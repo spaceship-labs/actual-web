@@ -1,0 +1,65 @@
+<md-content>
+
+  <div layout="row" layout-wrap layout-align="center center">
+
+    <div class="form-modal" flex="100">
+      <!--LOGIN-->
+      <form ng-submit="signIn()">
+        <md-card>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Iniciar sesión</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <md-input-container>
+              <label>E-mail</label>
+              <input ng-model="loginData.email" type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input ng-model="loginData.password" type="password">
+            </md-input-container>
+
+            <md-button type="submit" class="md-raised">Enviar</md-button>
+
+          </md-card-content>
+        </md-card>
+      </form>
+    </div>
+
+    <div class="form-modal" flex="100">
+
+      <!--REGISTERData DIRECTIVE-->
+      <form ng-submit="signUp()">
+        <md-card>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Registro</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <md-input-container>
+              <label>Email</label>
+              <input ng-model="registerData.email" type="email">
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input ng-model="registerData.password" type="password">
+            </md-input-container>
+            <md-input-container>
+              <label>Confirm Password</label>
+              <input ng-model="registerData.passwordConfirm" type="password">
+            </md-input-container>
+
+            <md-button type="submit" class="md-raised">Enviar</md-button>
+
+          </md-card-content>
+        </md-card>
+      </form>
+
+    </div>
+
+  </div>
+
+</md-content>
