@@ -24,7 +24,10 @@ angular
        BASE_API: 'http://api.jwt.dev:8000/v1'
   })
 
-  .config(function ($routeProvider, $httpProvider) {
+  .config(function ($routeProvider, $httpProvider, $locationProvider) {
+
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
 
     $routeProvider
       .when('/', {

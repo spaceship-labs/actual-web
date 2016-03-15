@@ -1,3 +1,44 @@
 .form-modal{
   max-width: 400px!important;
 }
+.container-xxlg{
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.container-xlg{
+  margin: 0 auto;
+  max-width: 1000px;
+}
+.container-lg{
+  margin: 0 auto;
+  max-width: 766px;
+}
+.container-md{
+  margin: 0 auto;
+  max-width: 670px;
+}
+.container-mmd{
+  margin: 0 auto;
+  max-width: 600px;
+}
+.container-smd{
+  margin: 0 auto;
+  max-width: 560px;
+}
+.container-xsmd{
+  margin: 0 auto;
+  max-width: 500px;
+}
+.container-sm{
+  margin: 0 auto;
+  max-width: 460px;
+}
+.container-xsm{
+  margin: 0 auto;
+  max-width: 320px;
+}
+.container-mini{
+  margin: 0 auto;
+  max-width: 264px;
+}

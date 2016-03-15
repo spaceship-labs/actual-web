@@ -36,6 +36,10 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "postinstall": "npm install -g bower && npm install -g grunt-cli && bower install"
+  },
+  "dependencies": {
+    "connect-modrewrite": "^0.9.0"
   }
 }

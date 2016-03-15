@@ -2,7 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Actual</title>
+
+    <base href="/" />
+    <meta name="fragment" content="!">
+
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -12,6 +16,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/stickyFooter.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -20,16 +25,40 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-if="user">
-      <a ng-click="logout()" href="" >Cerrar sesión</a>
-    </div>
+    <div id="wrap">
+      <div id="main" class="clearfix">
+        <div id="topBackRepeat" layout='row' flex layout-fill>
 
-    <div class="container">
-      <div ng-view=""></div>
+          <div layout="column" flex>
+            <!--<ng-include src="'views/header.html'"></ng-include>-->
+            <md-content ng-view ng-cloak autoscroll="autoScroll">
+            </md-content>
+
+          </div>
+        </div><!-- END topBackRepeat -->
+      </div><!-- END main -->
+    </div><!-- END wrap -->
+    <div class="clear"></div>
+
+    <!--FOOTER-->
+    <div id="footer">
+      <div class="container container-xxlg" layout="row" layout-align-sm="space-between center">
+        <section class="logo-wrapper" flex="20">
+          <a href="/">
+            <i class="icon-nave"></i>
+            <!--<img class="footer-logo" src="images/logo_footer.png" alt="SpaceshipLabs">-->
+          </a>
+        </section>
+        <section flex="80" flex-sm="60" itemscope itemtype="http://schema.org/ContactPoint">
+            <p itemprop="address">Footer</p>
+            <p><i class="icon-telefono"></i> <strong itemprop="telephone">Telefono</strong></p>
+        </section>
+      </div>
     </div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!--
      <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
@@ -39,6 +68,7 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
+    -->
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
