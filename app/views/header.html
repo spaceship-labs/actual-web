@@ -63,44 +63,50 @@
         <a ng-click="menuCategoriesOn = !menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
       </div>
       <nav flex="75" layout="row" class="nav-categories">
-        <div flex class="nav-categories-item">
-          <a href="#" class="absolute-link"></a>
-          <a class="nav-categories-item-text" href="#">Hogar</a>
-        </div>
-        <div flex class="nav-categories-item">
-          <a href="#" class="absolute-link"></a>
-          <a class="nav-categories-item-text" href="#">Oficina</a>
-        </div>
-        <div flex class="nav-categories-item">
-          <a href="#" class="absolute-link"></a>
-          <a class="nav-categories-item-text" href="#">Jardin</a>
-        </div>
-        <div flex class="nav-categories-item">
-          <a href="#" class="absolute-link"></a>
-          <a class="nav-categories-item-text" href="#">Niños</a>
-        </div>
-        <div flex class="nav-categories-item">
-          <a href="#" class="absolute-link"></a>
-          <a class="nav-categories-item-text" href="#">Bebés</a>
-        </div>
-        <div flex class="nav-categories-item">
-          <a href="#" class="absolute-link"></a>
-          <a class="nav-categories-item-text" href="#">Ambientes</a>
-        </div>
-        <div flex class="nav-categories-item">
-          <a href="#" class="absolute-link"></a>
-          <a class="nav-categories-item-text" href="#">Ofertas</a>
-        </div>
+        <a  href="#" flex class="nav-categories-item">
+          <!--<a href="#" class="absolute-link"></a>-->
+          <span class="nav-categories-item-text" href="#">Hogar</span>
+          <ng-include src="'views/menu-subcategories.html'"></ng-include>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <!--<a href="#" class="absolute-link"></a>-->
+          <span class="nav-categories-item-text" href="#">Oficina</span>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <!--<a href="#" class="absolute-link"></a>-->
+          <span class="nav-categories-item-text" href="#">Jardin</span>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <!--<a href="#" class="absolute-link"></a>-->
+          <span class="nav-categories-item-text" href="#">Niños</span>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <!--<a href="#" class="absolute-link"></a>-->
+          <span class="nav-categories-item-text" href="#">Bebés</span>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <!--<a href="#" class="absolute-link"></a>-->
+          <span class="nav-categories-item-text" href="#">Ambientes</span>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <!--<a href="#" class="absolute-link"></a>-->
+          <span class="nav-categories-item-text" href="#">Ofertas</span>
+        </a>
 
       </nav>
     </div>
 
-    <div class="container container-xxlg" layout="row">
+    <div class="container container-xxlg absolute-menus" layout="row">
       <div flex="15"></div>
       <div flex="80" class="menu-categories-wrapper">
         <ng-include src="'views/menu-categories.html'"></ng-include>
       </div>
+
+      <!--<ng-include src="'views/menu-subcategories.html'"></ng-include>-->
+
     </div>
+
+
 
   </div>
   <!--END MENU-->

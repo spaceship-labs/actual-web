@@ -11,6 +11,7 @@
    */
   function MainCtrl($rootScope, $scope, $location, $localStorage, $q, $timeout, AuthService){
     $scope.menuCategoriesOn = false;
+    $scope.menuActiveIndex = false;
 
     console.log($localStorage);
 
@@ -71,6 +72,11 @@
     $scope.user = $localStorage.user;
     console.log($scope.user);
     //$scope.tokenClaims = AuthService.getTokenClaims();
+
+    $scope.isMenuActive = function(index){
+      console.log($scope.menuActiveIndex);
+      return $scope.menuActiveIndex === index;
+    }
 
 
     /*------------*/
