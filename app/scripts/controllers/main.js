@@ -10,6 +10,7 @@
    * Controller of the dashexampleApp
    */
   function MainCtrl($rootScope, $scope, $location, $localStorage, $q, $timeout, AuthService){
+    $scope.menuCategoriesOn = false;
 
     console.log($localStorage);
 

@@ -1,6 +1,6 @@
 <div id="header">
+  <!--START TOP BAR-->
   <div class="header-top-bar">
-
     <div class="container container-lg" layout="row" layout-align="center center">
       <!--
       <md-autocomplete
@@ -51,4 +51,58 @@
     </div>
 
   </div>
+  <!--END TOP BAR-->
+
+  <!--START MENU-->
+  <div class="menu">
+    <div class="container container-xxlg" layout="row" layout-align="center center">
+      <div flex="15" layout-align="center center">
+        <a href="#" class="logo">Actual | Group</a>
+      </div>
+      <div flex="10" layout-align="center center">
+        <a ng-click="menuCategoriesOn = !menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
+      </div>
+      <nav flex="75" layout="row" class="nav-categories">
+        <div flex class="nav-categories-item">
+          <a href="#" class="absolute-link"></a>
+          <a class="nav-categories-item-text" href="#">Hogar</a>
+        </div>
+        <div flex class="nav-categories-item">
+          <a href="#" class="absolute-link"></a>
+          <a class="nav-categories-item-text" href="#">Oficina</a>
+        </div>
+        <div flex class="nav-categories-item">
+          <a href="#" class="absolute-link"></a>
+          <a class="nav-categories-item-text" href="#">Jardin</a>
+        </div>
+        <div flex class="nav-categories-item">
+          <a href="#" class="absolute-link"></a>
+          <a class="nav-categories-item-text" href="#">Niños</a>
+        </div>
+        <div flex class="nav-categories-item">
+          <a href="#" class="absolute-link"></a>
+          <a class="nav-categories-item-text" href="#">Bebés</a>
+        </div>
+        <div flex class="nav-categories-item">
+          <a href="#" class="absolute-link"></a>
+          <a class="nav-categories-item-text" href="#">Ambientes</a>
+        </div>
+        <div flex class="nav-categories-item">
+          <a href="#" class="absolute-link"></a>
+          <a class="nav-categories-item-text" href="#">Ofertas</a>
+        </div>
+
+      </nav>
+    </div>
+
+    <div class="container container-xxlg" layout="row">
+      <div flex="15"></div>
+      <div flex="80" class="menu-categories-wrapper">
+        <ng-include src="'views/menu-categories.html'"></ng-include>
+      </div>
+    </div>
+
+  </div>
+  <!--END MENU-->
+
 </div>

@@ -1,0 +1,106 @@
+<div class="menu-categories" ng-show="menuCategoriesOn">
+  <div layout="row" ng-init="currentCategory = 0">
+    <ul flex="20" class="menu-categories-sidebar">
+      <li><a ng-click="currentCategory = 0" href="#">Muebles</a></li>
+      <li><a ng-click="currentCategory = 1" href="#">Colchones</a></li>
+      <li><a ng-click="currentCategory = 2" href="#">Mesas</a></li>
+      <li><a ng-click="currentCategory = 3" href="#">Sillas</a></li>
+      <li><a ng-click="currentCategory = 4" href="#">Decoración</a></li>
+      <li><a ng-click="currentCategory = 5" href="#">Niños y bebés</a></li>
+      <li><a ng-click="currentCategory = 6" href="#">Blancos</a></li>
+    </ul>
+    <div flex="80" class="menu-categories-list">
+
+      <div class="menu-categories-list-inner" ng-repeat="category in [1,2,3,4,5,6,7] track by $index" layout="row" ng-show="$index == currentCategory">
+        <div flex="33">
+          <div class="menu-categories-group">
+            <h3><strong>Salas {{$index}}</strong></h3>
+            <ul>
+              <li><a href="#">Set de salas</a></li>
+              <li><a href="#">Salas Esquineras</a></li>
+              <li><a href="#">Sofa</a></li>
+              <li><a href="#">Couch</a></li>
+              <li><a href="#">Love Seat</a></li>
+              <li><a href="#">Sillones</a></li>
+              <li><a href="#">Mesas de centro</a></li>
+              <li><a href="#">Mesas Laterales</a></li>
+            </ul>
+          </div>
+          <div class="menu-categories-group">
+            <h3><strong>Recámaras</strong></h3>
+            <ul>
+              <li><a href="#">Set de Recámaras</a></li>
+              <li><a href="#">Camas</a></li>
+              <li><a href="#">Sofa Cama</a></li>
+              <li><a href="#">Sillones</a></li>
+              <li><a href="#">Futón</a></li>
+              <li><a href="#">Cómoda</a></li>
+              <li><a href="#">Cajoneras</a></li>
+              <li><a href="#">Bases para cama</a></li>
+              <li><a href="#">Buros</a></li>
+            </ul>
+          </div>
+        </div>
+        <div flex="33">
+          <div class="menu-categories-group">
+            <h3><strong>Comedores</strong></h3>
+            <ul>
+              <li><a href="#">Set de comedores</a></li>
+              <li><a href="#">Mesas de comedor</a></li>
+              <li><a href="#">Sillas para comedor</a></li>
+              <li><a href="#">Bufeteras</a></li>
+              <li><a href="#">Antecomedores</a></li>
+              <li><a href="#">Bancos para barra</a></li>
+            </ul>
+          </div>
+          <div class="menu-categories-group">
+            <h3><strong>Muebles para TV</strong></h3>
+            <ul>
+              <li><a href="#">Centro de entretenimiento</a></li>
+              <li><a href="#">Sillones reclinables</a></li>
+              <li><a href="#">Sofa cama</a></li>
+              <li><a href="#">Futón</a></li>
+              <li><a href="#">Taburete</a></li>
+            </ul>
+          </div>
+          <div class="menu-categories-group">
+            <h3><strong>Muebles de jardín</strong></h3>
+            <ul>
+              <li><a href="#">Mesas para jardín</a></li>
+              <li><a href="#">Sillas para jardín</a></li>
+              <li><a href="#">Camastro</a></li>
+              <li><a href="#">Sombrillas</a></li>
+              <li><a href="#">Salas para jardín</a></li>
+            </ul>
+          </div>
+
+        </div>
+        <div flex="33">
+          <div class="menu-categories-group">
+            <h3><strong>Muebles para oficina</strong></h3>
+            <ul>
+              <li><a href="#">Escritorios</a></li>
+              <li><a href="#">Libreros</a></li>
+              <li><a href="#">Sillas para oficina</a></li>
+            </ul>
+          </div>
+          <div class="menu-categories-group">
+            <h3><strong>Muebles infantiles</strong></h3>
+            <ul>
+              <li><a href="#">Recámaras infantiles</a></li>
+              <li><a href="#">Camas infantiles</a></li>
+              <li><a href="#">Mesas y sillas infantiles</a></li>
+            </ul>
+          </div>
+          <div class="menu-categories-group">
+            <h3><strong>Muebles para bebé</strong></h3>
+            <ul>
+              <li><a href="#">Cunas para bebés</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
