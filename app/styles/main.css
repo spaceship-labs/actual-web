@@ -79,6 +79,16 @@ body{font-family: 'Helvetica Neue', sans-serif;}
 
 .absolute-menus{position: relative;}
 
+
+.block-title{
+  text-align: center;
+  font-weight: 400;
+}
+.block-title h1,.block-title h2{
+  font-weight: 400;
+  margin: 4px 0;
+}
+
 /*-------------/
   #FORM ELEMENTS
 /*------------*/
@@ -192,7 +202,7 @@ body{font-family: 'Helvetica Neue', sans-serif;}
 /*------------*/
 .menu{
   position: relative;
-  z-index: 0;
+  z-index: 99999;
 }
 .menu .nav-categories{
   padding: 0 20px;
@@ -244,6 +254,7 @@ body{font-family: 'Helvetica Neue', sans-serif;}
   width: 100%;
   /*display: block;*/
   display: none;
+  z-index: 999999;
 }
 .menu-subcategories-nav > .container{position: relative;}
 .menu-subcategories-nav-item{
@@ -273,6 +284,7 @@ body{font-family: 'Helvetica Neue', sans-serif;}
   left: 0;
   width: 100%;
   top: 100%;
+  z-index: 99999999;
 }
 .menu-subcategory-content .inner-list{
   background: #F8F8F8;
