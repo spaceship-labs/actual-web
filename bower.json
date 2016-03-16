@@ -2,7 +2,7 @@
   "name": "actualfront",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.4.0",
+    "angular": "1.4.x",
     "angular-animate": "^1.4.0",
     "angular-cookies": "^1.4.0",
     "angular-resource": "^1.4.0",
@@ -17,5 +17,8 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "dashexampleApp"
+  "moduleName": "dashexampleApp",
+  "resolutions": {
+    "angular": "^1.4.8"
+  }
 }

@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="styles/stickyFooter.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
   </head>
   <body ng-app="dashexampleApp" ng-controller="MainCtrl">
     <!--[if lte IE 8]>
@@ -41,21 +44,7 @@
     <div class="clear"></div>
 
     <!--FOOTER-->
-    <div id="footer">
-      <div class="container container-xxlg" layout="row" layout-align-sm="space-between center">
-        <section class="logo-wrapper" flex="20">
-          <a href="/">
-            <i class="icon-nave"></i>
-            <!--<img class="footer-logo" src="images/logo_footer.png" alt="SpaceshipLabs">-->
-          </a>
-        </section>
-        <section flex="80" flex-sm="60" itemscope itemtype="http://schema.org/ContactPoint">
-            <p itemprop="address">Footer</p>
-            <p><i class="icon-telefono"></i> <strong itemprop="telephone">Telefono</strong></p>
-        </section>
-      </div>
-    </div>
-
+    <ng-include src="'views/footer.html'"></ng-include>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!--

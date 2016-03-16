@@ -1,6 +1,12 @@
+body{font-family: 'Open Sans', sans-serif;}
 .form-modal{
   max-width: 400px!important;
 }
+.content-block{
+  padding: 40px 20px;
+  position: relative;
+}
+
 .container-xxlg{
   margin: 0 auto;
   max-width: 1200px;
@@ -41,4 +47,87 @@
 .container-mini{
   margin: 0 auto;
   max-width: 264px;
+}
+
+/*------------/
+  #HEADER
+/*----------*/
+.header-top-bar{
+  background: #F8F8F8;
+  padding: 12px 0;
+}
+.header-top-bar .searcher{
+  background: rgb(250,250,250);
+  min-width: 400px;
+  max-width: 100%;
+  border-radius: 2px;
+  display: block;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+.header-top-bar .searcher .searcher-inner{
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  position: relative;
+  overflow: visible;
+  height: 36px;
+}
+.header-top-bar .searcher .searcher-inner input[type="text"]{
+  font-size: 14px;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  padding: 0 15px;
+  line-height: 36px;
+  height: 36px;
+}
+
+.header-top-bar .searcher-wrapper .searcher-btn{
+  background: #C82828;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)!important;
+  color: #fff;
+  font-size: 11px;
+  text-transform: uppercase;
+  border: 0;
+  padding: 0 22px;
+}
+
+.header-top-bar-menu{margin-left: 20px;}
+.header-top-bar-menu .header-top-bar-menu-item{
+  min-height: 40px;
+  text-align: center;
+}
+.header-top-bar-menu .header-top-bar-menu-item + .header-top-bar-menu-item{
+  border-left: 1px solid #000;
+}
+
+.header-top-bar .md-chips-wrapper{
+  padding: 10px;
+  overflow: hidden;
+  background: rgb(250,250,250);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)!important;
+}
+.header-top-bar .md-chips{
+  /*
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)!important;
+  */
+  overflow: hidden;
+  padding: 0 0 6px 3px;
+  height: 40px;
+
+}
+/*
+.header-top-bar .md-chips:after{display: none;}
+*/
+
+/*--------------/
+  #FOOTER
+/*-------------*/
+#footer{
+  background: #F8F8F8;
+  height: auto!important;
+  min-height: 83px!important;
 }
