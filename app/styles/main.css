@@ -79,7 +79,7 @@ a{text-decoration: none}
 }
 
 .absolute-menus{position: relative;}
-
+.hl-text{color: #BD063E;}
 
 .block-title{
   text-align: center;
@@ -676,12 +676,12 @@ a{text-decoration: none}
   text-decoration: none;
 }
 
-.listing-view .subs-container h2{
+.listing-view .listing-view-title{
   font-size: 32px;
   font-weight: 400;
   text-transform: uppercase;
 }
-.listing-view .subs-container h2:before{
+.listing-view .listing-view-title:before{
   content: '';
   width: 20px;
   height: 20px;

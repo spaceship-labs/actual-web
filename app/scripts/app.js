@@ -52,6 +52,11 @@ angular
         controller: 'CategoryCtrl',
         controllerAs: 'vm'
       })
+      .when('/listing', {
+        templateUrl: 'views/listing.html',
+        controller: 'ListingCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

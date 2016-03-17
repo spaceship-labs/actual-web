@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:CategoryCtrl
+ * @name dashexampleApp.controller:ListingCtrl
  * @description
- * # CategoryCtrl
+ * # ListingCtrl
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('CategoryCtrl', CategoryCtrl);
+  .controller('ListingCtrl', ListingCtrl);
 
-function CategoryCtrl(){
+function ListingCtrl(){
   var vm = this;
 
   vm.subnavIndex = 0;
