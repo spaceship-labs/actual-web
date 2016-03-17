@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngMaterial'
+    'ngMaterial',
+    'slick'
   ])
 
   .constant('urls', {
@@ -31,20 +32,21 @@ angular
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl',
+        controllerAs: 'vm'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
-        controllerAs: 'about'
+        controllerAs: 'vm'
       })
+      /*
       .when('/home', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
         controllerAs: 'home'
-      })
+      })*/
       .otherwise({
         redirectTo: '/'
       });

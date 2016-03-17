@@ -1,5 +1,26 @@
-<p>Estas logeado, estos son tus datos</p>
+<div class="content-block">
+  <div class="container container-xlg">
+    <div class="block-title">
+      <h1 class="center-content"><span>OFERTAS ESPECIALES</span></h1>
+      <h2><span>Los mejores productos al <strong>mejor precio</strong></span></h2>
+    </div>
 
-<ul>
-  <li>{{::user.email}}</li>
-</ul>
+    <div class="content-block">
+      <slick  arrows="true" class="products-list-slider" infinite="false" draggable="false">
+        <div class="products-list-slide" ng-repeat="group in vm.productsGroups">
+          <div
+            class="products-list"
+
+            layout="row"
+            layout-wrap
+            layout-align="space-between center">
+            <div flex="30" ng-repeat="product in group">
+              <listing-product product="product"></listing-product>
+            </div>
+          </div>
+        </div>
+      </slick>
+    </div>
+
+  </div>
+</div>

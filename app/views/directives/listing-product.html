@@ -1,1 +1,25 @@
-listing-product.html
+<div class="listing-product">
+  <a href="#" class="listing-product-link absolute-link">
+    <span>AGREGAR</span>
+  </a>
+  <div class="listing-product-gallery">
+    <slick arrows="true">
+      <div ng-repeat="image in product.images track by $index">
+        <img ng-src="{{image}}" alt="">
+      </div>
+    </slick>
+  </div>
+  <div class="listing-product-info" layout="row">
+    <div flex="70" class="listing-product-info-main">
+      <p><strong>{{product.name}}</strong></p>
+      <p class="price">
+        <span class="price-before">{{product.priceBefore | currency}}</span> |
+        <strong class="price-now">{{product.priceNow | currency}}</strong>
+      </p>
+    </div>
+    <div flex class="listing-product-info-extra">
+      <p>...</p>
+      <p><strong class="small">visto 16 veces hoy</strong></p>
+    </div>
+  </div>
+</div>

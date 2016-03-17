@@ -9,10 +9,13 @@
 angular.module('dashexampleApp')
   .directive('listingProduct', function () {
     return {
-      templateUrl: 'views/direcitves/listing-product.html',
+      scope:{
+        product:'='
+      },
+      templateUrl: 'views/directives/listing-product.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-        element.text('this is the listingProduct directive');
+
       }
     };
   });
