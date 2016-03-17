@@ -557,7 +557,17 @@ body{font-family: 'Helvetica Neue', sans-serif;}
   /*min-width: 1000px;*/
   /*width: 100%;*/
 }
-.products-list .listing-product{min-width: 33%;}
+.products-list .listing-product-wrap{
+  min-height: 100px;
+  min-width: 33%;
+  min-width: 1px;
+}
+/*.products-list listing-product{display: block;}*/
+/*.products-list listing-product,*/
+.products-list .listing-product{
+  min-height:  100px;
+  min-width: 33%;
+}
 
 /*--------------/
   #FOOTER

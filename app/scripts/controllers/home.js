@@ -13,10 +13,14 @@ angular.module('dashexampleApp')
 function HomeCtrl($timeout){
   var vm = this;
   vm.init = init;
+  vm.areProductsLoaded = false;
   vm.groupProducts = groupProducts;
+
+  vm.simulateLoading = simulateLoading;
 
   function init(){
     vm.productsGroups = vm.groupProducts(vm.products, 6);
+    vm.simulateLoading();
     console.log(vm.productsGroups);
   }
 
@@ -26,6 +30,12 @@ function HomeCtrl($timeout){
           groups.push(arr.slice(i, i + chunkSize));
       }
       return groups;
+  }
+
+  function simulateLoading(){
+    $timeout(function(){
+      vm.areProductsLoaded = true;
+    },500);
   }
 
   vm.products = [

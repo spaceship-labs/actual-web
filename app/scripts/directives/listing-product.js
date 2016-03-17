@@ -7,7 +7,7 @@
  * # listingProduct
  */
 angular.module('dashexampleApp')
-  .directive('listingProduct', function () {
+  .directive('listingProduct',['$timeout' ,function ($timeout) {
     return {
       scope:{
         product:'='
@@ -15,7 +15,21 @@ angular.module('dashexampleApp')
       templateUrl: 'views/directives/listing-product.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
+        scope.areImagesLoaded = false;
+        console.log(attrs);
+
+        scope.simulateLoad = function(){
+          $timeout(function(){
+            scope.areImagesLoaded = true;
+          },500);
+        };
+
+        scope.init = function(){
+          scope.simulateLoad();
+        };
+
+        scope.init();
 
       }
     };
-  });
+  }]);

@@ -76,7 +76,7 @@
     $scope.isMenuActive = function(index){
       console.log($scope.menuActiveIndex);
       return $scope.menuActiveIndex === index;
-    }
+    };
 
 
     /*------------*/
@@ -96,7 +96,7 @@
     $scope.newState = newState;
     $scope.createFilterFor = createFilterFor;
     function newState(state) {
-      alert("Sorry! You'll need to create a Constituion for " + state + " first!");
+      console.log("Sorry! You'll need to create a Constituion for " + state + " first!");
     }
     // ******************************
     // Internal methods

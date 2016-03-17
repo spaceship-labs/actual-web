@@ -3,7 +3,7 @@
     <span>AGREGAR</span>
   </a>
   <div class="listing-product-gallery">
-    <slick arrows="true">
+    <slick ng-if="areImagesLoaded" arrows="true" >
       <div ng-repeat="image in product.images track by $index">
         <img ng-src="{{image}}" alt="">
       </div>
