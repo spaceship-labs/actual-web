@@ -292,6 +292,11 @@ a{text-decoration: none}
   background: red;
 }
 
+.menu-subcategories-nav-item .menu-subcategory-content{display: none;}
+.menu-subcategories-nav-item:hover .menu-subcategory-content{
+  display: block;
+}
+
 /*-------------/
   #MENU-SUBCATEGORY-CONTENT
 /*------------*/
@@ -341,6 +346,10 @@ a{text-decoration: none}
   font-size: 13px;
   text-transform: none;
   line-height: 1.4;
+}
+.menu-subcategory-content .inner-product-image{
+  background-size: cover;
+  background-position: center;
 }
 .menu-subcategory-content .inner-product .price{margin-top:30px;}
 .menu-subcategory-content .inner-product .price p{margin: 0;}
