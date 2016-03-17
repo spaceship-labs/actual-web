@@ -47,6 +47,11 @@ angular
         controller: 'HomeCtrl',
         controllerAs: 'home'
       })*/
+      .when('/category', {
+        templateUrl: 'views/category.html',
+        controller: 'CategoryCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });
