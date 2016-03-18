@@ -222,6 +222,8 @@ a{text-decoration: none}
   position: relative;
   z-index: 99999;
 }
+.menu .logo{padding: 0 14px}
+.menu .logo img{max-width: 100%;}
 .menu .nav-categories{
   padding: 0 20px;
 }
@@ -234,7 +236,7 @@ a{text-decoration: none}
   text-decoration: none;
 }
 .nav-categories-item{
-  min-height: 65px;
+  min-height: 72px;
   text-align: center;
   padding: 20px 6px;
   z-index: 9999;
@@ -511,14 +513,14 @@ a{text-decoration: none}
 }
 
 .listing-product .listing-product-gallery .slick-prev{
-  background: url(../images/arrow-left.png) center no-repeat!important;
+  background: url(../images/arrow2-left.png) center no-repeat!important;
   background-size: 100%!important;
   height: 24px;
   width: 24px;
   left: 0px;
 }
 .listing-product .listing-product-gallery .slick-next{
-  background: url(../images/arrow-right.png) center no-repeat!important;
+  background: url(../images/arrow2-right.png) center no-repeat!important;
   background-size: 100%!important;
   height: 24px;
   width: 24px;
@@ -551,14 +553,14 @@ a{text-decoration: none}
 }
 
 .products-list-slider .slick-prev{
-  background: url(../images/arrow-left.png) center no-repeat!important;
+  background: url(../images/arrow2-left.png) center no-repeat!important;
   background-size: 100%!important;
   height: 60px;
   width: 60px;
   left: -105px;
 }
 .products-list-slider .slick-next{
-  background: url(../images/arrow-right.png) center no-repeat!important;
+  background: url(../images/arrow2-right.png) center no-repeat!important;
   background-size: 100%!important;
   height: 60px;
   width: 60px;
