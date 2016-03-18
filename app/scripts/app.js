@@ -73,4 +73,50 @@ angular
       };
     }]);
 
+  })
+
+
+
+  .run(function(localStorageService, authService, $timeout, jwtHelper){
+
+      var _token = localStorageService.get('token') || false;
+      var _user = localStorageService.get('user') || false;
+
+
+      var logIn = function(){
+        var formData = {
+          email: 'luis19prz@gmail.com',
+          password: '1234'
+        };
+
+        authService.signIn(formData,
+          function(res){
+            console.log(res);
+            localStorageService.set('token', res.token);
+            localStorageService.set('user', res.user);
+            console.log(localStorageService);
+          },
+          function(){
+            console.log('Invalid');
+          }
+        );
+      }
+
+      //Check if token is expired
+      if(_token){
+          var expiration = jwtHelper.getTokenExpirationDate(_token);
+          console.log(expiration);
+          if(expiration <= new Date() && !toState.isPublic){
+            //event.preventDefault();
+            //$state.go('app.auth_login');
+            //$location.path('/auth/login')
+            console.log('expirado');
+            login();
+          }else{
+            console.log('no expirado')
+          }
+      }else{
+        logIn();
+      }
+
   });

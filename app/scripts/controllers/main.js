@@ -14,27 +14,6 @@
     vm.menuCategoriesOn = false;
 
     vm.init = function(){
-      vm.signIn();
-    };
-
-    vm.signIn = function(){
-      var formData = {
-        email: 'luis19prz@gmail.com',
-        password: '1234'
-      };
-
-      authService.signIn(formData,
-        function(res){
-          console.log(res);
-          localStorageService.set('token', res.token);
-          localStorageService.set('user', res.user);
-          console.log(localStorageService);
-        },
-        function(){
-          console.log('Invalid');
-        }
-      );
-
     };
 
     $scope.$on('$routeChangeStart', function(next, current) {
