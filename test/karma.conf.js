@@ -37,6 +37,8 @@ module.exports = function(config) {
       'bower_components/angular-material/angular-material.js',
       'bower_components/slick-carousel/slick/slick.min.js',
       'bower_components/angular-slick/dist/slick.js',
+      'bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'bower_components/angular-jwt/dist/angular-jwt.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

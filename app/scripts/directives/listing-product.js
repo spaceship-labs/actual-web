@@ -14,9 +14,8 @@ angular.module('dashexampleApp')
       },
       templateUrl: 'views/directives/listing-product.html',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
+      link: function postLink(scope, element) {
         scope.areImagesLoaded = false;
-        console.log(attrs);
 
         scope.simulateLoad = function(){
           $timeout(function(){

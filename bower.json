@@ -12,7 +12,9 @@
     "angularLocalStorage": "ngStorage#~0.3.2",
     "ngstorage": "~0.3.10",
     "angular-material": "~1.0.2",
-    "angular-slick": "^0.2.1"
+    "angular-slick": "^0.2.1",
+    "angular-local-storage": "^0.2.7",
+    "angular-jwt": "^0.0.9"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

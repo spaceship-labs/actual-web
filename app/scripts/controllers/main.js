@@ -9,152 +9,44 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl($rootScope, $scope, $location, $localStorage, $q, $timeout, AuthService){
-    $scope.menuCategoriesOn = false;
-    $scope.menuActiveIndex = false;
+  function MainCtrl($rootScope, $scope, $location, localStorageService, $q, $timeout, authService){
+    var vm = this;
+    vm.menuCategoriesOn = false;
 
-    console.log($localStorage);
+    vm.init = function(){
+      vm.signIn();
+    };
 
-    function successAuth(res){
-      console.log(res);
-      $localStorage.token = res.token;
-      $localStorage.user = res.user;
-
-      $scope.token = $localStorage.token;
-      $scope.user = $localStorage.user;
-
-      $location.path('/home');
-    }
-
-    function successRegister(res){
-      console.log(res);
-      $localStorage.token = res.data.token;
-      $localStorage.user = res.data.user;
-
-      $scope.token = $localStorage.token;
-      $scope.user = $localStorage.user;
-      $location.path('/home');
-
-    }
-
-    $scope.loginData = {};
-    $scope.registerData = {};
-
-    $scope.signIn = function(){
+    vm.signIn = function(){
       var formData = {
-        email: $scope.loginData.email,
-        password: $scope.loginData.password
+        email: 'luis19prz@gmail.com',
+        password: '1234'
       };
 
-      AuthService.signIn(formData, successAuth, function(){
-        $rootScope.error = 'Invalid credentials';
-      });
+      authService.signIn(formData,
+        function(res){
+          console.log(res);
+          localStorageService.set('token', res.token);
+          localStorageService.set('user', res.user);
+          console.log(localStorageService);
+        },
+        function(){
+          console.log('Invalid');
+        }
+      );
+
     };
 
-    $scope.signUp = function(){
-      var formData = {
-        email: $scope.registerData.email,
-        password: $scope.registerData.password
-      };
+    $scope.$on('$routeChangeStart', function(next, current) {
+      console.log('$routeChangeStart');
+      vm.menuCategoriesOn = false;
+    });
 
-      AuthService.signUp(formData, successRegister, function(){
-        $rootScope.error = 'Invalid credentials';
-      });
-    };
-
-    $scope.logout = function () {
-      AuthService.logout(function () {
-        $location.path('/');
-      });
-    };
-
-    $scope.token = $localStorage.token;
-    $scope.user = $localStorage.user;
-    console.log($scope.user);
-    //$scope.tokenClaims = AuthService.getTokenClaims();
-
-    $scope.isMenuActive = function(index){
-      console.log($scope.menuActiveIndex);
-      return $scope.menuActiveIndex === index;
-    };
-
-
-    /*------------*/
-      //TEMPORAL FOR CHIP
-    /*------------*/
-    $scope.searchParams = [];
-
-
-    /*-------------*/
-    //  TEMPORAL, FOR AUTOCOMPLETE
-    /*------------*/
-
-    $scope.states        = loadAll();
-    $scope.querySearch   = querySearch;
-    $scope.selectedItemChange = selectedItemChange;
-    $scope.searchTextChange   = searchTextChange;
-    $scope.newState = newState;
-    $scope.createFilterFor = createFilterFor;
-    function newState(state) {
-      console.log("Sorry! You'll need to create a Constituion for " + state + " first!");
-    }
-    // ******************************
-    // Internal methods
-    // ******************************
-    /**
-     * Search for states... use $timeout to simulate
-     * remote dataservice call.
-     */
-    function querySearch (query) {
-      var results = query ? $scope.states.filter( createFilterFor(query) ) : $scope.states,
-          deferred;
-      if (true) {
-        deferred = $q.defer();
-        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-        return deferred.promise;
-      } else {
-        return results;
-      }
-    }
-    function searchTextChange(text) {
-      console.log('Text changed to ' + text);
-    }
-    function selectedItemChange(item) {
-      console.log('Item changed to ' + JSON.stringify(item));
-    }
-    /**
-     * Build `states` list of key/value pairs
-     */
-    function loadAll() {
-      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-              Wisconsin, Wyoming';
-      return allStates.split(/, +/g).map( function (state) {
-        return {
-          value: state.toLowerCase(),
-          display: state
-        };
-      });
-    }
-
-
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(state) {
-        return (state.value.indexOf(lowercaseQuery) === 0);
-      };
-    }
-
-    /*-------------*/
-
+    vm.init();
 
   }
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
-  MainCtrl.$inject = ['$rootScope', '$scope', '$location', '$localStorage', '$q','$timeout', 'AuthService'];
+  MainCtrl.$inject = ['$rootScope', '$scope', '$location', 'localStorageService', '$q','$timeout', 'authService'];
 
 })();

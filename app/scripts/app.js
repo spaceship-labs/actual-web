@@ -17,15 +17,12 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngMaterial',
-    'slick'
+    'slick',
+    'LocalStorageModule',
+    'angular-jwt'
   ])
 
-  .constant('urls', {
-       BASE: 'http://localhost:1337',
-       BASE_API: 'http://api.jwt.dev:8000/v1'
-  })
-
-  .config(function ($routeProvider, $httpProvider, $locationProvider) {
+  .config(function ($routeProvider, $httpProvider, $locationProvider, localStorageServiceProvider) {
 
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
@@ -41,12 +38,6 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'vm'
       })
-      /*
-      .when('/home', {
-        templateUrl: 'views/home.html',
-        controller: 'HomeCtrl',
-        controllerAs: 'home'
-      })*/
       .when('/category', {
         templateUrl: 'views/category.html',
         controller: 'CategoryCtrl',
@@ -61,18 +52,21 @@ angular
         redirectTo: '/'
       });
 
-    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+    localStorageServiceProvider.setPrefix('actualFront');
+
+    //JWT TOKENS CONFIG
+    $httpProvider.interceptors.push(['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
       return {
         request: function (config) {
           config.headers = config.headers || {};
-          if ($localStorage.token) {
-            config.headers.Authorization = 'JWT ' + $localStorage.token;
+          if ( localStorageService.get('token') ) {
+            config.headers.Authorization = 'JWT ' + localStorageService.get('token');
           }
           return config;
         },
         responseError: function (response) {
           if (response.status === 401 || response.status === 403) {
-            $location.path('/signin');
+            $location.path('/');
           }
           return $q.reject(response);
         }
