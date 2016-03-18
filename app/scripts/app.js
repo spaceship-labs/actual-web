@@ -77,7 +77,7 @@ angular
 
 
 
-  .run(function(localStorageService, authService, $timeout, jwtHelper){
+  .run(function(localStorageService, authService, jwtHelper){
 
       var _token = localStorageService.get('token') || false;
       var _user = localStorageService.get('user') || false;
@@ -100,20 +100,17 @@ angular
             console.log('Invalid');
           }
         );
-      }
+      };
 
       //Check if token is expired
       if(_token){
           var expiration = jwtHelper.getTokenExpirationDate(_token);
           console.log(expiration);
-          if(expiration <= new Date() && !toState.isPublic){
-            //event.preventDefault();
-            //$state.go('app.auth_login');
-            //$location.path('/auth/login')
+          if(expiration <= new Date()){
             console.log('expirado');
-            login();
+            logIn();
           }else{
-            console.log('no expirado')
+            console.log('no expirado');
           }
       }else{
         logIn();

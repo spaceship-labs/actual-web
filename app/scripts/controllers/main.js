@@ -9,7 +9,7 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl($rootScope, $scope, $location, localStorageService, $q, $timeout, authService){
+  function MainCtrl($rootScope, $scope){
     var vm = this;
     vm.menuCategoriesOn = false;
 
@@ -26,6 +26,6 @@
   }
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
-  MainCtrl.$inject = ['$rootScope', '$scope', '$location', 'localStorageService', '$q','$timeout', 'authService'];
+  MainCtrl.$inject = ['$rootScope', '$scope'];
 
 })();
