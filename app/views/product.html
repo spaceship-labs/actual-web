@@ -1,0 +1,149 @@
+<div class="breadcrumb">
+  <div class="container container-xxlg">
+    <p>
+      <a href="#">Inicio</a>
+      <a href="#"> > Muebles</a>
+      <a href="#" class="breadcrumb-active"> > Salas</a>
+    </p>
+  </div>
+</div>
+<div class="content-block listing-view">
+  <div class="container container-xxlg" layout="row" layout-align="space-between start">
+
+    <!--START NAV-->
+    <sidebar-categories flex="25"></sidebar-categories>
+    <!--END NAV-->
+
+    <!--SUBCATEGORIES-->
+    <div flex="70">
+      <div class="subs-container">
+        <h2 class="listing-view-title">Sillon de 2 asientos</h2>
+        <div
+          class="sub sub-big"
+          ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
+          <!--
+          <img class="sub-image" src="images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg" alt="">
+          -->
+          <div class="sub-text">
+            <h4><a href="/listing">Ambiente | <strong>Salas</strong></a></h4>
+          </div>
+          <a href="/listing" class="absolute-link"></a>
+        </div>
+
+        <div class="product-view" layout="row">
+          <div flex="50"></div>
+          <div flex="50" class="product-view-data">
+            <div class="product-view-data-block">
+              <h4><strong>CARACTERISTICAS</strong></h4>
+              <table>
+                <tr>
+                  <td>Estilo:</td>
+                  <td><strong>Moderno</strong></td>
+                </tr>
+                <tr>
+                  <td>Forma:</td>
+                  <td><strong>Cuadrada</strong></td>
+                </tr>
+                <tr>
+                  <td>Material:</td>
+                  <td><strong>Lino y acero inoxidable</strong></td>
+                </tr>
+                <tr>
+                  <td>Color:</td>
+                  <td><strong>Café capuccino</strong></td>
+                </tr>
+                <tr>
+                  <td>Asientos:</td>
+                  <td><strong>2</strong></td>
+                </tr>
+
+              </table>
+            </div>
+            <div class="product-view-data-block">
+              <h4><strong>DIMENSIONES</strong></h4>
+              <table>
+                <tr>
+                  <td>Largo:</td>
+                  <td><strong>150cm</strong></td>
+                </tr>
+                <tr>
+                  <td>Ancho:</td>
+                  <td><strong>87cm</strong></td>
+                </tr>
+                <tr>
+                  <td>Alto:</td>
+                  <td><strong>85cm</strong></td>
+                </tr>
+
+              </table>
+            </div>
+
+            <div class="product-view-data-block">
+              <h4 class="product-view-data-block-toggle">
+                <a href="#"  ng-click="vm.availableToggle = !vm.availableToggle">
+                  <strong>DISPONIBILIDAD:</strong> solo quedan <strong>6 productos</strong>
+                </a>
+              </h4>
+              <div ng-show="vm.availableToggle" class="hl-data">
+                <h4><strong>STOCK</strong></h4>
+                <table>
+                  <tr>
+                    <td>Actual Studio Cancun:</td>
+                    <td><strong>3</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Actual Home Cancun:</td>
+                    <td><strong>1</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Actual Playa del carmen:</td>
+                    <td><strong>2</strong></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="product-view-data-block">
+              <div layout="row" layout-align="space-between center">
+                <a flex href="#" ng-click="vm.discountToggle = !vm.discountToggle" class="product-view-data-block-toggle product-view-data-block-toggle-btn">
+                  <strong>Máx. Descuento</strong>
+                </a>
+                <h4>
+                  <span class="product-view-price-crossed">$24,399 | </span>
+                  <span class="product-view-price">$19,519</span>
+                </h4>
+              </div>
+              <div ng-show="vm.discountToggle" class="hl-data">
+                <h4><strong>PROMOCIONES</strong></h4>
+                <table>
+                  <tr>
+                    <td>Precio Lista:</td>
+                    <td><strong>$24,399</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Promoción: <strong>Pago ÚNICO <span class="hl-text">20%</span></strong></td>
+                    <td><span class="crossed-text">$24,399</span> | <strong class="hl-text">$19,519</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Promoción: <strong>6 Meses sin intereses <span class="hl-text">15%</span></strong></td>
+                    <td><span class="crossed-text">$24,399</span> | <strong>$20,739</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Promoción: <strong>12 meses sin intereses <span class="hl-text">10%</span></strong></td>
+                    <td><span class="crossed-text">$24,399</span> | <strong class="hl-text">$21,959</strong></td>
+                  </tr>
+
+                </table>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END SUBCATEGORIES-->
+
+  </div>
+</div>

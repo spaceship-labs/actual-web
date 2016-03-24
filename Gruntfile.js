@@ -259,7 +259,7 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      html: ['<%= yeoman.dist %>/**/*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
       options: {
@@ -347,7 +347,7 @@ module.exports = function (grunt) {
           usemin: 'scripts/scripts.js'
         },
         cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
+        src: 'views/**/*.html',
         dest: '.tmp/templateCache.js'
       }
     },
@@ -384,7 +384,8 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*',
+            '.htaccess'
           ]
         }, {
           expand: true,
@@ -398,7 +399,8 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/fonts',
           src: ['*.*'],
           dest: '<%= yeoman.dist %>/fonts'
-        }]
+        }
+        ]
       },
       styles: {
         expand: true,
