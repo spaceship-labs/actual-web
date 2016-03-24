@@ -753,6 +753,7 @@ a{text-decoration: none}
   max-width: 100px;
 }
 
+.listing-view .sub-set{min-height: 300px;}
 .listing-view .sub-big{min-height: 300px;}
 .listing-view .sub-big .sub-text{
   padding: 40px 40px;
@@ -825,6 +826,22 @@ a{text-decoration: none}
   margin: 0 4px;
 }
 
+.product-view .add-cart-btn{
+  background: #2ABC1C;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  margin: 10px 0;
+  padding: 12px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  display: block;
+}
+.product-view .seen-number{
+  color: #929191;
+  text-align: center;
+  font-size: 12px;
+}
 
 /*--------------/
   #FOOTER
