@@ -1,0 +1,30 @@
+<div class="modal-header cart-modal-header">
+  <div class="modal-header-top">
+    <h4>Hay <strong>(0) productos</strong> en tu carrito</h4>
+  </div>
+  <div class="modal-header-inner">
+    <div layout="row" layout-align="space-between center">
+      <p flex><strong>MI CARRITO</strong></p>
+      <p flex>SUBTOTAL: <strong>MXN $0.00</strong></p>
+    </div>
+    <hr/>
+    <a href="#" class="action-btn">Ver detalles de mi carrito</a>
+    <hr/>
+    <div class="cart-modal-items">
+      <div layout="row" layout-wrap>
+        <div ng-repeat="product in main.cart.products" class="cart-modal-item-wrap" flex="33">
+          <a href="#"><img class="cart-modal-item-img" ng-src="{{product.image}}" alt=""></a>
+          <div  class="cart-modal-item-desc">
+            <p>
+              <a href="#"><strong>
+                {{ product.name | limitTo: 12 }}{{product.name.length > 12 ? '...' : ''}}
+              </strong></a>
+            </p>
+            <hr class="cart-modal-item-hr" />
+            <p class="cart-modal-item-price">MXN {{product.priceNow | currency}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
