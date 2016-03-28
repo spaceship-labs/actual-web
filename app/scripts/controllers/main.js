@@ -9,13 +9,15 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl($rootScope, $scope){
+  function MainCtrl($rootScope, $scope, $location, $window, $route, authService, localStorageService, cartService, categoriesService){
     var vm = this;
     vm.menuCategoriesOn = false;
     vm.isActiveBackdrop = false;
     vm.isActiveLogin = false;
     vm.isActiveCart = false;
+    vm.isLoadingLogin = false;
     vm.cart = {};
+    vm.logInForm = {};
 
     vm.activateLoginModal = activateLoginModal;
     vm.deactivateLoginModal = deactivateLoginModal;
@@ -23,47 +25,15 @@
     vm.activateCartModal = activateCartModal;
     vm.deactivateCartModal = deactivateCartModal;
 
-    vm.cart.products = [
-      {
-        name:'Silla textura red',
-        priceBefore: 2399,
-        priceNow: 1499,
-        image: 'images/chair2.jpg'
-      },
-      {
-        name:'Mesa redonda cedro',
-        priceBefore: 2399,
-        priceNow: 1499,
-        image:
-          'images/getMain8-287x287.jpg'
-      },
-      {
-        name:'Sofa blanco 2 plazas',
-        priceBefore: 2399,
-        priceNow: 1499,
-        image:'images/1210-287x287.jpg'
-      },
-      {
-        name:'Mesa 2 piezas',
-        priceBefore: 2399,
-        priceNow: 1499,
-        image: 'images/prodotti-59268-relf13017b0-53eb-44c1-b59a-c8438d55cff7-287x287.jpg',
-      },
-      {
-        name:'Mesa redonda mimbre',
-        priceBefore: 2399,
-        priceNow: 1499,
-        image: 'images/BALOU_daybed-forsite-011-287x287.jpg'
-      } ,
-      {
-        name:'Sofa café 3 plazas',
-        priceBefore: 2399,
-        priceNow: 1499,
-        image:'images/All-one-divano-fisso-schienale-abbattuto-copy-287x287.jpg'
-      }
-    ];
+    vm.logOut = logOut;
+    vm.signIn = signIn;
+
+    vm.cart.products = cartService.getProducts();
+    vm.categories = categoriesService.getCategories();
 
     vm.init = function(){
+      vm.token = localStorageService.get('token');
+      vm.user = localStorageService.get('user');
     };
 
     $scope.$on('$routeChangeStart', function(next, current) {
@@ -74,13 +44,17 @@
     vm.init();
 
     function activateLoginModal(){
-      vm.isActiveLogin = true;
-      vm.isActiveBackdrop = true;
+      if(!vm.user){
+        vm.isActiveLogin = true;
+        vm.isActiveBackdrop = true;
+      }
     }
 
     function deactivateLoginModal(){
-      vm.isActiveLogin = false;
-      vm.isActiveBackdrop = false;
+      if(!vm.user){
+        vm.isActiveLogin = false;
+        vm.isActiveBackdrop = false;
+      }
     }
 
     function activateCartModal(){
@@ -93,9 +67,66 @@
       vm.isActiveBackdrop = false;
     }
 
+
+    function signIn(){
+      vm.isLoadingLogin = true;
+
+      var formData = {
+        email: vm.logInForm.email,
+        password: vm.logInForm.password
+      };
+
+      console.log(formData);
+
+      authService.signIn(formData, $rootScope.successAuth, function(){
+        //Error
+        console.log('Invalid');
+        vm.isLoadingLogin = false;
+      });
+
+    };
+
+    function logOut(){
+      console.log('logout');
+      authService.logout(function(){
+        $location.path('/');
+        $window.location.reload();
+      });
+    }
+
+    function formatSubcategories(category){
+      var subs = [];
+    }
+
+
+    $rootScope.successAuth = function(res){
+      console.log(res);
+      localStorageService.set('token', res.token);
+      localStorageService.set('user', res.user);
+
+      vm.token = res.token;
+      vm.user = res.user;
+
+      //$location.path('/');
+      $window.location.reload();
+
+    }
+
+
+
   }
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
-  MainCtrl.$inject = ['$rootScope', '$scope'];
+  MainCtrl.$inject = [
+    '$rootScope',
+    '$scope',
+    '$location',
+    '$window',
+    '$route',
+    'authService',
+    'localStorageService',
+    'cartService',
+    'categoriesService'
+  ];
 
 })();

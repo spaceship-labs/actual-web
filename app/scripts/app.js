@@ -51,7 +51,12 @@ angular
       .when('/product', {
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',
-        controllerAs: 'product'
+        controllerAs: 'vm'
+      })
+      .when('/search', {
+        templateUrl: 'views/search.html',
+        controller: 'SearchCtrl',
+        controllerAs: 'vm'
       })
       .otherwise({
         redirectTo: '/'
@@ -82,30 +87,10 @@ angular
 
 
 
-  .run(function(localStorageService, authService, jwtHelper){
+  .run(function(localStorageService, authService, jwtHelper, $location){
 
       var _token = localStorageService.get('token') || false;
       var _user = localStorageService.get('user') || false;
-
-
-      var logIn = function(){
-        var formData = {
-          email: 'luis19prz@gmail.com',
-          password: '1234'
-        };
-
-        authService.signIn(formData,
-          function(res){
-            console.log(res);
-            localStorageService.set('token', res.token);
-            localStorageService.set('user', res.user);
-            console.log(localStorageService);
-          },
-          function(){
-            console.log('Invalid');
-          }
-        );
-      };
 
       //Check if token is expired
       if(_token){
@@ -113,12 +98,14 @@ angular
           console.log(expiration);
           if(expiration <= new Date()){
             console.log('expirado');
-            logIn();
+            authService.logout(function(){
+              $location.path('/');
+            });
           }else{
             console.log('no expirado');
           }
       }else{
-        logIn();
+        console.log('no hay token');
       }
 
   });

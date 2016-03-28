@@ -1,109 +1,53 @@
-<div class="listing-view-nav-wrapper">
-  <h2><strong>Muebles</strong></h2>
-  <ul class="listing-view-nav">
-    <li ng-class="{'active': subnavIndex == 0}">
-      <h3><a ng-click="setSubnavIndex(0)" href="#"><strong>Salas</strong></a></h3>
+<!--AMBIENTES-->
+<div ng-repeat="category in categories track by $index" class="listing-view-nav-wrapper">
+  <h2>
+    <a ng-click="toggleCategory(category, $event)"  ng-href="/category/{{category.handle}}">
+      <i class="icon-{{category.icon}}"></i> <strong>{{category.label}}</strong>
+    </a>
+  </h2>
+  <ul class="listing-view-nav" ng-show="category.isActive">
+    <li ng-repeat="sub in category.subcategories" ng-class="{'active': sub.isActive}">
+      <h3><a ng-click="toggleSubCategory(sub, $event)" ng-href="/subcategory/{{sub.handle}}"><strong>{{sub.label}}</strong></a></h3>
       <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas</a></li>
-        <li><a href="#">Salas esquineras</a></li>
-        <li><a href="#">Sofá</a></li>
-        <li><a href="#">Couch</a></li>
-        <li><a href="#">Love Seat</a></li>
-        <li><a href="#">Sillones</a></li>
-        <li><a href="#">Mesas de centro</a></li>
-        <li><a href="#">Mesas Laterales</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 1}">
-      <h3><a ng-click="setSubnavIndex(1)" href="#"><strong>Recámaras</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas</a></li>
-        <li><a href="#">Salas esquineras</a></li>
-        <li><a href="#">Sofá</a></li>
-        <li><a href="#">Couch</a></li>
-        <li><a href="#">Love Seat</a></li>
-        <li><a href="#">Sillones</a></li>
-        <li><a href="#">Mesas de centro</a></li>
-        <li><a href="#">Mesas Laterales</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 2}">
-      <h3><a ng-click="setSubnavIndex(2)" href="#"><strong>Comedores</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas</a></li>
-        <li><a href="#">Salas esquineras</a></li>
-        <li><a href="#">Sofá</a></li>
-        <li><a href="#">Couch</a></li>
-        <li><a href="#">Love Seat</a></li>
-        <li><a href="#">Sillones</a></li>
-        <li><a href="#">Mesas de centro</a></li>
-        <li><a href="#">Mesas Laterales</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 3}">
-      <h3><a ng-click="setSubnavIndex(3)" href="#"><strong>Muebles tv</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas</a></li>
-        <li><a href="#">Salas esquineras</a></li>
-        <li><a href="#">Sofá</a></li>
-        <li><a href="#">Couch</a></li>
-        <li><a href="#">Love Seat</a></li>
-        <li><a href="#">Sillones</a></li>
-        <li><a href="#">Mesas de centro</a></li>
-        <li><a href="#">Mesas Laterales</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 4}">
-      <h3><a ng-click="setSubnavIndex(4)" href="#"><strong>Muebles de jardín</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas</a></li>
-        <li><a href="#">Salas esquineras</a></li>
-        <li><a href="#">Sofá</a></li>
-        <li><a href="#">Couch</a></li>
-        <li><a href="#">Love Seat</a></li>
-        <li><a href="#">Sillones</a></li>
-        <li><a href="#">Mesas de centro</a></li>
-        <li><a href="#">Mesas Laterales</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 5}">
-      <h3><a ng-click="setSubnavIndex(5)" href="#"><strong>Muebles para oficina</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas</a></li>
-        <li><a href="#">Salas esquineras</a></li>
-        <li><a href="#">Sofá</a></li>
-        <li><a href="#">Couch</a></li>
-        <li><a href="#">Love Seat</a></li>
-        <li><a href="#">Sillones</a></li>
-        <li><a href="#">Mesas de centro</a></li>
-        <li><a href="#">Mesas Laterales</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 6}">
-      <h3><a ng-click="setSubnavIndex(6)" href="#"><strong>Muebles infantiles</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas</a></li>
-        <li><a href="#">Salas esquineras</a></li>
-        <li><a href="#">Sofá</a></li>
-        <li><a href="#">Couch</a></li>
-        <li><a href="#">Love Seat</a></li>
-        <li><a href="#">Sillones</a></li>
-        <li><a href="#">Mesas de centro</a></li>
-        <li><a href="#">Mesas Laterales</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 7}">
-      <h3><a ng-click="setSubnavIndex(7)" href="#"><strong>Muebles para bebé</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas</a></li>
-        <li><a href="#">Salas esquineras</a></li>
-        <li><a href="#">Sofá</a></li>
-        <li><a href="#">Couch</a></li>
-        <li><a href="#">Love Seat</a></li>
-        <li><a href="#">Sillones</a></li>
-        <li><a href="#">Mesas de centro</a></li>
-        <li><a href="#">Mesas Laterales</a></li>
+        <li ng-repeat="group in sub.groups"><a ng-href="/group/{{group.handle}}">{{group.label}}</a></li>
       </ul>
     </li>
   </ul>
 </div>
+
+
+<!---
+<div class="listing-view-nav-wrapper">
+  <h2>
+    <a ng-click="parentsCategories[0] = !parentsCategories[0]" href="">
+      <i class="icon-ambientes"></i> <strong>Ambientes</strong>
+    </a>
+  </h2>
+  <ul class="listing-view-nav" ng-show="parentsCategories[0]">
+    <li ng-class="{'active': subnavIndex == 0}">
+      <h3><a ng-click="setSubnavIndex(0)" href="#"><strong>Set de Salas</strong></a></h3>
+      <ul class="listing-view-subnav">
+        <li><a href="#">Set de Salas 1</a></li>
+        <li><a href="#">Set de Salas 2</a></li>
+        <li><a href="#">Set de Salas 3</a></li>
+      </ul>
+    </li>
+    <li ng-class="{'active': subnavIndex == 1}">
+      <h3><a ng-click="setSubnavIndex(1)" href="#"><strong>Set de recamaras</strong></a></h3>
+      <ul class="listing-view-subnav">
+        <li><a href="#">Set de Salas 1</a></li>
+        <li><a href="#">Set de Salas 2</a></li>
+        <li><a href="#">Set de Salas 3</a></li>
+      </ul>
+    </li>
+    <li ng-class="{'active': subnavIndex == 2}">
+      <h3><a ng-click="setSubnavIndex(2)" href="#"><strong>Set de comedores</strong></a></h3>
+      <ul class="listing-view-subnav">
+        <li><a href="#">Set de Salas 1</a></li>
+        <li><a href="#">Set de Salas 2</a></li>
+        <li><a href="#">Set de Salas 3</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+-->

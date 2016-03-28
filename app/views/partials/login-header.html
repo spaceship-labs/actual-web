@@ -7,19 +7,23 @@
 
     <hr/>
 
-    <form action="#">
+    <div ng-if="main.isLoadingLogin" layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <form ng-if="!main.isLoadingLogin" name="logInForm" method="POST" ng-submit="main.signIn()">
 
       <p><label>E-mail</label></p>
       <div class="input-element">
         <div class="input-element-inner">
-          <input type="text">
+          <input type="text" name="email" ng-model="main.logInForm.email" required>
         </div>
       </div>
 
       <p><label>Contraseña</label></p>
       <div class="input-element">
         <div class="input-element-inner">
-          <input type="text">
+          <input type="password" name="password" ng-model="main.logInForm.password" required>
         </div>
       </div>
 

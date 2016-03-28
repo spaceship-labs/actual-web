@@ -3,29 +3,45 @@
   <div class="header-top-bar">
     <div class="container container-lg" layout="row" layout-align="center center">
 
-      <div class="searcher-wrapper" layout="row">
+      <form action="/search" method="GET" class="searcher-wrapper" layout="row">
         <div class="searcher">
           <div class="searcher-inner">
-            <input type="text">
+            <i class="icon-search"></i>
+            <input type="text" name="term">
           </div>
         </div>
         <input type="submit" value="BUSCAR" class="searcher-btn">
-      </div>
+      </form>
 
       <div class="header-top-bar-menu" layout="row" layout-align="center center">
         <div ng-mouseover="main.activateCartModal()" ng-mouseleave="main.deactivateCartModal()" flex href="#" class="header-top-bar-menu-item">
+          <span class="cart-n-items">{{main.cart.products.length}}</span>
           <i class="icon-carro"></i>
           <ng-include src="'views/partials/cart-header.html'"></ng-include>
         </div>
         <span class="header-top-bar-menu-item-separator" flex></span>
-        <div ng-mouseover="main.activateLoginModal()" ng-mouseleave="main.deactivateLoginModal()" flex href="#" class="header-top-bar-menu-item">
+        <div ng-if="!main.user" ng-mouseover="main.activateLoginModal()" ng-mouseleave="main.deactivateLoginModal()" flex href="#" class="header-top-bar-menu-item">
           <i class="icon-login"></i>
-          <ng-include src="'views/partials/login-header.html'"></ng-include>
+          <ng-include ng-if="!main.user" src="'views/partials/login-header.html'"></ng-include>
         </div>
-        <div ng-mouseover="main.activateLoginModal()" ng-mouseleave="main.deactivateLoginModal()" flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-name">
-          <span >Bienvenido <strong>Oliver</strong></span>
-          <ng-include src="'views/partials/login-header.html'"></ng-include>
+
+        <!--IF logged in-->
+        <div ng-if="main.user" flex href="#" class="header-top-bar-menu-item">
+          <a href="#"><i class="icon-login"></i></a>
         </div>
+
+        <div ng-if="main.user" flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-name">
+          <a href="#"><span >Bienvenido <strong>{{main.user.firstName}}</strong></span></a>
+        </div>
+
+        <span ng-if="main.user" class="header-top-bar-menu-item-separator" flex></span>
+
+        <div ng-if="main.user" flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-name header-top-bar-menu-item-logout">
+          <a ng-click="main.logOut()" href="#"><span>Cerrar sesión</span></a>
+        </div>
+
+
+        <!---end if Logged in -->
 
       </div>
 

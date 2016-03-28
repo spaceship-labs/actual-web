@@ -1,13 +1,10 @@
 <div class="menu-categories" ng-show="main.menuCategoriesOn">
   <div layout="row" ng-init="currentCategory = 0">
     <ul flex="20" class="menu-categories-sidebar">
-      <li><a ng-click="currentCategory = 0" href="#">Muebles</a></li>
-      <li><a ng-click="currentCategory = 1" href="#">Colchones</a></li>
-      <li><a ng-click="currentCategory = 2" href="#">Mesas</a></li>
-      <li><a ng-click="currentCategory = 3" href="#">Sillas</a></li>
-      <li><a ng-click="currentCategory = 4" href="#">Decoración</a></li>
-      <li><a ng-click="currentCategory = 5" href="#">Niños y bebés</a></li>
-      <li><a ng-click="currentCategory = 6" href="#">Blancos</a></li>
+      <li ng-repeat="category in main.categories track by $index">
+        <a ng-click="currentCategory = $index" href="#">{{category.label}}</a>
+      </li>
+
     </ul>
     <div flex="80" class="menu-categories-list">
 

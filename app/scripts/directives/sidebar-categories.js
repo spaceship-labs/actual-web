@@ -7,16 +7,38 @@
  * # sidebarCategories
  */
 angular.module('dashexampleApp')
-  .directive('sidebarCategories', function () {
+  .directive('sidebarCategories', function (categoriesService) {
     return {
       templateUrl: 'views/directives/sidebar-categories.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-        scope.subnavIndex = 0;
 
-        scope.setSubnavIndex = function(index){
-          scope.subnavIndex = index;
+        scope.init = function(){
+          scope.categories[0].isActive = true;
         }
+
+        scope.categories = categoriesService.getCategories();
+
+        scope.toggleCategory = function(category,event){
+          console.log(category.subcategories);
+          if(category.subcategories){
+            event.preventDefault();
+          }
+          category.isActive = !category.isActive;
+        }
+
+        scope.toggleSubCategory = function(subCategory, event){
+          console.log(subCategory.groups);
+          if(subCategory.groups){
+            event.preventDefault();
+          }
+          subCategory.isActive = !subCategory.isActive;
+
+
+        }
+
+
+        scope.init();
 
       }
     };
