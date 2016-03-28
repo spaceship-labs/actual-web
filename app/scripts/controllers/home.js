@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('HomeCtrl', HomeCtrl);
 
-function HomeCtrl($timeout){
+function HomeCtrl($timeout, productService){
   var vm = this;
   vm.init = init;
   vm.areProductsLoaded = false;
@@ -21,6 +21,9 @@ function HomeCtrl($timeout){
   function init(){
     vm.productsGroups = vm.groupProducts(vm.products, 6);
     vm.simulateLoading();
+    productService.getList(1,{items:50}).then(function(res){
+      console.log(res);
+    });
     console.log(vm.productsGroups);
   }
 
@@ -153,4 +156,4 @@ function HomeCtrl($timeout){
   vm.init();
 }
 
-HomeCtrl.$inject = ['$timeout'];
+HomeCtrl.$inject = ['$timeout','productService'];
