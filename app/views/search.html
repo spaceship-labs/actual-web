@@ -20,23 +20,31 @@
       <div class="subs-container">
         <div layout="row" layout-align="space-between start">
           <h2 class="listing-view-title">Resultados para "{{vm.search.term}}"</h2>
-          <h3><i class="icon-search"></i> <span class="hl-text">556</span> Resultados</h3>
+          <h3 ng-if="!vm.isLoading">
+            <i class="icon-search"></i> <span class="hl-text">{{vm.totalResults}}</span> Resultados
+          </h3>
         </div>
 
         <!--RESULTS-->
-        <div class="results">
+        <div ng-if="!vm.isLoading || vm.loadMoreCount > 1" class="results">
           <div
             class="products-list"
             layout="row"
             layout-wrap
-            layout-align="space-between center">
-            <div flex="30" class="listing-product-wrap" ng-repeat="product in vm.products">
+            layout-align="start center">
+            <div flex="33" class="listing-product-wrap" ng-repeat="product in vm.products">
               <listing-product product="product"></listing-product>
             </div>
           </div>
 
         </div>
         <!--END RESULTS-->
+
+        <div ng-if="vm.isLoading" layout="row" layout-align="center center">
+          <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+        </div>
+
+        <a ng-if="vm.totalResults > vm.products.length" ng-click="vm.loadMore()" href="#" class="action-btn action-btn-sm">Cargar más</a>
 
       </div>
     </div>

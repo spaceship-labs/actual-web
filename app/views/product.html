@@ -16,7 +16,7 @@
 
     <!--SUBCATEGORIES-->
     <div flex="70">
-      <h2 class="listing-view-title">Sillon de 2 asientos</h2>
+      <h2 class="listing-view-title">{{vm.product.ItemName}}</h2>
       <div
         class="sub sub-set"
         ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
@@ -30,12 +30,46 @@
       </div>
 
       <div class="product-view" layout="row">
-        <div flex="50"></div>
+        <div class="product-view-gallery-wrap" flex="50">
+
+          <div class="product-view-gallery">
+            <slick
+              init-onload="true"
+              data="vm.areImagesLoaded"
+              arrows="true"
+              draggable="false"
+            >
+              <div ng-repeat="image in vm.galleryImages track by $index" class="product-view-gallery-img">
+                <div class="product-view-gallery-img-inner">
+                  <img ng-src="{{image.url}}" alt="">
+                </div>
+              </div>
+            </slick>
+          </div>
+
+          <div class="product-view-gallery-thumbs">
+            <slick
+              slides-to-show="4"
+              slides-to-scroll="4"
+              init-onload="true"
+              data="vm.areImagesLoaded"
+              arrows="false"
+              draggable="false"
+            >
+              <div ng-repeat="image in vm.galleryImages track by $index">
+                <div class="product-view-gallery-thumb">
+                  <a ng-click="vm.setGalleryIndex($index)" href="" class="product-view-gallery-thumb-inner"><img ng-src="{{image.url}}" alt=""></a>
+                </div>
+              </div>
+            </slick>
+          </div>
+
+        </div>
 
         <!--PRODUCT VIEW DATA-->
         <div flex="50" class="product-view-data">
           <div class="product-view-data-block">
-            <h4><strong>CARACTERISTICAS</strong></h4>
+            <h4 ng-click="vm.nextSlide()"><strong>CARACTERISTICAS</strong></h4>
             <table>
               <tr>
                 <td>Estilo:</td>
@@ -82,23 +116,26 @@
           <div class="product-view-data-block">
             <h4 class="product-view-data-block-toggle">
               <a href="#"  ng-click="vm.availableToggle = !vm.availableToggle">
-                <strong>DISPONIBILIDAD:</strong> solo quedan <strong>6 productos</strong>
+                <strong>DISPONIBILIDAD:</strong> solo quedan <strong>{{vm.product.OnHand}} productos</strong>
               </a>
             </h4>
             <div ng-show="vm.availableToggle" class="hl-data">
               <h4><strong>STOCK</strong></h4>
               <table>
-                <tr>
+              <!--
+                <tr ng-repeat="stock in vm.product.prices">
                   <td>Actual Studio Cancun:</td>
                   <td><strong>3</strong></td>
                 </tr>
-                <tr>
-                  <td>Actual Home Cancun:</td>
-                  <td><strong>1</strong></td>
+              -->
+                <tr ng-repeat="stock in vm.product.stock">
+                  <td>{{stock.WhsCode}}:</td>
+                  <td><strong>{{stock.OnHand}}</strong></td>
                 </tr>
+
                 <tr>
-                  <td>Actual Playa del carmen:</td>
-                  <td><strong>2</strong></td>
+                  <td><strong>Total:</strong></td>
+                  <td><strong>{{vm.product.OnHand}}</strong></td>
                 </tr>
               </table>
             </div>
@@ -106,12 +143,12 @@
 
           <div class="product-view-data-block">
             <div layout="row" layout-align="space-between center">
-              <a flex href="#" ng-click="vm.discountToggle = !vm.discountToggle" class="product-view-data-block-toggle product-view-data-block-toggle-btn">
+              <a flex href="#" ng-click="vm.discountToggle = !vm.discountToggle" class="product-view-data-block-toggle-btn">
                 <strong>Máx. Descuento</strong>
               </a>
               <h4>
-                <span class="product-view-price-crossed">$24,399 | </span>
-                <span class="product-view-price">$19,519</span>
+                <span class="product-view-price-crossed">{{vm.product.price.value | currency}} | </span>
+                <span class="product-view-price">{{vm.product.price.value | currency}}</span>
               </h4>
             </div>
             <div ng-show="vm.discountToggle" class="hl-data">

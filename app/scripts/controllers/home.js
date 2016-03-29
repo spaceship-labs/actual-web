@@ -19,12 +19,14 @@ function HomeCtrl($timeout, productService){
   vm.simulateLoading = simulateLoading;
 
   function init(){
-    vm.productsGroups = vm.groupProducts(vm.products, 6);
-    vm.simulateLoading();
-    productService.getList(1,{items:50}).then(function(res){
-      console.log(res);
+    //vm.simulateLoading();
+    productService.getList(1,{items:20}).then(function(res){
+      var productsAux = res.data.data;
+      vm.products = productService.formatProducts(productsAux);
+      vm.productsGroups = vm.groupProducts(vm.products, 6);
+      vm.areProductsLoaded = true;
+
     });
-    console.log(vm.productsGroups);
   }
 
   function groupProducts(arr, chunkSize) {
@@ -41,6 +43,7 @@ function HomeCtrl($timeout, productService){
     },500);
   }
 
+  /*
   vm.products = [
     {
       name:'Silla textura red',
@@ -152,6 +155,8 @@ function HomeCtrl($timeout, productService){
     }
 
   ];
+  */
+
 
   vm.init();
 }

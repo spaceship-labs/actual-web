@@ -44,6 +44,10 @@
             )
         };
 
+        api.imageSizes = {
+          avatar : ['600x600','593x331','80x80','50x50','184x73','177x171','196x140','201x201','1000x1000','300x300'],
+          gallery : ['110x105','593x331','600x600','1000x1000','300x300'],
+        };
 
         api.$http = function(req) {
           var data = api.serialize(req);

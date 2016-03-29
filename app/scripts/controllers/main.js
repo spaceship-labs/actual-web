@@ -37,7 +37,6 @@
     };
 
     $scope.$on('$routeChangeStart', function(next, current) {
-      console.log('$routeChangeStart');
       vm.menuCategoriesOn = false;
     });
 
@@ -76,7 +75,6 @@
         password: vm.logInForm.password
       };
 
-      console.log(formData);
 
       authService.signIn(formData, $rootScope.successAuth, function(){
         //Error
@@ -87,7 +85,6 @@
     };
 
     function logOut(){
-      console.log('logout');
       authService.logout(function(){
         $location.path('/');
         $window.location.reload();

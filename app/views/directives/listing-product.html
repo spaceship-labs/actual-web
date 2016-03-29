@@ -1,20 +1,20 @@
 <div class="listing-product">
-  <a href="/product" class="listing-product-link absolute-link">
+  <a ng-href="/product/{{product.ItemCode}}" class="listing-product-link absolute-link">
     <span>AGREGAR</span>
   </a>
   <div class="listing-product-gallery">
     <slick ng-if="areImagesLoaded" arrows="true" >
-      <div ng-repeat="image in product.images track by $index">
-        <img ng-src="{{image}}" alt="">
+      <div ng-repeat="image in images track by $index">
+        <img ng-src="{{image.url}}" alt="">
       </div>
     </slick>
   </div>
   <div class="listing-product-info" layout="row">
     <div flex="70" class="listing-product-info-main">
-      <p><strong>{{product.name}}</strong></p>
+      <p><strong>{{product.ItemName}}</strong></p>
       <p class="price">
-        <span class="price-before">{{product.priceBefore | currency}}</span> |
-        <strong class="price-now">{{product.priceNow | currency}}</strong>
+        <span class="price-before">{{product.price.value | currency}}</span> |
+        <strong class="price-now">{{product.price.value | currency}}</strong>
       </p>
     </div>
     <div flex class="listing-product-info-extra">

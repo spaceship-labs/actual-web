@@ -22,7 +22,13 @@ angular
     'angular-jwt'
   ])
 
-  .config(function ($routeProvider, $httpProvider, $locationProvider, localStorageServiceProvider) {
+  .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
+
+    $mdThemingProvider.theme('default')
+      .accentPalette('red', {
+        'default': '700' // use shade 200 for default, and keep all other shades the same
+      });
+
 
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
@@ -48,7 +54,7 @@ angular
         controller: 'ListingCtrl',
         controllerAs: 'vm'
       })
-      .when('/product', {
+      .when('/product/:id', {
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',
         controllerAs: 'vm'
