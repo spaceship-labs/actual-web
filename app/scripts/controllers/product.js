@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('ProductCtrl', ProductCtrl);
 
-function ProductCtrl(productService, $routeParams, $timeout,$mdDialog, $mdMedia, api){
+function ProductCtrl(productService, $routeParams, $timeout,$mdDialog, $mdMedia, $sce, api){
   var vm = this;
 
   vm.showMessageCart = showMessageCart;
@@ -22,14 +22,22 @@ function ProductCtrl(productService, $routeParams, $timeout,$mdDialog, $mdMedia,
   vm.addToCart = addToCart;
   vm.setupGallery = setupGallery;
   vm.setGalleryIndex = setGalleryIndex;
+  vm.trustAsHtml = trustAsHtml;
+  vm.loadProductFilters = loadProductFilters;
   vm.init = init;
+  vm.filters = [];
 
   vm.init();
+
+  function trustAsHtml(string) {
+      return $sce.trustAsHtml(string);
+  };
 
   function init(){
     productService.getById($routeParams.id).then(function(res){
       vm.product = productService.formatProduct(res.data.data);
       vm.setupGallery();
+      vm.loadProductFilters();
     });
   }
 
@@ -40,7 +48,6 @@ function ProductCtrl(productService, $routeParams, $timeout,$mdDialog, $mdMedia,
     vm.areImagesLoaded = true;
 
     //Adding icon as gallery first image
-    console.log(vm.product.icons);
 
     if(vm.product.icons[vm.imageSizeIndexIcon]){
       vm.galleryImages.push(vm.product.icons[vm.imageSizeIndexIcon]);
@@ -56,9 +63,7 @@ function ProductCtrl(productService, $routeParams, $timeout,$mdDialog, $mdMedia,
       });
     }
 
-
     vm.gallery.on('afterChange',function(e, slick, currentSlide){
-      console.log(currentSlide);
       vm.galleryReel.slick('slickGoTo',currentSlide);
     });
 
@@ -66,6 +71,24 @@ function ProductCtrl(productService, $routeParams, $timeout,$mdDialog, $mdMedia,
 
   function setGalleryIndex(index){
     vm.gallery.slick('slickGoTo',index);
+  }
+
+  function loadProductFilters(){
+    productService.getAllFilters({quickread:true}).then(function(res){
+      vm.filters = res.data;
+      var filters = vm.filters.map(function(filter){
+        filter.Values = [];
+        vm.product.FilterValues.forEach(function(value){
+          if(value.Filter == filter.id){
+            filter.Values.push(value);
+          }
+        })
+        return filter;
+      });
+
+      vm.filters = filters;
+      console.log(vm.filters);
+    });
   }
 
   function addToCart($event){

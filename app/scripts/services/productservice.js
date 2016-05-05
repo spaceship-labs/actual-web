@@ -13,7 +13,18 @@
         getById: getById,
         search: search,
         formatProduct: formatProduct,
-        formatProducts: formatProducts
+        formatProducts: formatProducts,
+
+        getListNoImages: getListNoImages,
+
+        getCategories: getCategories,
+        getMainCategories: getMainCategories,
+        getAllCategories: getAllCategories,
+        getCategoryById: getCategoryById,
+        getCategoriesGroups: getCategoriesGroups,
+
+        getAllFilters: getAllFilters
+
       };
 
       return service;
@@ -21,6 +32,13 @@
       function getList(page, params){
         var p = page || 1;
         var url = '/product/find/' + p;
+        return api.$http.post(url,params);
+      }
+
+      function getListNoImages(page, params){
+        var p = page || 1;
+        var url = '/product/find/' + p;
+        params.noimages = true
         return api.$http.post(url,params);
       }
 
@@ -35,6 +53,8 @@
       }
 
       function formatProduct(product){
+        product.Name = product.Name || product.ItemName;
+
         //The prices item in pos. 0 belongs to the Public price list in SAP
         if(product.prices && product.prices[0]){
           product.price = {
@@ -76,6 +96,37 @@
         return formatted;
       }
 
+      //CATEGORIES
+      function getCategories(page, params){
+        var p = page || 1;
+        var url = '/productcategory/find/' + p;
+        return api.$http.post(url, params);
+      }
+
+      function getMainCategories(){
+        var url = '/productcategory/getmaincategories';
+        return api.$http.post(url);
+      }
+
+      function getAllCategories(){
+        var url = '/productcategory/getallcategories';
+        return api.$http.post(url);
+      }
+
+      function getCategoriesGroups(){
+        var url = '/productcategory/getcategoriesgroups';
+        return api.$http.post(url);
+      }
+
+      function getCategoryById(id){
+        var url = '/productcategory/findbyid/' + id;
+        return api.$http.post(url);
+      }
+
+      function getAllFilters(){
+        var url = '/productfilter/list/';
+        return api.$http.post(url);
+      }
 
     }
 

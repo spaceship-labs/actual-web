@@ -20,7 +20,12 @@ function HomeCtrl($timeout, productService){
 
   function init(){
     //vm.simulateLoading();
-    productService.getList(1,{items:20}).then(function(res){
+    var page = 1;
+    var query = {
+      items:20,
+      orderby: 'OnHand DESC'
+    };
+    productService.getList(page, query).then(function(res){
       var productsAux = res.data.data;
       vm.products = productService.formatProducts(productsAux);
       vm.productsGroups = vm.groupProducts(vm.products, 6);

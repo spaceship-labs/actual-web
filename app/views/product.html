@@ -14,9 +14,9 @@
     <sidebar-categories flex="25"></sidebar-categories>
     <!--END NAV-->
 
-    <!--SUBCATEGORIES-->
-    <div flex="70">
-      <h2 class="listing-view-title">{{vm.product.ItemName}}</h2>
+    <!--MAIN VIEW-->
+    <div class="product-view" flex="70">
+      <h2 class="listing-view-title">{{vm.product.Name}}</h2>
       <div
         class="sub sub-set"
         ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
@@ -29,7 +29,7 @@
         <a href="/listing" class="absolute-link"></a>
       </div>
 
-      <div class="product-view" layout="row">
+      <div layout="row">
         <div class="product-view-gallery-wrap" flex="50">
 
           <div class="product-view-gallery">
@@ -41,7 +41,7 @@
             >
               <div ng-repeat="image in vm.galleryImages track by $index" class="product-view-gallery-img">
                 <div class="product-view-gallery-img-inner">
-                  <img ng-src="{{image.url}}" alt="">
+                  <img ng-src="{{image.url}}" alt="{{vm.product.icon_description}}">
                 </div>
               </div>
             </slick>
@@ -71,6 +71,18 @@
           <div class="product-view-data-block">
             <h4 ng-click="vm.nextSlide()"><strong>CARACTERISTICAS</strong></h4>
             <table>
+              <tr ng-repeat="filter in vm.filters">
+                <td ng-if="filter.Values.length > 0">{{filter.Name}}: </td>
+                <td ng-if="filter.Values.length > 0">
+                  <span ng-repeat="value in filter.Values track by $index">
+                    <strong>{{value.Name}}</strong>
+                    <span ng-if="$index < (filters.Values.length-1)">,</span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <!--
+            <table>
               <tr>
                 <td>Estilo:</td>
                 <td><strong>Moderno</strong></td>
@@ -93,21 +105,22 @@
               </tr>
 
             </table>
+            -->
           </div>
           <div class="product-view-data-block">
             <h4><strong>DIMENSIONES</strong></h4>
             <table>
               <tr>
                 <td>Largo:</td>
-                <td><strong>150cm</strong></td>
+                <td><strong>{{vm.product.Length}} {{vm.product.LengthUnitMsr}}</strong></td>
               </tr>
               <tr>
                 <td>Ancho:</td>
-                <td><strong>87cm</strong></td>
+                <td><strong>{{vm.product.Width}} {{vm.product.WidthUnitMsr}}</strong></td>
               </tr>
               <tr>
                 <td>Alto:</td>
-                <td><strong>85cm</strong></td>
+                <td><strong>{{vm.product.Height}} {{vm.product.HeightUnitMsr}}</strong></td>
               </tr>
 
             </table>
@@ -184,8 +197,43 @@
         <!--END PRODUCT VIEW DATA-->
 
       </div>
+
+      <section class="desc-wrapper">
+        <div class="desc-head" layout="row">
+          <div
+            flex="50"
+            class="desc-head-item"
+            ng-class="{'desc-head-item-on' : !vm.toggleProductDescription }"
+            ng-click="vm.toggleProductDescription = !vm.toggleProductDescription">
+            <h3>Detalles del artículo</h3>
+          </div>
+          <div
+            flex="50"
+            class="desc-head-item"
+            ng-class="{'desc-head-item-on' : vm.toggleProductDescription}"
+            ng-click="vm.toggleProductDescription = !vm.toggleProductDescription">
+            <h3>Detalles de la entrega</h3>
+          </div>
+        </div>
+        <div class="desc-cont">
+          <article ng-if="!vm.toggleProductDescription">
+            <h3>{{vm.product.Name}}</h3>
+            <div ng-bind-html="vm.trustAsHtml(vm.product.Description)"></div>
+            <br/>
+            <h4>Contenido del paquete</h4>
+            <div ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"></div>
+          </article>
+
+          <article ng-if="vm.toggleProductDescription">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, ut suscipit magni illum dolore blanditiis quas sequi, nihil, vel autem excepturi ex, repellat hic incidunt et animi expedita eligendi libero!</p>
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+          </article>
+
+        </div>
+      </section>
+
     </div>
-    <!-- END SUBCATEGORIES-->
+    <!-- MAIN VIEW -->
 
   </div>
 </div>
