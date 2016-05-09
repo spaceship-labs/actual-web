@@ -138,6 +138,8 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
               variant.filterValues.map(function(variantValue){
                 if(variantValue.value.id == value.id ){
                   variantValue.selected = true;
+                  vm.variants[key].selected = variantValue.value;
+                  //console.log(vm.variants[key].selected);
                 }else{
                   variantValue.selected = false;
                 }

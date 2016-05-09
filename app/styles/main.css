@@ -1219,6 +1219,25 @@ a{text-decoration: none}
 }
 .variants-picker .variant-color + .variant-color{margin-left: 4px;}
 .variants-picker .variant-color-on{border: 2px solid red;}
+.variants-picker md-radio-button{
+  display: inline-block;
+}
+.variants-picker md-radio-button + md-radio-button{margin: 0 20px;}
+
+md-radio-group.md-default-theme:not([disabled]) .md-primary .md-on,
+md-radio-group:not([disabled]) .md-primary .md-on,
+md-radio-group.md-default-theme:not([disabled]).md-primary .md-on,
+md-radio-group:not([disabled]).md-primary .md-on,
+md-radio-button.md-default-theme:not([disabled]) .md-primary .md-on,
+md-radio-button:not([disabled]) .md-primary .md-on,
+md-radio-button.md-default-theme:not([disabled]).md-primary .md-on,
+md-radio-button:not([disabled]).md-primary .md-on{
+  background: #000;
+}
+
+md-radio-button.md-default-theme.md-checked .md-off,
+md-radio-button.md-checked .md-off{border-color: #000!important;}
+
 
 /*--------------/
   #CART-VIEW
