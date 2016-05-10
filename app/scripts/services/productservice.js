@@ -25,7 +25,8 @@
 
         getAllFilters: getAllFilters,
 
-        getGroupVariants: getGroupVariants
+        getGroupVariants: getGroupVariants,
+        getGroupProducts: getGroupProducts,
 
       };
 
@@ -132,6 +133,12 @@
 
       function getGroupVariants(id){
         var url = '/productgroup/getgroupvariants/' + id;
+        return api.$http.post(url);
+      }
+
+      function getGroupProducts(params){
+        var id = params.id;
+        var url = '/productgroup/getvariantgroupproducts/' + id;
         return api.$http.post(url);
       }
 

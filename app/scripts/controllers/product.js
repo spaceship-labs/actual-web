@@ -25,6 +25,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   vm.init = init;
   vm.sortImages = sortImages;
   vm.loadVariants = loadVariants;
+  vm.getGroupProducts = getGroupProducts;
   vm.variants = [];
 
   vm.toggleVariants = true;
@@ -48,6 +49,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       vm.isLoading = false;
       vm.product = productService.formatProduct(res.data.data);
       vm.setupGallery();
+      vm.getGroupProducts()
       if(reload){
         $location.path('/product/' + productId, false);
         vm.loadProductFilters();
@@ -61,6 +63,22 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     });
   }
 
+  function getGroupProducts(){
+    var variantGroup = false;
+    vm.product.Groups.forEach(function(group){
+      if(group.Type === 'variations'){
+        variantGroup = group;
+      }
+    });
+    if(variantGroup && variantGroup.id){
+      var query = {
+        id: variantGroup.id
+      };
+      productService.getGroupProducts(query).then(function(res){
+        console.log(res);
+      });
+    }
+  }
 
 
   function setupGallery(){
@@ -124,6 +142,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     vm.gallery.slick('slickGoTo',index);
   }
 
+  //Always use after variants have loaded
   function loadProductFilters(){
     productService.getAllFilters({quickread:true}).then(function(res){
       vm.filters = res.data;
@@ -136,7 +155,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
             for(var key in vm.variants){
               var variant = vm.variants[key];
               variant.filterValues.map(function(variantValue){
-                if(variantValue.value.id == value.id ){
+                if(variantValue.value.id == value.id && variantValue.product == vm.product.ItemCode){
                   variantValue.selected = true;
                   vm.variants[key].selected = variantValue.value;
                   //console.log(vm.variants[key].selected);

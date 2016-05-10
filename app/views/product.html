@@ -133,6 +133,7 @@
                             class="variant-color"
                             ng-class="{'variant-color-on': filterValue.selected}"
                             ng-style="{'background-color' : filterValue.value.Code}">
+                            {{filterValue.product}}
                           </span>
                         </div>
                       </div>
@@ -145,7 +146,7 @@
                               ng-value="filterValue.value"
                               ng-click="vm.init(filterValue.product, true)"
                               class="" >
-                            {{filterValue.value.Name}}
+                            {{filterValue.value.Name}} | {{filterValue.product}}
                           </md-radio-button>
 
                         </md-radio-group>
