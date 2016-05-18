@@ -49,36 +49,82 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       vm.isLoading = false;
       vm.product = productService.formatProduct(res.data.data);
       vm.setupGallery();
-      vm.getGroupProducts()
+
       if(reload){
         $location.path('/product/' + productId, false);
         vm.loadProductFilters();
       }else{
-        vm.loadVariants().then(function(res){
-          vm.variants = res;
-          vm.loadProductFilters();
-        });
+        vm.loadProductFilters();
+        console.log('llego a loadVariants');
+        vm.loadVariants();
       }
 
     });
   }
 
   function getGroupProducts(){
+    var deferred = $q.defer();
     var variantGroup = false;
     vm.product.Groups.forEach(function(group){
       if(group.Type === 'variations'){
         variantGroup = group;
       }
     });
+    console.log(variantGroup);
     if(variantGroup && variantGroup.id){
       var query = {
         id: variantGroup.id
       };
       productService.getGroupProducts(query).then(function(res){
         console.log(res);
+        deferred.resolve(res.data);
       });
     }
+    return deferred.promise;
   }
+
+
+
+  function loadVariants(){
+    vm.getGroupProducts().then(function(products){
+
+      console.log(products);
+
+      vm.variants = {};
+      var valuesIds = [];
+
+      var filtersVariants = [
+        {id:16, key:'color', handle:'color', name: 'Color'},
+        {id:17, key:'forma', handle:'forma', name: 'Forma'},
+        {id:5, key:'tamano', handle:'tamano-camas-y-blancos-cama', name: 'Tamaño'},
+        {id:9, key:'firmeza', handle: 'firmeza', name: 'Firmeza'}
+      ];
+
+      filtersVariants.forEach(function(filter){
+        vm.variants[filter.key] = {};
+        angular.copy(filter, vm.variants[filter.key]);
+        vm.variants[filter.key].products = [];
+      });
+
+      products.forEach(function( product ){
+        filtersVariants.forEach(function (filter){
+          var values = _.where( product.FilterValues, { Filter: filter.id } );
+          values.forEach(function(val){
+            val.product = product.ItemCode;
+            valuesIds.push(val.id);
+            console.log(val.Name);
+          });
+          if(values.length > 0){
+            var aux = {id: product.ItemCode, filterValues : values};
+            vm.variants[filter.key].products.push(aux);
+            vm.hasVariants = true;
+          }
+        });
+      });
+
+    });
+  }
+
 
 
   function setupGallery(){
@@ -142,7 +188,6 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     vm.gallery.slick('slickGoTo',index);
   }
 
-  //Always use after variants have loaded
   function loadProductFilters(){
     productService.getAllFilters({quickread:true}).then(function(res){
       vm.filters = res.data;
@@ -152,20 +197,6 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
         vm.product.FilterValues.forEach(function(value){
           if(value.Filter == filter.id){
             filter.Values.push(value);
-            for(var key in vm.variants){
-              var variant = vm.variants[key];
-              variant.filterValues.map(function(variantValue){
-                if(variantValue.value.id == value.id && variantValue.product == vm.product.ItemCode){
-                  variantValue.selected = true;
-                  vm.variants[key].selected = variantValue.value;
-                  //console.log(vm.variants[key].selected);
-                }else{
-                  variantValue.selected = false;
-                }
-                return variantValue
-              });
-            }
-
           }
         })
         return filter;
@@ -175,12 +206,12 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
         return filter.Values.length > 0;
       });
 
-      console.log(vm.variants);
-
+      console.log(vm.filters);
 
     });
   }
 
+  /*
   function loadVariants(){
     var variantGroup = false;
     var deferred = $q.defer();
@@ -198,6 +229,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
 
     return deferred.promise;
   }
+  */
 
   function addToCart($event){
     console.log('addToCart');

@@ -24,16 +24,16 @@
         <img class="sub-image" src="images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg" alt="">
         -->
         <div class="sub-text">
-          <h4><a href="/listing">Ambiente | <strong>Salas</strong></a></h4>
+          <h4><a href="#">Ambiente | <strong>Salas</strong></a></h4>
         </div>
-        <a href="/listing" class="absolute-link"></a>
+        <a href="#" class="absolute-link"></a>
       </div>
 
-      <div ng-show="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+      <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
         <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
       </div>
       <!--PRODUCT VIEW CONTENT-->
-      <section ng-show="!vm.isLoading" class="product-view-content">
+      <section ng-if="!vm.isLoading" class="product-view-content">
 
         <div layout="row">
           <div class="product-view-gallery-wrap" flex="50">
@@ -61,6 +61,7 @@
                 data="vm.areImagesLoaded"
                 arrows="false"
                 draggable="false"
+                init-onload="true"
               >
                 <div ng-repeat="image in vm.galleryImages track by $index">
                   <div class="product-view-gallery-thumb">
@@ -78,8 +79,8 @@
               <h4 ng-click="vm.nextSlide()"><strong>CARACTERISTICAS</strong></h4>
               <table>
                 <tr ng-repeat="filter in vm.filters">
-                  <td ng-if="filter.Values.length > 0">{{filter.Name}}: </td>
-                  <td ng-if="filter.Values.length > 0">
+                  <td ng-if="filter.Values.length > 0 && filter.Name != 'Color paleta' ">{{filter.Name}}: </td>
+                  <td ng-if="filter.Values.length > 0 && filter.Name != 'Color paleta' ">
                     <span ng-repeat="value in filter.Values track by $index">
                       <strong>{{value.Name}}</strong>
                       <span ng-if="$index < (filter.Values.length-1)">,</span>
@@ -112,7 +113,7 @@
               </table>
             </div>
 
-            <div class="product-view-data-block">
+            <div ng-if="vm.hasVariants" class="product-view-data-block">
               <h4 class="product-view-data-block-toggle" ng-class="{'opened-toggle': vm.toggleVariants}">
                 <a href="#"  ng-click="vm.toggleVariants = !vm.toggleVariants">
                   <strong>VARIANTES</strong>
@@ -120,33 +121,55 @@
               </h4>
               <div ng-show="vm.toggleVariants" class="hl-data variants-picker">
                   <div ng-repeat="variant in vm.variants">
-                    <div class="variant-row"  layout="row" ng-if="variant.filterValues.length > 0">
+                    <div class="variant-row" ng-if="variant.products.length > 0"  layout="row">
                       <div flex="30"><strong>{{variant.name}}:</strong></div>
 
+                      <!--
                       <div ng-if="variant.handle == 'color' " flex="70">
                         <div>
                           <span
                             ng-repeat="filterValue in variant.filterValues"
-                            ng-click="vm.init(filterValue.product, true)"
-                            ng-mouseenter="vm.hoverText = filterValue.value.Name"
-                            ng-mouseleave="vm.hoverText = ''"
                             class="variant-color"
                             ng-class="{'variant-color-on': filterValue.selected}"
-                            ng-style="{'background-color' : filterValue.value.Code}">
+                            ng-style="{'background-color' : filterValue.Code}">
                             {{filterValue.product}}
                           </span>
                         </div>
                       </div>
+                      -->
 
-                      <div flex="70" ng-if="variant.handle != 'color' ">
-                        <md-radio-group ng-model="variant.selected" class="md-primary">
+                      <div ng-if=" variant.handle == 'color'  " flex="70" >
+
+                        <div
+                          class="variant-color"
+                          layout="row"
+                          layout-wrap
+                          ng-repeat="prod in variant.products"
+                          ng-click="vm.init(prod.id, true)"
+                          ng-class="{'variant-color-on': prod.id == vm.product.ItemCode}"
+                        >
+                          <span
+                            class="variant-color-val"
+                            ng-repeat="val in prod.filterValues track by $index"
+                            ng-style=" {'background' : val.Code, 'width' : (100 / prod.filterValues.length) +'%' } "
+                          >
+                          </span>
+
+                        </div>
+
+                      </div>
+
+                      <div ng-if=" variant.handle != 'color'  " flex="70" >
+                        <md-radio-group ng-model="vm.product.ItemCode" class="md-primary">
 
                           <md-radio-button
-                              ng-repeat="filterValue in variant.filterValues"
-                              ng-value="filterValue.value"
-                              ng-click="vm.init(filterValue.product, true)"
+                              ng-repeat="prod in variant.products"
+                              ng-value="prod.id"
+                              ng-click="vm.init(prod.id, true)"
                               class="" >
-                            {{filterValue.value.Name}} | {{filterValue.product}}
+                             <span ng-repeat="val in prod.filterValues track by $index">
+                              {{val.Name}}<span ng-if="$index < (prod.filterValues.length-1) ">, </span>
+                             </span>
                           </md-radio-button>
 
                         </md-radio-group>
@@ -249,9 +272,15 @@
             <article ng-if="!vm.toggleProductDescription">
               <h3>{{vm.product.Name}}</h3>
               <div ng-bind-html="vm.trustAsHtml(vm.product.Description)"></div>
-              <br/>
+              <!--<br/>-->
               <h4>Contenido del paquete</h4>
               <div ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"></div>
+              <h4>Caracteristicas princiaples</h4>
+              <div ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"></div>
+              <h4>Restricciones</h4>
+              <div ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"></div>
+              <h4>Conservación</h4>
+              <div ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"></div>
             </article>
 
             <article ng-if="vm.toggleProductDescription">
