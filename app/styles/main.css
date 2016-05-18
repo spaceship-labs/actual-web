@@ -254,6 +254,7 @@ a{text-decoration: none}
   margin: 0 auto;
   right: 0;
   font-weight: 700;
+  font-size: 12px;
 }
 
 .header-top-bar-menu .header-top-bar-menu-item-name{
@@ -261,6 +262,7 @@ a{text-decoration: none}
   min-width: 140px;
   vertical-align: middle;
   padding: 20px 0;
+  font-size: 12px;
 }
 .header-top-bar-menu .header-top-bar-menu-item-name > a{
   color: #000;
@@ -453,6 +455,17 @@ a{text-decoration: none}
   text-decoration: none;
   text-transform: uppercase;
 }
+
+.nav-categories-item > span:after{
+  content: '';
+  background: url(../images/arrow-down.png) center no-repeat!important;
+  display: block;
+  width: 13px;
+  height: 13px;
+  margin: 0 auto;
+  background-size: cover!important;
+}
+
 .nav-categories-item:hover{
   background: #000;
   color: #fff;
@@ -590,8 +603,31 @@ a{text-decoration: none}
   display: block;
   font-size: 13px;
   padding: 20px;
+  position: relative;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.menu-categories-sidebar a.active-item:after{
+  content: '';
+  background: url(../images/arrow-right.png) center no-repeat!important;
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0 auto;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  background-size: cover!important;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.menu-categories-sidebar li > a > i{
+  font-size: 32px;
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
 .menu-categories-list{padding: 10px 20px;}
@@ -998,7 +1034,7 @@ a{text-decoration: none}
   margin-bottom: 0;
 }
 .product-view-gallery-wrap{
-  padding: 20px 40px 0px 0px;
+  padding: 40px 40px 0px 0px;
 }
 .product-view-gallery{
   border: 1px solid #000;
@@ -1028,7 +1064,9 @@ a{text-decoration: none}
   -moz-box-shadow: 0px 6px 10px -2px rgba(0,0,0,0.64);
   box-shadow: 0px 6px 10px -2px rgba(0,0,0,0.64);
   border-radius: 2px;
-  top:20px;
+  /*top:20px;*/
+  top: auto;
+  bottom: 20px;
   z-index: 9;
 }
 
@@ -1072,7 +1110,7 @@ a{text-decoration: none}
   #PRODUCT-VIEW-DATA
 /*-------------*/
 
-.product-view-data{margin-top: 10px;}
+.product-view-data{margin-top: 20px;}
 .product-view-data-block h4{
   font-size: 14px;
   margin: 0;

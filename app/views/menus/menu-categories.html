@@ -1,14 +1,18 @@
 <div class="menu-categories" ng-show="main.menuCategoriesOn">
-  <div layout="row" ng-init="currentCategory = 0">
+  <div layout="row" ng-init="vm.currentCategory = 0">
+
     <ul flex="20" class="menu-categories-sidebar">
       <li ng-repeat="category in main.categories track by $index">
-        <a ng-click="currentCategory = $index" href="#">{{category.label}}</a>
+        <a ng-click="vm.currentCategory = $index" ng-class="{'active-item': $index == vm.currentCategory}" href="#">
+          <i class="icon-{{category.icon}}"></i>
+          {{category.label}}
+        </a>
       </li>
 
     </ul>
     <div flex="80" class="menu-categories-list">
 
-      <div class="menu-categories-list-inner" ng-repeat="category in [1,2,3,4,5,6,7] track by $index" layout="row" ng-show="$index == currentCategory">
+      <div class="menu-categories-list-inner" ng-repeat="category in [1,2,3,4,5,6,7] track by $index" layout="row" ng-show="$index == vm.currentCategory">
         <div flex="33">
           <div class="menu-categories-group">
             <h3><a href="/category"><strong>Salas {{$index}}</strong></a></h3>

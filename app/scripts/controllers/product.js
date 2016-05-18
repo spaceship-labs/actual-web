@@ -40,8 +40,6 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     vm.filters = [];
     vm.activeVariants = {};
     vm.galleryImages = [];
-    vm.gallery = $(".product-view-gallery").find('slick');
-    vm.galleryReel = $('.product-view-gallery-thumbs').find('slick');
     vm.isLoading = true;
     var getVariants = true;
 
@@ -150,9 +148,18 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       });
     }
 
-    vm.gallery.on('afterChange',function(e, slick, currentSlide){
-      vm.galleryReel.slick('slickGoTo',currentSlide);
-    });
+    $timeout(function(){
+
+      vm.gallery = $(".product-view-gallery").find('slick');
+      vm.galleryReel = $('.product-view-gallery-thumbs').find('slick');
+
+
+      vm.gallery.on('afterChange',function(e, slick, currentSlide){
+        vm.galleryReel.slick('slickGoTo',currentSlide);
+      });
+
+    }, 1000);
+
 
   }
 
@@ -185,6 +192,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   }
 
   function setGalleryIndex(index){
+    console.log('setupGalleryIndex : ' + index);
     vm.gallery.slick('slickGoTo',index);
   }
 
