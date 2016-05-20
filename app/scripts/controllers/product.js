@@ -93,7 +93,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
 
       var filtersVariants = [
         {id:16, key:'color', handle:'color', name: 'Color'},
-        {id:17, key:'forma', handle:'forma', name: 'Forma'},
+        {id:7, key:'forma', handle:'forma', name: 'Forma'},
         {id:5, key:'tamano', handle:'tamano-camas-y-blancos-cama', name: 'Tamaño'},
         {id:9, key:'firmeza', handle: 'firmeza', name: 'Firmeza'}
       ];
