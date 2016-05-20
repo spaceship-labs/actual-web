@@ -16,7 +16,7 @@
 
     <!--MAIN VIEW-->
     <div class="product-view" flex="70">
-      <h2 class="listing-view-title">{{vm.product.Name}}</h2>
+      <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
       <div
         class="sub sub-set"
         ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
@@ -87,8 +87,8 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Color detallado</td>
-                  <td><strong>{{vm.product.DetailedColor}}</strong></td>
+                  <td>Color</td>
+                  <td><strong>{{vm.product.DetailedColor || vm.product.U_COLOR}}</strong></td>
                 </tr>
               </table>
 
@@ -98,15 +98,23 @@
               <table>
                 <tr>
                   <td>Largo:</td>
-                  <td><strong>{{vm.product.Length}} {{vm.product.LengthUnitMsr}}</strong></td>
+                  <td><strong>{{vm.product.Length | number:2}} {{vm.product.LengthUnitMsr}}</strong></td>
                 </tr>
                 <tr>
                   <td>Ancho:</td>
-                  <td><strong>{{vm.product.Width}} {{vm.product.WidthUnitMsr}}</strong></td>
+                  <td><strong>{{vm.product.Width | number:2}} {{vm.product.WidthUnitMsr}}</strong></td>
                 </tr>
                 <tr>
                   <td>Alto:</td>
-                  <td><strong>{{vm.product.Height}} {{vm.product.HeightUnitMsr}}</strong></td>
+                  <td><strong>{{vm.product.Height | number:2}} {{vm.product.HeightUnitMsr}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Volumen:</td>
+                  <td><strong>{{vm.product.Volume | number:2}} {{vm.product.VolumeUnitMsr}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Peso:</td>
+                  <td><strong>{{vm.product.Weight | number:2}} {{vm.product.WeightUnitMsr}}</strong></td>
                 </tr>
 
               </table>

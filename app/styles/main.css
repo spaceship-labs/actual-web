@@ -948,7 +948,7 @@ a{text-decoration: none}
   font-size: 32px;
   font-weight: 400;
   text-transform: uppercase;
-  margin: 12px 0;
+  margin:  0 0 12px;
   line-height: 1;
 }
 .listing-view .listing-view-title:before{
