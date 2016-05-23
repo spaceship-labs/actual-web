@@ -73,6 +73,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       var query = {
         id: variantGroup.id
       };
+      console.log(query);
       productService.getGroupProducts(query).then(function(res){
         console.log(res);
         deferred.resolve(res.data);
@@ -92,10 +93,10 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       var valuesIds = [];
 
       var filtersVariants = [
-        {id:16, key:'color', handle:'color', name: 'Color'},
-        {id:7, key:'forma', handle:'forma', name: 'Forma'},
-        {id:5, key:'tamano', handle:'tamano-camas-y-blancos-cama', name: 'Tamaño'},
-        {id:9, key:'firmeza', handle: 'firmeza', name: 'Firmeza'}
+        {id:'5743703aef7d5e62e508e22d', key:'color', handle:'color', name: 'Color'},
+        {id:'5743703aef7d5e62e508e223', key:'forma', handle:'forma', name: 'Forma'},
+        {id:'5743703aef7d5e62e508e220', key:'tamano', handle:'tamano-camas-y-blancos-cama', name: 'Tamaño'},
+        {id:'5743703aef7d5e62e508e226', key:'firmeza', handle: 'firmeza', name: 'Firmeza'}
       ];
 
       filtersVariants.forEach(function(filter){
@@ -164,7 +165,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   }
 
   function sortImages(){
-    var idsList = vm.product.ImagesOrder.split(',');
+    var idsList = vm.product.ImagesOrder ? vm.product.ImagesOrder.split(',') : [];
     var notSortedImages = [];
     var found = false;
 
@@ -219,25 +220,6 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     });
   }
 
-  /*
-  function loadVariants(){
-    var variantGroup = false;
-    var deferred = $q.defer();
-
-    vm.product.Groups.forEach(function(group){
-      if(group.Type === 'variations'){
-        variantGroup = group;
-      }
-    });
-    if(variantGroup){
-      productService.getGroupVariants(variantGroup.id).then(function(res){
-        deferred.resolve(res.data);
-      });
-    }
-
-    return deferred.promise;
-  }
-  */
 
   function addToCart($event){
     console.log('addToCart');
