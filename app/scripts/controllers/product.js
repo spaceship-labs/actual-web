@@ -27,6 +27,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   vm.loadVariants = loadVariants;
   vm.getGroupProducts = getGroupProducts;
   vm.variants = [];
+  vm.productQty = 1;
 
   vm.toggleVariants = true;
 
@@ -51,9 +52,9 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       if(reload){
         $location.path('/product/' + productId, false);
         vm.loadProductFilters();
+        vm.productQty = 1;
       }else{
         vm.loadProductFilters();
-        console.log('llego a loadVariants');
         vm.loadVariants();
       }
 
@@ -127,9 +128,10 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
 
 
   function setupGallery(){
-    vm.imageSizeIndexGallery = 3;
-    vm.imageSizeIndexIcon = 9;
+    vm.imageSizeIndexGallery = 2;
+    vm.imageSizeIndexIcon = 1;
     vm.imageSize = api.imageSizes.gallery[vm.imageSizeIndexGallery];
+    console.log(api.imageSizes.gallery);
     vm.areImagesLoaded = true;
     vm.sortImages();
 

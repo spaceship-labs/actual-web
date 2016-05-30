@@ -19,15 +19,18 @@ angular.module('dashexampleApp')
         scope.images = [];
 
         scope.setUpImages = function(){
-          scope.imageSizeIndexGallery = 2;
-          scope.imageSizeIndexIcon = 0;
+          scope.imageSizeIndexGallery = 4;
+          scope.imageSizeIndexIcon = 10;
           scope.imageSize = api.imageSizes.gallery[scope.imageSizeIndexGallery];
+          console.log(api.imageSizes.gallery);
 
           $timeout(function(){
             scope.areImagesLoaded = true;
 
             //Adding icon as gallery first image
             if(scope.product.icons[scope.imageSizeIndexIcon]){
+              console.log('product icons: ',scope.product.icons);
+
               scope.images.push(scope.product.icons[scope.imageSizeIndexIcon]);
             }else{
               scope.images.push(scope.product.icons[0]);
@@ -35,6 +38,7 @@ angular.module('dashexampleApp')
 
             if(scope.product.files){
               scope.product.files.forEach(function(img){
+                console.log('image url: ', api.baseUrl + '/uploads/products/gallery/' + scope.imageSize + img.filename);
                 scope.images.push({
                   url: api.baseUrl + '/uploads/products/gallery/' + scope.imageSize + img.filename
                 });

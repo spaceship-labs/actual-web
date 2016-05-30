@@ -187,43 +187,34 @@
             </div>
 
             <div class="product-view-data-block">
-              <h4 class="product-view-data-block-toggle"  ng-class="{'opened-toggle': vm.availableToggle}">
-                <a href="#"  ng-click="vm.availableToggle = !vm.availableToggle">
-                  <strong>DISPONIBILIDAD:</strong> solo quedan <strong>{{vm.product.OnHand}} productos</strong>
-                </a>
+              <h4 >
+                <strong>DISPONIBILIDAD:</strong> quedan <strong>16 productos</strong> disponibles
               </h4>
-              <div ng-show="vm.availableToggle" class="hl-data">
-                <h4><strong>STOCK</strong></h4>
+              <div>
                 <table>
-                <!--
-                  <tr ng-repeat="stock in vm.product.prices">
-                    <td>Actual Studio Cancun:</td>
-                    <td><strong>3</strong></td>
+                  <tr>
+                    <td>1-abril-2016 (en 8 dias)</td>
+                    <td>3 piezas</td>
                   </tr>
-                -->
-                  <tr ng-repeat="stock in vm.product.stock">
-                    <td>{{stock.WhsCode}}:</td>
-                    <td><strong>{{stock.OnHand}}</strong></td>
+                  <tr>
+                    <td>5-abril-2016 (en 12 dias)</td>
+                    <td>6 piezas</td>
+                  </tr>
+                  <tr>
+                    <td>20-abril-2016 (en 27 dias)</td>
+                    <td>16 piezas</td>
                   </tr>
 
-                  <tr>
-                    <td><strong>Total:</strong></td>
-                    <td><strong>{{vm.product.OnHand}}</strong></td>
-                  </tr>
                 </table>
               </div>
             </div>
 
             <div class="product-view-data-block">
-              <div layout="row" layout-align="space-between center">
-                <a flex href="#" ng-click="vm.discountToggle = !vm.discountToggle" class="product-view-data-block-toggle-btn">
-                  <strong>Máx. Descuento</strong>
+              <h4 class="product-view-data-block-toggle" ng-click="vm.discountToggle = !vm.discountToggle">
+                <a flex href="#" >
+                  <strong>MÁXIMO DESCUENTO</strong>
                 </a>
-                <h4>
-                  <span class="product-view-price-crossed">{{vm.product.price.value | currency}} | </span>
-                  <span class="product-view-price">{{vm.product.price.value | currency}}</span>
-                </h4>
-              </div>
+              </h4>
               <div ng-show="vm.discountToggle" class="hl-data">
                 <h4><strong>PROMOCIONES</strong></h4>
                 <table>
@@ -248,10 +239,33 @@
               </div>
             </div>
 
+            <div class="product-view-prices" layout="row" layout-align="space-between center">
+              <div flex="20">
+                <p class="product-view-price-crossed">$18, 699</p>
+                <p class="product-view-price-hl">
+                  <strong>$14, 699</strong>
+                </p>
+              </div>
+              <div flex="40">
+                <div class="product-view-qty input-element">
+                  <div class="input-element-inner">
+                    <input ng-model="vm.productQty" min="1" type="number">
+                  </div>
+                </div>
+              </div>
+              <h3 flex="30" class="product-view-price-hl product-view-price-main">
+                <strong>$102,893</strong>
+              </h3>
+            </div>
+
             <a ng-click="vm.addToCart($event)" href="#" class="add-cart-btn">
+              <span class="add-cart-btn-icon">
+                <span class="add-cart-btn-icon-num">{{vm.productQty}}</span>
+                <i class="icon-carro"></i>
+              </span>
               <strong>Agregar al carrito</strong>
             </a>
-            <p class="seen-number">Visto 16 veces hoy</p>
+            <p class="seen-number"><strong>Visto 16 veces hoy</strong></p>
 
           </div>
           <!--END PRODUCT VIEW DATA-->

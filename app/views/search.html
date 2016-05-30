@@ -12,7 +12,81 @@
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
-    <sidebar-categories flex="25"></sidebar-categories>
+    <aside flex="25">
+      <sidebar-categories></sidebar-categories>
+
+      <section class="filters">
+        <h3 class="filters-head">FILTRAR RESULTADOS</h3>
+        <div class="filters-inner">
+          <div class="filter-block">
+            <h4><strong>PRECIO:</strong></h4>
+            <div class="filter-block-inner">
+
+              <div layout="row" layout-align="space-between center">
+                <div flex class="input-element">
+                  <div class="input-element-inner">
+                    <input placeholder="Min." type="number">
+                  </div>
+                </div>
+                <span>-</span>
+                <div flex class="input-element">
+                  <div class="input-element-inner">
+                    <input placeholder="Max." type="number">
+                  </div>
+                </div>
+                <a href="#" class="filter-block-price-btn">
+                  <img src="images/arrow-right.png" alt="">
+                </a>
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
+            <h4><strong>{{filter.Name}}:</strong></h4>
+            <div class="filter-block-inner">
+
+              <!--
+              <md-radio-group
+                ng-if=" filter.Handle != 'color' "
+                ng-model="vm.filters[$index].selectedValue"
+                ng-change="vm.searchByFilters()"
+                class="md-primary">
+                <md-radio-button ng-repeat="value in filter.Values"  ng-value="value.id" class="">
+                  <span>{{value.Name}}</span>
+                </md-radio-button>
+              </md-radio-group>
+              -->
+
+              <div ng-if=" filter.Handle != 'color' " >
+                <md-checkbox md-indeterminate
+                  ng-repeat="value in filter.Values"
+                  ng-model="value.selected"
+                  ng-change="vm.searchByFilters()"
+                  aria-label="Checkbox Indeterminate" class="md-primary">
+                  {{value.Name}}
+                </md-checkbox>
+              </div>
+
+
+              <div ng-if=" filter.Handle == 'color' " class="color-picker-sp" layout="row" layout-wrap>
+                <a
+                  class="color-picker-sp-value"
+                  ng-repeat="value in filter.Values"
+                  ng-style="{'background-color' : value.Code}"
+                  href="#"
+                  flex>
+                  <span>(50)</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </aside>
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
