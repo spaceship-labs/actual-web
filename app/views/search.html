@@ -60,7 +60,7 @@
               -->
 
               <div ng-if=" filter.Handle != 'color' " >
-                <md-checkbox md-indeterminate
+                <md-checkbox
                   ng-repeat="value in filter.Values"
                   ng-model="value.selected"
                   ng-change="vm.searchByFilters()"
