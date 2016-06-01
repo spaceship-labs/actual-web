@@ -20,7 +20,8 @@ angular
     'slick',
     'LocalStorageModule',
     'angular-jwt',
-    'ngMaterialDatePicker'
+    'ngMaterialDatePicker',
+    'datatables'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
@@ -70,10 +71,60 @@ angular
         controller: 'AddquotationCtrl',
         controllerAs: 'vm'
       })
-      .when('/create-client', {
-        templateUrl: 'views/create-client.html',
-        controller: 'CreateClientCtrl',
-        controllerAs: 'vm'
+      .when('/client/create', {
+        templateUrl: 'views/client-create.html',
+        controller: 'ClientCreateCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
+      .when('/client/profile/:id', {
+        templateUrl: 'views/client-profile.html',
+        controller: 'ClientProfileCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
+      .when('/clients/list', {
+        templateUrl: 'views/clients-list.html',
+        controller: 'ClientsListCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
+      .when('/user/profile', {
+        templateUrl: 'views/user-profile.html',
+        controller: 'UserProfileCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
+      .when('/cart', {
+        templateUrl: 'views/cart.html',
+        controller: 'CartCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'

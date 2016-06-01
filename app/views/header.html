@@ -30,30 +30,33 @@
       </form>
 
       <div class="header-top-bar-menu" layout="row" layout-align="center center">
+
+        <!---
         <div ng-mouseover="main.activateCartModal()" ng-mouseleave="main.deactivateCartModal()" flex href="#" class="header-top-bar-menu-item">
           <span class="cart-n-items">{{main.cart.products.length}}</span>
           <i class="icon-carro"></i>
           <ng-include src="'views/partials/cart-header.html'"></ng-include>
         </div>
-        <span class="header-top-bar-menu-item-separator" flex></span>
+        -->
+
         <div ng-if="!main.user" ng-mouseover="main.activateLoginModal()" ng-mouseleave="main.deactivateLoginModal()" flex href="#" class="header-top-bar-menu-item">
           <i class="icon-login"></i>
           <ng-include ng-if="!main.user" src="'views/partials/login-header.html'"></ng-include>
         </div>
 
         <!--IF logged in-->
-        <div ng-if="main.user" flex href="#" class="header-top-bar-menu-item">
-          <a href="#"><i class="icon-login"></i></a>
-        </div>
-
-        <div ng-if="main.user" flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-name">
-          <a href="#"><span >Bienvenido <strong>{{main.user.firstName}}</strong></span></a>
-        </div>
-
-        <span ng-if="main.user" class="header-top-bar-menu-item-separator" flex></span>
-
-        <div ng-if="main.user" flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-name header-top-bar-menu-item-logout">
-          <a ng-click="main.logOut()" href="#"><span>Cerrar sesión</span></a>
+        <div
+          ng-if="main.user"
+          flex
+          href="#"
+          class="header-top-bar-menu-item header-top-bar-menu-item-name"
+          ng-click="main.toggleProfileHeader = !main.toggleProfileHeader"
+        >
+          <a href="#">
+            <i class="icon-login"></i>
+            <span >Bienvenido <strong>{{main.user.firstName}}</strong></span>
+          </a>
+          <ng-include ng-if="main.toggleProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
 
@@ -67,69 +70,11 @@
   <!--END TOP BAR-->
 
   <!--START MENU-->
-  <div class="menu">
-    <div class="container container-xxlg" layout="row" layout-align="center center">
-      <div flex="20" class="logo" layout-align="center center">
-        <a href="/" >
-          <img src="images/logo.png" alt="Actual Group">
-        </a>
-      </div>
-      <div flex="10" layout-align="center center">
-        <a ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
-      </div>
-      <nav flex="70" layout="row" ng-mouseover="main.menuCategoriesOn = false" class="nav-categories">
-        <a  href="#" flex class="nav-categories-item">
-          <!--<a href="#" class="absolute-link"></a>-->
-          <i class="icon-sofa"></i>
-          <span class="nav-categories-item-text" href="#">Hogar</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
-        </a>
-        <a href="#" flex class="nav-categories-item">
-          <i class="icon-office"></i>
-          <span class="nav-categories-item-text" href="#">Oficina</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
-        </a>
-        <a href="#" flex class="nav-categories-item">
-          <i class="icon-jardin"></i>
-          <span class="nav-categories-item-text" href="#">Jardin</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
-        </a>
-        <a href="#" flex class="nav-categories-item">
-          <i class="icon-ninos"></i>
-          <span class="nav-categories-item-text" href="#">Niños</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
-        </a>
-        <a href="#" flex class="nav-categories-item">
-          <i class="icon-bebes"></i>
-          <span class="nav-categories-item-text" href="#">Bebés</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
-        </a>
-        <a href="#" flex class="nav-categories-item">
-          <i class="icon-ambientes"></i>
-          <span class="nav-categories-item-text" href="#">Ambientes</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
-        </a>
-        <a href="#" flex class="nav-categories-item">
-          <i class="icon-ofertas"></i>
-          <span class="nav-categories-item-text" href="#">Ofertas</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
-        </a>
 
-      </nav>
-    </div>
+    <ng-include ng-if="!isMiActual" src="'views/partials/header-menu.html'"></ng-include>
 
-    <div class="container container-xxlg absolute-menus" layout="row">
-      <div flex="100" class="menu-categories-wrapper">
-        <ng-include src="'views/menus/menu-categories.html'"></ng-include>
-      </div>
+    <ng-include ng-if="isMiActual" src="'views/partials/header-menu-miactual.html'"></ng-include>
 
-      <!--<ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>-->
-
-    </div>
-
-
-
-  </div>
   <!--END MENU-->
 
 </div>

@@ -1,0 +1,78 @@
+<section class="form-view container container-xlg">
+  <h1><i class="icon-login"></i> <strong>MI PERFIL |</strong> {{main.user.firstName + ' ' + main.user.lastName }}</h1>
+
+  <section class="form-view-content">
+
+    <section class="form-section">
+
+      <!--DATOS PERSONALES-->
+      <section action="#" class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+
+        <div flex="20" class="avatar-placeholder-wrap">
+          <div class="avatar-placeholder">
+            <span>+</span>
+          </div>
+          <p><strong>FOTO DE PERFIL</strong></p>
+        </div>
+
+        <div flex="75">
+          <div layout="row">
+            <div flex="40" class="input-element">
+              <label><strong>Nombre(s) <span class="hl-label">*</span></strong></label>
+              <div class="input-element-inner">
+                <input type="text" required>
+              </div>
+            </div>
+
+            <div flex="60" class="input-element">
+              <label><strong>Apellidos <span class="hl-label">*</span></strong></label>
+              <div class="input-element-inner">
+                <input type="text" required>
+              </div>
+            </div>
+
+          </div>
+
+          <div layout="row">
+
+            <div flex="30" class="input-element">
+              <label><strong>Email</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="email" required>
+              </div>
+            </div>
+
+           <div flex="30" class="input-element">
+              <label><strong>Confirmar email</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="email" required>
+              </div>
+            </div>
+
+          </div>
+
+          <hr/>
+
+          <p class="modify-password">
+            <a href="http://actual.spaceshiplabs.com/auth/forgot-password">
+              <i class="icon-login"></i>
+              <strong>MODIFICAR CONTRASEÑA</strong>
+            </a>
+          </p>
+
+        </div>
+
+      </section>
+      <!--END DATOS PERSONALES-->
+
+    </section>
+    <!--END FORM SECTION-->
+
+    <div layout="row" class="form-view-btns">
+      <a href="" flex class="form-view-btn">Borrar todos los campos</a>
+      <a href="" flex class="form-view-btn form-view-btn-primary">Guardar información</a>
+    </div>
+
+  </section>
+  <!--END PROFILE EDIT-->
+</section>

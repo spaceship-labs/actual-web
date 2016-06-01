@@ -1,0 +1,63 @@
+  <div class="menu">
+    <div class="container container-xxlg" layout="row" layout-align="center center">
+      <div flex="20" class="logo" layout-align="center center">
+        <a href="/" >
+          <img src="images/logo.png" alt="Actual Group">
+        </a>
+      </div>
+      <div flex="10" layout-align="center center">
+        <a ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
+      </div>
+      <nav flex="70" layout="row" ng-mouseover="main.menuCategoriesOn = false" class="nav-categories">
+        <a  href="#" flex class="nav-categories-item">
+          <!--<a href="#" class="absolute-link"></a>-->
+          <i class="icon-sofa"></i>
+          <span class="nav-categories-item-text" href="#">Hogar</span>
+          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <i class="icon-office"></i>
+          <span class="nav-categories-item-text" href="#">Oficina</span>
+          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <i class="icon-jardin"></i>
+          <span class="nav-categories-item-text" href="#">Jardin</span>
+          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <i class="icon-ninos"></i>
+          <span class="nav-categories-item-text" href="#">Niños</span>
+          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <i class="icon-bebes"></i>
+          <span class="nav-categories-item-text" href="#">Bebés</span>
+          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <i class="icon-ambientes"></i>
+          <span class="nav-categories-item-text" href="#">Ambientes</span>
+          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
+        </a>
+        <a href="#" flex class="nav-categories-item">
+          <i class="icon-ofertas"></i>
+          <span class="nav-categories-item-text" href="#">Ofertas</span>
+          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
+        </a>
+
+      </nav>
+    </div>
+
+    <div class="container container-xxlg absolute-menus" layout="row">
+      <div flex="100" class="menu-categories-wrapper">
+        <ng-include src="'views/menus/menu-categories.html'"></ng-include>
+      </div>
+
+      <!--<ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>-->
+
+    </div>
+
+
+
+  </div>

@@ -31,6 +31,8 @@
     vm.cart.products = cartService.getProducts();
     vm.categories = categoriesService.getCategories();
 
+    vm.isMiActual = $rootScope.isMiActual;
+
     vm.init = function(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');

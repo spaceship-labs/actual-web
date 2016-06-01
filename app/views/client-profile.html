@@ -1,5 +1,5 @@
 <section class="form-view container container-xlg">
-  <h1><i class="icon-login"></i> <strong>NUEVO CLIENTE</strong></h1>
+  <h1><i class="icon-login"></i> <strong>PERFIL DEL CLIENTE</strong></h1>
 
   <section class="form-view-content">
 
@@ -48,8 +48,8 @@
             <label><strong>Titulo</strong></label>
             <md-input-container>
               <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Sr. / Sra. / Srita." required>
-                <md-option value="Sra">
-                  Sra
+                <md-option ng-repeat="title in vm.titles" ng-value="title.value">
+                  {{title.label}}
                 </md-option>
               </md-select>
             </md-input-container>
@@ -59,8 +59,9 @@
             <label><strong>Sexo</strong></label>
             <md-input-container>
               <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Masculino / Femenino" required>
-                <md-option value="M">Masculino</md-option>
-                <md-option value="F">Femenino</md-option>
+                <md-option ng-repeat="gender in vm.genders" ng-value="gender.value">
+                  {{gender.label}}
+                </md-option>
               </md-select>
             </md-input-container>
           </div>
@@ -247,8 +248,8 @@
             <label><strong>Estado</strong></label>
             <md-input-container>
               <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Elige un estado" required>
-                <md-option value="Sra">
-                  Sra
+                <md-option ng-repeat="state in vm.states" ng-value="state.name">
+                  {{state.name}}
                 </md-option>
               </md-select>
             </md-input-container>
@@ -302,8 +303,8 @@
             <label><strong>País</strong> <span class="hint">(Selecciona de la lista) *</span></label>
             <md-input-container>
               <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Elige un estado" required>
-                <md-option value="Sra">
-                  Sra
+                <md-option ng-repeat="country in vm.countries" ng-value="country.code">
+                  {{country.name}}
                 </md-option>
               </md-select>
             </md-input-container>
@@ -455,8 +456,8 @@
             <label><strong>Estado</strong> <span class="hl-label">*</span></label>
             <md-input-container>
               <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Elige un estado" required>
-                <md-option value="Sra">
-                  Sra
+                <md-option ng-repeat="state in vm.states" ng-value="state.name">
+                  {{state.name}}
                 </md-option>
               </md-select>
             </md-input-container>
@@ -498,11 +499,24 @@
     </section>
     <!--END FORM SECTION-->
 
-    <div layout="row" class="form-view-btns">
-      <a href="" flex class="form-view-btn">Borrar todos los campos</a>
-      <a href="" flex class="form-view-btn form-view-btn-primary">Guardar información</a>
-    </div>
 
   </section>
+  <!--END PROFILE EDIT-->
+
+
+  <h1>HISTORIAL POR SEGMENTOS</h1>
+
+  <section class="table-list-wrap">
+    <label><strong>OPORTUNIDADES</strong></label>
+    <hr>
+    <div table-list class="table-list" columns="vm.columnsLeads" api-resource="vm.apiResourceLeads"></div>
+  </section>
+
+  <section class="table-list-wrap">
+    <label><strong>PEDIDOS</strong></label>
+    <hr>
+    <div table-list class="table-list" columns="vm.columnsLeads" api-resource="vm.apiResourceLeads"></div>
+  </section>
+
 
 </section>

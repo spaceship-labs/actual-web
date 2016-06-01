@@ -1,0 +1,23 @@
+<div class="modal-header profile-modal-header">
+  <section class="profile-modal-header-content">
+    <div class="profile-modal-header-avatar">
+      <a href="#"><img src="images/profile.png"></a>
+    </div>
+    <div class="profile-modal-header-info">
+      <h2><strong>{{ main.user.firstName + ' ' + main.user.lastName }}</strong></h2>
+      <p>{{main.user.email}}</p>
+      <p>
+        <a href="/user/profile" class="profile-modal-header-btn">
+          <i class="icon-login"></i> Mi perfil
+        </a>
+      </p>
+    </div>
+  </section>
+  <section class="profile-modal-header-bottom">
+    <div layout="row" layout-align="center center">
+      <a flex ng-click="main.logOut()" href="" class="profile-modal-header-btn profile-modal-header-btn-alert">
+        Cambiar sesion
+      </a>
+    </div>
+  </section>
+</div>
