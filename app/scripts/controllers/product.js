@@ -27,7 +27,6 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   vm.loadVariants = loadVariants;
   vm.getGroupProducts = getGroupProducts;
   vm.variants = [];
-  vm.productQty = 1;
 
   vm.toggleVariants = true;
 
@@ -47,12 +46,16 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     productService.getById(productId).then(function(res){
       vm.isLoading = false;
       vm.product = productService.formatProduct(res.data.data);
+      vm.product.cart = {
+        quantity: 1
+      }
       vm.setupGallery();
 
       if(reload){
         $location.path('/product/' + productId, false);
         vm.loadProductFilters();
-        vm.productQty = 1;
+        //vm.productQty = 1;
+
       }else{
         vm.loadProductFilters();
         vm.loadVariants();

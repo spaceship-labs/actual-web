@@ -19,7 +19,8 @@ angular
     'ngMaterial',
     'slick',
     'LocalStorageModule',
-    'angular-jwt'
+    'angular-jwt',
+    'ngMaterialDatePicker'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
@@ -62,6 +63,16 @@ angular
       .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/addquotation', {
+        templateUrl: 'views/addquotation.html',
+        controller: 'AddquotationCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/create-client', {
+        templateUrl: 'views/create-client.html',
+        controller: 'CreateClientCtrl',
         controllerAs: 'vm'
       })
       .otherwise({

@@ -63,6 +63,7 @@ function SearchCtrl($location,$routeParams ,productService){
       console.log(res);
       vm.isLoading = false;
       vm.products = productService.formatProducts(res.data);
+      vm.totalResults = vm.products.length;
     });
   }
 

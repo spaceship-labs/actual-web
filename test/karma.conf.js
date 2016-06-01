@@ -41,6 +41,9 @@ module.exports = function(config) {
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/angular-jwt/dist/angular-jwt.js',
       'bower_components/underscore/underscore.js',
+      'bower_components/midnight/midnight.jquery.min.js',
+      'bower_components/momentjs/moment.js',
+      'bower_components/angular-material-datetimepicker/js/angular-material-datetimepicker.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

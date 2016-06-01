@@ -241,26 +241,26 @@
 
             <div class="product-view-prices" layout="row" layout-align="space-between center">
               <div flex="20">
-                <p class="product-view-price-crossed">$18, 699</p>
+                <p class="product-view-price-crossed">{{vm.product.price.value + 2000 | currency }}</p>
                 <p class="product-view-price-hl">
-                  <strong>$14, 699</strong>
+                  <strong>{{vm.product.price.value | currency }}</strong>
                 </p>
               </div>
               <div flex="40">
                 <div class="product-view-qty input-element">
                   <div class="input-element-inner">
-                    <input ng-model="vm.productQty" min="1" type="number">
+                    <input ng-model="vm.product.cart.quantity" min="1" type="number">
                   </div>
                 </div>
               </div>
               <h3 flex="30" class="product-view-price-hl product-view-price-main">
-                <strong>$102,893</strong>
+                <strong>{{vm.product.price.value * vm.product.cart.quantity | currency }}</strong>
               </h3>
             </div>
 
             <a ng-click="vm.addToCart($event)" href="#" class="add-cart-btn">
               <span class="add-cart-btn-icon">
-                <span class="add-cart-btn-icon-num">{{vm.productQty}}</span>
+                <span class="add-cart-btn-icon-num">{{vm.product.cart.quantity}}</span>
                 <i class="icon-carro"></i>
               </span>
               <strong>Agregar al carrito</strong>

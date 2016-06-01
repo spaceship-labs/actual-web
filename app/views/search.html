@@ -44,8 +44,10 @@
           </div>
 
           <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
-            <h4><strong>{{filter.Name}}:</strong></h4>
-            <div class="filter-block-inner">
+            <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active">
+              <strong>{{filter.Name}}:</strong>
+            </h4>
+            <div ng-show="vm.filters[$index].active" class="filter-block-inner">
 
               <!--
               <md-radio-group
@@ -64,7 +66,7 @@
                   ng-repeat="value in filter.Values"
                   ng-model="value.selected"
                   ng-change="vm.searchByFilters()"
-                  aria-label="Checkbox Indeterminate" class="md-primary">
+                  aria-label="Checkbox Indeterminate">
                   {{value.Name}}
                 </md-checkbox>
               </div>
@@ -118,7 +120,7 @@
           <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
         </div>
 
-        <a ng-if="vm.totalResults > vm.products.length" ng-click="vm.loadMore()" href="#" class="action-btn action-btn-sm">Cargar más</a>
+        <a ng-if="vm.totalResults > vm.products.length && !vm.isLoading && vm.products.length > 0" ng-click="vm.loadMore()" href="#" class="action-btn action-btn-sm">Cargar más</a>
 
       </div>
     </div>

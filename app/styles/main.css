@@ -23,6 +23,9 @@ a{text-decoration: none}
 .form-modal{
   max-width: 400px!important;
 }
+.md-dialog-container{
+  z-index: 99999999;
+}
 .pull-left{text-align: left!important;}
 .absolute-link{
   position: absolute;
@@ -141,21 +144,25 @@ a{text-decoration: none}
   #FORM ELEMENTS
 /*------------*/
 .input-element{
-  background: rgb(250,250,250);
   max-width: 100%;
   border-radius: 2px;
   display: block;
-  height: 36px;
   position: relative;
   overflow: visible;
 }
+
+.select-element,
 .input-element .input-element-inner{
+  background: rgb(250,250,250);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   position: relative;
   overflow: visible;
   height: 36px;
 }
+
+.select-element md-select,
 .input-element .input-element-inner input[type="text"],
+.input-element .input-element-inner input[type="email"],
 .input-element .input-element-inner input[type="number"],
 .input-element .input-element-inner input[type="password"]{
   font-size: 14px;
@@ -170,20 +177,30 @@ a{text-decoration: none}
   height: 36px;
 }
 
+.select-element-wrapper md-input-container{
+  margin: 0;
+  padding: 0;
+  min-width: 100%;
+}
+.select-element{
+  padding: 0px 6px;
+  min-width: 100%;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+}
+.select-element md-select-value{
+  border: 0!important;
+}
+
 .input-element .input-element-inner input[type="number"]{
   padding-right: 0;
 }
 
-/*------------/
-  #HEADER
-/*----------*/
-.header-top-bar{
-  background: #F8F8F8;
-  padding: 4px 0;
-  position: relative;
-  z-index: 99999999999999999999;
-}
-.header-top-bar .searcher{
+/*---------------/
+  #SEARCHER
+/*---------------*/
+.searcher{
   background: rgb(250,250,250);
   min-width: 400px;
   max-width: 100%;
@@ -193,13 +210,13 @@ a{text-decoration: none}
   position: relative;
   overflow: visible;
 }
-.header-top-bar .searcher .searcher-inner{
+.searcher .searcher-inner{
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   position: relative;
   overflow: visible;
   height: 32px;
 }
-.header-top-bar .searcher .searcher-inner > i{
+.searcher .searcher-inner > i{
   position: absolute;
   left: 0;
   top: 50%;
@@ -209,7 +226,7 @@ a{text-decoration: none}
   transform: translateY(-50%);
 }
 
-.header-top-bar .searcher .searcher-inner input[type="text"]{
+.searcher .searcher-inner input[type="text"]{
   font-size: 14px;
   box-sizing: border-box;
   border: none;
@@ -223,7 +240,7 @@ a{text-decoration: none}
   height: 32px;
 }
 
-.header-top-bar .searcher-wrapper .searcher-btn{
+.searcher-wrapper .searcher-btn{
   background: #C82828;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)!important;
   color: #fff;
@@ -232,6 +249,19 @@ a{text-decoration: none}
   border: 0;
   padding: 0 22px;
 }
+
+
+
+/*------------/
+  #HEADER
+/*----------*/
+.header-top-bar{
+  background: #F8F8F8;
+  padding: 4px 0;
+  position: relative;
+  z-index: 99999999999999999999;
+}
+
 
 .header-top-bar-menu{
   position: relative;
@@ -305,6 +335,29 @@ a{text-decoration: none}
   height: 40px;
 
 }
+
+.header-top-bar .logo,
+.header-top-bar .categories-btn-wrap{
+  display: none;
+}
+
+.header-top-bar.fixed-head{
+  position: fixed;
+  width: 100%;
+}
+.header-top-bar.fixed-head > .container-lg{
+  max-width: 1300px;
+}
+.header-top-bar.fixed-head .logo,
+.header-top-bar.fixed-head .categories-btn-wrap{
+  display: flex;
+}
+.header-top-bar.fixed-head .modal-header{
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
 /*
 .header-top-bar .md-chips:after{display: none;}
 */
@@ -418,7 +471,10 @@ a{text-decoration: none}
   -moz-box-shadow: 0px 6px 3px -2px rgba(0,0,0,0.44);
   box-shadow: 0px 6px 3px -2px rgba(0,0,0,0.44);
 }
+.header-top-bar .logo,
 .menu .logo{padding: 0 14px}
+
+.header-top-bar .logo img,
 .menu .logo img{
   max-width: 200px;
   /*max-width: 100%;*/
@@ -426,6 +482,8 @@ a{text-decoration: none}
 .menu .nav-categories{
   padding: 0 20px;
 }
+
+.header-top-bar .categories-btn,
 .menu .categories-btn{
   border: 2px solid #000;
   color: #000;
@@ -582,6 +640,16 @@ a{text-decoration: none}
 /*------------/
   #MENU-CATEGORIES
 /*-----------*/
+.menu-categories.menu-categories-fixed{
+  position: fixed;
+  top: 76px;
+  max-width: 960px;
+  min-width: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
 .menu-categories-wrapper{
   position: relative;
 }
@@ -591,7 +659,10 @@ a{text-decoration: none}
   left: 0;
   top: 0;
   z-index: 9;
-  min-width: 100%;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  right: 0;
 }
 .menu-categories-sidebar{
   background: #000;
@@ -1404,7 +1475,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 
 .filters .filter-block h4{
+  cursor: pointer;
   margin: 10px 0;
+  outline: 0;
+  font-size: 14px;
   text-transform: uppercase;
 }
 .filters .filter-block h4:before{
@@ -1465,6 +1539,135 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   transform: translateY(-50%);
 }
 
+/*-------------/
+  #ADDQUOTATION
+/*-------------*/
+.add-quotation .col-q{
+  min-height: 500px;
+  position: relative;
+}
+.add-quotation .col-q .absolute-link{
+  z-index: 999;
+}
+.add-quotation .col-q-inner{
+  position: relative;
+  text-align: center;
+}
+.add-quotation .col-q-inner h3{
+  font-weight: 400;
+  font-size: 36px;
+}
+.add-quotation .q-icon{font-size: 72px;}
+.add-quotation md-autocomplete-wrap{
+  background: #fff;
+  min-width: 240px;
+  position: relative;
+}
+.add-quotation .searcher-wrapper{position: relative;}
+.add-quotation .searcher-wrapper .search-icon{
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  z-index: 999;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.add-quotation .searcher-wrapper input[type="search"]{
+  padding-left: 36px;
+}
+
+/*----------------/
+  #FORM-VIEW
+/*---------------*/
+.form-view-btn{
+  padding: 10px 6px;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #000;
+  margin: 10px 0;
+  font-size: 12px;
+}
+.form-view-btn-primary{
+  background: #33BA2C;
+}
+
+.form-view-btns{margin-top: 20px;}
+.form-view-btns .form-view-btn + .form-view-btn{
+  margin-left: 16px;
+}
+
+.form-section-tab{
+  cursor: pointer;
+  outline: 0;
+  border-left: 1px solid #000;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  text-align: center;
+  padding: 12px 4px;
+  background: url(../images/arrow-down.png) 10px center no-repeat;
+  background-size: 18px 18px;
+}
+.form-section-tab a{
+  color: #000;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.form-section-tab:last-child{
+  border-right: 1px solid #000;
+}
+.form-section-tab-active{
+  background-color: #000;
+}
+.form-section-tab-active a{
+  color: #fff;
+  font-weight: 700;
+}
+
+.form-view{
+  padding: 20px 0;
+}
+.form-view-hint{font-size: 14px;}
+.form-view h1{font-size: 28px;}
+.form-view h1 i{
+  font-size: 42px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.form-view .select-element,
+.form-view .input-element .input-element-inner{
+  background: #fff;
+}
+.form-view .input-element label{
+  font-size: 11px;
+  margin-bottom: 10px;
+  display: block;
+  text-transform: uppercase;
+}
+.form-view .input-element label .hint{
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: none;
+}
+.form-view .input-element {
+  margin: 10px;
+}
+.form-view .input-element:first-child{
+  margin-left: 0;
+}
+.form-view-content{
+  border-top: 1px solid #000;
+  padding: 10px 0;
+}
+
+.form-section{margin-top: 20px;}
+.form-section-content{
+  border: 1px solid #000;
+  border-top: 0;
+  padding: 30px;
+}
 
 
 /*--------------/

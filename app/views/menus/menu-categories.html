@@ -1,4 +1,4 @@
-<div class="menu-categories" ng-show="main.menuCategoriesOn">
+<div class="menu-categories" ng-show="main.menuCategoriesOn" fixed-header ng-class="{'menu-categories-fixed': scrolled}">
   <div layout="row" ng-init="vm.currentCategory = 0">
 
     <ul flex="20" class="menu-categories-sidebar">

@@ -1,7 +1,23 @@
 <div id="header">
   <!--START TOP BAR-->
-  <div class="header-top-bar">
+  <div class="header-top-bar" fixed-header ng-class="{'fixed-head': scrolled}">
     <div class="container container-lg" layout="row" layout-align="center center">
+
+      <!--ON SCROLL-->
+
+      <div flex="15" class="logo" layout-align="center center">
+        <a href="/" >
+          <img src="images/logo.png" alt="Actual Group">
+        </a>
+      </div>
+
+      <div class="categories-btn-wrap" flex="15" layout-align="center center">
+        <a ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
+      </div>
+
+
+      <!--ONLY ON SCROLL-->
+
 
       <form action="/search" method="GET" class="searcher-wrapper" layout="row">
         <div class="searcher">
@@ -103,8 +119,7 @@
     </div>
 
     <div class="container container-xxlg absolute-menus" layout="row">
-      <div flex="15"></div>
-      <div flex="80" class="menu-categories-wrapper">
+      <div flex="100" class="menu-categories-wrapper">
         <ng-include src="'views/menus/menu-categories.html'"></ng-include>
       </div>
 

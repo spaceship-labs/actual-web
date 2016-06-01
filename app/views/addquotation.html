@@ -1,0 +1,50 @@
+<div class="container container-xlg">
+
+  <section class="add-quotation" layout="row">
+
+    <div flex="50" class="col-q" layout="row" layout-align="center center">
+      <div class="col-q-inner">
+        <a href="#" class="absolute-link"></a>
+        <h2><i class="icon-login q-icon"></i></h2>
+        <h3>NUEVO CLIENTE</h3>
+      </div>
+    </div>
+    <div flex="50" class="col-q" layout="row" layout-align="center center">
+      <div class="col-q-inner">
+        <h2><i class="icon-login q-icon"></i></h2>
+        <h3>CLIENTES</h3>
+        <form class="searcher-wrapper" layout="row">
+          <!--
+          <div class="searcher">
+            <div class="searcher-inner">
+              <i class="icon-search"></i>
+              <input type="text" name="term">
+            </div>
+          </div>
+          -->
+          <i class="icon-search search-icon"></i>
+          <md-autocomplete
+              md-no-cache="false"
+              md-selected-item="vm.selectedProduct"
+              md-search-text="vm.searchText"
+              md-items="item in vm.queryClients(vm.searchText)"
+              md-selected-item-change="vm.selectedItemChange(item)"
+              md-item-text="item.ItemCode + ' ' + item.ItemName"
+              md-min-length="0"
+              placeholder="Buscar producto">
+            <md-item-template>
+              <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.ItemCode}} | {{item.ItemName}}</span>
+            </md-item-template>
+            <md-not-found>
+              No se encontro "{{vm.searchText}}".
+            </md-not-found>
+          </md-autocomplete>
+
+          <input type="submit" value="BUSCAR" class="searcher-btn">
+        </form>
+      </div>
+    </div>
+
+  </section>
+
+</div>

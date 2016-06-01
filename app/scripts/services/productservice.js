@@ -69,7 +69,7 @@
           }
         }else{
          //Default
-         product.price = {currency:'MXP', value:0, priceList:0};
+         product.price = {currency:'MXP', value:12999, priceList:0};
         }
 
         //Setting icon and images

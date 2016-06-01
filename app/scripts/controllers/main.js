@@ -127,3 +127,10 @@
   ];
 
 })();
+
+$(document).ready(function(){
+  // Change this to the correct selector for your nav.
+  setTimeout(function(){
+    $('.nav-fixed').midnight();
+  },2000)
+});
