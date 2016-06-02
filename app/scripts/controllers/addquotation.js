@@ -19,7 +19,7 @@ function AddquotationCtrl($location,$routeParams, $q ,productService){
   function queryClients(term){
     console.log(term);
     console.log('queryClients');
-    if(term != '' && term){
+    if(term !== '' && term){
       var deferred = $q.defer();
       var params = {term: term, autocomplete: true};
       productService.search(params).then(function(res){

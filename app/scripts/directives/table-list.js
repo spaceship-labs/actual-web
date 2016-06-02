@@ -12,7 +12,7 @@
       $scope.showDestroyDialog = function(ev, id){
         console.log('showDestroyDialog');
         dialogService.showDestroyDialog(ev, $scope.destroyFn, id);
-      }
+      };
 
       $scope.dtOptions = DTOptionsBuilder
         .newOptions()
@@ -69,9 +69,9 @@
         var sortingColumnName = columns[sortingColumnIndex].data;
         var sortingDirection = sorting[1].toUpperCase();
 
-        page = (start==0) ? 1 : (start/length) + 1;
-        if(search != ''){
-            query = {page:page,term:search.value}
+        page = (start===0) ? 1 : (start/length) + 1;
+        if(search !== ''){
+            query = {page:page,term:search.value};
         }else{
             query.page = page;
         }
@@ -91,12 +91,12 @@
           .then(
             function(res){
               console.log(res);
-              var res = res.data;
+              var result = res.data;
               var records = {
                   'draw': draw,
-                  'recordsTotal': res.total,
-                  'recordsFiltered': res.total,
-                  'data': res.data
+                  'recordsTotal': result.total,
+                  'recordsFiltered': result.total,
+                  'data': result.data
               };
               fnCallback(records);
             },
@@ -115,36 +115,37 @@
             .renderWith(
               function renderCell(data, type, full, pos){
                 var html = '';
+                var id = 'id';
+                var icon = '<i class="icon-search"></i>';
 
                 if(column.yesNo){
                   data = data ? 'Si' : 'No';
                 }
 
                 if(column.destroy){
-                  var id = (column.propId) ? column.propId : 'id';
+                  id = (column.propId) ? column.propId : 'id';
                   html = '<a href="#" ng-click="showDestroyDialog($event, \''+ full[id] +'\')">Eliminar</a>';
                 }
                 else if(column.editUrl){
-                  var id = (column.propId) ? column.propId : 'id';
-                  var icon = '<i class="icon-search"></i>';
+                  id = (column.propId) ? column.propId : 'id';
+                  icon = '<i class="icon-search"></i>';
 
                   if($scope.quickEdit){
                     html = '<a href="#" ng-click="editFn($event'+ ', \'' + full[id]+'\' )">' + icon + '</a>';
                   }else{
                     html = '<a href="'+(column.editUrl + full[id])+'">' + icon + '</a>';
-                    console.log(html);
                   }
                 }
                 else if(column.actions){
-                  var id = (column.propId) ? column.propId : 'id';
-                  var icon = '<i class="icon-search"></i>';
+                  id = (column.propId) ? column.propId : 'id';
+                  icon = '<i class="icon-search"></i>';
 
                   column.actions.forEach(function(action){
-                    if(action.type == 'edit'){
+                    if(action.type === 'edit'){
                       icon = '<i class="icon-search edit-icon"></i>';
                       html += '<a href="'+(action.url + full[id])+'">' + icon + '</a>';
                     }
-                    else if(action.type == 'delete'){
+                    else if(action.type === 'delete'){
                       icon = '<i class="icon-ofertas delete-icon"></i>';
                       html += '<a href="'+(action.url + full[id])+'">' + icon + '</a>';
                     }
@@ -152,7 +153,7 @@
                 }
                 else{
                   if(column.actionUrl){
-                    var id = (column.propId) ? column.propId : 'id';
+                    id = (column.propId) ? column.propId : 'id';
                     if($scope.quickEdit){
                       html = '<a href="#" ng-click="editFn($event'+ ', \'' + full[id]+ '\')">' + data + '</a>';
                     }else{
@@ -170,8 +171,10 @@
       });
 
       $rootScope.$on('reloadTable', function(event, data){
-        var callback = function(json){console.log(json);}
-        var resetPaging = false;
+        console.log(data);
+        console.log(event);
+        var callback = function(json){console.log(json);};
+        //var resetPaging = false;
         //$scope.dtInstance.reloadData(callback, resetPaging);
         //$scope.dtInstance.reloadData(callback, resetPaging);
         $scope.dtInstance.rerender();

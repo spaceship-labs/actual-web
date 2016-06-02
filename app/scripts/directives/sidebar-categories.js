@@ -11,11 +11,11 @@ angular.module('dashexampleApp')
     return {
       templateUrl: 'views/directives/sidebar-categories.html',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
+      link: function postLink(scope) {
 
         scope.init = function(){
           scope.categories[0].isActive = true;
-        }
+        };
 
         scope.categories = categoriesService.getCategories();
 
@@ -25,17 +25,16 @@ angular.module('dashexampleApp')
             event.preventDefault();
           }
           category.isActive = !category.isActive;
-        }
+        };
 
         scope.toggleSubCategory = function(subCategory, event){
           console.log(subCategory.groups);
           if(subCategory.groups){
             event.preventDefault();
           }
-          subCategory.isActive = !subCategory.isActive;
+          subCategory.isActive = !subCategory.isActive
 
-
-        }
+        };
 
 
         scope.init();

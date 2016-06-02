@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('UserProfileCtrl', UserProfileCtrl);
 
-function UserProfileCtrl($location,$routeParams, $q ,productService, commonService){
+function UserProfileCtrl(){
   var vm = this;
-
+  console.log(vm);
 }

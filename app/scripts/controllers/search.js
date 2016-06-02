@@ -56,7 +56,7 @@ function SearchCtrl($location,$routeParams ,productService){
         if(val.selected){
           values.push(val.id);
         }
-      })
+      });
     });
 
     productService.getProductsByFilters({ids: values}).then(function(res){

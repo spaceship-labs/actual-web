@@ -33,22 +33,21 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   vm.init($routeParams.id);
 
   function trustAsHtml(string) {
-      return $sce.trustAsHtml(string);
-  };
+    return $sce.trustAsHtml(string);
+  }
 
   function init(productId, reload){
     vm.filters = [];
     vm.activeVariants = {};
     vm.galleryImages = [];
     vm.isLoading = true;
-    var getVariants = true;
 
     productService.getById(productId).then(function(res){
       vm.isLoading = false;
       vm.product = productService.formatProduct(res.data.data);
       vm.product.cart = {
         quantity: 1
-      }
+      };
       vm.setupGallery();
 
       if(reload){
@@ -172,14 +171,13 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   function sortImages(){
     var idsList = vm.product.ImagesOrder ? vm.product.ImagesOrder.split(',') : [];
     var notSortedImages = [];
-    var found = false;
 
     if(idsList.length > 0 && vm.product.ImagesOrder){
       var baseArr = angular.copy(vm.product.files);
       var orderedList = [];
       idsList.forEach(function(id){
         baseArr.forEach(function(file){
-          if(file.id == id){
+          if(file.id === id){
             orderedList.push(file);
           }
         });
@@ -209,10 +207,10 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       var filters = vm.filters.map(function(filter){
         filter.Values = [];
         vm.product.FilterValues.forEach(function(value){
-          if(value.Filter == filter.id){
+          if(value.Filter === filter.id){
             filter.Values.push(value);
           }
-        })
+        });
         return filter;
       });
 
@@ -245,7 +243,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     .then(function(answer) {
       console.log(answer);
     })
-  };
+  }
 
   function DialogController($scope, $mdDialog) {
     $scope.hide = function() {

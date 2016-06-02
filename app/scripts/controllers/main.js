@@ -39,6 +39,7 @@
     };
 
     $scope.$on('$routeChangeStart', function(next, current) {
+      console.log(next,current);
       vm.menuCategoriesOn = false;
     });
 
@@ -84,7 +85,7 @@
         vm.isLoadingLogin = false;
       });
 
-    };
+    }
 
     function logOut(){
       authService.logout(function(){
@@ -92,11 +93,6 @@
         $window.location.reload();
       });
     }
-
-    function formatSubcategories(category){
-      var subs = [];
-    }
-
 
     $rootScope.successAuth = function(res){
       console.log(res);
@@ -109,7 +105,7 @@
       //$location.path('/');
       $window.location.reload();
 
-    }
+    };
 
 
 
@@ -130,9 +126,4 @@
 
 })();
 
-$(document).ready(function(){
-  // Change this to the correct selector for your nav.
-  setTimeout(function(){
-    $('.nav-fixed').midnight();
-  },2000)
-});
+

@@ -123,7 +123,7 @@
           {
             isActive: false,
             label:'Peluches',
-            label:'peluches'
+            handle:'peluches'
           }
         ]
       },

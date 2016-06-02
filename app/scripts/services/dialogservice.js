@@ -9,7 +9,7 @@
     function dialogController($scope, $mdDialog){
       $scope.closeDialog = function (){
           $mdDialog.hide();
-      }
+      };
     }
 
     dialogController.$inject = ['$scope','$mdDialog'];
@@ -140,7 +140,8 @@
             return Object.keys(toastPosition)
               .filter(function(pos) { return toastPosition[pos]; })
               .join(' ');
-          };
+          }
+
           function sanitizePosition() {
             var current = toastPosition;
             if ( current.bottom && last.top ) current.top = false;

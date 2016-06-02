@@ -43,7 +43,7 @@
       function getListNoImages(page, params){
         var p = page || 1;
         var url = '/product/find/' + p;
-        params.noimages = true
+        params.noimages = true;
         return api.$http.post(url,params);
       }
 
@@ -66,14 +66,14 @@
             currency: product.prices[0].Currency,
             value: product.prices[0].Price,
             priceList: product.prices[0].PriceList
-          }
+          };
         }else{
          //Default
          product.price = {currency:'MXP', value:12999, priceList:0};
         }
 
         //Setting icon and images
-        if(product.icon_filename && product.icon_filename != 'null'){
+        if(product.icon_filename && product.icon_filename !== 'null'){
 
           product.icons = [
             {url: api.baseUrl + '/uploads/products/' +  product.icon_filename, size:'default'}
