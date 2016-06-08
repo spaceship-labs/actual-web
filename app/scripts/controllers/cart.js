@@ -8,10 +8,13 @@
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('CartCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('CartCtrl', CartCtrl);
+
+function CartCtrl($location,$routeParams, $q ,productService, commonService){
+  var vm = this;
+
+  vm.qty = 1;
+
+
+
+}

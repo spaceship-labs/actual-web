@@ -1,4 +1,4 @@
-<section class="cart-view container container-xlg" layout="row" layout-align="space-between start">
+<section class="cart-view container container-xxlg" layout="row" layout-align="space-between start">
 
   <section flex="70" class="cart-list">
     <h1 class="cart-title"><strong>ARTICULOS AGREGADOS</strong></h1>
@@ -8,6 +8,8 @@
       <div class="cart-item" ng-repeat="item in [0,1,2]">
         <h3><strong>Mesa redonda mimbre</strong></h3>
         <div layout="row">
+
+          <!--ITEM PROD IMG-->
           <div flex="45" class="cart-item-prod">
             <div layout="row">
               <div class="cart-item-prod-img">
@@ -25,50 +27,62 @@
               </div>
             </div>
           </div>
+          <!--END ITEM PROD IMG-->
 
-          <div class="cart-item-data" flex="55">
-            <div layout="row" layout-align="space-between center">
+          <!--ITEM DATA-->
+          <div class="cart-item-data" flex="50">
+            <div class="cart-item-data-inner">
+              <div layout="row" layout-align="start center">
 
-              <div flex="45" layout="row" layout-align="start center">
-                <label flex="30"><strong>Colores:</strong></label>
-                <div flex class="input-element select-element-wrapper">
-                  <md-input-container>
-                    <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Color" required>
-                      <md-option ng-value="Cafe">
-                        Cafe
-                      </md-option>
-                    </md-select>
-                  </md-input-container>
+                <div class="cart-item-data-col" flex="45" layout="row" layout-align="start center">
+                  <label flex="30"><strong>Colores:</strong></label>
+                  <div flex class="input-element select-element-wrapper">
+                    <md-input-container>
+                      <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Color" required>
+                        <md-option ng-value="Cafe">
+                          Cafe
+                        </md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
                 </div>
-              </div>
-              <div flex="45" layout="row" layout-align="start center" >
-                <label flex="30"><strong>Formas:</strong></label>
-                <div flex class="input-element select-element-wrapper">
-                  <md-input-container>
-                    <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Rectangular" required>
-                      <md-option ng-value="Cafe">
-                        Rectangular
-                      </md-option>
-                    </md-select>
-                  </md-input-container>
+                <div class="cart-item-data-col" flex="45" layout="row" layout-align="start center" >
+                  <label flex="30"><strong>Formas:</strong></label>
+                  <div flex class="input-element select-element-wrapper">
+                    <md-input-container>
+                      <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Rectangular" required>
+                        <md-option ng-value="Cafe">
+                          Rectangular
+                        </md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
                 </div>
-              </div>
 
+              </div>
+              <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
+                <div flex="30">
+                  <p class="price-crossed">$18, 699</p>
+                  <p class="price-hl"><strong>$14,699</strong></p>
+                </div>
+                <div flex="30" class="product-view-qty input-element">
+                  <div class="input-element-inner">
+                    <input ng-model="vm.qty" min="1" type="number">
+                  </div>
+                </div>
+                <h3 flex class="product-view-price-hl product-view-price-main">
+                  <strong>$14,699</strong>
+                </h3>
+              </div>
             </div>
-            <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
-              <div flex="30">
-                <p class="price-crossed">$18, 699</p>
-                <p class="price-hl">$14,699</p>
-              </div>
-              <div flex="30" class="product-view-qty input-element">
-                <div class="input-element-inner">
-                  <input ng-model="vm.product.cart.quantity" min="1" type="number">
-                </div>
-              </div>
-              <h3 flex class="product-view-price-hl product-view-price-main">
-                <strong>$14,699</strong>
-              </h3>
-            </div>
+            <p class="bottom-text"><strong>Entrega:</strong> 1-Abr-2016 (en 8 dias)</p>
+          </div>
+          <!--END ITEM DATA-->
+
+          <div flex="5" class="cart-item-remove-wrap">
+            <a href="#" class="cart-item-remove">
+              x
+            </a>
           </div>
 
         </div>
@@ -80,7 +94,49 @@
   </section>
 
   <aside flex class="cart-aside">
-    <h1 class="cart-title"><i class="icon-carro"></i> <strong>MI CARRITO</strong></h1>
+    <h1 class="cart-title"><i class="icon-carro"><span>3</span></i> <strong>MI CARRITO</strong></h1>
+
+    <div class="cart-summary">
+      <table>
+        <tr>
+          <td><strong>Subtotal (3 productos):</strong></td>
+          <td><strong>$56,097</strong></td>
+        </tr>
+        <tr>
+          <td>Descuento:</td>
+          <td><strong>-$12,097</strong></td>
+        </tr>
+        <tr>
+          <td>Costo de envío:</td>
+          <td><strong>GRATIS</strong></td>
+        </tr>
+      </table>
+      <hr>
+
+      <div>
+        <h5><strong>MÁXIMO DESCUENTO</strong></h5>
+        <table>
+          <tr>
+            <td>Precio Lista:</td>
+            <td><strong>$24,399</strong></td>
+          </tr>
+          <tr>
+            <td>Pago único (<strong class="hl-price">-20%</strong>)</td>
+            <td><span class="crossed">$24,399</span> | <strong class="hl-price">$19,519</strong> </td>
+          </tr>
+          <tr>
+            <td>6 MSI Banamex (<strong class="hl-price">-15%</strong>)</td>
+            <td><span class="crossed">$24,399</span> | <strong class="hl-price">$20,739</strong> </td>
+          </tr>
+          <tr>
+            <td>12 MSI Santander (<strong class="hl-price">-10%</strong>)</td>
+            <td><span class="crossed">$24,399</span> | <strong class="hl-price">$21,959</strong> </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
   </aside>
 
 </section>

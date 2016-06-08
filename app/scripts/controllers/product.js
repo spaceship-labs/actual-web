@@ -225,9 +225,12 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
 
 
   function addToCart($event){
+    /*
     console.log('addToCart');
     console.log(vm.customFullscreen);
     vm.showMessageCart($event);
+    */
+    $location.path('/addquotation');
   }
 
   function showMessageCart(ev) {
