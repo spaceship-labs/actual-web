@@ -36,18 +36,19 @@
           $('<p class="sorting-by-label"></p>').appendTo('.dataTables_wrapper .top');
           //$('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ $scope.columns[0].label);
 
-          /*
-          $('<button/>').text('Buscar').attr('id', 'new-search').appendTo('.dataTables_filter');
-          $('.dataTables_filter input').unbind();
-          $('.dataTables_filter input').keypress(function(e){
-            if(e.which == 10 || e.which == 13) {
-              $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
-            }
-          })
-          $('#new-search').on('click', function() {
-              $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
-          })
-        */
+          //$('.table-list-wrap label').text('');
+          if($('#new-search').length <= 0){
+            $('<button/>').text('Buscar').attr('id', 'new-search').appendTo('.dataTables_filter');
+            $('.dataTables_filter input').unbind();
+            $('.dataTables_filter input').keypress(function(e){
+              if(e.which == 10 || e.which == 13) {
+                $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
+              }
+            });
+            $('#new-search').on('click', function() {
+                $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
+            });
+          }
 
         });
 
@@ -107,6 +108,8 @@
       }
 
       $scope.dtColumns = [];
+
+      console.log($scope.columns);
 
       $scope.columns.forEach(function(column){
         $scope.dtColumns.push(

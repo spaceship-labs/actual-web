@@ -12,5 +12,8 @@ angular.module('dashexampleApp')
 
 function UserProfileCtrl(){
   var vm = this;
-  console.log(vm);
+
+
+
+
 }

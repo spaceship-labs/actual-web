@@ -26,7 +26,7 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, $rootScope,
       label:'Acción',
       propId: 'id',
       actions:[
-        {url:'#',type:'edit'},
+        {url:'/clients/profile/',type:'edit'},
       ]
     },
 

@@ -1,0 +1,79 @@
+<section class="form-view container container-xlg">
+
+  <h1><i class="icon-login"></i> <strong>OPORTUNIDADES</strong></h1>
+
+  <div layout="row" layout-align="space-between center">
+    <div><p><strong>MES DE MAYO 2016</strong></p></div>
+    <div>
+      <p>
+        <strong>DEL</strong>
+        <strong>AL</strong>
+      </p>
+    </div>
+  </div>
+
+  <hr/>
+
+
+  <div class="nested-table">
+
+    <div class="nested-top" layout="row" layout-align="space-between center">
+      <span></span><span>TOTAL</span>
+    </div>
+
+    <div class="nested-bar nested-bar1" layout="row" layout-align="space-between center">
+      <span>TOTAL</span><span>$209,000</span>
+    </div>
+    <div class="nested-item" ng-repeat="manager in vm.managers track by $index">
+      <div ng-click="manager.selected = !manager.selected" class="nested-bar nested-bar2" layout="row" layout-align="space-between center">
+        <span>TOTAL GERENTE 1</span><span>$209,000</span>
+      </div>
+      <div ng-show="manager.selected" class="nested-content">
+        <div class="nested-item" ng-repeat="sellers in manager.sellers track by $index">
+          <div class="nested-bar nested-bar3"  ng-click="seller.selected = !seller.selected" layout="row" layout-align="space-between center">
+            <span>TOTAL VENDEDOR 1</span><span>$209,000</span>
+          </div>
+          <div ng-show="seller.selected" class="nested-content">
+            <section class="table-list-wrap table-list-wrap-nomargin">
+              <div table-list class="table-list table-list-v2" columns="vm.columnsLeads" api-resource="vm.apiResourceLeads"></div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="chart-section">
+    <h2><i class="icon-login"></i> <strong>OPORTUNIDADES</strong></h2>
+    <div class="chart-section-inner">
+
+    <div layout="row">
+      <div class="chart-section-col" flex="40">
+        <h3>Cantidad</h3>
+        <canvas id="pie" class="chart chart-pie"
+          chart-data="vm.quantities.data" chart-labels="vm.quantities.labels" chart-colours="vm.quantities.colours">
+        </canvas>
+        <p><strong>Hoy</strong> | <strong>Total</strong></p>
+        <p>{{vm.todayQty}} | {{vm.monthQty}}</p>
+      </div>
+      <div class="chart-section-col chart-section-legends" flex="20">
+
+        <p><span class="chart-section-sqr"></span> Hoy</p>
+        <p><span class="chart-section-sqr chart-section-sqr2"></span> Resto del mes</p>
+
+
+      </div>
+      <div class="chart-section-col" flex="40">
+        <h3>Monto</h3>
+        <canvas id="pie" class="chart chart-pie"
+          chart-data="vm.ammounts.data" chart-labels="vm.ammounts.labels" chart-colours="vm.ammounts.colours">
+        </canvas>
+        <p><strong>Hoy</strong> | <strong>Total</strong></p>
+        <p>{{vm.todayAmmount | currency}} | {{vm.monthAmmount | currency}}</p>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+</section>

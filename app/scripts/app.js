@@ -21,7 +21,8 @@ angular
     'LocalStorageModule',
     'angular-jwt',
     'ngMaterialDatePicker',
-    'datatables'
+    'datatables',
+    'chart.js'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
@@ -71,8 +72,8 @@ angular
         controller: 'AddquotationCtrl',
         controllerAs: 'vm'
       })
-      .when('/client/create', {
-        templateUrl: 'views/client-create.html',
+      .when('/clients/create', {
+        templateUrl: 'views/clients/create.html',
         controller: 'ClientCreateCtrl',
         controllerAs: 'vm',
         resolve: {
@@ -82,8 +83,8 @@ angular
           }
         }
       })
-      .when('/client/profile/:id', {
-        templateUrl: 'views/client-profile.html',
+      .when('/clients/profile/:id', {
+        templateUrl: 'views/clients/profile.html',
         controller: 'ClientProfileCtrl',
         controllerAs: 'vm',
         resolve: {
@@ -94,7 +95,7 @@ angular
         }
       })
       .when('/clients/list', {
-        templateUrl: 'views/clients-list.html',
+        templateUrl: 'views/clients/list.html',
         controller: 'ClientsListCtrl',
         controllerAs: 'vm',
         resolve: {
@@ -105,7 +106,7 @@ angular
         }
       })
       .when('/user/profile', {
-        templateUrl: 'views/user-profile.html',
+        templateUrl: 'views/users/profile.html',
         controller: 'UserProfileCtrl',
         controllerAs: 'vm',
         resolve: {
@@ -118,6 +119,28 @@ angular
       .when('/cart', {
         templateUrl: 'views/cart.html',
         controller: 'CartCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
+      .when('/opportunities/list', {
+        templateUrl: 'views/opportunities/list.html',
+        controller: 'OpportunitiesListCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
+      .when('/sales/list', {
+        templateUrl: 'views/sales/list.html',
+        controller: 'SalesListCtrl',
         controllerAs: 'vm',
         resolve: {
           isMiActual: function($rootScope){

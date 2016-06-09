@@ -22,7 +22,7 @@ angular.module('dashexampleApp')
           scope.imageSizeIndexGallery = 4;
           scope.imageSizeIndexIcon = 10;
           scope.imageSize = api.imageSizes.gallery[scope.imageSizeIndexGallery];
-          console.log(api.imageSizes.gallery);
+          //console.log(api.imageSizes.gallery);
 
           $timeout(function(){
             scope.areImagesLoaded = true;
