@@ -12,7 +12,6 @@
         var api = {};
 
         // Base Url
-        //api.baseUrl = 'app/data/';
         api.baseUrl = 'http://actual-api.herokuapp.com';
         //api.baseUrl = 'http://localhost:1337';
 
