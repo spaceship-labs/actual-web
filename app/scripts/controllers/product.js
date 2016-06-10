@@ -146,6 +146,9 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     }
 
     if(vm.product.files){
+      //TEMPORAL
+      vm.imageSize = '';
+
       vm.product.files.forEach(function(img){
         vm.galleryImages.push({
           url: api.baseUrl + '/uploads/products/gallery/' + vm.imageSize + img.filename
