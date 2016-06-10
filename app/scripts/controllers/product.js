@@ -140,7 +140,8 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     //Adding icon as gallery first image
 
     if(vm.product.icons[vm.imageSizeIndexIcon]){
-      vm.galleryImages.push(vm.product.icons[vm.imageSizeIndexIcon]);
+      //vm.galleryImages.push(vm.product.icons[vm.imageSizeIndexIcon]);
+      vm.galleryImages.push(vm.product.icons[0]);
     }else{
       vm.galleryImages.push(vm.product.icons[0]);
     }
