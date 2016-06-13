@@ -40,6 +40,7 @@
 
             <div class="product-view-gallery">
               <slick
+                id="slick-gallery"
                 init-onload="true"
                 data="vm.areImagesLoaded"
                 arrows="true"
@@ -55,20 +56,29 @@
 
             <div class="product-view-gallery-thumbs">
               <slick
+                id="slick-thumbs"
                 slides-to-show="4"
-                slides-to-scroll="4"
+                slides-to-scroll="1"
                 init-onload="true"
                 data="vm.areImagesLoaded"
-                arrows="false"
+                arrows="true"
                 draggable="false"
               >
                 <div ng-repeat="image in vm.galleryImages track by $index">
                   <div class="product-view-gallery-thumb">
-                    <!--<div class="product-view-gallery-thumb-inner">-->
-                      <a ng-click="vm.setGalleryIndex($index)" href="" class="product-view-gallery-thumb-inner">
-                        <img ng-src="{{image.url}}" alt="">
-                      </a>
-                    <!--</div>-->
+                    <a
+                      ng-click="vm.setGalleryIndex($index)"
+                      href=""
+                      data-thumb="{{$index}}"
+                      data-selected-index="{{vm.selectedSlideIndex}}"
+                      ng-class="
+                      {
+                        'product-view-gallery-thumb-inner-active' : $index === vm.selectedSlideIndex,
+                        'product-view-gallery-thumb-inner-inactive' : $index !== vm.selectedSlideIndex
+                      }"
+                      class="product-view-gallery-thumb-inner">
+                      <img ng-src="{{image.url}}" alt="">
+                    </a>
                   </div>
                 </div>
               </slick>

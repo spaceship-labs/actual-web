@@ -132,6 +132,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   function setupGallery(){
     vm.imageSizeIndexGallery = 2;
     vm.imageSizeIndexIcon = 1;
+    vm.selectedSlideIndex = 0;
     vm.imageSize = api.imageSizes.gallery[vm.imageSizeIndexGallery];
     console.log(api.imageSizes.gallery);
     vm.areImagesLoaded = true;
@@ -159,12 +160,15 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
 
     $timeout(function(){
 
-      vm.gallery = $(".product-view-gallery").find('slick');
-      vm.galleryReel = $('.product-view-gallery-thumbs').find('slick');
+      vm.gallery = $("#slick-gallery");
+      vm.galleryReel = $('#slick-thumbs');
 
 
       vm.gallery.on('afterChange',function(e, slick, currentSlide){
-        vm.galleryReel.slick('slickGoTo',currentSlide);
+        $timeout(function(){
+          vm.galleryReel.slick('slickGoTo',currentSlide);
+          vm.selectedSlideIndex = currentSlide;
+        },0);
       });
 
     }, 1000);
@@ -200,7 +204,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   }
 
   function setGalleryIndex(index){
-    console.log('setupGalleryIndex : ' + index);
+    vm.selectedSlideIndex = index;
     vm.gallery.slick('slickGoTo',index);
   }
 

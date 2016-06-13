@@ -149,6 +149,11 @@ angular
           }
         }
       })
+      .when('/opportunities/records', {
+        templateUrl: 'views/opportunities/records.html',
+        controller: 'OpportunitiesRecordsCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });
