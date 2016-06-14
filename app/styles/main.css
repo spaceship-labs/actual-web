@@ -1194,7 +1194,7 @@ a{text-decoration: none}
   margin-bottom: 0;
 }
 .product-view-gallery-wrap{
-  padding: 40px 40px 0px 0px;
+  padding: 10px 40px 0px 0px;
 }
 .product-view-gallery{
   border: 1px solid #000;
@@ -1310,12 +1310,15 @@ a{text-decoration: none}
   #PRODUCT-VIEW-DATA
 /*-------------*/
 
-.product-view-data{margin-top: 20px;}
+.product-view-data{margin-top: 0px;}
 .product-view-data-block h4{
   font-size: 14px;
   margin: 0;
   font-weight: 400;
   position: relative;
+}
+.product-view-data-block:first-child{
+  padding-top: 0;
 }
 .product-view-data-block{
   border-bottom: 1px solid rgba(0,0,0,0.87);

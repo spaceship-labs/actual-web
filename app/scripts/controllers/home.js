@@ -23,7 +23,7 @@ function HomeCtrl($timeout, productService){
     var page = 1;
     var query = {
       items:20,
-      orderby: 'OnHand DESC'
+      //orderby: 'OnHand DESC'
     };
     productService.getList(page, query).then(function(res){
       var productsAux = res.data.data;

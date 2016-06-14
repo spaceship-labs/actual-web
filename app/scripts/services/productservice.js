@@ -88,7 +88,8 @@
 
         }else{
           product.icons = [
-            {url: '/images/b-287x287.jpg', size:'default'}
+            //{url: '/images/b-287x287.jpg', size:'default'}
+            {url: '', size:'default'}
           ];
         }
 

@@ -17,17 +17,16 @@
     <!--MAIN VIEW-->
     <div class="product-view" flex="70">
       <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
+      <!--
       <div
         class="sub sub-set"
         ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
-        <!--
-        <img class="sub-image" src="images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg" alt="">
-        -->
         <div class="sub-text">
           <h4><a href="#">Ambiente | <strong>Salas</strong></a></h4>
         </div>
         <a href="#" class="absolute-link"></a>
       </div>
+      -->
 
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
         <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
