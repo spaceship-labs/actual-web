@@ -5,10 +5,22 @@
     .module('dashexampleApp')
     .factory('categoriesService', categoriesService);
 
-  function categoriesService(){
+  function categoriesService(api, $q){
     var service = {
-      getCategories: getCategories
+      getCategories: getCategories,
+      getCategoriesGroups: getCategoriesGroups,
+      createCategoriesTree: createCategoriesTree
     };
+
+    function getCategoriesGroups(){
+      var url = '/productcategory/getcategoriesgroups';
+      return api.$http.post(url);
+    }
+
+    function createCategoriesTree(){
+      var url = '/productcategory/getcategoriestree';
+      return api.$http.post(url);
+    }
 
     function getCategories(){
       return categories;

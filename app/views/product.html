@@ -110,26 +110,43 @@
             <div class="product-view-data-block">
               <h4><strong>DIMENSIONES</strong></h4>
               <table>
-                <tr>
+                <tr ng-if="vm.product.Length && vm.product.Length > 0">
                   <td>Largo:</td>
                   <td><strong>{{vm.product.Length | number:2}} {{vm.product.LengthUnitMsr}}</strong></td>
                 </tr>
-                <tr>
+                <tr ng-if="vm.product.Width && vm.product.Width > 0">
                   <td>Ancho:</td>
                   <td><strong>{{vm.product.Width | number:2}} {{vm.product.WidthUnitMsr}}</strong></td>
                 </tr>
-                <tr>
+                <tr ng-if="vm.product.Height && vm.product.Height > 0">
                   <td>Alto:</td>
                   <td><strong>{{vm.product.Height | number:2}} {{vm.product.HeightUnitMsr}}</strong></td>
                 </tr>
-                <tr>
+                <tr ng-if="vm.product.Volume && vm.product.Volume > 0">
                   <td>Volumen:</td>
                   <td><strong>{{vm.product.Volume | number:2}} {{vm.product.VolumeUnitMsr}}</strong></td>
                 </tr>
-                <tr>
+                <tr ng-if="vm.product.Weight && vm.product.Weight > 0">
                   <td>Peso:</td>
                   <td><strong>{{vm.product.Weight | number:2}} {{vm.product.WeightUnitMsr}}</strong></td>
                 </tr>
+                <tr ng-if="vm.product.Depth && vm.product.Depth > 0">
+                  <td>Profundidad: </td>
+                  <td><strong>{{vm.product.Depth | number:2}} {{vm.product.DepthUnitMsr}}</strong></td>
+                </tr>
+                <tr ng-if="vm.product.SeatHeight && vm.product.SeatHeight > 0">
+                  <td>Altura asiento: </td>
+                  <td><strong>{{vm.product.SeatHeight | number:2}} {{vm.product.ChairBackHeight}}</strong></td>
+                </tr>
+                <tr ng-if="vm.product.ChairBackHeight && vm.product.ChairBackHeight > 0">
+                  <td>Altura respaldo: </td>
+                  <td><strong>{{vm.product.ChairBackHeight | number:2}} {{vm.product.ChairBackHeightUnitMsr}}</strong></td>
+                </tr>
+                <tr ng-if="vm.product.ArmRestHeight && vm.product.ArmRestHeight > 0">
+                  <td>Altura reposa brazos: </td>
+                  <td><strong>{{vm.product.ArmRestHeight | number:2}} {{vm.product.ArmRestHeightUnitMsr}}</strong></td>
+                </tr>
+
 
               </table>
             </div>
@@ -305,17 +322,30 @@
           </div>
           <div class="desc-cont">
             <article ng-if="!vm.toggleProductDescription">
-              <h3>{{vm.product.Name}}</h3>
-              <div ng-bind-html="vm.trustAsHtml(vm.product.Description)"></div>
-              <!--<br/>-->
-              <h4>Contenido del paquete</h4>
-              <div ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"></div>
-              <h4>Caracteristicas princiaples</h4>
-              <div ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"></div>
-              <h4>Restricciones</h4>
-              <div ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"></div>
-              <h4>Conservación</h4>
-              <div ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"></div>
+              <div ng-if="vm.product.Description">
+                <h3>{{vm.product.Name}}</h3>
+                <div ng-bind-html="vm.trustAsHtml(vm.product.Description)"></div>
+              </div>
+
+              <div ng-if="vm.product.PackageContent">
+                <h4>Contenido del paquete</h4>
+                <div ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"></div>
+              </div>
+
+              <div ng-if="vm.product.MainFeatures">
+                <h4>Caracteristicas princiaples</h4>
+                <div ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"></div>
+              </div>
+
+              <div ng-if="vm.product.Restrictions">
+                <h4>Restricciones</h4>
+                <div ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"></div>
+              </div>
+
+              <div ng-if="vm.product.Conservation">
+                <h4>Conservación</h4>
+                <div ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"></div>
+              </div>
             </article>
 
             <article ng-if="vm.toggleProductDescription">

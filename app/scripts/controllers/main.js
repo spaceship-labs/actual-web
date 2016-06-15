@@ -9,7 +9,7 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl($rootScope, $scope, $location, $window, $route, authService, localStorageService, cartService, categoriesService){
+  function MainCtrl($rootScope, $scope, $location, $window, $route, authService, localStorageService, cartService, productService, categoriesService){
     var vm = this;
     vm.menuCategoriesOn = false;
     vm.isActiveBackdrop = false;
@@ -36,6 +36,12 @@
     vm.init = function(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
+
+      categoriesService.createCategoriesTree().then(function(res){
+        //console.log(res);
+        console.log(res);
+        vm.categoryTree = res.data.categoryTree;
+      });
     };
 
     $scope.$on('$routeChangeStart', function(next, current) {
@@ -121,6 +127,7 @@
     'authService',
     'localStorageService',
     'cartService',
+    'productService',
     'categoriesService'
   ];
 
