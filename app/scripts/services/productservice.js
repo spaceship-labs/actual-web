@@ -21,7 +21,6 @@
         getMainCategories: getMainCategories,
         getAllCategories: getAllCategories,
         getCategoryById: getCategoryById,
-        getCategoriesGroups: getCategoriesGroups,
 
         getAllFilters: getAllFilters,
 
@@ -116,11 +115,6 @@
 
       function getAllCategories(){
         var url = '/productcategory/getallcategories';
-        return api.$http.post(url);
-      }
-
-      function getCategoriesGroups(){
-        var url = '/productcategory/getcategoriesgroups';
         return api.$http.post(url);
       }
 

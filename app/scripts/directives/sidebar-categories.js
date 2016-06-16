@@ -7,32 +7,35 @@
  * # sidebarCategories
  */
 angular.module('dashexampleApp')
-  .directive('sidebarCategories', function (categoriesService) {
+  .directive('sidebarCategories', function (categoriesService, $timeout) {
     return {
       templateUrl: 'views/directives/sidebar-categories.html',
       restrict: 'E',
+      scope:{
+        categoriesTree: '='
+      },
       link: function postLink(scope) {
 
         scope.init = function(){
-          scope.categories[0].isActive = true;
+          //scope.categoriesTree[0].isActive = true;
+          $timeout(function(){
+            console.log(scope.categoriesTree);
+          }, 4000)
         };
 
-        scope.categories = categoriesService.getCategories();
-
-        scope.toggleCategory = function(category,event){
-          console.log(category.subcategories);
-          if(category.subcategories){
+        scope.toggleMainCategory = function(mainCategory,event){
+          if(mainCategory.Childs){
             event.preventDefault();
           }
-          category.isActive = !category.isActive;
+          mainCategory.isActive = !mainCategory.isActive;
         };
 
-        scope.toggleSubCategory = function(subCategory, event){
-          console.log(subCategory.groups);
-          if(subCategory.groups){
+        scope.toggleCategory = function(category, event){
+          console.log(category.Childs);
+          if(category.Childs){
             event.preventDefault();
           }
-          subCategory.isActive = !subCategory.isActive
+          category.isActive = !category.isActive
 
         };
 

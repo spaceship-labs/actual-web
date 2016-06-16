@@ -1,53 +1,23 @@
 <!--AMBIENTES-->
-<div ng-repeat="category in categories track by $index" class="listing-view-nav-wrapper">
+<div ng-repeat="mainCategory in categoriesTree track by $index" class="listing-view-nav-wrapper">
   <h2>
-    <a ng-click="toggleCategory(category, $event)"  ng-href="/category/{{category.handle}}">
-      <i class="icon-{{category.icon}}"></i> <strong>{{category.label}}</strong>
+    <a ng-if="mainCategory.Handle != 'muebles' " ng-click="toggleMainCategory(mainCategory, $event)"  ng-href="/category/{{mainCategory.Handle}}">
+      <i class="icon-{{mainCategory.Handle}}"></i> <strong>{{mainCategory.Name}}</strong>
     </a>
+    <a ng-if="mainCategory.Handle == 'muebles' " ng-click="toggleMainCategory(mainCategory, $event)"  ng-href="/category/{{mainCategory.Handle}}">
+      <i class="icon-murbles"></i> <strong>{{mainCategory.Name}}</strong>
+    </a>
+
+
   </h2>
-  <ul class="listing-view-nav" ng-show="category.isActive">
-    <li ng-repeat="sub in category.subcategories" ng-class="{'active': sub.isActive}">
-      <h3><a ng-click="toggleSubCategory(sub, $event)" ng-href="/subcategory/{{sub.handle}}"><strong>{{sub.label}}</strong></a></h3>
+  <ul class="listing-view-nav" ng-show="mainCategory.isActive">
+    <li ng-repeat="category in mainCategory.Childs" ng-class="{'active': category.isActive}">
+      <h3><a ng-click="toggleCategory(category, $event)" ng-href="/category/{{category.Handle}}"><strong>{{category.Name}}</strong></a></h3>
       <ul class="listing-view-subnav">
-        <li ng-repeat="group in sub.groups"><a ng-href="/group/{{group.handle}}">{{group.label}}</a></li>
+        <li ng-repeat="subcategory in category.Childs"><a ng-href="/category/{{subcategory.Handle}}">{{subcategory.Name}}</a></li>
       </ul>
     </li>
   </ul>
 </div>
 
 
-<!---
-<div class="listing-view-nav-wrapper">
-  <h2>
-    <a ng-click="parentsCategories[0] = !parentsCategories[0]" href="">
-      <i class="icon-ambientes"></i> <strong>Ambientes</strong>
-    </a>
-  </h2>
-  <ul class="listing-view-nav" ng-show="parentsCategories[0]">
-    <li ng-class="{'active': subnavIndex == 0}">
-      <h3><a ng-click="setSubnavIndex(0)" href="#"><strong>Set de Salas</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas 1</a></li>
-        <li><a href="#">Set de Salas 2</a></li>
-        <li><a href="#">Set de Salas 3</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 1}">
-      <h3><a ng-click="setSubnavIndex(1)" href="#"><strong>Set de recamaras</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas 1</a></li>
-        <li><a href="#">Set de Salas 2</a></li>
-        <li><a href="#">Set de Salas 3</a></li>
-      </ul>
-    </li>
-    <li ng-class="{'active': subnavIndex == 2}">
-      <h3><a ng-click="setSubnavIndex(2)" href="#"><strong>Set de comedores</strong></a></h3>
-      <ul class="listing-view-subnav">
-        <li><a href="#">Set de Salas 1</a></li>
-        <li><a href="#">Set de Salas 2</a></li>
-        <li><a href="#">Set de Salas 3</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
--->

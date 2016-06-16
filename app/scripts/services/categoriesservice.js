@@ -9,7 +9,9 @@
     var service = {
       getCategories: getCategories,
       getCategoriesGroups: getCategoriesGroups,
-      createCategoriesTree: createCategoriesTree
+      createCategoriesTree: createCategoriesTree,
+      getCategoryByHandle: getCategoryByHandle,
+      getCategoryIcon: getCategoryIcon
     };
 
     function getCategoriesGroups(){
@@ -24,6 +26,22 @@
 
     function getCategories(){
       return categories;
+    }
+
+    function getCategoryByHandle(handle){
+      var url = '/productcategory/findbyhandle/' + handle;
+      return api.$http.post(url);
+    }
+
+    function getCategoryIcon(handle){
+      return false;
+      /*var icons = {
+        'Ambientes': 'ambientes',
+        'Colchones': 'Colchones',
+        'Mesas': 'Mesas',
+        'Ambientes': 'ambientes',
+        'Ambientes': 'ambientes',
+      }*/
     }
 
     var categories = [

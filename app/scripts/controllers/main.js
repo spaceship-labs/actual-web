@@ -40,7 +40,7 @@
       categoriesService.createCategoriesTree().then(function(res){
         //console.log(res);
         console.log(res);
-        vm.categoryTree = res.data.categoryTree;
+        vm.categoriesTree = res.data;
       });
     };
 

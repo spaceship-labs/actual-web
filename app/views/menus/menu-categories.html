@@ -2,7 +2,7 @@
   <div layout="row" ng-init="vm.currentCategory = 0">
 
     <ul flex="20" class="menu-categories-sidebar" ng-init="vm.currentmainCategory = 0">
-      <li ng-repeat="mainCategory in main.categoryTree track by $index">
+      <li ng-repeat="mainCategory in main.categoriesTree track by $index">
         <a ng-click="vm.currentmainCategory = $index" ng-class="{'active-item': $index == vm.currentmainCategory}" href="">
           <i class="icon-{{mainCategory.icon}}"></i>
           {{mainCategory.Name}}
@@ -12,7 +12,7 @@
     </ul>
     <div flex="80" class="menu-categories-list">
 
-      <div class="menu-categories-list-inner" ng-repeat="mainCategory in main.categoryTree track by $index" layout="row"  layout-wrap ng-show="$index == vm.currentmainCategory">
+      <div class="menu-categories-list-inner" ng-repeat="mainCategory in main.categoriesTree track by $index" layout="row"  layout-wrap ng-show="$index == vm.currentmainCategory">
 
         <div class="menu-categories-group" flex="33" ng-repeat="category in mainCategory.Childs">
           <h3><a ng-href="/category/{{category.Handle}}"><strong>{{category.Name}}</strong></a></h3>

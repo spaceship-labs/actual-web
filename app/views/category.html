@@ -11,123 +11,65 @@
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
-    <sidebar-categories flex="25"></sidebar-categories>
+    <sidebar-categories categories-tree="main.categoriesTree" flex="25"></sidebar-categories>
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
     <div flex="70">
       <div class="subs-container">
-        <h2 class="listing-view-title">Salas</h2>
+        <h2 class="listing-view-title">{{vm.category.Name}}</h2>
+
+        <!--
         <div
           class="sub sub-big"
           ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
-          <!--
+
           <img class="sub-image" src="images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg" alt="">
-          -->
+
           <div class="sub-text">
             <h4><a href="/listing">Set de <strong>salas</strong></a></h4>
           </div>
           <a href="/listing" class="absolute-link"></a>
         </div>
+        -->
 
-        <!--SUBCATEGORIES LIST-->
-        <div class="subs-container-list" layout="row" layout-wrap>
-
-          <div class="sub-wrapper" flex="33">
+        <!--SUBCATEGORIES LIST LEVEL 2-->
+        <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap>
+          <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}" flex="33">
             <div
               class="sub"
               ng-style="{'background-image' : 'url(' + 'images/living-room-fabulous-white-minimmalist-living-room-design-for-bright-white-sofas-and-unique-red-cuhions-plus-minimalist-white-coffee-table-and-high-gloss-black-ceramic-flooring-and-cool.jpg' + ')'}">
               <div class="sub-text">
-                <h4><a href="/listing">Salas <strong>esquineras</strong></a></h4>
+                <h4><a ng-href="/category/{{subcategory.Handle}}"><strong>{{subcategory.Name}}</strong></a></h4>
               </div>
-              <a href="/listing" class="absolute-link"></a>
+              <a ng-href="/category/{{subcategory.Handle}}" class="absolute-link"></a>
             </div>
           </div>
-
-          <div class="sub-wrapper" flex="33">
-            <div
-              class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/a.jpg' + ')'}">
-              <div class="sub-text">
-                <h4><a href="#">Sofá</a></h4>
-              </div>
-              <a href="#" class="absolute-link"></a>
-            </div>
-          </div>
-
-          <div class="sub-wrapper" flex="33">
-            <div
-              class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/modern-home-decor-decor-store-the-most-awesome-along-with-gorgeous-decor-store.jpg' + ')'}">
-              <div class="sub-text">
-                <h4><a href="#">Couch</a></h4>
-              </div>
-              <a href="#" class="absolute-link"></a>
-            </div>
-          </div>
-
-          <div class="sub-wrapper" flex="33">
-            <div
-              class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/Carousel_NewCoulisseEdit2.jpg' + ')'}">
-              <div class="sub-text">
-                <h4><a href="#">Love <strong>seat</strong></a></h4>
-              </div>
-              <a href="#" class="absolute-link"></a>
-            </div>
-          </div>
-
-          <div class="sub-wrapper" flex="33">
-            <div
-              class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/living-room-fabulous-white-minimmalist-living-room-design-for-bright-white-sofas-and-unique-red-cuhions-plus-minimalist-white-coffee-table-and-high-gloss-black-ceramic-flooring-and-cool.jpg' + ')'}">
-              <div class="sub-text">
-                <h4><a href="#">Sillones</a></h4>
-              </div>
-              <a href="#" class="absolute-link"></a>
-            </div>
-          </div>
-
-          <div class="sub-wrapper" flex="33">
-            <div
-              class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/Carousel_WoodBlindsFall2015.jpg' + ')'}">
-              <div class="sub-text">
-                <h4><a href="#">Mesas de <strong>centro</strong></a></h4>
-              </div>
-              <a href="#" class="absolute-link"></a>
-            </div>
-          </div>
-
-          <div class="sub-wrapper" flex="33">
-            <div
-              class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/Carousel_DraperyFall2015.jpg' + ')'}">
-              <div class="sub-text">
-                <h4><a href="#">Mesas <strong>laterales</strong></a></h4>
-              </div>
-              <a href="#" class="absolute-link"></a>
-            </div>
-          </div>
-
-          <div class="sub-wrapper" flex="33">
-            <div
-              class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
-              <div class="sub-text">
-                <h4><a href="#">Set de <strong>salas</strong></a></h4>
-              </div>
-              <a href="#" class="absolute-link"></a>
-            </div>
-          </div>
-
         </div>
-        <!--END SUBCATEGORIES LIST-->
+        <!--END SUBCATEGORIES LIST LEVEL 2-->
+
+
+        <!--SUBCATEGORIES LIST LEVEL 3-->
+        <div ng-if="vm.category.Childs.length > 0 && vm.showLevel3" class="subs-container-list" layout="row" layout-wrap>
+          <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}" flex="33">
+            <div
+              class="sub"
+              ng-style="{'background-image' : 'url(' + 'images/living-room-fabulous-white-minimmalist-living-room-design-for-bright-white-sofas-and-unique-red-cuhions-plus-minimalist-white-coffee-table-and-high-gloss-black-ceramic-flooring-and-cool.jpg' + ')'}">
+              <div class="sub-text">
+                <!--<h4><a ng-href="/category/{{subcategory.Handle}}">Salas <strong>esquineras</strong></a></h4>-->
+                <h4><a ng-href="/category/{{subcategory.Handle}}"><strong>{{subcategory.Name}}</strong></a></h4>
+              </div>
+              <a ng-href="/category/{{subcategory.Handle}}" class="absolute-link"></a>
+            </div>
+          </div>
+        </div>
+        <!--END SUBCATEGORIES LIST LEVEL 3-->
+
 
         <!--RESULTS-->
         <div class="results">
           <h2 class="center-content">
-            <strong><i class="icon-search"></i> <span class="hl-text">556</span> Resultados</strong>
+            <strong><i class="icon-search"></i> <span class="hl-text">{{vm.category.Products.length}}</span> Resultados</strong>
           </h2>
 
           <div
@@ -135,7 +77,7 @@
             layout="row"
             layout-wrap
             layout-align="space-between center">
-            <div flex="30" class="listing-product-wrap" ng-repeat="product in vm.products">
+            <div flex="30" class="listing-product-wrap" ng-repeat="product in vm.category.Products">
               <listing-product product="product"></listing-product>
             </div>
           </div>

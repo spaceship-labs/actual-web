@@ -11,7 +11,7 @@
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
-    <sidebar-categories flex="25"></sidebar-categories>
+    <sidebar-categories categories-tree="main.categoriesTree" flex="25"></sidebar-categories>
     <!--END NAV-->
 
     <!--MAIN VIEW-->
@@ -92,8 +92,8 @@
               <h4 ng-click="vm.nextSlide()"><strong>CARACTERISTICAS</strong></h4>
               <table>
                 <tr ng-repeat="filter in vm.filters">
-                  <td ng-if="filter.Values.length > 0 && filter.Name != 'Color paleta' ">{{filter.Name}}: </td>
-                  <td ng-if="filter.Values.length > 0 && filter.Name != 'Color paleta' ">
+                  <td ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">{{filter.Name}}: </td>
+                  <td ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">
                     <span ng-repeat="value in filter.Values track by $index">
                       <strong>{{value.Name}}</strong>
                       <span ng-if="$index < (filter.Values.length-1)">,</span>
