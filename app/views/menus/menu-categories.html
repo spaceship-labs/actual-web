@@ -4,7 +4,7 @@
     <ul flex="20" class="menu-categories-sidebar" ng-init="vm.currentmainCategory = 0">
       <li ng-repeat="mainCategory in main.categoriesTree track by $index">
         <a ng-click="vm.currentmainCategory = $index" ng-class="{'active-item': $index == vm.currentmainCategory}" href="">
-          <i class="icon-{{mainCategory.icon}}"></i>
+          <i class="icon-{{main.getCategoryIcon(mainCategory.Handle)}}"></i>
           {{mainCategory.Name}}
         </a>
       </li>

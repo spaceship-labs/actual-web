@@ -39,6 +39,10 @@ angular.module('dashexampleApp')
 
         };
 
+        scope.getCategoryIcon = function(handle){
+          return categoriesService.getCategoryIcon(handle);
+        }
+
 
         scope.init();
 

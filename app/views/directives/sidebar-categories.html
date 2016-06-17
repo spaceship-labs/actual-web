@@ -1,11 +1,8 @@
 <!--AMBIENTES-->
 <div ng-repeat="mainCategory in categoriesTree track by $index" class="listing-view-nav-wrapper">
   <h2>
-    <a ng-if="mainCategory.Handle != 'muebles' " ng-click="toggleMainCategory(mainCategory, $event)"  ng-href="/category/{{mainCategory.Handle}}">
-      <i class="icon-{{mainCategory.Handle}}"></i> <strong>{{mainCategory.Name}}</strong>
-    </a>
-    <a ng-if="mainCategory.Handle == 'muebles' " ng-click="toggleMainCategory(mainCategory, $event)"  ng-href="/category/{{mainCategory.Handle}}">
-      <i class="icon-murbles"></i> <strong>{{mainCategory.Name}}</strong>
+    <a  ng-click="toggleMainCategory(mainCategory, $event)"  ng-href="/category/{{mainCategory.Handle}}">
+      <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i> <strong>{{mainCategory.Name}}</strong>
     </a>
 
 

@@ -34,14 +34,22 @@
     }
 
     function getCategoryIcon(handle){
-      return false;
-      /*var icons = {
-        'Ambientes': 'ambientes',
-        'Colchones': 'Colchones',
-        'Mesas': 'Mesas',
-        'Ambientes': 'ambientes',
-        'Ambientes': 'ambientes',
-      }*/
+      var icons = {
+        'ambientes': 'ambientes',
+        'colchones': 'colchones',
+        'mesas': 'mesas',
+        'ambientes': 'ambientes',
+        'sillas': 'sillas',
+        'bebes': 'bebes',
+        'ninos': 'ninos',
+        'blancos': 'blancos',
+        'decoracion': 'decoracion',
+      }
+      if(icons[handle]){
+        return icons[handle];
+      }
+      return 'murbles';
+
     }
 
     var categories = [

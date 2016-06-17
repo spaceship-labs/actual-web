@@ -32,8 +32,10 @@
     vm.categories = categoriesService.getCategories();
 
     vm.isMiActual = $rootScope.isMiActual;
+    vm.init = init;
+    vm.getCategoryIcon = getCategoryIcon;
 
-    vm.init = function(){
+    function init(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
 
@@ -43,6 +45,10 @@
         vm.categoriesTree = res.data;
       });
     };
+
+    function getCategoryIcon(handle){
+      return categoriesService.getCategoryIcon(handle);
+    }
 
     $scope.$on('$routeChangeStart', function(next, current) {
       console.log(next,current);
