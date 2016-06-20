@@ -1,3 +1,4 @@
+<!--
 <div class="breadcrumb">
   <div class="container container-xxlg">
     <p>
@@ -8,7 +9,8 @@
     </p>
   </div>
 </div>
-<div class="content-block listing-view">
+-->
+<div class="content-block listing-view search-view">
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
@@ -44,22 +46,10 @@
           </div>
 
           <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
-            <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active">
+            <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
               <strong>{{filter.Name}}:</strong>
             </h4>
             <div ng-show="vm.filters[$index].active" class="filter-block-inner">
-
-              <!--
-              <md-radio-group
-                ng-if=" filter.Handle != 'color' "
-                ng-model="vm.filters[$index].selectedValue"
-                ng-change="vm.searchByFilters()"
-                class="md-primary">
-                <md-radio-button ng-repeat="value in filter.Values"  ng-value="value.id" class="">
-                  <span>{{value.Name}}</span>
-                </md-radio-button>
-              </md-radio-group>
-              -->
 
               <div ng-if=" filter.Handle != 'color' " >
                 <md-checkbox
@@ -76,10 +66,12 @@
                 <a
                   class="color-picker-sp-value"
                   ng-repeat="value in filter.Values"
+                  ng-click="vm.toggleColorFilter(value, filter)"
                   ng-style="{'background-color' : value.Code}"
+                  ng-class="{'active': value.selected}"
                   href="#"
                   flex>
-                  <span>(50)</span>
+                  <span></span>
                 </a>
               </div>
 

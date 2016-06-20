@@ -1643,6 +1643,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin-right: 10px;
   vertical-align: middle;
 }
+.filters .filter-block h4.active-arrow:before{
+  background: url(../images/arrow-up.png) center no-repeat;
+}
+
 .filters .filter-block .filter-block-inner{
   padding: 0 10px;
 }
@@ -1690,6 +1694,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+
+.filters .color-picker-sp-value.active span:after{
+  content: '\2713';
+  color: #000;
 }
 
 /*-------------/
@@ -2273,6 +2282,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   background: #000;
   font-weight: 400;
 }
+
+/*--------------/
+  #SEARCH-VIEW
+/*-------------*/
+.search-view .subs-container{margin-top: 40px;}
+
 
 /*--------------/
   #FOOTER

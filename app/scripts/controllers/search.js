@@ -15,6 +15,7 @@ function SearchCtrl($location,$routeParams ,productService){
   vm.init = init;
   vm.loadMore = loadMore;
   vm.searchByFilters = searchByFilters;
+  vm.toggleColorFilter = toggleColorFilter;
 
   vm.totalResults = 0;
   vm.isLoading = false;
@@ -67,6 +68,10 @@ function SearchCtrl($location,$routeParams ,productService){
     });
   }
 
+  function toggleColorFilter(value, filter){
+    value.selected = !value.selected;
+    vm.searchByFilters();
+  }
 
   function loadMore(){
     vm.loadMoreCount++;
