@@ -116,7 +116,7 @@ angular
           }
         }
       })
-      .when('/cart', {
+      .when('/cart/:id', {
         templateUrl: 'views/cart.html',
         controller: 'CartCtrl',
         controllerAs: 'vm',
@@ -219,3 +219,8 @@ angular
 
 
   });
+
+String.prototype.capitalizeFirstLetter = function() {
+    var text = this.toLowerCase();
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}

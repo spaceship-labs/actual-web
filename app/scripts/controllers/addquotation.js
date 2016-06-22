@@ -10,11 +10,12 @@
 angular.module('dashexampleApp')
   .controller('AddquotationCtrl', AddquotationCtrl);
 
-function AddquotationCtrl($location,$routeParams, $q ,productService, userService){
+function AddquotationCtrl($location,$routeParams, $q ,productService, userService, quotationService){
   var vm = this;
   console.log(vm);
   vm.queryClients = queryClients;
   vm.selectedItemChange = selectedItemChange;
+  vm.createQuotation = createQuotation;
 
   function queryClients(term){
     console.log(term);
@@ -36,13 +37,22 @@ function AddquotationCtrl($location,$routeParams, $q ,productService, userServic
   function selectedItemChange(item){
     if(item && item.CardCode){
       console.log(item);
-      $location.path('/cart');
+      vm.createQuotation(item.CardCode);
+      //$location.path('/cart');
       /*
       vm.group.Products.push(item);
       vm.selectedProduct = null;
       vm.searchText = null;
       */
     }
+  }
+
+  function createQuotation(cardCode){
+    console.log(cardCode);
+    var params = {Client: cardCode};
+    quotationService.create(params).then(function(res){
+      console.log(res);
+    });
   }
 
 

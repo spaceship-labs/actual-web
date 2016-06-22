@@ -27,6 +27,13 @@ angular.module('dashexampleApp')
           if(mainCategory.Childs){
             event.preventDefault();
           }
+
+          scope.categoriesTree.forEach(function(category){
+            if(category.Handle != mainCategory.Handle){
+              category.isActive = false;
+            }
+          });
+
           mainCategory.isActive = !mainCategory.isActive;
         };
 

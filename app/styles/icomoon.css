@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'icomoon';
-    src:    url('../fonts/icomoon.eot?5eth0n');
-    src:    url('../fonts/icomoon.eot?5eth0n#iefix') format('embedded-opentype'),
-        url('../fonts/icomoon.ttf?5eth0n') format('truetype'),
-        url('../fonts/icomoon.woff?5eth0n') format('woff'),
-        url('../fonts/icomoon.svg?5eth0n#icomoon') format('svg');
+    src:    url('../fonts/icomoon.eot?64xmt');
+    src:    url('../fonts/icomoon.eot?64xmt#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?64xmt') format('truetype'),
+        url('../fonts/icomoon.woff?64xmt') format('woff'),
+        url('../fonts/icomoon.svg?64xmt#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -54,70 +54,76 @@
 .icon-cotizar:before {
     content: "\e909";
 }
-.icon-decoracion:before {
+.icon-dashboard:before {
     content: "\e90a";
 }
-.icon-file:before {
+.icon-decoracion:before {
     content: "\e90b";
 }
-.icon-jardin:before {
+.icon-file:before {
     content: "\e90c";
 }
-.icon-login:before {
+.icon-home:before {
     content: "\e90d";
 }
-.icon-mail:before {
+.icon-jardin:before {
     content: "\e90e";
 }
-.icon-mesas:before {
+.icon-login:before {
     content: "\e90f";
 }
-.icon-murbles:before {
+.icon-mail:before {
     content: "\e910";
 }
-.icon-ninos:before {
+.icon-mesas:before {
     content: "\e911";
 }
-.icon-ofertas:before {
+.icon-murbles:before {
     content: "\e912";
 }
-.icon-office:before {
+.icon-ninos:before {
     content: "\e913";
 }
-.icon-oportunidades:before {
+.icon-ofertas:before {
     content: "\e914";
 }
-.icon-pedidos:before {
+.icon-office:before {
     content: "\e915";
 }
-.icon-phone:before {
+.icon-oportunidades:before {
     content: "\e916";
 }
-.icon-photo:before {
+.icon-pedidos:before {
     content: "\e917";
 }
-.icon-place:before {
+.icon-phone:before {
     content: "\e918";
 }
-.icon-pointer:before {
+.icon-photo:before {
     content: "\e919";
 }
-.icon-search:before {
+.icon-place:before {
     content: "\e91a";
 }
-.icon-settings:before {
+.icon-pointer:before {
     content: "\e91b";
 }
-.icon-sillas:before {
+.icon-search:before {
     content: "\e91c";
 }
-.icon-sofa:before {
+.icon-settings:before {
     content: "\e91d";
 }
-.icon-terminal:before {
+.icon-sillas:before {
     content: "\e91e";
 }
-.icon-transfer:before {
+.icon-sofa:before {
     content: "\e91f";
+}
+.icon-terminal:before {
+    content: "\e920";
+}
+.icon-transfer:before {
+    content: "\e921";
 }
 

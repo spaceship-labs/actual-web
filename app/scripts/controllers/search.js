@@ -10,12 +10,13 @@
 angular.module('dashexampleApp')
   .controller('SearchCtrl', SearchCtrl);
 
-function SearchCtrl($location,$routeParams ,productService){
+function SearchCtrl($location, $timeout,$routeParams ,productService){
   var vm = this;
   vm.init = init;
   vm.loadMore = loadMore;
   vm.searchByFilters = searchByFilters;
   vm.toggleColorFilter = toggleColorFilter;
+  vm.scrollTo = scrollTo;
 
   vm.totalResults = 0;
   vm.isLoading = false;
@@ -65,6 +66,7 @@ function SearchCtrl($location,$routeParams ,productService){
       vm.isLoading = false;
       vm.products = productService.formatProducts(res.data);
       vm.totalResults = vm.products.length;
+      vm.scrollTo('search-page');
     });
   }
 
@@ -85,6 +87,17 @@ function SearchCtrl($location,$routeParams ,productService){
       vm.products = productsAux.concat(newProducts);
       vm.isLoading = false;
     });
+  }
+
+  function scrollTo(target){
+    $timeout(
+        function(){
+          $('html, body').animate({
+            scrollTop: $('#' + target).offset().top - 50
+          }, 600);
+        },
+        300
+    );
   }
 
 }

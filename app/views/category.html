@@ -11,7 +11,71 @@
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
-    <sidebar-categories categories-tree="main.categoriesTree" flex="25"></sidebar-categories>
+    <aside flex="25">
+      <sidebar-categories categories-tree="main.categoriesTree"></sidebar-categories>
+      <section class="filters">
+        <h3 class="filters-head">FILTRAR RESULTADOS</h3>
+        <div class="filters-inner">
+          <div class="filter-block">
+            <h4><strong>PRECIO:</strong></h4>
+            <div class="filter-block-inner">
+
+              <div layout="row" layout-align="space-between center">
+                <div flex class="input-element">
+                  <div class="input-element-inner">
+                    <input placeholder="Min." type="number">
+                  </div>
+                </div>
+                <span>-</span>
+                <div flex class="input-element">
+                  <div class="input-element-inner">
+                    <input placeholder="Max." type="number">
+                  </div>
+                </div>
+                <a href="#" class="filter-block-price-btn">
+                  <img src="images/arrow-right.png" alt="">
+                </a>
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
+            <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
+              <strong>{{filter.Name}}:</strong>
+            </h4>
+            <div ng-show="vm.filters[$index].active" class="filter-block-inner">
+
+              <div ng-if=" filter.Handle != 'color' " >
+                <md-checkbox
+                  ng-repeat="value in filter.Values"
+                  ng-model="value.selected"
+                  ng-change="vm.searchByFilters()"
+                  aria-label="Checkbox Indeterminate">
+                  {{value.Name}}
+                </md-checkbox>
+              </div>
+
+
+              <div ng-if=" filter.Handle == 'color' " class="color-picker-sp" layout="row" layout-wrap>
+                <a
+                  class="color-picker-sp-value"
+                  ng-repeat="value in filter.Values"
+                  ng-click="vm.toggleColorFilter(value, filter)"
+                  ng-style="{'background-color' : value.Code}"
+                  ng-class="{'active': value.selected}"
+                  href="#"
+                  flex>
+                  <span></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </aside>
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->

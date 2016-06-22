@@ -29,6 +29,17 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
       vm.category = res.data;
       var productsAux = res.data.Products;
       var hasLevel2Categories = false;
+
+      var filters = [];
+      vm.category.Filters.forEach(function(filter){
+        filters.push(filter.id);
+      });
+
+      productService.getAllFilters({ids: filters}).then(function(res){
+        vm.filters = res.data;
+      });
+
+
       vm.category.Products = productService.formatProducts(productsAux);
       for(var i=0;i<vm.category.Childs.length;i++){
         if(vm.category.Childs[i].CategoryLevel == 2){

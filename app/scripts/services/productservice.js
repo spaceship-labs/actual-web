@@ -59,6 +59,8 @@
       function formatProduct(product){
         product.Name = product.Name || product.ItemName;
 
+        product.Name = product.Name.capitalizeFirstLetter();
+
         //The prices item in pos. 0 belongs to the Public price list in SAP
         if(product.prices && product.prices[0]){
           product.price = {
@@ -123,9 +125,9 @@
         return api.$http.post(url);
       }
 
-      function getAllFilters(){
+      function getAllFilters(params){
         var url = '/productfilter/list/';
-        return api.$http.post(url);
+        return api.$http.post(url,params);
       }
 
       function getGroupVariants(id){

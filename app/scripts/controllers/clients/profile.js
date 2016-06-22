@@ -10,8 +10,10 @@
 angular.module('dashexampleApp')
   .controller('ClientProfileCtrl', ClientProfileCtrl);
 
-function ClientProfileCtrl($location,$routeParams, $q ,productService, commonService){
+function ClientProfileCtrl($location,$routeParams, $q ,productService, commonService, clientService){
   var vm = this;
+
+  vm.init = init;
 
   vm.activeTab = 0;
   vm.titles = [
@@ -71,6 +73,13 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
   ];
   vm.apiResourceOrders = commonService.simulateOrders;
 
+  function init(){
+    clientService.getById($routeParams.id).then(function(res){
+      console.log(res);
+    });
+  }
+
+  vm.init();
 
 
 }

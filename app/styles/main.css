@@ -247,6 +247,7 @@ a{text-decoration: none}
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)!important;
   color: #fff;
   font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
   border: 0;
   padding: 0 22px;
@@ -608,6 +609,11 @@ a{text-decoration: none}
   color: #000;
   margin-bottom: 6px;
 }
+
+.nav-categories-item .nav-categories-item-add{
+  color: #50C841;
+}
+
 .nav-categories-item > span{
   color: #000;
   font-size: 14px;
@@ -987,7 +993,7 @@ md-backdrop.md-sidenav-backdrop{
 .listing-product p{margin: 4px 0;}
 .listing-product .listing-product-info-main p{
   font-size: 13px;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 .listing-product .listing-product-info .price{
   font-size: 15px;
@@ -1233,7 +1239,7 @@ md-backdrop.md-sidenav-backdrop{
 .listing-view .listing-view-title{
   font-size: 32px;
   font-weight: 400;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   margin:  0 0 12px;
   line-height: 1;
 }
@@ -1632,9 +1638,9 @@ md-backdrop.md-sidenav-backdrop{
   cursor: pointer;
   height: 28px;
   vertical-align: middle;
-  margin: 0 8px;
+  margin: 2px 8px;
 }
-.variants-picker .variant-color + .variant-color{margin-left: 4px;}
+/*.variants-picker .variant-color + .variant-color{margin-left: 4px;}*/
 .variants-picker .variant-color-on{
   border: 1px solid #fff;
   outline: 2px solid #E2023F;
