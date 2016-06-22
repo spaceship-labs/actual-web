@@ -56,10 +56,16 @@
         return api.$http.post(url, params);
       }
 
+      function capitalizeFirstLetter(string){
+        var text = string.toLowerCase();
+        return text.charAt(0).toUpperCase() + text.slice(1);
+      }
+
+
       function formatProduct(product){
         product.Name = product.Name || product.ItemName;
 
-        product.Name = product.Name.capitalizeFirstLetter();
+        product.Name = capitalizeFirstLetter(product.Name);
 
         //The prices item in pos. 0 belongs to the Public price list in SAP
         if(product.prices && product.prices[0]){
@@ -96,6 +102,8 @@
 
         return product;
       }
+
+
 
       function formatProducts(products){
         var formatted = products.map(formatProduct);
