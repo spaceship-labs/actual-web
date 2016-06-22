@@ -29,11 +29,11 @@
               md-search-text="vm.searchText"
               md-items="item in vm.queryClients(vm.searchText)"
               md-selected-item-change="vm.selectedItemChange(item)"
-              md-item-text="item.ItemCode + ' ' + item.ItemName"
+              md-item-text="item.CardName + ' ' + item.CardCode"
               md-min-length="0"
               placeholder="Buscar producto">
             <md-item-template>
-              <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.ItemCode}} | {{item.ItemName}}</span>
+              <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.CardName}} | {{item.CardCode}}</span>
             </md-item-template>
             <md-not-found>
               No se encontro "{{vm.searchText}}".

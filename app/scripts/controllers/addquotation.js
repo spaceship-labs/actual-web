@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('AddquotationCtrl', AddquotationCtrl);
 
-function AddquotationCtrl($location,$routeParams, $q ,productService){
+function AddquotationCtrl($location,$routeParams, $q ,productService, userService){
   var vm = this;
   console.log(vm);
   vm.queryClients = queryClients;
@@ -22,7 +22,7 @@ function AddquotationCtrl($location,$routeParams, $q ,productService){
     if(term !== '' && term){
       var deferred = $q.defer();
       var params = {term: term, autocomplete: true};
-      productService.search(params).then(function(res){
+      userService.getClients(1,params).then(function(res){
         console.log(res);
         deferred.resolve(res.data.data);
       });
@@ -34,10 +34,14 @@ function AddquotationCtrl($location,$routeParams, $q ,productService){
   }
 
   function selectedItemChange(item){
-    if(item && item.ItemCode){
+    if(item && item.CardCode){
+      console.log(item);
+      $location.path('/cart');
+      /*
       vm.group.Products.push(item);
       vm.selectedProduct = null;
       vm.searchText = null;
+      */
     }
   }
 
