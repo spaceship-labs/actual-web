@@ -22,7 +22,7 @@ angular
     'angular-jwt',
     'ngMaterialDatePicker',
     'datatables',
-    'chart.js'
+    'chart.js',
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {

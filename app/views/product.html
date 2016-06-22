@@ -47,7 +47,13 @@
               >
                 <div ng-repeat="image in vm.galleryImages track by $index" class="product-view-gallery-img">
                   <div class="product-view-gallery-img-inner">
-                    <img ng-src="{{image.url}}" alt="{{vm.product.icon_description}}">
+                    <img
+                      ng-src="{{image.url}}"
+                      alt="{{vm.product.icon_description}}"
+                      ez-plus
+                      ezp-model="{thumb:image.url, small:image.url, large:image.url}"
+                      ezp-options="{scrollZoom: true, easing: true}"
+                      >
                   </div>
                 </div>
               </slick>

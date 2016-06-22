@@ -1,0 +1,294 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp pointers-sidenav" md-component-id="right">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">POINTERS <i class="icon-pointer"></i></h1>
+  </md-toolbar>
+  <md-content  layout-padding>
+
+    <div class="pointers-list">
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[0].selected = !main.pointersSidenav[0].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[0].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Bienvenida</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[0].selected" class="pointer-item-content">
+          <ul>
+            <li>Bienvenido a Actual</li>
+            <li>MI nombre es______</li>
+            <li>Entregar folleto</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[1].selected = !main.pointersSidenav[1].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[1].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Preguntar</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[1].selected" class="pointer-item-content">
+          <p>¿Cómo se entero de Actual?</p>
+          <md-radio-group>
+            <md-radio-button value="Referencia">Referencia</md-radio-button>
+            <md-radio-button value="Redes Sociales">Redes Sociales</md-radio-button>
+            <md-radio-button value="Internet">Internet</md-radio-button>
+            <md-radio-button value="Pase por la tienda">Pase por la tienda</md-radio-button>
+            <md-radio-button value="Medios impresos">Medios impresos</md-radio-button>
+            <md-radio-button value="Broker">Broker</md-radio-button>
+            <md-radio-button value="Otro">Otro</md-radio-button>
+
+          </md-radio-group>
+
+          <!--<a href="#" class="action-btn">GUARDAR</a>-->
+          <input class="action-btn" type="submit" value="GUARDAR">
+
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[2].selected = !main.pointersSidenav[2].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[2].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Tipo de cliente</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[2].selected" class="pointer-item-content">
+          <ul>
+            <li>Izquierdo: ser puntual en la información, datos, cifras, precios exactos.</li>
+            <li>Derecho: déjalo hablar, apoya sus comentarios y platica con él.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[3].selected = !main.pointersSidenav[3].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[3].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Mención del precio</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[3].selected" class="pointer-item-content">
+          <ul>
+            <li>1ero,  precio de etiqueta.</li>
+            <li>2do, precio con descuento</li>
+            <li>3ero, cantidad a MSI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[4].selected = !main.pointersSidenav[4].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[4].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>El/la Asesor camina:</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[4].selected" class="pointer-item-content">
+          <ul>
+            <li>
+              <span>Va ingresando a través de la tablet los productos que le interesan al cliente:</span>
+              <ul>
+                <li>Productos que menciona interés.</li>
+                <li>Productos que se detiene a ver.</li>
+                <li>Productos en los que se sienta.</li>
+                <li>Productos que pregunta de qué materiales están hechos.</li>
+                <li>Productos de los cuales pregunta el precio.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[5].selected = !main.pointersSidenav[5].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[5].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Tráfico</span><a>
+        </div>
+        <div ng-show="main.pointersSidenav[5].selected" class="pointer-item-content">
+          <ul>
+            <li>¿Cómo se enteró de nosotros?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[6].selected = !main.pointersSidenav[6].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[6].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Recorrido, al pasar</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[6].selected" class="pointer-item-content">
+          <ul>
+            <li>
+              <p><strong>Freedom Movement.</strong></p>
+              <p>Mobiliario básico y confortable inspirado en la naturaleza y la tecnología. Ideal para espacios medianos y pequeños.</p>
+            </li>
+            <li>
+              <p><strong>White on White.</strong></p>
+              <p>Ideal para espacios amplios permite la mezcla de texturas y materiales transmitiendo la sensación de orden y tranquilidad.</p>
+            </li>
+            <li>
+              <p><strong>Natural Mind.</strong></p>
+              <p>Inspirado en los colores de la tierra con acentos de animal print y accesorios en tonalidades doradas transmite paz y calma.</p>
+            </li>
+            <li>
+              <p><strong>India Essence.</strong></p>
+              <p>Inspirado en la cultura y colorido de la India ideal para resaltar una habitación y/ó espacio de su hogar.</p>
+            </li>
+            <li>
+              <p><strong>Deep Meditation.</strong></p>
+              <p>Inspirado en un estilo bohemio con colores profundos, destacando el berenjena, este espacio invita a la meditación.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[7].selected = !main.pointersSidenav[7].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[7].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span> Investigación del cliente</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[7].selected" class="pointer-item-content">
+          <ul>
+            <li>
+              <span>Preguntas abiertas:</span>
+              <ul>
+                <li>Que</li>
+                <li>Como</li>
+                <li>Cuando</li>
+                <li>Porque</li>
+                <li>Cual</li>
+                <li>Quien</li>
+                <li>Donde</li>
+              </ul>
+            </li>
+            <li>Apoyar a la respuesta</li>
+            <li>Resumir</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[8].selected = !main.pointersSidenav[8].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[8].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Ofrecer la visita a su casa</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[8].selected" class="pointer-item-content">
+          <ul>
+            <li>Mencionar "Yo Como interiorista"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[9].selected = !main.pointersSidenav[9].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[9].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Demostración del producto</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[9].selected" class="pointer-item-content">
+          <ul>
+            <li>
+              <span>Describe el producto usando palabras de acuerdo al tipo de cliente:</span>
+              <ul>
+                <li>Visual</li>
+                <li>Auditivo</li>
+                <li>Sensorial</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[10].selected = !main.pointersSidenav[10].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[10].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Ofrece Productos complementarios.</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[10].selected" class="pointer-item-content">
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[11].selected = !main.pointersSidenav[11].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[11].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Preguntas de cierre</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[11].selected" class="pointer-item-content">
+          <ul>
+            <li>¿Cuál va a ser su forma de pago?</li>
+            <li>¿Con que tarjeta va a realizar el pago?</li>
+            <li>¿En qué dirección vamos a entregar?</li>
+            <li>¿Va a pagar en efectivo o con tarjeta?</li>
+            <li>¿Qué tarjetas maneja?</li>
+            <li>
+              <span>¿A dónde vamos a entregarle el producto?</span>
+              <ul>
+                <li>
+                  <span>Y las siguientes palabras:</span>
+                  <ul>
+                    <li>Único</li>
+                    <li>Exclusivo</li>
+                    <li>De vanguardia</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span>En caso que diga que lo tiene que pensar, preguntar amablemente:</span>
+              <ul>
+                <li>¿Qué es lo que tiene que pensar?</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pointer-item">
+        <div
+          ng-click="main.pointersSidenav[12].selected = !main.pointersSidenav[12].selected"
+          class="pointer-item-head"
+          ng-class="{'pointer-item-head-active' : main.pointersSidenav[12].selected }"
+        >
+          <a href="#"><span class="circle"></span> <span>Despedida</span></a>
+        </div>
+        <div ng-show="main.pointersSidenav[12].selected" class="pointer-item-content">
+          <ul>
+            <li>Agradecer por la compra o visita.</li>
+            <li>Preguntar “¿Hay algo más en lo que le pueda ayudar?</li>
+            <li>Invitarlo a regresar.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </md-content>
+</md-sidenav>

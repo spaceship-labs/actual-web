@@ -26,6 +26,6 @@
   "appPath": "app",
   "moduleName": "dashexampleApp",
   "resolutions": {
-    "angular": "1.4.x"
+    "angular": "1.4.9"
   }
 }

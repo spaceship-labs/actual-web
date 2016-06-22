@@ -9,7 +9,7 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl($rootScope, $scope, $location, $window, $route, authService, localStorageService, cartService, productService, categoriesService){
+  function MainCtrl($rootScope, $scope, $location, $window, $route, $mdSidenav, authService, localStorageService, cartService, productService, categoriesService){
     var vm = this;
     vm.menuCategoriesOn = false;
     vm.isActiveBackdrop = false;
@@ -34,17 +34,29 @@
     vm.isMiActual = $rootScope.isMiActual;
     vm.init = init;
     vm.getCategoryIcon = getCategoryIcon;
+    vm.togglePointerSidenav = togglePointerSidenav;
+
+    vm.pointersSidenav = [];
 
     function init(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
+      $rootScope.user = vm.user;
+
+      for(var i=0;i<9;i++){
+        vm.pointersSidenav.push({selected:false});
+      }
 
       categoriesService.createCategoriesTree().then(function(res){
         //console.log(res);
         console.log(res);
         vm.categoriesTree = res.data;
       });
-    };
+    }
+
+    function togglePointerSidenav(){
+      $mdSidenav('right').toggle();
+    }
 
     function getCategoryIcon(handle){
       return categoriesService.getCategoryIcon(handle);
@@ -130,6 +142,7 @@
     '$location',
     '$window',
     '$route',
+    '$mdSidenav',
     'authService',
     'localStorageService',
     'cartService',

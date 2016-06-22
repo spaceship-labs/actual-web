@@ -10,29 +10,38 @@
 angular.module('dashexampleApp')
   .controller('ClientsListCtrl', ClientsListCtrl);
 
-function ClientsListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService){
+function ClientsListCtrl($location,$routeParams, $q ,productService, userService, $rootScope, commonService){
 
   var vm = this;
 
   vm.columnsClients = [
-    {key:'id', label:'id'},
-    {key:'client', label:'Cliente'},
-    {key:'rfc', label:'RFC'},
-    {key:'email', label:'Email'},
-    {key:'telefono', label:'Télefono'},
-    {key:'alta', label:'Alta'},
+    {key:'CardCode', label:'CardCode'},
+    {key:'CardName', label:'Cliente'},
+    //{key:'rfc', label:'RFC'},
+    {key:'E_Mail', label:'Email'},
+    {key:'Phone1', label:'Télefono'},
+    //{key:'alta', label:'Alta'},
     {
       key:'Acciones',
       label:'Acción',
-      propId: 'id',
+      propId: 'CardCode',
       actions:[
         {url:'/clients/profile/',type:'edit'},
       ]
     },
 
   ];
-  vm.apiResourceClients = commonService.simulateClients;
+  vm.apiResourceClients = userService.getClients;
+  vm.init = init;
 
+  console.log($rootScope.user);
 
+  function init(){
+    userService.getClients(1,{}).then(function(res){
+      console.log(res);
+    });
+  }
+
+  vm.init();
 
 }
