@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('ClientProfileCtrl', ClientProfileCtrl);
 
-function ClientProfileCtrl($location,$routeParams, $q ,productService, commonService, clientService){
+function ClientProfileCtrl($location,$routeParams, $q ,productService, commonService, clientService, quotationService, saleService){
   var vm = this;
 
   vm.init = init;
@@ -30,6 +30,22 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
   vm.countries = commonService.getCountries();
 
   vm.columnsLeads = [
+    {key: 'DocEntry', label:'Folio'},
+    {key:'CardName', label:'Cliente'},
+    {key:'DocTotal', label: 'Total'},
+    {key:'DocCur', label:'Moneda'},
+    {
+      key:'Acciones',
+      label:'Acciones',
+      propId: 'DocEntry',
+      actions:[
+        {url:'#',type:'edit'},
+      ]
+    },
+  ];
+
+  /*
+  vm.columnsLeads = [
     {key:'folio', label:'Folio'},
     {key:'client', label:'Cliente'},
     {key:'email', label:'Email'},
@@ -47,9 +63,11 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
         {url:'#',type:'delete'}
       ]
     },
-
   ];
-  vm.apiResourceLeads = commonService.simulateLeads;
+  */
+
+
+  vm.apiResourceLeads = quotationService.getByClient;
 
   vm.columnsOrders = [
     {key:'folio', label:'Folio'},
@@ -71,11 +89,14 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
     },
 
   ];
-  vm.apiResourceOrders = commonService.simulateOrders;
+  vm.apiResourceOrders = saleService.getByClient;
 
   function init(){
     clientService.getById($routeParams.id).then(function(res){
       console.log(res);
+      vm.client = res.data;
+      vm.extraParamsLeads = {CardCode: vm.client.CardCode};
+      vm.extraParamsSales = {CardCode: vm.client.CardCode};
     });
   }
 

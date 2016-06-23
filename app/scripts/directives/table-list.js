@@ -6,13 +6,14 @@
         .module('dashexampleApp')
         .directive('tableList', tableList);
 
-    var controller = function($scope, $rootScope, DTOptionsBuilder, DTColumnBuilder, dialogService, $compile){
+    var controller = function($scope, $rootScope , $timeout, DTOptionsBuilder, DTColumnBuilder, dialogService, $compile){
       $scope.dtInstance = {};
+      $scope.isExporting = false;
 
       $scope.showDestroyDialog = function(ev, id){
         console.log('showDestroyDialog');
         dialogService.showDestroyDialog(ev, $scope.destroyFn, id);
-      };
+      }
 
       $scope.dtOptions = DTOptionsBuilder
         .newOptions()
@@ -25,32 +26,49 @@
         .withOption('autoWidth',true)
         .withOption('displayLength', 10)
         .withOption('bLengthChange',false)
-        .withOption('paging', false)
         //.withPaginationType('numbers')
+        .withPaginationType('input')
         .withDOM('<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>')
         .withOption('createdRow', function(row) {
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);
         })
         .withOption('initComplete', function() {
-          $('<p class="sorting-by-label"></p>').appendTo('.dataTables_wrapper .top');
-          //$('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ $scope.columns[0].label);
-
-          //$('.table-list-wrap label').text('');
           if($('#new-search').length <= 0){
+            $('<p class="sorting-by-label"></p>').appendTo('.dataTables_wrapper .top');
+            $('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ $scope.columns[0].label);
             $('<button/>').text('Buscar').attr('id', 'new-search').appendTo('.dataTables_filter');
-            $('.dataTables_filter input').unbind();
-            $('.dataTables_filter input').keypress(function(e){
-              if(e.which == 10 || e.which == 13) {
-                $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
-              }
-            });
-            $('#new-search').on('click', function() {
-                $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
-            });
+
+            if($scope.exportQuery){
+              $('<a class="export-button" href="" ng-click="exportToExcel()">Exportar registros</a>')
+                .appendTo('.dataTables_wrapper .top .sorting-by-label');
+              $compile($('.export-button'))($scope);
+            }
+
           }
 
-        });
+          $('.dataTables_filter input').unbind();
+          $('.dataTables_filter input').keypress(function(e){
+            if(e.which == 10 || e.which == 13) {
+              $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
+            }
+          })
+          $('#new-search').on('click', function() {
+              $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
+          })
+
+        })
+        /*
+        .withButtons([
+          {
+            extend: 'excel',
+            text: 'Exportar pagina',
+            filename: 'MyDT',
+            name: 'Productos',
+            extension: '.xlsx'
+          },
+        ])
+        */
 
       function serverData(sSource, aoData, fnCallback, oSettings) {
         console.log('en serverData');
@@ -70,9 +88,9 @@
         var sortingColumnName = columns[sortingColumnIndex].data;
         var sortingDirection = sorting[1].toUpperCase();
 
-        page = (start===0) ? 1 : (start/length) + 1;
-        if(search !== ''){
-            query = {page:page,term:search.value};
+        page = (start==0) ? 1 : (start/length) + 1;
+        if(search != ''){
+            query = {page:page,term:search.value}
         }else{
             query.page = page;
         }
@@ -83,21 +101,33 @@
         //Do not sort when is a destroy column
         else if(!$scope.columns[sortingColumnIndex].destroy && !$scope.columns[sortingColumnIndex].editUrl){
           query.orderby = sortingColumnName + ' ' + sortingDirection;
-          //$('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ sortingColumnLabel);
+          $('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ sortingColumnLabel);
         }
+
+        query.fields = [];
+        query.filters = $scope.filters || false;
+        $scope.columns.forEach(function(col){
+          if(!col.destroy && !col.editUrl && !col.quickEdit ){
+            query.fields.push(col.key);
+          }
+        });
 
         //console.log(query.orderby);
 
+        $scope.query = query;
+        $scope.page = page;
+
         $scope.apiResource(page,query)
           .then(
-            function(res){
-              console.log(res);
-              var result = res.data;
+            function(result){
+              console.log(result);
+              var res = result.data;
+
               var records = {
                   'draw': draw,
-                  'recordsTotal': result.total,
-                  'recordsFiltered': result.total,
-                  'data': result.data
+                  'recordsTotal': res.total,
+                  'recordsFiltered': res.total,
+                  'data': res.data
               };
               fnCallback(records);
             },
@@ -108,8 +138,6 @@
       }
 
       $scope.dtColumns = [];
-
-      console.log($scope.columns);
 
       $scope.columns.forEach(function(column){
         $scope.dtColumns.push(
@@ -174,25 +202,63 @@
       });
 
       $rootScope.$on('reloadTable', function(event, data){
-        console.log(data);
-        console.log(event);
-        var callback = function(json){console.log(json);};
-        //var resetPaging = false;
-        //$scope.dtInstance.reloadData(callback, resetPaging);
-        //$scope.dtInstance.reloadData(callback, resetPaging);
-        $scope.dtInstance.rerender();
-        /*
-        DTInstances.getLast().then(function(instance) {
-            dtInstance = instance;
-            dtInstance.reloadData();
-        });
-        */
-
-
+        $timeout(function(){
+          var callback = function(json){console.log(json);}
+          var resetPaging = false;
+          console.log('filters');
+          console.log($scope.filters);
+          if($scope.dtInstance){
+            $scope.dtInstance.rerender();
+          }
+        }, 100);
       });
 
+      //$rootScope.$on('exportData', function(event, data){
+      $scope.exportToExcel = function(){
+        if(!$scope.isExporting){
+          $scope.isExporting = true;
+          $('.export-button').text('Exportando...');
+          var auxQuery = angular.copy($scope.query);
+          auxQuery.getAll = true;
+          $scope.apiResource($scope.page, auxQuery).then(function(result){
+            var items = result.data.data;
+            var itemsFormatted = items.map(function(item){
+              $scope.exportColumns.forEach(function(col){
+                var columnParts = col.split('.');
+                if(columnParts.length > 1){
+                  if( item[columnParts[0]][columnParts[1]]== false){
+                    item[columnParts[0]][columnParts[1]]= 'No';
+                  }
+                  else if( item[columnParts[0]][columnParts[1]] == true ){
+                    item[columnParts[0]][columnParts[1]]= 'Si';
+                  }
+                  else if( typeof item[columnParts[0]][columnParts[1]] == 'undefined' ){
+                    item[columnParts[0]][columnParts[1]] = 'No';
+                  }
+                }else{
+                  if( item[columnParts[0]] == false){
+                    item[columnParts[0]] = 'No';
+                  }
+                  else if( item[columnParts[0]] == true ){
+                    item[columnParts[0]] = 'Si';
+                  }
+                  else if( typeof item[columnParts[0]] == 'undefined' ){
+                    item[columnParts[0]] = 'No';
+                  }
+                }
+              });
+              return item;
+            });
+            console.log(itemsFormatted)
+            alasql($scope.exportQuery ,[itemsFormatted]);
+            $('.export-button').text('Exportar registros');
+            $scope.isExporting = false;
+          });
+        }
+      }
+
     };
-    controller.$inject = ['$scope','$rootScope','DTOptionsBuilder','DTColumnBuilder','dialogService','$compile'];
+    controller.$inject = ['$scope','$rootScope', '$timeout','DTOptionsBuilder','DTColumnBuilder','dialogService','$compile'];
 
     /** @ngInject */
     function tableList(){
@@ -207,6 +273,9 @@
           actionUrl: '=',
           searchText: '@',
           orderBy: '@',
+          filters: '=',
+          exportQuery: '=',
+          exportColumns: '='
         },
         templateUrl : 'views/directives/table-list.html'
       };

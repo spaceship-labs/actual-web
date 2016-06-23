@@ -10,7 +10,8 @@
 
       var service = {
         create: create,
-        getById: getById
+        getById: getById,
+        getByClient: getByClient
       };
 
       return service;
@@ -23,6 +24,12 @@
       function getById(id){
         var url = '/quotation/findbyid/' + id;
         return api.$http.post(url);
+      }
+
+      function getByClient(page, params){
+        var p = page || 1;
+        var url = '/quotation/findbyclient/' + p;
+        return api.$http.post(url,params);
       }
 
     }
