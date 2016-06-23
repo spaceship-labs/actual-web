@@ -1734,7 +1734,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 /*--------------/
   #FILTERS
 /*-------------*/
-.filters{margin-top: 40px;}
+.filters{margin-top: 20px;}
 .filters h4,
 .filters h3{margin: 0;}
 .filters-head{
@@ -2419,7 +2419,29 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 /*--------------/
   #SEARCH-VIEW
 /*-------------*/
-.search-view .subs-container{margin-top: 40px;}
+.search-view .subs-container{margin-top: 20px;}
+
+.filters-selected-list{margin-bottom: 10px;}
+.filters-selected-item {
+  background: #E7E7E7;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 13px;
+  margin: 0 4px 10px;
+}
+.filters-selected-item .remove-item{
+  display: inline-block;
+  border-radius: 50%;
+  line-height: 15px;
+  vertical-align: middle;
+  text-align: center;
+  color: #000;
+  font-size: 16px;
+  margin: -2px 0 0 2px;
+  -webkit-transform: rotate(46deg);
+  -moz-transform: rotate(46deg);
+  transform: rotate(46deg);
+}
 
 
 /*--------------/

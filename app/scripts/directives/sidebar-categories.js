@@ -21,25 +21,27 @@ angular.module('dashexampleApp')
           //scope.categoriesTree[0].isActive = true;
           $timeout(function(){
             scope.showSelectedCategoryId();
-          }, 3000)
+          }, 3500)
         };
 
         scope.showSelectedCategoryId = function(){
           var selected = scope.selectedCategoryId;
-          scope.categoriesTree.forEach(function(mainCategory){
-            var hasSelectedAsChild = _.findWhere(mainCategory.Childs, {id: selected});
-            if(mainCategory.id == selected ||  hasSelectedAsChild ){
-              mainCategory.isActive = true;
-              if(hasSelectedAsChild){
-                mainCategory.Childs.forEach(function(category){
-                  var hasSelectedAsChildAux = _.findWhere(category.Childs, {id: selected});
-                  if(category.id == selected || hasSelectedAsChildAux){
-                    category.isActive = true;
-                  }
-                });
+          if(scope.categoriesTree){
+            scope.categoriesTree.forEach(function(mainCategory){
+              var hasSelectedAsChild = _.findWhere(mainCategory.Childs, {id: selected});
+              if(mainCategory.id == selected ||  hasSelectedAsChild ){
+                mainCategory.isActive = true;
+                if(hasSelectedAsChild){
+                  mainCategory.Childs.forEach(function(category){
+                    var hasSelectedAsChildAux = _.findWhere(category.Childs, {id: selected});
+                    if(category.id == selected || hasSelectedAsChildAux){
+                      category.isActive = true;
+                    }
+                  });
+                }
               }
-            }
-          });
+            });
+          }
         }
 
         scope.toggleMainCategory = function(mainCategory,event){

@@ -22,6 +22,8 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
   vm.isLoading = false;
   vm.loadMoreCount = 1;
   vm.filters = [];
+  vm.searchValues = [];
+  vm.removeSearchValue = removeSearchValue;
 
   vm.search = {
     term: $location.search().term,
@@ -46,22 +48,43 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
 
   }
 
+  function removeSearchValue(removeValue){
+    //var removeIndex = false;
+    var removeIndex = vm.searchValues.indexOf(removeValue);
+    if(removeIndex > -1){
+      vm.searchValues.splice(removeIndex, 1);
+    }
+    vm.filters.forEach(function(filter){
+      filter.Values.forEach(function(val){
+        if(val.id == removeValue.id){
+          val.selected = false;
+        }
+      });
+    });
+    vm.searchByFilters();
+  }
+
   function searchByFilters(){
     vm.isLoading = true;
+    vm.searchValues = [];
+    var searchValuesIds = [];
     //var values = ['5743763aef7d5e62e508e2f0'];
-    var values = [];
     vm.filters.forEach(function(filter){
       /*if(filter.selectedValue){
         values.push(filter.selectedValue);
       }*/
       filter.Values.forEach(function(val){
         if(val.selected){
-          values.push(val.id);
+          vm.searchValues.push(val);
         }
       });
     });
 
-    productService.getProductsByFilters({ids: values}).then(function(res){
+    vm.searchValues.forEach(function(searchVal){
+      searchValuesIds.push(searchVal.id);
+    });
+
+    productService.getProductsByFilters({ids: searchValuesIds}).then(function(res){
       console.log(res);
       vm.isLoading = false;
       vm.products = productService.formatProducts(res.data);
@@ -93,7 +116,7 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
     $timeout(
         function(){
           $('html, body').animate({
-            scrollTop: $('#' + target).offset().top - 50
+            scrollTop: $('#' + target).offset().top - 100
           }, 600);
         },
         300
