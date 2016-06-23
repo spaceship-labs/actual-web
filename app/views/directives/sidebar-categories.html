@@ -11,7 +11,11 @@
     <li ng-repeat="category in mainCategory.Childs" ng-class="{'active': category.isActive}">
       <h3><a ng-click="toggleCategory(category, $event)" ng-href="/category/{{category.Handle}}"><strong>{{category.Name}}</strong></a></h3>
       <ul class="listing-view-subnav">
-        <li ng-repeat="subcategory in category.Childs"><a ng-href="/category/{{subcategory.Handle}}">{{subcategory.Name}}</a></li>
+        <li ng-repeat="subcategory in category.Childs">
+          <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
+            {{subcategory.Name}}
+          </a>
+        </li>
       </ul>
     </li>
   </ul>

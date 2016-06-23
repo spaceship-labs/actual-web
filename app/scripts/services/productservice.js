@@ -63,9 +63,7 @@
 
 
       function formatProduct(product){
-        product.Name = product.Name || product.ItemName;
-
-        product.Name = capitalizeFirstLetter(product.Name);
+        product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
 
         //The prices item in pos. 0 belongs to the Public price list in SAP
         if(product.prices && product.prices[0]){

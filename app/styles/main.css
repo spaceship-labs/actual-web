@@ -1222,6 +1222,7 @@ md-backdrop.md-sidenav-backdrop{
 .listing-view-nav h3{margin: 0;}
 .listing-view-nav h3 a{color: #000;}
 .listing-view-nav > li.active h3 a,
+.listing-view-nav > li h3 a.active,
 .listing-view-nav > li h3 a:hover{
   color: #E2023F;
 }

@@ -26,6 +26,7 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
   vm.sortImages = sortImages;
   vm.loadVariants = loadVariants;
   vm.getGroupProducts = getGroupProducts;
+  vm.getLowestCategory = getLowestCategory;
   vm.variants = [];
 
   vm.toggleVariants = true;
@@ -45,6 +46,9 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
     productService.getById(productId).then(function(res){
       vm.isLoading = false;
       vm.product = productService.formatProduct(res.data.data);
+      vm.lowestCategory = vm.getLowestCategory();
+      console.log(vm.lowestCategory);
+      console.log(vm.product);
       vm.product.cart = {
         quantity: 1
       };
@@ -61,6 +65,18 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       }
 
     });
+  }
+
+  function getLowestCategory(){
+    var lowestCategoryLevel = 0;
+    var lowestCategory = false;
+    vm.product.Categories.forEach(function(category){
+      if(category.CategoryLevel > lowestCategoryLevel){
+        lowestCategory = category;
+        lowestCategoryLevel = category.CategoryLevel;
+      }
+    });
+    return lowestCategory;
   }
 
   function getGroupProducts(){

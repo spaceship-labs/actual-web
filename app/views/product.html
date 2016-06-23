@@ -11,7 +11,11 @@
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
-    <sidebar-categories categories-tree="main.categoriesTree" flex="25"></sidebar-categories>
+    <sidebar-categories
+      categories-tree="main.categoriesTree"
+      selected-category-id="vm.lowestCategory.id"
+      flex="25">
+    </sidebar-categories>
     <!--END NAV-->
 
     <!--MAIN VIEW-->
@@ -97,6 +101,10 @@
             <div class="product-view-data-block">
               <h4 ng-click="vm.nextSlide()"><strong>CARACTERISTICAS</strong></h4>
               <table>
+                <tr>
+                  <td>Código:</td>
+                  <td><strong>{{vm.product.ItemCode}}</strong></td>
+                </tr>
                 <tr ng-repeat="filter in vm.filters">
                   <td ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">{{filter.Name}}: </td>
                   <td ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">
@@ -109,10 +117,6 @@
                 <tr>
                   <td>Color</td>
                   <td><strong>{{vm.product.DetailedColor || vm.product.U_COLOR}}</strong></td>
-                </tr>
-                <tr>
-                  <td>Código</td>
-                  <td><strong>{{vm.product.ItemCode}}</strong></td>
                 </tr>
               </table>
 

@@ -12,16 +12,35 @@ angular.module('dashexampleApp')
       templateUrl: 'views/directives/sidebar-categories.html',
       restrict: 'E',
       scope:{
-        categoriesTree: '='
+        categoriesTree: '=',
+        selectedCategoryId: '='
       },
       link: function postLink(scope) {
 
         scope.init = function(){
           //scope.categoriesTree[0].isActive = true;
           $timeout(function(){
-            console.log(scope.categoriesTree);
-          }, 4000)
+            scope.showSelectedCategoryId();
+          }, 3000)
         };
+
+        scope.showSelectedCategoryId = function(){
+          var selected = scope.selectedCategoryId;
+          scope.categoriesTree.forEach(function(mainCategory){
+            var hasSelectedAsChild = _.findWhere(mainCategory.Childs, {id: selected});
+            if(mainCategory.id == selected ||  hasSelectedAsChild ){
+              mainCategory.isActive = true;
+              if(hasSelectedAsChild){
+                mainCategory.Childs.forEach(function(category){
+                  var hasSelectedAsChildAux = _.findWhere(category.Childs, {id: selected});
+                  if(category.id == selected || hasSelectedAsChildAux){
+                    category.isActive = true;
+                  }
+                });
+              }
+            }
+          });
+        }
 
         scope.toggleMainCategory = function(mainCategory,event){
           if(mainCategory.Childs){
@@ -31,10 +50,15 @@ angular.module('dashexampleApp')
           scope.categoriesTree.forEach(function(category){
             if(category.Handle != mainCategory.Handle){
               category.isActive = false;
+              //Closing also child categories
+              category.Childs.forEach(function(subCategory){
+                subCategory.isActive = false;
+              });
             }
           });
 
           mainCategory.isActive = !mainCategory.isActive;
+
         };
 
         scope.toggleCategory = function(category, event){
