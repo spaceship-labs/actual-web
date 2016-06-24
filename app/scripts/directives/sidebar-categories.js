@@ -74,8 +74,23 @@ angular.module('dashexampleApp')
 
         scope.getCategoryIcon = function(handle){
           return categoriesService.getCategoryIcon(handle);
-        }
+        };
 
+
+        scope.cleanUp = function(){
+          scope.categoriesTree.forEach(function(category){
+            category.isActive = false;
+            //Closing also child categories
+            category.Childs.forEach(function(subCategory){
+              subCategory.isActive = false;
+            });
+          });
+        };
+
+        scope.$on('$destroy', function() {
+          console.log("destroy");
+          scope.cleanUp();
+        });
 
         scope.init();
 

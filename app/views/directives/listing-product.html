@@ -5,7 +5,17 @@
   <div class="listing-product-gallery">
     <slick ng-if="areImagesLoaded" arrows="true" >
       <div ng-repeat="image in images track by $index">
-        <img ng-src="{{image.url}}" alt="">
+        <!--<img
+          ng-src="{{image.url}}"
+          alt=""
+          ez-plus
+          ezp-model="{thumb:image.url, small:image.url, large:image.url}"
+          ezp-options="ezOptions"
+          >-->
+        <img
+          ng-src="{{image.url}}"
+          alt=""
+          >
       </div>
     </slick>
   </div>

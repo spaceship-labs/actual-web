@@ -39,9 +39,13 @@
         </div>
         -->
 
-        <div ng-if="!main.user" ng-mouseover="main.activateLoginModal()" ng-mouseleave="main.deactivateLoginModal()" flex href="#" class="header-top-bar-menu-item">
+        <div
+          ng-if="!main.user"
+          ng-click="main.toggleLoginModal()"
+          flex
+          class="header-top-bar-menu-item">
           <i class="icon-login"></i>
-          <ng-include ng-if="!main.user" src="'views/partials/login-header.html'"></ng-include>
+          <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>
 
         <!--IF logged in-->

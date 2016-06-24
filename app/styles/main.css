@@ -23,6 +23,7 @@ body{font-family: 'Helvetica Neue', sans-serif;}
 */
 body{
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+  overflow-x:hidden;
 }
 a{text-decoration: none}
 .form-modal{
@@ -285,8 +286,10 @@ a{text-decoration: none}
 }
 .header-top-bar-menu .header-top-bar-menu-item{
   /*min-height: 40px;*/
+  outline: none;
   text-align: center;
   min-width: 50px;
+  cursor: pointer;
   position: relative;
 }
 
@@ -330,9 +333,11 @@ a{text-decoration: none}
   padding: 20px 10px;
 }
 
+/*
 .header-top-bar-menu .header-top-bar-menu-item:hover .modal-header{
   display: block;
 }
+*/
 
 .header-top-bar-menu .header-top-bar-menu-item i{
   font-size: 28px;
@@ -476,8 +481,12 @@ a{text-decoration: none}
 .cart-modal-header,
 .login-modal-header{
   display: none;
-  top: 90%;
+  /*top: 90%;*/
   /*top: 116%;*/
+  top: 100%;
+}
+.login-modal-header{
+  display: block;
 }
 
 /*-------------/
@@ -752,7 +761,7 @@ a{text-decoration: none}
 .menu-categories.menu-categories-fixed{
   position: fixed;
   top: 76px;
-  max-width: 960px;
+  max-width: 1200px;
   min-width: 0;
   left: 0;
   right: 0;
@@ -768,7 +777,8 @@ a{text-decoration: none}
   left: 0;
   top: 0;
   z-index: 9;
-  max-width: 960px;
+  max-width: 1200px;
+  /*max-width: 960px;*/
   width: 100%;
   margin: 0 auto;
   right: 0;
@@ -855,6 +865,26 @@ md-backdrop.md-sidenav-backdrop{
   position: fixed;
   background: #000;
   color: #fff;
+}
+.pointers-sidenav .pointer-close-btn{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background: #000!important;
+  /* color: #C82828; */
+  font-weight: 700;
+  font-size: 28px;
+  height: 28px!important;
+  width: 28px!important;
+  min-height: 28px;
+  vertical-align: middle;
+  padding: 0;
+  text-align: center;
+  transform: rotate(45deg);
+  line-height: 1!important;
+}
+.pointers-sidenav .pointer-close-btn i{
+  color: #C82828;
 }
 .pointers-sidenav md-radio-button.md-default-theme.md-checked .md-off,
 .pointers-sidenav md-radio-button.md-checked .md-off{
@@ -1661,8 +1691,11 @@ md-backdrop.md-sidenav-backdrop{
 
 .variants-picker md-radio-button{
   display: inline-block;
+  margin-right: 20px;
+  margin-top: 5px!important;
 }
-.variants-picker md-radio-button + md-radio-button{margin: 0 20px;}
+/*.variants-picker md-radio-button + md-radio-button{margin: 0 20px;}*/
+
 
 md-radio-group.md-default-theme:not([disabled]) .md-primary .md-on,
 md-radio-group:not([disabled]) .md-primary .md-on,
@@ -2241,6 +2274,24 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   background: #F8F8F8;
 }
 
+/*--------------/
+  #QUOTATION-VIEW
+/*--------------*/
+.quotation-view .quotation-data{
+  margin: 10px 0;
+  padding: 0 20px;
+}
+.quotation-view .quotation-data-row{margin: 12px 0;}
+.quotation-view .quotation-data label{
+  font-weight: 700;
+  font-size: 12px;
+}
+.quotation-view .quotation-data p{
+  font-size: 20px;
+  margin: 4px 0;
+  font-weight: 700;
+}
+.quotation-view .cart-view{padding: 20px 0;}
 
 /*--------------/
   #CART-VIEW

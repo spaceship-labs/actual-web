@@ -53,6 +53,14 @@ angular.module('dashexampleApp')
           scope.setUpImages();
         };
 
+        scope.ezOptions = {
+          constrainType: "height",
+          constrainSize: 274,
+          zoomType: "lens",
+          containLensZoom: true,
+          cursor: 'pointer',
+        };
+
         scope.init();
 
       }

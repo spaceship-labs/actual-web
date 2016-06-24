@@ -39,7 +39,7 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
       label:'Acciones',
       propId: 'DocEntry',
       actions:[
-        {url:'#',type:'edit'},
+        {url:'/quotations/edit/',type:'edit'},
       ]
     },
   ];

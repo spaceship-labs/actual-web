@@ -21,6 +21,7 @@
 
     vm.activateLoginModal = activateLoginModal;
     vm.deactivateLoginModal = deactivateLoginModal;
+    vm.toggleLoginModal = toggleLoginModal;
 
     vm.activateCartModal = activateCartModal;
     vm.deactivateCartModal = deactivateCartModal;
@@ -68,6 +69,17 @@
     });
 
     vm.init();
+
+    function toggleLoginModal(){
+      if( vm.isActiveLogin ){
+        vm.isActiveLogin = false;
+        vm.isActiveBackdrop = false;
+      }else{
+        vm.isActiveLogin = true;
+        vm.isActiveBackdrop = true;
+      }
+    }
+
 
     function activateLoginModal(){
       if(!vm.user){

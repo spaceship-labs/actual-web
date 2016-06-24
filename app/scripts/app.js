@@ -23,6 +23,7 @@ angular
     'ngMaterialDatePicker',
     'datatables',
     'chart.js',
+    'ezplus'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
@@ -127,9 +128,9 @@ angular
           }
         }
       })
-      .when('/opportunities/list', {
-        templateUrl: 'views/opportunities/list.html',
-        controller: 'OpportunitiesListCtrl',
+      .when('/quotations/list', {
+        templateUrl: 'views/quotations/list.html',
+        controller: 'QuotationsListCtrl',
         controllerAs: 'vm',
         resolve: {
           isMiActual: function($rootScope){
@@ -149,10 +150,27 @@ angular
           }
         }
       })
-      .when('/opportunities/records', {
-        templateUrl: 'views/opportunities/records.html',
-        controller: 'OpportunitiesRecordsCtrl',
-        controllerAs: 'vm'
+      .when('/quotations/records', {
+        templateUrl: 'views/quotations/records.html',
+        controller: 'QuotationsRecordsCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
+      .when('/quotations/edit/:id', {
+        templateUrl: 'views/quotations/edit.html',
+        controller: 'QuotationsEditCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'

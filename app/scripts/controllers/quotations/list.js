@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:OpportunitiesListCtrl
+ * @name dashexampleApp.controller:QuotationsListCtrl
  * @description
- * # OpportunitiesListCtrl
+ * # QuotationsListCtrl
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('OpportunitiesListCtrl', OpportunitiesListCtrl);
+  .controller('QuotationsListCtrl', QuotationsListCtrl);
 
-function OpportunitiesListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService){
+function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService){
 
   var vm = this;
 

@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:OpportunitiesRecordsCtrl
+ * @name dashexampleApp.controller:QuotationsRecordsCtrl
  * @description
- * # OpportunitiesRecordsCtrl
+ * # QuotationsRecordsCtrl
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('OpportunitiesRecordsCtrl', function () {
+  .controller('QuotationsRecordsCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
