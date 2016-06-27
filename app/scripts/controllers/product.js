@@ -47,8 +47,6 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
       vm.isLoading = false;
       vm.product = productService.formatProduct(res.data.data);
       vm.lowestCategory = vm.getLowestCategory();
-      console.log(vm.lowestCategory);
-      console.log(vm.product);
       vm.product.cart = {
         quantity: 1
       };

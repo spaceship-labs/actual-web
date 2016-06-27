@@ -10,10 +10,10 @@
 angular.module('dashexampleApp')
   .controller('UserProfileCtrl', UserProfileCtrl);
 
-function UserProfileCtrl(){
+function UserProfileCtrl($rootScope){
   var vm = this;
 
-
-
+  vm.user = $rootScope.user;
+  console.log(vm.user);
 
 }

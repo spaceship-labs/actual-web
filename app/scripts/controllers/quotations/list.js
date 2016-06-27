@@ -10,9 +10,11 @@
 angular.module('dashexampleApp')
   .controller('QuotationsListCtrl', QuotationsListCtrl);
 
-function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService){
+function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, quotationService){
 
   var vm = this;
+  vm.init = init;
+  vm.filters = false;
 
   vm.managers = [
     {
@@ -26,6 +28,7 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
     }
   ];
 
+  /*
   vm.columnsLeads = [
     {key:'folio', label:'Folio'},
     {key:'client', label:'Cliente'},
@@ -44,9 +47,25 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
         {url:'#',type:'delete'}
       ]
     },
-
   ];
-  vm.apiResourceLeads = commonService.simulateLeads;
+  */
+  vm.columnsLeads = [
+    {key: 'DocEntry', label:'Folio'},
+    {key:'CardName', label:'Cliente'},
+    {key:'DocTotal', label: 'Total'},
+    {key:'DocCur', label:'Moneda'},
+    {
+      key:'Acciones',
+      label:'Acciones',
+      propId: 'DocEntry',
+      actions:[
+        {url:'/quotations/edit/',type:'edit'},
+      ]
+    },
+  ];
+
+
+  vm.apiResourceLeads = quotationService.getList;
 
   vm.todayQty = 5;
   vm.monthQty = 20;
@@ -65,5 +84,12 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
     data: [vm.todayAmmount, (vm.monthAmmount - vm.todayAmmount) ],
     colours: ["#C92933", "#48C7DB", "#FFCE56"]
   };
+
+  function init(){
+    console.log($rootScope.user);
+    vm.filters = {SlpCode: $rootScope.user.SlpCode};
+  }
+
+  vm.init();
 
 }

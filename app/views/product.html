@@ -54,9 +54,6 @@
                     <img
                       ng-src="{{image.url}}"
                       alt="{{vm.product.icon_description}}"
-                      ez-plus
-                      ezp-model="{thumb:image.url, small:image.url, large:image.url}"
-                      ezp-options="{scrollZoom: true, easing: true}"
                       >
                   </div>
                 </div>
@@ -265,7 +262,7 @@
                 <table>
                   <tr>
                     <td>Precio Lista:</td>
-                    <td><strong>$24,399</strong></td>
+                    <td><strong>{{vm.product.Price | currency }}</strong></td>
                   </tr>
                   <tr>
                     <td>Promoción: <strong>Pago ÚNICO <span class="hl-text">20%</span></strong></td>
@@ -286,9 +283,9 @@
 
             <div class="product-view-prices" layout="row" layout-align="space-between center">
               <div flex="20">
-                <p class="product-view-price-crossed">{{vm.product.price.value + 2000 | currency }}</p>
+                <p class="product-view-price-crossed">{{vm.product.Price | currency }}</p>
                 <p class="product-view-price-hl">
-                  <strong>{{vm.product.price.value | currency }}</strong>
+                  <strong>{{vm.product.Price | currency }}</strong>
                 </p>
               </div>
               <div flex="40">
@@ -299,7 +296,7 @@
                 </div>
               </div>
               <h3 flex="30" class="product-view-price-hl product-view-price-main">
-                <strong>{{vm.product.price.value * vm.product.cart.quantity | currency }}</strong>
+                <strong>{{vm.product.Price * vm.product.cart.quantity | currency }}</strong>
               </h3>
             </div>
 

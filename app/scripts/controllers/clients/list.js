@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('ClientsListCtrl', ClientsListCtrl);
 
-function ClientsListCtrl($location,$routeParams, $q ,productService, userService, $rootScope, commonService){
+function ClientsListCtrl($location,$routeParams, $q ,productService, clientService, userService, $rootScope, commonService){
 
   var vm = this;
 
@@ -31,17 +31,12 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, userService
     },
 
   ];
-  vm.apiResourceClients = userService.getClients;
-  vm.init = init;
+  vm.apiResourceClients = clientService.getClients;
+  vm.filters = {
+    SlpCode: $rootScope.user.SlpCode
+  };
 
   console.log($rootScope.user);
 
-  function init(){
-    userService.getClients(1,{}).then(function(res){
-      console.log(res);
-    });
-  }
-
-  vm.init();
 
 }

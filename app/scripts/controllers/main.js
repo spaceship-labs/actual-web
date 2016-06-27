@@ -143,6 +143,17 @@
 
     };
 
+    $scope.$on('$routeChangeStart', function(next, current) {
+      vm.menuCategoriesOn = false;
+      vm.isActiveBackdrop = false;
+      vm.isActiveLogin = false;
+      vm.isActiveCart = false;
+      vm.isLoadingLogin = false;
+
+      //console.log('route change');
+      //console.log('vm.isActiveLogin:' + vm.isActiveLogin);
+      //m.toggleLoginModal();
+    });
 
 
   }

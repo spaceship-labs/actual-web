@@ -172,6 +172,17 @@ angular
           }
         }
       })
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });

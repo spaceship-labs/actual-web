@@ -24,6 +24,16 @@
     <div class="nested-bar nested-bar1" layout="row" layout-align="space-between center">
       <span>TOTAL</span><span>$209,000</span>
     </div>
+
+    <div class="nested-item">
+      <div class="nested-content">
+        <section class="table-list-wrap table-list-wrap-nomargin">
+          <div ng-if="vm.filters" table-list class="table-list table-list-v2" columns="vm.columnsLeads" api-resource="vm.apiResourceLeads" filters="vm.filters"></div>
+        </section>
+      </div>
+    </div>
+
+    <!--
     <div class="nested-item" ng-repeat="manager in vm.managers track by $index">
       <div ng-click="manager.selected = !manager.selected" class="nested-bar nested-bar2" layout="row" layout-align="space-between center">
         <span>TOTAL GERENTE 1</span><span>$209,000</span>
@@ -41,6 +51,7 @@
         </div>
       </div>
     </div>
+    -->
   </div>
 
   <section class="chart-section">

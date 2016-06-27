@@ -41,10 +41,9 @@
 
         <div
           ng-if="!main.user"
-          ng-click="main.toggleLoginModal()"
           flex
           class="header-top-bar-menu-item">
-          <i class="icon-login"></i>
+          <i class="icon-login" ng-click="main.toggleLoginModal()"></i>
           <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>
 
@@ -53,10 +52,10 @@
           ng-if="main.user"
           flex
           href="#"
-          class="header-top-bar-menu-item header-top-bar-menu-item-name"
           ng-click="main.toggleProfileHeader = !main.toggleProfileHeader"
+          class="header-top-bar-menu-item header-top-bar-menu-item-name"
         >
-          <a href="#">
+          <a href="#" >
             <i class="icon-login"></i>
             <span >Bienvenido <strong>{{main.user.firstName}}</strong></span>
           </a>

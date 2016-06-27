@@ -51,24 +51,31 @@
 
         <div class="cart-items">
 
-          <div class="cart-item" ng-repeat="item in [0,1,2]">
-            <h3><strong>Mesa redonda mimbre</strong></h3>
+          <div class="cart-item" ng-repeat="detail in vm.quotation.Details">
+            <h3>
+              <a ng-href="/product/{{detail.Product.ItemCode}}">
+                <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
+              </a>
+            </h3>
             <div layout="row">
 
               <!--ITEM PROD IMG-->
-              <div flex="45" class="cart-item-prod">
+              <div flex="40" class="cart-item-prod">
                 <div layout="row">
                   <div class="cart-item-prod-img">
-                    <img src="images/slide-Avenue-03-287x287.jpg" alt="">
+                    <img ng-src="{{detail.Product.icons[0].url}}" alt="">
                   </div>
                   <div>
                     <ul>
-                      <li><strong>SKU: </strong> 2903930</li>
-                      <li><strong>Materiales: </strong> Mimbre/Cristal</li>
-                      <li><strong>Tamaño: </strong> Mediano</li>
-                      <li><strong>Asientos: </strong> 2</li>
-                      <li><strong>Estilo: </strong> Moderno</li>
-
+                      <li><strong>Código: </strong> {{detail.Product.ItemCode}}</li>
+                      <li ng-repeat="filter in detail.Product.Filters">
+                        <strong>{{filter.Name}}: </strong>
+                        <span ng-repeat="value in filter.Values track by $index">
+                          <span ng-if="value.Handle == 'color-paleta'">Color</span>
+                          <span ng-if="value.Handle != 'color-paleta'">{{value.Name}}</span>
+                          <span ng-if="$index < (filter.Values.length-1)">,</span>
+                        </span>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -76,7 +83,7 @@
               <!--END ITEM PROD IMG-->
 
               <!--ITEM DATA-->
-              <div class="cart-item-data" flex="50">
+              <div class="cart-item-data" flex="55">
                 <div class="cart-item-data-inner">
                   <div layout="row" layout-align="start center">
 
@@ -108,16 +115,16 @@
                   </div>
                   <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
                     <div flex="30">
-                      <p class="price-crossed">$18, 699</p>
-                      <p class="price-hl"><strong>$14,699</strong></p>
+                      <p class="price-crossed">{{detail.Product.Price | currency}}</p>
+                      <p class="price-hl"><strong>{{detail.Product.Price | currency}}</strong></p>
                     </div>
                     <div flex="30" class="product-view-qty input-element">
                       <div class="input-element-inner">
-                        <input ng-model="vm.qty" min="1" type="number">
+                        <input ng-model="detail.Quantity" min="1" type="number">
                       </div>
                     </div>
                     <h3 flex class="product-view-price-hl product-view-price-main">
-                      <strong>$14,699</strong>
+                      <strong>{{detail.Product.Price * detail.Quantity | currency}}</strong>
                     </h3>
                   </div>
                 </div>
@@ -145,8 +152,8 @@
         <div class="cart-summary">
           <table>
             <tr>
-              <td><strong>Subtotal (3 productos):</strong></td>
-              <td><strong>$56,097</strong></td>
+              <td><strong>Subtotal ({{ vm.getTotalProducts() }} productos):</strong></td>
+              <td><strong>{{ vm.getTotalPrice() | currency }}</strong></td>
             </tr>
             <tr>
               <td>Descuento:</td>
@@ -189,8 +196,8 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h3 class="price-crossed">$18, 699</h3>
-              <h1 class="price-main">$14,699</h1>
+              <h3 class="price-crossed">{{ vm.getTotalPrice() | currency }}</h3>
+              <h1 class="price-main">{{ vm.getTotalPrice() | currency }}</h1>
             </div>
           </div>
 
@@ -204,35 +211,153 @@
 
     </div>
 
-    <section>
-      <h1 class="cart-title nomargin">ENTREGA</h1>
-      <div layout="row">
-        <div flex="50" layout="row" class="cart-col">
-          <div flex="20"></div>
-          <div flex="80">
-            <p>Los tiempos de entrega aproximados se especifican en cada articulo. Nuestros procesos de Control de Calidad aseguran el cumplimiento de estas fechas a un máximo. Solamente en casos de retrasos de fabricación y/o envío, provocados por terceros, puede salir afectada la fecha programada. En estos casos se avisará al cliente de la nueva fecha de entrega. Para servicios de Entrega Express (sujeto a disponibilidad) pregunte a su asesor. <a href="#">Ver más detalles aquí.</a></p>
-          </div>
-        </div>
-        <div flex="50" layout="row" class="cart-col">
-          <div flex="20"></div>
-          <div flex="80">
-            <p>Todos los envíos en un radio de 50km de la tienda donde se realizó la compra sin costo.</p>
-            <p>Todas las entregas incluyen el ensamble gratuito de los artículos adquiridos. <a href="#">Ver más detalles aquí.</a></p>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div layout="row" class="cart-view-bottom-btns" layout-align="space-between center">
-        <a flex href="#" class="cart-view-btn cart-view-btn-v2">SEGUIR COMPRANDO</a>
-        <input flex type="submit" class="cart-view-btn" value="CONTINUAR">
-      </div>
-
-    </section>
 
   </form>
 
+
+  <section class="records-view">
+    <h1><i class="icon-attachment"></i> <strong>BITÁCORA DE SEGUIMIENTO</strong></h1>
+
+    <p><strong>CREAR NUEVO EVENTO</strong></p>
+    <hr/>
+
+    <form class="new-record">
+      <div layout="row" layout-align="space-between start
+      ">
+        <div flex="40">
+          <div class="input-element textarea-element">
+            <label><strong>NOTAS</strong></label>
+            <div class="input-element-inner">
+              <textarea rows="5"></textarea>
+            </div>
+          </div>
+        </div>
+        <div flex="55">
+          <div layout="row" layout-align="space-between center">
+
+            <div flex="30" class="input-element select-element-wrapper">
+              <label><strong>Tipo de evento</strong></label>
+              <md-input-container>
+                <md-select ng-model="vm.deod" class="select-element" placeholder="Tipo de evento" >
+                  <md-option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
+                    {{recordTypes}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+
+            <div flex="30" class="input-element select-element-wrapper">
+              <label><strong>Fecha de seguimiento</strong></label>
+              <md-input-container>
+                <md-select ng-model="vm.deod" class="select-element" placeholder="Tipo de evento" >
+                  <md-option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
+                    {{recordTypes}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+
+            <div flex="30" class="input-element select-element-wrapper">
+              <label><strong>Hora de seguimiento</strong></label>
+              <md-input-container>
+                <md-select ng-model="vm.deod" class="select-element" placeholder="Tipo de evento" >
+                  <md-option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
+                    {{recordTypes}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+
+          </div>
+
+          <div layout="row" layout-align="space-between center" class="attachments-section">
+            <div flex="30">
+              <a href="#">
+                <strong><i class="icon-attatch"></i>ADJUNTAR ARCHIVO</strong>
+              </a>
+            </div>
+            <div flex="30">
+              <a href="#">
+                <strong><i class="icon-attachment"></i>ADJUNTAR IMÁGEN</strong>
+              </a>
+            </div>
+            <div flex="30">
+              <a href="#">
+                <strong><i class="icon-photo"></i>TOMAR FOTO</strong>
+              </a>
+            </div>
+          </div>
+
+          <a href="#" class="action-btn">Guardar nuevo evento en la bitácora</a>
+
+        </div>
+
+        <hr/>
+
+      </div>
+    </form>
+
+    <table class="records-table">
+      <thead>
+        <tr>
+          <td>FECHA/HORA EVENTO</td>
+          <td>EVENTO</td>
+          <td>USUARIO</td>
+          <td>FECHA SEGUIMIENTO</td>
+          <td>ARCHIVO</td>
+          <td>DETALLES</td>
+        </tr>
+      </thead>
+      <tbody ng-repeat="record in vm.records">
+        <tr>
+          <td>{{record.date}}</td>
+          <td>{{record.eventType}}</td>
+          <td>{{record.user}}</td>
+          <td>{{record.recordDate}}</td>
+          <td>{{record.files}}</td>
+          <td>
+            <a ng-click="record.isActive = !record.isActive" href="#">
+              VER DETALLES <img src="/images/arrow-down.png" alt="">
+            </a>
+          </td>
+        </tr>
+        <tr ng-show="record.isActive">
+          <td  colspan="6" class="inner-content">
+            <div class="record-item">
+              <div class="record-item-block" layout="row" layout-align="space-between start">
+                <div flex="55">
+                  <p><label><strong>NOTAS</strong></label></p>
+                  <textarea name="" id="" rows="7">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </textarea>
+                </div>
+                <div flex="40" class="center-content">
+                  <p><strong>ARCHIVOS ADJUNTOS (1)</strong></p>
+                </div>
+              </div>
+              <div class="record-item-block" layout="row" layout-align="space-between start">
+                <div flex="55">
+                  <p><label><strong>AGREGAR COMENTARIOS</strong></label></p>
+                  <textarea name="" id="" rows="7"></textarea>
+                </div>
+                <div flex="40">
+                  <p><label><strong>DECLARAR COMO PERDIDA:</strong></label></p>
+                  <select>
+                    <option value="">El tiempo de entrega fué muy largo</option>
+                    <option value="">El tiempo de entrega fué muy largo</option>
+                    <option value="">El tiempo de entrega fué muy largo</option>
+                  </select>
+                  <a href="#" class="action-btn">CERRAR OPORTUNIDAD</a>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </section>
 
 
 

@@ -120,9 +120,7 @@
         $scope.apiResource(page,query)
           .then(
             function(result){
-              console.log(result);
               var res = result.data;
-
               var records = {
                   'draw': draw,
                   'recordsTotal': res.total,

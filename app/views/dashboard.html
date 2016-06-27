@@ -1,0 +1,143 @@
+<section class="dashboard-view container container-xlg">
+
+  <div layout="row">
+
+    <section flex class="dashboard-card chart-section">
+      <h2><i class="icon-login"></i> <strong>OPORTUNIDADES</strong></h2>
+      <div class="chart-section-inner">
+
+      <div layout="row">
+        <div class="chart-section-col" flex="45">
+          <h3>Cantidad</h3>
+          <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.quotationData.quantities.data" chart-labels="vm.quotationData.quantities.labels" chart-colours="vm.quotationData.quantities.colours">
+          </canvas>
+          <p><strong>Hoy</strong> | <strong>Total</strong></p>
+          <p>{{vm.quotationData.todayQty}} | {{vm.quotationData.monthQty}}</p>
+        </div>
+
+        <div class="chart-section-col" flex="45">
+          <h3>Monto</h3>
+          <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.quotationData.ammounts.data" chart-labels="vm.quotationData.ammounts.labels" chart-colours="vm.quotationData.ammounts.colours">
+          </canvas>
+          <p><strong>Hoy</strong> | <strong>Total</strong></p>
+          <p>{{vm.quotationData.todayAmmount | currency}} | {{vm.quotationData.monthAmmount | currency}}</p>
+        </div>
+      </div>
+
+      <div class="container container-xsm chart-section-legends" layout="row">
+        <p flex><span class="chart-section-sqr"></span> Hoy</p>
+        <p flex><span class="chart-section-sqr chart-section-sqr2"></span> Resto del mes</p>
+      </div>
+
+
+      </div>
+    </section>
+
+    <section flex class="dashboard-card chart-section">
+      <h2><i class="icon-comisiones"></i> <strong>COMISIONES</strong></h2>
+      <div class="chart-section-inner">
+
+      <div layout="row">
+        <div class="chart-section-col" flex="45">
+          <h3>Cantidad</h3>
+          <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.quotationData.quantities.data" chart-labels="vm.quotationData.quantities.labels" chart-colours="vm.quotationData.quantities.colours">
+          </canvas>
+          <p><strong>Hoy</strong> | <strong>Total</strong></p>
+          <p>{{vm.quotationData.todayQty}} | {{vm.quotationData.monthQty}}</p>
+        </div>
+
+        <div class="chart-section-col" flex="45">
+          <h3>Monto</h3>
+          <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.quotationData.ammounts.data" chart-labels="vm.quotationData.ammounts.labels" chart-colours="vm.quotationData.ammounts.colours">
+          </canvas>
+          <p><strong>Hoy</strong> | <strong>Total</strong></p>
+          <p>{{vm.quotationData.todayAmmount | currency}} | {{vm.quotationData.monthAmmount | currency}}</p>
+        </div>
+      </div>
+
+      <div class="container container-xsm chart-section-legends" layout="row">
+        <p flex><span class="chart-section-sqr"></span> Hoy</p>
+        <p flex><span class="chart-section-sqr chart-section-sqr2"></span> Resto del mes</p>
+      </div>
+
+
+      </div>
+    </section>
+
+  </div>
+
+  <div layout="row">
+
+    <section flex class="dashboard-card chart-section">
+      <h2><i class="icon-pedidos"></i> <strong>VENTAS</strong></h2>
+      <div class="chart-section-inner">
+
+      <div layout="row">
+        <div class="chart-section-col" flex="45">
+          <h3>Cantidad</h3>
+          <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.quotationData.quantities.data" chart-labels="vm.quotationData.quantities.labels" chart-colours="vm.quotationData.quantities.colours">
+          </canvas>
+          <p><strong>Hoy</strong> | <strong>Total</strong></p>
+          <p>{{vm.quotationData.todayQty}} | {{vm.quotationData.monthQty}}</p>
+        </div>
+
+        <div class="chart-section-col" flex="45">
+          <h3>Monto</h3>
+          <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.quotationData.ammounts.data" chart-labels="vm.quotationData.ammounts.labels" chart-colours="vm.quotationData.ammounts.colours">
+          </canvas>
+          <p><strong>Hoy</strong> | <strong>Total</strong></p>
+          <p>{{vm.quotationData.todayAmmount | currency}} | {{vm.quotationData.monthAmmount | currency}}</p>
+        </div>
+      </div>
+
+      <div class="container container-xsm chart-section-legends" layout="row">
+        <p flex><span class="chart-section-sqr"></span> Hoy</p>
+        <p flex><span class="chart-section-sqr chart-section-sqr2"></span> Resto del mes</p>
+      </div>
+
+
+      </div>
+    </section>
+
+    <section flex class="dashboard-card chart-section">
+      <h2><i class="icon-attachment"></i> <strong>PERFORMANCE</strong></h2>
+      <div class="chart-section-inner">
+
+      <div layout="row">
+        <div class="chart-section-col" flex="45">
+          <h3>Cantidad</h3>
+          <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.quotationData.quantities.data" chart-labels="vm.quotationData.quantities.labels" chart-colours="vm.quotationData.quantities.colours">
+          </canvas>
+          <p><strong>Hoy</strong> | <strong>Total</strong></p>
+          <p>{{vm.quotationData.todayQty}} | {{vm.quotationData.monthQty}}</p>
+        </div>
+
+        <div class="chart-section-col" flex="45">
+          <h3>Monto</h3>
+          <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.quotationData.ammounts.data" chart-labels="vm.quotationData.ammounts.labels" chart-colours="vm.quotationData.ammounts.colours">
+          </canvas>
+          <p><strong>Hoy</strong> | <strong>Total</strong></p>
+          <p>{{vm.quotationData.todayAmmount | currency}} | {{vm.quotationData.monthAmmount | currency}}</p>
+        </div>
+      </div>
+
+      <div class="container container-xsm chart-section-legends" layout="row">
+        <p flex><span class="chart-section-sqr"></span> Hoy</p>
+        <p flex><span class="chart-section-sqr chart-section-sqr2"></span> Resto del mes</p>
+      </div>
+
+
+      </div>
+    </section>
+
+  </div>
+
+</section>

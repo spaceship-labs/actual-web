@@ -11,7 +11,8 @@
       var service = {
         create: create,
         getById: getById,
-        getByClient: getByClient
+        getByClient: getByClient,
+        getList: getList
       };
 
       return service;
@@ -29,6 +30,12 @@
       function getByClient(page, params){
         var p = page || 1;
         var url = '/quotation/findbyclient/' + p;
+        return api.$http.post(url,params);
+      }
+
+      function getList(page, params){
+        var p = page || 1;
+        var url = '/quotation/find/' + p;
         return api.$http.post(url,params);
       }
 

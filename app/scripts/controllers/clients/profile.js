@@ -89,7 +89,7 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
     },
 
   ];
-  vm.apiResourceOrders = saleService.getByClient;
+  vm.apiResourceOrders = saleService.getList;
 
   function init(){
     clientService.getById($routeParams.id).then(function(res){

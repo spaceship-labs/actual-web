@@ -66,6 +66,7 @@
         product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
 
         //The prices item in pos. 0 belongs to the Public price list in SAP
+        /*
         if(product.prices && product.prices[0]){
           product.price = {
             currency: product.prices[0].Currency,
@@ -76,6 +77,7 @@
          //Default
          product.price = {currency:'MXP', value:12999, priceList:0};
         }
+        */
 
         //Setting icon and images
         if(product.icon_filename && product.icon_filename !== 'null'){

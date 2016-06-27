@@ -10,9 +10,10 @@
 angular.module('dashexampleApp')
   .controller('SalesListCtrl', SalesListCtrl);
 
-function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService){
+function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, saleService){
 
   var vm = this;
+  vm.init = init;
 
   vm.managers = [
     {
@@ -27,26 +28,21 @@ function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, c
   ];
 
   vm.columnsOrders = [
-    {key:'folio', label:'Folio'},
-    {key:'client', label:'Cliente'},
-    {key:'cotizacion', label:'Cotización'},
-    {key:'entrega', label:'Entrega'},
-    /*{key:'dias', label:'Dias'},*/
-    {key:'total', label:'Total'},
-    {key:'cobrado', label:'Monto cobrado'},
-    {key:'diferencia', label:'Monto diferencia'},
-    /*{
+    {key: 'DocEntry', label:'Folio'},
+    {key:'CardName', label:'Cliente'},
+    {key:'DocTotal', label: 'Total'},
+    {key:'DocCur', label:'Moneda'},
+    {
       key:'Acciones',
-      label:'Acción',
-      propId: 'folio',
+      label:'Acciones',
+      propId: 'DocEntry',
       actions:[
         {url:'#',type:'edit'},
-        {url:'#',type:'delete'}
       ]
-    },*/
-
+    },
   ];
-  vm.apiResourceOrders = commonService.simulateOrders;
+  vm.apiResourceOrders = saleService.getList;
+
 
   vm.goal = 6230000;
   vm.current = 5938776;
@@ -59,5 +55,10 @@ function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, c
     colours: ["#48C7DB","#EADE56"]
   };
 
+  function init(){
+    vm.filters = {SlpCode: $rootScope.user.SlpCode};
+  }
+
+  vm.init();
 
 }

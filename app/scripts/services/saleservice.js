@@ -9,14 +9,14 @@
     function saleService($http, $q, $rootScope, api){
 
       var service = {
-        getByClient: getByClient
+        getList: getList
       };
 
       return service;
 
-      function getByClient(page, params){
+      function getList(page, params){
         var p = page || 1;
-        var url = '/sale/findbyclient/' + p;
+        var url = '/sale/find/' + p;
         return api.$http.post(url,params);
       }
 
