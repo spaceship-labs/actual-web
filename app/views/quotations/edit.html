@@ -1,6 +1,6 @@
 <section class="form-view container container-xlg quotation-view">
 
-  <h1><i class="icon-attachment"></i> <strong>OPORTUNIDAD #{{vm.quotation.DocEntry}}</strong></h1>
+  <h1><i class="icon-attachment"></i> <strong>OPORTUNIDAD #{{vm.quotation.id}}</strong></h1>
   <hr/>
 
 
@@ -90,24 +90,23 @@
                     <div class="cart-item-data-col" flex="45" layout="row" layout-align="start center">
                       <label flex="30"><strong>Colores:</strong></label>
                       <div flex class="input-element select-element-wrapper">
-                        <md-input-container>
-                          <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Color" required>
-                            <md-option ng-value="Cafe">
-                              Cafe
-                            </md-option>
-                          </md-select>
-                        </md-input-container>
+                        <select class="select-element" ng-model="vm.ddseoed">
+                          <option  ng-value="'Cafe'">
+                            Cafe
+                          </option>
+                        </select>
                       </div>
                     </div>
                     <div class="cart-item-data-col" flex="45" layout="row" layout-align="start center" >
                       <label flex="30"><strong>Formas:</strong></label>
                       <div flex class="input-element select-element-wrapper">
                         <md-input-container>
-                          <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Rectangular" required>
-                            <md-option ng-value="Cafe">
-                              Rectangular
-                            </md-option>
-                          </md-select>
+                        <select class="select-element" ng-model="vm.ddeoed">
+                          <option  ng-value="'Rectangular'">
+                            Rectangular
+                          </option>
+                        </select>
+
                         </md-input-container>
                       </div>
                     </div>
@@ -228,44 +227,47 @@
           <div class="input-element textarea-element">
             <label><strong>NOTAS</strong></label>
             <div class="input-element-inner">
-              <textarea rows="5"></textarea>
+              <textarea ng-model="vm.newRecord.notes" rows="5"></textarea>
             </div>
           </div>
         </div>
         <div flex="55">
-          <div layout="row" layout-align="space-between center">
+          <div layout="row" layout-align="space-between start">
 
             <div flex="30" class="input-element select-element-wrapper">
               <label><strong>Tipo de evento</strong></label>
-              <md-input-container>
-                <md-select ng-model="vm.deod" class="select-element" placeholder="Tipo de evento" >
-                  <md-option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
-                    {{recordTypes}}
-                  </md-option>
-                </md-select>
-              </md-input-container>
+              <select class="select-element" ng-model="vm.newRecord.eventType">
+                <option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
+                  {{recordType}}
+                </option>
+              </select>
+              <!--
+              <md-select ng-model="vm.deod" class="select-element" placeholder="Tipo de evento" >
+                <md-option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
+                  {{recordTypes}}
+                </md-option>
+              </md-select>
+              -->
             </div>
 
             <div flex="30" class="input-element select-element-wrapper">
               <label><strong>Fecha de seguimiento</strong></label>
-              <md-input-container>
-                <md-select ng-model="vm.deod" class="select-element" placeholder="Tipo de evento" >
-                  <md-option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
-                    {{recordTypes}}
-                  </md-option>
-                </md-select>
-              </md-input-container>
+              <div class="input-element-inner">
+                <input pikaday="vm.newRecord.date" readonly type="text" on-select="onPikadaySelect(pikaday)">
+              </div>
+              <!--<select class="select-element" ng-model="vm.doeqad">
+                <option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
+                  {{recordType}}
+                </option>
+              </select>
+              -->
             </div>
 
             <div flex="30" class="input-element select-element-wrapper">
               <label><strong>Hora de seguimiento</strong></label>
-              <md-input-container>
-                <md-select ng-model="vm.deod" class="select-element" placeholder="Tipo de evento" >
-                  <md-option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
-                    {{recordTypes}}
-                  </md-option>
-                </md-select>
-              </md-input-container>
+              <div class="input-element-inner">
+                <input type="text" ui-timepicker ui-timepicker="vm.timePickerOptions"  ng-model="vm.newRecord.time">
+              </div>
             </div>
 
           </div>
@@ -288,7 +290,7 @@
             </div>
           </div>
 
-          <a href="#" class="action-btn">Guardar nuevo evento en la bitácora</a>
+          <a href="#" ng-click="vm.addRecord()" class="action-btn">Guardar nuevo evento en la bitácora</a>
 
         </div>
 
@@ -297,26 +299,30 @@
       </div>
     </form>
 
-    <table class="records-table">
+    <div ng-if="vm.isLoadingRecords" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+    </div>
+
+    <table ng-if="!vm.isLoadingRecords" class="records-table">
       <thead>
         <tr>
           <td>FECHA/HORA EVENTO</td>
           <td>EVENTO</td>
           <td>USUARIO</td>
           <td>FECHA SEGUIMIENTO</td>
-          <td>ARCHIVO</td>
+          <td>ARCHIVO(S)</td>
           <td>DETALLES</td>
         </tr>
       </thead>
-      <tbody ng-repeat="record in vm.records">
+      <tbody ng-repeat="record in vm.quotation.Records">
         <tr>
-          <td>{{record.date}}</td>
+          <td>{{record.createdAt | date: 'MMM d, y h:mm:ss a'}}</td>
           <td>{{record.eventType}}</td>
-          <td>{{record.user}}</td>
-          <td>{{record.recordDate}}</td>
-          <td>{{record.files}}</td>
+          <td>{{record.User.firstName + ' ' + record.User.lastName}}</td>
+          <td>{{record.dateTime | date:'MMM d, y h:mm:ss a' }}</td>
+          <td>{{record.files.length}}</td>
           <td>
-            <a ng-click="record.isActive = !record.isActive" href="#">
+            <a ng-click="vm.toggleRecord(record)" href="#">
               VER DETALLES <img src="/images/arrow-down.png" alt="">
             </a>
           </td>
@@ -327,12 +333,10 @@
               <div class="record-item-block" layout="row" layout-align="space-between start">
                 <div flex="55">
                   <p><label><strong>NOTAS</strong></label></p>
-                  <textarea name="" id="" rows="7">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </textarea>
+                  <textarea name="" id="" rows="7">{{record.notes}}</textarea>
                 </div>
                 <div flex="40" class="center-content">
-                  <p><strong>ARCHIVOS ADJUNTOS (1)</strong></p>
+                  <p><strong>ARCHIVOS ADJUNTOS ({{record.files.length}})</strong></p>
                 </div>
               </div>
               <div class="record-item-block" layout="row" layout-align="space-between start">
@@ -343,9 +347,15 @@
                 <div flex="40">
                   <p><label><strong>DECLARAR COMO PERDIDA:</strong></label></p>
                   <select>
-                    <option value="">El tiempo de entrega fué muy largo</option>
-                    <option value="">El tiempo de entrega fué muy largo</option>
-                    <option value="">El tiempo de entrega fué muy largo</option>
+                    <option value="El tiempo de entrega fué muy largo">
+                      El tiempo de entrega fué muy largo
+                    </option>
+                    <option value="El tiempo de entrega fué muy largo">
+                      El tiempo de entrega fué muy largo
+                    </option>
+                    <option value="El tiempo de entrega fué muy largo">
+                      El tiempo de entrega fué muy largo
+                    </option>
                   </select>
                   <a href="#" class="action-btn">CERRAR OPORTUNIDAD</a>
                 </div>

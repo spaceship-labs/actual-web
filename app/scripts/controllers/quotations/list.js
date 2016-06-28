@@ -50,14 +50,14 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   ];
   */
   vm.columnsLeads = [
-    {key: 'DocEntry', label:'Folio'},
+    {key: 'id', label:'Folio'},
     {key:'CardName', label:'Cliente'},
     {key:'DocTotal', label: 'Total'},
     {key:'DocCur', label:'Moneda'},
     {
       key:'Acciones',
       label:'Acciones',
-      propId: 'DocEntry',
+      propId: 'id',
       actions:[
         {url:'/quotations/edit/',type:'edit'},
       ]

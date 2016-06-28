@@ -12,7 +12,8 @@
         create: create,
         getById: getById,
         getByClient: getByClient,
-        getList: getList
+        getList: getList,
+        addRecord: addRecord
       };
 
       return service;
@@ -36,6 +37,11 @@
       function getList(page, params){
         var p = page || 1;
         var url = '/quotation/find/' + p;
+        return api.$http.post(url,params);
+      }
+
+      function addRecord(quotationId, params){
+        var url = '/quotation/addrecord/' + quotationId;
         return api.$http.post(url,params);
       }
 

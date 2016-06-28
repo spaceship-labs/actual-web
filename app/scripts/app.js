@@ -23,7 +23,9 @@ angular
     'ngMaterialDatePicker',
     'datatables',
     'chart.js',
-    'ezplus'
+    'ezplus',
+    'pikaday',
+    'ui.timepicker'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {

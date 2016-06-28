@@ -19,33 +19,61 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.loadProductFilters = loadProductFilters;
   vm.getTotalPrice = getTotalPrice;
   vm.getTotalProducts = getTotalProducts;
+  vm.toggleRecord = toggleRecord;
+  vm.addRecord = addRecord;
 
-  vm.recordTypes = ['Whatsapp', 'Llamada'];
+  vm.newRecord = {};
+  vm.isLoadingRecords = false;
 
-  vm.records = [
-    {
-      date:'15-May-2016 | 10:00 am',
-      eventType: 'Whatsapp',
-      user:'Azucena Barrón',
-      recordDate: '16-May-2016 | 9:30 am',
-      files:'2 archivo(s)'
-    },
-    {
-      date:'15-May-2016 | 10:00 am',
-      eventType: 'Email',
-      user:'Azucena Barrón',
-      recordDate: '16-May-2016 | 9:30 am',
-      files:'2 archivo(s)'
-    },
-    {
-      date:'15-May-2016 | 10:00 am',
-      eventType: 'Llamada',
-      user:'Azucena Barrón',
-      recordDate: '16-May-2016 | 9:30 am',
-      files:'2 archivo(s)'
-    },
-  ];
+  vm.recordTypes = ['Email', 'Llamada', 'WhatsApp', 'Visita'];
 
+  vm.timePickerOptions = {
+      step: 20,
+      timeFormat: 'g:ia',
+      appendTo: 'body',
+      disableTextInput:true
+  };
+
+
+  function toggleRecord(record){
+    vm.quotation.Records.forEach(function(rec){
+      if(rec.id != record.id){
+        rec.isActive = false;
+      }
+    });
+    record.isActive = !record.isActive;
+  }
+
+  function addRecord(){
+    vm.isLoadingRecords = true;
+
+    //Formatting date and time
+    var date = moment(vm.newRecord.date._d)
+    var time = vm.newRecord.time;
+    var year = date.get('year');
+    var month = date.get('month');
+    var day = date.get('date');
+    var dateTime = moment(time).set('year',year).set('month',month).set('date',day)._d;
+
+    vm.newRecord.dateTime = dateTime;
+
+    var params = {
+      dateTime: vm.newRecord.dateTime,
+      eventType: vm.newRecord.eventType,
+      notes: vm.newRecord.notes,
+      User: $rootScope.user.id
+    };
+
+    quotationService.addRecord(vm.quotation.id, params).then(function(res){
+      console.log(res);
+      if(res.data.id){
+        vm.quotation.Records.push(res.data);
+      }
+      vm.newRecord = {};
+      vm.isLoadingRecords = false;
+    });
+
+  }
 
   function init(){
     quotationService.getById($routeParams.id).then(function(res){
