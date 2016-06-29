@@ -327,19 +327,29 @@
         </div>
 
         <section class="desc-wrapper">
-          <div class="desc-head" layout="row">
+          <div class="desc-head" layout="row"
+            ng-init="hideProductDescription = vm.toggleProductDescription = !(
+              vm.product.Description ||
+              vm.product.PackageContent ||
+              vm.product.MainFeatures ||
+              vm.product.Restrictions ||
+              vm.product.Conservation
+            )
+            "
+          >
             <div
-              flex="50"
+              ng-if="!hideProductDescription"
+              flex="100"
               class="desc-head-item"
               ng-class="{'desc-head-item-on' : !vm.toggleProductDescription }"
               ng-click="vm.toggleProductDescription = !vm.toggleProductDescription">
               <h3>Detalles del artículo</h3>
             </div>
             <div
-              flex="50"
+              flex="100"
               class="desc-head-item"
               ng-class="{'desc-head-item-on' : vm.toggleProductDescription}"
-              ng-click="vm.toggleProductDescription = !vm.toggleProductDescription">
+              ng-click="!hideProductDescription && (vm.toggleProductDescription = !vm.toggleProductDescription)">
               <h3>Detalles de la entrega</h3>
             </div>
           </div>
