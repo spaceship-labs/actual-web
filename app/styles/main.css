@@ -151,6 +151,10 @@ a{text-decoration: none}
 /*-------------/
   #FORM ELEMENTS
 /*------------*/
+select{
+  border:none;
+}
+
 .input-element{
   max-width: 100%;
   border-radius: 2px;
