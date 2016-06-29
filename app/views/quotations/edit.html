@@ -220,7 +220,7 @@
     <p><strong>CREAR NUEVO EVENTO</strong></p>
     <hr/>
 
-    <form class="new-record">
+    <form ng-submit="vm.addRecord(newRecordForm)" name="newRecordForm" class="new-record">
       <div layout="row" layout-align="space-between start
       ">
         <div flex="40">
@@ -241,13 +241,7 @@
                   {{recordType}}
                 </option>
               </select>
-              <!--
-              <md-select ng-model="vm.deod" class="select-element" placeholder="Tipo de evento" >
-                <md-option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
-                  {{recordTypes}}
-                </md-option>
-              </md-select>
-              -->
+
             </div>
 
             <div flex="30" class="input-element select-element-wrapper">
@@ -255,12 +249,7 @@
               <div class="input-element-inner">
                 <input pikaday="vm.newRecord.date" readonly type="text" on-select="onPikadaySelect(pikaday)">
               </div>
-              <!--<select class="select-element" ng-model="vm.doeqad">
-                <option ng-repeat="recordType in vm.recordTypes" ng-value="recordType">
-                  {{recordType}}
-                </option>
-              </select>
-              -->
+
             </div>
 
             <div flex="30" class="input-element select-element-wrapper">
@@ -279,7 +268,7 @@
               </a>
             </div>
             <div flex="30">
-              <a href="#">
+              <a href="#" ngf-select="vm.attachImage($file)">
                 <strong><i class="icon-attachment"></i>ADJUNTAR IMÁGEN</strong>
               </a>
             </div>
@@ -290,7 +279,11 @@
             </div>
           </div>
 
-          <a href="#" ng-click="vm.addRecord()" class="action-btn">Guardar nuevo evento en la bitácora</a>
+          <input
+            type="submit"
+            ng-submit="vm.addRecord(newRecordForm)"
+            class="action-btn"
+            value="Guardar nuevo evento en la bitácora">
 
         </div>
 
@@ -337,29 +330,37 @@
                 </div>
                 <div flex="40" class="center-content">
                   <p><strong>ARCHIVOS ADJUNTOS ({{record.files.length}})</strong></p>
+
+                  <div class="record-item-block-attach">
+                    <a
+                      ng-repeat="file in record.files"
+                      ng-href="{{vm.api.baseUrl + '/uploads/records/gallery/' + file.filename }}"
+                      target="_blank">
+                      <img
+                        ng-src="{{vm.api.baseUrl + '/uploads/records/gallery/300x300' + file.filename }}"
+                        alt="">
+                    </a>
+                  </div>
+
                 </div>
               </div>
-              <div class="record-item-block" layout="row" layout-align="space-between start">
-                <div flex="55">
-                  <p><label><strong>AGREGAR COMENTARIOS</strong></label></p>
-                  <textarea name="" id="" rows="7"></textarea>
+              <form name="closeQuotationForm" ng-submit="vm.updateInfo(closeQuotationForm)">
+                <div class="record-item-block" layout="row" layout-align="space-between start">
+                  <div flex="55">
+                    <p><label><strong>AGREGAR COMENTARIOS</strong></label></p>
+                    <textarea rows="7" ng-model="vm.quotation.Info.notes"></textarea>
+                  </div>
+                  <div flex="40">
+                    <p><label><strong>DECLARAR COMO PERDIDA:</strong></label></p>
+                    <select ng-model="vm.quotation.Info.isClosedReason">
+                      <option ng-repeat="closeType in vm.closeTypes" ng-value="closeType">
+                        {{closeType}}
+                      </option>
+                    </select>
+                    <input type="submit" class="action-btn" value="CERRAR OPORTUNIDAD" />
+                  </div>
                 </div>
-                <div flex="40">
-                  <p><label><strong>DECLARAR COMO PERDIDA:</strong></label></p>
-                  <select>
-                    <option value="El tiempo de entrega fué muy largo">
-                      El tiempo de entrega fué muy largo
-                    </option>
-                    <option value="El tiempo de entrega fué muy largo">
-                      El tiempo de entrega fué muy largo
-                    </option>
-                    <option value="El tiempo de entrega fué muy largo">
-                      El tiempo de entrega fué muy largo
-                    </option>
-                  </select>
-                  <a href="#" class="action-btn">CERRAR OPORTUNIDAD</a>
-                </div>
-              </div>
+              </form>
             </div>
           </td>
         </tr>

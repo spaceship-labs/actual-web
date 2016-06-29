@@ -25,7 +25,8 @@ angular
     'chart.js',
     'ezplus',
     'pikaday',
-    'ui.timepicker'
+    'ui.timepicker',
+    'ngFileUpload'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {

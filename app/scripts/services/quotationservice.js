@@ -6,14 +6,15 @@
         .factory('quotationService', quotationService);
 
     /** @ngInject */
-    function quotationService($http, $q, $rootScope, api){
+    function quotationService($http, $q, $rootScope, api, Upload){
 
       var service = {
         create: create,
         getById: getById,
         getByClient: getByClient,
         getList: getList,
-        addRecord: addRecord
+        addRecord: addRecord,
+        updateInfo: updateInfo
       };
 
       return service;
@@ -42,6 +43,12 @@
 
       function addRecord(quotationId, params){
         var url = '/quotation/addrecord/' + quotationId;
+        return Upload.upload({url: api.baseUrl + url, data:params});
+        //return api.$http.post(url,params);
+      }
+
+      function updateInfo(quotationId, params){
+        var url = '/quotation/updateinfo/' + quotationId;
         return api.$http.post(url,params);
       }
 

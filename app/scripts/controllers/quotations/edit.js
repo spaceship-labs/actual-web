@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
-function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, quotationService){
+function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, quotationService, api){
 
   var vm = this;
 
@@ -21,11 +21,29 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.getTotalProducts = getTotalProducts;
   vm.toggleRecord = toggleRecord;
   vm.addRecord = addRecord;
+  vm.attachImage = attachImage;
+  vm.updateInfo = updateInfo;
 
   vm.newRecord = {};
+  vm.api = api;
   vm.isLoadingRecords = false;
 
   vm.recordTypes = ['Email', 'Llamada', 'WhatsApp', 'Visita'];
+  vm.closeTypes = [
+    'Cliente compró en otra tienda de la empresa.',
+    'Cliente compró en otra mueblería.',
+    'Cliente se murió',
+    'Cliente solicita no ser contactado más',
+    'Cliente ya no está interesado',
+    'Cliente es incontactable',
+    'Cliente se mudó',
+    'Vendedor no dio seguimiento suficiente',
+    'Vendedor cotizó artículos equivocados',
+    'Los precios son altos',
+    'Las fechas de entrega son tardadas',
+    'No vendemos el articulo solicitado',
+    'Otra razón (especificar)',
+  ];
 
   vm.timePickerOptions = {
       step: 20,
@@ -44,35 +62,37 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
     record.isActive = !record.isActive;
   }
 
-  function addRecord(){
-    vm.isLoadingRecords = true;
+  function addRecord(form){
+    if(vm.newRecord.eventType && form.$valid){
+      vm.isLoadingRecords = true;
 
-    //Formatting date and time
-    var date = moment(vm.newRecord.date._d)
-    var time = vm.newRecord.time;
-    var year = date.get('year');
-    var month = date.get('month');
-    var day = date.get('date');
-    var dateTime = moment(time).set('year',year).set('month',month).set('date',day)._d;
+      //Formatting date and time
+      var date = moment(vm.newRecord.date._d)
+      var time = vm.newRecord.time;
+      var year = date.get('year');
+      var month = date.get('month');
+      var day = date.get('date');
+      var dateTime = moment(time).set('year',year).set('month',month).set('date',day)._d;
 
-    vm.newRecord.dateTime = dateTime;
+      vm.newRecord.dateTime = dateTime;
 
-    var params = {
-      dateTime: vm.newRecord.dateTime,
-      eventType: vm.newRecord.eventType,
-      notes: vm.newRecord.notes,
-      User: $rootScope.user.id
-    };
+      var params = {
+        dateTime: vm.newRecord.dateTime,
+        eventType: vm.newRecord.eventType,
+        notes: vm.newRecord.notes,
+        User: $rootScope.user.id,
+        file: vm.newRecord.file
+      };
 
-    quotationService.addRecord(vm.quotation.id, params).then(function(res){
-      console.log(res);
-      if(res.data.id){
-        vm.quotation.Records.push(res.data);
-      }
-      vm.newRecord = {};
-      vm.isLoadingRecords = false;
-    });
-
+      quotationService.addRecord(vm.quotation.id, params).then(function(res){
+        console.log(res);
+        if(res.data.id){
+          vm.quotation.Records.push(res.data);
+        }
+        vm.newRecord = {};
+        vm.isLoadingRecords = false;
+      });
+    }
   }
 
   function init(){
@@ -165,6 +185,19 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
     return total;
   }
 
+
+  function attachImage(file){
+    vm.newRecord.file = file;
+  }
+
+  function updateInfo(){
+    vm.isLoadingRecords = true;
+    var params = vm.quotation.Info;
+    quotationService.updateInfo(vm.quotation.id, params).then(function(res){
+      console.log(res);
+      vm.isLoadingRecords = false;
+    });
+  }
 
   vm.init();
 
