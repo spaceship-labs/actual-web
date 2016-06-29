@@ -118,7 +118,19 @@
               </table>
 
             </div>
-            <div class="product-view-data-block">
+            <div class="product-view-data-block"
+              ng-if="
+                vm.product.Length ||
+                vm.product.Width  ||
+                vm.product.Height ||
+                vm.product.Volume ||
+                vm.product.Weight ||
+                vm.product.Depth  ||
+                vm.product.SeatHeight ||
+                vm.product.ChairBackHeight||
+                vm.product.ArmRestHeight
+              "
+            >
               <h4><strong>DIMENSIONES</strong></h4>
               <table>
                 <tr ng-if="vm.product.Length && vm.product.Length > 0">
