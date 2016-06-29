@@ -26,7 +26,8 @@ angular
     'ezplus',
     'pikaday',
     'ui.timepicker',
-    'ngFileUpload'
+    'ngFileUpload',
+    'sly'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
