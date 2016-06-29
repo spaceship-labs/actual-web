@@ -56,24 +56,20 @@
 
           <div flex="20" class="input-element select-element-wrapper">
             <label><strong>Titulo</strong></label>
-            <md-input-container>
-              <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Sr. / Sra. / Srita." required>
-                <md-option ng-repeat="title in vm.titles" ng-value="title.value">
-                  {{title.label}}
-                </md-option>
-              </md-select>
-            </md-input-container>
+            <select ng-model="vm.clientTitle" class="select-element">
+              <option ng-repeat="title in vm.titles" ng-value="title.value">
+                {{title.label}}
+              </option>
+            </select>
           </div>
 
           <div flex="20" class="input-element select-element-wrapper">
             <label><strong>Sexo</strong></label>
-            <md-input-container>
-              <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Masculino / Femenino" required>
-                <md-option ng-repeat="gender in vm.genders" ng-value="gender.value">
-                  {{gender.label}}
-                </md-option>
-              </md-select>
-            </md-input-container>
+            <select ng-model="vm.clientGender" class="select-element">
+              <option ng-repeat="gender in vm.genders" ng-value="gender.value">
+                {{gender.label}}
+              </option>
+            </select>
           </div>
 
           <div flex="20" class="input-element">
@@ -256,13 +252,11 @@
 
           <div flex="30" class="input-element select-element-wrapper">
             <label><strong>Estado</strong></label>
-            <md-input-container>
-              <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Elige un estado" required>
-                <md-option ng-repeat="state in vm.states" ng-value="state.name">
-                  {{state.name}}
-                </md-option>
-              </md-select>
-            </md-input-container>
+            <select ng-model="vm.clientState" class="select-element">
+              <option ng-repeat="state in vm.states" ng-value="state.name">
+                {{state.name}}
+              </option>
+            </select>
           </div>
 
           <div flex="15" class="input-element">
@@ -311,13 +305,13 @@
 
           <div flex="25" class="input-element select-element-wrapper">
             <label><strong>País</strong> <span class="hint">(Selecciona de la lista) *</span></label>
-            <md-input-container>
-              <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Elige un estado" required>
-                <md-option ng-repeat="country in vm.countries" ng-value="country.code">
-                  {{country.name}}
-                </md-option>
-              </md-select>
-            </md-input-container>
+
+            <select ng-model="vm.clientCountry" class="select-element">
+              <option ng-repeat="country in vm.countries" ng-value="country.code">
+                {{country.name}}
+              </option>
+            </select>
+
           </div>
 
           <div flex="15" class="input-element">
@@ -464,13 +458,11 @@
           </div>
           <div flex="25" class="input-element select-element-wrapper">
             <label><strong>Estado</strong> <span class="hl-label">*</span></label>
-            <md-input-container>
-              <md-select ng-model="vm.clientTitle" class="select-element" placeholder="Elige un estado" required>
-                <md-option ng-repeat="state in vm.states" ng-value="state.name">
-                  {{state.name}}
-                </md-option>
-              </md-select>
-            </md-input-container>
+            <select ng-model="vm.clientState" class="select-element">
+              <option ng-repeat="state in vm.states" ng-value="state.name">
+                {{state.name}}
+              </option>
+            </select>
           </div>
           <div flex="15" class="input-element">
             <label><strong>Codigo postal</strong> <span class="hl-label">*</span></label>
@@ -505,6 +497,10 @@
 
       </section>
 
+      <div layout="row" class="form-view-btns" layout-align="center center">
+        <a href="" flex="70" class="form-view-btn form-view-btn-primary">Guardar información</a>
+      </div>
+
 
     </section>
     <!--END FORM SECTION-->
@@ -536,7 +532,7 @@
       table-list
       ng-if="vm.client"
       class="table-list"
-      columns="vm.columnsLeads"
+      columns="vm.columnsOrders"
       filters="vm.extraParamsSales"
       api-resource="vm.apiResourceOrders">
     </div>

@@ -2004,6 +2004,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .form-view .input-element .input-element-inner{
   background: #fff;
 }
+.form-view .select-element{max-width: 100%;}
+
 .form-view .input-element label{
   font-size: 11px;
   margin-bottom: 10px;
@@ -2294,7 +2296,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 12px;
 }
 .quotation-view .quotation-data p{
-  font-size: 20px;
+  font-size: 18px;
   margin: 4px 0;
   font-weight: 700;
 }

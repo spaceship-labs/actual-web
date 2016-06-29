@@ -15,7 +15,7 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
   var vm = this;
 
   vm.columnsClients = [
-    {key:'CardCode', label:'CardCode'},
+    {key:'id', label:'CardCode'},
     {key:'CardName', label:'Cliente'},
     //{key:'rfc', label:'RFC'},
     {key:'E_Mail', label:'Email'},
@@ -24,7 +24,7 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
     {
       key:'Acciones',
       label:'Acción',
-      propId: 'CardCode',
+      propId: 'id',
       actions:[
         {url:'/clients/profile/',type:'edit'},
       ]

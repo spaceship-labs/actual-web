@@ -30,14 +30,14 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
   vm.countries = commonService.getCountries();
 
   vm.columnsLeads = [
-    {key: 'DocEntry', label:'Folio'},
+    {key: 'id', label:'Folio'},
     {key:'CardName', label:'Cliente'},
     {key:'DocTotal', label: 'Total'},
     {key:'DocCur', label:'Moneda'},
     {
       key:'Acciones',
       label:'Acciones',
-      propId: 'DocEntry',
+      propId: 'id',
       actions:[
         {url:'/quotations/edit/',type:'edit'},
       ]
@@ -70,24 +70,18 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
   vm.apiResourceLeads = quotationService.getByClient;
 
   vm.columnsOrders = [
-    {key:'folio', label:'Folio'},
-    {key:'client', label:'Cliente'},
-    {key:'cotizacion', label:'Cotización'},
-    {key:'entrega', label:'Entrega'},
-    {key:'dias', label:'Dias'},
-    {key:'total', label:'Total'},
-    {key:'cobrado', label:'Cobrado'},
-    {key:'diferencia', label:'Diferencia'},
+    {key: 'DocEntry', label:'Folio'},
+    {key:'CardName', label:'Cliente'},
+    {key:'DocTotal', label: 'Total'},
+    {key:'DocCur', label:'Moneda'},
     {
       key:'Acciones',
-      label:'Acción',
-      propId: 'folio',
+      label:'Acciones',
+      propId: 'id',
       actions:[
-        {url:'#',type:'edit'},
-        {url:'#',type:'delete'}
+        {url:'/quotations/edit/',type:'edit'},
       ]
     },
-
   ];
   vm.apiResourceOrders = saleService.getList;
 
@@ -95,8 +89,8 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
     clientService.getById($routeParams.id).then(function(res){
       console.log(res);
       vm.client = res.data;
-      vm.extraParamsLeads = {CardCode: vm.client.CardCode};
-      vm.extraParamsSales = {CardCode: vm.client.CardCode};
+      vm.extraParamsLeads = {CardCode: vm.client.id};
+      vm.extraParamsSales = {CardCode: vm.client.id};
     });
   }
 
