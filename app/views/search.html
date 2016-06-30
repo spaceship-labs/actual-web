@@ -106,7 +106,13 @@
         </div>
 
         <!--RESULTS-->
-        <div ng-if="!vm.isLoading || vm.loadMoreCount > 1" class="results">
+        <div
+          ng-if="!vm.isLoading || vm.loadMoreCount > 1"
+          class="results"
+          infinite-scroll="vm.loadMore()"
+          infinite-scroll-disabled="!(vm.totalResults > vm.products.length && !vm.isLoading && vm.products.length > 0)"
+          infinite-scroll-distance="1"
+        >
           <div
             class="products-list"
             layout="row"
@@ -124,7 +130,15 @@
           <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
         </div>
 
-        <a ng-if="vm.totalResults > vm.products.length && !vm.isLoading && vm.products.length > 0" ng-click="vm.loadMore()" href="#" class="action-btn action-btn-sm">Cargar más</a>
+<!--
+        <a
+          href="#" class="action-btn action-btn-sm"
+          ng-if="vm.totalResults > vm.products.length && !vm.isLoading && vm.products.length > 0"
+          ng-click="vm.loadMore()"
+        >
+          Cargar más
+        </a>
+-->
 
       </div>
     </div>
