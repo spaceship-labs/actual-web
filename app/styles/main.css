@@ -490,7 +490,7 @@ select{
 
 .cart-modal-header,
 .login-modal-header{
-  display: none;
+  /*display: none;*/
   /*top: 90%;*/
   /*top: 116%;*/
   top: 100%;
@@ -523,6 +523,8 @@ select{
 }
 .cart-modal-header .cart-modal-item-desc{font-size: 11px;}
 .cart-modal-header .cart-modal-item-desc p{margin: 0}
+.cart-modal-header .cart-modal-subtotal p + p{text-align: right;}
+
 
 /*-------------/
   #PROFILE-MODAL-HEADER

@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
-function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, quotationService, api){
+function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, quotationService, api, cartService){
 
   var vm = this;
 
@@ -23,6 +23,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.addRecord = addRecord;
   vm.attachImage = attachImage;
   vm.updateInfo = updateInfo;
+  vm.addNewProduct = addNewProduct;
 
   vm.newRecord = {};
   vm.api = api;
@@ -197,6 +198,12 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       console.log(res);
       vm.isLoadingRecords = false;
     });
+  }
+
+  function addNewProduct(){
+    cartService.setActiveQuotation(vm.quotation.id);
+    $rootScope.$emit('newActiveQuotation', vm.quotation.id);
+    $location.path('/search');
   }
 
   vm.init();

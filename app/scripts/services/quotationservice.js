@@ -6,7 +6,7 @@
         .factory('quotationService', quotationService);
 
     /** @ngInject */
-    function quotationService($http, $q, $rootScope, api, Upload){
+    function quotationService($http, $q, $rootScope, api, Upload, productService){
 
       var service = {
         create: create,
@@ -14,7 +14,8 @@
         getByClient: getByClient,
         getList: getList,
         addRecord: addRecord,
-        updateInfo: updateInfo
+        updateInfo: updateInfo,
+        getQuotationProducts: getQuotationProducts
       };
 
       return service;
@@ -51,6 +52,32 @@
         var url = '/quotation/updateinfo/' + quotationId;
         return api.$http.post(url,params);
       }
+
+      function getQuotationProducts(quotation){
+        var deferred = $q.defer();
+        var productsIds = [];
+        quotation.Details.forEach(function(detail){
+          productsIds.push(detail.ItemCode);
+        });
+        var params = {
+          filters: {
+            ItemCode: productsIds
+          }
+        };
+        var page = 1;
+        productService.getList(page,params).then(function(res){
+          var products = productService.formatProducts(res.data.data);
+          //Match detail - product
+          quotation.Details.forEach(function(detail){
+            detail.Product = _.findWhere( products, {ItemCode : detail.ItemCode } );
+          });
+
+          deferred.resolve(quotation.Details);
+
+        });
+        return deferred.promise;
+      }
+
 
     }
 

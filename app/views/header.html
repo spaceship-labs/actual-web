@@ -31,13 +31,31 @@
 
       <div class="header-top-bar-menu" layout="row" layout-align="center center">
 
-        <!---
-        <div ng-mouseover="main.activateCartModal()" ng-mouseleave="main.deactivateCartModal()" flex href="#" class="header-top-bar-menu-item">
-          <span class="cart-n-items">{{main.cart.products.length}}</span>
+        <!--IF ACTIVE QUOTATION-->
+        <div
+          ng-if="main.user && main.activeQuotation"
+          ng-mouseover="main.activateCartModal()"
+          ng-mouseleave="main.deactivateCartModal()"
+          flex
+          href="#"
+          class="header-top-bar-menu-item"
+        >
+          <span class="cart-n-items">{{main.activeQuotation.Details.length}}</span>
           <i class="icon-carro"></i>
-          <ng-include src="'views/partials/cart-header.html'"></ng-include>
+          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
         </div>
-        -->
+
+        <!--IF NOT ACTIVE QUOTATION-->
+        <a
+          ng-if="main.user && !main.activeQuotation"
+          flex
+          href="/search"
+          class="header-top-bar-menu-item"
+        >
+          <i class="icon-carro"></i>
+          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+        </a>
+
 
         <div
           ng-if="!main.user"

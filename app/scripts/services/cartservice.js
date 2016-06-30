@@ -5,10 +5,21 @@
     .module('dashexampleApp')
     .factory('cartService', cartService);
 
-  function cartService(){
+  function cartService(localStorageService, quotationService){
     var service = {
-      getProducts: getProducts
+      getProducts: getProducts,
+      getActiveQuotation: getActiveQuotation,
+      setActiveQuotation: setActiveQuotation
     };
+
+    function getActiveQuotation(){
+      var quotationId = localStorageService.get('quotation');
+      return quotationService.getById(quotationId);
+    }
+
+    function setActiveQuotation(quotationId){
+      localStorageService.set('quotation', quotationId);
+    }
 
     function getProducts(){
       return products;
