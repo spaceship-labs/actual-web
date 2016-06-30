@@ -27,7 +27,8 @@ angular
     'pikaday',
     'ui.timepicker',
     'ngFileUpload',
-    'sly'
+    'sly',
+    'infinite-scroll'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
