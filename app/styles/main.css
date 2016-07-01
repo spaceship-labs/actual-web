@@ -2074,9 +2074,15 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 0;
   font-size: 12px;
 }
+
+.form-view .form-view-filters .select-element{
+  height: 24px;
+}
 .form-view .form-view-filters .action-btn{
   margin: 0;
-  font-size: 14px
+  font-size: 12px;
+  padding: 6px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
 /*---------------/

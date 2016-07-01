@@ -17,6 +17,7 @@
 
   <div class="nested-table">
 
+    <!---
     <div class="nested-top">
       <table>
         <tr>
@@ -45,6 +46,25 @@
     <div class="nested-bar nested-bar1" layout="row" layout-align="space-between center">
       <span>TOTAL</span><span>$209,000</span>
     </div>
+    -->
+
+    <div layout="row" layout-align="end end" class="form-view-filters">
+      <div flex="30" class="input-element select-element-wrapper">
+        <label><strong>Buscar sobre:</strong></label>
+        <select ng-model="vm.filters.SlpCode" class="select-element">
+          <option ng-selected="vm.user.SlpCode == vm.filters.SlpCode" ng-value="vm.user.SlpCode">
+            Mis ventas
+          </option>
+          <option ng-value="'none'">
+            Todas las ventas
+          </option>
+        </select>
+      </div>
+      <div flex="20">
+        <a ng-click="vm.applyFilters()" href="#" class="action-btn">Aplicar filtros</a>
+      </div>
+    </div>
+
     <div class="nested-item">
       <div  class="nested-content">
         <section class="table-list-wrap table-list-wrap-nomargin">

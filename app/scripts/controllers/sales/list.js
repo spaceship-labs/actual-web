@@ -14,6 +14,7 @@ function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, c
 
   var vm = this;
   vm.init = init;
+  vm.applyFilters = applyFilters;
 
   vm.managers = [
     {
@@ -57,6 +58,11 @@ function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, c
 
   function init(){
     vm.filters = {SlpCode: $rootScope.user.SlpCode};
+    vm.user = $rootScope.user;
+  }
+
+  function applyFilters(){
+    $rootScope.$broadcast('reloadTable', true);
   }
 
   vm.init();

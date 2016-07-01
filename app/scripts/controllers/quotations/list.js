@@ -14,6 +14,7 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
 
   var vm = this;
   vm.init = init;
+  vm.applyFilters = applyFilters;
   vm.filters = false;
 
   vm.managers = [
@@ -28,27 +29,6 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
     }
   ];
 
-  /*
-  vm.columnsLeads = [
-    {key:'folio', label:'Folio'},
-    {key:'client', label:'Cliente'},
-    {key:'email', label:'Email'},
-    {key:'cotizacion', label:'Cotización'},
-    {key:'seguimiento', label:'Seguimiento'},
-    {key:'total', label:'Total'},
-    {key:'cobrado', label:'Cobrado'},
-    {key:'diferencia', label:'Diferencia'},
-    {
-      key:'Acciones',
-      label:'Acciones',
-      propId: 'folio',
-      actions:[
-        {url:'#',type:'edit'},
-        {url:'#',type:'delete'}
-      ]
-    },
-  ];
-  */
   vm.columnsLeads = [
     {key: 'id', label:'Folio'},
     {key:'CardName', label:'Cliente'},
@@ -86,8 +66,13 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   };
 
   function init(){
-    console.log($rootScope.user);
     vm.filters = {SlpCode: $rootScope.user.SlpCode};
+    vm.user = $rootScope.user;
+    console.log(vm.user);
+  }
+
+  function applyFilters(){
+    $rootScope.$broadcast('reloadTable', true);
   }
 
   vm.init();
