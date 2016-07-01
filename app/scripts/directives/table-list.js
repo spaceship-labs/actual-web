@@ -106,6 +106,20 @@
 
         query.fields = [];
         query.filters = $scope.filters || false;
+
+        //Cleaning filters
+        var aux = {};
+        for(var key in query.filters){
+          if(query.filters[key] != 'none'){
+            if(!isNaN(query.filters[key])){
+              aux[key] = parseFloat(query.filters[key]);
+            }else{
+              aux[key] = query.filters[key];
+            }
+          }
+        }
+        query.filters = aux;
+
         $scope.columns.forEach(function(col){
           if(!col.destroy && !col.editUrl && !col.quickEdit ){
             query.fields.push(col.key);
@@ -206,7 +220,7 @@
           console.log('filters');
           console.log($scope.filters);
           if($scope.dtInstance){
-            $scope.dtInstance.rerender();
+            $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
           }
         }, 100);
       });

@@ -14,6 +14,9 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
 
   var vm = this;
 
+  vm.applyFilters = applyFilters;
+
+  vm.user = $rootScope.user;
   vm.columnsClients = [
     {key:'id', label:'CardCode'},
     {key:'CardName', label:'Cliente'},
@@ -31,12 +34,16 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
     },
 
   ];
+
+
   vm.apiResourceClients = clientService.getClients;
   vm.filters = {
     SlpCode: $rootScope.user.SlpCode
   };
 
-  console.log($rootScope.user);
+  function applyFilters(){
+    $rootScope.$broadcast('reloadTable', true);
+  }
 
 
 }
