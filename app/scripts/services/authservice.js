@@ -6,7 +6,7 @@
         .factory('authService', authService);
 
     /** @ngInject */
-    function authService($http,localStorageService, api){
+    function authService($http,$rootScope,localStorageService, api){
 
       var service = {
         signUp: signUp,
@@ -30,7 +30,7 @@
       function logout(success) {
         localStorageService.remove('token');
         localStorageService.remove('user');
-
+        delete $rootScope.user;
         success();
       }
 

@@ -51,7 +51,9 @@
         vm.categoriesTree = res.data;
       });
 
-      vm.getActiveQuotation();
+      if($rootScope.user){
+        vm.getActiveQuotation();
+      }
     }
 
     function togglePointerSidenav(){
@@ -63,6 +65,7 @@
     }
 
     function getActiveQuotation(){
+      console.log('getActiveQuotation');
       cartService.getActiveQuotation().then(function(res){
         $rootScope.activeQuotation = res.data;
         vm.activeQuotation = res.data;
@@ -80,7 +83,9 @@
     });
 
     $rootScope.$on('newActiveQuotation', function(event, data){
-      vm.getActiveQuotation();
+      if($rootScope.user){
+        vm.getActiveQuotation();
+      }
     });
 
     vm.init();
