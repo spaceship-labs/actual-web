@@ -18,10 +18,13 @@
     vm.isLoadingLogin = false;
     vm.cart = {};
     vm.logInForm = {};
+    vm.menuCategories = [];
 
     vm.activateLoginModal = activateLoginModal;
     vm.deactivateLoginModal = deactivateLoginModal;
     vm.toggleLoginModal = toggleLoginModal;
+
+    vm.toggleMenuCategory = toggleMenuCategory;
 
     vm.activateCartModal = activateCartModal;
     vm.deactivateCartModal = deactivateCartModal;
@@ -40,6 +43,31 @@
 
     vm.pointersSidenav = [];
 
+    function toggleMenuCategory(index){
+      vm.menuCategories.forEach(function(category, i){
+        if(i != index){
+          category.isActive = false;
+          category.Childs.forEach(function (subcategory){
+            subcategory.isActive = false;
+          });
+        }
+      });
+
+      vm.menuCategories[index].isActive = !vm.menuCategories[index].isActive;
+      console.log(vm.menuCategories);
+    }
+
+    function toggleMenuSubCategory(index, category){
+      console.log('toggleMenuSubCategory');
+      category.Childs.forEach(function(subcategory, i){
+        if(i != index){
+          subcategory.isActive = false;
+        }
+      });
+      category.isActive = !category.isActive;
+      console.log(category);
+    }
+
     function init(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
@@ -49,6 +77,18 @@
       }
       categoriesService.createCategoriesTree().then(function(res){
         vm.categoriesTree = res.data;
+
+        var auxCategoryTree = angular.copy(vm.categoriesTree);
+
+        vm.menuCategories = [];
+        vm.menuCategories.push( _.findWhere( auxCategoryTree, {Handle: 'muebles'} ) );
+        vm.menuCategories.push( _.findWhere( vm.menuCategories[0].Childs, {Handle:'muebles-para-oficina'} ) );
+        vm.menuCategories.push( _.findWhere( vm.menuCategories[0].Childs, {Handle:'muebles-de-jardin'} ) );
+        vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'ninos'} ) );
+        vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'bebes'}  ) );
+        vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'ambientes'} ) );
+        vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'ofertas'}  ) );
+
       });
 
       if($rootScope.user){
@@ -80,6 +120,9 @@
     $scope.$on('$routeChangeStart', function(next, current) {
       console.log(next,current);
       vm.menuCategoriesOn = false;
+      vm.menuCategories.forEach(function(category){
+        category.isActive = false;
+      });
     });
 
     $rootScope.$on('newActiveQuotation', function(event, data){

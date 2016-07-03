@@ -623,12 +623,18 @@ select{
   padding: 12px 6px 12px;
   z-index: 9999;
   text-decoration: none;
+  position: relative;
   -webkit-transition: all .4s;
   -moz-transition: all .4s;
   -o-transition: all .4s;
   -ms-transition: all .4s;
   transition: all .4s;
 }
+
+.nav-categories-item > .absolute-link:after{
+  display: none;
+}
+
 .nav-categories-item > i{
   display: block;
   font-size: 22px;
@@ -657,16 +663,22 @@ select{
   background-size: cover!important;
 }
 
+.nav-categories-item-active,
 .nav-categories-item:hover{
   background: #000;
   color: #fff;
 }
+/*
 .nav-categories-item:hover .menu-subcategories{
   display: block;
 }
+*/
+.nav-categories-item-active > span,
 .nav-categories-item:hover > span{
   color: #fff;
 }
+
+.nav-categories-item-active > i,
 .nav-categories-item:hover > i{
   color: #fff;
 }
@@ -680,18 +692,23 @@ select{
   left: 0;
   text-align: left;
   width: 100%;
-  /*display: block;*/
+  /*display: block;
   display: none;
+  */
   z-index: 999999;
 }
 .menu-subcategories-nav > .container{position: relative;}
 .menu-subcategories-nav-item{
   background: #000;
-  padding: 14px;
+  padding: 14px 10px;
   text-transform: uppercase;
   color: #fff;
   text-decoration: none;
   font-size: 14px;
+}
+.menu-subcategories-nav-item > strong{
+  cursor: pointer;
+  outline: none;
 }
 .menu-subcategories-nav-item > strong:after{
   content: '';
@@ -702,10 +719,13 @@ select{
   background: red;
 }
 
+/*
 .menu-subcategories-nav-item .menu-subcategory-content{display: none;}
+
 .menu-subcategories-nav-item:hover .menu-subcategory-content{
   display: block;
 }
+*/
 
 /*-------------/
   #MENU-SUBCATEGORY-CONTENT

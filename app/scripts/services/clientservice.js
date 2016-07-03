@@ -10,7 +10,8 @@
 
       var service = {
         getById: getById,
-        getClients: getClients
+        getClients: getClients,
+        update: update
       };
 
       return service;
@@ -26,6 +27,10 @@
         return api.$http.post(url,params);
       }
 
+      function update(clientId, params){
+        var url = '/client/update/' + clientId;
+        return api.$http.post(url, params);
+      }
 
 
     }

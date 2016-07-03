@@ -11,7 +11,12 @@
     </div>
   </div>
 
-  <section class="form-view-content">
+  <div ng-show="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+  </div>
+
+  <!--START FORM-->
+  <section ng-show="!vm.isLoading" class="form-view-content">
 
     <p class="form-view-hint"><strong>SELECCIONA UNA PESTAÑA</strong> | PARA VISUALIZAR Y/O EDITAR LA INFORMACIÓN REQUERIDA</p>
 
@@ -56,8 +61,8 @@
 
           <div flex="20" class="input-element select-element-wrapper">
             <label><strong>Titulo</strong></label>
-            <select ng-model="vm.clientTitle" class="select-element">
-              <option ng-repeat="title in vm.titles" ng-value="title.value">
+            <select ng-model="vm.client.Info.title" class="select-element">
+              <option ng-selected="vm.client.Info.title == title.value" ng-repeat="title in vm.titles" ng-value="title.value">
                 {{title.label}}
               </option>
             </select>
@@ -65,8 +70,8 @@
 
           <div flex="20" class="input-element select-element-wrapper">
             <label><strong>Sexo</strong></label>
-            <select ng-model="vm.clientGender" class="select-element">
-              <option ng-repeat="gender in vm.genders" ng-value="gender.value">
+            <select ng-model="vm.client.Info.gender" class="select-element">
+              <option ng-selected="vm.client.Info.gender == gender.value"  ng-repeat="gender in vm.genders" ng-value="gender.value">
                 {{gender.label}}
               </option>
             </select>
@@ -498,7 +503,7 @@
       </section>
 
       <div layout="row" class="form-view-btns" layout-align="center center">
-        <a href="" flex="70" class="form-view-btn form-view-btn-primary">Guardar información</a>
+        <a ng-click="vm.update()" href="" flex="70" class="form-view-btn form-view-btn-primary">Guardar información</a>
       </div>
 
 

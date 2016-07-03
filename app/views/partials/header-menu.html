@@ -9,44 +9,49 @@
         <a ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
       </div>
       <nav flex="70" layout="row" ng-mouseover="main.menuCategoriesOn = false" class="nav-categories">
-        <a  href="#" flex class="nav-categories-item">
-          <!--<a href="#" class="absolute-link"></a>-->
+        <a  href="#" ng-click="main.toggleMenuCategory(0)" flex class="nav-categories-item" ng-class="{'nav-categories-item-active': main.menuCategories[0].isActive}">
           <i class="icon-sofa"></i>
-          <span class="nav-categories-item-text" href="#">Hogar</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
+          <span class="nav-categories-item-text" href="#">Muebles</span>
+          <!--<ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>-->
         </a>
-        <a href="#" flex class="nav-categories-item">
+        <a href="#" ng-click="main.toggleMenuCategory(1)" flex class="nav-categories-item" ng-class="{'nav-categories-item-active': main.menuCategories[1].isActive}">
           <i class="icon-office"></i>
           <span class="nav-categories-item-text" href="#">Oficina</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
         </a>
-        <a href="#" flex class="nav-categories-item">
+        <a href="#" ng-click="main.toggleMenuCategory(2)" flex class="nav-categories-item" ng-class="{'nav-categories-item-active': main.menuCategories[2].isActive}">
           <i class="icon-jardin"></i>
           <span class="nav-categories-item-text" href="#">Jardin</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
         </a>
-        <a href="#" flex class="nav-categories-item">
+        <a href="#" ng-click="main.toggleMenuCategory(3)" flex class="nav-categories-item" ng-class="{'nav-categories-item-active': main.menuCategories[3].isActive}">
           <i class="icon-ninos"></i>
           <span class="nav-categories-item-text" href="#">Niños</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
         </a>
-        <a href="#" flex class="nav-categories-item">
+        <a href="#" ng-click="main.toggleMenuCategory(4)" flex class="nav-categories-item" ng-class="{'nav-categories-item-active': main.menuCategories[4].isActive}">
           <i class="icon-bebes"></i>
           <span class="nav-categories-item-text" href="#">Bebés</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
         </a>
-        <a href="#" flex class="nav-categories-item">
+        <a href="#" ng-click="main.toggleMenuCategory(5)" flex class="nav-categories-item" ng-class="{'nav-categories-item-active': main.menuCategories[5].isActive}">
           <i class="icon-ambientes"></i>
           <span class="nav-categories-item-text" href="#">Ambientes</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
         </a>
-        <a href="#" flex class="nav-categories-item">
+        <a href="#" ng-click="main.toggleMenuCategory(6)" flex class="nav-categories-item" ng-class="{'nav-categories-item-active': main.menuCategories[6].isActive}">
           <i class="icon-ofertas"></i>
           <span class="nav-categories-item-text" href="#">Ofertas</span>
-          <ng-include src="'views/menus/categories/hogar/menu-subcategories.html'"></ng-include>
         </a>
 
       </nav>
+
+      <menu-categories ng-show="main.menuCategories[0].isActive" categories="main.menuCategories[0].Childs"></menu-categories>
+      <menu-categories ng-show="main.menuCategories[1].isActive" categories="main.menuCategories[1].Childs"></menu-categories>
+      <menu-categories ng-show="main.menuCategories[2].isActive" categories="main.menuCategories[2].Childs"></menu-categories>
+      <menu-categories ng-show="main.menuCategories[3].isActive" categories="main.menuCategories[3].Childs"></menu-categories>
+      <menu-categories ng-show="main.menuCategories[4].isActive" categories="main.menuCategories[4].Childs"></menu-categories>
+      <menu-categories ng-show="main.menuCategories[5].isActive" categories="main.menuCategories[5].Childs"></menu-categories>
+      <menu-categories ng-show="main.menuCategories[6].isActive" categories="main.menuCategories[6].Childs"></menu-categories>
+      <menu-categories ng-show="main.menuCategories[7].isActive" categories="main.menuCategories[7].Childs"></menu-categories>
+
+
+
     </div>
 
     <div class="container container-xxlg absolute-menus" layout="row">

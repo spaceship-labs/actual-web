@@ -1,0 +1,12 @@
+<div class="menu-subcategories">
+  <div class="menu-subcategories-nav">
+    <div class="container container-xxlg" >
+      <nav layout="row">
+        <span ng-repeat="category in categories track by $index" flex class="menu-subcategories-nav-item" href="#">
+          <strong ng-click="toggleMenuSubCategory($index, category)">{{category.Name}}</strong>
+          <menu-sub-categories ng-show="category.isActive" parent-category="category"></menu-sub-categories>
+        </span>
+      </nav>
+    </div>
+  </div>
+</div>

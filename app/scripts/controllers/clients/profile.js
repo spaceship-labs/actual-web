@@ -14,6 +14,7 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
   var vm = this;
 
   vm.init = init;
+  vm.update = update;
 
   vm.activeTab = 0;
   vm.titles = [
@@ -22,8 +23,8 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
     {label: 'Srita.', value: 'Srita'}
   ];
   vm.genders = [
-    {label:'Masculino', value: 'M'},
-    {label: 'Femenino', value: 'F'}
+    {label:'Masculino', value: 'Masculino'},
+    {label: 'Femenino', value: 'Femenino'}
   ];
 
   vm.states = commonService.getStates();
@@ -89,8 +90,18 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
     clientService.getById($routeParams.id).then(function(res){
       console.log(res);
       vm.client = res.data;
+      vm.client.Info = vm.client.Info || {};
       vm.extraParamsLeads = {CardCode: vm.client.id};
       vm.extraParamsSales = {CardCode: vm.client.id};
+    });
+  }
+
+  function update(){
+    console.log(vm.client);
+    vm.isLoading = true;
+    clientService.update(vm.client.id, vm.client).then(function (res){
+      console.log(res);
+      vm.isLoading = false;
     });
   }
 
