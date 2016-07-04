@@ -2,15 +2,42 @@
 
   <h1><i class="icon-login"></i> <strong>OPORTUNIDADES</strong></h1>
 
-  <div layout="row" layout-align="space-between center">
-    <div><p><strong>MES DE MAYO 2016</strong></p></div>
-    <div>
+  <div layout="row" layout-align="space-between end" class="form-view-filters">
+
+    <div flex="50" class="date-filters">
       <p>
-        <strong>DEL</strong>
-        <strong>AL</strong>
+        <strong>
+          <i id="trigger-start-date" class="icon-pedidos"></i> DEL:
+          <input pikaday="vm.dateStart" format="DD/MM/YYYY" trigger="trigger-start-date" readonly type="text" on-select="vm.onDateStartSelect(pikaday)">
+        </strong>
+        <strong>
+          <i id="trigger-end-date" class="icon-pedidos"></i> AL:
+          <input pikaday="vm.dateEnd" format="DD/MM/YYYY" trigger="trigger-end-date" readonly type="text" on-select="vm.onDateEndSelect(pikaday)">
+        </strong>
       </p>
     </div>
+
+    <div flex="30" class="input-element select-element-wrapper">
+      <label><strong>Buscar sobre:</strong></label>
+      <select ng-model="vm.filters.SlpCode" class="select-element">
+        <option ng-selected="vm.user.SlpCode == vm.filters.SlpCode" ng-value="vm.user.SlpCode">
+          Mis oportunidades
+        </option>
+        <option ng-value="'none'">
+          Todas las oportunidades
+        </option>
+      </select>
+    </div>
+    <div flex="20">
+      <a ng-click="vm.applyFilters()" href="#" class="action-btn">Aplicar filtros</a>
+    </div>
   </div>
+
+  <!--
+  <div layout="row" layout-align="space-between center">
+    <div><p><strong>MES DE MAYO 2016</strong></p></div>
+  </div>
+  -->
 
   <hr/>
 
@@ -27,27 +54,12 @@
     </div>
     -->
 
-    <div layout="row" layout-align="end end" class="form-view-filters">
-      <div flex="30" class="input-element select-element-wrapper">
-        <label><strong>Buscar sobre:</strong></label>
-        <select ng-model="vm.filters.SlpCode" class="select-element">
-          <option ng-selected="vm.user.SlpCode == vm.filters.SlpCode" ng-value="vm.user.SlpCode">
-            Mis oportunidades
-          </option>
-          <option ng-value="'none'">
-            Todas las oportunidades
-          </option>
-        </select>
-      </div>
-      <div flex="20">
-        <a ng-click="vm.applyFilters()" href="#" class="action-btn">Aplicar filtros</a>
-      </div>
-    </div>
+
 
     <div class="nested-item">
       <div class="nested-content">
         <section class="table-list-wrap table-list-wrap-nomargin">
-          <div ng-if="vm.filters" table-list class="table-list table-list-v2" columns="vm.columnsLeads" api-resource="vm.apiResourceLeads" filters="vm.filters"></div>
+          <div ng-if="vm.filters" table-list class="table-list table-list-v2" columns="vm.columnsLeads" api-resource="vm.apiResourceLeads" filters="vm.filters" date-range="vm.dateRange"></div>
         </section>
       </div>
     </div>

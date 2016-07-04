@@ -6,7 +6,7 @@
         .module('dashexampleApp')
         .directive('tableList', tableList);
 
-    var controller = function($scope, $rootScope , $timeout, DTOptionsBuilder, DTColumnBuilder, dialogService, $compile){
+    var controller = function($scope, $rootScope , $timeout, DTOptionsBuilder, DTColumnBuilder, dialogService, $compile, $filter){
       $scope.dtInstance = {};
       $scope.isExporting = false;
 
@@ -126,6 +126,10 @@
           }
         });
 
+        if($scope.dateRange){
+          query.dateRange = $scope.dateRange;
+        }
+
         //console.log(query.orderby);
 
         $scope.query = query;
@@ -163,6 +167,14 @@
 
                 if(column.yesNo){
                   data = data ? 'Si' : 'No';
+                }
+
+                if(column.date){
+                  data = $filter('date')(data, 'dd/MM/yyyy');
+                }
+
+                if(column.currency){
+                  data = $filter('currency')(data);
                 }
 
                 if(column.destroy){
@@ -270,7 +282,7 @@
       }
 
     };
-    controller.$inject = ['$scope','$rootScope', '$timeout','DTOptionsBuilder','DTColumnBuilder','dialogService','$compile'];
+    controller.$inject = ['$scope','$rootScope', '$timeout','DTOptionsBuilder','DTColumnBuilder','dialogService','$compile','$filter'];
 
     /** @ngInject */
     function tableList(){
@@ -286,6 +298,7 @@
           searchText: '@',
           orderBy: '@',
           filters: '=',
+          dateRange: '=',
           exportQuery: '=',
           exportColumns: '='
         },

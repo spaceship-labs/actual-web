@@ -16,6 +16,8 @@ function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, c
   vm.init = init;
   vm.applyFilters = applyFilters;
 
+  vm.dateRange = false;
+
   vm.managers = [
     {
       sellers: [{},{},{},{}]
@@ -31,8 +33,9 @@ function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, c
   vm.columnsOrders = [
     {key: 'DocEntry', label:'Folio'},
     {key:'CardName', label:'Cliente'},
-    {key:'DocTotal', label: 'Total'},
+    {key:'DocTotal', label: 'Total', currency:true},
     {key:'DocCur', label:'Moneda'},
+    {key:'CreateDate', label:'Venta', date:true},
     {
       key:'Acciones',
       label:'Acciones',
@@ -62,6 +65,13 @@ function SalesListCtrl($location,$routeParams, $q ,productService, $rootScope, c
   }
 
   function applyFilters(){
+    if(vm.dateStart && vm.dateEnd){
+      vm.dateRange = {
+        field: 'CreateDate',
+        start: vm.dateStart._d,
+        end: vm.dateEnd._d
+      };
+    }
     $rootScope.$broadcast('reloadTable', true);
   }
 

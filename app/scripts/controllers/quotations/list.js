@@ -15,7 +15,11 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   var vm = this;
   vm.init = init;
   vm.applyFilters = applyFilters;
+  vm.onDateStartSelect = onDateStartSelect;
+  vm.onDateEndSelect = vm.onDateEndSelect;
+
   vm.filters = false;
+  vm.dateEnd = false;
 
   vm.managers = [
     {
@@ -32,8 +36,9 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.columnsLeads = [
     {key: 'id', label:'Folio'},
     {key:'CardName', label:'Cliente'},
-    {key:'DocTotal', label: 'Total'},
+    {key:'DocTotal', label: 'Total', currency:true},
     {key:'DocCur', label:'Moneda'},
+    {key:'CreateDate', label:'Cotización' ,date:true},
     {
       key:'Acciones',
       label:'Acciones',
@@ -72,8 +77,24 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   }
 
   function applyFilters(){
+    if(vm.dateStart && vm.dateEnd){
+      vm.dateRange = {
+        field: 'CreateDate',
+        start: vm.dateStart._d,
+        end: vm.dateEnd._d
+      };
+    }
     $rootScope.$broadcast('reloadTable', true);
   }
+
+  function onDateStartSelect(pikaday){
+    console.log(pikaday);
+  }
+
+  function onDateEndSelect(pikaday){
+    console.log(pikaday);
+  }
+
 
   vm.init();
 

@@ -2164,6 +2164,24 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
+.form-view .date-filters i{
+  font-size: 40px;
+  vertical-align: middle;
+}
+.form-view .date-filters input{
+  border: 0;
+}
+.form-view .date-filters p{
+  margin: 0;
+  line-height: 1;
+}
+.form-view .date-filters{
+  height: 42px;
+  overflow: hidden;
+}
+.form-view .date-filters i{cursor: pointer;}
+
+
 /*---------------/
   #CHART-SECTION
 /*---------------*/
