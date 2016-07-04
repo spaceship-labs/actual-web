@@ -82,8 +82,8 @@
 
         vm.menuCategories = [];
         vm.menuCategories.push( _.findWhere( auxCategoryTree, {Handle: 'muebles'} ) );
-        vm.menuCategories.push( _.findWhere( vm.menuCategories[0].Childs, {Handle:'muebles-para-oficina'} ) );
-        vm.menuCategories.push( _.findWhere( vm.menuCategories[0].Childs, {Handle:'muebles-de-jardin'} ) );
+        vm.menuCategories.push( angular.copy(_.findWhere( vm.menuCategories[0].Childs, {Handle:'muebles-para-oficina'} ) ) );
+        vm.menuCategories.push( angular.copy(_.findWhere( vm.menuCategories[0].Childs, {Handle:'muebles-de-jardin'} ) ) );
         vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'ninos'} ) );
         vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'bebes'}  ) );
         vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'ambientes'} ) );

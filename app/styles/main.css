@@ -1008,6 +1008,65 @@ md-backdrop.md-sidenav-backdrop{
   margin: 10px auto;
 }
 
+/*---------------/
+  #HOME
+/*--------------*/
+.home-gallery{position: relative;}
+.home-gallery .slick-slide{
+  background-size: cover!important;
+  background-repeat: no-repeat!important;
+  background-position: center!important;
+  min-height: 460px;
+}
+.home-gallery .slick-slide img{margin: 0 auto;}
+.home-gallery .slick-prev,
+.home-gallery .slick-next{
+  -webkit-box-shadow: 0px 6px 10px -2px rgba(0,0,0,0.64);
+  -moz-box-shadow: 0px 6px 10px -2px rgba(0,0,0,0.64);
+  box-shadow: 0px 6px 10px -2px rgba(0,0,0,0.64);
+  border-radius: 2px;
+  top: 55%;
+  z-index: 9999;
+}
+.home-gallery .slick-prev{
+  background: url(../images/arrow2-left.png) center no-repeat!important;
+  background-size: 100%!important;
+  background-color: #fff!important;
+  height: 36px;
+  width: 36px;
+  left: 20px;
+}
+.home-gallery .slick-next{
+  background: url(../images/arrow2-right.png) center no-repeat!important;
+  background-size: 100%!important;
+  background-color: #fff!important;
+  height: 36px;
+  width: 36px;
+  right: 20px;
+}
+
+.home-gallery .slick-prev:before,
+.home-gallery .slick-next:before{
+  content: '';
+}
+.home-gallery .home-gallery-bar{
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 40px 0;
+  text-align: center;
+  bottom: 0px;
+  color: #fff;
+}
+.home-gallery .home-gallery-bar h1{
+  margin: 5px 0;
+  color: #fff;
+  font-weight: 400;
+}
+.home-gallery .home-gallery-bar p{margin: 0;}
+
+
 
 /*--------------/
   #LISTING-PRODUCT
