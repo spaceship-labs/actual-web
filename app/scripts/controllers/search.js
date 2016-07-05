@@ -25,14 +25,20 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
   vm.searchValues = [];
   vm.removeSearchValue = removeSearchValue;
 
-  vm.search = {
-    term: $location.search().term,
-    items: 10
-  };
-
   vm.init();
 
   function init(){
+    var keywords = [];
+    if($location.search() && $location.search().term ){
+      keywords = $location.search().term.split(" ");
+    }
+    vm.search = {
+      //term: $location.search().term,
+      keywords: keywords,
+      items: 10
+    };
+
+
     vm.isLoading = true;
     productService.search(vm.search).then(function(res){
       console.log(res);
@@ -84,7 +90,12 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
       searchValuesIds.push(searchVal.id);
     });
 
-    productService.getProductsByFilters({ids: searchValuesIds}).then(function(res){
+    var params = {
+      ids: searchValuesIds,
+      keywords: vm.search.keywords
+    };
+
+    productService.getProductsByFilters(params).then(function(res){
       console.log(res);
       vm.isLoading = false;
       vm.products = productService.formatProducts(res.data);
