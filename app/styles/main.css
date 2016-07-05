@@ -2798,3 +2798,9 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   }
 
 }
+
+
+@media screen and (max-width: 960px){
+  .header-top-bar.fixed-head{position:static;}
+
+}
