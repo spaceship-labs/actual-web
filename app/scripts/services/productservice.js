@@ -27,7 +27,10 @@
         getGroupVariants: getGroupVariants,
         getGroupProducts: getGroupProducts,
 
-        getProductsByFilters: getProductsByFilters
+        getProductsByFilters: getProductsByFilters,
+
+        advancedSearch: advancedSearch,
+        searchByFilters: searchByFilters
 
       };
 
@@ -149,9 +152,20 @@
         return api.$http.post(url);
       }
 
+      //TODO: Remove function
       function getProductsByFilters(params){
         var url = '/productfiltervalue/getproducts';
         return api.$http.post(url,params);
+      }
+
+      function advancedSearch(params){
+        var url = '/product/advancedsearch/';
+        return api.$http.post(url, params);
+      }
+
+      function searchByFilters(params){
+        var url = '/product/searchbyfilters/';
+        return api.$http.post(url, params);
       }
 
     }

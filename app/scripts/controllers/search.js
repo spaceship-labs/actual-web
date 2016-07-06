@@ -40,7 +40,7 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
 
 
     vm.isLoading = true;
-    productService.search(vm.search).then(function(res){
+    productService.advancedSearch(vm.search).then(function(res){
       console.log(res);
       vm.totalResults = res.data.total;
       vm.products = productService.formatProducts(res.data.data);
@@ -92,10 +92,12 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
 
     var params = {
       ids: searchValuesIds,
+      //term: vm.search.term
       keywords: vm.search.keywords
     };
 
-    productService.getProductsByFilters(params).then(function(res){
+    //productService.getProductsByFilters(params).then(function(res){
+    productService.searchByFilters(params).then(function(res){
       console.log(res);
       vm.isLoading = false;
       vm.products = productService.formatProducts(res.data);
@@ -113,7 +115,8 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
     vm.loadMoreCount++;
     vm.search.page = vm.loadMoreCount;
     vm.isLoading = true;
-    productService.search(vm.search).then(function(res){
+    //productService.search(vm.search).then(function(res){
+    productService.advancedSearch(vm.search).then(function(res){
       console.log(res);
       vm.totalResults = res.data.total;
       var productsAux = angular.copy(vm.products);
