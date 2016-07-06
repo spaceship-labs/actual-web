@@ -89,7 +89,10 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
     vm.searchValues.forEach(function(searchVal){
       searchValuesIds.push(searchVal.id);
     });
-
+    if (searchValuesIds.length == 0) {
+      vm.init();
+      return;
+    }
     var params = {
       ids: searchValuesIds,
       //term: vm.search.term
