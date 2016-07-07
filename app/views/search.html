@@ -135,7 +135,7 @@
             layout="row"
             layout-wrap
             layout-align="start center">
-            <div flex="33" class="listing-product-wrap" ng-repeat="product in vm.products track by product._id">
+            <div flex="33" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
               <listing-product product="product"></listing-product>
             </div>
           </div>
