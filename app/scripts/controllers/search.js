@@ -28,20 +28,16 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
   vm.init();
 
   function init(){
-    var keywords = [];
-    if($location.search() && $location.search().term ){
-      keywords = $location.search().term.split(" ");
+    var keywords = [''];
+    if($routeParams.term) {
+      keywords = $routeParams.term.split(' ');
     }
     vm.search = {
-      //term: $location.search().term,
       keywords: keywords,
       items: 10
     };
-
-
     vm.isLoading = true;
     productService.advancedSearch(vm.search).then(function(res){
-      console.log(res);
       vm.totalResults = res.data.total;
       vm.products = productService.formatProducts(res.data.data);
       vm.isLoading = false;
