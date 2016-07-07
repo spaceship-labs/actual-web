@@ -188,6 +188,16 @@ angular
           }
         }
       })
+      .when('/checkout/client', {
+        templateUrl: 'views/checkout/client.html',
+        controller: 'CheckoutClientCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/checkout/paymentmethod', {
+        templateUrl: 'views/checkout/paymentmethod.html',
+        controller: 'CheckoutPaymentmethodCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });
