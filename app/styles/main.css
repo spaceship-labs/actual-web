@@ -147,6 +147,10 @@ a{text-decoration: none}
   max-width: 300px;
 }
 
+.action-btn-save{
+  background: #33BA2C;
+}
+
 
 /*-------------/
   #FORM ELEMENTS
@@ -2834,7 +2838,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   padding: 10px 16px;
 }
 
-.pay-method-wrap .method-block-v2{
+.pay-method-wrap-v2{
   padding: 0;
   background: none;
 }
@@ -2931,9 +2935,19 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .pay-method-wrap .method-block .input-element,
 .pay-method-wrap .method-block .action-btn{margin: 0 10px;}
 .pay-method-wrap .method-block .method-data{text-align: left;}
+.pay-method-wrap .method-block .method-data p{text-align: left;}
 .pay-method-wrap .method-block .method-data strong{
   font-size: 12px;
   margin: 0;
+}
+
+.pay-method-wrap .method-block .saved-icon-wrap{
+  text-align: center;
+}
+.pay-method-wrap .method-block .saved-icon{
+  color: #33BA2C;
+  font-size: 30px;
+  vertical-align: middle;
 }
 
 

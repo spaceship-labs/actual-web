@@ -386,7 +386,7 @@
                       <input type="text" required>
                     </div>
                   </div>
-                  <a href="#" flex="45" class="action-btn">GUARDAR</a>
+                  <a href="#" flex="45" class="action-btn action-btn-save">GUARDAR</a>
                 </div>
 
               </li>
@@ -402,7 +402,7 @@
                       <input type="text" required>
                     </div>
                   </div>
-                  <a href="#" flex="45" class="action-btn">APLICAR</a>
+                  <a href="#" ng-click="vm.applyDeposit($event)" flex="45" class="action-btn">APLICAR</a>
                 </div>
               </li>
 
@@ -446,7 +446,8 @@
                     <p>$30, 000</p>
                   </div>
                 </div>
-                <div flex="10">
+                <div flex="10" class="saved-icon-wrap">
+                  <i class="icon-login saved-icon"></i>
                 </div>
               </li>
 
