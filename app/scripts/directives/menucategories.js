@@ -15,6 +15,7 @@ angular.module('dashexampleApp')
         categories: '='
       },
       link: function postLink(scope, element, attrs) {
+        scope.categories = scope.categories || [];
 
         scope.toggleMenuSubCategory = function(index, category){
           console.log('toggleMenuSubCategory');
