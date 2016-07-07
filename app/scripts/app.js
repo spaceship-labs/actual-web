@@ -227,10 +227,10 @@ angular
 
 
 
-  .run(function(localStorageService, authService, jwtHelper, $location, $rootScope, $route){
+  .run(function(localStorageService, authService, jwtHelper, userService, $location, $rootScope, $route){
 
       var _token = localStorageService.get('token') || false;
-      //var _user = localStorageService.get('user') || false;
+      var _user = localStorageService.get('user') || false;
 
       //Check if token is expired
       if(_token){
@@ -242,7 +242,13 @@ angular
               $location.path('/');
             });
           }else{
-            console.log('no expirado');
+            userService.getUser(_user.id).then(function(res){
+              console.log('userService');
+              console.log(res);
+              _user = res.data.data;
+              localStorageService.set('user', _user);
+              $rootScope.user = _user;
+            });
           }
       }else{
         console.log('no hay token');

@@ -9,7 +9,8 @@
     function userService($http, $q, $rootScope, api){
 
       var service = {
-        getClients: getClients
+        getClients: getClients,
+        getUser: getUser,
       };
 
       return service;
@@ -22,6 +23,10 @@
         return api.$http.post(url,params);
       }
 
+      function getUser(id){
+        var url = '/user/findbyid/' + id;
+        return api.$http.post(url);
+      }
 
 
     }
