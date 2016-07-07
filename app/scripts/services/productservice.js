@@ -30,7 +30,8 @@
         getProductsByFilters: getProductsByFilters,
 
         advancedSearch: advancedSearch,
-        searchByFilters: searchByFilters
+        searchByFilters: searchByFilters,
+        searchCategoryByFilters: searchCategoryByFilters
 
       };
 
@@ -67,42 +68,21 @@
 
       function formatProduct(product){
         product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
-
-        //The prices item in pos. 0 belongs to the Public price list in SAP
-        /*
-        if(product.prices && product.prices[0]){
-          product.price = {
-            currency: product.prices[0].Currency,
-            value: product.prices[0].Price,
-            priceList: product.prices[0].PriceList
-          };
-        }else{
-         //Default
-         product.price = {currency:'MXP', value:12999, priceList:0};
-        }
-        */
-
-        //Setting icon and images
-        if(product.icon_filename && product.icon_filename !== 'null'){
-
+        if (product.icon_filename && product.icon_filename !== 'null') {
           product.icons = [
             {url: api.baseUrl + '/uploads/products/' +  product.icon_filename, size:'default'}
           ];
-
           api.imageSizes.avatar.forEach(function(size){
             product.icons.push({
               url: api.baseUrl + '/uploads/products/'  + size +  product.icon_filename,
               size: size
             });
           });
-
-        }else{
+        } else {
           product.icons = [
-            //{url: '/images/b-287x287.jpg', size:'default'}
             {url: '', size:'default'}
           ];
         }
-
         return product;
       }
 
@@ -110,7 +90,6 @@
 
       function formatProducts(products){
         var formatted = products.map(formatProduct);
-
         return formatted;
       }
 
@@ -165,6 +144,11 @@
 
       function searchByFilters(params){
         var url = '/product/searchbyfilters/';
+        return api.$http.post(url, params);
+      }
+
+      function searchCategoryByFilters(params) {
+        var url = '/ProductSearch/searchByCategory';
         return api.$http.post(url, params);
       }
 
