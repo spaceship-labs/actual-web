@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('ProductCtrl', ProductCtrl);
 
-function ProductCtrl(productService, $location, $rootScope,$routeParams, $q, $timeout,$mdDialog, $mdMedia, $sce, api, cartService, quotationService){
+function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams, $q, $timeout,$mdDialog, $mdMedia, $sce, api, cartService, quotationService){
   var vm = this;
 
   vm.showMessageCart = showMessageCart;
@@ -27,17 +27,52 @@ function ProductCtrl(productService, $location, $rootScope,$routeParams, $q, $ti
   vm.loadVariants = loadVariants;
   vm.getGroupProducts = getGroupProducts;
   vm.getLowestCategory = getLowestCategory;
-  vm.variants = [];
+  vm.showGallery = showGallery;
+  vm.closeGallery = closeGallery;
+  vm.getImageSizes = getImageSizes;
 
   vm.toggleVariants = true;
+  vm.variants = [];
+  vm.opts = {
+    index:0,
+    history: false,
+    hideAnimationDuration: 0,
+    showAnimationDuration: 0
+  };
 
   vm.init($routeParams.id);
+
+  function getImageSizes(){
+    var getImageSize = function(galleryImg, callback){
+      console.log('getImageSize');
+      var img = new Image();
+      console.log(galleryImg);
+      img.src = galleryImg.src;
+      img.addEventListener("load", function(){
+        galleryImg.w = this.naturalWidth;
+        galleryImg.h = this.naturalHeight;
+        console.log(galleryImg);
+        $scope.$apply();
+        callback();
+      });
+    }
+    async.forEachSeries(vm.galleryImages ,getImageSize, function(err){
+      if(err) console.log(err);
+      vm.loadedSizes = true;
+      $scope.$apply();
+    });
+  }
 
   function trustAsHtml(string) {
     return $sce.trustAsHtml(string);
   }
 
+  function closeGallery() {
+    vm.open = false;
+  }
+
   function init(productId, reload){
+    console.log('inicializando');
     vm.filters = [];
     vm.activeVariants = {};
     vm.galleryImages = [];
@@ -63,6 +98,13 @@ function ProductCtrl(productService, $location, $rootScope,$routeParams, $q, $ti
       }
 
     });
+  }
+
+  function showGallery (i) {
+    if(angular.isDefined(i)) {
+      vm.opts.index = i;
+    }
+    vm.open = true;
   }
 
   function getLowestCategory(){
@@ -154,22 +196,40 @@ function ProductCtrl(productService, $location, $rootScope,$routeParams, $q, $ti
 
     //Adding icon as gallery first image
 
+    /*
     if(vm.product.icons[vm.imageSizeIndexIcon]){
       //vm.galleryImages.push(vm.product.icons[vm.imageSizeIndexIcon]);
-      vm.galleryImages.push(vm.product.icons[0]);
+      var img = {
+        src: vm.product.icons[0].url,
+        w:500,
+        h:500
+      };
+      vm.galleryImages.push(img);
     }else{
       vm.galleryImages.push(vm.product.icons[0]);
     }
+    */
+    if(vm.product.icons.length >= 0){
+      var img = {
+        src: vm.product.icons[0].url,
+        w:500,
+        h:500
+      };
+      vm.galleryImages.push(img);
+    }
+
 
     if(vm.product.files){
       //TEMPORAL
       vm.imageSize = '';
-
       vm.product.files.forEach(function(img){
         vm.galleryImages.push({
-          url: api.baseUrl + '/uploads/products/gallery/' + vm.imageSize + img.filename
+          src: api.baseUrl + '/uploads/products/gallery/' + vm.imageSize + img.filename,
+          w: 500,
+          h: 500
         });
       });
+      console.log(vm.galleryImages);
     }
 
     $timeout(function(){
@@ -177,13 +237,14 @@ function ProductCtrl(productService, $location, $rootScope,$routeParams, $q, $ti
       vm.gallery = $("#slick-gallery");
       vm.galleryReel = $('#slick-thumbs');
 
-
       vm.gallery.on('afterChange',function(e, slick, currentSlide){
         $timeout(function(){
           vm.galleryReel.slick('slickGoTo',currentSlide);
           vm.selectedSlideIndex = currentSlide;
         },0);
       });
+
+      vm.getImageSizes();
 
     }, 1000);
 

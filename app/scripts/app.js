@@ -28,7 +28,8 @@ angular
     'ui.timepicker',
     'ngFileUpload',
     'sly',
-    'infinite-scroll'
+    'infinite-scroll',
+    'ngPhotoswipe'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
@@ -255,6 +256,7 @@ angular
       }
 
       //Configures $location.path second parameter, for no reloading
+      /*
       var original = $location.path;
       $location.path = function (path, reload) {
           if (reload === false) {
@@ -266,6 +268,7 @@ angular
           }
           return original.apply($location, [path]);
       };
+      */
 
 
   });

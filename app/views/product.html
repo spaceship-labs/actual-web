@@ -1,3 +1,12 @@
+<div
+  ng-if="vm.galleryImages.length > 0"
+  ng-photoswipe slides="vm.galleryImages"
+  open="vm.open"
+  slide-selector=".product-view-gallery-img-inner > img"
+  on-close="vm.closeGallery()"
+  options="vm.opts">
+</div>
+
 <div class="breadcrumb">
   <div class="container container-xxlg">
     <p>
@@ -49,10 +58,14 @@
                 arrows="true"
                 draggable="false"
               >
-                <div ng-repeat="image in vm.galleryImages track by $index" class="product-view-gallery-img">
+                <div
+                  ng-repeat="image in vm.galleryImages track by $index"
+                  class="product-view-gallery-img"
+                >
                   <div class="product-view-gallery-img-inner">
                     <img
-                      ng-src="{{image.url}}"
+                      ng-src="{{image.src}}"
+                      ng-click="vm.showGallery($index)"
                       alt="{{vm.product.icon_description}}"
                       >
                   </div>
@@ -68,7 +81,7 @@
                 slides-to-scroll="1"
                 init-onload="true"
                 data="vm.areImagesLoaded"
-                arrows="true"
+                arrows="false"
                 draggable="false"
               >
                 <div ng-repeat="image in vm.galleryImages track by $index">
@@ -84,7 +97,7 @@
                         'product-view-gallery-thumb-inner-inactive' : $index !== vm.selectedSlideIndex
                       }"
                       class="product-view-gallery-thumb-inner">
-                      <img ng-src="{{image.url}}" alt="">
+                      <img ng-src="{{image.src}}" alt="">
                     </a>
                   </div>
                 </div>

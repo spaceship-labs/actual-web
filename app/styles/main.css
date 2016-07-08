@@ -1570,6 +1570,8 @@ md-backdrop.md-sidenav-backdrop{
   border: 1px solid #000;
 }
 
+.pswp--open{z-index: 999999999}
+
 /*-------------/
   #PRODUCT-VIEW-DATA
 /*-------------*/
