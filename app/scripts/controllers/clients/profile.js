@@ -10,11 +10,12 @@
 angular.module('dashexampleApp')
   .controller('ClientProfileCtrl', ClientProfileCtrl);
 
-function ClientProfileCtrl($location,$routeParams, $q ,productService, commonService, clientService, quotationService, saleService){
+function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productService, commonService, clientService, quotationService, saleService){
   var vm = this;
 
   vm.init = init;
   vm.update = update;
+  vm.createQuotation = createQuotation;
 
   vm.activeTab = 0;
   vm.titles = [
@@ -104,6 +105,16 @@ function ClientProfileCtrl($location,$routeParams, $q ,productService, commonSer
       vm.isLoading = false;
     });
   }
+
+  function createQuotation(){
+    var params = {
+      User: $rootScope.user.id,
+      Client: vm.client.id,
+    };
+    var goToSearch = true;
+    quotationService.newQuotation(params, goToSearch);
+  }
+
 
   vm.init();
 

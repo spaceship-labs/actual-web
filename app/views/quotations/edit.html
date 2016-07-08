@@ -1,6 +1,10 @@
-<section class="form-view container container-xlg quotation-view">
+<div ng-if="vm.isLoading" layout="row" layout-align="center center">
+  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+</div>
 
-  <h1><i class="icon-attachment"></i> <strong>OPORTUNIDAD #{{vm.quotation.id}}</strong></h1>
+<section ng-show="!vm.isLoading" class="form-view container container-xlg quotation-view">
+
+  <h1><i class="icon-attachment"></i> <strong>OPORTUNIDAD #{{vm.quotation.folio}}</strong></h1>
   <hr/>
 
 
@@ -8,15 +12,15 @@
     <div layout="row" class="quotation-data-row">
       <div flex="">
         <label for="">Nombre del cliente</label>
-        <p>{{vm.quotation.CardName}}</p>
+        <p>{{vm.quotation.Client || 'Sin cliente asignado'}}</p>
       </div>
       <div flex="">
         <label for="">Fecha de cotización</label>
-        <p>{{vm.quotation.CreateDate | date: 'd-MM-yyyy'}}</p>
+        <p>{{vm.quotation.createdAt | date: 'd-MM-yyyy'}}</p>
       </div>
       <div flex="">
         <label for="">Vendedor</label>
-        <p>{{vm.quotation.Seller.SlpName}}</p>
+        <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
       </div>
     </div>
 
@@ -42,16 +46,20 @@
 
   </section>
 
-  <form action="#" class="cart-view container container-xxlg" >
+  <form ng-submit="vm.continueBuying()" class="cart-view container container-xxlg" >
 
     <div layout="row" layout-align="space-between start">
 
       <section flex="70" class="cart-list">
         <h1 class="cart-title"><strong>ARTICULOS AGREGADOS</strong></h1>
 
-        <div class="cart-items">
+        <div ng-if="vm.isLoadingDetails" layout="row" layout-align="center center">
+          <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+        </div>
 
-          <div class="cart-item" ng-repeat="detail in vm.quotation.Details">
+        <div ng-if="!vm.isLoadingDetails" class="cart-items">
+
+          <div class="cart-item" ng-repeat="detail in vm.quotation.Details track by $index">
             <h3>
               <a ng-href="/product/{{detail.Product.ItemCode}}">
                 <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
@@ -85,6 +93,7 @@
               <!--ITEM DATA-->
               <div class="cart-item-data" flex="55">
                 <div class="cart-item-data-inner">
+                  <!--
                   <div layout="row" layout-align="start center">
 
                     <div class="cart-item-data-col" flex="45" layout="row" layout-align="start center">
@@ -112,6 +121,7 @@
                     </div>
 
                   </div>
+                  -->
                   <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
                     <div flex="30">
                       <p class="price-crossed">{{detail.Product.Price | currency}}</p>
@@ -132,7 +142,7 @@
               <!--END ITEM DATA-->
 
               <div flex="5" class="cart-item-remove-wrap">
-                <a href="#" class="cart-item-remove">
+                <a href="#" ng-click="vm.alertRemoveDetail($event,detail.id, $index)" class="cart-item-remove">
                   x
                 </a>
               </div>
@@ -174,19 +184,19 @@
             <table ng-show="!vm.togglePrices">
               <tr>
                 <td>Precio Lista:</td>
-                <td><strong>$24,399</strong></td>
+                <td><strong>{{vm.getTotalPrice() | currency:'$':0 }}</strong></td>
               </tr>
               <tr>
                 <td>Pago único (<strong class="hl-price">-20%</strong>)</td>
-                <td><span class="crossed">$24,399</span> | <strong class="hl-price">$19,519</strong> </td>
+                <td><span class="crossed">{{vm.getTotalPrice() | currency:'$':0 }}</span> | <strong class="hl-price">$19,519</strong> </td>
               </tr>
               <tr>
                 <td>6 MSI Banamex (<strong class="hl-price">-15%</strong>)</td>
-                <td><span class="crossed">$24,399</span> | <strong class="hl-price">$20,739</strong> </td>
+                <td><span class="crossed">{{vm.getTotalPrice() | currency:'$':0 }}</span> | <strong class="hl-price">$20,739</strong> </td>
               </tr>
               <tr>
                 <td>12 MSI Santander (<strong class="hl-price">-10%</strong>)</td>
-                <td><span class="crossed">$24,399</span> | <strong class="hl-price">$21,959</strong> </td>
+                <td><span class="crossed">{{vm.getTotalPrice() | currency:'$':0 }}</span> | <strong class="hl-price">$21,959</strong> </td>
               </tr>
             </table>
           </div>
@@ -202,7 +212,7 @@
             </div>
           </div>
 
-          <input type="submit" value="CONTINUAR" class="cart-view-btn">
+          <input type="submit" ng-click="vm.continueBuying()" value="CONTINUAR" class="cart-view-btn">
 
           <p class="cart-summary-note">*Precios en Pesos Mexicanos con impuestos incluidos.</p>
 
@@ -328,7 +338,7 @@
               <div class="record-item-block" layout="row" layout-align="space-between start">
                 <div flex="55">
                   <p><label><strong>NOTAS</strong></label></p>
-                  <textarea name="" id="" rows="7">{{record.notes}}</textarea>
+                  <textarea name="" id="" rows="4">{{record.notes}}</textarea>
                 </div>
                 <div flex="40" class="center-content">
                   <p><strong>ARCHIVOS ADJUNTOS ({{record.files.length}})</strong></p>

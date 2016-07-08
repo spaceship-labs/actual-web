@@ -188,12 +188,12 @@ angular
           }
         }
       })
-      .when('/checkout/client', {
+      .when('/checkout/client/:id', {
         templateUrl: 'views/checkout/client.html',
         controller: 'CheckoutClientCtrl',
         controllerAs: 'vm'
       })
-      .when('/checkout/paymentmethod', {
+      .when('/checkout/paymentmethod/:id', {
         templateUrl: 'views/checkout/paymentmethod.html',
         controller: 'CheckoutPaymentmethodCtrl',
         controllerAs: 'vm'

@@ -24,8 +24,11 @@
     vm.deactivateLoginModal = deactivateLoginModal;
     vm.toggleLoginModal = toggleLoginModal;
 
+    vm.toggleProfileModal = toggleProfileModal;
+
     vm.toggleMenuCategory = toggleMenuCategory;
 
+    vm.toggleCartModal = toggleCartModal;
     vm.activateCartModal = activateCartModal;
     vm.deactivateCartModal = deactivateCartModal;
 
@@ -33,8 +36,6 @@
     vm.signIn = signIn;
 
     vm.getActiveQuotation = getActiveQuotation;
-
-    vm.cart.products = cartService.getProducts();
 
     vm.isMiActual = $rootScope.isMiActual;
     vm.init = init;
@@ -106,14 +107,17 @@
 
     function getActiveQuotation(){
       console.log('getActiveQuotation');
-      cartService.getActiveQuotation().then(function(res){
+      quotationService.getActiveQuotation().then(function(res){
         $rootScope.activeQuotation = res.data;
         vm.activeQuotation = res.data;
-        quotationService.getQuotationProducts(vm.activeQuotation).then(function(details){
-          $rootScope.activeQuotation.Details = details;
-          vm.activeQuotation.Details = details;
-          console.log(vm.activeQuotation);
-        });
+        if($rootScope.activeQuotation){
+          quotationService.getQuotationProducts(vm.activeQuotation).then(function(details){
+            $rootScope.activeQuotation.Details = details;
+            vm.activeQuotation.Details = details;
+            vm.activeQuotation.totalItems = quotationService.calculateItemsNumber(details);
+            vm.activeQuotation.total = quotationService.calculateTotal(details);
+          });
+        }
       });
     }
 
@@ -140,9 +144,21 @@
       }else{
         vm.isActiveLogin = true;
         vm.isActiveBackdrop = true;
+        vm.toggleProfileHeader = false;
+        vm.isActiveCart = false;
       }
     }
 
+    function toggleProfileModal(){
+      if(vm.toggleProfileHeader){
+        vm.toggleProfileHeader = false;
+        vm.isActiveBackdrop = false;
+      }else{
+        vm.toggleProfileHeader = true
+        vm.isActiveBackdrop = true;
+        vm.isActiveCart = false;
+      }
+    }
 
     function activateLoginModal(){
       if(!vm.user){
@@ -155,6 +171,17 @@
       if(!vm.user){
         vm.isActiveLogin = false;
         vm.isActiveBackdrop = false;
+      }
+    }
+
+    function toggleCartModal(){
+      if(vm.isActiveCart){
+        vm.isActiveCart = false;
+        vm.isActiveBackdrop = false;
+      }else{
+        vm.isActiveCart = true;
+        vm.isActiveBackdrop = true;
+        vm.toggleProfileHeader = false;
       }
     }
 

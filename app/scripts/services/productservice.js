@@ -60,6 +60,10 @@
         return api.$http.post(url, params);
       }
 
+      function isUpperCase(str) {
+          return str === str.toUpperCase();
+      }
+
       function capitalizeFirstLetter(string){
         var text = string.toLowerCase();
         return text.charAt(0).toUpperCase() + text.slice(1);
@@ -67,7 +71,10 @@
 
 
       function formatProduct(product){
-        product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+        //product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+        if( isUpperCase(product.Name) ){
+          product.Name = capitalizeFirstLetter(product.ItemName);
+        }
         if (product.icon_filename && product.icon_filename !== 'null') {
           product.icons = [
             {url: api.baseUrl + '/uploads/products/' +  product.icon_filename, size:'default'}

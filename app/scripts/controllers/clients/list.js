@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('ClientsListCtrl', ClientsListCtrl);
 
-function ClientsListCtrl($location,$routeParams, $q ,productService, clientService, userService, $rootScope, commonService){
+function ClientsListCtrl($location,$routeParams, $q ,productService, clientService, userService, $rootScope, commonService, quotationService){
 
   var vm = this;
 
@@ -44,6 +44,5 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
   function applyFilters(){
     $rootScope.$broadcast('reloadTable', true);
   }
-
 
 }

@@ -34,11 +34,11 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   ];
 
   vm.columnsLeads = [
-    {key: 'id', label:'Folio'},
-    {key:'CardName', label:'Cliente'},
+    {key: 'folio', label:'Folio'},
+    {key:'Client.CardName', label:'Cliente'},
     {key:'DocTotal', label: 'Total', currency:true},
     {key:'DocCur', label:'Moneda'},
-    {key:'CreateDate', label:'Cotización' ,date:true},
+    {key:'createdAt', label:'Cotización' ,date:true},
     {
       key:'Acciones',
       label:'Acciones',
@@ -71,7 +71,7 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   };
 
   function init(){
-    vm.filters = {SlpCode: $rootScope.user.SlpCode};
+    vm.filters = {User: $rootScope.user.id};
     vm.user = $rootScope.user;
     console.log(vm.user);
   }

@@ -1,11 +1,11 @@
 <div class="modal-header cart-modal-header">
   <div class="modal-header-top">
-    <h4>Hay <strong>(0) productos</strong> en tu carrito</h4>
+    <h4>Hay <strong>({{main.activeQuotation.totalItems}}) productos</strong> en tu carrito</h4>
   </div>
   <div class="modal-header-inner">
     <div class="cart-modal-subtotal" layout="row" layout-align="space-between center">
       <p flex="30"><strong>MI CARRITO</strong></p>
-      <p flex="70">SUBTOTAL: <strong>MXN {{main.activeQuotation.DocSubtotal | currency}}</strong></p>
+      <p flex="70">SUBTOTAL: <strong>MXN {{main.activeQuotation.total | currency}}</strong></p>
     </div>
     <hr/>
     <a ng-href="/quotations/edit/{{main.activeQuotation.id}}" class="action-btn">Ver detalles de mi carrito</a>

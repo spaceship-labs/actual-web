@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('AddquotationCtrl', AddquotationCtrl);
 
-function AddquotationCtrl($location,$routeParams, $q ,productService, userService, quotationService){
+function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService, clientService, quotationService){
   var vm = this;
   console.log(vm);
   vm.queryClients = queryClients;
@@ -23,7 +23,7 @@ function AddquotationCtrl($location,$routeParams, $q ,productService, userServic
     if(term !== '' && term){
       var deferred = $q.defer();
       var params = {term: term, autocomplete: true};
-      userService.getClients(1,params).then(function(res){
+      clientService.getClients(1,params).then(function(res){
         console.log(res);
         deferred.resolve(res.data.data);
       });
@@ -35,24 +35,51 @@ function AddquotationCtrl($location,$routeParams, $q ,productService, userServic
   }
 
   function selectedItemChange(item){
-    if(item && item.CardCode){
+    console.log(item);
+    if(item && item.id){
       console.log(item);
-      vm.createQuotation(item.CardCode);
-      //$location.path('/cart');
-      /*
-      vm.group.Products.push(item);
-      vm.selectedProduct = null;
-      vm.searchText = null;
-      */
+      if($rootScope.activeQuotation){
+
+        if($rootScope.activeQuotation.Client == item.id){
+          if($location.search().goToCheckout){
+            $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
+          }
+          else{
+            $location.path('/search');
+          }
+        }
+        else if(!$rootScope.activeQuotation.Client){
+          var params = {Client: item.id};
+          quotationService.update($rootScope.activeQuotation.id, params).then(function(res){
+            var quotation = res.data;
+            setActiveQuotation(quotation.id);
+            $rootScope.$broadcast('newActiveQuotation', quotation);
+            if($location.search().goToCheckout){
+              $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
+            }
+            else{
+              $location.path('/search');
+            }
+          });
+        }
+        else{
+          vm.createQuotation(item.id)
+        }
+      }
+      else{
+        vm.createQuotation(item.id);
+      }
+
     }
   }
 
-  function createQuotation(cardCode){
-    console.log(cardCode);
-    var params = {Client: cardCode};
-    quotationService.create(params).then(function(res){
-      console.log(res);
-    });
+  function createQuotation(clientId){
+    var params = {
+      Client: clientId,
+      User: $rootScope.user.id
+    };
+    var goToSearch = true;
+    quotationService.newQuotation(params, goToSearch);
   }
 
 

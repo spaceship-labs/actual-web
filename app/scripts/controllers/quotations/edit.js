@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
-function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, quotationService, api, cartService){
+function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootScope, $mdDialog, commonService, quotationService, api, cartService){
 
   var vm = this;
 
@@ -24,6 +24,9 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.attachImage = attachImage;
   vm.updateInfo = updateInfo;
   vm.addNewProduct = addNewProduct;
+  vm.removeDetail = removeDetail;
+  vm.alertRemoveDetail = alertRemoveDetail;
+  vm.continueBuying = continueBuying;
 
   vm.newRecord = {};
   vm.api = api;
@@ -97,12 +100,14 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   }
 
   function init(){
+    vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
       console.log(res.data);
+      vm.isLoading = false;
       vm.quotation = res.data;
       var productsIds = [];
       vm.quotation.Details.forEach(function(detail){
-        productsIds.push(detail.ItemCode);
+        productsIds.push(detail.Product);
       });
       vm.getProducts(productsIds);
     });
@@ -111,7 +116,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   function getProducts(productsIds){
     var params = {
       filters: {
-        ItemCode: productsIds
+        id: productsIds
       },
       populate_fields: ['FilterValues']
     };
@@ -124,7 +129,8 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
 
       //Match detail - product
       vm.quotation.Details.forEach(function(detail){
-        detail.Product = _.findWhere( products, {ItemCode : detail.ItemCode } );
+        //Populating detail with product info.
+        detail.Product = _.findWhere( products, {id : detail.Product } );
         console.log(detail);
       });
 
@@ -168,7 +174,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
     var total = 0;
     if(vm.quotation && vm.quotation.Details){
       vm.quotation.Details.forEach(function(detail){
-        if(detail.Product){
+        if(detail.Product && detail.Product.Price){
           total += detail.Product.Price * detail.Quantity;
         }
       });
@@ -201,9 +207,51 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   }
 
   function addNewProduct(){
-    cartService.setActiveQuotation(vm.quotation.id);
+    quotationService.setActiveQuotation(vm.quotation.id);
     $rootScope.$emit('newActiveQuotation', vm.quotation.id);
     $location.path('/search');
+  }
+
+  function removeDetail(detailId, index){
+    vm.isLoadingDetails = true;
+    quotationService.removeDetail(detailId).then(function(res){
+      console.log(res);
+      vm.quotation.Details.splice(index,1);
+      vm.isLoadingDetails = false;
+    });
+  }
+
+  function alertRemoveDetail(ev, detailId, detailIndex) {
+    console.log('alertRemoveDetail')
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+          .title('¿Eliminar articulo de la cotizacion?')
+          .textContent('-' + vm.quotation.Details[detailIndex].Product.Name)
+          .ariaLabel('')
+          .targetEvent(ev)
+          .ok('Eliminar')
+          .cancel('Cancelar');
+    $mdDialog.show(confirm).then(function() {
+      vm.removeDetail(detailId, detailIndex)
+    }, function() {
+      console.log('Eliminado');
+    });
+  }
+
+  function continueBuying(){
+    vm.isLoading = true;
+    quotationService.update(vm.quotation.id, vm.quotation).then(function(res){
+      vm.isLoading = false;
+      var quotationUpdated = res.data;
+      if(vm.quotation.Client){
+        console.log('checkout client');
+        $location.path('/checkout/client/' + vm.quotation.id);
+      }else{
+        console.log('addquotation');
+        quotationService.setActiveQuotation(vm.quotation.id);
+        $location.path('/addquotation');
+      }
+    });
   }
 
   vm.init();

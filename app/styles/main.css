@@ -2713,6 +2713,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .records-view .records-table .record-item textarea{
   border: 1px solid #000;
   resize:none;
+  padding: 10px;
+  font-size: 14px;
   width: 100%;
 }
 .records-view .records-table .record-item-block{

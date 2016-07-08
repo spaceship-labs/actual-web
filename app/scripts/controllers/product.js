@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('ProductCtrl', ProductCtrl);
 
-function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDialog, $mdMedia, $sce, api){
+function ProductCtrl(productService, $location, $rootScope,$routeParams, $q, $timeout,$mdDialog, $mdMedia, $sce, api, cartService, quotationService){
   var vm = this;
 
   vm.showMessageCart = showMessageCart;
@@ -247,12 +247,10 @@ function ProductCtrl(productService, $location,$routeParams, $q, $timeout,$mdDia
 
 
   function addToCart($event){
-    /*
-    console.log('addToCart');
-    console.log(vm.customFullscreen);
-    vm.showMessageCart($event);
-    */
-    $location.path('/addquotation');
+    //cartService.addToCart(vm.product.id, params);
+    var params = {quantity: vm.product.cart.quantity};
+    quotationService.addProduct(vm.product.id, params);
+    $rootScope.$broadcast('newActiveQuotation', quotation);
   }
 
   function showMessageCart(ev) {

@@ -1,14 +1,18 @@
-<section class="form-view cart-view checkout-view container container-xxlg" >
+<div ng-if="vm.isLoading" layout="row" layout-align="center center">
+  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+</div>
+
+<section ng-show="!vm.isLoading"  class="form-view cart-view checkout-view cont{{vm.getTotalPrice() | currency }}ainer container-xxlg" >
 
   <h1 class="checkout-title">CHECKOUT</h1>
 
   <div class="steps-bar" layout="row">
-    <div flex="25" class="steps-bar-item">
+    <a ng-href="/quotations/edit/{{vm.quotation.id}}" flex="25" class="steps-bar-item">
       <span><i class="icon-carro"></i> 1. Mi carrito</span>
-    </div>
-    <div flex="25" class="steps-bar-item">
+    </a>
+    <a ng-href="/checkout/client/{{vm.quotation.id}}" flex="25" class="steps-bar-item">
       <span><i class="icon-login"></i> 2. Datos personales</span>
-    </div>
+    </a>
     <div flex="25" class="steps-bar-item steps-bar-item-active">
       <span><i class="icon-terminal"></i> 3. Método de pago</span>
     </div>
@@ -459,12 +463,12 @@
       </section>
 
       <aside flex class="cart-aside">
-        <h1 class="cart-title"><i class="icon-carro"><span>3</span></i> <strong>RESUMEN</strong></h1>
+        <h1 class="cart-title"><i class="icon-carro"><span>{{vm.getTotalProducts()}}</span></i> <strong>RESUMEN</strong></h1>
 
         <div class="cart-summary">
           <table>
             <tr>
-              <td><strong>Subtotal (3 productos):</strong></td>
+              <td><strong>Subtotal ({{vm.getTotalProducts()}}) productos):</strong></td>
               <td><strong>$56,097</strong></td>
             </tr>
             <tr>
@@ -478,7 +482,7 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h1 class="price-main-v2"><strong>$14,699</strong></h1>
+              <h1 class="price-main-v2"><strong>{{vm.getTotalPrice() | currency }}</strong></h1>
             </div>
           </div>
           <hr>

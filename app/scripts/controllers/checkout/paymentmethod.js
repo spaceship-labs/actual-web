@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
 
-function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,categoriesService, productService){
+function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,quotationService, productService){
   var vm = this;
 
   vm.selectSingle = selectSingle;
@@ -21,6 +21,27 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,ca
 
   vm.singlePayment = true;
   vm.multiplePayment = false;
+
+  vm.init = init;
+  vm.getProducts = getProducts;
+  vm.loadProductFilters = loadProductFilters;
+  vm.getTotalPrice = getTotalPrice;
+  vm.getTotalProducts = getTotalProducts;
+
+  function init(){
+    vm.isLoading = true;
+    quotationService.getById($routeParams.id).then(function(res){
+      console.log(res.data);
+      vm.isLoading = false;
+      vm.quotation = res.data;
+      var productsIds = [];
+      vm.quotation.Details.forEach(function(detail){
+        productsIds.push(detail.Product);
+      });
+      vm.getProducts(productsIds);
+    });
+  }
+
 
   function selectSingle(){
     console.log('selectSingle');
@@ -65,6 +86,87 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,ca
       $mdDialog.hide(answer);
     };
   }
+
+
+  function getProducts(productsIds){
+    var params = {
+      filters: {
+        id: productsIds
+      },
+      populate_fields: ['FilterValues']
+    };
+    var page = 1;
+    productService.getList(page,params).then(function(res){
+      //vm.quotation.Products = res.data;
+      var products = productService.formatProducts(res.data.data);
+
+      console.log(products);
+
+      //Match detail - product
+      vm.quotation.Details.forEach(function(detail){
+        //Populating detail with product info.
+        detail.Product = _.findWhere( products, {id : detail.Product } );
+        console.log(detail);
+      });
+
+      console.log(vm.quotation.Details);
+      vm.loadProductFilters();
+    });
+  }
+
+  function loadProductFilters(){
+    productService.getAllFilters({quickread:true}).then(function(res){
+      vm.filters = res.data;
+      var filters = angular.copy(vm.filters);
+
+      vm.quotation.Details.forEach(function(detail){
+
+        filters = vm.filters.map(function(filter){
+          filter.Values = [];
+          detail.Product.FilterValues.forEach(function(value){
+            if(value.Filter === filter.id){
+              filter.Values.push(value);
+            }
+          });
+          return filter;
+        });
+
+        filters = filters.filter(function(filter){
+          return filter.Values.length > 0;
+        });
+
+        //console.log(vm.filters);
+        detail.Product.Filters = filters;
+
+      });
+    });
+
+    console.log(vm.quotation);
+  }
+
+  function getTotalPrice(){
+    var total = 0;
+    if(vm.quotation && vm.quotation.Details){
+      vm.quotation.Details.forEach(function(detail){
+        if(detail.Product && detail.Product.Price){
+          total += detail.Product.Price * detail.Quantity;
+        }
+      });
+    }
+    return total;
+  }
+
+  function getTotalProducts(){
+    var total = 0;
+    if(vm.quotation && vm.quotation.Details){
+      vm.quotation.Details.forEach(function(detail){
+        total += detail.Quantity;
+      });
+    }
+    return total;
+  }
+
+  vm.init();
 
 
 }

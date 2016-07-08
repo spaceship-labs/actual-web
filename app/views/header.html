@@ -34,13 +34,12 @@
         <!--IF ACTIVE QUOTATION-->
         <div
           ng-if="main.user && main.activeQuotation"
-          ng-mouseover="main.activateCartModal()"
-          ng-mouseleave="main.deactivateCartModal()"
+          ng-click="main.toggleCartModal()"
           flex
           href="#"
           class="header-top-bar-menu-item"
         >
-          <span class="cart-n-items">{{main.activeQuotation.Details.length}}</span>
+          <span class="cart-n-items">{{main.activeQuotation.totalItems}}</span>
           <i class="icon-carro"></i>
           <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
         </div>
@@ -70,7 +69,7 @@
           ng-if="main.user"
           flex
           href="#"
-          ng-click="main.toggleProfileHeader = !main.toggleProfileHeader"
+          ng-click="main.toggleProfileModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-name"
         >
           <a href="#" >
