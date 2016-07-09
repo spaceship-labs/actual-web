@@ -23,7 +23,10 @@
         addProduct: addProduct,
         removeDetail: removeDetail,
         newQuotation: newQuotation,
-        setActiveQuotation: setActiveQuotation
+        setActiveQuotation: setActiveQuotation,
+        getTotalsByUser: getTotalsByUser,
+        getCountByUser: getCountByUser
+
       };
 
       return service;
@@ -71,6 +74,17 @@
         var url = '/quotation/removedetail/' + id  + '/' + quotationId;
         return api.$http.post(url);
       }
+
+      function getTotalsByUser(userId, params){
+        var url = '/quotation/gettotalsbyuser/' + userId;
+        return api.$http.post(url,params);
+      }
+
+      function getCountByUser(userId, params){
+        var url = '/quotation/getcountbyuser/' + userId;
+        return api.$http.post(url,params);
+      }
+
 
       function calculateTotal(details){
         var total = 0;

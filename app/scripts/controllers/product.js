@@ -48,13 +48,13 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
       var img = new Image();
       console.log(galleryImg);
       img.src = galleryImg.src;
-      img.addEventListener("load", function(){
-        galleryImg.w = this.naturalWidth;
-        galleryImg.h = this.naturalHeight;
+      img.onload = function(){
+        galleryImg.w = this.width;
+        galleryImg.h = this.height;
         console.log(galleryImg);
         $scope.$apply();
         callback();
-      });
+      };
     }
     async.forEachSeries(vm.galleryImages ,getImageSize, function(err){
       if(err) console.log(err);
@@ -244,7 +244,7 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
         },0);
       });
 
-      vm.getImageSizes();
+      //vm.getImageSizes();
 
     }, 1000);
 
