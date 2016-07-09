@@ -16,9 +16,6 @@ function HomeCtrl($timeout, productService, api){
   vm.areProductsLoaded = false;
   vm.groupProducts = groupProducts;
   vm.api = api;
-
-  console.log(vm.api);
-
   vm.simulateLoading = simulateLoading;
 
   function init(){

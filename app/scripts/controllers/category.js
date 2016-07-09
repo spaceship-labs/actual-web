@@ -44,7 +44,7 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
 
       vm.category.Products = productService.formatProducts(productsAux);
       for(var i=0;i<vm.category.Childs.length;i++){
-        if(vm.category.Childs[i].CategoryLevel == 2){
+        if(vm.category.Childs[i].CategoryLevel === 2){
           hasLevel2Categories = true;
           break;
         }
@@ -66,7 +66,7 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
     filtervalues = filtervalues.reduce(function(acum, current) {
       return current.selected && acum.concat(current.id) || acum;
     }, []);
-    if (filtervalues.length == 0) {
+    if (filtervalues.length === 0) {
       vm.init();
       return;
     }

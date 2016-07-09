@@ -93,7 +93,6 @@
             loadingFlag = true;
             destroyPromise(id).then(
               function(res){
-                console.log(res);
                 loadingFlag = false;
                 $rootScope.$emit('destroyingItemEnd', true);
 
@@ -102,11 +101,9 @@
                 }
                 else{
                   if(redirectPath){
-                    console.log('redirecting');
                     $location.path(redirectPath);
                   }
                   else{
-                    console.log('reloading');
                     $window.location.reload();
                   }
                 }
@@ -144,10 +141,10 @@
 
           function sanitizePosition() {
             var current = toastPosition;
-            if ( current.bottom && last.top ) current.top = false;
-            if ( current.top && last.bottom ) current.bottom = false;
-            if ( current.right && last.left ) current.left = false;
-            if ( current.left && last.right ) current.right = false;
+            if ( current.bottom && last.top ){ current.top = false;}
+            if ( current.top && last.bottom ){ current.bottom = false;}
+            if ( current.right && last.left ){ current.left = false;}
+            if ( current.left && last.right ){ current.right = false;}
             last = angular.extend({},current);
           }
 

@@ -73,7 +73,6 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   function init(){
     vm.filters = {User: $rootScope.user.id};
     vm.user = $rootScope.user;
-    console.log(vm.user);
   }
 
   function applyFilters(){

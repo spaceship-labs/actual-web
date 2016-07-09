@@ -12,19 +12,15 @@ angular.module('dashexampleApp')
 
 function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService, clientService, quotationService){
   var vm = this;
-  console.log(vm);
   vm.queryClients = queryClients;
   vm.selectedItemChange = selectedItemChange;
   vm.createQuotation = createQuotation;
 
   function queryClients(term){
-    console.log(term);
-    console.log('queryClients');
     if(term !== '' && term){
       var deferred = $q.defer();
       var params = {term: term, autocomplete: true};
       clientService.getClients(1,params).then(function(res){
-        console.log(res);
         deferred.resolve(res.data.data);
       });
       return deferred.promise;
@@ -35,9 +31,7 @@ function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService
   }
 
   function selectedItemChange(item){
-    console.log(item);
     if(item && item.id){
-      console.log(item);
       vm.createQuotation(item.id);
     }
   }

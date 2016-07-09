@@ -44,7 +44,6 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
     });
 
     productService.getAllFilters().then(function(res){
-      console.log(res);
       vm.filters = res.data;
     });
 
@@ -97,7 +96,6 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
 
     //productService.getProductsByFilters(params).then(function(res){
     productService.searchByFilters(params).then(function(res){
-      console.log(res);
       vm.isLoading = false;
       vm.products = productService.formatProducts(res.data);
       vm.totalResults = vm.products.length;
@@ -116,7 +114,6 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
     vm.isLoading = true;
     //productService.search(vm.search).then(function(res){
     productService.advancedSearch(vm.search).then(function(res){
-      console.log(res);
       vm.totalResults = res.data.total;
       var productsAux = angular.copy(vm.products);
       var newProducts = productService.formatProducts(res.data.data);

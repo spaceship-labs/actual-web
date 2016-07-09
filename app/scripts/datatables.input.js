@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Sometimes for quick navigation, it can be useful to allow an end user to
  * enter which page they wish to jump to manually. This paging control uses a

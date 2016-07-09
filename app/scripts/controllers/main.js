@@ -55,18 +55,15 @@
       });
 
       vm.menuCategories[index].isActive = !vm.menuCategories[index].isActive;
-      console.log(vm.menuCategories);
     }
 
     function toggleMenuSubCategory(index, category){
-      console.log('toggleMenuSubCategory');
       category.Childs.forEach(function(subcategory, i){
         if(i != index){
           subcategory.isActive = false;
         }
       });
       category.isActive = !category.isActive;
-      console.log(category);
     }
 
     function init(){
@@ -106,7 +103,6 @@
     }
 
     function getActiveQuotation(){
-      console.log('getActiveQuotation');
       quotationService.getActiveQuotation().then(function(res){
         $rootScope.activeQuotation = res.data;
         vm.activeQuotation = res.data;
@@ -222,7 +218,6 @@
     }
 
     $rootScope.successAuth = function(res){
-      console.log(res);
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', res.token);
       localStorageService.set('user', res.user);
@@ -241,10 +236,6 @@
       vm.isActiveLogin = false;
       vm.isActiveCart = false;
       vm.isLoadingLogin = false;
-
-      //console.log('route change');
-      //console.log('vm.isActiveLogin:' + vm.isActiveLogin);
-      //m.toggleLoginModal();
     });
 
 

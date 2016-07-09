@@ -18,7 +18,6 @@ angular.module('dashexampleApp')
         scope.categories = scope.categories || [];
 
         scope.toggleMenuSubCategory = function(index, category){
-          console.log('toggleMenuSubCategory');
           scope.categories.forEach(function(subcategory, i){
             if(i != index){
               subcategory.isActive = false;

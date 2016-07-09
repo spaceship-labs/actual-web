@@ -37,10 +37,8 @@ function DashboardCtrl($routeParams , $rootScope,categoriesService, productServi
 
   function getQuotationData(){
     quotationService.getTotalsByUser($rootScope.user.id, {}).then(function(res){
-      console.log(res);
       vm.quotationData.todayAmmount = res.data.all[0].total;
       vm.quotationData.monthAmmount = res.data.dateRange[0].total;
-      console.log(vm.quotationData);
       vm.quotationData.ammounts = {
         labels: ["Hoy", "Resto del mes"],
         data: [vm.quotationData.todayAmmount, (vm.quotationData.monthAmmount - vm.quotationData.todayAmmount) ],
@@ -48,7 +46,6 @@ function DashboardCtrl($routeParams , $rootScope,categoriesService, productServi
       };
     });
     quotationService.getCountByUser($rootScope.user.id, {}).then(function(res){
-      console.log(res);
       vm.quotationData.todayQty = res.data.all;
       vm.quotationData.monthQty = res.data.dateRange;
       vm.quotationData.quantities = {

@@ -168,7 +168,6 @@
             Quotation: quotationId
           };
           addDetail(quotationId, detail).then(function(res){
-            console.log(res);
             setActiveQuotation(quotationId);
             $location.path('/quotations/edit/' + quotationId);
           });
@@ -181,7 +180,6 @@
           };
           create(params).then(function(res){
             var quotation = res.data;
-            console.log(quotation);
             if(quotation){
               setActiveQuotation(quotation.id);
               $location.path('/quotations/edit/' + quotation.id);

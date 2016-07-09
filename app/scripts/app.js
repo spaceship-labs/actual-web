@@ -254,8 +254,6 @@ angular
             });
           }else{
             userService.getUser(_user.id).then(function(res){
-              console.log('userService');
-              console.log(res);
               _user = res.data.data;
               localStorageService.set('user', _user);
               $rootScope.user = _user;

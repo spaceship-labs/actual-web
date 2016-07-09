@@ -12,8 +12,6 @@ angular.module('dashexampleApp')
 
 function UserProfileCtrl($rootScope){
   var vm = this;
-
   vm.user = $rootScope.user;
-  console.log(vm.user);
 
 }

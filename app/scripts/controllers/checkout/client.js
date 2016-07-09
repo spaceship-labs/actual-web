@@ -24,7 +24,6 @@ function CheckoutClientCtrl(commonService ,$routeParams, $location ,categoriesSe
   function init(){
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
-      console.log(res.data);
       vm.quotation = res.data;
       var productsIds = [];
       vm.quotation.Details.forEach(function(detail){
@@ -34,8 +33,6 @@ function CheckoutClientCtrl(commonService ,$routeParams, $location ,categoriesSe
       clientService.getById(vm.quotation.Client.id).then(function(res){
         vm.client = res.data;
         vm.isLoading = false;
-
-        console.log(vm.client);
 
         //fillin address data with client info
         if(!vm.quotation.Address ){
@@ -48,8 +45,6 @@ function CheckoutClientCtrl(commonService ,$routeParams, $location ,categoriesSe
           };
         }
 
-        console.log(vm.quotation.Address);
-
       });
 
       vm.getProducts(productsIds);
@@ -59,7 +54,6 @@ function CheckoutClientCtrl(commonService ,$routeParams, $location ,categoriesSe
   function continueProcess(){
     vm.isLoading = true;
     quotationService.update(vm.quotation.id, vm.quotation).then(function(res){
-      console.log(res);
       vm.isLoading = false;
       $location.path('/checkout/paymentmethod/' + vm.quotation.id);
     });
@@ -74,19 +68,13 @@ function CheckoutClientCtrl(commonService ,$routeParams, $location ,categoriesSe
     };
     var page = 1;
     productService.getList(page,params).then(function(res){
-      //vm.quotation.Products = res.data;
       var products = productService.formatProducts(res.data.data);
-
-      console.log(products);
 
       //Match detail - product
       vm.quotation.Details.forEach(function(detail){
         //Populating detail with product info.
         detail.Product = _.findWhere( products, {id : detail.Product } );
-        console.log(detail);
       });
-
-      console.log(vm.quotation.Details);
       vm.loadProductFilters();
     });
   }
@@ -112,13 +100,11 @@ function CheckoutClientCtrl(commonService ,$routeParams, $location ,categoriesSe
           return filter.Values.length > 0;
         });
 
-        //console.log(vm.filters);
         detail.Product.Filters = filters;
 
       });
     });
 
-    console.log(vm.quotation);
   }
 
   function getTotalPrice(){

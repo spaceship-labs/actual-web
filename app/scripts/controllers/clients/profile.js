@@ -89,7 +89,6 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
 
   function init(){
     clientService.getById($routeParams.id).then(function(res){
-      console.log(res);
       vm.client = res.data;
       vm.client.Info = vm.client.Info || {};
       vm.extraParamsLeads = {CardCode: vm.client.id};
@@ -98,10 +97,8 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
   }
 
   function update(){
-    console.log(vm.client);
     vm.isLoading = true;
     clientService.update(vm.client.id, vm.client).then(function (res){
-      console.log(res);
       vm.isLoading = false;
     });
   }

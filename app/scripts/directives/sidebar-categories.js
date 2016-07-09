@@ -64,7 +64,6 @@ angular.module('dashexampleApp')
         };
 
         scope.toggleCategory = function(category, event){
-          console.log(category.Childs);
           if(category.Childs){
             event.preventDefault();
           }
@@ -88,7 +87,6 @@ angular.module('dashexampleApp')
         };
 
         scope.$on('$destroy', function() {
-          console.log("destroy");
           scope.cleanUp();
         });
 

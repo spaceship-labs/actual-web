@@ -11,7 +11,6 @@
       $scope.isExporting = false;
 
       $scope.showDestroyDialog = function(ev, id){
-        console.log('showDestroyDialog');
         dialogService.showDestroyDialog(ev, $scope.destroyFn, id);
       }
 
@@ -71,7 +70,6 @@
         */
 
       function serverData(sSource, aoData, fnCallback, oSettings) {
-        console.log('en serverData');
 
         //All the parameters you need is in the aoData variable
         var draw = aoData[0].value;
@@ -129,8 +127,6 @@
         if($scope.dateRange){
           query.dateRange = $scope.dateRange;
         }
-
-        //console.log(query.orderby);
 
         $scope.query = query;
         $scope.page = page;
@@ -233,8 +229,6 @@
         $timeout(function(){
           var callback = function(json){console.log(json);}
           var resetPaging = false;
-          console.log('filters');
-          console.log($scope.filters);
           if($scope.dtInstance){
             $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
           }
@@ -277,7 +271,6 @@
               });
               return item;
             });
-            console.log(itemsFormatted)
             alasql($scope.exportQuery ,[itemsFormatted]);
             $('.export-button').text('Exportar registros');
             $scope.isExporting = false;

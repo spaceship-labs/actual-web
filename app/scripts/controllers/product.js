@@ -44,13 +44,12 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
 
   function getImageSizes(){
     var getImageSize = function(galleryImg, callback){
-      console.log('getImageSize');
       var img = new Image();
-      console.log(galleryImg);
       img.src = galleryImg.src;
       img.onload = function(){
         galleryImg.w = this.width;
         galleryImg.h = this.height;
+        console.log('getImageSize');
         console.log(galleryImg);
         $scope.$apply();
         callback();
@@ -72,7 +71,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
   }
 
   function init(productId, reload){
-    console.log('inicializando');
     vm.filters = [];
     vm.activeVariants = {};
     vm.galleryImages = [];
@@ -128,14 +126,11 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
         variantGroup = group;
       }
     });
-    console.log(variantGroup);
     if(variantGroup && variantGroup.id){
       var query = {
         id: variantGroup.id
       };
-      console.log(query);
       productService.getGroupProducts(query).then(function(res){
-        console.log(res);
         deferred.resolve(res.data);
       });
     }
@@ -146,9 +141,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
 
   function loadVariants(){
     vm.getGroupProducts().then(function(products){
-
-      console.log(products);
-
       vm.variants = {};
       var valuesIds = [];
 
@@ -171,7 +163,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
           values.forEach(function(val){
             val.product = product.ItemCode;
             valuesIds.push(val.id);
-            console.log(val.Name);
           });
           if(values.length > 0){
             var aux = {id: product.ItemCode, filterValues : values};
@@ -191,7 +182,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     vm.imageSizeIndexIcon = 1;
     vm.selectedSlideIndex = 0;
     vm.imageSize = api.imageSizes.gallery[vm.imageSizeIndexGallery];
-    console.log(api.imageSizes.gallery);
     vm.areImagesLoaded = true;
     vm.sortImages();
 
@@ -244,7 +234,7 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
         },0);
       });
 
-      //vm.getImageSizes();
+      vm.getImageSizes();
 
     }, 1000);
 

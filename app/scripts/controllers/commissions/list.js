@@ -73,7 +73,6 @@ function CommissionsListCtrl($location,$routeParams, $q ,productService, $rootSc
   function init(){
     vm.filters = {User: $rootScope.user.id};
     vm.user = $rootScope.user;
-    console.log(vm.user);
   }
 
   function applyFilters(){

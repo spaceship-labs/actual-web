@@ -31,7 +31,6 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
   function init(){
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
-      console.log(res.data);
       vm.isLoading = false;
       vm.quotation = res.data;
       var productsIds = [];
@@ -44,20 +43,17 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
 
 
   function selectSingle(){
-    console.log('selectSingle');
     vm.singlePayment = true;
     vm.multiplePayment = false;
 
   }
 
   function selectMultiple(){
-    console.log('selectMultiple');
     vm.multiplePayment = true;
     vm.singlePayment = false;
   }
 
   function applyDeposit(ev) {
-    console.log('applyDeposit');
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
     $mdDialog.show({
       controller: DepositController,
@@ -97,19 +93,14 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
     };
     var page = 1;
     productService.getList(page,params).then(function(res){
-      //vm.quotation.Products = res.data;
       var products = productService.formatProducts(res.data.data);
-
-      console.log(products);
 
       //Match detail - product
       vm.quotation.Details.forEach(function(detail){
         //Populating detail with product info.
         detail.Product = _.findWhere( products, {id : detail.Product } );
-        console.log(detail);
       });
 
-      console.log(vm.quotation.Details);
       vm.loadProductFilters();
     });
   }
@@ -135,13 +126,11 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
           return filter.Values.length > 0;
         });
 
-        //console.log(vm.filters);
         detail.Product.Filters = filters;
 
       });
     });
 
-    console.log(vm.quotation);
   }
 
   function getTotalPrice(){

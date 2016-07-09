@@ -19,7 +19,6 @@ function CartCtrl($location,$routeParams, $q ,productService, commonService, quo
 
   function init(){
     quotationService.getById($routeParams.id).then(function(res){
-      console.log(res);
     });
   }
 

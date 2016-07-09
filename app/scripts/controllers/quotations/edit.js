@@ -88,7 +88,6 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       };
 
       quotationService.addRecord(vm.quotation.id, params).then(function(res){
-        console.log(res);
         if(res.data.id){
           vm.quotation.Records.push(res.data);
         }
@@ -101,7 +100,6 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   function init(){
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
-      console.log(res.data);
       vm.isLoading = false;
       vm.quotation = res.data;
       var productsIds = [];
@@ -124,16 +122,12 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       //vm.quotation.Products = res.data;
       var products = productService.formatProducts(res.data.data);
 
-      console.log(products);
-
       //Match detail - product
       vm.quotation.Details.forEach(function(detail){
         //Populating detail with product info.
         detail.Product = _.findWhere( products, {id : detail.Product } );
-        console.log(detail);
       });
 
-      console.log(vm.quotation.Details);
       vm.loadProductFilters();
     });
   }
@@ -160,13 +154,11 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
           return filter.Values.length > 0;
         });
 
-        //console.log(vm.filters);
         detail.Product.Filters = filters;
 
       });
     });
 
-    console.log(vm.quotation);
   }
 
   function getTotalPrice(){
@@ -199,14 +191,12 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   function removeDetail(detailId, index){
     vm.isLoadingDetails = true;
     quotationService.removeDetail(detailId, vm.quotation.id).then(function(res){
-      console.log(res);
       vm.quotation.Details.splice(index,1);
       vm.isLoadingDetails = false;
     });
   }
 
   function alertRemoveDetail(ev, detailId, detailIndex) {
-    console.log('alertRemoveDetail')
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.confirm()
           .title('¿Eliminar articulo de la cotizacion?')
@@ -229,7 +219,6 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       vm.isLoading = false;
       var quotationUpdated = res.data;
       if(vm.quotation.Client){
-        console.log('checkout client');
         quotationService.setActiveQuotation(vm.quotation.id);
         $location.path('/checkout/client/' + vm.quotation.id);
       }else{
