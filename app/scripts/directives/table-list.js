@@ -169,6 +169,10 @@
                   data = data ? 'Si' : 'No';
                 }
 
+                if(column.defaultValue){
+                  data = data ? data : column.defaultValue
+                }
+
                 if(column.date){
                   data = $filter('date')(data, 'dd/MM/yyyy');
                 }

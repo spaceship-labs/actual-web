@@ -124,7 +124,7 @@
 
       function setActiveQuotation(quotationId){
         localStorageService.set('quotation', quotationId);
-        $rootScope.$broadcast('newActiveQuotation', quotation);
+        $rootScope.$broadcast('newActiveQuotation', quotationId);
       }
 
 

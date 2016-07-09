@@ -51,8 +51,7 @@ function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService
         else if(!$rootScope.activeQuotation.Client){
           var params = {Client: item.id};
           quotationService.update($rootScope.activeQuotation.id, params).then(function(res){
-            var quotation = res.data;
-            setActiveQuotation(quotation.id);
+            quotationService.setActiveQuotation$rootScope.activeQuotation.id;);
             $rootScope.$broadcast('newActiveQuotation', quotation);
             if($location.search().goToCheckout){
               $location.path('/checkout/client/' + $rootScope.activeQuotation.id);

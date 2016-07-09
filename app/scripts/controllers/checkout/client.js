@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CheckoutClientCtrl', CheckoutClientCtrl);
 
-function CheckoutClientCtrl($routeParams, $location ,categoriesService, productService, quotationService){
+function CheckoutClientCtrl(commonService ,$routeParams, $location ,categoriesService, productService, quotationService, clientService){
   var vm = this;
   vm.init = init;
   vm.getProducts = getProducts;
@@ -19,22 +19,50 @@ function CheckoutClientCtrl($routeParams, $location ,categoriesService, productS
   vm.getTotalProducts = getTotalProducts;
   vm.continueProcess = continueProcess;
 
+  vm.states = commonService.getStates();
+
   function init(){
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
       console.log(res.data);
-      vm.isLoading = false;
       vm.quotation = res.data;
       var productsIds = [];
       vm.quotation.Details.forEach(function(detail){
         productsIds.push(detail.Product);
       });
+
+      clientService.getById(vm.quotation.Client.id).then(function(res){
+        vm.client = res.data;
+        vm.isLoading = false;
+
+        console.log(vm.client);
+
+        //fillin address data with client info
+        if(!vm.quotation.Address ){
+          vm.quotation.Address = {
+            name: vm.client.CardName,
+            lastName: '',
+            phone: vm.client.Phone,
+            mobilePhone: vm.client.Cellular,
+            email: vm.client.E_Mail
+          };
+        }
+
+        console.log(vm.quotation.Address);
+
+      });
+
       vm.getProducts(productsIds);
     });
   }
 
   function continueProcess(){
-    $location.path('/checkout/paymentmethod/' + vm.quotation.id);
+    vm.isLoading = true;
+    quotationService.update(vm.quotation.id, vm.quotation).then(function(res){
+      console.log(res);
+      vm.isLoading = false;
+      $location.path('/checkout/paymentmethod/' + vm.quotation.id);
+    });
   }
 
   function getProducts(productsIds){

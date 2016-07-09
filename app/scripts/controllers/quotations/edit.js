@@ -245,6 +245,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       var quotationUpdated = res.data;
       if(vm.quotation.Client){
         console.log('checkout client');
+        quotationService.setActiveQuotation(vm.quotation.id);
         $location.path('/checkout/client/' + vm.quotation.id);
       }else{
         console.log('addquotation');

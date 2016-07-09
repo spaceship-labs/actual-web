@@ -36,8 +36,8 @@ function HomeCtrl($timeout, productService, api){
       vm.areProductsLoaded = true;
 
       vm.productsGallery = [
-        'http://cafafdaa38a2d7c9529b-6ed6be8f68df7536cde1676c1863b473.r79.cf1.rackcdn.com/uploads/products/gallery/14655953998567932972.png',
         'http://cafafdaa38a2d7c9529b-6ed6be8f68df7536cde1676c1863b473.r79.cf1.rackcdn.com/uploads/products/gallery/14655953998447618690.png',
+        'http://cafafdaa38a2d7c9529b-6ed6be8f68df7536cde1676c1863b473.r79.cf1.rackcdn.com/uploads/products/gallery/14655953998567932972.png',
         'http://cafafdaa38a2d7c9529b-6ed6be8f68df7536cde1676c1863b473.r79.cf1.rackcdn.com/uploads/products/gallery/14655953998528871884.png',
         'http://cafafdaa38a2d7c9529b-6ed6be8f68df7536cde1676c1863b473.r79.cf1.rackcdn.com/uploads/products/gallery/14658316829631008869.png',
         'http://cafafdaa38a2d7c9529b-6ed6be8f68df7536cde1676c1863b473.r79.cf1.rackcdn.com/uploads/products/gallery/14658316829724450631.png'
