@@ -38,37 +38,7 @@ function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService
     console.log(item);
     if(item && item.id){
       console.log(item);
-      if($rootScope.activeQuotation){
-
-        if($rootScope.activeQuotation.Client == item.id){
-          if($location.search().goToCheckout){
-            $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
-          }
-          else{
-            $location.path('/search');
-          }
-        }
-        else if(!$rootScope.activeQuotation.Client){
-          var params = {Client: item.id};
-          quotationService.update($rootScope.activeQuotation.id, params).then(function(res){
-            quotationService.setActiveQuotation($rootScope.activeQuotation.id);
-            $rootScope.$broadcast('newActiveQuotation', quotation);
-            if($location.search().goToCheckout){
-              $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
-            }
-            else{
-              $location.path('/search');
-            }
-          });
-        }
-        else{
-          vm.createQuotation(item.id)
-        }
-      }
-      else{
-        vm.createQuotation(item.id);
-      }
-
+      vm.createQuotation(item.id);
     }
   }
 

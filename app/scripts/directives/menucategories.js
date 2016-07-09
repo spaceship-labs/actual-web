@@ -28,9 +28,11 @@ angular.module('dashexampleApp')
         }
 
         scope.$on('$routeChangeStart', function(next, current) {
-          scope.categories.forEach(function(subcategory){
-            subcategory.isActive = false;
-          });
+          if(scope.categories){
+            scope.categories.forEach(function(subcategory){
+              subcategory.isActive = false;
+            });
+          }
         });
 
       }

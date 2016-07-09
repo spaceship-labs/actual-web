@@ -22,7 +22,6 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.toggleRecord = toggleRecord;
   vm.addRecord = addRecord;
   vm.attachImage = attachImage;
-  vm.updateInfo = updateInfo;
   vm.addNewProduct = addNewProduct;
   vm.removeDetail = removeDetail;
   vm.alertRemoveDetail = alertRemoveDetail;
@@ -173,11 +172,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   function getTotalPrice(){
     var total = 0;
     if(vm.quotation && vm.quotation.Details){
-      vm.quotation.Details.forEach(function(detail){
-        if(detail.Product && detail.Product.Price){
-          total += detail.Product.Price * detail.Quantity;
-        }
-      });
+      total = quotationService.calculateTotal(vm.quotation.Details);
     }
     return total;
   }
@@ -185,9 +180,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   function getTotalProducts(){
     var total = 0;
     if(vm.quotation && vm.quotation.Details){
-      vm.quotation.Details.forEach(function(detail){
-        total += detail.Quantity;
-      });
+      total = quotationService.calculateItemsNumber(vm.quotation.Details)
     }
     return total;
   }
@@ -195,15 +188,6 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
 
   function attachImage(file){
     vm.newRecord.file = file;
-  }
-
-  function updateInfo(){
-    vm.isLoadingRecords = true;
-    var params = vm.quotation.Info;
-    quotationService.updateInfo(vm.quotation.id, params).then(function(res){
-      console.log(res);
-      vm.isLoadingRecords = false;
-    });
   }
 
   function addNewProduct(){
@@ -214,7 +198,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
 
   function removeDetail(detailId, index){
     vm.isLoadingDetails = true;
-    quotationService.removeDetail(detailId).then(function(res){
+    quotationService.removeDetail(detailId, vm.quotation.id).then(function(res){
       console.log(res);
       vm.quotation.Details.splice(index,1);
       vm.isLoadingDetails = false;
@@ -240,6 +224,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
 
   function continueBuying(){
     vm.isLoading = true;
+    vm.quotation.total = vm.getTotalPrice();
     quotationService.update(vm.quotation.id, vm.quotation).then(function(res){
       vm.isLoading = false;
       var quotationUpdated = res.data;
@@ -248,9 +233,8 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
         quotationService.setActiveQuotation(vm.quotation.id);
         $location.path('/checkout/client/' + vm.quotation.id);
       }else{
-        console.log('addquotation');
         quotationService.setActiveQuotation(vm.quotation.id);
-        $location.path('/addquotation');
+        $location.path('/continuequotation');
       }
     });
   }

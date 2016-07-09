@@ -67,15 +67,17 @@
         return api.$http.post(url,params);
       }
 
-      function removeDetail(id){
-        var url = '/quotation/removedetail/' + id;
+      function removeDetail(id, quotationId){
+        var url = '/quotation/removedetail/' + id  + '/' + quotationId;
         return api.$http.post(url);
       }
 
       function calculateTotal(details){
         var total = 0;
         details.forEach(function(detail){
-          total+= detail.Product.Price * detail.Quantity;
+          if(detail.Product && detail.Product.Price){
+            total+= detail.Product.Price * detail.Quantity;
+          }
         });
         return total;
       }
@@ -133,7 +135,6 @@
           var quotation = res.data;
           if(quotation){
             setActiveQuotation(quotation.id);
-            $rootScope.$broadcast('newActiveQuotation', quotation);
             if(goToSearch){
               $location.path('/search');
             }else{
@@ -154,8 +155,7 @@
           };
           addDetail(quotationId, detail).then(function(res){
             console.log(res);
-            var quotation = res.data;
-            $rootScope.$broadcast('newActiveQuotation', quotation);
+            setActiveQuotation(quotationId);
             $location.path('/quotations/edit/' + quotationId);
           });
 
@@ -170,7 +170,6 @@
             console.log(quotation);
             if(quotation){
               setActiveQuotation(quotation.id);
-              $rootScope.$broadcast('newActiveQuotation', quotation);
               $location.path('/quotations/edit/' + quotation.id);
             }
           });

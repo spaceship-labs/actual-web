@@ -36,7 +36,7 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.columnsLeads = [
     {key: 'folio', label:'Folio'},
     {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
-    {key:'DocTotal', label: 'Total', currency:true},
+    {key:'total', label: 'Total', currency:true},
     {key:'DocCur', label:'Moneda', defaultValue: 'MXP'},
     {key:'createdAt', label:'Cotización' ,date:true},
     {

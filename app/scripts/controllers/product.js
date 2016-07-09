@@ -103,6 +103,7 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
   function showGallery (i) {
     if(angular.isDefined(i)) {
       vm.opts.index = i;
+      console.log('showing gallery index: ' + i);
     }
     vm.open = true;
   }
@@ -195,7 +196,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     vm.sortImages();
 
     //Adding icon as gallery first image
-
     /*
     if(vm.product.icons[vm.imageSizeIndexIcon]){
       //vm.galleryImages.push(vm.product.icons[vm.imageSizeIndexIcon]);
@@ -311,7 +311,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     //cartService.addToCart(vm.product.id, params);
     var params = {quantity: vm.product.cart.quantity};
     quotationService.addProduct(vm.product.id, params);
-    $rootScope.$broadcast('newActiveQuotation', quotation);
   }
 
   function showMessageCart(ev) {

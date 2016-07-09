@@ -147,11 +147,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
   function getTotalPrice(){
     var total = 0;
     if(vm.quotation && vm.quotation.Details){
-      vm.quotation.Details.forEach(function(detail){
-        if(detail.Product && detail.Product.Price){
-          total += detail.Product.Price * detail.Quantity;
-        }
-      });
+      total = quotationService.calculateTotal(vm.quotation.Details);
     }
     return total;
   }
@@ -159,9 +155,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
   function getTotalProducts(){
     var total = 0;
     if(vm.quotation && vm.quotation.Details){
-      vm.quotation.Details.forEach(function(detail){
-        total += detail.Quantity;
-      });
+      total = quotationService.calculateItemsNumber(vm.quotation.Details)
     }
     return total;
   }

@@ -199,6 +199,11 @@ angular
         controller: 'CheckoutPaymentmethodCtrl',
         controllerAs: 'vm'
       })
+      .when('/continuequotation', {
+        templateUrl: 'views/continuequotation.html',
+        controller: 'ContinuequotationCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });
