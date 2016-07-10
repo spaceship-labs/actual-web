@@ -110,7 +110,7 @@
             </li>
           </ul>
           <div flex="15" class="method-block-prices">
-            <h2 class="price-now">{{vm.getTotalPrice() | currency }}</h2>
+            <h2 class="price-now">{{vm.totalPrice | currency }}</h2>
           </div>
         </div>
 
@@ -144,7 +144,7 @@
           </ul>
           <div flex="15" class="method-block-prices">
             <div class="discount-label"><strong>-25%</strong></div>
-            <h4 class="price-before">{{vm.getTotalPrice() | currency }}</h4>
+            <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
             <h2 class="price-now price-hl">$30,097</h2>
             <p>¡Aprovecha este es el mejor precio!</p>
           </div>
@@ -185,7 +185,7 @@
           </ul>
           <div flex="15" class="method-block-prices">
             <div class="discount-label"><strong>-20%</strong></div>
-            <h4 class="price-before">{{vm.getTotalPrice() | currency }}</h4>
+            <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
             <h2 class="price-now">$44,097</h2>
           </div>
         </div>
@@ -236,7 +236,7 @@
           </ul>
           <div flex="15" class="method-block-prices">
             <div class="discount-label"><strong>-15%</strong></div>
-            <h4 class="price-before">{{vm.getTotalPrice() | currency }}</h4>
+            <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
             <h2 class="price-now">$47,683</h2>
           </div>
         </div>
@@ -298,7 +298,7 @@
           </ul>
           <div flex="15" class="method-block-prices">
             <div class="discount-label"><strong>-10%</strong></div>
-            <h4 class="price-before">{{vm.getTotalPrice() | currency }}</h4>
+            <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
             <h2 class="price-now">$50,487</h2>
           </div>
         </div>
@@ -361,7 +361,7 @@
             </li>
           </ul>
           <div flex="15" class="method-block-prices">
-            <h2 class="price-now">{{vm.getTotalPrice() | currency }}</h2>
+            <h2 class="price-now">{{vm.totalPrice | currency }}</h2>
           </div>
         </div>
 
@@ -390,7 +390,7 @@
                       <input type="text" required>
                     </div>
                   </div>
-                  <a href="#" flex="45" class="action-btn action-btn-save">GUARDAR</a>
+                  <a href="#" flex="45" ng-click="vm.applyPayment(false)" class="action-btn action-btn-save">GUARDAR</a>
                 </div>
 
               </li>
@@ -406,7 +406,7 @@
                       <input type="text" required>
                     </div>
                   </div>
-                  <a href="#" ng-click="vm.applyDeposit($event)" flex="45" class="action-btn">APLICAR</a>
+                  <a href="#" ng-click="vm.applyTransaction($event, 'deposit')" flex="45" class="action-btn">APLICAR</a>
                 </div>
               </li>
 
@@ -427,7 +427,7 @@
                       <input type="text" required>
                     </div>
                   </div>
-                  <a href="#" flex="45" class="action-btn">APLICAR</a>
+                  <a href="#" ng-click="vm.applyTransaction($event, 'terminal')" flex="45" class="action-btn">APLICAR</a>
                 </div>
               </li>
 
@@ -443,7 +443,7 @@
                   </div>
                   <div flex="33">
                     <p><strong># AUTORIZACIÓN</strong></p>
-                    <p>TPV Banorte</p>
+                    <p>6564</p>
                   </div>
                   <div flex="33">
                     <p><strong>CANTIDAD</strong></p>
@@ -453,6 +453,86 @@
                 <div flex="10" class="saved-icon-wrap">
                   <i class="icon-login saved-icon"></i>
                 </div>
+              </li>
+
+              <li ng-repeat="payment in vm.payments" >
+
+                <div
+                  ng-if="payment.isRecurring"
+                  layout="row"
+                  layout-align="space-between center"
+                >
+                  <div flex="30">
+                    <strong>{{payment.recurringPayments}} Meses</strong>
+                    <div class="hl-label">
+                      <strong>{{payment.paymentType}}</strong>
+                    </div>
+                  </div>
+                  <div class="method-data" flex="60" layout="row">
+                    <div flex="33">
+                      <p><strong>TERMINAL</strong></p>
+                      <p>{{payment.terminal}}</p>
+                    </div>
+                    <div flex="33">
+                      <p><strong># AUTORIZACIÓN</strong></p>
+                      <p>{{payment.verificationCode}}</p>
+                    </div>
+                    <div flex="33">
+                      <p><strong>CANTIDAD</strong></p>
+                      <p>{{payment.ammount | currency}}</p>
+                    </div>
+                  </div>
+                  <div flex="10" class="saved-icon-wrap">
+                    <i class="icon-login saved-icon"></i>
+                  </div>
+                </div>
+
+                <div
+                  ng-if="payment.type == 'deposit' "
+                  layout="row"
+                  layout-align="space-between center"
+                >
+                  <div flex="30">
+                    <strong>Pago efectivo MXN</strong>
+                  </div>
+                  <div class="method-data" flex="60" layout="row">
+                    <div flex="33">
+                      <p><strong>CANTIDAD</strong></p>
+                      <p>{{payment.ammount | currency}}</p>
+                    </div>
+                  </div>
+                  <div flex="10" class="saved-icon-wrap">
+                    <i class="icon-login saved-icon"></i>
+                  </div>
+                </div>
+
+                <div
+                  ng-if="payment.type == 'transaction' "
+                  layout="row"
+                  layout-align="space-between center"
+                >
+                  <div flex="30">
+                    <strong>Transferencia bancaria</strong>
+                  </div>
+                  <div class="method-data" flex="60" layout="row">
+                    <div flex="33">
+                      <p><strong>TERMINAL</strong></p>
+                      <p>{{payment.terminal}}</p>
+                    </div>
+                    <div flex="33">
+                      <p><strong># AUTORIZACIÓN</strong></p>
+                      <p>{{payment.verificationCode}}</p>
+                    </div>
+                    <div flex="33">
+                      <p><strong>CANTIDAD</strong></p>
+                      <p>{{payment.ammount | currency}}</p>
+                    </div>
+                  </div>
+                  <div flex="10" class="saved-icon-wrap">
+                    <i class="icon-login saved-icon"></i>
+                  </div>
+                </div>
+
               </li>
 
             </ul>
@@ -469,7 +549,7 @@
           <table>
             <tr>
               <td><strong>Subtotal ({{vm.getTotalProducts()}}) productos):</strong></td>
-              <td><strong>{{vm.getTotalPrice() | currency }}</strong></td>
+              <td><strong>{{vm.totalPrice | currency }}</strong></td>
             </tr>
             <tr>
               <td>Costo de envío:</td>
@@ -482,7 +562,7 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h1 class="price-main-v2"><strong>{{vm.getTotalPrice() | currency }}</strong></h1>
+              <h1 class="price-main-v2"><strong>{{vm.totalPrice | currency }}</strong></h1>
             </div>
           </div>
           <hr>

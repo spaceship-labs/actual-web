@@ -23,7 +23,7 @@ body{font-family: 'Helvetica Neue', sans-serif;}
 */
 body{
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
-  overflow-x:hidden;
+  /*overflow-x:hidden;*/
 }
 a{text-decoration: none}
 .form-modal{
@@ -2959,6 +2959,41 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   vertical-align: middle;
 }
 
+/*------------/
+  #DEPOSIT-DIALOG
+/*------------*/
+.deposit-dialog .deposit-dialog-inner{
+  padding: 30px 20px;
+}
+.deposit-dialog h2{
+  font-weight: 400;
+  font-size: 18px;
+  margin: 4px 0;
+}
+.deposit-dialog hr{
+  height: 2px;
+  background: #000;
+  border:0;
+  margin: 10px 0;
+}
+.deposit-dialog h2 i{
+  color: #33BA2C;
+  font-size: 24px;
+}
+.deposit-dialog h3{
+  font-size: 22px;
+  font-weight: 400;
+  margin: 4px 0;
+}
+.deposit-dialog p{margin: 0;}
+.deposit-dialog .action-btn-save{margin: 0}
+.deposit-dialog small{
+  font-size: 12px;
+  font-style: italic;
+}
+.deposit-dialog .dialog-block{
+  margin: 20px 0;
+}
 
 /*--------------/
   #FOOTER

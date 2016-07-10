@@ -30,22 +30,19 @@ function CheckoutClientCtrl(commonService ,$routeParams, $rootScope, $location ,
         productsIds.push(detail.Product);
       });
 
-      clientService.getById(vm.quotation.Client.id).then(function(res){
-        vm.client = res.data;
-        vm.isLoading = false;
+      vm.isLoading = false;
 
-        //fillin address data with client info
-        if(!vm.quotation.Address ){
-          vm.quotation.Address = {
-            name: vm.client.CardName,
-            lastName: '',
-            phone: vm.client.Phone,
-            mobilePhone: vm.client.Cellular,
-            email: vm.client.E_Mail
-          };
-        }
+      //fillin address data with client info
+      if(!vm.quotation.Address ){
+        vm.quotation.Address = {
+          name: vm.quotation.Client.CardName,
+          lastName: '',
+          phone: vm.quotation.Client.Phone,
+          mobilePhone: vm.quotation.Client.Cellular,
+          email: vm.quotation.Client.E_Mail
+        };
+      }
 
-      });
 
       vm.getProducts(productsIds);
     });
