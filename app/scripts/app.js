@@ -20,7 +20,6 @@ angular
     'slick',
     'LocalStorageModule',
     'angular-jwt',
-    'ngMaterialDatePicker',
     'datatables',
     'chart.js',
     'ezplus',
@@ -192,22 +191,62 @@ angular
       .when('/checkout/client/:id', {
         templateUrl: 'views/checkout/client.html',
         controller: 'CheckoutClientCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+
       })
       .when('/checkout/paymentmethod/:id', {
         templateUrl: 'views/checkout/paymentmethod.html',
         controller: 'CheckoutPaymentmethodCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+
       })
       .when('/continuequotation', {
         templateUrl: 'views/continuequotation.html',
         controller: 'ContinuequotationCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+
       })
       .when('/commissions/list', {
         templateUrl: 'views/commissions/list.html',
         controller: 'CommissionsListCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+
+      })
+      .when('/orders/list', {
+        templateUrl: 'views/orders/list.html',
+        controller: 'OrdersListCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+
       })
       .otherwise({
         redirectTo: '/'

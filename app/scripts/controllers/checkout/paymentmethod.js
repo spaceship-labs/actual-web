@@ -10,12 +10,13 @@
 angular.module('dashexampleApp')
   .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
 
-function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,quotationService, productService){
+function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $mdDialog ,quotationService, productService, orderService){
   var vm = this;
 
   vm.selectSingle = selectSingle;
   vm.selectMultiple = selectMultiple;
   vm.applyDeposit = applyDeposit;
+  vm.createOrder = createOrder;
 
   vm.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
 
@@ -24,7 +25,6 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
 
   vm.init = init;
   vm.getProducts = getProducts;
-  vm.loadProductFilters = loadProductFilters;
   vm.getTotalPrice = getTotalPrice;
   vm.getTotalProducts = getTotalProducts;
 
@@ -33,6 +33,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
     quotationService.getById($routeParams.id).then(function(res){
       vm.isLoading = false;
       vm.quotation = res.data;
+      console.log(vm.quotation);
       var productsIds = [];
       vm.quotation.Details.forEach(function(detail){
         productsIds.push(detail.Product);
@@ -65,6 +66,17 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
     })
     .then(function(answer) {
       vm.status = 'You said the information was "' + answer + '".';
+      if(!vm.quotation.Order){
+        vm.createOrder();
+      }else{
+        var params = {
+          ammount: 1200,
+          currency: 'MXP',
+          verificationCode: '8870',
+          terminal: 'TPV Banorte'
+        }
+        vm.addPayment();
+      }
     }, function() {
       vm.status = 'You cancelled the dialog.';
     });
@@ -82,6 +94,30 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
       $mdDialog.hide(answer);
     };
   }
+
+  function addPayment(orderId,params){
+    return orderService.addPayment();
+  }
+
+  function createOrder(){
+    var params = {
+      total: vm.getTotalPrice(),
+      Details: vm.quotation.Details,
+      SlpCode: $rootScope.user.SlpCode,
+      CardCode: vm.client.CardCode,
+      currency: 'MXP',
+      status:'pending',
+      Payments: []
+    };
+    //Merging quotation address with order
+    params = _.extend(params, vm.quotation.Address)
+    vm.createOrder(params);
+    orderService.create(params).then(function(res){
+      vm.order = res.data;
+      vm.quotation.Order = vm.order.id;
+    });
+  }
+
 
 
   function getProducts(productsIds){
@@ -101,36 +137,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $scope, $mdMedia, $mdDialog ,qu
         detail.Product = _.findWhere( products, {id : detail.Product } );
       });
 
-      vm.loadProductFilters();
     });
-  }
-
-  function loadProductFilters(){
-    productService.getAllFilters({quickread:true}).then(function(res){
-      vm.filters = res.data;
-      var filters = angular.copy(vm.filters);
-
-      vm.quotation.Details.forEach(function(detail){
-
-        filters = vm.filters.map(function(filter){
-          filter.Values = [];
-          detail.Product.FilterValues.forEach(function(value){
-            if(value.Filter === filter.id){
-              filter.Values.push(value);
-            }
-          });
-          return filter;
-        });
-
-        filters = filters.filter(function(filter){
-          return filter.Values.length > 0;
-        });
-
-        detail.Product.Filters = filters;
-
-      });
-    });
-
   }
 
   function getTotalPrice(){

@@ -2860,6 +2860,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .pay-method-wrap .method-block ul li md-radio-button{
   display: inline-block;
   margin-bottom: 0;
+  min-width: 60px;
 }
 
 .pay-method-wrap .method-block ul li md-checkbox{
@@ -2875,6 +2876,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .pay-method-wrap .method-block ul li span{font-size: 14px;}
 
+.pay-method-wrap .method-block .method-text{
+  display: inline-block;
+  min-width: 184px;
+}
 .pay-method-wrap .method-block .discount-label{
   color: #000;
   background: #FDE933;

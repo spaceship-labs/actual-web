@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CheckoutClientCtrl', CheckoutClientCtrl);
 
-function CheckoutClientCtrl(commonService ,$routeParams, $location ,categoriesService, productService, quotationService, clientService){
+function CheckoutClientCtrl(commonService ,$routeParams, $rootScope, $location ,categoriesService, productService, quotationService, clientService, orderService){
   var vm = this;
   vm.init = init;
   vm.getProducts = getProducts;
