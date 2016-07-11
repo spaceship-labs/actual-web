@@ -27,16 +27,16 @@
               <div layout="row" layout-align="space-between center">
                 <div flex class="input-element">
                   <div class="input-element-inner">
-                    <input placeholder="Min." type="number">
+                    <input ng-model="vm.minPrice" placeholder="Min." type="number">
                   </div>
                 </div>
                 <span>-</span>
                 <div flex class="input-element">
                   <div class="input-element-inner">
-                    <input placeholder="Max." type="number">
+                    <input ng-model="vm.maxPrice" placeholder="Max." type="number">
                   </div>
                 </div>
-                <a href="#" class="filter-block-price-btn">
+                <a href="#" class="filter-block-price-btn" ng-click="vm.searchByFilters()">
                   <img src="images/arrow-right.png" alt="">
                 </a>
               </div>
