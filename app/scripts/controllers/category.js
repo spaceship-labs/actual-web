@@ -19,6 +19,8 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
   vm.getProductsByCategory = getProductsByCategory;
   vm.showLevel2 = false;
   vm.showLevel3 = false;
+  vm.page  = 1;
+  vm.limit = 10;
 
 
   function setSubnavIndex(index){
@@ -49,9 +51,14 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
 
   }
 
-  function getProductsByCategory(){
-    var filtervalues = [];
+  function getProductsByCategory(next){
     vm.isLoading = true;
+    var filtervalues = [];
+    if (next) {
+      vm.page += 1;
+    } else  {
+      vm.page = 1;
+    }
     filtervalues = vm.filters.reduce(function(acum, current) {
       return acum.concat(current.Values);
     }, []);
@@ -60,13 +67,19 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
     }, []);
     var params = {
       category: $routeParams.category,
-      filtervalues: filtervalues
+      filtervalues: filtervalues,
+      page: vm.page,
+      limit: vm.limit
     };
     productService.searchCategoryByFilters(params).then(function(res){
       vm.isLoading = false;
-      vm.category.Products = productService.formatProducts(res.data.products);
-      vm.category.TotalProducts = res.data.total;
-      //vm.scrollTo('search-page');
+      if (next) {
+        vm.products = vm.products.concat(productService.formatProducts(res.data.products));
+      } else {
+        vm.products = productService.formatProducts(res.data.products);
+      }
+      vm.totalProducts = res.data.total;
+      console.log(vm.products.length, vm.totalProducts);
     });
   }
 
