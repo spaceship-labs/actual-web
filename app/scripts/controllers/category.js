@@ -66,6 +66,8 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
       return current.selected && acum.concat(current.id) || acum;
     }, []);
     var params = {
+      minPrice: vm.minPrice,
+      maxPrice: vm.maxPrice,
       category: $routeParams.category,
       filtervalues: filtervalues,
       page: vm.page,
