@@ -9,7 +9,6 @@
 </div>
 <div class="content-block listing-view">
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
-
     <!--START NAV-->
     <aside flex="25">
       <sidebar-categories categories-tree="main.categoriesTree"></sidebar-categories>
@@ -51,7 +50,7 @@
                 <md-checkbox
                   ng-repeat="value in filter.Values"
                   ng-model="value.selected"
-                  ng-change="vm.searchByFilters()"
+                  ng-change="vm.getProductsByCategory()"
                   aria-label="Checkbox Indeterminate">
                   {{value.Name}}
                 </md-checkbox>
@@ -82,21 +81,6 @@
     <div flex="70">
       <div class="subs-container">
         <h2 class="listing-view-title">{{vm.category.Name}}</h2>
-
-        <!--
-        <div
-          class="sub sub-big"
-          ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
-
-          <img class="sub-image" src="images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg" alt="">
-
-          <div class="sub-text">
-            <h4><a href="/listing">Set de <strong>salas</strong></a></h4>
-          </div>
-          <a href="/listing" class="absolute-link"></a>
-        </div>
-        -->
-
         <!--SUBCATEGORIES LIST LEVEL 2-->
         <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap>
           <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}" flex="33">
@@ -133,7 +117,7 @@
         <!--RESULTS-->
         <div class="results">
           <h2 class="center-content">
-            <strong><i class="icon-search"></i> <span class="hl-text">{{vm.category.Products.length}}</span> Resultados</strong>
+            <strong><i class="icon-search"></i> <span class="hl-text">{{vm.category.TotalProducts}}</span> Resultados</strong>
           </h2>
 
           <div
