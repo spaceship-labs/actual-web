@@ -79,7 +79,6 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
         vm.products = productService.formatProducts(res.data.products);
       }
       vm.totalProducts = res.data.total;
-      console.log(vm.products.length, vm.totalProducts);
     });
   }
 
