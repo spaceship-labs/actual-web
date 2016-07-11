@@ -2734,6 +2734,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .records-view .records-table .record-item-block select{
   background: #fff;
+  border: 1px solid #000;
   width: 100%;
   padding: 6px;
 }

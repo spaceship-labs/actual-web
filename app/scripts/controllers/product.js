@@ -102,8 +102,11 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     if(angular.isDefined(i)) {
       vm.opts.index = i;
       console.log('showing gallery index: ' + i);
+      console.log('vm.opts');
+      console.log(vm.opts);
     }
     vm.open = true;
+    console.log('vm.open : ' + vm.open);
   }
 
   function getLowestCategory(){

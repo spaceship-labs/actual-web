@@ -115,43 +115,17 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
 
     payment = payment || defaultPayment;
     vm.payments.push(payment);
-    /*
-    if(!vm.quotation.Order){
-      var defaultPayment = {
-        ammount: 1200,
-        currency: 'MXP',
-        verificationCode: '8870',
-        terminal: 'TPV Banorte'
-      };
 
-      payment = payment || defaultPayment;
-
-      var params = {
-        total: vm.totalPrice,
-        Details: vm.quotation.Details,
-        SlpCode: $rootScope.user.SlpCode,
-        CardCode: vm.quotation.Client.CardCode,
-        currency: 'MXP',
-        status:'pending',
-        ammountPayed: payment.ammount,
-        Payments: [payment],
-        Quotation: vm.quotation.id,
-      };
-      //Merging quotation address with order
-      params = _.extend(params, vm.quotation.Address)
-      vm.createOrder(params);
-    }else{
-      var params = {
-        ammount: 1200,
-        currency: 'MXP',
-        verificationCode: '8870',
-        terminal: 'TPV Banorte'
-      }
-      vm.addPayment(vm.quotation.Order.id, params).then(function(res){
-        vm.quotation.Order = res.data;
-      });
+    var params = {
+      ammount: 1200,
+      currency: 'MXP',
+      verificationCode: '8870',
+      terminal: 'TPV Banorte'
     }
-    */
+    vm.addPayment(vm.quotation.id, params).then(function(res){
+      console.log(res.data);
+    });
+
   }
 
   function DepositController($scope, $mdDialog, payment) {
