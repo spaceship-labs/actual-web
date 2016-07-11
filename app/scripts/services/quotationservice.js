@@ -188,6 +188,10 @@
         }
       }
 
+      function addPayment(quotationId, params){
+        var url = '/quotation/addpayment/' + quotationId;
+        return api.$http.post(url,params);
+      }
 
     }
 
