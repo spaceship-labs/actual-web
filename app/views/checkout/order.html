@@ -31,7 +31,7 @@
         </h1>
         <div flex="20" class="order-title-extra">
           <span class="order-date">12-JUN-2016</span>
-          <a href="#" class="action-btn action-btn-save">
+          <a href="#" ng-click="vm.print()" class="action-btn action-btn-save">
             <strong>IMPRIMIR</strong>
           </a>
         </div>
@@ -41,8 +41,6 @@
       <p>Estimado <strong>Oliver</strong></p>
       <p>Su compra ha sido procesada, en breve estaras recibiendo tu confirmación al correo electrónico registrado: <strong>oliver@actualgroup.com</strong></p>
     </div>
-
-    <hr>
 
     <!--ORDER ITEMS-->
     <div class="order-block">
@@ -83,8 +81,6 @@
     </div>
     <!--END ORDER ITEMS-->
 
-
-    <hr>
 
     <!--ORDER PAYMENTS-->
     <div class="order-block">
@@ -172,8 +168,6 @@
     </div>
     <!--END ORDER PAYMENTS-->
 
-    <hr>
-
     <!--MONEDERO-->
     <div class="order-block">
       <h3><strong><i class="icon-monedero"></i> MONEDERO ELECTRÓNICO</strong></h3>
@@ -195,8 +189,6 @@
     </div>
     <!--END MONEDERO-->
 
-    <hr>
-
     <!--ENVIO-->
     <div class="order-block delivery-block order-block-info">
       <h3><strong><i class="icon-envio"></i> ENVÍO</strong></h3>
@@ -210,8 +202,6 @@
     </div>
     <!--END ENVIO-->
 
-    <hr>
-
     <!--VENDEDOR-->
     <div class="order-block seller-block order-block-info">
       <h3><strong><i class="icon-vendedor"></i> VENDEDOR</strong></h3>
@@ -222,7 +212,7 @@
           <p>+52 (998) 842-16-04</p>
         </div>
         <div flex="20">
-          <a href="#" class="action-btn action-btn-save">
+          <a href="#"  ng-click="vm.print()" class="action-btn action-btn-save">
             <strong>IMPRIMIR</strong>
           </a>
         </div>

@@ -1292,6 +1292,7 @@ md-backdrop.md-sidenav-backdrop{
   color: #E2023F;
 }
 .listing-view-nav-wrapper > h2 i{
+  color: #000;
   font-size: 22px;
   vertical-align: middle;
   margin-right: 6px;
@@ -3077,13 +3078,18 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 13px;
 }
 
+.order-view .order-block{
+  border-top: 1px solid #000;
+  margin: 8px 0;
+}
+
 .order-view .order-block-inner{
   padding: 4px 12px;
 }
 .order-view .order-table-header{
   font-size: 14px;
   text-align: right;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .order-view .order-table-header > div{
@@ -3256,4 +3262,11 @@ padding-left: 16px;
 @media screen and (max-width: 960px){
   .header-top-bar.fixed-head{position:static;}
 
+}
+
+@media print{
+  #header,
+  .steps-bar,
+  .checkout-view > .checkout-title,
+  #footer .footer-menu{display: none;}
 }
