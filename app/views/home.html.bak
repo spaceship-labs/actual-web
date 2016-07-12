@@ -1,0 +1,43 @@
+<div  ng-if="vm.productsGallery.length > 0" class="home-gallery" >
+  <slick arrows="true" draggable="false" >
+    <div
+      ng-repeat="img in vm.productsGallery track by $index | limitTo: 4"
+      ng-style="{'background': 'url('+ img +')'}"
+    >
+    </div>
+  </slick>
+
+  <div class="home-gallery-bar">
+    <h1>MÁS DE <strong>10,000</strong> PRODUCTOS</h1>
+    <p>El mejor catálogo online de la <strong>industria mueblera.</strong></p>
+  </div>
+
+</div>
+
+<div class="content-block">
+
+  <div class="container container-xlg">
+    <div class="block-title">
+      <h1 class="center-content"><span>OFERTAS ESPECIALES</span></h1>
+      <h2><span>Los mejores productos al <strong>mejor precio</strong></span></h2>
+    </div>
+
+    <div class="content-block">
+      <slick ng-if="vm.areProductsLoaded" arrows="true" class="products-list-slider" infinite="true" draggable="false">
+        <div class="products-list-slide" ng-repeat="group in vm.productsGroups">
+          <div
+            class="products-list"
+
+            layout="row"
+            layout-wrap
+            layout-align="start center">
+            <div flex="33" class="listing-product-wrap" ng-repeat="product in group">
+              <listing-product product="product"></listing-product>
+            </div>
+          </div>
+        </div>
+      </slick>
+    </div>
+
+  </div>
+</div>

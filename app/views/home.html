@@ -1,43 +1,36 @@
-<div  ng-if="vm.productsGallery.length > 0" class="home-gallery" >
-  <slick arrows="true" draggable="false" >
-    <div
-      ng-repeat="img in vm.productsGallery track by $index | limitTo: 4"
-      ng-style="{'background': 'url('+ img +')'}"
-    >
-    </div>
-  </slick>
-
-  <div class="home-gallery-bar">
-    <h1>MÁS DE <strong>10,000</strong> PRODUCTOS</h1>
-    <p>El mejor catálogo online de la <strong>industria mueblera.</strong></p>
+<div class="container container-xxlg">
+  <div ng-if="main.isLoadingCategoriesTree" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
   </div>
-
 </div>
 
-<div class="content-block">
+<div ng-if="!main.isLoadingCategoriesTree" class="content-block listing-view">
+  <div class="container container-xxlg" layout="row" layout-align="space-between start">
+    <!--START NAV-->
+    <aside flex="25">
+      <sidebar-categories></sidebar-categories>
+    </aside>
+    <!--END NAV-->
 
-  <div class="container container-xlg">
-    <div class="block-title">
-      <h1 class="center-content"><span>OFERTAS ESPECIALES</span></h1>
-      <h2><span>Los mejores productos al <strong>mejor precio</strong></span></h2>
-    </div>
-
-    <div class="content-block">
-      <slick ng-if="vm.areProductsLoaded" arrows="true" class="products-list-slider" infinite="true" draggable="false">
-        <div class="products-list-slide" ng-repeat="group in vm.productsGroups">
-          <div
-            class="products-list"
-
-            layout="row"
-            layout-wrap
-            layout-align="start center">
-            <div flex="33" class="listing-product-wrap" ng-repeat="product in group">
-              <listing-product product="product"></listing-product>
+    <!--CATEGORIES-->
+    <div flex="70">
+      <div class="subs-container">
+        <div  class="subs-container-list" layout="row" layout-wrap>
+          <div class="sub-wrapper" ng-repeat="category in main.categoriesTree" flex="33">
+            <div
+              class="sub"
+              ng-style="{'background-image' : 'url(' + 'images/living-room-fabulous-white-minimmalist-living-room-design-for-bright-white-sofas-and-unique-red-cuhions-plus-minimalist-white-coffee-table-and-high-gloss-black-ceramic-flooring-and-cool.jpg' + ')'}">
+              <div class="sub-text">
+                <h4><a ng-href="/category/{{category.Handle}}"><strong>{{category.Name}}</strong></a></h4>
+              </div>
+              <a ng-href="/category/{{category.Handle}}" class="absolute-link"></a>
             </div>
           </div>
         </div>
-      </slick>
+
+      </div>
     </div>
+    <!-- END CATEGORIES-->
 
   </div>
 </div>

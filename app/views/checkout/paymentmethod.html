@@ -33,514 +33,357 @@
       </div>
     </div>
 
-    <section ng-show="vm.multiplePayment && !vm.singlePayment">
-      <div class="pay-method-wrap" >
+    <section layout="row">
+      <div flex="75">
+        <section ng-show="vm.multiplePayment && !vm.singlePayment">
+          <div class="pay-method-wrap" >
 
-        <div class="method-block" layout="row" layout-align="space-between center">
-          <ul flex="80">
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                  <strong>Efectivo MXN</strong>
-                </md-checbox>
+            <div class="method-block" layout="row" layout-align="space-between center">
+              <ul flex="75">
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Efectivo MXN</strong>
+                    </md-checbox>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Efectivo USD</strong>
+                    </md-checkbox>
+                     <span>Tipo de cambio $17.05 MXN</span>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Cheque</strong>
+                    </md-checkbox>
+                     <span>Sujeto a verificación contable</span>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Depósito</strong>
+                    </md-checkbox>
+                     <span class="method-text">Sujeto a verificación contable</span>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Transferencia</strong>
+                    </md-checkbox>
+                     <span class="method-text">Sujeto a verificación contable</span>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="40">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>3</strong>
+                    </md-checkbox>
+                     <span class="method-text">Meses</span>
+                     <div class="hl-label"><strong>Sin intereses</strong></div>
+                  </div>
+                  <div flex="60" class="bank-icons">
+                    <img src="images/banamex.png" alt="">
+                    <img src="images/santander.png" alt="">
+                    <img src="images/banorte.png" alt="">
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="40">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>6</strong>
+                    </md-checkbox>
+                     <span class="method-text">Meses</span>
+                     <div class="hl-label"><strong>Sin intereses</strong></div>
+                  </div>
+                  <div flex="60" class="bank-icons">
+                    <img src="images/banamex.png" alt="">
+                    <img src="images/amexcard.png" alt="">
+                    <img src="images/santander.png" alt="">
+                    <img src="images/bancomer.png" alt="">
+                    <img src="images/hsbc.png" alt="">
+                    <img src="images/banorte.png" alt="">
+                  </div>
+                </li>
+              </ul>
+              <div flex="20" class="method-block-prices">
+                <h2 class="price-now'price-hl">{{vm.totalPrice | currency }}</h2>
               </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                  <strong>Efectivo USD</strong>
-                </md-checkbox>
-                 <span>Tipo de cambio $17.05 MXN</span>
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                  <strong>Cheque</strong>
-                </md-checkbox>
-                 <span>Sujeto a verificación contable</span>
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                  <strong>Depósito</strong>
-                </md-checkbox>
-                 <span class="method-text">Sujeto a verificación contable</span>
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                  <strong>Transferencia</strong>
-                </md-checkbox>
-                 <span class="method-text">Sujeto a verificación contable</span>
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                  <strong>3</strong>
-                </md-checkbox>
-                 <span class="method-text">Meses</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="60" class="bank-icons">
-                <img src="images/banamex.png" alt="">
-                <img src="images/santander.png" alt="">
-                <img src="images/banorte.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                  <strong>6</strong>
-                </md-checkbox>
-                 <span class="method-text">Meses</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="60" class="bank-icons">
-                <img src="images/banamex.png" alt="">
-                <img src="images/amexcard.png" alt="">
-                <img src="images/santander.png" alt="">
-                <img src="images/bancomer.png" alt="">
-                <img src="images/hsbc.png" alt="">
-                <img src="images/banorte.png" alt="">
-              </div>
-            </li>
-          </ul>
-          <div flex="15" class="method-block-prices">
-            <h2 class="price-now">{{vm.totalPrice | currency }}</h2>
+            </div>
+
           </div>
+        </section>
+
+
+        <md-radio-group ng-show="vm.singlePayment && !vm.multiplePayment" ng-model="data.group1">
+
+          <div class="pay-method-wrap" >
+            <div class="method-block" layout="row" layout-align="space-between center">
+              <ul flex="75">
+                <li>
+                  <md-radio-button value="Efectivo" class="md-primary">
+                    <strong>Efectivo MXN</strong>
+                  </md-radio-button>
+                   <span class="method-text">Aceptamos pesos mexicanos y dólares americanos</span>
+                </li>
+                <li>
+                  <md-radio-button value="Efectivo USD" class="md-primary">
+                    <strong>Efectivo USD</strong>
+                  </md-radio-button>
+                   <span class="method-text">Tipo de cambio $17.05 MXN</span>
+                </li>
+                <li>
+                  <md-radio-button value="Cheque" class="md-primary">
+                    <strong>Cheque</strong>
+                  </md-radio-button>
+                   <span class="method-text">Sujeto a verificación contable</span>
+                </li>
+                <li>
+                  <md-radio-button value="Deposito" class="md-primary">
+                    <strong>Deposito</strong>
+                  </md-radio-button>
+                   <span class="method-text">Sujeto a verificación contable</span>
+                </li>
+                <li>
+                  <md-radio-button value="Transferencia" class="md-primary">
+                    <strong>Transferencia</strong>
+                  </md-radio-button>
+                   <span class="method-text">Sujeto a verificación contable</span>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="40">
+                    <md-radio-button value="3 meses" class="md-primary">
+                      <strong>3</strong>
+                    </md-radio-button>
+                     <span class="method-text">Meses</span>
+                     <div class="hl-label"><strong>Sin intereses</strong></div>
+                  </div>
+                  <div flex="60" class="bank-icons">
+                    <img src="images/banamex.png" alt="">
+                    <img src="images/santander.png" alt="">
+                    <img src="images/banorte.png" alt="">
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="40">
+                    <md-radio-button value="6 meses" class="md-primary">
+                      <strong>6</strong>
+                    </md-radio-button>
+                     <span class="method-text">Meses</span>
+                     <div class="hl-label"><strong>Sin intereses</strong></div>
+                  </div>
+                  <div flex="60" class="bank-icons">
+                    <img src="images/banamex.png" alt="">
+                    <img src="images/amexcard.png" alt="">
+                    <img src="images/santander.png" alt="">
+                    <img src="images/bancomer.png" alt="">
+                    <img src="images/hsbc.png" alt="">
+                    <img src="images/banorte.png" alt="">
+                  </div>
+                </li>
+              </ul>
+              <div flex="20" class="method-block-prices">
+                <!--
+                <div class="discount-label"><strong>-25%</strong></div>
+                <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
+                -->
+                <h2 class="price-now price-hl">{{vm.totalPrice | currency }}</h2>
+                <!--<p>¡Aprovecha este es el mejor precio!</p>-->
+              </div>
+            </div>
+
+          </div>
+
+        </md-radio-group>
+
+        <div class="second-step-payment">
+
+          <section>
+            <h3><strong>2. Ingresa los montos para cada forma de pago</strong></h3>
+            <hr />
+
+            <div class="pay-method-wrap pay-method-wrap-v2" >
+              <div class="method-block">
+                <ul>
+
+                  <li layout="row" layout-align="space-between center">
+                    <div flex="30">
+                      <strong>Pago Efectivo MXN</strong>
+                    </div>
+                    <div flex="30" class="method-icon">
+                      <i class="icon-cash"></i>
+                    </div>
+                    <div flex="40" layout="row" layout-align="start end">
+                      <div flex="45" class="input-element">
+                        <label>CANTIDAD</label>
+                        <div class="input-element-inner">
+                          <input type="text" required>
+                        </div>
+                      </div>
+                      <a href="#" flex="45" ng-click="vm.applyPayment(false)" class="action-btn action-btn-save">GUARDAR</a>
+                    </div>
+
+                  </li>
+
+                  <li layout="row" layout-align="space-between center">
+                    <div flex="30">
+                      <strong>Transferencia bancaria</strong>
+                    </div>
+                    <div flex="30" class="method-icon">
+                      <i class="icon-transfer"></i>
+                    </div>
+                    <div flex="40" layout="row" layout-align="start end">
+                      <div flex="45" class="input-element">
+                        <label>CANTIDAD</label>
+                        <div class="input-element-inner">
+                          <input type="text" required>
+                        </div>
+                      </div>
+                      <a href="#" ng-click="vm.applyTransaction($event, 'deposit')" flex="45" class="action-btn">APLICAR</a>
+                    </div>
+                  </li>
+
+                  <li layout="row" layout-align="space-between center">
+                    <div flex="30">
+                      <strong>3 Meses</strong>
+                     <div class="hl-label"><strong>Sin intereses</strong></div>
+                    </div>
+                    <div flex="30" class="bank-icons bank-icons-v2">
+                      <img src="images/visa.png" alt="">
+                      <img src="images/mastercard.png" alt="">
+                      <img src="images/amexcard.png" alt="">
+                    </div>
+                    <div flex="40" layout="row" layout-align="start end">
+                      <div flex="45" class="input-element">
+                        <label>CANTIDAD</label>
+                        <div class="input-element-inner">
+                          <input type="text" required>
+                        </div>
+                      </div>
+                      <a href="#" ng-click="vm.applyTransaction($event, 'terminal')" flex="45" class="action-btn">APLICAR</a>
+                    </div>
+                  </li>
+
+                  <li layout="row" layout-align="space-between center">
+                    <div flex="30">
+                      <strong>3 Meses</strong>
+                     <div class="hl-label"><strong>Sin intereses</strong></div>
+                    </div>
+                    <div class="method-data" flex="60" layout="row">
+                      <div flex="33">
+                        <p><strong>TERMINAL</strong></p>
+                        <p>TPV Banorte</p>
+                      </div>
+                      <div flex="33">
+                        <p><strong># AUTORIZACIÓN</strong></p>
+                        <p>6564</p>
+                      </div>
+                      <div flex="33">
+                        <p><strong>CANTIDAD</strong></p>
+                        <p>$30, 000</p>
+                      </div>
+                    </div>
+                    <div flex="10" class="saved-icon-wrap">
+                      <i class="icon-login saved-icon"></i>
+                    </div>
+                  </li>
+
+                  <li ng-repeat="payment in vm.payments" >
+
+                    <div
+                      ng-if="payment.isRecurring"
+                      layout="row"
+                      layout-align="space-between center"
+                    >
+                      <div flex="30">
+                        <strong>{{payment.recurringPayments}} Meses</strong>
+                        <div class="hl-label">
+                          <strong>{{payment.paymentType}}</strong>
+                        </div>
+                      </div>
+                      <div class="method-data" flex="60" layout="row">
+                        <div flex="33">
+                          <p><strong>TERMINAL</strong></p>
+                          <p>{{payment.terminal}}</p>
+                        </div>
+                        <div flex="33">
+                          <p><strong># AUTORIZACIÓN</strong></p>
+                          <p>{{payment.verificationCode}}</p>
+                        </div>
+                        <div flex="33">
+                          <p><strong>CANTIDAD</strong></p>
+                          <p>{{payment.ammount | currency}}</p>
+                        </div>
+                      </div>
+                      <div flex="10" class="saved-icon-wrap">
+                        <i class="icon-login saved-icon"></i>
+                      </div>
+                    </div>
+
+                    <div
+                      ng-if="payment.type == 'deposit' "
+                      layout="row"
+                      layout-align="space-between center"
+                    >
+                      <div flex="30">
+                        <strong>Pago efectivo MXN</strong>
+                      </div>
+                      <div class="method-data" flex="60" layout="row">
+                        <div flex="33">
+                          <p><strong>CANTIDAD</strong></p>
+                          <p>{{payment.ammount | currency}}</p>
+                        </div>
+                      </div>
+                      <div flex="10" class="saved-icon-wrap">
+                        <i class="icon-login saved-icon"></i>
+                      </div>
+                    </div>
+
+                    <div
+                      ng-if="payment.type == 'transaction' "
+                      layout="row"
+                      layout-align="space-between center"
+                    >
+                      <div flex="30">
+                        <strong>Transferencia bancaria</strong>
+                      </div>
+                      <div class="method-data" flex="60" layout="row">
+                        <div flex="33">
+                          <p><strong>TERMINAL</strong></p>
+                          <p>{{payment.terminal}}</p>
+                        </div>
+                        <div flex="33">
+                          <p><strong># AUTORIZACIÓN</strong></p>
+                          <p>{{payment.verificationCode}}</p>
+                        </div>
+                        <div flex="33">
+                          <p><strong>CANTIDAD</strong></p>
+                          <p>{{payment.ammount | currency}}</p>
+                        </div>
+                      </div>
+                      <div flex="10" class="saved-icon-wrap">
+                        <i class="icon-login saved-icon"></i>
+                      </div>
+                    </div>
+
+                  </li>
+
+                </ul>
+              </div>
+
+            </div>
+
+          </section>
+
+
         </div>
 
       </div>
-    </section>
-
-
-    <md-radio-group ng-show="vm.singlePayment && !vm.multiplePayment" ng-model="data.group1">
-
-      <div class="pay-method-wrap" >
-        <div class="method-block" layout="row" layout-align="space-between center">
-          <ul flex="80">
-            <li>
-              <md-radio-button value="Efectivo" class="md-primary">
-                <strong>Efectivo</strong>
-              </md-radio-button>
-               <span class="method-text">Aceptamos pesos mexicanos y dólares americanos</span>
-            </li>
-            <li>
-              <md-radio-button value="Deposito" class="md-primary">
-                <strong>Deposito</strong>
-              </md-radio-button>
-               <span class="method-text">Sujeto a verificación contable</span>
-            </li>
-            <li>
-              <md-radio-button value="Transferencia" class="md-primary">
-                <strong>Transferencia</strong>
-              </md-radio-button>
-               <span class="method-text">Sujeto a verificación contable</span>
-            </li>
-          </ul>
-          <div flex="15" class="method-block-prices">
-            <div class="discount-label"><strong>-25%</strong></div>
-            <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
-            <h2 class="price-now price-hl">$30,097</h2>
-            <p>¡Aprovecha este es el mejor precio!</p>
-          </div>
-        </div>
-
-        <div class="method-block" layout="row" layout-align="space-between center">
-          <ul flex="80">
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="dede" class="md-primary">
-                  <strong>1</strong>
-                </md-radio-button>
-                 <span class="method-text">Pago con tarjeta de crédito o débito</span>
-              </div>
-              <div flex="60" class="bank-icons">
-                <img src="images/visa.png" alt="">
-                <img src="images/mastercard.png" alt="">
-                <img src="images/amexcard.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>3</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $14,699</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/banamex.png" alt="">
-                <img src="images/amexcard.png" alt="">
-                <img src="images/santander.png" alt="">
-                <img src="images/bancomer.png" alt="">
-                <img src="images/hsbc.png" alt="">
-                <img src="images/banorte.png" alt="">
-              </div>
-            </li>
-          </ul>
-          <div flex="15" class="method-block-prices">
-            <div class="discount-label"><strong>-20%</strong></div>
-            <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
-            <h2 class="price-now">$44,097</h2>
-          </div>
-        </div>
-
-        <div class="method-block" layout="row" layout-align="space-between center">
-          <ul flex="80">
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>3</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $15,894</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/banamex.png" alt="">
-                <img src="images/santander.png" alt="">
-                <img src="images/hsbc.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>6</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $7,947</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/banamex.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>9</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $5,298</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/banamex.png" alt="">
-                <img src="images/santander.png" alt="">
-                <img src="images/bancomer.png" alt="">
-                <img src="images/banorte.png" alt="">
-              </div>
-            </li>
-          </ul>
-          <div flex="15" class="method-block-prices">
-            <div class="discount-label"><strong>-15%</strong></div>
-            <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
-            <h2 class="price-now">$47,683</h2>
-          </div>
-        </div>
-
-        <div class="method-block" layout="row" layout-align="space-between center">
-          <ul flex="80">
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>3</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $16,829</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/banorte.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>6</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $8,414</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/santander.png" alt="">
-                <img src="images/banorte.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>9</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $5,609.66</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/banamex.png" alt="">
-                <img src="images/santander.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>12</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $4,207.25</span>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/banamex.png" alt="">
-                <img src="images/santander.png" alt="">
-                <img src="images/banorte.png" alt="">
-              </div>
-            </li>
-          </ul>
-          <div flex="15" class="method-block-prices">
-            <div class="discount-label"><strong>-10%</strong></div>
-            <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
-            <h2 class="price-now">$50,487</h2>
-          </div>
-        </div>
-
-        <div class="method-block" layout="row" layout-align="space-between center">
-          <ul flex="80">
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>3</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $19,032.33</span>
-                 <div class="hl-label hl-label-v2"><strong>Pagos fijos</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/visa.png" alt="">
-                <img src="images/mastercard.png" alt="">
-                <img src="images/amexcard.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>6</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $9,649.5</span>
-                 <div class="hl-label hl-label-v2"><strong>Pagos fijos</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/visa.png" alt="">
-                <img src="images/mastercard.png" alt="">
-                <img src="images/amexcard.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>9</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $6,494.11</span>
-                 <div class="hl-label hl-label-v2"><strong>Pagos fijos</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/visa.png" alt="">
-                <img src="images/mastercard.png" alt="">
-              </div>
-            </li>
-            <li layout="row" layout-align="space-between center">
-              <div flex="55">
-                <md-radio-button value="Deposito" class="md-primary">
-                  <strong>12</strong>
-                </md-radio-button>
-                 <span class="method-text">Meses de MXN $4,966.41</span>
-                 <div class="hl-label hl-label-v2"><strong>Pagos fijos</strong></div>
-              </div>
-              <div flex="45" class="bank-icons">
-                <img src="images/visa.png" alt="">
-                <img src="images/mastercard.png" alt="">
-              </div>
-            </li>
-          </ul>
-          <div flex="15" class="method-block-prices">
-            <h2 class="price-now">{{vm.totalPrice | currency }}</h2>
-          </div>
-        </div>
-
-      </div>
-
-    </md-radio-group>
-
-    <div class="second-step-payment" layout="row" layout-align="space-between start">
-
-      <section flex="75">
-        <h3><strong>2. Ingresa los montos para cada forma de pago</strong></h3>
-        <hr />
-
-        <div class="pay-method-wrap pay-method-wrap-v2" >
-          <div class="method-block">
-            <ul>
-
-              <li layout="row" layout-align="space-between center">
-                <div flex="40">
-                  <strong>Pago Efectivo MXN</strong>
-                </div>
-                <div flex="40" layout="row" layout-align="start end">
-                  <div flex="45" class="input-element">
-                    <label>CANTIDAD</label>
-                    <div class="input-element-inner">
-                      <input type="text" required>
-                    </div>
-                  </div>
-                  <a href="#" flex="45" ng-click="vm.applyPayment(false)" class="action-btn action-btn-save">GUARDAR</a>
-                </div>
-
-              </li>
-
-              <li layout="row" layout-align="space-between center">
-                <div flex="40">
-                  <strong>Transferencia bancaria</strong>
-                </div>
-                <div flex="40" layout="row" layout-align="start end">
-                  <div flex="45" class="input-element">
-                    <label>CANTIDAD</label>
-                    <div class="input-element-inner">
-                      <input type="text" required>
-                    </div>
-                  </div>
-                  <a href="#" ng-click="vm.applyTransaction($event, 'deposit')" flex="45" class="action-btn">APLICAR</a>
-                </div>
-              </li>
-
-              <li layout="row" layout-align="space-between center">
-                <div flex="30">
-                  <strong>3 Meses</strong>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-                </div>
-                <div flex="30" class="bank-icons bank-icons-v2">
-                  <img src="images/visa.png" alt="">
-                  <img src="images/mastercard.png" alt="">
-                  <img src="images/amexcard.png" alt="">
-                </div>
-                <div flex="40" layout="row" layout-align="start end">
-                  <div flex="45" class="input-element">
-                    <label>CANTIDAD</label>
-                    <div class="input-element-inner">
-                      <input type="text" required>
-                    </div>
-                  </div>
-                  <a href="#" ng-click="vm.applyTransaction($event, 'terminal')" flex="45" class="action-btn">APLICAR</a>
-                </div>
-              </li>
-
-              <li layout="row" layout-align="space-between center">
-                <div flex="30">
-                  <strong>3 Meses</strong>
-                 <div class="hl-label"><strong>Sin intereses</strong></div>
-                </div>
-                <div class="method-data" flex="60" layout="row">
-                  <div flex="33">
-                    <p><strong>TERMINAL</strong></p>
-                    <p>TPV Banorte</p>
-                  </div>
-                  <div flex="33">
-                    <p><strong># AUTORIZACIÓN</strong></p>
-                    <p>6564</p>
-                  </div>
-                  <div flex="33">
-                    <p><strong>CANTIDAD</strong></p>
-                    <p>$30, 000</p>
-                  </div>
-                </div>
-                <div flex="10" class="saved-icon-wrap">
-                  <i class="icon-login saved-icon"></i>
-                </div>
-              </li>
-
-              <li ng-repeat="payment in vm.payments" >
-
-                <div
-                  ng-if="payment.isRecurring"
-                  layout="row"
-                  layout-align="space-between center"
-                >
-                  <div flex="30">
-                    <strong>{{payment.recurringPayments}} Meses</strong>
-                    <div class="hl-label">
-                      <strong>{{payment.paymentType}}</strong>
-                    </div>
-                  </div>
-                  <div class="method-data" flex="60" layout="row">
-                    <div flex="33">
-                      <p><strong>TERMINAL</strong></p>
-                      <p>{{payment.terminal}}</p>
-                    </div>
-                    <div flex="33">
-                      <p><strong># AUTORIZACIÓN</strong></p>
-                      <p>{{payment.verificationCode}}</p>
-                    </div>
-                    <div flex="33">
-                      <p><strong>CANTIDAD</strong></p>
-                      <p>{{payment.ammount | currency}}</p>
-                    </div>
-                  </div>
-                  <div flex="10" class="saved-icon-wrap">
-                    <i class="icon-login saved-icon"></i>
-                  </div>
-                </div>
-
-                <div
-                  ng-if="payment.type == 'deposit' "
-                  layout="row"
-                  layout-align="space-between center"
-                >
-                  <div flex="30">
-                    <strong>Pago efectivo MXN</strong>
-                  </div>
-                  <div class="method-data" flex="60" layout="row">
-                    <div flex="33">
-                      <p><strong>CANTIDAD</strong></p>
-                      <p>{{payment.ammount | currency}}</p>
-                    </div>
-                  </div>
-                  <div flex="10" class="saved-icon-wrap">
-                    <i class="icon-login saved-icon"></i>
-                  </div>
-                </div>
-
-                <div
-                  ng-if="payment.type == 'transaction' "
-                  layout="row"
-                  layout-align="space-between center"
-                >
-                  <div flex="30">
-                    <strong>Transferencia bancaria</strong>
-                  </div>
-                  <div class="method-data" flex="60" layout="row">
-                    <div flex="33">
-                      <p><strong>TERMINAL</strong></p>
-                      <p>{{payment.terminal}}</p>
-                    </div>
-                    <div flex="33">
-                      <p><strong># AUTORIZACIÓN</strong></p>
-                      <p>{{payment.verificationCode}}</p>
-                    </div>
-                    <div flex="33">
-                      <p><strong>CANTIDAD</strong></p>
-                      <p>{{payment.ammount | currency}}</p>
-                    </div>
-                  </div>
-                  <div flex="10" class="saved-icon-wrap">
-                    <i class="icon-login saved-icon"></i>
-                  </div>
-                </div>
-
-              </li>
-
-            </ul>
-          </div>
-
-        </div>
-
-      </section>
 
       <aside flex class="cart-aside">
         <h1 class="cart-title"><i class="icon-carro"><span>{{vm.getTotalProducts()}}</span></i> <strong>RESUMEN</strong></h1>
@@ -562,7 +405,7 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h1 class="price-main-v2"><strong>{{vm.totalPrice | currency }}</strong></h1>
+              <h1 class="price-main"><strong>{{vm.totalPrice | currency }}</strong></h1>
             </div>
           </div>
           <hr>
@@ -579,8 +422,9 @@
 
       </aside>
 
+    </section>
 
-    </div>
+
 
 
   </div>

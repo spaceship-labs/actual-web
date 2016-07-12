@@ -11,7 +11,10 @@
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
     <!--START NAV-->
     <aside flex="25">
-      <sidebar-categories categories-tree="main.categoriesTree"></sidebar-categories>
+      <sidebar-categories
+        selected-category-id="vm.category.id">
+      </sidebar-categories>
+
       <section class="filters">
         <h3 class="filters-head">FILTRAR RESULTADOS</h3>
         <div class="filters-inner">

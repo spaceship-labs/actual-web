@@ -57,7 +57,7 @@ function HomeCtrl($timeout, productService, api){
   }
 
 
-  vm.init();
+  //vm.init();
 }
 
 HomeCtrl.$inject = ['$timeout','productService','api'];

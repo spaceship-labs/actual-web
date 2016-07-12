@@ -188,38 +188,13 @@
         </table>
         <hr>
 
-        <div>
-          <h5 class="cart-summary-toggler">
-            <a href="" ng-click="vm.togglePrices = !vm.togglePrices"><strong>MÁXIMO DESCUENTO</strong> <img src="images/arrow-down.png" alt=""></a>
-          </h5>
-          <table ng-show="!vm.togglePrices">
-            <tr>
-              <td>Precio Lista:</td>
-              <td><strong>{{vm.getTotalPrice() | currency }}</strong></td>
-            </tr>
-            <tr>
-              <td>Pago único (<strong class="hl-price">-20%</strong>)</td>
-              <td><span class="crossed">{{vm.getTotalPrice() | currency:'$':0 }}</span> | <strong class="hl-price">$19,519</strong> </td>
-            </tr>
-            <tr>
-              <td>6 MSI Banamex (<strong class="hl-price">-15%</strong>)</td>
-              <td><span class="crossed">{{vm.getTotalPrice() | currency:'$':0 }}</span> | <strong class="hl-price">$20,739</strong> </td>
-            </tr>
-            <tr>
-              <td>12 MSI Santander (<strong class="hl-price">-10%</strong>)</td>
-              <td><span class="crossed">{{vm.getTotalPrice() | currency:'$':0 }}</span> | <strong class="hl-price">$21,959</strong> </td>
-            </tr>
-          </table>
-        </div>
-
-        <hr>
         <div class="cart-totals" layout="row" layout-align="space-between end">
           <div flex="50">
             <h1><strong>TOTAL:</strong></h1>
           </div>
           <div flex="50">
-            <h3 class="price-crossed">{{vm.getTotalPrice() | currency }}</h3>
-            <h1 class="price-main">{{vm.getTotalPrice() | currency }}</h1>
+            <!--<h3 class="price-crossed">{{vm.getTotalPrice() | currency }}</h3>-->
+            <h1 class="price-main"><strong>{{vm.getTotalPrice() | currency }}</strong></h1>
           </div>
         </div>
 

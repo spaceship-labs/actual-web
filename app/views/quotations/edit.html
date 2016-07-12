@@ -93,51 +93,26 @@
               <!--ITEM DATA-->
               <div class="cart-item-data" flex="55">
                 <div class="cart-item-data-inner">
-                  <!--
-                  <div layout="row" layout-align="start center">
 
-                    <div class="cart-item-data-col" flex="45" layout="row" layout-align="start center">
-                      <label flex="30"><strong>Colores:</strong></label>
-                      <div flex class="input-element select-element-wrapper">
-                        <select class="select-element" ng-model="vm.ddseoed">
-                          <option  ng-value="'Cafe'">
-                            Cafe
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="cart-item-data-col" flex="45" layout="row" layout-align="start center" >
-                      <label flex="30"><strong>Formas:</strong></label>
-                      <div flex class="input-element select-element-wrapper">
-                        <md-input-container>
-                        <select class="select-element" ng-model="vm.ddeoed">
-                          <option  ng-value="'Rectangular'">
-                            Rectangular
-                          </option>
-                        </select>
-
-                        </md-input-container>
-                      </div>
-                    </div>
-
-                  </div>
-                  -->
                   <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
                     <div flex="30">
+                      <p class="discount-label">- 50%</p>
                       <p class="price-crossed">{{detail.Product.Price | currency}}</p>
                       <p class="price-hl"><strong>{{detail.Product.Price | currency}}</strong></p>
                     </div>
-                    <div flex="30" class="product-view-qty input-element">
-                      <div class="input-element-inner">
-                        <input ng-model="detail.Quantity" min="1" type="number">
-                      </div>
+                    <div flex="30" class="cart-item-data-qty">
+                      <p>
+                        {{detail.Quantity}}
+                        <span ng-if="detail.Quantity == 1">pieza</span>
+                        <span ng-if="detail.Quantity > 1">piezas</span>
+                      </p>
                     </div>
                     <h3 flex class="product-view-price-hl product-view-price-main">
                       <strong>{{detail.Product.Price * detail.Quantity | currency}}</strong>
                     </h3>
                   </div>
                 </div>
-                <p class="bottom-text"><strong>Entrega:</strong> 1-Abr-2016 (en 8 dias)</p>
+                <p class="bottom-text"><strong>Entrega aproximada:</strong> 1-Abr-2016 (en 8 dias)</p>
               </div>
               <!--END ITEM DATA-->
 
@@ -177,6 +152,7 @@
           </table>
           <hr>
 
+          <!--
           <div>
             <h5 class="cart-summary-toggler">
               <a href="" ng-click="vm.togglePrices = !vm.togglePrices"><strong>MÁXIMO DESCUENTO</strong> <img src="images/arrow-down.png" alt=""></a>
@@ -200,8 +176,9 @@
               </tr>
             </table>
           </div>
-
           <hr>
+          -->
+
           <div class="cart-totals" layout="row" layout-align="space-between end">
             <div flex="50">
               <h1><strong>TOTAL:</strong></h1>

@@ -73,9 +73,12 @@
       for(var i=0;i<9;i++){
         vm.pointersSidenav.push({selected:false});
       }
+      vm.isLoadingCategoriesTree = true;
       categoriesService.createCategoriesTree().then(function(res){
+        vm.isLoadingCategoriesTree = false;
         vm.categoriesTree = res.data;
-
+        $rootScope.categoriesTree = res.data;
+        $rootScope.$broadcast('loadedCategoriesTree', true);
         var auxCategoryTree = angular.copy(vm.categoriesTree);
 
         vm.menuCategories = [];

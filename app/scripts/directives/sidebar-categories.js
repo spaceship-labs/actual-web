@@ -7,35 +7,52 @@
  * # sidebarCategories
  */
 angular.module('dashexampleApp')
-  .directive('sidebarCategories', function (categoriesService, $timeout) {
+  .directive('sidebarCategories', function (categoriesService, $timeout, $rootScope) {
     return {
       templateUrl: 'views/directives/sidebar-categories.html',
       restrict: 'E',
       scope:{
-        categoriesTree: '=',
         selectedCategoryId: '='
       },
       link: function postLink(scope) {
 
         scope.init = function(){
-          //scope.categoriesTree[0].isActive = true;
-          $timeout(function(){
-            scope.showSelectedCategoryId();
-          }, 3500)
         };
+
+        $rootScope.$on('loadedCategoriesTree', function(ev){
+          console.log('loadedCategoriesTree');
+          console.log(scope.categoriesTree);
+          console.log($rootScope.categoriesTree);
+          scope.categoriesTree = $rootScope.categoriesTree;
+          scope.showSelectedCategoryId();
+
+        });
 
         scope.showSelectedCategoryId = function(){
           var selected = scope.selectedCategoryId;
+          console.log(selected);
           if(scope.categoriesTree){
             scope.categoriesTree.forEach(function(mainCategory){
               var hasSelectedAsChild = _.findWhere(mainCategory.Childs, {id: selected});
-              if(mainCategory.id == selected ||  hasSelectedAsChild ){
+              var hasSelectedAsGrandChild = false;
+              mainCategory.Childs.forEach(function(child){
+                if(child.Childs){
+                  child.Childs.forEach(function(grandChild){
+                    if(grandChild.id == selected){
+                      hasSelectedAsGrandChild = true;
+                    }
+                  });
+                }
+              });
+              if(mainCategory.id == selected ||  hasSelectedAsChild || hasSelectedAsGrandChild ){
                 mainCategory.isActive = true;
-                if(hasSelectedAsChild){
+                if(hasSelectedAsChild || hasSelectedAsGrandChild){
                   mainCategory.Childs.forEach(function(category){
                     var hasSelectedAsChildAux = _.findWhere(category.Childs, {id: selected});
                     if(category.id == selected || hasSelectedAsChildAux){
                       category.isActive = true;
+                      console.log(hasSelectedAsChildAux);
+                      hasSelectedAsChildAux.isActive = true;
                     }
                   });
                 }

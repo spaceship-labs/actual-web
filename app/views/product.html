@@ -21,7 +21,6 @@
 
     <!--START NAV-->
     <sidebar-categories
-      categories-tree="main.categoriesTree"
       selected-category-id="vm.lowestCategory.id"
       flex="25">
     </sidebar-categories>
@@ -30,6 +29,7 @@
     <!--MAIN VIEW-->
     <div class="product-view" flex="70">
       <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
+
       <!--
       <div
         class="sub sub-set"
@@ -306,22 +306,34 @@
               </div>
             </div>
 
-            <div class="product-view-prices" layout="row" layout-align="space-between center">
-              <div flex="20">
-                <p class="product-view-price-crossed">{{vm.product.Price | currency }}</p>
+            <div class="product-view-prices" layout="row" layout-align="space-between end">
+              <div flex="15">
+                <p class="product-view-price-discount">- 50%</p>
+                <p class="product-view-price-crossed">{{vm.product.Price | currency:'$':0 }}</p>
                 <p class="product-view-price-hl">
-                  <strong>{{vm.product.Price | currency }}</strong>
+                  <strong>{{vm.product.Price | currency:'$':0 }}</strong>
                 </p>
               </div>
-              <div flex="40">
+              <div flex="15">
                 <div class="product-view-qty input-element">
+                  <label>Piezas</label>
                   <div class="input-element-inner">
                     <input ng-model="vm.product.cart.quantity" min="1" type="number">
                   </div>
                 </div>
               </div>
-              <h3 flex="30" class="product-view-price-hl product-view-price-main">
-                <strong>{{vm.product.Price * vm.product.cart.quantity | currency }}</strong>
+              <div flex="30">
+                <div class="input-element select-element-wrapper">
+                  <label>Entrega aproximada</label>
+                  <select class="select-element">
+                    <option value="20-Abr-2016">1-Abr-2016</option>
+                    <option value="20-Abr-2016">5-Abr-2016</option>
+                    <option value="20-Abr-2016">20-Abr-2016</option>
+                  </select>
+                </div>
+              </div>
+              <h3 flex="25" class="product-view-price-hl product-view-price-main">
+                <strong>{{vm.product.Price * vm.product.cart.quantity | currency:'$':0 }}</strong>
               </h3>
             </div>
 

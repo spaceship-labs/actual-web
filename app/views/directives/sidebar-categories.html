@@ -1,12 +1,14 @@
 <!--AMBIENTES-->
 <div ng-repeat="mainCategory in categoriesTree track by $index" class="listing-view-nav-wrapper">
   <h2>
-    <a  ng-click="toggleMainCategory(mainCategory, $event)"  ng-href="/category/{{mainCategory.Handle}}">
+    <a
+      ng-click="toggleMainCategory(mainCategory, $event)"
+      ng-href="/category/{{mainCategory.Handle}}"
+      ng-class="{'active': mainCategory.isActive}">
       <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i> <strong>{{mainCategory.Name}}</strong>
     </a>
-
-
   </h2>
+
   <ul class="listing-view-nav" ng-show="mainCategory.isActive">
     <li ng-repeat="category in mainCategory.Childs" ng-class="{'active': category.isActive}">
       <h3><a ng-click="toggleCategory(category, $event)" ng-href="/category/{{category.Handle}}"><strong>{{category.Name}}</strong></a></h3>
