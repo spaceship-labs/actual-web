@@ -12,9 +12,9 @@
         var api = {};
 
         // Base Url
-        api.baseUrl = 'http://actual-api.herokuapp.com';
+        //api.baseUrl = 'http://actual-api.herokuapp.com';
         //api.baseUrl = 'http://localhost:1340';
-        //api.baseUrl = 'http://localhost:1337';
+        api.baseUrl = 'http://localhost:1337';
 
         api.sample = $resource(api.baseUrl + 'sample/sample.json');
 

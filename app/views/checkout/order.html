@@ -1,8 +1,8 @@
-<div ng-if="vm.isLoading || true" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+<div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
-<section ng-show="!vm.isLoading || true" class="form-view cart-view checkout-view order-view container container-xxlg" >
+<section ng-show="!vm.isLoading" class="form-view cart-view checkout-view order-view container container-xxlg" >
 
   <h1 class="checkout-title">CHECKOUT</h1>
 
@@ -23,8 +23,18 @@
 
   <div class="checkout-view-inner">
 
-    <div class="checkout-title order-title">
-      <h1><span><i class="icon-checkmark"></i> NÚMERO DE ORDEN: <span>#29389283</span></h1>
+    <div class="checkout-title order-title" layout="row" layout-align="space-between center">
+        <h1 flex="70">
+          <strong>
+            <span><i class="icon-checkmark"></i> NÚMERO DE ORDEN: <span class="order-folio">#29389283</span>
+          </strong>
+        </h1>
+        <div flex="20" class="order-title-extra">
+          <span class="order-date">12-JUN-2016</span>
+          <a href="#" class="action-btn action-btn-save">
+            <strong>IMPRIMIR</strong>
+          </a>
+        </div>
     </div>
     <div class="order-text-block">
       <h3><strong>¡GRACIAS POR SU COMPRA!</strong></h3>
@@ -34,18 +44,19 @@
 
     <hr>
 
+    <!--ORDER ITEMS-->
     <div class="order-block">
       <h3><strong><i class="icon-checkout-ticket"></i> ARTÍCULOS ADQUIRIDOS</strong></h3>
-      <div class="order-items">
+      <div class="order-items order-block-inner">
 
-        <div class="order-items-header" layout="row" layout-align="space-between start">
+        <div class="order-table-header" layout="row" layout-align="space-between start">
           <div flex="35"></div>
           <div flex="20"><strong>CANTIDAD</strong></div>
           <div flex="20"><strong>ENTREGA APROXIMADA</strong></div>
           <div flex="20"><strong>PRECIO</strong></div>
         </div>
 
-        <div class="order-item">
+        <div class="order-item" ng-repeat="item in [0,1,2] track by $index">
           <h3><strong>Mesa redonda mimbre</strong></h3>
           <div layout="row" layout-align="space-between start">
             <div flex="35" layout="row">
@@ -70,6 +81,154 @@
 
       </div>
     </div>
+    <!--END ORDER ITEMS-->
+
+
+    <hr>
+
+    <!--ORDER PAYMENTS-->
+    <div class="order-block">
+      <h3><strong><i class="icon-metodo-pago"></i> PAGOS</strong></h3>
+      <div class="order-block-inner">
+        <div class="order-table-header" layout="row" layout-align="space-between start">
+          <div flex="20" class="pull-left"><strong>FORMA DE PAGO</strong></div>
+          <div flex="20"><strong>FECHA</strong></div>
+          <div flex="20"><strong>FOLIO</strong></div>
+          <div flex="20"><strong>TIPO DE PAGO</strong></div>
+          <div flex="20"><strong>MONTO COBRADO</strong></div>
+        </div>
+
+        <div class="order-payment-item" layout="row" layout-align="space-between center">
+          <div flex="20" class="order-payment-item-data">
+            <span><i class="icon-terminal"></i></span> <strong>Pago con terminal</strong>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>12/18/2016</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>#3040303</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>3 meses sin intereses</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>$14,699 MXN</span>
+          </div>
+        </div>
+
+        <div class="order-payment-item" layout="row" layout-align="space-between center">
+          <div flex="20" class="order-payment-item-data">
+            <span><i class="icon-terminal"></i></span> <strong>Pago con terminal</strong>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>12/18/2016</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>#3040303</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>1 sola exhibición</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>$14,699 MXN</span>
+          </div>
+        </div>
+
+        <div class="order-payment-item" layout="row" layout-align="space-between center">
+          <div flex="20" class="order-payment-item-data">
+            <span><i class="icon-cash"></i></span> <strong>Pago en efectivo</strong>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>12/18/2016</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>#3040303</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>Pago de contado</span>
+          </div>
+          <div flex="20" class="order-payment-item-data">
+            <span>$14,699 MXN</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-payment-totals" layout="row" layout-align="space-between center">
+        <div flex="60">
+          <p class="order-payment-totals-note">* Todos los montos incluyen impuestos.</p>
+        </div>
+        <div flex="20">
+          <p><strong>TOTAL COMPRA:</strong></p>
+          <p><strong>TOTAL PAGADO:</strong></p>
+          <p><strong>SALDO:</strong></p>
+        </div>
+        <div flex="20">
+          <p><strong>$44,097 MXN</strong></p>
+          <p><strong>$44,097 MXN</strong></p>
+          <p><strong>$0 MXN</strong></p>
+        </div>
+      </div>
+
+    </div>
+    <!--END ORDER PAYMENTS-->
+
+    <hr>
+
+    <!--MONEDERO-->
+    <div class="order-block">
+      <h3><strong><i class="icon-monedero"></i> MONEDERO ELECTRÓNICO</strong></h3>
+      <div layout="row" class="order-monedero order-block-inner">
+        <div flex="60"></div>
+        <div flex="20">
+          <p>Saldo anterior:</p>
+          <p>Abonos:</p>
+          <p>Retiros:</p>
+          <p><strong>Saldo actual:</strong></p>
+        </div>
+        <div flex="20">
+          <p>$1,258 MXN<p>
+          <p>$315 MXN<p>
+          <p>$12 MXN<p>
+          <p><strong>$1,561 MXN</strong><p>
+        </div>
+      </div>
+    </div>
+    <!--END MONEDERO-->
+
+    <hr>
+
+    <!--ENVIO-->
+    <div class="order-block delivery-block order-block-info">
+      <h3><strong><i class="icon-envio"></i> ENVÍO</strong></h3>
+      <div class="order-block-inner">
+        <p><strong>DIRECCIÓN:</strong> Av. Bonampak, Calle Cereza #1 SM 2-A M 11 L20, Delegación Bénito Juarez, CP 77500, Cancún, Quintana Roo, México.</p>
+        <p><strong>TELÉFONO:</strong> (998) 842-16-04</p>
+        <br>
+        <p>Solo tienes que esperar a que llegue el producto.</p>
+        <p>Cuando este en camino te enviaremos un e-mail para que puedas hacer el seguimiento.</p>
+      </div>
+    </div>
+    <!--END ENVIO-->
+
+    <hr>
+
+    <!--VENDEDOR-->
+    <div class="order-block seller-block order-block-info">
+      <h3><strong><i class="icon-vendedor"></i> VENDEDOR</strong></h3>
+      <div class="order-block-inner" layout="row" layout-align="space-between center">
+        <div flex="40">
+          <p><strong>LUIS PEREZ BAUTISTA</strong></p>
+          <p>luisperez@actualgroup.com</p>
+          <p>+52 (998) 842-16-04</p>
+        </div>
+        <div flex="20">
+          <a href="#" class="action-btn action-btn-save">
+            <strong>IMPRIMIR</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--END VENDEDOR-->
 
   </div>
 

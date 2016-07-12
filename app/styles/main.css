@@ -3046,6 +3046,27 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 /*---------------/
   #ORDER-VIEW
 /*--------------*/
+.order-view .action-btn-save strong{
+  color: #fff!important;
+}
+.order-view .order-title .order-folio{
+  text-decoration: underline;
+}
+.order-view .order-title .order-date{
+  font-size: 14px;
+  color: #6B6B6B;
+  font-weight: 400;
+}
+.order-view .order-title .action-btn-save {
+  display: inline-block;
+  width: auto;
+  font-size: 18px;
+  margin: 0 0px 0 10px;
+  font-size: 14px;
+  padding: 10px 24px;
+}
+.order-view .order-title-extra{text-align: right;}
+
 .order-view .order-text-block{
   padding: 12px;
   margin: 10px 0;
@@ -3056,13 +3077,19 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 13px;
 }
 
-.order-view .order-block{
-  padding: 12px;
+.order-view .order-block-inner{
+  padding: 4px 12px;
 }
-.order-view .order-items-header{
+.order-view .order-table-header{
   font-size: 14px;
   text-align: right;
+  margin-bottom: 12px;
 }
+
+.order-view .order-table-header > div{
+  padding: 2px 6px;
+}
+
 .order-view .order-item h3{margin: 4px 0;}
 .order-view .order-item-img img{
   max-width: 105px;
@@ -3083,9 +3110,72 @@ padding-left: 16px;
 .order-view .order-item-data{
   font-size: 14px;
   text-align: right;
+  padding: 2px 6px;
+  color: #6B6B6B;
 }
 
+.order-view .order-block h3{
+  font-size: 16px;
+  margin-bottom: 8px;
+}
 
+.order-view .order-block h3 i{
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.order-view .order-payment-item-data{
+  padding: 2px 6px;
+  text-align: right;
+  margin: 6px 0;
+  font-size: 14px;
+  color: #6B6B6B;
+}
+
+.order-view .order-payment-item-data:first-child{
+  text-align: left;
+  color: #000;
+}
+
+.order-view .order-payment-item-data i{
+  font-size: 24px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.order-view .order-payment-totals{
+  background: #F8F8F8;
+  padding: 8px 14px;
+  text-align: right;
+}
+.order-view .order-payment-totals-note{
+  text-align: left;
+}
+.order-view .order-payment-totals p{
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.order-view .order-monedero{
+  font-size: 14px;
+  text-align: right;
+  padding: 2px 6px;
+  color: #6B6B6B;
+}
+.order-view .order-monedero p{margin: 4px 0}
+.order-view .order-monedero strong{
+  color: #000;
+}
+
+.order-view .order-block-info p{
+  color: #6B6B6B;
+  margin: 4px 0;
+  font-size: 13px;
+}
+.order-view .order-block-info strong{
+  color: #000;
+}
 
 /*--------------/
   #FOOTER
