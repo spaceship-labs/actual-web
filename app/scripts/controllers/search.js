@@ -69,11 +69,7 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
     vm.isLoading = true;
     vm.searchValues = [];
     var searchValuesIds = [];
-    //var values = ['5743763aef7d5e62e508e2f0'];
     vm.filters.forEach(function(filter){
-      /*if(filter.selectedValue){
-        values.push(filter.selectedValue);
-      }*/
       filter.Values.forEach(function(val){
         if(val.selected){
           vm.searchValues.push(val);
@@ -84,21 +80,21 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
     vm.searchValues.forEach(function(searchVal){
       searchValuesIds.push(searchVal.id);
     });
-    if (searchValuesIds.length == 0) {
+    if (searchValuesIds.length == 0 && !vm.minPrice && !vm.maxPrice) {
       vm.init();
       return;
     }
     var params = {
       ids: searchValuesIds,
-      //term: vm.search.term
-      keywords: vm.search.keywords
+      keywords: vm.search.keywords,
+      minPrice: vm.minPrice,
+      maxPrice: vm.maxPrice
     };
 
-    //productService.getProductsByFilters(params).then(function(res){
     productService.searchByFilters(params).then(function(res){
       vm.isLoading = false;
-      vm.products = productService.formatProducts(res.data);
-      vm.totalResults = vm.products.length;
+      vm.products = productService.formatProducts(res.data.products);
+      vm.totalResults = res.data.total;
       vm.scrollTo('search-page');
     });
   }
