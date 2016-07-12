@@ -78,7 +78,9 @@
         vm.isLoadingCategoriesTree = false;
         vm.categoriesTree = res.data;
         $rootScope.categoriesTree = res.data;
-        $rootScope.$broadcast('loadedCategoriesTree', true);
+        console.log('loadedCategoriesTree');
+        $rootScope.$broadcast('loadedCategoriesTree', res.data);
+        console.log($rootScope.categoriesTree);
         var auxCategoryTree = angular.copy(vm.categoriesTree);
 
         vm.menuCategories = [];

@@ -3043,6 +3043,50 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 20px 0;
 }
 
+/*---------------/
+  #ORDER-VIEW
+/*--------------*/
+.order-view .order-text-block{
+  padding: 12px;
+  margin: 10px 0;
+}
+.order-view .order-text-block h3{margin: 6px 0;}
+.order-view .order-text-block p{
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+.order-view .order-block{
+  padding: 12px;
+}
+.order-view .order-items-header{
+  font-size: 14px;
+  text-align: right;
+}
+.order-view .order-item h3{margin: 4px 0;}
+.order-view .order-item-img img{
+  max-width: 105px;
+  border: 1px solid #000;
+}
+.order-view .order-item-features{
+padding-left: 16px;
+}
+.order-view .order-item-features ul{
+  margin: 0;
+  list-style: none;
+  padding-left: 0;
+}
+.order-view .order-item-features ul li{
+  margin: 4px 0;
+  font-size: 13px;
+}
+.order-view .order-item-data{
+  font-size: 14px;
+  text-align: right;
+}
+
+
+
 /*--------------/
   #FOOTER
 /*-------------*/

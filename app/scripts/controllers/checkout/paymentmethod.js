@@ -165,7 +165,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
   }
 
   function addPayment(orderId,params){
-    return orderService.addPayment(orderId, params);
+    return quotationService.addPayment(orderId, params);
   }
 
   function createOrder(params){

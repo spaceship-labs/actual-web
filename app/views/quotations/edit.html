@@ -206,10 +206,10 @@
   <section class="records-view">
     <h1><i class="icon-attachment"></i> <strong>BITÁCORA DE SEGUIMIENTO</strong></h1>
 
-    <p><strong>CREAR NUEVO EVENTO</strong></p>
+    <p ng-if="!vm.quotation.isClosed"><strong>CREAR NUEVO EVENTO</strong></p>
     <hr/>
 
-    <form ng-submit="vm.addRecord(newRecordForm)" name="newRecordForm" class="new-record">
+    <form ng-if="!vm.quotation.isClosed" ng-submit="vm.addRecord(newRecordForm)" name="newRecordForm" class="new-record">
       <div layout="row" layout-align="space-between start
       ">
         <div flex="40">
@@ -251,17 +251,19 @@
           </div>
 
           <div layout="row" layout-align="space-between center" class="attachments-section">
+            <!--
             <div flex="30">
               <a href="#">
                 <strong><i class="icon-attatch"></i>ADJUNTAR ARCHIVO</strong>
               </a>
             </div>
-            <div flex="30">
+            -->
+            <div flex="45">
               <a href="#" ngf-select="vm.attachImage($file)">
                 <strong><i class="icon-attachment"></i>ADJUNTAR IMÁGEN</strong>
               </a>
             </div>
-            <div flex="30">
+            <div flex="45">
               <a href="#" ngf-select="vm.attachImage($file)" ngf-capture="'camera'">
                 <strong><i class="icon-photo"></i>TOMAR FOTO</strong>
               </a>
@@ -333,15 +335,15 @@
 
                 </div>
               </div>
-              <form name="closeQuotationForm" ng-submit="vm.updateInfo(closeQuotationForm)">
+              <form ng-if="!vm.quotation.isClosed" name="closeQuotationForm" ng-submit="vm.closeQuotation(closeQuotationForm, vm.closeReason, vm.closeNote)">
                 <div class="record-item-block" layout="row" layout-align="space-between start">
                   <div flex="55">
                     <p><label><strong>AGREGAR COMENTARIOS</strong></label></p>
-                    <textarea rows="7" ng-model="vm.quotation.Info.notes"></textarea>
+                    <textarea rows="7" ng-model="vm.closeNote"></textarea>
                   </div>
                   <div flex="40">
                     <p><label><strong>DECLARAR COMO PERDIDA:</strong></label></p>
-                    <select ng-model="vm.quotation.Info.isClosedReason">
+                    <select required ng-model="vm.closeReason">
                       <option ng-repeat="closeType in vm.closeTypes" ng-value="closeType">
                         {{closeType}}
                       </option>

@@ -72,7 +72,7 @@
 
       function formatProduct(product){
         //product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
-        if( isUpperCase(product.Name) ){
+        if( product.Name && isUpperCase(product.Name) ){
           product.Name = capitalizeFirstLetter(product.ItemName);
         }
         if (product.icon_filename && product.icon_filename !== 'null') {

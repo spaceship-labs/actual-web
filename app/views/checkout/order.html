@@ -1,0 +1,76 @@
+<div ng-if="vm.isLoading || true" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+</div>
+
+<section ng-show="!vm.isLoading || true" class="form-view cart-view checkout-view order-view container container-xxlg" >
+
+  <h1 class="checkout-title">CHECKOUT</h1>
+
+  <div class="steps-bar" layout="row">
+    <a flex="25" class="steps-bar-item">
+      <span><i class="icon-carro"></i> 1. Mi carrito</span>
+    </a>
+    <div flex="25" class="steps-bar-item">
+      <span><i class="icon-login"></i> 2. Datos personales</span>
+    </div>
+    <div flex="25" class="steps-bar-item">
+      <span><i class="icon-terminal"></i> 3. Método de pago</span>
+    </div>
+    <div flex="25" class="steps-bar-item steps-bar-item-active">
+      <span><i class="icon-oportunidades"></i> 4. Checkout</span>
+    </div>
+  </div>
+
+  <div class="checkout-view-inner">
+
+    <div class="checkout-title order-title">
+      <h1><span><i class="icon-checkmark"></i> NÚMERO DE ORDEN: <span>#29389283</span></h1>
+    </div>
+    <div class="order-text-block">
+      <h3><strong>¡GRACIAS POR SU COMPRA!</strong></h3>
+      <p>Estimado <strong>Oliver</strong></p>
+      <p>Su compra ha sido procesada, en breve estaras recibiendo tu confirmación al correo electrónico registrado: <strong>oliver@actualgroup.com</strong></p>
+    </div>
+
+    <hr>
+
+    <div class="order-block">
+      <h3><strong><i class="icon-checkout-ticket"></i> ARTÍCULOS ADQUIRIDOS</strong></h3>
+      <div class="order-items">
+
+        <div class="order-items-header" layout="row" layout-align="space-between start">
+          <div flex="35"></div>
+          <div flex="20"><strong>CANTIDAD</strong></div>
+          <div flex="20"><strong>ENTREGA APROXIMADA</strong></div>
+          <div flex="20"><strong>PRECIO</strong></div>
+        </div>
+
+        <div class="order-item">
+          <h3><strong>Mesa redonda mimbre</strong></h3>
+          <div layout="row" layout-align="space-between start">
+            <div flex="35" layout="row">
+              <div class="order-item-img">
+                <img src="/images/b-287x287.jpg" alt="">
+              </div>
+              <div flex class="order-item-features">
+                <ul>
+                  <li><strong>SKU:</strong> 33342</li>
+                  <li><strong>Materiales:</strong> Mimbre/Cristal</li>
+                  <li><strong>Asientos:</strong> 2</li>
+                  <li><strong>Estilo:</strong> Moderno</li>
+                  <li><strong>Color:</strong> Café capuccino</li>
+                </ul>
+              </div>
+            </div>
+            <div flex="20" class="order-item-data"><span>2</span></div>
+            <div flex="20" class="order-item-data"><span>12/26/2016</span></div>
+            <div flex="20" class="order-item-data"><span>$14,699 MXN</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>

@@ -12,21 +12,19 @@ angular.module('dashexampleApp')
       templateUrl: 'views/directives/sidebar-categories.html',
       restrict: 'E',
       scope:{
-        selectedCategoryId: '='
+        selectedCategoryId: '=',
+        categoriesTree: '='
       },
       link: function postLink(scope) {
 
         scope.init = function(){
         };
 
-        $rootScope.$on('loadedCategoriesTree', function(ev){
-          console.log('loadedCategoriesTree');
-          console.log(scope.categoriesTree);
-          console.log($rootScope.categoriesTree);
-          scope.categoriesTree = $rootScope.categoriesTree;
-          scope.showSelectedCategoryId();
-
-        });
+        scope.$watch('categoriesTree', function(newVal, oldVal){
+          if(newVal != oldVal){
+            scope.showSelectedCategoryId();
+          }
+        })
 
         scope.showSelectedCategoryId = function(){
           var selected = scope.selectedCategoryId;

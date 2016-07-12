@@ -248,6 +248,17 @@ angular
         }
 
       })
+      .when('/checkout/order', {
+        templateUrl: 'views/checkout/order.html',
+        controller: 'CheckoutOrderCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });

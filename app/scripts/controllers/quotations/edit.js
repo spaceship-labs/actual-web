@@ -26,6 +26,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.removeDetail = removeDetail;
   vm.alertRemoveDetail = alertRemoveDetail;
   vm.continueBuying = continueBuying;
+  vm.closeQuotation = closeQuotation;
 
   vm.newRecord = {};
   vm.api = api;
@@ -93,6 +94,35 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
         }
         vm.newRecord = {};
         vm.isLoadingRecords = false;
+      });
+    }
+  }
+
+  function closeQuotation(form,closeReason, extraNotes){
+    if(closeReason){
+      vm.isLoading = true;
+      var params = {
+        dateTime: new Date(),
+        eventType: 'Cierre',
+        notes: extraNotes,
+        User: $rootScope.user.id
+      };
+      quotationService.addRecord(vm.quotation.id, params).then(function(res){
+        if(res.data.id){
+          vm.quotation.Records.push(res.data);
+        }
+        var updateParams = {
+          isClosed: true,
+          isClosedReason: closeReason,
+          isClosedNotes: extraNotes
+        };
+        quotationService.update(vm.quotation.id, updateParams).then(function(res){
+          console.log(res);
+          vm.isLoading = false;
+          vm.quotation.Records.forEach(function(rec){
+            rec.isActive = false;
+          });
+        })
       });
     }
   }

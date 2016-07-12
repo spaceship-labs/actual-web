@@ -25,7 +25,8 @@
         newQuotation: newQuotation,
         setActiveQuotation: setActiveQuotation,
         getTotalsByUser: getTotalsByUser,
-        getCountByUser: getCountByUser
+        getCountByUser: getCountByUser,
+        addPayment: addPayment
 
       };
 
