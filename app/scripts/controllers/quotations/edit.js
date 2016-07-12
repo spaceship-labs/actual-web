@@ -215,7 +215,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   function addNewProduct(){
     quotationService.setActiveQuotation(vm.quotation.id);
     $rootScope.$emit('newActiveQuotation', vm.quotation.id);
-    $location.path('/search');
+    $location.path('/');
   }
 
   function removeDetail(detailId, index){

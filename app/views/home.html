@@ -19,7 +19,7 @@
           <div class="sub-wrapper" ng-repeat="category in main.categoriesTree" flex="33">
             <div
               class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/living-room-fabulous-white-minimmalist-living-room-design-for-bright-white-sofas-and-unique-red-cuhions-plus-minimalist-white-coffee-table-and-high-gloss-black-ceramic-flooring-and-cool.jpg' + ')'}">
+              ng-style="{'background-image' : 'url(' + 'images/{{category.Handle}}.jpg' + ')'}">
               <div class="sub-text">
                 <h4><a ng-href="/category/{{category.Handle}}"><strong>{{category.Name}}</strong></a></h4>
               </div>

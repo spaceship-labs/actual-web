@@ -45,37 +45,37 @@
         <div layout="row">
           <div flex="20" class="input-element select-element-wrapper">
             <label><strong>Titulo</strong></label>
-            <select
+            <md-select
               ng-model="vm.clientTitle"
               class="select-element"
               placeholder="Sr. / Sra. / Srita."
               required
             >
-              <option
+              <md-option
                 ng-repeat="title in vm.titles"
                 ng-value="title.value"
               >
                 {{title.label}}
               </option>
-            </select>
+            </md-select>
           </div>
 
 
           <div flex="20" class="input-element select-element-wrapper">
             <label><strong>Sexo</strong></label>
-            <select
+            <md-select
               ng-model="vm.clientTitle"
               class="select-element"
               placeholder="Masculino / Femenino"
               required
             >
-              <option
+              <md-option
                 ng-repeat="gender in vm.genders"
                 ng-value="gender.value"
               >
                 {{gender.label}}
               </option>
-            </select>
+            </md-select>
           </div>
 
           <div flex="20" class="input-element">

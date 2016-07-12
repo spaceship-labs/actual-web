@@ -36,10 +36,10 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
 
         if($rootScope.activeQuotation.Client === item.id){
           if($location.search().goToCheckout){
-            $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
+            $location.path('/');
           }
           else{
-            $location.path('/search');
+            $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
           }
         }
         else if(!$rootScope.activeQuotation.Client){
@@ -50,7 +50,7 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
               $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
             }
             else{
-              $location.path('/search');
+              $location.path('/');
             }
           });
         }

@@ -32,6 +32,14 @@ a{text-decoration: none}
 .md-dialog-container{
   z-index: 99999999;
 }
+
+md-dialog-content{padding: 20px 10px;}
+md-dialog-content h1{font-size: 24px;}
+md-dialog .md-button.md-primary{
+  background: #33BA2C;
+  color: #fff;
+}
+
 .no-border{border: 0!important;}
 .pull-left{text-align: left!important;}
 .absolute-link{
@@ -1869,7 +1877,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .cart-view .cart-item-data{}
 .cart-view .cart-item-data-inner{
   /*background: #F8F8F8;*/
-  padding: 10px 20px;
+  padding: 0px 20px 10px;
 }
 .cart-view .cart-item-data-qty{
   text-align: center;
@@ -2129,6 +2137,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .form-view .select-element,
 .form-view .input-element .input-element-inner{
   background: #fff;
+  margin: 0;
 }
 .form-view .select-element{max-width: 100%;}
 
@@ -2158,11 +2167,19 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .form-section-content{
   border: 1px solid #000;
   border-top: 0;
-  padding: 30px;
+  padding: 15px 30px;
 }
 .form-section-content-v2{
   padding: 0 0 30px;
   border: 0;
+}
+
+.form-section-content .copy-data{
+  margin: 4px 0;
+}
+.form-section-content .copy-data a{
+  color: #000;
+  text-decoration: underline;
 }
 
 .form-view .action-links a{
@@ -2531,7 +2548,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin-right: 10px;
 }
 .cart-item .cart-item-data-prices{
-  margin-top: 20px;
+  /*margin-top: 20px;*/
 }
 .cart-item .cart-item-data-prices h3{
   font-size: 23px;

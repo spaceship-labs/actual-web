@@ -18,7 +18,7 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
 
   vm.user = $rootScope.user;
   vm.columnsClients = [
-    {key:'id', label:'CardCode'},
+    {key:'CardCode', label:'CardCode'},
     {key:'CardName', label:'Cliente'},
     //{key:'rfc', label:'RFC'},
     {key:'E_Mail', label:'Email'},

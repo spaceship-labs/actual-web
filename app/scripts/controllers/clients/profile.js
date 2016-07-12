@@ -10,12 +10,13 @@
 angular.module('dashexampleApp')
   .controller('ClientProfileCtrl', ClientProfileCtrl);
 
-function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productService, commonService, clientService, quotationService, saleService){
+function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productService, commonService, clientService, quotationService, saleService, dialogService){
   var vm = this;
 
   vm.init = init;
   vm.update = update;
   vm.createQuotation = createQuotation;
+  vm.personalDataToDelivery = personalDataToDelivery;
 
   vm.activeTab = 0;
   vm.titles = [
@@ -88,10 +89,14 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
   vm.apiResourceOrders = saleService.getList;
 
   function init(){
+    vm.isLoading = true;
     clientService.getById($routeParams.id).then(function(res){
+      vm.isLoading = false;
       vm.client = res.data;
-      vm.client.Info = vm.client.Info || {};
-      vm.extraParamsLeads = {CardCode: vm.client.id};
+      vm.client.firstName = vm.client.firstName || vm.client.CardName;
+      vm.client.phone = vm.client.phone || vm.client.Phone1;
+      vm.client.mobilePhone = vm.client.mobilePhone || vm.client.Cellular;
+      vm.extraParamsLeads = {Client: vm.client.id};
       vm.extraParamsSales = {CardCode: vm.client.id};
     });
   }
@@ -100,6 +105,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
     vm.isLoading = true;
     clientService.update(vm.client.id, vm.client).then(function (res){
       vm.isLoading = false;
+      dialogService.showDialog('Informacion de cliente actualizada');
     });
   }
 
@@ -112,6 +118,30 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
     quotationService.newQuotation(params, goToSearch);
   }
 
+  function personalDataToDelivery(){
+    vm.client.deliveryLastName = vm.client.lastName + ' ' + vm.client.secondLastName;
+    vm.relationFields = [
+      {deliveryField:'deliveryName', personalField: 'firstName'},
+      {deliveryField: 'deliveryDialCode', personalField: 'dialCode'},
+      {deliveryField: 'deliveryPhone', personalField: 'phone'},
+      {deliveryField: 'deliveryEmail', personalField: 'E_Mail'},
+      {deliveryField: 'deliveryMobileDialCode', personalField: 'mobileDialCode'},
+      {deliveryField: 'deliveryMobilePhone', personalField: 'mobilePhone'},
+      {deliveryField: 'deliveryExternalNumber', personalField: 'externalNumber'},
+      {deliveryField: 'deliveryInternalNumber', personalField: 'internalNumber'},
+      {deliveryField: 'deliveryNeighborhood', personalField: 'neighborhood'},
+      {deliveryField: 'deliveryMunicipality', personalField: 'municipality'},
+      {deliveryField: 'deliveryCity', personalField: 'city'},
+      {deliveryField: 'deliveryEntity', personalField: 'entity'},
+      {deliveryField: 'deliveryZipCode', personalField: 'zipCode'},
+      {deliveryField: 'deliveryStreet', personalField: 'street'},
+      {deliveryField: 'deliveryStreet2', personalField: 'street2'},
+      {deliveryField: 'deliveryReferences', personalField: 'references'},
+    ];
+    vm.relationFields.forEach(function(relation){
+      vm.client[relation.deliveryField] = angular.copy(vm.client[relation.personalField]);
+    });
+  }
 
   vm.init();
 
