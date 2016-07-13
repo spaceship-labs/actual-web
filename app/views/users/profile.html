@@ -1,13 +1,17 @@
-<section class="form-view container container-xlg">
-  <h1><i class="icon-login"></i> <strong>MI PERFIL |</strong> {{main.user.firstName + ' ' + main.user.lastName }}</h1>
-
+<form name="form" class="form-view container container-xlg">
+  <h1>
+    <i class="icon-login"></i>
+    <strong>MI PERFIL |</strong>
+    {{main.user.firstName + ' ' + main.user.lastName }}
+  </h1>
+  {{form}}
   <section class="form-view-content">
-
     <section class="form-section">
-
       <!--DATOS PERSONALES-->
-      <section action="#" class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
-
+      <section action="#"
+        class="form-section-content form-section-content-v2"
+        layout="row" layout-align="space-between center"
+      >
         <div flex="20" class="avatar-placeholder-wrap">
           <div class="avatar-placeholder">
             <span>+</span>
@@ -18,14 +22,18 @@
         <div flex="75">
           <div layout="row">
             <div flex="40" class="input-element">
-              <label><strong>Nombre(s) <span class="hl-label">*</span></strong></label>
+              <label>
+                <strong>Nombre(s) <span class="hl-label">*</span></strong>
+              </label>
               <div class="input-element-inner">
                 <input type="text" ng-model="vm.user.firstName" required>
               </div>
             </div>
 
             <div flex="60" class="input-element">
-              <label><strong>Apellidos <span class="hl-label">*</span></strong></label>
+              <label>
+                <strong>Apellidos <span class="hl-label">*</span></strong>
+              </label>
               <div class="input-element-inner">
                 <input type="text" ng-model="vm.user.lastName" required>
               </div>
@@ -36,16 +44,26 @@
           <div layout="row">
 
             <div flex="30" class="input-element">
-              <label><strong>Email</strong> <span class="hl-label">*</span></label>
+              <label>
+                <strong>Email</strong> <span class="hl-label">*</span>
+              </label>
               <div class="input-element-inner">
                 <input type="email" ng-model="vm.user.email" required>
               </div>
             </div>
 
            <div flex="30" class="input-element">
-              <label><strong>Confirmar email</strong> <span class="hl-label">*</span></label>
+              <label>
+                <strong>Confirmar email</strong>
+                <span class="hl-label">*</span>
+              </label>
               <div class="input-element-inner">
-                <input type="email" required>
+                <input
+                  type="email"
+                  ng-model="_email"
+                  ng-pattern="vm.user.email"
+                  required
+                >
               </div>
             </div>
 
@@ -54,7 +72,9 @@
           <hr/>
 
           <p class="modify-password">
-            <a href="http://actual.spaceshiplabs.com/auth/forgot-password">
+            <a
+              href="http://actual.spaceshiplabs.com/auth/forgot-password"
+            >
               <i class="icon-login"></i>
               <strong>MODIFICAR CONTRASEÑA</strong>
             </a>
@@ -69,8 +89,14 @@
     <!--END FORM SECTION-->
 
     <div layout="row" class="form-view-btns">
-      <a href="" flex class="form-view-btn">Borrar todos los campos</a>
-      <a href="" flex class="form-view-btn form-view-btn-primary">Guardar información</a>
+      <button href="" flex class="form-view-btn">
+        Borrar todos los campos
+      </button>
+      <button href="" type="submit" flex
+        class="form-view-btn form-view-btn-primary"
+      >
+        Guardar información
+      </button>
     </div>
 
   </section>
