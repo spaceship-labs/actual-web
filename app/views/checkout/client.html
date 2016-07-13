@@ -24,20 +24,27 @@
   <div class="checkout-view-inner" layout="row" layout-align="space-between start">
 
     <section flex="75">
-      <h3>Datos personales</h3>
+      <h3>
+        <strong>Datos personales</strong>
+        <a class="small-link" href="#" ng-href="/clients/profile/{{vm.quotation.Client.id}}">Cambiar mis datos personales</a>
+        <span ng-if="vm.quotation.Address"><a href="#" ng-click="vm.updateAddress()" class="small-link">Actualizar con mis datos personales</a></span>
+
+      </h3>
       <form ng-submit="vm.continueProcess()" action="#">
         <div layout="row">
           <div flex="45" class="input-element">
             <label><strong>Nombre(s) del destinatario</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.name" required>
-            </div>
+            <p>{{vm.quotation.Address.name}}</p>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.name" required>
+            </div>-->
           </div>
           <div flex="45" class="input-element">
             <label><strong>Apllido(s) del destinatario</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.lastName" required>
-            </div>
+            <p>{{vm.quotation.Address.lastName}}</p>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.lastName" required>
+            </div>-->
           </div>
         </div>
 
@@ -46,12 +53,14 @@
           <div flex="20" class="input-element">
             <label><strong>Teléfono fijo <span class="hl-label">*</span></strong></label>
             <div layout="row" layout-align="space-between center">
-                <div flex="30" class="input-element-inner">
-                  <input type="text" ng-model="vm.quotation.Address.dialCode" placeholder="Lada" required>
-                </div>
-                <div flex="60" class="input-element-inner">
-                  <input type="text" ng-model="vm.quotation.Address.phone" required>
-                </div>
+                <!--<div flex="30" class="input-element-inner">
+                  <input type="text" disabled ng-model="vm.quotation.Address.dialCode" placeholder="Lada" required>
+                </div>-->
+                <div flex="30"><p>Lada:{{vm.quotation.Address.dialCode}}</p></div>
+                <div flex="60"><p>{{vm.quotation.Address.phone}}</p></div>
+                <!--<div flex="60" class="input-element-inner">
+                  <input type="text" disabled ng-model="vm.quotation.Address.phone" required>
+                </div>-->
             </div>
           </div>
 
@@ -59,29 +68,32 @@
           <div flex="20" class="input-element">
             <label><strong>Teléfono celular <span class="hl-label">*</span></strong></label>
             <div layout="row" layout-align="space-between center">
-                <div flex="30" class="input-element-inner">
-                  <input type="text" ng-model="vm.quotation.Address.mobileDialCode" placeholder="Lada" required>
+                <div flex="30"><p>Lada:{{vm.quotation.Address.mobileDialCode}}</p></div>
+                <div flex="60"><p>{{vm.quotation.Address.mobilePhone}}</p></div>
+                <!--<div flex="30" class="input-element-inner">
+                  <input type="text" readonly ng-model="vm.quotation.Address.mobileDialCode" placeholder="Lada" required>
                 </div>
                 <div flex="60" class="input-element-inner">
-                  <input type="text" ng-model="vm.quotation.Address.mobilePhone" required>
-                </div>
+                  <input type="text" disabled ng-model="vm.quotation.Address.mobilePhone" required>
+                </div>-->
             </div>
           </div>
 
 
           <div flex class="input-element">
             <label><strong>Email</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="email" ng-model="vm.quotation.Address.email" ng-model="vm.client.E_Mail" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="email" disabled ng-model="vm.quotation.Address.email"  required>
+            </div>-->
+            <p>{{vm.quotation.Address.email}}</p>
           </div>
 
-         <div flex class="input-element">
+          <!--<div flex class="input-element">
             <label><strong>Confirmar email</strong> <span class="hl-label">*</span></label>
             <div class="input-element-inner">
               <input type="email" required>
             </div>
-          </div>
+          </div>-->
 
         </div>
 
@@ -89,56 +101,64 @@
         <div layout="row">
           <div flex class="input-element">
             <label><strong>Calle</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.street" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.street" required>
+            </div>-->
+            <p>{{vm.quotation.Address.street}}</p>
           </div>
           <div flex class="input-element">
             <label><strong>No. exterior</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.externalNumber" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.externalNumber" required>
+            </div>-->
+            <p>{{vm.quotation.Address.externalNumber}}</p>
           </div>
           <div flex class="input-element">
             <label><strong>No. interior</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.internalNumber" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.internalNumber" required>
+            </div>-->
+            <p>{{vm.quotation.Address.internalNumber}}</p>
           </div>
           <div flex class="input-element">
             <label><strong>Colonia</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.neighborhood" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.neighborhood" required>
+            </div>-->
+            <p>{{vm.quotation.Address.neighborhood}}</p>
           </div>
           <div flex class="input-element">
             <label><strong>Municipio</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text"  ng-model="vm.quotation.Address.municipality" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text"  disabled ng-model="vm.quotation.Address.municipality" required>
+            </div>-->
+            <p>{{vm.quotation.Address.municipality}}</p>
           </div>
         </div>
 
         <div layout="row">
           <div flex="25" class="input-element">
             <label><strong>Ciudad</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.city" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.city" required>
+            </div>-->
+            <p>{{vm.quotation.Address.city}}</p>
           </div>
           <div flex="25" class="input-element select-element-wrapper">
             <label><strong>Estado</strong> <span class="hl-label">*</span></label>
-            <select ng-model="vm.quotation.Address.entity" class="select-element">
+            <!--<select disabled ng-model="vm.quotation.Address.entity" class="select-element">
               <option ng-selected="state.name == vm.quotation.Address.entity" ng-repeat="state in vm.states" ng-value="state.name">
                 {{state.name}}
               </option>
-            </select>
+            </select>-->
+            <p>{{vm.quotation.Address.entity}}</p>
           </div>
           <div flex="15" class="input-element">
             <label><strong>Codigo postal</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input  type="text" ng-model="vm.quotation.Address.zipCode" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input  type="text" disabled ng-model="vm.quotation.Address.zipCode" required>
+            </div>-->
+            <p>{{vm.quotation.Address.zipCode}}</p>
           </div>
 
         </div>
@@ -146,21 +166,24 @@
         <div layout="row">
           <div flex="25" class="input-element">
             <label><strong>Entre calle</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.street" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.street" required>
+            </div>-->
+            <p>{{vm.quotation.Address.street}}</p>
           </div>
           <div flex="25" class="input-element">
             <label><strong>Y calle</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.street2" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.street2" required>
+            </div>-->
+            <p>{{vm.quotation.Address.street2}}</p>
           </div>
           <div flex="25" class="input-element">
             <label><strong>Referencias cercanas</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="vm.quotation.Address.references" required>
-            </div>
+            <!--<div class="input-element-inner">
+              <input type="text" disabled ng-model="vm.quotation.Address.references" required>
+            </div>-->
+            <p>{{vm.quotation.Address.references}}</p>
           </div>
 
         </div>

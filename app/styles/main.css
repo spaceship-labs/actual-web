@@ -2876,6 +2876,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .checkout-view h3{
   font-weight: 400
 }
+.checkout-view .small-link{
+  font-size: 13px;
+  text-decoration: underline;
+  margin-left: 5px;
+  color: #000;
+}
 
 .checkout-view .second-step-payment{
   margin-top: 40px;

@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CheckoutClientCtrl', CheckoutClientCtrl);
 
-function CheckoutClientCtrl(commonService ,$routeParams, $rootScope, $location ,categoriesService, productService, quotationService, clientService, orderService){
+function CheckoutClientCtrl(commonService ,$timeout ,$routeParams, $rootScope, $location ,categoriesService, productService, quotationService, clientService, orderService){
   var vm = this;
   vm.init = init;
   vm.getProducts = getProducts;
@@ -18,6 +18,8 @@ function CheckoutClientCtrl(commonService ,$routeParams, $rootScope, $location ,
   vm.getTotalPrice = getTotalPrice;
   vm.getTotalProducts = getTotalProducts;
   vm.continueProcess = continueProcess;
+  vm.setAddress = setAddress;
+  vm.updateAddress = updateAddress;
 
   vm.states = commonService.getStates();
 
@@ -33,19 +35,45 @@ function CheckoutClientCtrl(commonService ,$routeParams, $rootScope, $location ,
       vm.isLoading = false;
 
       //fillin address data with client info
-      if(!vm.quotation.Address ){
-        vm.quotation.Address = {
-          name: vm.quotation.Client.CardName,
-          lastName: '',
-          phone: vm.quotation.Client.Phone,
-          mobilePhone: vm.quotation.Client.Cellular,
-          email: vm.quotation.Client.E_Mail
-        };
+      if(!vm.quotation.Address){
+        console.log('No habia direccion');
+        vm.setAddress();
       }
 
 
       vm.getProducts(productsIds);
     });
+  }
+
+  function setAddress(){
+    vm.quotation.Address = {
+      //name: vm.quotation.Client.deliveryName  || vm.quotation.Client.CardName,
+      name: vm.quotation.Client.deliveryName,
+      lastName: vm.quotation.Client.deliveryLastName,
+      dialCode: vm.quotation.deliveryPhone,
+      phone: vm.quotation.deliveryPhone,
+      mobileDialCode: vm.quotation.Client.deliveryMobileDialCode,
+      mobilePhone: vm.quotation.Client.deliveryMobilePhone,
+      email: vm.quotation.Client.deliveryEmail,
+      externalNumber: vm.quotation.Client.deliveryExternalNumber,
+      internalNumber: vm.quotation.Client.deliveryInternalNumber,
+      neighborhood:  vm.quotation.Client.deliveryNeighborhood,
+      municipality:  vm.quotation.Client.deliveryMunicipality,
+      city: vm.quotation.Client.deliveryCity,
+      entity: vm.quotation.Client.deliveryEntity,
+      zipCode:  vm.quotation.Client.deliveryZipCode,
+      street:  vm.quotation.Client.deliveryStreet,
+      street2:  vm.quotation.Client.deliveryStreet2,
+      references: vm.quotation.Client.deliveryReferences,
+    };
+  }
+
+  function updateAddress(){
+    vm.isLoading = true;
+    $timeout(function(){
+      vm.setAddress();
+      vm.isLoading = false;
+    },1000);
   }
 
   function continueProcess(){

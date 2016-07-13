@@ -17,6 +17,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
   vm.update = update;
   vm.createQuotation = createQuotation;
   vm.personalDataToDelivery = personalDataToDelivery;
+  vm.onPikadaySelect = onPikadaySelect;
 
   vm.activeTab = 0;
   vm.titles = [
@@ -33,10 +34,11 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
   vm.countries = commonService.getCountries();
 
   vm.columnsLeads = [
-    {key: 'id', label:'Folio'},
-    {key:'CardName', label:'Cliente'},
-    {key:'DocTotal', label: 'Total'},
-    {key:'DocCur', label:'Moneda'},
+    {key: 'folio', label:'Folio'},
+    {key:'Client.firstName', label:'Cliente'},
+    {key:'Client.CardName', label:'Cliente (Nombre SAP)'},
+    {key:'total', label: 'Total', currency:true},
+    {key:'currency', label:'Moneda'},
     {
       key:'Acciones',
       label:'Acciones',
@@ -46,29 +48,6 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
       ]
     },
   ];
-
-  /*
-  vm.columnsLeads = [
-    {key:'folio', label:'Folio'},
-    {key:'client', label:'Cliente'},
-    {key:'email', label:'Email'},
-    {key:'cotizacion', label:'Cotización'},
-    {key:'seguimiento', label:'Seguimiento'},
-    {key:'total', label:'Total'},
-    {key:'cobrado', label:'Cobrado'},
-    {key:'diferencia', label:'Diferencia'},
-    {
-      key:'Acciones',
-      label:'Acciones',
-      propId: 'folio',
-      actions:[
-        {url:'#',type:'edit'},
-        {url:'#',type:'delete'}
-      ]
-    },
-  ];
-  */
-
 
   vm.apiResourceLeads = quotationService.getByClient;
 
@@ -93,6 +72,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
     clientService.getById($routeParams.id).then(function(res){
       vm.isLoading = false;
       vm.client = res.data;
+      vm.client.birthDate = vm.client.birthDate  ? new Date(vm.client.birthDate) : new Date();
       vm.client.firstName = vm.client.firstName || vm.client.CardName;
       vm.client.phone = vm.client.phone || vm.client.Phone1;
       vm.client.mobilePhone = vm.client.mobilePhone || vm.client.Cellular;
@@ -101,9 +81,15 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
     });
   }
 
+  function onPikadaySelect(pikaday){
+    console.log(pikaday);
+    vm.client.birthDate = pikaday._d;
+  }
+
   function update(){
     vm.isLoading = true;
-    clientService.update(vm.client.id, vm.client).then(function (res){
+    var params = angular.copy(vm.client);
+    clientService.update(vm.client.id, params).then(function (res){
       vm.isLoading = false;
       dialogService.showDialog('Informacion de cliente actualizada');
     });
