@@ -78,9 +78,7 @@
         vm.isLoadingCategoriesTree = false;
         vm.categoriesTree = res.data;
         $rootScope.categoriesTree = res.data;
-        console.log('loadedCategoriesTree');
         $rootScope.$broadcast('loadedCategoriesTree', res.data);
-        console.log($rootScope.categoriesTree);
         var auxCategoryTree = angular.copy(vm.categoriesTree);
 
         vm.menuCategories = [];
@@ -123,7 +121,6 @@
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {
-      console.log(next,current);
       vm.menuCategoriesOn = false;
       vm.menuCategories.forEach(function(category){
         category.isActive = false;
