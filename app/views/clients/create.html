@@ -1,9 +1,12 @@
-<section class="form-view container container-xlg">
+<form name="form" class="form-view container container-xlg">
   <h1><i class="icon-login"></i> <strong>NUEVO CLIENTE</strong></h1>
-
+  {{vm.client}}
   <section class="form-view-content">
 
-    <p class="form-view-hint"><strong>SELECCIONA UNA PESTAÑA</strong> | PARA VISUALIZAR Y/O EDITAR LA INFORMACIÓN REQUERIDA</p>
+    <p class="form-view-hint">
+      <strong>SELECCIONA UNA PESTAÑA</strong>
+      | PARA VISUALIZAR Y/O EDITAR LA INFORMACIÓN REQUERIDA
+    </p>
 
     <section class="form-section">
 
@@ -40,15 +43,18 @@
       </div>
 
       <!--DATOS PERSONALES-->
-      <section ng-show="vm.activeTab==0" action="#" class="form-section-content">
+      <section action="#" class="form-section-content"
+        ng-show="vm.activeTab==0"
+      >
 
         <div layout="row">
           <div flex="20" class="input-element select-element-wrapper">
             <label><strong>Titulo</strong></label>
             <md-select
-              ng-model="vm.clientTitle"
+              ng-model="vm.client.title"
+              name="title"
               class="select-element"
-              placeholder="Sr. / Sra. / Srita."
+              placeholder="Sr/ Sra/ Srita"
               required
             >
               <md-option
@@ -64,7 +70,8 @@
           <div flex="20" class="input-element select-element-wrapper">
             <label><strong>Sexo</strong></label>
             <md-select
-              ng-model="vm.clientTitle"
+              ng-model="vm.client.gender"
+              name="title"
               class="select-element"
               placeholder="Masculino / Femenino"
               required
@@ -79,9 +86,20 @@
           </div>
 
           <div flex="20" class="input-element">
-            <label><strong>Fecha de nacimiento <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>Fecha de nacimiento
+                <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div class="input-element-inner">
-              <input mdc-datetime-picker="" date="true" type="text" id="datetime" min-date="date" ng-model="vm.birthdate" placeholder="dd-mm/aaaa" time="false" lang="es" class=" md-input">
+              <input
+                id="datetime"
+                type="text"
+                name="birthdate"
+                ng-model="vm.client.birthdate"
+                ng-pattern="'(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}'"
+                placeholder="dd/mm/aaaa"
+              >
             </div>
           </div>
 
@@ -89,23 +107,46 @@
 
         <div layout="row">
           <div flex="20" class="input-element">
-            <label><strong>Nombre(s) del cliente <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>Nombre(s) del cliente
+                <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div class="input-element-inner">
-              <input type="text" required>
+              <input
+                type="text"
+                name="name"
+                ng-model="vm.client.name"
+                required
+              >
             </div>
           </div>
 
           <div flex class="input-element">
-            <label><strong>Apellido paterno <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>
+                Apellido paterno <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div class="input-element-inner">
-              <input type="text" required>
+              <input
+                type="text"
+                name="paterno"
+                ng-model="vm.client.paterno"
+                required
+              >
             </div>
           </div>
 
           <div flex class="input-element">
             <label><strong>Apellido materno</strong></label>
             <div class="input-element-inner">
-              <input type="text" required>
+              <input
+                type="text"
+                name="materno"
+                ng-model="vm.client.materno"
+                required
+              >
             </div>
           </div>
         </div>
@@ -113,47 +154,96 @@
         <div layout="row">
 
           <div flex="20" class="input-element">
-            <label><strong>Teléfono fijo <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>
+                Teléfono fijo <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div layout="row" layout-align="space-between center">
                 <div flex="30" class="input-element-inner">
-                  <input type="text" placeholder="Lada" required>
+                  <input
+                    type="text"
+                    name="ladaFijo"
+                    ng-model="vm.client.ladaFijo"
+                    ng-pattern="'[0-9]{3}'"
+                    placeholder="Lada"
+                    required
+                  >
                 </div>
                 <div flex="60" class="input-element-inner">
-                  <input type="text" required>
+                  <input
+                    type="text"
+                    name="fijo"
+                    ng-model="vm.client.fijo"
+                    ng-pattern="'[0-9]{7}'"
+                    required
+                  >
                 </div>
             </div>
           </div>
 
 
           <div flex="20" class="input-element">
-            <label><strong>Teléfono celular <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>
+                Teléfono celular <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div layout="row" layout-align="space-between center">
                 <div flex="30" class="input-element-inner">
-                  <input type="text" placeholder="Lada" required>
+                  <input
+                    type="text"
+                    name="ladaCel"
+                    ng-model="vm.client.ladaCelular"
+                    ng-pattern="'[0-9]{3}'"
+                    placeholder="Lada"
+                    required
+                  >
                 </div>
                 <div flex="60" class="input-element-inner">
-                  <input type="text" required>
+                  <input
+                    type="text"
+                    name="celular"
+                    ng-model="vm.client.celular"
+                    ng-pattern="'[0-9]{7}'"
+                    placeholder="celular"
+                    required
+                  >
                 </div>
             </div>
           </div>
 
 
           <div flex class="input-element">
-            <label><strong>Email</strong> <span class="hl-label">*</span></label>
+            <label>
+              <strong>Email</strong>
+              <span class="hl-label">*</span>
+            </label>
             <div class="input-element-inner">
-              <input type="email" required>
+              <input
+                type="email"
+                name="email"
+                ng-model="vm.client.email"
+                required
+              >
             </div>
           </div>
-
          <div flex class="input-element">
-            <label><strong>Confirmar email</strong> <span class="hl-label">*</span></label>
+            <label>
+              <strong>Confirmar email</strong>
+              <span class="hl-label">*</span>
+            </label>
             <div class="input-element-inner">
-              <input type="email" required>
+              <input
+                type="email"
+                name="_email"
+                ng-model="_email"
+                ng-pattern="vm.client.email"
+                required
+              >
             </div>
           </div>
-
         </div>
-
       </section>
       <!--END DATOS PERSONALES-->
 
@@ -537,10 +627,16 @@
     <!--END FORM SECTION-->
 
     <div layout="row" class="form-view-btns">
-      <a href="" flex class="form-view-btn">Borrar todos los campos</a>
-      <a href="" flex class="form-view-btn form-view-btn-primary">Guardar información</a>
+      <button flex class="form-view-btn">
+        Borrar todos los campos
+      </button>
+      <button type="submit" class="form-view-btn form-view-btn-primary"
+        flex
+      >
+        Guardar información
+      </button>
     </div>
 
   </section>
 
-</section>
+</form>
