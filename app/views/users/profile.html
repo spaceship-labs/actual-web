@@ -4,7 +4,11 @@
     <strong>MI PERFIL |</strong>
     {{main.user.firstName + ' ' + main.user.lastName }}
   </h1>
-  {{form}}
+  <section ng-if="form.$submitted && form.$error" class="error">
+    <div ng-if="form.confirmEmail.$error.pattern">
+      Los correos no coinciden
+    </div>
+  </section>
   <section class="form-view-content">
     <section class="form-section">
       <!--DATOS PERSONALES-->
@@ -59,6 +63,7 @@
               </label>
               <div class="input-element-inner">
                 <input
+                  name="confirmEmail"
                   type="email"
                   ng-model="_email"
                   ng-pattern="vm.user.email"
@@ -93,6 +98,7 @@
         Borrar todos los campos
       </button>
       <button href="" type="submit" flex
+        ng-click="vm.submit()"
         class="form-view-btn form-view-btn-primary"
       >
         Guardar información

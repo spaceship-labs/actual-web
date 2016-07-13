@@ -249,40 +249,84 @@
 
 
       <!--DATOS DE FACTURACION-->
-      <section ng-show="vm.activeTab==1" action="#" class="form-section-content">
-
+      <section
+        ng-show="vm.activeTab==1"
+        action="#" class="form-section-content"
+      >
         <div layout="row">
           <div flex="45" class="input-element">
-            <label><strong>Razón social <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>
+                Razón social <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div class="input-element-inner">
-              <input type="text" required>
+              <input
+                type="text"
+                name="razon"
+                ng-model="vm.client.billing.razon"
+                required
+              >
             </div>
           </div>
 
           <div flex="45" class="input-element">
-            <label><strong>Nombre de la empresa <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>Nombre de la empresa
+                <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div class="input-element-inner">
-              <input type="text" required>
+              <input
+                type="text"
+                name="enterprise"
+                ng-model="vm.client.billing.enterprise"
+                required
+              >
             </div>
           </div>
         </div>
 
         <div layout="row">
           <div flex="20" class="input-element">
-            <label><strong>RFC <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>
+                RFC <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div class="input-element-inner">
-              <input type="text" required>
+              <input
+                type="text"
+                name="rfc"
+                ng-model="vm.client.billing.rfc"
+                required
+              >
             </div>
           </div>
 
           <div flex="25" class="input-element">
-            <label><strong>Teléfono <span class="hl-label">*</span></strong></label>
+            <label>
+              <strong>
+                Teléfono <span class="hl-label">*</span>
+              </strong>
+            </label>
             <div layout="row" layout-align="space-between center">
                 <div flex="35" class="input-element-inner">
-                  <input type="text" placeholder="Lada" required>
+                  <input
+                    type="text"
+                    name="phoneLada"
+                    ng-model="vm.client.phoneLada"
+                    placeholder="Lada"
+                    required
+                  >
                 </div>
                 <div flex="60" class="input-element-inner">
-                  <input type="text" required>
+                  <input
+                    type="text"
+                    name="phone"
+                    ng-model="vm.client.phone"
+                    required
+                  >
                 </div>
             </div>
           </div>
@@ -290,7 +334,11 @@
           <div flex="30" class="input-element">
             <label><strong>Email</strong></label>
             <div class="input-element-inner">
-              <input type="email" required>
+              <input
+                type="email"
+                name="email"
+                required
+              >
             </div>
           </div>
         </div>
