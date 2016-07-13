@@ -74,6 +74,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
       paymentOpts = {
         type:'terminal',
         ammount: 30000,
+        currency: 'MXP',
         verificationCode: '',
         terminal:'TPV Banorte',
         recurringPayments: 3,
