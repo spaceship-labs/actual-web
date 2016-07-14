@@ -22,9 +22,17 @@ angular.module('dashexampleApp')
 
         scope.$watch('categoriesTree', function(newVal, oldVal){
           if(newVal != oldVal){
+            console.log('categoriesTree');
+            console.log(newVal);
             scope.showSelectedCategoryId();
           }
-        })
+        });
+
+        scope.$watch('selectedCategoryId', function(newVal, oldVal){
+          if(newVal != oldVal && angular.isArray(scope.categoriesTree) ){
+            scope.showSelectedCategoryId();
+          }
+        });
 
         scope.showSelectedCategoryId = function(){
           var selected = scope.selectedCategoryId;
@@ -49,8 +57,9 @@ angular.module('dashexampleApp')
                     var hasSelectedAsChildAux = _.findWhere(category.Childs, {id: selected});
                     if(category.id == selected || hasSelectedAsChildAux){
                       category.isActive = true;
-                      console.log(hasSelectedAsChildAux);
-                      hasSelectedAsChildAux.isActive = true;
+                      if(hasSelectedAsChildAux){
+                        hasSelectedAsChildAux.isActive = true;
+                      }
                     }
                   });
                 }
@@ -95,9 +104,16 @@ angular.module('dashexampleApp')
           scope.categoriesTree.forEach(function(category){
             category.isActive = false;
             //Closing also child categories
-            category.Childs.forEach(function(subCategory){
-              subCategory.isActive = false;
-            });
+            if(category.Childs){
+              category.Childs.forEach(function(subCategory){
+                subCategory.isActive = false;
+                if(subCategory.Childs){
+                  subCategory.Childs.forEach(function(innerCategory){
+                    innerCategory.isActive = false;
+                  });
+                }
+              });
+            }
           });
         };
 

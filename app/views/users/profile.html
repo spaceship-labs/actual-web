@@ -1,12 +1,16 @@
 <section class="form-view container container-xlg">
-  <h1><i class="icon-login"></i> <strong>MI PERFIL |</strong> {{main.user.firstName + ' ' + main.user.lastName }}</h1>
+  <h1><i class="icon-login"></i> <strong>MI PERFIL |</strong> {{vm.user.firstName + ' ' + vm.user.lastName }}</h1>
 
-  <section class="form-view-content">
+  <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+  </div>
+
+  <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)" class="form-view-content">
 
     <section class="form-section">
 
       <!--DATOS PERSONALES-->
-      <section action="#" class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+      <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
 
         <div flex="20" class="avatar-placeholder-wrap">
           <div class="avatar-placeholder">
@@ -70,9 +74,9 @@
 
     <div layout="row" class="form-view-btns">
       <a href="" flex class="form-view-btn">Borrar todos los campos</a>
-      <a href="" flex class="form-view-btn form-view-btn-primary">Guardar información</a>
+      <a href="" ng-click="vm.update(updateForm)" flex class="form-view-btn form-view-btn-primary">Guardar información</a>
     </div>
 
-  </section>
+  </form>
   <!--END PROFILE EDIT-->
 </section>

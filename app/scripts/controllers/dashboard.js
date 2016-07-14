@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('DashboardCtrl', DashboardCtrl);
 
-function DashboardCtrl($routeParams , $rootScope,categoriesService, productService, quotationService){
+function DashboardCtrl($routeParams , $rootScope, $filter,categoriesService, productService, quotationService){
   var vm = this;
 
   vm.getQuotationData = getQuotationData;
@@ -42,7 +42,11 @@ function DashboardCtrl($routeParams , $rootScope,categoriesService, productServi
       vm.quotationData.ammounts = {
         labels: ["Hoy", "Resto del mes"],
         data: [vm.quotationData.todayAmmount, (vm.quotationData.monthAmmount - vm.quotationData.todayAmmount) ],
-        colours: ["#C92933", "#48C7DB", "#FFCE56"]
+        colours: ["#C92933", "#48C7DB", "#FFCE56"],
+        options:{
+          scaleLabel: function(label){ return $filter('currency')(label.value)},
+          tooltipTemplate: function(data){ console.log(data); return $filter('currency')(data.value)}
+        }
       };
     });
     quotationService.getCountByUser($rootScope.user.id, {}).then(function(res){

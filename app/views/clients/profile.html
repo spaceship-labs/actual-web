@@ -28,28 +28,30 @@
 
       <div layout="row" class="form-section-tabs">
         <div
-          flex="25"
+          flex
           ng-click="vm.activeTab = 0"
           class="form-section-tab"
           ng-class="{'form-section-tab-active': vm.activeTab == 0}">
           <a href="#">Datos personales</a>
         </div>
         <div
-          flex="25"
+          flex
           ng-click="vm.activeTab = 1"
           class="form-section-tab"
           ng-class="{'form-section-tab-active': vm.activeTab == 1}">
           <a href="#">Datos de facturación</a>
         </div>
+        <!--
         <div
-          flex="25"
+          flex
           ng-click="vm.activeTab = 2"
           class="form-section-tab"
           ng-class="{'form-section-tab-active': vm.activeTab == 2}">
           <a href="#">Datos de pago</a>
         </div>
+        -->
         <div
-          flex="25"
+          flex
           ng-click="vm.activeTab = 3"
           class="form-section-tab"
           ng-class="{'form-section-tab-active': vm.activeTab == 3}">
@@ -286,6 +288,7 @@
 
 
       <!--DATOS DE PAGO-->
+      <!--
       <section ng-show="vm.activeTab==2" action="#" class="form-section-content">
 
         <hr>
@@ -361,6 +364,7 @@
         </div>
 
       </section>
+      -->
       <!--END DATOS PAGO-->
 
 

@@ -11,6 +11,7 @@
       var service = {
         getClients: getClients,
         getUser: getUser,
+        update: update
       };
 
       return service;
@@ -26,6 +27,11 @@
       function getUser(id){
         var url = '/user/findbyid/' + id;
         return api.$http.post(url);
+      }
+
+      function update(params){
+        var url = '/me/update';
+        return api.$http.post(url, params);
       }
 
 

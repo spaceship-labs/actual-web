@@ -76,7 +76,13 @@ angular
       .when('/addquotation', {
         templateUrl: 'views/addquotation.html',
         controller: 'AddquotationCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
       })
       .when('/clients/create', {
         templateUrl: 'views/clients/create.html',
@@ -105,7 +111,8 @@ angular
         controller: 'ClientsListCtrl',
         controllerAs: 'vm',
         resolve: {
-          isMiActual: function($rootScope){
+          isMiActual: function($rootScope, authService){
+            authService.dennyAccessBroker();
             $rootScope.isMiActual = true;
             return true;
           }
@@ -138,7 +145,8 @@ angular
         controller: 'QuotationsListCtrl',
         controllerAs: 'vm',
         resolve: {
-          isMiActual: function($rootScope){
+          isMiActual: function($rootScope,authService){
+            authService.dennyAccessBroker();
             $rootScope.isMiActual = true;
             return true;
           }
@@ -160,7 +168,8 @@ angular
         controller: 'QuotationsRecordsCtrl',
         controllerAs: 'vm',
         resolve: {
-          isMiActual: function($rootScope){
+          isMiActual: function($rootScope, authService){
+            authService.dennyAccessBroker();
             $rootScope.isMiActual = true;
             return true;
           }
@@ -182,7 +191,8 @@ angular
         controller: 'DashboardCtrl',
         controllerAs: 'vm',
         resolve: {
-          isMiActual: function($rootScope){
+          isMiActual: function($rootScope, authService){
+            authService.dennyAccessBroker();
             $rootScope.isMiActual = true;
             return true;
           }
@@ -193,7 +203,8 @@ angular
         controller: 'CheckoutClientCtrl',
         controllerAs: 'vm',
         resolve: {
-          isMiActual: function($rootScope){
+          isMiActual: function($rootScope, authService){
+            authService.dennyAccessBroker();
             $rootScope.isMiActual = true;
             return true;
           }
@@ -205,7 +216,8 @@ angular
         controller: 'CheckoutPaymentmethodCtrl',
         controllerAs: 'vm',
         resolve: {
-          isMiActual: function($rootScope){
+          isMiActual: function($rootScope, authService){
+            authService.dennyAccessBroker();
             $rootScope.isMiActual = true;
             return true;
           }
@@ -217,7 +229,8 @@ angular
         controller: 'ContinuequotationCtrl',
         controllerAs: 'vm',
         resolve: {
-          isMiActual: function($rootScope){
+          isMiActual: function($rootScope, authService){
+            authService.dennyAccessBroker();
             $rootScope.isMiActual = true;
             return true;
           }
@@ -251,6 +264,17 @@ angular
       .when('/checkout/order', {
         templateUrl: 'views/checkout/order.html',
         controller: 'CheckoutOrderCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
+      .when('/users/brokerprofile', {
+        templateUrl: 'views/users/broker.html',
+        controller: 'UsersBrokerCtrl',
         controllerAs: 'vm',
         resolve: {
           isMiActual: function($rootScope){
@@ -305,6 +329,8 @@ angular
           }else{
             userService.getUser(_user.id).then(function(res){
               _user = res.data.data;
+              console.log('getting _user');
+              console.log(_user);
               localStorageService.set('user', _user);
               $rootScope.user = _user;
             });

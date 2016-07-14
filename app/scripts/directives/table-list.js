@@ -25,6 +25,7 @@
         .withOption('autoWidth',true)
         .withOption('displayLength', 10)
         .withOption('bLengthChange',false)
+        .withOption('oLanguage',{"sEmptyTable": "No hay información"})
         //.withPaginationType('numbers')
         .withPaginationType('input')
         .withDOM('<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>')

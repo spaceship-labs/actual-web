@@ -5,7 +5,7 @@
     .module('dashexampleApp')
     .factory('commonService', commonService);
 
-  function commonService($q, $timeout){
+  function commonService($q, $timeout, $mdDialog){
 
     var states = [
       {name:"Aguascalientes",code:"AG",alt:["AGS"],country:"MX"},
@@ -376,12 +376,37 @@
       return deferred.promise;
     }
 
+    function dialogController($scope, $mdDialog){
+      $scope.closeDialog = function (){
+          $mdDialog.hide();
+      };
+    }
+
+    function showDialog(message, parent, ev){
+      var parentCon = angular.element('body');
+      if(parent){
+        parentCon = angular.element(parent);
+      }
+
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(parentCon)
+          .clickOutsideToClose(true)
+          .title(message)
+          //.textContent('You can specify some description text in here.')
+          .ariaLabel(message)
+          .ok('Aceptar')
+          .targetEvent(ev)
+      );
+    }
+
     var service = {
       getCountries: getCountries,
       getStates: getStates,
       simulateOrders: simulateOrders,
       simulateLeads: simulateLeads,
-      simulateClients: simulateClients
+      simulateClients: simulateClients,
+      showDialog: showDialog
     };
 
     return service;

@@ -92,11 +92,14 @@
     <div layout="row">
       <div class="chart-section-col" flex="40">
         <h3>Cantidad</h3>
-        <canvas id="pie" class="chart chart-pie"
-          chart-data="vm.quantities.data" chart-labels="vm.quantities.labels" chart-colours="vm.quantities.colours">
-        </canvas>
+        <canvas
+          id="pie"
+          class="chart chart-pie"
+          chart-data="vm.quotationData.quantities.data"
+          chart-labels="vm.quotationData.quantities.labels"
+          chart-colours="vm.quotationData.quantities.colours"></canvas>
         <p><strong>Hoy</strong> | <strong>Total</strong></p>
-        <p>{{vm.todayQty}} | {{vm.monthQty}}</p>
+        <p>{{ vm.quotationData.todayQty }} | {{vm.quotationData.monthQty}}</p>
       </div>
       <div class="chart-section-col chart-section-legends" flex="20">
 
@@ -107,11 +110,15 @@
       </div>
       <div class="chart-section-col" flex="40">
         <h3>Monto</h3>
-        <canvas id="pie" class="chart chart-pie"
-          chart-data="vm.ammounts.data" chart-labels="vm.ammounts.labels" chart-colours="vm.ammounts.colours">
-        </canvas>
+        <canvas
+          id="pie"
+          class="chart chart-pie"
+          options="vm.quotationData.ammounts.options"
+          chart-data="vm.quotationData.ammounts.data"
+          chart-labels="vm.quotationData.ammounts.labels"
+          chart-colours="vm.quotationData.ammounts.colours"></canvas>
         <p><strong>Hoy</strong> | <strong>Total</strong></p>
-        <p>{{vm.todayAmmount | currency}} | {{vm.monthAmmount | currency}}</p>
+        <p>{{vm.quotationData.todayAmmount | currency}} | {{vm.quotationData.monthAmmount | currency}}</p>
       </div>
     </div>
 

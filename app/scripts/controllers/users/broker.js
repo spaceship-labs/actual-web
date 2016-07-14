@@ -2,22 +2,20 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:UserProfileCtrl
+ * @name dashexampleApp.controller:UsersBrokerCtrl
  * @description
- * # UserProfileCtrl
+ * # UsersBrokerCtrl
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('UserProfileCtrl', UserProfileCtrl);
+  .controller('UsersBrokerCtrl', UsersBrokerCtrl);
 
-function UserProfileCtrl($rootScope, $location, commonService, userService, localStorageService){
+function UsersBrokerCtrl($rootScope, commonService, userService,localStorageService){
   var vm = this;
-  vm.user = angular.copy($rootScope.user);
   vm.update = update;
-
-  if(vm.user.userType == 'broker'){
-    $location.path('/users/brokerprofile');
-  }
+  vm.user = $rootScope.user;
+  vm.states = commonService.getStates();
+  vm.countries = commonService.getCountries();
 
   function update(form){
     if(form.$valid){
@@ -33,5 +31,4 @@ function UserProfileCtrl($rootScope, $location, commonService, userService, loca
       });
     }
   }
-
 }
