@@ -315,12 +315,11 @@ angular
   .run(function(localStorageService, authService, jwtHelper, userService, $location, $rootScope, $route){
 
       var _token = localStorageService.get('token') || false;
-      var _user = localStorageService.get('user') || false;
+      var _user  = localStorageService.get('user')  || false;
 
       //Check if token is expired
       if(_token){
           var expiration = jwtHelper.getTokenExpirationDate(_token);
-          console.log(expiration);
           if(expiration <= new Date()){
             console.log('expirado');
             authService.logout(function(){

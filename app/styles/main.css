@@ -202,6 +202,7 @@ select{
   height: 36px;
 }
 
+/*
 .select-element md-select.ng-invalid.ng-touched,
 .input-element .input-element-inner input[type="text"].ng-invalid.ng-touched,
 .input-element .input-element-inner input[type="email"].ng-invalid.ng-touched,
@@ -210,6 +211,16 @@ select{
 .input-element .input-element-inner textarea.ng-invalid.ng-touched{
   border:2px solid red;
 }
+*/
+.select-element md-select.ng-invalid.ng-dirty,
+.input-element .input-element-inner input[type="text"].ng-invalid.ng-dirty,
+.input-element .input-element-inner input[type="email"].ng-invalid.ng-dirty,
+.input-element .input-element-inner input[type="number"].ng-invalid.ng-dirty,
+.input-element .input-element-inner input[type="password"].ng-invalid.ng-dirty,
+.input-element .input-element-inner textarea.ng-invalid.ng-dirty{
+  border:2px solid red;
+}
+
 
 .select-element-wrapper md-input-container{
   margin: 0;
@@ -2088,6 +2099,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   background: #000;
   margin: 10px 0;
   font-size: 12px;
+  border:0;
 }
 .form-view-btn-primary{
   background: #33BA2C;
