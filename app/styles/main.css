@@ -712,7 +712,7 @@ select{
 
 .nav-categories-item-active > i,
 .nav-categories-item:hover > i{
-  color: #fff;
+  color: #fff!important;
 }
 
 /*----------

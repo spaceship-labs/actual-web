@@ -34,6 +34,7 @@
 
     vm.logOut = logOut;
     vm.signIn = signIn;
+    vm.getActiveModule = getActiveModule;
 
     vm.getActiveQuotation = getActiveQuotation;
 
@@ -157,7 +158,31 @@
       vm.menuCategories.forEach(function(category){
         category.isActive = false;
       });
+      console.log('Location path: ' + $location.path());
+      vm.activeModule = vm.getActiveModule();
+      console.log(vm.activeModule);
     });
+
+    function getActiveModule(){
+      var activeModule = false;
+      var path = $location.path();
+      if(path.indexOf('dashboard') >= 0){
+        activeModule = 'dashboard';
+      }else if(path.indexOf('addquotation') >= 0){
+        activeModule = 'addquotation';
+      }else if(path.indexOf('clients') >= 0){
+        activeModule = 'clients';
+      }else if(path.indexOf('quotations') >= 0){
+        activeModule = 'quotations';
+      }else if(path.indexOf('orders') >= 0){
+        activeModule = 'orders';
+      }else if(path.indexOf('commissions') >= 0){
+        activeModule = 'commissions';
+      }else if(path.indexOf('scorecard') >= 0){
+        activeModule = 'scorecard';
+      }
+      return activeModule;
+    }
 
     $rootScope.$on('newActiveQuotation', function(event, data){
       if($rootScope.user){
