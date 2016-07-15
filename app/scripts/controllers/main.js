@@ -158,9 +158,7 @@
       vm.menuCategories.forEach(function(category){
         category.isActive = false;
       });
-      console.log('Location path: ' + $location.path());
       vm.activeModule = vm.getActiveModule();
-      console.log(vm.activeModule);
     });
 
     function getActiveModule(){
