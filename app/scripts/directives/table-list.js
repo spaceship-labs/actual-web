@@ -161,23 +161,18 @@
                 var html = '';
                 var id = 'id';
                 var icon = '<i class="icon-search"></i>';
-
                 if(column.yesNo){
                   data = data ? 'Si' : 'No';
                 }
-
                 if(column.defaultValue){
                   data = data ? data : column.defaultValue
                 }
-
                 if(column.date){
                   data = $filter('date')(data, 'dd/MM/yyyy');
                 }
-
                 if(column.currency){
                   data = $filter('currency')(data);
                 }
-
                 if(column.destroy){
                   id = (column.propId) ? column.propId : 'id';
                   html = '<a href="#" ng-click="showDestroyDialog($event, \''+ full[id] +'\')">Eliminar</a>';

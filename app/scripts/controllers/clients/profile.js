@@ -72,7 +72,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
     clientService.getById($routeParams.id).then(function(res){
       vm.isLoading = false;
       vm.client = res.data;
-      vm.client.birthDate = vm.client.birthDate  ? new Date(vm.client.birthDate) : new Date();
+      vm.client.birthDate = vm.client.birthDate  ? vm.client.birthDate : new Date();
       vm.client.firstName = vm.client.firstName || vm.client.CardName;
       vm.client.phone = vm.client.phone || vm.client.Phone1;
       vm.client.mobilePhone = vm.client.mobilePhone || vm.client.Cellular;
