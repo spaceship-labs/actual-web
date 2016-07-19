@@ -288,19 +288,25 @@
                 <table>
                   <tr>
                     <td>Precio Lista:</td>
-                    <td><strong>{{vm.product.Price | currency }}</strong></td>
+                    <td><strong>{{vm.product.priceBefore | currency }}</strong></td>
                   </tr>
                   <tr>
-                    <td>Promoción: <strong>Pago ÚNICO <span class="hl-text">20%</span></strong></td>
-                    <td><span class="crossed-text">$24,399</span> | <strong class="hl-text">$19,519</strong></td>
+                    <td>Promoción: <strong>Pago ÚNICO <span class="hl-text">(-20%)</span></strong></td>
+                    <td>
+                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span> | <strong class="hl-text">$19,519</strong>
+                    </td>
                   </tr>
                   <tr>
-                    <td>Promoción: <strong>6 Meses sin intereses <span class="hl-text">15%</span></strong></td>
-                    <td><span class="crossed-text">$24,399</span> | <strong>$20,739</strong></td>
+                    <td>Promoción: <strong>6 Meses sin intereses <span class="hl-text">(-15%)</span></strong></td>
+                    <td>
+                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span> | <strong>$20,739</strong>
+                    </td>
                   </tr>
                   <tr>
-                    <td>Promoción: <strong>12 meses sin intereses <span class="hl-text">10%</span></strong></td>
-                    <td><span class="crossed-text">$24,399</span> | <strong class="hl-text">$21,959</strong></td>
+                    <td>Promoción: <strong>12 meses sin intereses <span class="hl-text">(-10%)</span></strong></td>
+                    <td>
+                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span> | <strong class="hl-text">$21,959</strong>
+                    </td>
                   </tr>
 
                 </table>
@@ -309,8 +315,8 @@
 
             <div class="product-view-prices" layout="row" layout-align="space-between end">
               <div flex="15">
-                <p class="product-view-price-discount">- 50%</p>
-                <p class="product-view-price-crossed">{{vm.product.Price | currency:'$':0 }}</p>
+                <p class="product-view-price-discount">- {{vm.product.maxDiscount}}%</p>
+                <p class="product-view-price-crossed">{{vm.product.priceBefore | currency:'$':0 }}</p>
                 <p class="product-view-price-hl">
                   <strong>{{vm.product.Price | currency:'$':0 }}</strong>
                 </p>

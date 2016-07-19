@@ -13,32 +13,32 @@ angular.module('dashexampleApp')
 function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams, $q, $timeout,$mdDialog, $mdMedia, $sce, api, cartService, quotationService){
   var vm = this;
 
-  vm.showMessageCart = showMessageCart;
-  vm.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-
-
-  vm.addToCart = addToCart;
-  vm.setupGallery = setupGallery;
-  vm.setGalleryIndex = setGalleryIndex;
-  vm.trustAsHtml = trustAsHtml;
-  vm.loadProductFilters = loadProductFilters;
-  vm.init = init;
-  vm.sortImages = sortImages;
-  vm.loadVariants = loadVariants;
-  vm.getGroupProducts = getGroupProducts;
-  vm.getLowestCategory = getLowestCategory;
-  vm.showGallery = showGallery;
-  vm.closeGallery = closeGallery;
-  vm.getImageSizes = getImageSizes;
-
-  vm.toggleVariants = true;
-  vm.variants = [];
-  vm.opts = {
-    index:0,
-    history: false,
-    hideAnimationDuration: 0,
-    showAnimationDuration: 0
-  };
+  angular.extend(vm, {
+    customFullscreen: ($mdMedia('xs') || $mdMedia('sm') ),
+    toggleVariants: true,
+    variants: [],
+    opts: {
+      index:0,
+      history: false,
+      hideAnimationDuration: 0,
+      showAnimationDuration: 0
+    },
+    applyDiscountPrice: applyDiscountPrice,
+    addToCart: addToCart,
+    closeGallery: closeGallery,
+    getGroupProducts: getGroupProducts,
+    getImageSizes: getImageSizes,
+    getLowestCategory: getLowestCategory,
+    init: init,
+    loadProductFilters: loadProductFilters,
+    loadVariants: loadVariants,
+    setGalleryIndex: setGalleryIndex,
+    setupGallery: setupGallery,
+    showGallery: showGallery,
+    showMessageCart: showMessageCart,
+    sortImages: sortImages,
+    trustAsHtml: trustAsHtml,
+  });
 
   vm.init($routeParams.id);
 
@@ -60,6 +60,10 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
       vm.loadedSizes = true;
       $scope.$apply();
     });
+  }
+
+  function applyDiscountPrice(promo, price){
+    return 0;
   }
 
   function trustAsHtml(string) {

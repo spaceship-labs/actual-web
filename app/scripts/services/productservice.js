@@ -90,6 +90,21 @@
             {url: '', size:'default'}
           ];
         }
+
+        if(product.Promotions){
+          var discounts = product.Promotions.map(function(promo){
+            return promo.discountPg1;
+          });
+          var maxDiscount = Math.max.apply(Math,discounts)
+          product.maxDiscount = maxDiscount;
+          product.priceBefore = product.Price;
+          product.Price = product.Price - ( ( product.Price / 100) * maxDiscount );
+        }else{
+          product.maxDiscount = 0;
+          product.pricebefore = product.Price;
+        }
+
+        console.log(product);
         return product;
       }
 
