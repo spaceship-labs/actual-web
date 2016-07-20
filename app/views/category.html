@@ -100,7 +100,7 @@
           <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}" flex="33">
             <div
               class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/living-room-fabulous-white-minimmalist-living-room-design-for-bright-white-sofas-and-unique-red-cuhions-plus-minimalist-white-coffee-table-and-high-gloss-black-ceramic-flooring-and-cool.jpg' + ')'}">
+              ng-style="main.getCategoryBackground(subcategory.Handle)">
               <div class="sub-text">
                 <h4><a ng-href="/category/{{subcategory.Handle}}"><strong>{{subcategory.Name}}</strong></a></h4>
               </div>
@@ -116,7 +116,7 @@
           <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}" flex="33">
             <div
               class="sub"
-              ng-style="{'background-image' : 'url(' + 'images/living-room-fabulous-white-minimmalist-living-room-design-for-bright-white-sofas-and-unique-red-cuhions-plus-minimalist-white-coffee-table-and-high-gloss-black-ceramic-flooring-and-cool.jpg' + ')'}">
+              ng-style="main.getCategoryBackground(subcategory.Handle)">
               <div class="sub-text">
                 <!--<h4><a ng-href="/category/{{subcategory.Handle}}">Salas <strong>esquineras</strong></a></h4>-->
                 <h4><a ng-href="/category/{{subcategory.Handle}}"><strong>{{subcategory.Name}}</strong></a></h4>

@@ -91,11 +91,12 @@
           ];
         }
 
-        if(product.Promotions){
+        if(product.Promotions && product.Promotions.length > 0){
           var discounts = product.Promotions.map(function(promo){
             return promo.discountPg1;
           });
-          var maxDiscount = Math.max.apply(Math,discounts)
+          var maxDiscount = Math.max.apply(Math,discounts);
+          console.log('maxDiscount: ' + maxDiscount);
           product.maxDiscount = maxDiscount;
           product.priceBefore = product.Price;
           product.Price = product.Price - ( ( product.Price / 100) * maxDiscount );

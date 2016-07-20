@@ -12,13 +12,13 @@ angular.module('dashexampleApp')
 
 function HomeCtrl($timeout, productService, api){
   var vm = this;
-  vm.init = init;
-  vm.areProductsLoaded = false;
-  vm.groupProducts = groupProducts;
-  vm.api = api;
-  vm.simulateLoading = simulateLoading;
-
-  vm.getCategoryBackground = getCategoryBackground;
+  angular.extend(vm,{
+    areProductsLoaded: false,
+    api: api,
+    groupProducts: groupProducts,
+    init: init,
+    simulateLoading: simulateLoading
+  });
 
   function init(){
     //vm.simulateLoading();
@@ -42,27 +42,6 @@ function HomeCtrl($timeout, productService, api){
         'http://cafafdaa38a2d7c9529b-6ed6be8f68df7536cde1676c1863b473.r79.cf1.rackcdn.com/uploads/products/gallery/14658316829724450631.png'
       ];
     });
-  }
-
-  function getCategoryBackground(handle){
-    var categoriesBackgrounds = [
-      {key:'muebles', src:'/images/muebles.jpg'},
-      {key:'mesas', src:'/images/mesas.jpg'},
-      {key:'colchones', src:'/images/colchones.jpg'},
-      {key:'ninos', src:'/images/ninos.jpg'},
-      {key:'bebes', src:'/images/bebes.jpg'},
-      {key:'ambientes', src:'/images/ambientes.jpg'},
-      {key:'sillas', src:'/images/sillas.jpg'},
-      {key:'decoracion', src:'/images/decoracion.jpg'},
-      {key:'blancos', src:'/images/blancos.jpg'},
-      {key:'ofertas', src:'/images/ofertas.jpg'}
-    ];
-    var found = _.findWhere(categoriesBackgrounds, {key: handle});
-    var image =  '/images/mesas.jpg';
-    if( found ){
-      image = found.src;
-    }
-    return {'background-image' : 'url(' + image + ')'}
   }
 
   function groupProducts(arr, chunkSize) {

@@ -9,43 +9,37 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl($rootScope, $q, $scope, $location, $window, $route, $mdSidenav, authService, cartService, productService, categoriesService, quotationService, jwtHelper, localStorageService, userService){
+  function MainCtrl(api, $rootScope, $q, $scope, $location, $window, $route, $mdSidenav, authService, cartService, productService, categoriesService, quotationService, jwtHelper, localStorageService, userService){
     var vm = this;
-    vm.menuCategoriesOn = false;
-    vm.isActiveBackdrop = false;
-    vm.isActiveLogin = false;
-    vm.isActiveCart = false;
-    vm.isLoadingLogin = false;
-    vm.cart = {};
-    vm.logInForm = {};
-    vm.menuCategories = [];
-
-    vm.activateLoginModal = activateLoginModal;
-    vm.deactivateLoginModal = deactivateLoginModal;
-    vm.toggleLoginModal = toggleLoginModal;
-
-    vm.toggleProfileModal = toggleProfileModal;
-
-    vm.toggleMenuCategory = toggleMenuCategory;
-
-    vm.toggleCartModal = toggleCartModal;
-    vm.activateCartModal = activateCartModal;
-    vm.deactivateCartModal = deactivateCartModal;
-
-    vm.logOut = logOut;
-    vm.signIn = signIn;
-    vm.getActiveModule = getActiveModule;
-
-    vm.getActiveQuotation = getActiveQuotation;
-
-    vm.isMiActual = $rootScope.isMiActual;
-    vm.init = init;
-    vm.getCategoryIcon = getCategoryIcon;
-    vm.togglePointerSidenav = togglePointerSidenav;
-
-    vm.validateUser = validateUser;
-
-    vm.pointersSidenav = [];
+    angular.extend(vm, {
+      cart: {},
+      isActiveBackdrop: false,
+      isActiveCart: false,
+      isActiveLogin: false,
+      isLoadingLogin: false,
+      isMiActual: $rootScope.isMiActual,
+      logInForm: {},
+      menuCategories: [],
+      menuCategoriesOn: false,
+      pointersSidenav: [],
+      activateCartModal: activateCartModal,
+      activateLoginModal: activateLoginModal,
+      deactivateCartModal: deactivateCartModal,
+      deactivateLoginModal: deactivateLoginModal,
+      getActiveModule: getActiveModule,
+      getActiveQuotation: getActiveQuotation,
+      getCategoryBackground: getCategoryBackground,
+      getCategoryIcon: getCategoryIcon,
+      init: init,
+      logOut: logOut,
+      signIn: signIn,
+      toggleCartModal: toggleCartModal,
+      toggleLoginModal: toggleLoginModal,
+      toggleMenuCategory: toggleMenuCategory,
+      togglePointerSidenav: togglePointerSidenav,
+      toggleProfileModal: toggleProfileModal,
+      validateUser: validateUser,
+    });
 
     function toggleMenuCategory(index){
       vm.menuCategories.forEach(function(category, i){
@@ -287,6 +281,13 @@
 
     };
 
+
+    function getCategoryBackground(handle){
+      var image =  '/images/mesas.jpg';
+      image = api.baseUrl + '/categories/' + handle + '.jpg';
+      return {'background-image' : 'url(' + image + ')'}
+    }
+
     $scope.$on('$routeChangeStart', function(next, current) {
       vm.menuCategoriesOn = false;
       vm.isActiveBackdrop = false;
@@ -300,6 +301,7 @@
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
   MainCtrl.$inject = [
+    'api',
     '$rootScope',
     '$q',
     '$scope',

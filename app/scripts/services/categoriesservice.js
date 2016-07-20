@@ -10,7 +10,7 @@
       getCategoriesGroups: getCategoriesGroups,
       createCategoriesTree: createCategoriesTree,
       getCategoryByHandle: getCategoryByHandle,
-      getCategoryIcon: getCategoryIcon
+      getCategoryIcon: getCategoryIcon,
     };
 
     function getCategoriesGroups(){
@@ -48,6 +48,18 @@
 
     }
 
+    var backgrounds = [
+      {key:'muebles', src:'/images/categories/muebles.jpg'},
+      {key:'mesas', src:'/images/categories/mesas.jpg'},
+      {key:'colchones', src:'/images/categories/colchones.jpg'},
+      {key:'ninos', src:'/images/categories/ninos.jpg'},
+      {key:'bebes', src:'/images/categories/bebes.jpg'},
+      {key:'ambientes', src:'/images/categories/ambientes.jpg'},
+      {key:'sillas', src:'/images/categories/sillas.jpg'},
+      {key:'decoracion', src:'/images/categories/decoracion.jpg'},
+      {key:'blancos', src:'/images/categories/blancos.jpg'},
+      {key:'ofertas', src:'/images/categories/ofertas.jpg'}
+    ];
 
     return service;
   }
