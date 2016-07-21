@@ -359,6 +359,8 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
 
 }
 
+/*
 angular.element(document).ready(function() {
   angular.bootstrap(document, ['dashexampleApp']);
 });
+*/
