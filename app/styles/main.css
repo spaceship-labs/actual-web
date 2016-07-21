@@ -1630,11 +1630,21 @@ md-backdrop.md-sidenav-backdrop{
   font-size: 12px;
   padding: 15px 0;
 }
+.product-view-data-block table{
+  width: 100%;
+}
 .product-view-data-block tr td:first-child:before{
   content: "\002022";
   color: #E2023F;
   font-size: 14px;
   margin-right: 5px;
+}
+.product-view-data-block tr td p{
+  margin: 0;
+  padding-left: 12px;
+}
+.product-view-data-block tr td .crossed-text{
+  text-decoration: line-through;
 }
 .product-view-data-block tr td:nth-child(2){
   padding-left: 10px;

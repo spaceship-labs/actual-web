@@ -23,12 +23,13 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
       hideAnimationDuration: 0,
       showAnimationDuration: 0
     },
-    applyDiscountPrice: applyDiscountPrice,
+    applyDiscount: applyDiscount,
     addToCart: addToCart,
     closeGallery: closeGallery,
     getGroupProducts: getGroupProducts,
     getImageSizes: getImageSizes,
     getLowestCategory: getLowestCategory,
+    getMainPromo: getMainPromo,
     init: init,
     loadProductFilters: loadProductFilters,
     loadVariants: loadVariants,
@@ -62,8 +63,10 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     });
   }
 
-  function applyDiscountPrice(promo, price){
-    return 0;
+  function applyDiscount(discount, price){
+    var result = price;
+    result = price - ( ( price / 100) * discount );
+    return result;
   }
 
   function trustAsHtml(string) {
@@ -88,6 +91,7 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
         quantity: 1
       };
       vm.setupGallery();
+      vm.mainPromo = vm.getMainPromo(vm.product);
 
       if(reload){
         $location.path('/product/' + productId, false);
@@ -323,6 +327,22 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     .then(function(answer) {
       console.log(answer);
     })
+  }
+
+  function getMainPromo(product){
+    vm.mainPromo = false;
+    if(product.Promotions && product.Promotions.length > 0){
+      var indexMaxPromo = 0;
+      var maxPromo = 0;
+      product.Promotions.forEach(function(promo, index){
+        if(promo.discountPg1 >= maxPromo){
+          maxPromo = promo.discountPg1;
+          indexMaxPromo = index;
+        }
+      });
+    }
+    console.log(product.Promotions[indexMaxPromo]);
+    return product.Promotions[indexMaxPromo];
   }
 
   function DialogController($scope, $mdDialog) {

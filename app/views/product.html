@@ -277,7 +277,7 @@
               </div>
             </div>
 
-            <div class="product-view-data-block">
+            <div ng-if="vm.mainPromo" class="product-view-data-block">
               <h4 class="product-view-data-block-toggle" ng-click="vm.discountToggle = !vm.discountToggle">
                 <a flex href="#" >
                   <strong>MÁXIMO DESCUENTO</strong>
@@ -291,21 +291,73 @@
                     <td><strong>{{vm.product.priceBefore | currency }}</strong></td>
                   </tr>
                   <tr>
-                    <td>Promoción: <strong>Pago ÚNICO <span class="hl-text">(-20%)</span></strong></td>
                     <td>
-                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span> | <strong class="hl-text">$19,519</strong>
+                      <span>Promoción:</span>
+                      <p>
+                        <strong>Pago ÚNICO
+                          <span class="hl-text">(-{{vm.mainPromo.discountPg1}}%)</span>
+                        </strong>
+                      </p>
+                    </td>
+                    <td>
+                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
+                       | <strong class="hl-text">{{ vm.applyDiscount(vm.mainPromo.discountPg1,vm.product.priceBefore) | currency }}</strong>
                     </td>
                   </tr>
                   <tr>
-                    <td>Promoción: <strong>6 Meses sin intereses <span class="hl-text">(-15%)</span></strong></td>
                     <td>
-                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span> | <strong>$20,739</strong>
+                      <span>Promoción:</span>
+                      <p>
+                        <strong>3 Meses sin intereses
+                          <span class="hl-text">(-{{vm.mainPromo.discountPg2}}%)</span>
+                        </strong>
+                      </p>
+                    </td>
+                    <td>
+                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
+                       | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg2,vm.product.priceBefore) | currency }}</strong>
                     </td>
                   </tr>
                   <tr>
-                    <td>Promoción: <strong>12 meses sin intereses <span class="hl-text">(-10%)</span></strong></td>
                     <td>
-                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span> | <strong class="hl-text">$21,959</strong>
+                      <span>Promoción:</span>
+                      <p>
+                        <strong>6 y 9 Meses sin intereses
+                          <span class="hl-text">(-{{vm.mainPromo.discountPg3}}%)</span>
+                        </strong>
+                      </p>
+                    </td>
+                    <td>
+                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
+                       | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg3,vm.product.priceBefore) | currency }}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span>Promoción:</span>
+                      <p>
+                        <strong>12 meses sin intereses
+                          <span class="hl-text">(-{{vm.mainPromo.discountPg4}}%)</span>
+                        </strong>
+                      </p>
+                    </td>
+                    <td>
+                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
+                       | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg4,vm.product.priceBefore) | currency }}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span>Promoción:</span>
+                      <p>
+                        <strong>18 meses sin intereses
+                          <span class="hl-text">(-{{vm.mainPromo.discountPg5}}%)</span>
+                        </strong>
+                      </p>
+                    </td>
+                    <td>
+                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
+                       | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg5,vm.product.priceBefore) | currency }}</strong>
                     </td>
                   </tr>
 
@@ -315,7 +367,9 @@
 
             <div class="product-view-prices" layout="row" layout-align="space-between end">
               <div flex="15">
-                <p class="product-view-price-discount">- {{vm.product.maxDiscount}}%</p>
+                <p class="product-view-price-discount" ng-if="vm.product.Promotions && vm.product.Promotions.length > 0">
+                  - {{vm.product.maxDiscount}}%
+                </p>
                 <p class="product-view-price-crossed">{{vm.product.priceBefore | currency:'$':0 }}</p>
                 <p class="product-view-price-hl">
                   <strong>{{vm.product.Price | currency:'$':0 }}</strong>
