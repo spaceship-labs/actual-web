@@ -225,6 +225,7 @@
                         >
                           <span
                             class="variant-color-val"
+                            data-color="{{val.Name}}"
                             ng-repeat="val in prod.filterValues track by $index"
                             ng-style=" {'background' : val.Code, 'width' : (100 / prod.filterValues.length) +'%' } "
                           >

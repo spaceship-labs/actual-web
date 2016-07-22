@@ -96,8 +96,10 @@
 
                   <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
                     <div flex="30">
-                      <p class="discount-label">- 50%</p>
-                      <p class="price-crossed">{{detail.Product.Price | currency}}</p>
+                      <p ng-if="detail.Product.maxDiscount > 0" class="discount-label">
+                        -{{detail.Product.maxDiscount}}%
+                      </p>
+                      <p class="price-crossed">{{detail.Product.priceBefore | currency}}</p>
                       <p class="price-hl"><strong>{{detail.Product.Price | currency}}</strong></p>
                     </div>
                     <div flex="30" class="cart-item-data-qty">

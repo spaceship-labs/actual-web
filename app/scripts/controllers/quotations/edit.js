@@ -145,7 +145,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       filters: {
         id: productsIds
       },
-      populate_fields: ['FilterValues']
+      populate_fields: ['FilterValues','Promotions']
     };
     var page = 1;
     productService.getList(page,params).then(function(res){
@@ -253,7 +253,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
         $location.path('/checkout/client/' + vm.quotation.id);
       }else{
         quotationService.setActiveQuotation(vm.quotation.id);
-        $location.path('/continuequotation');
+        $location.path('/continuequotation?goToCheckout');
       }
     });
   }
