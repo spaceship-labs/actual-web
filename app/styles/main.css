@@ -2946,6 +2946,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 
 .pay-method-wrap .method-block{
   background: #fff;
+  margin: 10px 0;
   padding: 10px 16px;
 }
 
@@ -2958,6 +2959,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 
 .pay-method-wrap .method-block ul{
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 .pay-method-wrap .method-block ul li{
@@ -3024,6 +3026,9 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   text-decoration: line-through;
 }
 .pay-method-wrap .method-block .price-now{font-size: 32px;}
+.pay-method-wrap .method-block .price-now.price-hl{
+  font-size: 32px;
+}
 .pay-method-wrap .method-block .price-hl{color: #E2023F;}
 .pay-method-wrap .method-block p{
   text-align: right;

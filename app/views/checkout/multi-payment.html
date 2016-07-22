@@ -1,0 +1,83 @@
+        <section ng-show="vm.multiplePayment && !vm.singlePayment">
+          <div class="pay-method-wrap" >
+
+            <div class="method-block" layout="row" layout-align="space-between center">
+              <ul flex="75">
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Efectivo MXN</strong>
+                    </md-checbox>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Efectivo USD</strong>
+                    </md-checkbox>
+                     <span>Tipo de cambio $17.05 MXN</span>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Cheque</strong>
+                    </md-checkbox>
+                     <span>Sujeto a verificación contable</span>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Depósito</strong>
+                    </md-checkbox>
+                     <span class="method-text">Sujeto a verificación contable</span>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="55">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>Transferencia</strong>
+                    </md-checkbox>
+                     <span class="method-text">Sujeto a verificación contable</span>
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="40">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>3</strong>
+                    </md-checkbox>
+                     <span class="method-text">Meses</span>
+                     <div class="hl-label"><strong>Sin intereses</strong></div>
+                  </div>
+                  <div flex="60" class="bank-icons">
+                    <img src="images/banamex.png" alt="">
+                    <img src="images/santander.png" alt="">
+                    <img src="images/banorte.png" alt="">
+                  </div>
+                </li>
+                <li layout="row" layout-align="space-between center">
+                  <div flex="40">
+                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                      <strong>6</strong>
+                    </md-checkbox>
+                     <span class="method-text">Meses</span>
+                     <div class="hl-label"><strong>Sin intereses</strong></div>
+                  </div>
+                  <div flex="60" class="bank-icons">
+                    <img src="images/banamex.png" alt="">
+                    <img src="images/amexcard.png" alt="">
+                    <img src="images/santander.png" alt="">
+                    <img src="images/bancomer.png" alt="">
+                    <img src="images/hsbc.png" alt="">
+                    <img src="images/banorte.png" alt="">
+                  </div>
+                </li>
+              </ul>
+              <div flex="20" class="method-block-prices">
+                <h2 class="price-now'price-hl">{{vm.totalPrice | currency }}</h2>
+              </div>
+            </div>
+
+          </div>
+        </section>

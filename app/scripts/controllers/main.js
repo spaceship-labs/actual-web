@@ -9,7 +9,7 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl(api, $rootScope, $q, $scope, $location, $window, $route, $mdSidenav, authService, cartService, productService, categoriesService, quotationService, jwtHelper, localStorageService, userService){
+  function MainCtrl(api, $rootScope, $q, $scope, $location, $window, $route, $mdSidenav, authService, cartService, productService, categoriesService, quotationService, jwtHelper, localStorageService, userService,siteService){
     var vm = this;
     angular.extend(vm, {
       cart: {},
@@ -70,6 +70,13 @@
       for(var i=0;i<9;i++){
         vm.pointersSidenav.push({selected:false});
       }
+
+      siteService.findByHandle('actual-group').then(function(res){
+        console.log(res);
+        vm.site = res.data || {};
+        $rootScope.site = res.data || {};
+      });
+
       vm.isLoadingCategoriesTree = true;
       categoriesService.createCategoriesTree().then(function(res){
         vm.isLoadingCategoriesTree = false;
@@ -316,7 +323,8 @@
     'quotationService',
     'jwtHelper',
     'localStorageService',
-    'userService'
+    'userService',
+    'siteService'
   ];
 
 })();

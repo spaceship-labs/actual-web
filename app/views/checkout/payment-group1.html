@@ -1,0 +1,61 @@
+<div class="method-block" layout="row" layout-align="space-between center">
+  <ul flex="75">
+    <li>
+      <md-radio-button value="Efectivo" class="md-primary">
+        <strong>Efectivo MXN</strong>
+      </md-radio-button>
+       <span class="method-text">Aceptamos pesos mexicanos y dólares americanos</span>
+    </li>
+    <li>
+      <md-radio-button value="Efectivo USD" class="md-primary">
+        <strong>Efectivo USD</strong>
+      </md-radio-button>
+       <span class="method-text">Tipo de cambio $17.05 MXN</span>
+    </li>
+    <li>
+      <md-radio-button value="Cheque" class="md-primary">
+        <strong>Cheque</strong>
+      </md-radio-button>
+       <span class="method-text">Sujeto a verificación contable</span>
+    </li>
+    <li>
+      <md-radio-button value="Deposito" class="md-primary">
+        <strong>Deposito</strong>
+      </md-radio-button>
+       <span class="method-text">Sujeto a verificación contable</span>
+    </li>
+    <li>
+      <md-radio-button value="Transferencia" class="md-primary">
+        <strong>Transferencia</strong>
+      </md-radio-button>
+       <span class="method-text">Sujeto a verificación contable</span>
+    </li>
+    <li>
+      <md-radio-button value="Monedero electrónico" class="md-primary">
+        <strong>Monedero Electrónico</strong>
+      </md-radio-button>
+       <span class="method-text">Sujeto a verificación contable</span>
+    </li>
+    <li layout="row" layout-align="space-between center">
+      <div flex="40">
+        <md-radio-button value="Pago visa, mastercard, american express" class="md-primary">
+          <strong>Pago con</strong>
+          <!--<span class="method-text"> Visa, MasterCard, American Express</span>-->
+        </md-radio-button>
+      </div>
+      <div flex="60" class="bank-icons">
+        <img src="images/visa.png" alt="">
+        <img src="images/mastercard.png" alt="">
+        <img src="images/american.png" alt="">
+      </div>
+    </li>
+  </ul>
+  <div flex="20" class="method-block-prices">
+    <!--
+    <div class="discount-label"><strong>-25%</strong></div>
+    <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
+    -->
+    <h2 class="price-now price-hl">{{vm.totalPrice | currency }}</h2>
+    <!--<p>¡Aprovecha este es el mejor precio!</p>-->
+  </div>
+</div>

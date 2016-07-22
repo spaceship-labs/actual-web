@@ -10,31 +10,29 @@
 angular.module('dashexampleApp')
   .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
 
-function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $mdDialog ,quotationService, productService, orderService){
+function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $mdDialog ,quotationService, productService, orderService, pmPeriodService){
   var vm = this;
 
-  vm.selectSingle = selectSingle;
-  vm.selectMultiple = selectMultiple;
-  vm.applyTransaction = applyTransaction;
-  vm.createOrder = createOrder;
+  angular.extend(vm,{
+    addPayment: addPayment,
+    applyPayment: applyPayment,
+    applyTransaction: applyTransaction,
+    createOrder: createOrder,
+    getProducts: getProducts,
+    getTotalPrice: getTotalPrice,
+    getTotalProducts: getTotalProducts,
+    init: init,
+    selectMultiple: selectMultiple,
+    selectSingle: selectSingle,
 
-  vm.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-
-  vm.singlePayment = true;
-  vm.multiplePayment = false;
-
-  vm.init = init;
-  vm.getProducts = getProducts;
-  vm.getTotalPrice = getTotalPrice;
-  vm.getTotalProducts = getTotalProducts;
-  vm.addPayment = addPayment;
-  vm.applyPayment = applyPayment;
+    customFullscreen: $mdMedia('xs') || $mdMedia('sm'),
+    singlePayment: true,
+    multiplePayment: false,
+    payments: [],
+    totalPrice: 0
+  });
 
   //FAKE ARRAY
-  vm.payments = [];
-
-  vm.totalPrice = 0;
-
   function init(){
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
@@ -45,6 +43,9 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
         productsIds.push(detail.Product);
       });
       vm.getProducts(productsIds);
+      pmPeriodService.getActive().then(function(res){
+        console.log(res);
+      });
     });
   }
 
