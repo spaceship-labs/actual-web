@@ -294,7 +294,7 @@
                     <td>
                       <span>Promoción:</span>
                       <p>
-                        <strong>Pago ÚNICO
+                        <strong>{{ vm.mainPromo.discountTextPg1 ||  'Pago ÚNICO'}}
                           <span class="hl-text">(-{{vm.mainPromo.discountPg1}}%)</span>
                         </strong>
                       </p>
@@ -308,7 +308,7 @@
                     <td>
                       <span>Promoción:</span>
                       <p>
-                        <strong>3 Meses sin intereses
+                        <strong>{{ vm.mainPromo.discountTextPg2 ||  '3 Meses sin intereses'}}
                           <span class="hl-text">(-{{vm.mainPromo.discountPg2}}%)</span>
                         </strong>
                       </p>
@@ -322,7 +322,7 @@
                     <td>
                       <span>Promoción:</span>
                       <p>
-                        <strong>6 y 9 Meses sin intereses
+                        <strong>{{ vm.mainPromo.discountTextPg3 ||  '6 y 9 Meses sin intereses'}}
                           <span class="hl-text">(-{{vm.mainPromo.discountPg3}}%)</span>
                         </strong>
                       </p>
@@ -336,7 +336,7 @@
                     <td>
                       <span>Promoción:</span>
                       <p>
-                        <strong>12 meses sin intereses
+                        <strong>{{ vm.mainPromo.discountTextPg4 ||  '12 Meses sin intereses'}}
                           <span class="hl-text">(-{{vm.mainPromo.discountPg4}}%)</span>
                         </strong>
                       </p>
@@ -350,7 +350,7 @@
                     <td>
                       <span>Promoción:</span>
                       <p>
-                        <strong>18 meses sin intereses
+                        <strong>{{ vm.mainPromo.discountTextPg5 ||  '18 Meses sin intereses'}}
                           <span class="hl-text">(-{{vm.mainPromo.discountPg5}}%)</span>
                         </strong>
                       </p>
