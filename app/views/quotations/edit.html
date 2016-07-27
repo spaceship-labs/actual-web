@@ -141,11 +141,11 @@
           <table>
             <tr>
               <td><strong>Subtotal ({{ vm.totalProducts }} productos):</strong></td>
-              <td><strong>{{ vm.subTotal | currency }}</strong></td>
+              <td><strong>{{ vm.quotation.subtotal | currency }}</strong></td>
             </tr>
             <tr>
               <td>Descuento:</td>
-              <td><strong>-{{ vm.totalDiscount | currency }}</strong></td>
+              <td><strong>-{{ vm.quotation.discount | currency }}</strong></td>
             </tr>
             <tr>
               <td>Costo de envío:</td>
@@ -159,8 +159,8 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h3 class="price-crossed">{{ vm.subTotal | currency }}</h3>
-              <h1 class="price-main">{{ vm.totalPrice | currency }}</h1>
+              <h3 class="price-crossed">{{ vm.quotation.subtotal | currency }}</h3>
+              <h1 class="price-main">{{ vm.quotation.total | currency }}</h1>
             </div>
           </div>
 

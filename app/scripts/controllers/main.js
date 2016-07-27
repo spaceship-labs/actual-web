@@ -116,8 +116,8 @@
           quotationService.getQuotationProducts(vm.activeQuotation).then(function(details){
             $rootScope.activeQuotation.Details = details;
             vm.activeQuotation.Details = details;
-            vm.activeQuotation.totalItems = quotationService.calculateItemsNumber(details);
-            vm.activeQuotation.total = quotationService.calculateTotal(details);
+            vm.activeQuotation.totalItems = quotationService.calculateItemsNumber(vm.activeQuotation);
+            console.log(vm.activeQuotation);
           });
         }
       });

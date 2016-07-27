@@ -309,6 +309,7 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
   function addToCart($event){
     //cartService.addToCart(vm.product.id, params);
     var params = {quantity: vm.product.cart.quantity};
+    vm.isLoading = true;
     quotationService.addProduct(vm.product.id, params);
   }
 

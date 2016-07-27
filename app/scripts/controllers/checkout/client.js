@@ -31,10 +31,7 @@ function CheckoutClientCtrl(commonService ,$timeout ,$routeParams, $rootScope, $
       }
       quotationService.getQuotationProducts(vm.quotation).then(function(details){
         vm.quotation.Details = details;
-        vm.totalPrice = quotationService.calculateTotal(vm.quotation);
-        vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
         vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
-        vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
       });
     });
   }

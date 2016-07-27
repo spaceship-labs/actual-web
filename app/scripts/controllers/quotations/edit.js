@@ -132,9 +132,6 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       });
       quotationService.getQuotationProducts(vm.quotation).then(function(details){
         vm.quotation.Details = details;
-        vm.totalPrice = quotationService.calculateTotal(vm.quotation);
-        vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
-        vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
         vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
         quotationService.loadProductFilters(vm.quotation.Details).then(function(details2){
           vm.quotation.Details = details2;
@@ -157,11 +154,12 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
   function removeDetail(detailId, index){
     vm.isLoadingDetails = true;
     quotationService.removeDetail(detailId, vm.quotation.id).then(function(res){
+      var updatedQ = res.data;
       vm.quotation.Details.splice(index,1);
       vm.isLoadingDetails = false;
-      vm.totalPrice = quotationService.calculateTotal(vm.quotation);
-      vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
-      vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
+      vm.quotation.total = updatedQ.total;
+      vm.quotation.subtotal = updatedQ.subtotal;
+      vm.quotation.discount = updatedQ.discount;
       vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
 
     });

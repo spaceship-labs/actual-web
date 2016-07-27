@@ -153,7 +153,7 @@
         if(quotation.Details){
           var details = quotation.Details;
           details.forEach(function(detail){
-            items+=  detail.quantity;
+            items += detail.quantity;
           });
         }
         return items;
