@@ -38,6 +38,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
+      vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
       vm.getMethods(vm.quotation.id).then(function(methods){
         vm.paymentMethods = methods;
       });
@@ -134,6 +135,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
   }
 
   function addPayment(payment){
+    vm.isLoadingPayments = true;
     quotationService.addPayment(vm.quotation.id, payment).then(function(res){
       if(res.data && res.data.length > 0){
         var quotation = res.data[0];
@@ -155,7 +157,6 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
       ammount: ammount
     };
     params = angular.extend(params, method);
-    vm.isLoadingPayments = true;
     vm.addPayment(params);
   }
 
@@ -184,7 +185,6 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
     })
     .then(function(payment) {
       console.log('Pago aplicado');
-      vm.isLoadingPayments = true;
       vm.addPayment(payment);
     }, function() {
       console.log('Pago no aplicado');
