@@ -12,9 +12,14 @@ angular.module('dashexampleApp')
 
 function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productService, clientService, quotationService){
   var vm = this;
+  vm.init = init;
   vm.queryClients = queryClients;
   vm.selectedItemChange = selectedItemChange;
   vm.createQuotation = createQuotation;
+
+  function init(){
+    console.log('continue quotation');
+  }
 
   function queryClients(term){
     if(term !== '' && term){
@@ -74,5 +79,6 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
     quotationService.newQuotation(params, goToSearch);
   }
 
+  vm.init();
 
 }

@@ -7,6 +7,111 @@
 
   function commonService($q, $timeout, $mdDialog){
 
+    var paymentGroups = [
+      {
+        group:1,
+        discountKey:'discountPg1',
+        methods: [
+         {
+            label:'Efectivo',
+            type:'cash',
+          },
+          {
+            label:'Efectivo USD',
+            type:'cash-usd',
+            currency:'USD',
+            description:'Tipo de cambio $17.05 MXN'
+          },
+          {
+            label:'Cheque',
+            type:'cheque',
+            description:'Sujeto a verificación contable'
+          },
+          {
+            label:'Deposito',
+            type:'deposit',
+            description:'Sujeto a verificación contable'
+          },
+          {
+            label:'Transferencia',
+            type:'transfer',
+            description:'Sujeto a verificación contable'
+          },
+          {
+            label:'Monedero electrónico',
+            type:'monedero',
+            description:'Sujeto a verificación contable'
+          },
+          {
+            label:'Pago con',
+            type:'credit-card',
+            description:'VISA, MasterCard, American Express',
+            cards:['images/visa.png','images/mastercard.png','images/american.png'],
+            terminals:['Banamex','American Express']
+          },
+        ]
+      },
+      {
+        group:2,
+        discountKey:'discountPg2',
+        methods: [
+          {
+            label:'3',
+            type:'3-msi',
+            msi:3,
+            cards:['images/banamex.png','images/santander.png','images/banorte.png'],
+            terminals:['Banorte','Santander','Bancomer','American Express']
+          }
+        ]
+      },
+      {
+        group:3,
+        discountKey:'discountPg3',
+        methods: [
+          {
+            label:'6',
+            type:'6-msi',
+            msi:6,
+            cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            terminals:['Banamex','Banorte','Santander','Bancomer','American Express']
+          },
+          {
+            label:'9',
+            type:'9-msi',
+            msi:9,
+            cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            terminals:['Banamex','Banorte','Santander','Bancomer','American Express']
+          },
+        ]
+      },
+      {
+        group:4,
+        discountKey:'discountPg4',
+        methods: [
+          {
+            label:'12',
+            type:'12-msi',
+            msi:12,
+            cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            terminals:['Banamex','Banorte','Santander','Bancomer','American Express']
+          },
+        ]
+      },
+      {
+        group:5,
+        discountKey:'discountPg5',
+        methods: [
+          {
+            label:'18',
+            type:'18-msi',
+            msi:18,
+            cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            terminals:['Banamex','Banorte','Santander','Bancomer','American Express']
+          },
+        ]
+      }
+    ];
+
     var states = [
       {name:"Aguascalientes",code:"AG",alt:["AGS"],country:"MX"},
       {name:"Baja California",code:"BC",alt:["BCN"],country:"MX"},
@@ -400,9 +505,14 @@
       );
     }
 
+    function getPaymentMethods(){
+      return paymentGroups;
+    }
+
     var service = {
       getCountries: getCountries,
       getStates: getStates,
+      getPaymentMethods: getPaymentMethods,
       simulateOrders: simulateOrders,
       simulateLeads: simulateLeads,
       simulateClients: simulateClients,

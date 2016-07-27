@@ -10,50 +10,91 @@
 angular.module('dashexampleApp')
   .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
 
-function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $mdDialog ,quotationService, productService, orderService, pmPeriodService){
+function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $mdDialog ,quotationService, productService, orderService, pmPeriodService, commonService, formatService){
   var vm = this;
 
   angular.extend(vm,{
     addPayment: addPayment,
-    applyPayment: applyPayment,
     applyTransaction: applyTransaction,
+    applyCashPayment: applyCashPayment,
     createOrder: createOrder,
-    getProducts: getProducts,
-    getTotalPrice: getTotalPrice,
-    getTotalProducts: getTotalProducts,
+    getTotalByPaymentMethod: getTotalByPaymentMethod,
+    getGroupByPayments: getGroupByPayments,
+    getMethods: getMethods,
     init: init,
+    isActiveGroup: isActiveGroup,
     selectMultiple: selectMultiple,
     selectSingle: selectSingle,
+    setMethod: setMethod,
 
     customFullscreen: $mdMedia('xs') || $mdMedia('sm'),
     singlePayment: true,
     multiplePayment: false,
     payments: [],
-    totalPrice: 0
+    totalPrice: 0,
+    paymentMethods: []
   });
 
-  //FAKE ARRAY
   function init(){
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
-      console.log(vm.quotation);
-      var productsIds = [];
-      vm.quotation.Details.forEach(function(detail){
-        productsIds.push(detail.Product);
+      quotationService.getQuotationProducts(vm.quotation).then(function(details){
+        vm.quotation.Details = details;
+        vm.totalPrice = quotationService.calculateTotal(vm.quotation);
+        vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
+        vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
+        vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
+        vm.paymentMethods = vm.getMethods();
+        vm.isLoading = false;
       });
-      vm.getProducts(productsIds);
       pmPeriodService.getActive().then(function(res){
-        console.log(res);
+        vm.validPayments = res.data;
       });
     });
   }
 
+  function getMethods(){
+    var methodsGroups = commonService.getPaymentMethods();
+    var discountKeys = ['discountPg1','discountPg2','discountPg3','discountPg4','discountPg5'];
+    methodsGroups.map(function(mG){
+      mG.methods = mG.methods.map(function(m){
+        var discountKey = discountKeys[mG.group - 1]
+        var totalByMethod = quotationService.getTotalByPaymentMethod(vm.quotation, discountKey);
+        m.totalDiscount = vm.quotation.total - totalByMethod;
+        return m;
+      });
+    })
+    return methodsGroups;
+  }
 
   function selectSingle(){
     vm.singlePayment = true;
     vm.multiplePayment = false;
+  }
 
+  function isActiveGroup(index){
+    var activeKeys = ['paymentGroup1','paymentGroup2','paymentGroup3','paymentGroup4','paymentGroup5'];
+    if(vm.validPayments){
+      var isGroupUsed = false;
+      var currentGroup = vm.getGroupByPayments();
+      if( currentGroup < 0){
+        isGroupUsed = true;
+      }else if(currentGroup > 0 && currentGroup == index+1){
+        isGroupUsed = true;
+      }
+      return vm.validPayments[activeKeys[index]] && isGroupUsed;
+    }else{
+      return false;
+    }
+  }
+
+  function getGroupByPayments(){
+    var group = -1;
+    vm.quotation.Payments.forEach(function(payment){
+      group = payment.group;
+    });
+    return group;
   }
 
   function selectMultiple(){
@@ -61,27 +102,45 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
     vm.singlePayment = false;
   }
 
-  function applyTransaction(ev, type) {
+  function setMethod(method, group){
+    vm.activeMethod = method;
+    vm.activeMethod.group = group;
+  }
+
+  function addPayment(payment){
+    quotationService.addPayment(vm.quotation.id, payment).then(function(res){
+      if(res.data && res.data.length > 0){
+        var quotation = res.data[0];
+        vm.quotation.ammountPaid = quotation.ammountPaid;
+        console.log(vm.quotation);
+      }
+      console.log(payment);
+      vm.quotation.Payments.push(payment);
+      vm.isLoadingPayments = false;
+      delete vm.activeMethod.ammount;
+      delete vm.activeMethod.verficiationCode;
+      console.log(vm.activeMethod);
+    });
+  }
+
+  function applyCashPayment(method, ammount){
+    var params = {
+      currency: method.currency || 'MXP',
+      ammount: ammount
+    };
+    params = angular.extend(params, method);
+    vm.isLoadingPayments = true;
+    vm.addPayment(params);
+  }
+
+  function applyTransaction(ev, method, ammount) {
     var templateUrl = 'views/checkout/deposit-dialog.html';
     var controller = DepositController;
-    var paymentOpts = {
-      type:'transaction',
-      ammount: 124000,
-      verificationCode: '',
-      paymentType: 'Deposito/Transaccion'
-    };
+    method.currency = method.currency || 'MXP';
+    method.ammount = ammount;
+    var paymentOpts = angular.copy(method);
 
-    if(type == 'terminal'){
-      paymentOpts = {
-        type:'terminal',
-        ammount: 30000,
-        currency: 'MXP',
-        verificationCode: '',
-        terminal:'TPV Banorte',
-        recurringPayments: 3,
-        isRecurring: true,
-        paymentType: 'Sin intereses'
-      };
+    if(method.msi || method.terminals){
       templateUrl = 'views/checkout/terminal-dialog.html',
       controller = TerminalController;
     }
@@ -99,36 +158,14 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
     })
     .then(function(payment) {
       console.log('Pago aplicado');
-      vm.applyPayment(payment);
+      vm.isLoadingPayments = true;
+      vm.addPayment(payment);
     }, function() {
       console.log('Pago no aplicado');
     });
 
   }
 
-  function applyPayment(payment){
-    var defaultPayment = {
-      ammount: 1200,
-      currency: 'MXP',
-      type:'deposit',
-      isRecurring: false,
-      paymentType: 'Efectivo'
-    };
-
-    payment = payment || defaultPayment;
-    vm.payments.push(payment);
-
-    var params = {
-      ammount: 1200,
-      currency: 'MXP',
-      verificationCode: '8870',
-      terminal: 'TPV Banorte'
-    }
-    vm.addPayment(vm.quotation.id, params).then(function(res){
-      console.log(res.data);
-    });
-
-  }
 
   function DepositController($scope, $mdDialog, payment) {
     $scope.payment = payment;
@@ -148,8 +185,12 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
     };
   }
 
-  function TerminalController($scope, $mdDialog, payment) {
+  function TerminalController($scope, $mdDialog, formatService, payment) {
     $scope.payment = payment;
+
+    $scope.numToLetters = function(num){
+      return formatService.numberToLetters(num);
+    }
 
     $scope.hide = function() {
       $mdDialog.hide();
@@ -166,67 +207,26 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
     };
   }
 
-  function addPayment(orderId,params){
-    return quotationService.addPayment(orderId, params);
-  }
 
-  function createOrder(params){
-    //Formatting order details
-    if(params.Details){
-      params.Details = params.Details.map(function(detail){
-        var obj = {
-          Quantity: detail.Quantity,
-          Product: detail.Product.id,
-          total: (detail.Product.Price * detail.Quantity) || 0
-        };
-        return obj;
+  function createOrder(form){
+    if(vm.quotation.ammountPaid >= vm.quotation.total){
+      vm.isLoading = true;
+      orderService.createFromQuotation(vm.quotation.id).then(function(res){
+        vm.isLoading = false;
+        console.log(res);
+      }).catch(function(err){
+        console.log(err);
       });
     }
-    console.log(params);
-    orderService.create(params).then(function(res){
-      vm.order = res.data;
-      quotationService.update(vm.quotation.id, {Order: vm.order.id}).then(function(res){
-        vm.quotation.Order = vm.order;
-      });
-    });
   }
 
-
-
-  function getProducts(productsIds){
-    var params = {
-      filters: {
-        id: productsIds
-      },
-      populate_fields: ['FilterValues']
-    };
-    var page = 1;
-    productService.getList(page,params).then(function(res){
-      var products = productService.formatProducts(res.data.data);
-      //Match detail - product
-      vm.quotation.Details.forEach(function(detail){
-        //Populating detail with product info.
-        detail.Product = _.findWhere( products, {id : detail.Product } );
-      });
-      vm.isLoading = false;
-      vm.totalPrice = vm.getTotalPrice();
-    });
-  }
-
-  function getTotalPrice(){
-    var total = 0;
-    if(vm.quotation && vm.quotation.Details){
-      total = quotationService.calculateTotal(vm.quotation.Details);
+  //paymentDiscountKey eg: discountPg2
+  function getTotalByPaymentMethod(paymentDiscountKey){
+    if(vm.quotation){
+      return quotationService.getTotalByPaymentMethod(vm.quotation, paymentDiscountKey);
+    }else{
+      return 0;
     }
-    return total;
-  }
-
-  function getTotalProducts(){
-    var total = 0;
-    if(vm.quotation && vm.quotation.Details){
-      total = quotationService.calculateItemsNumber(vm.quotation.Details)
-    }
-    return total;
   }
 
   vm.init();

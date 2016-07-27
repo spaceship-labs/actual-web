@@ -13,48 +13,42 @@ angular.module('dashexampleApp')
 function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootScope, $mdDialog, commonService, quotationService, api, cartService){
 
   var vm = this;
-
-  vm.init = init;
-  vm.getProducts = getProducts;
-  vm.loadProductFilters = loadProductFilters;
-  vm.getTotalPrice = getTotalPrice;
-  vm.getTotalProducts = getTotalProducts;
-  vm.toggleRecord = toggleRecord;
-  vm.addRecord = addRecord;
-  vm.attachImage = attachImage;
-  vm.addNewProduct = addNewProduct;
-  vm.removeDetail = removeDetail;
-  vm.alertRemoveDetail = alertRemoveDetail;
-  vm.continueBuying = continueBuying;
-  vm.closeQuotation = closeQuotation;
-
-  vm.newRecord = {};
-  vm.api = api;
-  vm.isLoadingRecords = false;
-
-  vm.recordTypes = ['Email', 'Llamada', 'WhatsApp', 'Visita'];
-  vm.closeTypes = [
-    'Cliente compró en otra tienda de la empresa.',
-    'Cliente compró en otra mueblería.',
-    'Cliente se murió',
-    'Cliente solicita no ser contactado más',
-    'Cliente ya no está interesado',
-    'Cliente es incontactable',
-    'Cliente se mudó',
-    'Vendedor no dio seguimiento suficiente',
-    'Vendedor cotizó artículos equivocados',
-    'Los precios son altos',
-    'Las fechas de entrega son tardadas',
-    'No vendemos el articulo solicitado',
-    'Otra razón (especificar)',
-  ];
-
-  vm.timePickerOptions = {
-      step: 20,
-      timeFormat: 'g:ia',
-      appendTo: 'body',
-      disableTextInput:true
-  };
+  angular.extend(vm, {
+    newRecord: {},
+    api: api,
+    isLoadingRecords: false,
+    recordTypes: ['Email', 'Llamada', 'WhatsApp', 'Visita'],
+    closeTypes: [
+      'Cliente compró en otra tienda de la empresa.',
+      'Cliente compró en otra mueblería.',
+      'Cliente se murió',
+      'Cliente solicita no ser contactado más',
+      'Cliente ya no está interesado',
+      'Cliente es incontactable',
+      'Cliente se mudó',
+      'Vendedor no dio seguimiento suficiente',
+      'Vendedor cotizó artículos equivocados',
+      'Los precios son altos',
+      'Las fechas de entrega son tardadas',
+      'No vendemos el articulo solicitado',
+      'Otra razón (especificar)',
+    ],
+    timePickerOptions: {
+        step: 20,
+        timeFormat: 'g:ia',
+        appendTo: 'body',
+        disableTextInput:true
+    },
+    addNewProduct: addNewProduct,
+    addRecord: addRecord,
+    alertRemoveDetail: alertRemoveDetail,
+    attachImage: attachImage,
+    closeQuotation: closeQuotation,
+    continueBuying: continueBuying,
+    init:init,
+    removeDetail: removeDetail,
+    toggleRecord: toggleRecord,
+  });
 
 
   function toggleRecord(record){
@@ -136,75 +130,17 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       vm.quotation.Details.forEach(function(detail){
         productsIds.push(detail.Product);
       });
-      vm.getProducts(productsIds);
-    });
-  }
-
-  function getProducts(productsIds){
-    var params = {
-      filters: {
-        id: productsIds
-      },
-      populate_fields: ['FilterValues','Promotions']
-    };
-    var page = 1;
-    productService.getList(page,params).then(function(res){
-      //vm.quotation.Products = res.data;
-      var products = productService.formatProducts(res.data.data);
-
-      //Match detail - product
-      vm.quotation.Details.forEach(function(detail){
-        //Populating detail with product info.
-        detail.Product = _.findWhere( products, {id : detail.Product } );
-      });
-
-      vm.loadProductFilters();
-    });
-  }
-
-
-  function loadProductFilters(){
-    productService.getAllFilters({quickread:true}).then(function(res){
-      vm.filters = res.data;
-      var filters = angular.copy(vm.filters);
-
-      vm.quotation.Details.forEach(function(detail){
-
-        filters = vm.filters.map(function(filter){
-          filter.Values = [];
-          detail.Product.FilterValues.forEach(function(value){
-            if(value.Filter === filter.id){
-              filter.Values.push(value);
-            }
-          });
-          return filter;
-        });
-
-        filters = filters.filter(function(filter){
-          return filter.Values.length > 0;
-        });
-
-        detail.Product.Filters = filters;
-
+      quotationService.getQuotationProducts(vm.quotation).then(function(details){
+        vm.quotation.Details = details;
+        vm.totalPrice = quotationService.calculateTotal(vm.quotation);
+        vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
+        vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
+        vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
+        quotationService.loadProductFilters(vm.quotation.Details).then(function(details2){
+          vm.quotation.Details = details2;
+        })
       });
     });
-
-  }
-
-  function getTotalPrice(){
-    var total = 0;
-    if(vm.quotation && vm.quotation.Details){
-      total = quotationService.calculateTotal(vm.quotation.Details);
-    }
-    return total;
-  }
-
-  function getTotalProducts(){
-    var total = 0;
-    if(vm.quotation && vm.quotation.Details){
-      total = quotationService.calculateItemsNumber(vm.quotation.Details)
-    }
-    return total;
   }
 
 
@@ -223,6 +159,11 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
     quotationService.removeDetail(detailId, vm.quotation.id).then(function(res){
       vm.quotation.Details.splice(index,1);
       vm.isLoadingDetails = false;
+      vm.totalPrice = quotationService.calculateTotal(vm.quotation);
+      vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
+      vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
+      vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
+
     });
   }
 
@@ -244,16 +185,26 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
 
   function continueBuying(){
     vm.isLoading = true;
-    vm.quotation.total = vm.getTotalPrice();
-    quotationService.update(vm.quotation.id, vm.quotation).then(function(res){
+    vm.quotation.total = quotationService.calculateTotal(vm.quotation);
+    vm.quotation.subTotal = quotationService.calculateSubTotal(vm.quotation);
+    var params = angular.copy(vm.quotation);
+    if(params.Details){
+      params.Details = params.Details.map(function(detail){
+        detail.Product = detail.Product.id;
+        return detail;
+      });
+    }
+    quotationService.update(vm.quotation.id, params).then(function(res){
       vm.isLoading = false;
       var quotationUpdated = res.data;
       if(vm.quotation.Client){
         quotationService.setActiveQuotation(vm.quotation.id);
         $location.path('/checkout/client/' + vm.quotation.id);
       }else{
+        console.log('No hay cliente');
         quotationService.setActiveQuotation(vm.quotation.id);
-        $location.path('/continuequotation?goToCheckout');
+        //$location.path('/continuequotation?goToCheckout');
+        $location.path('/continuequotation');
       }
     });
   }

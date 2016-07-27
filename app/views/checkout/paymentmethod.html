@@ -2,7 +2,12 @@
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
-<section ng-show="!vm.isLoading"  class="form-view cart-view checkout-view container container-xxlg" >
+<form
+  name="createForm"
+  ng-submit="vm.createOrder(createForm)"
+  ng-show="!vm.isLoading"
+  class="form-view cart-view checkout-view container container-xxlg"
+>
 
   <h1 class="checkout-title">CHECKOUT</h1>
 
@@ -41,11 +46,12 @@
         <md-radio-group ng-show="vm.singlePayment && !vm.multiplePayment" ng-model="data.group1">
 
           <div class="pay-method-wrap" >
-            <ng-include src="'views/checkout/payment-group1.html'"></ng-include>
-            <ng-include src="'views/checkout/payment-group2.html'"></ng-include>
-            <ng-include src="'views/checkout/payment-group3.html'"></ng-include>
-            <ng-include src="'views/checkout/payment-group4.html'"></ng-include>
-            <ng-include src="'views/checkout/payment-group5.html'"></ng-include>
+            <ng-include
+              ng-repeat="paymentGroup in vm.paymentMethods track by $index"
+              ng-show="vm.isActiveGroup($index)"
+              src="'views/checkout/payment-group.html'">
+            </ng-include>
+
           </div>
 
         </md-radio-group>
@@ -60,9 +66,14 @@
               <div class="method-block">
                 <ul>
 
-                  <li layout="row" layout-align="space-between center">
+                  <li
+                    ng-if="vm.activeMethod && (vm.activeMethod.type == 'cash' || vm.activeMethod.type == 'cash-usd' )"
+                    layout="row"
+                    layout-align="space-between center"
+                  >
                     <div flex="30">
-                      <strong>Pago Efectivo MXN</strong>
+                      <strong ng-if="vm.activeMethod.type == 'cash'">Pago Efectivo MXN</strong>
+                      <strong ng-if="vm.activeMethod.type == 'cash-usd'">Pago Efectivo USD</strong>
                     </div>
                     <div flex="30" class="method-icon">
                       <i class="icon-cash"></i>
@@ -71,17 +82,21 @@
                       <div flex="45" class="input-element">
                         <label>CANTIDAD</label>
                         <div class="input-element-inner">
-                          <input type="text" required>
+                          <input type="text" ng-model="vm.currentAmmount" required>
                         </div>
                       </div>
-                      <a href="#" flex="45" ng-click="vm.applyPayment(false)" class="action-btn action-btn-save">GUARDAR</a>
+                      <a href="#" flex="45" ng-click="vm.applyCashPayment(vm.activeMethod, vm.currentAmmount)" class="action-btn action-btn-save">GUARDAR</a>
                     </div>
 
                   </li>
 
-                  <li layout="row" layout-align="space-between center">
+                  <li
+                    ng-if="vm.activeMethod && (vm.activeMethod.type == 'deposit' || vm.activeMethod.type == 'transfer' || vm.activeMethod.type == 'cheque' || vm.activeMethod.type == 'credit-card' ) "
+                    layout="row"
+                    layout-align="space-between center"
+                  >
                     <div flex="30">
-                      <strong>Transferencia bancaria</strong>
+                      <strong>{{vm.activeMethod.label}}</strong>
                     </div>
                     <div flex="30" class="method-icon">
                       <i class="icon-transfer"></i>
@@ -90,16 +105,20 @@
                       <div flex="45" class="input-element">
                         <label>CANTIDAD</label>
                         <div class="input-element-inner">
-                          <input type="text" required>
+                          <input type="text" ng-model="vm.currentAmmount"  required>
                         </div>
                       </div>
-                      <a href="#" ng-click="vm.applyTransaction($event, 'deposit')" flex="45" class="action-btn">APLICAR</a>
+                      <a href="#" ng-click="vm.applyTransaction($event, vm.activeMethod, vm.currentAmmount)" flex="45" class="action-btn">APLICAR</a>
                     </div>
                   </li>
 
-                  <li layout="row" layout-align="space-between center">
+                  <li
+                    ng-if="vm.activeMethod.terminals && vm.activeMethod.msi"
+                    layout="row"
+                    layout-align="space-between center"
+                  >
                     <div flex="30">
-                      <strong>3 Meses</strong>
+                      <strong>{{vm.activeMethod.label}} Meses</strong>
                      <div class="hl-label"><strong>Sin intereses</strong></div>
                     </div>
                     <div flex="30" class="bank-icons bank-icons-v2">
@@ -111,54 +130,52 @@
                       <div flex="45" class="input-element">
                         <label>CANTIDAD</label>
                         <div class="input-element-inner">
-                          <input type="text" required>
+                          <input type="text" ng-model="vm.currentAmmount"  required>
                         </div>
                       </div>
-                      <a href="#" ng-click="vm.applyTransaction($event, 'terminal')" flex="45" class="action-btn">APLICAR</a>
+                      <a href="#" ng-click="vm.applyTransaction($event, vm.activeMethod, vm.currentAmmount)" flex="45" class="action-btn">APLICAR</a>
                     </div>
                   </li>
-
-                  <!--
-                  <li layout="row" layout-align="space-between center">
-                    <div flex="30">
-                      <strong>3 Meses</strong>
-                     <div class="hl-label"><strong>Sin intereses</strong></div>
-                    </div>
-                    <div class="method-data" flex="60" layout="row">
-                      <div flex="33">
-                        <p><strong>TERMINAL</strong></p>
-                        <p>TPV Banorte</p>
-                      </div>
-                      <div flex="33">
-                        <p><strong># AUTORIZACIÓN</strong></p>
-                        <p>6564</p>
-                      </div>
-                      <div flex="33">
-                        <p><strong>CANTIDAD</strong></p>
-                        <p>$30, 000</p>
-                      </div>
-                    </div>
-                    <div flex="10" class="saved-icon-wrap">
-                      <i class="icon-login saved-icon"></i>
-                    </div>
-                  </li>
-                  -->
                 </ul>
 
                 <!--PAYMENTS APPLIED-->
-                <ul>
-                  <li ng-repeat="payment in vm.payments" >
+                <div ng-if="vm.isLoadingPayments" layout="row" layout-align="center center">
+                  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+                </div>
+                <h2 ng-if="!vm.isLoadingPayments">
+                  Pagos aplicados
+                </h2>
+                <ul ng-if="!vm.isLoadingPayments">
+                  <li ng-repeat="payment in vm.quotation.Payments"  class="applied-payment">
 
                     <div
-                      ng-if="payment.isRecurring"
+                      ng-if="payment.type == 'cash' "
                       layout="row"
                       layout-align="space-between center"
                     >
                       <div flex="30">
-                        <strong>{{payment.recurringPayments}} Meses</strong>
-                        <div class="hl-label">
-                          <strong>{{payment.paymentType}}</strong>
+                        <strong>Pago efectivo MXN</strong>
+                        <p class="pull-left">{{payment.description}}</p>
+                      </div>
+                      <div class="method-data" flex="60" layout="row">
+                        <div flex="33">
+                          <p><strong>CANTIDAD</strong></p>
+                          <p>{{payment.ammount | currency}}</p>
                         </div>
+                      </div>
+                      <div flex="10" class="saved-icon-wrap">
+                        <i class="icon-checkmark saved-icon"></i>
+                      </div>
+                    </div>
+
+                    <div
+                      ng-if="payment.group == 1 && payment.type != 'cash' && payment.type != 'cash-usd'"
+                      layout="row"
+                      layout-align="space-between center"
+                    >
+                      <div flex="30">
+                        <strong>Transferencia bancaria</strong>
+                        <p class="pull-left">{{payment.description}}</p>
                       </div>
                       <div class="method-data" flex="60" layout="row">
                         <div flex="33">
@@ -175,36 +192,20 @@
                         </div>
                       </div>
                       <div flex="10" class="saved-icon-wrap">
-                        <i class="icon-login saved-icon"></i>
+                        <i class="icon-checkmark saved-icon"></i>
                       </div>
                     </div>
 
                     <div
-                      ng-if="payment.type == 'deposit' "
+                      ng-if="payment.group != 1"
                       layout="row"
                       layout-align="space-between center"
                     >
                       <div flex="30">
-                        <strong>Pago efectivo MXN</strong>
-                      </div>
-                      <div class="method-data" flex="60" layout="row">
-                        <div flex="33">
-                          <p><strong>CANTIDAD</strong></p>
-                          <p>{{payment.ammount | currency}}</p>
+                        <strong>{{payment.msi}} Meses</strong>
+                        <div class="hl-label">
+                          <strong>Sin intereses</strong>
                         </div>
-                      </div>
-                      <div flex="10" class="saved-icon-wrap">
-                        <i class="icon-login saved-icon"></i>
-                      </div>
-                    </div>
-
-                    <div
-                      ng-if="payment.type == 'transaction' "
-                      layout="row"
-                      layout-align="space-between center"
-                    >
-                      <div flex="30">
-                        <strong>Transferencia bancaria</strong>
                       </div>
                       <div class="method-data" flex="60" layout="row">
                         <div flex="33">
@@ -243,13 +244,17 @@
       </div>
 
       <aside flex class="cart-aside">
-        <h1 class="cart-title"><i class="icon-carro"><span>{{vm.getTotalProducts()}}</span></i> <strong>RESUMEN</strong></h1>
+        <h1 class="cart-title"><i class="icon-carro"><span>{{vm.totalProducts}}</span></i> <strong>RESUMEN</strong></h1>
 
         <div class="cart-summary">
           <table>
             <tr>
-              <td><strong>Subtotal ({{vm.getTotalProducts()}}) productos):</strong></td>
-              <td><strong>{{vm.totalPrice | currency }}</strong></td>
+              <td><strong>Subtotal ({{vm.totalProducts}}) productos):</strong></td>
+              <td><strong>{{vm.subTotal | currency }}</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Descuento:</strong></td>
+              <td><strong>-{{vm.totalDiscount | currency }}</strong></td>
             </tr>
             <tr>
               <td>Costo de envío:</td>
@@ -266,12 +271,29 @@
             </div>
           </div>
           <hr>
+          <table>
+            <tr>
+              <td><strong>Pagado:</strong></td>
+              <td><strong>{{vm.quotation.ammountPaid | currency }}</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Restante:</strong></td>
+              <td><strong>{{ (vm.totalPrice - vm.quotation.ammountPaid) | currency }}</strong></td>
+            </tr>
+          </table>
+
+          <hr>
 
           <div class="secure-note" layout="row">
             <p flex="60"><strong>Las compras con ACTUAL son 100% seguras.</strong></p>
           </div>
 
-          <input type="submit" value="PAGAR" class="cart-view-btn">
+          <input
+            type="submit"
+            value="PAGAR"
+            class="cart-view-btn"
+            ng-disabled="(vm.quotation.ammountPaid < vm.quotation.total)"
+            ng-class="{'cart-view-btn-disabled' : (vm.quotation.ammountPaid < vm.quotation.total) }">
 
           <p class="cart-summary-note">*Precios en Pesos Mexicanos con impuestos incluidos.</p>
 
@@ -281,14 +303,5 @@
 
     </section>
 
-
-
-
   </div>
-
-
-
-
-
-
-</section>
+</form>

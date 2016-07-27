@@ -12,36 +12,30 @@ angular.module('dashexampleApp')
 
 function CheckoutClientCtrl(commonService ,$timeout ,$routeParams, $rootScope, $location ,categoriesService, productService, quotationService, clientService, orderService){
   var vm = this;
-  vm.init = init;
-  vm.getProducts = getProducts;
-  vm.loadProductFilters = loadProductFilters;
-  vm.getTotalPrice = getTotalPrice;
-  vm.getTotalProducts = getTotalProducts;
-  vm.continueProcess = continueProcess;
-  vm.setAddress = setAddress;
-  vm.updateAddress = updateAddress;
-
-  vm.states = commonService.getStates();
+  angular.extend(vm,{
+    continueProcess: continueProcess,
+    init: init,
+    setAddress: setAddress,
+    updateAddress: updateAddress,
+  });
 
   function init(){
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
-      var productsIds = [];
-      vm.quotation.Details.forEach(function(detail){
-        productsIds.push(detail.Product);
-      });
-
       vm.isLoading = false;
-
       //fillin address data with client info
       if(!vm.quotation.Address){
         console.log('No habia direccion');
         vm.setAddress();
       }
-
-
-      vm.getProducts(productsIds);
+      quotationService.getQuotationProducts(vm.quotation).then(function(details){
+        vm.quotation.Details = details;
+        vm.totalPrice = quotationService.calculateTotal(vm.quotation);
+        vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
+        vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
+        vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
+      });
     });
   }
 
@@ -78,75 +72,19 @@ function CheckoutClientCtrl(commonService ,$timeout ,$routeParams, $rootScope, $
 
   function continueProcess(){
     vm.isLoading = true;
-    quotationService.update(vm.quotation.id, vm.quotation).then(function(res){
+    var params = angular.copy(vm.quotation);
+    if(params.Details){
+      params.Details = params.Details.map(function(detail){
+        detail.Product = detail.Product.id;
+        return detail;
+      });
+    }
+    quotationService.update(vm.quotation.id, params).then(function(res){
       vm.isLoading = false;
       $location.path('/checkout/paymentmethod/' + vm.quotation.id);
     });
   }
 
-  function getProducts(productsIds){
-    var params = {
-      filters: {
-        id: productsIds
-      },
-      populate_fields: ['FilterValues']
-    };
-    var page = 1;
-    productService.getList(page,params).then(function(res){
-      var products = productService.formatProducts(res.data.data);
-
-      //Match detail - product
-      vm.quotation.Details.forEach(function(detail){
-        //Populating detail with product info.
-        detail.Product = _.findWhere( products, {id : detail.Product } );
-      });
-      vm.loadProductFilters();
-    });
-  }
-
-  function loadProductFilters(){
-    productService.getAllFilters({quickread:true}).then(function(res){
-      vm.filters = res.data;
-      var filters = angular.copy(vm.filters);
-
-      vm.quotation.Details.forEach(function(detail){
-
-        filters = vm.filters.map(function(filter){
-          filter.Values = [];
-          detail.Product.FilterValues.forEach(function(value){
-            if(value.Filter === filter.id){
-              filter.Values.push(value);
-            }
-          });
-          return filter;
-        });
-
-        filters = filters.filter(function(filter){
-          return filter.Values.length > 0;
-        });
-
-        detail.Product.Filters = filters;
-
-      });
-    });
-
-  }
-
-  function getTotalPrice(){
-    var total = 0;
-    if(vm.quotation && vm.quotation.Details){
-      total = quotationService.calculateTotal(vm.quotation.Details);
-    }
-    return total;
-  }
-
-  function getTotalProducts(){
-    var total = 0;
-    if(vm.quotation && vm.quotation.Details){
-      total = quotationService.calculateItemsNumber(vm.quotation.Details)
-    }
-    return total;
-  }
 
   vm.init();
 

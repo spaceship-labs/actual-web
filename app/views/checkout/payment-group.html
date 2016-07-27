@@ -1,0 +1,28 @@
+<div class="method-block" layout="row" layout-align="space-between center">
+  <ul flex="75">
+    <li ng-repeat="method in paymentGroup.methods" layout="row" layout-align="space-between center">
+      <div ng-attr-flex="{{method.cards && '40' || '100' }}" >
+        <md-radio-button ng-click="vm.setMethod(method , paymentGroup.group)" ng-model="method" ng-value="method" class="md-primary">
+          <strong>{{method.label}}</strong>
+        </md-radio-button>
+        <span  ng-if="!method.msi" class="method-text"> {{method.description}}</span>
+        <span ng-if="method.msi" class="method-text">Meses</span>
+        <div ng-if="method.msi" class="hl-label"><strong>Sin intereses</strong></div>
+      </div>
+      <div ng-if="method.cards" flex="60" class="bank-icons">
+        <img ng-repeat="card in method.cards"  ng-src="{{card}}" alt="">
+      </div>
+    </li>
+
+  </ul>
+  <div flex="20" class="method-block-prices">
+    <!--
+    <div class="discount-label"><strong>-25%</strong></div>
+    <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
+    -->
+    <h2 class="price-now" ng-class="{'price-hl' : $index == 0 }">
+      {{ vm.getTotalByPaymentMethod(paymentGroup.discountKey) | currency }}
+      <!--{{vm.totalPrice | currency }}-->
+    </h2>
+  </div>
+</div>

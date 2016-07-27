@@ -1,0 +1,116 @@
+<section action="#" class="form-section-content">
+
+  <div layout="row">
+    <div flex="45" class="input-element">
+      <label><strong>Razón social <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.bussinessLegalName" required>
+      </div>
+    </div>
+
+    <div flex="45" class="input-element">
+      <label><strong>Nombre de la empresa <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.bussinessName" required>
+      </div>
+    </div>
+  </div>
+
+  <div layout="row">
+    <div flex="20" class="input-element">
+      <label><strong>RFC <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.rfc" required>
+      </div>
+    </div>
+
+    <div flex="25" class="input-element">
+      <label><strong>Teléfono <span class="hl-label">*</span></strong></label>
+      <div layout="row" layout-align="space-between center">
+          <div flex="35" class="input-element-inner">
+            <input type="text" ng-model="vm.client.invoiceDialCode" placeholder="Lada" required>
+          </div>
+          <div flex="60" class="input-element-inner">
+            <input type="text" ng-model="vm.client.invoicePhone" required>
+          </div>
+      </div>
+    </div>
+
+    <div flex="30" class="input-element">
+      <label><strong>Email</strong></label>
+      <div class="input-element-inner">
+        <input type="email" ng-model="vm.client.invoiceEmail" required>
+      </div>
+    </div>
+  </div>
+
+
+  <h4>DIRECCIÓN FISCAL</h4>
+  <div layout="row">
+
+    <div flex="20" class="input-element">
+      <label><strong>Calle <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.invoiceStreet" required>
+      </div>
+    </div>
+
+    <div flex="10" class="input-element">
+      <label><strong>No. exterior <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.invoiceExternalNumber" required>
+      </div>
+    </div>
+
+    <div flex="10" class="input-element">
+      <label><strong>No. interior <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.invoiceInternalNumber" required>
+      </div>
+    </div>
+
+    <div flex="25" class="input-element">
+      <label><strong>Colonia <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.invoiceNeighborhood" required>
+      </div>
+    </div>
+
+    <div flex="20" class="input-element">
+      <label><strong>Municipio <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.invoiceMunicipality" required>
+      </div>
+    </div>
+
+  </div>
+
+  <div layout="row">
+
+    <div flex="20" class="input-element">
+      <label><strong>Ciudad <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.invoiceCity" required>
+      </div>
+    </div>
+
+
+    <div flex="30" class="input-element select-element-wrapper">
+      <label><strong>Estado</strong></label>
+      <md-select ng-model="vm.client.invoiceEntity" class="select-element">
+        <md-option ng-repeat="state in vm.states" ng-value="state.name">
+          {{state.name}}
+        </md-option>
+      </md-select>
+    </div>
+
+    <div flex="15" class="input-element">
+      <label><strong>Código postal <span class="hl-label">*</span></strong></label>
+      <div class="input-element-inner">
+        <input type="text" ng-model="vm.client.invoiceZipCode" required>
+      </div>
+    </div>
+
+  </div>
+
+</section>

@@ -30,7 +30,7 @@ a{text-decoration: none}
   max-width: 400px!important;
 }
 .md-dialog-container{
-  z-index: 99999999;
+  /*z-index: 99999999;*/
 }
 
 md-dialog-content{padding: 20px 10px;}
@@ -2687,6 +2687,9 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   outline: 0;
   letter-spacing: 3px;
 }
+.cart-view .cart-view-btn-disabled{
+  background: gray;
+}
 .cart-view .cart-summary .cart-summary-note{
   color: #828282;
   font-size: 14px;
@@ -2954,6 +2957,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   padding: 0;
   background: none;
 }
+.pay-method-wrap-v2 .method-block{padding: 12px 0;}
 
 .pay-method-wrap .method-block + .method-block{margin-top: 15px;}
 
@@ -3075,6 +3079,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 40px
 }
 
+.pay-method-wrap .method-block .applied-payment{
+  padding: 12px 0;
+}
+
 /*------------/
   #DEPOSIT-DIALOG
 /*------------*/
@@ -3110,6 +3118,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .deposit-dialog .dialog-block{
   margin: 20px 0;
 }
+.deposit-dialog .dialog-block md-select{margin-bottom: 0;}
 
 /*---------------/
   #ORDER-VIEW

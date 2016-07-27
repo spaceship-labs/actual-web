@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('ProductCtrl', ProductCtrl);
 
-function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams, $q, $timeout,$mdDialog, $mdMedia, $sce, api, cartService, quotationService){
+function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams, $q, $timeout,$mdDialog, $mdMedia, $sce, api, cartService, quotationService, pmPeriodService){
   var vm = this;
 
   angular.extend(vm, {
@@ -29,7 +29,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     getGroupProducts: getGroupProducts,
     getImageSizes: getImageSizes,
     getLowestCategory: getLowestCategory,
-    getMainPromo: getMainPromo,
     init: init,
     loadProductFilters: loadProductFilters,
     loadVariants: loadVariants,
@@ -43,6 +42,41 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
 
   vm.init($routeParams.id);
 
+
+  function init(productId, reload){
+    vm.filters = [];
+    vm.activeVariants = {};
+    vm.galleryImages = [];
+    vm.isLoading = true;
+
+    productService.getById(productId).then(function(res){
+      vm.isLoading = false;
+      vm.product = productService.formatProduct(res.data.data);
+      vm.lowestCategory = vm.getLowestCategory();
+      vm.product.cart = {
+        quantity: 1
+      };
+      vm.setupGallery();
+      vm.mainPromo = vm.product.mainPromo;
+
+      if(reload){
+        $location.path('/product/' + productId, false);
+        vm.loadProductFilters();
+        //vm.productQty = 1;
+
+      }else{
+        vm.loadProductFilters();
+        vm.loadVariants();
+      }
+
+    });
+
+    pmPeriodService.getActive().then(function(res){
+      vm.validPayments = res.data;
+      console.log(res);
+    });
+  }
+
   function getImageSizes(){
     var getImageSize = function(galleryImg, callback){
       var img = new Image();
@@ -50,8 +84,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
       img.onload = function(){
         galleryImg.w = this.width;
         galleryImg.h = this.height;
-        console.log('getImageSize');
-        console.log(galleryImg);
         $scope.$apply();
         callback();
       };
@@ -77,44 +109,12 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     vm.open = false;
   }
 
-  function init(productId, reload){
-    vm.filters = [];
-    vm.activeVariants = {};
-    vm.galleryImages = [];
-    vm.isLoading = true;
-
-    productService.getById(productId).then(function(res){
-      vm.isLoading = false;
-      vm.product = productService.formatProduct(res.data.data);
-      vm.lowestCategory = vm.getLowestCategory();
-      vm.product.cart = {
-        quantity: 1
-      };
-      vm.setupGallery();
-      vm.mainPromo = vm.getMainPromo(vm.product);
-
-      if(reload){
-        $location.path('/product/' + productId, false);
-        vm.loadProductFilters();
-        //vm.productQty = 1;
-
-      }else{
-        vm.loadProductFilters();
-        vm.loadVariants();
-      }
-
-    });
-  }
-
   function showGallery (i) {
     if(angular.isDefined(i)) {
       vm.opts.index = i;
-      console.log('showing gallery index: ' + i);
-      console.log('vm.opts');
       console.log(vm.opts);
     }
     vm.open = true;
-    console.log('vm.open : ' + vm.open);
   }
 
   function getLowestCategory(){
@@ -230,7 +230,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
           h: 500
         });
       });
-      console.log(vm.galleryImages);
     }
 
     $timeout(function(){
@@ -302,7 +301,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
         return filter.Values.length > 0;
       });
 
-      console.log(vm.filters);
 
     });
   }
@@ -329,21 +327,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     })
   }
 
-  function getMainPromo(product){
-    vm.mainPromo = false;
-    if(product.Promotions && product.Promotions.length > 0){
-      var indexMaxPromo = 0;
-      var maxPromo = 0;
-      product.Promotions.forEach(function(promo, index){
-        if(promo.discountPg1 >= maxPromo){
-          maxPromo = promo.discountPg1;
-          indexMaxPromo = index;
-        }
-      });
-    }
-    console.log(product.Promotions[indexMaxPromo]);
-    return product.Promotions[indexMaxPromo];
-  }
 
   function DialogController($scope, $mdDialog) {
     $scope.hide = function() {

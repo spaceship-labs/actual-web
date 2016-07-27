@@ -9,30 +9,24 @@
     function productService($http, $q, api){
 
       var service = {
-        getList: getList,
-        getById: getById,
-        search: search,
+        advancedSearch: advancedSearch,
         formatProduct: formatProduct,
         formatProducts: formatProducts,
-
-        getListNoImages: getListNoImages,
-
-        getCategories: getCategories,
-        getMainCategories: getMainCategories,
         getAllCategories: getAllCategories,
-        getCategoryById: getCategoryById,
-
         getAllFilters: getAllFilters,
-
-        getGroupVariants: getGroupVariants,
+        getById: getById,
+        getCategories: getCategories,
+        getCategoryById: getCategoryById,
         getGroupProducts: getGroupProducts,
-
+        getGroupVariants: getGroupVariants,
+        getList: getList,
+        getListNoImages: getListNoImages,
+        getMainCategories: getMainCategories,
+        getMainPromo: getMainPromo,
         getProductsByFilters: getProductsByFilters,
-
-        advancedSearch: advancedSearch,
+        search: search,
         searchByFilters: searchByFilters,
-        searchCategoryByFilters: searchCategoryByFilters
-
+        searchCategoryByFilters: searchCategoryByFilters,
       };
 
       return service;
@@ -96,7 +90,6 @@
             return promo.discountPg1;
           });
           var maxDiscount = Math.max.apply(Math,discounts);
-          console.log('maxDiscount: ' + maxDiscount);
           product.maxDiscount = maxDiscount;
           product.priceBefore = product.Price;
           product.Price = product.Price - ( ( product.Price / 100) * maxDiscount );
@@ -104,12 +97,27 @@
           product.maxDiscount = 0;
           product.pricebefore = product.Price;
         }
+        product.mainPromo = getMainPromo(product);
 
-        console.log(product);
         return product;
       }
 
+      function getMainPromo(product){
+        if(product.Promotions && product.Promotions.length > 0){
+          var indexMaxPromo = 0;
+          var maxPromo = 0;
+          product.Promotions.forEach(function(promo, index){
+            if(promo.discountPg1 >= maxPromo){
+              maxPromo = promo.discountPg1;
+              indexMaxPromo = index;
+            }
+          });
 
+          return product.Promotions[indexMaxPromo];
+        }else{
+          return false;
+        }
+      }
 
       function formatProducts(products){
         var formatted = products.map(formatProduct);

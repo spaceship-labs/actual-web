@@ -13,59 +13,57 @@ angular.module('dashexampleApp')
 function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productService, commonService, clientService, quotationService, saleService, dialogService){
   var vm = this;
 
-  vm.init = init;
-  vm.update = update;
-  vm.createQuotation = createQuotation;
-  vm.personalDataToDelivery = personalDataToDelivery;
-  vm.onPikadaySelect = onPikadaySelect;
-
-  vm.activeTab = 0;
-  vm.titles = [
-    {label:'Sr.', value:'Sr'},
-    {label:'Sra.', value: 'Sra'},
-    {label: 'Srita.', value: 'Srita'}
-  ];
-  vm.genders = [
-    {label:'Masculino', value: 'Masculino'},
-    {label: 'Femenino', value: 'Femenino'}
-  ];
-
-  vm.states = commonService.getStates();
-  vm.countries = commonService.getCountries();
-
-  vm.columnsLeads = [
-    {key: 'folio', label:'Folio'},
-    {key:'Client.firstName', label:'Cliente'},
-    {key:'Client.CardName', label:'Cliente (Nombre SAP)'},
-    {key:'total', label: 'Total', currency:true},
-    {key:'currency', label:'Moneda'},
-    {
-      key:'Acciones',
-      label:'Acciones',
-      propId: 'id',
-      actions:[
-        {url:'/quotations/edit/',type:'edit'},
-      ]
-    },
-  ];
-
-  vm.apiResourceLeads = quotationService.getByClient;
-
-  vm.columnsOrders = [
-    {key: 'DocEntry', label:'Folio'},
-    {key:'CardName', label:'Cliente'},
-    {key:'DocTotal', label: 'Total'},
-    {key:'DocCur', label:'Moneda'},
-    {
-      key:'Acciones',
-      label:'Acciones',
-      propId: 'id',
-      actions:[
-        {url:'/quotations/edit/',type:'edit'},
-      ]
-    },
-  ];
-  vm.apiResourceOrders = saleService.getList;
+  angular.extend(vm, {
+    activeTab: 0,
+    genders: [
+      {label:'Masculino', value: 'Masculino'},
+      {label: 'Femenino', value: 'Femenino'}
+    ],
+    titles: [
+      {label:'Sr.', value:'Sr'},
+      {label:'Sra.', value: 'Sra'},
+      {label: 'Srita.', value: 'Srita'}
+    ],
+    states: commonService.getStates(),
+    countries: commonService.getCountries(),
+    columnsLeads: [
+      {key: 'folio', label:'Folio'},
+      {key:'Client.firstName', label:'Cliente'},
+      {key:'Client.CardName', label:'Cliente (Nombre SAP)'},
+      {key:'total', label: 'Total', currency:true},
+      {key:'currency', label:'Moneda'},
+      {
+        key:'Acciones',
+        label:'Acciones',
+        propId: 'id',
+        actions:[
+          {url:'/quotations/edit/',type:'edit'},
+        ]
+      },
+    ],
+    columnsOrders: [
+      {key: 'DocEntry', label:'Folio'},
+      {key:'CardName', label:'Cliente'},
+      {key:'DocTotal', label: 'Total'},
+      {key:'DocCur', label:'Moneda'},
+      {
+        key:'Acciones',
+        label:'Acciones',
+        propId: 'id',
+        actions:[
+          {url:'/quotations/edit/',type:'edit'},
+        ]
+      },
+    ],
+    createQuotation: createQuotation,
+    formatContacts: formatContacts,
+    init: init,
+    onPikadaySelect: onPikadaySelect,
+    personalDataToDelivery: personalDataToDelivery,
+    update: update,
+    apiResourceLeads: quotationService.getByClient,
+    apiResourceOrders: saleService.getList,
+  });
 
   function init(){
     vm.isLoading = true;
@@ -78,6 +76,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
       vm.client.mobilePhone = vm.client.mobilePhone || vm.client.Cellular;
       vm.extraParamsLeads = {Client: vm.client.id};
       vm.extraParamsSales = {CardCode: vm.client.id};
+      vm.client.Contacts = vm.formatContacts(vm.client);
     });
   }
 
@@ -127,6 +126,19 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
     vm.relationFields.forEach(function(relation){
       vm.client[relation.deliveryField] = angular.copy(vm.client[relation.personalField]);
     });
+  }
+
+  function formatContacts(client){
+    var contacts = [];
+    if(client.Contacts){
+      contacts = client.Contacts.map(function(contact){
+        contact.firstName = angular.copy(contact.name);
+        contact.deliveryStreet = angular.copy(contact.address);
+        return contact;
+      });
+    }
+    console.log(client);
+    return contacts;
   }
 
   vm.init();

@@ -305,7 +305,7 @@
                        | <strong class="hl-text">{{ vm.applyDiscount(vm.mainPromo.discountPg1,vm.product.priceBefore) | currency }}</strong>
                     </td>
                   </tr>
-                  <tr>
+                  <tr ng-if="vm.validPayments.paymentGroup2">
                     <td>
                       <span>Promoción:</span>
                       <p>
@@ -319,7 +319,7 @@
                        | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg2,vm.product.priceBefore) | currency }}</strong>
                     </td>
                   </tr>
-                  <tr>
+                  <tr ng-if="vm.validPayments.paymentGroup3">
                     <td>
                       <span>Promoción:</span>
                       <p>
@@ -333,7 +333,7 @@
                        | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg3,vm.product.priceBefore) | currency }}</strong>
                     </td>
                   </tr>
-                  <tr>
+                  <tr ng-if="vm.validPayments.paymentGroup4">
                     <td>
                       <span>Promoción:</span>
                       <p>
@@ -347,7 +347,7 @@
                        | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg4,vm.product.priceBefore) | currency }}</strong>
                     </td>
                   </tr>
-                  <tr>
+                  <tr ng-if="vm.validPayments.paymentGroup5">
                     <td>
                       <span>Promoción:</span>
                       <p>

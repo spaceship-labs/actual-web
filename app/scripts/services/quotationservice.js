@@ -9,25 +9,28 @@
     function quotationService($http, $location, $q, $rootScope, api, Upload, productService, localStorageService){
 
       var service = {
-        create: create,
-        update: update,
-        getById: getById,
-        getByClient: getByClient,
-        getList: getList,
-        addRecord: addRecord,
         addDetail: addDetail,
-        getQuotationProducts: getQuotationProducts,
-        calculateTotal: calculateTotal,
-        calculateItemsNumber: calculateItemsNumber,
-        getActiveQuotation: getActiveQuotation,
+        addPayment: addPayment,
         addProduct: addProduct,
-        removeDetail: removeDetail,
-        newQuotation: newQuotation,
-        setActiveQuotation: setActiveQuotation,
-        getTotalsByUser: getTotalsByUser,
+        addRecord: addRecord,
+        calculateItemsNumber: calculateItemsNumber,
+        calculateSubTotal: calculateSubTotal,
+        calculateTotal: calculateTotal,
+        calculateTotalDiscount: calculateTotalDiscount,
+        create: create,
+        getActiveQuotation: getActiveQuotation,
+        getByClient: getByClient,
+        getById: getById,
         getCountByUser: getCountByUser,
-        addPayment: addPayment
-
+        getList: getList,
+        getQuotationProducts: getQuotationProducts,
+        getTotalByPaymentMethod: getTotalByPaymentMethod,
+        getTotalsByUser: getTotalsByUser,
+        loadProductFilters: loadProductFilters,
+        newQuotation: newQuotation,
+        removeDetail: removeDetail,
+        setActiveQuotation: setActiveQuotation,
+        update: update,
       };
 
       return service;
@@ -87,21 +90,72 @@
       }
 
 
-      function calculateTotal(details){
+      function calculateSubTotal(quotation){
+        var subTotal = 0;
+        if(quotation.Details){
+          var details = quotation.Details;
+          details.forEach(function(detail){
+            if(detail.Product && detail.Product.priceBefore){
+              subTotal+= detail.Product.priceBefore * detail.quantity;
+            }
+          });
+        }
+        return subTotal;
+
+      }
+
+      function calculateTotal(quotation){
         var total = 0;
-        details.forEach(function(detail){
-          if(detail.Product && detail.Product.Price){
-            total+= detail.Product.Price * detail.Quantity;
-          }
-        });
+        if(quotation.Details){
+          var details = quotation.Details;
+          details.forEach(function(detail){
+            if(detail.Product && detail.Product.Price){
+              total+= detail.Product.Price * detail.quantity;
+            }
+          });
+        }
         return total;
       }
 
-      function calculateItemsNumber(details){
+      //Siempre toma el precio actual como la promocion con pago unico
+      function calculateTotalDiscount(quotation){
+        var totalDiscount = 0;
+        if(quotation.Details){
+          var details = quotation.Details;
+          details.forEach(function(detail){
+            if(detail.Product && detail.Product.Price && detail.Product.priceBefore){
+              totalDiscount += ( detail.Product.priceBefore - detail.Product.Price) * detail.quantity;
+            }
+          });
+        }
+        return totalDiscount;
+      }
+
+      function getTotalByPaymentMethod(quotation, paymentDiscountKey){
+        var total = 0;
+        if(quotation.Details){
+          var details = quotation.Details;
+          details.forEach(function(detail){
+            if(detail.Product && detail.Product.priceBefore && detail.Product.mainPromo){
+              var product = detail.Product;
+              var discountPercent =  product.mainPromo[paymentDiscountKey];
+              var price  = product.priceBefore - ( ( product.priceBefore / 100) * discountPercent);
+              total += price * detail.quantity;
+              //total+= detail.Product.Price * detail.quantity;
+            }
+          });
+        }
+        return total;
+      }
+
+      function calculateItemsNumber(quotation){
         var items = 0;
-        details.forEach(function(detail){
-          items+=  detail.Quantity;
-        });
+        if(quotation.Details){
+          var details = quotation.Details;
+          details.forEach(function(detail){
+            items+=  detail.quantity;
+          });
+        }
         return items;
       }
 
@@ -113,9 +167,8 @@
             productsIds.push(detail.Product);
           });
           var params = {
-            filters: {
-              id: productsIds
-            }
+            filters: {id: productsIds},
+            populate_fields: ['FilterValues','Promotions']
           };
           var page = 1;
           productService.getList(page,params).then(function(res){
@@ -165,7 +218,7 @@
           //Agregar al carrito
           var detail = {
             Product: productId,
-            Quantity: params.quantity,
+            quantity: params.quantity,
             Quotation: quotationId
           };
           addDetail(quotationId, detail).then(function(res){
@@ -177,7 +230,7 @@
           //Crear cotizacion con producto agregado
           var params = {
             User: $rootScope.user.id,
-            Details:[ {Product: productId, Quantity: params.quantity}  ]
+            Details:[ {Product: productId, quantity: params.quantity}  ]
           };
           create(params).then(function(res){
             var quotation = res.data;
@@ -192,6 +245,36 @@
       function addPayment(quotationId, params){
         var url = '/quotation/addpayment/' + quotationId;
         return api.$http.post(url,params);
+      }
+
+      function loadProductFilters(details){
+        var deferred = $q.defer();
+        productService.getAllFilters({quickread:true}).then(function(res){
+          //Assign filters to every product
+          var filters = res.data;
+          details.forEach(function(detail){
+            filters = filters.map(function(filter){
+              filter.Values = [];
+              detail.Product.FilterValues.forEach(function(value){
+                if(value.Filter === filter.id){
+                  filter.Values.push(value);
+                }
+              });
+              return filter;
+            });
+
+            filters = filters.filter(function(filter){
+              return filter.Values.length > 0;
+            });
+            detail.Product.Filters = filters;
+          });
+
+          deferred.resolve(details);
+
+        }).catch(function(err){
+          deferred.reject(err);
+        });
+        return deferred.promise;
       }
 
     }

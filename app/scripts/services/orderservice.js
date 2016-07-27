@@ -32,6 +32,11 @@
         return api.$http.post(url,params);
       }
 
+      function createFromQuotation(quotationId){
+        var url = '/order/createfromquotation/' + quotationId;
+        return api.$http.post(url);
+      }
+
 
 
     }

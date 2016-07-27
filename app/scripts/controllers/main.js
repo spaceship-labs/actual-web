@@ -72,7 +72,6 @@
       }
 
       siteService.findByHandle('actual-group').then(function(res){
-        console.log(res);
         vm.site = res.data || {};
         $rootScope.site = res.data || {};
       });
@@ -131,8 +130,8 @@
       //Check if token is expired
       if(_token){
           var expiration = jwtHelper.getTokenExpirationDate(_token);
-          console.log(expiration);
           if(expiration <= new Date()){
+            console.log(expiration);
             console.log('expirado');
             authService.logout(function(){
               if($location.path() != '/'){
