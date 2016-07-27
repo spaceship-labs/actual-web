@@ -10,10 +10,11 @@
 angular.module('dashexampleApp')
   .controller('CheckoutClientCtrl', CheckoutClientCtrl);
 
-function CheckoutClientCtrl(commonService ,$timeout ,$routeParams, $rootScope, $location ,categoriesService, productService, quotationService, clientService, orderService){
+function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams, $rootScope, $location ,categoriesService, productService, quotationService, orderService){
   var vm = this;
   angular.extend(vm,{
     continueProcess: continueProcess,
+    formatContacts: formatContacts,
     init: init,
   });
 
@@ -23,19 +24,42 @@ function CheckoutClientCtrl(commonService ,$timeout ,$routeParams, $rootScope, $
       vm.quotation = res.data;
       vm.isLoading = false;
       //fillin address data with client info
-      if(!vm.quotation.Address){
-        console.log('No habia direccion');
-        vm.setAddress();
-      }
       quotationService.getQuotationProducts(vm.quotation).then(function(details){
+        console.log(details);
         vm.quotation.Details = details;
-        vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
       });
+
+      if(vm.quotation.Client){
+        clientService.getContacts(vm.quotation.Client.CardCode).then(function(res){
+          vm.contacts = vm.formatContacts(res.data);
+          if(!vm.quotation.Address && vm.contacts.length > 0){
+            vm.quotation.Address = vm.contacts[0].id;
+            console.log('No habia direccion');
+          }
+
+          console.log(res);
+          //vm.contacts = contacts;
+        });
+      }
     });
   }
 
+  function formatContacts(contacts){
+    var formattedContacts = [];
+    if(contacts){
+      formattedContacts = contacts.map(function(c){
+        c.name = (c.firstName&&c.lastName) ? c.firstName+' '+c.lastName : c.name;
+        c.address = c.address;
+        c.phone = (c.phone) ? c.dialCode + ' ' + c.phone : c.phone1;
+        c.mobile = (c.mobilePhone) ? c.mobileDialCode + ' ' + c.mobilePhone : c.mobileSAP;
+        return c;
+      });
+    }
+    return formattedContacts;
+  }
 
   function continueProcess(){
+    console.log('continueProcess');
     vm.isLoading = true;
     var params = angular.copy(vm.quotation);
     //delete params.Details;

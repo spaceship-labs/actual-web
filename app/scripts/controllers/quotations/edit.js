@@ -132,7 +132,6 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       });
       quotationService.getQuotationProducts(vm.quotation).then(function(details){
         vm.quotation.Details = details;
-        vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
         quotationService.loadProductFilters(vm.quotation.Details).then(function(details2){
           vm.quotation.Details = details2;
         })
@@ -160,8 +159,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
       vm.quotation.total = updatedQ.total;
       vm.quotation.subtotal = updatedQ.subtotal;
       vm.quotation.discount = updatedQ.discount;
-      vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
-
+      vm.quotation.totalProducts = updatedQ.totalProducts;
     });
   }
 

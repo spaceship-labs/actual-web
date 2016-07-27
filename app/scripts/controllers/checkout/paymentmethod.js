@@ -43,7 +43,6 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
         vm.quotation.Details = details;
         vm.totalPrice = quotationService.calculateTotal(vm.quotation);
         vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
-        vm.totalProducts = quotationService.calculateItemsNumber(vm.quotation);
         vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
         vm.paymentMethods = vm.getMethods();
         vm.isLoading = false;

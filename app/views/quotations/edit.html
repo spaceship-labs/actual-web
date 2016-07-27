@@ -135,12 +135,12 @@
       </section>
 
       <aside flex class="cart-aside">
-        <h1 class="cart-title"><i class="icon-carro"><span>{{ vm.totalProducts }}</span></i> <strong>MI CARRITO</strong></h1>
+        <h1 class="cart-title"><i class="icon-carro"><span>{{ vm.quotation.totalProducts }}</span></i> <strong>MI CARRITO</strong></h1>
 
         <div class="cart-summary">
           <table>
             <tr>
-              <td><strong>Subtotal ({{ vm.totalProducts }} productos):</strong></td>
+              <td><strong>Subtotal ({{ vm.quotation.totalProducts }} productos):</strong></td>
               <td><strong>{{ vm.quotation.subtotal | currency }}</strong></td>
             </tr>
             <tr>

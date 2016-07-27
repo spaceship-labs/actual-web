@@ -3121,6 +3121,31 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .deposit-dialog .dialog-block md-select{margin-bottom: 0;}
 
 /*---------------/
+  #CHECKOUT CLIENT INFO
+/*---------------*/
+.client-checkout .input-element label{margin-bottom: 5px;}
+.client-checkout .input-element p{margin:0;}
+.client-checkout .delivery-option-radio{text-align: center;}
+.client-checkout .delivery-option-radio md-radio-button{
+  display: inline-block;
+  margin: 0 auto;
+}
+.client-checkout .delivery-option ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.client-checkout .delivery-option-data{
+  background: #F8F8F8;
+  border: 1px solid #D6D6D6;
+  border-radius: 4px;
+  color: #030303;
+  padding: 15px;
+}
+.client-checkout .delivery-option-data h4{margin: 0 0 10px;}
+
+
+/*---------------/
   #ORDER-VIEW
 /*--------------*/
 .order-view .action-btn-save strong{
