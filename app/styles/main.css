@@ -2549,6 +2549,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .cart-view .cart-aside{
   margin-left: 20px;
 }
+.cart-view .cart-aside.cart-aside-fixed{
+  position: fixed;
+  top: 100px;
+}
+
 .cart-view .cart-aside .cart-title{
   padding: 14px 10px;
   text-align: center;

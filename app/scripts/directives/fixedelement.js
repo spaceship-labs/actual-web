@@ -2,15 +2,17 @@
 
 /**
  * @ngdoc directive
- * @name dashexampleApp.directive:fixedHeader
+ * @name dashexampleApp.directive:fixedElement
  * @description
- * # fixedHeader
+ * # fixedElement
  */
 angular.module('dashexampleApp')
-  .directive('fixedHeader', function ($window) {
-    return function(scope) {
+  .directive('fixedElement', function ($window) {
+    return function(scope, element, attrs) {
+        console.log(attrs);
+        var top = attrs.top || 70;
         angular.element($window).bind("scroll", function() {
-             if (this.pageYOffset >= 70) {
+             if (this.pageYOffset >= top) {
                  scope.scrolled = true;
              } else {
                  scope.scrolled = false;
