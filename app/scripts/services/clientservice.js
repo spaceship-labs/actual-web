@@ -11,6 +11,7 @@
       var service = {
         getById: getById,
         getClients: getClients,
+        getContacts: getContacts,
         update: update
       };
 
@@ -32,6 +33,10 @@
         return api.$http.post(url, params);
       }
 
+      function getContacts(clientSlpCode){
+        var url = '/client/'+clientSlpCode+'/contacts';
+        return api.$http.post(url);
+      }
 
     }
 

@@ -107,7 +107,9 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   }
 
   function applyFilters(){
-    if(vm.dateStart && vm.dateEnd){
+    if(vm.dateStart._d && vm.dateEnd._d){
+      console.log(vm.dateStart);
+      console.log(vm.dateEnd);
       vm.dateRange = {
         field: 'createdAt',
         start: vm.dateStart._d,
