@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
 
-function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $mdDialog ,quotationService, productService, orderService, pmPeriodService, commonService, formatService){
+function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedia, $mdDialog ,quotationService, productService, orderService, pmPeriodService, commonService, formatService){
   var vm = this;
 
   angular.extend(vm,{
@@ -18,7 +18,6 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
     applyTransaction: applyTransaction,
     applyCashPayment: applyCashPayment,
     createOrder: createOrder,
-    getTotalByPaymentMethod: getTotalByPaymentMethod,
     getGroupByPayments: getGroupByPayments,
     getMethods: getMethods,
     init: init,
@@ -39,32 +38,53 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
-      quotationService.getQuotationProducts(vm.quotation).then(function(details){
-        vm.quotation.Details = details;
-        vm.totalPrice = quotationService.calculateTotal(vm.quotation);
-        vm.subTotal = quotationService.calculateSubTotal(vm.quotation);
-        vm.totalDiscount = quotationService.calculateTotalDiscount(vm.quotation);
-        vm.paymentMethods = vm.getMethods();
-        vm.isLoading = false;
+      vm.getMethods(vm.quotation.id).then(function(methods){
+        vm.paymentMethods = methods;
       });
+
       pmPeriodService.getActive().then(function(res){
         vm.validPayments = res.data;
       });
+
+      vm.isLoading = false;
+
     });
   }
 
-  function getMethods(){
+  function getMethods(quotationId){
+    var deferred = $q.defer();
     var methodsGroups = commonService.getPaymentMethods();
     var discountKeys = ['discountPg1','discountPg2','discountPg3','discountPg4','discountPg5'];
-    methodsGroups.map(function(mG){
-      mG.methods = mG.methods.map(function(m){
-        var discountKey = discountKeys[mG.group - 1]
-        var totalByMethod = quotationService.getTotalByPaymentMethod(vm.quotation, discountKey);
-        m.totalDiscount = vm.quotation.total - totalByMethod;
-        return m;
+    var totalsPromises = [];
+
+    methodsGroups.forEach(function(mG){
+      totalsPromises.push(quotationService.getQuotationTotals(quotationId, {paymentGroup:mG.group}));
+    });
+
+    return $q.all(totalsPromises).then(function(response){
+      //var totalsByGroup = response.data;
+      var totalsByGroup = response || [];
+      totalsByGroup = totalsByGroup.map(function(tbg){
+        return tbg.data || {};
       });
+      console.log(totalsByGroup);
+      methodsGroups = methodsGroups.map(function(mG, index){
+        mG.total = totalsByGroup[index].total || 0;
+        mG.subtotal = totalsByGroup[index].subtotal || 0;
+        mG.discount = totalsByGroup[index].discount || 0;
+        mG.methods = mG.methods.map(function(m){
+          var discountKey = discountKeys[mG.group - 1]
+          m.discountKey = discountKey;
+          m.total = mG.total;
+          m.subtotal = mG.subtotal;
+          m.discount = mG.discount;
+          return m;
+        });
+        return mG;
+      });
+      return methodsGroups;
     })
-    return methodsGroups;
+
   }
 
   function selectSingle(){
@@ -103,7 +123,14 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
 
   function setMethod(method, group){
     vm.activeMethod = method;
+    console.log(vm.activeMethod);
     vm.activeMethod.group = group;
+
+    vm.quotation.total = vm.activeMethod.total;
+    vm.quotation.subtotal = vm.activeMethod.subtotal;
+    vm.quotation.discount = vm.activeMethod.discount;
+
+
   }
 
   function addPayment(payment){
@@ -216,15 +243,6 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $mdMedia, $
       }).catch(function(err){
         console.log(err);
       });
-    }
-  }
-
-  //paymentDiscountKey eg: discountPg2
-  function getTotalByPaymentMethod(paymentDiscountKey){
-    if(vm.quotation){
-      return quotationService.getTotalByPaymentMethod(vm.quotation, paymentDiscountKey);
-    }else{
-      return 0;
     }
   }
 

@@ -24,6 +24,7 @@
         getCountByUser: getCountByUser,
         getList: getList,
         getQuotationProducts: getQuotationProducts,
+        getQuotationTotals: getQuotationTotals,
         getTotalByPaymentMethod: getTotalByPaymentMethod,
         getTotalsByUser: getTotalsByUser,
         loadProductFilters: loadProductFilters,
@@ -275,6 +276,11 @@
           deferred.reject(err);
         });
         return deferred.promise;
+      }
+
+      function getQuotationTotals(quotationId, params){
+        var url = '/quotation/totals/' + quotationId;
+        return api.$http.post(url,params);
       }
 
     }

@@ -244,17 +244,17 @@
       </div>
 
       <aside flex class="cart-aside">
-        <h1 class="cart-title"><i class="icon-carro"><span>{{vm.totalProducts}}</span></i> <strong>RESUMEN</strong></h1>
+        <h1 class="cart-title"><i class="icon-carro"><span>{{vm.quotation.totalProducts}}</span></i> <strong>RESUMEN</strong></h1>
 
         <div class="cart-summary">
           <table>
             <tr>
-              <td><strong>Subtotal ({{vm.totalProducts}}) productos):</strong></td>
-              <td><strong>{{vm.subTotal | currency }}</strong></td>
+              <td><strong>Subtotal ({{vm.quotation.totalProducts}}) productos):</strong></td>
+              <td><strong>{{vm.quotation.subtotal | currency }}</strong></td>
             </tr>
             <tr>
               <td><strong>Descuento:</strong></td>
-              <td><strong>-{{vm.totalDiscount | currency }}</strong></td>
+              <td><strong>-{{vm.quotation.discount | currency }}</strong></td>
             </tr>
             <tr>
               <td>Costo de envío:</td>
@@ -267,7 +267,7 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h1 class="price-main"><strong>{{vm.totalPrice | currency }}</strong></h1>
+              <h1 class="price-main"><strong>{{vm.quotation.total | currency }}</strong></h1>
             </div>
           </div>
           <hr>
