@@ -12,7 +12,6 @@
     </div>
 
     <form ng-if="!main.isLoadingLogin" name="logInForm" method="POST" ng-submit="main.signIn()">
-
       <p><label>E-mail</label></p>
       <div class="input-element">
         <div class="input-element-inner">
@@ -26,6 +25,21 @@
           <input type="password" name="password" ng-model="main.logInForm.password" required>
         </div>
       </div>
+
+      <p><label>Selecciona una tienda</label></p>
+      <div class="input-element select-element-wrapper">
+        <select
+          ng-model="main.logInForm.companyActive"
+          class="select-element"
+          required
+          required
+        >
+          <option ng-repeat="company in main.companies" ng-value="company.id">
+            {{company.WhsName}}
+          </option>
+        </select>
+      </div>
+
 
       <input class="action-btn" type="submit" value="Iniciar sesión">
 
