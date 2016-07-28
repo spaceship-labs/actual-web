@@ -43,7 +43,7 @@
     <section layout="row">
       <div flex="75">
 
-        <md-radio-group ng-show="vm.singlePayment && !vm.multiplePayment" ng-model="data.group1">
+        <md-radio-group ng-show="vm.singlePayment && !vm.multiplePayment" ng-model="vm.activeMethod">
 
           <div class="pay-method-wrap" >
             <ng-include
@@ -82,7 +82,7 @@
                       <div flex="45" class="input-element">
                         <label>CANTIDAD</label>
                         <div class="input-element-inner">
-                          <input type="text" ng-model="vm.currentAmmount" required>
+                          <input type="text" ng-model="vm.currentAmmount">
                         </div>
                       </div>
                       <a href="#" flex="45" ng-click="vm.applyCashPayment(vm.activeMethod, vm.currentAmmount)" class="action-btn action-btn-save">GUARDAR</a>
@@ -105,7 +105,7 @@
                       <div flex="45" class="input-element">
                         <label>CANTIDAD</label>
                         <div class="input-element-inner">
-                          <input type="text" ng-model="vm.currentAmmount"  required>
+                          <input type="text" ng-model="vm.currentAmmount">
                         </div>
                       </div>
                       <a href="#" ng-click="vm.applyTransaction($event, vm.activeMethod, vm.currentAmmount)" flex="45" class="action-btn">APLICAR</a>
@@ -130,7 +130,7 @@
                       <div flex="45" class="input-element">
                         <label>CANTIDAD</label>
                         <div class="input-element-inner">
-                          <input type="text" ng-model="vm.currentAmmount"  required>
+                          <input type="text" ng-model="vm.currentAmmount">
                         </div>
                       </div>
                       <a href="#" ng-click="vm.applyTransaction($event, vm.activeMethod, vm.currentAmmount)" flex="45" class="action-btn">APLICAR</a>
@@ -278,7 +278,7 @@
             </tr>
             <tr>
               <td><strong>Restante:</strong></td>
-              <td><strong>{{ (vm.totalPrice - vm.quotation.ammountPaid) | currency }}</strong></td>
+              <td><strong>{{ (vm.quotation.total - vm.quotation.ammountPaid) | currency }}</strong></td>
             </tr>
           </table>
 

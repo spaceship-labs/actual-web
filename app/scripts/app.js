@@ -261,7 +261,7 @@ angular
         }
 
       })
-      .when('/checkout/order', {
+      .when('/checkout/order/:id', {
         templateUrl: 'views/checkout/order.html',
         controller: 'CheckoutOrderCtrl',
         controllerAs: 'vm',

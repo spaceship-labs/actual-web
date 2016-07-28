@@ -126,10 +126,6 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
     quotationService.getById($routeParams.id).then(function(res){
       vm.isLoading = false;
       vm.quotation = res.data;
-      var productsIds = [];
-      vm.quotation.Details.forEach(function(detail){
-        productsIds.push(detail.Product);
-      });
       quotationService.getQuotationProducts(vm.quotation).then(function(details){
         vm.quotation.Details = details;
         quotationService.loadProductFilters(vm.quotation.Details).then(function(details2){
