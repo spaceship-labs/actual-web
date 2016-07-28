@@ -10,8 +10,10 @@
 
       var service = {
         create: create,
+        createFromQuotation: createFromQuotation,
         addPayment: addPayment,
-        getList: getList
+        getList: getList,
+        getById: getById
       };
 
       return service;
@@ -32,12 +34,15 @@
         return api.$http.post(url,params);
       }
 
-      function createFromQuotation(quotationId){
+      function createFromQuotation(quotationId, params){
         var url = '/order/createfromquotation/' + quotationId;
-        return api.$http.post(url);
+        return api.$http.post(url,params);
       }
 
-
+      function getById(id){
+        var url = '/order/findbyid/' + id;
+        return api.$http.post(url);
+      }
 
     }
 

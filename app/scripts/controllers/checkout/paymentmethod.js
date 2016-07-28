@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
 
-function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedia, $mdDialog ,quotationService, productService, orderService, pmPeriodService, commonService, formatService){
+function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedia, $mdDialog, $location ,quotationService, productService, orderService, pmPeriodService, commonService, formatService){
   var vm = this;
 
   angular.extend(vm,{
@@ -41,14 +41,19 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
       vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
       vm.getMethods(vm.quotation.id).then(function(methods){
         vm.paymentMethods = methods;
+        if(vm.quotation.Payments){
+          var paymentGroup = vm.getGroupByPayments();
+          console.log(paymentGroup);
+          var currentGroup = _.findWhere(vm.paymentMethods, {group: paymentGroup});
+          var currentMethod = currentGroup.methods[0];
+          console.log(currentMethod);
+          vm.setMethod(currentMethod, paymentGroup);
+        }
       });
-
       pmPeriodService.getActive().then(function(res){
         vm.validPayments = res.data;
       });
-
       vm.isLoading = false;
-
     });
   }
 
@@ -68,7 +73,6 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
       totalsByGroup = totalsByGroup.map(function(tbg){
         return tbg.data || {};
       });
-      console.log(totalsByGroup);
       methodsGroups = methodsGroups.map(function(mG, index){
         mG.total = totalsByGroup[index].total || 0;
         mG.subtotal = totalsByGroup[index].subtotal || 0;
@@ -124,21 +128,18 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
 
   function setMethod(method, group){
     vm.activeMethod = method;
-    console.log(vm.activeMethod);
     vm.activeMethod.group = group;
-
     vm.quotation.total = vm.activeMethod.total;
     vm.quotation.subtotal = vm.activeMethod.subtotal;
     vm.quotation.discount = vm.activeMethod.discount;
-
-
   }
 
   function addPayment(payment){
     vm.isLoadingPayments = true;
     quotationService.addPayment(vm.quotation.id, payment).then(function(res){
-      if(res.data && res.data.length > 0){
-        var quotation = res.data[0];
+      console.log(res);
+      if(res.data){
+        var quotation = res.data;
         vm.quotation.ammountPaid = quotation.ammountPaid;
         console.log(vm.quotation);
       }
@@ -152,44 +153,51 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
   }
 
   function applyCashPayment(method, ammount){
-    var params = {
-      currency: method.currency || 'MXP',
-      ammount: ammount
-    };
-    params = angular.extend(params, method);
-    vm.addPayment(params);
+    if( method && ammount && !isNaN(ammount) ){
+      var params = {
+        currency: method.currency || 'MXP',
+        ammount: ammount
+      };
+      params = angular.extend(params, method);
+      vm.addPayment(params);
+    }else{
+      commonService.showDialog('Revisa los datos, e intenta de nuevo');
+    }
   }
 
   function applyTransaction(ev, method, ammount) {
-    var templateUrl = 'views/checkout/deposit-dialog.html';
-    var controller = DepositController;
-    method.currency = method.currency || 'MXP';
-    method.ammount = ammount;
-    var paymentOpts = angular.copy(method);
+    if( method && ammount && !isNaN(ammount) ){
+      var templateUrl = 'views/checkout/deposit-dialog.html';
+      var controller = DepositController;
+      method.currency = method.currency || 'MXP';
+      method.ammount = ammount;
+      var paymentOpts = angular.copy(method);
 
-    if(method.msi || method.terminals){
-      templateUrl = 'views/checkout/terminal-dialog.html',
-      controller = TerminalController;
-    }
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
-    $mdDialog.show({
-      controller: controller,
-      templateUrl: templateUrl,
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true,
-      fullscreen: useFullScreen,
-      locals: {
-        payment: paymentOpts
+      if(method.msi || method.terminals){
+        templateUrl = 'views/checkout/terminal-dialog.html',
+        controller = TerminalController;
       }
-    })
-    .then(function(payment) {
-      console.log('Pago aplicado');
-      vm.addPayment(payment);
-    }, function() {
-      console.log('Pago no aplicado');
-    });
-
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
+      $mdDialog.show({
+        controller: controller,
+        templateUrl: templateUrl,
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: useFullScreen,
+        locals: {
+          payment: paymentOpts
+        }
+      })
+      .then(function(payment) {
+        console.log('Pago aplicado');
+        vm.addPayment(payment);
+      }, function() {
+        console.log('Pago no aplicado');
+      });
+    }else{
+      commonService.showDialog('Revisa los datos, e intenta de nuevo');
+    }
   }
 
 
@@ -237,10 +245,17 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
   function createOrder(form){
     if(vm.quotation.ammountPaid >= vm.quotation.total){
       vm.isLoading = true;
-      orderService.createFromQuotation(vm.quotation.id).then(function(res){
+      var params = {
+        paymentGroup: vm.activeMethod.group || 1
+      };
+      orderService.createFromQuotation(vm.quotation.id, params).then(function(res){
         vm.isLoading = false;
-        console.log(res);
+        vm.order = res.data;
+        if(vm.order.id){
+          $location.path('/checkout/order/' + vm.order.id);
+        }
       }).catch(function(err){
+        commonService.showDialog('Hubo un error, revisa los datos e intenta de nuevo');
         console.log(err);
       });
     }
