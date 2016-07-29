@@ -26,14 +26,14 @@
         </div>
       </div>
 
-      <p><label>Selecciona una tienda</label></p>
+      <p><label>¿En qué tienda estás?</label></p>
       <div class="input-element select-element-wrapper">
         <select
           ng-model="main.logInForm.companyActive"
           class="select-element"
           required
-          required
         >
+          <option value=""></option>
           <option ng-repeat="company in main.companies" ng-value="company.id">
             {{company.WhsName}}
           </option>
