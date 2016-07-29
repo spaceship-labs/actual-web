@@ -9,9 +9,27 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl(api, $rootScope, $q, $scope, $location, $window, $route, $mdSidenav, authService, cartService, productService, categoriesService, quotationService, jwtHelper, localStorageService, userService,siteService){
+  function MainCtrl(
+    api,
+    $rootScope,
+    $q,
+    $scope,
+    $location,
+    $window,
+    $route,
+    $mdSidenav,
+    authService,
+    cartService,
+    productService,
+    categoriesService,
+    quotationService,
+    jwtHelper,
+    localStorageService,
+    userService,
+    siteService,
+    $mdDialog
+  ){
     var vm = this;
-    vm.companies = [];
     angular.extend(vm, {
       cart: {},
       isActiveBackdrop: false,
@@ -68,6 +86,8 @@
     function init(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
+      vm.companyActive     = localStorageService.get('companyActive');
+      vm.companyActiveName = localStorageService.get('companyActiveName');
       $rootScope.user = vm.user;
       for(var i=0;i<9;i++){
         vm.pointersSidenav.push({selected:false});
@@ -96,10 +116,6 @@
       if($rootScope.user){
         vm.getActiveQuotation();
       }
-
-      api.$http.get('/company/find').then(function(res){
-        vm.companies = res.data;
-      });
     }
 
     function getSiteInfo(){
@@ -260,11 +276,9 @@
 
     function signIn(){
       vm.isLoadingLogin = true;
-
       var formData = {
         email: vm.logInForm.email,
         password: vm.logInForm.password,
-        companyActive: vm.logInForm.companyActive
       };
 
 
@@ -278,23 +292,18 @@
 
     function logOut(){
       authService.logout(function(){
-        localStorageService.remove('currentQuotation');
         $location.path('/');
         $window.location.reload();
       });
     }
 
     $rootScope.successAuth = function(res){
+      vm.token = res.token;
+      vm.user  = res.user;
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', res.token);
       localStorageService.set('user', res.user);
-
-      vm.token = res.token;
-      vm.user = res.user;
-
-      //$location.path('/');
       $window.location.reload();
-
     };
 
 
@@ -312,8 +321,36 @@
       vm.isLoadingLogin = false;
     });
 
+    $scope.$watch(function(){
+      return vm.user;
+    }, function(user){
+      if (!vm.user || vm.companyActive) {
+        return
+      }
+      $mdDialog.show({
+        controller: function($scope, $mdDialog){
+          console.log(vm.user);
+          $scope.companies         = vm.user.companies;
+          $scope.saveCompanyActive = saveCompanyActive;
+        },
+        templateUrl: 'views/partials/company-active.html',
+        parent: angular.element(document.body),
+      });
+    });
 
+    function saveCompanyActive(companyActive){
+      userService.update({companyActive: companyActive}).then(function(res){
+        $mdDialog.hide();
+        vm.companyActive = res.data.companyActive;
+        vm.companyActiveName = vm.user.companies.filter(function(comp){
+          return comp.id == vm.companyActive;
+        })[0].WhsName;
+        localStorageService.set('companyActive', vm.companyActive);
+        localStorageService.set('companyActiveName', vm.companyActiveName);
+      });
+    }
   }
+
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
   MainCtrl.$inject = [
@@ -333,7 +370,8 @@
     'jwtHelper',
     'localStorageService',
     'userService',
-    'siteService'
+    'siteService',
+    '$mdDialog'
   ];
 
 })();
