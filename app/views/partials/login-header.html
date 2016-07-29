@@ -26,21 +26,6 @@
         </div>
       </div>
 
-      <p><label>¿En qué tienda estás?</label></p>
-      <div class="input-element select-element-wrapper">
-        <select
-          ng-model="main.logInForm.companyActive"
-          class="select-element"
-          required
-        >
-          <option value=""></option>
-          <option ng-repeat="company in main.companies" ng-value="company.id">
-            {{company.WhsName}}
-          </option>
-        </select>
-      </div>
-
-
       <input class="action-btn" type="submit" value="Iniciar sesión">
 
     </form>

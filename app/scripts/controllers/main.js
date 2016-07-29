@@ -11,7 +11,6 @@
    */
   function MainCtrl(api, $rootScope, $q, $scope, $location, $window, $route, $mdSidenav, authService, cartService, productService, categoriesService, quotationService, jwtHelper, localStorageService, userService,siteService){
     var vm = this;
-    vm.companies = [];
     angular.extend(vm, {
       cart: {},
       isActiveBackdrop: false,
@@ -99,10 +98,6 @@
       if($rootScope.user){
         vm.getActiveQuotation();
       }
-
-      api.$http.get('/company/find').then(function(res){
-        vm.companies = res.data;
-      });
     }
 
     function togglePointerSidenav(){
@@ -255,11 +250,9 @@
 
     function signIn(){
       vm.isLoadingLogin = true;
-
       var formData = {
         email: vm.logInForm.email,
         password: vm.logInForm.password,
-        companyActive: vm.logInForm.companyActive
       };
 
 
