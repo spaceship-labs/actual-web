@@ -34,6 +34,7 @@
         localStorageService.remove('user');
         localStorageService.remove('quotation');
         localStorageService.remove('companyActive');
+        localStorageService.remove('companyActiveName');
         localStorageService.remove('currentQuotation');
         delete $rootScope.user;
         success();

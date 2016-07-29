@@ -85,7 +85,8 @@
     function init(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
-      vm.companyActive = localStorageService.get('companyActive');
+      vm.companyActive     = localStorageService.get('companyActive');
+      vm.companyActiveName = localStorageService.get('companyActiveName');
       $rootScope.user = vm.user;
       for(var i=0;i<9;i++){
         vm.pointersSidenav.push({selected:false});
@@ -336,7 +337,11 @@
       userService.update({companyActive: companyActive}).then(function(res){
         $mdDialog.hide();
         vm.companyActive = res.data.companyActive;
+        vm.companyActiveName = vm.user.companies.filter(function(comp){
+          return comp.id == vm.companyActive;
+        })[0].WhsName;
         localStorageService.set('companyActive', vm.companyActive);
+        localStorageService.set('companyActiveName', vm.companyActiveName);
       });
     }
   }
