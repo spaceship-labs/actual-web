@@ -142,25 +142,27 @@
                 <div ng-if="vm.isLoadingPayments" layout="row" layout-align="center center">
                   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
                 </div>
-                <h2 ng-if="!vm.isLoadingPayments">
+                <h2 ng-if="!vm.isLoadingPayments && vm.quotation.Payments">
                   Pagos aplicados
                 </h2>
                 <ul ng-if="!vm.isLoadingPayments">
                   <li ng-repeat="payment in vm.quotation.Payments"  class="applied-payment">
 
                     <div
-                      ng-if="payment.type == 'cash' "
+                      ng-if="payment.type == 'cash' || payment.type == 'cash-usd' "
                       layout="row"
                       layout-align="space-between center"
                     >
                       <div flex="30">
-                        <strong>Pago efectivo MXN</strong>
+                        <strong ng-if="payment.type=='cash'">Pago efectivo MXN</strong>
+                        <strong ng-if="payment.type=='cash-usd'">Pago efectivo USD.</strong>
                         <p class="pull-left">{{payment.description}}</p>
                       </div>
                       <div class="method-data" flex="60" layout="row">
                         <div flex="33">
                           <p><strong>CANTIDAD</strong></p>
-                          <p>{{payment.ammount | currency}}</p>
+                          <p ng-if="payment.type=='cash'">{{payment.ammount | currency}}</p>
+                          <p ng-if="payment.type=='cash-usd'">{{payment.ammount | currency}} USD.</p>
                         </div>
                       </div>
                       <div flex="10" class="saved-icon-wrap">

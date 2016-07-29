@@ -31,6 +31,7 @@
       getActiveQuotation: getActiveQuotation,
       getCategoryBackground: getCategoryBackground,
       getCategoryIcon: getCategoryIcon,
+      getSiteInfo: getSiteInfo,
       init: init,
       logOut: logOut,
       signIn: signIn,
@@ -72,11 +73,7 @@
         vm.pointersSidenav.push({selected:false});
       }
 
-      siteService.findByHandle('actual-group').then(function(res){
-        vm.site = res.data || {};
-        $rootScope.site = res.data || {};
-      });
-
+      vm.getSiteInfo();
       vm.isLoadingCategoriesTree = true;
       categoriesService.createCategoriesTree().then(function(res){
         vm.isLoadingCategoriesTree = false;
@@ -102,6 +99,13 @@
 
       api.$http.get('/company/find').then(function(res){
         vm.companies = res.data;
+      });
+    }
+
+    function getSiteInfo(){
+      siteService.findByHandle('actual-group').then(function(res){
+        vm.site = res.data || {};
+        $rootScope.site = res.data || {};
       });
     }
 
@@ -159,6 +163,7 @@
     $scope.$on('$routeChangeStart', function(next, current) {
       vm.menuCategoriesOn = false;
       vm.validateUser();
+      vm.getSiteInfo();
       vm.menuCategories.forEach(function(category){
         category.isActive = false;
       });

@@ -5,8 +5,7 @@
     .module('dashexampleApp')
     .factory('commonService', commonService);
 
-  function commonService($q, $timeout, $mdDialog){
-
+  function commonService($q, $timeout, $filter, $mdDialog){
     var paymentGroups = [
       {
         group:1,
@@ -20,7 +19,7 @@
             label:'Efectivo USD',
             type:'cash-usd',
             currency:'USD',
-            description:'Tipo de cambio $17.05 MXN'
+            description:'Tipo de cambio $18.76 MXN'
           },
           {
             label:'Cheque',

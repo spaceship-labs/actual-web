@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
 
-function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedia, $mdDialog, $location ,quotationService, productService, orderService, pmPeriodService, commonService, formatService){
+function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedia, $mdDialog, $location, $filter ,quotationService, productService, orderService, pmPeriodService, commonService, formatService, siteService){
   var vm = this;
 
   angular.extend(vm,{
@@ -19,7 +19,8 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
     applyCashPayment: applyCashPayment,
     createOrder: createOrder,
     getGroupByPayments: getGroupByPayments,
-    getMethods: getMethods,
+    getPaymentMethods: getPaymentMethods,
+    getExchangeRate:getExchangeRate,
     init: init,
     isActiveGroup: isActiveGroup,
     selectMultiple: selectMultiple,
@@ -39,9 +40,9 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
       vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
-      vm.getMethods(vm.quotation.id).then(function(methods){
+      vm.getPaymentMethods(vm.quotation.id).then(function(methods){
         vm.paymentMethods = methods;
-        if(vm.quotation.Payments){
+        if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
           var paymentGroup = vm.getGroupByPayments();
           console.log(paymentGroup);
           var currentGroup = _.findWhere(vm.paymentMethods, {group: paymentGroup});
@@ -57,39 +58,64 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
     });
   }
 
-  function getMethods(quotationId){
+  function getExchangeRate(){
+    var deferred = $q.defer();
+    siteService.findByHandle('actual-group').then(function(res){
+      var site = res.data || {};
+      deferred.resolve(site.exchangeRate);
+    }).catch(function(err){
+      deferred.reject(err);
+    });
+    return deferred.promise;
+  }
+
+
+  function getPaymentMethods(quotationId){
     var deferred = $q.defer();
     var methodsGroups = commonService.getPaymentMethods();
     var discountKeys = ['discountPg1','discountPg2','discountPg3','discountPg4','discountPg5'];
     var totalsPromises = [];
+    var exchangeRate = 18.76;
 
     methodsGroups.forEach(function(mG){
       totalsPromises.push(quotationService.getQuotationTotals(quotationId, {paymentGroup:mG.group}));
     });
 
-    return $q.all(totalsPromises).then(function(response){
-      //var totalsByGroup = response.data;
-      var totalsByGroup = response || [];
-      totalsByGroup = totalsByGroup.map(function(tbg){
-        return tbg.data || {};
-      });
-      methodsGroups = methodsGroups.map(function(mG, index){
-        mG.total = totalsByGroup[index].total || 0;
-        mG.subtotal = totalsByGroup[index].subtotal || 0;
-        mG.discount = totalsByGroup[index].discount || 0;
-        mG.methods = mG.methods.map(function(m){
-          var discountKey = discountKeys[mG.group - 1]
-          m.discountKey = discountKey;
-          m.total = mG.total;
-          m.subtotal = mG.subtotal;
-          m.discount = mG.discount;
-          return m;
+    return vm.getExchangeRate()
+      .then(function(exr){
+        exchangeRate = exr;
+        return $q.all(totalsPromises)
+      })
+      .then(function(responsePromises){
+        console.log(exchangeRate);
+        var totalsByGroup = responsePromises || [];
+        totalsByGroup = totalsByGroup.map(function(tbg){
+          return tbg.data || {};
         });
-        return mG;
+        methodsGroups = methodsGroups.map(function(mG, index){
+          mG.total = totalsByGroup[index].total || 0;
+          mG.subtotal = totalsByGroup[index].subtotal || 0;
+          mG.discount = totalsByGroup[index].discount || 0;
+          mG.methods = mG.methods.map(function(m){
+            var discountKey = discountKeys[mG.group - 1]
+            m.discountKey = discountKey;
+            m.total = mG.total;
+            m.subtotal = mG.subtotal;
+            m.discount = mG.discount;
+            if(m.type === 'cash-usd'){
+              var exrStr = $filter('currency')(exchangeRate);
+              m.description = 'Tipo de cambio '+exrStr+' MXN';
+            }
+            return m;
+          });
+          return mG;
+        });
+        return methodsGroups;
+      })
+      .catch(function(err){
+        console.log(err);
+        return err;
       });
-      return methodsGroups;
-    })
-
   }
 
   function selectSingle(){
