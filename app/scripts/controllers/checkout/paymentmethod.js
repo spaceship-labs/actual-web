@@ -252,6 +252,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
         vm.isLoading = false;
         vm.order = res.data;
         if(vm.order.id){
+          quotationService.setActiveQuotation(false);
           $location.path('/checkout/order/' + vm.order.id);
         }
       }).catch(function(err){

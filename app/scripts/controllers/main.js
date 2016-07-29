@@ -122,7 +122,6 @@
             $rootScope.activeQuotation.Details = details;
             vm.activeQuotation.Details = details;
             vm.activeQuotation.totalItems = quotationService.calculateItemsNumber(vm.activeQuotation);
-            console.log(vm.activeQuotation);
           });
         }
       });

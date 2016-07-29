@@ -31,17 +31,16 @@ function OrdersListCtrl($location,$routeParams, $q ,productService, $rootScope, 
   ];
 
   vm.columnsOrders = [
-    {key: 'DocEntry', label:'Folio'},
-    {key:'Client.Name', label:'Cliente'},
+    {key: 'folio', label:'Folio'},
+    {key:'Client.CardName', label:'Cliente'},
     {key:'total', label: 'Total', currency:true},
     {key:'currency', label:'Moneda'},
     {key:'createdAt', label:'Venta', date:true},
     {
       key:'Acciones',
       label:'Acciones',
-      propId: 'DocEntry',
       actions:[
-        {url:'#',type:'edit'},
+        {url:'/checkout/order/',type:'edit'},
       ]
     },
   ];
@@ -65,7 +64,7 @@ function OrdersListCtrl($location,$routeParams, $q ,productService, $rootScope, 
   }
 
   function applyFilters(){
-    if(vm.dateStart && vm.dateEnd){
+    if(vm.dateStart._d && vm.dateEnd._d){
       vm.dateRange = {
         field: 'createdAt',
         start: vm.dateStart._d,

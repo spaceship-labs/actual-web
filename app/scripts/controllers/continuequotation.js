@@ -71,12 +71,15 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
   }
 
   function createQuotation(clientId){
+    console.log('createQuotation');
+    /*
     var params = {
       Client: clientId,
       User: $rootScope.user.id
     };
     var goToSearch = true;
     quotationService.newQuotation(params, goToSearch);
+    */
   }
 
   vm.init();
