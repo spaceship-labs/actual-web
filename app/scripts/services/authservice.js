@@ -33,6 +33,8 @@
         localStorageService.remove('token');
         localStorageService.remove('user');
         localStorageService.remove('quotation');
+        localStorageService.remove('companyActive');
+        localStorageService.remove('currentQuotation');
         delete $rootScope.user;
         success();
       }

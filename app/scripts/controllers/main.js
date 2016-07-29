@@ -9,7 +9,26 @@
    * # MainCtrl
    * Controller of the dashexampleApp
    */
-  function MainCtrl(api, $rootScope, $q, $scope, $location, $window, $route, $mdSidenav, authService, cartService, productService, categoriesService, quotationService, jwtHelper, localStorageService, userService,siteService){
+  function MainCtrl(
+    api,
+    $rootScope,
+    $q,
+    $scope,
+    $location,
+    $window,
+    $route,
+    $mdSidenav,
+    authService,
+    cartService,
+    productService,
+    categoriesService,
+    quotationService,
+    jwtHelper,
+    localStorageService,
+    userService,
+    siteService,
+    $mdDialog
+  ){
     var vm = this;
     angular.extend(vm, {
       cart: {},
@@ -66,6 +85,7 @@
     function init(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
+      vm.companyActive = localStorageService.get('companyActive');
       $rootScope.user = vm.user;
       for(var i=0;i<9;i++){
         vm.pointersSidenav.push({selected:false});
@@ -266,23 +286,18 @@
 
     function logOut(){
       authService.logout(function(){
-        localStorageService.remove('currentQuotation');
         $location.path('/');
         $window.location.reload();
       });
     }
 
     $rootScope.successAuth = function(res){
+      vm.token = res.token;
+      vm.user  = res.user;
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', res.token);
       localStorageService.set('user', res.user);
-
-      vm.token = res.token;
-      vm.user = res.user;
-
-      //$location.path('/');
       $window.location.reload();
-
     };
 
 
@@ -300,8 +315,32 @@
       vm.isLoadingLogin = false;
     });
 
+    $scope.$watch(function(){
+      return vm.user;
+    }, function(user){
+      if (!vm.user || vm.companyActive) {
+        return
+      }
+      $mdDialog.show({
+        controller: function($scope, $mdDialog){
+          console.log(vm.user);
+          $scope.companies         = vm.user.companies;
+          $scope.saveCompanyActive = saveCompanyActive;
+        },
+        templateUrl: 'views/partials/company-active.html',
+        parent: angular.element(document.body),
+      });
+    });
 
+    function saveCompanyActive(companyActive){
+      userService.update({companyActive: companyActive}).then(function(res){
+        $mdDialog.hide();
+        vm.companyActive = res.data.companyActive;
+        localStorageService.set('companyActive', vm.companyActive);
+      });
+    }
   }
+
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
   MainCtrl.$inject = [
@@ -321,7 +360,8 @@
     'jwtHelper',
     'localStorageService',
     'userService',
-    'siteService'
+    'siteService',
+    '$mdDialog'
   ];
 
 })();
