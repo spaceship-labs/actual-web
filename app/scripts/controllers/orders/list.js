@@ -34,7 +34,7 @@ function OrdersListCtrl($location,$routeParams, $q ,productService, $rootScope, 
     {key: 'folio', label:'Folio'},
     {key:'Client.CardName', label:'Cliente'},
     {key:'total', label: 'Total', currency:true},
-    {key:'currency', label:'Moneda'},
+    //{key:'currency', label:'Moneda'},
     {key:'createdAt', label:'Venta', date:true},
     {
       key:'Acciones',

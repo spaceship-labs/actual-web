@@ -252,11 +252,11 @@
           <table>
             <tr>
               <td><strong>Subtotal ({{vm.quotation.totalProducts}}) productos):</strong></td>
-              <td><strong>{{vm.quotation.subtotal | currency }}</strong></td>
+              <td><strong>{{ vm.math.ceil(vm.quotation.subtotal) | currency }}</strong></td>
             </tr>
             <tr>
               <td><strong>Descuento:</strong></td>
-              <td><strong>-{{vm.quotation.discount | currency }}</strong></td>
+              <td><strong>-{{ vm.math.ceil(vm.quotation.discount) | currency }}</strong></td>
             </tr>
             <tr>
               <td>Costo de envío:</td>
@@ -269,18 +269,18 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h1 class="price-main"><strong>{{vm.quotation.total | currency }}</strong></h1>
+              <h1 class="price-main"><strong>{{ vm.math.ceil(vm.quotation.total) | currency }}</strong></h1>
             </div>
           </div>
           <hr>
           <table>
             <tr>
               <td><strong>Pagado:</strong></td>
-              <td><strong>{{vm.quotation.ammountPaid | currency }}</strong></td>
+              <td><strong>{{ vm.math.ceil(vm.quotation.ammountPaid) | currency }}</strong></td>
             </tr>
             <tr>
               <td><strong>Restante:</strong></td>
-              <td><strong>{{ (vm.quotation.total - vm.quotation.ammountPaid) | currency }}</strong></td>
+              <td><strong>{{ vm.math.ceil(vm.quotation.total - vm.quotation.ammountPaid) | currency }}</strong></td>
             </tr>
           </table>
 
@@ -294,8 +294,8 @@
             type="submit"
             value="CONTINUAR"
             class="cart-view-btn"
-            ng-disabled="(vm.quotation.ammountPaid < vm.quotation.total)"
-            ng-class="{'cart-view-btn-disabled' : (vm.quotation.ammountPaid < vm.quotation.total) }">
+            ng-disabled="(vm.quotation.ammountPaid <= vm.quotation.total)"
+            ng-class="{'cart-view-btn-disabled' : (vm.quotation.ammountPaid <= vm.quotation.total) }">
 
           <p class="cart-summary-note">*Precios en Pesos Mexicanos con impuestos incluidos.</p>
 

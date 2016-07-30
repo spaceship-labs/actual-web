@@ -165,6 +165,7 @@
           }else{
             userService.getUser(_user.id).then(function(res){
               _user = res.data.data;
+              console.log(_user);
               localStorageService.set('user', _user);
               $rootScope.user = _user;
             });

@@ -14,39 +14,45 @@
          {
             label:'Efectivo',
             type:'cash',
+            currency: 'mxn'
           },
           {
             label:'Efectivo USD',
             type:'cash-usd',
-            currency:'USD',
+            currency:'usd',
             description:'Tipo de cambio $18.76 MXN'
           },
           {
             label:'Cheque',
             type:'cheque',
-            description:'Sujeto a verificación contable'
+            description:'Sujeto a verificación contable',
+            currency:'mxn',
           },
           {
             label:'Deposito',
             type:'deposit',
-            description:'Sujeto a verificación contable'
+            description:'Sujeto a verificación contable',
+            currency:'mxn'
           },
           {
             label:'Transferencia',
             type:'transfer',
-            description:'Sujeto a verificación contable'
+            description:'Sujeto a verificación contable',
+            currency: 'mxn'
           },
           {
             label:'Monedero electrónico',
             type:'monedero',
-            description:'Sujeto a verificación contable'
+            description:'Sujeto a verificación contable',
+            currency: 'mxn'
           },
           {
             label:'Pago con',
             type:'credit-card',
             description:'VISA, MasterCard, American Express',
             cards:['images/visa.png','images/mastercard.png','images/american.png'],
-            terminals:['Banamex','American Express']
+            terminals:['Banamex','American Express'],
+            currency: 'mxn'
           },
         ]
       },
@@ -59,7 +65,8 @@
             type:'3-msi',
             msi:3,
             cards:['images/banamex.png','images/santander.png','images/banorte.png'],
-            terminals:['Banorte','Santander','Bancomer','American Express']
+            terminals:['Banorte','Santander','Bancomer','American Express'],
+            currency: 'mxn'
           }
         ]
       },
@@ -72,14 +79,16 @@
             type:'6-msi',
             msi:6,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
-            terminals:['Banamex','Banorte','Santander','Bancomer','American Express']
+            terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
+            currency: 'mxn'
           },
           {
             label:'9',
             type:'9-msi',
             msi:9,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
-            terminals:['Banamex','Banorte','Santander','Bancomer','American Express']
+            terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
+            currency: 'mxn'
           },
         ]
       },
@@ -92,7 +101,8 @@
             type:'12-msi',
             msi:12,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
-            terminals:['Banamex','Banorte','Santander','Bancomer','American Express']
+            terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
+            currency: 'mxn'
           },
         ]
       },
@@ -105,7 +115,8 @@
             type:'18-msi',
             msi:18,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
-            terminals:['Banamex','Banorte','Santander','Bancomer','American Express']
+            terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
+            currency: 'mxn'
           },
         ]
       }

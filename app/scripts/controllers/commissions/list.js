@@ -76,7 +76,7 @@ function CommissionsListCtrl($location,$routeParams, $q ,productService, $rootSc
   }
 
   function applyFilters(){
-    if(vm.dateStart && vm.dateEnd){
+    if(vm.dateStart._d && vm.dateEnd._d){
       vm.dateRange = {
         field: 'CreateDate',
         start: vm.dateStart._d,

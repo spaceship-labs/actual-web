@@ -32,7 +32,8 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
     multiplePayment: false,
     payments: [],
     totalPrice: 0,
-    paymentMethods: []
+    paymentMethods: [],
+    math: window.Math
   });
 
   function init(){
@@ -102,6 +103,7 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
             m.total = mG.total;
             m.subtotal = mG.subtotal;
             m.discount = mG.discount;
+            m.exchangeRate = exchangeRate;
             if(m.type === 'cash-usd'){
               var exrStr = $filter('currency')(exchangeRate);
               m.description = 'Tipo de cambio '+exrStr+' MXN';

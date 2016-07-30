@@ -21,7 +21,7 @@
     <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
     -->
     <h2 class="price-now" ng-class="{'price-hl' : $index == 0 }">
-      {{ paymentGroup.total | currency }}
+      {{ vm.math.ceil(paymentGroup.total) | currency }}
       <!--{{vm.totalPrice | currency }}-->
     </h2>
   </div>
