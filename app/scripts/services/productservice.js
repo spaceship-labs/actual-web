@@ -86,11 +86,9 @@
             {url: '', size:'default'}
           ];
         }
-        if(product.Promotions && product.Promotions.length > 0){
-          var discounts = product.Promotions.map(function(promo){
-            return promo.discountPg1;
-          });
-          var maxDiscount = Math.max.apply(Math,discounts);
+        product.mainPromo = getMainPromo(product);
+        if(product.mainPromo){
+          var maxDiscount = product.mainPromo.discountPg1;
           product.maxDiscount = maxDiscount;
           product.priceBefore = product.Price;
           product.Price = product.Price - ( ( product.Price / 100) * maxDiscount );
@@ -112,12 +110,6 @@
         });
         return deferred.promise;
       }
-
-      /*
-      function mainPromo(){
-
-      }
-      */
 
       function getMainPromo(product){
         if(product.Promotions && product.Promotions.length > 0){

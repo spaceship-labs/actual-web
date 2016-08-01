@@ -110,6 +110,7 @@ function CheckoutPaymentmethodCtrl(
         totalsByGroup = totalsByGroup.map(function(tbg){
           return tbg.data || {};
         });
+        console.log(totalsByGroup);
         methodsGroups = methodsGroups.map(function(mG, index){
           mG.total = totalsByGroup[index].total || 0;
           mG.subtotal = totalsByGroup[index].subtotal || 0;
@@ -188,9 +189,10 @@ function CheckoutPaymentmethodCtrl(
           var quotation = res.data;
           vm.quotation.ammountPaid = quotation.ammountPaid;
           if(vm.quotation.ammountPaid >= vm.quotation.total){
-            dialogService.showDialog('Cantidad total pagada');
+            dialogService.showDialog('Pago aplicado, cantidad total pagada, presiona el boton de continuar');
+          }else{
+            dialogService.showDialog('Pago aplicado');
           }
-          dialogService.showDialog('Pago aplicado');
         }
         vm.quotation.Payments.push(payment);
         vm.isLoadingPayments = false;

@@ -279,6 +279,7 @@
       }
 
       function getQuotationTotals(quotationId, params){
+        console.log('params',params);
         var url = '/quotation/totals/' + quotationId;
         return api.$http.post(url,params);
       }

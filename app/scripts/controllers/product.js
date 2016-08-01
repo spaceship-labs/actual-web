@@ -50,7 +50,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     vm.isLoading = true;
 
     productService.getById(productId).then(function(res){
-      vm.isLoading = false;
       productService.formatSingleProduct(res.data.data).then(function(fProduct){
         vm.product = fProduct;
         vm.mainPromo = vm.product.mainPromo;
@@ -67,6 +66,7 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
           vm.loadProductFilters();
           vm.loadVariants();
         }
+        vm.isLoading = false;
       });
     });
 
