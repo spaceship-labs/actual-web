@@ -10,7 +10,24 @@
 angular.module('dashexampleApp')
   .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
 
-function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedia, $mdDialog, $location, $filter ,quotationService, productService, orderService, pmPeriodService, commonService, formatService, siteService){
+function CheckoutPaymentmethodCtrl(
+    $routeParams,
+    $rootScope,
+    $scope,
+    $q,
+    $mdMedia,
+    $mdDialog,
+    $location,
+    $filter,
+    commonService,
+    dialogService,
+    formatService,
+    orderService,
+    pmPeriodService,
+    productService,
+    quotationService,
+    siteService
+  ){
   var vm = this;
 
   angular.extend(vm,{
@@ -163,21 +180,26 @@ function CheckoutPaymentmethodCtrl($routeParams, $rootScope, $scope, $q, $mdMedi
   }
 
   function addPayment(payment){
-    vm.isLoadingPayments = true;
-    quotationService.addPayment(vm.quotation.id, payment).then(function(res){
-      console.log(res);
-      if(res.data){
-        var quotation = res.data;
-        vm.quotation.ammountPaid = quotation.ammountPaid;
-        console.log(vm.quotation);
-      }
-      console.log(payment);
-      vm.quotation.Payments.push(payment);
-      vm.isLoadingPayments = false;
-      delete vm.activeMethod.ammount;
-      delete vm.activeMethod.verficiationCode;
-      console.log(vm.activeMethod);
-    });
+    if( (payment.ammount > 0 && vm.quotation.ammountPaid < vm.quotation.total)
+        || payment.ammount < 0 ){
+      vm.isLoadingPayments = true;
+      quotationService.addPayment(vm.quotation.id, payment).then(function(res){
+        if(res.data){
+          var quotation = res.data;
+          vm.quotation.ammountPaid = quotation.ammountPaid;
+          if(vm.quotation.ammountPaid >= vm.quotation.total){
+            dialogService.showDialog('Cantidad total pagada');
+          }
+          dialogService.showDialog('Pago aplicado');
+        }
+        vm.quotation.Payments.push(payment);
+        vm.isLoadingPayments = false;
+        delete vm.activeMethod.ammount;
+        delete vm.activeMethod.verficiationCode;
+      });
+    }else{
+      dialogService.showDialog('Total de la orden pagada, presiona el boton de continuar');
+    }
   }
 
   function applyCashPayment(method, ammount){

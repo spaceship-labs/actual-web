@@ -173,14 +173,14 @@
           };
           var page = 1;
           productService.getList(page,params).then(function(res){
-            var products = productService.formatProducts(res.data.data);
+            return productService.formatProducts(res.data.data);
+          })
+          .then(function(fProducts){
             //Match detail - product
             quotation.Details.forEach(function(detail){
-              detail.Product = _.findWhere( products, {id : detail.Product } );
+              detail.Product = _.findWhere( fProducts, {id : detail.Product } );
             });
-
             deferred.resolve(quotation.Details);
-
           });
         }else{
           deferred.resolve([]);

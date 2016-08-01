@@ -51,24 +51,23 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
 
     productService.getById(productId).then(function(res){
       vm.isLoading = false;
-      vm.product = productService.formatProduct(res.data.data);
-      vm.lowestCategory = vm.getLowestCategory();
-      vm.product.cart = {
-        quantity: 1
-      };
-      vm.setupGallery();
-      vm.mainPromo = vm.product.mainPromo;
-
-      if(reload){
-        $location.path('/product/' + productId, false);
-        vm.loadProductFilters();
-        //vm.productQty = 1;
-
-      }else{
-        vm.loadProductFilters();
-        vm.loadVariants();
-      }
-
+      productService.formatSingleProduct(res.data.data).then(function(fProduct){
+        vm.product = fProduct;
+        vm.mainPromo = vm.product.mainPromo;
+        vm.lowestCategory = vm.getLowestCategory();
+        vm.product.cart = {
+          quantity: 1
+        };
+        vm.setupGallery();
+        if(reload){
+          $location.path('/product/' + productId, false);
+          vm.loadProductFilters();
+          //vm.productQty = 1;
+        }else{
+          vm.loadProductFilters();
+          vm.loadVariants();
+        }
+      });
     });
 
     pmPeriodService.getActive().then(function(res){

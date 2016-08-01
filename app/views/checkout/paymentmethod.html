@@ -64,8 +64,8 @@
 
             <div class="pay-method-wrap pay-method-wrap-v2" >
               <div class="method-block">
+                <!--PAYMENT INPUTS-->
                 <ul>
-
                   <li
                     ng-if="vm.activeMethod && (vm.activeMethod.type == 'cash' || vm.activeMethod.type == 'cash-usd' )"
                     layout="row"
@@ -137,6 +137,7 @@
                     </div>
                   </li>
                 </ul>
+                <!--END PAYMENT INPUTS-->
 
                 <!--PAYMENTS APPLIED-->
                 <div ng-if="vm.isLoadingPayments" layout="row" layout-align="center center">

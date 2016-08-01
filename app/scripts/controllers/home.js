@@ -22,6 +22,7 @@ function HomeCtrl($timeout, productService, api){
 
   function init(){
     //vm.simulateLoading();
+    /*
     var page = 1;
     var query = {
       items:20,
@@ -42,6 +43,7 @@ function HomeCtrl($timeout, productService, api){
         'http://cafafdaa38a2d7c9529b-6ed6be8f68df7536cde1676c1863b473.r79.cf1.rackcdn.com/uploads/products/gallery/14658316829724450631.png'
       ];
     });
+    */
   }
 
   function groupProducts(arr, chunkSize) {

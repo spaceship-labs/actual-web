@@ -6,11 +6,13 @@
         .factory('productService', productService);
 
     /** @ngInject */
-    function productService($http, $q, api){
+    function productService($http, $q, api, storeService, localStorageService){
 
+      var storePromotions = [];
       var service = {
         advancedSearch: advancedSearch,
-        formatProduct: formatProduct,
+        //formatProduct: formatProduct,
+        formatSingleProduct: formatSingleProduct,
         formatProducts: formatProducts,
         getAllCategories: getAllCategories,
         getAllFilters: getAllFilters,
@@ -66,7 +68,7 @@
 
       function formatProduct(product){
         //product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
-        if( product.Name && isUpperCase(product.Name) ){
+        if( product.Name && isUpperCase(product.Name) ) {
           product.Name = capitalizeFirstLetter(product.ItemName);
         }
         if (product.icon_filename && product.icon_filename !== 'null') {
@@ -84,7 +86,6 @@
             {url: '', size:'default'}
           ];
         }
-
         if(product.Promotions && product.Promotions.length > 0){
           var discounts = product.Promotions.map(function(promo){
             return promo.discountPg1;
@@ -98,21 +99,39 @@
           product.pricebefore = product.Price;
         }
         product.mainPromo = getMainPromo(product);
-
         return product;
       }
+
+      function formatSingleProduct(product){
+        var deferred = $q.defer();
+        var companyActive = localStorageService.get('companyActive');
+        storeService.getPromosByCompany(companyActive).then(function(res){
+          storePromotions = res.data;
+          var fProduct = formatProduct(product);
+          deferred.resolve(fProduct);
+        });
+        return deferred.promise;
+      }
+
+      /*
+      function mainPromo(){
+
+      }
+      */
 
       function getMainPromo(product){
         if(product.Promotions && product.Promotions.length > 0){
           var indexMaxPromo = 0;
           var maxPromo = 0;
+          product.Promotions = product.Promotions.filter(function(promotion){
+            return _.findWhere(storePromotions, {id:promotion.id});
+          });
           product.Promotions.forEach(function(promo, index){
             if(promo.discountPg1 >= maxPromo){
               maxPromo = promo.discountPg1;
               indexMaxPromo = index;
             }
           });
-
           return product.Promotions[indexMaxPromo];
         }else{
           return false;
@@ -120,8 +139,15 @@
       }
 
       function formatProducts(products){
-        var formatted = products.map(formatProduct);
-        return formatted;
+        var deferred = $q.defer();
+        var companyActive = localStorageService.get('companyActive');
+        storeService.getPromosByCompany(companyActive).then(function(res){
+          storePromotions = res.data;
+          var formatted = products.map(formatProduct);
+          deferred.resolve(formatted);
+        });
+        return deferred.promise;
+        //return formatted;
       }
 
       //CATEGORIES

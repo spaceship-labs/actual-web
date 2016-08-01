@@ -27,6 +27,7 @@
     localStorageService,
     userService,
     siteService,
+    storeService,
     $mdDialog
   ){
     var vm = this;
@@ -138,10 +139,10 @@
         $rootScope.activeQuotation = res.data;
         vm.activeQuotation = res.data;
         if($rootScope.activeQuotation){
+          console.log(vm.activeQuotation);
           quotationService.getQuotationProducts(vm.activeQuotation).then(function(details){
             $rootScope.activeQuotation.Details = details;
             vm.activeQuotation.Details = details;
-            vm.activeQuotation.totalItems = quotationService.calculateItemsNumber(vm.activeQuotation);
           });
         }
       });
@@ -350,8 +351,8 @@
         localStorageService.set('companyActiveName', vm.companyActiveName);
       });
     }
-  }
 
+  }
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
   MainCtrl.$inject = [
@@ -372,6 +373,7 @@
     'localStorageService',
     'userService',
     'siteService',
+    'storeService',
     '$mdDialog'
   ];
 
