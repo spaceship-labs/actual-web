@@ -1,7 +1,7 @@
 <div
-  ng-if="vm.galleryImages.length > 0"
+  ng-if="vm.galleryImages.length > 0 && vm.loadedSizes"
   ng-photoswipe slides="vm.galleryImages"
-  open="vm.open"
+  show="vm.open"
   slide-selector=".product-view-gallery-img-inner > img"
   on-close="vm.closeGallery()"
   options="vm.opts">

@@ -90,6 +90,7 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     async.forEachSeries(vm.galleryImages ,getImageSize, function(err){
       if(err) console.log(err);
       vm.loadedSizes = true;
+      console.log(vm.loadedSizes);
       $scope.$apply();
     });
   }
@@ -109,11 +110,12 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
   }
 
   function showGallery (i) {
-    if(angular.isDefined(i)) {
-      vm.opts.index = i;
-      console.log(vm.opts);
+    if(vm.loadedSizes){
+      if(angular.isDefined(i)) {
+        vm.opts.index = i;
+      }
+      vm.open = true;
     }
-    vm.open = true;
   }
 
   function getLowestCategory(){
