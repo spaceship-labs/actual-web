@@ -189,7 +189,7 @@ function CheckoutPaymentmethodCtrl(
           var quotation = res.data;
           vm.quotation.ammountPaid = quotation.ammountPaid;
           if(vm.quotation.ammountPaid >= vm.quotation.total){
-            dialogService.showDialog('Pago aplicado, cantidad total pagada, presiona el boton de continuar');
+            dialogService.showDialog('Cantidad total pagada, presiona el boton de continuar');
           }else{
             dialogService.showDialog('Pago aplicado');
           }
