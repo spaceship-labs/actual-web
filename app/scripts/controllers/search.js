@@ -28,31 +28,46 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
 
   function init(){
     var keywords = [''];
-    if($routeParams.term) {
-      keywords = $routeParams.term.split(' ');
+    if($routeParams.itemcode) {
+      vm.isLoading = true;
+      vm.search = {};
+      vm.search.itemcode = $routeParams.itemcode;
+      productService.getById($routeParams.itemcode).then(function(res){
+        productService.formatSingleProduct(res.data.data).then(function(fProduct){
+          vm.isLoading = false;
+          vm.totalResults = 1;
+          vm.products = [fProduct];
+        });
+      });
     }
-    vm.search = {
-      keywords: keywords,
-      items: 10,
-      page: 1
-    };
-    vm.isLoading = true;
-    productService.searchByFilters(vm.search).then(function(res){
-      vm.totalResults = res.data.total;
-      vm.isLoading = false;
-      return productService.formatProducts(res.data.products);
-    })
-    .then(function(fProducts){
-      vm.products = fProducts;
-    })
-    .catch(function(err){
-      console.log(err);
-    });
+    else{
+      if($routeParams.term){
+        keywords = $routeParams.term.split(' ');
+      }
+      vm.search = {
+        keywords: keywords,
+        items: 10,
+        page: 1
+      };
+      vm.isLoading = true;
+      productService.searchByFilters(vm.search).then(function(res){
+        vm.totalResults = res.data.total;
+        vm.isLoading = false;
+        return productService.formatProducts(res.data.products);
+      })
+      .then(function(fProducts){
+        vm.products = fProducts;
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+
+    }
+
 
     productService.getAllFilters().then(function(res){
       vm.filters = res.data;
     });
-
   }
 
   function removeSearchValue(removeValue){
@@ -143,3 +158,10 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
   }
 
 }
+
+SearchCtrl.$inject = [
+  '$location',
+  '$timeout',
+  '$routeParams',
+  'productService'
+];

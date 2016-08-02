@@ -86,3 +86,13 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
   vm.init();
 
 }
+
+ContinuequotationCtrl.$inject = [
+  '$location',
+  '$routeParams',
+  '$rootScope',
+  '$q',
+  'productService',
+  'clientService',
+  'quotationService'
+];

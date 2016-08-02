@@ -44,6 +44,13 @@ function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService
     var goToSearch = true;
     quotationService.newQuotation(params, goToSearch);
   }
-
-
 }
+AddquotationCtrl.$inject = [
+  '$location',
+  '$routeParams',
+  '$rootScope',
+  '$q',
+  'productService',
+  'clientService',
+  'quotationService'
+];

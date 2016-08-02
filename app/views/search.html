@@ -113,6 +113,9 @@
           <h2 ng-if="vm.search.term" class="listing-view-title">
             Resultados para "{{vm.search.term}}"
           </h2>
+          <h2 ng-if="vm.search.itemcode" class="listing-view-title">
+            Resultados para "{{vm.search.itemcode}}"
+          </h2>
           <h2 ng-if="vm.search.keywords" class="listing-view-title">
             Resultados para "<span ng-repeat="keyword in vm.search.keywords">{{keyword}} </span>"
           </h2>

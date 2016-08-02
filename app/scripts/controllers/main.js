@@ -90,6 +90,9 @@
       vm.companyActive     = localStorageService.get('companyActive');
       vm.companyActiveName = localStorageService.get('companyActiveName');
       $rootScope.user = vm.user;
+      if($location.search().itemcode){
+        vm.searchingItemCode = true;
+      }
       for(var i=0;i<9;i++){
         vm.pointersSidenav.push({selected:false});
       }
@@ -186,6 +189,12 @@
         category.isActive = false;
       });
       vm.activeModule = vm.getActiveModule();
+      if($location.search().itemcode){
+        vm.searchingItemCode = true;
+      }else{
+        vm.searchingItemCode = false;
+      }
+
     });
 
     function getActiveModule(){

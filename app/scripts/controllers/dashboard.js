@@ -67,3 +67,12 @@ function DashboardCtrl($routeParams , $rootScope, $filter,categoriesService, pro
   vm.init();
 
 }
+
+DashboardCtrl.$inject = [
+  '$routeParams',
+  '$rootScope',
+  '$filter',
+  'categoriesService',
+  'productService',
+  'quotationService'
+];

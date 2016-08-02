@@ -53,8 +53,8 @@
 
       function Decenas(num){
 
-          decena = Math.floor(num/10);
-          unidad = num -   (decena * 10);
+          var decena = Math.floor(num/10);
+          var unidad = num -   (decena * 10);
 
           switch(decena)
           {
@@ -94,8 +94,8 @@
       }//DecenasY()
 
       function Centenas(num) {
-          centenas = Math.floor(num / 100);
-          decenas = num - (centenas * 100);
+          var centenas = Math.floor(num / 100);
+          var decenas = num - (centenas * 100);
 
           switch(centenas)
           {
@@ -117,10 +117,10 @@
       }//Centenas()
 
       function Seccion(num, divisor, strSingular, strPlural) {
-          cientos = Math.floor(num / divisor)
-          resto = num - (cientos * divisor)
+          var cientos = Math.floor(num / divisor)
+          var resto = num - (cientos * divisor)
 
-          letras = "";
+          var letras = "";
 
           if (cientos > 0)
               if (cientos > 1)
@@ -135,12 +135,12 @@
       }//Seccion()
 
       function Miles(num) {
-          divisor = 1000;
-          cientos = Math.floor(num / divisor)
-          resto = num - (cientos * divisor)
+          var divisor = 1000;
+          var cientos = Math.floor(num / divisor)
+          var resto = num - (cientos * divisor)
 
-          strMiles = Seccion(num, divisor, "UN MIL", "MIL");
-          strCentenas = Centenas(resto);
+          var strMiles = Seccion(num, divisor, "UN MIL", "MIL");
+          var strCentenas = Centenas(resto);
 
           if(strMiles == "")
               return strCentenas;
@@ -153,8 +153,8 @@
           var cientos = Math.floor(num / divisor)
           var resto = num - (cientos * divisor)
 
-          strMillones = Seccion(num, divisor, "UN MILLON DE", "MILLONES DE");
-          strMiles = Miles(resto);
+          var strMillones = Seccion(num, divisor, "UN MILLON DE", "MILLONES DE");
+          var strMiles = Miles(resto);
 
           if(strMillones == "")
               return strMiles;

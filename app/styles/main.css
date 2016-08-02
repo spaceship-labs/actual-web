@@ -300,8 +300,13 @@ select{
   border: 0;
   padding: 0 22px;
 }
-
-
+.searcher-wrapper .searcher-checkbox{
+  vertical-align: middle;
+  margin-top: 9px;
+}
+.searcher-wrapper .searcher-checkbox-label{
+  margin-top: 6px;
+}
 
 /*------------/
   #HEADER

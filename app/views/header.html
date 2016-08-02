@@ -16,17 +16,30 @@
       </div>
 
 
-      <!--ONLY ON SCROLL-->
+      <!--END ONLY ON SCROLL-->
 
 
       <form action="/search" method="GET" class="searcher-wrapper" layout="row">
         <div class="searcher">
           <div class="searcher-inner">
             <i class="icon-search"></i>
-            <input type="text" name="term">
+            <input
+              type="text"
+              name="term"
+              ng-attr-name="{{vm.isItemCodeSearch && 'itemcode' || 'term' }}"
+              >
           </div>
         </div>
         <input type="submit" value="BUSCAR" class="searcher-btn">
+        <!--<div flex class="searcher-checkbox">-->
+          <input
+            type="checkbox"
+            class="searcher-checkbox"
+            ng-checked="main.searchingItemCode"
+            ng-model="vm.isItemCodeSearch"
+            id="isItemCode">
+          <label for="isItemCode" class="searcher-checkbox-label">ItemCode</label>
+        <!--</div>-->
       </form>
 
       <div class="header-top-bar-menu" layout="row" layout-align="center center">

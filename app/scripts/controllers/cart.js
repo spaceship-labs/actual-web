@@ -21,7 +21,13 @@ function CartCtrl($location,$routeParams, $q ,productService, commonService, quo
     quotationService.getById($routeParams.id).then(function(res){
     });
   }
-
   vm.init();
-
 }
+CartCtrl.$inject = [
+  '$location',
+  '$routeParams',
+  '$q',
+  'productService',
+  'commonService',
+  'quotationService'
+];

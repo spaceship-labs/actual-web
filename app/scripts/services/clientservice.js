@@ -28,8 +28,8 @@
         return api.$http.post(url,params);
       }
 
-      function update(clientId, params){
-        var url = '/client/update/' + clientId;
+      function update(cardCode, params){
+        var url = '/client/update/' + cardCode;
         return api.$http.post(url, params);
       }
 

@@ -231,7 +231,7 @@ function CheckoutPaymentmethodCtrl(
       }
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
-        controller: controller,
+        controller: ['$scope','$mdDialog','formatService','payment',controller],
         templateUrl: templateUrl,
         parent: angular.element(document.body),
         targetEvent: ev,
@@ -253,7 +253,7 @@ function CheckoutPaymentmethodCtrl(
   }
 
 
-  function DepositController($scope, $mdDialog, payment) {
+  function DepositController($scope, $mdDialog, formatService, payment) {
     $scope.payment = payment;
 
     $scope.hide = function() {
@@ -275,6 +275,7 @@ function CheckoutPaymentmethodCtrl(
     $scope.payment = payment;
 
     $scope.numToLetters = function(num){
+      console.log(num);
       return formatService.numberToLetters(num);
     }
 

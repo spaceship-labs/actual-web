@@ -90,3 +90,9 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
 
   vm.init();
 }
+
+CategoryCtrl.$inject = [
+  '$routeParams',
+  'categoriesService',
+  'productService',
+];

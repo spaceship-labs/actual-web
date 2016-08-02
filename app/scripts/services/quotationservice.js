@@ -205,7 +205,7 @@
           if(quotation){
             setActiveQuotation(quotation.id);
             if(goToSearch){
-              $location.path('/');
+              $location.path('/').search({startQuotation:true});
             }else{
               $location.path('/quotations/edit/'+quotation.id);
             }

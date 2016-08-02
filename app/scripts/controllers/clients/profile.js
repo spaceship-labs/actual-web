@@ -88,7 +88,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
   function update(){
     vm.isLoading = true;
     var params = angular.copy(vm.client);
-    clientService.update(vm.client.id, params).then(function (res){
+    clientService.update(vm.client.CardCode, params).then(function (res){
       vm.isLoading = false;
       dialogService.showDialog('Informacion de cliente actualizada');
     });

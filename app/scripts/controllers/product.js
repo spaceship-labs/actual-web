@@ -342,6 +342,22 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
 
 }
 
+ProductCtrl.$inject = [
+  'productService',
+  '$scope',
+  '$location',
+  '$rootScope',
+  '$routeParams',
+  '$q',
+  '$timeout',
+  '$mdDialog',
+  '$mdMedia',
+  '$sce',
+  'api',
+  'cartService',
+  'quotationService',
+  'pmPeriodService',
+];
 /*
 angular.element(document).ready(function() {
   angular.bootstrap(document, ['dashexampleApp']);
