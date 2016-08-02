@@ -35,7 +35,7 @@
           $mdDialog.show({
               controller: dialogController,
               template           : '<md-dialog>' +
-              '  <md-dialog-content><h1>' + message + '</h1></md-dialog-content>' +
+              '  <md-dialog-content><h2 style="font-weight:400">' + message + '</h2></md-dialog-content>' +
               '  <md-dialog-actions>' +
               '    <md-button ng-click="closeDialog()" class="md-primary">' +
               '      Aceptar' +

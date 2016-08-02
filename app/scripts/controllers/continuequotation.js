@@ -56,7 +56,7 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
             }
             else{
               console.log('inicio de busqueda');
-              $location.path('/');
+              $location.path('/').search({startQuotation:true});
             }
           });
         }

@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('HomeCtrl', HomeCtrl);
 
-function HomeCtrl($timeout, productService, api){
+function HomeCtrl($timeout, $location, productService, api, dialogService){
   var vm = this;
   angular.extend(vm,{
     areProductsLoaded: false,
@@ -21,6 +21,10 @@ function HomeCtrl($timeout, productService, api){
   });
 
   function init(){
+    console.log($location.search());
+    if($location.search().startQuotation){
+      dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización')
+    }
     //vm.simulateLoading();
     /*
     var page = 1;
@@ -61,7 +65,7 @@ function HomeCtrl($timeout, productService, api){
   }
 
 
-  //vm.init();
+  vm.init();
 }
 
-HomeCtrl.$inject = ['$timeout','productService','api'];
+HomeCtrl.$inject = ['$timeout','$location','productService','api','dialogService'];
