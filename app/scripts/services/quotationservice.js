@@ -25,6 +25,7 @@
         getList: getList,
         getQuotationProducts: getQuotationProducts,
         getQuotationTotals: getQuotationTotals,
+        getRecords: getRecords,
         getTotalByPaymentMethod: getTotalByPaymentMethod,
         getTotalsByUser: getTotalsByUser,
         loadProductFilters: loadProductFilters,
@@ -282,6 +283,11 @@
         console.log('params',params);
         var url = '/quotation/totals/' + quotationId;
         return api.$http.post(url,params);
+      }
+
+      function getRecords(quotationId){
+        var url = '/quotation/' + quotationId + '/records';
+        return api.$http.post(url);
       }
 
     }

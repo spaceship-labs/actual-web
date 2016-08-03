@@ -58,7 +58,8 @@ md-dialog .md-button.md-primary{
 
 .container-xxlg{
   margin: 0 auto;
-  max-width: 1200px;
+  /*max-width: 1200px;*/
+  max-width: 1280px;
 }
 
 .container-xlg{
@@ -154,7 +155,10 @@ md-dialog .md-button.md-primary{
   margin: 0 auto;
   max-width: 300px;
 }
-
+.action-btn-xsm{
+  margin: 0 auto;
+  max-width: 260px;
+}
 .action-btn-save{
   background: #33BA2C;
 }
@@ -1160,6 +1164,7 @@ md-backdrop.md-sidenav-backdrop{
 }
 .listing-product .listing-product-info .price{
   font-size: 15px;
+  text-align: right;
 }
 .listing-product .listing-product-info .price-before{
   text-decoration: line-through;
@@ -1182,15 +1187,25 @@ md-backdrop.md-sidenav-backdrop{
   min-height: 200px;
   margin-bottom: 10px;
 }
+.listing-product .listing-product-gallery .slick-track{
+  height: 200px;
+}
 .listing-product .listing-product-gallery .slick-slide{
   /*margin-top: 20px;*/
   text-align: center;
-  height: 200px;
+  /*height: 200px;*/
+  top: 50%;
+  position: relative;
+  height: auto;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
 }
 .listing-product .listing-product-gallery img{
   display: inline;
   max-width: 100%;
-  height: 100%;
+  max-height: 200px;
+  /*height: 100%;*/
   /*max-width: 200px;*/
 }
 
@@ -2510,6 +2525,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 10px 0;
   padding: 0 20px;
 }
+.quotation-view .quotation-data .order-link{
+  color: #000;
+  text-decoration: underline;
+}
 .quotation-view .quotation-data-row{margin: 4px 0;}
 .quotation-view .quotation-data label{
   font-weight: 700;
@@ -2674,9 +2693,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .cart-view .cart-summary .cart-totals .price-crossed{
   text-decoration: line-through;
+  font-weight: 400;
 }
 .cart-view .cart-summary .cart-totals .price-main{
   color: #E2023F;
+  font-weight: 700;
 }
 
 .cart-view .cart-summary .cart-totals .price-main-v2{
@@ -3097,7 +3118,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   #DEPOSIT-DIALOG
 /*------------*/
 .deposit-dialog .deposit-dialog-inner{
-  padding: 30px 20px;
+  padding: 15px 20px;
+  max-width: 600px;
 }
 .deposit-dialog h2{
   font-weight: 400;
@@ -3113,6 +3135,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .deposit-dialog h2 i{
   color: #33BA2C;
   font-size: 24px;
+  vertical-align: middle;
+  margin-right: 3px;
 }
 .deposit-dialog h3{
   font-size: 22px;
@@ -3129,6 +3153,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 20px 0;
 }
 .deposit-dialog .dialog-block md-select{margin-bottom: 0;}
+.deposit-dialog .dialog-block .ammount-input{
+  margin-top: 10px;
+}
+.deposit-dialog .dialog-block .price-sign{
+  margin-right: 10px;
+}
 
 /*---------------/
   #CHECKOUT CLIENT INFO
@@ -3152,6 +3182,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   color: #030303;
   padding: 15px;
 }
+.client-checkout .delivery-option-data p{margin: 5px 0;}
+.client-checkout .delivery-option-data .small-link{margin:0;}
 .client-checkout .delivery-option-data h4{margin: 0 0 10px;}
 
 
@@ -3293,6 +3325,9 @@ padding-left: 16px;
 .order-view .order-block-info strong{
   color: #000;
 }
+.order-view .records-view{margin-top: 35px;}
+
+
 
 /*--------------/
   #FOOTER
@@ -3379,5 +3414,6 @@ padding-left: 16px;
   #header,
   .steps-bar,
   .checkout-view > .checkout-title,
+  #records-view,
   #footer .footer-menu{display: none;}
 }

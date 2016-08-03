@@ -33,7 +33,6 @@ function CheckoutPaymentmethodCtrl(
   angular.extend(vm,{
     addPayment: addPayment,
     applyTransaction: applyTransaction,
-    applyCashPayment: applyCashPayment,
     createOrder: createOrder,
     getGroupByPayments: getGroupByPayments,
     getPaymentMethods: getPaymentMethods,
@@ -57,6 +56,11 @@ function CheckoutPaymentmethodCtrl(
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
+
+      if(vm.quotation.Order){
+        $location.path('/checkout/order/' + vm.quotation.Order);
+      }
+
       vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
       vm.getPaymentMethods(vm.quotation.id).then(function(methods){
         vm.paymentMethods = methods;
@@ -178,6 +182,8 @@ function CheckoutPaymentmethodCtrl(
     vm.quotation.total = vm.activeMethod.total;
     vm.quotation.subtotal = vm.activeMethod.subtotal;
     vm.quotation.discount = vm.activeMethod.discount;
+    var remaining = vm.quotation.total - vm.quotation.ammountPaid;
+    vm.applyTransaction(null, vm.activeMethod, remaining);
   }
 
   function addPayment(payment){
@@ -189,7 +195,7 @@ function CheckoutPaymentmethodCtrl(
           var quotation = res.data;
           vm.quotation.ammountPaid = quotation.ammountPaid;
           if(vm.quotation.ammountPaid >= vm.quotation.total){
-            dialogService.showDialog('Cantidad total pagada, presiona el boton de continuar');
+            dialogService.showDialog('Cantidad total pagada');
           }else{
             dialogService.showDialog('Pago aplicado');
           }
@@ -200,33 +206,20 @@ function CheckoutPaymentmethodCtrl(
         delete vm.activeMethod.verficiationCode;
       });
     }else{
-      dialogService.showDialog('Total de la orden pagada, presiona el boton de continuar');
-    }
-  }
-
-  function applyCashPayment(method, ammount){
-    if( method && ammount && !isNaN(ammount) ){
-      var params = {
-        currency: method.currency || 'MXP',
-        ammount: ammount
-      };
-      params = angular.extend(params, method);
-      vm.addPayment(params);
-    }else{
-      commonService.showDialog('Revisa los datos, e intenta de nuevo');
+      dialogService.showDialog('Cantidad total pagada');
     }
   }
 
   function applyTransaction(ev, method, ammount) {
-    if( method && ammount && !isNaN(ammount) ){
-      var templateUrl = 'views/checkout/deposit-dialog.html';
+    //if( method && ammount && !isNaN(ammount) ){
+    if(method){
+      var templateUrl = 'views/checkout/terminal-dialog.html';
       var controller = DepositController;
       method.currency = method.currency || 'MXP';
-      method.ammount = ammount;
+      method.ammount = Math.ceil(ammount);
       var paymentOpts = angular.copy(method);
 
       if(method.msi || method.terminals){
-        templateUrl = 'views/checkout/terminal-dialog.html',
         controller = TerminalController;
       }
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
@@ -255,6 +248,7 @@ function CheckoutPaymentmethodCtrl(
 
   function DepositController($scope, $mdDialog, formatService, payment) {
     $scope.payment = payment;
+    $scope.needsVerification = payment.needsVerification;
 
     $scope.hide = function() {
       $mdDialog.hide();
@@ -263,19 +257,15 @@ function CheckoutPaymentmethodCtrl(
       $mdDialog.cancel();
     };
     $scope.save = function() {
-      if($scope.payment.verificationCode && $scope.payment.verificationCode!= ''){
-        $mdDialog.hide($scope.payment);
-      }else{
-        console.log('no cumple');
-      }
+      $mdDialog.hide($scope.payment);
     };
   }
 
   function TerminalController($scope, $mdDialog, formatService, payment) {
     $scope.payment = payment;
+    $scope.needsVerification = payment.needsVerification;
 
     $scope.numToLetters = function(num){
-      console.log(num);
       return formatService.numberToLetters(num);
     }
 

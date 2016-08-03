@@ -17,22 +17,22 @@
       <span><i class="icon-terminal"></i> 3. Método de pago</span>
     </div>
     <div flex="25" class="steps-bar-item steps-bar-item-active">
-      <span><i class="icon-oportunidades"></i> 4. Checkout</span>
+      <span><i class="icon-oportunidades"></i> 4. Confirmación</span>
     </div>
   </div>
 
   <div class="checkout-view-inner">
 
     <div class="checkout-title order-title" layout="row" layout-align="space-between center">
-        <h1 flex="70">
+        <h1 flex="60">
           <strong>
             <span><i class="icon-checkmark"></i> NÚMERO DE ORDEN: <span class="order-folio">#{{vm.order.folio}}</span>
           </strong>
         </h1>
-        <div flex="20" class="order-title-extra">
+        <div flex="30" class="order-title-extra">
           <span class="order-date">{{vm.order.createdAt | date}}</span>
           <a href="#" ng-click="vm.print()" class="action-btn action-btn-save">
-            <strong>IMPRIMIR</strong>
+            <strong>IMPRIMIR RECIBO</strong>
           </a>
         </div>
     </div>
@@ -198,7 +198,7 @@
         </div>
         <div flex="20">
           <a href="#"  ng-click="vm.print()" class="action-btn action-btn-save">
-            <strong>IMPRIMIR</strong>
+            <strong>IMPRIMIR RECIBO</strong>
           </a>
         </div>
       </div>
@@ -206,5 +206,72 @@
     <!--END VENDEDOR-->
 
   </div>
+
+  <hr/>
+
+  <section id="records-view" class="records-view">
+    <h1><i class="icon-attachment"></i> <strong>BITÁCORA DE SEGUIMIENTO</strong></h1>
+
+    <div ng-if="vm.isLoadingRecords" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+    </div>
+
+    <table ng-if="!vm.isLoadingRecords" class="records-table">
+      <thead>
+        <tr>
+          <td>FECHA/HORA EVENTO</td>
+          <td>EVENTO</td>
+          <td>USUARIO</td>
+          <td>FECHA SEGUIMIENTO</td>
+          <td>ARCHIVO(S)</td>
+          <td>DETALLES</td>
+        </tr>
+      </thead>
+      <tbody ng-repeat="record in vm.records">
+        <tr>
+          <td>{{record.createdAt | date: 'MMM d, y h:mm:ss a'}}</td>
+          <td>{{record.eventType}}</td>
+          <td>{{record.User.firstName + ' ' + record.User.lastName}}</td>
+          <td>{{record.dateTime | date:'MMM d, y h:mm:ss a' }}</td>
+          <td>{{record.files.length}}</td>
+          <td>
+            <a ng-click="vm.toggleRecord(record)" href="#">
+              VER DETALLES <img src="/images/arrow-down.png" alt="">
+            </a>
+          </td>
+        </tr>
+        <tr ng-show="record.isActive">
+          <td  colspan="6" class="inner-content">
+            <div class="record-item">
+              <div class="record-item-block" layout="row" layout-align="space-between start">
+                <div flex="55">
+                  <p><label><strong>NOTAS</strong></label></p>
+                  <textarea name="" id="" rows="4">{{record.notes}}</textarea>
+                </div>
+                <div flex="40" class="center-content">
+                  <p><strong>ARCHIVOS ADJUNTOS ({{record.files.length}})</strong></p>
+
+                  <div class="record-item-block-attach">
+                    <a
+                      ng-repeat="file in record.files"
+                      ng-href="{{vm.api.baseUrl + '/uploads/records/gallery/' + file.filename }}"
+                      target="_blank">
+                      <img
+                        ng-src="{{vm.api.baseUrl + '/uploads/records/gallery/300x300' + file.filename }}"
+                        alt="">
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </section>
+
 
 </section>

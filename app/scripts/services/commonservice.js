@@ -12,47 +12,54 @@
         discountKey:'discountPg1',
         methods: [
          {
-            label:'Efectivo',
+            label:'Efectivo MXN',
             type:'cash',
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: false
           },
           {
             label:'Efectivo USD',
             type:'cash-usd',
             currency:'usd',
-            description:'Tipo de cambio $18.76 MXN'
+            description:'Tipo de cambio $18.76 MXN',
+            needsVerification: false
           },
           {
             label:'Cheque',
             type:'cheque',
             description:'Sujeto a verificación contable',
             currency:'mxn',
+            needsVerification: false
           },
           {
             label:'Deposito',
             type:'deposit',
             description:'Sujeto a verificación contable',
-            currency:'mxn'
+            currency:'mxn',
+            needsVerification: false
           },
           {
             label:'Transferencia',
             type:'transfer',
             description:'Sujeto a verificación contable',
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: true
           },
           {
             label:'Monedero electrónico',
             type:'monedero',
             description:'Sujeto a verificación contable',
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: false
           },
           {
-            label:'Pago con',
+            label:'1 pago con',
             type:'credit-card',
             description:'VISA, MasterCard, American Express',
             cards:['images/visa.png','images/mastercard.png','images/american.png'],
             terminals:['Banamex','American Express'],
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: true
           },
         ]
       },
@@ -66,7 +73,8 @@
             msi:3,
             cards:['images/banamex.png','images/santander.png','images/banorte.png'],
             terminals:['Banorte','Santander','Bancomer','American Express'],
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: true
           }
         ]
       },
@@ -80,7 +88,8 @@
             msi:6,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
             terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: true
           },
           {
             label:'9',
@@ -88,7 +97,8 @@
             msi:9,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
             terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: true
           },
         ]
       },
@@ -102,7 +112,8 @@
             msi:12,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
             terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: true
           },
         ]
       },
@@ -116,7 +127,8 @@
             msi:18,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
             terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
-            currency: 'mxn'
+            currency: 'mxn',
+            needsVerification: true
           },
         ]
       }
@@ -519,10 +531,24 @@
       return paymentGroups;
     }
 
+    function getMonthDateRange() {
+      var currentTime = new Date()
+      // returns the month (from 0 to 11)
+      var month = currentTime.getMonth() + 1
+      // returns the year (four digits)
+      var year = currentTime.getFullYear()
+      var startDate = moment([year, month]).add(-1,"month");
+      // Clone the value before .endOf()
+      var endDate = moment(startDate).endOf('month');
+      // make sure to call toDate() for plain JavaScript date type
+      return { start: startDate.toDate(), end: endDate.toDate() };
+    }
+
     var service = {
       getCountries: getCountries,
       getStates: getStates,
       getPaymentMethods: getPaymentMethods,
+      getMonthDateRange: getMonthDateRange,
       simulateOrders: simulateOrders,
       simulateLeads: simulateLeads,
       simulateClients: simulateClients,

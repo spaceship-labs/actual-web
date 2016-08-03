@@ -77,6 +77,11 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
       vm.extraParamsLeads = {Client: vm.client.id};
       vm.extraParamsSales = {CardCode: vm.client.id};
       vm.client.Contacts = vm.formatContacts(vm.client);
+
+      if($location.search().activeTab && $location.search().activeTab < 4){
+        vm.activeTab = $location.search().activeTab;
+      }
+
     });
   }
 

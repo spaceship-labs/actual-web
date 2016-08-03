@@ -9,6 +9,18 @@
 
 
   <section class="quotation-data">
+    <div>
+      <label>Status</label>
+      <p>
+        {{vm.status}}
+        <a
+          class="order-link"
+          ng-href="/checkout/order/{{vm.quotation.Order.id}}"
+          ng-if="vm.quotation.Order">
+          | Haz click aqui para ver el pedido
+        </a>
+      </p>
+    </div>
     <div layout="row" class="quotation-data-row">
       <div flex="">
         <label for="">Nombre del cliente</label>
@@ -130,7 +142,13 @@
 
         </div>
 
-        <a href="#" ng-click="vm.addNewProduct()" class="action-btn">AGREGAR NUEVO ARTÍCULO</a>
+        <a
+          href="#"
+          ng-if="!vm.quotation.Order || !vm.quotation.isClosed"
+          ng-click="vm.addNewProduct()"
+          class="action-btn">
+          AGREGAR NUEVO ARTÍCULO
+        </a>
 
       </section>
 
@@ -164,7 +182,12 @@
             </div>
           </div>
 
-          <input type="submit" value="CONTINUAR" class="cart-view-btn">
+          <input
+            type="submit"
+            value="CONTINUAR"
+            ng-if="!vm.quotation.Order || !vm.quotation.isClosed"
+            class="cart-view-btn"
+          >
 
           <p class="cart-summary-note">*Precios en Pesos Mexicanos con impuestos incluidos.</p>
 

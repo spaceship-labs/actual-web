@@ -101,7 +101,17 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   }
 
   function init(){
-    vm.filters = {User: $rootScope.user.id};
+    var monthRange = commonService.getMonthDateRange();
+    vm.startDate = monthRange.start.toString();
+    vm.endDate = monthRange.end.toString();
+    vm.filters = {
+      User: $rootScope.user.id,
+    };
+    vm.dateRange = {
+      field: 'createdAt',
+      start: vm.startDate,
+      end: vm.endDate
+    };
     vm.user = $rootScope.user;
     vm.getQuotationData();
   }

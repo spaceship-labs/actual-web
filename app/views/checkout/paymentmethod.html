@@ -22,23 +22,23 @@
       <span><i class="icon-terminal"></i> 3. Método de pago</span>
     </div>
     <div flex="25" class="steps-bar-item">
-      <span><i class="icon-oportunidades"></i> 4. Checkout</span>
+      <span><i class="icon-oportunidades"></i> 4. Confirmación</span>
     </div>
   </div>
 
   <div class="checkout-view-inner">
-    <h3><strong>1. Elige tu plan de pagos</strong> Los planes de meses sin intereses y pagos fijos solo aplican a tarjetas de crédito.</h3>
+    <h3><strong>1. Elige tu plan de pago</strong> Los planes de meses sin intereses y pagos fijos solo aplican a tarjetas de crédito.</h3>
 
+    <!--
     <div class="payment-methods-tabs" layout="row">
       <div ng-click="vm.selectSingle()" class="pay-method-tab" ng-class="{'pay-method-tab-active' : vm.singlePayment }">
         <strong>Una forma de pago</strong>
       </div>
-      <!--
       <div ng-click="vm.selectMultiple()" class="pay-method-tab"  ng-class="{'pay-method-tab-active' : vm.multiplePayment }">
         <strong>Multiples formas de pago</strong>
       </div>
-      -->
     </div>
+    -->
 
     <section layout="row">
       <div flex="75">
@@ -59,93 +59,17 @@
         <div class="second-step-payment">
 
           <section>
-            <h3><strong>2. Ingresa los montos para cada forma de pago</strong></h3>
+            <h3><strong>2. Pagos aplicados</strong></h3>
             <hr />
 
             <div class="pay-method-wrap pay-method-wrap-v2" >
               <div class="method-block">
-                <!--PAYMENT INPUTS-->
-                <ul>
-                  <li
-                    ng-if="vm.activeMethod && (vm.activeMethod.type == 'cash' || vm.activeMethod.type == 'cash-usd' )"
-                    layout="row"
-                    layout-align="space-between center"
-                  >
-                    <div flex="30">
-                      <strong ng-if="vm.activeMethod.type == 'cash'">Pago Efectivo MXN</strong>
-                      <strong ng-if="vm.activeMethod.type == 'cash-usd'">Pago Efectivo USD</strong>
-                    </div>
-                    <div flex="30" class="method-icon">
-                      <i class="icon-cash"></i>
-                    </div>
-                    <div flex="40" layout="row" layout-align="start end">
-                      <div flex="45" class="input-element">
-                        <label>CANTIDAD</label>
-                        <div class="input-element-inner">
-                          <input type="text" ng-model="vm.currentAmmount">
-                        </div>
-                      </div>
-                      <a href="#" flex="45" ng-click="vm.applyCashPayment(vm.activeMethod, vm.currentAmmount)" class="action-btn action-btn-save">GUARDAR</a>
-                    </div>
-
-                  </li>
-
-                  <li
-                    ng-if="vm.activeMethod && (vm.activeMethod.type == 'deposit' || vm.activeMethod.type == 'transfer' || vm.activeMethod.type == 'cheque' || vm.activeMethod.type == 'credit-card' ) "
-                    layout="row"
-                    layout-align="space-between center"
-                  >
-                    <div flex="30">
-                      <strong>{{vm.activeMethod.label}}</strong>
-                    </div>
-                    <div flex="30" class="method-icon">
-                      <i class="icon-transfer"></i>
-                    </div>
-                    <div flex="40" layout="row" layout-align="start end">
-                      <div flex="45" class="input-element">
-                        <label>CANTIDAD</label>
-                        <div class="input-element-inner">
-                          <input type="text" ng-model="vm.currentAmmount">
-                        </div>
-                      </div>
-                      <a href="#" ng-click="vm.applyTransaction($event, vm.activeMethod, vm.currentAmmount)" flex="45" class="action-btn">APLICAR</a>
-                    </div>
-                  </li>
-
-                  <li
-                    ng-if="vm.activeMethod.terminals && vm.activeMethod.msi"
-                    layout="row"
-                    layout-align="space-between center"
-                  >
-                    <div flex="30">
-                      <strong>{{vm.activeMethod.label}} Meses</strong>
-                     <div class="hl-label"><strong>Sin intereses</strong></div>
-                    </div>
-                    <div flex="30" class="bank-icons bank-icons-v2">
-                      <img src="images/visa.png" alt="">
-                      <img src="images/mastercard.png" alt="">
-                      <img src="images/amexcard.png" alt="">
-                    </div>
-                    <div flex="40" layout="row" layout-align="start end">
-                      <div flex="45" class="input-element">
-                        <label>CANTIDAD</label>
-                        <div class="input-element-inner">
-                          <input type="text" ng-model="vm.currentAmmount">
-                        </div>
-                      </div>
-                      <a href="#" ng-click="vm.applyTransaction($event, vm.activeMethod, vm.currentAmmount)" flex="45" class="action-btn">APLICAR</a>
-                    </div>
-                  </li>
-                </ul>
-                <!--END PAYMENT INPUTS-->
 
                 <!--PAYMENTS APPLIED-->
                 <div ng-if="vm.isLoadingPayments" layout="row" layout-align="center center">
                   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
                 </div>
-                <h2 ng-if="!vm.isLoadingPayments && vm.quotation.Payments">
-                  Pagos aplicados
-                </h2>
+
                 <ul ng-if="!vm.isLoadingPayments">
                   <li ng-repeat="payment in vm.quotation.Payments"  class="applied-payment">
 
