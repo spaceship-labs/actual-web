@@ -41,7 +41,7 @@
         return api.$http.post(url,params);
       }
 
-      function update(id,params){
+      function update(id, params){
         var url = '/quotation/update/' + id;
         return api.$http.post(url,params);
       }

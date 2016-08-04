@@ -10,8 +10,19 @@
 angular.module('dashexampleApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
-function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootScope, $mdDialog, commonService, quotationService, api, cartService){
-
+function QuotationsEditCtrl(
+  $location,
+  $routeParams,
+  $q,
+  productService,
+  $rootScope,
+  $mdDialog,
+  commonService,
+  quotationService,
+  api,
+  cartService,
+  userService
+){
   var vm = this;
   angular.extend(vm, {
     newRecord: {},
@@ -50,6 +61,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
     toggleRecord: toggleRecord,
   });
 
+  vm.brokers = [];
 
   function toggleRecord(record){
     vm.quotation.Records.forEach(function(rec){
@@ -88,7 +100,7 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
         }
         vm.newRecord = {};
         vm.isLoadingRecords = false;
-      });
+      })
     }
   }
 
@@ -132,6 +144,9 @@ function QuotationsEditCtrl($location,$routeParams, $q ,productService, $rootSco
           vm.quotation.Details = details2;
         })
       });
+    });
+    userService.getBrokers().then(function(brokers){
+      vm.brokers = brokers;
     });
   }
 

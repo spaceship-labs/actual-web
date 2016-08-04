@@ -10,32 +10,43 @@
 
   <section class="quotation-data">
     <div layout="row" class="quotation-data-row">
-      <div flex="">
+      <div flex="25">
         <label for="">Nombre del cliente</label>
         <p>{{vm.quotation.Client.CardName || 'Sin cliente asignado'}}</p>
       </div>
-      <div flex="">
+      <div flex="25">
         <label for="">Fecha de cotización</label>
         <p>{{vm.quotation.createdAt | date: 'd-MM-yyyy'}}</p>
       </div>
-      <div flex="">
+      <div flex="25">
         <label for="">Vendedor</label>
         <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
       </div>
+      <div flex="25" layout layout-wrap>
+        <label for="">Broker</label>
+        <md-input-container flex="100" style="margin:0;">
+          <md-select ng-model="vm.quotation.Broker">
+            <md-option ng-value="undefined">Ninguno</md-option>
+            <md-option ng-repeat="broker in vm.brokers" ng-value="broker.id">
+              {{broker.firstName + ' ' + broker.lastName}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
     </div>
 
-    <div layout="row" class="quotation-data-row">
-      <div flex="">
+    <div layout="row" layout-align="start center" class="quotation-data-row">
+      <div flex="25">
         <label for="">Télefono fijo</label>
-        <p>{{vm.quotation.Client.Phone1}}</p>
+        <p>{{vm.quotation.Client.Phone1 || 'No proporcionado'}}</p>
       </div>
-      <div flex="">
+      <div flex="25">
         <label for="">Télefono celular</label>
-        <p>{{vm.quotation.Client.Cellular}}</p>
+        <p>{{vm.quotation.Client.Cellular || 'No proporcionado'}}</p>
       </div>
-      <div flex="">
+      <div flex="25">
         <label for="">E-mail</label>
-        <p>{{vm.quotation.Client.E_Mail}}</p>
+        <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
       </div>
     </div>
 
