@@ -17,7 +17,7 @@
       <span><i class="icon-terminal"></i> 3. Método de pago</span>
     </div>
     <div flex="25" class="steps-bar-item">
-      <span><i class="icon-oportunidades"></i> 4. Checkout</span>
+      <span><i class="icon-oportunidades"></i> 4. Confirmación</span>
     </div>
   </div>
 
@@ -64,7 +64,9 @@
         </div>
         <!--END PERSONAL DATA-->
 
-        <h4><strong>DIRECCIÓN DE ENTREGA</strong> (Buscar con Google Maps)</h4>
+        <h4>
+          <strong>DIRECCIÓN DE ENTREGA</strong>
+        </h4>
 
         <section class="delivery-options">
           <md-radio-group ng-model="vm.quotation.Address">
@@ -87,6 +89,14 @@
                   <li><strong>Télefono: </strong>{{contact.phone}}</li>
                   <li><strong>Celular: </strong>{{contact.mobile}}</li>
                 </ul>
+                <p>
+                  <a
+                    class="small-link"
+                    href="#"
+                    ng-href="/clients/profile/{{vm.quotation.Client.id}}?activeTab=3">
+                    Editar datos de dirección
+                  </a>
+                </p>
               </div>
             </div>
 

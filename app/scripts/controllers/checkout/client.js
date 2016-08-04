@@ -23,6 +23,11 @@ function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
       vm.isLoading = false;
+
+      if(vm.quotation.Order){
+        $location.path('/checkout/order/' + vm.quotation.Order);
+      }
+
       //fillin address data with client info
       quotationService.getQuotationProducts(vm.quotation).then(function(details){
         console.log(details);

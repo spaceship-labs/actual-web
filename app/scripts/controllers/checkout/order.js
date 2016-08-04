@@ -10,19 +10,23 @@
 angular.module('dashexampleApp')
   .controller('CheckoutOrderCtrl', CheckoutOrderCtrl);
 
-function CheckoutOrderCtrl(commonService ,$routeParams, $rootScope, $location, quotationService, orderService){
+function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $location, quotationService, orderService){
   var vm = this;
   angular.extend(vm,{
     init: init,
     print: print,
     getPaymentType: getPaymentType,
     formatAddress: formatAddress,
-    isLoading: false
+    toggleRecord: toggleRecord,
+    isLoading: false,
+    api: api
   });
 
   function init(){
     //vm.isLoading = false;
     vm.isLoading = true;
+    vm.isLoadingRecords = true;
+
     orderService.getById($routeParams.id).then(function(res){
       vm.order = res.data;
       console.log(vm.order);
@@ -38,12 +42,31 @@ function CheckoutOrderCtrl(commonService ,$routeParams, $rootScope, $location, q
           vm.order.Details = details2;
           console.log(vm.order.Details);
         })
+
+      quotationService.getRecords(vm.order.Quotation)
+        .then(function(result){
+          console.log(result);
+          vm.records = result.data;
+          vm.isLoadingRecords = false;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
     })
     .catch(function(err){
       console.log(err);
       vm.isLoading = false;
     });
 
+  }
+
+  function toggleRecord(record){
+    vm.records.forEach(function(rec){
+      if(rec.id != record.id){
+        rec.isActive = false;
+      }
+    });
+    record.isActive = !record.isActive;
   }
 
   function formatAddress(address){

@@ -2,10 +2,11 @@
   <div class="deposit-dialog-inner">
     <h2><i class="icon-transfer"></i> APLICA <strong>EL PAGO</strong> COMO SE INDICA</h2>
     <hr />
+    <p ng-if="payment.terminals">
+      <strong>Terminal:</strong> <small>Solo se puede cobrar en esta terminal bancaria.</small>
+    </p>
     <div class="dialog-block" layout="row" layout-align="space-between end">
-      <div flex="45">
-        <p><strong>Terminal:</strong> <small>Solo se puede cobrar en esta terminal bancaria.</small></p>
-
+      <div flex="45" ng-if="payment.terminals">
         <div class="input-element select-element-wrapper">
           <md-select ng-model="payment.terminal" class="select-element">
             <md-option
@@ -25,20 +26,33 @@
     </div>
 
     <div class="dialog-block" >
-      <p><strong>CANTIDAD:</strong> Este es el monto que se debe cobrar:</p>
-      <h3><strong>{{payment.ammount | currency}} MXN</strong> ({{numToLetters(payment.ammount)}} M.N)</h3>
+      <p><strong>CANTIDAD:</strong> Se muestra el saldo total pendiente por cobrar. Puedes cobrar cualquier monto menor, pero después debes aplicar otro cobro para saldar esta venta.</p>
+      <div class="ammount-input" layout="row" layout-align="start center">
+        <div class="price-sign">
+          <p><strong>$</strong></p>
+        </div>
+        <div class="input-element" flex="80">
+          <div class="input-element-inner">
+            <input type="number" ng-model="payment.ammount" required>
+          </div>
+        </div>
+      </div>
+      <!--
+        <h3><strong>{{payment.ammount | currency}} MXN</strong> ({{numToLetters(payment.ammount)}} M.N)</h3>
+      -->
     </div>
 
     <div  layout="row" layout-align="space-between end">
-      <div flex="45">
+      <div ng-if="needsVerification" flex="45">
         <p><strong># AUTORIZACIÓN</strong></p>
         <p><small>Ingresa el # de autorización de esta transacción</small></p>
       </div>
-      <div flex="20" class="input-element">
+      <div ng-if="needsVerification" flex="20" class="input-element">
         <div class="input-element-inner">
           <input type="text" ng-model="payment.verificationCode" required>
         </div>
       </div>
+      <div flex="75" ng-if="!needsVerification"></div>
       <a ng-click="save()" class="action-btn action-btn-save" href="#" flex="25">
         <strong>GUARDAR</strong>
       </a>

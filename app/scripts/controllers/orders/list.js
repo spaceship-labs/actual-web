@@ -59,7 +59,17 @@ function OrdersListCtrl($location,$routeParams, $q ,productService, $rootScope, 
   };
 
   function init(){
-    vm.filters = {SlpCode: $rootScope.user.SlpCode};
+    var monthRange = commonService.getMonthDateRange();
+    vm.startDate = monthRange.start.toString();
+    vm.endDate = monthRange.end.toString();
+    vm.filters = {
+      User: $rootScope.user.id,
+    };
+    vm.dateRange = {
+      field: 'createdAt',
+      start: vm.startDate,
+      end: vm.endDate
+    };
     vm.user = $rootScope.user;
   }
 

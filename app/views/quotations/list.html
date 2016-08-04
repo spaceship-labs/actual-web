@@ -8,11 +8,27 @@
       <p>
         <strong>
           <i id="trigger-start-date" class="icon-pedidos"></i> DEL:
-          <input pikaday="vm.dateStart" format="DD/MM/YYYY" trigger="trigger-start-date" readonly type="text" on-select="vm.onDateStartSelect(pikaday)">
+          <input
+            pikaday="vm.dateStart"
+            format="DD/MM/YYYY"
+            trigger="trigger-start-date"
+            readonly
+            type="text"
+            set-default-date="true"
+            default-date="{{vm.startDate}}"
+            on-select="vm.onDateStartSelect(pikaday)">
         </strong>
         <strong>
           <i id="trigger-end-date" class="icon-pedidos"></i> AL:
-          <input pikaday="vm.dateEnd" format="DD/MM/YYYY" trigger="trigger-end-date" readonly type="text" on-select="vm.onDateEndSelect(pikaday)">
+          <input
+            pikaday="vm.dateEnd"
+            format="DD/MM/YYYY"
+            trigger="trigger-end-date"
+            readonly
+            set-default-date="true"
+            default-date="{{vm.endDate}}"
+            type="text"
+            on-select="vm.onDateEndSelect(pikaday)">
         </strong>
       </p>
     </div>
@@ -20,7 +36,7 @@
     <div flex="30" class="input-element select-element-wrapper">
       <label><strong>Buscar sobre:</strong></label>
       <select ng-model="vm.filters.User" class="select-element">
-        <option ng-selected="vm.User == vm.filters.User" ng-value="vm.user.id">
+        <option ng-selected="vm.user.id == vm.filters.User" ng-value="vm.user.id">
           Mis oportunidades
         </option>
         <option ng-value="'none'">

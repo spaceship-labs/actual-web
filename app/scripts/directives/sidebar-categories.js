@@ -36,6 +36,9 @@ angular.module('dashexampleApp')
 
         scope.showSelectedCategoryId = function(){
           var selected = scope.selectedCategoryId;
+          var activeCountL1 = 0;
+          var activeCountL2 = 0;
+          var activeCountL3 = 0;
           console.log(selected);
           if(scope.categoriesTree){
             scope.categoriesTree.forEach(function(mainCategory){
@@ -44,21 +47,24 @@ angular.module('dashexampleApp')
               mainCategory.Childs.forEach(function(child){
                 if(child.Childs){
                   child.Childs.forEach(function(grandChild){
-                    if(grandChild.id == selected){
+                    if(grandChild.id == selected && activeCountL3 < 1){
                       hasSelectedAsGrandChild = true;
                     }
                   });
                 }
               });
-              if(mainCategory.id == selected ||  hasSelectedAsChild || hasSelectedAsGrandChild ){
+              if(mainCategory.id == selected ||  hasSelectedAsChild || hasSelectedAsGrandChild && activeCountL1<1){
                 mainCategory.isActive = true;
+                activeCountL1++;
                 if(hasSelectedAsChild || hasSelectedAsGrandChild){
                   mainCategory.Childs.forEach(function(category){
                     var hasSelectedAsChildAux = _.findWhere(category.Childs, {id: selected});
-                    if(category.id == selected || hasSelectedAsChildAux){
+                    if(category.id == selected || hasSelectedAsChildAux && activeCountL2<1){
                       category.isActive = true;
-                      if(hasSelectedAsChildAux){
+                      activeCountL2++;
+                      if(hasSelectedAsChildAux && activeCountL3 < 1){
                         hasSelectedAsChildAux.isActive = true;
+                        activeCountL3++;
                       }
                     }
                   });
