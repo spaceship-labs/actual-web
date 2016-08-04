@@ -10,91 +10,21 @@
 angular.module('dashexampleApp')
   .controller('CommissionsListCtrl', CommissionsListCtrl);
 
-function CommissionsListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, quotationService){
-
-  var vm = this;
-  vm.init = init;
-  vm.applyFilters = applyFilters;
-  vm.onDateStartSelect = onDateStartSelect;
-  vm.onDateEndSelect = vm.onDateEndSelect;
-
-  vm.filters = false;
-  vm.dateEnd = false;
-
-  vm.managers = [
-    {
-      sellers: [{},{},{},{}]
-    },
-    {
-      sellers: [{},{},{},{}]
-    },
-    {
-      sellers: [{},{},{},{}]
-    }
+function CommissionsListCtrl($location) {
+  var vm     = this;
+  vm.columns = [
+    {key: 'id', label:'FOLIO'},
+    {key: 'createdAt' , label: 'FECHA VENTA'    },
+    {key: 'ammount'   , label: 'MONTO COBRADO'  },
+    {key: 'commission', label: '% COMISIÓN'     },
+    {key: 'commission', label: 'MONTO COMISIÓN' },
+    {key: 'commission', label: 'COMISIÓN PAGADA'},
   ];
-
-  vm.columnsLeads = [
-    {key: 'folio', label:'Folio'},
-    {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
-    {key:'total', label: 'Total', currency:true},
-    {key:'DocCur', label:'Moneda', defaultValue: 'MXP'},
-    {key:'createdAt', label:'Cotización' ,date:true},
-    {
-      key:'Acciones',
-      label:'Acciones',
-      propId: 'id',
-      actions:[
-        {url:'/quotations/edit/',type:'edit'},
-      ]
-    },
-  ];
-
-
-  vm.apiResourceLeads = quotationService.getList;
-
-  vm.todayQty = 5;
-  vm.monthQty = 20;
-
-  vm.todayAmmount = 38542;
-  vm.monthAmmount = 257982;
-
-  vm.quantities = {
-    labels: ["Hoy", "Resto del mes"],
-    data: [vm.todayQty, (vm.monthQty - vm.todayQty) ],
-    colours: ["#C92933", "#48C7DB", "#FFCE56"]
-  };
-
-  vm.ammounts = {
-    labels: ["Hoy", "Resto del mes"],
-    data: [vm.todayAmmount, (vm.monthAmmount - vm.todayAmmount) ],
-    colours: ["#C92933", "#48C7DB", "#FFCE56"]
-  };
-
-  function init(){
-    vm.filters = {User: $rootScope.user.id};
-    vm.user = $rootScope.user;
+  vm.apiResourceClients = function() {
+    return {
+      then: function(fn) {
+        fn({data: {data: [], total: 10}});
+      }
+    };
   }
-
-  function applyFilters(){
-    if(vm.dateStart._d && vm.dateEnd._d){
-      vm.dateRange = {
-        field: 'CreateDate',
-        start: vm.dateStart._d,
-        end: vm.dateEnd._d
-      };
-    }
-    $rootScope.$broadcast('reloadTable', true);
-  }
-
-  function onDateStartSelect(pikaday){
-    console.log(pikaday);
-  }
-
-  function onDateEndSelect(pikaday){
-    console.log(pikaday);
-  }
-
-
-  vm.init();
-
 }
