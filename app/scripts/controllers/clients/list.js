@@ -23,6 +23,7 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
     //{key:'rfc', label:'RFC'},
     {key:'E_Mail', label:'Email'},
     {key:'Phone1', label:'Télefono'},
+    {key:'ewallet', label:'Saldo Monedero', currency: true},
     //{key:'alta', label:'Alta'},
     {
       key:'Acciones',
