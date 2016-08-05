@@ -190,21 +190,27 @@ function CheckoutPaymentmethodCtrl(
     if( (payment.ammount > 0 && vm.quotation.ammountPaid < vm.quotation.total)
         || payment.ammount < 0 ){
       vm.isLoadingPayments = true;
-      quotationService.addPayment(vm.quotation.id, payment).then(function(res){
-        if(res.data){
-          var quotation = res.data;
-          vm.quotation.ammountPaid = quotation.ammountPaid;
-          if(vm.quotation.ammountPaid >= vm.quotation.total){
-            dialogService.showDialog('Cantidad total pagada');
-          }else{
-            dialogService.showDialog('Pago aplicado');
+      quotationService.addPayment(vm.quotation.id, payment)
+        .then(function(res){
+          if(res.data){
+            var quotation = res.data;
+            vm.quotation.ammountPaid = quotation.ammountPaid;
+            if(vm.quotation.ammountPaid >= vm.quotation.total){
+              dialogService.showDialog('Cantidad total pagada');
+            }else{
+              dialogService.showDialog('Pago aplicado');
+            }
           }
-        }
-        vm.quotation.Payments.push(payment);
-        vm.isLoadingPayments = false;
-        delete vm.activeMethod.ammount;
-        delete vm.activeMethod.verficiationCode;
-      });
+          vm.quotation.Payments.push(payment);
+          vm.isLoadingPayments = false;
+          delete vm.activeMethod.ammount;
+          delete vm.activeMethod.verficiationCode;
+        })
+        .catch(function(err){
+          console.log(err);
+          vm.isLoadingPayments = false;
+          dialogService.showDialog(err.data.message);
+        });
     }else{
       dialogService.showDialog('Cantidad total pagada');
     }
@@ -214,21 +220,20 @@ function CheckoutPaymentmethodCtrl(
     //if( method && ammount && !isNaN(ammount) ){
     if(method){
       var templateUrl = 'views/checkout/terminal-dialog.html';
-      var controller = DepositController;
+      var controller  = DepositController;
       method.currency = method.currency || 'MXP';
-      method.ammount = Math.ceil(ammount);
+      method.ammount  = Math.ceil(ammount);
       var paymentOpts = angular.copy(method);
-
       if(method.msi || method.terminals){
-        controller = TerminalController;
+        controller    = TerminalController;
       }
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
-        controller: ['$scope','$mdDialog','formatService','payment',controller],
+        controller: ['$scope', '$mdDialog', 'formatService', 'payment', controller],
         templateUrl: templateUrl,
         parent: angular.element(document.body),
         targetEvent: ev,
-        clickOutsideToClose:true,
+        clickOutsideToClose: true,
         fullscreen: useFullScreen,
         locals: {
           payment: paymentOpts
