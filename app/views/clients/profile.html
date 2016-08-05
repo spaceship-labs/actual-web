@@ -78,11 +78,6 @@
       <ng-include ng-show="vm.activeTab==3" src="'views/clients/profile-delivery.html'"></ng-include>
 
 
-      <div layout="row" class="form-view-btns" layout-align="center center">
-        <a ng-click="vm.update()" href="" flex="70" class="form-view-btn form-view-btn-primary">Guardar información</a>
-      </div>
-
-
     </section>
     <!--END FORM SECTION-->
 
@@ -101,7 +96,7 @@
       table-list
       class="table-list"
       columns="vm.columnsLeads"
-      filters="vm.extraParamsLeads"
+      filters="vm.filtersQuotations"
       api-resource="vm.apiResourceLeads">
     </div>
   </section>
@@ -111,10 +106,10 @@
     <hr>
     <div
       table-list
-      ng-if="vm.client"
+      ng-if="vm.client && vm.filtersOrders"
       class="table-list"
       columns="vm.columnsOrders"
-      filters="vm.extraParamsSales"
+      filters="vm.filtersOrders"
       api-resource="vm.apiResourceOrders">
     </div>
   </section>

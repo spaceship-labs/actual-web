@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('ClientProfileCtrl', ClientProfileCtrl);
 
-function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productService, commonService, clientService, quotationService, saleService, dialogService){
+function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonService, clientService, quotationService, orderService, dialogService){
   var vm = this;
 
   angular.extend(vm, {
@@ -31,7 +31,6 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
       {key:'Client.firstName', label:'Cliente'},
       {key:'Client.CardName', label:'Cliente (Nombre SAP)'},
       {key:'total', label: 'Total', currency:true},
-      {key:'currency', label:'Moneda'},
       {
         key:'Acciones',
         label:'Acciones',
@@ -42,16 +41,16 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
       },
     ],
     columnsOrders: [
-      {key: 'DocEntry', label:'Folio'},
-      {key:'CardName', label:'Cliente'},
-      {key:'DocTotal', label: 'Total'},
-      {key:'DocCur', label:'Moneda'},
+      {key: 'folio', label:'Folio'},
+      {key:'Client.CardName', label:'Cliente'},
+      {key:'total', label: 'Total', currency:true},
+      {key:'discount', label:'Descuento', currency:true},
       {
         key:'Acciones',
         label:'Acciones',
         propId: 'id',
         actions:[
-          {url:'/quotations/edit/',type:'edit'},
+          {url:'/order/edit/',type:'edit'},
         ]
       },
     ],
@@ -60,9 +59,9 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
     init: init,
     onPikadaySelect: onPikadaySelect,
     personalDataToDelivery: personalDataToDelivery,
-    update: update,
+    updatePersonalData: updatePersonalData,
     apiResourceLeads: quotationService.getByClient,
-    apiResourceOrders: saleService.getList,
+    apiResourceOrders: orderService.getList,
   });
 
   function init(){
@@ -71,12 +70,18 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
       vm.isLoading = false;
       vm.client = res.data;
       vm.client.birthDate = vm.client.birthDate  ? vm.client.birthDate : new Date();
-      vm.client.firstName = vm.client.firstName || vm.client.CardName;
-      vm.client.phone = vm.client.phone || vm.client.Phone1;
-      vm.client.mobilePhone = vm.client.mobilePhone || vm.client.Cellular;
-      vm.extraParamsLeads = {Client: vm.client.id};
-      vm.extraParamsSales = {CardCode: vm.client.id};
+      vm.client.firstName = vm.client.firstName || angular.copy(vm.client.CardName);
+      vm.client.phone = vm.client.phone || angular.copy(vm.client.Phone1);
+      vm.client.mobilePhone = vm.client.mobilePhone || angular.copy(vm.client.Cellular);
+      vm.filtersQuotations = {Client: vm.client.id};
+      vm.filtersOrders = {Client: vm.client.id};
       vm.client.Contacts = vm.formatContacts(vm.client);
+
+      /*
+      $timeout(function(){
+        vm.filter
+      }, 100)
+      */
 
       if($location.search().activeTab && $location.search().activeTab < 4){
         vm.activeTab = $location.search().activeTab;
@@ -90,12 +95,30 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
     vm.client.birthDate = pikaday._d;
   }
 
-  function update(){
+  function updatePersonalData(){
+    console.log('update');
     vm.isLoading = true;
-    var params = angular.copy(vm.client);
+    var params = {
+      //SAP fields
+      CardName: vm.client.CardName,
+      Phone1: vm.client.Phone1,
+      Cellular: vm.client.Cellular,
+      //Extrafields
+      title: vm.client.title,
+      gender: vm.client.gender,
+      birthDate: vm.client.birthDate,
+      firstName: vm.client.firstName,
+      lastName: vm.client.lastName,
+      dialCode: vm.client.dialCode,
+      phone: vm.client.phone,
+      mobileDialCode: vm.client.mobileDialCode,
+      mobilePhone: vm.client.mobilePhone,
+      E_Mail: vm.client.E_Mail
+    }
     clientService.update(vm.client.CardCode, params).then(function (res){
+      console.log(res);
       vm.isLoading = false;
-      dialogService.showDialog('Informacion de cliente actualizada');
+      dialogService.showDialog('Datos personales actualizados');
     });
   }
 
@@ -105,6 +128,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $q ,productServic
       Client: vm.client.id,
     };
     var goToSearch = true;
+    vm.isLoading = true;
     quotationService.newQuotation(params, goToSearch);
   }
 

@@ -9,6 +9,7 @@
     function clientService($http, $q, $rootScope, api){
 
       var service = {
+        create: create,
         getById: getById,
         getClients: getClients,
         getContacts: getContacts,
@@ -16,6 +17,11 @@
       };
 
       return service;
+
+      function create(params){
+        var url = '/client/create/';
+        return api.$http.post(url, params);
+      }
 
       function getById(id){
         var url = '/client/findbyid/' + id;

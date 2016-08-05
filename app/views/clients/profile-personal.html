@@ -30,7 +30,7 @@
   </div>
 
   <div layout="row">
-    <div flex="20" class="input-element">
+    <div flex="50" class="input-element">
       <label><strong>Nombre(s) del cliente <span class="hl-label">*</span></strong></label>
       <div class="input-element-inner">
         <input type="text" ng-model="vm.client.firstName" required>
@@ -38,18 +38,12 @@
     </div>
 
     <div flex class="input-element">
-      <label><strong>Apellido paterno <span class="hl-label">*</span></strong></label>
+      <label><strong>Apellidos <span class="hl-label">*</span></strong></label>
       <div class="input-element-inner">
         <input type="text" ng-model="vm.client.lastName" required>
       </div>
     </div>
 
-    <div flex class="input-element">
-      <label><strong>Apellido materno</strong></label>
-      <div class="input-element-inner">
-        <input type="text" ng-model="vm.client.secondLastName" required>
-      </div>
-    </div>
   </div>
 
   <div layout="row">
@@ -58,10 +52,15 @@
       <label><strong>Teléfono fijo <span class="hl-label">*</span></strong></label>
       <div layout="row" layout-align="space-between center">
           <div flex="30" class="input-element-inner">
-            <input type="text" ng-model="vm.client.dialCode" placeholder="Lada" required>
+            <input
+              type="text"
+              ng-model="vm.client.dialCode"
+              ng-pattern="'[0-9]{3}'"
+              placeholder="Lada"
+              required>
           </div>
           <div flex="60" class="input-element-inner">
-            <input type="text" ng-model="vm.client.Phone1" required>
+            <input type="text" ng-model="vm.client.phone" required>
           </div>
       </div>
     </div>
@@ -71,7 +70,7 @@
       <label><strong>Teléfono celular <span class="hl-label">*</span></strong></label>
       <div layout="row" layout-align="space-between center">
           <div flex="30" class="input-element-inner">
-            <input type="text" ng-model="vm.client.mobileDialCode" placeholder="Lada" required>
+            <input type="text" ng-pattern="'[0-9]{3}'" ng-model="vm.client.mobileDialCode" placeholder="Lada" required>
           </div>
           <div flex="60" class="input-element-inner">
             <input type="text" ng-model="vm.client.mobilePhone" required>
@@ -90,14 +89,10 @@
       </div>
     </div>
 
-   <div flex class="input-element">
-      <label><strong>Confirmar email</strong> <span class="hl-label">*</span></label>
-      <div class="input-element-inner">
-        <input type="email" ng-if="!vm.client.E_Mail" ng-model="vm.client.E_Mail" required>
-        <input type="email" ng-if="vm.client.E_Mail" ng-model="vm.client.E_Mail" readonly required>
-      </div>
-    </div>
+  </div>
 
+  <div layout="row" class="form-view-btns" layout-align="center center">
+    <a ng-click="vm.updatePersonalData()" href="" flex="70" class="form-view-btn form-view-btn-primary">Guardar información</a>
   </div>
 
 </section>

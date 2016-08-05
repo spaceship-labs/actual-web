@@ -1,4 +1,4 @@
-<section class="form-view container container-xlg">
+<section class="form-view container container-xxlg">
 
   <h1><i class="icon-login"></i> <strong>CLIENTES</strong></h1>
   <p><strong>LISTA DETALLADA DE MIS CLIENTES</strong></p>
@@ -15,7 +15,7 @@
     </div>
     <div flex="30">
       <h4>
-        <a href="/search">
+        <a href="/addquotation">
           <i class="icon-ofertas"></i> CREAR NUEVA COTIZACIÓN
         </a>
       </h4>
@@ -26,7 +26,7 @@
     <div flex="30" class="input-element select-element-wrapper">
       <label><strong>Buscar sobre:</strong></label>
       <select ng-model="vm.filters.SlpCode" class="select-element">
-        <option ng-selected="vm.user.SlpCode == vm.filters.SlpCode" ng-value="vm.user.SlpCode">
+        <option ng-selected="vm.user.SlpCode.id == vm.filters.SlpCode" ng-value="vm.user.SlpCode.id">
           Mis clientes
         </option>
         <option ng-value="'none'">
