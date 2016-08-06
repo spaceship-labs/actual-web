@@ -96,7 +96,7 @@
                     </div>
 
                     <div
-                      ng-if="payment.group == 1 && payment.type != 'cash' && payment.type != 'cash-usd'"
+                      ng-if="payment.group == 1 && payment.type != 'cash' && payment.type != 'cash-usd' && payment.type != 'monedero'"
                       layout="row"
                       layout-align="space-between center"
                     >
@@ -122,6 +122,27 @@
                         <i class="icon-checkmark saved-icon"></i>
                       </div>
                     </div>
+
+                    <div
+                      ng-if="payment.group == 1 && payment.type == 'monedero'"
+                      layout="row"
+                      layout-align="space-between center"
+                    >
+                      <div flex="30">
+                        <strong>Monedero</strong>
+                        <p class="pull-left">{{payment.description}}</p>
+                      </div>
+                      <div class="method-data" flex="60" layout="row">
+                        <div flex="33">
+                          <p><strong>CANTIDAD</strong></p>
+                          <p>{{payment.ammount | currency}}</p>
+                        </div>
+                      </div>
+                      <div flex="10" class="saved-icon-wrap">
+                        <i class="icon-checkmark saved-icon"></i>
+                      </div>
+                    </div>
+
 
                     <div
                       ng-if="payment.group != 1"
