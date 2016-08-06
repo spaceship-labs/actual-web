@@ -60,7 +60,8 @@
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       validateUser: validateUser,
-      getCompanies: getCompanies
+      getCompanies: getCompanies,
+      saveBroker: saveBroker
     });
 
     function toggleMenuCategory(index){
@@ -87,7 +88,7 @@
 
     function init(){
       vm.token = localStorageService.get('token');
-      vm.user = localStorageService.get('user');
+      vm.user  = localStorageService.get('user');
       vm.companyActive     = localStorageService.get('companyActive');
       vm.companyActiveName = localStorageService.get('companyActiveName');
       $rootScope.user = vm.user;
@@ -118,9 +119,16 @@
 
       });
 
+      $scope.$watch(function() {
+        return localStorageService.get('quotation');
+      }, function(quotation) {
+        vm.quotation = quotation;
+      });
+
       if($rootScope.user){
         vm.getActiveQuotation();
         getCompanyActive();
+        getBrokers();
       }
     }
 
@@ -344,6 +352,17 @@
       userService.getCompanyActive().then(function(companyActive) {
         vm.companyActive = companyActive;
       });
+    }
+
+    function getBrokers() {
+      userService.getBrokers().then(function(brokers) {
+        vm.brokers = brokers;
+      });
+    }
+
+    function saveBroker(broker) {
+      localStorageService.set('broker', broker);
+      togglePointerSidenav();
     }
   }
 

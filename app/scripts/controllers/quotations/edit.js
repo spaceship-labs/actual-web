@@ -14,6 +14,7 @@ function QuotationsEditCtrl(
   $location,
   $routeParams,
   $q,
+  localStorageService,
   productService,
   $rootScope,
   $mdDialog,
@@ -174,6 +175,7 @@ function QuotationsEditCtrl(
         console.log(err);
       });
 
+    vm.broker = localStorageService.get('broker');
     userService.getBrokers().then(function(brokers){
       vm.brokers = brokers;
     });

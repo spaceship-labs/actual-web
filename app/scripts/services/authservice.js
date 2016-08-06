@@ -33,6 +33,7 @@
         localStorageService.remove('token');
         localStorageService.remove('user');
         localStorageService.remove('quotation');
+        localStorageService.remove('broker');
         localStorageService.remove('companyActive');
         localStorageService.remove('companyActiveName');
         localStorageService.remove('currentQuotation');
