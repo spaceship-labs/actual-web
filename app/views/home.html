@@ -16,12 +16,21 @@
     <div flex="70">
       <div class="subs-container">
         <div  class="subs-container-list" layout="row" layout-wrap>
-          <div class="sub-wrapper" ng-repeat="category in main.categoriesTree" flex="33">
+          <div
+            class="sub-wrapper"
+            ng-repeat="category in main.categoriesTree"
+            ng-if="category.productsNum > 0"
+            flex="33">
             <div
               class="sub"
               ng-style="main.getCategoryBackground(category.Handle)">
               <div class="sub-text">
-                <h4><a ng-href="/category/{{category.Handle}}"><strong>{{category.Name}}</strong></a></h4>
+                <h4>
+                  <a ng-href="/category/{{category.Handle}}">
+                    <strong>{{category.Name}}</strong>
+                     ({{category.productsNum}})
+                  </a>
+                </h4>
               </div>
               <a ng-href="/category/{{category.Handle}}" class="absolute-link"></a>
             </div>
