@@ -12,6 +12,7 @@
         getBrokers: getBrokers,
         getUser: getUser,
         getCompanies: getCompanies,
+        getCompanyActive: getCompanyActive,
         update: update
       };
 
@@ -49,6 +50,13 @@
         var url      = '/user/companies';
         var params   = {email: email};
         return api.$http.get(url, params).then(function(res){
+         return res.data;
+        });
+      }
+
+      function getCompanyActive() {
+        var url      = '/me/companyActive';
+        return api.$http.get(url).then(function(res){
          return res.data;
         });
       }

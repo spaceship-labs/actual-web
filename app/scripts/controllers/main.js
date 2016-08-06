@@ -120,6 +120,7 @@
 
       if($rootScope.user){
         vm.getActiveQuotation();
+        getCompanyActive();
       }
     }
 
@@ -336,6 +337,12 @@
     function getCompanies(email) {
       userService.getCompanies(email).then(function(companies){
         vm.companies = companies;
+      });
+    }
+
+    function getCompanyActive() {
+      userService.getCompanyActive().then(function(companyActive) {
+        vm.companyActive = companyActive;
       });
     }
   }
