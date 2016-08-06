@@ -11,6 +11,7 @@
         getClients: getClients,
         getBrokers: getBrokers,
         getUser: getUser,
+        getCompanies: getCompanies,
         update: update
       };
 
@@ -39,6 +40,14 @@
         var params   = {};
         params.page  = page  || 0;
         params.limit = limit || 10;
+        return api.$http.get(url, params).then(function(res){
+         return res.data;
+        });
+      }
+
+      function getCompanies(email) {
+        var url      = '/user/companies';
+        var params   = {email: email};
         return api.$http.get(url, params).then(function(res){
          return res.data;
         });

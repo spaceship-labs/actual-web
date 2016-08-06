@@ -60,6 +60,7 @@
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       validateUser: validateUser,
+      getCompanies: getCompanies
     });
 
     function toggleMenuCategory(index){
@@ -290,11 +291,11 @@
       var formData = {
         email: vm.logInForm.email,
         password: vm.logInForm.password,
+        companyActive: vm.logInForm.companyActive
       };
 
 
       authService.signIn(formData, $rootScope.successAuth, function(){
-        //Error
         console.log('Invalid');
         vm.isLoadingLogin = false;
       });
@@ -313,7 +314,7 @@
       vm.user  = res.user;
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', res.token);
-      localStorageService.set('user', res.user);
+      localStorageService.set('user' , res.user);
       $window.location.reload();
     };
 
@@ -332,35 +333,11 @@
       vm.isLoadingLogin = false;
     });
 
-    $scope.$watch(function(){
-      return vm.user;
-    }, function(user){
-      if (!vm.user || vm.companyActive) {
-        return
-      }
-      $mdDialog.show({
-        controller: function($scope, $mdDialog){
-          console.log(vm.user);
-          $scope.companies         = vm.user.companies;
-          $scope.saveCompanyActive = saveCompanyActive;
-        },
-        templateUrl: 'views/partials/company-active.html',
-        parent: angular.element(document.body),
-      });
-    });
-
-    function saveCompanyActive(companyActive){
-      userService.update({companyActive: companyActive}).then(function(res){
-        $mdDialog.hide();
-        vm.companyActive = res.data.companyActive;
-        vm.companyActiveName = vm.user.companies.filter(function(comp){
-          return comp.id == vm.companyActive;
-        })[0].WhsName;
-        localStorageService.set('companyActive', vm.companyActive);
-        localStorageService.set('companyActiveName', vm.companyActiveName);
+    function getCompanies(email) {
+      userService.getCompanies(email).then(function(companies){
+        vm.companies = companies;
       });
     }
-
   }
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);

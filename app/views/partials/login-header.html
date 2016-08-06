@@ -14,7 +14,13 @@
     <form ng-if="!main.isLoadingLogin" name="logInForm" method="POST" ng-submit="main.signIn()">
       <div class="input-element">
         <div class="input-element-inner">
-          <input type="email" name="email" placeholder="Email" ng-model="main.logInForm.email" required>
+          <input type="email" name="email"
+            placeholder="Email"
+            ng-model="main.logInForm.email"
+            ng-model-options='{ debounce: 1000 }'
+            ng-change="main.getCompanies(main.logInForm.email)"
+            required
+          >
         </div>
       </div>
 
@@ -23,6 +29,18 @@
           <input type="password" placeholder="Contraseña" name="password" ng-model="main.logInForm.password" required>
         </div>
       </div>
+
+      <div class="input-element">
+        <select class="select-element input-element-inner" ng-model="main.logInForm.companyActive">
+          <option value="" selected disabled hidden>
+            Tienda
+          </option>
+          <option ng-repeat="company in main.companies" ng-value="company.id">
+            {{company.WhsName}}
+          </option>
+        </select>
+      </div>
+
 
       <input class="action-btn" type="submit" value="Iniciar sesión">
 
