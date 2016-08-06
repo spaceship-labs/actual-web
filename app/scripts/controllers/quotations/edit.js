@@ -14,6 +14,7 @@ function QuotationsEditCtrl(
   $location,
   $routeParams,
   $q,
+  $scope,
   localStorageService,
   productService,
   $rootScope,
@@ -147,6 +148,17 @@ function QuotationsEditCtrl(
 
   function init(){
     vm.isLoading = true;
+
+    $scope.$watch(function() {
+      return !!vm.quotation && localStorageService.get('broker');
+    }, function(broker) {
+      if (!vm.quotation) {
+        return;
+      }
+      vm.quotation.Broker = broker;
+    });
+
+
     quotationService.getById($routeParams.id)
       .then(function(res){
         vm.isLoading = false;
@@ -175,7 +187,6 @@ function QuotationsEditCtrl(
         console.log(err);
       });
 
-    vm.broker = localStorageService.get('broker');
     userService.getBrokers().then(function(brokers){
       vm.brokers = brokers;
     });

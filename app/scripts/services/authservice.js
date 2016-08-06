@@ -26,6 +26,7 @@
         localStorageService.remove('token');
         localStorageService.remove('user');
         localStorageService.remove('quotation');
+        localStorageService.remove('broker');
         $http.post(api.baseUrl + '/auth/signin', data).success(success).error(error);
       }
 
