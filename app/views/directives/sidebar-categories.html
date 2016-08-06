@@ -1,21 +1,45 @@
 <!--AMBIENTES-->
-<div ng-repeat="mainCategory in categoriesTree track by $index" class="listing-view-nav-wrapper">
+<div
+  ng-repeat="mainCategory in categoriesTree track by $index"
+  ng-if="mainCategory.productsNum"
+  class="listing-view-nav-wrapper">
   <h2>
     <a
       ng-click="toggleMainCategory(mainCategory, $event)"
       ng-href="/category/{{mainCategory.Handle}}"
       ng-class="{'active': mainCategory.isActive}">
-      <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i> <strong>{{mainCategory.Name}}</strong>
+      <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i>
+      <strong>{{mainCategory.Name}}</strong>
+      <strong class="products-num">({{mainCategory.productsNum}})</strong>
     </a>
   </h2>
 
   <ul class="listing-view-nav" ng-show="mainCategory.isActive">
-    <li ng-repeat="category in mainCategory.Childs" ng-class="{'active': category.isActive}">
-      <h3><a ng-click="toggleCategory(category, $event)" ng-href="/category/{{category.Handle}}"><strong>{{category.Name}}</strong></a></h3>
+    <li
+      ng-repeat="category in mainCategory.Childs"
+      ng-if="category.productsNum"
+      ng-class="{'active': category.isActive}"
+    >
+      <h3>
+        <a
+          ng-if="category.Childs"
+          ng-click="toggleCategory(category, $event)"
+        >
+          <strong>{{category.Name}}</strong>
+          <strong class="products-num">({{category.productsNum}})</strong>
+        </a>
+        <a
+          ng-if="!category.Childs"
+          ng-href="/category/{{category.Handle}}"
+        >
+          <strong>{{category.Name}}</strong>
+          <strong class="products-num">({{category.productsNum}})</strong>
+        </a>
+      </h3>
       <ul class="listing-view-subnav">
-        <li ng-repeat="subcategory in category.Childs">
+        <li ng-repeat="subcategory in category.Childs" ng-if="subcategory.productsNum">
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
-            {{subcategory.Name}}
+            {{subcategory.Name}} ({{subcategory.productsNum}})
           </a>
         </li>
       </ul>
