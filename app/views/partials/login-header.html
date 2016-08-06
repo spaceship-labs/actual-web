@@ -16,6 +16,7 @@
         <div class="input-element-inner">
           <input type="email" name="email"
             placeholder="Email"
+            autocomplete="off"
             ng-model="main.logInForm.email"
             ng-model-options='{ debounce: 1000 }'
             ng-change="main.getCompanies(main.logInForm.email)"
