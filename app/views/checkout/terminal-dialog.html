@@ -20,21 +20,26 @@
 
       </div>
       <div flex="50" ng-if="payment.msi">
-        <p><strong>PAGOS DIFERIDOS:</strong></p>
+        <!--<p><strong>PAGOS DIFERIDOS:</strong></p>-->
         <h3><strong>{{payment.msi}}</strong> Meses SIN INTERESES</h3>
       </div>
     </div>
 
     <div class="dialog-block" >
-      <p><strong>CANTIDAD:</strong> Se muestra el saldo total pendiente por cobrar. Puedes cobrar cualquier monto menor, pero después debes aplicar otro cobro para saldar esta venta.</p>
+      <p><strong>Cantidad:</strong> <small>Se muestra el saldo total pendiente por cobrar. Puedes cobrar cualquier monto menor, pero después debes aplicar otro cobro para saldar esta venta.</small></p>
       <div class="ammount-input" layout="row" layout-align="start center">
-        <div class="price-sign">
+        <!--<div class="price-sign">
           <p><strong>$</strong></p>
-        </div>
-        <div class="input-element" flex="80">
+        </div>-->
+        <div class="input-element" flex="60">
           <div class="input-element-inner">
-            <input type="number" ng-model="payment.ammount" required>
+            <!--<input type="number" ng-model="payment.ammount" required>-->
+            <input type="text" ng-model="payment.ammount" ui-money-mask>
           </div>
+        </div>
+        <div class="currency-label">
+          <span ng-if="payment.currency != 'usd'">MXN</span>
+          <span ng-if="payment.currency == 'usd'">USD</span>
         </div>
       </div>
       <!--
@@ -44,7 +49,7 @@
 
     <div  layout="row" layout-align="space-between end">
       <div ng-if="needsVerification" flex="45">
-        <p><strong># AUTORIZACIÓN</strong></p>
+        <p><strong># AUTORIZACIÓN:</strong></p>
         <p><small>Ingresa el # de autorización de esta transacción</small></p>
       </div>
       <div ng-if="needsVerification" flex="20" class="input-element">

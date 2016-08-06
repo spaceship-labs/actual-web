@@ -59,7 +59,7 @@ md-dialog .md-button.md-primary{
 .container-xxlg{
   margin: 0 auto;
   /*max-width: 1200px;*/
-  max-width: 1280px;
+  max-width: 1240px;
 }
 
 .container-xlg{
@@ -397,6 +397,9 @@ select{
   margin: 0 10px;
   vertical-align: middle;
 }
+.header-top-bar-menu .cart-active{
+  color: #50C841!important;
+}
 
 .header-top-bar-menu .header-top-bar-menu-item .pointer-btn{
   line-height: 30px;
@@ -539,6 +542,7 @@ select{
 .login-modal-header{
   display: block;
 }
+.login-modal-header .input-element{margin: 5px 0;}
 
 /*-------------/
   #CART-MODAL-HEADER
@@ -632,7 +636,8 @@ select{
 /*------------*/
 .menu{
   position: relative;
-  z-index: 99999;
+  /*z-index: 99999;*/
+  z-index: 9;
   -webkit-box-shadow: 0px 6px 3px -2px rgba(0,0,0,0.44);
   -moz-box-shadow: 0px 6px 3px -2px rgba(0,0,0,0.44);
   box-shadow: 0px 6px 3px -2px rgba(0,0,0,0.44);
@@ -1847,13 +1852,24 @@ md-backdrop.md-sidenav-backdrop{
   border-top: 0;
   padding: 20px;
 }
+.product-view .desc-cont p{
+  margin: 0;
+}
+.product-view .desc-cont ul{
+  margin: 0;
+  padding-left: 20px;
+}
 
 /*---------------/
   #VARIANT-PICKER
 /*--------------*/
+.variants-picker{
+  background: #fff!important;
+  padding: 4px 0px!important;
+}
 .variants-picker .variant-row{
-  margin: 4px 0;
-  padding: 10px 5px;
+  margin: 8px 0;
+  padding: 0px 5px;
 }
 .variants-picker .variant-color{
   border: 1px solid #000;
@@ -3005,6 +3021,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   display: inline-block;
   margin-bottom: 0;
   min-width: 60px;
+  outline: none;
 }
 
 .pay-method-wrap .method-block ul li md-checkbox{
@@ -3152,12 +3169,17 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .deposit-dialog .dialog-block{
   margin: 20px 0;
 }
-.deposit-dialog .dialog-block md-select{margin-bottom: 0;}
+.deposit-dialog .dialog-block md-select{
+  margin: 0;
+}
 .deposit-dialog .dialog-block .ammount-input{
   margin-top: 10px;
 }
 .deposit-dialog .dialog-block .price-sign{
   margin-right: 10px;
+}
+.deposit-dialog .dialog-block .currency-label{
+  margin-left: 10px;
 }
 
 /*---------------/
@@ -3389,7 +3411,10 @@ padding-left: 16px;
   color: #fff;
   padding: 20px 0;
 }
-#footer .footer-bottom p{font-size: 13px;}
+#footer .footer-bottom p{
+  font-size: 13px;
+  margin: 5px 0;
+}
 #footer .footer-bottom span{font-size: 11px;}
 
 

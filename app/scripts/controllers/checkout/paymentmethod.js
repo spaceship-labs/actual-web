@@ -34,6 +34,8 @@ function CheckoutPaymentmethodCtrl(
     addPayment: addPayment,
     applyTransaction: applyTransaction,
     createOrder: createOrder,
+    clearActiveMethod: clearActiveMethod,
+    chooseMethod: chooseMethod,
     getGroupByPayments: getGroupByPayments,
     getPaymentMethods: getPaymentMethods,
     getExchangeRate:getExchangeRate,
@@ -47,7 +49,6 @@ function CheckoutPaymentmethodCtrl(
     singlePayment: true,
     multiplePayment: false,
     payments: [],
-    totalPrice: 0,
     paymentMethods: [],
     math: window.Math
   });
@@ -66,15 +67,13 @@ function CheckoutPaymentmethodCtrl(
         vm.paymentMethods = methods;
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
           var paymentGroup = vm.getGroupByPayments();
-          console.log(paymentGroup);
           var currentGroup = _.findWhere(vm.paymentMethods, {group: paymentGroup});
           var currentMethod = currentGroup.methods[0];
-          console.log(currentMethod);
           vm.setMethod(currentMethod, paymentGroup);
         }
       });
       pmPeriodService.getActive().then(function(res){
-        vm.validPayments = res.data;
+        vm.validMethods = res.data;
       });
       vm.isLoading = false;
     });
@@ -149,7 +148,7 @@ function CheckoutPaymentmethodCtrl(
 
   function isActiveGroup(index){
     var activeKeys = ['paymentGroup1','paymentGroup2','paymentGroup3','paymentGroup4','paymentGroup5'];
-    if(vm.validPayments){
+    if(vm.validMethods){
       var isGroupUsed = false;
       var currentGroup = vm.getGroupByPayments();
       if( currentGroup < 0){
@@ -157,7 +156,7 @@ function CheckoutPaymentmethodCtrl(
       }else if(currentGroup > 0 && currentGroup == index+1){
         isGroupUsed = true;
       }
-      return vm.validPayments[activeKeys[index]] && isGroupUsed;
+      return vm.validMethods[activeKeys[index]] && isGroupUsed;
     }else{
       return false;
     }
@@ -182,8 +181,29 @@ function CheckoutPaymentmethodCtrl(
     vm.quotation.total = vm.activeMethod.total;
     vm.quotation.subtotal = vm.activeMethod.subtotal;
     vm.quotation.discount = vm.activeMethod.discount;
+  }
+
+  function chooseMethod(method, group){
+    vm.setMethod(method, group);
     var remaining = vm.quotation.total - vm.quotation.ammountPaid;
     vm.applyTransaction(null, vm.activeMethod, remaining);
+  }
+
+  function clearActiveMethod(){
+    vm.activeMethod = null;
+    var firstMethod = false;
+    var group = false;
+
+    if(!vm.quotation.Payments || vm.quotation.Payments.length == 0){
+      group = vm.paymentMethods[0];
+      firstMethod = group.methods[0];
+      console.log(firstMethod);
+    }else{
+      var groupIndex = vm.getGroupByPayments() - 1;
+      group = vm.paymentMethods[groupIndex];
+      firstMethod = group.methods[0];
+    }
+    vm.setMethod(firstMethod, group);
   }
 
   function addPayment(payment){
@@ -239,6 +259,7 @@ function CheckoutPaymentmethodCtrl(
         vm.addPayment(payment);
       }, function() {
         console.log('Pago no aplicado');
+        vm.clearActiveMethod();
       });
     }else{
       commonService.showDialog('Revisa los datos, e intenta de nuevo');

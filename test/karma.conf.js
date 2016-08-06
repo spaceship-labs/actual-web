@@ -71,6 +71,7 @@ module.exports = function(config) {
       'bower_components/photoswipe/dist/photoswipe.js',
       'bower_components/photoswipe/dist/photoswipe-ui-default.js',
       'bower_components/ng-photoswipe/angular-photoswipe.min.js',
+      'bower_components/angular-input-masks/angular-input-masks-standalone.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

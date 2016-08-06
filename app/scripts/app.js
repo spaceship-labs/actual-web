@@ -28,7 +28,8 @@ angular
     'ngFileUpload',
     'sly',
     'infinite-scroll',
-    'ngPhotoswipe'
+    'ngPhotoswipe',
+    'ui.utils.masks'
   ])
 
   .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {

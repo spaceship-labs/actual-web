@@ -2,7 +2,7 @@
   <ul flex="75">
     <li ng-repeat="method in paymentGroup.methods" layout="row" layout-align="space-between center">
       <div ng-attr-flex="{{method.cards && '40' || '100' }}" >
-        <md-radio-button ng-click="vm.setMethod(method , paymentGroup.group)" ng-model="method" ng-value="method" class="md-primary">
+        <md-radio-button ng-click="vm.chooseMethod(method , paymentGroup.group)" ng-model="method" ng-value="method" class="md-primary">
           <strong>{{method.label}}</strong>
         </md-radio-button>
         <span

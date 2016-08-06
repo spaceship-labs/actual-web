@@ -16,8 +16,8 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
   angular.extend(vm, {
     activeTab: 0,
     genders: [
-      {label:'Masculino', value: 'Masculino'},
-      {label: 'Femenino', value: 'Femenino'}
+      {label:'Masculino', value: 'M'},
+      {label: 'Femenino', value: 'F'}
     ],
     titles: [
       {label:'Sr.', value:'Sr'},

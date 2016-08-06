@@ -21,7 +21,8 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
       index:0,
       history: false,
       hideAnimationDuration: 0,
-      showAnimationDuration: 0
+      showAnimationDuration: 0,
+      shareEl: false
     },
     applyDiscount: applyDiscount,
     addToCart: addToCart,
