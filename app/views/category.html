@@ -97,12 +97,21 @@
         <h2 class="listing-view-title">{{vm.category.Name}}</h2>
         <!--SUBCATEGORIES LIST LEVEL 2-->
         <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap>
-          <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}" flex="33">
+          <div
+            class="sub-wrapper"
+            ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}"
+            ng-if="subcategory.productsNum > 0"
+            flex="33">
             <div
               class="sub"
               ng-style="main.getCategoryBackground(subcategory.Handle)">
               <div class="sub-text">
-                <h4><a ng-href="/category/{{subcategory.Handle}}"><strong>{{subcategory.Name}}</strong></a></h4>
+                <h4>
+                  <a ng-href="/category/{{subcategory.Handle}}">
+                    <strong>{{subcategory.Name}}</strong>
+                    ({{subcategory.productsNum}})
+                  </a>
+                </h4>
               </div>
               <a ng-href="/category/{{subcategory.Handle}}" class="absolute-link"></a>
             </div>
@@ -113,13 +122,23 @@
 
         <!--SUBCATEGORIES LIST LEVEL 3-->
         <div ng-if="vm.category.Childs.length > 0 && vm.showLevel3" class="subs-container-list" layout="row" layout-wrap>
-          <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}" flex="33">
+          <div
+            class="sub-wrapper"
+            ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}"
+            ng-if="subcategory.productsNum > 0"
+            flex="33"
+          >
             <div
               class="sub"
               ng-style="main.getCategoryBackground(subcategory.Handle)">
               <div class="sub-text">
                 <!--<h4><a ng-href="/category/{{subcategory.Handle}}">Salas <strong>esquineras</strong></a></h4>-->
-                <h4><a ng-href="/category/{{subcategory.Handle}}"><strong>{{subcategory.Name}}</strong></a></h4>
+                <h4>
+                  <a ng-href="/category/{{subcategory.Handle}}">
+                    <strong>{{subcategory.Name}}</strong>
+                    ({{subcategory.productsNum}})
+                  </a>
+                </h4>
               </div>
               <a ng-href="/category/{{subcategory.Handle}}" class="absolute-link"></a>
             </div>

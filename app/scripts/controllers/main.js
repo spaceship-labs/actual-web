@@ -321,9 +321,12 @@
     $rootScope.successAuth = function(res){
       vm.token = res.token;
       vm.user  = res.user;
+      console.log('successAuth');
+      console.log(vm.user);
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', res.token);
       localStorageService.set('user' , res.user);
+      localStorageService.set('companyActive', res.user.companyActive);
       $window.location.reload();
     };
 
