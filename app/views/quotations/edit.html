@@ -142,7 +142,11 @@
               <!--END ITEM DATA-->
 
               <div flex="5" class="cart-item-remove-wrap">
-                <a href="#" ng-click="vm.alertRemoveDetail($event,detail.id, $index)" class="cart-item-remove">
+                <a href="#"
+                  ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
+                  ng-click="vm.alertRemoveDetail($event,detail.id, $index)"
+                  class="cart-item-remove"
+                >
                   x
                 </a>
               </div>
@@ -155,7 +159,7 @@
 
         <a
           href="#"
-          ng-if="!vm.quotation.Order || !vm.quotation.isClosed"
+          ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
           ng-click="vm.addNewProduct()"
           class="action-btn">
           AGREGAR NUEVO ARTÍCULO
@@ -196,7 +200,7 @@
           <input
             type="submit"
             value="CONTINUAR"
-            ng-if="!vm.quotation.Order || !vm.quotation.isClosed"
+            ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
             class="cart-view-btn"
           >
 
