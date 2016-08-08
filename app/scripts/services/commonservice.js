@@ -13,12 +13,14 @@
         methods: [
          {
             label:'Efectivo MXN',
+            name:'Efectivo MXN',
             type:'cash',
             currency: 'mxn',
             needsVerification: false
           },
           {
             label:'Efectivo USD',
+            name:'Efectivo USD',
             type:'cash-usd',
             currency:'usd',
             description:'Tipo de cambio $18.76 MXN',
@@ -26,6 +28,7 @@
           },
           {
             label:'Cheque',
+            name:'Cheque',
             type:'cheque',
             description:'Sujeto a verificación contable',
             currency:'mxn',
@@ -33,6 +36,7 @@
           },
           {
             label:'Deposito',
+            name:'Deposito',
             type:'deposit',
             description:'Sujeto a verificación contable',
             currency:'mxn',
@@ -40,6 +44,7 @@
           },
           {
             label:'Transferencia',
+            name:'Transferencia',
             type:'transfer',
             description:'Sujeto a verificación contable',
             currency: 'mxn',
@@ -47,6 +52,7 @@
           },
           {
             label:'Monedero electrónico',
+            name:'Monedero electrónico',
             type:'monedero',
             description:'Sujeto a verificación contable',
             currency: 'mxn',
@@ -54,7 +60,9 @@
           },
           {
             label:'1 pago con',
-            type:'credit-card',
+            name:'Una sola exhibición terminal',
+            type:'single-payment-terminal',
+            //type:'credit-card',
             description:'VISA, MasterCard, American Express',
             cards:['images/visa.png','images/mastercard.png','images/american.png'],
             terminals:['Banamex','American Express'],
@@ -69,6 +77,7 @@
         methods: [
           {
             label:'3',
+            name:'3 meses sin intereses',
             type:'3-msi',
             msi:3,
             cards:['images/banamex.png','images/santander.png','images/banorte.png'],
@@ -84,6 +93,7 @@
         methods: [
           {
             label:'6',
+            name:'6 meses sin intereses',
             type:'6-msi',
             msi:6,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
@@ -93,6 +103,7 @@
           },
           {
             label:'9',
+            name:'9 meses sin intereses',
             type:'9-msi',
             msi:9,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
@@ -108,6 +119,7 @@
         methods: [
           {
             label:'12',
+            name:'12 meses sin intereses',
             type:'12-msi',
             msi:12,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
@@ -123,6 +135,7 @@
         methods: [
           {
             label:'18',
+            name:'18 meses sin intereses',
             type:'18-msi',
             msi:18,
             cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
@@ -544,7 +557,19 @@
       return { start: startDate.toDate(), end: endDate.toDate() };
     }
 
+    function combineDateTime(date, time, seconds){
+      var date = moment(date);
+      time = moment(time);
+      date = date.set({
+         'hour' : time.get('hour'),
+         'minute'  : time.get('minute'),
+         'second' : seconds || time.get('second')
+      });
+      return date.toDate();
+    }
+
     var service = {
+      combineDateTime: combineDateTime,
       getCountries: getCountries,
       getStates: getStates,
       getPaymentMethods: getPaymentMethods,

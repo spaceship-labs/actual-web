@@ -13,6 +13,7 @@
         getUser: getUser,
         getCompanies: getCompanies,
         getCompanyActive: getCompanyActive,
+        getCashReport: getCashReport,
         update: update
       };
 
@@ -60,5 +61,11 @@
          return res.data;
         });
       }
+
+      function getCashReport(params){
+        var url = '/me/cashreport';
+        return api.$http.post(url, params);
+      }
+
     }
 })();

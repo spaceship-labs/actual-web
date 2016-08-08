@@ -1,4 +1,4 @@
-<section class="form-view container container-xlg">
+<section id="profile-view" class="form-view container container-xlg">
   <h1><i class="icon-login"></i> <strong>MI PERFIL |</strong> {{vm.user.firstName + ' ' + vm.user.lastName }}</h1>
 
   <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
@@ -10,14 +10,17 @@
     <section class="form-section">
       <!--DATOS PERSONALES-->
       <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+
+        <!--
         <div flex="20" class="avatar-placeholder-wrap">
           <div class="avatar-placeholder">
             <span>+</span>
           </div>
           <p><strong>FOTO DE PERFIL</strong></p>
         </div>
+        -->
 
-        <div flex="75">
+        <div flex="100">
           <div layout="row">
             <div flex="40" class="input-element">
               <label>
@@ -87,11 +90,143 @@
     </section>
     <!--END FORM SECTION-->
 
-    <div layout="row" class="form-view-btns">
-      <a href="" flex class="form-view-btn">Borrar todos los campos</a>
-      <button href="" ng-submit="vm.update(updateForm)" flex class="form-view-btn form-view-btn-primary">Guardar información</button>
+    <div layout="row" class="form-view-btns no-margin">
+      <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
+      <button
+        ng-submit="vm.update(updateForm)"
+        flex="50"
+        class="form-view-btn form-view-btn-primary">
+        Guardar información
+      </button>
     </div>
 
   </form>
   <!--END PROFILE EDIT-->
+
+  <!--CASH REPORT-->
+  <section class="cash-report-config">
+
+    <h2>Generar reporte de caja</h2>
+
+    <section layout="row" layout-align="space-between center">
+      <div class="input-element" flex="40" flex-sm="100" flex-xs="100">
+        <label><strong>Fecha de inicio*</strong></label>
+        <div layout="row">
+          <div flex="60" class="input-element-inner">
+            <input
+              type="text"
+              pikaday="vm.myPickerStartDate"
+              set-default-date="true"
+              default-date="{{vm.cashRegister.startDate.toString()}}"
+              on-select="vm.onSelectStartDate(pikaday)"
+              format="DD/MM/YYYY"
+              readonly
+              required
+            >
+          </div>
+          <div flex="40" class="input-element-inner">
+            <input
+              type="text"
+              ui-timepicker
+              ui-timepicker="vm.timePickerOptions"
+              ng-model="vm.cashRegister.startTime"
+              placeholder="Hora"
+              required>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-element" flex="40" flex-sm="100" flex-xs="100">
+        <label><strong>Fecha de vencimiento*</strong></label>
+        <div layout="row">
+          <div flex="60" class="input-element-inner">
+            <input
+              type="text"
+              pikaday="vm.myPickerEndDate"
+              set-default-date="true"
+              format="DD/MM/YYYY"
+              default-date="{{vm.cashRegister.endDate.toString()}}"
+              on-select="vm.onSelectEndDate(pikaday)"
+              readonly required>
+          </div>
+          <div flex="40" class="input-element-inner">
+            <input
+              type="text"
+              ui-timepicker
+              ui-timepicker="vm.timePickerOptions"
+              ng-model="vm.cashRegister.endTime"
+              placeholder="Hora"
+              required>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <div layout="row" class="form-view-btns no-margin">
+      <button
+        ng-click="vm.getCashReport()"
+        flex="50"
+        class="form-view-btn form-view-btn-primary"
+      >
+        Generar reporte
+      </button>
+    </div>
+
+  </section>
+  <!--END CASH REPORT-->
+
+</section>
+
+<div ng-if="vm.isLoadingReport" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+  <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+</div>
+
+<section
+  ng-if="!vm.isLoadingReport && vm.paymentsGroups"
+  id="cash-report"
+  class="cash-report container container-xlg"
+>
+  <h1>REPORTE DE CAJA</h1>
+
+  <h3><strong>Usuario:</strong> {{main.user.firstName + ' ' + main.user.lastName}}</h2>
+  <h3>
+    <strong>Periodo:</strong>
+    {{vm.cashRegister.startDate | date:'dd/MM/yyyy h:mm a'}} |
+    {{vm.cashRegister.endDate | date:'dd/MM/yyyy h:mm a'}}
+  </h3>
+
+  <div class="payment-group" ng-repeat="group in vm.paymentsGroups track by $index">
+    <h3 ng-if="group.terminal"><strong>{{group.name}} | {{group.terminal}}</strong></h3>
+    <h3 ng-if="!group.terminal"><strong>{{group.name}} | {{group.terminal}}</strong></h3>
+    <div>
+      <div layout="row">
+        <div class="payment-item-cell" flex="25"><strong>ID Pago</strong></div>
+        <div class="payment-item-cell" flex><strong>Tienda</strong></div>
+        <div class="payment-item-cell" flex="20"><strong>Código de verificación</strong></div>
+        <div class="payment-item-cell" flex="15"><strong>Fecha</strong></div>
+        <div class="payment-item-cell" flex><strong>Pedido</strong></div>
+        <div class="payment-item-cell" flex><strong>Cantidad</strong></div>
+      </div>
+      <div layout="row" ng-repeat="payment in group.payments" class="payment-item">
+        <div class="payment-item-cell" flex="25">{{payment.id}}</div>
+        <div class="payment-item-cell" flex>{{payment.Store.WhsName}}</div>
+        <div class="payment-item-cell" flex="20">{{payment.verificationCode}}</div>
+        <div class="payment-item-cell" flex="15">{{payment.createdAt | date:'dd/MM/yyyy h:mm a'}}</div>
+        <div class="payment-item-cell" flex>#{{payment.Order.folio}}</div>
+        <div class="payment-item-cell" flex>{{payment.ammount | currency}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div layout="row" class="form-view-btns no-margin">
+    <button
+      ng-click="vm.print()"
+      flex="50"
+      class="form-view-btn form-view-btn-primary"
+    >
+      Imprimir reporte
+    </button>
+  </div>
+
 </section>

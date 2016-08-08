@@ -41,6 +41,7 @@ md-dialog .md-button.md-primary{
 }
 
 .no-border{border: 0!important;}
+.no-margin{margin: 0!important}
 .pull-left{text-align: left!important;}
 .absolute-link{
   position: absolute;
@@ -3350,7 +3351,32 @@ padding-left: 16px;
 }
 .order-view .records-view{margin-top: 35px;}
 
-
+/*---------------/
+  #CASH-REPORT
+/*--------------*/
+.cash-report-config{
+  border: 1px solid #000;
+  margin: 10px 0;
+  padding:20px;
+}
+.cash-report{
+  border: 1px solid #000;
+  padding:20px;
+  margin-bottom: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.cash-report h3{font-weight: 400;}
+.cash-report .payment-group{
+  padding: 5px 0;
+  font-size: 14px;
+}
+.cash-report .payment-item{margin: 6px 0;}
+.cash-report .payment-group + .payment-group{
+  border-top: 1px solid;
+}
+.cash-report .payment-item-cell{padding: 6px}
 
 /*--------------/
   #FOOTER
@@ -3441,5 +3467,6 @@ padding-left: 16px;
   .steps-bar,
   .checkout-view > .checkout-title,
   #records-view,
+  #profile-view,
   #footer .footer-menu{display: none;}
 }
