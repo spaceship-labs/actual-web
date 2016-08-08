@@ -50,7 +50,7 @@ function CheckoutPaymentmethodCtrl(
     multiplePayment: false,
     payments: [],
     paymentMethods: [],
-    math: window.Math
+    roundCurrency: roundCurrency
   });
 
   function init(){
@@ -242,7 +242,7 @@ function CheckoutPaymentmethodCtrl(
       var templateUrl = 'views/checkout/terminal-dialog.html';
       var controller  = DepositController;
       method.currency = method.currency || 'MXP';
-      method.ammount  = Math.ceil(ammount);
+      method.ammount  = vm.roundCurrency(ammount);
       var paymentOpts = angular.copy(method);
       if(method.msi || method.terminals){
         controller    = TerminalController;
@@ -329,6 +329,15 @@ function CheckoutPaymentmethodCtrl(
         console.log(err);
       });
     }
+  }
+
+  function roundCurrency(ammount){
+    var aux = Math.floor(ammount);
+    var cents = (ammount - aux);
+    if(cents > 0){
+      cents = Math.ceil(cents/0.5) * 0.5;
+    }
+    return aux + cents;
   }
 
   vm.init();

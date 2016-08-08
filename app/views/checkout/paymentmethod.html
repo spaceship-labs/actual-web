@@ -198,11 +198,11 @@
           <table>
             <tr>
               <td><strong>Subtotal ({{vm.quotation.totalProducts}}) productos):</strong></td>
-              <td><strong>{{ vm.math.ceil(vm.quotation.subtotal) | currency }}</strong></td>
+              <td><strong>{{ vm.roundCurrency(vm.quotation.subtotal) | currency }}</strong></td>
             </tr>
             <tr>
               <td><strong>Descuento:</strong></td>
-              <td><strong>-{{ vm.math.ceil(vm.quotation.discount) | currency }}</strong></td>
+              <td><strong>-{{ vm.roundCurrency(vm.quotation.discount) | currency }}</strong></td>
             </tr>
             <tr>
               <td>Costo de envío:</td>
@@ -215,18 +215,18 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h1 class="price-main"><strong>{{ vm.math.ceil(vm.quotation.total) | currency }}</strong></h1>
+              <h1 class="price-main"><strong>{{ vm.roundCurrency(vm.quotation.total) | currency }}</strong></h1>
             </div>
           </div>
           <hr>
           <table>
             <tr>
               <td><strong>Pagado:</strong></td>
-              <td><strong>{{ vm.math.ceil(vm.quotation.ammountPaid) | currency }}</strong></td>
+              <td><strong>{{ vm.roundCurrency(vm.quotation.ammountPaid) | currency }}</strong></td>
             </tr>
             <tr>
               <td><strong>Restante:</strong></td>
-              <td><strong>{{ vm.math.ceil(vm.quotation.total - vm.quotation.ammountPaid) | currency }}</strong></td>
+              <td><strong>{{ vm.roundCurrency(vm.quotation.total - vm.quotation.ammountPaid) | currency }}</strong></td>
             </tr>
           </table>
 

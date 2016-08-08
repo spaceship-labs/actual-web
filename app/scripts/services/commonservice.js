@@ -64,7 +64,8 @@
             type:'single-payment-terminal',
             //type:'credit-card',
             description:'VISA, MasterCard, American Express',
-            cards:['images/visa.png','images/mastercard.png','images/american.png'],
+            cardsImages:['images/visa.png','images/mastercard.png','images/american.png'],
+            cards:['Visa','MasterCard','American Express'],
             terminals:['Banamex','American Express'],
             currency: 'mxn',
             needsVerification: true
@@ -80,7 +81,9 @@
             name:'3 meses sin intereses',
             type:'3-msi',
             msi:3,
-            cards:['images/banamex.png','images/santander.png','images/banorte.png'],
+            cardsImages:['images/banamex.png','images/santander.png','images/banorte.png'],
+            cards: ["AMEX", "Banamex", "Santander", "Bancomer", "Banorte", "IXE", "SCOTIABANK", "INBURSA", "AFIRME", "BANBAJIO", "BANJERCITO", "BANCAMIFEL", "ITAUCARD", "PREMIUMCARD", "BANREGIO", "BANCOAHORRO", " FAMSA"],
+            moreCards: true,
             terminals:['Banorte','Santander','Bancomer','American Express'],
             currency: 'mxn',
             needsVerification: true
@@ -96,7 +99,9 @@
             name:'6 meses sin intereses',
             type:'6-msi',
             msi:6,
-            cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            cards:['AFIRME', 'AMEX', 'Banamex', 'BANBAJIO', 'BANCAMIFEL', 'BANCOAHORRO', 'Bancomer', 'BANJERCITO', 'Banorte', 'BANREGIO', 'FAMSA', 'INBURSA', 'ITAUCARD', 'IXE', 'PREMIUMCARD', 'Santander', 'SCOTIABANK'],
+            moreCards: true,
             terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
             currency: 'mxn',
             needsVerification: true
@@ -106,7 +111,9 @@
             name:'9 meses sin intereses',
             type:'9-msi',
             msi:9,
-            cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            cards:['AFIRME', 'AMEX', 'Banamex', 'BANBAJIO', 'BANCAMIFEL', 'BANCOAHORRO', 'Bancomer', 'BANJERCITO', 'Banorte', 'BANREGIO', 'FAMSA', 'INBURSA', 'ITAUCARD', 'IXE', 'PREMIUMCARD', 'Santander', 'SCOTIABANK'],
+            moreCards: true,
             terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
             currency: 'mxn',
             needsVerification: true
@@ -122,7 +129,9 @@
             name:'12 meses sin intereses',
             type:'12-msi',
             msi:12,
-            cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            cards:['AFIRME', 'AMEX', 'Banamex', 'BANBAJIO', 'BANCAMIFEL', 'BANCOAHORRO', 'Bancomer', 'BANJERCITO', 'Banorte', 'BANREGIO', 'FAMSA', 'INBURSA', 'ITAUCARD', 'IXE', 'PREMIUMCARD', 'Santander', 'SCOTIABANK'],
+            moreCards: true,
             terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
             currency: 'mxn',
             needsVerification: true
@@ -138,7 +147,8 @@
             name:'18 meses sin intereses',
             type:'18-msi',
             msi:18,
-            cards:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
+            cardsImages:['images/banamex.png','images/amexcard.png'],
+            cards: ['AMEX','Banamex'],
             terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
             currency: 'mxn',
             needsVerification: true

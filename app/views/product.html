@@ -52,6 +52,14 @@
         <div layout="row">
           <div class="product-view-gallery-wrap" flex="50">
 
+            <div
+              ng-if="vm.product.maxDiscount && vm.product.maxDiscount > 0"
+              class="product-view-gallery-discount"
+              layout="row"
+              layout-align="center center">
+              <strong>- {{vm.product.maxDiscount}}%</strong>
+            </div>
+
             <div class="product-view-gallery">
               <slick
                 id="slick-gallery"

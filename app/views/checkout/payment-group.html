@@ -5,7 +5,7 @@
       layout="row"
       layout-align="space-between center"
     >
-      <div ng-attr-flex="{{method.cards && '40' || '100' }}" >
+      <div ng-attr-flex="{{method.cardsImages && '40' || '100' }}" >
 
         <md-radio-button
           ng-click="vm.chooseMethod(method , paymentGroup.group)"
@@ -24,8 +24,16 @@
         <span ng-if="method.msi" class="method-text">Meses</span>
         <div ng-if="method.msi" class="hl-label"><strong>Sin intereses</strong></div>
       </div>
-      <div ng-if="method.cards" flex="60" class="bank-icons">
-        <img ng-repeat="card in method.cards"  ng-src="{{card}}" alt="">
+      <div ng-if="method.cardsImages" flex="60" class="bank-icons">
+        <img ng-repeat="card in method.cardsImages"  ng-src="{{card}}" alt="">
+        <span>
+          <img ng-if="method.moreCards" src="images/mas-bancos.png" alt="Más bancos">
+          <md-tooltip>
+            <ul>
+              <li ng-repeat="card in method.cards">{{card}}</li>
+            </ul>
+          </md-tooltip>
+        </span>
       </div>
     </li>
 
@@ -35,8 +43,9 @@
     <div class="discount-label"><strong>-25%</strong></div>
     <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
     -->
+    <p>{{paymentGroup.total}}</p>
     <h2 class="price-now" ng-class="{'price-hl' : $index == 0 }">
-      {{ vm.math.ceil(paymentGroup.total) | currency }}
+      {{ vm.roundCurrency(paymentGroup.total) | currency }}
       <!--{{vm.totalPrice | currency }}-->
     </h2>
   </div>
