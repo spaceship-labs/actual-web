@@ -583,6 +583,16 @@
       return api.$http.post(url);
     }
 
+    function roundIntegerCurrency(ammount){
+      var aux = Math.floor(ammount);
+      var cents = (ammount - aux);
+      if(cents > 0){
+        cents = Math.ceil(cents/0.5) * 0.5;
+        cents = (cents>=0.5) ? 1 : 0;
+      }
+      return aux + cents;
+    }
+
     var service = {
       combineDateTime: combineDateTime,
       getCountries: getCountries,
@@ -590,6 +600,7 @@
       getStatesSap: getStatesSap,
       getPaymentMethods: getPaymentMethods,
       getMonthDateRange: getMonthDateRange,
+      roundIntegerCurrency: roundIntegerCurrency,
       simulateOrders: simulateOrders,
       simulateLeads: simulateLeads,
       simulateClients: simulateClients,

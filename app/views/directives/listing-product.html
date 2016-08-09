@@ -5,13 +5,6 @@
   <div class="listing-product-gallery">
     <slick ng-if="areImagesLoaded" arrows="true" >
       <div ng-repeat="image in images track by $index">
-        <!--<img
-          ng-src="{{image.url}}"
-          alt=""
-          ez-plus
-          ezp-model="{thumb:image.url, small:image.url, large:image.url}"
-          ezp-options="ezOptions"
-          >-->
         <img
           ng-src="{{image.url}}"
           alt=""
@@ -23,8 +16,9 @@
     <div class="listing-product-info-main">
       <p><strong>{{product.Name}}</strong></p>
       <p class="price">
-        <span class="price-before">{{product.priceBefore | currency}}</span> |
-        <strong class="price-now">{{product.Price | currency}}</strong>
+        <span class="price-before">{{product.priceBefore | currency:'$':0}}</span>
+        <span ng-if="product.priceBefore">|</span>
+        <strong class="price-now">{{product.Price | currency:'$':0}}</strong>
       </p>
     </div>
     <!--

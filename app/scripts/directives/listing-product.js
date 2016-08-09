@@ -7,7 +7,7 @@
  * # listingProduct
  */
 angular.module('dashexampleApp')
-  .directive('listingProduct',['$timeout','api' ,function ($timeout, api) {
+  .directive('listingProduct',['$timeout','api', 'commonService' ,function ($timeout, api, commonService) {
     return {
       scope:{
         product:'='
@@ -47,6 +47,11 @@ angular.module('dashexampleApp')
         scope.init = function(){
           scope.setUpImages();
         };
+
+        scope.roundCurrency = function(ammount){
+          ammount = commonService.roundIntegerCurrency(ammount);
+          return ammount;
+        }
 
         scope.ezOptions = {
           constrainType: "height",
