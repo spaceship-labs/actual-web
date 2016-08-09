@@ -96,7 +96,6 @@
           product.maxDiscount = 0;
           product.pricebefore = product.Price;
         }
-        product.mainPromo = getMainPromo(product);
         return product;
       }
 

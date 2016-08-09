@@ -79,7 +79,8 @@ angular
         controller: 'AddquotationCtrl',
         controllerAs: 'vm',
         resolve: {
-          isMiActual: function($rootScope){
+          isMiActual: function($rootScope, authService){
+            authService.dennyAccessBroker();
             $rootScope.isMiActual = true;
             return true;
           }

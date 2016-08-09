@@ -5,7 +5,7 @@
     .module('dashexampleApp')
     .factory('commonService', commonService);
 
-  function commonService($q, $timeout, $filter, $mdDialog){
+  function commonService($q, $timeout, $filter, $mdDialog, api){
     var paymentGroups = [
       {
         group:1,
@@ -578,10 +578,16 @@
       return date.toDate();
     }
 
+    function getStatesSap(){
+      var url = '/common/states';
+      return api.$http.post(url);
+    }
+
     var service = {
       combineDateTime: combineDateTime,
       getCountries: getCountries,
       getStates: getStates,
+      getStatesSap: getStatesSap,
       getPaymentMethods: getPaymentMethods,
       getMonthDateRange: getMonthDateRange,
       simulateOrders: simulateOrders,

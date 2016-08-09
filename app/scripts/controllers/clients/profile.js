@@ -24,7 +24,8 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
       {label:'Sra.', value: 'Sra'},
       {label: 'Srita.', value: 'Srita'}
     ],
-    states: commonService.getStates(),
+    states: [],
+    //states: commonService.getStates(),
     countries: commonService.getCountries(),
     columnsLeads: [
       {key: 'folio', label:'Folio'},
@@ -58,8 +59,8 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     formatContacts: formatContacts,
     init: init,
     onPikadaySelect: onPikadaySelect,
-    personalDataToDelivery: personalDataToDelivery,
     updatePersonalData: updatePersonalData,
+    updateFiscalInfo: updateFiscalInfo,
     apiResourceLeads: quotationService.getByClient,
     apiResourceOrders: orderService.getList,
   });
@@ -76,7 +77,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
       vm.filtersQuotations = {Client: vm.client.id};
       vm.filtersOrders = {Client: vm.client.id};
       vm.client.Contacts = vm.formatContacts(vm.client);
-
+      console.log(vm.client);
       /*
       $timeout(function(){
         vm.filter
@@ -86,6 +87,13 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
       if($location.search().activeTab && $location.search().activeTab < 4){
         vm.activeTab = $location.search().activeTab;
       }
+
+      commonService.getStatesSap().then(function(res){
+        console.log(res);
+        vm.states = res.data;
+      }).catch(function(err){
+        console.log(err);
+      })
 
     });
   }
@@ -119,7 +127,26 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
       console.log(res);
       vm.isLoading = false;
       dialogService.showDialog('Datos personales actualizados');
+    }).catch(function(err){
+      console.log(err);
+      dialogService.showDialog('Hubo un error, revisa los campos');
     });
+  }
+
+  function updateFiscalInfo(){
+    var params = vm.client.FiscalInfo[0] || {};
+    vm.isLoading =  true;
+    clientService.updateFiscalInfo(vm.client.FiscalInfo[0].id, vm.client.CardCode,params)
+      .then(function(res){
+        console.log(res);
+        vm.isLoading = false;
+        dialogService.showDialog('Datos de facturación actualizados');
+      })
+      .catch(function(err){
+        console.log(err);
+        vm.isLoading = false;
+        dialogService.showDialog('Hubo un error, revisa los campos');
+      })
   }
 
   function createQuotation(){
@@ -132,29 +159,8 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     quotationService.newQuotation(params, goToSearch);
   }
 
-  function personalDataToDelivery(){
-    vm.client.deliveryLastName = vm.client.lastName + ' ' + vm.client.secondLastName;
-    vm.relationFields = [
-      {deliveryField:'deliveryName', personalField: 'firstName'},
-      {deliveryField: 'deliveryDialCode', personalField: 'dialCode'},
-      {deliveryField: 'deliveryPhone', personalField: 'phone'},
-      {deliveryField: 'deliveryEmail', personalField: 'E_Mail'},
-      {deliveryField: 'deliveryMobileDialCode', personalField: 'mobileDialCode'},
-      {deliveryField: 'deliveryMobilePhone', personalField: 'mobilePhone'},
-      {deliveryField: 'deliveryExternalNumber', personalField: 'externalNumber'},
-      {deliveryField: 'deliveryInternalNumber', personalField: 'internalNumber'},
-      {deliveryField: 'deliveryNeighborhood', personalField: 'neighborhood'},
-      {deliveryField: 'deliveryMunicipality', personalField: 'municipality'},
-      {deliveryField: 'deliveryCity', personalField: 'city'},
-      {deliveryField: 'deliveryEntity', personalField: 'entity'},
-      {deliveryField: 'deliveryZipCode', personalField: 'zipCode'},
-      {deliveryField: 'deliveryStreet', personalField: 'street'},
-      {deliveryField: 'deliveryStreet2', personalField: 'street2'},
-      {deliveryField: 'deliveryReferences', personalField: 'references'},
-    ];
-    vm.relationFields.forEach(function(relation){
-      vm.client[relation.deliveryField] = angular.copy(vm.client[relation.personalField]);
-    });
+  function formatFiscalInfo(client){
+    var fiscalInfo = [];
   }
 
   function formatContacts(client){

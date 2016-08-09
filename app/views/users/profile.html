@@ -203,18 +203,20 @@
       <div layout="row">
         <div class="payment-item-cell" flex="25"><strong>ID Pago</strong></div>
         <div class="payment-item-cell" flex><strong>Tienda</strong></div>
-        <div class="payment-item-cell" flex="20"><strong>Código de verificación</strong></div>
+        <div class="payment-item-cell" flex><strong>Verificación</strong></div>
         <div class="payment-item-cell" flex="15"><strong>Fecha</strong></div>
         <div class="payment-item-cell" flex><strong>Pedido</strong></div>
         <div class="payment-item-cell" flex><strong>Cantidad</strong></div>
+        <div class="payment-item-cell" flex><strong>Moneda</strong></div>
       </div>
       <div layout="row" ng-repeat="payment in group.payments" class="payment-item">
         <div class="payment-item-cell" flex="25">{{payment.id}}</div>
         <div class="payment-item-cell" flex>{{payment.Store.WhsName}}</div>
-        <div class="payment-item-cell" flex="20">{{payment.verificationCode}}</div>
+        <div class="payment-item-cell" flex>{{payment.verificationCode}}</div>
         <div class="payment-item-cell" flex="15">{{payment.createdAt | date:'dd/MM/yyyy h:mm a'}}</div>
         <div class="payment-item-cell" flex>#{{payment.Order.folio}}</div>
         <div class="payment-item-cell" flex>{{payment.ammount | currency}}</div>
+        <div class="payment-item-cell to-upper" flex>{{payment.currency}}</div>
       </div>
     </div>
   </div>

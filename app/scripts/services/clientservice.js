@@ -13,7 +13,8 @@
         getById: getById,
         getClients: getClients,
         getContacts: getContacts,
-        update: update
+        update: update,
+        updateFiscalInfo: updateFiscalInfo
       };
 
       return service;
@@ -42,6 +43,11 @@
       function getContacts(clientSlpCode){
         var url = '/client/'+clientSlpCode+'/contacts';
         return api.$http.post(url);
+      }
+
+      function updateFiscalInfo(id,cardCode,params){
+        var url = '/client/update/fiscalinfo/' + id + '/' + cardCode;
+        return api.$http.post(url, params);
       }
 
     }

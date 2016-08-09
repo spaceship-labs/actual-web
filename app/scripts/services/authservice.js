@@ -44,9 +44,17 @@
 
       function dennyAccessBroker(){
         var _user = localStorageService.get('user');
-        if(_user.userType == 'broker'){
+        if( isBroker(_user) ){
           $location.path('/');
         }
+      }
+
+      function isBroker(user){
+        var role = user.role[0] || [];
+        if(role.name == 'broker' || user.userType == 'broker'){
+          return true;
+        }
+        return false;
       }
 
     }

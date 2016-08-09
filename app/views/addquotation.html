@@ -34,7 +34,8 @@
               md-min-length="0"
               placeholder="Buscar cliente">
             <md-item-template>
-              <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.CardName}} | {{item.CardCode}}</span>
+              <span md-highlight-text="vm.searchText" md-highlight-flags="^i">
+                {{item.CardName}} | {{item.CardCode}}</span>
             </md-item-template>
             <md-not-found>
               No se encontro "{{vm.searchText}}".

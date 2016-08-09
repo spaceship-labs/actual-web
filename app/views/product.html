@@ -60,6 +60,13 @@
               <strong>- {{vm.product.maxDiscount}}%</strong>
             </div>
 
+            <div
+              ng-if="vm.product.mainPromo && vm.product.mainPromo.hasLM"
+              class="slow-movement-sticker"
+            >
+              <img src="images/boton-lm.png" alt="">
+            </div>
+
             <div class="product-view-gallery">
               <slick
                 id="slick-gallery"
@@ -372,7 +379,7 @@
                   </tr>
 
                 </table>
-                <p>*Descuento aplicado con promoción: {{vm.mainPromo.name}}</p>
+                <p>*Descuento aplicado con promoción: {{vm.mainPromo.publicName}}</p>
               </div>
             </div>
 
