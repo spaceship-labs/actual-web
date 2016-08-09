@@ -164,8 +164,11 @@
                 if(column.yesNo){
                   data = data ? 'Si' : 'No';
                 }
+                if(!data){
+                  data = data ? data : 'No asignado';
+                }
                 if(column.defaultValue){
-                  data = data ? data : column.defaultValue
+                  data = data ? data : column.defaultValue;
                 }
                 if(column.date){
                   data = $filter('date')(data, 'dd/MM/yyyy');

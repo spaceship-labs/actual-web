@@ -20,8 +20,8 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
   vm.columnsClients = [
     {key:'CardCode', label:'CardCode'},
     {key:'CardName', label:'Cliente'},
-    //{key:'rfc', label:'RFC'},
     {key:'E_Mail', label:'Email'},
+    {key:'LicTradNum', label:'RFC'},
     {key:'Phone1', label:'Télefono'},
     {key:'ewallet', label:'Saldo Monedero', currency: true},
     //{key:'alta', label:'Alta'},

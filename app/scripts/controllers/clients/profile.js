@@ -29,9 +29,11 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     countries: commonService.getCountries(),
     columnsLeads: [
       {key: 'folio', label:'Folio'},
-      {key:'Client.firstName', label:'Cliente'},
-      {key:'Client.CardName', label:'Cliente (Nombre SAP)'},
+      {key:'Client.CardName', label:'Cliente'},
+      {key:'Client.E_Mail', label:'Email'},
+      {key:'createdAt', label:'Cotización'},
       {key:'total', label: 'Total', currency:true},
+      {key:'ammountPaid', label: 'Cobrado', currency:true},
       {
         key:'Acciones',
         label:'Acciones',
@@ -46,6 +48,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
       {key:'Client.CardName', label:'Cliente'},
       {key:'total', label: 'Total', currency:true},
       {key:'discount', label:'Descuento', currency:true},
+      {key:'ammountPaid', label:'Cobrado', currency:true},
       {
         key:'Acciones',
         label:'Acciones',
