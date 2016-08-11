@@ -15,6 +15,7 @@ function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService
   vm.queryClients = queryClients;
   vm.selectedItemChange = selectedItemChange;
   vm.createQuotation = createQuotation;
+  vm.isLoading = false;
 
   function queryClients(term){
     if(term !== '' && term){
@@ -42,6 +43,7 @@ function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService
       User: $rootScope.user.id
     };
     var goToSearch = true;
+    vm.isLoading = true;
     quotationService.newQuotation(params, goToSearch);
   }
 }

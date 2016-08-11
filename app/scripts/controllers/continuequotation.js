@@ -37,6 +37,7 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
 
   function selectedItemChange(item){
     if(item && item.id){
+      vm.isLoading = true;
       if($rootScope.activeQuotation){
 
         if($rootScope.activeQuotation.Client === item.id){

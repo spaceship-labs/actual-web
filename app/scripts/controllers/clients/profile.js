@@ -164,6 +164,13 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
 
   function formatFiscalInfo(client){
     var fiscalInfo = [];
+    if(client.fiscalInfo){
+      fiscalInfo = client.fiscalInfo.map(function(info){
+        info.email = info.email || angular.copy(client.E_Mail);
+        return info;
+      });
+    }
+    return fiscalInfo;
   }
 
   function formatContacts(client){
@@ -172,6 +179,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
       contacts = client.Contacts.map(function(contact){
         contact.firstName = angular.copy(contact.name);
         contact.deliveryStreet = angular.copy(contact.address);
+        contact.email = angular.copy(client.E_Mail);
         return contact;
       });
     }

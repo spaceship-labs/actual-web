@@ -32,7 +32,14 @@ angular
     'ui.utils.masks'
   ])
 
-  .config(function ($routeProvider, $httpProvider, $locationProvider, $mdThemingProvider, localStorageServiceProvider) {
+  .config(function (
+    $routeProvider,
+    $httpProvider,
+    $locationProvider,
+    $mdThemingProvider,
+    localStorageServiceProvider
+  ) {
+
 
     $mdThemingProvider.theme('default')
       .accentPalette('red', {

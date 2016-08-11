@@ -26,6 +26,7 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
     //vm.isLoading = false;
     vm.isLoading = true;
     vm.isLoadingRecords = true;
+    vm.placeholderDate = moment( new Date() ).add('days',5).toDate();
 
     orderService.getById($routeParams.id).then(function(res){
       vm.order = res.data;

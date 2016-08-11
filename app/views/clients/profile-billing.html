@@ -1,4 +1,11 @@
-<section action="#" class="form-section-content">
+<form ng-submit="vm.updateFiscalInfo(fiscalForm)" class="form-section-content">
+
+  <div flex="20" class="input-element">
+    <label><strong>RFC (Principal) <span class="hl-label">*</span></strong></label>
+    <div class="input-element-inner">
+      <input type="text" ng-model="vm.client.LicTradNum">
+    </div>
+  </div>
 
   <div class="fiscal-address-item" ng-repeat="fiscalInfo in vm.client.FiscalInfo">
 
@@ -45,37 +52,37 @@
     <div layout="row">
 
       <div flex="20" class="input-element">
-        <label><strong>Calle <span class="hl-label">*</span></strong></label>
+        <label><strong>Calle</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.Street" required>
+          <input type="text" ng-model="fiscalInfo.Street">
         </div>
       </div>
 
       <div flex="10" class="input-element">
-        <label><strong>No. exterior <span class="hl-label">*</span></strong></label>
+        <label><strong>No. exterior</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.U_NumExt" required>
+          <input type="text" ng-model="fiscalInfo.U_NumExt">
         </div>
       </div>
 
       <div flex="10" class="input-element">
-        <label><strong>No. interior <span class="hl-label">*</span></strong></label>
+        <label><strong>No. interior</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.U_NumInt" required>
+          <input type="text" ng-model="fiscalInfo.U_NumInt">
         </div>
       </div>
 
       <div flex="25" class="input-element">
-        <label><strong>Colonia <span class="hl-label">*</span></strong></label>
+        <label><strong>Colonia</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.Block" required>
+          <input type="text" ng-model="fiscalInfo.Block">
         </div>
       </div>
 
       <div flex="20" class="input-element">
-        <label><strong>Municipio <span class="hl-label">*</span></strong></label>
+        <label><strong>Municipio</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.municipality" required>
+          <input type="text" ng-model="fiscalInfo.municipality">
         </div>
       </div>
 
@@ -84,9 +91,9 @@
     <div layout="row">
 
       <div flex="20" class="input-element">
-        <label><strong>Ciudad <span class="hl-label">*</span></strong></label>
+        <label><strong>Ciudad</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.City" required>
+          <input type="text" ng-model="fiscalInfo.City">
         </div>
       </div>
 
@@ -101,9 +108,9 @@
       </div>
 
       <div flex="15" class="input-element">
-        <label><strong>Código postal <span class="hl-label">*</span></strong></label>
+        <label><strong>Código postal</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.ZipCode" required>
+          <input type="text" ng-model="fiscalInfo.ZipCode">
         </div>
       </div>
 
@@ -112,7 +119,13 @@
   </div>
 
   <div layout="row" class="form-view-btns" layout-align="center center">
-    <a ng-click="vm.updateFiscalInfo()" href="" flex="70" class="form-view-btn form-view-btn-primary">Guardar información</a>
+    <a
+      ng-click="vm.updateFiscalInfo(fiscalForm)"
+      href=""
+      flex="70"
+      class="form-view-btn form-view-btn-primary">
+      Guardar información
+    </a>
   </div>
 
-</section>
+</form>

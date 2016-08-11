@@ -30,8 +30,8 @@
           </strong>
         </h1>
         <div flex="30" class="order-title-extra">
-          <span class="order-date">{{vm.order.createdAt | date}}</span>
-          <a href="#" ng-click="vm.print()" class="action-btn action-btn-save">
+          <span class="order-date">{{vm.order.createdAt | date:'d/MMM/yyyy'}}</span>
+          <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
             <strong>IMPRIMIR RECIBO</strong>
           </a>
         </div>
@@ -39,7 +39,7 @@
     <div class="order-text-block">
       <h3><strong>¡GRACIAS POR SU COMPRA!</strong></h3>
       <p>Estimado <strong>{{vm.order.Address.name}}</strong></p>
-      <p>Su compra ha sido procesada, en breve estaras recibiendo tu confirmación al correo electrónico registrado: <strong>{{vm.order.Address.E_Mail || vm.order.Client.E_Mail}}</strong></p>
+      <p>Su compra ha sido procesada y en breve estará recibiendo su confirmación al correo electrónico <strong>{{vm.order.Address.E_Mail || vm.order.Client.E_Mail}}</strong></p>
     </div>
 
     <!--ORDER ITEMS-->
@@ -64,10 +64,17 @@
               <div flex class="order-item-features">
                 <ul>
                   <li><strong>Código: </strong> {{detail.Product.ItemCode}}</li>
-                  <li ng-repeat="filter in detail.Product.Filters">
+                  <li
+                    ng-repeat="filter in detail.Product.Filters"
+                    ng-if="
+                      filter.Handle == 'codigo' ||
+                      filter.Handle == 'color' ||
+                      filter.Handle == 'material' ||
+                      filter.Handle == 'garantia'
+                    "
+                  >
                     <strong>{{filter.Name}}: </strong>
                     <span ng-repeat="value in filter.Values track by $index">
-                      <span ng-if="value.Handle == 'color-paleta'">Color</span>
                       <span ng-if="value.Handle != 'color-paleta'">{{value.Name}}</span>
                       <span ng-if="$index < (filter.Values.length-1)">,</span>
                     </span>
@@ -76,8 +83,10 @@
               </div>
             </div>
             <div flex="20" class="order-item-data"><span>{{detail.quantity}}</span></div>
-            <div flex="20" class="order-item-data"><span>12/26/2016</span></div>
-            <div flex="20" class="order-item-data"><span>{{detail.total | currency}}</span></div>
+            <div flex="20" class="order-item-data"><span>{{vm.placeholderDate | date:'d/MMM/yyyy'}}</span></div>
+            <div flex="20" class="order-item-data">
+              <span>{{detail.total | currency}} MXN</span>
+            </div>
           </div>
         </div>
 
@@ -91,11 +100,12 @@
       <h3><strong><i class="icon-metodo-pago"></i> PAGOS</strong></h3>
       <div class="order-block-inner">
         <div class="order-table-header" layout="row" layout-align="space-between start">
-          <div flex="20" class="pull-left"><strong>FORMA DE PAGO</strong></div>
-          <div flex="20"><strong>FECHA</strong></div>
-          <div flex="20"><strong>FOLIO</strong></div>
-          <div flex="20"><strong>TIPO DE PAGO</strong></div>
-          <div flex="20"><strong>MONTO COBRADO</strong></div>
+          <div flex class="pull-left"><strong>FORMA DE PAGO</strong></div>
+          <div flex><strong>FECHA</strong></div>
+          <div flex><strong>FOLIO</strong></div>
+          <div flex><strong>TIPO DE PAGO</strong></div>
+          <div flex><strong>TERMINAL</strong></div>
+          <div flex><strong>MONTO COBRADO</strong></div>
         </div>
 
         <div
@@ -104,25 +114,29 @@
           layout-align="space-between center"
           ng-repeat="payment in vm.order.Payments"
         >
-          <div ng-if="payment.type == 'cash'" flex="20" class="order-payment-item-data">
+          <div ng-if="payment.type == 'cash'" flex class="order-payment-item-data">
             <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (MXN)</strong>
           </div>
-          <div ng-if="payment.type == 'cash-usd'" flex="20" class="order-payment-item-data">
+          <div ng-if="payment.type == 'cash-usd'" flex class="order-payment-item-data">
             <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (USD)</strong>
+            <p class="small-note">Tipo de cambio: {{payment.exchangeRate | currency}} MXN</p>
           </div>
-          <div ng-if="payment.type != 'cash' && payment.type != 'cash-usd'" flex="20" class="order-payment-item-data">
+          <div ng-if="payment.type != 'cash' && payment.type != 'cash-usd'" flex class="order-payment-item-data">
             <span><i class="icon-terminal"></i></span> <strong>Pago con terminal</strong>
           </div>
-          <div flex="20" class="order-payment-item-data">
-            <span>{{payment.createdAt | date}}</span>
+          <div flex class="order-payment-item-data">
+            <span>{{payment.createdAt | date:'d/MMM/yyyy'}}</span>
           </div>
-          <div flex="20" class="order-payment-item-data">
-            <span>#{{payment.id}}</span>
+          <div flex class="order-payment-item-data">
+            <span>#{{ payment.id | limitTo: 14 }}{{payment.id.length > 14 ? '...' : ''}}</span>
           </div>
-          <div flex="20" class="order-payment-item-data">
+          <div flex class="order-payment-item-data">
             <span>{{vm.getPaymentType(payment)}}</span>
           </div>
-          <div flex="20" class="order-payment-item-data">
+          <div flex class="order-payment-item-data">
+            <span>{{payment.terminal}}</span>
+          </div>
+          <div flex class="order-payment-item-data">
             <span ng-if="payment.type !='cash-usd'">{{payment.ammount | currency}} MXN</span>
             <span ng-if="payment.type =='cash-usd'">{{payment.ammount | currency}} USD.</span>
           </div>
@@ -180,8 +194,12 @@
         <p><strong>CELULAR:</strong> {{vm.order.Address.mobile}}</p>
         <p><strong>EMAIL:</strong> {{vm.order.Address.email}}</p>
         <br>
-        <p>Solo tienes que esperar a que llegue el producto.</p>
-        <p>Cuando este en camino te enviaremos un e-mail para que puedas hacer el seguimiento.</p>
+        <p>El personal de entrega le estará contactando vía telefónica en varias ocasiones:</p>
+        <ul>
+          <li><strong>Coordinación de la fecha de entrega:</strong> En los siguientes 24 horas hábiles después de la compra.</li>
+          <li><strong>Coordinación de la hora de entrega:</strong>  Mínimo 24 horas antes de la entrega.</li>
+          <li><strong>Aviso de la llegada de la unidad de entrega</strong>  1 hora antes de la entrega</li>
+        </ul>
       </div>
     </div>
     <!--END ENVIO-->
@@ -193,11 +211,12 @@
         <div flex="40">
           <p><strong>{{vm.order.User.firstName + ' ' + vm.order.User.lastName}}</strong></p>
           <p>{{vm.order.User.email}}</p>
-          <p>{{vm.order.User.phone}}</p>
-          <p><strong>Tienda:</strong> {{vm.order.Store.WhsName}}</p>
+          <p><strong>Télefono: </strong>{{vm.order.User.dialCode + ' ' + vm.order.User.phone }}</p>
+          <p><strong>Celular: </strong>{{vm.order.User.mobileDialCode + ' ' + vm.order.User.mobilePhone }}</p>
+          <p><strong>{{vm.order.Store.WhsName}}</strong></p>
         </div>
         <div flex="20">
-          <a href="#"  ng-click="vm.print()" class="action-btn action-btn-save">
+          <a href="#"  ng-click="vm.print()" class="action-btn action-btn-save print-btn">
             <strong>IMPRIMIR RECIBO</strong>
           </a>
         </div>

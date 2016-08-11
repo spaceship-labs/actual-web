@@ -62,6 +62,7 @@ function CheckoutPaymentmethodCtrl(
         $location.path('/checkout/order/' + vm.quotation.Order);
       }
 
+      //vm.quotation.Client.ewallet = 600;
       vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
       vm.getPaymentMethods(vm.quotation.id).then(function(methods){
         vm.paymentMethods = methods;
@@ -108,12 +109,10 @@ function CheckoutPaymentmethodCtrl(
         return $q.all(totalsPromises)
       })
       .then(function(responsePromises){
-        console.log(exchangeRate);
         var totalsByGroup = responsePromises || [];
         totalsByGroup = totalsByGroup.map(function(tbg){
           return tbg.data || {};
         });
-        console.log(totalsByGroup);
         methodsGroups = methodsGroups.map(function(mG, index){
           mG.total = totalsByGroup[index].total || 0;
           mG.subtotal = totalsByGroup[index].subtotal || 0;
@@ -128,6 +127,11 @@ function CheckoutPaymentmethodCtrl(
             if(m.type === 'cash-usd'){
               var exrStr = $filter('currency')(exchangeRate);
               m.description = 'Tipo de cambio '+exrStr+' MXN';
+            }
+            else if(m.type === 'monedero'){
+              var balance = vm.quotation.Client.ewallet || 0;
+              var balanceStr = $filter('currency')(balance);
+              m.description = 'Saldo disponible: ' + balanceStr +' MXN';
             }
             return m;
           });
@@ -186,7 +190,18 @@ function CheckoutPaymentmethodCtrl(
   function chooseMethod(method, group){
     vm.setMethod(method, group);
     var remaining = vm.quotation.total - vm.quotation.ammountPaid;
-    vm.applyTransaction(null, vm.activeMethod, remaining);
+    if(method.type === 'monedero'){
+      var balance = vm.quotation.Client.ewallet || 0;
+      vm.activeMethod.maxAmmount = balance;
+      if(balance <= remaining){
+        remaining = balance;
+      }
+    }
+    if(vm.activeMethod.maxAmmount <= 0){
+      dialogService.showDialog('Fondos insuficientes');
+      return false;
+    }
+    return vm.applyTransaction(null, vm.activeMethod, remaining);
   }
 
   function clearActiveMethod(){
@@ -207,8 +222,10 @@ function CheckoutPaymentmethodCtrl(
   }
 
   function addPayment(payment){
-    if( (payment.ammount > 0 && vm.quotation.ammountPaid < vm.quotation.total)
-        || payment.ammount < 0 ){
+    if(
+        (payment.ammount > 0 && vm.quotation.ammountPaid < vm.quotation.total)
+        || payment.ammount < 0
+      ){
       vm.isLoadingPayments = true;
       quotationService.addPayment(vm.quotation.id, payment)
         .then(function(res){
@@ -229,7 +246,7 @@ function CheckoutPaymentmethodCtrl(
         .catch(function(err){
           console.log(err);
           vm.isLoadingPayments = false;
-          dialogService.showDialog(err.data.message);
+          dialogService.showDialog(err.data);
         });
     }else{
       dialogService.showDialog('Cantidad total pagada');
@@ -273,8 +290,22 @@ function CheckoutPaymentmethodCtrl(
 
 
   function DepositController($scope, $mdDialog, formatService, payment) {
-    $scope.payment = payment;
-    $scope.needsVerification = payment.needsVerification;
+
+    $scope.init = function(){
+      $scope.payment = payment;
+      $scope.needsVerification = payment.needsVerification;
+      $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
+
+      if($scope.payment.currency === 'usd'){
+        $scope.payment.ammount = $scope.payment.ammount / $scope.payment.exchangeRate;
+        $scope.payment.ammountMXN = $scope.getAmmountMXN($scope.payment.ammount);
+        console.log($scope.payment.ammount);
+      }
+    };
+
+    $scope.getAmmountMXN = function(ammount){
+      return ammount * $scope.payment.exchangeRate;
+    }
 
     $scope.hide = function() {
       $mdDialog.hide();
@@ -283,13 +314,20 @@ function CheckoutPaymentmethodCtrl(
       $mdDialog.cancel();
     };
     $scope.save = function() {
-      $mdDialog.hide($scope.payment);
+      if($scope.ammount > $scope.maxAmmount){
+        dialogService.showDialog('No hay fondos suficientes');
+      }else{
+        $mdDialog.hide($scope.payment);
+      }
     };
+
+    $scope.init();
   }
 
   function TerminalController($scope, $mdDialog, formatService, payment) {
     $scope.payment = payment;
     $scope.needsVerification = payment.needsVerification;
+    $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
 
     $scope.numToLetters = function(num){
       return formatService.numberToLetters(num);

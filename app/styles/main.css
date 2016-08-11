@@ -108,6 +108,7 @@ md-dialog .md-button.md-primary{
 
 .absolute-menus{position: relative;}
 .hl-text{color: #E2023F;}
+.hl-text-v2{color: #33BA2C}
 
 .block-title{
   text-align: center;
@@ -3348,6 +3349,12 @@ padding-left: 16px;
   color: #6B6B6B;
 }
 
+.order-view .order-payment-item-data .small-note{
+  font-size: 12px;
+  font-style: italic;
+  margin: 4px 0;
+}
+
 .order-view .order-payment-item-data:first-child{
   text-align: left;
   color: #000;
@@ -3388,6 +3395,16 @@ padding-left: 16px;
   margin: 4px 0;
   font-size: 13px;
 }
+.order-view .order-block-info ul{
+  padding-left: 20px;
+  font-size: 13px;
+  margin: 0;
+  color: #6B6B6B;
+}
+.order-view .order-block-info ul strong{
+  color: #6B6B6B;
+}
+
 .order-view .order-block-info strong{
   color: #000;
 }
@@ -3419,6 +3436,14 @@ padding-left: 16px;
   border-top: 1px solid;
 }
 .cash-report .payment-item-cell{padding: 6px}
+
+/*---------------/
+  #FISCAL ADDRESS INFO
+/*--------------*/
+.fiscal-address-item{
+  border: 1px solid #000;
+  padding: 20px;
+}
 
 /*--------------/
   #FOOTER
@@ -3510,5 +3535,6 @@ padding-left: 16px;
   .checkout-view > .checkout-title,
   #records-view,
   #profile-view,
-  #footer .footer-menu{display: none;}
+  .print-btn,
+  #footer{display: none;}
 }

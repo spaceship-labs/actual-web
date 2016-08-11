@@ -27,7 +27,7 @@
   </div>
 
   <div class="checkout-view-inner">
-    <h3><strong>1. Elige tu plan de pago</strong> Los planes de meses sin intereses y pagos fijos solo aplican a tarjetas de crédito.</h3>
+    <h3><strong>1. Elige tu plan de pago</strong> Se pueden aplicar múltiples pagos, pero solo del mismo grupo de pago.</h3>
 
     <!--
     <div class="payment-methods-tabs" layout="row">
@@ -226,7 +226,17 @@
             </tr>
             <tr>
               <td><strong>Restante:</strong></td>
-              <td><strong>{{ vm.roundCurrency(vm.quotation.total - vm.quotation.ammountPaid) | currency }}</strong></td>
+              <td>
+                <strong
+                  ng-class="
+                    {
+                      'hl-text' : (vm.quotation.total - vm.quotation.ammountPaid) > 0,
+                      'hl-text-v2' : (vm.quotation.total - vm.quotation.ammountPaid) <= 0
+                    }
+                  ">
+                  {{ vm.roundCurrency(vm.quotation.total - vm.quotation.ammountPaid) | currency }}
+                </strong>
+              </td>
             </tr>
           </table>
 
@@ -245,7 +255,9 @@
             ng-disabled="(vm.quotation.ammountPaid < vm.quotation.total)"
             ng-class="{'cart-view-btn-disabled' : (vm.quotation.ammountPaid < vm.quotation.total) }">
 
-          <p class="cart-summary-note">*Precios en Pesos Mexicanos con impuestos incluidos.</p>
+          <p class="cart-summary-note">*Se necesita saldar el monto total para poder procesar la venta</p>
+
+          <p class="cart-summary-note">*Hacer click para generar el folio de la venta.</p>
 
         </div>
 

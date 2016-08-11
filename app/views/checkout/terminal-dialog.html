@@ -28,20 +28,28 @@
     <div class="dialog-block" >
       <p><strong>Cantidad:</strong> <small>Se muestra el saldo total pendiente por cobrar. Puedes cobrar cualquier monto menor, pero después debes aplicar otro cobro para saldar esta venta.</small></p>
       <div class="ammount-input" layout="row" layout-align="start center">
-        <!--<div class="price-sign">
-          <p><strong>$</strong></p>
-        </div>-->
         <div class="input-element" flex="60">
           <div class="input-element-inner">
-            <!--<input type="number" ng-model="payment.ammount" required>-->
-            <input type="text" ng-model="payment.ammount" ui-money-mask>
+            <input
+              ng-if="maxAmmount && maxAmmount >=0"
+              type="text"
+              max="{{maxAmmount}}"
+              ng-model="payment.ammount"
+              ui-money-mask>
+            <input
+              ng-if="!maxAmmount"
+              type="text"
+              ng-model="payment.ammount"
+              ui-money-mask>
+
           </div>
         </div>
         <div class="currency-label">
           <span ng-if="payment.currency != 'usd'">MXN</span>
-          <span ng-if="payment.currency == 'usd'">USD</span>
+          <span ng-if="payment.currency == 'usd'">USD ({{ getAmmountMXN(payment.ammount) | currency}} MXN)</span>
         </div>
       </div>
+      <p ng-if="payment.currency == 'usd'"><small>Tipo de cambio: {{payment.exchangeRate | currency}} MXN</small></p>
       <!--
         <h3><strong>{{payment.ammount | currency}} MXN</strong> ({{numToLetters(payment.ammount)}} M.N)</h3>
       -->

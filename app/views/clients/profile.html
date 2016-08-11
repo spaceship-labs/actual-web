@@ -3,9 +3,12 @@
 </div>
 
 <section ng-if="!vm.isLoading" class="form-view container container-xlg">
-  <h1><i class="icon-login"></i> <strong>PERFIL DEL CLIENTE</strong></h1>
 
-  <div layout="row" layout-align="end start" class="action-links">
+  <div layout="row" layout-align="space-between center" class="action-links">
+    <h1 flex>
+      <i class="icon-login"></i> <strong>PERFIL DEL CLIENTE</strong>
+      | <span>{{vm.client.CardCode}}</span>
+    </h1>
     <div flex="30">
       <h4>
         <a href="#" ng-click="vm.createQuotation()">
