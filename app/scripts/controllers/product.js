@@ -188,8 +188,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     });
   }
 
-
-
   function setupGallery(){
     vm.imageSizeIndexGallery = 2;
     vm.imageSizeIndexIcon = 1;

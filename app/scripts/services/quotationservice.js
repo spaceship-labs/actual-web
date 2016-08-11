@@ -13,6 +13,7 @@
         addPayment: addPayment,
         addProduct: addProduct,
         addRecord: addRecord,
+        addMultipleProducts: addMultipleProducts,
         calculateItemsNumber: calculateItemsNumber,
         calculateSubTotal: calculateSubTotal,
         calculateTotal: calculateTotal,
@@ -240,6 +241,52 @@
               setActiveQuotation(quotation.id);
               $location.path('/quotations/edit/' + quotation.id);
             }
+          });
+        }
+      }
+
+      //@params: Object products, containing id, quantity
+      function addMultipleProducts(products){
+        var quotationId = localStorageService.get('quotation');
+        if( quotationId ){
+          var detailsPromises = [];
+          products.forEach(function(p){
+            var detail = {
+              Product: p.id,
+              quantity: p.quantity,
+              Quotation: quotationId
+            };
+            detailsPromises.push(addDetail(quotationId, detail));
+          });
+          $q.all(detailsPromises)
+            .then(function(details){
+              setActiveQuotation(quotationId);
+              $location.path('/quotations/edit/' + quotationId);
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+
+        }else{
+          //Crear cotizacion con producto agregado
+          var params = {
+            User: $rootScope.user.id,
+            Details: products.map(function(p){
+              var detail = {
+                Product: p.id,
+                quantity: p.quantity
+              };
+              return detail;
+            })
+          };
+          create(params).then(function(res){
+            var quotation = res.data;
+            if(quotation){
+              setActiveQuotation(quotation.id);
+              $location.path('/quotations/edit/' + quotation.id);
+            }
+          }).catch(function(err){
+            console.log(err);
           });
         }
       }

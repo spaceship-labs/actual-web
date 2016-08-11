@@ -292,6 +292,17 @@ angular
           }
         }
       })
+      .when('/ofertas', {
+        templateUrl: 'views/offers.html',
+        controller: 'OffersCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
