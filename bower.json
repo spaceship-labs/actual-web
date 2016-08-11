@@ -25,11 +25,11 @@
     "ng-file-upload": "^12.0.4",
     "scalyr": "^1.0.3",
     "ngInfiniteScroll": "^1.3.0",
-    "angular-material": "^1.0.9",
     "async": "^1.5.2",
     "ng-photoswipe": "^0.2.0",
     "angular-input-masks": "^2.4.0",
-    "angular-i18n": "^1.5.8"
+    "angular-i18n": "^1.5.8",
+    "angular-material": "master"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
@@ -37,6 +37,7 @@
   "appPath": "app",
   "moduleName": "dashexampleApp",
   "resolutions": {
-    "angular": "^1.4.8"
+    "angular": "^1.4.8",
+    "angular-material": "master"
   }
 }

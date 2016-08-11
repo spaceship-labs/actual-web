@@ -25,6 +25,11 @@ body{
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
   /*overflow-x:hidden;*/
 }
+body,
+md-content,
+md-content.md-default-theme, md-content{
+  background: #fff;
+}
 a{text-decoration: none}
 .form-modal{
   max-width: 400px!important;
@@ -3536,5 +3541,5 @@ padding-left: 16px;
   #records-view,
   #profile-view,
   .print-btn,
-  #footer{display: none;}
+  #footer{display: none!important;}
 }
