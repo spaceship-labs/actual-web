@@ -10,7 +10,23 @@
 angular.module('dashexampleApp')
   .controller('ProductCtrl', ProductCtrl);
 
-function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams, $q, $timeout,$mdDialog, $mdMedia, $sce, api, cartService, quotationService, pmPeriodService){
+function ProductCtrl(
+  productService,
+  $scope,
+  $location,
+  $rootScope,
+  $routeParams,
+  $q,
+  $timeout,
+  $mdDialog,
+  $mdMedia,
+  $sce,
+  api,
+  cartService,
+  quotationService,
+  pmPeriodService,
+  localStorageService
+) {
   var vm = this;
 
   angular.extend(vm, {
@@ -56,7 +72,7 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
         vm.mainPromo = vm.product.mainPromo;
         vm.lowestCategory = vm.getLowestCategory();
         vm.product.cart = {
-          quantity: 1
+          quantity: 0
         };
         vm.setupGallery();
         if(reload){
@@ -75,6 +91,14 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
       vm.validPayments = res.data;
       console.log(res);
     });
+    var companyActive = localStorageService.get('companyActive');
+    productService.delivery(productId, companyActive).then(function(delivery) {
+      vm.available = delivery.reduce(function(acum, current) {
+        return acum + current.available;
+      }, 0);
+      vm.delivery  = delivery;
+    });
+
   }
 
   function getImageSizes(){
@@ -197,21 +221,6 @@ function ProductCtrl(productService, $scope, $location, $rootScope,$routeParams,
     vm.imageSize = api.imageSizes.gallery[vm.imageSizeIndexGallery];
     vm.areImagesLoaded = true;
     vm.sortImages();
-
-    //Adding icon as gallery first image
-    /*
-    if(vm.product.icons[vm.imageSizeIndexIcon]){
-      //vm.galleryImages.push(vm.product.icons[vm.imageSizeIndexIcon]);
-      var img = {
-        src: vm.product.icons[0].url,
-        w:500,
-        h:500
-      };
-      vm.galleryImages.push(img);
-    }else{
-      vm.galleryImages.push(vm.product.icons[0]);
-    }
-    */
     if(vm.product.icons.length >= 0){
       var img = {
         src: vm.product.icons[0].url,
@@ -360,6 +369,7 @@ ProductCtrl.$inject = [
   'cartService',
   'quotationService',
   'pmPeriodService',
+  'localStorageService'
 ];
 /*
 angular.element(document).ready(function() {

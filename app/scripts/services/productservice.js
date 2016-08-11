@@ -29,6 +29,7 @@
         search: search,
         searchByFilters: searchByFilters,
         searchCategoryByFilters: searchCategoryByFilters,
+        delivery: delivery
       };
 
       return service;
@@ -198,6 +199,17 @@
       function searchCategoryByFilters(params) {
         var url = '/ProductSearch/searchByCategory';
         return api.$http.post(url, params);
+      }
+
+      function delivery(productCode, companyCode) {
+        var url    = '/shipping/product';
+        var params = {
+          productCode: productCode,
+          companyCode: companyCode
+        };
+        return api.$http.get(url, params).then(function(res){
+          return res.data;
+        });
       }
 
     }

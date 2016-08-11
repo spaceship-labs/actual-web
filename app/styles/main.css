@@ -1834,6 +1834,10 @@ md-backdrop.md-sidenav-backdrop{
   letter-spacing: 2px;
   display: block;
 }
+.product-view .add-cart-btn{
+  background: gray;
+}
+
 .product-view .add-cart-btn-icon{
   font-size: 30px;
   position: relative;

@@ -31,18 +31,6 @@
     <!--MAIN VIEW-->
     <div class="product-view" flex="70">
       <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
-
-      <!--
-      <div
-        class="sub sub-set"
-        ng-style="{'background-image' : 'url(' + 'images/living-room-comfortable-minimalist-living-room-seatting-for-apartment-minimalist-living-room-design-combined-sectional-black-upholstered-sofas-and-simple-oak-coffee-table-and-gray-fur-rug.jpg' + ')'}">
-        <div class="sub-text">
-          <h4><a href="#">Ambiente | <strong>Salas</strong></a></h4>
-        </div>
-        <a href="#" class="absolute-link"></a>
-      </div>
-      -->
-
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
         <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
       </div>
@@ -273,23 +261,14 @@
 
             <div class="product-view-data-block">
               <h4 >
-                <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.product.Available}} productos</strong> disponibles
+                <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available}} productos</strong> disponibles
               </h4>
-              <div>
+              <div ng-if="vm.available">
                 <table>
-                  <tr>
-                    <td>1-abril-2016 (en 8 dias)</td>
-                    <td>3 piezas</td>
+                  <tr ng-repeat="delivery in vm.delivery">
+                    <td> {{delivery.delivery | date: 'dd-mm-yyyy'}} (en {{delivery.days}} días)</td>
+                    <td> {{delivery.available}} piezas</td>
                   </tr>
-                  <tr>
-                    <td>5-abril-2016 (en 12 dias)</td>
-                    <td>6 piezas</td>
-                  </tr>
-                  <tr>
-                    <td>20-abril-2016 (en 27 dias)</td>
-                    <td>16 piezas</td>
-                  </tr>
-
                 </table>
               </div>
             </div>
@@ -311,7 +290,7 @@
                     <td>
                       <span>Promoción:</span>
                       <p>
-                        <strong>{{ vm.mainPromo.discountTextPg1 ||  'Pago ÚNICO'}}
+                        <strong>{{ vm.mainPromo.disco-mm-yyyy ||  'Pago ÚNICO'}}
                           <span class="hl-text">(-{{vm.mainPromo.discountPg1}}%)</span>
                         </strong>
                       </p>
@@ -397,17 +376,17 @@
                 <div class="product-view-qty input-element">
                   <label>Piezas</label>
                   <div class="input-element-inner">
-                    <input ng-model="vm.product.cart.quantity" min="1" type="number">
+                    <input ng-model="vm.product.cart.quantity" min="0" ng-max="delivery || 0" type="number">
                   </div>
                 </div>
               </div>
               <div flex="30">
                 <div class="input-element select-element-wrapper">
                   <label>Entrega aproximada</label>
-                  <select class="select-element">
-                    <option value="20-Abr-2016">1-Abr-2016</option>
-                    <option value="20-Abr-2016">5-Abr-2016</option>
-                    <option value="20-Abr-2016">20-Abr-2016</option>
+                  <select class="select-element" ng-model="delivery">
+                    <option ng-repeat="delivery in vm.delivery" ng-value="delivery">
+                      {{delivery.delivery | date: 'dd-mm-yyyy'}}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -416,7 +395,9 @@
               </h3>
             </div>
 
-            <a ng-click="vm.addToCart($event)" href="#" class="add-cart-btn">
+            <a ng-click="vm.available && vm.addToCart($event)" href="#" class="add-cart-btn"
+              ng-class="{'add-cart-btn-disabled': delivery}"
+            >
               <span class="add-cart-btn-icon">
                 <span class="add-cart-btn-icon-num">{{vm.product.cart.quantity}}</span>
                 <i class="icon-carro"></i>

@@ -87,15 +87,15 @@
     }
 
     function init(){
-      vm.token = localStorageService.get('token');
-      vm.user  = localStorageService.get('user');
+      vm.token             = localStorageService.get('token');
+      vm.user              = localStorageService.get('user');
       vm.companyActive     = localStorageService.get('companyActive');
       vm.companyActiveName = localStorageService.get('companyActiveName');
-      $rootScope.user = vm.user;
-      if($location.search().itemcode){
+      $rootScope.user      = vm.user;
+      if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
-      for(var i=0;i<9;i++){
+      for (var i = 0; i < 9; i++) {
         vm.pointersSidenav.push({selected:false});
       }
 
