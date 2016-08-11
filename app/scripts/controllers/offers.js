@@ -49,7 +49,6 @@ function OffersCtrl(packageService, quotationService, api){
         console.log(products);
         console.log(packageProducts);
         quotationService.addMultipleProducts(packageProducts);
-        vm.isLoading = false;
       })
       .catch(function(err){
         console.log(err);
