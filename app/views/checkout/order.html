@@ -1,4 +1,4 @@
-<div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+<div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
@@ -231,7 +231,7 @@
   <section id="records-view" class="records-view">
     <h1><i class="icon-attachment"></i> <strong>BITÁCORA DE SEGUIMIENTO</strong></h1>
 
-    <div ng-if="vm.isLoadingRecords" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+    <div ng-if="vm.isLoadingRecords" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
       <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
     </div>
 
