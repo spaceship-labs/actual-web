@@ -66,7 +66,7 @@
             description:'VISA, MasterCard, American Express',
             cardsImages:['images/visa.png','images/mastercard.png','images/american.png'],
             cards:['Visa','MasterCard','American Express'],
-            terminals:['Banamex','American Express'],
+            terminals:['American Express','Banamex'],
             currency: 'mxn',
             needsVerification: true
           },
@@ -84,7 +84,7 @@
             cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
             cards: ["American Express", "Ixe", "Scotiabank", "Inbursa", "Afirme", "Banbajio", "Banjercito", "Banca Mifel", "Itaucard", "Liverpool Premium Card", "BanRegio", "Banco Ahorro Famsa"],
             moreCards: true,
-            terminals:['Banorte','Santander','Bancomer','American Express'],
+            terminals:['American Express','Banamex','Bancomer','Banorte','Santander'],
             currency: 'mxn',
             needsVerification: true
           }
@@ -102,7 +102,7 @@
             cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
             cards:['Afirme', 'American Express', 'Banbajio', 'Banca Mifel', 'Banco Ahorro Famsa', 'Banjercito', 'BanRegio', 'Inbursa', 'Itaucard', 'Ixe', 'Liverpool Premium Card', 'Scotiabank'],
             moreCards: true,
-            terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
+            terminals:['American Express','Banamex','Bancomer','Banorte','Santander'],
             currency: 'mxn',
             needsVerification: true
           },
@@ -114,7 +114,7 @@
             cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
             cards:['Afirme', 'American Express', 'Banbajio', 'Banca Mifel', 'Banco Ahorro Famsa', 'Banjercito', 'BanRegio', 'Inbursa', 'Itaucard', 'Ixe', 'Liverpool Premium Card', 'Scotiabank'],
             moreCards: true,
-            terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
+            terminals:['American Express','Banamex','Bancomer','Santander'],
             currency: 'mxn',
             needsVerification: true
           },
@@ -132,7 +132,7 @@
             cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
             cards:['Afirme', 'American Express', 'Banbajio', 'Banca Mifel', 'Banco Ahorro Famsa', 'Banjercito', 'BanRegio', 'Inbursa', 'Itaucard', 'Ixe', 'Liverpool Premium Card', 'Scotiabank'],
             moreCards: true,
-            terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
+            terminals:['American Express', 'Banamex','Bancomer','Banorte','Santander'],
             currency: 'mxn',
             needsVerification: true
           },
@@ -149,7 +149,7 @@
             msi:18,
             cardsImages:['images/banamex.png','images/amexcard.png'],
             cards: ['American Express','Banamex'],
-            terminals:['Banamex','Banorte','Santander','Bancomer','American Express'],
+            terminals:['American Express','Banamex'],
             currency: 'mxn',
             needsVerification: true
           },

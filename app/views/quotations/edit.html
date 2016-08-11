@@ -1,4 +1,4 @@
-<div ng-if="vm.isLoading" layout="row" layout-align="center center">
+<div ng-if="vm.isLoading" layout="row" layout-align="center center" class="loading-circle">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
@@ -76,7 +76,7 @@
       <section flex="70" class="cart-list">
         <h1 class="cart-title"><strong>ARTICULOS AGREGADOS</strong></h1>
 
-        <div ng-if="vm.isLoadingDetails" layout="row" layout-align="center center">
+        <div ng-if="vm.isLoadingDetails" layout="row" layout-align="center center" class="loading-circle">
           <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
         </div>
 
@@ -296,7 +296,7 @@
       </div>
     </form>
 
-    <div ng-if="vm.isLoadingRecords" layout-fill layout="row" layout-sm="column" layout-align="space-around">
+    <div ng-if="vm.isLoadingRecords" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
       <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
     </div>
 

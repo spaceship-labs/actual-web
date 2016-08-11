@@ -50,6 +50,7 @@ md-dialog .md-button.md-primary{
   color: #fff!important;
 }
 
+.loading-circle{min-height: 400px;}
 .no-border{border: 0!important;}
 .no-margin{margin: 0!important}
 .pull-left{text-align: left!important;}

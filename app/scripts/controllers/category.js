@@ -33,6 +33,7 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
   }
 
   function getCategories() {
+    vm.isLoading = true;
     categoriesService.getCategoryByHandle($routeParams.category).then(function(res){
       vm.category = res.data;
       var hasLevel2Categories = false;
@@ -47,6 +48,7 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
       });
       vm.showLevel2 = hasLevel2Categories;
       vm.showLevel3 = !hasLevel2Categories;
+      vm.isLoading = false;
     });
 
   }

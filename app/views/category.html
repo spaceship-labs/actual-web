@@ -95,7 +95,19 @@
 
     <!--SUBCATEGORIES-->
     <div flex="70">
-      <div class="subs-container">
+
+      <div
+        ng-if="vm.isLoading"
+        layout-fill
+        layout="row"
+        layout-sm="column"
+        layout-align="center center"
+        class="loading-circle"
+      >
+        <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
+      </div>
+
+      <div ng-if="!vm.isLoading" class="subs-container">
         <h2 class="listing-view-title">{{vm.category.Name}}</h2>
         <!--SUBCATEGORIES LIST LEVEL 2-->
         <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap>
