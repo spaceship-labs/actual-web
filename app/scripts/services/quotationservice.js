@@ -191,7 +191,12 @@
       }
 
       function getActiveQuotation(){
+        var deferred = $q.defer();
         var quotationId = localStorageService.get('quotation');
+        if(!quotationId){
+          deferred.resolve(false);
+          return deferred.promise;
+        }
         return getById(quotationId);
       }
 

@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('OrdersListCtrl', OrdersListCtrl);
 
-function OrdersListCtrl($location,$routeParams, $q ,productService, $rootScope, commonService, orderService){
+function OrdersListCtrl($location,$routeParams, authService, $q ,productService, $rootScope, commonService, orderService){
 
   var vm = this;
   vm.init = init;
@@ -63,9 +63,16 @@ function OrdersListCtrl($location,$routeParams, $q ,productService, $rootScope, 
     var monthRange = commonService.getMonthDateRange();
     vm.startDate = monthRange.start.toString();
     vm.endDate = monthRange.end.toString();
-    vm.filters = {
-      User: $rootScope.user.id,
-    };
+    if( authService.isBroker($rootScope.user) ) {
+      console.log('es un broker');
+      vm.filters = {
+        User: $rootScope.user.id,
+      };
+    }else{
+      vm.filters = {
+        User: $rootScope.user.id,
+      };
+    }
     vm.dateRange = {
       field: 'createdAt',
       start: vm.startDate,

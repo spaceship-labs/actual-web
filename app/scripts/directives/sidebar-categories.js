@@ -7,7 +7,7 @@
  * # sidebarCategories
  */
 angular.module('dashexampleApp')
-  .directive('sidebarCategories', function (categoriesService, $timeout, $rootScope) {
+  .directive('sidebarCategories', function (categoriesService, $timeout, $rootScope, $location) {
     return {
       templateUrl: 'views/directives/sidebar-categories.html',
       restrict: 'E',
@@ -18,7 +18,18 @@ angular.module('dashexampleApp')
       link: function postLink(scope) {
 
         scope.init = function(){
+          scope.isActiveOffers = false;
+          console.log($location.path());
+          if($location.path() == '/ofertas'){
+            scope.isActiveOffers = true;
+          }
         };
+
+        scope.$on('$routeChangeSuccess', function(next, current) {
+          if($location.path() == '/ofertas'){
+            scope.isActiveOffers = true;
+          }
+        });
 
         scope.$watch('categoriesTree', function(newVal, oldVal){
           if(newVal != oldVal){
