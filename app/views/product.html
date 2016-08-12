@@ -261,13 +261,13 @@
 
             <div class="product-view-data-block">
               <h4 >
-                <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available}} productos</strong> disponibles
+                <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available | number: 0}} productos</strong> disponibles
               </h4>
               <div ng-if="vm.available">
                 <table>
                   <tr ng-repeat="delivery in vm.delivery">
                     <td> {{delivery.delivery | date: 'dd-mm-yyyy'}} (en {{delivery.days}} días)</td>
-                    <td> {{delivery.available}} piezas</td>
+                    <td> {{delivery.available | number: 0}} piezas</td>
                   </tr>
                 </table>
               </div>
@@ -384,8 +384,8 @@
                 <div class="input-element select-element-wrapper">
                   <label>Entrega aproximada</label>
                   <select class="select-element" ng-model="delivery">
-                    <option ng-repeat="delivery in vm.delivery" ng-value="delivery">
-                      {{delivery.delivery | date: 'dd-mm-yyyy'}}
+                    <option ng-repeat="delivery in vm.delivery" ng-value="delivery.available">
+                      {{delivery.date | date}}
                     </option>
                   </select>
                 </div>
@@ -395,7 +395,7 @@
               </h3>
             </div>
 
-            <a ng-click="vm.available && vm.addToCart($event)" href="#" class="add-cart-btn"
+            <a ng-click="vm.available && vm.product.cart.quantity && vm.addToCart($event)" href="#" class="add-cart-btn"
               ng-class="{'add-cart-btn-disabled': delivery}"
             >
               <span class="add-cart-btn-icon">
