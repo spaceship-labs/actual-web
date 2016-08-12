@@ -50,7 +50,7 @@ md-dialog .md-button.md-primary{
   color: #fff!important;
 }
 
-.loading-circle{min-height: 400px;}
+.loading-circle{min-height: 250px;}
 .no-border{border: 0!important;}
 .no-margin{margin: 0!important}
 .pull-left{text-align: left!important;}
@@ -1356,6 +1356,7 @@ md-backdrop.md-sidenav-backdrop{
 .listing-view{padding: 10px 20px 30px;}
 .listing-view-nav-wrapper > h2{
   font-size: 16px;
+  font-weight: 400;
   position: relative;
   text-transform: uppercase;
   padding-bottom: 2px;
@@ -1396,6 +1397,7 @@ md-backdrop.md-sidenav-backdrop{
 .listing-view-nav > li{margin: 14px 0;}
 .listing-view-nav > li > h3{
   font-size: 12px;
+  font-weight: 400;
   /*text-transform: uppercase;*/
 }
 .listing-view-nav > li > h3:before{
@@ -1533,6 +1535,10 @@ md-backdrop.md-sidenav-backdrop{
 .listing-view .sub-big .sub-text h4{
   font-size: 40px;
   padding-bottom: 16px;
+}
+
+.listing-view-nav .see-more{
+  font-style: italic;
 }
 
 /*-------------/

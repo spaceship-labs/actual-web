@@ -164,7 +164,7 @@
         <!--RESULTS-->
         <div class="results"
           infinite-scroll="vm.getProductsByCategory(true)"
-          infinite-scroll-disabled="vm.isLoading || vm.products.length >= vm.totalProducts"
+          infinite-scroll-disabled="vm.isLoading || vm.products.length >= vm.totalProducts || !vm.products"
           infinite-scroll-distance="0"
         >
           <h2 class="center-content">

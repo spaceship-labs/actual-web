@@ -9,7 +9,7 @@
       ng-class="{'active': mainCategory.isActive}">
       <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i>
       <strong>{{mainCategory.Name}}</strong>
-      <strong class="products-num">({{mainCategory.productsNum}})</strong>
+      <span class="products-num">({{mainCategory.productsNum}})</span>
     </a>
   </h2>
 
@@ -25,24 +25,49 @@
           ng-click="toggleCategory(category, $event)"
         >
           <strong>{{category.Name}}</strong>
-          <strong class="products-num">({{category.productsNum}})</strong>
+          <span class="products-num">({{category.productsNum}})</span>
         </a>
         <a
           ng-if="!category.Childs"
           ng-href="/category/{{category.Handle}}"
         >
           <strong>{{category.Name}}</strong>
-          <strong class="products-num">({{category.productsNum}})</strong>
+          <span class="products-num">({{category.productsNum}})</span>
         </a>
       </h3>
+
+
+
       <ul class="listing-view-subnav">
         <li ng-repeat="subcategory in category.Childs" ng-if="subcategory.productsNum">
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
             {{subcategory.Name}} ({{subcategory.productsNum}})
           </a>
         </li>
+
+        <li>
+          <a class="see-more" ng-href="/category/{{category.Handle}}">
+            Ver todo ({{category.productsNum}})
+          </a>
+        </li>
+
+
       </ul>
     </li>
+
+    <li>
+      <h3>
+        <a
+          class="see-more"
+          ng-href="/category/{{mainCategory.Handle}}"
+        >
+          <strong>Ver todo</strong>
+          <span class="products-num">({{mainCategory.productsNum}})</span>
+        </a>
+      </h3>
+    </li>
+
+
   </ul>
 </div>
 

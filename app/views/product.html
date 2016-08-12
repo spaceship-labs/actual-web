@@ -203,20 +203,6 @@
                     <div class="variant-row" ng-if="variant.products.length > 0"  layout="row">
                       <div flex="30"><strong>{{variant.name}}:</strong></div>
 
-                      <!--
-                      <div ng-if="variant.handle == 'color' " flex="70">
-                        <div>
-                          <span
-                            ng-repeat="filterValue in variant.filterValues"
-                            class="variant-color"
-                            ng-class="{'variant-color-on': filterValue.selected}"
-                            ng-style="{'background-color' : filterValue.Code}">
-                            {{filterValue.product}}
-                          </span>
-                        </div>
-                      </div>
-                      -->
-
                       <div ng-if=" variant.handle == 'color'  " flex="70" >
 
                         <div
@@ -266,7 +252,7 @@
               <div ng-if="vm.available">
                 <table>
                   <tr ng-repeat="delivery in vm.delivery">
-                    <td> {{delivery.delivery | date: 'dd-mm-yyyy'}} (en {{delivery.days}} días)</td>
+                    <td>{{delivery.delivery | date: 'd/MMM/yyyy'}} (en {{delivery.days}} días)</td>
                     <td> {{delivery.available | number: 0}} piezas</td>
                   </tr>
                 </table>
@@ -288,12 +274,9 @@
                   </tr>
                   <tr>
                     <td>
-                      <span>Promoción:</span>
-                      <p>
-                        <strong>{{ vm.mainPromo.disco-mm-yyyy ||  'Pago ÚNICO'}}
-                          <span class="hl-text">(-{{vm.mainPromo.discountPg1}}%)</span>
-                        </strong>
-                      </p>
+                      <strong>{{ vm.mainPromo.disco-mm-yyyy ||  'Pago ÚNICO'}}
+                        <span class="hl-text">(-{{vm.mainPromo.discountPg1}}%)</span>
+                      </strong>
                     </td>
                     <td>
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
@@ -302,12 +285,9 @@
                   </tr>
                   <tr ng-if="vm.validPayments.paymentGroup2">
                     <td>
-                      <span>Promoción:</span>
-                      <p>
-                        <strong>{{ vm.mainPromo.discountTextPg2 ||  '3 Meses sin intereses'}}
-                          <span class="hl-text">(-{{vm.mainPromo.discountPg2}}%)</span>
-                        </strong>
-                      </p>
+                      <strong>{{ vm.mainPromo.discountTextPg2 ||  '3 Meses sin intereses'}}
+                        <span class="hl-text">(-{{vm.mainPromo.discountPg2}}%)</span>
+                      </strong>
                     </td>
                     <td>
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
@@ -316,12 +296,9 @@
                   </tr>
                   <tr ng-if="vm.validPayments.paymentGroup3">
                     <td>
-                      <span>Promoción:</span>
-                      <p>
-                        <strong>{{ vm.mainPromo.discountTextPg3 ||  '6 y 9 Meses sin intereses'}}
-                          <span class="hl-text">(-{{vm.mainPromo.discountPg3}}%)</span>
-                        </strong>
-                      </p>
+                      <strong>{{ vm.mainPromo.discountTextPg3 ||  '6 y 9 Meses sin intereses'}}
+                        <span class="hl-text">(-{{vm.mainPromo.discountPg3}}%)</span>
+                      </strong>
                     </td>
                     <td>
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
@@ -330,12 +307,9 @@
                   </tr>
                   <tr ng-if="vm.validPayments.paymentGroup4">
                     <td>
-                      <span>Promoción:</span>
-                      <p>
-                        <strong>{{ vm.mainPromo.discountTextPg4 ||  '12 Meses sin intereses'}}
-                          <span class="hl-text">(-{{vm.mainPromo.discountPg4}}%)</span>
-                        </strong>
-                      </p>
+                      <strong>{{ vm.mainPromo.discountTextPg4 ||  '12 Meses sin intereses'}}
+                        <span class="hl-text">(-{{vm.mainPromo.discountPg4}}%)</span>
+                      </strong>
                     </td>
                     <td>
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
@@ -344,12 +318,9 @@
                   </tr>
                   <tr ng-if="vm.validPayments.paymentGroup5">
                     <td>
-                      <span>Promoción:</span>
-                      <p>
-                        <strong>{{ vm.mainPromo.discountTextPg5 ||  '18 Meses sin intereses'}}
-                          <span class="hl-text">(-{{vm.mainPromo.discountPg5}}%)</span>
-                        </strong>
-                      </p>
+                      <strong>{{ vm.mainPromo.discountTextPg5 ||  '18 Meses sin intereses'}}
+                        <span class="hl-text">(-{{vm.mainPromo.discountPg5}}%)</span>
+                      </strong>
                     </td>
                     <td>
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
@@ -384,7 +355,10 @@
                 <div class="input-element select-element-wrapper">
                   <label>Entrega aproximada</label>
                   <select class="select-element" ng-model="delivery">
-                    <option ng-repeat="delivery in vm.delivery" ng-value="delivery.available">
+                    <option
+                      ng-selected="vm.delivery[0]"
+                      ng-repeat="delivery in vm.delivery"
+                      ng-value="delivery.available">
                       {{delivery.date | date}}
                     </option>
                   </select>
