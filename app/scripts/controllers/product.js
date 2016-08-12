@@ -212,8 +212,6 @@ function ProductCtrl(
     });
   }
 
-
-
   function setupGallery(){
     vm.imageSizeIndexGallery = 2;
     vm.imageSizeIndexIcon = 1;

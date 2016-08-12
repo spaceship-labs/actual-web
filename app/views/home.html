@@ -14,13 +14,13 @@
 <div ng-if="!main.isLoadingCategoriesTree" class="content-block listing-view">
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
     <!--START NAV-->
-    <aside flex="25">
+    <aside flex="20">
       <sidebar-categories categories-tree="main.categoriesTree"></sidebar-categories>
     </aside>
     <!--END NAV-->
 
     <!--CATEGORIES-->
-    <div flex="70">
+    <div flex="75">
       <div class="subs-container">
         <div  class="subs-container-list" layout="row" layout-wrap>
           <div
@@ -42,6 +42,26 @@
               <a ng-href="/category/{{category.Handle}}" class="absolute-link"></a>
             </div>
           </div>
+
+          <!--OFERTAS-->
+          <div
+            class="sub-wrapper"
+            flex="33">
+            <div
+              class="sub"
+              ng-style="main.getCategoryBackground('ofertas')">
+              <div class="sub-text">
+                <h4>
+                  <a ng-href="/ofertas">
+                    <strong>Ofertas</strong>
+                  </a>
+                </h4>
+              </div>
+              <a ng-href="ofertas" class="absolute-link"></a>
+            </div>
+          </div>
+          <!--END OFERTAS-->
+
         </div>
 
       </div>

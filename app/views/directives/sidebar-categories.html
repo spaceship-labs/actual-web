@@ -1,4 +1,3 @@
-<!--AMBIENTES-->
 <div
   ng-repeat="mainCategory in categoriesTree track by $index"
   ng-if="mainCategory.productsNum"
@@ -47,4 +46,15 @@
   </ul>
 </div>
 
-
+<!--OFERTAS-->
+<div
+  class="listing-view-nav-wrapper">
+  <h2>
+    <a
+      ng-href="/ofertas"
+      ng-class="{'active': isActiveOffers}">
+      <i class="icon-ofertas"></i>
+      <strong>Ofertas</strong>
+    </a>
+  </h2>
+</div>

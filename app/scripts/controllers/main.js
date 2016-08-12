@@ -104,8 +104,8 @@
       categoriesService.createCategoriesTree().then(function(res){
         vm.isLoadingCategoriesTree = false;
         vm.categoriesTree = res.data;
-        $rootScope.categoriesTree = res.data;
-        $rootScope.$broadcast('loadedCategoriesTree', res.data);
+        $rootScope.categoriesTree = vm.categoriesTree;
+        $rootScope.$broadcast('loadedCategoriesTree', vm.categoriesTree);
         var auxCategoryTree = angular.copy(vm.categoriesTree);
 
         vm.menuCategories = [];

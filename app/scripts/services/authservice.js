@@ -12,7 +12,8 @@
         signUp: signUp,
         signIn: signIn,
         logout: logout,
-        dennyAccessBroker: dennyAccessBroker
+        dennyAccessBroker: dennyAccessBroker,
+        isBroker: isBroker
       };
 
       return service;
@@ -51,7 +52,7 @@
 
       function isBroker(user){
         var role = user.role[0] || [];
-        if(role.name == 'broker' || user.userType == 'broker'){
+        if(role.name == 'broker'){
           return true;
         }
         return false;
