@@ -347,7 +347,12 @@
                 <div class="product-view-qty input-element">
                   <label>Piezas</label>
                   <div class="input-element-inner">
-                    <input ng-model="vm.product.cart.quantity" min="0" ng-max="delivery || 0" type="number">
+                    <input
+                      ng-model="vm.product.cart.quantity"
+                      min="1"
+                      ng-max="vm.product.cart.delivery.available"
+                      type="number"
+                    >
                   </div>
                 </div>
               </div>
@@ -369,8 +374,14 @@
               </h3>
             </div>
 
-            <a ng-click="vm.available && vm.product.cart.quantity && vm.addToCart($event)" href="#" class="add-cart-btn"
-              ng-class="{'add-cart-btn-disabled': delivery}"
+            <a
+              ng-click="vm.available && vm.product.cart.quantity && vm.addToCart($event)" href="#"
+              class="add-cart-btn"
+              ng-class="
+              {
+                'add-cart-btn-disabled': vm.product.cart.quantity > vm.product.cart.delivery.available || !vm.product.cart.quantity
+              }
+              "
             >
               <span class="add-cart-btn-icon">
                 <span class="add-cart-btn-icon-num">{{vm.product.cart.quantity}}</span>

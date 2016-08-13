@@ -75,7 +75,7 @@ function ProductCtrl(
         vm.mainPromo = vm.product.mainPromo;
         vm.lowestCategory = vm.getLowestCategory();
         vm.product.cart = {
-          quantity: 0
+          quantity: 1
         };
         vm.setupGallery();
         if(reload){
@@ -92,10 +92,10 @@ function ProductCtrl(
       })
       .then(function(delivery){
         vm.available = delivery.reduce(function(acum, current) {
+          current.available = parseInt(current.available);
           return acum + current.available;
         }, 0);
         vm.deliveries  = delivery;
-        console.log(vm.deliveries);
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.product.cart.delivery = vm.deliveries[0];
         }

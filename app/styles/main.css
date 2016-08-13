@@ -1844,7 +1844,7 @@ md-backdrop.md-sidenav-backdrop{
   letter-spacing: 2px;
   display: block;
 }
-.product-view .add-cart-btn{
+.product-view .add-cart-btn-disabled{
   background: gray;
 }
 
