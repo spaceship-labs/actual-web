@@ -251,9 +251,9 @@
               </h4>
               <div ng-if="vm.available">
                 <table>
-                  <tr ng-repeat="delivery in vm.delivery">
-                    <td>{{delivery.delivery | date: 'd/MMM/yyyy'}} (en {{delivery.days}} días)</td>
-                    <td> {{delivery.available | number: 0}} piezas</td>
+                  <tr ng-repeat="delivery in vm.deliveries">
+                    <td>{{delivery.date | date: "d/MMM/yyyy"}} (en {{delivery.days}} días)</td>
+                    <td>{{delivery.available | number: 0}} piezas</td>
                   </tr>
                 </table>
               </div>
@@ -354,12 +354,12 @@
               <div flex="30">
                 <div class="input-element select-element-wrapper">
                   <label>Entrega aproximada</label>
-                  <select class="select-element" ng-model="delivery">
+                  <select class="select-element" ng-model="vm.product.cart.delivery">
                     <option
-                      ng-selected="vm.delivery[0]"
-                      ng-repeat="delivery in vm.delivery"
-                      ng-value="delivery.available">
-                      {{delivery.date | date}}
+                      ng-repeat="delivery in vm.deliveries"
+                      ng-selected="delivery.date == vm.product.cart.delivery.date"
+                      ng-value="delivery">
+                      {{delivery.date | date:"d/MMM/yyyy"}}
                     </option>
                   </select>
                 </div>

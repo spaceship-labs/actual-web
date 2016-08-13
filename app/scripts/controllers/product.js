@@ -66,8 +66,11 @@ function ProductCtrl(
     vm.galleryImages = [];
     vm.isLoading = true;
 
-    productService.getById(productId).then(function(res){
-      productService.formatSingleProduct(res.data.data).then(function(fProduct){
+    productService.getById(productId)
+      .then(function(res){
+        return productService.formatSingleProduct(res.data.data);
+      })
+      .then(function(fProduct){
         vm.product = fProduct;
         vm.mainPromo = vm.product.mainPromo;
         vm.lowestCategory = vm.getLowestCategory();
@@ -78,25 +81,31 @@ function ProductCtrl(
         if(reload){
           $location.path('/product/' + productId, false);
           vm.loadProductFilters();
-          //vm.productQty = 1;
         }else{
           vm.loadProductFilters();
           vm.loadVariants();
         }
         vm.isLoading = false;
+
+        var companyActive = localStorageService.get('companyActive');
+        return productService.delivery(productId, companyActive);
+      })
+      .then(function(delivery){
+        vm.available = delivery.reduce(function(acum, current) {
+          return acum + current.available;
+        }, 0);
+        vm.deliveries  = delivery;
+        console.log(vm.deliveries);
+        if(vm.deliveries && vm.deliveries.length > 0){
+          vm.product.cart.delivery = vm.deliveries[0];
+        }
+      })
+      .catch(function(err){
+        console.log(err);
       });
-    });
 
     pmPeriodService.getActive().then(function(res){
       vm.validPayments = res.data;
-      console.log(res);
-    });
-    var companyActive = localStorageService.get('companyActive');
-    productService.delivery(productId, companyActive).then(function(delivery) {
-      vm.available = delivery.reduce(function(acum, current) {
-        return acum + current.available;
-      }, 0);
-      vm.delivery  = delivery;
     });
 
   }
