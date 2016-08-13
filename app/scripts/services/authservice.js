@@ -51,7 +51,7 @@
       }
 
       function isBroker(user){
-        var role = user.role[0] || [];
+        var role = user.role || {};
         if(role.name == 'broker'){
           return true;
         }

@@ -11,6 +11,7 @@
    */
   function MainCtrl(
     api,
+    $mdUtil,
     $rootScope,
     $q,
     $scope,
@@ -367,11 +368,15 @@
       localStorageService.set('broker', broker);
       togglePointerSidenav();
     }
+
+    $scope.$on('$destroy', $mdUtil.enableScrolling);
+
   }
 
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
   MainCtrl.$inject = [
     'api',
+    '$mdUtil',
     '$rootScope',
     '$q',
     '$scope',
