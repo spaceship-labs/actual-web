@@ -24,7 +24,7 @@
           <h3>Monto</h3>
           <canvas id="pie"
             class="chart chart-pie"
-            options="vm.quotationsData.ammounts.options"
+            chart-options="vm.quotationsData.ammounts.options"
             chart-data="vm.quotationsData.ammounts.data"
             chart-labels="vm.quotationsData.ammounts.labels"
             chart-colors="vm.quotationsData.ammounts.colors">
@@ -66,6 +66,7 @@
           <canvas
             id="pie"
             class="chart chart-pie"
+            chart-options="vm.quotationsData.ammounts.options"
             chart-data="vm.quotationsData.ammounts.data"
             chart-labels="vm.quotationsData.ammounts.labels"
             chart-colors="vm.quotationsData.ammounts.colors">
@@ -137,8 +138,13 @@
       <div layout="row">
         <div class="chart-section-col" flex="45">
           <h3>Cantidad</h3>
-          <canvas id="pie" class="chart chart-pie"
-            chart-data="vm.quotationsData.quantities.data" chart-labels="vm.quotationsData.quantities.labels" chart-colors="vm.quotationsData.quantities.colors">
+          <canvas
+            id="pie"
+            class="chart chart-pie"
+            chart-options="vm.quotationsData.quantities.options"
+            chart-data="vm.quotationsData.quantities.data"
+            chart-labels="vm.quotationsData.quantities.labels"
+            chart-colors="vm.quotationsData.quantities.colors">
           </canvas>
           <p><strong>Hoy</strong> | <strong>Total</strong></p>
           <p>{{vm.quotationsData.todayQty}} | {{vm.quotationsData.monthQty}}</p>
@@ -146,8 +152,13 @@
 
         <div class="chart-section-col" flex="45">
           <h3>Monto</h3>
-          <canvas id="pie" class="chart chart-pie"
-            chart-data="vm.quotationsData.ammounts.data" chart-labels="vm.quotationsData.ammounts.labels" chart-colors="vm.quotationsData.ammounts.colors">
+          <canvas
+            id="pie" class="chart chart-pie"
+            chart-options="vm.quotationsData.ammounts.options"
+            chart-data="vm.quotationsData.ammounts.data"
+            chart-labels="vm.quotationsData.ammounts.labels"
+            chart-colors="vm.quotationsData.ammounts.colors"
+            >
           </canvas>
           <p><strong>Hoy</strong> | <strong>Total</strong></p>
           <p>{{vm.quotationsData.todayAmmount | currency}} | {{vm.quotationsData.monthAmmount | currency}}</p>

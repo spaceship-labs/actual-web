@@ -37,13 +37,14 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
           ],
           colors: ["#C92933", "#48C7DB", "#FFCE56"],
           options:{
-            scaleLabel: function(label){
-              return $filter('currency')(label.value);
-            },
-            tooltipTemplate: function(data){
-              return $filter('currency')(data.value)
+            tooltips: {
+              callbacks: {
+                label: function(tooltipItem, data) {
+                  return $filter('currency')(data.datasets[0].data[tooltipItem.index]);
+                }
+              }
             }
-          }
+          },
         };
       });
 
@@ -80,13 +81,14 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
           ],
           colors: ["#C92933", "#48C7DB", "#FFCE56"],
           options:{
-            scaleLabel: function(label){
-              return $filter('currency')(label.value);
-            },
-            tooltipTemplate: function(data){
-              return $filter('currency')(data.value)
+            tooltips: {
+              callbacks: {
+                label: function(tooltipItem, data) {
+                  return $filter('currency')(data.datasets[0].data[tooltipItem.index]);
+                }
+              }
             }
-          }
+          },
         };
       });
 

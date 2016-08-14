@@ -67,11 +67,12 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
             'Falta para el objetivo'
           ],
           options:{
-            scaleLabel: function(label){
-              return $filter('currency')(label.value);
-            },
-            tooltipTemplate: function(data){
-              return data.label + ': ' + $filter('currency')(data.value)
+            tooltips: {
+              callbacks: {
+                label: function(tooltipItem, data) {
+                  return data.labels[tooltipItem.index] + ': ' + $filter('currency')(data.datasets[0].data[tooltipItem.index]);
+                }
+              }
             }
           },
           colors: ["#48C7DB","#EADE56"],
