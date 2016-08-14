@@ -83,12 +83,12 @@
       }
 
       function getTotalsByUser(userId, params){
-        var url = '/quotation/gettotalsbyuser/' + userId;
+        var url = '/quotation/user/'+userId+'/totals';
         return api.$http.post(url,params);
       }
 
       function getCountByUser(userId, params){
-        var url = '/quotation/getcountbyuser/' + userId;
+        var url = '/quotation/user/'+userId+'/count';
         return api.$http.post(url,params);
       }
 

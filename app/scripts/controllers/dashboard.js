@@ -10,58 +10,105 @@
 angular.module('dashexampleApp')
   .controller('DashboardCtrl', DashboardCtrl);
 
-function DashboardCtrl($routeParams , $rootScope, $filter,categoriesService, productService, quotationService){
+function DashboardCtrl($rootScope, $filter, orderService, quotationService){
   var vm = this;
 
-  vm.getQuotationData = getQuotationData;
+  vm.getQuotationsData = getQuotationsData;
+  vm.getOrdersData = getOrdersData;
   vm.init = init;
 
-  vm.quotationData = {
-    todayQty:5,
-    monthQty:20,
-    todayAmmount: 38542,
-    monthAmmount: 257982,
-  };
+  vm.quotationsData = {}
+  vm.ordersData = {}
 
-  vm.quotationData.quantities = {
-    labels: ["Hoy", "Resto del mes"],
-    data: [vm.quotationData.todayQty, (vm.quotationData.monthQty - vm.quotationData.todayQty) ],
-    colours: ["#C92933", "#48C7DB", "#FFCE56"]
-  };
+  function getQuotationsData(){
+    var dateRange = {
+      startDate: moment().startOf('day'),
+      endDate: moment().endOf('day'),
+    };
+    quotationService.getTotalsByUser($rootScope.user.id, dateRange)
+      .then(function(res){
+        vm.quotationsData.todayAmmount = res.data.dateRange;
+        vm.quotationsData.monthAmmount = res.data.all;
+        vm.quotationsData.ammounts = {
+          labels: ["Hoy", "Resto del mes"],
+          data: [
+            vm.quotationsData.todayAmmount,
+            (vm.quotationsData.monthAmmount - vm.quotationsData.todayAmmount)
+          ],
+          colours: ["#C92933", "#48C7DB", "#FFCE56"],
+          options:{
+            scaleLabel: function(label){
+              return $filter('currency')(label.value);
+            },
+            tooltipTemplate: function(data){
+              return $filter('currency')(data.value)
+            }
+          }
+        };
+      });
 
-  vm.quotationData.ammounts = {
-    labels: ["Hoy", "Resto del mes"],
-    data: [vm.quotationData.todayAmmount, (vm.quotationData.monthAmmount - vm.quotationData.todayAmmount) ],
-    colours: ["#C92933", "#48C7DB", "#FFCE56"]
-  };
+    quotationService.getCountByUser($rootScope.user.id, dateRange)
+      .then(function(res){
+        console.log(res);
+        vm.quotationsData.todayQty = res.data.dateRange;
+        vm.quotationsData.monthQty = res.data.all;
+        vm.quotationsData.quantities = {
+          labels: ["Hoy", "Resto del mes"],
+          data: [
+            vm.quotationsData.todayQty,
+            (vm.quotationsData.monthQty - vm.quotationsData.todayQty)
+          ],
+          colours: ["#C92933", "#48C7DB", "#FFCE56"]
+        };
+      });
+  }
 
-  function getQuotationData(){
-    quotationService.getTotalsByUser($rootScope.user.id, {}).then(function(res){
-      vm.quotationData.todayAmmount = res.data.dateRange[0] ? res.data.dateRange[0].total : 0;
-      vm.quotationData.monthAmmount = res.data.all[0].total;
-      vm.quotationData.ammounts = {
-        labels: ["Hoy", "Resto del mes"],
-        data: [vm.quotationData.todayAmmount, (vm.quotationData.monthAmmount - vm.quotationData.todayAmmount) ],
-        colours: ["#C92933", "#48C7DB", "#FFCE56"],
-        options:{
-          scaleLabel: function(label){ return $filter('currency')(label.value)},
-          tooltipTemplate: function(data){ console.log(data); return $filter('currency')(data.value)}
-        }
-      };
-    });
-    quotationService.getCountByUser($rootScope.user.id, {}).then(function(res){
-      vm.quotationData.todayQty = res.data.dateRange;
-      vm.quotationData.monthQty = res.data.all;
-      vm.quotationData.quantities = {
-        labels: ["Hoy", "Resto del mes"],
-        data: [vm.quotationData.todayQty, (vm.quotationData.monthQty - vm.quotationData.todayQty) ],
-        colours: ["#C92933", "#48C7DB", "#FFCE56"]
-      };
-    });
+  function getOrdersData(){
+    var dateRange = {
+      startDate: moment().startOf('day'),
+      endDate: moment().endOf('day'),
+    };
+    orderService.getTotalsByUser($rootScope.user.id, dateRange)
+      .then(function(res){
+        vm.ordersData.todayAmmount = res.data.dateRange;
+        vm.ordersData.monthAmmount = res.data.all;
+        vm.ordersData.ammounts = {
+          labels: ["Hoy", "Resto del mes"],
+          data: [
+            vm.ordersData.todayAmmount,
+            (vm.ordersData.monthAmmount - vm.ordersData.todayAmmount)
+          ],
+          colours: ["#C92933", "#48C7DB", "#FFCE56"],
+          options:{
+            scaleLabel: function(label){
+              return $filter('currency')(label.value);
+            },
+            tooltipTemplate: function(data){
+              return $filter('currency')(data.value)
+            }
+          }
+        };
+      });
+
+    orderService.getCountByUser($rootScope.user.id, dateRange)
+      .then(function(res){
+        console.log(res);
+        vm.ordersData.todayQty = res.data.dateRange;
+        vm.ordersData.monthQty = res.data.all;
+        vm.ordersData.quantities = {
+          labels: ["Hoy", "Resto del mes"],
+          data: [
+            vm.ordersData.todayQty,
+            (vm.ordersData.monthQty - vm.ordersData.todayQty)
+          ],
+          colours: ["#C92933", "#48C7DB", "#FFCE56"]
+        };
+      });
   }
 
   function init(){
-    vm.getQuotationData();
+    vm.getQuotationsData();
+    vm.getOrdersData()
   }
 
   vm.init();
@@ -69,10 +116,8 @@ function DashboardCtrl($routeParams , $rootScope, $filter,categoriesService, pro
 }
 
 DashboardCtrl.$inject = [
-  '$routeParams',
   '$rootScope',
   '$filter',
-  'categoriesService',
-  'productService',
+  'orderService',
   'quotationService'
 ];

@@ -17,11 +17,9 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.applyFilters = applyFilters;
   vm.onDateStartSelect = onDateStartSelect;
   vm.onDateEndSelect = onDateEndSelect;
-  vm.getQuotationData = getQuotationData;
-
+  vm.getQuotationsData = getQuotationsData;
   vm.filters = false;
   vm.dateEnd = false;
-
   vm.managers = [
     {
       sellers: [{},{},{},{}]
@@ -33,7 +31,6 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
       sellers: [{},{},{},{}]
     }
   ];
-
   vm.columnsLeads = [
     {key: 'folio', label:'Folio'},
     {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
@@ -50,56 +47,53 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
       ]
     },
   ];
-
-
+  vm.quotationsData = {};
   vm.apiResourceLeads = quotationService.getList;
 
-  vm.todayQty = 5;
-  vm.monthQty = 20;
 
-  vm.todayAmmount = 38542;
-  vm.monthAmmount = 257982;
+  function getQuotationsData(){
+    var dateRange = {
+      startDate: moment().startOf('day'),
+      endDate: moment().endOf('day'),
+    };
+    quotationService.getTotalsByUser($rootScope.user.id, dateRange)
+      .then(function(res){
+        vm.quotationsData.todayAmmount = res.data.dateRange;
+        vm.quotationsData.monthAmmount = res.data.all;
+        vm.quotationsData.ammounts = {
+          labels: ["Hoy", "Resto del mes"],
+          data: [
+            vm.quotationsData.todayAmmount,
+            (vm.quotationsData.monthAmmount - vm.quotationsData.todayAmmount)
+          ],
+          colours: ["#C92933", "#48C7DB", "#FFCE56"],
+          options:{
+            scaleLabel: function(label){
+              return $filter('currency')(label.value);
+            },
+            tooltipTemplate: function(data){
+              return $filter('currency')(data.value)
+            }
+          }
+        };
+      });
 
-  vm.quantities = {
-    labels: ["Hoy", "Resto del mes"],
-    data: [vm.todayQty, (vm.monthQty - vm.todayQty) ],
-    colours: ["#C92933", "#48C7DB", "#FFCE56"]
-  };
-
-  vm.ammounts = {
-    labels: ["Hoy", "Resto del mes"],
-    data: [vm.todayAmmount, (vm.monthAmmount - vm.todayAmmount) ],
-    colours: ["#C92933", "#48C7DB", "#FFCE56"]
-  };
-
-  function getQuotationData(){
-    vm.quotationData = {};
-
-    quotationService.getTotalsByUser($rootScope.user.id, {}).then(function(res){
-      vm.quotationData.todayAmmount = res.data.dateRange[0] ? res.data.dateRange[0].total : 0;
-      vm.quotationData.monthAmmount = res.data.all[0].total;
-      vm.quotationData.ammounts = {
-        labels: ["Hoy", "Resto del mes"],
-        data: [vm.quotationData.todayAmmount, (vm.quotationData.monthAmmount - vm.quotationData.todayAmmount) ],
-        colours: ["#C92933", "#48C7DB", "#FFCE56"],
-        options:{
-          scaleLabel: function(label){ return $filter('currency')(label.value)},
-          tooltipTemplate: function(data){ console.log(data); return $filter('currency')(data.value)}
-        }
-      };
-      console.log(vm.quotationData);
-    });
-    quotationService.getCountByUser($rootScope.user.id, {}).then(function(res){
-      vm.quotationData.todayQty = res.data.dateRange;
-      vm.quotationData.monthQty = res.data.all;
-      vm.quotationData.quantities = {
-        labels: ["Hoy", "Resto del mes"],
-        data: [vm.quotationData.todayQty, (vm.quotationData.monthQty - vm.quotationData.todayQty) ],
-        colours: ["#C92933", "#48C7DB", "#FFCE56"]
-      };
-      console.log(vm.quotationData);
-    });
+    quotationService.getCountByUser($rootScope.user.id, dateRange)
+      .then(function(res){
+        console.log(res);
+        vm.quotationsData.todayQty = res.data.dateRange;
+        vm.quotationsData.monthQty = res.data.all;
+        vm.quotationsData.quantities = {
+          labels: ["Hoy", "Resto del mes"],
+          data: [
+            vm.quotationsData.todayQty,
+            (vm.quotationsData.monthQty - vm.quotationsData.todayQty)
+          ],
+          colours: ["#C92933", "#48C7DB", "#FFCE56"]
+        };
+      });
   }
+
 
   function init(){
     var monthRange = commonService.getMonthDateRange();
@@ -114,7 +108,7 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
       end: vm.endDate
     };
     vm.user = $rootScope.user;
-    vm.getQuotationData();
+    vm.getQuotationsData();
   }
 
   function applyFilters(){
