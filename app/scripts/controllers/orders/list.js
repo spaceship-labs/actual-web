@@ -63,10 +63,10 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
     var monthRange = commonService.getMonthDateRange();
     vm.startDate = monthRange.start.toString();
     vm.endDate = monthRange.end.toString();
-    if( authService.isBroker($rootScope.user) ) {
-      console.log('es un broker');
+    vm.isBroker = authService.isBroker($rootScope.user);
+    if(vm.isBroker){
       vm.filters = {
-        User: $rootScope.user.id,
+        Broker: $rootScope.user.id,
       };
     }else{
       vm.filters = {

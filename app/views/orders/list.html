@@ -33,7 +33,11 @@
       </p>
     </div>
 
-    <div flex="30" class="input-element select-element-wrapper">
+    <div
+      ng-if="!vm.isBroker"
+      flex="30"
+      class="input-element select-element-wrapper"
+    >
       <label><strong>Buscar sobre:</strong></label>
       <select ng-model="vm.filters.User" class="select-element">
         <option ng-selected="vm.user.id == vm.filters.User" ng-value="vm.user.id">
@@ -44,7 +48,7 @@
         </option>
       </select>
     </div>
-    <div flex="20">
+    <div ng-if="!vm.isBroker" flex="20">
       <a ng-click="vm.applyFilters()" href="#" class="action-btn">Aplicar filtros</a>
     </div>
   </div>
