@@ -43,8 +43,6 @@ module.exports = function(config) {
       'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-material/angular-material.js',
       'bower_components/angular-material-datetimepicker/js/angular-material-datetimepicker.min.js',
-      'bower_components/Chart.js/Chart.js',
-      'bower_components/angular-chart.js/dist/angular-chart.js',
       'bower_components/datatables/media/js/jquery.dataTables.js',
       'bower_components/angular-datatables/dist/angular-datatables.js',
       'bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js',
@@ -72,6 +70,7 @@ module.exports = function(config) {
       'bower_components/photoswipe/dist/photoswipe-ui-default.js',
       'bower_components/ng-photoswipe/angular-photoswipe.min.js',
       'bower_components/angular-input-masks/angular-input-masks-standalone.js',
+      'bower_components/angular-chart.js/dist/angular-chart.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

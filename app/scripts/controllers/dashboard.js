@@ -35,7 +35,7 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
             vm.quotationsData.todayAmmount,
             (vm.quotationsData.monthAmmount - vm.quotationsData.todayAmmount)
           ],
-          colours: ["#C92933", "#48C7DB", "#FFCE56"],
+          colors: ["#C92933", "#48C7DB", "#FFCE56"],
           options:{
             scaleLabel: function(label){
               return $filter('currency')(label.value);
@@ -58,7 +58,7 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
             vm.quotationsData.todayQty,
             (vm.quotationsData.monthQty - vm.quotationsData.todayQty)
           ],
-          colours: ["#C92933", "#48C7DB", "#FFCE56"]
+          colors: ["#C92933", "#48C7DB", "#FFCE56"]
         };
       });
   }
@@ -78,7 +78,7 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
             vm.ordersData.todayAmmount,
             (vm.ordersData.monthAmmount - vm.ordersData.todayAmmount)
           ],
-          colours: ["#C92933", "#48C7DB", "#FFCE56"],
+          colors: ["#C92933", "#48C7DB", "#FFCE56"],
           options:{
             scaleLabel: function(label){
               return $filter('currency')(label.value);
@@ -101,7 +101,7 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
             vm.ordersData.todayQty,
             (vm.ordersData.monthQty - vm.ordersData.todayQty)
           ],
-          colours: ["#C92933", "#48C7DB", "#FFCE56"]
+          colors: ["#C92933", "#48C7DB", "#FFCE56"]
         };
       });
   }

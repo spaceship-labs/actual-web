@@ -74,7 +74,7 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
               return data.label + ': ' + $filter('currency')(data.value)
             }
           },
-          colours: ["#48C7DB","#EADE56"],
+          colors: ["#48C7DB","#EADE56"],
           data: [
             vm.current,
             vm.goal - vm.current

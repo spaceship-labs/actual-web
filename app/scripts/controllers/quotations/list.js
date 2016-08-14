@@ -66,7 +66,7 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
             vm.quotationsData.todayAmmount,
             (vm.quotationsData.monthAmmount - vm.quotationsData.todayAmmount)
           ],
-          colours: ["#C92933", "#48C7DB", "#FFCE56"],
+          colors: ["#C92933", "#48C7DB", "#FFCE56"],
           options:{
             scaleLabel: function(label){
               return $filter('currency')(label.value);
@@ -89,7 +89,7 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
             vm.quotationsData.todayQty,
             (vm.quotationsData.monthQty - vm.quotationsData.todayQty)
           ],
-          colours: ["#C92933", "#48C7DB", "#FFCE56"]
+          colors: ["#C92933", "#48C7DB", "#FFCE56"]
         };
       });
   }
