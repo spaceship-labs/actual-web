@@ -358,14 +358,12 @@
               </div>
               <div flex="30">
                 <div class="input-element select-element-wrapper">
-                  <label>Entrega aproximada</label>
-                  <select class="select-element" ng-model="vm.product.cart.delivery">
-                    <option
-                      ng-repeat="delivery in vm.deliveries"
-                      ng-selected="delivery.date == vm.product.cart.delivery.date"
-                      ng-value="delivery">
-                      {{delivery.date | date:"d/MMM/yyyy"}}
-                    </option>
+                  <label>Entrega aproximada{{vm.selectedDelivery}}</label>
+                  <select
+                    class="select-element"
+                    ng-model="vm.product.cart.delivery"
+                    ng-options="delivery.date | date: 'd/MMM/yyyy' for delivery in vm.deliveries"
+                  >
                   </select>
                 </div>
               </div>
