@@ -13,7 +13,9 @@
         createFromQuotation: createFromQuotation,
         addPayment: addPayment,
         getList: getList,
-        getById: getById
+        getById: getById,
+        getTotalsByUser: getTotalsByUser,
+        getCountByUser: getCountByUser
       };
 
       return service;
@@ -42,6 +44,16 @@
       function getById(id){
         var url = '/order/findbyid/' + id;
         return api.$http.post(url);
+      }
+
+      function getTotalsByUser(userId, params){
+        var url = '/order/user/'+userId+'/totals';
+        return api.$http.post(url,params);
+      }
+
+      function getCountByUser(userId, params){
+        var url = '/order/user/'+userId+'/count';
+        return api.$http.post(url,params);
       }
 
     }

@@ -10,14 +10,16 @@
 angular.module('dashexampleApp')
   .controller('OrdersListCtrl', OrdersListCtrl);
 
-function OrdersListCtrl($location,$routeParams, authService, $q ,productService, $rootScope, commonService, orderService){
+function OrdersListCtrl($location,$routeParams, authService, $q ,productService, $rootScope, commonService, orderService, $filter){
 
   var vm = this;
   vm.init = init;
   vm.applyFilters = applyFilters;
+  vm.getOrdersData = getOrdersData;
 
+  vm.currentDate = new Date();
   vm.dateRange = false;
-
+  vm.ordersData = {};
   vm.managers = [
     {
       sellers: [{},{},{},{}]
@@ -29,7 +31,6 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
       sellers: [{},{},{},{}]
     }
   ];
-
   vm.columnsOrders = [
     {key: 'folio', label:'Folio'},
     {key:'Client.CardName', label:'Cliente'},
@@ -48,16 +49,40 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
   vm.apiResourceOrders = orderService.getList;
 
 
-  vm.goal = 6230000;
-  vm.current = 5938776;
-  vm.rest = vm.goal - vm.current;
-  vm.real =  vm.current / (vm.goal/100);
+  vm.goal = 600000;
 
-  vm.chartOptions = {
-    labels: ["Venta al 28/05/2016", "Falta para el objetivo"],
-    data: [vm.current, vm.rest ],
-    colours: ["#48C7DB","#EADE56"]
-  };
+  function getOrdersData(){
+    var dateRange = {
+      startDate: moment().startOf('month'),
+      endDate: moment().endOf('day'),
+    };
+    orderService.getTotalsByUser($rootScope.user.id, dateRange)
+      .then(function(res){
+        vm.current = res.data.dateRange || 0;
+        vm.rest = vm.goal - vm.current;
+        vm.currentPercent = 100 - ( vm.current  / (vm.goal / 100) );
+        vm.chartOptions = {
+          labels: [
+            'Venta al ' + $filter('date')(new Date(),'d/MMM/yyyy'),
+            'Falta para el objetivo'
+          ],
+          options:{
+            tooltips: {
+              callbacks: {
+                label: function(tooltipItem, data) {
+                  return data.labels[tooltipItem.index] + ': ' + $filter('currency')(data.datasets[0].data[tooltipItem.index]);
+                }
+              }
+            }
+          },
+          colors: ["#48C7DB","#EADE56"],
+          data: [
+            vm.current,
+            vm.goal - vm.current
+          ],
+        }
+      });
+  }
 
   function init(){
     var monthRange = commonService.getMonthDateRange();
@@ -79,6 +104,7 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
       end: vm.endDate
     };
     vm.user = $rootScope.user;
+    vm.getOrdersData();
   }
 
   function applyFilters(){

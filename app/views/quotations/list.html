@@ -111,11 +111,12 @@
         <canvas
           id="pie"
           class="chart chart-pie"
-          chart-data="vm.quotationData.quantities.data"
-          chart-labels="vm.quotationData.quantities.labels"
-          chart-colours="vm.quotationData.quantities.colours"></canvas>
+          chart-options="vm.quotationsData.quantities.options"
+          chart-data="vm.quotationsData.quantities.data"
+          chart-labels="vm.quotationsData.quantities.labels"
+          chart-colors="vm.quotationsData.quantities.colors"></canvas>
         <p><strong>Hoy</strong> | <strong>Total</strong></p>
-        <p>{{ vm.quotationData.todayQty }} | {{vm.quotationData.monthQty}}</p>
+        <p>{{ vm.quotationsData.todayQty }} | {{vm.quotationsData.monthQty}}</p>
       </div>
       <div class="chart-section-col chart-section-legends" flex="20">
 
@@ -129,12 +130,12 @@
         <canvas
           id="pie"
           class="chart chart-pie"
-          options="vm.quotationData.ammounts.options"
-          chart-data="vm.quotationData.ammounts.data"
-          chart-labels="vm.quotationData.ammounts.labels"
-          chart-colours="vm.quotationData.ammounts.colours"></canvas>
+          chart-options="vm.quotationsData.ammounts.options"
+          chart-data="vm.quotationsData.ammounts.data"
+          chart-labels="vm.quotationsData.ammounts.labels"
+          chart-colors="vm.quotationsData.ammounts.colors"></canvas>
         <p><strong>Hoy</strong> | <strong>Total</strong></p>
-        <p>{{vm.quotationData.todayAmmount | currency}} | {{vm.quotationData.monthAmmount | currency}}</p>
+        <p>{{vm.quotationsData.todayAmmount | currency}} | {{vm.quotationsData.monthAmmount | currency}}</p>
       </div>
     </div>
 
