@@ -10,6 +10,7 @@
 
       var storePromotions = [];
       var service = {
+        addSeenTime: addSeenTime,
         advancedSearch: advancedSearch,
         //formatProduct: formatProduct,
         formatSingleProduct: formatSingleProduct,
@@ -210,6 +211,11 @@
         return api.$http.get(url, params).then(function(res){
           return res.data;
         });
+      }
+
+      function addSeenTime(itemCode){
+        var url = '/product/addseen/' + itemCode;
+        return api.$http.post(url);
       }
 
     }

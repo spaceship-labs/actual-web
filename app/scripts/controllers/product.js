@@ -99,6 +99,11 @@ function ProductCtrl(
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.product.cart.delivery = vm.deliveries[0];
         }
+
+        return productService.addSeenTime(vm.product.ItemCode);
+      })
+      .then(function(seenTime){
+        console.log(seenTime);
       })
       .catch(function(err){
         console.log(err);
