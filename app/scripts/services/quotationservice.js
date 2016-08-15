@@ -74,7 +74,7 @@
 
       function addDetail(quotationId, params){
         var url = '/quotation/adddetail/' + quotationId;
-        return api.$http.post(url,params);
+        return api.$http.post(url, params);
       }
 
       function removeDetail(id, quotationId){
@@ -227,7 +227,9 @@
           var detail = {
             Product: productId,
             quantity: params.quantity,
-            Quotation: quotationId
+            Quotation: quotationId,
+            shipDate: params.shipDate,
+            shipCompany: params.shipCompany
           };
           addDetail(quotationId, detail).then(function(res){
             setActiveQuotation(quotationId);
@@ -238,7 +240,14 @@
           //Crear cotizacion con producto agregado
           var params = {
             User: $rootScope.user.id,
-            Details:[ {Product: productId, quantity: params.quantity}  ]
+            Details: [
+              {
+                Product: productId,
+                quantity: params.quantity,
+                shipDate: params.shipDate,
+                shipCompany: params.shipCompany
+              }
+            ]
           };
           create(params).then(function(res){
             var quotation = res.data;

@@ -330,8 +330,11 @@ function ProductCtrl(
 
 
   function addToCart($event){
-    //cartService.addToCart(vm.product.id, params);
-    var params = {quantity: vm.product.cart.quantity};
+    var params = {
+      quantity: vm.product.cart.quantity,
+      shipDate: vm.product.cart.delivery.date,
+      shipCompany: vm.product.cart.delivery.company
+    };
     vm.isLoading = true;
     quotationService.addProduct(vm.product.id, params);
   }

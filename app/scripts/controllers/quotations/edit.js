@@ -62,6 +62,7 @@ function QuotationsEditCtrl(
     init:init,
     removeDetail: removeDetail,
     toggleRecord: toggleRecord,
+    daysDiff: daysDiff
   });
 
   vm.brokers = [];
@@ -260,6 +261,15 @@ function QuotationsEditCtrl(
     }else{
       dialogService.showDialog('Esta cotización ya tiene un pedido asignado');
     }
+  }
+
+  function daysDiff(a, b) {
+    a = (a && new Date(a)) || new Date();
+    b = (b && new Date(b)) || new Date();
+    var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    var utc1        = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    var utc2        = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+    return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
   }
 
   vm.init();

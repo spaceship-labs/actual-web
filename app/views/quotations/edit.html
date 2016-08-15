@@ -137,7 +137,11 @@
                     </h3>
                   </div>
                 </div>
-                <p class="bottom-text"><strong>Entrega aproximada:</strong> 1-Abr-2016 (en 8 dias)</p>
+                <p class="bottom-text">
+                  <strong>Entrega aproximada:</strong>
+                  {{detail.shipDate | date: "d/MMM/yyyy"}}
+                  (en {{vm.daysDiff(detail.shipDate)}} días)
+                </p>
               </div>
               <!--END ITEM DATA-->
 
