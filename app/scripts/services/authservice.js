@@ -51,14 +51,8 @@
       }
 
       function isBroker(user){
-        var role = user.role || {};
-        if(role.name == 'broker'){
-          return true;
-        }
-        return false;
+        return !!(user && user.role && user.role.name == 'broker');
       }
 
     }
-
-
 })();
