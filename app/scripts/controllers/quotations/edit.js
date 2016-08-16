@@ -24,7 +24,8 @@ function QuotationsEditCtrl(
   api,
   cartService,
   dialogService,
-  userService
+  userService,
+  packageService
 ){
   var vm = this;
   angular.extend(vm, {
@@ -53,12 +54,14 @@ function QuotationsEditCtrl(
         appendTo: 'body',
         disableTextInput:true
     },
+    promotionPackages: [],
     addNewProduct: addNewProduct,
     addRecord: addRecord,
     alertRemoveDetail: alertRemoveDetail,
     attachImage: attachImage,
     closeQuotation: closeQuotation,
     continueBuying: continueBuying,
+    getPromotionPackageById: getPromotionPackageById,
     init:init,
     removeDetail: removeDetail,
     toggleRecord: toggleRecord,
@@ -159,7 +162,6 @@ function QuotationsEditCtrl(
       vm.quotation.Broker = broker;
     });
 
-
     quotationService.getById($routeParams.id)
       .then(function(res){
         vm.isLoading = false;
@@ -177,12 +179,33 @@ function QuotationsEditCtrl(
       .then(function(details2){
         vm.quotation.Details = details2;
         vm.isLoadingRecords = true;
+        console.log(vm.quotation.Details);
         return quotationService.getRecords(vm.quotation.id);
       })
       .then(function(result){
-        console.log(result);
+        var promisesArray = [];
         vm.quotation.Records = result.data;
         vm.isLoadingRecords = false;
+        var packagesIds = vm.quotation.Details.reduce(function(acum, d){
+          if(d.PromotionPackage){
+            acum.push(d.PromotionPackage);
+          }
+          return acum;
+        },[]);
+        packagesIds = _.uniq(packagesIds);
+        packagesIds.forEach(function(pId){
+          promisesArray.push(packageService.getDetailedPackage(pId));
+        });
+        if(promisesArray.length > 0){
+          return $q.all(promisesArray);
+        }
+        return [];
+      })
+      .then(function(results){
+        console.log(results);
+        vm.promotionPackages = results.map(function(r){
+          return r.data;
+        });
       })
       .catch(function(err){
         console.log(err);
@@ -193,6 +216,13 @@ function QuotationsEditCtrl(
     });
   }
 
+  function getPromotionPackageById(id){
+    if(id){
+      //console.log(vm.promotionPackages);
+      return _.findWhere(vm.promotionPackages, {id:id});
+    }
+    return {};
+  }
 
   function attachImage(file){
     vm.newRecord.file = file;
@@ -236,8 +266,7 @@ function QuotationsEditCtrl(
   function continueBuying(){
     if(!vm.quotation.Order){
       vm.isLoading = true;
-      //vm.quotation.total = quotationService.calculateTotal(vm.quotation);
-      //vm.quotation.subTotal = quotationService.calculateSubTotal(vm.quotation);
+
       var params = angular.copy(vm.quotation);
       if(params.Details){
         params.Details = params.Details.map(function(detail){
@@ -254,7 +283,6 @@ function QuotationsEditCtrl(
         }else{
           console.log('No hay cliente');
           quotationService.setActiveQuotation(vm.quotation.id);
-          //$location.path('/continuequotation?goToCheckout');
           $location.path('/continuequotation').search({goToCheckout:true});
         }
       });

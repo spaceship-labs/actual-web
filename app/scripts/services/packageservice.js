@@ -10,6 +10,7 @@
 
       var service = {
         getList: getList,
+        getDetailedPackage: getDetailedPackage,
         getProductsByPackage: getProductsByPackage,
       };
 
@@ -21,6 +22,11 @@
 
       function getProductsByPackage(id){
         var url = '/packages/'+id+'/products';
+        return api.$http.post(url);
+      }
+
+      function getDetailedPackage(id){
+        var url = '/packages/details/'+id;
         return api.$http.post(url);
       }
 

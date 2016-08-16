@@ -346,6 +346,13 @@
               <div flex="15">
                 <div class="product-view-qty input-element">
                   <label>Piezas</label>
+                  <select
+                    class="select-element"
+                    ng-model="vm.product.cart.quantity"
+                    ng-options="qty for qty in vm.getQtyArray(vm.product.cart.delivery.available)"
+                  >
+                  </select>
+                  <!--
                   <div class="input-element-inner">
                     <input
                       ng-model="vm.product.cart.quantity"
@@ -354,6 +361,7 @@
                       type="number"
                     >
                   </div>
+                  -->
                 </div>
               </div>
               <div flex="30">

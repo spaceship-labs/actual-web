@@ -142,6 +142,9 @@
                   {{detail.shipDate | date: "d/MMM/yyyy"}}
                   (en {{vm.daysDiff(detail.shipDate)}} días)
                 </p>
+                <p class="bottom-text">
+                  Paquete: {{ vm.getPromotionPackageById(detail.PromotionPackage).Name }}
+                </p>
               </div>
               <!--END ITEM DATA-->
 
@@ -182,7 +185,7 @@
             </tr>
             <tr>
               <td>Descuento:</td>
-              <td><strong>-{{ vm.quotation.discount | currency }}</strong></td>
+              <td><strong>{{ vm.quotation.discount | currency }}</strong></td>
             </tr>
             <tr>
               <td>Costo de envío:</td>

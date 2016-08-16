@@ -10,7 +10,15 @@
 angular.module('dashexampleApp')
   .controller('OffersCtrl', OffersCtrl);
 
-function OffersCtrl(packageService, quotationService, api){
+function OffersCtrl(
+  $q,
+  packageService,
+  quotationService,
+  api,
+  localStorageService,
+  productService,
+  dialogService
+){
   var vm = this;
   angular.extend(vm,{
     init:init,
@@ -36,18 +44,60 @@ function OffersCtrl(packageService, quotationService, api){
 
   function getProductsByPackage(packageId){
     vm.isLoading = true;
+    var companyActive = localStorageService.get('companyActive');
+    var products = [];
+    var packageProducts = [];
     packageService.getProductsByPackage(packageId)
       .then(function(res){
-        var products = res.data;
-        var packageProducts = products.map(function(p){
+        var promises = [];
+        products = res.data;
+        packageProducts = products.map(function(p){
+          promises.push(productService.delivery(p.ItemCode, companyActive));
           var pp = {
             id: p.id,
-            quantity: p.packageInfo.quantity
+            quantity: p.packageInfo.quantity,
+            name: p.Name
           };
           return pp;
         });
-        console.log(products);
-        console.log(packageProducts);
+
+        return $q.all(promises);
+        //quotationService.addMultipleProducts(packageProducts);
+      })
+      .then(function(deliveries){
+        var stockAvailable = true;
+        var auxProducts = [];
+        packageProducts = packageProducts.map(function(pp, index){
+          var deliveryOptions = deliveries[index] || [];
+          var availableFlag = false;
+          for(var i = (deliveryOptions.length-1); i>=0; i--){
+            var d = deliveryOptions[i];
+            if( pp.quantity <=  parseInt(d.available) ){
+              pp.shipDate = d.date;
+              pp.shipCompany = d.company;
+              pp.promotionPackage = packageId;
+              availableFlag = true;
+            }else{
+              stockAvailable = false;
+              availableFlag = false;
+            }
+          }
+          auxProducts.push(pp);
+          return pp;
+        });
+        if(!stockAvailable){
+          var htmlProducts = auxProducts.reduce(function(acum, curr){
+            acum+="<li>"+curr.name+'</li>';
+            return acum;
+          }, '<ul>');
+          htmlProducts += '</ul>';
+          dialogService.showDialog(
+            'No hay stock disponible de los siguientes productos: '
+            + htmlProducts
+          );
+          vm.isLoading = false;
+          return;
+        }
         quotationService.addMultipleProducts(packageProducts);
       })
       .catch(function(err){
@@ -58,4 +108,12 @@ function OffersCtrl(packageService, quotationService, api){
   vm.init();
 }
 
-OffersCtrl.$inject = ['packageService','quotationService','api'];
+OffersCtrl.$inject = [
+  '$q',
+  'packageService',
+  'quotationService',
+  'api',
+  'localStorageService',
+  'productService',
+  'dialogService'
+];

@@ -229,7 +229,8 @@
             quantity: params.quantity,
             Quotation: quotationId,
             shipDate: params.shipDate,
-            shipCompany: params.shipCompany
+            shipCompany: params.shipCompany,
+            PromotionPackage: params.promotionPackage
           };
           addDetail(quotationId, detail).then(function(res){
             setActiveQuotation(quotationId);
@@ -245,7 +246,8 @@
                 Product: productId,
                 quantity: params.quantity,
                 shipDate: params.shipDate,
-                shipCompany: params.shipCompany
+                shipCompany: params.shipCompany,
+                PromotionPackage: params.promotionPackage
               }
             ]
           };
@@ -268,7 +270,10 @@
             var detail = {
               Product: p.id,
               quantity: p.quantity,
-              Quotation: quotationId
+              Quotation: quotationId,
+              shipDate: p.shipDate,
+              shipCompany: p.shipCompany,
+              PromotionPackage: p.promotionPackage
             };
             detailsPromises.push(addDetail(quotationId, detail));
           });
@@ -288,7 +293,10 @@
             Details: products.map(function(p){
               var detail = {
                 Product: p.id,
-                quantity: p.quantity
+                quantity: p.quantity,
+                shipDate: p.shipDate,
+                shipCompany: p.shipCompany,
+                PromotionPackage: p.promotionPackage
               };
               return detail;
             })

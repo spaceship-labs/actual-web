@@ -46,6 +46,7 @@ function ProductCtrl(
     getGroupProducts: getGroupProducts,
     getImageSizes: getImageSizes,
     getLowestCategory: getLowestCategory,
+    getQtyArray: getQtyArray,
     init: init,
     loadProductFilters: loadProductFilters,
     loadVariants: loadVariants,
@@ -352,6 +353,15 @@ function ProductCtrl(
     .then(function(answer) {
       console.log(answer);
     })
+  }
+
+  function getQtyArray(n){
+    n = n || 0;
+    var arr = [];
+    for(var i=0;i<=n;i++){
+      arr.push(i);
+    }
+    return arr;
   }
 
 
