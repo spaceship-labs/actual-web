@@ -92,6 +92,7 @@ function ProductCtrl(
         return productService.delivery(productId, companyActive);
       })
       .then(function(delivery){
+        console.log(delivery);
         vm.available = delivery.reduce(function(acum, current) {
           current.available = parseInt(current.available);
           return acum + current.available;
@@ -189,8 +190,6 @@ function ProductCtrl(
     return deferred.promise;
   }
 
-
-
   function loadVariants(){
     vm.getGroupProducts().then(function(products){
       vm.variants = {};
@@ -242,7 +241,6 @@ function ProductCtrl(
       };
       vm.galleryImages.push(img);
     }
-
 
     if(vm.product.files){
       //TEMPORAL
@@ -358,8 +356,8 @@ function ProductCtrl(
   function getQtyArray(n){
     n = n || 0;
     var arr = [];
-    for(var i=0;i<=n;i++){
-      arr.push(i);
+    for(var i=0;i<n;i++){
+      arr.push(i+1);
     }
     return arr;
   }

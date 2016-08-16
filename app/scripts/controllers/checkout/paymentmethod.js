@@ -26,21 +26,25 @@ function CheckoutPaymentmethodCtrl(
     pmPeriodService,
     productService,
     quotationService,
-    siteService
+    siteService,
+    authService
   ){
   var vm = this;
 
   angular.extend(vm,{
     addPayment: addPayment,
     applyTransaction: applyTransaction,
+    authorizeOrder: authorizeOrder,
     createOrder: createOrder,
     clearActiveMethod: clearActiveMethod,
     chooseMethod: chooseMethod,
     getGroupByPayments: getGroupByPayments,
     getPaymentMethods: getPaymentMethods,
     getExchangeRate:getExchangeRate,
+    getPaidPercentage: getPaidPercentage,
     init: init,
     isActiveGroup: isActiveGroup,
+    isMinimumPaid: isMinimumPaid,
     selectMultiple: selectMultiple,
     selectSingle: selectSingle,
     setMethod: setMethod,
@@ -59,7 +63,7 @@ function CheckoutPaymentmethodCtrl(
       vm.quotation = res.data;
 
       if(vm.quotation.Order){
-        $location.path('/checkout/order/' + vm.quotation.Order);
+        $location.path('/checkout/order/' + vm.quotation.Order.id);
       }
 
       //vm.quotation.Client.ewallet = 600;
@@ -227,6 +231,7 @@ function CheckoutPaymentmethodCtrl(
         || payment.ammount < 0
       ){
       vm.isLoadingPayments = true;
+      vm.isLoading = true;
       quotationService.addPayment(vm.quotation.id, payment)
         .then(function(res){
           if(res.data){
@@ -240,12 +245,14 @@ function CheckoutPaymentmethodCtrl(
           }
           vm.quotation.Payments.push(payment);
           vm.isLoadingPayments = false;
+          vm.isLoading = false;
           delete vm.activeMethod.ammount;
           delete vm.activeMethod.verficiationCode;
         })
         .catch(function(err){
           console.log(err);
           vm.isLoadingPayments = false;
+          vm.isLoading = false;
           dialogService.showDialog(err.data);
         });
     }else{
@@ -285,6 +292,54 @@ function CheckoutPaymentmethodCtrl(
       });
     }else{
       commonService.showDialog('Revisa los datos, e intenta de nuevo');
+    }
+  }
+
+  function authManager(manager){
+    vm.isLoading = true;
+    authService.authManager(manager)
+      .then(function(res){
+        var manager = res.data;
+        if(!manager.id){
+          return $q.reject('Error en la autorización');
+        }
+        var params = {
+          Manager: manager.id,
+          minPaidPercentage: 60,
+        };
+        return quotationService.update(vm.quotation.id, params);
+      })
+      .then(function(quotationUpdated){
+        console.log(quotationUpdated);
+        vm.isLoading = false;
+      })
+      .catch(function(err){
+        vm.isLoading = false;
+        console.log(err);
+        dialogService.showDialog('Error en la autorización');
+      });
+  }
+
+  function authorizeOrder(ev, method, ammount) {
+    //if( method && ammount && !isNaN(ammount) ){
+    if( getPaidPercentage() >= 60 ){
+      var controller  = AuthorizeOrderController;
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
+      $mdDialog.show({
+        controller: ['$scope', '$mdDialog', controller],
+        templateUrl: 'views/checkout/authorize-dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: useFullScreen,
+      })
+      .then(function(manager) {
+        authManager(manager);
+      }, function() {
+        console.log('No autorizado');
+      });
+    }else{
+      commonService.showDialog('La suma pagada debe ser mayor o igual al 60% del total de la orden');
     }
   }
 
@@ -348,9 +403,24 @@ function CheckoutPaymentmethodCtrl(
     };
   }
 
+  function AuthorizeOrderController($scope, $mdDialog){
+    $scope.manager = {};
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+    $scope.authorize = function(form) {
+      if(form.$valid){
+        $mdDialog.hide($scope.manager);
+      }
+    };
+  }
+
 
   function createOrder(form){
-    if(vm.quotation.ammountPaid >= vm.quotation.total){
+    if( isMinimumPaid() ){
       vm.isLoading = true;
       var params = {
         paymentGroup: vm.activeMethod.group || 1
@@ -369,6 +439,14 @@ function CheckoutPaymentmethodCtrl(
     }
   }
 
+  function getPaidPercentage(){
+    var percentage = 0;
+    if(vm.quotation){
+      percentage = vm.quotation.ammountPaid / (vm.quotation.total / 100);
+    }
+    return percentage;
+  }
+
   function roundCurrency(ammount){
     var aux = Math.floor(ammount);
     var cents = (ammount - aux);
@@ -376,6 +454,16 @@ function CheckoutPaymentmethodCtrl(
       cents = Math.ceil(cents/0.5) * 0.5;
     }
     return aux + cents;
+  }
+
+  function isMinimumPaid(){
+    if(vm.quotation){
+      var minPaidPercentage = vm.quotation.minPaidPercentage || 100;
+      if( getPaidPercentage() >= minPaidPercentage ){
+        return true;
+      }
+    }
+    return false;
   }
 
   vm.init();

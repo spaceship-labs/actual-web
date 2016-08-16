@@ -222,8 +222,21 @@
           <table>
             <tr>
               <td><strong>Pagado:</strong></td>
-              <td><strong>{{ vm.roundCurrency(vm.quotation.ammountPaid) | currency }}</strong></td>
+              <td>
+                <strong>
+                  {{ vm.roundCurrency(vm.quotation.ammountPaid) | currency }}
+                </strong>
+              </td>
             </tr>
+            <tr>
+              <td><strong>Porcentaje pagado:</strong></td>
+              <td>
+                <strong>
+                  {{ vm.getPaidPercentage() | number:2 }}%
+                </strong>
+              </td>
+            </tr>
+
             <tr>
               <td><strong>Restante:</strong></td>
               <td>
@@ -252,12 +265,32 @@
             type="submit"
             value="CONTINUAR"
             class="cart-view-btn"
-            ng-disabled="(vm.quotation.ammountPaid < vm.quotation.total)"
-            ng-class="{'cart-view-btn-disabled' : (vm.quotation.ammountPaid < vm.quotation.total) }">
+            ng-disabled="!vm.isMinimumPaid()"
+            ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid() }">
 
-          <p class="cart-summary-note">*Se necesita saldar el monto total para poder procesar la venta</p>
+          <p class="cart-summary-note">
+            *Se necesita saldar el monto total para poder procesar la venta
+          </p>
 
-          <p class="cart-summary-note">*Hacer click para generar el folio de la venta.</p>
+          <p class="cart-summary-note">
+            *Hacer click para generar el folio de la venta.
+          </p>
+
+          <p
+            ng-if="vm.quotation.minPaidPercentage != 60"
+            class="cart-summary-custom-link"
+          >
+            <a ng-click="vm.authorizeOrder()" href="#">
+              Autorizar orden con el 60% pagado (o mayor) del total.
+            </a>
+          </p>
+
+          <p
+            ng-if="vm.quotation.minPaidPercentage == 60"
+            class="cart-summary-note"
+          >
+            Autorizado con el 60% minimo pagado por: {{vm.quotation.Manager.firstName}} {{vm.quotation.Manager.lastName}}.
+          </p>
 
         </div>
 

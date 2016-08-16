@@ -20,6 +20,7 @@ function UserProfileCtrl($rootScope, $window, $location, $mdDialog, commonServic
   vm.init = init;
   vm.getCashReport = getCashReport;
   vm.groupPayments = groupPayments;
+  vm.getTotalGroup = getTotalGroup;
   vm.print = print;
 
   if(vm.user.userType == 'broker'){
@@ -100,6 +101,19 @@ function UserProfileCtrl($rootScope, $window, $location, $mdDialog, commonServic
     });
     console.log(groups);
     return groups;
+  }
+
+  function getTotalGroup(group){
+    var total = group.payments.reduce(function(acum, current){
+      if(current.currency == 'usd'){
+        console.log('dolares');
+        acum += (current.ammount * current.exchangeRate);
+      }else{
+        acum += current.ammount;
+      }
+      return acum;
+    },0);
+    return total;
   }
 
   function showConfirm() {

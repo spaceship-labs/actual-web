@@ -201,14 +201,14 @@
     <h3 ng-if="!group.terminal"><strong>{{group.name}} | {{group.terminal}}</strong></h3>
     <div>
       <div layout="row">
-        <div class="payment-item-cell" flex="25"><strong>ID Pago</strong></div>
-        <div class="payment-item-cell" flex><strong>Tienda</strong></div>
-        <div class="payment-item-cell" flex><strong>Verificación</strong></div>
-        <div class="payment-item-cell" flex="15"><strong>Fecha</strong></div>
-        <div class="payment-item-cell" flex><strong>Pedido</strong></div>
-        <div class="payment-item-cell" flex><strong>Cantidad</strong></div>
-        <div class="payment-item-cell" flex><strong>Moneda</strong></div>
-        <div class="payment-item-cell" flex><strong>Tipo de cambio</strong></div>
+        <div class="payment-item-header" flex="25"><strong>ID Pago</strong></div>
+        <div class="payment-item-header" flex><strong>Tienda</strong></div>
+        <div class="payment-item-header" flex><strong>Verificación</strong></div>
+        <div class="payment-item-header" flex="15"><strong>Fecha</strong></div>
+        <div class="payment-item-header" flex><strong>Pedido</strong></div>
+        <div class="payment-item-header" flex><strong>Cantidad</strong></div>
+        <div class="payment-item-header" flex><strong>Moneda</strong></div>
+        <div class="payment-item-header" flex><strong>Tipo de cambio</strong></div>
       </div>
       <div layout="row" ng-repeat="payment in group.payments" class="payment-item">
         <div class="payment-item-cell" flex="25">{{payment.id}}</div>
@@ -221,6 +221,9 @@
         <div class="payment-item-cell" flex>{{payment.exchangeRate | currency}}</div>
       </div>
     </div>
+    <p class="pull-right total-group">
+      <strong>Total: </strong> {{vm.getTotalGroup(group) | currency}} MXN
+    </p>
   </div>
 
   <div layout="row" layout-align="center center" class="form-view-btns no-margin">

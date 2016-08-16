@@ -25,7 +25,7 @@ function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams
       vm.isLoading = false;
 
       if(vm.quotation.Order){
-        $location.path('/checkout/order/' + vm.quotation.Order);
+        $location.path('/checkout/order/' + vm.quotation.Order.id);
       }
 
       //fillin address data with client info

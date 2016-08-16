@@ -319,12 +319,14 @@ angular
           }
           return config;
         },
+        /*
         responseError: function (response) {
           if (response.status === 401 || response.status === 403) {
             $location.path('/');
           }
           return $q.reject(response);
         }
+        */
       };
     }]);
 

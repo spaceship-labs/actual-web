@@ -9,6 +9,7 @@
     function authService($http,$rootScope,$location,localStorageService, api){
 
       var service = {
+        authManager: authManager,
         signUp: signUp,
         signIn: signIn,
         logout: logout,
@@ -29,6 +30,12 @@
         localStorageService.remove('quotation');
         localStorageService.remove('broker');
         $http.post(api.baseUrl + '/auth/signin', data).success(success).error(error);
+      }
+
+      function authManager(params){
+        var url = '/auth/manager';
+        console.log(url);
+        return api.$http.post(url, params);
       }
 
       function logout(success) {

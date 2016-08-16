@@ -54,6 +54,7 @@ md-dialog .md-button.md-primary{
 .no-border{border: 0!important;}
 .no-margin{margin: 0!important}
 .pull-left{text-align: left!important;}
+.pull-right{text-align: right!important;}
 .absolute-link{
   position: absolute;
   left: 0;
@@ -112,6 +113,9 @@ md-dialog .md-button.md-primary{
   max-width: 264px;
 }
 
+.italic-style{
+  font-style: italic;
+}
 .absolute-menus{position: relative;}
 .hl-text{color: #E2023F;}
 .hl-text-v2{color: #33BA2C}
@@ -2731,6 +2735,15 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 11px;
 }
 
+.cart-view .cart-summary-custom-link{
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.cart-view .cart-summary-custom-link a{
+  color: #2B90DC;
+}
+
 .cart-view hr{
   border: 0;
   height: 1px;
@@ -3247,6 +3260,36 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 
 /*---------------/
+  #AUTHORIZE DIALOG
+/*--------------*/
+.authorize-dialog .authorize-dialog-inner{
+  padding: 15px 20px;
+  max-width: 600px;
+}
+.authorize-dialog h2{
+  font-weight: 400;
+  font-size: 18px;
+  margin: 4px 0;
+}
+.authorize-dialog hr{
+  height: 2px;
+  background: #000;
+  border:0;
+  margin: 10px 0;
+}
+.authorize-dialog h2 i{
+  color: #33BA2C;
+  font-size: 24px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+.authorize-dialog .text-note{
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+
+/*---------------/
   #CHECKOUT CLIENT INFO
 /*---------------*/
 .client-checkout .input-element label{margin-bottom: 5px;}
@@ -3454,7 +3497,14 @@ padding-left: 16px;
 .cash-report .payment-group + .payment-group{
   border-top: 1px solid;
 }
-.cash-report .payment-item-cell{padding: 6px}
+.cash-report .payment-item-header,
+.cash-report .payment-item-cell{
+  padding: 6px;
+  text-align: right;
+}
+.cash-report .total-group{
+  font-size:18px;
+}
 
 /*---------------/
   #FISCAL ADDRESS INFO
