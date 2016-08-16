@@ -208,6 +208,7 @@
         <div class="payment-item-cell" flex><strong>Pedido</strong></div>
         <div class="payment-item-cell" flex><strong>Cantidad</strong></div>
         <div class="payment-item-cell" flex><strong>Moneda</strong></div>
+        <div class="payment-item-cell" flex><strong>Tipo de cambio</strong></div>
       </div>
       <div layout="row" ng-repeat="payment in group.payments" class="payment-item">
         <div class="payment-item-cell" flex="25">{{payment.id}}</div>
@@ -217,15 +218,16 @@
         <div class="payment-item-cell" flex>#{{payment.Order.folio}}</div>
         <div class="payment-item-cell" flex>{{payment.ammount | currency}}</div>
         <div class="payment-item-cell to-upper" flex>{{payment.currency}}</div>
+        <div class="payment-item-cell" flex>{{payment.exchangeRate | currency}}</div>
       </div>
     </div>
   </div>
 
-  <div layout="row" class="form-view-btns no-margin">
+  <div layout="row" layout-align="center center" class="form-view-btns no-margin">
     <button
       ng-click="vm.print()"
       flex="50"
-      class="form-view-btn form-view-btn-primary"
+      class="form-view-btn form-view-btn-primary print-btn"
     >
       Imprimir reporte
     </button>

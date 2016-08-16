@@ -28,10 +28,10 @@ function UserProfileCtrl($rootScope, $window, $location, $mdDialog, commonServic
 
   function init(){
     var monthRange = commonService.getMonthDateRange();
-    vm.cashRegister.startDate = monthRange.start;
-    vm.cashRegister.endDate = monthRange.end;
-    vm.cashRegister.startTime = angular.copy(monthRange.start);
-    vm.cashRegister.endTime = angular.copy(monthRange.end);
+    vm.cashRegister.startDate = moment().startOf('day');
+    vm.cashRegister.endDate = moment().endOf('day');
+    vm.cashRegister.startTime = moment().startOf('day');
+    vm.cashRegister.endTime = moment().endOf('day');
   }
 
   function update(form){

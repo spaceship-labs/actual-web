@@ -54,12 +54,13 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
   }
 
   function getProductsByCategory(next){
-    vm.isLoading = true;
+    //vm.isLoading = true;
     var filtervalues = [];
     if (next) {
       vm.page += 1;
     } else  {
       vm.page = 1;
+      //vm.isLoading = true;
     }
     filtervalues = vm.filters.reduce(function(acum, current) {
       return acum.concat(current.Values);
@@ -81,7 +82,7 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
       return productService.formatProducts(products);
     })
     .then(function(productsFormatted){
-      vm.isLoading = false;
+      //vm.isLoading = false;
       if (next) {
         vm.products = vm.products.concat(productsFormatted);
       } else {

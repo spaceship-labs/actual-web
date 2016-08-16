@@ -29,7 +29,6 @@ function OffersCtrl(
     vm.isLoading = true;
     packageService.getList()
       .then(function(res){
-        console.log(res);
         vm.packages = res.data.data || [];
         vm.packages = vm.packages.map(function(p){
           p.image = api.baseUrl + '/uploads/groups/' + p.icon_filename;
@@ -70,6 +69,10 @@ function OffersCtrl(
         packageProducts = packageProducts.map(function(pp, index){
           var deliveryOptions = deliveries[index] || [];
           var availableFlag = false;
+          if(deliveryOptions.length == 0){
+            stockAvailable = false;
+            availableFlag = false;
+          }
           for(var i = (deliveryOptions.length-1); i>=0; i--){
             var d = deliveryOptions[i];
             if( pp.quantity <=  parseInt(d.available) ){
