@@ -252,7 +252,9 @@
               <div ng-if="vm.available">
                 <table>
                   <tr ng-repeat="delivery in vm.deliveries">
-                    <td>{{delivery.date | date: "d/MMM/yyyy"}} (en {{delivery.days}} días)</td>
+                    <td>
+                      {{delivery.date | date: "d/MMM/yyyy"}} (en {{delivery.days}} días) | {{ vm.getWarehouseName(delivery.company) }}
+                    </td>
                     <td>{{delivery.available | number: 0}} piezas</td>
                   </tr>
                 </table>
@@ -352,16 +354,6 @@
                     ng-options="qty for qty in vm.getQtyArray(vm.product.cart.delivery.available)"
                   >
                   </select>
-                  <!--
-                  <div class="input-element-inner">
-                    <input
-                      ng-model="vm.product.cart.quantity"
-                      min="1"
-                      ng-max="vm.product.cart.delivery.available"
-                      type="number"
-                    >
-                  </div>
-                  -->
                 </div>
               </div>
               <div flex="30">

@@ -47,6 +47,7 @@ function ProductCtrl(
     getImageSizes: getImageSizes,
     getLowestCategory: getLowestCategory,
     getQtyArray: getQtyArray,
+    getWarehouseName: getWarehouseName,
     init: init,
     loadProductFilters: loadProductFilters,
     loadVariants: loadVariants,
@@ -115,6 +116,26 @@ function ProductCtrl(
       vm.validPayments = res.data;
     });
 
+    getWarehouses();
+
+  }
+
+  function getWarehouseName(whsId){
+    var name = '';
+    if(vm.warehouses){
+      name = _.findWhere(vm.warehouses, {id:whsId}).WhsName;
+    }
+    return name;
+  }
+
+  function getWarehouses(){
+    api.$http.get('/company/find')
+      .then(function(res) {
+        vm.warehouses = res.data;
+      })
+      .catch(function(err){
+        console.log(err);
+      });
   }
 
   function getImageSizes(){
