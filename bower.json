@@ -28,8 +28,7 @@
     "ng-photoswipe": "^0.2.0",
     "angular-input-masks": "^2.4.0",
     "angular-i18n": "^1.5.8",
-    "angular-material": "master",
-    "angular-chart.js": "^1.0.0"
+    "angular-material": "master"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
