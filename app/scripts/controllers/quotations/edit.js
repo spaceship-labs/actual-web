@@ -77,11 +77,16 @@ function QuotationsEditCtrl(
   }
 
   function sendByEmail(){
-    quotationService.sendByEmail(vm.quotation.id).then(function(res){
+    vm.isLoading = true;
+    quotationService.sendByEmail(vm.quotation.id)
+    .then(function(res){
       console.log(res);
+      vm.isLoading = false;
+      dialogService.showDialog('Email enviado al cliente');
     })
     .catch(function(err){
       console.log(err);
+      vm.isLoading = false;
       dialogService.showDialog('Hubo un error, intentalo de nuevo');
     });
   }
