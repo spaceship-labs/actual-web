@@ -33,6 +33,7 @@
         newQuotation: newQuotation,
         removeDetail: removeDetail,
         setActiveQuotation: setActiveQuotation,
+        sendByEmail: sendByEmail,
         update: update,
       };
 
@@ -356,6 +357,11 @@
 
       function getRecords(quotationId){
         var url = '/quotation/' + quotationId + '/records';
+        return api.$http.post(url);
+      }
+
+      function sendByEmail(id){
+        var url = '/quotation/sendemail/' + id;
         return api.$http.post(url);
       }
 

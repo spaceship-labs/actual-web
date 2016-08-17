@@ -65,10 +65,26 @@ function QuotationsEditCtrl(
     init:init,
     removeDetail: removeDetail,
     toggleRecord: toggleRecord,
+    sendByEmail: sendByEmail,
+    print: print,
     daysDiff: daysDiff
   });
 
   vm.brokers = [];
+
+  function print(){
+    window.print();
+  }
+
+  function sendByEmail(){
+    quotationService.sendByEmail(vm.quotation.id).then(function(res){
+      console.log(res);
+    })
+    .catch(function(err){
+      console.log(err);
+      dialogService.showDialog('Hubo un error, intentalo de nuevo');
+    });
+  }
 
   function toggleRecord(record){
     vm.quotation.Records.forEach(function(rec){

@@ -168,7 +168,7 @@
           href="#"
           ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
           ng-click="vm.addNewProduct()"
-          class="action-btn">
+          class="action-btn print-btn">
           AGREGAR NUEVO ARTÍCULO
         </a>
 
@@ -207,13 +207,41 @@
           <input
             type="submit"
             value="CONTINUAR"
-            ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
-            class="cart-view-btn"
+            ng-if="!vm.quotation.Order && !vm.quotation.isClosed && vm.quotation.Client"
+            class="cart-view-btn print-btn"
           >
 
-          <p class="cart-summary-note">*Precios en Pesos Mexicanos con impuestos incluidos.</p>
+          <input
+            type="submit"
+            value="ASIGNAR CLIENTE"
+            ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.Client"
+            class="cart-view-btn print-btn"
+          >
+
+          <p class="cart-summary-note" ng-if="!vm.quotation.Client">
+            A continuación puedes elegir un cliente o asignar un nuevo cliente
+          </p>
+
+          <p class="cart-summary-note" ng-if="vm.quotation.Client">
+            *Precios en Pesos Mexicanos con impuestos incluidos.
+          </p>
 
         </div>
+
+        <a
+          ng-if="vm.quotation.Client"
+          href="#"
+          ng-click="vm.print()"
+          class="action-btn print-btn">
+          IMPRIMIR
+        </a>
+
+        <a
+          ng-if="vm.quotation.Client"
+          href="#"
+          class="action-btn">
+          ENVIAR POR EMAIL
+        </a>
 
       </aside>
 
