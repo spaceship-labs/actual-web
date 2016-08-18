@@ -11,6 +11,7 @@
       var service = {
         getList: getList,
         getDetailedPackage: getDetailedPackage,
+        getPackagesByStore: getPackagesByStore,
         getProductsByPackage: getProductsByPackage,
       };
 
@@ -18,6 +19,11 @@
         var p = page || 1;
         var url = '/packages/find/' + p;
         return api.$http.post(url,params);
+      }
+
+      function getPackagesByStore(id){
+        var url = '/store/'+id+'/packages';
+        return api.$http.post(url);
       }
 
       function getProductsByPackage(id){

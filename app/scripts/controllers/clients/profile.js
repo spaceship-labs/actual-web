@@ -66,6 +66,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     updateFiscalInfo: updateFiscalInfo,
     apiResourceLeads: quotationService.getByClient,
     apiResourceOrders: orderService.getList,
+    updateContact: updateContact
   });
 
   function init(){
@@ -185,6 +186,32 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     }
     console.log(client);
     return contacts;
+  }
+
+  function updateContact(form, contact){
+    console.log('updateContact', form);
+    console.log('contact',contact);
+    if(form.$valid){
+      contact.isLoading = true;
+
+      /*
+      var params = _.clone(contact);
+      delete params.formWrapper;
+      delete params.isLoading;
+      clientService.updateContact(
+        contact.CntctCode,
+        vm.client.CardCode,
+        params
+      ).then(function(res){
+        console.log(res);
+        vm.isLoadingContact = false;
+      })
+      .catch(function(err){
+        console.log(err);
+        dialogService.showDialog('Hubo un error');
+      });
+      */
+    }
   }
 
   vm.init();

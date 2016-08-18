@@ -3507,11 +3507,12 @@ padding-left: 16px;
 }
 
 /*---------------/
-  #FISCAL ADDRESS INFO
+  #CLIENT ITEM INFO
 /*--------------*/
-.fiscal-address-item{
+.client-item-info{
   border: 1px solid #000;
   padding: 20px;
+  display: block;
 }
 
 /*--------------/

@@ -22,14 +22,15 @@ function OffersCtrl(
   var vm = this;
   angular.extend(vm,{
     init:init,
-    getProductsByPackage: getProductsByPackage
+    addPackageToCart: addPackageToCart
   });
 
   function init(){
     vm.isLoading = true;
-    packageService.getList()
+    var companyActive = localStorageService.get('companyActive');
+    packageService.getPackagesByStore(companyActive)
       .then(function(res){
-        vm.packages = res.data.data || [];
+        vm.packages = res.data || [];
         vm.packages = vm.packages.map(function(p){
           p.image = api.baseUrl + '/uploads/groups/' + p.icon_filename;
           return p;
@@ -41,7 +42,7 @@ function OffersCtrl(
       })
   }
 
-  function getProductsByPackage(packageId){
+  function addPackageToCart(packageId){
     vm.isLoading = true;
     var companyActive = localStorageService.get('companyActive');
     var products = [];
