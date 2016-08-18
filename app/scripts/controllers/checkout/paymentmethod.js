@@ -421,22 +421,47 @@ function CheckoutPaymentmethodCtrl(
 
   function createOrder(form){
     if( isMinimumPaid() ){
-      vm.isLoading = true;
-      var params = {
-        paymentGroup: vm.activeMethod.group || 1
-      };
-      orderService.createFromQuotation(vm.quotation.id, params).then(function(res){
-        vm.isLoading = false;
-        vm.order = res.data;
-        if(vm.order.id){
-          quotationService.setActiveQuotation(false);
-          $location.path('/checkout/order/' + vm.order.id);
-        }
-      }).catch(function(err){
-        commonService.showDialog('Hubo un error, revisa los datos e intenta de nuevo');
-        console.log(err);
-      });
+
+      confirmOrder()
+        .then(function(){
+          vm.isLoading = true;
+          var params = {
+            paymentGroup: vm.activeMethod.group || 1
+          };
+          return orderService.createFromQuotation(vm.quotation.id, params);
+        })
+        .catch(function(){
+          return $q.reject('cancelled-by-user');
+        })
+        .then(function(res){
+          vm.isLoading = false;
+          vm.order = res.data;
+          if(vm.order.id){
+            quotationService.setActiveQuotation(false);
+            $location.path('/checkout/order/' + vm.order.id);
+          }
+        }).catch(function(err){
+          if(err != 'cancelled-by-user'){
+            commonService.showDialog('Hubo un error, revisa los datos e intenta de nuevo');
+            console.log(err);
+          }
+        });
     }
+  }
+
+  function confirmOrder(){
+    var dialogMsg = 'El pedido ha sido pagado al ' + $filter('number')(getPaidPercentage(),2) + '%';
+    dialogMsg += ' ( '+ $filter('currency')(vm.quotation.ammountPaid) +' de ';
+    dialogMsg += ' '+ $filter('currency')(vm.quotation.total) +' )';
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+          .title('Confirmar pedido')
+          .textContent(dialogMsg)
+          .ariaLabel('Confirmar pedido')
+          .targetEvent(null)
+          .ok('Confirmar')
+          .cancel('Cancelar');
+    return $mdDialog.show(confirm);
   }
 
   function getPaidPercentage(){
