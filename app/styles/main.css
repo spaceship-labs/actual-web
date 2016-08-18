@@ -2375,7 +2375,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   overflow: hidden;
 }
 .form-view .date-filters i{cursor: pointer;}
-
+.form-view .sorting-by-label{margin: 4px 0}
+.form-view .dataTables_wrapper .top{
+  padding: 4px 24px;
+}
 
 /*---------------/
   #CHART-SECTION
@@ -2516,7 +2519,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 
 .table-list .dataTables_info{display: none;}
-.table-list thead{background: #F8F8F8;}
+.table-list thead{background: #E2E2E2;}
 .table-list thead th{
   font-size: 13px;
   text-align: left;
@@ -2525,6 +2528,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   text-transform: uppercase;
 }
 .table-list td{
+  background: #F8F8F8;
   font-size: 11px;
   font-weight: 700;
   border-top: 1px solid #000!important;
@@ -2570,7 +2574,24 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 10px;
   font-weight: 700;
   cursor: pointer;
+  outline: none;
+  text-transform: uppercase;
 }
+
+.nested-bar .dropdown-icon{
+  color: #000;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+.nested-bar .dropdown-icon-closed{
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
 .nested-top{
   font-size: 13px;
   font-weight: 700;
@@ -2598,8 +2619,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   background: #E2E2E2;
 }
 .nested-table table{width: 100%!important;}
+.nested-table thead{
+  background: #E2E2E2;
+}
 .nested-table td{
-  /*background: #F8F8F8;*/
+  background: #F8F8F8;
 }
 
 /*--------------/

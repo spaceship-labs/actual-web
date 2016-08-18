@@ -101,6 +101,8 @@ function ProductCtrl(
         vm.deliveries  = delivery;
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.product.cart.delivery = vm.deliveries[0];
+        }else{
+          vm.product.cart.quantity = 0;
         }
 
         return productService.addSeenTime(vm.product.ItemCode);

@@ -18,6 +18,7 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
   vm.onDateStartSelect = onDateStartSelect;
   vm.onDateEndSelect = onDateEndSelect;
   vm.getQuotationsData = getQuotationsData;
+  vm.getTotalByDateRange = getTotalByDateRange;
   vm.filters = false;
   vm.dateEnd = false;
   vm.managers = [
@@ -59,12 +60,12 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
     quotationService.getTotalsByUser($rootScope.user.id, dateRange)
       .then(function(res){
         vm.quotationsData.todayAmmount = res.data.dateRange;
-        vm.quotationsData.monthAmmount = res.data.all;
+        vm.quotationsData.rangeAmmount = res.data.all;
         vm.quotationsData.ammounts = {
           labels: ["Hoy", "Resto del mes"],
           data: [
             vm.quotationsData.todayAmmount,
-            (vm.quotationsData.monthAmmount - vm.quotationsData.todayAmmount)
+            (vm.quotationsData.rangeAmmount - vm.quotationsData.todayAmmount)
           ],
           colors: ["#C92933", "#48C7DB", "#FFCE56"],
           options:{
@@ -84,12 +85,12 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
       .then(function(res){
         console.log(res);
         vm.quotationsData.todayQty = res.data.dateRange;
-        vm.quotationsData.monthQty = res.data.all;
+        vm.quotationsData.rangeQty = res.data.all;
         vm.quotationsData.quantities = {
           labels: ["Hoy", "Resto del mes"],
           data: [
             vm.quotationsData.todayQty,
-            (vm.quotationsData.monthQty - vm.quotationsData.todayQty)
+            (vm.quotationsData.rangeQty - vm.quotationsData.todayQty)
           ],
           colors: ["#C92933", "#48C7DB", "#FFCE56"]
         };
@@ -99,8 +100,9 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
 
   function init(){
     var monthRange = commonService.getMonthDateRange();
-    vm.startDate = monthRange.start.toString();
-    vm.endDate = monthRange.end.toString();
+    var fortnightRange = commonService.getFortnightRange();
+    vm.startDate = fortnightRange.start.toString();
+    vm.endDate = fortnightRange.end.toString();
     vm.filters = {
       User: $rootScope.user.id,
     };
@@ -111,12 +113,26 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
     };
     vm.user = $rootScope.user;
     vm.getQuotationsData();
+    vm.getTotalByDateRange(vm.user.id, {
+      startDate: vm.startDate,
+      endDate: vm.endDate,
+    });
+  }
+
+  function getTotalByDateRange(userId, dateRange){
+    var params = angular.extend(dateRange, {all:false});
+    quotationService.getTotalsByUser($rootScope.user.id, params)
+      .then(function(res){
+        console.log(res);
+        vm.totalDateRange = res.data.dateRange || 0;
+      })
+      .catch(function(err){
+        console.log(err);
+      });
   }
 
   function applyFilters(){
     if(vm.dateStart._d && vm.dateEnd._d){
-      console.log(vm.dateStart);
-      console.log(vm.dateEnd);
       vm.dateRange = {
         field: 'createdAt',
         start: vm.dateStart._d,

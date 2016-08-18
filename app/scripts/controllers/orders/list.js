@@ -16,6 +16,7 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
   vm.init = init;
   vm.applyFilters = applyFilters;
   vm.getOrdersData = getOrdersData;
+  vm.getTotalByDateRange = getTotalByDateRange;
 
   vm.currentDate = new Date();
   vm.dateRange = false;
@@ -86,8 +87,9 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
 
   function init(){
     var monthRange = commonService.getMonthDateRange();
-    vm.startDate = monthRange.start.toString();
-    vm.endDate = monthRange.end.toString();
+    var fortnightRange = commonService.getFortnightRange();
+    vm.startDate = fortnightRange.start.toString();
+    vm.endDate = fortnightRange.end.toString();
     vm.isBroker = authService.isBroker($rootScope.user);
     if(vm.isBroker){
       vm.filters = {
@@ -105,6 +107,22 @@ function OrdersListCtrl($location,$routeParams, authService, $q ,productService,
     };
     vm.user = $rootScope.user;
     vm.getOrdersData();
+    vm.getTotalByDateRange(vm.user.id, {
+      startDate: vm.startDate,
+      endDate: vm.endDate,
+    });
+  }
+
+  function getTotalByDateRange(userId, dateRange){
+    var params = angular.extend(dateRange, {all:false});
+    orderService.getTotalsByUser($rootScope.user.id, params)
+      .then(function(res){
+        console.log(res);
+        vm.totalDateRange = res.data.dateRange || 0;
+      })
+      .catch(function(err){
+        console.log(err);
+      });
   }
 
   function applyFilters(){

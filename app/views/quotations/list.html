@@ -64,18 +64,31 @@
       <span></span><span>TOTAL</span>
     </div>
 
-    <!--
-    <div class="nested-bar nested-bar1" layout="row" layout-align="space-between center">
-      <span>TOTAL</span><span>$209,000</span>
-    </div>
-    -->
-
-
 
     <div class="nested-item">
-      <div class="nested-content">
-        <section class="table-list-wrap table-list-wrap-nomargin">
-          <div ng-if="vm.filters" table-list class="table-list table-list-v2" columns="vm.columnsLeads" api-resource="vm.apiResourceLeads" filters="vm.filters" date-range="vm.dateRange"></div>
+      <div
+        class="nested-bar nested-bar3"
+        ng-init="seller.selected = true"
+        ng-click="seller.selected = !seller.selected"
+        layout="row"
+        layout-align="space-between center"
+      >
+        <span>VENDEDOR: {{vm.user.firstName + ' ' + vm.user.lastName}} </span>
+        <span>
+          {{vm.totalDateRange | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
+        </span>
+      </div>
+      <div ng-show="seller.selected" class="nested-content">
+        <section class="table-list-wrap">
+          <div
+            ng-if="vm.filters"
+            table-list
+            class="table-list table-list-v2"
+            columns="vm.columnsLeads"
+            api-resource="vm.apiResourceLeads"
+            filters="vm.filters"
+            date-range="vm.dateRange">
+          </div>
         </section>
       </div>
     </div>
@@ -116,7 +129,7 @@
           chart-labels="vm.quotationsData.quantities.labels"
           chart-colors="vm.quotationsData.quantities.colors"></canvas>
         <p><strong>Hoy</strong> | <strong>Total</strong></p>
-        <p>{{ vm.quotationsData.todayQty }} | {{vm.quotationsData.monthQty}}</p>
+        <p>{{ vm.quotationsData.todayQty }} | {{vm.quotationsData.rangeQty}}</p>
       </div>
       <div class="chart-section-col chart-section-legends" flex="20">
 
@@ -135,7 +148,7 @@
           chart-labels="vm.quotationsData.ammounts.labels"
           chart-colors="vm.quotationsData.ammounts.colors"></canvas>
         <p><strong>Hoy</strong> | <strong>Total</strong></p>
-        <p>{{vm.quotationsData.todayAmmount | currency}} | {{vm.quotationsData.monthAmmount | currency}}</p>
+        <p>{{vm.quotationsData.todayAmmount | currency}} | {{vm.quotationsData.rangeAmmount | currency}}</p>
       </div>
     </div>
 
