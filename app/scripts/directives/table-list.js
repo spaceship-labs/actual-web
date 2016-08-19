@@ -229,7 +229,11 @@
           var callback = function(json){console.log(json);}
           var resetPaging = false;
           if($scope.dtInstance){
-            $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
+            console.log('dtInstance');
+            console.log($scope.dtInstance.DataTable);
+            var searchValue = $('.dataTables_filter input').val();
+            console.log('searchValue', searchValue);
+            $scope.dtInstance.DataTable.search(searchValue).draw();
           }
         }, 100);
       });

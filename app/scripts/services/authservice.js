@@ -14,6 +14,7 @@
         signIn: signIn,
         logout: logout,
         dennyAccessBroker: dennyAccessBroker,
+        dennyAccessStoreManager: dennyAccessStoreManager,
         isBroker: isBroker
       };
 
@@ -57,8 +58,19 @@
         }
       }
 
+      function dennyAccessStoreManager(){
+        var _user = localStorageService.get('user');
+        if( isStoreManager(_user) ){
+          $location.path('/');
+        }
+      }
+
       function isBroker(user){
         return !!(user && user.role && user.role.name == 'broker');
+      }
+
+      function isStoreManager(user){
+        return !!(user && user.role && user.role.name == 'store manager');
       }
 
     }

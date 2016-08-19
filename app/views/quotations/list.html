@@ -7,11 +7,11 @@
     <div flex="50" class="date-filters">
       <p>
         <strong>
-          <i id="trigger-start-date" class="icon-pedidos"></i> DEL:
+          <i id="trigger-start-date-quotes" class="icon-pedidos"></i> DEL:
           <input
             pikaday="vm.dateStart"
             format="DD/MM/YYYY"
-            trigger="trigger-start-date"
+            trigger="trigger-start-date-quotes"
             readonly
             type="text"
             set-default-date="true"
@@ -19,11 +19,11 @@
             on-select="vm.onDateStartSelect(pikaday)">
         </strong>
         <strong>
-          <i id="trigger-end-date" class="icon-pedidos"></i> AL:
+          <i id="trigger-end-date-quotes" class="icon-pedidos"></i> AL:
           <input
             pikaday="vm.dateEnd"
             format="DD/MM/YYYY"
-            trigger="trigger-end-date"
+            trigger="trigger-end-date-quotes"
             readonly
             set-default-date="true"
             default-date="{{vm.endDate}}"
@@ -60,12 +60,53 @@
 
   <div class="nested-table">
 
-    <div class="nested-top" layout="row" layout-align="space-between center">
-      <span></span><span>TOTAL</span>
+    <!--
+      IF MANAGER
+    -->
+    <h2 ng-if="vm.sellers">
+      TIENDA: {{vm.user.companyMain.WhsName}}
+    </h2>
+    <div
+      ng-repeat="seller in vm.sellers track by $index"
+      class="nested-item"
+    >
+      <div
+        class="nested-bar nested-bar3"
+        ng-click="seller.selected = !seller.selected"
+        layout="row"
+        layout-align="space-between center"
+      >
+        <span>TOTAL VENDEDOR: {{seller.firstName + ' ' + seller.lastName}} </span>
+        <span>
+          {{seller.total | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
+        </span>
+      </div>
+
+      <div ng-show="seller.selected" class="nested-content">
+
+        <section ng-if="seller.selected" class="table-list-wrap table-list-wrap-nomargin">
+          <div
+            table-list
+            class="table-list table-list-v2"
+            columns="vm.columnsLeads"
+            api-resource="vm.apiResourceLeads"
+            date-range="vm.dateRange"
+            filters="seller.filters"></div>
+        </section>
+
+      </div>
     </div>
+    <!--
+    END IF MANAGER
+    -->
 
-
-    <div class="nested-item">
+    <!---
+    IF SELLER
+    -->
+    <div
+      ng-if="vm.user.role.name == 'seller' "
+      class="nested-item"
+    >
       <div
         class="nested-bar nested-bar3"
         ng-init="seller.selected = true"
@@ -73,25 +114,27 @@
         layout="row"
         layout-align="space-between center"
       >
-        <span>VENDEDOR: {{vm.user.firstName + ' ' + vm.user.lastName}} </span>
+        <span>TOTAL VENDEDOR: {{vm.user.firstName + ' ' + vm.user.lastName}} </span>
         <span>
           {{vm.totalDateRange | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
         </span>
       </div>
+
       <div ng-show="seller.selected" class="nested-content">
-        <section class="table-list-wrap">
+        <section class="table-list-wrap table-list-wrap-nomargin">
           <div
-            ng-if="vm.filters"
             table-list
             class="table-list table-list-v2"
             columns="vm.columnsLeads"
             api-resource="vm.apiResourceLeads"
-            filters="vm.filters"
-            date-range="vm.dateRange">
-          </div>
+            date-range="vm.dateRange"
+            filters="vm.filters"></div>
         </section>
       </div>
     </div>
+    <!--
+    END IF SELLER
+    -->
 
     <!--
     <div class="nested-item" ng-repeat="manager in vm.managers track by $index">
@@ -131,13 +174,12 @@
         <p><strong>Hoy</strong> | <strong>Total</strong></p>
         <p>{{ vm.quotationsData.todayQty }} | {{vm.quotationsData.rangeQty}}</p>
       </div>
-      <div class="chart-section-col chart-section-legends" flex="20">
 
+      <div class="chart-section-col chart-section-legends" flex="20">
         <p><span class="chart-section-sqr"></span> Hoy</p>
         <p><span class="chart-section-sqr chart-section-sqr2"></span> Resto del mes</p>
-
-
       </div>
+
       <div class="chart-section-col" flex="40">
         <h3>Monto</h3>
         <canvas

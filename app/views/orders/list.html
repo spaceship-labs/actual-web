@@ -7,11 +7,11 @@
     <div flex="50" class="date-filters">
       <p>
         <strong>
-          <i id="trigger-start-date" class="icon-pedidos"></i> DEL:
+          <i id="trigger-start-date-orders" class="icon-pedidos"></i> DEL:
           <input
             pikaday="vm.dateStart"
             format="DD/MM/YYYY"
-            trigger="trigger-start-date"
+            trigger="trigger-start-date-orders"
             readonly
             type="text"
             set-default-date="true"
@@ -19,11 +19,11 @@
             on-select="vm.onDateStartSelect(pikaday)">
         </strong>
         <strong>
-          <i id="trigger-end-date" class="icon-pedidos"></i> AL:
+          <i id="trigger-end-date-orders" class="icon-pedidos"></i> AL:
           <input
             pikaday="vm.dateEnd"
             format="DD/MM/YYYY"
-            trigger="trigger-end-date"
+            trigger="trigger-end-date-orders"
             readonly
             set-default-date="true"
             default-date="{{vm.endDate}}"
@@ -55,8 +55,18 @@
 
   <hr/>
 
+  <div
+    ng-if="vm.isLoading"
+    layout-fill
+    layout="row"
+    layout-sm="column"
+    layout-align="center center"
+    class="loading-circle"
+  >
+    <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
+  </div>
 
-  <div class="nested-table">
+  <div ng-show="!vm.isLoading" class="nested-table">
 
     <!---
     <div class="nested-top">
@@ -89,8 +99,53 @@
     </div>
     -->
 
+    <!--
+      IF MANAGER
+    -->
+    <h2 ng-if="vm.sellers">
+      TIENDA: {{vm.user.companyMain.WhsName}}
+    </h2>
+    <div
+      ng-repeat="seller in vm.sellers track by $index"
+      class="nested-item"
+    >
+      <div
+        class="nested-bar nested-bar3"
+        ng-click="seller.selected = !seller.selected"
+        layout="row"
+        layout-align="space-between center"
+      >
+        <span>TOTAL VENDEDOR: {{seller.firstName + ' ' + seller.lastName}} </span>
+        <span>
+          {{seller.total | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
+        </span>
+      </div>
 
-    <div class="nested-item">
+      <div ng-show="seller.selected" class="nested-content">
+
+        <section ng-if="seller.selected" class="table-list-wrap table-list-wrap-nomargin">
+          <div
+            table-list
+            class="table-list table-list-v2"
+            columns="vm.columnsOrders"
+            api-resource="vm.apiResourceOrders"
+            date-range="vm.dateRange"
+            filters="seller.filters"></div>
+        </section>
+
+      </div>
+    </div>
+    <!--
+    END IF MANAGER
+    -->
+
+    <!---
+    IF SELLER
+    -->
+    <div
+      ng-if="vm.user.role.name == 'seller' "
+      class="nested-item"
+    >
       <div
         class="nested-bar nested-bar3"
         ng-init="seller.selected = true"
@@ -98,7 +153,7 @@
         layout="row"
         layout-align="space-between center"
       >
-        <span>VENDEDOR: {{vm.user.firstName + ' ' + vm.user.lastName}} </span>
+        <span>TOTAL VENDEDOR: {{vm.user.firstName + ' ' + vm.user.lastName}} </span>
         <span>
           {{vm.totalDateRange | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
         </span>
@@ -116,6 +171,11 @@
         </section>
       </div>
     </div>
+    <!--
+    END IF SELLER
+    -->
+
+
     <!--
     <div class="nested-item" ng-repeat="manager in vm.managers track by $index">
       <div ng-click="manager.selected = !manager.selected" class="nested-bar nested-bar2" layout="row" layout-align="space-between center">

@@ -10,7 +10,17 @@
 angular.module('dashexampleApp')
   .controller('QuotationsListCtrl', QuotationsListCtrl);
 
-function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootScope, $filter, commonService, quotationService){
+function QuotationsListCtrl(
+    $location,
+    $routeParams,
+    $q,
+    productService,
+    $rootScope,
+    $filter,
+    commonService,
+    quotationService,
+    storeService
+  ){
 
   var vm = this;
   vm.init = init;
@@ -117,6 +127,15 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
       startDate: vm.startDate,
       endDate: vm.endDate,
     });
+
+    vm.getTotalByDateRange(vm.user.id, {
+      startDate: vm.startDate,
+      endDate: vm.endDate,
+    });
+
+    if(vm.user.role.name == 'store manager' && vm.user.companyMain){
+      getSellersByStore(vm.user.companyMain.id);
+    }
   }
 
   function getTotalByDateRange(userId, dateRange){
@@ -136,9 +155,10 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
       vm.dateRange = {
         field: 'createdAt',
         start: vm.dateStart._d,
-        end: vm.dateEnd._d
+        end: moment(vm.dateEnd._d).endOf('day')
       };
     }
+    updateSellersTotals();
     $rootScope.$broadcast('reloadTable', true);
   }
 
@@ -148,6 +168,65 @@ function QuotationsListCtrl($location,$routeParams, $q ,productService, $rootSco
 
   function onDateEndSelect(pikaday){
     console.log(pikaday);
+  }
+
+  function updateSellersTotals(){
+    console.log('updateSellersTotals');
+    if(vm.sellers){
+      var promisesTotals = [];
+      for(var i = 0; i< vm.sellers.length; i++){
+        var s = vm.sellers[i];
+        var params = {
+          startDate: vm.dateRange.start,
+          endDate: vm.dateRange.end,
+          all: false
+        };
+        promisesTotals.push(quotationService.getTotalsByUser(s.id, params));
+      }
+      $q.all(promisesTotals)
+        .then(function(totals){
+          console.log(totals);
+          vm.sellers = vm.sellers.map(function(s, index){
+            s.total = totals[index].data.dateRange;
+            return s;
+          })
+        })
+        .catch(function(err){
+          console.log(err);
+        })
+    }
+  }
+
+  function getSellersByStore(storeId){
+    storeService.getSellersByStore(storeId)
+      .then(function(res){
+        vm.sellers = res.data;
+        var promisesTotals = [];
+        vm.sellers = vm.sellers.map(function(s){
+          s.filters = {
+            User: s.id
+          };
+          var params = {
+            startDate: vm.startDate,
+            endDate: vm.endDate,
+            all: false
+          };
+          promisesTotals.push(quotationService.getTotalsByUser(s.id, params));
+          return s;
+        });
+        console.log(vm.sellers);
+        return $q.all(promisesTotals);
+      })
+      .then(function(totals){
+        vm.sellers = vm.sellers.map(function(s, i){
+          s.total = totals[i].data.dateRange;
+          return s;
+        });
+        console.log(vm.sellers);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
   }
 
 
