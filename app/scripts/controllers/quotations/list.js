@@ -158,6 +158,11 @@ function QuotationsListCtrl(
         end: moment(vm.dateEnd._d).endOf('day')
       };
     }
+
+    vm.getTotalByDateRange(vm.user.id, {
+      startDate: vm.dateRange.start,
+      endDate: vm.dateRange.end,
+    });
     updateSellersTotals();
     $rootScope.$broadcast('reloadTable', true);
   }

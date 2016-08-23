@@ -81,13 +81,15 @@
                 <md-radio-button ng-value="contact.id"></md-radio-button>
               </div>
               <div  flex="80" class="delivery-option-data">
-                <h4>Nombre: <strong>{{contact.name}}</strong></h4>
+                <h4>Nombre:
+                  <strong>{{contact.FirstName + ' ' + contact.LastName}}</strong>
+                </h4>
                 <ul>
                   <!--<li>2201. Westlake Ave. Ste. 500</li>-->
-                  <li><strong>Email: </strong>{{contact.email}}</li>
-                  <li><strong>Dirección: </strong>{{contact.address}}</li>
+                  <li><strong>Email: </strong>{{contact.E_Mail}}</li>
+                  <li><strong>Dirección: </strong>{{contact.Address}}</li>
                   <li><strong>Télefono: </strong>{{contact.phone}}</li>
-                  <li><strong>Celular: </strong>{{contact.mobile}}</li>
+                  <li><strong>Celular: </strong>{{contact.mobilePhone}}</li>
                 </ul>
                 <p>
                   <a

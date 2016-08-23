@@ -71,10 +71,10 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
   }
 
   function formatAddress(address){
-    address.name = (address.firstName&&address.lastName) ? address.firstName+' '+address.lastName : address.name;
-    address.address = address.address;
-    address.phone = (address.phone) ? address.dialCode + ' ' + address.phone : address.phone1;
-    address.mobile = (address.mobilePhone) ? address.mobileDialCode + ' ' + address.mobilePhone : address.mobileSAP;
+    address.name = (address.FirstName&&address.LastName) ? address.FirstName+' '+address.LastName : address.Name;
+    address.address = address.Address;
+    address.phone = (address.phone) ? address.dialCode + ' ' + address.phone : address.Tel1;
+    address.mobile = (address.mobilePhone) ? address.mobileDialCode + ' ' + address.mobilePhone : address.Cellolar;
     return address;
   }
 

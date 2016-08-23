@@ -59,6 +59,7 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
       },
     ],
     createQuotation: createQuotation,
+    changeTab: changeTab,
     formatContacts: formatContacts,
     init: init,
     onPikadaySelect: onPikadaySelect,
@@ -100,6 +101,11 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
       })
 
     });
+  }
+
+  function changeTab(index){
+    vm.activeTab = index;
+    $location.search({activeTab: index});
   }
 
   function onPikadaySelect(pikaday){
@@ -178,9 +184,12 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     var contacts = [];
     if(client.Contacts){
       contacts = client.Contacts.map(function(contact){
-        contact.firstName = angular.copy(contact.name);
-        contact.deliveryStreet = angular.copy(contact.address);
-        contact.email = angular.copy(client.E_Mail);
+        contact.FirstName = contact.FirstName || contact.Name;
+        contact.street = contact.street || angular.copy(contact.Address);
+        contact.E_Mail = contact.E_Mail || angular.copy(client.E_Mail);
+        contact.phone = contact.phone || contact.Tel1;
+        contact.phone = contact.phone || contact.Tel1;
+        contact.mobilePhone = contact.mobilePhone || contact.Cellolar;
         return contact;
       });
     }
@@ -193,8 +202,6 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     console.log('contact',contact);
     if(form.$valid){
       contact.isLoading = true;
-
-      /*
       var params = _.clone(contact);
       delete params.formWrapper;
       delete params.isLoading;
@@ -204,13 +211,13 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
         params
       ).then(function(res){
         console.log(res);
-        vm.isLoadingContact = false;
+        contact.isLoading = false;
+        dialogService.showDialog('Dirección de entrega actualizada');
       })
       .catch(function(err){
         console.log(err);
         dialogService.showDialog('Hubo un error');
       });
-      */
     }
   }
 

@@ -39,7 +39,10 @@
 
 
       <ul class="listing-view-subnav">
-        <li ng-repeat="subcategory in category.Childs" ng-if="subcategory.productsNum">
+        <li
+          ng-repeat="subcategory in category.Childs"
+          ng-if="subcategory.productsNum"
+        >
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
             {{subcategory.Name}} ({{subcategory.productsNum}})
           </a>

@@ -227,6 +227,8 @@ function QuotationsEditCtrl(
         vm.promotionPackages = results.map(function(r){
           return r.data;
         });
+        console.log('vm.promotionPackages');
+        console.log(vm.promotionPackages);
       })
       .catch(function(err){
         console.log(err);

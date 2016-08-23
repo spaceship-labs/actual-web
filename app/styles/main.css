@@ -45,7 +45,9 @@ md-tooltip .md-content ul{
 }
 md-dialog-content{padding: 20px 10px;}
 md-dialog-content h1{font-size: 24px;}
-md-dialog-content h2{font-weight: 700!important}
+md-dialog-content h2{
+  /*font-weight: 700!important;*/
+}
 md-dialog .md-button.md-primary{
   background: #33BA2C!important;
   color: #fff!important;

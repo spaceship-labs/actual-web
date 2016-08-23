@@ -32,14 +32,14 @@
       <div layout="row" class="form-section-tabs">
         <div
           flex
-          ng-click="vm.activeTab = 0"
+          ng-click="vm.changeTab(0)"
           class="form-section-tab"
           ng-class="{'form-section-tab-active': vm.activeTab == 0}">
           <a href="#">Datos personales</a>
         </div>
         <div
           flex
-          ng-click="vm.activeTab = 1"
+          ng-click="vm.changeTab(1)"
           class="form-section-tab"
           ng-class="{'form-section-tab-active': vm.activeTab == 1}">
           <a href="#">Datos de facturación</a>
@@ -55,7 +55,7 @@
         -->
         <div
           flex
-          ng-click="vm.activeTab = 3"
+          ng-click="vm.changeTab(3)"
           class="form-section-tab"
           ng-class="{'form-section-tab-active': vm.activeTab == 3}">
           <a href="#">Datos de envío</a>
