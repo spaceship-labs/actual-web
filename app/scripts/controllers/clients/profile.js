@@ -221,6 +221,25 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     }
   }
 
+  function createContact(form){
+    if(form.$valid){
+      vm.isLoading = true;
+      console.log(vm.newContact);
+      /*
+      clientService.createContact(vm.newContact)
+        .then(function(res){
+          console.log(res);
+        })
+        .catch(function(err){
+          console.log(err);
+          dialogService.showDialog('Hubo un error');
+        });
+      */
+    }else{
+      dialogService.showDialog('Campos incompletos');
+    }
+  }
+
   vm.init();
 
 

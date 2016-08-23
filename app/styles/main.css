@@ -2071,6 +2071,26 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   border-top: 1px solid #E7E7E7;
   padding: 6px 14px;
 }
+.filters .filter-block-prices{
+  padding: 6px 2px;
+}
+.filters .filter-block-prices h4{
+  padding: 0 13px;
+}
+.filters .filter-block-prices .filter-block-inner{
+  padding: 0 2px!important;
+}
+.filters .filter-block-prices .input-element{
+  margin: 0!important;
+}
+.filters .filter-block-prices .input-element-from{
+  margin-right: 4px!important;
+}
+.filters .filter-block-prices .input-element-to{
+  margin-left: 4px!important;
+}
+
+
 
 .filters .filter-block-price-btn{
   background: #000;

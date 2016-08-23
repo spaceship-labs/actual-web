@@ -10,6 +10,7 @@
 
       var service = {
         create: create,
+        createContact: createContact,
         getById: getById,
         getClients: getClients,
         getContacts: getContacts,
@@ -53,6 +54,11 @@
 
       function updateContact(contactCode, cardCode, params){
         var url = '/client/'+cardCode+'/update/contact/'+contactCode;
+        return api.$http.post(url, params);
+      }
+
+      function createContact(cardCode, params){
+        var url = '/client/'+cardCode+'/contact/create';
         return api.$http.post(url, params);
       }
 
