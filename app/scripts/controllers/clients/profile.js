@@ -67,7 +67,8 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     updateFiscalInfo: updateFiscalInfo,
     apiResourceLeads: quotationService.getByClient,
     apiResourceOrders: orderService.getList,
-    updateContact: updateContact
+    updateContact: updateContact,
+    createContact: createContact
   });
 
   function init(){
@@ -225,16 +226,19 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     if(form.$valid){
       vm.isLoading = true;
       console.log(vm.newContact);
-      /*
-      clientService.createContact(vm.newContact)
+      clientService.createContact(vm.client.CardCode,vm.newContact)
         .then(function(res){
           console.log(res);
+          vm.isLoading = false;
+          vm.showNewContact = false;
+          vm.newContact = {};
+          dialogService.showDialog('Dirección creada');
         })
         .catch(function(err){
+          vm.isLoading = false;
           console.log(err);
           dialogService.showDialog('Hubo un error');
         });
-      */
     }else{
       dialogService.showDialog('Campos incompletos');
     }
