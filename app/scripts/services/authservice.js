@@ -44,6 +44,8 @@
         localStorageService.remove('user');
         localStorageService.remove('quotation');
         localStorageService.remove('broker');
+        localStorageService.remove('activeStore');
+        localStorageService.remove('activeStoreName');
         localStorageService.remove('companyActive');
         localStorageService.remove('companyActiveName');
         localStorageService.remove('currentQuotation');

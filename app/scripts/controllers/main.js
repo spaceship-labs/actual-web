@@ -61,7 +61,7 @@
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       validateUser: validateUser,
-      getCompanies: getCompanies,
+      getStores: getStores,
       saveBroker: saveBroker
     });
 
@@ -90,8 +90,8 @@
     function init(){
       vm.token             = localStorageService.get('token');
       vm.user              = localStorageService.get('user');
-      vm.companyActive     = localStorageService.get('companyActive');
-      vm.companyActiveName = localStorageService.get('companyActiveName');
+      vm.activeStore     = localStorageService.get('activeStore');
+      vm.activeStoreName = localStorageService.get('activeStoreName');
       $rootScope.user      = vm.user;
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
@@ -128,7 +128,7 @@
 
       if($rootScope.user){
         vm.getActiveQuotation();
-        getCompanyActive();
+        getActiveStore();
         getBrokers();
       }
     }
@@ -310,7 +310,7 @@
       var formData = {
         email: vm.logInForm.email,
         password: vm.logInForm.password,
-        companyActive: vm.logInForm.companyActive
+        activeStore: vm.logInForm.activeStore
       };
 
 
@@ -336,7 +336,7 @@
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', res.token);
       localStorageService.set('user' , res.user);
-      localStorageService.set('companyActive', res.user.companyActive);
+      localStorageService.set('activeStore', res.user.activeStore);
       $window.location.reload();
     };
 
@@ -355,15 +355,15 @@
       vm.isLoadingLogin = false;
     });
 
-    function getCompanies(email) {
-      userService.getCompanies(email).then(function(companies){
-        vm.companies = companies;
+    function getStores(email) {
+      userService.getStores(email).then(function(stores){
+        vm.stores = stores;
       });
     }
 
-    function getCompanyActive() {
-      userService.getCompanyActive().then(function(companyActive) {
-        vm.companyActive = companyActive;
+    function getActiveStore() {
+      userService.getActiveStore().then(function(activeStore) {
+        vm.activeStore = activeStore;
       });
     }
 

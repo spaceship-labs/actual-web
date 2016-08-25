@@ -9,13 +9,13 @@
     function storeService($http, $q, $rootScope, api){
 
       var service = {
-        getPromosByCompany: getPromosByCompany,
+        getPromosByStore: getPromosByStore,
         getSellersByStore: getSellersByStore
       };
 
       return service;
 
-      function getPromosByCompany(id){
+      function getPromosByStore(id){
         var url = '/store/'+id+'/promotions';
         return api.$http.post(url);
       }

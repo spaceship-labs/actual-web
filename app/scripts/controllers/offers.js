@@ -27,8 +27,8 @@ function OffersCtrl(
 
   function init(){
     vm.isLoading = true;
-    var companyActive = localStorageService.get('companyActive');
-    packageService.getPackagesByStore(companyActive)
+    var activeStore = localStorageService.get('activeStore');
+    packageService.getPackagesByStore(activeStore)
       .then(function(res){
         vm.packages = res.data || [];
         vm.packages = vm.packages.map(function(p){
@@ -44,7 +44,7 @@ function OffersCtrl(
 
   function addPackageToCart(packageId){
     vm.isLoading = true;
-    var companyActive = localStorageService.get('companyActive');
+    var activeStore = localStorageService.get('activeStore');
     var products = [];
     var packageProducts = [];
     packageService.getProductsByPackage(packageId)
@@ -52,7 +52,7 @@ function OffersCtrl(
         var promises = [];
         products = res.data;
         packageProducts = products.map(function(p){
-          promises.push(productService.delivery(p.ItemCode, companyActive));
+          promises.push(productService.delivery(p.ItemCode, activeStore));
           var pp = {
             id: p.id,
             quantity: p.packageInfo.quantity,

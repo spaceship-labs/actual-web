@@ -133,8 +133,8 @@ function QuotationsListCtrl(
       endDate: vm.endDate,
     });
 
-    if(vm.user.role.name == 'store manager' && vm.user.companyMain){
-      getSellersByStore(vm.user.companyMain.id);
+    if(vm.user.role.name == 'store manager' && vm.user.mainStore){
+      getSellersByStore(vm.user.mainStore.id);
     }
   }
 

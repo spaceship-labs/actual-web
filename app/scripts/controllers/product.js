@@ -89,8 +89,8 @@ function ProductCtrl(
         }
         vm.isLoading = false;
 
-        var companyActive = localStorageService.get('companyActive');
-        return productService.delivery(productId, companyActive);
+        var activeStore = localStorageService.get('activeStore');
+        return productService.delivery(productId, activeStore);
       })
       .then(function(delivery){
         console.log(delivery);

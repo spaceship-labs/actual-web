@@ -283,7 +283,33 @@ function ClientProfileCtrl(
 
 
   function MapDialogController($scope){
-
+    angular.extend($scope, {
+        center: {
+          lat: 21.1213286,
+          lng: -86.9194812,
+          zoom: 6
+        },
+        defaults: {
+          scrollWheelZoom: false
+        },
+        markers: {
+          Madrid: {
+              lat: 40.095,
+              lng: -3.823,
+              focus: true,
+              draggable: true
+          },
+        },
+        layers: {
+          baselayers: {
+              googleRoadmap: {
+                  name: 'Google Streets',
+                  layerType: 'ROADMAP',
+                  type: 'google'
+              }
+          }
+        }
+    });
   }
 
   vm.init();

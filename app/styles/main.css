@@ -3605,6 +3605,18 @@ padding-left: 16px;
 }
 
 /*--------------/
+  #CLIENT DIALOG MAP
+/*-------------*/
+.client-dialog-map{
+  height: 400px;
+  width: 400px;
+}
+.client-dialog-map .angular-leaflet-map{
+  height: 300px;
+  width: 100%;
+}
+
+/*--------------/
   #FOOTER
 /*-------------*/
 #footer{

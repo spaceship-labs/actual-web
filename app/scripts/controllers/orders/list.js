@@ -121,8 +121,8 @@ function OrdersListCtrl(
       startDate: vm.startDate,
       endDate: vm.endDate,
     });
-    if(vm.user.role.name == 'store manager' && vm.user.companyMain){
-      getSellersByStore(vm.user.companyMain.id);
+    if(vm.user.role.name == 'store manager' && vm.user.mainCompany){
+      getSellersByStore(vm.user.mainCompany.id);
     }
   }
 

@@ -19,7 +19,7 @@
             autocomplete="off"
             ng-model="main.logInForm.email"
             ng-model-options='{ debounce: 1000 }'
-            ng-change="main.getCompanies(main.logInForm.email)"
+            ng-change="main.getStores(main.logInForm.email)"
             required
           >
         </div>
@@ -39,12 +39,12 @@
       </div>
 
       <div class="input-element">
-        <select class="select-element input-element-inner" name="companyActive" ng-model="main.logInForm.companyActive" required>
+        <select class="select-element input-element-inner" name="activeStore" ng-model="main.logInForm.activeStore" required>
           <option value="" selected disabled hidden>
             Tienda
           </option>
-          <option ng-repeat="company in main.companies" ng-value="company.id">
-            {{company.WhsName}}
+          <option ng-repeat="store in main.stores" ng-value="store.id">
+            {{store.name}}
           </option>
         </select>
       </div>

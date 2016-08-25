@@ -29,7 +29,8 @@ angular
     'sly',
     'infinite-scroll',
     'ngPhotoswipe',
-    'ui.utils.masks'
+    'ui.utils.masks',
+    'leaflet-directive'
   ])
 
   .config(function (

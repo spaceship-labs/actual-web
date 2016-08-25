@@ -103,8 +103,8 @@
 
       function formatSingleProduct(product){
         var deferred = $q.defer();
-        var companyActive = localStorageService.get('companyActive');
-        storeService.getPromosByCompany(companyActive).then(function(res){
+        var activeStore = localStorageService.get('activeStore');
+        storeService.getPromosByStore(activeStore).then(function(res){
           storePromotions = res.data;
           var fProduct = formatProduct(product);
           deferred.resolve(fProduct);
@@ -133,8 +133,8 @@
 
       function formatProducts(products){
         var deferred = $q.defer();
-        var companyActive = localStorageService.get('companyActive');
-        storeService.getPromosByCompany(companyActive).then(function(res){
+        var activeStore = localStorageService.get('activeStore');
+        storeService.getPromosByStore(activeStore).then(function(res){
           storePromotions = res.data;
           var formatted = products.map(formatProduct);
           deferred.resolve(formatted);
@@ -202,11 +202,11 @@
         return api.$http.post(url, params);
       }
 
-      function delivery(productCode, companyCode) {
+      function delivery(productCode, storeId) {
         var url    = '/shipping/product';
         var params = {
           productCode: productCode,
-          companyCode: companyCode
+          storeId: storeId
         };
         return api.$http.get(url, params).then(function(res){
           return res.data;

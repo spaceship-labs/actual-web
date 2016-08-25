@@ -11,8 +11,8 @@
         getClients: getClients,
         getBrokers: getBrokers,
         getUser: getUser,
-        getCompanies: getCompanies,
-        getCompanyActive: getCompanyActive,
+        getStores: getStores,
+        getActiveStore: getActiveStore,
         getCashReport: getCashReport,
         update: update
       };
@@ -47,16 +47,16 @@
         });
       }
 
-      function getCompanies(email) {
-        var url      = '/user/companies';
+      function getStores(email) {
+        var url      = '/user/stores';
         var params   = {email: email};
         return api.$http.get(url, params).then(function(res){
          return res.data;
         });
       }
 
-      function getCompanyActive() {
-        var url      = '/me/companyActive';
+      function getActiveStore() {
+        var url      = '/me/activeStore';
         return api.$http.get(url).then(function(res){
          return res.data;
         });
