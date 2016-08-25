@@ -183,6 +183,10 @@ function QuotationsEditCtrl(
       vm.quotation.Broker = broker;
     });
 
+    if($location.search().createdClient){
+      dialogService.showDialog('Cliente registrado');
+    }
+
     quotationService.getById($routeParams.id)
       .then(function(res){
         vm.isLoading = false;

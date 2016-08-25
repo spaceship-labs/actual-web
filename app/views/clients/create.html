@@ -98,6 +98,7 @@
                 pikaday="vm.pikadayDate"
                 readonly
                 show-month-after-year="true"
+                year-range="[1900,2016]"
                 on-select="vm.onPikadaySelect(pikaday)">
             </div>
           </div>
@@ -154,7 +155,6 @@
                     type="text"
                     name="dialCode"
                     ng-model="vm.client.dialCode"
-                    ng-pattern="'[0-9]{3}'"
                     placeholder="Lada"
                     required
                   >
@@ -164,7 +164,6 @@
                     type="text"
                     name="phone"
                     ng-model="vm.client.phone"
-                    ng-pattern="'[0-9]{7}'"
                     required
                   >
                 </div>
@@ -395,9 +394,9 @@
             >
               <option
                 ng-repeat="state in vm.states"
-                ng-value="state.name"
+                ng-value="state.Name"
               >
-                {{state.name}}
+                {{state.Name}}
               </option>
             </select>
           </div>
@@ -418,156 +417,150 @@
       <!--DATOS DEL ENVIO-->
       <section  ng-show="vm.activeTab==3" action="#" class="form-section-content">
 
-        <div layout="row">
-          <div flex="45" class="input-element">
-            <label><strong>Nombre(s) del cliente <span class="hl-label">*</span></strong></label>
-            <div class="input-element-inner">
-              <input type="text" required>
+        <div class="client-item-info" ng-repeat="contact in vm.contacts track by $index">
+
+          <div layout="row">
+            <div flex="45" class="input-element">
+              <label><strong>Nombre(s) del destinatario <span class="hl-label">*</span></strong></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.FirstName" required>
+              </div>
+            </div>
+
+            <div flex="45" class="input-element">
+              <label><strong>Apellidos del destinatario <span class="hl-label">*</span></strong></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.LastName" required>
+              </div>
+            </div>
+
+          </div>
+
+          <div layout="row">
+
+            <div flex="20" class="input-element">
+              <label><strong>Teléfono fijo <span class="hl-label">*</span></strong></label>
+              <div layout="row" layout-align="space-between center">
+                  <div flex="30" class="input-element-inner">
+                    <input type="text" ng-model="contact.dialCode" placeholder="Lada" required>
+                  </div>
+                  <div flex="60" class="input-element-inner">
+                    <input type="text" ng-model="contact.phone" required>
+                  </div>
+              </div>
+            </div>
+
+
+            <div flex="20" class="input-element">
+              <label><strong>Teléfono celular <span class="hl-label">*</span></strong></label>
+              <div layout="row" layout-align="space-between center">
+                  <div flex="30" class="input-element-inner">
+                    <input type="text" ng-model="contact.mobileDialCode" placeholder="Lada" required>
+                  </div>
+                  <div flex="60" class="input-element-inner">
+                    <input type="text" ng-model="contact.mobilePhone" required>
+                  </div>
+              </div>
+            </div>
+
+
+            <div flex class="input-element">
+              <label><strong>Email</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="email" ng-model="contact.E_Mail" required>
+              </div>
+            </div>
+
+           <div flex class="input-element">
+              <label><strong>Confirmar email</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="email" ng-pattern="contact.E_Mail" required>
+              </div>
+            </div>
+
+          </div>
+
+          <h4><strong>DIRECCIÓN DE ENTREGA</strong> (Buscar con Google Maps)</h4>
+          <div layout="row">
+            <div flex class="input-element">
+              <label><strong>Calle</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.street" required>
+              </div>
+            </div>
+            <div flex class="input-element">
+              <label><strong>No. exterior</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.externalNumber" required>
+              </div>
+            </div>
+            <div flex class="input-element">
+              <label><strong>No. interior</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.internalNumber" required>
+              </div>
+            </div>
+            <div flex class="input-element">
+              <label><strong>Colonia</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.neighborhood" required>
+              </div>
+            </div>
+            <div flex class="input-element">
+              <label><strong>Municipio</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.municipality" required>
+              </div>
             </div>
           </div>
 
-          <div flex="45" class="input-element">
-            <label><strong>Apellidos del destinatario <span class="hl-label">*</span></strong></label>
-            <div class="input-element-inner">
-              <input type="text" required>
+          <div layout="row">
+            <div flex="25" class="input-element">
+              <label><strong>Ciudad</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.city"  >
+              </div>
             </div>
-          </div>
-
-        </div>
-
-        <div layout="row">
-
-          <div flex="20" class="input-element">
-            <label><strong>Teléfono fijo <span class="hl-label">*</span></strong></label>
-            <div layout="row" layout-align="space-between center">
-                <div flex="30" class="input-element-inner">
-                  <input type="text" placeholder="Lada" required>
-                </div>
-                <div flex="60" class="input-element-inner">
-                  <input type="text" required>
-                </div>
+            <div flex="25" class="input-element select-element-wrapper">
+              <label><strong>Estado</strong> <span class="hl-label">*</span></label>
+              <md-select ng-model="contact.entity" class="select-element">
+                <md-option ng-repeat="state in vm.states" ng-value="state.Code">
+                  {{state.Name}}
+                </md-option>
+              </md-select>
             </div>
-          </div>
-
-
-          <div flex="20" class="input-element">
-            <label><strong>Teléfono celular <span class="hl-label">*</span></strong></label>
-            <div layout="row" layout-align="space-between center">
-                <div flex="30" class="input-element-inner">
-                  <input type="text" placeholder="Lada" required>
-                </div>
-                <div flex="60" class="input-element-inner">
-                  <input type="text" required>
-                </div>
+            <div flex="15" class="input-element">
+              <label><strong>Codigo postal</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.zipCode" >
+              </div>
             </div>
+
           </div>
 
 
-          <div flex class="input-element">
-            <label><strong>Email</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="email" required>
-            </div>
-          </div>
 
-         <div flex class="input-element">
-            <label><strong>Confirmar email</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="email" required>
+          <div layout="row">
+            <div flex="25" class="input-element">
+              <label><strong>Entre calle</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.street2" >
+              </div>
             </div>
-          </div>
+            <div flex="25" class="input-element">
+              <label><strong>Y calle</strong> <span class="hl-label">*</span></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.street3" >
+              </div>
+            </div>
+            <div flex="25" class="input-element">
+              <label><strong>Referencias cercanas</strong></label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="contact.references">
+              </div>
+            </div>
 
-        </div>
-
-        <h4><strong>DIRECCIÓN DE ENTREGA</strong> (Buscar con Google Maps)</h4>
-        <div layout="row">
-          <div flex class="input-element">
-            <label><strong>Calle</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
           </div>
-          <div flex class="input-element">
-            <label><strong>No. exterior</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-          <div flex class="input-element">
-            <label><strong>No. interior</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-          <div flex class="input-element">
-            <label><strong>Colonia</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-          <div flex class="input-element">
-            <label><strong>Municipio</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-        </div>
-
-        <div layout="row">
-          <div flex="25" class="input-element">
-            <label><strong>Ciudad</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-          <div flex="25" class="input-element select-element-wrapper">
-            <label>
-              <strong>Estado</strong> <span class="hl-label">*</span>
-            </label>
-            <select
-              ng-model="vm.clientTitle"
-              class="select-element"
-              placeholder="Elige un estado"
-              required
-            >
-              <option
-                ng-repeat="state in vm.states"
-                ng-value="state.name"
-              >
-                {{state.name}}
-              </option>
-            </select>
-          </div>
-          <div flex="15" class="input-element">
-            <label><strong>Codigo postal</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-
-        </div>
-
-        <div layout="row">
-          <div flex="25" class="input-element">
-            <label><strong>Entre calle</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-          <div flex="25" class="input-element">
-            <label><strong>Y calle</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-          <div flex="25" class="input-element">
-            <label><strong>Referencias cercanas</strong> <span class="hl-label">*</span></label>
-            <div class="input-element-inner">
-              <input type="text" required>
-            </div>
-          </div>
-
-        </div>
 
       </section>
 
@@ -579,7 +572,9 @@
       <button flex class="form-view-btn">
         Borrar todos los campos
       </button>
-      <button type="submit" class="form-view-btn form-view-btn-primary"
+      <button
+        type="submit"
+        class="form-view-btn form-view-btn-primary"
         flex
       >
         Guardar información

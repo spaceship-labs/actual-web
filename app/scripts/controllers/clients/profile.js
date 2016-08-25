@@ -10,7 +10,19 @@
 angular.module('dashexampleApp')
   .controller('ClientProfileCtrl', ClientProfileCtrl);
 
-function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonService, clientService, quotationService, orderService, dialogService){
+function ClientProfileCtrl(
+    $scope,
+    $location,
+    $routeParams,
+    $rootScope,
+    $timeout,
+    $mdDialog,
+    commonService,
+    clientService,
+    quotationService,
+    orderService,
+    dialogService
+  ){
   var vm = this;
 
   angular.extend(vm, {
@@ -68,11 +80,18 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     apiResourceLeads: quotationService.getByClient,
     apiResourceOrders: orderService.getList,
     updateContact: updateContact,
-    createContact: createContact
+    createContact: createContact,
+    openMapDialog: openMapDialog
   });
 
   function init(){
     vm.isLoading = true;
+
+
+    if($location.search().createdClient){
+      dialogService.showDialog('Cliente registrado');
+    }
+
     clientService.getById($routeParams.id).then(function(res){
       vm.isLoading = false;
       vm.client = res.data;
@@ -233,6 +252,9 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
           vm.showNewContact = false;
           vm.newContact = {};
           dialogService.showDialog('Dirección creada');
+          var created = res.data;
+          vm.client.contacts.push(created);
+          vm.client.contacts = formatContacts(vm.client);
         })
         .catch(function(err){
           vm.isLoading = false;
@@ -242,6 +264,26 @@ function ClientProfileCtrl($location,$routeParams, $rootScope, $timeout, commonS
     }else{
       dialogService.showDialog('Campos incompletos');
     }
+  }
+
+  function openMapDialog(){
+    $mdDialog.show({
+      controller: ['$scope',MapDialogController],
+      templateUrl: 'views/clients/dialog-map.html',
+      parent: angular.element(document.body),
+      targetEvent: null,
+      clickOutsideToClose:true,
+    })
+    .then(function(answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+    });
+  }
+
+
+  function MapDialogController($scope){
+
   }
 
   vm.init();
