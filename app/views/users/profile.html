@@ -212,7 +212,7 @@
       </div>
       <div layout="row" ng-repeat="payment in group.payments" class="payment-item">
         <div class="payment-item-cell" flex="25">{{payment.id}}</div>
-        <div class="payment-item-cell" flex>{{payment.Store.WhsName}}</div>
+        <div class="payment-item-cell" flex>{{payment.Store.name}}</div>
         <div class="payment-item-cell" flex>{{payment.verificationCode}}</div>
         <div class="payment-item-cell" flex="15">{{payment.createdAt | date:'dd/MM/yyyy h:mm a'}}</div>
         <div class="payment-item-cell" flex>#{{payment.Order.folio}}</div>
