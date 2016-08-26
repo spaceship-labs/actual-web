@@ -153,7 +153,6 @@
         $rootScope.activeQuotation = res.data;
         vm.activeQuotation = res.data;
         if($rootScope.activeQuotation){
-          console.log(vm.activeQuotation);
           quotationService.getQuotationProducts(vm.activeQuotation).then(function(details){
             $rootScope.activeQuotation.Details = details;
             vm.activeQuotation.Details = details;

@@ -64,7 +64,6 @@ module.exports = function(config) {
       'bower_components/moment/moment.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/scalyr/scalyr.js',
-      'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'bower_components/async/lib/async.js',
       'bower_components/photoswipe/dist/photoswipe.js',
       'bower_components/photoswipe/dist/photoswipe-ui-default.js',
@@ -92,6 +91,7 @@ module.exports = function(config) {
       'bower_components/leaflet-plugins/layer/tile/Bing.js',
       'bower_components/leaflet-plugins/layer/tile/Google.js',
       'bower_components/leaflet-plugins/layer/tile/Yandex.js',
+      'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

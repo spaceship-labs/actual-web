@@ -228,11 +228,17 @@ function QuotationsEditCtrl(
       })
       .then(function(results){
         console.log(results);
+        //Mapping HTTP response
         vm.promotionPackages = results.map(function(r){
           return r.data;
         });
-        console.log('vm.promotionPackages');
-        console.log(vm.promotionPackages);
+        vm.promotionPackages = vm.promotionPackages.map(function(pack){
+          pack.isValid = validatePackageRules(pack);
+          return pack;
+        });
+
+        console.log('vm.promotionPackages', vm.promotionPackages);
+
       })
       .catch(function(err){
         console.log(err);
@@ -243,12 +249,37 @@ function QuotationsEditCtrl(
     });
   }
 
+  function validatePackageRules(promotionPackage){
+    var rules = [];
+    for(var i = 0; i < promotionPackage.ProductsPackageInfo.length; i++){
+      rules.push( promotionPackage.ProductsPackageInfo[i] );
+    }
+
+    var validFlag = true;
+    for(var i = 0; i < rules.length; i++){
+      var rule = rules[i];
+      var isValidRule = _.find(vm.quotation.Details, function(detail){
+        return (detail.Product.id === rule.Product && detail.quantity === detail.quantity)
+      });
+      if(!isValidRule){
+        console.log('invalido', rule);
+        validFlag = false;
+      }else{
+        console.log('valido', rule);
+      }
+    }
+    return validFlag;
+  }
+
+
   function getPromotionPackageById(id){
     if(id){
-      //console.log(vm.promotionPackages);
-      return _.findWhere(vm.promotionPackages, {id:id});
+      var pack = _.findWhere(vm.promotionPackages, {id:id});
+      if(pack.isValid){
+        return pack;
+      }
     }
-    return {};
+    return false;
   }
 
   function attachImage(file){
@@ -266,11 +297,12 @@ function QuotationsEditCtrl(
     quotationService.removeDetail(detailId, vm.quotation.id).then(function(res){
       var updatedQ = res.data;
       vm.quotation.Details.splice(index,1);
-      vm.isLoadingDetails = false;
-      vm.quotation.total = updatedQ.total;
-      vm.quotation.subtotal = updatedQ.subtotal;
-      vm.quotation.discount = updatedQ.discount;
+      vm.isLoadingDetails        = false;
+      vm.quotation.total         = updatedQ.total;
+      vm.quotation.subtotal      = updatedQ.subtotal;
+      vm.quotation.discount      = updatedQ.discount;
       vm.quotation.totalProducts = updatedQ.totalProducts;
+      vm.currentPackage.isValid  = validatePackageRules(vm.currentPackage);
     });
   }
 

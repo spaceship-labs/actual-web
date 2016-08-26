@@ -116,6 +116,7 @@
         if(product.Promotions && product.Promotions.length > 0){
           var indexMaxPromo = 0;
           var maxPromo = 0;
+          //Intersection product promotions and storePromotions
           product.Promotions = product.Promotions.filter(function(promotion){
             return _.findWhere(storePromotions, {id:promotion.id});
           });

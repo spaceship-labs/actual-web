@@ -164,11 +164,13 @@
         <!--RESULTS-->
         <div class="results"
           infinite-scroll="vm.getProductsByCategory(true)"
-          infinite-scroll-disabled="vm.isLoading || vm.products.length >= vm.totalProducts"
+          infinite-scroll-disabled="vm.isLoadingProducts"
           infinite-scroll-distance="0"
         >
           <h2 class="center-content">
-            <strong><i class="icon-search"></i> <span class="hl-text">{{vm.totalProducts}}</span> Resultados</strong>
+            <strong>
+              <i class="icon-search"></i> <span class="hl-text">{{vm.totalProducts}}</span> Resultados
+            </strong>
           </h2>
 
           <div
@@ -178,7 +180,10 @@
             layout-align="start center"
             ng-cloak
           >
-            <div flex="30" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
+            <div
+              flex="30"
+              class="listing-product-wrap"
+              ng-repeat="product in vm.products track by product.ItemCode">
               <listing-product product="product"></listing-product>
             </div>
           </div>

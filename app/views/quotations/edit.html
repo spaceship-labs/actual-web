@@ -142,7 +142,9 @@
                   {{detail.shipDate | date: "d/MMM/yyyy"}}
                   (en {{vm.daysDiff(detail.shipDate)}} días)
                 </p>
-                <p class="bottom-text">
+                <p
+                  ng-if="vm.getPromotionPackageById(detail.PromotionPackage)"
+                  class="bottom-text">
                   Paquete: {{ vm.getPromotionPackageById(detail.PromotionPackage).Name }}
                 </p>
               </div>

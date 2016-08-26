@@ -118,8 +118,6 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
       page: vm.search.page
     };
 
-    console.log('Pagina: ' + params.page);
-
     productService.searchByFilters(params).then(function(res){
       vm.totalResults = res.data.total;
       return productService.formatProducts(res.data.products);

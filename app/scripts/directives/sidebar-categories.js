@@ -19,7 +19,6 @@ angular.module('dashexampleApp')
 
         scope.init = function(){
           scope.isActiveOffers = false;
-          console.log($location.path());
           if($location.path() == '/ofertas'){
             scope.isActiveOffers = true;
           }
@@ -33,8 +32,6 @@ angular.module('dashexampleApp')
 
         scope.$watch('categoriesTree', function(newVal, oldVal){
           if(newVal != oldVal){
-            console.log('categoriesTree');
-            console.log(newVal);
             scope.showSelectedCategoryId();
           }
         });
@@ -50,7 +47,6 @@ angular.module('dashexampleApp')
           var activeCountL1 = 0;
           var activeCountL2 = 0;
           var activeCountL3 = 0;
-          console.log(selected);
           if(scope.categoriesTree){
             scope.categoriesTree.forEach(function(mainCategory){
               var hasSelectedAsChild = _.findWhere(mainCategory.Childs, {id: selected});
