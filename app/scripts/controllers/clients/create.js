@@ -14,9 +14,10 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
   var vm = this;
 
   angular.extend(vm, {
-    activeTab: 0,
-    client:{},
-    contacts:[{}],
+    activeTab : 0,
+    client    :{},
+    contacts  :[{}],
+    fiscalData:[{}],
     titles: [
       {label:'Sr.', value:'Sr'},
       {label:'Sra.', value: 'Sra'},
@@ -26,15 +27,25 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
       {label:'Masculino', value: 'M'},
       {label: 'Femenino', value: 'F'}
     ],
-    states: [],
-    countries: commonService.getCountries(),
-    create: create,
-    onPikadaySelect: onPikadaySelect
+    states          : [],
+    countries       : commonService.getCountries(),
+    addFiscalForm   : addFiscalForm,
+    addContactForm  : addContactForm,
+    create          : create,
+    onPikadaySelect : onPikadaySelect
   });
 
   function onPikadaySelect(pikaday){
     console.log(pikaday);
     vm.client.birthDate = pikaday._d;
+  }
+
+  function addContactForm(){
+    vm.contacts.push({});
+  }
+
+  function addFiscalForm(){
+    vm.fiscalData.push({});
   }
 
   function addContact(form){
@@ -57,15 +68,19 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
   function create(){
     vm.isLoading = true;
     vm.client.contacts = vm.contacts.filter(function(c){
-      return true;
+      return !_.isUndefined(c.FirstName);
+    });
+    vm.client.fiscalData = vm.fiscalData.filter(function(f){
+      return !_.isUndefined(f.companyName);
     });
     console.log('client: ', vm.client);
+
     clientService.create(vm.client)
       .then(function(res){
         console.log(res);
         var created = res.data;
         vm.isLoading = false;
-        dialogService.showDialog('Cliente registrado');
+        //dialogService.showDialog('Cliente registrado');
         if(created.CardCode){
           if($location.search().continueQuotation){
             $location
@@ -81,7 +96,7 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
       .catch(function(err){
         console.log(err);
         vm.isLoading = false;
-        dialogService.showDialog('Hubo un error');
+        dialogService.showDialog('Hubo un error: ' + (err.data || err) );
       });
   }
 

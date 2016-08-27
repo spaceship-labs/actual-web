@@ -1,0 +1,165 @@
+<section action="#" class="form-section-content">
+
+  <div layout="row">
+    <div flex="20" class="input-element select-element-wrapper">
+      <label><strong>Titulo</strong></label>
+      <md-select
+        ng-model="vm.client.title"
+        name="title"
+        class="select-element"
+        placeholder="Sr/ Sra/ Srita"
+        required
+      >
+        <md-option
+          ng-repeat="title in vm.titles"
+          ng-value="title.value"
+        >
+          {{title.label}}
+        </option>
+      </md-select>
+    </div>
+
+
+    <div flex="20" class="input-element select-element-wrapper">
+      <label><strong>Sexo</strong></label>
+      <md-select
+        ng-model="vm.client.gender"
+        name="gender"
+        class="select-element"
+        placeholder="Masculino / Femenino"
+        required
+      >
+        <md-option
+          ng-repeat="gender in vm.genders"
+          ng-value="gender.value"
+        >
+          {{gender.label}}
+        </option>
+      </md-select>
+    </div>
+
+    <div flex="20" class="input-element">
+      <label>
+        <strong>Fecha de nacimiento
+          <span class="hl-label">*</span>
+        </strong>
+      </label>
+      <div class="input-element-inner">
+        <input
+          type="text"
+          pikaday="vm.pikadayDate"
+          readonly
+          show-month-after-year="true"
+          year-range="[1900,2016]"
+          on-select="vm.onPikadaySelect(pikaday)">
+      </div>
+    </div>
+
+  </div>
+
+  <div layout="row">
+    <div flex="50" class="input-element">
+      <label>
+        <strong>Nombre(s) del cliente
+          <span class="hl-label">*</span>
+        </strong>
+      </label>
+      <div class="input-element-inner">
+        <input
+          type="text"
+          name="name"
+          ng-model="vm.client.firstName"
+          required
+        >
+      </div>
+    </div>
+
+    <div flex class="input-element">
+      <label>
+        <strong>
+          Apellidos <span class="hl-label">*</span>
+        </strong>
+      </label>
+      <div class="input-element-inner">
+        <input
+          type="text"
+          name="paterno"
+          ng-model="vm.client.lastName"
+          required
+        >
+      </div>
+    </div>
+
+
+  </div>
+
+  <div layout="row">
+
+    <div flex="20" class="input-element">
+      <label>
+        <strong>
+          Teléfono fijo<span class="hl-label">*</span>
+        </strong>
+      </label>
+        <div class="input-element-inner">
+          <input
+            type="text"
+            name="phone"
+            ng-model="vm.client.phone"
+            required
+            placeholder="Lada + Número"
+          >
+        </div>
+    </div>
+
+
+    <div flex="20" class="input-element">
+      <label>
+        <strong>
+          Teléfono celular<span class="hl-label">*</span>
+        </strong>
+      </label>
+      <div class="input-element-inner">
+        <input
+          type="text"
+          name="mobilePhone"
+          ng-model="vm.client.mobilePhone"
+          placeholder="Lada + Número"
+          required
+        >
+      </div>
+
+    </div>
+
+
+    <div flex class="input-element">
+      <label>
+        <strong>Email</strong>
+        <span class="hl-label">*</span>
+      </label>
+      <div class="input-element-inner">
+        <input
+          type="email"
+          name="email"
+          ng-model="vm.client.email"
+          required
+        >
+      </div>
+    </div>
+   <div flex class="input-element">
+      <label>
+        <strong>Confirmar email</strong>
+        <span class="hl-label">*</span>
+      </label>
+      <div class="input-element-inner">
+        <input
+          type="email"
+          name="_email"
+          ng-model="_email"
+          ng-pattern="vm.client.email"
+          required
+        >
+      </div>
+    </div>
+  </div>
+</section>

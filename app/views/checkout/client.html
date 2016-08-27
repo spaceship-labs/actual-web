@@ -45,17 +45,11 @@
         <div layout="row">
           <div flex="20" class="input-element">
             <label><strong>Teléfono fijo <span class="hl-label">*</span></strong></label>
-            <div layout="row" layout-align="space-between center">
-                <div flex="30"><p>Lada:{{vm.quotation.Address.dialCode}}</p></div>
-                <div flex="60"><p>{{vm.quotation.Client.Phone1}}</p></div>
-            </div>
+            <p>{{vm.quotation.Client.Phone1}}</p>
           </div>
           <div flex="20" class="input-element">
             <label><strong>Teléfono celular <span class="hl-label">*</span></strong></label>
-            <div layout="row" layout-align="space-between center">
-                <div flex="30"><p>Lada:{{vm.quotation.Address.mobileDialCode}}</p></div>
-                <div flex="60"><p>{{vm.quotation.Client.Cellular}}</p></div>
-            </div>
+            <p>{{vm.quotation.Client.Cellular}}</p>
           </div>
           <div flex class="input-element">
             <label><strong>Email</strong> <span class="hl-label">*</span></label>

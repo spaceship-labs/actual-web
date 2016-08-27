@@ -55,8 +55,8 @@ function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams
       formattedContacts = contacts.map(function(c){
         c.name = (c.firstName&&c.lastName) ? c.firstName+' '+c.lastName : c.name;
         c.address = c.address;
-        c.phone = (c.phone) ? c.dialCode + ' ' + c.phone : c.phone1;
-        c.mobile = (c.mobilePhone) ? c.mobileDialCode + ' ' + c.mobilePhone : c.mobileSAP;
+        c.phone = c.phone || c.Tel1;
+        c.mobile = c.mobilePhone || c.Cellolar;
         return c;
       });
     }
@@ -64,18 +64,15 @@ function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams
   }
 
   function continueProcess(){
-    console.log('continueProcess');
     vm.isLoading = true;
     var params = angular.copy(vm.quotation);
     //delete params.Details;
-
     if(params.Details){
       params.Details = params.Details.map(function(detail){
         detail.Product = detail.Product.id;
         return detail;
       });
     }
-
     quotationService.update(vm.quotation.id, params).then(function(res){
       vm.isLoading = false;
       $location.path('/checkout/paymentmethod/' + vm.quotation.id);

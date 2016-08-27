@@ -147,9 +147,7 @@ function ClientProfileCtrl(
       birthDate: vm.client.birthDate,
       firstName: vm.client.firstName,
       lastName: vm.client.lastName,
-      dialCode: vm.client.dialCode,
       phone: vm.client.phone,
-      mobileDialCode: vm.client.mobileDialCode,
       mobilePhone: vm.client.mobilePhone,
       E_Mail: vm.client.E_Mail
     }
