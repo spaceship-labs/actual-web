@@ -1,4 +1,4 @@
-<form ng-submit="vm.updateFiscalInfo(fiscalForm)" class="form-section-content">
+<form ng-submit="vm.updateFiscalAddress(fiscalForm)" class="form-section-content">
 
   <div class="input-element">
     <label><strong>RFC (Principal) <span class="hl-label">*</span></strong></label>
@@ -7,13 +7,16 @@
     </div>
   </div>
 
-  <div class="client-item-info" ng-repeat="fiscalInfo in vm.client.FiscalInfo">
+  <div
+    class="client-item-info"
+    ng-repeat="fiscalAddress in vm.client.FiscalAddresses"
+  >
 
     <div layout="row">
       <div flex="45" class="input-element">
         <label><strong>Razón social <span class="hl-label">*</span></strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.companyName" required>
+          <input type="text" ng-model="fiscalAddress.companyName" required>
         </div>
       </div>
     </div>
@@ -22,7 +25,7 @@
       <div flex="20" class="input-element">
         <label><strong>RFC <span class="hl-label">*</span></strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.rfc" required>
+          <input type="text" ng-model="fiscalAddress.rfc" required>
         </div>
       </div>
 
@@ -32,7 +35,7 @@
           <input
             type="text"
             placeholder="Lada + Número"
-            ng-model="fiscalInfo.phone"
+            ng-model="fiscalAddress.phone"
             required>
         </div>
       </div>
@@ -40,7 +43,7 @@
       <div flex="30" class="input-element">
         <label><strong>Email</strong></label>
         <div class="input-element-inner">
-          <input type="email" ng-model="fiscalInfo.email" required>
+          <input type="email" ng-model="fiscalAddress.email" required>
         </div>
       </div>
     </div>
@@ -52,35 +55,35 @@
       <div flex="20" class="input-element">
         <label><strong>Calle</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.Street">
+          <input type="text" ng-model="fiscalAddress.Street">
         </div>
       </div>
 
       <div flex="10" class="input-element">
         <label><strong>No. exterior</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.U_NumExt">
+          <input type="text" ng-model="fiscalAddress.U_NumExt">
         </div>
       </div>
 
       <div flex="10" class="input-element">
         <label><strong>No. interior</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.U_NumInt">
+          <input type="text" ng-model="fiscalAddress.U_NumInt">
         </div>
       </div>
 
       <div flex="25" class="input-element">
         <label><strong>Colonia</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.Block">
+          <input type="text" ng-model="fiscalAddress.Block">
         </div>
       </div>
 
       <div flex="20" class="input-element">
         <label><strong>Municipio</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.municipality">
+          <input type="text" ng-model="fiscalAddress.municipality">
         </div>
       </div>
 
@@ -91,14 +94,14 @@
       <div flex="20" class="input-element">
         <label><strong>Ciudad</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.City">
+          <input type="text" ng-model="fiscalAddress.City">
         </div>
       </div>
 
 
       <div flex="30" class="input-element select-element-wrapper">
         <label><strong>Estado</strong></label>
-        <md-select ng-model="fiscalInfo.State" class="select-element">
+        <md-select ng-model="fiscalAddress.State" class="select-element">
           <md-option ng-repeat="state in vm.states" ng-value="state.Code">
             {{state.Name}}
           </md-option>
@@ -108,7 +111,7 @@
       <div flex="15" class="input-element">
         <label><strong>Código postal</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalInfo.ZipCode">
+          <input type="text" ng-model="fiscalAddress.ZipCode">
         </div>
       </div>
 
@@ -118,7 +121,7 @@
 
   <div layout="row" class="form-view-btns" layout-align="center center">
     <a
-      ng-click="vm.updateFiscalInfo(fiscalForm)"
+      ng-click="vm.updateFiscalAddress(fiscalForm)"
       href=""
       flex="70"
       class="form-view-btn form-view-btn-primary">

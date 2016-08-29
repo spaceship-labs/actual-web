@@ -15,7 +15,7 @@
         getClients: getClients,
         getContacts: getContacts,
         update: update,
-        updateFiscalInfo: updateFiscalInfo,
+        updateFiscalAddress: updateFiscalAddress,
         updateContact: updateContact
       };
 
@@ -47,8 +47,8 @@
         return api.$http.post(url);
       }
 
-      function updateFiscalInfo(id,cardCode,params){
-        var url = '/client/update/fiscalinfo/' + id + '/' + cardCode;
+      function updateFiscalAddress(id,cardCode,params){
+        var url = '/client/update/fiscaladdress/' + id + '/' + cardCode;
         return api.$http.post(url, params);
       }
 
