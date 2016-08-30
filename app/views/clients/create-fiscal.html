@@ -10,17 +10,6 @@
     </div>
   </div>
 
-  <div layout="row" layout-align="end center">
-    <a
-      href="#"
-      flex="30"
-      class="action-btn"
-      ng-click="vm.addFiscalForm()">
-      Agregar nueva dirección
-    </a>
-  </div>
-
-
   <div class="client-item-info" ng-repeat="fiscalAddress in vm.fiscalAddresses">
 
     <div layout="row">
@@ -129,6 +118,18 @@
     </div>
 
   </div>
+
+  <div layout="row" layout-align="end center">
+    <a
+      href="#"
+      flex="30"
+      class="action-btn"
+      ng-click="vm.addFiscalForm()">
+      Agregar nueva dirección 
+      <i class="icon-cotizar add-icon"></i>
+    </a>
+  </div>
+
 
 
 </section>

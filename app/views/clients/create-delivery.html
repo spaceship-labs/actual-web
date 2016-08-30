@@ -1,16 +1,5 @@
 <section  ng-show="vm.activeTab==3" action="#" class="form-section-content">
 
-  <div layout="row" layout-align="end center">
-    <a
-      href="#"
-      flex="30"
-      class="action-btn"
-      ng-if="!vm.showNewContact"
-      ng-click="vm.addContactForm()">
-      Agregar nueva dirección
-    </a>
-  </div>
-
   <div
     class="client-item-info"
     ng-repeat="contact in vm.contacts track by $index"
@@ -160,5 +149,20 @@
       </div>
 
     </div>
+
+  </div>
+  
+  <div layout="row" layout-align="end center">
+    <a
+      href="#"
+      flex="30"
+      class="action-btn"
+      ng-if="!vm.showNewContact"
+      ng-click="vm.addContactForm()">
+      Agregar nueva dirección 
+      <i class="icon-cotizar add-icon"></i>
+    </a>
+  </div>
+
 
 </section>

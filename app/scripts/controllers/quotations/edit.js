@@ -275,7 +275,7 @@ function QuotationsEditCtrl(
   function getPromotionPackageById(id){
     if(id){
       var pack = _.findWhere(vm.promotionPackages, {id:id});
-      if(pack.isValid){
+      if(pack && pack.isValid){
         return pack;
       }
     }
