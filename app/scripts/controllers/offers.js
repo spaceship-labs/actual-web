@@ -75,7 +75,7 @@ function OffersCtrl(
       var packageProduct = {
         ItemCode: product.ItemCode,
         id      : product.id,
-        quantity: product.packageInfo.quantity,
+        quantity: product.packageRule.quantity,
         name    : product.Name
       };
       return packageProduct;

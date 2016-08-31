@@ -234,7 +234,7 @@ function QuotationsEditCtrl(
         });
         vm.promotionPackages = vm.promotionPackages.map(function(pack){
           pack.isValid = validatePackageRules(
-            pack.ProductsPackageInfo,
+            pack.PackageRules,
             vm.quotation.Details
           );
           return pack;
@@ -298,7 +298,7 @@ function QuotationsEditCtrl(
       vm.quotation.discount      = updatedQ.discount;
       vm.quotation.totalProducts = updatedQ.totalProducts;
       vm.currentPackage.isValid  = validatePackageRules(
-        vm.currentPackage.ProductsPackageInfo,
+        vm.currentPackage.PackageRules,
         vm.quotation.Details
       );
     });
