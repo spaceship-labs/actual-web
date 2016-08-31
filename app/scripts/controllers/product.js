@@ -93,11 +93,21 @@ function ProductCtrl(
         return productService.delivery(productId, activeStore);
       })
       .then(function(delivery){
-        console.log(delivery);
-        vm.available = delivery.reduce(function(acum, current) {
-          current.available = parseInt(current.available);
-          return acum + current.available;
+        var locations   = delivery.reduce(function(acum, current){
+          if (acum.indexOf(current.companyFrom) == -1) {
+            return acum.concat(current.companyFrom);
+          }
+          return acum;
+        }, []);
+        vm.available = locations.reduce(function(acum, location) {
+          return acum + delivery.reduce(function(acum, current) {
+            if (current.companyFrom == location &&  current.available > acum ){
+              return current.available;
+            }
+            return acum;
+          }, 0);
         }, 0);
+
         vm.deliveries  = delivery;
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.product.cart.delivery = vm.deliveries[0];
