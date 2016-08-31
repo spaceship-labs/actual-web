@@ -253,7 +253,7 @@
                 <table>
                   <tr ng-repeat="delivery in vm.deliveries">
                     <td>
-                      {{delivery.date | date: "d/MMM/yyyy"}} (en {{delivery.days}} días) | {{ vm.getWarehouseName(delivery.company) }}
+                      {{delivery.date | date: "d/MMM/yyyy"}} (en {{delivery.days}} días) | {{ vm.getWarehouseName(delivery.companyFrom) }}
                     </td>
                     <td>{{delivery.available | number: 0}} piezas</td>
                   </tr>
