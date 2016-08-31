@@ -233,7 +233,10 @@ function QuotationsEditCtrl(
           return r.data;
         });
         vm.promotionPackages = vm.promotionPackages.map(function(pack){
-          pack.isValid = validatePackageRules(pack);
+          pack.isValid = validatePackageRules(
+            pack.ProductsPackageInfo,
+            vm.quotation.Details
+          );
           return pack;
         });
 
@@ -249,23 +252,15 @@ function QuotationsEditCtrl(
     });
   }
 
-  function validatePackageRules(promotionPackage){
-    var rules = [];
-    for(var i = 0; i < promotionPackage.ProductsPackageInfo.length; i++){
-      rules.push( promotionPackage.ProductsPackageInfo[i] );
-    }
-
+  function validatePackageRules(rules, details){
     var validFlag = true;
     for(var i = 0; i < rules.length; i++){
       var rule = rules[i];
-      var isValidRule = _.find(vm.quotation.Details, function(detail){
+      var isValidRule = _.find(details, function(detail){
         return (detail.Product.id === rule.Product && detail.quantity === detail.quantity)
       });
       if(!isValidRule){
-        console.log('invalido', rule);
         validFlag = false;
-      }else{
-        console.log('valido', rule);
       }
     }
     return validFlag;
@@ -275,7 +270,7 @@ function QuotationsEditCtrl(
   function getPromotionPackageById(id){
     if(id){
       var pack = _.findWhere(vm.promotionPackages, {id:id});
-      if(pack.isValid){
+      if(pack && pack.isValid){
         return pack;
       }
     }
@@ -302,7 +297,10 @@ function QuotationsEditCtrl(
       vm.quotation.subtotal      = updatedQ.subtotal;
       vm.quotation.discount      = updatedQ.discount;
       vm.quotation.totalProducts = updatedQ.totalProducts;
-      vm.currentPackage.isValid  = validatePackageRules(vm.currentPackage);
+      vm.currentPackage.isValid  = validatePackageRules(
+        vm.currentPackage.ProductsPackageInfo,
+        vm.quotation.Details
+      );
     });
   }
 

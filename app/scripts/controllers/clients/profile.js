@@ -76,7 +76,7 @@ function ClientProfileCtrl(
     init: init,
     onPikadaySelect: onPikadaySelect,
     updatePersonalData: updatePersonalData,
-    updateFiscalInfo: updateFiscalInfo,
+    updateFiscalAddress: updateFiscalAddress,
     apiResourceLeads: quotationService.getByClient,
     apiResourceOrders: orderService.getList,
     updateContact: updateContact,
@@ -102,12 +102,8 @@ function ClientProfileCtrl(
       vm.filtersQuotations = {Client: vm.client.id};
       vm.filtersOrders = {Client: vm.client.id};
       vm.client.Contacts = vm.formatContacts(vm.client);
+
       console.log(vm.client);
-      /*
-      $timeout(function(){
-        vm.filter
-      }, 100)
-      */
 
       if($location.search().activeTab && $location.search().activeTab < 4){
         vm.activeTab = $location.search().activeTab;
@@ -129,12 +125,10 @@ function ClientProfileCtrl(
   }
 
   function onPikadaySelect(pikaday){
-    console.log(pikaday);
     vm.client.birthDate = pikaday._d;
   }
 
   function updatePersonalData(){
-    console.log('update');
     vm.isLoading = true;
     var params = {
       //SAP fields
@@ -161,20 +155,22 @@ function ClientProfileCtrl(
     });
   }
 
-  function updateFiscalInfo(){
-    var params = vm.client.FiscalInfo[0] || {};
+  function updateFiscalAddress(){
+    var fiscalAddress = vm.client.FiscalAddresses[0] || {};
     vm.isLoading =  true;
-    clientService.updateFiscalInfo(vm.client.FiscalInfo[0].id, vm.client.CardCode,params)
-      .then(function(res){
-        console.log(res);
-        vm.isLoading = false;
-        dialogService.showDialog('Datos de facturación actualizados');
-      })
-      .catch(function(err){
-        console.log(err);
-        vm.isLoading = false;
-        dialogService.showDialog('Hubo un error, revisa los campos');
-      })
+    if(fiscalAddress.id){
+      clientService.updateFiscalAddress(fiscalAddress.id, vm.client.CardCode,fiscalAddress)
+        .then(function(res){
+          console.log(res);
+          vm.isLoading = false;
+          dialogService.showDialog('Datos de facturación actualizados');
+        })
+        .catch(function(err){
+          console.log(err);
+          vm.isLoading = false;
+          dialogService.showDialog('Hubo un error, revisa los campos');
+        });
+    }
   }
 
   function createQuotation(){
@@ -187,15 +183,16 @@ function ClientProfileCtrl(
     quotationService.newQuotation(params, goToSearch);
   }
 
-  function formatFiscalInfo(client){
-    var fiscalInfo = [];
-    if(client.fiscalInfo){
-      fiscalInfo = client.fiscalInfo.map(function(info){
-        info.email = info.email || angular.copy(client.E_Mail);
-        return info;
+  function formatFiscalAddresses(client){
+    var fiscalAddresses = [];
+    console.log(client.fiscalAddresses);
+    if(client.fiscalAddresses){
+      fiscalAddresses = client.fiscalAddresses.map(function(address){
+        address.email = address.email || angular.copy(client.E_Mail);
+        return address;
       });
     }
-    return fiscalInfo;
+    return fiscalAddresses;
   }
 
   function formatContacts(client){
