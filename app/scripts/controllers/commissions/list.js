@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CommissionsListCtrl', CommissionsListCtrl);
 
-function CommissionsListCtrl($location, commissionService) {
+function CommissionsListCtrl($rootScope, $location, commissionService) {
   var vm     = this;
   vm.columns = [
     {key: 'id',             label: 'FOLIO COMISION'},
@@ -19,5 +19,6 @@ function CommissionsListCtrl($location, commissionService) {
     {key: 'ammount',        label: 'MONTO COMISIÓN', currency: true},
     {key: 'rate',           label: '% COMISIÓN', rate: true, isRateNormalized: true},
   ];
+  vm.filters = {user: $rootScope.user.id};
   vm.apiResource = commissionService.getCommissions;
 }
