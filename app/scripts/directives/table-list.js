@@ -176,6 +176,12 @@
                 if(column.currency){
                   data = $filter('currency')(data);
                 }
+                if(column.isRateNormalized){
+                  data = data * 100;
+                }
+                if(column.rate){
+                  data = $filter('number')(data) + '%';
+                }
                 if(column.destroy){
                   id = (column.propId) ? column.propId : 'id';
                   html = '<a href="#" ng-click="showDestroyDialog($event, \''+ full[id] +'\')">Eliminar</a>';

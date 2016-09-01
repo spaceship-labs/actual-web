@@ -15,10 +15,9 @@ function CommissionsListCtrl($location, commissionService) {
   vm.columns = [
     {key: 'id',             label: 'FOLIO COMISION'},
     {key: 'payment.id',     label: 'FOLIO PAGO'},
-    {key: 'paymentAmmount', label: 'MONTO COBRADO'},
-    {key: 'ammount',        label: 'MONTO COMISIÓN'},
-    {key: 'rate',           label: '% COMISIÓN'},
-    {key: 'ammount',        label: 'MONTO COMISIÓN'},
+    {key: 'ammountPayment', label: 'MONTO COBRADO', currency: true},
+    {key: 'ammount',        label: 'MONTO COMISIÓN', currency: true},
+    {key: 'rate',           label: '% COMISIÓN', rate: true, isRateNormalized: true},
   ];
   vm.apiResource = commissionService.getCommissions;
 }
