@@ -10,21 +10,15 @@
 angular.module('dashexampleApp')
   .controller('CommissionsListCtrl', CommissionsListCtrl);
 
-function CommissionsListCtrl($location) {
+function CommissionsListCtrl($location, commissionService) {
   var vm     = this;
   vm.columns = [
-    {key: 'id', label:'FOLIO'},
-    {key: 'createdAt' , label: 'FECHA VENTA'    },
-    {key: 'ammount'   , label: 'MONTO COBRADO'  },
-    {key: 'commission', label: '% COMISIÓN'     },
-    {key: 'commission', label: 'MONTO COMISIÓN' },
-    {key: 'commission', label: 'COMISIÓN PAGADA'},
+    {key: 'id',             label: 'FOLIO COMISION'},
+    {key: 'payment.id',     label: 'FOLIO PAGO'},
+    {key: 'paymentAmmount', label: 'MONTO COBRADO'},
+    {key: 'ammount',        label: 'MONTO COMISIÓN'},
+    {key: 'rate',           label: '% COMISIÓN'},
+    {key: 'ammount',        label: 'MONTO COMISIÓN'},
   ];
-  vm.apiResourceClients = function() {
-    return {
-      then: function(fn) {
-        fn({data: {data: [], total: 10}});
-      }
-    };
-  }
+  vm.apiResource = commissionService.getCommissions;
 }
