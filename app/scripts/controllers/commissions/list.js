@@ -11,8 +11,8 @@ angular.module('dashexampleApp')
   .controller('CommissionsListCtrl', CommissionsListCtrl);
 
 function CommissionsListCtrl($rootScope, $location, commissionService) {
-  var vm     = this;
-  vm.columns = [
+  var vm          = this;
+  vm.columns      = [
     {key: 'folio', label: 'FOLIO'},
     {key: 'datePayment', label: 'FECHA VENTA', date: true},
     {key: 'ammountPayment', label: 'MONTO COBRADO', currency: true},
@@ -21,6 +21,32 @@ function CommissionsListCtrl($rootScope, $location, commissionService) {
     {key: 'ammountPaid', label: 'COMISIÓN PAGADA', currency: true},
     {key: 'ammountLeft', label: 'COMISIÓN PENDIENTE', currency: true},
   ];
-  vm.filters = {user: $rootScope.user.id};
-  vm.apiResource = commissionService.getCommissions;
+  vm.filters      = {user: $rootScope.user.id};
+  vm.applyFilters = applyFilters;
+  vm.setFromDate  = setFromDate;
+  vm.setToDate    = setToDate;
+  vm.apiResource  = commissionService.getCommissions;
+
+  function applyFilters(){
+    if(vm.dateStart && vm.dateEnd){
+      var start  = vm.dateStart;
+      var end    = moment(vm.dateEnd).endOf('day');
+      vm.filters = Object.assign({}, vm.filters, {
+        datePayment: {
+          '>=': start,
+          '<': end
+        }
+      });
+    }
+    $rootScope.$broadcast('reloadTable', true);
+  }
+
+  function setFromDate(pikaday){
+    vm.dateStart = pikaday._d;
+  }
+
+
+  function setToDate(pikaday){
+    vm.dateEnd   = pikaday._d;
+  }
 }

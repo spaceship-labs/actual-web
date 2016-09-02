@@ -12,7 +12,7 @@
             trigger="trigger-start-date"
             readonly
             type="text"
-            on-select="vm.onDateStartSelect(pikaday)"
+            on-select="vm.setFromDate(pikaday)"
           >
         </strong>
         <strong>
@@ -23,23 +23,12 @@
             trigger="trigger-end-date"
             readonly
             type="text"
-            on-select="vm.onDateEndSelect(pikaday)"
+            on-select="vm.setToDate(pikaday)"
           >
         </strong>
       </p>
     </div>
 
-    <div flex="30" class="input-element select-element-wrapper">
-      <label><strong>Buscar sobre:</strong></label>
-      <select ng-model="vm.filters.SlpCode" class="select-element">
-        <option ng-selected="vm.user.SlpCode == vm.filters.SlpCode" ng-value="vm.user.SlpCode">
-          Mis oportunidades
-        </option>
-        <option ng-value="'none'">
-          Todas las oportunidades
-        </option>
-      </select>
-    </div>
     <div flex="20">
       <a ng-click="vm.applyFilters()" href="#" class="action-btn">Aplicar filtros</a>
     </div>
