@@ -10,8 +10,15 @@
 angular.module('dashexampleApp')
   .controller('CommissionsListCtrl', CommissionsListCtrl);
 
-function CommissionsListCtrl($rootScope, $location, commissionService) {
+function CommissionsListCtrl($rootScope, $location, commissionService, storeService) {
+  var date        = new Date();
+  var first       = new Date(date.getFullYear(), date.getMonth(), 1);
+  var mid         = new Date(date.getFullYear(), date.getMonth(), 15);
+  var mid2        = new Date(date.getFullYear(), date.getMonth(), 16);
+  var last        = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   var vm          = this;
+  vm.user         = $rootScope.user;
+  vm.sellers      = [];
   vm.columns      = [
     {key: 'folio', label: 'FOLIO'},
     {key: 'datePayment', label: 'FECHA VENTA', date: true},
@@ -21,11 +28,21 @@ function CommissionsListCtrl($rootScope, $location, commissionService) {
     {key: 'ammountPaid', label: 'COMISIÓN PAGADA', currency: true},
     {key: 'ammountLeft', label: 'COMISIÓN PENDIENTE', currency: true},
   ];
-  vm.filters      = {user: $rootScope.user.id};
+  vm.dateStart    = date.getDate() <= 15? first.toISOString() : mid2.toISOString();
+  vm.dateEnd      = date.getDate() <= 15? mid.toISOString(): last.toISOString();
+  vm.filters      = {
+    user: vm.user.id,
+    datePayment: {
+      '>=': vm.dateStart,
+      '<': vm.dateEnd
+    }
+  };
   vm.applyFilters = applyFilters;
   vm.setFromDate  = setFromDate;
   vm.setToDate    = setToDate;
   vm.apiResource  = commissionService.getCommissions;
+
+  init();
 
   function applyFilters(){
     if(vm.dateStart && vm.dateEnd){
@@ -45,8 +62,25 @@ function CommissionsListCtrl($rootScope, $location, commissionService) {
     vm.dateStart = pikaday._d;
   }
 
-
   function setToDate(pikaday){
     vm.dateEnd   = pikaday._d;
   }
+
+  function init() {
+    if (vm.user.role.name == 'store manager') {
+      getSellersByStore(vm.user.mainStore.id);
+    }
+  }
+
+  function getSellersByStore(storeId){
+    storeService
+      .getSellersByStore(storeId)
+      .then(function(res){
+        return res.data;
+      })
+      .then(function(res) {
+        console.log(res.data);
+      });
+  }
+
 }
