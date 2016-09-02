@@ -32,28 +32,19 @@
         </strong>
       </p>
     </div>
-
     <div flex="20">
       <a ng-click="vm.applyFilters()" href="#" class="action-btn">Aplicar filtros</a>
     </div>
   </div>
-
   <hr/>
 
   <div class="nested-table">
-    <div class="nested-top" layout="row" layout-align="space-between center">
-      <span></span><span>TOTAL: {{vm.user.total | currency}}</span>
-    </div>
-    <div class="nested-item">
-      <div class="nested-content">
-      </div>
-    </div>
-  </div>
-
-  <!--
-    IF MANAGER
-  -->
-  <section class="nested table" ng-if="vm.user.role.name == 'store manager'">
+    <!--
+      IF MANAGER
+    -->
+    <h2 ng-if="vm.user.role.name == 'store manager'">
+      TIENDA: {{vm.user.mainStore.name}}
+    </h2>
     <div
       ng-repeat="seller in vm.sellers track by $index"
       class="nested-item"
@@ -84,60 +75,42 @@
 
       </div>
     </div>
-  </section>
-
-  <!--
+    <!--
     END IF MANAGER
-  -->
+    -->
 
-
-  <!--
+    <!---
     IF SELLER
-  -->
-  <section class="table-list-wrap table-list-wrap-nomargin" ng-if="vm.user.role.name == 'seller'">
+    -->
     <div
-      table-list
-      class="table-list"
-      columns="vm.columns"
-      filters="vm.filters"
-      api-resource="vm.apiResource"
+      ng-if="vm.user.role.name == 'seller'"
+      class="nested-item"
     >
-    </div>
-  </section>
-  <!--
-    END IF SELLER
-  -->
-
-  <section class="chart-section">
-    <h2><i class="icon-login"></i> <strong>OPORTUNIDADES</strong></h2>
-    <div class="chart-section-inner">
-      <div layout="row">
-        <div class="chart-section-col" flex="40">
-          <h3>Cantidad</h3>
-          <canvas
-            id="pie"
-            class="chart chart-pie"
-            chart-data="vm.quantities.data"
-            chart-labels="vm.quantities.labels"
-            chart-colours="vm.quantities.colours"
-          >
-          </canvas>
-          <p><strong>Hoy</strong> | <strong>Total</strong></p>
-          <p>{{vm.todayQty}} | {{vm.monthQty}}</p>
-        </div>
-      <div class="chart-section-col chart-section-legends" flex="20">
-        <p><span class="chart-section-sqr"></span> Hoy</p>
-        <p><span class="chart-section-sqr chart-section-sqr2"></span> Resto del mes</p>
+      <div
+        class="nested-bar nested-bar3"
+        ng-init="seller.selected  = true"
+        ng-click="seller.selected = !seller.selected"
+        layout="row"
+        layout-align="space-between center"
+      >
+        <span>TOTAL VENDEDOR: {{vm.user.firstName + ' ' + vm.user.lastName}} </span>
+        <span>
+          {{vm.user.total | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
+        </span>
       </div>
-      <div class="chart-section-col" flex="40">
-        <h3>Monto</h3>
-        <canvas id="pie" class="chart chart-pie"
-          chart-data="vm.ammounts.data" chart-labels="vm.ammounts.labels" chart-colours="vm.ammounts.colours">
-        </canvas>
-        <p><strong>Hoy</strong> | <strong>Total</strong></p>
-        <p>{{vm.todayAmmount | currency}} | {{vm.monthAmmount | currency}}</p>
+      <div ng-show="seller.selected" class="nested-content">
+        <section class="table-list-wrap table-list-wrap-nomargin">
+          <div
+            table-list
+            class="table-list table-list-v2"
+            columns="vm.columns"
+            api-resource="vm.apiResource"
+            date-range="vm.dateRange"
+            filters="vm.filters"
+          >
+          </div>
+        </section>
       </div>
     </div>
   </div>
-  </section>
 </section>
