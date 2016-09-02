@@ -17,6 +17,7 @@
     }
 
     function getTotalByUser(user, dateFrom, dateTo) {
+      console.log(user, dateFrom, dateTo);
       var url    = '/commission/total';
       var params = {
         user: user,

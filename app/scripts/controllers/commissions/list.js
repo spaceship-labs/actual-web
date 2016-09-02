@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('CommissionsListCtrl', CommissionsListCtrl);
 
-function CommissionsListCtrl($rootScope, $location, commissionService, storeService) {
+function CommissionsListCtrl($q, $rootScope, $location, commissionService, storeService) {
   var date        = new Date();
   var first       = new Date(date.getFullYear(), date.getMonth(), 1);
   var mid         = new Date(date.getFullYear(), date.getMonth(), 15);
@@ -28,8 +28,8 @@ function CommissionsListCtrl($rootScope, $location, commissionService, storeServ
     {key: 'ammountPaid', label: 'COMISIÓN PAGADA', currency: true},
     {key: 'ammountLeft', label: 'COMISIÓN PENDIENTE', currency: true},
   ];
-  vm.dateStart    = date.getDate() <= 15? first.toISOString() : mid2.toISOString();
-  vm.dateEnd      = date.getDate() <= 15? mid.toISOString(): last.toISOString();
+  vm.dateStart    = date.getDate() <= 15? first : mid2;
+  vm.dateEnd      = date.getDate() <= 15? mid : last;
   vm.filters      = {
     user: vm.user.id,
     datePayment: {
@@ -46,7 +46,7 @@ function CommissionsListCtrl($rootScope, $location, commissionService, storeServ
 
   function applyFilters(){
     if(vm.dateStart && vm.dateEnd){
-      var start  = vm.dateStart;
+      var start  = moment(vm.dateStart);
       var end    = moment(vm.dateEnd).endOf('day');
       vm.filters = Object.assign({}, vm.filters, {
         datePayment: {
@@ -69,7 +69,9 @@ function CommissionsListCtrl($rootScope, $location, commissionService, storeServ
 
   function init() {
     if (vm.user.role.name == 'store manager') {
-      getSellersByStore(vm.user.mainStore.id);
+      getSellersByStore(vm.user.mainStore.id).then(function(sellers){
+        vm.sellers = sellers;
+      });
     } else {
       getTotalByUser(vm.user.id).then(function(total){
         vm.user.total = total;
@@ -78,19 +80,31 @@ function CommissionsListCtrl($rootScope, $location, commissionService, storeServ
   }
 
   function getSellersByStore(storeId){
-    storeService
+    return storeService
       .getSellersByStore(storeId)
       .then(function(res){
         return res.data;
       })
-      .then(function(res) {
-        console.log(res.data);
+      .then(function(sellers) {
+        return sellers.reduce(function(promise, seller) {
+          return promise.then(function(sellers) {
+            return getTotalByUser(seller.id).then(function(total) {
+              seller.total = total;
+              return sellers.concat(seller);
+            });
+          });
+        }, $q.when([]));
+      })
+      .then(function(sellers) {
+        return sellers.map(function(seller) {
+          seller.filters = Object.assign({}, vm.filters, {user: seller.id});
+          return seller;
+        });
       });
   }
 
   function getTotalByUser (user) {
-    return commissionService
-      .getTotalByUser(user, vm.dateStart, vm.dateEnd);
+    return commissionService.getTotalByUser(user, vm.dateStart, vm.dateEnd);
   }
 
 }

@@ -7,27 +7,27 @@
         <strong>
           <i id="trigger-start-date" class="icon-pedidos"></i> DEL:
           <input
-            pikaday="vm.dateStart"
+            pikaday="vm.pikaday"
             format="DD/MM/YYYY"
             trigger="trigger-start-date"
             readonly
             type="text"
             on-select="vm.setFromDate(pikaday)"
             set-default-date="true"
-            default-date="{{vm.dateStart}}"
+            default-date="{{vm.dateStart.toISOString()}}"
           >
         </strong>
         <strong>
           <i id="trigger-end-date" class="icon-pedidos"></i> AL:
           <input
-            pikaday="vm.dateEnd"
+            pikaday="vm.pikaday"
             format="DD/MM/YYYY"
             trigger="trigger-end-date"
             readonly
             type="text"
             on-select="vm.setToDate(pikaday)"
             set-default-date="true"
-            default-date="{{vm.dateEnd}}"
+            default-date="{{vm.dateEnd.toISOString()}}"
           >
         </strong>
       </p>
@@ -67,10 +67,11 @@
           <div
             table-list
             class="table-list table-list-v2"
-            columns="vm.columnsLeads"
-            api-resource="vm.apiResourceLeads"
+            columns="vm.columns"
+            api-resource="vm.apiResource"
             date-range="vm.dateRange"
-            filters="seller.filters"></div>
+            filters="seller.filters">
+          </div>
         </section>
 
       </div>
