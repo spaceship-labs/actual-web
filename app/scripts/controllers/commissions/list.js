@@ -56,6 +56,7 @@ function CommissionsListCtrl($rootScope, $location, commissionService, storeServ
       });
     }
     $rootScope.$broadcast('reloadTable', true);
+    init();
   }
 
   function setFromDate(pikaday){
@@ -69,6 +70,10 @@ function CommissionsListCtrl($rootScope, $location, commissionService, storeServ
   function init() {
     if (vm.user.role.name == 'store manager') {
       getSellersByStore(vm.user.mainStore.id);
+    } else {
+      getTotalByUser(vm.user.id).then(function(total){
+        vm.user.total = total;
+      });
     }
   }
 
@@ -81,6 +86,11 @@ function CommissionsListCtrl($rootScope, $location, commissionService, storeServ
       .then(function(res) {
         console.log(res.data);
       });
+  }
+
+  function getTotalByUser (user) {
+    return commissionService
+      .getTotalByUser(user, vm.dateStart, vm.dateEnd);
   }
 
 }
