@@ -74,27 +74,50 @@ function CommissionsListCtrl($q, $rootScope, $location, commissionService, store
 
   function init() {
     if (vm.user.role.name == 'store manager') {
-      getSellersByStore(vm.user.mainStore.id).then(function(sellers){
-        vm.sellers = sellers;
-      });
+      getSellersByStore(vm.user.mainStore.id)
+        .then(function(sellers){
+          vm.sellers = sellers;
+          vm.user.total = sellers.reduce(function(acum, current) {
+            return acum + current.total;
+         }, 0);
+        })
+        .then(function() {
+          getGoal()
+            .then(function(goal) {
+              var goal = goal.goal / 2;
+              var labels = [
+                'vendido',
+                (vm.user.total >  goal && 'superado') || 'faltante'
+              ];
+              vm.chart        = {
+                data: [vm.user.total, Math.abs(vm.user.total - goal)],
+                labels: labels,
+                colors: ['#C92933', '#48C7DB', '#FFCE56']
+              };
+            });
+        });
     } else {
-      getTotalByUser(vm.user.id).then(function(res){
-        vm.user.total = res.total;
-        vm.user.commissions = res.commissions;
-      });
+      getTotalByUser(vm.user.id)
+        .then(function(res){
+          vm.user.total = res.total;
+          vm.user.commissions = res.commissions;
+        })
+        .then(function() {
+          getGoal()
+            .then(function(goal) {
+              var goal = goal.goal / goal.sellers / 2;
+              var labels = [
+                'vendido',
+                (vm.user.total >  goal && 'superado') || 'faltante'
+              ];
+              vm.chart        = {
+                data: [vm.user.total, Math.abs(vm.user.total - goal)],
+                labels: labels,
+                colors: ['#C92933', '#48C7DB', '#FFCE56']
+              };
+            });
+        });
     }
-    getGoal().then(function(goal) {
-      var goal = goal.goal / goal.sellers / 2;
-      var labels = [
-        'vendido',
-        (vm.user.total >  goal && 'superado') || 'faltante'
-      ];
-      vm.chart        = {
-        data: [vm.user.total, Math.abs(vm.user.total - goal)],
-        labels: labels,
-        colors: ['#C92933', '#48C7DB', '#FFCE56']
-      };
-    });
   }
 
   function getSellersByStore(storeId){
@@ -107,7 +130,8 @@ function CommissionsListCtrl($q, $rootScope, $location, commissionService, store
         return sellers.reduce(function(promise, seller) {
           return promise.then(function(sellers) {
             return getTotalByUser(seller.id).then(function(total) {
-              seller.total = total;
+              seller.commissions = total.commissions;
+              seller.total       = total.total;
               return sellers.concat(seller);
             });
           });
