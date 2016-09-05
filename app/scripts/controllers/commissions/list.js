@@ -37,6 +37,11 @@ function CommissionsListCtrl($q, $rootScope, $location, commissionService, store
       '<': vm.dateEnd
     }
   };
+  vm.chart        = {
+    data: [30, 70],
+    labels: ['vendido', 'faltante'],
+    colors: ['#C92933', '#48C7DB', '#FFCE56']
+  };
   vm.applyFilters = applyFilters;
   vm.setFromDate  = setFromDate;
   vm.setToDate    = setToDate;
@@ -73,10 +78,23 @@ function CommissionsListCtrl($q, $rootScope, $location, commissionService, store
         vm.sellers = sellers;
       });
     } else {
-      getTotalByUser(vm.user.id).then(function(total){
-        vm.user.total = total;
+      getTotalByUser(vm.user.id).then(function(res){
+        vm.user.total = res.total;
+        vm.user.commissions = res.commissions;
       });
     }
+    getGoal().then(function(goal) {
+      var goal = goal.goal / goal.sellers / 2;
+      var labels = [
+        'vendido',
+        (vm.user.total >  goal && 'superado') || 'faltante'
+      ];
+      vm.chart        = {
+        data: [vm.user.total, Math.abs(vm.user.total - goal)],
+        labels: labels,
+        colors: ['#C92933', '#48C7DB', '#FFCE56']
+      };
+    });
   }
 
   function getSellersByStore(storeId){
@@ -107,4 +125,10 @@ function CommissionsListCtrl($q, $rootScope, $location, commissionService, store
     return commissionService.getTotalByUser(user, vm.dateStart, vm.dateEnd);
   }
 
+  function getGoal() {
+    return commissionService.getGoal(vm.user.mainStore.id, vm.dateStart, vm.dateEnd).then(function(goal) {
+      vm.goal = goal;
+      return goal;
+    });
+  }
 }

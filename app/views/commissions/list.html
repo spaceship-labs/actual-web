@@ -96,7 +96,7 @@
       >
         <span>TOTAL VENDEDOR: {{vm.user.firstName + ' ' + vm.user.lastName}} </span>
         <span>
-          {{vm.user.total | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
+          {{vm.user.commissions | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
         </span>
       </div>
       <div ng-show="seller.selected" class="nested-content">
@@ -114,4 +114,46 @@
       </div>
     </div>
   </div>
+  <section class="chart-section">
+    <h2><i class="icon-login"></i> <strong>META QUINCENAL DE LA TIENDA: {{vm.goal.goal / vm.goal.sellers / 2 | currency}}</strong></h2>
+    <div class="chart-section-inner">
+    <div layout="row" layout-align="center center">
+      <div class="chart-section-col" flex="70">
+        <h3>Monto</h3>
+        <canvas
+          id="pie"
+          class="chart chart-pie"
+          chart-options="vm.quotationsData.ammounts.options"
+          chart-data="vm.chart.data"
+          chart-labels="vm.chart.labels"
+          chart-colors="vm.chart.colors">
+        <p><strong>Hoy</strong> | <strong>Total</strong></p>
+        <p>
+          {{vm.quotationsData.todayAmmount | currency}} | {{vm.quotationsData.rangeAmmount | currency}}
+        </p>
+
+      </div>
+      <div class="chart-section-col chart-section-legends" flex="30"
+        layout layout-wrap layout-align="start center"
+      >
+        <p>
+          <span class="chart-section-sqr"></span>
+          Has vendido {{vm.user.total | currency}}
+        </p>
+        <span flex="100"></span>
+        <p ng-if="((vm.goal.goal / vm.goal.sellers / 2) - vm.user.total) > 0">
+          <span class="chart-section-sqr chart-section-sqr2"></span>
+          Faltan para la meta {{(vm.goal.goal / vm.goal.sellers / 2) - vm.user.total | currency}}
+        </p>
+        <p ng-if="((vm.goal.goal / vm.goal.sellers / 2) - vm.user.total) < 0">
+          <span class="chart-section-sqr chart-section-sqr2"></span>
+          Has superado la meta por {{vm.user.total - (vm.goal.goal / vm.goal.sellers / 2) | currency}}
+        </p>
+
+      </div>
+    </div>
+
+    </div>
+  </section>
+
 </section>
