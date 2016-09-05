@@ -113,7 +113,7 @@
           </tr>
           <tr>
             <td>Descuento:</td>
-            <td><strong>-{{vm.quotation.discount | currency }}</strong></td>
+            <td><strong>{{vm.quotation.discount | currency }}</strong></td>
           </tr>
           <tr>
             <td>Costo de envío:</td>
@@ -127,7 +127,9 @@
             <h1><strong>TOTAL:</strong></h1>
           </div>
           <div flex="50">
-            <h3 class="price-crossed">{{vm.quotation.subtotal | currency }}</h3>
+            <h3 class="price-crossed" ng-show="vm.quotation.subtotal != vm.quotation.total">
+              {{vm.quotation.subtotal | currency }}
+            </h3>
             <h1 class="price-main"><strong>{{vm.quotation.total | currency }}</strong></h1>
           </div>
         </div>

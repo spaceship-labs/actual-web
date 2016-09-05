@@ -56,12 +56,14 @@ function QuotationsEditCtrl(
     },
     promotionPackages: [],
     addNewProduct: addNewProduct,
+    appliesForPackageOrPromotionDiscount: appliesForPackageOrPromotionDiscount,
     addRecord: addRecord,
     alertRemoveDetail: alertRemoveDetail,
     attachImage: attachImage,
     closeQuotation: closeQuotation,
     continueBuying: continueBuying,
     getPromotionPackageById: getPromotionPackageById,
+    getProductPackageDiscount: getProductPackageDiscount,
     init:init,
     removeDetail: removeDetail,
     toggleRecord: toggleRecord,
@@ -98,6 +100,16 @@ function QuotationsEditCtrl(
       }
     });
     record.isActive = !record.isActive;
+  }
+
+  function appliesForPackageOrPromotionDiscount(detail){
+    var appliesFor = false;
+    if(detail.PromotionPackageApplied){
+      appliesFor = 'packageDiscount';
+    }else if(detail.Product.mainPromo){
+      appliesFor = 'promoDiscount';
+    }
+    return appliesFor;
   }
 
   function addRecord(form){
@@ -204,7 +216,6 @@ function QuotationsEditCtrl(
       .then(function(details2){
         vm.quotation.Details = details2;
         vm.isLoadingRecords = true;
-        console.log(vm.quotation.Details);
         return quotationService.getRecords(vm.quotation.id);
       })
       .then(function(result){
@@ -227,7 +238,6 @@ function QuotationsEditCtrl(
         return [];
       })
       .then(function(results){
-        console.log(results);
         //Mapping HTTP response
         vm.promotionPackages = results.map(function(r){
           return r.data;
@@ -239,9 +249,6 @@ function QuotationsEditCtrl(
           );
           return pack;
         });
-
-        console.log('vm.promotionPackages', vm.promotionPackages);
-
       })
       .catch(function(err){
         console.log(err);
@@ -275,6 +282,23 @@ function QuotationsEditCtrl(
       }
     }
     return false;
+  }
+
+  function getPromotionPackageById(packageId){
+    return _.findWhere(vm.promotionPackages, {id:packageId}); 
+  }
+
+  function getProductPackageDiscount (productId, packageId){
+    if(packageId){
+      var pack = _.findWhere(vm.promotionPackages, {id:packageId});  
+      if(pack && pack.isValid){
+        var packageRule = _.findWhere(pack.PackageRules,{Product:productId});
+        if(packageRule){
+          return packageRule.discountPg1;
+        }
+      }
+    }
+    return 0;
   }
 
   function attachImage(file){

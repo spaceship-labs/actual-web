@@ -82,7 +82,10 @@
 
         <div ng-if="!vm.isLoadingDetails" class="cart-items">
 
-          <div class="cart-item" ng-repeat="detail in vm.quotation.Details track by $index">
+          <div 
+            class="cart-item" 
+            ng-repeat="detail in vm.quotation.Details track by $index"
+          >
             <h3>
               <a ng-href="/product/{{detail.Product.ItemCode}}">
                 <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
@@ -119,11 +122,25 @@
 
                   <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
                     <div flex="30">
-                      <p ng-if="detail.Product.maxDiscount > 0" class="discount-label">
-                        -{{detail.Product.maxDiscount}}%
+                      
+                      <p 
+                        ng-if="detail.discountPercent > 0" 
+                        class="discount-label"
+                      >
+                        -{{detail.discountPercent}}%
                       </p>
-                      <p class="price-crossed">{{detail.Product.priceBefore | currency}}</p>
-                      <p class="price-hl"><strong>{{detail.Product.Price | currency}}</strong></p>
+
+                      <p 
+                        class="price-crossed"
+                        ng-if="detail.Product.Price  != detail.unitPrice"
+                      >
+                        {{ detail.unitPrice | currency}}
+                      </p>
+                      <p class="price-hl">
+                        <strong>
+                          {{ detail.Product.Price | currency}}
+                        </strong>
+                      </p>
                     </div>
                     <div flex="30" class="cart-item-data-qty">
                       <p>
@@ -133,7 +150,7 @@
                       </p>
                     </div>
                     <h3 flex class="product-view-price-hl product-view-price-main">
-                      <strong>{{detail.Product.Price * detail.quantity | currency}}</strong>
+                      <strong>{{detail.total | currency}}</strong>
                     </h3>
                   </div>
                 </div>
@@ -143,9 +160,20 @@
                   (en {{vm.daysDiff(detail.shipDate)}} días)
                 </p>
                 <p
-                  ng-if="vm.getPromotionPackageById(detail.PromotionPackage)"
-                  class="bottom-text">
+                  ng-if="
+                    vm.appliesForPackageOrPromotionDiscount(detail) == 'packageDiscount'
+                  "
+                  class="bottom-text"
+                >
                   Paquete: {{ vm.getPromotionPackageById(detail.PromotionPackage).Name }}
+                </p>
+                <p
+                  ng-if="
+                    vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'
+                  "
+                  class="bottom-text">
+                  Promoción: {{detail.Product.mainPromo.publicName}}
+                  {{detail.Product.mainPromo.discountPg1}} %
                 </p>
               </div>
               <!--END ITEM DATA-->
@@ -201,7 +229,9 @@
               <h1><strong>TOTAL:</strong></h1>
             </div>
             <div flex="50">
-              <h3 class="price-crossed">{{ vm.quotation.subtotal | currency }}</h3>
+              <h3 class="price-crossed" ng-show="vm.quotation.subtotal != vm.quotation.total">
+                {{ vm.quotation.subtotal | currency }}
+              </h3>
               <h1 class="price-main">{{ vm.quotation.total | currency }}</h1>
             </div>
           </div>

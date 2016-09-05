@@ -45,7 +45,6 @@ function ProductCtrl(
     closeGallery: closeGallery,
     getGroupProducts: getGroupProducts,
     getImageSizes: getImageSizes,
-    getLowestCategory: getLowestCategory,
     getQtyArray: getQtyArray,
     getWarehouseName: getWarehouseName,
     init: init,
@@ -75,7 +74,7 @@ function ProductCtrl(
       .then(function(fProduct){
         vm.product = fProduct;
         vm.mainPromo = vm.product.mainPromo;
-        vm.lowestCategory = vm.getLowestCategory();
+        vm.lowestCategory = getLowestCategory();
         vm.product.cart = {
           quantity: 1
         };

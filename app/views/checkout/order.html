@@ -148,11 +148,15 @@
           <p class="order-payment-totals-note">* Todos los montos incluyen impuestos.</p>
         </div>
         <div flex="20">
+          <p><strong>SUBTOTAL COMPRA:</strong></p>
+          <p><strong>DESCUENTOS COMPRA:</strong></p>
           <p><strong>TOTAL COMPRA:</strong></p>
           <p><strong>TOTAL PAGADO:</strong></p>
           <p><strong>SALDO:</strong></p>
         </div>
         <div flex="20">
+          <p><strong>{{vm.order.subtotal | currency}} MXN</strong></p>
+          <p><strong>{{vm.order.discount | currency}} MXN</strong></p>
           <p><strong>{{vm.order.total | currency}} MXN</strong></p>
           <p><strong>{{vm.order.ammountPaid | currency}} MXN</strong></p>
           <p><strong>{{( vm.order.ammountPaid - vm.order.total ) | currency }} MXN</strong></p>
