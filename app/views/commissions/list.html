@@ -7,97 +7,193 @@
         <strong>
           <i id="trigger-start-date" class="icon-pedidos"></i> DEL:
           <input
-            pikaday="vm.dateStart"
+            pikaday="vm.pikaday"
             format="DD/MM/YYYY"
             trigger="trigger-start-date"
             readonly
             type="text"
-            on-select="vm.onDateStartSelect(pikaday)"
+            on-select="vm.setFromDate(pikaday)"
+            set-default-date="true"
+            default-date="{{vm.dateStart.toISOString()}}"
           >
         </strong>
         <strong>
           <i id="trigger-end-date" class="icon-pedidos"></i> AL:
           <input
-            pikaday="vm.dateEnd"
+            pikaday="vm.pikaday"
             format="DD/MM/YYYY"
             trigger="trigger-end-date"
             readonly
             type="text"
-            on-select="vm.onDateEndSelect(pikaday)"
+            on-select="vm.setToDate(pikaday)"
+            set-default-date="true"
+            default-date="{{vm.dateEnd.toISOString()}}"
           >
         </strong>
       </p>
-    </div>
-
-    <div flex="30" class="input-element select-element-wrapper">
-      <label><strong>Buscar sobre:</strong></label>
-      <select ng-model="vm.filters.SlpCode" class="select-element">
-        <option ng-selected="vm.user.SlpCode == vm.filters.SlpCode" ng-value="vm.user.SlpCode">
-          Mis oportunidades
-        </option>
-        <option ng-value="'none'">
-          Todas las oportunidades
-        </option>
-      </select>
     </div>
     <div flex="20">
       <a ng-click="vm.applyFilters()" href="#" class="action-btn">Aplicar filtros</a>
     </div>
   </div>
-
   <hr/>
 
   <div class="nested-table">
-    <div class="nested-top" layout="row" layout-align="space-between center">
-      <span></span><span>TOTAL</span>
-    </div>
-    <div class="nested-item">
-      <div class="nested-content">
-      </div>
-    </div>
-  </div>
-
-  <section class="table-list-wrap table-list-wrap-nomargin">
+    <!--
+      IF MANAGER
+    -->
+    <h2 ng-if="vm.user.role.name == 'store manager'">
+      TIENDA: {{vm.user.mainStore.name}}
+    </h2>
     <div
-      table-list
-      class="table-list"
-      columns="vm.columns"
-      filters="vm.filters"
-      api-resource="vm.apiResourceClients"
+      ng-repeat="seller in vm.sellers track by $index"
+      class="nested-item"
     >
-    </div>
-  </section>
-
-  <section class="chart-section">
-    <h2><i class="icon-login"></i> <strong>OPORTUNIDADES</strong></h2>
-    <div class="chart-section-inner">
-      <div layout="row">
-        <div class="chart-section-col" flex="40">
-          <h3>Cantidad</h3>
-          <canvas
-            id="pie"
-            class="chart chart-pie"
-            chart-data="vm.quantities.data"
-            chart-labels="vm.quantities.labels"
-            chart-colours="vm.quantities.colours"
-          >
-          </canvas>
-          <p><strong>Hoy</strong> | <strong>Total</strong></p>
-          <p>{{vm.todayQty}} | {{vm.monthQty}}</p>
-        </div>
-      <div class="chart-section-col chart-section-legends" flex="20">
-        <p><span class="chart-section-sqr"></span> Hoy</p>
-        <p><span class="chart-section-sqr chart-section-sqr2"></span> Resto del mes</p>
+      <div
+        class="nested-bar nested-bar3"
+        ng-click="seller.selected = !seller.selected"
+        layout="row"
+        layout-align="space-between center"
+      >
+        <span>TOTAL VENDEDOR: {{seller.firstName + ' ' + seller.lastName}} </span>
+        <span>
+          {{seller.commissions | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
+        </span>
       </div>
-      <div class="chart-section-col" flex="40">
-        <h3>Monto</h3>
-        <canvas id="pie" class="chart chart-pie"
-          chart-data="vm.ammounts.data" chart-labels="vm.ammounts.labels" chart-colours="vm.ammounts.colours">
-        </canvas>
-        <p><strong>Hoy</strong> | <strong>Total</strong></p>
-        <p>{{vm.todayAmmount | currency}} | {{vm.monthAmmount | currency}}</p>
+
+      <div ng-show="seller.selected" class="nested-content">
+
+        <section ng-if="seller.selected" class="table-list-wrap table-list-wrap-nomargin">
+          <div
+            table-list
+            class="table-list table-list-v2"
+            columns="vm.columns"
+            api-resource="vm.apiResource"
+            date-range="vm.dateRange"
+            filters="seller.filters">
+          </div>
+        </section>
+
+      </div>
+    </div>
+    <!--
+    END IF MANAGER
+    -->
+
+    <!---
+    IF SELLER
+    -->
+    <div
+      ng-if="vm.user.role.name == 'seller'"
+      class="nested-item"
+    >
+      <div
+        class="nested-bar nested-bar3"
+        ng-init="seller.selected  = true"
+        ng-click="seller.selected = !seller.selected"
+        layout="row"
+        layout-align="space-between center"
+      >
+        <span>TOTAL VENDEDOR: {{vm.user.firstName + ' ' + vm.user.lastName}} </span>
+        <span>
+          {{vm.user.commissions | currency}} <i class="icon-arrow dropdown-icon" ng-class="{'dropdown-icon-closed':!seller.selected}"></i>
+        </span>
+      </div>
+      <div ng-show="seller.selected" class="nested-content">
+        <section class="table-list-wrap table-list-wrap-nomargin">
+          <div
+            table-list
+            class="table-list table-list-v2"
+            columns="vm.columns"
+            api-resource="vm.apiResource"
+            date-range="vm.dateRange"
+            filters="vm.filters"
+          >
+          </div>
+        </section>
       </div>
     </div>
   </div>
+  <section class="chart-section" ng-if="vm.user.role.name == 'seller'">
+    <h2><i class="icon-login"></i> <strong>META QUINCENAL: {{vm.goal.goal / vm.goal.sellers / 2 | currency}}</strong></h2>
+    <div class="chart-section-inner">
+    <div layout="row" layout-align="center center">
+      <div class="chart-section-col" flex="70">
+        <h3>Monto</h3>
+        <canvas
+          id="pie"
+          class="chart chart-pie"
+          chart-options="vm.quotationsData.ammounts.options"
+          chart-data="vm.chart.data"
+          chart-labels="vm.chart.labels"
+          chart-colors="vm.chart.colors">
+        <p><strong>Hoy</strong> | <strong>Total</strong></p>
+        <p>
+          {{vm.quotationsData.todayAmmount | currency}} | {{vm.quotationsData.rangeAmmount | currency}}
+        </p>
+
+      </div>
+      <div class="chart-section-col chart-section-legends" flex="30"
+        layout layout-wrap layout-align="start center"
+      >
+        <p>
+          <span class="chart-section-sqr"></span>
+          Has vendido {{vm.user.total | currency}}
+        </p>
+        <span flex="100"></span>
+        <p ng-if="((vm.goal.goal / vm.goal.sellers / 2) - vm.user.total) > 0">
+          <span class="chart-section-sqr chart-section-sqr2"></span>
+          Faltan para la meta {{(vm.goal.goal / vm.goal.sellers / 2) - vm.user.total | currency}}
+        </p>
+        <p ng-if="((vm.goal.goal / vm.goal.sellers / 2) - vm.user.total) < 0">
+          <span class="chart-section-sqr chart-section-sqr2"></span>
+          Has superado la meta por {{vm.user.total - (vm.goal.goal / vm.goal.sellers / 2) | currency}}
+        </p>
+
+      </div>
+    </div>
+
+    </div>
   </section>
+  <section class="chart-section" ng-if="vm.user.role.name == 'store manager'">
+    <h2><i class="icon-login"></i> <strong>META QUINCENAL DE LA TIENDA: {{vm.goal.goal / 2 | currency}}</strong></h2>
+    <div class="chart-section-inner">
+    <div layout="row" layout-align="center center">
+      <div class="chart-section-col" flex="70">
+        <h3>Monto</h3>
+        <canvas
+          id="pie"
+          class="chart chart-pie"
+          chart-options="vm.quotationsData.ammounts.options"
+          chart-data="vm.chart.data"
+          chart-labels="vm.chart.labels"
+          chart-colors="vm.chart.colors">
+        <p><strong>Hoy</strong> | <strong>Total</strong></p>
+        <p>
+          {{vm.quotationsData.todayAmmount | currency}} | {{vm.quotationsData.rangeAmmount | currency}}
+        </p>
+
+      </div>
+      <div class="chart-section-col chart-section-legends" flex="30"
+        layout layout-wrap layout-align="start center"
+      >
+        <p>
+          <span class="chart-section-sqr"></span>
+          Se ha vendido {{vm.user.total | currency}}
+        </p>
+        <span flex="100"></span>
+        <p ng-if="((vm.goal.goal / 2) - vm.user.total) > 0">
+          <span class="chart-section-sqr chart-section-sqr2"></span>
+          Faltan para la meta {{(vm.goal.goal / 2) - vm.user.total | currency}}
+        </p>
+        <p ng-if="((vm.goal.goal / 2) - vm.user.total) < 0">
+          <span class="chart-section-sqr chart-section-sqr2"></span>
+          Has superado la meta por {{vm.user.total - (vm.goal.goal / 2) | currency}}
+        </p>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
 </section>

@@ -164,7 +164,7 @@
                 if(column.yesNo){
                   data = data ? 'Si' : 'No';
                 }
-                if(!data){
+                if(!data && data != 0){
                   data = data ? data : 'No asignado';
                 }
                 if(column.defaultValue){
@@ -175,6 +175,12 @@
                 }
                 if(column.currency){
                   data = $filter('currency')(data);
+                }
+                if(column.isRateNormalized){
+                  data = data * 100;
+                }
+                if(column.rate){
+                  data = $filter('number')(data) + '%';
                 }
                 if(column.destroy){
                   id = (column.propId) ? column.propId : 'id';
