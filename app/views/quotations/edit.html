@@ -165,7 +165,7 @@
                   "
                   class="bottom-text"
                 >
-                  Paquete: {{ vm.getPromotionPackageById(detail.PromotionPackage).Name }}
+                  Paquete: {{ vm.getPromotionPackageById(detail.PromotionPackageApplied).Name }}
                 </p>
                 <p
                   ng-if="
@@ -173,7 +173,6 @@
                   "
                   class="bottom-text">
                   Promoción: {{detail.Product.mainPromo.publicName}}
-                  {{detail.Product.mainPromo.discountPg1}} %
                 </p>
               </div>
               <!--END ITEM DATA-->

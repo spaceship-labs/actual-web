@@ -63,7 +63,6 @@ function QuotationsEditCtrl(
     closeQuotation: closeQuotation,
     continueBuying: continueBuying,
     getPromotionPackageById: getPromotionPackageById,
-    getProductPackageDiscount: getProductPackageDiscount,
     init:init,
     removeDetail: removeDetail,
     toggleRecord: toggleRecord,
@@ -165,7 +164,6 @@ function QuotationsEditCtrl(
         return quotationService.update(vm.quotation.id, updateParams);
       })
       .then(function(result){
-        console.log(result);
         if(result.data){
           vm.quotation.isClosed = result.data.isClosed;
           if(vm.quotation.isClosed){
@@ -223,8 +221,8 @@ function QuotationsEditCtrl(
         vm.quotation.Records = result.data;
         vm.isLoadingRecords = false;
         var packagesIds = vm.quotation.Details.reduce(function(acum, d){
-          if(d.PromotionPackage){
-            acum.push(d.PromotionPackage);
+          if(d.PromotionPackageApplied){
+            acum.push(d.PromotionPackageApplied);
           }
           return acum;
         },[]);
@@ -242,13 +240,6 @@ function QuotationsEditCtrl(
         vm.promotionPackages = results.map(function(r){
           return r.data;
         });
-        vm.promotionPackages = vm.promotionPackages.map(function(pack){
-          pack.isValid = validatePackageRules(
-            pack.PackageRules,
-            vm.quotation.Details
-          );
-          return pack;
-        });
       })
       .catch(function(err){
         console.log(err);
@@ -259,46 +250,8 @@ function QuotationsEditCtrl(
     });
   }
 
-  function validatePackageRules(rules, details){
-    var validFlag = true;
-    for(var i = 0; i < rules.length; i++){
-      var rule = rules[i];
-      var isValidRule = _.find(details, function(detail){
-        return (detail.Product.id === rule.Product && detail.quantity === detail.quantity)
-      });
-      if(!isValidRule){
-        validFlag = false;
-      }
-    }
-    return validFlag;
-  }
-
-
-  function getPromotionPackageById(id){
-    if(id){
-      var pack = _.findWhere(vm.promotionPackages, {id:id});
-      if(pack && pack.isValid){
-        return pack;
-      }
-    }
-    return false;
-  }
-
   function getPromotionPackageById(packageId){
     return _.findWhere(vm.promotionPackages, {id:packageId}); 
-  }
-
-  function getProductPackageDiscount (productId, packageId){
-    if(packageId){
-      var pack = _.findWhere(vm.promotionPackages, {id:packageId});  
-      if(pack && pack.isValid){
-        var packageRule = _.findWhere(pack.PackageRules,{Product:productId});
-        if(packageRule){
-          return packageRule.discountPg1;
-        }
-      }
-    }
-    return 0;
   }
 
   function attachImage(file){
@@ -321,11 +274,26 @@ function QuotationsEditCtrl(
       vm.quotation.subtotal      = updatedQ.subtotal;
       vm.quotation.discount      = updatedQ.discount;
       vm.quotation.totalProducts = updatedQ.totalProducts;
-      vm.currentPackage.isValid  = validatePackageRules(
-        vm.currentPackage.PackageRules,
-        vm.quotation.Details
-      );
+      if(updatedQ.Details){
+        matchNewDetails(updatedQ.Details);
+      }
     });
+  }
+
+  function matchNewDetails(newDetails){
+    for(var i=0;i<vm.quotation.Details.length; i++){
+      var detail = vm.quotation.Details[i];
+      var match = _.findWhere(newDetails, { id: detail.id } );
+      if(match){
+        detail.unitPrice        = match.unitPrice;
+        detail.discountPercent  = match.discountPercent;
+        detail.discount         = match.discount;
+        detail.subtotal         = match.subtotal;
+        detail.total            = match.total;
+        detail.Promotion        = match.Promotion;
+        detail.PromotionPackageApplied = match.PromotionPackageApplied;
+      }
+    }
   }
 
   function alertRemoveDetail(ev, detailId, detailIndex) {
