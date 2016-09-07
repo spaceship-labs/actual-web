@@ -277,6 +277,7 @@ function QuotationsEditCtrl(
       if(updatedQ.Details){
         matchNewDetails(updatedQ.Details);
       }
+      $rootScope.getActiveQuotation();
     });
   }
 

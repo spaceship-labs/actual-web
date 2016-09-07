@@ -48,7 +48,6 @@
       deactivateCartModal: deactivateCartModal,
       deactivateLoginModal: deactivateLoginModal,
       getActiveModule: getActiveModule,
-      getActiveQuotation: getActiveQuotation,
       getCategoryBackground: getCategoryBackground,
       getCategoryIcon: getCategoryIcon,
       getSiteInfo: getSiteInfo,
@@ -64,6 +63,7 @@
       getStores: getStores,
       saveBroker: saveBroker
     });
+    $rootScope.getActiveQuotation = getActiveQuotation;
 
     function toggleMenuCategory(index){
       vm.menuCategories.forEach(function(category, i){
@@ -125,7 +125,7 @@
       });
 
       if($rootScope.user){
-        vm.getActiveQuotation();
+        getActiveQuotation();
         getActiveStore();
         getBrokers();
       }
@@ -151,10 +151,14 @@
         $rootScope.activeQuotation = res.data;
         vm.activeQuotation = res.data;
         if($rootScope.activeQuotation){
-          quotationService.getQuotationProducts(vm.activeQuotation).then(function(details){
-            $rootScope.activeQuotation.Details = details;
-            vm.activeQuotation.Details = details;
-          });
+          quotationService.getQuotationProducts(vm.activeQuotation)
+            .then(function(details){
+              $rootScope.activeQuotation.Details = details;
+              vm.activeQuotation.Details = details;
+            })
+            .catch(function(err){
+              console.log(err);
+            });
         }
       });
     }
@@ -237,7 +241,7 @@
 
     $rootScope.$on('newActiveQuotation', function(event, data){
       if($rootScope.user){
-        vm.getActiveQuotation();
+        getActiveQuotation();
       }
     });
 
