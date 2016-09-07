@@ -54,7 +54,9 @@ function OffersCtrl(
       })
       .then(function(deliveries){
         var packageProducts = mapProductsDeliveryDates(products, deliveries, packageId);
-        quotationService.addMultipleProducts(packageProducts);
+        if(packageProducts.length > 0){
+          quotationService.addMultipleProducts(packageProducts);
+        }
       })
       .catch(function(err){
         console.log(err);
@@ -84,45 +86,46 @@ function OffersCtrl(
   }
 
   function mapProductsDeliveryDates(products, deliveryDates, packageId){
-    var availableFlag = true;
     products = products.map(function(product, index){
       var productDeliveryDates = deliveryDates[index] || [];
-      if(productDeliveryDates.length == 0){
-        availableFlag = false;
-      }
-      var resultAssigning = assignCloserDeliveryDate(
+      console.log('product: ' + product.ItemCode);
+      console.log('deliveryDates', productDeliveryDates);
+      product = assignCloserDeliveryDate(
         product, 
         productDeliveryDates, 
-        availableFlag,
         packageId
       );
-      product       = resultAssigning.product;
-      availableFlag = resultAssigning.availableFlag;
       return product;
     });
-
-    if(!availableFlag){
-      showUnavailableMsg(products);
+    var unavailableProducts = groupUnavailableProducts(products);
+    if(unavailableProducts.length > 0){
+      showUnavailableMsg(unavailableProducts);
+      return [];
     }
     return products;
   }
 
-  function assignCloserDeliveryDate(product, productDeliveryDates, availableFlag, packageId){
+  function groupUnavailableProducts(products){
+    var unavailable = products.filter(function(p){
+      return !p.hasStock;
+    });
+    return unavailable;
+  }
+
+  function assignCloserDeliveryDate(product, productDeliveryDates, packageId){
+    product.hasStock = true;
     for(var i = (productDeliveryDates.length-1); i>=0; i--){
       var deliveryDate = productDeliveryDates[i];
       if( product.quantity <=  parseInt(deliveryDate.available) ){
         product.shipDate = deliveryDate.date;
         product.shipCompany = deliveryDate.company;
         product.promotionPackage = packageId;
-      }else{
-        availableFlag    = false;
-        product.hasStock = false;
       }
     }
-    return {
-      availableFlag: availableFlag,
-      product      : product
-    };    
+    if(!product.shipDate){
+      product.hasStock = false;
+    }
+    return product;    
   }
 
   function showUnavailableMsg(products){
