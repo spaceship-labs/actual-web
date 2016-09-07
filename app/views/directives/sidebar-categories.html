@@ -1,6 +1,6 @@
 <div
   ng-repeat="mainCategory in categoriesTree track by $index"
-  ng-if="mainCategory.productsNum"
+  ng-if="mainCategory[storeCode]"
   class="listing-view-nav-wrapper">
   <h2>
     <a
@@ -9,14 +9,14 @@
       ng-class="{'active': mainCategory.isActive}">
       <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i>
       <strong>{{mainCategory.Name}}</strong>
-      <span class="products-num">({{mainCategory.productsNum}})</span>
+      <span class="products-num">({{mainCategory[storeCode]}})</span>
     </a>
   </h2>
 
   <ul class="listing-view-nav" ng-show="mainCategory.isActive">
     <li
       ng-repeat="category in mainCategory.Childs"
-      ng-if="category.productsNum"
+      ng-if="category[storeCode]"
       ng-class="{'active': category.isActive}"
     >
       <h3>
@@ -25,14 +25,14 @@
           ng-click="toggleCategory(category, $event)"
         >
           <strong>{{category.Name}}</strong>
-          <span class="products-num">({{category.productsNum}})</span>
+          <span class="products-num">({{category[storeCode]}})</span>
         </a>
         <a
           ng-if="!category.Childs"
           ng-href="/category/{{category.Handle}}"
         >
           <strong>{{category.Name}}</strong>
-          <span class="products-num">({{category.productsNum}})</span>
+          <span class="products-num">({{category[storeCode]}})</span>
         </a>
       </h3>
 
@@ -41,16 +41,16 @@
       <ul class="listing-view-subnav">
         <li
           ng-repeat="subcategory in category.Childs"
-          ng-if="subcategory.productsNum"
+          ng-if="subcategory[storeCode]"
         >
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
-            {{subcategory.Name}} ({{subcategory.productsNum}})
+            {{subcategory.Name}} ({{subcategory[storeCode]}})
           </a>
         </li>
 
         <li>
           <a class="see-more" ng-href="/category/{{category.Handle}}">
-            Ver todo ({{category.productsNum}})
+            Ver todo ({{category[storeCode]}})
           </a>
         </li>
 
@@ -65,7 +65,7 @@
           ng-href="/category/{{mainCategory.Handle}}"
         >
           <strong>Ver todo</strong>
-          <span class="products-num">({{mainCategory.productsNum}})</span>
+          <span class="products-num">({{mainCategory[storeCode]}})</span>
         </a>
       </h3>
     </li>

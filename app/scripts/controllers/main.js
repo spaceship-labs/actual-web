@@ -105,8 +105,6 @@
       categoriesService.createCategoriesTree().then(function(res){
         vm.isLoadingCategoriesTree = false;
         vm.categoriesTree = res.data;
-        $rootScope.categoriesTree = vm.categoriesTree;
-        $rootScope.$broadcast('loadedCategoriesTree', vm.categoriesTree);
         var auxCategoryTree = angular.copy(vm.categoriesTree);
 
         vm.menuCategories = [];
@@ -179,8 +177,8 @@
           }else{
             userService.getUser(_user.id).then(function(res){
               _user = res.data.data;
-              console.log(_user);
               localStorageService.set('user', _user);
+              localStorageService.set('activeStore', _user.activeStore);              
               $rootScope.user = _user;
             });
           }
@@ -311,13 +309,10 @@
         password: vm.logInForm.password,
         activeStore: vm.logInForm.activeStore
       };
-
-
       authService.signIn(formData, $rootScope.successAuth, function(){
         console.log('Invalid');
         vm.isLoadingLogin = false;
       });
-
     }
 
     function logOut(){
@@ -330,8 +325,6 @@
     $rootScope.successAuth = function(res){
       vm.token = res.token;
       vm.user  = res.user;
-      console.log('successAuth');
-      console.log(vm.user);
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', res.token);
       localStorageService.set('user' , res.user);
