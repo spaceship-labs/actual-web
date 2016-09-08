@@ -88,11 +88,11 @@
     }
 
     function init(){
-      vm.token             = localStorageService.get('token');
-      vm.user              = localStorageService.get('user');
-      vm.activeStore     = localStorageService.get('activeStore');
-      vm.activeStoreName = localStorageService.get('activeStoreName');
-      $rootScope.user      = vm.user;
+      vm.token               = localStorageService.get('token');
+      vm.user                = localStorageService.get('user');
+      vm.activeStore         = localStorageService.get('activeStore');
+      vm.activeStoreName     = localStorageService.get('activeStoreName');
+      $rootScope.user        = vm.user;
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
@@ -360,6 +360,7 @@
     function getActiveStore() {
       userService.getActiveStore().then(function(activeStore) {
         vm.activeStore = activeStore;
+        $rootScope.$emit('activeStoreAssigned', activeStore);
       });
     }
 

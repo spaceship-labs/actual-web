@@ -30,7 +30,7 @@
           <div
             class="sub-wrapper"
             ng-repeat="category in main.categoriesTree"
-            ng-if="category.productsNum > 0"
+            ng-if="category[vm.stockProperty] > 0"
             flex="33">
             <div
               class="sub"
@@ -39,7 +39,7 @@
                 <h4>
                   <a ng-href="/category/{{category.Handle}}">
                     <strong>{{category.Name}}</strong>
-                     ({{category.productsNum}})
+                     ({{category[vm.stockProperty]}})
                   </a>
                 </h4>
               </div>

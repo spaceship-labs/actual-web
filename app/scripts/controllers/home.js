@@ -10,21 +10,44 @@
 angular.module('dashexampleApp')
   .controller('HomeCtrl', HomeCtrl);
 
-function HomeCtrl($timeout, $location, productService, api, dialogService){
+function HomeCtrl(
+  $timeout, 
+  $location, 
+  $rootScope,
+  productService, 
+  api, 
+  dialogService
+){
   var vm = this;
   angular.extend(vm,{
     areProductsLoaded: false,
     api: api,
-    init: init,
   });
 
   function init(){
+    setCategoryStockProperty();
     if($location.search().startQuotation){
       dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización')
     }
   }
 
-  vm.init();
+  $rootScope.$on('activeStoreAssigned', setCategoryStockProperty);
+
+  function setCategoryStockProperty(event, activeStore){
+    vm.stockProperty = 'productsNum';
+    if(activeStore){
+      vm.stockProperty = activeStore.code;
+    }
+  }
+
+  init();
 }
 
-HomeCtrl.$inject = ['$timeout','$location','productService','api','dialogService'];
+HomeCtrl.$inject = [
+  '$timeout',
+  '$location',
+  '$rootScope',
+  'productService',
+  'api',
+  'dialogService'
+];

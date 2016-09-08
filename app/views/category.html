@@ -115,7 +115,7 @@
           <div
             class="sub-wrapper"
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}"
-            ng-if="subcategory.productsNum > 0"
+            ng-if="subcategory[main.activeStore.code] > 0"
             flex="33">
             <div
               class="sub"
@@ -124,7 +124,7 @@
                 <h4>
                   <a ng-href="/category/{{subcategory.Handle}}">
                     <strong>{{subcategory.Name}}</strong>
-                    ({{subcategory.productsNum}})
+                    ({{subcategory[main.activeStore.code]}})
                   </a>
                 </h4>
               </div>
@@ -140,7 +140,7 @@
           <div
             class="sub-wrapper"
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}"
-            ng-if="subcategory.productsNum > 0"
+            ng-if="subcategory[main.activeStore.code] > 0"
             flex="33"
           >
             <div
@@ -151,7 +151,7 @@
                 <h4>
                   <a ng-href="/category/{{subcategory.Handle}}">
                     <strong>{{subcategory.Name}}</strong>
-                    ({{subcategory.productsNum}})
+                    ({{subcategory[main.activeStore.code]}})
                   </a>
                 </h4>
               </div>
