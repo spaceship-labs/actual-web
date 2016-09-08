@@ -63,6 +63,7 @@ function QuotationsEditCtrl(
     closeQuotation: closeQuotation,
     continueBuying: continueBuying,
     getPromotionPackageById: getPromotionPackageById,
+    getUnitPriceWithDiscount: getUnitPriceWithDiscount,
     init:init,
     removeDetail: removeDetail,
     toggleRecord: toggleRecord,
@@ -339,6 +340,11 @@ function QuotationsEditCtrl(
     }else{
       dialogService.showDialog('Esta cotización ya tiene un pedido asignado');
     }
+  }
+
+  function getUnitPriceWithDiscount(unitPrice,discountPercent){
+    var result = unitPrice - ( ( unitPrice / 100) * discountPercent );
+    return result;
   }
 
   function daysDiff(a, b) {

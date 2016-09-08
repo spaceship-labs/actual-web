@@ -138,13 +138,13 @@
                       </p>
                       <p 
                         class="price-crossed"
-                        ng-if="detail.Product.Price  != detail.unitPrice"
+                        ng-if="vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) != detail.unitPrice"
                       >
                         {{ detail.unitPrice | currency}}
                       </p>
                       <p class="price-hl">
                         <strong>
-                          {{ detail.Product.Price | currency}}
+                          {{ vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) | currency}}
                         </strong>
                       </p>
                     </div>

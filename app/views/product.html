@@ -337,7 +337,9 @@
 
             <div class="product-view-prices" layout="row" layout-align="space-between end">
               <div flex="15">
-                <p class="product-view-price-discount" ng-if="vm.product.Promotions && vm.product.Promotions.length > 0">
+                <p 
+                  class="product-view-price-discount" 
+                  ng-if="vm.product.Promotions && vm.product.Promotions.length > 0">
                   - {{vm.product.maxDiscount}}%
                 </p>
                 <p class="product-view-price-crossed">{{vm.product.priceBefore | currency:'$':0 }}</p>
