@@ -64,6 +64,7 @@ function QuotationsEditCtrl(
     continueBuying: continueBuying,
     getPromotionPackageById: getPromotionPackageById,
     getUnitPriceWithDiscount: getUnitPriceWithDiscount,
+    getWarehouseById: getWarehouseById,
     init:init,
     removeDetail: removeDetail,
     toggleRecord: toggleRecord,
@@ -82,7 +83,6 @@ function QuotationsEditCtrl(
     vm.isLoading = true;
     quotationService.sendByEmail(vm.quotation.id)
     .then(function(res){
-      console.log(res);
       vm.isLoading = false;
       dialogService.showDialog('Email enviado al cliente');
     })
@@ -91,6 +91,23 @@ function QuotationsEditCtrl(
       vm.isLoading = false;
       dialogService.showDialog('Hubo un error, intentalo de nuevo');
     });
+  }
+
+  function loadWarehouses(){
+    api.$http.get('/company/find').then(function(res){
+      vm.warehouses = res.data;
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+  }
+
+  function getWarehouseById(id){
+    var warehouse = {};
+    if(vm.warehouses){
+      warehouse = _.findWhere(vm.warehouses, {id: id});
+    }
+    return warehouse;
   }
 
   function toggleRecord(record){
@@ -184,6 +201,8 @@ function QuotationsEditCtrl(
 
   function init(){
     vm.isLoading = true;
+
+    loadWarehouses();
 
     $scope.$watch(function() {
       return !!vm.quotation && localStorageService.get('broker');

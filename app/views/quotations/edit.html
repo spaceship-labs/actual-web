@@ -163,7 +163,7 @@
                 <p class="bottom-text">
                   <strong>Entrega aproximada:</strong>
                   {{detail.shipDate | date: "d/MMM/yyyy"}}
-                  (en {{vm.daysDiff(detail.shipDate)}} días)
+                  (en {{vm.daysDiff(detail.shipDate)}} días) | {{ vm.getWarehouseById(detail.shipCompany).WhsName }}
                 </p>
                 <p
                   ng-if="
