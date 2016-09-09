@@ -30,7 +30,7 @@ function ProductCtrl(
 ) {
   var vm = this;
   var activeStoreId        = localStorageService.get('activeStore'); 
-  var activeStore          = false;
+  var activeStore          = $rootScope.activeStore;
   var activeStoreWarehouse = false;
 
 
@@ -157,6 +157,7 @@ function ProductCtrl(
   }
 
   $rootScope.$on('activeStoreAssigned',function(e,data){
+    console.log('activeStoreAssigned');
     activeStore = data;
     getWarehouses();
   });

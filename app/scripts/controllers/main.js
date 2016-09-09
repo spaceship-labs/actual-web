@@ -363,6 +363,7 @@
     function getActiveStore() {
       userService.getActiveStore().then(function(activeStore) {
         vm.activeStore = activeStore;
+        $rootScope.activeStore = activeStore;
         $rootScope.$emit('activeStoreAssigned', activeStore);
       });
     }
