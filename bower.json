@@ -23,7 +23,6 @@
     "moment": "^2.13.0",
     "ng-file-upload": "^12.0.4",
     "scalyr": "^1.0.3",
-    "async": "^1.5.2",
     "ng-photoswipe": "^0.2.0",
     "angular-input-masks": "^2.4.0",
     "angular-i18n": "^1.5.8",

@@ -11,6 +11,7 @@ angular.module('dashexampleApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
 function QuotationsEditCtrl(
+  $log,
   $location,
   $routeParams,
   $q,
@@ -87,7 +88,7 @@ function QuotationsEditCtrl(
       dialogService.showDialog('Email enviado al cliente');
     })
     .catch(function(err){
-      console.log(err);
+      $log.error(err);
       vm.isLoading = false;
       dialogService.showDialog('Hubo un error, intentalo de nuevo');
     });
@@ -98,7 +99,7 @@ function QuotationsEditCtrl(
       vm.warehouses = res.data;
     })
     .catch(function(err){
-      console.log(err);
+      $log.error(err);
     });
   }
 
@@ -151,13 +152,17 @@ function QuotationsEditCtrl(
         file: vm.newRecord.file
       };
 
-      quotationService.addRecord(vm.quotation.id, params).then(function(res){
-        if(res.data.id){
-          vm.quotation.Records.push(res.data);
-        }
-        vm.newRecord = {};
-        vm.isLoadingRecords = false;
-      })
+      quotationService.addRecord(vm.quotation.id, params)
+        .then(function(res){
+          if(res.data.id){
+            vm.quotation.Records.push(res.data);
+          }
+          vm.newRecord = {};
+          vm.isLoadingRecords = false;
+        })
+        .catch(function(err){
+          $log.error(err);
+        });
     }
   }
 
@@ -170,40 +175,39 @@ function QuotationsEditCtrl(
         notes: extraNotes,
         User: $rootScope.user.id
       };
-      quotationService.addRecord(vm.quotation.id, params).then(function(res){
-        if(res.data.id){
-          vm.quotation.Records.push(res.data);
-        }
-        var updateParams = {
-          isClosed: true,
-          isClosedReason: closeReason,
-          isClosedNotes: extraNotes
-        };
-        return quotationService.update(vm.quotation.id, updateParams);
-      })
-      .then(function(result){
-        if(result.data){
-          vm.quotation.isClosed = result.data.isClosed;
-          if(vm.quotation.isClosed){
-            vm.status = 'Cerrada';
+      quotationService.addRecord(vm.quotation.id, params)
+        .then(function(res){
+          if(res.data.id){
+            vm.quotation.Records.push(res.data);
           }
-        }
-        vm.isLoading = false;
-        vm.quotation.Records.forEach(function(rec){
-          rec.isActive = false;
-        });
-      })
-      .catch(function(err){
-        console.log(err);
-      })
+          var updateParams = {
+            isClosed: true,
+            isClosedReason: closeReason,
+            isClosedNotes: extraNotes
+          };
+          return quotationService.update(vm.quotation.id, updateParams);
+        })
+        .then(function(result){
+          if(result.data){
+            vm.quotation.isClosed = result.data.isClosed;
+            if(vm.quotation.isClosed){
+              vm.status = 'Cerrada';
+            }
+          }
+          vm.isLoading = false;
+          vm.quotation.Records.forEach(function(rec){
+            rec.isActive = false;
+          });
+        })
+        .catch(function(err){
+          $log.error(err);
+        })
     }
   }
 
   function init(){
     vm.isLoading = true;
-
     loadWarehouses();
-
     $scope.$watch(function() {
       return !!vm.quotation && localStorageService.get('broker');
     }, function(broker) {
@@ -262,7 +266,7 @@ function QuotationsEditCtrl(
         });
       })
       .catch(function(err){
-        console.log(err);
+        $log.error(err);
       });
 
     userService.getBrokers().then(function(brokers){
@@ -286,19 +290,23 @@ function QuotationsEditCtrl(
 
   function removeDetail(detailId, index){
     vm.isLoadingDetails = true;
-    quotationService.removeDetail(detailId, vm.quotation.id).then(function(res){
-      var updatedQ = res.data;
-      vm.quotation.Details.splice(index,1);
-      vm.isLoadingDetails        = false;
-      vm.quotation.total         = updatedQ.total;
-      vm.quotation.subtotal      = updatedQ.subtotal;
-      vm.quotation.discount      = updatedQ.discount;
-      vm.quotation.totalProducts = updatedQ.totalProducts;
-      if(updatedQ.Details){
-        matchNewDetails(updatedQ.Details);
-      }
-      $rootScope.getActiveQuotation();
-    });
+    quotationService.removeDetail(detailId, vm.quotation.id)
+      .then(function(res){
+        var updatedQ = res.data;
+        vm.quotation.Details.splice(index,1);
+        vm.isLoadingDetails        = false;
+        vm.quotation.total         = updatedQ.total;
+        vm.quotation.subtotal      = updatedQ.subtotal;
+        vm.quotation.discount      = updatedQ.discount;
+        vm.quotation.totalProducts = updatedQ.totalProducts;
+        if(updatedQ.Details){
+          matchNewDetails(updatedQ.Details);
+        }
+        $rootScope.getActiveQuotation();
+      })
+      .catch(function(err){
+        $log.error(err);
+      })
   }
 
   function matchNewDetails(newDetails){
@@ -319,13 +327,15 @@ function QuotationsEditCtrl(
 
   function alertRemoveDetail(ev, detailId, detailIndex) {
     // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.confirm()
-          .title('¿Eliminar articulo de la cotizacion?')
-          .textContent('-' + vm.quotation.Details[detailIndex].Product.Name)
-          .ariaLabel('')
-          .targetEvent(ev)
-          .ok('Eliminar')
-          .cancel('Cancelar');
+    var confirm = $mdDialog
+      .confirm()
+      .title('¿Eliminar articulo de la cotizacion?')
+      .textContent('-' + vm.quotation.Details[detailIndex].Product.Name)
+      .ariaLabel('')
+      .targetEvent(ev)
+      .ok('Eliminar')
+      .cancel('Cancelar');
+    
     $mdDialog.show(confirm).then(function() {
       vm.removeDetail(detailId, detailIndex)
     }, function() {
@@ -344,18 +354,22 @@ function QuotationsEditCtrl(
           return detail;
         });
       }
-      quotationService.update(vm.quotation.id, params).then(function(res){
-        vm.isLoading = false;
-        var quotationUpdated = res.data;
-        if(vm.quotation.Client){
-          quotationService.setActiveQuotation(vm.quotation.id);
-          $location.path('/checkout/client/' + vm.quotation.id);
-        }else{
-          console.log('No hay cliente');
-          quotationService.setActiveQuotation(vm.quotation.id);
-          $location.path('/continuequotation').search({goToCheckout:true});
-        }
-      });
+      quotationService.update(vm.quotation.id, params)
+        .then(function(res){
+          vm.isLoading = false;
+          var quotationUpdated = res.data;
+          if(vm.quotation.Client){
+            quotationService.setActiveQuotation(vm.quotation.id);
+            $location.path('/checkout/client/' + vm.quotation.id);
+          }else{
+            console.log('No hay cliente');
+            quotationService.setActiveQuotation(vm.quotation.id);
+            $location.path('/continuequotation').search({goToCheckout:true});
+          }
+        })
+        .catch(function(err){
+          $log.error(err);
+        })
     }else{
       dialogService.showDialog('Esta cotización ya tiene un pedido asignado');
     }
@@ -378,3 +392,22 @@ function QuotationsEditCtrl(
   vm.init();
 
 }
+
+QuotationsEditCtrl.$inject = [
+  '$log',
+  '$location',
+  '$routeParams',
+  '$q',
+  '$scope',
+  'localStorageService',
+  'productService',
+  '$rootScope',
+  '$mdDialog',
+  'commonService',
+  'quotationService',
+  'api',
+  'cartService',
+  'dialogService',
+  'userService',
+  'packageService'
+];

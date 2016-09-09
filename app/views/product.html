@@ -22,7 +22,6 @@
 
     <!--START NAV-->
     <sidebar-categories
-      active-store="main.activeStore"
       selected-category-id="vm.lowestCategory.id"
       categories-tree="main.categoriesTree"
       flex="20">
@@ -122,8 +121,13 @@
                   <td><strong>{{vm.product.ItemCode}}</strong></td>
                 </tr>
                 <tr ng-repeat="filter in vm.filters">
-                  <td ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">{{filter.Name}}: </td>
-                  <td ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">
+                  <td 
+                    ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">
+                    {{filter.Name}}: 
+                  </td>
+                  <td 
+                    ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'"
+                  >
                     <span ng-repeat="value in filter.Values track by $index">
                       <strong>{{value.Name}}</strong>
                       <span ng-if="$index < (filter.Values.length-1)">,</span>
@@ -248,15 +252,25 @@
 
             <div class="product-view-data-block">
               <h4 >
-                <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available | number: 0}} productos</strong> disponibles
+                <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available | number: 0}} {{ vm.getPiecesString(vm.available) }}</strong> disponibles
               </h4>
               <div ng-if="vm.available">
                 <table>
-                  <tr ng-repeat="delivery in vm.deliveries">
+                  <tr ng-repeat="deliveryGroup in vm.deliveriesGroups">
                     <td>
-                      {{delivery.date | date: "d/MMM/yyyy"}} (en {{delivery.days}} días) | {{ vm.getWarehouseName(delivery.companyFrom) }}
+                      {{deliveryGroup.date | date: "d/MMM/yyyy"}} (en {{deliveryGroup.days}} días)
+                      <p>
+                        <span 
+                          class="comma-separated"
+                          ng-repeat="d in deliveryGroup.deliveries track by $index"
+                        >
+                          {{ vm.getWarehouseName(d.companyFrom) }}: {{d.available}}
+                        </span>
+                      </p>
                     </td>
-                    <td>{{delivery.available | number: 0}} piezas</td>
+                    <td class="delivery-date-stock">
+                      {{deliveryGroup.available | number: 0}} {{vm.getPiecesString(deliveryGroup.available)}}
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -353,8 +367,8 @@
                   <label>Piezas</label>
                   <select
                     class="select-element"
-                    ng-model="vm.product.cart.quantity"
-                    ng-options="qty for qty in vm.getQtyArray(vm.product.cart.delivery.available)"
+                    ng-model="vm.productCart.quantity"
+                    ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)"
                   >
                   </select>
                 </div>
@@ -364,28 +378,29 @@
                   <label>Entrega aproximada{{vm.selectedDelivery}}</label>
                   <select
                     class="select-element"
-                    ng-model="vm.product.cart.delivery"
-                    ng-options="delivery.date | date: 'd/MMM/yyyy' for delivery in vm.deliveries"
+                    ng-model="vm.productCart.deliveryGroup"
+                    ng-change="vm.resetCartQuantity(deliveryGrop.available)"
+                    ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in vm.deliveriesGroups"
                   >
                   </select>
                 </div>
               </div>
               <h3 flex="25" class="product-view-price-hl product-view-price-main">
-                <strong>{{vm.product.Price * vm.product.cart.quantity | currency:'$':0 }}</strong>
+                <strong>{{vm.product.Price * vm.productCart.quantity | currency:'$':0 }}</strong>
               </h3>
             </div>
 
             <a
-              ng-click="vm.available && vm.product.cart.quantity && vm.addToCart($event)" href="#"
+              ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#"
               class="add-cart-btn"
               ng-class="
               {
-                'add-cart-btn-disabled': vm.product.cart.quantity > vm.product.cart.delivery.available || !vm.product.cart.quantity
+                'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity
               }
               "
             >
               <span class="add-cart-btn-icon">
-                <span class="add-cart-btn-icon-num">{{vm.product.cart.quantity}}</span>
+                <span class="add-cart-btn-icon-num">{{vm.productCart.quantity}}</span>
                 <i class="icon-carro"></i>
               </span>
               <strong>Agregar al carrito</strong>

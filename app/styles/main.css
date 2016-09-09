@@ -69,6 +69,10 @@ md-dialog .md-button.md-primary{
 .to-upper{text-transform: uppercase;}
 .nomargin{margin: 0;}
 .center-content{text-align: center;}
+.comma-separated + .comma-separated:before{
+  content:', ';
+  display: inline-block;
+}
 .content-block{
   padding: 40px 20px;
   position: relative;
@@ -1741,8 +1745,10 @@ md-backdrop.md-sidenav-backdrop{
 }
 .product-view-data-block tr td:nth-child(2){
   padding-left: 10px;
+} 
+.product-view-data-block .delivery-date-stock{
+  text-align: right;
 }
-
 .product-view-data-block-toggle{
   cursor: pointer;
   outline: 0;

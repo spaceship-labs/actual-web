@@ -20,55 +20,52 @@ function SidebarCategories(
     templateUrl: 'views/directives/sidebar-categories.html',
     restrict: 'E',
     scope:{
-      activeStore: '=',
       categoriesTree: '=',
       selectedCategoryId: '=',
     },
-    link: function postLink(scope) {
-      scope.storeCode = false;
+    controller: ['$scope', '$rootScope' ,function($scope, $rootScope) {
+      $scope.storeCode = false;
 
-      scope.init = function(){
-        scope.isActiveOffers = false;
+      $scope.init = function(){
+        console.log('init');
+        $scope.isActiveOffers = false;
         if($location.path() == '/ofertas'){
-          scope.isActiveOffers = true;
+          $scope.isActiveOffers = true;
         }
-        if(scope.activeStore){
-          scope.storeCode = scope.activeStore.code;
+        if(!$scope.activeStore){
+          $scope.storeCode = 'productsNum';
         }
       };
 
-      scope.$on('$routeChangeSuccess', function(next, current) {
+      $scope.$on('$routeChangeSuccess', function(next, current) {
         if($location.path() == '/ofertas'){
-          scope.isActiveOffers = true;
+          $scope.isActiveOffers = true;
         }
       });
 
-      scope.$watch('categoriesTree', function(newVal, oldVal){
+      $scope.$watch('categoriesTree', function(newVal, oldVal){
         if(newVal != oldVal){
-          scope.showSelectedCategoryId();
+          $scope.showSelectedCategoryId();
         }
       });
 
-      scope.$watch('selectedCategoryId', function(newVal, oldVal){
-        if(newVal != oldVal && angular.isArray(scope.categoriesTree) ){
-          scope.showSelectedCategoryId();
+      $scope.$watch('selectedCategoryId', function(newVal, oldVal){
+        if(newVal != oldVal && angular.isArray($scope.categoriesTree) ){
+          $scope.showSelectedCategoryId();
         }
       });
 
-      scope.$watch('activeStore', function(newVal, oldVal){
-        if(newVal != oldVal){
-          console.log('activeStore sidebarCategories');
-          console.log(newVal);
-        }
+      $rootScope.$on('activeStoreAssigned', function(e, data){
+        $scope.activeStore = data;
       });
 
-      scope.showSelectedCategoryId = function(){
-        var selected = scope.selectedCategoryId;
+      $scope.showSelectedCategoryId = function(){
+        var selected = $scope.selectedCategoryId;
         var activeCountL1 = 0;
         var activeCountL2 = 0;
         var activeCountL3 = 0;
-        if(scope.categoriesTree){
-          scope.categoriesTree.forEach(function(mainCategory){
+        if($scope.categoriesTree){
+          $scope.categoriesTree.forEach(function(mainCategory){
             var hasSelectedAsChild = _.findWhere(mainCategory.Childs, {id: selected});
             var hasSelectedAsGrandChild = false;
             mainCategory.Childs.forEach(function(child){
@@ -101,12 +98,12 @@ function SidebarCategories(
         }
       }
 
-      scope.toggleMainCategory = function(mainCategory,event){
+      $scope.toggleMainCategory = function(mainCategory,event){
         if(mainCategory.Childs){
           event.preventDefault();
         }
 
-        scope.categoriesTree.forEach(function(category){
+        $scope.categoriesTree.forEach(function(category){
           if(category.Handle != mainCategory.Handle){
             category.isActive = false;
             //Closing also child categories
@@ -120,7 +117,7 @@ function SidebarCategories(
 
       };
 
-      scope.toggleCategory = function(category, event){
+      $scope.toggleCategory = function(category, event){
         if(category.Childs){
           event.preventDefault();
         }
@@ -128,13 +125,13 @@ function SidebarCategories(
 
       };
 
-      scope.getCategoryIcon = function(handle){
+      $scope.getCategoryIcon = function(handle){
         return categoriesService.getCategoryIcon(handle);
       };
 
 
-      scope.cleanUp = function(){
-        scope.categoriesTree.forEach(function(category){
+      $scope.cleanUp = function(){
+        $scope.categoriesTree.forEach(function(category){
           category.isActive = false;
           //Closing also child categories
           if(category.Childs){
@@ -150,13 +147,13 @@ function SidebarCategories(
         });
       };
 
-      scope.$on('$destroy', function() {
-        scope.cleanUp();
+      $scope.$on('$destroy', function() {
+        $scope.cleanUp();
       });
 
-      scope.init();
+      $scope.init();
 
-    }
+    }]
   };
 }
 

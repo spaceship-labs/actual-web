@@ -1,0 +1,50 @@
+REGLA GENERAL
+
+CEDIS de la region
+Almacenes de la region
+Por cada region extra
+	CEDIS de region extra
+	Almacenes de region extra
+---------------------------------------------
+
+*Actual Studio Malecon*
+1. CEDIS Cancun
+2. Cualquiera de las tiendas de Cancun
+3. Almacen Merida
+4. Cualquiera de las tiendas de Merida
+
+*Actual Studio Playa del Carmen*
+1. CEDIS Cancun
+2. Cualquiera de las tiendas de Cancun
+3. Almacen Merida
+4. Cualquiera de las tiendas de Merida
+
+*Actual Studio Cumbres*
+1. CEDIS Cancun
+2. Cualquiera de las tiendas de Cancun
+3. Almacen Merida
+4. Cualquiera de las tiendas de Merida
+
+*Actual Home Xcaret*
+1. CEDIS Cancun
+2. Cualquiera de las tiendas de Cancun
+3. Almacen Merida
+4. Cualquiera de las tiendas de Merida
+
+*Proyectos*
+1. CEDIS Cancun
+2. Cualquiera de las tiendas de Cancun
+3. Almacen Merida
+4. Cualquiera de las tiendas de Merida
+
+*Actual Studio Merida*
+1. Almacen Merida
+2. Cualquiera de las tiendas de Merida
+3. CEDIS Cancun
+4. Cualquiera de las tiendas de Cancun
+
+*Actual Home Merida*
+1. Almacen Merida
+2. Cualquiera de las tiendas de Merida
+3. CEDIS Cancun
+4. Cualquiera de las tiendas de Cancun

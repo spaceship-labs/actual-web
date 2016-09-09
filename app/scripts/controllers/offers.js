@@ -99,7 +99,7 @@ function OffersCtrl(
     });
     var unavailableProducts = groupUnavailableProducts(products);
     if(unavailableProducts.length > 0){
-      showUnavailableMsg(unavailableProducts);
+      showUnavailableStockMsg(unavailableProducts);
       return [];
     }
     return products;
@@ -119,6 +119,7 @@ function OffersCtrl(
       if( product.quantity <=  parseInt(deliveryDate.available) ){
         product.shipDate = deliveryDate.date;
         product.shipCompany = deliveryDate.company;
+        product.shipCompanyFrom = deliveryDate.companyFrom;
         product.promotionPackage = packageId;
       }
     }
@@ -128,7 +129,7 @@ function OffersCtrl(
     return product;    
   }
 
-  function showUnavailableMsg(products){
+  function showUnavailableStockMsg(products){
     var htmlProducts = products.reduce(function(acum, p){
       acum+="<li>"+p.name+'</li>';
       return acum;

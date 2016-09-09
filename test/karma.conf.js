@@ -64,7 +64,6 @@ module.exports = function(config) {
       'bower_components/moment/moment.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/scalyr/scalyr.js',
-      'bower_components/async/lib/async.js',
       'bower_components/photoswipe/dist/photoswipe.js',
       'bower_components/photoswipe/dist/photoswipe-ui-default.js',
       'bower_components/ng-photoswipe/angular-photoswipe.min.js',

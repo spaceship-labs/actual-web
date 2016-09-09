@@ -221,36 +221,41 @@
         });
       }
 
+      function createDetailFromParams(productId, params, quotationId){
+        var detail = {
+          Product: productId,
+          quantity: params.quantity,
+          Quotation: quotationId,
+          shipDate: params.shipDate,
+          shipCompany: params.shipCompany,
+          shipCompanyFrom: params.shipCompanyFrom,
+          PromotionPackage: params.promotionPackage || null
+        }
+        if(quotationId){
+          detail.Quotation = quotationId;
+        }
+        return detail;
+      }
+
       function addProduct(productId, params){
         var quotationId = localStorageService.get('quotation');
+        var detail = createDetailFromParams(productId, params, quotationId);
         if( quotationId ){
           //Agregar al carrito
-          var detail = {
-            Product: productId,
-            quantity: params.quantity,
-            Quotation: quotationId,
-            shipDate: params.shipDate,
-            shipCompany: params.shipCompany,
-            PromotionPackage: params.promotionPackage
-          };
-          addDetail(quotationId, detail).then(function(res){
-            setActiveQuotation(quotationId);
-            $location.path('/quotations/edit/' + quotationId);
-          });
+          addDetail(quotationId, detail)
+            .then(function(res){
+              setActiveQuotation(quotationId);
+              $location.path('/quotations/edit/' + quotationId);
+            })
+            .catch(function(err){
+              console.log(err);
+            })
 
         }else{
           //Crear cotizacion con producto agregado
           var params = {
             User: $rootScope.user.id,
-            Details: [
-              {
-                Product: productId,
-                quantity: params.quantity,
-                shipDate: params.shipDate,
-                shipCompany: params.shipCompany,
-                PromotionPackage: params.promotionPackage
-              }
-            ]
+            Details: [detail]
           };
           create(params).then(function(res){
             var quotation = res.data;
@@ -258,6 +263,9 @@
               setActiveQuotation(quotation.id);
               $location.path('/quotations/edit/' + quotation.id);
             }
+          })
+          .catch(function(err){
+            console.log(err);
           });
         }
       }
@@ -267,15 +275,8 @@
         var quotationId = localStorageService.get('quotation');
         if( quotationId ){
           var detailsPromises = [];
-          products.forEach(function(p){
-            var detail = {
-              Product: p.id,
-              quantity: p.quantity,
-              Quotation: quotationId,
-              shipDate: p.shipDate,
-              shipCompany: p.shipCompany,
-              PromotionPackage: p.promotionPackage
-            };
+          products.forEach(function(product){
+            var detail = createDetailFromParams(product.id, product, quotationId);
             detailsPromises.push(addDetail(quotationId, detail));
           });
           $q.all(detailsPromises)
@@ -291,17 +292,12 @@
           //Crear cotizacion con producto agregado
           var params = {
             User: $rootScope.user.id,
-            Details: products.map(function(p){
-              var detail = {
-                Product: p.id,
-                quantity: p.quantity,
-                shipDate: p.shipDate,
-                shipCompany: p.shipCompany,
-                PromotionPackage: p.promotionPackage
-              };
+            Details: products.map(function(product){
+              var detail = createDetailFromParams(product.id, product);
               return detail;
             })
           };
+          
           create(params).then(function(res){
             var quotation = res.data;
             if(quotation){
@@ -350,7 +346,6 @@
       }
 
       function getQuotationTotals(quotationId, params){
-        console.log('params',params);
         var url = '/quotation/totals/' + quotationId;
         return api.$http.post(url,params);
       }
