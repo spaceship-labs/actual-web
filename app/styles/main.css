@@ -2040,6 +2040,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .cart-view .cart-item-data .bottom-text{
   margin-bottom: 0;
   margin-right: 15px;
+  margin-top: 6px;
   font-size: 12px;
   text-align: right;
 }

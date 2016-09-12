@@ -12,6 +12,10 @@ angular.module('dashexampleApp')
 
 function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $location, quotationService, orderService){
   var vm = this;
+  var EWALLET_POSITIVE = 'positive';
+  var EWALLET_NEGATIVE = 'negative';
+
+
   angular.extend(vm,{
     init: init,
     print: print,
@@ -33,6 +37,13 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
       console.log(vm.order);
       vm.order.Details = vm.order.Details || [];
       vm.order.Address = vm.formatAddress(vm.order.Address);
+      vm.ewallet = {
+        positive: getEwalletAmmount(vm.order.EwalletRecords, EWALLET_POSITIVE),
+        negative: getEwalletAmmount(vm.order.EwalletRecords,EWALLET_NEGATIVE),
+      };
+      vm.ewallet.before = vm.order.Client.ewallet + vm.ewallet.negative - vm.ewallet.positive;
+      vm.ewallet.current = vm.order.Client.ewallet;
+
       vm.isLoading = false;
       quotationService.getQuotationProducts(vm.order)
         .then(function(details){
@@ -59,6 +70,17 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
       vm.isLoading = false;
     });
 
+  }
+
+  function getEwalletAmmount(ewalletRecords, type){
+    ewalletRecords = ewalletRecords.filter(function(record){
+      return record.type === type;
+    });
+    var amount = ewalletRecords.reduce(function(acum, record){
+      acum += record.amount; 
+      return acum;
+    },0);
+    return amount;
   }
 
   function toggleRecord(record){

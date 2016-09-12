@@ -167,7 +167,6 @@
     <!--END ORDER PAYMENTS-->
 
     <!--MONEDERO-->
-    <!--
     <div class="order-block">
       <h3><strong><i class="icon-monedero"></i> MONEDERO ELECTRÓNICO</strong></h3>
       <div layout="row" class="order-monedero order-block-inner">
@@ -179,14 +178,13 @@
           <p><strong>Saldo actual:</strong></p>
         </div>
         <div flex="20">
-          <p>$1,258 MXN<p>
-          <p>$315 MXN<p>
-          <p>$12 MXN<p>
-          <p><strong>$1,561 MXN</strong><p>
+          <p>{{vm.ewallet.before | currency}} MXN<p>
+          <p>{{vm.ewallet.positive | currency}} MXN<p>
+          <p>{{vm.ewallet.negative | currency}} MXN<p>
+          <p><strong>{{vm.ewallet.current | currency}} MXN</strong><p>
         </div>
       </div>
     </div>
-    -->
     <!--END MONEDERO-->
 
     <!--ENVIO-->

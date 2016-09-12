@@ -57,6 +57,8 @@ function CheckoutPaymentmethodCtrl(
     roundCurrency: roundCurrency
   });
 
+  var EWALLET_TYPE = 'ewallet';
+
   function init(){
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
@@ -132,7 +134,7 @@ function CheckoutPaymentmethodCtrl(
               var exrStr = $filter('currency')(exchangeRate);
               m.description = 'Tipo de cambio '+exrStr+' MXN';
             }
-            else if(m.type === 'monedero'){
+            else if(m.type === EWALLET_TYPE){
               var balance = vm.quotation.Client.ewallet || 0;
               var balanceStr = $filter('currency')(balance);
               m.description = 'Saldo disponible: ' + balanceStr +' MXN';
@@ -194,7 +196,7 @@ function CheckoutPaymentmethodCtrl(
   function chooseMethod(method, group){
     vm.setMethod(method, group);
     var remaining = vm.quotation.total - vm.quotation.ammountPaid;
-    if(method.type === 'monedero'){
+    if(method.type === EWALLET_TYPE){
       var balance = vm.quotation.Client.ewallet || 0;
       vm.activeMethod.maxAmmount = balance;
       if(balance <= remaining){

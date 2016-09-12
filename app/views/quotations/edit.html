@@ -173,13 +173,17 @@
                 >
                   Paquete: {{ vm.getPromotionPackageById(detail.PromotionPackageApplied).Name }}
                 </p>
-                <p
-                  ng-if="
-                    vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'
-                  "
-                  class="bottom-text">
-                  Promoción: {{detail.Product.mainPromo.publicName}}
-                </p>
+                <div 
+                  ng-if="vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'"
+                >
+                  <p
+                    class="bottom-text">
+                    Promoción: {{detail.Product.mainPromo.publicName}}
+                  </p>
+                  <p class="bottom-text" ng-if="detail.ewallet > 0">
+                    Monedero eléctronico: {{detail.ewallet | currency}}
+                  </p>                  
+                </div>
              
               </div>
               <!--END ITEM DATA-->

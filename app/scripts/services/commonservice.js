@@ -53,7 +53,7 @@
           {
             label:'Monedero electrónico',
             name:'Monedero electrónico',
-            type:'monedero',
+            type:'ewallet',
             description:'Sujeto a verificación contable',
             currency: 'mxn',
             needsVerification: false

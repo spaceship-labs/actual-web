@@ -143,7 +143,6 @@ function QuotationsEditCtrl(
       var dateTime = moment(time).set('year',year).set('month',month).set('date',day)._d;
 
       vm.newRecord.dateTime = dateTime;
-
       var params = {
         dateTime: vm.newRecord.dateTime,
         eventType: vm.newRecord.eventType,
