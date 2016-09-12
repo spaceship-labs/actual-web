@@ -297,6 +297,8 @@
               return detail;
             })
           };
+
+          console.log('params create', params);
           
           create(params).then(function(res){
             var quotation = res.data;

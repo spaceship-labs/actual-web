@@ -157,7 +157,6 @@ function ProductCtrl(
   }
 
   $rootScope.$on('activeStoreAssigned',function(e,data){
-    console.log('activeStoreAssigned');
     activeStore = data;
     getWarehouses();
   });
@@ -392,6 +391,7 @@ function ProductCtrl(
       vm.productCart.deliveryGroup,
       vm.productCart.quantity
     );
+
     if(productCartItems.length == 1){
       var item = productCartItems[0];
       var params = {
@@ -489,9 +489,13 @@ function ProductCtrl(
   }
 
   function getWarehousesRules(region, warehouses){
-    var otherRegions = warehouses.filter(function(whs){
-      return whs.region != region;
-    });
+    var otherRegions = warehouses
+      .filter(function(whs){
+        return whs.region != region;
+      })
+      .map(function(whs){
+        return whs.region;
+      });
     var rulesHashes = [
       'cedis#' + region,
       '#'+region,
