@@ -73,6 +73,7 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
   }
 
   function getEwalletAmmount(ewalletRecords, type){
+    ewalletRecords = ewalletRecords || [];
     ewalletRecords = ewalletRecords.filter(function(record){
       return record.type === type;
     });

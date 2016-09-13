@@ -1707,6 +1707,9 @@ md-backdrop.md-sidenav-backdrop{
 }
 
 .pswp--open{z-index: 999999999}
+.pswp img{
+  background: #fff;
+}
 
 /*-------------/
   #PRODUCT-VIEW-DATA

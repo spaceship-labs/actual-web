@@ -594,7 +594,7 @@
     }
 
     function getFortnightRange(){
-      var currentDay = moment().date;
+      var currentDay = moment().date();
       var range = {};
       if(currentDay <= 15){
         range = {
