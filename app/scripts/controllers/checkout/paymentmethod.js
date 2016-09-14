@@ -447,7 +447,7 @@ function CheckoutPaymentmethodCtrl(
 
     $scope.isvalidPayment = function(){
       return (
-        $scope.payment.ammount > $scope.maxAmmount &&
+        ($scope.payment.ammount <= $scope.maxAmmount) &&
         $scope.payment.ammount && 
         $scope.payment.verificationCode &&
         $scope.payment.verificationCode != ''

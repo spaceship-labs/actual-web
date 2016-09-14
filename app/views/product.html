@@ -257,7 +257,7 @@
               <div ng-if="vm.available">
                 <table>
                   <tr 
-                    ng-repeat="deliveryGroup in vm.deliveriesGroups | orderBy: 'date' "
+                    ng-repeat="deliveryGroup in vm.deliveriesGroups"
                   >
                     <td>
                       {{deliveryGroup.date | date: "d/MMM/yyyy"}} (en {{deliveryGroup.days}} días)

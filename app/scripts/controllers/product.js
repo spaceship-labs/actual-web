@@ -22,6 +22,7 @@ function ProductCtrl(
   $mdDialog,
   $mdMedia,
   $sce,
+  $filter,
   api,
   cartService,
   quotationService,
@@ -114,6 +115,7 @@ function ProductCtrl(
         }, 0);
         vm.deliveries  = delivery;
         vm.deliveriesGroups = groupDeliveryDates(vm.deliveries);
+        vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
 
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
@@ -590,6 +592,7 @@ ProductCtrl.$inject = [
   '$mdDialog',
   '$mdMedia',
   '$sce',
+  '$filter',
   'api',
   'cartService',
   'quotationService',
