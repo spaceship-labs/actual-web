@@ -188,7 +188,9 @@ md-dialog .md-button.md-primary{
 .action-btn-save{
   background: #33BA2C;
 }
-
+.action-btn-disabled{
+  background: gray;
+}
 
 /*-------------/
   #FORM ELEMENTS

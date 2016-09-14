@@ -14,6 +14,7 @@
         getById: getById,
         getClients: getClients,
         getContacts: getContacts,
+        getEwalletById: getEwalletById,
         update: update,
         updateFiscalAddress: updateFiscalAddress,
         updateContact: updateContact
@@ -60,6 +61,11 @@
       function createContact(cardCode, params){
         var url = '/client/'+cardCode+'/contact/create';
         return api.$http.post(url, params);
+      }
+
+      function getEwalletById(clientId){
+        var url = '/client/'+clientId+'/ewallet';
+        return api.$http.get(url);
       }
 
     }

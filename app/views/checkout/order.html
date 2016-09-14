@@ -68,7 +68,6 @@
                     ng-repeat="filter in detail.Product.Filters"
                     ng-if="
                       filter.Handle == 'codigo' ||
-                      filter.Handle == 'color' ||
                       filter.Handle == 'material' ||
                       filter.Handle == 'garantia'
                     "
@@ -79,6 +78,10 @@
                       <span ng-if="$index < (filter.Values.length-1)">,</span>
                     </span>
                   </li>
+                  <li ng-if="detail.Product.DetailedColor">
+                    <strong>Color</strong>
+                    <span>{{detail.Product.DetailedColor}}</span>
+                  </li>                  
                 </ul>
               </div>
             </div>

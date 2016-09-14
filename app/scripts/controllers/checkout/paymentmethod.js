@@ -27,7 +27,8 @@ function CheckoutPaymentmethodCtrl(
     productService,
     quotationService,
     siteService,
-    authService
+    authService,
+    clientService
   ){
   var vm = this;
 
@@ -38,8 +39,6 @@ function CheckoutPaymentmethodCtrl(
     createOrder: createOrder,
     clearActiveMethod: clearActiveMethod,
     chooseMethod: chooseMethod,
-    getGroupByPayments: getGroupByPayments,
-    getPaymentMethods: getPaymentMethods,
     getExchangeRate:getExchangeRate,
     getPaidPercentage: getPaidPercentage,
     init: init,
@@ -53,11 +52,13 @@ function CheckoutPaymentmethodCtrl(
     singlePayment: true,
     multiplePayment: false,
     payments: [],
-    paymentMethods: [],
+    paymentMethodsGroups: [],
     roundCurrency: roundCurrency
   });
 
   var EWALLET_TYPE = 'ewallet';
+  var CASH_USD_TYPE = 'cash-usd';
+  var EWALLET_GROUP_INDEX = 0;
 
   function init(){
     vm.isLoading = true;
@@ -70,11 +71,11 @@ function CheckoutPaymentmethodCtrl(
 
       //vm.quotation.Client.ewallet = 600;
       vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
-      vm.getPaymentMethods(vm.quotation.id).then(function(methods){
-        vm.paymentMethods = methods;
+      getPaymentMethodsGroups(vm.quotation.id).then(function(groups){
+        vm.paymentMethodsGroups = groups;
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
-          var paymentGroup = vm.getGroupByPayments();
-          var currentGroup = _.findWhere(vm.paymentMethods, {group: paymentGroup});
+          var paymentGroup = getGroupByPayments();
+          var currentGroup = _.findWhere(vm.paymentMethodsGroups, {group: paymentGroup});
           var currentMethod = currentGroup.methods[0];
           vm.setMethod(currentMethod, paymentGroup);
         }
@@ -84,6 +85,33 @@ function CheckoutPaymentmethodCtrl(
       });
       vm.isLoading = false;
     });
+  }
+
+  function updateEwalletBalance(){
+    var group = vm.paymentMethodsGroups[EWALLET_GROUP_INDEX];
+    var ewalletPaymentMethod = _.findWhere(group.methods, {type:EWALLET_TYPE});
+    var ewalletPayments = _.where(vm.quotation.Payments, {type:EWALLET_TYPE});
+    clientService.getEwalletById(vm.quotation.Client.id)
+      .then(function(res){
+        var balance = res.data || 0;
+        var description = getEwalletDescription(balance);;
+        ewalletPaymentMethod.description = description;
+        ewalletPayments = ewalletPayments.map(function(payment){
+          payment.description = description;
+          return payment;
+        });
+      })
+      .catch(function(err){
+        console.log(err);
+      })
+  }
+
+  function getEwalletDescription(balance){
+    var description = '';
+    var balanceRounded = roundCurrency( balance, {up:false} );
+    var balanceStr = $filter('currency')(balanceRounded);
+    description = 'Saldo disponible: ' + balanceStr +' MXN';    
+    return description;
   }
 
   function getExchangeRate(){
@@ -98,9 +126,9 @@ function CheckoutPaymentmethodCtrl(
   }
 
 
-  function getPaymentMethods(quotationId){
+  function getPaymentMethodsGroups(quotationId){
     var deferred = $q.defer();
-    var methodsGroups = commonService.getPaymentMethods();
+    var methodsGroups = commonService.getPaymentMethodsGroups();
     var discountKeys = ['discountPg1','discountPg2','discountPg3','discountPg4','discountPg5'];
     var totalsPromises = [];
     var exchangeRate = 18.76;
@@ -130,14 +158,13 @@ function CheckoutPaymentmethodCtrl(
             m.subtotal = mG.subtotal;
             m.discount = mG.discount;
             m.exchangeRate = exchangeRate;
-            if(m.type === 'cash-usd'){
+            if(m.type === CASH_USD_TYPE){
               var exrStr = $filter('currency')(exchangeRate);
               m.description = 'Tipo de cambio '+exrStr+' MXN';
             }
             else if(m.type === EWALLET_TYPE){
               var balance = vm.quotation.Client.ewallet || 0;
-              var balanceStr = $filter('currency')(balance);
-              m.description = 'Saldo disponible: ' + balanceStr +' MXN';
+              m.description = getEwalletDescription(balance);
             }
             return m;
           });
@@ -160,7 +187,7 @@ function CheckoutPaymentmethodCtrl(
     var activeKeys = ['paymentGroup1','paymentGroup2','paymentGroup3','paymentGroup4','paymentGroup5'];
     if(vm.validMethods){
       var isGroupUsed = false;
-      var currentGroup = vm.getGroupByPayments();
+      var currentGroup = getGroupByPayments();
       if( currentGroup < 0){
         isGroupUsed = true;
       }else if(currentGroup > 0 && currentGroup == index+1){
@@ -216,20 +243,20 @@ function CheckoutPaymentmethodCtrl(
     var group = false;
 
     if(!vm.quotation.Payments || vm.quotation.Payments.length == 0){
-      group = vm.paymentMethods[0];
+      group = vm.paymentMethodsGroups[0];
       firstMethod = group.methods[0];
-      console.log(firstMethod);
     }else{
-      var groupIndex = vm.getGroupByPayments() - 1;
-      group = vm.paymentMethods[groupIndex];
+      var groupIndex = getGroupByPayments() - 1;
+      group = vm.paymentMethodsGroups[groupIndex];
       firstMethod = group.methods[0];
     }
     vm.setMethod(firstMethod, group);
   }
 
   function addPayment(payment){
+    console.log('addPayment', payment);
     if(
-        (payment.ammount > 0 && vm.quotation.ammountPaid < vm.quotation.total)
+        ( (payment.ammount > 0) && (vm.quotation.ammountPaid < vm.quotation.total) )
         || payment.ammount < 0
       ){
       vm.isLoadingPayments = true;
@@ -250,6 +277,12 @@ function CheckoutPaymentmethodCtrl(
           vm.isLoading = false;
           delete vm.activeMethod.ammount;
           delete vm.activeMethod.verficiationCode;
+          return;
+        })
+        .then(function(){
+          if(payment.type == EWALLET_TYPE){
+            updateEwalletBalance();
+          }
         })
         .catch(function(err){
           console.log(err);
@@ -265,10 +298,11 @@ function CheckoutPaymentmethodCtrl(
   function applyTransaction(ev, method, ammount) {
     //if( method && ammount && !isNaN(ammount) ){
     if(method){
-      var templateUrl = 'views/checkout/terminal-dialog.html';
+      var templateUrl = 'views/checkout/payment-dialog.html';
       var controller  = DepositController;
       method.currency = method.currency || 'MXP';
-      method.ammount  = vm.roundCurrency(ammount);
+      method.ammount  = ammount;
+      console.log('method', method);
       var paymentOpts = angular.copy(method);
       if(method.msi || method.terminals){
         controller    = TerminalController;
@@ -350,18 +384,31 @@ function CheckoutPaymentmethodCtrl(
 
     $scope.init = function(){
       $scope.payment = payment;
+      if(payment.type == EWALLET_TYPE){ 
+        $scope.payment.ammount = roundCurrency($scope.payment.ammount, {up:false}); 
+      }else{
+        $scope.payment.ammount = roundCurrency($scope.payment.ammount);
+      }
       $scope.needsVerification = payment.needsVerification;
       $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
 
       if($scope.payment.currency === 'usd'){
         $scope.payment.ammount = $scope.payment.ammount / $scope.payment.exchangeRate;
         $scope.payment.ammountMXN = $scope.getAmmountMXN($scope.payment.ammount);
-        console.log($scope.payment.ammount);
       }
     };
 
     $scope.getAmmountMXN = function(ammount){
       return ammount * $scope.payment.exchangeRate;
+    }
+
+    $scope.isvalidPayment = function(){
+      console.log('maxAmmount', $scope.maxAmmount);
+      console.log('ammount', $scope.payment.ammount);
+      if($scope.maxAmmount){
+        return ($scope.payment.ammount <= $scope.maxAmmount);
+      }
+      return true;
     }
 
     $scope.hide = function() {
@@ -371,10 +418,10 @@ function CheckoutPaymentmethodCtrl(
       $mdDialog.cancel();
     };
     $scope.save = function() {
-      if($scope.ammount > $scope.maxAmmount){
-        dialogService.showDialog('No hay fondos suficientes');
-      }else{
+      if( $scope.isvalidPayment() ){
         $mdDialog.hide($scope.payment);
+      }else{
+        dialogService.showDialog('No hay fondos suficientes');
       }
     };
 
@@ -384,6 +431,7 @@ function CheckoutPaymentmethodCtrl(
   function TerminalController($scope, $mdDialog, formatService, payment) {
     $scope.payment = payment;
     $scope.needsVerification = payment.needsVerification;
+    $scope.payment.ammount = roundCurrency($scope.payment.ammount); 
     $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
 
     $scope.numToLetters = function(num){
@@ -396,8 +444,18 @@ function CheckoutPaymentmethodCtrl(
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
+
+    $scope.isvalidPayment = function(){
+      return (
+        $scope.payment.ammount > $scope.maxAmmount &&
+        $scope.payment.ammount && 
+        $scope.payment.verificationCode &&
+        $scope.payment.verificationCode != ''
+      );
+    }
+
     $scope.save = function() {
-      if($scope.payment.verificationCode && $scope.payment.verificationCode!= ''){
+      if( $scope.isvalidPayment() ){
         $mdDialog.hide($scope.payment);
       }else{
         console.log('no cumple');
@@ -474,13 +532,20 @@ function CheckoutPaymentmethodCtrl(
     return percentage;
   }
 
-  function roundCurrency(ammount){
-    var aux = Math.floor(ammount);
-    var cents = (ammount - aux);
+  function roundCurrency(ammount, options){
+    options = options || {up:true};
+    var integers = Math.floor(ammount);
+    var cents = (ammount - integers);
+    var roundedCents = 0;
     if(cents > 0){
-      cents = Math.ceil(cents/0.5) * 0.5;
+      if(options.up){
+        roundedCents = Math.ceil( (cents*100) ) / 100;
+      }else{
+        roundedCents = Math.floor( (cents*100) ) / 100;        
+      }
     }
-    return aux + cents;
+    var rounded = integers + roundedCents;
+    return rounded;
   }
 
   function isMinimumPaid(){

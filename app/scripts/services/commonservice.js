@@ -550,7 +550,7 @@
       );
     }
 
-    function getPaymentMethods(){
+    function getPaymentMethodsGroups(){
       return paymentGroups;
     }
 
@@ -615,7 +615,7 @@
       getCountries: getCountries,
       getStates: getStates,
       getStatesSap: getStatesSap,
-      getPaymentMethods: getPaymentMethods,
+      getPaymentMethodsGroups: getPaymentMethodsGroups,
       getMonthDateRange: getMonthDateRange,
       getFortnightRange: getFortnightRange,
       roundIntegerCurrency: roundIntegerCurrency,
