@@ -254,7 +254,6 @@ function CheckoutPaymentmethodCtrl(
   }
 
   function addPayment(payment){
-    console.log('addPayment', payment);
     if(
         ( (payment.ammount > 0) && (vm.quotation.ammountPaid < vm.quotation.total) )
         || payment.ammount < 0
@@ -446,8 +445,15 @@ function CheckoutPaymentmethodCtrl(
     };
 
     $scope.isvalidPayment = function(){
+      if( $scope.maxAmmount ){
+        return (
+          ($scope.payment.ammount <= $scope.maxAmmount) &&
+          $scope.payment.ammount && 
+          $scope.payment.verificationCode &&
+          $scope.payment.verificationCode != ''
+        );
+      }
       return (
-        ($scope.payment.ammount <= $scope.maxAmmount) &&
         $scope.payment.ammount && 
         $scope.payment.verificationCode &&
         $scope.payment.verificationCode != ''
