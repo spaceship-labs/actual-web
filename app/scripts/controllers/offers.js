@@ -12,6 +12,7 @@ angular.module('dashexampleApp')
 
 function OffersCtrl(
   $q,
+  $filter,
   packageService,
   quotationService,
   api,
@@ -114,6 +115,7 @@ function OffersCtrl(
 
   function assignCloserDeliveryDate(product, productDeliveryDates, packageId){
     product.hasStock = true;
+    productDeliveryDates = $filter('orderBy')(productDeliveryDates, 'date');
     for(var i = (productDeliveryDates.length-1); i>=0; i--){
       var deliveryDate = productDeliveryDates[i];
       if( product.quantity <=  parseInt(deliveryDate.available) ){
@@ -146,6 +148,7 @@ function OffersCtrl(
 
 OffersCtrl.$inject = [
   '$q',
+  '$filter',
   'packageService',
   'quotationService',
   'api',
