@@ -109,11 +109,11 @@
         <table>
           <tr>
             <td><strong>Subtotal ({{vm.quotation.totalProducts }} productos):</strong></td>
-            <td><strong>{{vm.quotation.subtotal | currency }}</strong></td>
+            <td><strong>{{vm.quotation.subtotal | roundCurrency }}</strong></td>
           </tr>
           <tr>
             <td>Descuento:</td>
-            <td><strong>{{vm.quotation.discount | currency }}</strong></td>
+            <td><strong>{{vm.quotation.discount | roundCurrency }}</strong></td>
           </tr>
           <tr>
             <td>Costo de envío:</td>
@@ -128,9 +128,9 @@
           </div>
           <div flex="50">
             <h3 class="price-crossed" ng-show="vm.quotation.subtotal != vm.quotation.total">
-              {{vm.quotation.subtotal | currency }}
+              {{vm.quotation.subtotal | roundCurrency }}
             </h3>
-            <h1 class="price-main"><strong>{{vm.quotation.total | currency }}</strong></h1>
+            <h1 class="price-main"><strong>{{vm.quotation.total | roundCurrency }}</strong></h1>
           </div>
         </div>
 

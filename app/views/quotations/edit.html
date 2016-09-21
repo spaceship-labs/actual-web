@@ -145,11 +145,11 @@
                         class="price-crossed"
                         ng-if="vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) != detail.unitPrice"
                       >
-                        {{ detail.unitPrice | currency}}
+                        {{ detail.unitPrice | roundCurrency }}
                       </p>
                       <p class="price-hl">
                         <strong>
-                          {{ vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) | currency}}
+                          {{ vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) | roundCurrency }}
                         </strong>
                       </p>
                     </div>
@@ -161,7 +161,7 @@
                       </p>
                     </div>
                     <h3 flex class="product-view-price-hl product-view-price-main">
-                      <strong>{{detail.total | currency}}</strong>
+                      <strong>{{detail.total | roundCurrency }}</strong>
                     </h3>
                   </div>
                 </div>
@@ -245,9 +245,9 @@
             </div>
             <div flex="50">
               <h3 class="price-crossed" ng-show="vm.quotation.subtotal != vm.quotation.total">
-                {{ vm.quotation.subtotal | currency }}
+                {{ vm.quotation.subtotal | roundCurrency  }}
               </h3>
-              <h1 class="price-main">{{ vm.quotation.total | currency }}</h1>
+              <h1 class="price-main">{{ vm.quotation.total | roundCurrency  }}</h1>
             </div>
           </div>
 

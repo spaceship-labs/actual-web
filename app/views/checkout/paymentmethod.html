@@ -86,8 +86,8 @@
                       <div class="method-data" flex="60" layout="row">
                         <div flex="33">
                           <p><strong>CANTIDAD</strong></p>
-                          <p ng-if="payment.type=='cash'">{{payment.ammount | currency}}</p>
-                          <p ng-if="payment.type=='cash-usd'">{{payment.ammount | currency}} USD.</p>
+                          <p ng-if="payment.type=='cash'">{{payment.ammount | roundCurrency}}</p>
+                          <p ng-if="payment.type=='cash-usd'">{{payment.ammount | roundCurrency}} USD.</p>
                         </div>
                       </div>
                       <div flex="10" class="saved-icon-wrap">
@@ -115,7 +115,7 @@
                         </div>
                         <div flex="33">
                           <p><strong>CANTIDAD</strong></p>
-                          <p>{{payment.ammount | currency}}</p>
+                          <p>{{payment.ammount | roundCurrency}}</p>
                         </div>
                       </div>
                       <div flex="10" class="saved-icon-wrap">
@@ -135,7 +135,7 @@
                       <div class="method-data" flex="60" layout="row">
                         <div flex="33">
                           <p><strong>CANTIDAD</strong></p>
-                          <p>{{payment.ammount | currency}}</p>
+                          <p>{{payment.ammount | roundCurrency}}</p>
                         </div>
                       </div>
                       <div flex="10" class="saved-icon-wrap">
@@ -166,7 +166,7 @@
                         </div>
                         <div flex="33">
                           <p><strong>CANTIDAD</strong></p>
-                          <p>{{payment.ammount | currency}}</p>
+                          <p>{{payment.ammount | roundCurrency}}</p>
                         </div>
                       </div>
                       <div flex="10" class="saved-icon-wrap">
@@ -198,11 +198,11 @@
           <table>
             <tr>
               <td><strong>Subtotal ({{vm.quotation.totalProducts}}) productos):</strong></td>
-              <td><strong>{{ vm.roundCurrency(vm.quotation.subtotal) | currency }}</strong></td>
+              <td><strong>{{ vm.quotation.subtotal | roundCurrency }}</strong></td>
             </tr>
             <tr>
               <td><strong>Descuento:</strong></td>
-              <td><strong>{{ vm.roundCurrency(vm.quotation.discount) | currency }}</strong></td>
+              <td><strong>{{ vm.quotation.discount | roundCurrency }}</strong></td>
             </tr>
             <tr>
               <td>Costo de envío:</td>
@@ -216,7 +216,7 @@
             </div>
             <div flex="50">
               <h1 class="price-main">
-                <strong>{{ vm.roundCurrency(vm.quotation.total) | currency }}</strong>
+                <strong>{{ vm.quotation.total | roundCurrency }}</strong>
               </h1>
             </div>
           </div>
@@ -226,7 +226,7 @@
               <td><strong>Pagado:</strong></td>
               <td>
                 <strong>
-                  {{ vm.roundCurrency(vm.quotation.ammountPaid) | currency }}
+                  {{ vm.quotation.ammountPaid | roundCurrency }}
                 </strong>
               </td>
             </tr>
@@ -249,19 +249,13 @@
                       'hl-text-v2' : (vm.quotation.total - vm.quotation.ammountPaid) <= 0
                     }
                   ">
-                  {{ vm.roundCurrency(vm.quotation.total - vm.quotation.ammountPaid) | currency }}
+                  {{ (vm.quotation.total - vm.quotation.ammountPaid) | roundCurrency }}
                 </strong>
               </td>
             </tr>
           </table>
 
           <hr>
-
-          <!--
-          <div class="secure-note" layout="row">
-            <p flex="60"><strong>Las compras con ACTUAL son 100% seguras.</strong></p>
-          </div>
-          -->
 
           <input
             type="submit"

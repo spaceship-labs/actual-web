@@ -66,7 +66,7 @@ function ClientProfileCtrl(
         label:'Acciones',
         propId: 'id',
         actions:[
-          {url:'/order/edit/',type:'edit'},
+          {url:'/checkout/order/',type:'edit'},
         ]
       },
     ],

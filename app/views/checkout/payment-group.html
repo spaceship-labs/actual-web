@@ -39,13 +39,8 @@
 
   </ul>
   <div flex="20" class="method-block-prices">
-    <!--
-    <div class="discount-label"><strong>-25%</strong></div>
-    <h4 class="price-before">{{vm.totalPrice | currency }}</h4>
-    -->
     <h2 class="price-now" ng-class="{'price-hl' : $index == 0 }">
-      {{ vm.roundCurrency(paymentGroup.total) | currency }}
-      <!--{{vm.totalPrice | currency }}-->
+      {{ paymentGroup.total | roundCurrency }}
     </h2>
   </div>
 </div>
