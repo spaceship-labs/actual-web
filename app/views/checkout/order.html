@@ -86,7 +86,7 @@
               </div>
             </div>
             <div flex="20" class="order-item-data"><span>{{detail.quantity}}</span></div>
-            <div flex="20" class="order-item-data"><span>{{vm.placeholderDate | date:'d/MMM/yyyy'}}</span></div>
+            <div flex="20" class="order-item-data"><span>{{detail.shipDate | date:'d/MMM/yyyy'}}</span></div>
             <div flex="20" class="order-item-data">
               <span>{{detail.total | roundCurrency}} MXN</span>
             </div>

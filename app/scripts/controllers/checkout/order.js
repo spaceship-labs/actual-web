@@ -30,7 +30,6 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
     //vm.isLoading = false;
     vm.isLoading = true;
     vm.isLoadingRecords = true;
-    vm.placeholderDate = moment( new Date() ).add('days',5).toDate();
 
     orderService.getById($routeParams.id).then(function(res){
       vm.order = res.data;
@@ -52,8 +51,7 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
         })
         .then(function(details2){
           vm.order.Details = details2;
-          console.log(vm.order.Details);
-        })
+        });
 
       quotationService.getRecords(vm.order.Quotation)
         .then(function(result){

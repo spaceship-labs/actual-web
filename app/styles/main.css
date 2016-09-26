@@ -2575,7 +2575,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   border-top: 0!important;
 }
 
-.table-list table{border-bottom: 0!important}
+.table-list table{
+  border-bottom: 0!important;
+  width: 100%!important;
+}
 
 .table-list .edit-icon{
   color: #95CF81;
