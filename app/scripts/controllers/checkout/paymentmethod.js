@@ -487,7 +487,6 @@ function CheckoutPaymentmethodCtrl(
 
   function createOrder(form){
     if( isMinimumPaid() ){
-
       confirmOrder()
         .then(function(){
           vm.isLoading = true;
@@ -496,7 +495,10 @@ function CheckoutPaymentmethodCtrl(
           };
           return orderService.createFromQuotation(vm.quotation.id, params);
         })
-        .catch(function(){
+        .catch(function(err){
+          console.log(err);
+          dialogService.showDialog('Hubo un error, revisa tus datos');
+          vm.isLoading = false;
           return $q.reject('cancelled-by-user');
         })
         .then(function(res){
@@ -507,8 +509,9 @@ function CheckoutPaymentmethodCtrl(
             $location.path('/checkout/order/' + vm.order.id);
           }
         }).catch(function(err){
-          if(err != 'cancelled-by-user'){
+          if(err !== 'cancelled-by-user'){
             commonService.showDialog('Hubo un error, revisa los datos e intenta de nuevo');
+            vm.isLoading = false;
             console.log(err);
           }
         });

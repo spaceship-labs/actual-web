@@ -72,6 +72,8 @@
         //product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
         if( product.Name && isUpperCase(product.Name) ) {
           product.Name = capitalizeFirstLetter(product.ItemName);
+        }else{
+          product.Name = product.ItemName;
         }
         if (product.icon_filename && product.icon_filename !== 'null') {
           product.icons = [
