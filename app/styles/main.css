@@ -1789,8 +1789,9 @@ md-backdrop.md-sidenav-backdrop{
 
 .product-view-data-block .hl-data{
   background: #F8F8F8;
-  padding: 15px;
-  margin: 10px 0;
+  padding: 8px 15px;
+  /*margin: 10px 0;*/
+  margin: 10px 0 0;
 }
 
 .product-view-data-block-toggle-btn{

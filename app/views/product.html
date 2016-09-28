@@ -285,7 +285,6 @@
                 </a>
               </h4>
               <div ng-show="vm.discountToggle" class="hl-data">
-                <h4><strong>PROMOCIONES</strong></h4>
                 <table>
                   <tr>
                     <td>Precio Lista:</td>
@@ -293,7 +292,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <strong>{{ vm.mainPromo.disco-mm-yyyy ||  'Pago ÚNICO'}}
+                      <strong>{{ vm.mainPromo.discountTextPg1 ||  'Pago ÚNICO'}}
                         <span class="hl-text">(-{{vm.mainPromo.discountPg1}}%)</span>
                       </strong>
                     </td>

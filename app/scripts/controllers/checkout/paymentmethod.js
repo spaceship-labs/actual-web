@@ -234,6 +234,7 @@ function CheckoutPaymentmethodCtrl(
       dialogService.showDialog('Fondos insuficientes');
       return false;
     }
+    console.log('remaining', remaining);
     return vm.applyTransaction(null, vm.activeMethod, remaining);
   }
 
@@ -383,9 +384,7 @@ function CheckoutPaymentmethodCtrl(
 
     $scope.init = function(){
       $scope.payment = payment;
-      if(payment.type == EWALLET_TYPE){ 
-        $scope.payment.ammount = roundCurrency($scope.payment.ammount, {up:false}); 
-      }else{
+      if(payment.type !== EWALLET_TYPE){ 
         $scope.payment.ammount = roundCurrency($scope.payment.ammount);
       }
       $scope.needsVerification = payment.needsVerification;
@@ -399,16 +398,14 @@ function CheckoutPaymentmethodCtrl(
 
     $scope.getAmmountMXN = function(ammount){
       return ammount * $scope.payment.exchangeRate;
-    }
+    };
 
     $scope.isvalidPayment = function(){
-      console.log('maxAmmount', $scope.maxAmmount);
-      console.log('ammount', $scope.payment.ammount);
       if($scope.maxAmmount){
         return ($scope.payment.ammount <= $scope.maxAmmount);
       }
       return true;
-    }
+    };
 
     $scope.hide = function() {
       $mdDialog.hide();
@@ -435,7 +432,7 @@ function CheckoutPaymentmethodCtrl(
 
     $scope.numToLetters = function(num){
       return formatService.numberToLetters(num);
-    }
+    };
 
     $scope.hide = function() {
       $mdDialog.hide();
@@ -458,7 +455,7 @@ function CheckoutPaymentmethodCtrl(
         $scope.payment.verificationCode &&
         $scope.payment.verificationCode != ''
       );
-    }
+    };
 
     $scope.save = function() {
       if( $scope.isvalidPayment() ){
