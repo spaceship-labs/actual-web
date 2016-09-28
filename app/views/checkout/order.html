@@ -40,6 +40,14 @@
       <h3><strong>¡GRACIAS POR SU COMPRA!</strong></h3>
       <p>Estimado <strong>{{vm.order.Address.name}}</strong></p>
       <p>Su compra ha sido procesada y en breve estará recibiendo su confirmación al correo electrónico <strong>{{vm.order.Address.E_Mail || vm.order.Client.E_Mail}}</strong></p>
+      <br/>
+      <p>Documentos de SAP generados: 
+        <span 
+          ng-repeat="document in vm.order.documents track by $index"
+          class="comma-separated">
+          {{document}}
+        </span>
+      </p>
     </div>
 
     <!--ORDER ITEMS-->

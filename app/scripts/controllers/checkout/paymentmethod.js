@@ -497,7 +497,7 @@ function CheckoutPaymentmethodCtrl(
         })
         .catch(function(err){
           console.log(err);
-          dialogService.showDialog('Hubo un error, revisa tus datos');
+          dialogService.showDialog('Hubo un error, revisa tus datos <br/>' + err.data);
           vm.isLoading = false;
           return $q.reject('cancelled-by-user');
         })
