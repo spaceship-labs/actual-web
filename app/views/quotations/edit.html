@@ -400,7 +400,7 @@
           <td>{{record.eventType}}</td>
           <td>{{record.User.firstName + ' ' + record.User.lastName}}</td>
           <td>{{record.dateTime | date:'MMM d, y h:mm:ss a' }}</td>
-          <td>{{record.files.length}}</td>
+          <td>{{record.files.length || 0}}</td>
           <td>
             <a ng-click="vm.toggleRecord(record)" href="#">
               VER DETALLES <img src="/images/arrow-down.png" alt="">
