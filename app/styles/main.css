@@ -1719,7 +1719,7 @@ md-backdrop.md-sidenav-backdrop{
 /*-------------*/
 
 .product-view-data{margin-top: 0px;}
-.product-view-data-block-v2{padding-bottom: 6px;}
+.product-view-data-block-v2{padding-bottom: 6px!important;}
 .product-view-data-block h4{
   font-size: 14px;
   margin: 0;
