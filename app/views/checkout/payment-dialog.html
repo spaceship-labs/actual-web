@@ -29,9 +29,11 @@
         <strong>Cantidad:</strong> <small>Se muestra el saldo total pendiente por cobrar. Puedes cobrar cualquier monto menor, pero después debes aplicar otro cobro para saldar esta venta.</small>
       </p>
       
-      <p ng-if="payment.ammount > maxAmmount">
+      <!--<p ng-if="payment.ammount > maxAmmount">
         Máximo excedido
       </p>
+      -->
+      <p class="error-msg" ng-if="errMin">{{errMsg}}</p>
 
       <div class="ammount-input" layout="row" layout-align="start center">
         <div class="input-element" flex="60">

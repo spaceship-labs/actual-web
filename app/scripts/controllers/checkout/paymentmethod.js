@@ -442,18 +442,30 @@ function CheckoutPaymentmethodCtrl(
     };
 
     $scope.isvalidPayment = function(){
+      console.log('min: ' + $scope.payment.min);
+
+      if($scope.payment.ammount < $scope.payment.min){
+        $scope.minStr = $filter('currency')($scope.payment.min);
+        $scope.errMin = true;
+        $scope.errMsg = 'La cantidad minima es: ' +  $scope.minStr;
+      }else{
+        $scope.errMin = false;        
+      }
+
       if( $scope.maxAmmount ){
         return (
           ($scope.payment.ammount <= $scope.maxAmmount) &&
           $scope.payment.ammount && 
           $scope.payment.verificationCode &&
-          $scope.payment.verificationCode != ''
+          $scope.payment.verificationCode != '' &&
+          $scope.payment.ammount >= $scope.payment.min
         );
       }
       return (
         $scope.payment.ammount && 
         $scope.payment.verificationCode &&
-        $scope.payment.verificationCode != ''
+        $scope.payment.verificationCode != '' &&
+        $scope.payment.ammount >= $scope.payment.min        
       );
     };
 

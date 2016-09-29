@@ -15,7 +15,7 @@
 
   <ul class="listing-view-nav" ng-show="mainCategory.isActive">
     <li
-      ng-repeat="category in mainCategory.Childs"
+      ng-repeat="category in mainCategory.Childs | orderBy: 'Name' "
       ng-if="category[storeCode]"
       ng-class="{'active': category.isActive}"
     >
@@ -40,7 +40,7 @@
 
       <ul class="listing-view-subnav">
         <li
-          ng-repeat="subcategory in category.Childs"
+          ng-repeat="subcategory in category.Childs | orderBy: 'Name' "
           ng-if="subcategory[storeCode]"
         >
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">

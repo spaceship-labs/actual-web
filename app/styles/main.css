@@ -1968,7 +1968,7 @@ md-backdrop.md-sidenav-backdrop{
   cursor: pointer;
   height: 28px;
   vertical-align: middle;
-  margin: 2px 8px;
+  margin: 2px;
 }
 /*.variants-picker .variant-color + .variant-color{margin-left: 4px;}*/
 .variants-picker .variant-color-on{
@@ -3318,6 +3318,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .deposit-dialog .dialog-block md-select{
   margin: 0;
+}
+.deposit-dialog .dialog-block .error-msg{
+  color: red;
+  margin: 6px 0;
+  font-size: 12px;
 }
 .deposit-dialog .dialog-block .ammount-input{
   margin-top: 10px;

@@ -30,7 +30,7 @@
           <img ng-if="method.moreCards" src="images/mas-bancos.png" alt="Más bancos">
           <md-tooltip>
             <ul>
-              <li ng-repeat="card in method.cards">{{card}}</li>
+              <li ng-repeat="card in method.cards | orderBy:'toString()' ">{{card}}</li>
             </ul>
           </md-tooltip>
         </span>

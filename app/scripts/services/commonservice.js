@@ -86,6 +86,7 @@
             moreCards: true,
             terminals:['American Express','Banamex','Bancomer','Banorte','Santander'],
             currency: 'mxn',
+            min:300,
             needsVerification: true
           }
         ]
@@ -104,6 +105,7 @@
             moreCards: true,
             terminals:['American Express','Banamex','Bancomer','Banorte','Santander'],
             currency: 'mxn',
+            min:600,
             needsVerification: true
           },
           {
@@ -116,6 +118,7 @@
             moreCards: true,
             terminals:['American Express','Banamex','Bancomer','Santander'],
             currency: 'mxn',
+            min:900,
             needsVerification: true
           },
         ]
@@ -134,6 +137,7 @@
             moreCards: true,
             terminals:['American Express', 'Banamex','Bancomer','Banorte','Santander'],
             currency: 'mxn',
+            min: 1200,
             needsVerification: true
           },
         ]
