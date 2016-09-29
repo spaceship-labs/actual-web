@@ -57,6 +57,7 @@ md-dialog .md-button.md-primary{
 .loading-circle{min-height: 250px;}
 .no-border{border: 0!important;}
 .no-margin{margin: 0!important}
+.no-padding{padding: 0!important}
 .pull-left{text-align: left!important;}
 .pull-right{text-align: right!important;}
 .absolute-link{
@@ -1751,6 +1752,9 @@ md-backdrop.md-sidenav-backdrop{
 .product-view-data-block tr td:nth-child(2){
   padding-left: 10px;
 } 
+.product-view-data-block tr td.price-col{
+  text-align: right;
+}
 .product-view-data-block .delivery-date-stock{
   text-align: right;
 }
@@ -1791,7 +1795,7 @@ md-backdrop.md-sidenav-backdrop{
   background: #F8F8F8;
   padding: 8px 15px;
   /*margin: 10px 0;*/
-  margin: 10px 0 0;
+  margin: 0;
 }
 
 .product-view-data-block-toggle-btn{

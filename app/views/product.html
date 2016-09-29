@@ -288,7 +288,7 @@
                 <table>
                   <tr>
                     <td>Precio Lista:</td>
-                    <td><strong>{{vm.product.priceBefore | currency }}</strong></td>
+                    <td class="price-col"><strong>{{vm.product.priceBefore | currency }}</strong></td>
                   </tr>
                   <tr>
                     <td>
@@ -296,7 +296,7 @@
                         <span class="hl-text">(-{{vm.mainPromo.discountPg1}}%)</span>
                       </strong>
                     </td>
-                    <td>
+                    <td class="price-col">
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
                        | <strong class="hl-text">{{ vm.applyDiscount(vm.mainPromo.discountPg1,vm.product.priceBefore) | currency }}</strong>
                     </td>
@@ -307,7 +307,7 @@
                         <span class="hl-text">(-{{vm.mainPromo.discountPg2}}%)</span>
                       </strong>
                     </td>
-                    <td>
+                    <td class="price-col">
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
                        | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg2,vm.product.priceBefore) | currency }}</strong>
                     </td>
@@ -318,7 +318,7 @@
                         <span class="hl-text">(-{{vm.mainPromo.discountPg3}}%)</span>
                       </strong>
                     </td>
-                    <td>
+                    <td class="price-col">
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
                        | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg3,vm.product.priceBefore) | currency }}</strong>
                     </td>
@@ -329,7 +329,7 @@
                         <span class="hl-text">(-{{vm.mainPromo.discountPg4}}%)</span>
                       </strong>
                     </td>
-                    <td>
+                    <td class="price-col">
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
                        | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg4,vm.product.priceBefore) | currency }}</strong>
                     </td>
@@ -340,7 +340,7 @@
                         <span class="hl-text">(-{{vm.mainPromo.discountPg5}}%)</span>
                       </strong>
                     </td>
-                    <td>
+                    <td class="price-col">
                       <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
                        | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg5,vm.product.priceBefore) | currency }}</strong>
                     </td>
