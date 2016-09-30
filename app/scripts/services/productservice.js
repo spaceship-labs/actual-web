@@ -69,12 +69,14 @@
 
 
       function formatProduct(product){
-        //product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+        product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+        /*
         if( product.Name && isUpperCase(product.Name) ) {
           product.Name = capitalizeFirstLetter(product.ItemName);
         }else{
           product.Name = product.ItemName;
         }
+        */
         if (product.icon_filename && product.icon_filename !== 'null') {
           product.icons = [
             {url: api.baseUrl + '/uploads/products/' +  product.icon_filename, size:'default'}
