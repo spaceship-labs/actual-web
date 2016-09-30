@@ -43,12 +43,15 @@
     <section layout="row">
       <div flex="75">
 
-        <md-radio-group ng-show="vm.singlePayment && !vm.multiplePayment" ng-model="vm.activeMethod">
+        <md-radio-group 
+          ng-show="vm.singlePayment && !vm.multiplePayment" 
+          ng-model="vm.activeMethod"
+        >
 
           <div class="pay-method-wrap" >
             <ng-include
               ng-repeat="paymentGroup in vm.paymentMethodsGroups track by $index"
-              ng-show="vm.isActiveGroup($index)"
+              ng-if="vm.isActiveGroup($index)"
               src="'views/checkout/payment-group.html'">
             </ng-include>
 

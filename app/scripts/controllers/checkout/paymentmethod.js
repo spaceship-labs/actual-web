@@ -74,10 +74,7 @@ function CheckoutPaymentmethodCtrl(
       getPaymentMethodsGroups(vm.quotation.id).then(function(groups){
         vm.paymentMethodsGroups = groups;
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
-          var paymentGroup = getGroupByPayments();
-          var currentGroup = _.findWhere(vm.paymentMethodsGroups, {group: paymentGroup});
-          var currentMethod = currentGroup.methods[0];
-          vm.setMethod(currentMethod, paymentGroup);
+          vm.quotation = setQuotationTotalsByGroup(vm.quotation);
         }
       });
       pmPeriodService.getActive().then(function(res){
@@ -187,7 +184,7 @@ function CheckoutPaymentmethodCtrl(
     var activeKeys = ['paymentGroup1','paymentGroup2','paymentGroup3','paymentGroup4','paymentGroup5'];
     if(vm.validMethods){
       var isGroupUsed = false;
-      var currentGroup = getGroupByPayments();
+      var currentGroup = getGroupByQuotation(vm.quotation);
       if( currentGroup < 0){
         isGroupUsed = true;
       }else if(currentGroup > 0 && currentGroup == index+1){
@@ -199,11 +196,12 @@ function CheckoutPaymentmethodCtrl(
     }
   }
 
-  function getGroupByPayments(){
+  function getGroupByQuotation(quotation){
     var group = -1;
-    vm.quotation.Payments.forEach(function(payment){
-      group = payment.group;
-    });
+    if(quotation.Payments.length > 0){
+      group = quotation.paymentGroup;
+      //console.log(quotation);
+    }
     return group;
   }
 
@@ -214,10 +212,10 @@ function CheckoutPaymentmethodCtrl(
 
   function setMethod(method, group){
     vm.activeMethod = method;
-    vm.activeMethod.group = group;
-    vm.quotation.total = vm.activeMethod.total;
-    vm.quotation.subtotal = vm.activeMethod.subtotal;
-    vm.quotation.discount = vm.activeMethod.discount;
+    vm.activeMethod.group = angular.copy(group);
+    vm.quotation.total = angular.copy(vm.activeMethod.total);
+    vm.quotation.subtotal = angular.copy(vm.activeMethod.subtotal);
+    vm.quotation.discount = angular.copy(vm.activeMethod.discount);
   }
 
   function chooseMethod(method, group){
@@ -247,11 +245,23 @@ function CheckoutPaymentmethodCtrl(
       group = vm.paymentMethodsGroups[0];
       firstMethod = group.methods[0];
     }else{
-      var groupIndex = getGroupByPayments() - 1;
+      var groupIndex = getGroupByQuotation(vm.quotation) - 1;
       group = vm.paymentMethodsGroups[groupIndex];
       firstMethod = group.methods[0];
     }
     vm.setMethod(firstMethod, group);
+  }
+
+  function setQuotationTotalsByGroup(quotation){
+    var paymentGroup = getGroupByQuotation(quotation);
+    console.log('quotation', quotation);
+    console.log('paymentGroup', paymentGroup);
+    var currentGroup = _.findWhere(vm.paymentMethodsGroups, {group: paymentGroup});
+    var firstMethod = currentGroup.methods[0];
+    quotation.total = angular.copy(firstMethod.total);
+    quotation.subtotal = angular.copy(firstMethod.subtotal);
+    quotation.discount = angular.copy(firstMethod.discount);
+    return quotation;
   }
 
   function addPayment(payment){
@@ -266,17 +276,24 @@ function CheckoutPaymentmethodCtrl(
           if(res.data){
             var quotation = res.data;
             vm.quotation.ammountPaid = quotation.ammountPaid;
+            vm.quotation.paymentGroup = quotation.paymentGroup;
+            vm.quotation.Payments.push(payment);
+            vm.quotation = setQuotationTotalsByGroup(vm.quotation);            
+            vm.isLoadingPayments = false;
+            vm.isLoading = false;
+
+            console.log('quotation after addPayment', vm.quotation);
+
+            delete vm.activeMethod;
+
             if(vm.quotation.ammountPaid >= vm.quotation.total){
               dialogService.showDialog('Cantidad total pagada');
             }else{
               dialogService.showDialog('Pago aplicado');
             }
+          }else{
+            dialogService.showDialog('Hubo un error');
           }
-          vm.quotation.Payments.push(payment);
-          vm.isLoadingPayments = false;
-          vm.isLoading = false;
-          delete vm.activeMethod.ammount;
-          delete vm.activeMethod.verficiationCode;
           return;
         })
         .then(function(){
@@ -442,6 +459,7 @@ function CheckoutPaymentmethodCtrl(
     };
 
     $scope.isvalidPayment = function(){
+      console.log($scope.payment);
       console.log('min: ' + $scope.payment.min);
 
       if($scope.payment.ammount < $scope.payment.min){
@@ -500,7 +518,7 @@ function CheckoutPaymentmethodCtrl(
         .then(function(){
           vm.isLoading = true;
           var params = {
-            paymentGroup: vm.activeMethod.group || 1
+            paymentGroup: vm.quotation.paymentGroup || 1
           };
           return orderService.createFromQuotation(vm.quotation.id, params);
         })

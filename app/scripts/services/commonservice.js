@@ -68,7 +68,8 @@
             cards:['Visa','MasterCard','American Express'],
             terminals:['American Express','Banamex'],
             currency: 'mxn',
-            needsVerification: true
+            needsVerification: true,
+            min:0
           },
         ]
       },
