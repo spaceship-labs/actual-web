@@ -1719,7 +1719,7 @@ md-backdrop.md-sidenav-backdrop{
 /*-------------*/
 
 .product-view-data{margin-top: 0px;}
-.product-view-data-block-v2{padding-bottom: 6px!important;}
+/*.product-view-data-block-v2{padding-bottom: 6px!important;}*/
 .product-view-data-block h4{
   font-size: 14px;
   margin: 0;
@@ -1732,8 +1732,9 @@ md-backdrop.md-sidenav-backdrop{
 .product-view-data-block{
   border-bottom: 1px solid rgba(0,0,0,0.87);
   font-size: 12px;
-  padding: 15px 0;
+  padding: 9px 0;
 }
+.product-view-data-block p{margin: 5px 0;}
 .product-view-data-block table{
   width: 100%;
 }

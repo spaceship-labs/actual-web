@@ -4,7 +4,6 @@
   class="listing-view-nav-wrapper">
   <h2>
     <a
-      ng-click="toggleMainCategory(mainCategory, $event)"
       ng-href="/category/{{mainCategory.Handle}}"
       ng-class="{'active': mainCategory.isActive}">
       <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i>
@@ -22,7 +21,7 @@
       <h3>
         <a
           ng-if="category.Childs"
-          ng-click="toggleCategory(category, $event)"
+          ng-href="/category/{{category.Handle}}"
         >
           <strong>{{category.Name}}</strong>
           <span class="products-num">({{category[storeCode]}})</span>
@@ -48,29 +47,9 @@
           </a>
         </li>
 
-        <li>
-          <a class="see-more" ng-href="/category/{{category.Handle}}">
-            Ver todo ({{category[storeCode]}})
-          </a>
-        </li>
-
 
       </ul>
     </li>
-
-    <li>
-      <h3>
-        <a
-          class="see-more"
-          ng-href="/category/{{mainCategory.Handle}}"
-        >
-          <strong>Ver todo</strong>
-          <span class="products-num">({{mainCategory[storeCode]}})</span>
-        </a>
-      </h3>
-    </li>
-
-
   </ul>
 </div>
 
