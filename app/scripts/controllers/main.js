@@ -133,10 +133,12 @@
 
     $scope.$on("$routeChangeSuccess", function(event, next, current) {
       //Patch for autocomplete which doesn't remove
+      
       angular.element('body')[0].style = '';
       if(angular.element('.md-scroll-mask')[0]){
           angular.element('.md-scroll-mask')[0].remove();
       }
+      
       if($rootScope.user){
         getActiveQuotation();
       }      

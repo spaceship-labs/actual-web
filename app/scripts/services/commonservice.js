@@ -156,7 +156,8 @@
             cards: ['American Express','Banamex'],
             terminals:['American Express','Banamex'],
             currency: 'mxn',
-            needsVerification: true
+            needsVerification: true,
+            min:2000
           },
         ]
       }

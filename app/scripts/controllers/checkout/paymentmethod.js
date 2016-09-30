@@ -546,17 +546,18 @@ function CheckoutPaymentmethodCtrl(
   }
 
   function confirmOrder(){
-    var dialogMsg = 'El pedido ha sido pagado al ' + $filter('number')(getPaidPercentage(),2) + '%';
+    var paidPercent = $filter('number')(getPaidPercentage(),2);
+    var dialogMsg = 'El pedido ha sido pagado al ' + paidPercent + '%';
     dialogMsg += ' ( '+ $filter('currency')(vm.quotation.ammountPaid) +' de ';
     dialogMsg += ' '+ $filter('currency')(vm.quotation.total) +' )';
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.confirm()
-          .title('Confirmar pedido')
+          .title('CREAR PEDIDO')
           .textContent(dialogMsg)
-          .ariaLabel('Confirmar pedido')
+          .ariaLabel('Crear pedido')
           .targetEvent(null)
-          .ok('Confirmar')
-          .cancel('Cancelar');
+          .ok('Crear')
+          .cancel('Regresar');
     return $mdDialog.show(confirm);
   }
 

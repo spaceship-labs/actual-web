@@ -52,7 +52,9 @@ md-dialog .md-button.md-primary{
   background: #33BA2C!important;
   color: #fff!important;
 }
-
+md-dialog .md-button[ng-click="dialog.abort()"]{
+  background: #000!important;
+}
 
 .loading-circle{min-height: 250px;}
 .no-border{border: 0!important;}
