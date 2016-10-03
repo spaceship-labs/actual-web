@@ -1,0 +1,29 @@
+
+*Terminal Banamex*
+- 1 Pago Visa, MasterCard
+- 3, 6, 9, 12 y 18 MSI Banamex
+
+*Terminal American Express*
+- 1 Pago American Express
+- 3, 6, 9, 12 y 18 MSI AMEX
+
+*Terminal Bancomer*
+- 3, 6, 9 y 12 MSI Bancomer
+
+*Terminal Santander*
+- 3, 6, 9 y 12 MSI Santander
+
+*Terminal Banorte*
+- 3, 6 y 12 MSI Banorte
+- 3, 6 y 12 MSI IXE
+- 3, 6 y 12 MSI SCOTIABANK
+- 3, 6 y 12 MSI INBURSA
+- 3, 6 y 12 MSI AFIRME
+- 3, 6 y 12 MSI BANBAJIO
+- 3, 6 y 12 MSI BANJERCITO
+- 3, 6 y 12 MSI BANCAMIFEL
+- 3, 6 y 12 MSI ITAUCARD
+- 3, 6 y 12 MSI PREMIUMCARD
+- 3, 6 y 12 MSI BANREGIO
+- 3, 6 y 12 MSI BANCOAHORRO
+- 3, 6 y 12 MSI FAMSA
