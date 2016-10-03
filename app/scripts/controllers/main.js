@@ -29,7 +29,8 @@
     userService,
     siteService,
     storeService,
-    $mdDialog
+    $mdDialog,
+    dialogService
   ){
     var vm = this;
     angular.extend(vm, {
@@ -61,7 +62,8 @@
       toggleProfileModal: toggleProfileModal,
       validateUser: validateUser,
       getStores: getStores,
-      saveBroker: saveBroker
+      saveBroker: saveBroker,
+      saveSource: saveSource
     });
     $rootScope.getActiveQuotation = getActiveQuotation;
 
@@ -381,6 +383,44 @@
       togglePointerSidenav();
     }
 
+    function saveSource(source){
+      if(source === 'Broker'){
+        console.log('broker',vm.activeQuotation.Broker);
+        quotationService.updateBroker(vm.quotation, {brokerId:vm.activeQuotation.Broker})
+          .then(function(res){
+            vm.pointersLoading = false;
+            togglePointerSidenav();
+            dialogService.showDialog('Datos guardados');
+            console.log(res);
+          })
+          .catch(function(err){
+            vm.pointersLoading = false;
+            console.log(err);
+            togglePointerSidenav();
+            dialogService.showDialog('Hubo un error, revisa tus datos');
+          });
+      }else{
+        console.log('source', source);
+        console.log(vm.quotation);
+        if(vm.quotation){
+          vm.pointersLoading = true;
+          quotationService.updateSource(vm.quotation, {source:source})
+            .then(function(res){
+              vm.pointersLoading = false;
+              togglePointerSidenav();
+              dialogService.showDialog('Datos guardados');
+              console.log(res);
+            })
+            .catch(function(err){
+              vm.pointersLoading = false;
+              console.log(err);
+              togglePointerSidenav();
+              dialogService.showDialog('Hubo un error, revisa tus datos');
+            });
+        }
+      }
+    }
+
     //$scope.$on('$destroy', $mdUtil.enableScrolling);
 
   }
@@ -406,7 +446,8 @@
     'userService',
     'siteService',
     'storeService',
-    '$mdDialog'
+    '$mdDialog',
+    'dialogService'
   ];
 
 })();

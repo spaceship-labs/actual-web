@@ -1370,7 +1370,7 @@ md-backdrop.md-sidenav-backdrop{
 /*-------------/
   #listing-view
 /*-------------*/
-.listing-view{padding: 10px 20px 30px;}
+.listing-view{padding: 20px 20px 30px;}
 .listing-view-nav-wrapper > h2{
   font-size: 16px;
   font-weight: 400;
@@ -3739,4 +3739,7 @@ padding-left: 16px;
   .print-btn,
   .records-view,
   #footer{display: none!important;}
+  
+  .cash-report h1{font-size: 16px;}
+
 }

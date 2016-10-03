@@ -207,15 +207,6 @@ function QuotationsEditCtrl(
   function init(){
     vm.isLoading = true;
     loadWarehouses();
-    $scope.$watch(function() {
-      return !!vm.quotation && localStorageService.get('broker');
-    }, function(broker) {
-      if (!vm.quotation) {
-        return;
-      }
-      vm.quotation.Broker = broker;
-    });
-
     if($location.search().createdClient){
       dialogService.showDialog('Cliente registrado');
     }
@@ -353,6 +344,10 @@ function QuotationsEditCtrl(
           return detail;
         });
       }
+
+      console.log('------------------');
+      console.log('params', params);
+
       quotationService.update(vm.quotation.id, params)
         .then(function(res){
           vm.isLoading = false;

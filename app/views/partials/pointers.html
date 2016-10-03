@@ -8,8 +8,18 @@
     <h1 class="md-toolbar-tools">POINTERS <i class="icon-pointer"></i></h1>
   </md-toolbar>
   <md-content  layout-padding>
+    
+    <div
+      ng-show="main.pointersLoding"
+      layout-fill
+      layout="row"
+      layout-align="center center"
+      class="loading-circle"
+    >
+      <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
+    </div>
 
-    <div class="pointers-list">
+    <div ng-show="!main.pointersLoding" class="pointers-list">
 
       <div class="pointer-item">
         <div
@@ -38,24 +48,62 @@
         </div>
         <div ng-show="main.pointersSidenav[1].selected" class="pointer-item-content">
           <p>¿Cómo se entero de Actual?</p>
-          <md-radio-group ng-model="trafico">
-            <md-radio-button value="Referencia">Referencia</md-radio-button>
-            <md-radio-button value="Redes Sociales">Redes Sociales</md-radio-button>
-            <md-radio-button value="Internet">Internet</md-radio-button>
-            <md-radio-button value="Pase por la tienda">Pase por la tienda</md-radio-button>
-            <md-radio-button value="Medios impresos">Medios impresos</md-radio-button>
-            <md-radio-button value="Broker">Broker</md-radio-button>
-            <select class="broker-select" ng-model="broker" ng-show="trafico == 'Broker'">
-              <option value="" selected disabled hidden>Escoge un broker</option>
-              <option ng-repeat="broker in main.brokers" ng-value="broker.id">
+          <md-radio-group ng-model="main.activeQuotation.source">
+            <md-radio-button 
+              value="Referencia">
+              Referencia
+            </md-radio-button>
+            <md-radio-button 
+              value="Redes Sociales">
+              Redes Sociales
+            </md-radio-button>
+            <md-radio-button 
+              value="Internet">
+              Internet
+            </md-radio-button>
+            <md-radio-button 
+              value="Pase por la tienda">
+              Pase por la tienda
+            </md-radio-button>
+            <md-radio-button 
+              value="Medios impresos">
+              Medios impresos
+            </md-radio-button>
+            
+            <md-radio-button  
+              value="Broker">
+              Broker
+            </md-radio-button>
+            
+            <select 
+              class="broker-select" 
+              ng-model="main.activeQuotation.Broker" 
+              ng-show="main.activeQuotation.source === 'Broker'">
+              <option 
+                value="" 
+                selected 
+                disabled 
+                hidden>
+                Escoge un broker
+              </option>
+              <option 
+                ng-repeat="broker in main.brokers" 
+                ng-value="broker.id"
+                ng-selected="broker.id === main.activeQuotation.Broker"
+              >
                 {{broker.firstName +  ' ' +broker.lastName}}
               </option>
             </select>
+
             <md-radio-button value="Otro">Otro</md-radio-button>
 
           </md-radio-group>
           <!--<a href="#" class="action-btn">GUARDAR</a>-->
-          <input class="action-btn" type="submit" value="GUARDAR" ng-click="main.saveBroker(broker)">
+          <input 
+            class="action-btn" 
+            type="submit" 
+            value="GUARDAR" 
+            ng-click="main.saveSource(main.activeQuotation.source)">
         </div>
       </div>
 

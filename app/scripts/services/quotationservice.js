@@ -35,6 +35,8 @@
         setActiveQuotation: setActiveQuotation,
         sendByEmail: sendByEmail,
         update: update,
+        updateSource: updateSource,
+        updateBroker: updateBroker
       };
 
       return service;
@@ -47,6 +49,16 @@
       function update(id, params){
         var url = '/quotation/update/' + id;
         return api.$http.post(url,params);
+      }
+
+      function updateSource(id, params){
+        var url = '/quotation/' + id + '/source';
+        return api.$http.post(url, params);
+      }
+
+      function updateBroker(id, params){
+        var url = '/quotation/' + id + '/broker';
+        return api.$http.post(url, params);
       }
 
       function getById(id){

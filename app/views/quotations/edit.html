@@ -36,10 +36,15 @@
       </div>
       <div flex="25" layout layout-wrap>
         <label for="">Broker </label>
+
         <md-input-container flex="100" style="margin:0;">
           <md-select ng-model="vm.quotation.Broker">
-            <md-option ng-value="undefined">Ninguno</md-option>
-            <md-option ng-repeat="broker in vm.brokers" ng-value="broker.id">
+            <md-option ng-value="null">Ninguno</md-option>
+            <md-option 
+              ng-repeat="broker in vm.brokers" 
+              ng-value="broker.id"
+              ng-selected="broker.id === vm.quotation.Broker"
+            >
               {{broker.firstName + ' ' + broker.lastName}}
             </md-option>
           </md-select>
