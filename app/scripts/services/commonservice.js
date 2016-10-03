@@ -82,10 +82,34 @@
             name:'3 meses sin intereses',
             type:'3-msi',
             msi:3,
-            cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
-            cards: ["American Express", "Ixe", "Scotiabank", "Inbursa", "Afirme", "Banbajio", "Banjercito", "Banca Mifel", "Itaucard", "Liverpool Premium Card", "BanRegio", "Banco Ahorro Famsa"],
+            cardsImages:[
+              'images/amexcard.png',
+              'images/banamex.png',
+              'images/bancomer.png',
+            ],
+            cards: [
+              'Afirme',
+              'Banbajio',
+              'Banca Mifel',
+              'Banco Ahorro Famsa',
+              'Banjercito',
+              'Banorte',
+              'Banregio',
+              'Inbursa',
+              'Itaucard',
+              'Ixe',
+              'Liverpool Premium Card',
+              'Santander',
+              'Scotiabank'
+            ],
             moreCards: true,
-            terminals:['American Express','Banamex','Bancomer','Banorte','Santander'],
+            terminals:[
+              'American Express',
+              'Banamex',
+              'Bancomer',
+              'Banorte',
+              'Santander'
+            ],
             currency: 'mxn',
             min:300,
             needsVerification: true
@@ -101,10 +125,34 @@
             name:'6 meses sin intereses',
             type:'6-msi',
             msi:6,
-            cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
-            cards:['Afirme', 'American Express', 'Banbajio', 'Banca Mifel', 'Banco Ahorro Famsa', 'Banjercito', 'BanRegio', 'Inbursa', 'Itaucard', 'Ixe', 'Liverpool Premium Card', 'Scotiabank'],
+            cardsImages:[
+              'images/amexcard.png',
+              'images/banamex.png',
+              'images/bancomer.png',
+            ],
+            cards:[
+              'Afirme',
+              'Banbajio',
+              'Banca Mifel',
+              'Banco Ahorro Famsa',
+              'Banjercito',
+              'Banorte',
+              'Banregio',
+              'Inbursa',
+              'Itaucard',
+              'Ixe',
+              'Liverpool Premium Card',
+              'Santander',
+              'Scotiabank'
+            ],
             moreCards: true,
-            terminals:['American Express','Banamex','Bancomer','Banorte','Santander'],
+            terminals:[
+              'American Express',
+              'Banamex',
+              'Bancomer',
+              'Banorte',
+              'Santander'
+            ],
             currency: 'mxn',
             min:600,
             needsVerification: true
@@ -114,10 +162,22 @@
             name:'9 meses sin intereses',
             type:'9-msi',
             msi:9,
-            cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
-            cards:['Afirme', 'American Express', 'Banbajio', 'Banca Mifel', 'Banco Ahorro Famsa', 'Banjercito', 'BanRegio', 'Inbursa', 'Itaucard', 'Ixe', 'Liverpool Premium Card', 'Scotiabank'],
+            cardsImages:[
+              'images/amexcard.png',
+              'images/banamex.png',
+              'images/bancomer.png',
+            ],
+            cards:[
+              'Banorte',
+              'Santander'
+            ],
             moreCards: true,
-            terminals:['American Express','Banamex','Bancomer','Santander'],
+            terminals:[
+              'American Express',
+              'Banamex',
+              'Bancomer',
+              'Santander'
+            ],
             currency: 'mxn',
             min:900,
             needsVerification: true
@@ -133,10 +193,34 @@
             name:'12 meses sin intereses',
             type:'12-msi',
             msi:12,
-            cardsImages:['images/banamex.png','images/amexcard.png','images/santander.png','images/bancomer.png','images/hsbc.png','images/banorte.png'],
-            cards:['Afirme', 'American Express', 'Banbajio', 'Banca Mifel', 'Banco Ahorro Famsa', 'Banjercito', 'BanRegio', 'Inbursa', 'Itaucard', 'Ixe', 'Liverpool Premium Card', 'Scotiabank'],
+            cardsImages:[
+              'images/amexcard.png',
+              'images/banamex.png',
+              'images/bancomer.png',
+            ],
+            cards:[
+              'Afirme',
+              'Banbajio',
+              'Banca Mifel',
+              'Banco Ahorro Famsa',
+              'Banjercito',
+              'Banorte',
+              'Banregio',
+              'Inbursa',
+              'Itaucard',
+              'Ixe',
+              'Liverpool Premium Card',
+              'Santander',
+              'Scotiabank'
+            ],
             moreCards: true,
-            terminals:['American Express', 'Banamex','Bancomer','Banorte','Santander'],
+            terminals:[
+              'American Express', 
+              'Banamex',
+              'Bancomer',
+              'Banorte',
+              'Santander'
+            ],
             currency: 'mxn',
             min: 1200,
             needsVerification: true
@@ -152,9 +236,18 @@
             name:'18 meses sin intereses',
             type:'18-msi',
             msi:18,
-            cardsImages:['images/banamex.png','images/amexcard.png'],
-            cards: ['American Express','Banamex'],
-            terminals:['American Express','Banamex'],
+            cardsImages:[
+              'images/banamex.png',
+              'images/amexcard.png'
+            ],
+            cards: [
+              'American Express',
+              'Banamex'
+            ],
+            terminals:[
+              'American Express',
+              'Banamex'
+            ],
             currency: 'mxn',
             needsVerification: true,
             min:2000

@@ -25,9 +25,19 @@
         <div ng-if="method.msi" class="hl-label"><strong>Sin intereses</strong></div>
       </div>
       <div ng-if="method.cardsImages" flex="60" class="bank-icons">
-        <img ng-repeat="card in method.cardsImages"  ng-src="{{card}}" alt="">
+        <img 
+          ng-repeat="card in method.cardsImages"  
+          ng-src="{{card}}" 
+          alt=""
+          ng-class=" method.discountKey != 'discountPg1' ? 'card' : ''"
+        >
         <span>
-          <img ng-if="method.moreCards" src="images/mas-bancos.png" alt="Más bancos">
+          <img 
+            ng-if="method.moreCards" 
+            src="images/mas-bancos.png" 
+            alt="Más bancos"
+            class="card"
+          >
           <md-tooltip>
             <ul>
               <li ng-repeat="card in method.cards | orderBy:'toString()' ">{{card}}</li>
