@@ -267,7 +267,7 @@
                           class="comma-separated"
                           ng-repeat="d in deliveryGroup.deliveries track by $index"
                         >
-                          {{ vm.getWarehouseName(d.companyFrom) }}: {{d.available}}
+                          {{ vm.getWarehouseName(d.companyFrom) }}: {{d.available}} ({{d.date | date: 'd/MMM/yyyy'}})
                         </span>
                       </p>
                     </td>

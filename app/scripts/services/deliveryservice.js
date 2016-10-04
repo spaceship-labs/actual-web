@@ -9,10 +9,57 @@
     var service = {
     	getAvailableByDeliveries: getAvailableByDeliveries,
     	groupDeliveryDates: groupDeliveryDates,
+    	groupDeliveryDates2: groupDeliveryDates2,
     	sortDeliveriesByHierarchy: sortDeliveriesByHierarchy,
     };
 
-	  function groupDeliveryDates(deliveries){
+    function groupDeliveryDates(deliveries){
+	    var groups = [];
+	    for(var i= (deliveries.length-1); i>= 0; i--){
+	    	var items = _.filter(deliveries, function(delivery){
+	    		var deliveryHash = objectHash(delivery);
+	    		if(delivery.companyFrom !== deliveries[i].companyFrom && 
+	    			new Date(delivery.date) <= new Date(deliveries[i].date)
+	    		){
+	    			return true;
+	    		}
+	    		else{
+	    			return false;
+	    		}
+	    	});
+	    	var hash = objectHash(deliveries[i]);
+    		items.push(deliveries[i]);
+				if(items.length > 0){	    	
+		    	var farthestDelivery = getFarthestDelivery(items);
+		      var group = {
+		      	available: getAvailableByDeliveries(items),
+		      	days: farthestDelivery.days,
+		        deliveries: items,
+		        date: farthestDelivery.date
+		      };
+		      groups.push(group);
+		    }
+	    }
+	    return groups;
+    }
+
+    function getFarthestDelivery(deliveries){
+		  var farthestDelivery = {};
+		  for(var i=0; i<deliveries.length; i++){
+		    if(
+		      (
+		        farthestDelivery.date && 
+		        new Date(deliveries[i].date) >= new Date(farthestDelivery.date)
+		      ) || 
+		      i === 0
+		    ){
+		      farthestDelivery = deliveries[i];
+		    }
+		  }
+		  return farthestDelivery;
+    }
+
+	  function groupDeliveryDates2(deliveries){
 	    var groups = [];
 	    for(var i=0;i<deliveries.length;i++){
 	      var items = _.where(deliveries, {
@@ -42,7 +89,6 @@
 	  }
 
     function getAvailableByDeliveries(deliveries){
-    	deliveries = $filter('orderBy')(deliveries, 'date');
     	var warehousesIds = getWarehousesIdsByDeliveries(deliveries);
       var available = 0;
       available = warehousesIds.reduce(function(acum, whsId) {

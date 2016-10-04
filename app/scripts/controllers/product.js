@@ -101,10 +101,12 @@ function ProductCtrl(
       })
       .then(function(deliveries){
         console.log('deliveries', deliveries);
+        deliveries = $filter('orderBy')(deliveries, 'date');        
         vm.available = deliveryService.getAvailableByDeliveries(deliveries);
         vm.deliveries  = deliveries;
+        //var groups2 = deliveryService.groupDeliveryDates2(vm.deliveries);
         vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
-        //vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
+        vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
 
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];

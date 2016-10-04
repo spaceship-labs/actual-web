@@ -91,6 +91,7 @@ module.exports = function(config) {
       'bower_components/leaflet-plugins/layer/tile/Google.js',
       'bower_components/leaflet-plugins/layer/tile/Yandex.js',
       'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
+      'bower_components/object-hash/dist/object_hash.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
