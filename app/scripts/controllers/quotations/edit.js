@@ -296,7 +296,7 @@ function QuotationsEditCtrl(
       })
       .catch(function(err){
         $log.error(err);
-      })
+      });
   }
 
   function matchNewDetails(newDetails){
@@ -344,9 +344,6 @@ function QuotationsEditCtrl(
           return detail;
         });
       }
-
-      console.log('------------------');
-      console.log('params', params);
 
       quotationService.update(vm.quotation.id, params)
         .then(function(res){

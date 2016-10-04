@@ -12,7 +12,13 @@
     <div>
       <label>Status</label>
       <p>
-        {{vm.status}}
+        <span 
+          ng-class="{
+            'active': !vm.quotation.Order,
+            'closed': vm.quotation.Order
+          }">
+          {{vm.status}}
+        </span>
         <a
           class="order-link"
           ng-href="/checkout/order/{{vm.quotation.Order.id}}"

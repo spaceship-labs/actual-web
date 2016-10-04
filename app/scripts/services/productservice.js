@@ -29,6 +29,7 @@
         getProductsByFilters: getProductsByFilters,
         search: search,
         searchByFilters: searchByFilters,
+        sortProductImages: sortProductImages,
         searchCategoryByFilters: searchCategoryByFilters,
         delivery: delivery
       };
@@ -134,6 +135,35 @@
         }else{
           return false;
         }
+      }
+
+      function sortProductImages(product){
+        var idsList = product.ImagesOrder ? product.ImagesOrder.split(',') : [];
+        var unSortedImages = [];
+        var orderedList = [];
+        if(idsList.length > 0 && product.ImagesOrder){
+          var files = angular.copy(product.files);
+          for(var i=0;i<idsList.length;i++){
+            for(var j=0; j<files.length;j++){
+              if(files[j].id === idsList[i]){
+                orderedList.push(files[j]);
+              }          
+            }
+          }
+          //Checking if a file was not in the orderedList
+          files.forEach(function(file){
+            if( !_.findWhere(orderedList, {id: file.id}) ){
+              orderedList.push(file);
+            }
+          });
+          orderedList.concat(unSortedImages);
+        }
+
+        if(orderedList.length === 0){
+          return false;
+        }
+
+        return orderedList;
       }
 
       function formatProducts(products){

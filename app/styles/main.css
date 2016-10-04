@@ -2682,6 +2682,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 10px 0;
   padding: 0 20px;
 }
+.quotation-view .quotation-data .active{color: #33BA2C}
+.quotation-view .quotation-data .closed{color: red}
 .quotation-view .quotation-data .order-link{
   color: #000;
   text-decoration: underline;
@@ -3249,6 +3251,9 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   max-width: 46px;
   vertical-align: middle;
   margin: 0 2px;
+}
+.pay-method-wrap .method-block .bank-icons .card{
+  max-width: 80px;
 }
 
 .pay-method-wrap .method-block .input-element label{

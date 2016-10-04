@@ -27,7 +27,8 @@ function ProductCtrl(
   cartService,
   quotationService,
   pmPeriodService,
-  localStorageService
+  localStorageService,
+  deliveryService
 ) {
   var vm = this;
   var activeStoreId        = localStorageService.get('activeStore'); 
@@ -98,24 +99,12 @@ function ProductCtrl(
         vm.isLoading = false;
         return productService.delivery(productId, activeStoreId);
       })
-      .then(function(delivery){
-        var locations   = delivery.reduce(function(acum, current){
-          if (acum.indexOf(current.companyFrom) == -1) {
-            return acum.concat(current.companyFrom);
-          }
-          return acum;
-        }, []);
-        vm.available = locations.reduce(function(acum, location) {
-          return acum + delivery.reduce(function(acum, current) {
-            if (current.companyFrom == location &&  current.available > acum ){
-              return current.available;
-            }
-            return acum;
-          }, 0);
-        }, 0);
-        vm.deliveries  = delivery;
-        vm.deliveriesGroups = groupDeliveryDates(vm.deliveries);
-        vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
+      .then(function(deliveries){
+        console.log('deliveries', deliveries);
+        vm.available = deliveryService.getAvailableByDeliveries(deliveries);
+        vm.deliveries  = deliveries;
+        vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
+        //vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
 
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
@@ -144,7 +133,7 @@ function ProductCtrl(
 
   function getPiecesString(stock){
     var str = 'piezas';
-    if(stock == 1){
+    if(stock === 1){
       str = 'pieza';
     }
     return str;
@@ -258,7 +247,6 @@ function ProductCtrl(
   function loadVariants(){
     vm.getGroupProducts()
       .then(function(result){
-
         vm.variants = {};
         var valuesIds = [];
         var products = result.data || [];
@@ -310,9 +298,8 @@ function ProductCtrl(
     var imageSizeIndexIcon = 1;
     vm.selectedSlideIndex = 0;
     vm.areImagesLoaded = true;
-
     var imageSize = api.imageSizes.gallery[imageSizeIndexGallery];
-    sortImages();
+    vm.product.files = productService.sortProductImages(vm.product) || vm.product.files; 
     if(vm.product.icons.length >= 0){
       var img = {
         src: vm.product.icons[0].url,
@@ -321,7 +308,6 @@ function ProductCtrl(
       };
       vm.galleryImages.push(img);
     }
-
     if(vm.product.files){
       //TEMPORAL
       imageSize = '';
@@ -332,30 +318,6 @@ function ProductCtrl(
           h: 500
         });
       });
-    }
-  }
-
-  function sortImages(){
-    var idsList = vm.product.ImagesOrder ? vm.product.ImagesOrder.split(',') : [];
-    var unSortedImages = [];
-    if(idsList.length > 0 && vm.product.ImagesOrder){
-      var files = angular.copy(vm.product.files);
-      var orderedList = [];
-      for(var i=0;i<idsList.length;i++){
-        for(var j=0; j<files.length;j++){
-          if(files[j].id === idsList[i]){
-            orderedList.push(files[j]);
-          }          
-        }
-      }
-      //Checking if a file was not in the orderedList
-      files.forEach(function(file){
-        if( !_.findWhere(orderedList, {id: file.id}) ){
-          orderedList.push(file);
-        }
-      });
-      orderedList.concat(unSortedImages);
-      vm.product.files = orderedList;
     }
   }
 
@@ -433,7 +395,7 @@ function ProductCtrl(
       productCartItem.quantity = quantity;
       productCartItems.push( productCartItem );
     }else{
-      var deliveries = sortDeliveries(deliveryGroup.deliveries);
+      var deliveries = deliveryService.sortDeliveriesByHierarchy(deliveryGroup.deliveries);
       productCartItems = deliveries.map(function(delivery){
         if(quantity > delivery.available){
           delivery.quantity = delivery.available;
@@ -450,67 +412,6 @@ function ProductCtrl(
     } 
     return productCartItems;
   }
-
-  function sortDeliveries(deliveries){
-    var sortedDeliveries = [];
-    var warehouses = deliveries.map(function(delivery){
-      var warehouse = _.findWhere(vm.warehouses, {
-        id: delivery.companyFrom
-      });
-      return warehouse;
-    });
-    warehouses = sortWarehousesByHierarchy(warehouses);
-    for(var i = 0; i < warehouses.length; i++){
-      var delivery = _.findWhere(deliveries, {companyFrom: warehouses[i].id});
-      sortedDeliveries.push( delivery );
-    }
-    return sortedDeliveries;    
-  }
-
-  function sortWarehousesByHierarchy(warehouses){
-    var region = activeStoreWarehouse.region;
-    var sorted = [];
-    var rules  = getWarehousesRules(region, warehouses);
-    
-    for(var i=0;i<rules.length;i++){
-      for(var j=0;j<warehouses.length;j++){
-        var hash = getWarehouseHash(warehouses[j]);
-        if(!warehouses[j].sorted && hash == rules[i]){
-          sorted.push(warehouses[j]);
-          warehouses[j].sorted = true;
-        }
-      }
-    }
-    return sorted;
-  }
-
-  function getWarehouseHash(warehouse){
-    var hash = warehouse.cedis ? 'cedis#' : '#';
-    hash += warehouse.region;
-    return hash;
-  }
-
-  function getWarehousesRules(region, warehouses){
-    var otherRegions = warehouses
-      .filter(function(whs){
-        return whs.region != region;
-      })
-      .map(function(whs){
-        return whs.region;
-      });
-    var rulesHashes = [
-      'cedis#' + region,
-      '#'+region,
-    ];
-    if(otherRegions.length > 0){
-      for(var i=0;i<otherRegions.length;i++){
-        rulesHashes.push('cedis#'+otherRegions[i]);
-        rulesHashes.push('#'+otherRegions[i])
-      }
-    }
-    return rulesHashes;
-  }
-  
 
   function showMessageCart(ev) {
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
@@ -535,36 +436,6 @@ function ProductCtrl(
     }
     return arr;
   }
-
-  function groupDeliveryDates(deliveries){
-    var groups = [];
-    for(var i=0;i<deliveries.length;i++){
-      var items = _.where(deliveries, {
-        date: deliveries[i].date,
-        available: deliveries[i].available
-      });
-      var group = {
-        days: deliveries[i].days,
-        date: deliveries[i].date,
-        hash: deliveries[i].date + '#' + deliveries[i].available,
-        deliveries: items,
-      };
-      groups.push(group);
-    }
-    groups = _.uniq(groups, false, function(g){
-      return g.hash;
-    });
-    groups = groups.map(function(g){
-      g.available = g.deliveries.reduce(function(acum, delivery){
-        acum+= delivery.available;
-        return acum;
-      }, 0);
-      return g;
-    });
-    return groups;
-    //return deliveries;
-  }
-
 
   function DialogController($scope, $mdDialog) {
     $scope.hide = function() {
@@ -597,7 +468,8 @@ ProductCtrl.$inject = [
   'cartService',
   'quotationService',
   'pmPeriodService',
-  'localStorageService'
+  'localStorageService',
+  'deliveryService'
 ];
 /*
 angular.element(document).ready(function() {
