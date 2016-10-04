@@ -397,7 +397,11 @@ function ProductCtrl(
       productCartItem.quantity = quantity;
       productCartItems.push( productCartItem );
     }else{
-      var deliveries = deliveryService.sortDeliveriesByHierarchy(deliveryGroup.deliveries);
+      var deliveries = deliveryService.sortDeliveriesByHierarchy(
+        deliveryGroup.deliveries, 
+        vm.warehouses,
+        activeStoreWarehouse
+      );
       productCartItems = deliveries.map(function(delivery){
         if(quantity > delivery.available){
           delivery.quantity = delivery.available;

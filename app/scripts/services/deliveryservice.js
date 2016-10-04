@@ -122,15 +122,15 @@
       return api.$http.post(url);
     }
 
-	  function sortDeliveriesByHierarchy(deliveries){
+	  function sortDeliveriesByHierarchy(deliveries, allWarehouses, activeStoreWarehouse){
 	    var sortedDeliveries = [];
 	    var warehouses = deliveries.map(function(delivery){
-	      var warehouse = _.findWhere(vm.warehouses, {
+	      var warehouse = _.findWhere(allWarehouses, {
 	        id: delivery.companyFrom
 	      });
 	      return warehouse;
 	    });
-	    warehouses = sortWarehousesByHierarchy(warehouses);
+	    warehouses = sortWarehousesByHierarchy(warehouses, activeStoreWarehouse);
 	    for(var i = 0; i < warehouses.length; i++){
 	      var delivery = _.findWhere(deliveries, {companyFrom: warehouses[i].id});
 	      sortedDeliveries.push( delivery );
@@ -138,7 +138,7 @@
 	    return sortedDeliveries;    
 	  }
 
-	  function sortWarehousesByHierarchy(warehouses){
+	  function sortWarehousesByHierarchy(warehouses, activeStoreWarehouse){
 	    var region = activeStoreWarehouse.region;
 	    var sorted = [];
 	    var rules  = getWarehousesRules(region, warehouses);
@@ -169,16 +169,26 @@
 	      .map(function(whs){
 	        return whs.region;
 	      });
+
+	    //Hierarchy
+	    /*	
+				1. Region cedis
+				2. Other regions cedis
+				3. Region warehouses
+				4. Other regions warehouses
+	    */
+	    var otherRegionsRules = [];
 	    var rulesHashes = [
 	      'cedis#' + region,
-	      '#'+region,
 	    ];
 	    if(otherRegions.length > 0){
 	      for(var i=0;i<otherRegions.length;i++){
 	        rulesHashes.push('cedis#'+otherRegions[i]);
-	        rulesHashes.push('#'+otherRegions[i])
-	      }
+	        otherRegionsRules.push('#'+otherRegions[i]);
+				}
 	    }
+	    rulesHashes.push('#'+region);
+	    rulesHashes = rulesHashes.concat(otherRegionsRules);
 	    return rulesHashes;
 	  }    
 
