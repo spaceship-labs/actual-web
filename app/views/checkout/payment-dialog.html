@@ -12,8 +12,8 @@
             <md-option
               ng-repeat="terminal in payment.terminals track by $index"
               ng-selected="$index==0"
-              ng-value="terminal">
-              {{terminal}}
+              ng-value="terminal.value">
+              {{terminal.label}}
             </md-option>
           </md-select>
         </div>

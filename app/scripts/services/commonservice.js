@@ -66,7 +66,10 @@
             description:'VISA, MasterCard, American Express',
             cardsImages:['images/visa.png','images/mastercard.png','images/american.png'],
             cards:['Visa','MasterCard','American Express'],
-            terminals:['American Express','Banamex'],
+            terminals:[
+              {label:'American Express', value:'american-express'},
+              {label:'Banamex', value:'banamex'}
+            ],
             currency: 'mxn',
             needsVerification: true,
             min:0
@@ -104,11 +107,11 @@
             ],
             moreCards: true,
             terminals:[
-              'American Express',
-              'Banamex',
-              'Bancomer',
-              'Banorte',
-              'Santander'
+              {label:'American Express', value:'american-express'},
+              {label:'Banamex', value:'banamex'},
+              {label:'Bancomer', value:'bancomer'},
+              {label:'Banorte', value:'banorte'},
+              {label:'Santander', value:'santander'}
             ],
             currency: 'mxn',
             min:300,
@@ -147,11 +150,11 @@
             ],
             moreCards: true,
             terminals:[
-              'American Express',
-              'Banamex',
-              'Bancomer',
-              'Banorte',
-              'Santander'
+              {label:'American Express', value:'american-express'},
+              {label:'Banamex', value:'banamex'},
+              {label:'Bancomer', value:'bancomer'},
+              {label:'Banorte', value:'banorte'},
+              {label:'Santander', value:'santander'}
             ],
             currency: 'mxn',
             min:600,
@@ -173,10 +176,10 @@
             ],
             moreCards: true,
             terminals:[
-              'American Express',
-              'Banamex',
-              'Bancomer',
-              'Santander'
+              {label:'American Express', value:'american-express'},
+              {label:'Banamex', value:'banamex'},
+              {label:'Bancomer', value:'bancomer'},
+              {label:'Santander', value:'santander'}
             ],
             currency: 'mxn',
             min:900,
@@ -215,11 +218,11 @@
             ],
             moreCards: true,
             terminals:[
-              'American Express', 
-              'Banamex',
-              'Bancomer',
-              'Banorte',
-              'Santander'
+              {label:'American Express', value:'american-express'},
+              {label:'Banamex', value:'banamex'},
+              {label:'Bancomer', value:'bancomer'},
+              {label:'Banorte', value:'banorte'},
+              {label:'Santander', value:'santander'}
             ],
             currency: 'mxn',
             min: 1200,
@@ -245,8 +248,8 @@
               'Banamex'
             ],
             terminals:[
-              'American Express',
-              'Banamex'
+              {label:'American Express', value:'american-express'},
+              {label:'Banamex', value:'banamex'}
             ],
             currency: 'mxn',
             needsVerification: true,
