@@ -10,7 +10,15 @@
 angular.module('dashexampleApp')
   .controller('UserProfileCtrl', UserProfileCtrl);
 
-function UserProfileCtrl($rootScope, $window, $location, $mdDialog, commonService, userService, localStorageService){
+function UserProfileCtrl(
+  $rootScope, 
+  $window, 
+  $location, 
+  $mdDialog, 
+  commonService, 
+  userService, 
+  localStorageService
+){
   var vm = this;
   vm.user = angular.copy($rootScope.user);
   vm.cashRegister = {};
@@ -20,7 +28,7 @@ function UserProfileCtrl($rootScope, $window, $location, $mdDialog, commonServic
   vm.init = init;
   vm.getCashReport = getCashReport;
   vm.groupPayments = groupPayments;
-  vm.getTotalGroup = getTotalGroup;
+  vm.getTotalByMethod = getTotalByMethod;
   vm.print = print;
 
   if(vm.user.userType == 'broker'){
@@ -36,7 +44,6 @@ function UserProfileCtrl($rootScope, $window, $location, $mdDialog, commonServic
   }
 
   function update(form){
-    console.log('update');
     if(form.$valid){
       showConfirm().then(function(ok) {
         if (!ok) {return;}
@@ -71,7 +78,6 @@ function UserProfileCtrl($rootScope, $window, $location, $mdDialog, commonServic
       startDate: vm.cashRegister.startDate,
       endDate: vm.cashRegister.endDate
     };
-    console.log(params);
     vm.isLoadingReport = true;
     userService.getCashReport(params).then(function(res){
       console.log(res);
@@ -89,24 +95,32 @@ function UserProfileCtrl($rootScope, $window, $location, $mdDialog, commonServic
     var auxGroups = _.groupBy(payments, function(payment){
       return payment.type + '#' + payment.terminal;
     });
-    var groups = _.map(auxGroups, function(group){
+    //var groups = _.map(auxGroups, function(group){
+    var methods = _.map(auxGroups, function(group){
         return {
             type: group[0].type,
             name: group[0].name,
             label: group[0].type,
             terminal: group[0].terminal,
             msi: group[0].msi,
-            payments: group
+            payments: group,
+            groupNumber: group[0].group
         }
     });
-    console.log(groups);
+
+    var paymentsGroups = _.groupBy(methods, 'groupNumber');
+    for(var key in paymentsGroups){
+      groups.push({
+        groupNumber: key,
+        methods: paymentsGroups[key]
+      });
+    }
     return groups;
   }
 
-  function getTotalGroup(group){
-    var total = group.payments.reduce(function(acum, current){
+  function getTotalByMethod(method){
+    var total = method.payments.reduce(function(acum, current){
       if(current.currency == 'usd'){
-        console.log('dolares');
         acum += (current.ammount * current.exchangeRate);
       }else{
         acum += current.ammount;

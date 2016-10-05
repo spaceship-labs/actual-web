@@ -22,7 +22,6 @@ function UsersBrokerCtrl($rootScope, commonService, userService,localStorageServ
       vm.isLoading = true;
       userService.update(vm.user).then(function(res){
         vm.isLoading = false;
-        console.log(res);
         commonService.showDialog('Datos actualizados');
         if(res.data.id){
           $rootScope.user = res.data;
