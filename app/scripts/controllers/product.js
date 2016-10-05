@@ -50,7 +50,6 @@ function ProductCtrl(
     applyDiscount: applyDiscount,
     addToCart: addToCart,
     closeGallery: closeGallery,
-    getGroupProducts: getGroupProducts,
     getQtyArray: getQtyArray,
     getWarehouseName: getWarehouseName,
     getPiecesString: getPiecesString,
@@ -88,13 +87,20 @@ function ProductCtrl(
         vm.productCart = {
           quantity: 1
         };
-        setupGallery();
+        setupGallery(vm.product);
         if(reload){
           $location.path('/product/' + productId, false);
-          loadProductFilters();
+          loadProductFilters(vm.product);
         }else{
-          loadProductFilters();
-          loadVariants();
+          loadProductFilters(vm.product);
+          if($rootScope.activeStore){
+            loadVariants(vm.product, $rootScope.activeStore);
+          }
+          $rootScope.$on('activeStoreAssigned',function(e,data){
+            activeStore = data;
+            getWarehouses(activeStore);
+            loadVariants(vm.product);
+          });
         }
         vm.isLoading = false;
         return productService.delivery(productId, activeStoreId);
@@ -104,10 +110,8 @@ function ProductCtrl(
         deliveries = $filter('orderBy')(deliveries, 'date');        
         vm.available = deliveryService.getAvailableByDeliveries(deliveries);
         vm.deliveries  = deliveries;
-        //var groups2 = deliveryService.groupDeliveryDates2(vm.deliveries);
         vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
         vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
-
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
         }else{
@@ -130,7 +134,6 @@ function ProductCtrl(
         $log.error(err);
       });
 
-    getWarehouses();
   }
 
   function getPiecesString(stock){
@@ -149,12 +152,7 @@ function ProductCtrl(
     return name;
   }
 
-  $rootScope.$on('activeStoreAssigned',function(e,data){
-    activeStore = data;
-    getWarehouses();
-  });
-
-  function getWarehouses(){
+  function getWarehouses(activeStore){
     api.$http.get('/company/find')
       .then(function(res) {
         vm.warehouses = res.data;
@@ -180,7 +178,7 @@ function ProductCtrl(
         deferred.resolve();
       };
       return deferred.promise;
-    }
+    };
     for(var i=0;i<vm.galleryImages.length;i++){
       promises.push( getImageSize(vm.galleryImages[i]) );
     }
@@ -190,7 +188,7 @@ function ProductCtrl(
       })
       .catch(function(err){
         $log.error(err);
-      })
+      });
   }
 
   function applyDiscount(discount, price){
@@ -228,7 +226,7 @@ function ProductCtrl(
     return lowestCategory;
   }
 
-  function getGroupProducts(){
+  function getVariantGroupProducts(product){
     var variantGroup = false;
     vm.product.Groups.forEach(function(group){
       if(group.Type === 'variations'){
@@ -246,26 +244,27 @@ function ProductCtrl(
     return deferred.promise;
   }
 
-  function loadVariants(){
-    vm.getGroupProducts()
+  function loadVariants(product, activeStore){
+    getVariantGroupProducts(product)
       .then(function(result){
         vm.variants = {};
-        var valuesIds = [];
         var products = result.data || [];
         if(products.length > 0){
-
           FILTERS_VARIANTS.forEach(function(filter){
             vm.variants[filter.key] = {};
             angular.copy(filter, vm.variants[filter.key]);
             vm.variants[filter.key].products = [];
           });
-
           products.forEach(function( product ){
             FILTERS_VARIANTS.forEach(function (filter){
               var values = _.where( product.FilterValues, { Filter: filter.id } );
               values.forEach(function(val){
                 val.product = product.ItemCode;
-                valuesIds.push(val.id);
+                val.stock   = product.Available;
+                val.stock   = product[activeStore.code];
+              });
+              values = values.filter(function(val){
+                return val.stock > 0;
               });
               if(values.length > 0){
                 var aux = {id: product.ItemCode, filterValues : values};
@@ -279,8 +278,8 @@ function ProductCtrl(
       });
   }
 
-  function setupGallery(){
-    setupImages();
+  function setupGallery(product){
+    setupImages(product);
     $timeout(function(){
       vm.gallery = $("#slick-gallery");
       vm.galleryReel = $('#slick-thumbs');
@@ -295,25 +294,25 @@ function ProductCtrl(
   }
 
 
-  function setupImages(){
+  function setupImages(product){
     var imageSizeIndexGallery = 2;
     var imageSizeIndexIcon = 1;
     vm.selectedSlideIndex = 0;
     vm.areImagesLoaded = true;
     var imageSize = api.imageSizes.gallery[imageSizeIndexGallery];
-    vm.product.files = productService.sortProductImages(vm.product) || vm.product.files; 
-    if(vm.product.icons.length >= 0){
+    product.files = productService.sortProductImages(product) || product.files; 
+    if(product.icons.length >= 0){
       var img = {
-        src: vm.product.icons[0].url,
+        src: product.icons[0].url,
         w:500,
         h:500
       };
       vm.galleryImages.push(img);
     }
-    if(vm.product.files){
+    if(product.files){
       //TEMPORAL
       imageSize = '';
-      vm.product.files.forEach(function(img){
+      product.files.forEach(function(img){
         vm.galleryImages.push({
           src: api.baseUrl + '/uploads/products/gallery/' + imageSize + img.filename,
           w: 500,
@@ -328,13 +327,13 @@ function ProductCtrl(
     vm.gallery.slick('slickGoTo',index);
   }
 
-  function loadProductFilters(){
+  function loadProductFilters(product){
     productService.getAllFilters({quickread:true})
       .then(function(res){
         var data = res.data || [];
         var filters = data.map(function(filter){
           filter.Values = [];
-          vm.product.FilterValues.forEach(function(value){
+          product.FilterValues.forEach(function(value){
             if(value.Filter === filter.id){
               filter.Values.push(value);
             }
@@ -376,7 +375,7 @@ function ProductCtrl(
           shipDate: item.date,
           shipCompany: item.company,
           shipCompanyFrom: item.companyFrom
-        }
+        };
       });
       quotationService.addMultipleProducts(multiParams);
     }
@@ -431,7 +430,7 @@ function ProductCtrl(
     })
     .then(function(answer) {
       console.log(answer);
-    })
+    });
   }
 
   function getQtyArray(n){

@@ -282,8 +282,6 @@ function CheckoutPaymentmethodCtrl(
             vm.isLoadingPayments = false;
             vm.isLoading = false;
 
-            console.log('quotation after addPayment', vm.quotation);
-
             delete vm.activeMethod;
 
             if(vm.quotation.ammountPaid >= vm.quotation.total){
@@ -305,7 +303,7 @@ function CheckoutPaymentmethodCtrl(
           console.log(err);
           vm.isLoadingPayments = false;
           vm.isLoading = false;
-          dialogService.showDialog(err.data);
+          dialogService.showDialog('Error: <br/>' + err.data);
         });
     }else{
       dialogService.showDialog('Cantidad total pagada');

@@ -17,7 +17,6 @@
 	    var groups = [];
 	    for(var i= (deliveries.length-1); i>= 0; i--){
 	    	var items = _.filter(deliveries, function(delivery){
-	    		var deliveryHash = objectHash(delivery);
 	    		if(delivery.companyFrom !== deliveries[i].companyFrom && 
 	    			new Date(delivery.date) <= new Date(deliveries[i].date)
 	    		){
@@ -27,9 +26,9 @@
 	    			return false;
 	    		}
 	    	});
-	    	var hash = objectHash(deliveries[i]);
     		items.push(deliveries[i]);
 				if(items.length > 0){	    	
+					items = $filter('orderBy')(items, 'date');
 		    	var farthestDelivery = getFarthestDelivery(items);
 		      var group = {
 		      	available: getAvailableByDeliveries(items),
@@ -40,6 +39,10 @@
 		      groups.push(group);
 		    }
 	    }
+			groups = _.uniq(groups, false, function(group) {
+				return group.date;
+			});
+
 	    return groups;
     }
 
