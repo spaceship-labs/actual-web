@@ -208,15 +208,19 @@
                 ng-show="vm.toggleVariants" 
                 class="hl-data variants-picker"
               >
+              
                   <div ng-repeat="variant in vm.variants">
                     <div 
                       class="variant-row" 
-                      ng-if="variant.products.length > 0"  
+                      ng-if="variant.products.length > 0" 
                       layout="row"
                     >
                       <div flex="30"><strong>{{variant.name}}:</strong></div>
 
-                      <div ng-if=" variant.handle == 'color'  " flex="70" >
+                      <div 
+                        ng-if=" variant.handle == 'color' " 
+                        flex="70"
+                      >
 
                         <div
                           class="variant-color"

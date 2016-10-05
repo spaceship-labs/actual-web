@@ -7,7 +7,12 @@
 
     /** @ngInject */
     function productService($http, $q, api, storeService, localStorageService){
-
+      var FILTERS_VARIANTS = [
+        {id:'5743703aef7d5e62e508e22d', key:'color', handle:'color', name: 'Color'},
+        {id:'5743703aef7d5e62e508e223', key:'forma', handle:'forma', name: 'Forma'},
+        {id:'5743703aef7d5e62e508e220', key:'tamano', handle:'tamano-camas-y-blancos-cama', name: 'Tamaño'},
+        {id:'5743703aef7d5e62e508e226', key:'firmeza', handle: 'firmeza', name: 'Firmeza'}
+      ];  
       var storePromotions = [];
       var service = {
         addSeenTime: addSeenTime,
@@ -27,6 +32,7 @@
         getMainCategories: getMainCategories,
         getMainPromo: getMainPromo,
         getProductsByFilters: getProductsByFilters,
+        loadVariants: loadVariants,
         search: search,
         searchByFilters: searchByFilters,
         sortProductImages: sortProductImages,
@@ -252,6 +258,63 @@
         var url = '/product/addseen/' + itemCode;
         return api.$http.post(url);
       }
+
+      function getVariantGroupProducts(product){
+        var variantGroup = false;
+        product.Groups.forEach(function(group){
+          if(group.Type === 'variations'){
+            variantGroup = group;
+          }
+        });
+        if(variantGroup && variantGroup.id){
+          var query = {
+            id: variantGroup.id
+          };
+          return getGroupProducts(query);
+        }
+        var deferred = $q.defer();
+        deferred.resolve({});
+        return deferred.promise;
+      }
+
+      function loadVariants(product, activeStore){
+        var deferred = $q.defer();
+        var variants = {};
+        getVariantGroupProducts(product)
+          .then(function(result){
+            var products = result.data || [];
+            if(products.length > 0){
+              FILTERS_VARIANTS.forEach(function(filter){
+                variants[filter.key] = {};
+                angular.copy(filter, variants[filter.key]);
+                variants[filter.key].products = [];
+              });
+              products.forEach(function( product ){
+                FILTERS_VARIANTS.forEach(function (filter){
+                  var values = _.where( product.FilterValues, { Filter: filter.id } );
+                  values.forEach(function(val){
+                    val.product = product.ItemCode;
+                    val.stock   = product.Available;
+                    val.stock   = product[activeStore.code];
+                  });
+                  values = values.filter(function(val){
+                    return val.stock > 0;
+                  });
+                  if(values.length > 0){
+                    var aux = {id: product.ItemCode, filterValues : values};
+                    variants[filter.key].products.push(aux);
+                  }
+                });
+              });
+            }
+            deferred.resolve(variants);
+          })
+          .catch(function(err){
+            deferred.reject(err);
+          });
+        return deferred.promise;
+      }
+
 
     }
 

@@ -61,13 +61,6 @@ function ProductCtrl(
     trustAsHtml: trustAsHtml,
   });
 
-  var FILTERS_VARIANTS = [
-    {id:'5743703aef7d5e62e508e22d', key:'color', handle:'color', name: 'Color'},
-    {id:'5743703aef7d5e62e508e223', key:'forma', handle:'forma', name: 'Forma'},
-    {id:'5743703aef7d5e62e508e220', key:'tamano', handle:'tamano-camas-y-blancos-cama', name: 'Tamaño'},
-    {id:'5743703aef7d5e62e508e226', key:'firmeza', handle: 'firmeza', name: 'Firmeza'}
-  ];  
-
   vm.init($routeParams.id);
 
   function init(productId, reload){
@@ -81,6 +74,7 @@ function ProductCtrl(
         return productService.formatSingleProduct(res.data.data);
       })
       .then(function(fProduct){
+        var promises = [];
         vm.product = fProduct;
         vm.mainPromo = vm.product.mainPromo;
         vm.lowestCategory = getLowestCategory();
@@ -94,12 +88,20 @@ function ProductCtrl(
         }else{
           loadProductFilters(vm.product);
           if($rootScope.activeStore){
-            loadVariants(vm.product, $rootScope.activeStore);
+            productService.loadVariants(vm.product, $rootScope.activeStore)
+              .then(function(variants){
+                vm.variants = variants;
+                vm.hasVariants = checkIfHasVariants(vm.variants);
+              });
           }
           $rootScope.$on('activeStoreAssigned',function(e,data){
             activeStore = data;
             getWarehouses(activeStore);
-            loadVariants(vm.product);
+            productService.loadVariants(vm.product)
+              .then(function(variants, activeStore){
+                vm.variants = variants;
+                vm.hasVariants = checkIfHasVariants(vm.variants);
+              });
           });
         }
         vm.isLoading = false;
@@ -133,7 +135,16 @@ function ProductCtrl(
       .catch(function(err){
         $log.error(err);
       });
+  }
 
+  function checkIfHasVariants(variants){
+    var hasVariants = false;
+    for(var key in variants){
+      if(variants[key].products.length > 0){
+        hasVariants = true;
+      }
+    }
+    return hasVariants;
   }
 
   function getPiecesString(stock){
@@ -224,58 +235,6 @@ function ProductCtrl(
       }
     });
     return lowestCategory;
-  }
-
-  function getVariantGroupProducts(product){
-    var variantGroup = false;
-    vm.product.Groups.forEach(function(group){
-      if(group.Type === 'variations'){
-        variantGroup = group;
-      }
-    });
-    if(variantGroup && variantGroup.id){
-      var query = {
-        id: variantGroup.id
-      };
-      return productService.getGroupProducts(query);
-    }
-    var deferred = $q.defer();
-    deferred.resolve({});
-    return deferred.promise;
-  }
-
-  function loadVariants(product, activeStore){
-    getVariantGroupProducts(product)
-      .then(function(result){
-        vm.variants = {};
-        var products = result.data || [];
-        if(products.length > 0){
-          FILTERS_VARIANTS.forEach(function(filter){
-            vm.variants[filter.key] = {};
-            angular.copy(filter, vm.variants[filter.key]);
-            vm.variants[filter.key].products = [];
-          });
-          products.forEach(function( product ){
-            FILTERS_VARIANTS.forEach(function (filter){
-              var values = _.where( product.FilterValues, { Filter: filter.id } );
-              values.forEach(function(val){
-                val.product = product.ItemCode;
-                val.stock   = product.Available;
-                val.stock   = product[activeStore.code];
-              });
-              values = values.filter(function(val){
-                return val.stock > 0;
-              });
-              if(values.length > 0){
-                var aux = {id: product.ItemCode, filterValues : values};
-                vm.variants[filter.key].products.push(aux);
-                vm.hasVariants = true;
-              }
-            });
-          });
-        }
-
-      });
   }
 
   function setupGallery(product){
