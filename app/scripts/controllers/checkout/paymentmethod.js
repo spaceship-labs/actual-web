@@ -457,6 +457,7 @@ function CheckoutPaymentmethodCtrl(
     };
 
     $scope.isvalidPayment = function(){
+      $scope.payment.min = $scope.payment.min || 0;
       if($scope.payment.ammount < $scope.payment.min){
         $scope.minStr = $filter('currency')($scope.payment.min);
         $scope.errMin = true;

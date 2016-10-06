@@ -48,6 +48,13 @@
             type:'transfer',
             description:'Sujeto a verificación contable',
             currency: 'mxn',
+            terminals:[
+              {label:'American Express', value:'american-express'},
+              {label:'Banamex', value:'banamex'},
+              {label:'Bancomer', value:'bancomer'},
+              {label:'Banorte', value:'banorte'},
+              {label:'Santander', value:'santander'}
+            ],            
             needsVerification: true
           },
           {
