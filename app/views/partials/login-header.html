@@ -39,12 +39,16 @@
       </div>
 
       <div class="input-element">
-        <select class="select-element input-element-inner" name="activeStore" ng-model="main.logInForm.activeStore" required>
+        <select 
+          class="select-element input-element-inner" 
+          name="activeStore"
+          placeholder="Tienda"
+          ng-model="main.logInForm.activeStore" 
+          ng-options="store.id as store.name for store in main.stores"
+          required
+        >
           <option value="" selected disabled hidden>
             Tienda
-          </option>
-          <option ng-repeat="store in main.stores" ng-value="store.id">
-            {{store.name}}
           </option>
         </select>
       </div>

@@ -53,6 +53,7 @@
       getCategoryIcon: getCategoryIcon,
       getSiteInfo: getSiteInfo,
       init: init,
+      isLoginStoreSelected: isLoginStoreSelected,
       logOut: logOut,
       signIn: signIn,
       toggleCartModal: toggleCartModal,
@@ -66,6 +67,10 @@
       saveSource: saveSource
     });
     $rootScope.getActiveQuotation = getActiveQuotation;
+
+    function isLoginStoreSelected(store){
+      return vm.logInForm.activeStore === store.id;
+    }
 
     function toggleMenuCategory(index){
       vm.menuCategories.forEach(function(category, i){
@@ -361,6 +366,9 @@
     function getStores(email) {
       userService.getStores(email).then(function(stores){
         vm.stores = stores;
+        if(vm.stores.length > 0){
+          vm.logInForm.activeStore = vm.stores[0].id;
+        }
       });
     }
 
