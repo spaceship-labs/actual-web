@@ -39,6 +39,7 @@
   "moduleName": "dashexampleApp",
   "resolutions": {
     "angular": "^1.4.8",
-    "angular-material": "master"
+    "angular-material": "master",
+    "ngInfiniteScroll": "1.0.0"
   }
 }
