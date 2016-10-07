@@ -1,6 +1,6 @@
 {
   "name": "actualfront",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "angular": "1.4.x",
     "angular-animate": "^1.4.0",

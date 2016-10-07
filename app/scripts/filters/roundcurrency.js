@@ -21,7 +21,6 @@
 			    var rounded = integers + roundedCents;
 			    return rounded;
 			  }
-
 		  	up = !_.isUndefined(up) ? up : true;
 		  	var rounded = roundCents(input, {up:up});
 		    var output 	= $filter('currency')(rounded);
