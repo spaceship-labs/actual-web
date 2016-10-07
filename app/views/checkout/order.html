@@ -94,7 +94,7 @@
             <div flex="20" class="order-item-data"><span>{{detail.quantity}}</span></div>
             <div flex="20" class="order-item-data"><span>{{detail.shipDate | date:'d/MMM/yyyy'}}</span></div>
             <div flex="20" class="order-item-data">
-              <span>{{detail.total | currency}} MXN</span>
+              <span>{{detail.total | roundCurrency:false}} MXN</span>
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@
           </div>
           <div ng-if="payment.type == 'cash-usd'" flex class="order-payment-item-data">
             <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (USD)</strong>
-            <p class="small-note">Tipo de cambio: {{payment.exchangeRate | currency}} MXN</p>
+            <p class="small-note">Tipo de cambio: {{payment.exchangeRate | roundCurrency:false}} MXN</p>
           </div>
           <div ng-if="payment.type != 'cash' && payment.type != 'cash-usd' && payment.type != 'cheque' && payment.type != 'transfer' " flex class="order-payment-item-data">
             <span><i class="icon-terminal"></i></span> <strong>Pago con terminal</strong>
@@ -153,8 +153,8 @@
             <span>{{payment.terminal}}</span>
           </div>
           <div flex class="order-payment-item-data">
-            <span ng-if="payment.type !='cash-usd'">{{payment.ammount | currency}} MXN</span>
-            <span ng-if="payment.type =='cash-usd'">{{payment.ammount | currency}} USD.</span>
+            <span ng-if="payment.type !='cash-usd'">{{payment.ammount | roundCurrency:false}} MXN</span>
+            <span ng-if="payment.type =='cash-usd'">{{payment.ammount | roundCurrency:false}} USD.</span>
           </div>
         </div>
       </div>
@@ -171,11 +171,11 @@
           <p><strong>SALDO:</strong></p>
         </div>
         <div flex="20">
-          <p><strong>{{vm.order.subtotal | currency}} MXN</strong></p>
-          <p><strong>{{vm.order.discount | currency}} MXN</strong></p>
-          <p><strong>{{vm.order.total | currency}} MXN</strong></p>
-          <p><strong>{{vm.order.ammountPaid | currency}} MXN</strong></p>
-          <p><strong>{{( vm.order.ammountPaid - vm.order.total ) | currency }} MXN</strong></p>
+          <p><strong>{{vm.order.subtotal | roundCurrency:false}} MXN</strong></p>
+          <p><strong>{{vm.order.discount | roundCurrency:false}} MXN</strong></p>
+          <p><strong>{{vm.order.total | roundCurrency:false}} MXN</strong></p>
+          <p><strong>{{vm.order.ammountPaid | roundCurrency:false}} MXN</strong></p>
+          <p><strong>{{( vm.order.ammountPaid - vm.order.total ) | roundCurrency:false }} MXN</strong></p>
         </div>
       </div>
 
@@ -194,10 +194,10 @@
           <p><strong>Saldo actual:</strong></p>
         </div>
         <div flex="20">
-          <p>{{vm.ewallet.before | currency}} MXN<p>
-          <p>{{vm.ewallet.positive | currency}} MXN<p>
-          <p>{{vm.ewallet.negative | currency}} MXN<p>
-          <p><strong>{{vm.ewallet.current | currency}} MXN</strong><p>
+          <p>{{vm.ewallet.before | roundCurrency:false}} MXN<p>
+          <p>{{vm.ewallet.positive | roundCurrency:false}} MXN<p>
+          <p>{{vm.ewallet.negative | roundCurrency:false}} MXN<p>
+          <p><strong>{{vm.ewallet.current | roundCurrency:false}} MXN</strong><p>
         </div>
       </div>
     </div>
