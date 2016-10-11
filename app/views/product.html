@@ -268,7 +268,7 @@
                 <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available | number: 0}} {{ vm.getPiecesString(vm.available) }}</strong> disponibles
               </h4>
               <div ng-if="vm.available">
-                <table>
+                <table class="delivery-table">
                   <tr 
                     ng-repeat="deliveryGroup in vm.deliveriesGroups"
                   >

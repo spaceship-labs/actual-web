@@ -10,8 +10,28 @@
     	getAvailableByDeliveries: getAvailableByDeliveries,
     	groupDeliveryDates: groupDeliveryDates,
     	groupDeliveryDates2: groupDeliveryDates2,
+    	groupDetails: groupDetails,
     	sortDeliveriesByHierarchy: sortDeliveriesByHierarchy,
     };
+
+    function groupDetails(details){
+    	console.log('details', details);
+    	var groups = [];
+    	var groupedDetails = _.groupBy(details, function(detail){
+    		var discountPercent = detail.discountPercent || 0;
+    		var date = moment(detail.shipDate).startOf('day');
+    		return detail.Product.ItemCode + '#' + date + discountPercent;
+    	});
+    	for(var key in groupedDetails){
+    		var group = angular.copy(groupedDetails[key][0]);
+    	 	group.quantity = groupedDetails[key].reduce(function(acum, detail){
+    			return acum+detail.quantity;
+    		},0);
+    		group.details = groupedDetails[key];
+    		groups.push(group);
+    	}
+    	return groups;
+    }
 
     function groupDeliveryDates(deliveries){
 	    var groups = [];

@@ -1765,6 +1765,9 @@ md-backdrop.md-sidenav-backdrop{
 .product-view-data-block .delivery-date-stock{
   text-align: right;
 }
+.product-view-data-block .delivery-table tr td:first-child{
+  width: auto!important;
+}
 .product-view-data-block-toggle{
   cursor: pointer;
   outline: 0;
