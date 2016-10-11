@@ -101,6 +101,7 @@ function QuotationsEditCtrl(
       .then(function(details2){
         vm.quotation.Details = details2;
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+        console.log('DetailsGroups', vm.quotation.DetailsGroups);
         vm.isLoadingRecords = true;
         return quotationService.getRecords(vm.quotation.id);
       })
