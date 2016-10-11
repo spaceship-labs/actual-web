@@ -15,7 +15,6 @@
     };
 
     function groupDetails(details){
-    	console.log('details', details);
     	var groups = [];
     	var groupedDetails = _.groupBy(details, function(detail){
     		var discountPercent = detail.discountPercent || 0;
@@ -24,9 +23,19 @@
     	});
     	for(var key in groupedDetails){
     		var group = angular.copy(groupedDetails[key][0]);
-    	 	group.quantity = groupedDetails[key].reduce(function(acum, detail){
-    			return acum+detail.quantity;
-    		},0);
+    	 	group.quantity = 0;
+    	 	group.subtotal = 0;
+    	 	group.total = 0;
+    	 	group.discount = 0;
+    	 	group.ewallet = 0;
+    	 	for(var i=0; i< groupedDetails[key].length; i++){
+    	 		var detail = groupedDetails[key][i];
+    	 		group.quantity += detail.quantity;
+    	 		group.subtotal += detail.subtotal;
+    	 		group.total += detail.total;
+    	 		group.discount += detail.discount;
+    	 		group.ewallet += detail.ewallet;
+    	 	}
     		group.details = groupedDetails[key];
     		groups.push(group);
     	}

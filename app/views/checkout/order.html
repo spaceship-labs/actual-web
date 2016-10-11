@@ -60,18 +60,21 @@
           <div flex="20"><strong>PRECIO</strong></div>
         </div>
 
-        <div class="order-item" ng-repeat="detail in vm.order.Details track by $index">
-          <h3><strong>{{detail.Product.Name}}</strong></h3>
+        <div 
+          class="order-item" 
+          ng-repeat="detailGroup in vm.order.DetailsGroups track by $index"
+        >
+          <h3><strong>{{detailGroup.Product.Name}}</strong></h3>
           <div layout="row" layout-align="space-between start">
             <div flex="35" layout="row">
               <div class="order-item-img">
-                <img src="{{detail.Product.icons[0].url}}" alt="">
+                <img src="{{detailGroup.Product.icons[0].url}}" alt="">
               </div>
               <div flex class="order-item-features">
                 <ul>
-                  <li><strong>Código: </strong> {{detail.Product.ItemCode}}</li>
+                  <li><strong>Código: </strong> {{detailGroup.Product.ItemCode}}</li>
                   <li
-                    ng-repeat="filter in detail.Product.Filters"
+                    ng-repeat="filter in detailGroup.Product.Filters"
                     ng-if="
                       filter.Handle == 'codigo' ||
                       filter.Handle == 'material' ||
@@ -84,17 +87,17 @@
                       <span ng-if="$index < (filter.Values.length-1)">,</span>
                     </span>
                   </li>
-                  <li ng-if="detail.Product.DetailedColor">
+                  <li ng-if="detailGroup.Product.DetailedColor">
                     <strong>Color</strong>
-                    <span>{{detail.Product.DetailedColor}}</span>
+                    <span>{{detailGroup.Product.DetailedColor}}</span>
                   </li>                  
                 </ul>
               </div>
             </div>
-            <div flex="20" class="order-item-data"><span>{{detail.quantity}}</span></div>
-            <div flex="20" class="order-item-data"><span>{{detail.shipDate | date:'d/MMM/yyyy'}}</span></div>
+            <div flex="20" class="order-item-data"><span>{{detailGroup.quantity}}</span></div>
+            <div flex="20" class="order-item-data"><span>{{detailGroup.shipDate | date:'d/MMM/yyyy'}}</span></div>
             <div flex="20" class="order-item-data">
-              <span>{{detail.total | roundCurrency:false}} MXN</span>
+              <span>{{detailGroup.total | roundCurrency:false}} MXN</span>
             </div>
           </div>
         </div>

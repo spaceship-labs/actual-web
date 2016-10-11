@@ -1,0 +1,125 @@
+<div 
+  class="cart-item" 
+>
+  <h3>
+    <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
+      <strong>{{detailGroup.Product.Name || detailGroup.Product.ItemCode}}</strong>
+    </a>
+  </h3>
+  <div layout="row">
+
+    <!--ITEM PROD IMG-->
+    <div flex="40" class="cart-item-prod">
+      <div layout="row">
+        <div class="cart-item-prod-img">
+          <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
+            <img ng-src="{{detailGroup.Product.icons[0].url}}" alt="">
+          </a>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Código: </strong> {{detailGroup.Product.ItemCode}}</li>
+            <li
+              ng-repeat="filter in detailGroup.Product.Filters"
+              ng-if="
+                (
+                  filter.Handle == 'codigo' ||
+                  filter.Handle == 'material' ||
+                  filter.Handle == 'garantia'
+                )
+                &&
+                filter.Values.length > 0
+              "
+            >
+              <strong>{{filter.Name}}: </strong>
+              <span ng-repeat="value in filter.Values track by $index">
+                <span ng-if="value.Handle != 'color-paleta'">{{value.Name}}</span>
+                <span ng-if="$index < (filter.Values.length-1)">,</span>
+              </span>
+            </li>
+            <li ng-if="detailGroup.Product.DetailedColor">
+              <strong>Color</strong>
+              <span>{{detailGroup.Product.DetailedColor}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--END ITEM PROD IMG-->
+
+    <!--ITEM DATA-->
+    <div class="cart-item-data" flex="55">
+      <div class="cart-item-data-inner">
+
+        <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
+          <div flex="30">
+            <p 
+              ng-if="detailGroup.discountPercent > 0" 
+              class="discount-label"
+            >
+              -{{detailGroup.discountPercent}}%
+            </p>
+            <p 
+              class="price-crossed"
+              ng-if="vm.getUnitPriceWithDiscount(detailGroup.unitPrice, detailGroup.discountPercent) != detailGroup.unitPrice"
+            >
+              {{ detailGroup.unitPrice | roundCurrency }}
+            </p>
+            <p class="price-hl">
+              <strong>
+                {{ vm.getUnitPriceWithDiscount(detailGroup.unitPrice, detailGroup.discountPercent) | roundCurrency }}
+              </strong>
+            </p>
+          </div>
+          <div flex="30" class="cart-item-data-qty">
+            <p>
+              {{detailGroup.quantity}}
+              <span ng-if="detailGroup.quantity == 1">pieza</span>
+              <span ng-if="detailGroup.quantity > 1">piezas</span>
+            </p>
+          </div>
+          <h3 flex class="product-view-price-hl product-view-price-main">
+            <strong>{{detailGroup.total | roundCurrency }}</strong>
+          </h3>
+        </div>
+      </div>
+      <p class="bottom-text" ng-repeat="detail in detailGroup.details">
+        <strong>Entrega aproximada:</strong>
+        {{detail.shipDate | date: "d/MMM/yyyy"}}
+        (en {{vm.daysDiff(detail.shipDate)}} días) | {{ vm.getWarehouseById(detail.shipCompanyFrom).WhsName }}
+      </p>
+      <p
+        ng-if="
+          vm.appliesForPackageOrPromotionDiscount(detailGroup) == 'packageDiscount'
+        "
+        class="bottom-text"
+      >
+        Paquete: {{ vm.getPromotionPackageById(detailGroup.PromotionPackageApplied).Name }}
+      </p>
+      <div 
+        ng-if="vm.appliesForPackageOrPromotionDiscount(detailGroup) == 'promoDiscount'"
+      >
+        <p
+          class="bottom-text">
+          Promoción: {{detailGroup.Product.mainPromo.publicName}}
+        </p>
+        <p class="bottom-text" ng-if="detailGroup.ewallet > 0">
+          Beneficio monedero eléctronico: {{detailGroup.ewallet | currency}}
+        </p>                  
+      </div>
+   
+    </div>
+    <!--END ITEM DATA-->
+
+    <div flex="5" class="cart-item-remove-wrap">
+      <a href="#"
+        ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
+        ng-click="vm.alertRemoveDetail($event,detailGroup, $index)"
+        class="cart-item-remove"
+      >
+        x
+      </a>
+    </div>
+
+  </div>
+</div>

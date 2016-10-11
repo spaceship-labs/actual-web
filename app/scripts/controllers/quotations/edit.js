@@ -67,8 +67,8 @@ function QuotationsEditCtrl(
     getPromotionPackageById: getPromotionPackageById,
     getUnitPriceWithDiscount: getUnitPriceWithDiscount,
     getWarehouseById: getWarehouseById,
-    init:init,
     removeDetail: removeDetail,
+    removeDetailsGroup: removeDetailsGroup,
     toggleRecord: toggleRecord,
     sendByEmail: sendByEmail,
     print: print,
@@ -92,7 +92,7 @@ function QuotationsEditCtrl(
         if(vm.quotation.Order || vm.quotation.isClosed){
           vm.status = 'Cerrada';
         }
-        return quotationService.getQuotationProducts(vm.quotation);
+        return quotationService.populateDetailsWithProducts(vm.quotation);
       })
       .then(function(details){
         vm.quotation.Details = details;
@@ -101,7 +101,6 @@ function QuotationsEditCtrl(
       .then(function(details2){
         vm.quotation.Details = details2;
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
-        console.log('DetailsGroups', vm.quotation.DetailsGroups);
         vm.isLoadingRecords = true;
         return quotationService.getRecords(vm.quotation.id);
       })
@@ -199,7 +198,7 @@ function QuotationsEditCtrl(
       vm.isLoadingRecords = true;
 
       //Formatting date and time
-      var date = moment(vm.newRecord.date._d)
+      var date = moment(vm.newRecord.date._d);
       var time = vm.newRecord.time;
       var year = date.get('year');
       var month = date.get('month');
@@ -264,7 +263,7 @@ function QuotationsEditCtrl(
         })
         .catch(function(err){
           $log.error(err);
-        })
+        });
     }
   }
 
@@ -282,19 +281,71 @@ function QuotationsEditCtrl(
     $location.path('/');
   }
 
+  function alertRemoveDetail(ev, detailsGroup) {
+    console.log(detailsGroup);
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog
+      .confirm()
+      .title('¿Eliminar articulo de la cotizacion?')
+      .textContent('-' + detailsGroup.Product.Name)
+      .ariaLabel('')
+      .targetEvent(ev)
+      .ok('Eliminar')
+      .cancel('Cancelar');
+    
+    $mdDialog.show(confirm).then(function() {
+      removeDetailsGroup(detailsGroup);
+    }, function() {
+      console.log('Eliminado');
+    });
+  }
+
+  function removeDetailsGroup(detailsGroup){
+    vm.isLoadingDetails = true;
+    console.log('removeDetailsGroup');
+    var detailsIds = detailsGroup.details.map(function(d){return d.id;});
+    console.log('detailsIds', detailsIds);
+    var params = {
+      detailsIds: detailsIds
+    };
+    quotationService.removeDetailsGroup(params, vm.quotation.id)
+      .then(function(res){
+        var updatedQuotation = res.data;
+        vm.isLoadingDetails        = false;
+        vm.quotation.total         = updatedQuotation.total;
+        vm.quotation.subtotal      = updatedQuotation.subtotal;
+        vm.quotation.discount      = updatedQuotation.discount;
+        vm.quotation.totalProducts = updatedQuotation.totalProducts;
+        if(updatedQuotation.Details){
+          vm.quotation.Details =  updateDetailsInfo(
+            vm.quotation.Details, 
+            updatedQuotation.Details
+          );
+          vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+        }
+        $rootScope.getActiveQuotation();
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+  }
+
   function removeDetail(detailId, index){
     vm.isLoadingDetails = true;
     quotationService.removeDetail(detailId, vm.quotation.id)
       .then(function(res){
-        var updatedQ = res.data;
+        var updatedQuotation = res.data;
         vm.quotation.Details.splice(index,1);
         vm.isLoadingDetails        = false;
-        vm.quotation.total         = updatedQ.total;
-        vm.quotation.subtotal      = updatedQ.subtotal;
-        vm.quotation.discount      = updatedQ.discount;
-        vm.quotation.totalProducts = updatedQ.totalProducts;
-        if(updatedQ.Details){
-          updateDetailsInfo(updatedQ.Details);
+        vm.quotation.total         = updatedQuotation.total;
+        vm.quotation.subtotal      = updatedQuotation.subtotal;
+        vm.quotation.discount      = updatedQuotation.discount;
+        vm.quotation.totalProducts = updatedQuotation.totalProducts;
+        if(updatedQuotation.Details){
+          vm.quotation.Details =  updateDetailsInfo(
+            updatedQuotation.Details, 
+            updatedQuotation.Details
+          );
         }
         $rootScope.getActiveQuotation();
       })
@@ -303,9 +354,10 @@ function QuotationsEditCtrl(
       });
   }
 
-  function updateDetailsInfo(newDetails){
-    for(var i=0;i<vm.quotation.Details.length; i++){
-      var detail = vm.quotation.Details[i];
+  function updateDetailsInfo(details, newDetails){
+    var removedDetailsIds = [];
+    for(var i=0;i<details.length; i++){
+      var detail = details[i];
       var match = _.findWhere(newDetails, { id: detail.id } );
       if(match){
         detail.unitPrice        = match.unitPrice;
@@ -317,24 +369,10 @@ function QuotationsEditCtrl(
         detail.PromotionPackageApplied = match.PromotionPackageApplied;
       }
     }
-  }
-
-  function alertRemoveDetail(ev, detailId, detailIndex) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog
-      .confirm()
-      .title('¿Eliminar articulo de la cotizacion?')
-      .textContent('-' + vm.quotation.Details[detailIndex].Product.Name)
-      .ariaLabel('')
-      .targetEvent(ev)
-      .ok('Eliminar')
-      .cancel('Cancelar');
-    
-    $mdDialog.show(confirm).then(function() {
-      vm.removeDetail(detailId, detailIndex)
-    }, function() {
-      console.log('Eliminado');
+    details = details.filter(function(d){
+      return _.findWhere(newDetails, {id: d.id});
     });
+    return details;
   }
 
   function continueBuying(){
@@ -352,7 +390,6 @@ function QuotationsEditCtrl(
       quotationService.update(vm.quotation.id, params)
         .then(function(res){
           vm.isLoading = false;
-          var quotationUpdated = res.data;
           if(vm.quotation.Client){
             quotationService.setActiveQuotation(vm.quotation.id);
             $location.path('/checkout/client/' + vm.quotation.id);
@@ -364,7 +401,7 @@ function QuotationsEditCtrl(
         })
         .catch(function(err){
           $log.error(err);
-        })
+        });
     }else{
       dialogService.showDialog('Esta cotización ya tiene un pedido asignado');
     }
@@ -384,7 +421,7 @@ function QuotationsEditCtrl(
     return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
   }
 
-  vm.init();
+  init();
 
 }
 

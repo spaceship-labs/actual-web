@@ -4,14 +4,18 @@
   </div>
   <div class="modal-header-inner">
     <h3><strong>INICIO DE SESIÓN</strong></h3>
-
     <hr/>
 
     <div ng-if="main.isLoadingLogin" layout="row" layout-sm="column" layout-align="space-around">
       <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
 
-    <form ng-if="!main.isLoadingLogin" name="logInForm" method="POST" ng-submit="main.signIn()">
+    <form 
+      ng-if="!main.isLoadingLogin" 
+      name="logInForm" 
+      method="POST" 
+      ng-submit="main.signIn()"
+    >
       <div class="input-element">
         <div class="input-element-inner">
           <input type="email" name="email"

@@ -30,7 +30,8 @@
     siteService,
     storeService,
     $mdDialog,
-    dialogService
+    dialogService,
+    deliveryService
   ){
     var vm = this;
     angular.extend(vm, {
@@ -51,9 +52,6 @@
       getActiveModule: getActiveModule,
       getCategoryBackground: getCategoryBackground,
       getCategoryIcon: getCategoryIcon,
-      getSiteInfo: getSiteInfo,
-      init: init,
-      isLoginStoreSelected: isLoginStoreSelected,
       logOut: logOut,
       signIn: signIn,
       toggleCartModal: toggleCartModal,
@@ -61,69 +59,36 @@
       toggleMenuCategory: toggleMenuCategory,
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
-      validateUser: validateUser,
       getStores: getStores,
       saveBroker: saveBroker,
       saveSource: saveSource
     });
     $rootScope.getActiveQuotation = getActiveQuotation;
 
-    function isLoginStoreSelected(store){
-      return vm.logInForm.activeStore === store.id;
-    }
-
-    function toggleMenuCategory(index){
-      vm.menuCategories.forEach(function(category, i){
-        if(i != index){
-          category.isActive = false;
-          category.Childs.forEach(function (subcategory){
-            subcategory.isActive = false;
-          });
-        }
-      });
-
-      vm.menuCategories[index].isActive = !vm.menuCategories[index].isActive;
-    }
-
-    function toggleMenuSubCategory(index, category){
-      category.Childs.forEach(function(subcategory, i){
-        if(i != index){
-          subcategory.isActive = false;
-        }
-      });
-      category.isActive = !category.isActive;
-    }
 
     function init(){
-      vm.token               = localStorageService.get('token');
-      vm.user                = localStorageService.get('user');
-      vm.activeStore         = localStorageService.get('activeStore');
-      vm.activeStoreName     = localStorageService.get('activeStoreName');
-      $rootScope.user        = vm.user;
+      vm.token = localStorageService.get('token');
+      vm.user = localStorageService.get('user');
+      vm.activeStore = localStorageService.get('activeStore');
+      vm.activeStoreName = localStorageService.get('activeStoreName');
+      $rootScope.user = vm.user;
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
       for (var i = 0; i < 9; i++) {
         vm.pointersSidenav.push({selected:false});
       }
-
-      vm.getSiteInfo();
+      getSiteInfo();
       vm.isLoadingCategoriesTree = true;
-      categoriesService.createCategoriesTree().then(function(res){
-        vm.isLoadingCategoriesTree = false;
-        vm.categoriesTree = res.data;
-        var auxCategoryTree = angular.copy(vm.categoriesTree);
-
-        vm.menuCategories = [];
-        vm.menuCategories.push( _.findWhere( auxCategoryTree, {Handle: 'muebles'} ) );
-        vm.menuCategories.push( angular.copy(_.findWhere( vm.menuCategories[0].Childs, {Handle:'muebles-para-oficina'} ) ) );
-        vm.menuCategories.push( angular.copy(_.findWhere( vm.menuCategories[0].Childs, {Handle:'muebles-de-jardin'} ) ) );
-        vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'ninos'} ) );
-        vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'bebes'}  ) );
-        vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'ambientes'} ) );
-        vm.menuCategories.push( _.findWhere(auxCategoryTree, {Handle: 'ofertas'}  ) );
-
-      });
+      categoriesService.createCategoriesTree()
+        .then(function(res){
+          vm.isLoadingCategoriesTree = false;
+          vm.categoriesTree = res.data;
+          vm.menuCategories = buildMenuCategories(vm.categoriesTree);
+        })
+        .catch(function(err){
+          console.log(err);
+        });
 
       $scope.$watch(function() {
         return localStorageService.get('quotation');
@@ -138,26 +103,64 @@
       }
     }
 
+    function getSiteInfo(){
+      siteService.findByHandle('actual-group')
+        .then(function(res){
+          vm.site = res.data || {};
+          $rootScope.site = res.data || {};
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+    }
+
+    function buildMenuCategories(categoryTree){
+      var menuCategories = [];
+      menuCategories.push( _.findWhere( categoryTree, {Handle: 'muebles'} ) );
+      menuCategories.push( angular.copy(_.findWhere( menuCategories[0].Childs, {Handle:'muebles-para-oficina'} ) ) );
+      menuCategories.push( angular.copy(_.findWhere( menuCategories[0].Childs, {Handle:'muebles-de-jardin'} ) ) );
+      menuCategories.push( _.findWhere(categoryTree, {Handle: 'ninos'} ) );
+      menuCategories.push( _.findWhere(categoryTree, {Handle: 'bebes'}  ) );
+      menuCategories.push( _.findWhere(categoryTree, {Handle: 'ambientes'} ) );
+      menuCategories.push( _.findWhere(categoryTree, {Handle: 'ofertas'}  ) );
+      return menuCategories;
+    }
+
+
+    function toggleMenuCategory(index){
+      vm.menuCategories.forEach(function(category, i){
+        if(i !== index){
+          category.isActive = false;
+          category.Childs.forEach(function (subcategory){
+            subcategory.isActive = false;
+          });
+        }
+      });
+      vm.menuCategories[index].isActive = !vm.menuCategories[index].isActive;
+    }
+
+    function toggleMenuSubCategory(index, category){
+      category.Childs.forEach(function(subcategory, i){
+        if(i !== index){
+          subcategory.isActive = false;
+        }
+      });
+      category.isActive = !category.isActive;
+    }
+
     $scope.$on("$routeChangeSuccess", function(event, next, current) {
       //Patch for autocomplete which doesn't remove
-      
+      //TODO search a better solution
       angular.element('body')[0].style = '';
       if(angular.element('.md-scroll-mask')[0]){
           angular.element('.md-scroll-mask')[0].remove();
       }
-      
+
       if($rootScope.user){
         getActiveQuotation();
       }      
 
     });    
-
-    function getSiteInfo(){
-      siteService.findByHandle('actual-group').then(function(res){
-        vm.site = res.data || {};
-        $rootScope.site = res.data || {};
-      });
-    }
 
     function togglePointerSidenav(){
       $mdSidenav('right').toggle();
@@ -172,10 +175,11 @@
         $rootScope.activeQuotation = res.data;
         vm.activeQuotation = res.data;
         if($rootScope.activeQuotation){
-          quotationService.getQuotationProducts(vm.activeQuotation)
+          quotationService.populateDetailsWithProducts(vm.activeQuotation)
             .then(function(details){
               $rootScope.activeQuotation.Details = details;
               vm.activeQuotation.Details = details;
+              vm.activeQuotation.DetailsGroups = deliveryService.groupDetails(vm.activeQuotation.Details);
             })
             .catch(function(err){
               console.log(err);
@@ -216,8 +220,8 @@
 
     $scope.$on('$routeChangeStart', function(next, current) {
       vm.menuCategoriesOn = false;
-      vm.validateUser();
-      vm.getSiteInfo();
+      validateUser();
+      getSiteInfo();
       vm.menuCategories.forEach(function(category){
         category.isActive = false;
       });
@@ -257,7 +261,6 @@
       }
     });
 
-    vm.init();
 
     function toggleLoginModal(){
       if( vm.isActiveLogin ){
@@ -276,7 +279,7 @@
         vm.toggleProfileHeader = false;
         vm.isActiveBackdrop = false;
       }else{
-        vm.toggleProfileHeader = true
+        vm.toggleProfileHeader = true;
         vm.isActiveBackdrop = true;
         vm.isActiveCart = false;
       }
@@ -352,7 +355,7 @@
     function getCategoryBackground(handle){
       var image =  '/images/mesas.jpg';
       image = api.baseUrl + '/categories/' + handle + '.jpg';
-      return {'background-image' : 'url(' + image + ')'}
+      return {'background-image' : 'url(' + image + ')'};
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {
@@ -408,8 +411,6 @@
             dialogService.showDialog('Hubo un error, revisa tus datos');
           });
       }else{
-        console.log('source', source);
-        console.log(vm.quotation);
         if(vm.quotation){
           vm.pointersLoading = true;
           quotationService.updateSource(vm.quotation, {source:source})
@@ -428,6 +429,8 @@
         }
       }
     }
+
+    init();
 
     //$scope.$on('$destroy', $mdUtil.enableScrolling);
 
@@ -455,7 +458,8 @@
     'siteService',
     'storeService',
     '$mdDialog',
-    'dialogService'
+    'dialogService',
+    'deliveryService'
   ];
 
 })();

@@ -10,14 +10,22 @@
 angular.module('dashexampleApp')
   .controller('CheckoutOrderCtrl', CheckoutOrderCtrl);
 
-function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $location, quotationService, orderService){
+function CheckoutOrderCtrl(
+  api, 
+  commonService ,
+  $routeParams, 
+  $rootScope, 
+  $location, 
+  quotationService, 
+  orderService,
+  deliveryService
+){
   var vm = this;
   var EWALLET_POSITIVE = 'positive';
   var EWALLET_NEGATIVE = 'negative';
 
 
   angular.extend(vm,{
-    init: init,
     print: print,
     getPaymentType: getPaymentType,
     formatAddress: formatAddress,
@@ -30,12 +38,11 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
     //vm.isLoading = false;
     vm.isLoading = true;
     vm.isLoadingRecords = true;
-
     orderService.getById($routeParams.id).then(function(res){
       vm.order = res.data;
-      console.log(vm.order);
       vm.order.Details = vm.order.Details || [];
       vm.order.Address = vm.formatAddress(vm.order.Address);
+      
       vm.ewallet = {
         positive: getEwalletAmmount(vm.order.EwalletRecords, EWALLET_POSITIVE),
         negative: getEwalletAmmount(vm.order.EwalletRecords,EWALLET_NEGATIVE),
@@ -44,13 +51,17 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
       vm.ewallet.current = vm.order.Client.ewallet;
 
       vm.isLoading = false;
-      quotationService.getQuotationProducts(vm.order)
+      quotationService.populateDetailsWithProducts(vm.order)
         .then(function(details){
           vm.order.Details = details;
+          vm.order.DetailsGroups = deliveryService.groupDetails(details);
           return quotationService.loadProductFilters(vm.order.Details);
         })
         .then(function(details2){
           vm.order.Details = details2;
+        })
+        .catch(function(err){
+          console.log(err);
         });
 
       quotationService.getRecords(vm.order.Quotation)
@@ -113,6 +124,6 @@ function CheckoutOrderCtrl(api, commonService ,$routeParams, $rootScope, $locati
     window.print();
   }
 
-  vm.init();
+  init();
 
 }

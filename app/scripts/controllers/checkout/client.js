@@ -10,12 +10,22 @@
 angular.module('dashexampleApp')
   .controller('CheckoutClientCtrl', CheckoutClientCtrl);
 
-function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams, $rootScope, $location ,categoriesService, productService, quotationService, orderService){
+function CheckoutClientCtrl(
+  commonService, 
+  clientService ,
+  $timeout,
+  $routeParams, 
+  $rootScope, 
+  $location,
+  categoriesService, 
+  productService, 
+  quotationService, 
+  orderService,
+  dialogService
+){
   var vm = this;
   angular.extend(vm,{
     continueProcess: continueProcess,
-    formatContacts: formatContacts,
-    init: init,
   });
 
   function init(){
@@ -28,15 +38,9 @@ function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams
         $location.path('/checkout/order/' + vm.quotation.Order.id);
       }
 
-      //fillin address data with client info
-      quotationService.getQuotationProducts(vm.quotation).then(function(details){
-        console.log(details);
-        vm.quotation.Details = details;
-      });
-
       if(vm.quotation.Client){
         clientService.getContacts(vm.quotation.Client.CardCode).then(function(res){
-          vm.contacts = vm.formatContacts(res.data);
+          vm.contacts = formatContacts(res.data);
           if(!vm.quotation.Address && vm.contacts.length > 0){
             vm.quotation.Address = vm.contacts[0].id;
             console.log('No habia direccion');
@@ -44,6 +48,9 @@ function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams
 
           console.log(res);
           //vm.contacts = contacts;
+        })
+        .catch(function(err){
+          console.log(err);
         });
       }
     });
@@ -66,20 +73,15 @@ function CheckoutClientCtrl(commonService, clientService ,$timeout ,$routeParams
   function continueProcess(){
     vm.isLoading = true;
     var params = angular.copy(vm.quotation);
-    //delete params.Details;
-    if(params.Details){
-      params.Details = params.Details.map(function(detail){
-        detail.Product = detail.Product.id;
-        return detail;
-      });
-    }
     quotationService.update(vm.quotation.id, params).then(function(res){
       vm.isLoading = false;
       $location.path('/checkout/paymentmethod/' + vm.quotation.id);
+    })
+    .catch(function(err){
+      console.log(err);
+      dialogService.showDialog('Hubo un error: <br/>' + err);
     });
   }
 
-
-  vm.init();
-
+  init();
 }

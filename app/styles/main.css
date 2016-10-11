@@ -2753,9 +2753,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   border-bottom: 1px solid #000;
   padding: 10px;
 }
-.cart-item:last-child{
-  border: 0;
-}
+.cart-item-wrapper:last-child .cart-item{border:0;}
+/*.cart-item:last-child{border: 0;}*/
 
 .cart-item-prod-img img{
   border: 1px solid #000;

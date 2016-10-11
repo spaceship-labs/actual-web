@@ -29,26 +29,26 @@
     <div class="cart-modal-items">
       <div layout="row" layout-wrap>
         <div 
-          ng-repeat="detail in main.activeQuotation.Details track by $index" 
+          ng-repeat="detailGroup in main.activeQuotation.DetailsGroups track by $index" 
           class="cart-modal-item-wrap" 
           flex="33"
         >
-          <a ng-href="/product/{{detail.Product.ItemCode}}">
+          <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
             <img 
               class="cart-modal-item-img" 
-              ng-src="{{detail.Product.icons[10].url}}" alt=""
+              ng-src="{{detailGroup.Product.icons[10].url}}" alt=""
             >
           </a>
           <div class="cart-modal-item-desc">
             <p>
-              <a ng-href="/product/{{detail.Product.ItemCode}}">
+              <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
                 <strong>
-                  {{ detail.Product.Name | limitTo: 12 }}{{detail.Product.Name.length > 12 ? '...' : ''}}
+                  {{ detailGroup.Product.Name | limitTo: 12 }}{{detailGroup.Product.Name.length > 12 ? '...' : ''}}
                 </strong>
               </a>
             </p>
             <hr class="cart-modal-item-hr" />
-            <p class="cart-modal-item-price">MXN {{detail.Product.Price | currency}}</p>
+            <p class="cart-modal-item-price">MXN {{detailGroup.Product.Price | currency}}</p>
           </div>
         </div>
       </div>

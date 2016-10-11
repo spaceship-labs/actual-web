@@ -24,7 +24,7 @@
         getById: getById,
         getCountByUser: getCountByUser,
         getList: getList,
-        getQuotationProducts: getQuotationProducts,
+        populateDetailsWithProducts: populateDetailsWithProducts,
         getQuotationTotals: getQuotationTotals,
         getRecords: getRecords,
         getTotalByPaymentMethod: getTotalByPaymentMethod,
@@ -32,6 +32,7 @@
         loadProductFilters: loadProductFilters,
         newQuotation: newQuotation,
         removeDetail: removeDetail,
+        removeDetailsGroup: removeDetailsGroup,
         setActiveQuotation: setActiveQuotation,
         sendByEmail: sendByEmail,
         update: update,
@@ -94,6 +95,12 @@
         var url = '/quotation/removedetail/' + id  + '/' + quotationId;
         return api.$http.post(url);
       }
+
+      function removeDetailsGroup(detailsGroup, quotationId){
+        var url = '/quotation/removedetailsgroup/' + quotationId;
+        return api.$http.post(url, detailsGroup);
+      }
+
 
       function getTotalsByUser(userId, params){
         var url = '/quotation/user/'+userId+'/totals';
@@ -175,7 +182,7 @@
         return items;
       }
 
-      function getQuotationProducts(quotation){
+      function populateDetailsWithProducts(quotation){
         var deferred = $q.defer();
         var productsIds = [];
         if(quotation){
