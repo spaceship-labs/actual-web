@@ -31,17 +31,12 @@
       </div>
 
       <div
-        ng-if="payment.type === 'single-payment-terminal' || payment.type === 'transfer' "
+        ng-if="payment.group === 1"
         layout="row"
         layout-align="space-between center"
       >
         <div flex="30">
-          <strong ng-if="payment.type === 'single-payment-terminal'">
-            Pago una sola exhibición
-          </strong>
-          <strong ng-if="payment.type === 'transfer'">
-            Transferencia bancaria
-          </strong>
+          <strong>{{payment.name}}</strong>
           <p class="pull-left">{{payment.description}}</p>
         </div>
         <div class="method-data" flex="60" layout="row">
