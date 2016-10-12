@@ -4,11 +4,11 @@
     <hr />
 
     <p ng-if="payment.terminals">
-      <!--<strong>Terminal:</strong> <small>Solo se puede cobrar en esta terminal bancaria.</small>-->
       <strong>Tarjeta:</strong> 
       <small ng-if="payment.msi">Selecciona la tarjeta de credito a utilizar</small>
       <small ng-if="!payment.msi">Selecciona la tarjeta de credito/debito a utilizar</small>
     </p>
+
     <div class="dialog-block" layout="row" layout-align="space-between end">
       <!--TERMINALS-->
       <div flex="45" ng-if="payment.terminals && payment.type === 'transfer' ">
@@ -29,7 +29,8 @@
       <div flex="45" ng-if="payment.options.length > 0">
         <div class="input-element select-element-wrapper">
           <md-select 
-            ng-model="payment.card" 
+            ng-model="payment.card"
+            ng-change="onChangeCard(payment.card)" 
             class="select-element"
           >
             <md-option
@@ -48,6 +49,10 @@
         <h3><strong>{{payment.msi}}</strong> Meses SIN INTERESES</h3>
       </div>
     </div>
+
+    <p ng-if="terminal">
+      <strong>Terminal:</strong> <small>La terminal de cobro que debes usar es: </small> <strong class="to-upper">{{terminal.label}}</strong>
+    </p>
 
     <div class="dialog-block" >
       <p>
@@ -91,10 +96,10 @@
       <div ng-if="needsVerification" flex="45">
         <p><strong># AUTORIZACIÓN:</strong></p>
         <p><small>Ingresa el # de autorización de esta transacción</small></p>
-      </div>
-      <div ng-if="needsVerification" flex="20" class="input-element">
-        <div class="input-element-inner">
-          <input type="text" ng-model="payment.verificationCode" required>
+        <div class="input-element">
+          <div class="input-element-inner">
+            <input type="text" ng-model="payment.verificationCode" required>
+          </div>
         </div>
       </div>
       <div flex="75" ng-if="!needsVerification"></div>

@@ -500,8 +500,9 @@ function CheckoutPaymentmethodCtrl(
       );
     };
 
-    $scope.onSelectOption = function(option){
-      $scope.payment.card = option.card.value;
+    $scope.onChangeCard = function(card){
+      $scope.terminal = getSelectedTerminal(card);
+      console.log('terminal', $scope.terminal);
     };
 
     function getSelectedTerminal(card){
@@ -509,7 +510,7 @@ function CheckoutPaymentmethodCtrl(
         return option.card.value === card;
       });
       if(option){
-        return option.terminal.value;
+        return option.terminal;
       }
       return false;
     }
@@ -517,7 +518,8 @@ function CheckoutPaymentmethodCtrl(
     $scope.save = function() {
       if( $scope.isvalidPayment() ){
         if($scope.payment.options.length > 0){
-          $scope.payment.terminal = getSelectedTerminal($scope.payment.card);
+          $scope.terminal = getSelectedTerminal($scope.payment.card);
+          $scope.payment.terminal = $scope.terminal.value;
         }        
         $mdDialog.hide($scope.payment);
       }else{
