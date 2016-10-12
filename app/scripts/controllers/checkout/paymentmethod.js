@@ -28,7 +28,9 @@ function CheckoutPaymentmethodCtrl(
     quotationService,
     siteService,
     authService,
-    clientService
+    clientService,
+    paymentService,
+    localStorageService
   ){
   var vm = this;
 
@@ -62,6 +64,9 @@ function CheckoutPaymentmethodCtrl(
 
   function init(){
     vm.isLoading = true;
+    var activeStoreId = localStorageService.get('activeStore');
+    console.log('activeStore', vm.activeStore);
+
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
 
@@ -71,17 +76,29 @@ function CheckoutPaymentmethodCtrl(
 
       //vm.quotation.Client.ewallet = 600;
       vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
-      getPaymentMethodsGroups(vm.quotation.id).then(function(groups){
-        vm.paymentMethodsGroups = groups;
-        if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
-          vm.quotation = setQuotationTotalsByGroup(vm.quotation);
-        }
-      });
+      if($rootScope.activeStore){
+        console.log('loadPaymentMethods rootScope');
+        loadPaymentMethods();
+      }else{
+        $rootScope.$on('activeStoreAssigned',function(e,data){
+          console.log('loadPaymentMethods');
+          loadPaymentMethods();
+        });
+      }
       pmPeriodService.getActive().then(function(res){
         vm.validMethods = res.data;
       });
       vm.isLoading = false;
     });
+  }
+
+  function loadPaymentMethods(){
+    getPaymentMethodsGroups(vm.quotation.id).then(function(groups){
+      vm.paymentMethodsGroups = groups;
+      if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
+        vm.quotation = setQuotationTotalsByGroup(vm.quotation);
+      }
+    });          
   }
 
   function updateEwalletBalance(){
@@ -122,10 +139,9 @@ function CheckoutPaymentmethodCtrl(
     return deferred.promise;
   }
 
-
   function getPaymentMethodsGroups(quotationId){
     var deferred = $q.defer();
-    var methodsGroups = commonService.getPaymentMethodsGroups();
+    var methodsGroups = paymentService.getPaymentMethodsGroups();
     var discountKeys = ['discountPg1','discountPg2','discountPg3','discountPg4','discountPg5'];
     var totalsPromises = [];
     var exchangeRate = 18.76;
@@ -212,6 +228,9 @@ function CheckoutPaymentmethodCtrl(
 
   function setMethod(method, group){
     vm.activeMethod = method;
+    method.storeType = $rootScope.activeStore.group;
+    var options = paymentService.getPaymentOptionsByMethod(method);
+    method.options = options;
     vm.activeMethod.group = angular.copy(group);
     vm.quotation.total = angular.copy(vm.activeMethod.total);
     vm.quotation.subtotal = angular.copy(vm.activeMethod.subtotal);
@@ -254,8 +273,6 @@ function CheckoutPaymentmethodCtrl(
 
   function setQuotationTotalsByGroup(quotation){
     var paymentGroup = getGroupByQuotation(quotation);
-    console.log('quotation', quotation);
-    console.log('paymentGroup', paymentGroup);
     var currentGroup = _.findWhere(vm.paymentMethodsGroups, {group: paymentGroup});
     var firstMethod = currentGroup.methods[0];
     quotation.total = angular.copy(firstMethod.total);
@@ -483,8 +500,25 @@ function CheckoutPaymentmethodCtrl(
       );
     };
 
+    $scope.onSelectOption = function(option){
+      $scope.payment.card = option.card.value;
+    };
+
+    function getSelectedTerminal(card){
+      var option = _.find($scope.payment.options, function(option){
+        return option.card.value === card;
+      });
+      if(option){
+        return option.terminal.value;
+      }
+      return false;
+    }
+
     $scope.save = function() {
       if( $scope.isvalidPayment() ){
+        if($scope.payment.options.length > 0){
+          $scope.payment.terminal = getSelectedTerminal($scope.payment.card);
+        }        
         $mdDialog.hide($scope.payment);
       }else{
         console.log('no cumple');
