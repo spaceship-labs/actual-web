@@ -255,11 +255,13 @@
       return activeModule;
     }
 
+    /*
     $rootScope.$on('newActiveQuotation', function(event, data){
       if($rootScope.user){
         getActiveQuotation();
       }
     });
+    */
 
 
     function toggleLoginModal(){

@@ -110,9 +110,15 @@ function ProductCtrl(
         return productService.delivery(productId, activeStoreId);
       })
       .then(function(deliveries){
-        console.log('deliveries', deliveries);
         deliveries = $filter('orderBy')(deliveries, 'date');        
         vm.available = deliveryService.getAvailableByDeliveries(deliveries);
+        if($rootScope.activeQuotation){
+          deliveries = deliveryService.substractDeliveriesStockByDetails(
+            $rootScope.activeQuotation.Details, 
+            deliveries,
+            vm.product.id
+          );
+        }
         vm.deliveries  = deliveries;
         vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
         vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
@@ -307,7 +313,7 @@ function ProductCtrl(
       })
       .catch(function(err){
         $log.error(err);
-      })
+      });
   }
 
 
@@ -344,8 +350,12 @@ function ProductCtrl(
 
   function resetCartQuantity(){
     var available = vm.productCart.deliveryGroup.available;
-    if(vm.productCart.quantity > available){
+    console.log('available', available);
+    if(vm.productCart.quantity >= available){
       vm.productCart.quantity = available;
+    }
+    else if(!vm.productCart.quantity && available){
+      vm.productCart.quantity = 1;
     }
   }
 
