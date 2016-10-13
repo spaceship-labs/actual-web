@@ -10,7 +10,10 @@
 
       var service = {
         getPromosByStore: getPromosByStore,
-        getSellersByStore: getSellersByStore
+        getSellersByStore: getSellersByStore,
+        getAllStores: getAllStores,
+        countSellers: countSellers,
+        commissionables: commissionables
       };
 
       return service;
@@ -25,7 +28,29 @@
         return api.$http.post(url);
       }
 
+      function getAllStores() {
+        var url = '/store/getAll';
+        return api.$http.get(url).then(function(res){
+          return res.data;
+        });
+      }
+
+      function countSellers(store) {
+        var url    = '/store/countSellers';
+        var params = {
+          store: store
+        };
+        return api.$http.get(url, params).then(function(res) {
+          return res.data;
+        });
+      }
+
+      function commissionables(store) {
+        var url    = '/store/getCommissionables';
+        var params = store ? {store: store} : {};
+        return api.$http.get(url, params).then(function(res) {
+          return res.data;
+        });
+      }
     }
-
-
 })();
