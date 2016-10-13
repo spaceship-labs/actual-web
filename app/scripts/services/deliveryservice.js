@@ -12,7 +12,28 @@
     	groupDeliveryDates2: groupDeliveryDates2,
     	groupDetails: groupDetails,
     	sortDeliveriesByHierarchy: sortDeliveriesByHierarchy,
+    	substractDeliveriesStockByDetails: substractDeliveriesStockByDetails
     };
+
+    function substractDeliveriesStockByDetails(details, deliveries, productId){
+    	details = details.filter(function(detail){
+    		return detail.Product === productId || detail.Product.id === productId;
+    	});
+    	for(var i = 0; i<deliveries.length; i++){
+    		for(var j=0; j<details.length; j++){
+    			var detailShipDate = moment(details[j].shipDate).startOf('day').format('DD-MM-YYYY');
+    			var deliveryDate = moment(deliveries[i].date).startOf('day').format('DD-MM-YYYY');
+    			if(
+    				detailShipDate === deliveryDate &&
+  					details[j].shipCompany === deliveries[i].company && 
+  					details[j].shipCompanyFrom === deliveries[i].companyFrom  					
+    			){
+    				deliveries[i].available -= details[j].quantity;
+    			}
+    		}
+    	}
+    	return deliveries;
+    }
 
     function groupDetails(details){
     	var groups = [];
