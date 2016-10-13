@@ -9,6 +9,17 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'icomoon-dashboard';
+  src:  url('../fonts/dashboard-fonts/icomoon.eot?8695w3');
+  src:  url('../fonts/dashboard-fonts/icomoon.eot?8695w3#iefix') format('embedded-opentype'),
+    url('../fonts/dashboard-fonts/icomoon.ttf?8695w3') format('truetype'),
+    url('../fonts/dashboard-fonts/icomoon.woff?8695w3') format('woff'),
+    url('../fonts/dashboard-fonts/icomoon.svg?8695w3#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
@@ -156,4 +167,7 @@
 .icon-vendedor:before {
   content: "\e92b";
 }
-
+.icon-link:before {
+  font-family:icomoon-dashboard;
+  content: "\e8d9";
+}

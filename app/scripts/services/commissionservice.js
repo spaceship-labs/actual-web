@@ -12,9 +12,13 @@
       getGoal: getGoal
     };
 
-    function getCommissions(page, params) {
-      var url = '/commission/find';
+    function getCommissions(page, _params) {
+      var url    = '/commission/find/';
+      var params = Object.assign({} ,_params, {
+        page: page || 1
+      });
       return api.$http.post(url, params);
+
     }
 
     function getTotalByUser(user, dateFrom, dateTo) {

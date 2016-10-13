@@ -196,6 +196,16 @@
                     html = '<a href="'+(column.editUrl + full[id])+'">' + icon + '</a>';
                   }
                 }
+                else if(column.seeUrl) {
+                  var id = (column.propId) ? column.propId : 'id';
+                  if (full[id]) {
+                    var icon = '<md-icon md-font-icon="icon-link" class="icon icon-link md-font icon-link material-icons md-default-theme" aria-hidden="true"></md-icon>';
+                    html = '<a target="_blank" href="'+(column.seeUrl + full[id])+'">' + icon + '</a>';
+                  } else {
+                    var icon = '<md-icon md-font-icon="icon-link" class="icon icon-link gray md-font material-icons md-default-theme" aria-hidden="true"></md-icon>';
+                    html = '<a>' + icon + '</a>';
+                  }
+                }
                 else if(column.actions){
                   id = (column.propId) ? column.propId : 'id';
                   icon = '<i class="icon-search"></i>';
