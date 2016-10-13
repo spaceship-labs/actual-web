@@ -3,10 +3,15 @@
     <h2><i class="icon-transfer"></i> APLICA <strong>EL PAGO</strong> COMO SE INDICA</h2>
     <hr />
 
-    <p ng-if="payment.terminals">
+    <p ng-if="payment.terminals && payment.type !== 'transfer' ">
       <strong>Tarjeta:</strong> 
       <small ng-if="payment.msi">Selecciona la tarjeta de credito a utilizar</small>
       <small ng-if="!payment.msi">Selecciona la tarjeta de credito/debito a utilizar</small>
+    </p>
+
+    <p ng-if="payment.type === 'transfer' ">
+      <strong>Banco</strong>
+      <p>Selecciona un banco para la transferencia</p>
     </p>
 
     <div class="dialog-block" layout="row" layout-align="space-between end">
@@ -93,16 +98,17 @@
     </div>
 
     <div  layout="row" layout-align="space-between end">
-      <div ng-if="needsVerification" flex="45">
-        <p><strong># AUTORIZACIÓN:</strong></p>
-        <p><small>Ingresa el # de autorización de esta transacción</small></p>
-        <div class="input-element">
+      <div ng-if="needsVerification" flex="70">
+        <p>
+          <strong># AUTORIZACIÓN:</strong> <small>Ingresa el # de autorización de esta transacción</small>
+        </p>
+        <div class="input-element verification-code">
           <div class="input-element-inner">
             <input type="text" ng-model="payment.verificationCode" required>
           </div>
         </div>
       </div>
-      <div flex="75" ng-if="!needsVerification"></div>
+      <div flex="30" ng-if="!needsVerification"></div>
       <a 
         ng-click="save()"
         ng-class="{'action-btn-disabled': isValidPayment() }" 

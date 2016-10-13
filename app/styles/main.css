@@ -3338,6 +3338,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .deposit-dialog .dialog-block .ammount-input{margin-top: 10px;}
 .deposit-dialog .dialog-block .price-sign{margin-right: 10px;}
 .deposit-dialog .dialog-block .currency-label{margin-left: 10px;}
+.deposit-dialog .verification-code{
+  margin: 6px 0 0;
+  max-width: 300px;
+}
+
 
 /*---------------/
   #AUTHORIZE DIALOG
