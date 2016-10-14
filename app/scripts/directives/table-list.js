@@ -170,6 +170,10 @@
                 if(column.defaultValue){
                   data = data ? data : column.defaultValue;
                 }
+                if(column.mapper){
+                  var data_b = data;
+                  data = column.mapper[data] || data;
+                }
                 if(column.date){
                   data = $filter('date')(data, 'dd/MM/yyyy');
                 }
@@ -220,6 +224,10 @@
                       html += '<a href="'+(action.url + full[id])+'">' + icon + '</a>';
                     }
                   });
+                }
+                else if(column.color) {
+                  data_b = column.color[data_b] || data_b;
+                  html = '<span style="color:' + data_b + ';">' + data + '</span>';
                 }
                 else{
                   if(column.actionUrl){
