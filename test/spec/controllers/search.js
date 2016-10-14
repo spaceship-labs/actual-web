@@ -6,6 +6,7 @@ describe('Controller: SearchCtrl', function () {
   beforeEach(module('dashexampleApp'));
 
   var SearchCtrl,
+    vm,
     scope;
 
   // Initialize the controller and a mock scope
@@ -15,6 +16,7 @@ describe('Controller: SearchCtrl', function () {
       $scope: scope
       // place here mocked dependencies
     });
+    vm = SearchCtrl;
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
