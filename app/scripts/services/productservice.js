@@ -114,8 +114,8 @@
 
       function formatSingleProduct(product){
         var deferred = $q.defer();
-        var activeStore = localStorageService.get('activeStore');
-        storeService.getPromosByStore(activeStore).then(function(res){
+        var activeStoreId = localStorageService.get('activeStore');
+        storeService.getPromosByStore(activeStoreId).then(function(res){
           storePromotions = res.data;
           var fProduct = formatProduct(product);
           deferred.resolve(fProduct);
@@ -174,8 +174,8 @@
 
       function formatProducts(products){
         var deferred = $q.defer();
-        var activeStore = localStorageService.get('activeStore');
-        storeService.getPromosByStore(activeStore).then(function(res){
+        var activeStoreId = localStorageService.get('activeStore');
+        storeService.getPromosByStore(activeStoreId).then(function(res){
           storePromotions = res.data;
           var formatted = products.map(formatProduct);
           deferred.resolve(formatted);

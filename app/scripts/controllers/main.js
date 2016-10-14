@@ -69,7 +69,7 @@
     function init(){
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
-      vm.activeStore = localStorageService.get('activeStore');
+      vm.activeStoreId = localStorageService.get('activeStore');
       vm.activeStoreName = localStorageService.get('activeStoreName');
       $rootScope.user = vm.user;
       if ($location.search().itemcode) {
@@ -328,7 +328,7 @@
       var formData = {
         email: vm.logInForm.email,
         password: vm.logInForm.password,
-        activeStore: vm.logInForm.activeStore
+        activeStore: vm.logInForm.activeStoreId
       };
       authService.signIn(formData, $rootScope.successAuth, function(){
         console.log('Invalid');
@@ -372,7 +372,7 @@
       userService.getStores(email).then(function(stores){
         vm.stores = stores;
         if(vm.stores.length > 0){
-          vm.logInForm.activeStore = vm.stores[0].id;
+          vm.logInForm.activeStoreId = vm.stores[0].id;
         }
       });
     }

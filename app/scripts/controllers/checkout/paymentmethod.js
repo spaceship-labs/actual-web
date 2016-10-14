@@ -64,8 +64,6 @@ function CheckoutPaymentmethodCtrl(
 
   function init(){
     vm.isLoading = true;
-    var activeStoreId = localStorageService.get('activeStore');
-    console.log('activeStore', vm.activeStore);
 
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
@@ -73,18 +71,16 @@ function CheckoutPaymentmethodCtrl(
       if(vm.quotation.Order){
         $location.path('/checkout/order/' + vm.quotation.Order.id);
       }
-
-      //vm.quotation.Client.ewallet = 600;
       vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
+
       if($rootScope.activeStore){
-        console.log('loadPaymentMethods rootScope');
         loadPaymentMethods();
       }else{
         $rootScope.$on('activeStoreAssigned',function(e,data){
-          console.log('loadPaymentMethods');
           loadPaymentMethods();
         });
       }
+
       pmPeriodService.getActive().then(function(res){
         vm.validMethods = res.data;
       });

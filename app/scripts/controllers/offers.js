@@ -28,8 +28,8 @@ function OffersCtrl(
 
   function init(){
     vm.isLoading = true;
-    var activeStore = localStorageService.get('activeStore');
-    packageService.getPackagesByStore(activeStore)
+    var activeStoreId = localStorageService.get('activeStore');
+    packageService.getPackagesByStore(activeStoreId)
       .then(function(res){
         vm.packages = res.data || [];
         vm.packages = vm.packages.map(function(p){
@@ -40,7 +40,7 @@ function OffersCtrl(
       })
       .catch(function(err){
         console.log(err);
-      })
+      });
   }
 
   function addPackageToCart(packageId){
@@ -66,9 +66,9 @@ function OffersCtrl(
 
   function getProductsDeliveriesPromises(products){
     var promises    = [];
-    var activeStore = localStorageService.get('activeStore');
+    var activeStoreId = localStorageService.get('activeStore');
     for(var i = 0; i<products.length;i++){
-      promises.push(productService.delivery(products[i].ItemCode, activeStore));
+      promises.push(productService.delivery(products[i].ItemCode, activeStoreId));
     }
     return promises;
   }

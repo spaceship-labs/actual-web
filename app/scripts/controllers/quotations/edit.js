@@ -80,7 +80,6 @@ function QuotationsEditCtrl(
   vm.brokers = [];
 
   $rootScope.$on('activeStoreAssigned', function(){
-    console.log($rootScope.activeStore);
     vm.activeStore = $rootScope.activeStore;
   });
 
