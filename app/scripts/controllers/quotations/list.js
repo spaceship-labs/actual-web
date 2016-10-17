@@ -23,7 +23,6 @@ function QuotationsListCtrl(
   ){
 
   var vm = this;
-  vm.init = init;
   vm.applyFilters = applyFilters;
   vm.onDateStartSelect = onDateStartSelect;
   vm.onDateEndSelect = onDateEndSelect;
@@ -31,24 +30,12 @@ function QuotationsListCtrl(
   vm.getTotalByDateRange = getTotalByDateRange;
   vm.filters = false;
   vm.dateEnd = false;
-  vm.managers = [
-    {
-      sellers: [{},{},{},{}]
-    },
-    {
-      sellers: [{},{},{},{}]
-    },
-    {
-      sellers: [{},{},{},{}]
-    }
-  ];
   vm.columnsLeads = [
     {key: 'folio', label:'Folio'},
     {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
     {key:'Client.E_Mail', label:'Email', defaultValue:'Sin cliente'},
     {key:'createdAt', label:'Cotización' ,date:true},
     {key:'total', label: 'Total', currency:true},
-    //{key:'DocCur', label:'Moneda', defaultValue: 'MXP'},
     {
       key:'Acciones',
       label:'Acciones',
@@ -234,7 +221,5 @@ function QuotationsListCtrl(
       });
   }
 
-
-  vm.init();
-
+  init();
 }

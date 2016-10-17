@@ -27,7 +27,9 @@ function QuotationsEditCtrl(
   dialogService,
   userService,
   packageService,
-  deliveryService
+  deliveryService,
+  DTOptionsBuilder, 
+  DTColumnDefBuilder
 ){
   var vm = this;
   angular.extend(vm, {
@@ -76,6 +78,10 @@ function QuotationsEditCtrl(
   });
 
   vm.brokers = [];
+
+  $rootScope.$on('activeStoreAssigned', function(){
+    vm.activeStore = $rootScope.activeStore;
+  });
 
   function init(){
     vm.isLoading = true;
@@ -302,9 +308,7 @@ function QuotationsEditCtrl(
 
   function removeDetailsGroup(detailsGroup){
     vm.isLoadingDetails = true;
-    console.log('removeDetailsGroup');
     var detailsIds = detailsGroup.details.map(function(d){return d.id;});
-    console.log('detailsIds', detailsIds);
     var params = {
       detailsIds: detailsIds
     };
@@ -442,5 +446,7 @@ QuotationsEditCtrl.$inject = [
   'dialogService',
   'userService',
   'packageService',
-  'deliveryService'
+  'deliveryService',
+  'DTOptionsBuilder', 
+  'DTColumnDefBuilder'
 ];

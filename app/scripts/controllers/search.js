@@ -12,7 +12,6 @@ angular.module('dashexampleApp')
 
 function SearchCtrl($location, $timeout,$routeParams ,productService){
   var vm = this;
-  vm.init = init;
   vm.loadMore = loadMore;
   vm.searchByFilters = searchByFilters;
   vm.toggleColorFilter = toggleColorFilter;
@@ -24,7 +23,7 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
   vm.searchValues = [];
   vm.removeSearchValue = removeSearchValue;
 
-  vm.init();
+  init();
 
   function init(){
     var keywords = [''];
@@ -71,7 +70,6 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
   }
 
   function removeSearchValue(removeValue){
-    //var removeIndex = false;
     var removeIndex = vm.searchValues.indexOf(removeValue);
     if(removeIndex > -1){
       vm.searchValues.splice(removeIndex, 1);
@@ -104,12 +102,7 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
     vm.searchValues.forEach(function(searchVal){
       searchValuesIds.push(searchVal.id);
     });
-    /*
-    if (searchValuesIds.length == 0 && !vm.minPrice && !vm.maxPrice) {
-      vm.init();
-      return;
-    }
-    */
+
     var params = {
       ids: searchValuesIds,
       keywords: vm.search.keywords,

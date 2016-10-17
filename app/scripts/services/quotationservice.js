@@ -249,7 +249,7 @@
           shipCompany: params.shipCompany,
           shipCompanyFrom: params.shipCompanyFrom,
           PromotionPackage: params.promotionPackage || null
-        }
+        };
         if(quotationId){
           detail.Quotation = quotationId;
         }
@@ -316,8 +316,6 @@
               return detail;
             })
           };
-
-          console.log('params create', params);
           
           create(params).then(function(res){
             var quotation = res.data;
