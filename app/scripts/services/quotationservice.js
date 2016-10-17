@@ -37,7 +37,8 @@
         sendByEmail: sendByEmail,
         update: update,
         updateSource: updateSource,
-        updateBroker: updateBroker
+        updateBroker: updateBroker,
+        validateQuotationStock: validateQuotationStock
       };
 
       return service;
@@ -376,6 +377,11 @@
 
       function sendByEmail(id){
         var url = '/quotation/sendemail/' + id;
+        return api.$http.post(url);
+      }
+
+      function validateQuotationStock(id){
+        var url = '/quotation/validatestock/' + id;
         return api.$http.post(url);
       }
 

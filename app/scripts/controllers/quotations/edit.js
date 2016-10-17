@@ -90,6 +90,12 @@ function QuotationsEditCtrl(
       dialogService.showDialog('Cliente registrado');
     }
 
+    quotationService.validateQuotationStock($routeParams.id)
+      .then(function(results){
+        console.log('results');
+        console.log(results);
+      });
+
     quotationService.getById($routeParams.id)
       .then(function(res){
         vm.isLoading = false;
