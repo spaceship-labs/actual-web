@@ -113,7 +113,6 @@ function QuotationsEditCtrl(
         var detailsStock = response.data;
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
-        console.log('detailsGroup', vm.quotation.DetailsGroups);
         return quotationService.getRecords(vm.quotation.id);
       })
       .then(function(result){
@@ -304,7 +303,6 @@ function QuotationsEditCtrl(
   }
 
   function alertRemoveDetail(ev, detailsGroup) {
-    console.log(detailsGroup);
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog
       .confirm()
