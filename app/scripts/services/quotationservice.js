@@ -26,11 +26,13 @@
         getList: getList,
         populateDetailsWithProducts: populateDetailsWithProducts,
         getQuotationTotals: getQuotationTotals,
+        getCurrentStock: getCurrentStock,        
         getRecords: getRecords,
         getTotalByPaymentMethod: getTotalByPaymentMethod,
         getTotalsByUser: getTotalsByUser,
         loadProductFilters: loadProductFilters,
         newQuotation: newQuotation,
+        mapDetailsStock: mapDetailsStock,
         removeDetail: removeDetail,
         removeDetailsGroup: removeDetailsGroup,
         setActiveQuotation: setActiveQuotation,
@@ -38,7 +40,6 @@
         update: update,
         updateSource: updateSource,
         updateBroker: updateBroker,
-        validateQuotationStock: validateQuotationStock
       };
 
       return service;
@@ -380,9 +381,20 @@
         return api.$http.post(url);
       }
 
-      function validateQuotationStock(id){
-        var url = '/quotation/validatestock/' + id;
+      function getCurrentStock(id){
+        var url = '/quotation/getCurrentStock/' + id;
         return api.$http.post(url);
+      }
+
+      function mapDetailsStock(details, detailsStock){
+        var details = details.map(function(detail){
+          var detailStock = _.findWhere(detailsStock, {id:detail.id});
+          if(detailsStock){
+            detail.validStock = detailStock.validStock;
+          }
+          return detail;
+        });
+        return details;
       }
 
     }

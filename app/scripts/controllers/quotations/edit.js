@@ -90,12 +90,6 @@ function QuotationsEditCtrl(
       dialogService.showDialog('Cliente registrado');
     }
 
-    quotationService.validateQuotationStock($routeParams.id)
-      .then(function(results){
-        console.log('results');
-        console.log(results);
-      });
-
     quotationService.getById($routeParams.id)
       .then(function(res){
         vm.isLoading = false;
@@ -110,10 +104,15 @@ function QuotationsEditCtrl(
         vm.quotation.Details = details;
         return quotationService.loadProductFilters(vm.quotation.Details);
       })
-      .then(function(details2){
-        vm.quotation.Details = details2;
-        vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+      .then(function(detailsWithFilters){
+        vm.quotation.Details = detailsWithFilters;
         vm.isLoadingRecords = true;
+        return quotationService.getCurrentStock(vm.quotation.id);       
+      })
+      .then(function(response){
+        var detailsStock = response.data;
+        vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
+        vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         return quotationService.getRecords(vm.quotation.id);
       })
       .then(function(result){
