@@ -3763,3 +3763,10 @@ padding-left: 16px;
    color: #039be5 !important;
  }
 
+/*----------
+  #COMMISSIONS
+/*----------*/
+.hide-top .top {
+  visibility: hidden;
+  height:0;
+}
