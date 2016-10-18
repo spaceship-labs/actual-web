@@ -123,13 +123,23 @@
 
     <div 
       ng-show="!detailGroup.validStock && !vm.quotation.Order" 
-      class="stock-alert-icon"
-    >
-      <a 
-        href="#" 
-        ng-click="vm.showDetailGroupStockAlert($event, detailGroup)">
-        Alerta
-      </a>
+      layout="row"
+      layout-align="center center"
+      class="stock-alert-layer"
+      ng-click="vm.showDetailGroupStockAlert($event, detailGroup)"
+    > 
+      <div class="stock-alert-content">
+        <p>
+          <a>
+            <i class="icon-envio"></i>
+          </a>
+        </p>
+        <p>
+          <a>
+            ALERTA
+          </a>
+        </p>
+      </div>
     </div>
 
   </div>

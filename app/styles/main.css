@@ -2083,11 +2083,27 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 19px;
   margin-top: 30px;
 }
-.cart-view .cart-item .stock-alert-icon{
+.cart-view .cart-item .stock-alert-layer{
+  color: #fff;
   position: absolute;
-  top: 30px;
-  right: 20px;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  left: 0;
+  top: 0;
+  z-index: 2;
+  cursor: pointer;
 }
+.cart-view .cart-item .stock-alert-content p{
+  margin: 4px 0;
+  line-height: 1;
+  text-align: center;
+}
+.cart-view .cart-item .stock-alert-content a{
+  color: #FDE932;
+  font-size: 40px;
+}
+.cart-view .cart-item .stock-alert-content a i{font-size: 50px}
 
 /*---------------
   #STOCK-ALERT-DIALOG
@@ -2099,8 +2115,17 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .stock-alert-dialog h2{margin-top: 0;}
 .stock-alert-dialog .btns-section{text-align: right;}
+.stock-alert-dialog .btns-section-block:first-child{
+  margin-right: 20px;
+  text-align: left;
+}
+.stock-alert-dialog .btns-section-block{text-align: right;}
+.stock-alert-dialog .btns-section-block p{
+  /*font-style: italic;*/
+  font-size: 13px;
+}
 .stock-alert-dialog .btns-section .action-btn-delete{background: #E2023F;}
-.stock-alert-dialog .btns-section .action-btn{margin-bottom: 0;}
+.stock-alert-dialog .btns-section .action-btn{margin: 0 0 4px;}
 .stock-alert-dialog .stock-alert-cancel{
   border-radius: 50%;
   border: 2px solid #BABABA;
