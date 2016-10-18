@@ -58,6 +58,8 @@
     	 		group.ewallet += detail.ewallet;
     	 	}
     		group.details = groupedDetails[key];
+    	 	var invalidStock = _.findWhere(group.details, {validStock: false});
+    	 	group.validStock = invalidStock ? false : true;
     		groups.push(group);
     	}
     	return groups;

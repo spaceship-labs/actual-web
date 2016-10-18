@@ -1,0 +1,29 @@
+<md-dialog class="stock-alert-dialog" aria-label="Alerta stock"  ng-cloak>
+  <div class="stock-alert-inner">
+		
+		<a 
+			href="#" 
+			ng-click="cancel()"
+			class="stock-alert-cancel">
+			x
+		</a>
+
+		<h2>Alerta</h2>
+		<p>El inventario y/o la fecha de entrega del articulo cotizado sufrió un cambio.</p>
+		<div class="btns-section">
+			<a 
+				href="#" 
+				ng-click="delete()"
+				class="action-btn action-btn-inline action-btn-delete">
+					Eliminar
+			</a>
+			<a 
+				href="#" 
+				ng-click="modify()"
+				class="action-btn action-btn-save action-btn-inline">
+					Modificar
+			</a>
+		</div>
+
+	</div>
+</md-dialog>

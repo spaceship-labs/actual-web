@@ -86,7 +86,7 @@
       <p class="bottom-text" ng-repeat="detail in detailGroup.details">
         <strong>Entrega aproximada:</strong>
         {{detail.shipDate | date: "d/MMM/yyyy"}}
-        (en {{vm.daysDiff(detail.shipDate)}} días) | {{ vm.getWarehouseById(detail.shipCompanyFrom).WhsName }} | Valido: {{detail.validStock}}
+        (en {{vm.daysDiff(detail.shipDate)}} días) | {{ vm.getWarehouseById(detail.shipCompanyFrom).WhsName }}  | Cantidad: {{detail.quantity}} | Valido: {{detail.validStock}}
       </p>
       <p
         ng-if="
@@ -118,6 +118,17 @@
         class="cart-item-remove"
       >
         x
+      </a>
+    </div>
+
+    <div 
+      ng-show="!detailGroup.validStock && !vm.quotation.Order" 
+      class="stock-alert-icon"
+    >
+      <a 
+        href="#" 
+        ng-click="vm.showStockAlert($event, detailGroup)">
+        Alerta
       </a>
     </div>
 

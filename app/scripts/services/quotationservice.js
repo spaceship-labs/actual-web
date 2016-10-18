@@ -19,6 +19,7 @@
         calculateTotal: calculateTotal,
         calculateTotalDiscount: calculateTotalDiscount,
         create: create,
+        isValidStock: isValidStock,
         getActiveQuotation: getActiveQuotation,
         getByClient: getByClient,
         getById: getById,
@@ -395,6 +396,15 @@
           return detail;
         });
         return details;
+      }
+
+      function isValidStock(detailsStock){
+        for(var i=0;i<detailsStock.length; i++){
+          if(!detailsStock[i].validStock){
+            return false;
+          }
+        }
+        return true;
       }
 
     }

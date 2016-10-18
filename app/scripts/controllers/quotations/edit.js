@@ -19,6 +19,7 @@ function QuotationsEditCtrl(
   localStorageService,
   productService,
   $rootScope,
+  $mdMedia,
   $mdDialog,
   commonService,
   quotationService,
@@ -73,6 +74,7 @@ function QuotationsEditCtrl(
     removeDetailsGroup: removeDetailsGroup,
     toggleRecord: toggleRecord,
     sendByEmail: sendByEmail,
+    showStockAlert: showStockAlert,
     print: print,
     daysDiff: daysDiff
   });
@@ -86,9 +88,7 @@ function QuotationsEditCtrl(
   function init(){
     vm.isLoading = true;
     loadWarehouses();
-    if($location.search().createdClient){
-      dialogService.showDialog('Cliente registrado');
-    }
+    showAlerts();
 
     quotationService.getById($routeParams.id)
       .then(function(res){
@@ -113,6 +113,7 @@ function QuotationsEditCtrl(
         var detailsStock = response.data;
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+        console.log('detailsGroup', vm.quotation.DetailsGroups);
         return quotationService.getRecords(vm.quotation.id);
       })
       .then(function(result){
@@ -147,6 +148,16 @@ function QuotationsEditCtrl(
     userService.getBrokers().then(function(brokers){
       vm.brokers = brokers;
     });
+  }
+
+  function showAlerts(){
+    if($location.search().createdClient){
+      dialogService.showDialog('Cliente registrado');
+    }
+    if($location.search().stockAlert){
+      var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
+      dialogService.showDialog(msg);    
+    }
   }
 
   function loadWarehouses(){
@@ -312,6 +323,7 @@ function QuotationsEditCtrl(
   }
 
   function removeDetailsGroup(detailsGroup){
+    var deferred = $q.defer();
     vm.isLoadingDetails = true;
     var detailsIds = detailsGroup.details.map(function(d){return d.id;});
     var params = {
@@ -332,11 +344,17 @@ function QuotationsEditCtrl(
           );
           vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         }
-        $rootScope.getActiveQuotation();
+        return $rootScope.getActiveQuotation();
+      })
+      .then(function(){
+        deferred.resolve();
       })
       .catch(function(err){
         console.log(err);
+        deferred.reject(err);
       });
+
+    return deferred.promise;
   }
 
   function removeDetail(detailId, index){
@@ -430,6 +448,59 @@ function QuotationsEditCtrl(
     return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
   }
 
+  function showStockAlert(ev,detailGroup){
+    var controller = StockDialogController;
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
+    $mdDialog.show({
+      controller: [
+        '$scope', 
+        '$mdDialog',
+        '$location', 
+        'detailGroup', 
+        controller
+      ],
+      templateUrl: 'views/quotations/stock-dialog.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen,
+      locals:{
+        detailGroup: detailGroup
+      }
+    })
+    .then(function(manager) {
+    }, function() {
+      console.log('No autorizado');
+    });    
+  }
+
+  function StockDialogController($scope, $mdDialog, $location, detailGroup){
+    
+    function setActiveQuotation(){
+      quotationService.setActiveQuotation(vm.quotation.id);
+      $rootScope.$emit('newActiveQuotation', vm.quotation.id);
+    }
+
+    $scope.cancel = function(){
+      $mdDialog.cancel();
+    };
+
+    $scope.delete = function(){
+      $mdDialog.hide();
+      setActiveQuotation();        
+      removeDetailsGroup(detailGroup);
+    };
+  
+    $scope.modify = function(){
+      $mdDialog.hide();   
+      var itemCode = angular.copy(detailGroup.Product.ItemCode);  
+      setActiveQuotation(); 
+      removeDetailsGroup(detailGroup).then(function(){
+        $location.path('/product/' + itemCode);
+      });
+    };
+  }
+
   init();
 
 }
@@ -443,6 +514,7 @@ QuotationsEditCtrl.$inject = [
   'localStorageService',
   'productService',
   '$rootScope',
+  '$mdMedia',
   '$mdDialog',
   'commonService',
   'quotationService',

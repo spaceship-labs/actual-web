@@ -1,3 +1,0 @@
-Regla numero 1: Primero se toma el inventario de CEDIS Q. ROO.
-Regla numero 2: Si no hay inventario en el CEDIS Q. ROO, entonces se toma el inventario de ALMACEN MERIDA.
-Regla numero 2: Si no hay inventario en el CEDIS Q. ROO, ni en el ALMACEN MERIDA, entonces se toma el inventario de cualquiera de los almacenes LOCALES. Cabe mencionar que _almacenes LOCALES_ se refiere a la ubicación fisica de la tienda en la cual se registró en este momento el vendedor.

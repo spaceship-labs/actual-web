@@ -66,25 +66,34 @@ function CheckoutPaymentmethodCtrl(
     vm.isLoading = true;
 
     quotationService.getById($routeParams.id).then(function(res){
-      vm.quotation = res.data;
+        vm.quotation = res.data;
+        return quotationService.getCurrentStock(vm.quotation.id); 
+      })
+      .then(function(response){
+  
+        var quotationDetailsStock = response.data;
+        if( !quotationService.isValidStock(quotationDetailsStock) ){
+          $location.path('/quotations/edit/' + vm.quotation.id)
+            .search({stockAlert:true});
+        }
 
-      if(vm.quotation.Order){
-        $location.path('/checkout/order/' + vm.quotation.Order.id);
-      }
-      vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
+        if(vm.quotation.Order){
+          $location.path('/checkout/order/' + vm.quotation.Order.id);
+        }
+        vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
 
-      if($rootScope.activeStore){
-        loadPaymentMethods();
-      }else{
-        $rootScope.$on('activeStoreAssigned',function(e,data){
+        if($rootScope.activeStore){
           loadPaymentMethods();
-        });
-      }
+        }else{
+          $rootScope.$on('activeStoreAssigned',function(e,data){
+            loadPaymentMethods();
+          });
+        }
 
-      pmPeriodService.getActive().then(function(res){
-        vm.validMethods = res.data;
-      });
-      vm.isLoading = false;
+        pmPeriodService.getActive().then(function(res){
+          vm.validMethods = res.data;
+        });
+        vm.isLoading = false;
     });
   }
 

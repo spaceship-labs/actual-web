@@ -34,6 +34,16 @@ function CheckoutClientCtrl(
       vm.quotation = res.data;
       vm.isLoading = false;
 
+      return quotationService.getCurrentStock(vm.quotation.id); 
+
+    })
+    .then(function(response){
+      var quotationDetailsStock = response.data;
+      if( !quotationService.isValidStock(quotationDetailsStock) ){
+        $location.path('/quotations/edit/' + vm.quotation.id)
+          .search({stockAlert:true});
+      }
+
       if(vm.quotation.Order){
         $location.path('/checkout/order/' + vm.quotation.Order.id);
       }
@@ -45,14 +55,12 @@ function CheckoutClientCtrl(
             vm.quotation.Address = vm.contacts[0].id;
             console.log('No habia direccion');
           }
-
-          console.log(res);
-          //vm.contacts = contacts;
         })
         .catch(function(err){
           console.log(err);
         });
       }
+
     });
   }
 

@@ -171,6 +171,7 @@
     }
 
     function getActiveQuotation(){
+      var deferred = $q.defer();
       quotationService.getActiveQuotation().then(function(res){
         $rootScope.activeQuotation = res.data;
         vm.activeQuotation = res.data;
@@ -180,12 +181,14 @@
               $rootScope.activeQuotation.Details = details;
               vm.activeQuotation.Details = details;
               vm.activeQuotation.DetailsGroups = deliveryService.groupDetails(vm.activeQuotation.Details);
+              deferred.resolve();
             })
             .catch(function(err){
               console.log(err);
             });
         }
       });
+      return deferred.promise;
     }
 
     function validateUser(){
