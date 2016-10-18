@@ -74,7 +74,7 @@ function QuotationsEditCtrl(
     removeDetailsGroup: removeDetailsGroup,
     toggleRecord: toggleRecord,
     sendByEmail: sendByEmail,
-    showStockAlert: showStockAlert,
+    showDetailGroupStockAlert: showDetailGroupStockAlert,
     print: print,
     daysDiff: daysDiff
   });
@@ -154,9 +154,13 @@ function QuotationsEditCtrl(
       dialogService.showDialog('Cliente registrado');
     }
     if($location.search().stockAlert){
-      var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
-      dialogService.showDialog(msg);    
+      showStockAlert();
     }
+  }
+
+  function showStockAlert(){
+    var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
+    dialogService.showDialog(msg);        
   }
 
   function loadWarehouses(){
@@ -401,6 +405,10 @@ function QuotationsEditCtrl(
   }
 
   function continueBuying(){
+    if(!quotationService.isValidStock(vm.quotation.Details)){
+      showStockAlert();
+      return;
+    }
     if(!vm.quotation.Order){
       vm.isLoading = true;
 
@@ -446,7 +454,7 @@ function QuotationsEditCtrl(
     return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
   }
 
-  function showStockAlert(ev,detailGroup){
+  function showDetailGroupStockAlert(ev,detailGroup){
     var controller = StockDialogController;
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
     $mdDialog.show({
