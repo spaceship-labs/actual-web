@@ -70,6 +70,7 @@ function QuotationsEditCtrl(
     getPromotionPackageById: getPromotionPackageById,
     getUnitPriceWithDiscount: getUnitPriceWithDiscount,
     getWarehouseById: getWarehouseById,
+    isValidStock: isValidStock,
     removeDetail: removeDetail,
     removeDetailsGroup: removeDetailsGroup,
     toggleRecord: toggleRecord,
@@ -404,9 +405,16 @@ function QuotationsEditCtrl(
     return details;
   }
 
+  function isValidStock(details){
+    return quotationService.isValidStock(vm.quotation.Details);    
+  }
+
   function continueBuying(){
-    if(!quotationService.isValidStock(vm.quotation.Details)){
+    if( !isValidStock(vm.quotation.Details) ){
       showStockAlert();
+      return;
+    }else{
+      alert('valid');
       return;
     }
     if(!vm.quotation.Order){

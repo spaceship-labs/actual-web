@@ -148,13 +148,17 @@
             type="submit"
             value="CONTINUAR"
             ng-if="!vm.quotation.Order && !vm.quotation.isClosed && vm.quotation.Client"
+            ng-disabled="!vm.isValidStock(vm.quotation.Details)"
+            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) }"
             class="cart-view-btn print-btn"
           >
 
           <input
             type="submit"
             value="ASIGNAR CLIENTE"
+            ng-disabled="!vm.isValidStock(vm.quotation.Details)"
             ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.Client"
+            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) }"
             class="cart-view-btn print-btn"
           >
 
