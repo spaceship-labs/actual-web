@@ -406,7 +406,10 @@ function QuotationsEditCtrl(
   }
 
   function isValidStock(details){
-    return quotationService.isValidStock(vm.quotation.Details);    
+    if(!details){
+      return false;
+    }
+    return quotationService.isValidStock(details);    
   }
 
   function continueBuying(){

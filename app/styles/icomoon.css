@@ -1,21 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?8695w3');
-  src:  url('../fonts/icomoon.eot?8695w3#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?8695w3') format('truetype'),
-    url('../fonts/icomoon.woff?8695w3') format('woff'),
-    url('../fonts/icomoon.svg?8695w3#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'icomoon-dashboard';
-  src:  url('../fonts/dashboard-fonts/icomoon.eot?8695w3');
-  src:  url('../fonts/dashboard-fonts/icomoon.eot?8695w3#iefix') format('embedded-opentype'),
-    url('../fonts/dashboard-fonts/icomoon.ttf?8695w3') format('truetype'),
-    url('../fonts/dashboard-fonts/icomoon.woff?8695w3') format('woff'),
-    url('../fonts/dashboard-fonts/icomoon.svg?8695w3#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?f2fzfu');
+  src:  url('../fonts/icomoon.eot?f2fzfu#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?f2fzfu') format('truetype'),
+    url('../fonts/icomoon.woff?f2fzfu') format('woff'),
+    url('../fonts/icomoon.svg?f2fzfu#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -35,139 +24,139 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-ambientes:before {
+.icon-alert:before {
   content: "\e900";
 }
-.icon-arrow:before {
+.icon-ambientes:before {
   content: "\e901";
 }
-.icon-attachment:before {
+.icon-arrow:before {
   content: "\e902";
 }
-.icon-attatch:before {
+.icon-attachment:before {
   content: "\e903";
 }
-.icon-bebes:before {
+.icon-attatch:before {
   content: "\e904";
 }
-.icon-blancos:before {
+.icon-bebes:before {
   content: "\e905";
 }
-.icon-carro:before {
+.icon-blancos:before {
   content: "\e906";
 }
-.icon-cash:before {
+.icon-carro:before {
   content: "\e907";
 }
-.icon-checkmark:before {
+.icon-cash:before {
   content: "\e908";
 }
-.icon-checkout-ticket:before {
+.icon-checkmark:before {
   content: "\e909";
 }
-.icon-clients:before {
+.icon-checkout-ticket:before {
   content: "\e90a";
 }
-.icon-colchones:before {
+.icon-clients:before {
   content: "\e90b";
 }
-.icon-comisiones:before {
+.icon-colchones:before {
   content: "\e90c";
 }
-.icon-cotizar:before {
+.icon-comisiones:before {
   content: "\e90d";
 }
-.icon-dashboard:before {
+.icon-cotizar:before {
   content: "\e90e";
 }
-.icon-decoracion:before {
+.icon-dashboard:before {
   content: "\e90f";
 }
-.icon-envio:before {
+.icon-decoracion:before {
   content: "\e910";
 }
-.icon-file:before {
+.icon-envio:before {
   content: "\e911";
 }
-.icon-home:before {
+.icon-file:before {
   content: "\e912";
 }
-.icon-info:before {
+.icon-home:before {
   content: "\e913";
 }
-.icon-jardin:before {
+.icon-info:before {
   content: "\e914";
 }
-.icon-login:before {
+.icon-jardin:before {
   content: "\e915";
 }
-.icon-mail:before {
+.icon-login:before {
   content: "\e916";
 }
-.icon-mesas:before {
+.icon-mail:before {
   content: "\e917";
 }
-.icon-metodo-pago:before {
+.icon-mesas:before {
   content: "\e918";
 }
-.icon-monedero:before {
+.icon-metodo-pago:before {
   content: "\e919";
 }
-.icon-murbles:before {
+.icon-monedero:before {
   content: "\e91a";
 }
-.icon-ninos:before {
+.icon-murbles:before {
   content: "\e91b";
 }
-.icon-ofertas:before {
+.icon-ninos:before {
   content: "\e91c";
 }
-.icon-office:before {
+.icon-ofertas:before {
   content: "\e91d";
 }
-.icon-oportunidades:before {
+.icon-office:before {
   content: "\e91e";
 }
-.icon-pedidos:before {
+.icon-oportunidades:before {
   content: "\e91f";
 }
-.icon-phone:before {
+.icon-pedidos:before {
   content: "\e920";
 }
-.icon-photo:before {
+.icon-phone:before {
   content: "\e921";
 }
-.icon-place:before {
+.icon-photo:before {
   content: "\e922";
 }
-.icon-pointer:before {
+.icon-place:before {
   content: "\e923";
 }
-.icon-scorecard:before {
+.icon-pointer:before {
   content: "\e924";
 }
-.icon-search:before {
+.icon-scorecard:before {
   content: "\e925";
 }
-.icon-settings:before {
+.icon-search:before {
   content: "\e926";
 }
-.icon-sillas:before {
+.icon-settings:before {
   content: "\e927";
 }
-.icon-sofa:before {
+.icon-sillas:before {
   content: "\e928";
 }
-.icon-terminal:before {
+.icon-sofa:before {
   content: "\e929";
 }
-.icon-transfer:before {
+.icon-terminal:before {
   content: "\e92a";
 }
-.icon-vendedor:before {
+.icon-transfer:before {
   content: "\e92b";
 }
-.icon-link:before {
-  font-family:icomoon-dashboard;
-  content: "\e8d9";
+.icon-vendedor:before {
+  content: "\e92c";
 }
+
