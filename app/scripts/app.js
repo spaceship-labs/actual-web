@@ -289,6 +289,17 @@ angular
           }
         }
       })
+      .when('/refunds', {
+        templateUrl: 'views/refunds.html',
+        controller: 'CheckoutRefundsCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          isMiActual: function($rootScope){
+            $rootScope.isMiActual = true;
+            return true;
+          }
+        }
+      })
       .when('/users/brokerprofile', {
         templateUrl: 'views/users/broker.html',
         controller: 'UsersBrokerCtrl',

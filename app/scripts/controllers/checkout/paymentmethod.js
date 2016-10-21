@@ -43,7 +43,6 @@ function CheckoutPaymentmethodCtrl(
     chooseMethod: chooseMethod,
     getExchangeRate:getExchangeRate,
     getPaidPercentage: getPaidPercentage,
-    init: init,
     isActiveGroup: isActiveGroup,
     isMinimumPaid: isMinimumPaid,
     selectMultiple: selectMultiple,
@@ -245,6 +244,7 @@ function CheckoutPaymentmethodCtrl(
   function chooseMethod(method, group){
     vm.setMethod(method, group);
     var remaining = vm.quotation.total - vm.quotation.ammountPaid;
+    vm.activeMethod.maxAmmount = remaining;
     if(method.type === EWALLET_TYPE){
       var balance = vm.quotation.Client.ewallet || 0;
       vm.activeMethod.maxAmmount = balance;
@@ -632,7 +632,7 @@ function CheckoutPaymentmethodCtrl(
     return false;
   }
 
-  vm.init();
+  init();
 
 
 }
