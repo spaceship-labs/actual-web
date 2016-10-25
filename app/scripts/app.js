@@ -289,7 +289,7 @@ angular
           }
         }
       })
-      .when('/refunds', {
+      .when('/refunds/:id', {
         templateUrl: 'views/refunds.html',
         controller: 'CheckoutRefundsCtrl',
         controllerAs: 'vm',

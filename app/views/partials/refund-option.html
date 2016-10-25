@@ -1,0 +1,23 @@
+<li
+  layout="row"
+  layout-align="space-between center"
+>
+  <div ng-attr-flex="{{option.cardsImages && '40' || '100' }}" >
+
+    <md-radio-button
+      ng-click="vm.chooseoption(option , paymentGroup.group)"
+      ng-model="option"
+      ng-value="option"
+      class="md-primary">
+
+      <strong>{{option.label}}</strong>
+    </md-radio-button>
+    <span
+      ng-if="!option.msi && option.type != 'single-payment-terminal' "
+      class="option-text"
+    >
+      {{option.description}}
+    </span>
+  </div>
+</li>
+

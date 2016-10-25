@@ -260,6 +260,15 @@ select{
   border:2px solid red;
 }
 
+.select-element md-select.ng-invalid.ng-touched,
+.input-element .input-element-inner input[type="text"].ng-invalid.ng-touched,
+.input-element .input-element-inner input[type="email"].ng-invalid.ng-touched,
+.input-element .input-element-inner input[type="number"].ng-invalid.ng-touched,
+.input-element .input-element-inner input[type="password"].ng-invalid.ng-touched,
+.input-element .input-element-inner textarea.ng-invalid.ng-touched{
+  border:2px solid red;
+}
+
 
 .select-element-wrapper md-input-container{
   margin: 0;
@@ -3619,6 +3628,10 @@ padding-left: 16px;
   color: #000;
 }
 .order-view .records-view{margin-top: 35px;}
+.order-view .refunds-link{
+  color: #000;
+  text-decoration: underline;
+}
 
 /*---------------/
   #CASH-REPORT

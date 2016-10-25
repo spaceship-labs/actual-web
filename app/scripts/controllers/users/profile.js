@@ -36,6 +36,10 @@ function UserProfileCtrl(
   }
 
   function init(){
+    var role = $rootScope.user.role.name;
+    if(role === 'broker'){
+      $location.path('/users/brokerprofile');
+    }
     var monthRange = commonService.getMonthDateRange();
     vm.cashRegister.startDate = moment().startOf('day');
     vm.cashRegister.endDate = moment().endOf('day');

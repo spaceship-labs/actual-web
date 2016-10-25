@@ -8,7 +8,8 @@
   function paymentService(api, $filter){
     var service = {
       getPaymentMethodsGroups: getPaymentMethodsGroups,
-      getPaymentOptionsByMethod: getPaymentOptionsByMethod
+      getPaymentOptionsByMethod: getPaymentOptionsByMethod,
+      getRefundsOptions: getRefundsOptions
     };
 
 var paymentGroups = [
@@ -268,6 +269,23 @@ var paymentGroups = [
             min:2000
           },
         ]
+      },
+    ];
+
+    var refundsOptions = [
+      {
+        name:'Reembolso a cuenta de cliente',
+        label: 'Reembolso a cuenta de cliente',
+        description: 'Descripción',
+        type:'refund-to-account',
+        currency: 'mxn'
+      },
+      {
+        name: 'Reembolso en efectivo',
+        label: 'Reembolso en efectivo',
+        description: 'Descripción',
+        type: 'cash-refund',
+        currency: 'mxn'
       }
     ];
 
@@ -488,6 +506,10 @@ var paymentGroups = [
     function getPaymentMethodsGroups(){
       return paymentGroups;
     }    
+
+    function getRefundsOptions(){
+      return refundsOptions;
+    }
     
     return service;
   }
