@@ -21,11 +21,12 @@ function OrdersListCtrl(
   commonService,
   orderService,
   productService,
-  storeService
+  storeService,
+  commissionService,
+  localStorageService
   ){
 
   var vm = this;
-  vm.init = init;
   vm.applyFilters = applyFilters;
   vm.getOrdersData = getOrdersData;
   vm.getTotalByDateRange = getTotalByDateRange;
@@ -33,17 +34,7 @@ function OrdersListCtrl(
   vm.currentDate = new Date();
   vm.dateRange = false;
   vm.ordersData = {};
-  vm.managers = [
-    {
-      sellers: [{},{},{},{}]
-    },
-    {
-      sellers: [{},{},{},{}]
-    },
-    {
-      sellers: [{},{},{},{}]
-    }
-  ];
+
   vm.columnsOrders = [
     {key: 'folio', label:'Folio'},
     {key:'Client.CardName', label:'Cliente'},
@@ -67,9 +58,19 @@ function OrdersListCtrl(
       startDate: moment().startOf('month'),
       endDate: moment().endOf('day'),
     };
-    orderService.getTotalsByUser($rootScope.user.id, dateRange)
-      .then(function(res){
-        vm.current = res.data.dateRange || 0;
+
+    var promises = [
+      getCommisionsGoal(),
+      orderService.getTotalsByUser($rootScope.user.id, dateRange)
+    ];
+
+    $q.all(promises)
+      .then(function(results){
+        var commisionResult = results[0];
+        var totalsResult = results[1].data;
+
+        vm.current = totalsResult.dateRange || 0;
+        vm.goal = commisionResult.goal;
         vm.rest = vm.goal - vm.current;
         vm.currentPercent = 100 - ( vm.current  / (vm.goal / 100) );
         vm.chartOptions = {
@@ -96,7 +97,6 @@ function OrdersListCtrl(
   }
 
   function init(){
-    var monthRange = commonService.getMonthDateRange();
     var fortnightRange = commonService.getFortnightRange();
     vm.startDate = fortnightRange.start.toString();
     vm.endDate = fortnightRange.end.toString();
@@ -162,7 +162,6 @@ function OrdersListCtrl(
   }
 
   function updateSellersTotals(){
-    console.log('updateSellersTotals');
     if(vm.sellers){
       var promisesTotals = [];
       for(var i = 0; i< vm.sellers.length; i++){
@@ -220,6 +219,14 @@ function OrdersListCtrl(
       });
   }
 
-  vm.init();
+  function getCommisionsGoal(){
+    var fortnightRange = commonService.getFortnightRange();
+    var start = moment().startOf('month').toDate();
+    var end = moment().endOf('month').toDate();
+    var storeId = localStorageService.get('activeStore');
+    return commissionService.getGoal(storeId, start, end);
+  }
+
+  init();
 
 }

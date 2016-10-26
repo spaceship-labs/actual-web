@@ -50,7 +50,6 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
 
     quotationService.getCountByUser($rootScope.user.id, dateRange)
       .then(function(res){
-        console.log(res);
         vm.quotationsData.todayQty = res.data.dateRange;
         vm.quotationsData.monthQty = res.data.all;
         vm.quotationsData.quantities = {
@@ -94,7 +93,6 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
 
     orderService.getCountByUser($rootScope.user.id, dateRange)
       .then(function(res){
-        console.log(res);
         vm.ordersData.todayQty = res.data.dateRange;
         vm.ordersData.monthQty = res.data.all;
         vm.ordersData.quantities = {
