@@ -12,13 +12,10 @@ angular.module('dashexampleApp')
 
 function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productService, clientService, quotationService){
   var vm = this;
-  vm.init = init;
   vm.queryClients = queryClients;
   vm.selectedItemChange = selectedItemChange;
-  vm.createQuotation = createQuotation;
 
   function init(){
-    console.log('continue quotation');
   }
 
   function queryClients(term){
@@ -48,44 +45,28 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
             $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
           }
         }
-        else if(!$rootScope.activeQuotation.Client){
-          var params = {Client: item.id};
-          quotationService.update($rootScope.activeQuotation.id, params).then(function(res){
-            quotationService.setActiveQuotation($rootScope.activeQuotation.id);
-            if($location.search().goToCheckout){
-              $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
-            }
-            else{
-              console.log('inicio de busqueda');
-              $location.path('/').search({startQuotation:true});
-            }
-          });
-        }
-        else{
-          vm.createQuotation(item.id)
-        }
-      }
-      else{
-        vm.createQuotation(item.id);
-      }
 
+        else if(!$rootScope.activeQuotation.Client){
+          continueQuotationByClient(item);
+        }
+      }
     }
   }
 
-  function createQuotation(clientId){
-    console.log('createQuotation');
-    /*
-    var params = {
-      Client: clientId,
-      User: $rootScope.user.id
-    };
-    var goToSearch = true;
-    quotationService.newQuotation(params, goToSearch);
-    */
+  function continueQuotationByClient(client){
+    var params = {Client: client.id};
+    quotationService.update($rootScope.activeQuotation.id, params).then(function(res){
+      quotationService.setActiveQuotation($rootScope.activeQuotation.id);
+      if($location.search().goToCheckout){
+        $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
+      }
+      else{
+        $location.path('/').search({startQuotation:true});
+      }
+    });
   }
 
-  vm.init();
-
+  init();
 }
 
 ContinuequotationCtrl.$inject = [

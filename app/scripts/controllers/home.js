@@ -11,10 +11,8 @@ angular.module('dashexampleApp')
   .controller('HomeCtrl', HomeCtrl);
 
 function HomeCtrl(
-  $timeout, 
   $location, 
   $rootScope,
-  productService, 
   api, 
   dialogService
 ){
@@ -44,10 +42,8 @@ function HomeCtrl(
 }
 
 HomeCtrl.$inject = [
-  '$timeout',
   '$location',
   '$rootScope',
-  'productService',
   'api',
   'dialogService'
 ];

@@ -11,10 +11,7 @@ angular.module('dashexampleApp')
   .controller('QuotationsListCtrl', QuotationsListCtrl);
 
 function QuotationsListCtrl(
-    $location,
-    $routeParams,
     $q,
-    productService,
     $rootScope,
     $filter,
     commonService,

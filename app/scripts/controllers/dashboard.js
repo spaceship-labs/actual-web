@@ -13,10 +13,6 @@ angular.module('dashexampleApp')
 function DashboardCtrl($rootScope, $filter, orderService, quotationService){
   var vm = this;
 
-  vm.getQuotationsData = getQuotationsData;
-  vm.getOrdersData = getOrdersData;
-  vm.init = init;
-
   vm.quotationsData = {}
   vm.ordersData = {}
 
@@ -107,11 +103,11 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
   }
 
   function init(){
-    vm.getQuotationsData();
-    vm.getOrdersData()
+    getQuotationsData();
+    getOrdersData();
   }
 
-  vm.init();
+  init();
 
 }
 

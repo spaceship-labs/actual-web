@@ -75,9 +75,7 @@
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
-      for (var i = 0; i < 9; i++) {
-        vm.pointersSidenav.push({selected:false});
-      }
+      buildPointersSidenav();
       getSiteInfo();
       vm.isLoadingCategoriesTree = true;
       categoriesService.createCategoriesTree()
@@ -101,6 +99,12 @@
         getBrokers();
         //getActiveQuotation();
       }
+    }
+
+    function buildPointersSidenav(){
+      for (var i = 0; i < 9; i++) {
+        vm.pointersSidenav.push({selected:false});
+      }      
     }
 
     function getSiteInfo(){

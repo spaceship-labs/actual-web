@@ -12,7 +12,6 @@ angular.module('dashexampleApp')
 
 function CategoryCtrl($routeParams ,categoriesService, productService){
   var vm     = this;
-  vm.init    = init;
   vm.filters = [];
   vm.subnavIndex = 0;
   vm.setSubnavIndex = setSubnavIndex;
@@ -90,7 +89,7 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
     });
   }
 
-  vm.init();
+  init();
 }
 
 CategoryCtrl.$inject = [

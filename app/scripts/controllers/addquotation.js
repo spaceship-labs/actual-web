@@ -10,7 +10,12 @@
 angular.module('dashexampleApp')
   .controller('AddquotationCtrl', AddquotationCtrl);
 
-function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService, clientService, quotationService){
+function AddquotationCtrl(
+  $rootScope, 
+  $q ,
+  clientService, 
+  quotationService
+){
   var vm = this;
   vm.queryClients = queryClients;
   vm.selectedItemChange = selectedItemChange;
@@ -48,11 +53,8 @@ function AddquotationCtrl($location,$routeParams, $rootScope, $q ,productService
   }
 }
 AddquotationCtrl.$inject = [
-  '$location',
-  '$routeParams',
   '$rootScope',
   '$q',
-  'productService',
   'clientService',
   'quotationService'
 ];

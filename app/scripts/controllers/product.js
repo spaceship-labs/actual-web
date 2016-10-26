@@ -24,15 +24,14 @@ function ProductCtrl(
   $sce,
   $filter,
   api,
-  cartService,
   quotationService,
   pmPeriodService,
   localStorageService,
   deliveryService
 ) {
   var vm = this;
-  var activeStoreId        = localStorageService.get('activeStore'); 
-  var activeStore          = $rootScope.activeStore;
+  var activeStoreId = localStorageService.get('activeStore'); 
+  var activeStore = $rootScope.activeStore;
   var activeStoreWarehouse = false;
 
 
@@ -441,7 +440,6 @@ ProductCtrl.$inject = [
   '$sce',
   '$filter',
   'api',
-  'cartService',
   'quotationService',
   'pmPeriodService',
   'localStorageService',

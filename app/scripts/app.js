@@ -159,17 +159,6 @@ angular
           }
         }
       })
-      .when('/sales/list', {
-        templateUrl: 'views/sales/list.html',
-        controller: 'SalesListCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
       .when('/quotations/records', {
         templateUrl: 'views/quotations/records.html',
         controller: 'QuotationsRecordsCtrl',

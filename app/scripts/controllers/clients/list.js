@@ -15,7 +15,6 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
   var vm = this;
 
   vm.applyFilters = applyFilters;
-
   vm.user = $rootScope.user;
   vm.columnsClients = [
     {key:'CardCode', label:'CardCode'},
@@ -23,7 +22,6 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
     {key:'E_Mail', label:'Email'},
     {key:'LicTradNum', label:'RFC'},
     {key:'Phone1', label:'Télefono'},
-    //{key:'alta', label:'Alta'},
     {
       key:'Acciones',
       label:'Acción',
@@ -34,7 +32,6 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
     },
 
   ];
-
 
   vm.apiResourceClients = clientService.getClients;
   vm.filters = {

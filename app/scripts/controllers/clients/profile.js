@@ -37,7 +37,6 @@ function ClientProfileCtrl(
       {label: 'Srita.', value: 'Srita'}
     ],
     states: [],
-    //states: commonService.getStates(),
     countries: commonService.getCountries(),
     columnsLeads: [
       {key: 'folio', label:'Folio'},
@@ -73,7 +72,6 @@ function ClientProfileCtrl(
     createQuotation: createQuotation,
     changeTab: changeTab,
     formatContacts: formatContacts,
-    init: init,
     onPikadaySelect: onPikadaySelect,
     updatePersonalData: updatePersonalData,
     updateFiscalAddress: updateFiscalAddress,
@@ -87,7 +85,6 @@ function ClientProfileCtrl(
   function init(){
     vm.isLoading = true;
 
-
     if($location.search().createdClient){
       dialogService.showDialog('Cliente registrado');
     }
@@ -95,15 +92,7 @@ function ClientProfileCtrl(
     clientService.getById($routeParams.id).then(function(res){
       vm.isLoading = false;
       vm.client = res.data;
-      vm.client.birthDate = vm.client.birthDate  ? vm.client.birthDate : new Date();
-      vm.client.firstName = vm.client.firstName || angular.copy(vm.client.CardName);
-      vm.client.phone = vm.client.phone || angular.copy(vm.client.Phone1);
-      vm.client.mobilePhone = vm.client.mobilePhone || angular.copy(vm.client.Cellular);
-      vm.filtersQuotations = {Client: vm.client.id};
-      vm.filtersOrders = {Client: vm.client.id};
-      vm.client.Contacts = vm.formatContacts(vm.client);
-
-      console.log(vm.client);
+      vm.client = formatClient(vm.client);
 
       if($location.search().activeTab && $location.search().activeTab < 4){
         vm.activeTab = $location.search().activeTab;
@@ -114,10 +103,21 @@ function ClientProfileCtrl(
         vm.states = res.data;
       }).catch(function(err){
         console.log(err);
-      })
+      });
 
     });
   }
+
+  function formatClient(client){
+    client.birthDate = client.birthDate  ? client.birthDate : new Date();
+    client.firstName = client.firstName || angular.copy(client.CardName);
+    client.phone = client.phone || angular.copy(client.Phone1);
+    client.mobilePhone = client.mobilePhone || angular.copy(client.Cellular);
+    vm.filtersQuotations = {Client: client.id};
+    vm.filtersOrders = {Client: client.id};
+    client.Contacts = vm.formatContacts(client);    
+    return client;
+  }  
 
   function changeTab(index){
     vm.activeTab = index;
@@ -144,7 +144,7 @@ function ClientProfileCtrl(
       phone: vm.client.phone,
       mobilePhone: vm.client.mobilePhone,
       E_Mail: vm.client.E_Mail
-    }
+    };
     clientService.update(vm.client.CardCode, params).then(function (res){
       console.log(res);
       vm.isLoading = false;
@@ -185,7 +185,6 @@ function ClientProfileCtrl(
 
   function formatFiscalAddresses(client){
     var fiscalAddresses = [];
-    console.log(client.fiscalAddresses);
     if(client.fiscalAddresses){
       fiscalAddresses = client.fiscalAddresses.map(function(address){
         address.email = address.email || angular.copy(client.E_Mail);
@@ -213,8 +212,6 @@ function ClientProfileCtrl(
   }
 
   function updateContact(form, contact){
-    console.log('updateContact', form);
-    console.log('contact',contact);
     if(form.$valid){
       contact.isLoading = true;
       var params = _.clone(contact);
@@ -307,7 +304,7 @@ function ClientProfileCtrl(
     });
   }
 
-  vm.init();
+  init();
 
 
 }

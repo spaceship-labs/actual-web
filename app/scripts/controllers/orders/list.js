@@ -28,9 +28,6 @@ function OrdersListCtrl(
 
   var vm = this;
   vm.applyFilters = applyFilters;
-  vm.getOrdersData = getOrdersData;
-  vm.getTotalByDateRange = getTotalByDateRange;
-
   vm.currentDate = new Date();
   vm.dateRange = false;
   vm.ordersData = {};
@@ -40,7 +37,6 @@ function OrdersListCtrl(
     {key:'Client.CardName', label:'Cliente'},
     {key:'total', label: 'Total', currency:true},
     {key:'ammountPaid', label: 'Monto cobrado', currency:true},
-    //{key:'currency', label:'Moneda'},
     {key:'createdAt', label:'Venta', date:true},
     {
       key:'Acciones',
@@ -92,7 +88,7 @@ function OrdersListCtrl(
             vm.current,
             vm.goal - vm.current
           ],
-        }
+        };
       });
   }
 
@@ -116,8 +112,8 @@ function OrdersListCtrl(
       end: vm.endDate
     };
     vm.user = $rootScope.user;
-    vm.getOrdersData();
-    vm.getTotalByDateRange(vm.user.id, {
+    getOrdersData();
+    getTotalByDateRange(vm.user.id, {
       startDate: vm.startDate,
       endDate: vm.endDate,
     });
@@ -179,11 +175,11 @@ function OrdersListCtrl(
           vm.sellers = vm.sellers.map(function(s, index){
             s.total = totals[index].data.dateRange;
             return s;
-          })
+          });
         })
         .catch(function(err){
           console.log(err);
-        })
+        });
     }
   }
 
