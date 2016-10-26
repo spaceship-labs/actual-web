@@ -416,9 +416,6 @@ function QuotationsEditCtrl(
     if( !isValidStock(vm.quotation.Details) ){
       showStockAlert();
       return;
-    }else{
-      alert('valid');
-      return;
     }
     if(!vm.quotation.Order){
       vm.isLoading = true;

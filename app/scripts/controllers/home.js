@@ -35,7 +35,7 @@ function HomeCtrl(
 
   function setCategoryStockProperty(event, activeStore){
     vm.stockProperty = 'productsNum';
-    if(activeStore){
+    if(activeStore && activeStore.code != 'proyectos'){
       vm.stockProperty = activeStore.code;
     }
   }

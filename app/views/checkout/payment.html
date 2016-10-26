@@ -46,7 +46,10 @@
 
         </md-radio-group>
 
-        <div class="second-step-payment">
+        <div 
+          ng-show="vm.quotation.Payments && vm.quotation.Payments.length > 0" 
+          class="second-step-payment"
+        >
 
           <section>
             <h3><strong>2. Pagos aplicados</strong></h3>

@@ -33,9 +33,7 @@ function CheckoutClientCtrl(
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
       vm.isLoading = false;
-
       return quotationService.getCurrentStock(vm.quotation.id); 
-
     })
     .then(function(response){
       var quotationDetailsStock = response.data;
@@ -60,7 +58,7 @@ function CheckoutClientCtrl(
           console.log(err);
         });
       }
-
+      
     });
   }
 

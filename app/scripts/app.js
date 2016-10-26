@@ -67,11 +67,6 @@ angular
         controller: 'CategoryCtrl',
         controllerAs: 'vm'
       })
-      .when('/listing', {
-        templateUrl: 'views/listing.html',
-        controller: 'ListingCtrl',
-        controllerAs: 'vm'
-      })
       .when('/product/:id', {
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',
@@ -227,8 +222,8 @@ angular
 
       })
       .when('/checkout/paymentmethod/:id', {
-        templateUrl: 'views/checkout/paymentmethod.html',
-        controller: 'CheckoutPaymentmethodCtrl',
+        templateUrl: 'views/checkout/payment.html',
+        controller: 'CheckoutPaymentCtrl',
         controllerAs: 'vm',
         resolve: {
           isMiActual: function($rootScope, authService){

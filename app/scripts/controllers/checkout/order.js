@@ -112,7 +112,7 @@ function CheckoutOrderCtrl(
 
   function getPaymentType(payment){
     var type = '1 sola exhibición';
-    if(payment.type == 'cash' || payment.type == 'cash-usd'){
+    if(payment.type === 'cash' || payment.type === 'cash-usd'){
       type = 'Pago de contado';
     }else if(payment.terminal && payment.msi){
       type = payment.msi + ' meses sin intereses';

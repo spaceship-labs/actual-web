@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:CheckoutPaymentmethodCtrl
+ * @name dashexampleApp.controller:CheckoutPaymentCtrl
  * @description
- * # CheckoutPaymentmethodCtrl
+ * # CheckoutPaymentCtrl
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('CheckoutPaymentmethodCtrl', CheckoutPaymentmethodCtrl);
+  .controller('CheckoutPaymentCtrl', CheckoutPaymentCtrl);
 
-function CheckoutPaymentmethodCtrl(
+function CheckoutPaymentCtrl(
     $routeParams,
     $rootScope,
     $scope,
@@ -256,7 +256,6 @@ function CheckoutPaymentmethodCtrl(
       dialogService.showDialog('Fondos insuficientes');
       return false;
     }
-    console.log('remaining', remaining);
     return vm.applyTransaction(null, vm.activeMethod, remaining);
   }
 
@@ -339,7 +338,6 @@ function CheckoutPaymentmethodCtrl(
       var controller  = DepositController;
       method.currency = method.currency || 'MXP';
       method.ammount  = ammount;
-      console.log('method', method);
       var paymentOpts = angular.copy(method);
       if(method.msi || method.terminals){
         controller    = TerminalController;
