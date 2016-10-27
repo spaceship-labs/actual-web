@@ -37,7 +37,7 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
 
   function onPikadaySelect(pikaday){
     console.log(pikaday);
-    vm.client.birthDate = pikaday._d;
+    vm.client.Birthdate = pikaday._d;
   }
 
   function addContactForm(){

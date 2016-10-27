@@ -109,10 +109,8 @@ function ClientProfileCtrl(
   }
 
   function formatClient(client){
-    client.birthDate = client.birthDate  ? client.birthDate : new Date();
-    client.firstName = client.firstName || angular.copy(client.CardName);
-    client.phone = client.phone || angular.copy(client.Phone1);
-    client.mobilePhone = client.mobilePhone || angular.copy(client.Cellular);
+    client.BirthDate = client.BirthDate  ? client.BirthDate : new Date();
+    client.FirstName = client.FirstName || angular.copy(client.CardName);
     vm.filtersQuotations = {Client: client.id};
     vm.filtersOrders = {Client: client.id};
     client.Contacts = vm.formatContacts(client);    
@@ -130,21 +128,9 @@ function ClientProfileCtrl(
 
   function updatePersonalData(){
     vm.isLoading = true;
-    var params = {
-      //SAP fields
-      CardName: vm.client.CardName,
-      Phone1: vm.client.Phone1,
-      Cellular: vm.client.Cellular,
-      //Extrafields
-      title: vm.client.title,
-      gender: vm.client.gender,
-      birthDate: vm.client.birthDate,
-      firstName: vm.client.firstName,
-      lastName: vm.client.lastName,
-      phone: vm.client.phone,
-      mobilePhone: vm.client.mobilePhone,
-      E_Mail: vm.client.E_Mail
-    };
+    var params = angular.copy(vm.client);
+    delete params.FiscalAddresses;
+    delete params.Contacts;
     clientService.update(vm.client.CardCode, params).then(function (res){
       console.log(res);
       vm.isLoading = false;
