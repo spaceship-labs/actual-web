@@ -31,7 +31,6 @@
         getListNoImages: getListNoImages,
         getMainCategories: getMainCategories,
         getMainPromo: getMainPromo,
-        getProductsByFilters: getProductsByFilters,
         loadVariants: loadVariants,
         search: search,
         searchByFilters: searchByFilters,
