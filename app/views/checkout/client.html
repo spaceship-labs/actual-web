@@ -32,11 +32,11 @@
         <div layout="row">
           <div flex="45" class="input-element">
             <label><strong>Nombre(s) del cliente</strong> <span class="hl-label">*</span></label>
-            <p>{{vm.quotation.Client.firstName || vm.quotation.Client.CardName}}</p>
+            <p>{{vm.quotation.Client.FirstName || vm.quotation.Client.CardName}}</p>
           </div>
           <div flex="45" class="input-element">
-            <label><strong>Apllido(s) del cliente</strong> <span class="hl-label">*</span></label>
-            <p>{{vm.quotation.Client.lastName}}</p>
+            <label><strong>Apellido(s) del cliente</strong> <span class="hl-label">*</span></label>
+            <p>{{vm.quotation.Client.LastName}}</p>
           </div>
         </div>
 
@@ -77,11 +77,20 @@
                   <strong>{{contact.FirstName + ' ' + contact.LastName}}</strong>
                 </h4>
                 <ul>
-                  <!--<li>2201. Westlake Ave. Ste. 500</li>-->
                   <li><strong>Email: </strong>{{contact.E_Mail}}</li>
-                  <li><strong>Dirección: </strong>{{contact.Address}}</li>
-                  <li><strong>Télefono: </strong>{{contact.phone}}</li>
-                  <li><strong>Celular: </strong>{{contact.mobilePhone}}</li>
+                  <li><strong>Télefono: </strong>{{contact.Tel1}}</li>
+                  <li><strong>Celular: </strong>{{contact.Cellolar}}</li>
+                  <li><strong>No. exterior: </strong>{{contact.U_Noexterior}}</li>
+                  <li><strong>No. interior: </strong>{{contact.U_Nointerior}}</li>
+                  <li><strong>Colonia: </strong>{{contact.U_Colonia}}</li>
+                  <li><strong>Municipio: </strong>{{contact.U_Mpio}}</li>
+                  <li><strong>Ciudad: </strong>{{contact.U_Ciudad}}</li>
+                  <li><strong>Estado: </strong>{{contact.U_Estado}}</li>
+                  <li><strong>C.P.: </strong>{{contact.U_CP}}</li>
+                  <li><strong>Entre calle: </strong>{{contact.U_Entrecalle}}</li>
+                  <li><strong>Y calle: </strong>{{contact.U_Ycalle}}</li>
+                  <li><strong>Referencias: </strong>{{contact.U_Notes1}}</li>
+
                 </ul>
                 <p>
                   <a

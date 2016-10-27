@@ -15,7 +15,14 @@
     ng-submit="vm.updateContact(contact.formWrapper, contact)"
   >
 
-    <div ng-show="contact.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+    <div 
+      ng-show="contact.isLoading" 
+      layout-fill 
+      layout="row" 
+      layout-sm="column" 
+      layout-align="center center" 
+      class="loading-circle"
+    >
       <md-progress-circular
         md-mode="indeterminate"
         md-diameter="150">
@@ -45,20 +52,20 @@
 
         <div flex="20" class="input-element">
           <label>
-            <strong>Teléfono fijo (Lada + Número)<span class="hl-label">*</span></strong>
+            <strong>Teléfono fijo<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.phone" >
+            <input type="text" ng-model="contact.Tel1" placeholder="(Lada + Número)" >
           </div>
         </div>
 
 
         <div flex="20" class="input-element">
           <label>
-            <strong>Teléfono celular (Lada + Número) <span class="hl-label">*</span></strong>
+            <strong>Teléfono celular <span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.mobilePhone" >
+            <input type="text" ng-model="contact.Cellolar" placeholder="(Lada + Número)">
           </div>
         </div>
 
@@ -80,31 +87,31 @@
         <div flex class="input-element">
           <label><strong>Calle</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.street" >
+            <input type="text" ng-model="contact.address" >
           </div>
         </div>
         <div flex class="input-element">
           <label><strong>No. exterior*</strong></label>
           <div class="input-element-inner">
-            <input type="text"  ng-model="contact.externalNumber">
+            <input type="text"  ng-model="contact.U_Noexterior">
           </div>
         </div>
         <div flex class="input-element">
           <label><strong>No. interior</strong></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.internalNumber">
+            <input type="text" ng-model="contact.U_Nointerior">
           </div>
         </div>
         <div flex class="input-element">
           <label><strong>Colonia</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.neighborhood" >
+            <input type="text" ng-model="contact.U_Colonia" >
           </div>
         </div>
         <div flex class="input-element">
           <label><strong>Municipio</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.municipality" >
+            <input type="text" ng-model="contact.U_Mpio" >
           </div>
         </div>
       </div>
@@ -113,12 +120,12 @@
         <div flex="25" class="input-element">
           <label><strong>Ciudad</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.city"  >
+            <input type="text" ng-model="contact.U_Ciudad"  >
           </div>
         </div>
         <div flex="25" class="input-element select-element-wrapper">
           <label><strong>Estado</strong> <span class="hl-label">*</span></label>
-          <md-select ng-model="contact.entity" class="select-element">
+          <md-select ng-model="contact.U_Estado" class="select-element">
             <md-option ng-repeat="state in vm.states" ng-value="state.Code">
               {{state.Name}}
             </md-option>
@@ -127,7 +134,7 @@
         <div flex="15" class="input-element">
           <label><strong>Codigo postal</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.zipCode" >
+            <input type="text" ng-model="contact.U_CP" >
           </div>
         </div>
 
@@ -137,19 +144,19 @@
         <div flex="25" class="input-element">
           <label><strong>Entre calle</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.street2" >
+            <input type="text" ng-model="contact.U_Entrecalle" >
           </div>
         </div>
         <div flex="25" class="input-element">
           <label><strong>Y calle</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.street3" >
+            <input type="text" ng-model="contact.U_Ycalle" >
           </div>
         </div>
         <div flex="25" class="input-element">
           <label><strong>Referencias cercanas</strong></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="contact.references">
+            <input type="text" ng-model="contact.U_Notes1">
           </div>
         </div>
 
@@ -221,7 +228,7 @@
             <strong>Teléfono fijo (Lada + Número) <span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.phone" >
+            <input type="text" ng-model="vm.newContact.Tel1" >
           </div>
         </div>
 
@@ -231,7 +238,7 @@
             <strong>Teléfono celular (Lada + Número) <span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.mobilePhone" >
+            <input type="text" ng-model="vm.newContact.Cellolar" >
           </div>
         </div>
 
@@ -253,31 +260,31 @@
         <div flex class="input-element">
           <label><strong>Calle</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.street" >
+            <input type="text" ng-model="vm.newContact.address" >
           </div>
         </div>
         <div flex class="input-element">
           <label><strong>No. exterior*</strong></label>
           <div class="input-element-inner">
-            <input type="text"  ng-model="vm.newContact.externalNumber">
+            <input type="text"  ng-model="vm.newContact.U_Noexterior">
           </div>
         </div>
         <div flex class="input-element">
           <label><strong>No. interior</strong></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.internalNumber">
+            <input type="text" ng-model="vm.newContact.U_Nointerior">
           </div>
         </div>
         <div flex class="input-element">
           <label><strong>Colonia</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.neighborhood" >
+            <input type="text" ng-model="vm.newContact.U_Colonia" >
           </div>
         </div>
         <div flex class="input-element">
           <label><strong>Municipio</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.municipality" >
+            <input type="text" ng-model="vm.newContact.U_Mpio" >
           </div>
         </div>
       </div>
@@ -286,12 +293,12 @@
         <div flex="25" class="input-element">
           <label><strong>Ciudad</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.city"  >
+            <input type="text" ng-model="vm.newContact.U_Ciudad"  >
           </div>
         </div>
         <div flex="25" class="input-element select-element-wrapper">
           <label><strong>Estado</strong> <span class="hl-label">*</span></label>
-          <md-select ng-model="vm.newContact.entity" class="select-element">
+          <md-select ng-model="vm.newContact.U_Estado" class="select-element">
             <md-option ng-repeat="state in vm.states" ng-value="state.Code">
               {{state.Name}}
             </md-option>
@@ -300,7 +307,7 @@
         <div flex="15" class="input-element">
           <label><strong>Codigo postal</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.zipCode" >
+            <input type="text" ng-model="vm.newContact.U_CP" >
           </div>
         </div>
 
@@ -310,19 +317,19 @@
         <div flex="25" class="input-element">
           <label><strong>Entre calle</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.street2" >
+            <input type="text" ng-model="vm.newContact.U_Entrecalle" >
           </div>
         </div>
         <div flex="25" class="input-element">
           <label><strong>Y calle</strong> <span class="hl-label">*</span></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.street3" >
+            <input type="text" ng-model="vm.newContact.U_Ycalle" >
           </div>
         </div>
         <div flex="25" class="input-element">
           <label><strong>Referencias cercanas</strong></label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newContact.references">
+            <input type="text" ng-model="vm.newContact.U_Notes1">
           </div>
         </div>
 

@@ -24,11 +24,12 @@
       <label><strong>Fecha de nacimiento</strong></label>
       <div class="input-element-inner">
         <input
+          ng-if="vm.client.Birthdate"
           type="text"
           pikaday="vm.pikadayDate"
           set-default-date="true"
           year-range="[1900,2016]"
-          default-date="{{vm.client.BirthDate}}"
+          default-date="{{vm.client.Birthdate}}"
           readonly
           show-month-after-year="true"
           on-select="vm.onPikadaySelect(pikaday)"

@@ -71,7 +71,6 @@ function ClientProfileCtrl(
     ],
     createQuotation: createQuotation,
     changeTab: changeTab,
-    formatContacts: formatContacts,
     onPikadaySelect: onPikadaySelect,
     updatePersonalData: updatePersonalData,
     updateFiscalAddress: updateFiscalAddress,
@@ -109,11 +108,10 @@ function ClientProfileCtrl(
   }
 
   function formatClient(client){
-    client.BirthDate = client.BirthDate  ? client.BirthDate : new Date();
+    client.Birthdate = client.Birthdate  ? client.Birthdate : new Date();
     client.FirstName = client.FirstName || angular.copy(client.CardName);
     vm.filtersQuotations = {Client: client.id};
     vm.filtersOrders = {Client: client.id};
-    client.Contacts = vm.formatContacts(client);    
     return client;
   }  
 
@@ -123,7 +121,7 @@ function ClientProfileCtrl(
   }
 
   function onPikadaySelect(pikaday){
-    vm.client.birthDate = pikaday._d;
+    vm.client.Birthdate = pikaday._d;
   }
 
   function updatePersonalData(){
@@ -131,6 +129,7 @@ function ClientProfileCtrl(
     var params = angular.copy(vm.client);
     delete params.FiscalAddresses;
     delete params.Contacts;
+    console.log('params', params);
     clientService.update(vm.client.CardCode, params).then(function (res){
       console.log(res);
       vm.isLoading = false;
@@ -169,33 +168,6 @@ function ClientProfileCtrl(
     quotationService.newQuotation(params, goToSearch);
   }
 
-  function formatFiscalAddresses(client){
-    var fiscalAddresses = [];
-    if(client.fiscalAddresses){
-      fiscalAddresses = client.fiscalAddresses.map(function(address){
-        address.email = address.email || angular.copy(client.E_Mail);
-        return address;
-      });
-    }
-    return fiscalAddresses;
-  }
-
-  function formatContacts(client){
-    var contacts = [];
-    if(client.Contacts){
-      contacts = client.Contacts.map(function(contact){
-        contact.FirstName = contact.FirstName || contact.Name;
-        contact.street = contact.street || angular.copy(contact.Address);
-        contact.E_Mail = contact.E_Mail || angular.copy(client.E_Mail);
-        contact.phone = contact.phone || contact.Tel1;
-        contact.phone = contact.phone || contact.Tel1;
-        contact.mobilePhone = contact.mobilePhone || contact.Cellolar;
-        return contact;
-      });
-    }
-    console.log(client);
-    return contacts;
-  }
 
   function updateContact(form, contact){
     if(form.$valid){
@@ -231,8 +203,7 @@ function ClientProfileCtrl(
           vm.newContact = {};
           dialogService.showDialog('Dirección creada');
           var created = res.data;
-          vm.client.contacts.push(created);
-          vm.client.contacts = formatContacts(vm.client);
+          vm.client.Contacts.push(created);
         })
         .catch(function(err){
           vm.isLoading = false;

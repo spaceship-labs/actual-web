@@ -48,7 +48,11 @@ function CheckoutClientCtrl(
 
       if(vm.quotation.Client){
         clientService.getContacts(vm.quotation.Client.CardCode).then(function(res){
-          vm.contacts = formatContacts(res.data);
+          vm.contacts = res.data;
+          vm.contacts = vm.contacts.map(function(c){
+            c.completeAdrress = buildAddress(c);
+            return c;
+          });
           if(!vm.quotation.Address && vm.contacts.length > 0){
             vm.quotation.Address = vm.contacts[0].id;
             console.log('No habia direccion');
@@ -62,18 +66,23 @@ function CheckoutClientCtrl(
     });
   }
 
-  function formatContacts(contacts){
-    var formattedContacts = [];
-    if(contacts){
-      formattedContacts = contacts.map(function(c){
-        c.name = (c.firstName&&c.lastName) ? c.firstName+' '+c.lastName : c.name;
-        c.address = c.address;
-        c.phone = c.phone || c.Tel1;
-        c.mobile = c.mobilePhone || c.Cellolar;
-        return c;
-      });
-    }
-    return formattedContacts;
+  function buildAddress(contact){
+    var address = '';
+    address += 'Calle: ' + contact.address;
+    address += contact.U_Noexterior ? ', no. exterior: '+ contact.U_Noexterior : null;
+    address += contact.U_Nointerior ? ', no. interior: '+ contact.U_Nointerior : null;
+    address += contact.U_Colonia ? ', colonia: '+ contact.U_Colonia : null;
+    address += contact.U_Colonia ? ', colonia: '+ contact.U_Colonia : null;
+    address += contact.U_Mpio ? ', municipio: '+ contact.U_Mpio : null;
+    address += contact.U_Ciudad ? ', ciudad: '+ contact.U_Ciudad : null;
+    address += contact.U_Estado ? ', estado: '+ contact.U_Estado : null;
+    address += contact.U_CP ? ', código postal: '+ contact.U_CP : null;
+    address += contact.U_Estado ? ', estado: '+ contact.U_Estado : null;
+    address += contact.U_Entrecalle ? ', entre calle: '+ contact.U_Entrecalle : null;
+    address += contact.U_Ycalle ? ' y calle: '+ contact.U_Ycalle : null;
+    address += contact.U_Notes1 ? ', referencias: '+ contact.U_Notes1 : null;
+    console.log('address',address)
+    return address;
   }
 
   function continueProcess(){
