@@ -222,12 +222,6 @@
         return api.$http.post(url);
       }
 
-      //TODO: Remove function
-      function getProductsByFilters(params){
-        var url = '/productfiltervalue/getproducts';
-        return api.$http.post(url,params);
-      }
-
       function advancedSearch(params){
         var url = '/product/advancedsearch/';
         return api.$http.post(url, params);
