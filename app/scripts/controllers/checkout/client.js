@@ -72,7 +72,6 @@ function CheckoutClientCtrl(
     address += contact.U_Noexterior ? ', no. exterior: '+ contact.U_Noexterior : null;
     address += contact.U_Nointerior ? ', no. interior: '+ contact.U_Nointerior : null;
     address += contact.U_Colonia ? ', colonia: '+ contact.U_Colonia : null;
-    address += contact.U_Colonia ? ', colonia: '+ contact.U_Colonia : null;
     address += contact.U_Mpio ? ', municipio: '+ contact.U_Mpio : null;
     address += contact.U_Ciudad ? ', ciudad: '+ contact.U_Ciudad : null;
     address += contact.U_Estado ? ', estado: '+ contact.U_Estado : null;
@@ -81,7 +80,6 @@ function CheckoutClientCtrl(
     address += contact.U_Entrecalle ? ', entre calle: '+ contact.U_Entrecalle : null;
     address += contact.U_Ycalle ? ' y calle: '+ contact.U_Ycalle : null;
     address += contact.U_Notes1 ? ', referencias: '+ contact.U_Notes1 : null;
-    console.log('address',address)
     return address;
   }
 

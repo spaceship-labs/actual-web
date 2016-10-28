@@ -11,6 +11,7 @@
       var service = {
         create: create,
         createContact: createContact,
+        createFiscalAddress: createFiscalAddress,
         getById: getById,
         getClients: getClients,
         getContacts: getContacts,
@@ -60,6 +61,11 @@
 
       function createContact(cardCode, params){
         var url = '/client/'+cardCode+'/contact/create';
+        return api.$http.post(url, params);
+      }
+
+      function createFiscalAddress(cardCode, params){
+        var url = '/client/'+cardCode+'/fiscaladdress/create';
         return api.$http.post(url, params);
       }
 

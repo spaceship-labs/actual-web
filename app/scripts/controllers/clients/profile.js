@@ -215,6 +215,30 @@ function ClientProfileCtrl(
     }
   }
 
+  function createFiscalAddress(form){
+    if(form.$valid){
+      vm.isLoading = true;
+      console.log(vm.newFiscalAddress);
+      clientService.createFiscalAddress(vm.client.CardCode,vm.newFiscalAddress)
+        .then(function(res){
+          console.log(res);
+          vm.isLoading = false;
+          vm.showNewFiscal = false;
+          vm.newFiscalAddress = {};
+          dialogService.showDialog('Dirección creada');
+          var created = res.data;
+          vm.client.FiscalAddresses.push(created);
+        })
+        .catch(function(err){
+          vm.isLoading = false;
+          console.log(err);
+          dialogService.showDialog('Hubo un error');
+        });
+    }else{
+      dialogService.showDialog('Campos incompletos');
+    }
+  }  
+
   function openMapDialog(){
     $mdDialog.show({
       controller: ['$scope',MapDialogController],
