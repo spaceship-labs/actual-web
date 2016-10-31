@@ -39,23 +39,13 @@ function ProductCtrl(
     customFullscreen: ($mdMedia('xs') || $mdMedia('sm') ),
     toggleVariants: true,
     variants: [],
-    opts: {
-      index:0,
-      history: false,
-      hideAnimationDuration: 0,
-      showAnimationDuration: 0,
-      shareEl: false
-    },
     applyDiscount: applyDiscount,
     addToCart: addToCart,
-    closeGallery: closeGallery,
     getQtyArray: getQtyArray,
     getWarehouseName: getWarehouseName,
     getPiecesString: getPiecesString,
     init: init,
     resetCartQuantity: resetCartQuantity,
-    setGalleryIndex: setGalleryIndex,
-    showGallery: showGallery,
     showMessageCart: showMessageCart,
     trustAsHtml: trustAsHtml,
   });
@@ -80,7 +70,6 @@ function ProductCtrl(
         vm.productCart = {
           quantity: 1
         };
-        setupGallery(vm.product);
         if(reload){
           $location.path('/product/' + productId, false);
           loadProductFilters(vm.product);
@@ -183,32 +172,6 @@ function ProductCtrl(
       });
   }
 
-  function getImageSizes(){
-    var promises = [];
-    var getImageSize = function(galleryImg){
-      var deferred = $q.defer();
-      var img = new Image();
-      img.src = galleryImg.src;
-      img.onload = function(){
-        galleryImg.w = this.width;
-        galleryImg.h = this.height;
-        $scope.$apply();
-        deferred.resolve();
-      };
-      return deferred.promise;
-    };
-    for(var i=0;i<vm.galleryImages.length;i++){
-      promises.push( getImageSize(vm.galleryImages[i]) );
-    }
-    $q.all(promises)
-      .then(function(){
-        vm.loadedSizes = true;
-      })
-      .catch(function(err){
-        $log.error(err);
-      });
-  }
-
   function applyDiscount(discount, price){
     var result = price;
     result = price - ( ( price / 100) * discount );
@@ -219,18 +182,6 @@ function ProductCtrl(
     return $sce.trustAsHtml(string);
   }
 
-  function closeGallery() {
-    vm.open = false;
-  }
-
-  function showGallery (i) {
-    if(vm.loadedSizes){
-      if(angular.isDefined(i)) {
-        vm.opts.index = i;
-      }
-      vm.open = true;
-    }
-  }
 
   function getLowestCategory(){
     var lowestCategoryLevel = 0;
@@ -242,55 +193,6 @@ function ProductCtrl(
       }
     });
     return lowestCategory;
-  }
-
-  function setupGallery(product){
-    setupImages(product);
-    $timeout(function(){
-      vm.gallery = $("#slick-gallery");
-      vm.galleryReel = $('#slick-thumbs');
-      vm.gallery.on('afterChange',function(e, slick, currentSlide){
-        $timeout(function(){
-          vm.galleryReel.slick('slickGoTo',currentSlide);
-          vm.selectedSlideIndex = currentSlide;
-        },0);
-      });
-      getImageSizes();
-    }, 1000);    
-  }
-
-
-  function setupImages(product){
-    var imageSizeIndexGallery = 2;
-    var imageSizeIndexIcon = 1;
-    vm.selectedSlideIndex = 0;
-    vm.areImagesLoaded = true;
-    var imageSize = api.imageSizes.gallery[imageSizeIndexGallery];
-    product.files = productService.sortProductImages(product) || product.files; 
-    if(product.icons.length >= 0){
-      var img = {
-        src: product.icons[0].url,
-        w:500,
-        h:500
-      };
-      vm.galleryImages.push(img);
-    }
-    if(product.files){
-      //TEMPORAL
-      imageSize = '';
-      product.files.forEach(function(img){
-        vm.galleryImages.push({
-          src: api.baseUrl + '/uploads/products/gallery/' + imageSize + img.filename,
-          w: 500,
-          h: 500
-        });
-      });
-    }
-  }
-
-  function setGalleryIndex(index){
-    vm.selectedSlideIndex = index;
-    vm.gallery.slick('slickGoTo',index);
   }
 
   function loadProductFilters(product){
