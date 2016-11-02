@@ -48,6 +48,12 @@ function ProductCtrl(
     resetCartQuantity: resetCartQuantity,
     showMessageCart: showMessageCart,
     trustAsHtml: trustAsHtml,
+    sas:{
+      '001': 'Studio',
+      '002': 'Home',
+      '003': 'Ambas',
+      '004': 'Kids'
+    }  
   });
 
   vm.init($routeParams.id);
@@ -251,7 +257,6 @@ function ProductCtrl(
 
   function resetCartQuantity(){
     var available = vm.productCart.deliveryGroup.available;
-    console.log('available', available);
     if(vm.productCart.quantity >= available){
       vm.productCart.quantity = available;
     }

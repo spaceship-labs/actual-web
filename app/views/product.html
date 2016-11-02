@@ -51,6 +51,14 @@
                   <td>Código:</td>
                   <td><strong>{{vm.product.ItemCode}}</strong></td>
                 </tr>
+                <tr>
+                  <td>Sociedad (SAP):</td>
+                  <td><strong>{{vm.sas[vm.product.U_Empresa]}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Marca (SAP)</td>
+                  <td><strong>{{vm.product.ItmsGrpNam}}</strong></td>
+                </tr>
                 <tr ng-repeat="filter in vm.filters">
                   <td 
                     ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">

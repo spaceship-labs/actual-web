@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:CheckoutPaymentCtrl
+ * @name dashexampleApp.controller:CheckoutPaymentsCtrl
  * @description
- * # CheckoutPaymentCtrl
+ * # CheckoutPaymentsCtrl
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('CheckoutPaymentCtrl', CheckoutPaymentCtrl);
+  .controller('CheckoutPaymentsCtrl', CheckoutPaymentsCtrl);
 
-function CheckoutPaymentCtrl(
+function CheckoutPaymentsCtrl(
     $routeParams,
     $rootScope,
     $scope,
@@ -121,7 +121,7 @@ function CheckoutPaymentCtrl(
       })
       .catch(function(err){
         console.log(err);
-      })
+      });
   }
 
   function getEwalletDescription(balance){
@@ -205,7 +205,7 @@ function CheckoutPaymentCtrl(
     if(vm.validMethods){
       var isGroupUsed = false;
       var currentGroup = getGroupByQuotation(vm.quotation);
-      if( currentGroup < 0){
+      if( currentGroup < 0 || currentGroup === 1){
         isGroupUsed = true;
       }else if(currentGroup > 0 && currentGroup == index+1){
         isGroupUsed = true;
@@ -332,7 +332,6 @@ function CheckoutPaymentCtrl(
   }
 
   function applyTransaction(ev, method, ammount) {
-    //if( method && ammount && !isNaN(ammount) ){
     if(method){
       var templateUrl = 'views/checkout/payment-dialog.html';
       var controller  = DepositController;
@@ -476,6 +475,14 @@ function CheckoutPaymentCtrl(
       $mdDialog.cancel();
     };
 
+    function isPaymentMinValid(){
+      $scope.payment.min = $scope.payment.min || 0;      
+      if( ($scope.maxAmmount - $scope.payment.ammount) >= $scope.payment.min ){
+        return true;
+      }
+      return false;
+    } 
+
     $scope.isvalidPayment = function(){
       $scope.payment.min = $scope.payment.min || 0;
       if($scope.payment.ammount < $scope.payment.min){
@@ -488,6 +495,7 @@ function CheckoutPaymentCtrl(
 
       if( $scope.maxAmmount ){
         return (
+          isPaymentMinValid() &&
           ($scope.payment.ammount <= $scope.maxAmmount) &&
           $scope.payment.ammount && 
           $scope.payment.verificationCode &&
@@ -505,7 +513,6 @@ function CheckoutPaymentCtrl(
 
     $scope.onChangeCard = function(card){
       $scope.terminal = getSelectedTerminal(card);
-      console.log('terminal', $scope.terminal);
     };
 
     function getSelectedTerminal(card){
@@ -524,7 +531,8 @@ function CheckoutPaymentCtrl(
           $scope.terminal = getSelectedTerminal($scope.payment.card);
           $scope.payment.terminal = $scope.terminal.value;
         }        
-        $mdDialog.hide($scope.payment);
+        alert('cumple');
+        //$mdDialog.hide($scope.payment);
       }else{
         console.log('no cumple');
       }

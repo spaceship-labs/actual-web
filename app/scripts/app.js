@@ -211,8 +211,8 @@ angular
 
       })
       .when('/checkout/paymentmethod/:id', {
-        templateUrl: 'views/checkout/payment.html',
-        controller: 'CheckoutPaymentCtrl',
+        templateUrl: 'views/checkout/payments.html',
+        controller: 'CheckoutPaymentsCtrl',
         controllerAs: 'vm',
         resolve: {
           isMiActual: function($rootScope, authService){

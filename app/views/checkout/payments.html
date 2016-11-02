@@ -31,7 +31,6 @@
       <div flex="75">
 
         <md-radio-group 
-          ng-show="vm.singlePayment && !vm.multiplePayment" 
           ng-model="vm.activeMethod"
         >
 
@@ -45,6 +44,26 @@
           </div>
 
         </md-radio-group>
+
+        <!--
+        <md-radio-group 
+          ng-model="vm.refundOption"
+        >
+          <h1>Reembolsos</h1>
+
+          <div class="pay-method-wrap" >
+            <ul flex="75">              
+              <ng-include
+                ng-repeat="option in vm.quotation.Payments track by $index"
+                src="'views/checkout/refund-option.html'">
+              </ng-include>                
+            </ul>
+
+          </div>
+
+        </md-radio-group>
+        -->
+
 
         <div 
           ng-show="vm.quotation.Payments && vm.quotation.Payments.length > 0" 
