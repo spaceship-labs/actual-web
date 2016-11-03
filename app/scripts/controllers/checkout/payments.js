@@ -205,9 +205,10 @@ function CheckoutPaymentsCtrl(
     if(vm.validMethods){
       var isGroupUsed = false;
       var currentGroup = getGroupByQuotation(vm.quotation);
+      console.log('currentGroup', currentGroup);
       if( currentGroup < 0 || currentGroup === 1){
         isGroupUsed = true;
-      }else if(currentGroup > 0 && currentGroup == index+1){
+      }else if(currentGroup > 0 && currentGroup === index+1){
         isGroupUsed = true;
       }
       return vm.validMethods[activeKeys[index]] && isGroupUsed;
@@ -244,6 +245,7 @@ function CheckoutPaymentsCtrl(
   function chooseMethod(method, group){
     vm.setMethod(method, group);
     var remaining = vm.quotation.total - vm.quotation.ammountPaid;
+    vm.activeMethod.remaining = remaining;
     vm.activeMethod.maxAmmount = remaining;
     if(method.type === EWALLET_TYPE){
       var balance = vm.quotation.Client.ewallet || 0;
@@ -476,10 +478,14 @@ function CheckoutPaymentsCtrl(
     };
 
     function isPaymentMinValid(){
-      $scope.payment.min = $scope.payment.min || 0;      
-      if( ($scope.maxAmmount - $scope.payment.ammount) >= $scope.payment.min ){
+      $scope.payment.min = $scope.payment.min || 0;   
+      if($scope.payment.ammount === $scope.payment.remaining){
         return true;
       }
+      else if( ($scope.payment.remaining - $scope.payment.ammount) >= $scope.payment.min ){
+        return true;
+      }
+      $scope.errMsg = 'Cantidad no valida';
       return false;
     } 
 
@@ -487,7 +493,6 @@ function CheckoutPaymentsCtrl(
       $scope.payment.min = $scope.payment.min || 0;
       if($scope.payment.ammount < $scope.payment.min){
         $scope.minStr = $filter('currency')($scope.payment.min);
-        $scope.errMin = true;
         $scope.errMsg = 'La cantidad minima es: ' +  $scope.minStr;
       }else{
         $scope.errMin = false;        
@@ -531,8 +536,8 @@ function CheckoutPaymentsCtrl(
           $scope.terminal = getSelectedTerminal($scope.payment.card);
           $scope.payment.terminal = $scope.terminal.value;
         }        
-        alert('cumple');
-        //$mdDialog.hide($scope.payment);
+        //alert('cumple');
+        $mdDialog.hide($scope.payment);
       }else{
         console.log('no cumple');
       }
