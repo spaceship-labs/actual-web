@@ -205,7 +205,6 @@ function CheckoutPaymentsCtrl(
     if(vm.validMethods){
       var isGroupUsed = false;
       var currentGroup = getGroupByQuotation(vm.quotation);
-      console.log('currentGroup', currentGroup);
       if( currentGroup < 0 || currentGroup === 1){
         isGroupUsed = true;
       }else if(currentGroup > 0 && currentGroup === index+1){
@@ -221,7 +220,8 @@ function CheckoutPaymentsCtrl(
     var group = -1;
     if(quotation.Payments.length > 0){
       group = quotation.paymentGroup;
-      //console.log(quotation);
+      var paymentsCount = quotation.Payments.length;
+      group = quotation.Payments[paymentsCount - 1].group;
     }
     return group;
   }
@@ -281,6 +281,7 @@ function CheckoutPaymentsCtrl(
     var paymentGroup = getGroupByQuotation(quotation);
     var currentGroup = _.findWhere(vm.paymentMethodsGroups, {group: paymentGroup});
     var firstMethod = currentGroup.methods[0];
+    quotation.paymentGroup = paymentGroup;
     quotation.total = angular.copy(firstMethod.total);
     quotation.subtotal = angular.copy(firstMethod.subtotal);
     quotation.discount = angular.copy(firstMethod.discount);
