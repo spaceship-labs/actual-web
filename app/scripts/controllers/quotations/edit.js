@@ -268,7 +268,8 @@ function QuotationsEditCtrl(
           var updateParams = {
             isClosed: true,
             isClosedReason: closeReason,
-            isClosedNotes: extraNotes
+            isClosedNotes: extraNotes,
+            status: 'closed'
           };
           return quotationService.update(vm.quotation.id, updateParams);
         })

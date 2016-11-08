@@ -10,7 +10,7 @@
       ng-value="option"
       class="md-primary">
 
-      <strong>{{option.name}}</strong>
+      <strong>{{option.name}}</strong> | Cantidad: {{option.ammount | roundCurrency}}
     </md-radio-button>
     <span
       ng-if="!option.msi && option.type != 'single-payment-terminal' "

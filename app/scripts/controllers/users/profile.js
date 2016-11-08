@@ -17,7 +17,8 @@ function UserProfileCtrl(
   $mdDialog, 
   commonService, 
   userService, 
-  localStorageService
+  localStorageService,
+  paymentService
 ){
   var vm = this;
   vm.user = angular.copy($rootScope.user);
@@ -27,8 +28,8 @@ function UserProfileCtrl(
   vm.onSelectEndDate = onSelectEndDate;
   vm.init = init;
   vm.getCashReport = getCashReport;
-  vm.groupPayments = groupPayments;
   vm.getTotalByMethod = getTotalByMethod;
+  vm.getTotalByGroup = getTotalByGroup;
   vm.print = print;
 
   if(vm.user.userType == 'broker'){
@@ -86,7 +87,7 @@ function UserProfileCtrl(
     userService.getCashReport(params).then(function(res){
       console.log(res);
       var payments = res.data;
-      vm.paymentsGroups = vm.groupPayments(payments);
+      vm.paymentsGroups = groupPayments(payments);
       vm.isLoadingReport = false;
     }).catch(function(err){
       console.log(err);
@@ -99,27 +100,41 @@ function UserProfileCtrl(
     var auxGroups = _.groupBy(payments, function(payment){
       return payment.type + '#' + payment.terminal;
     });
-    //var groups = _.map(auxGroups, function(group){
     var methods = _.map(auxGroups, function(group){
-        return {
-            type: group[0].type,
-            name: group[0].name,
-            label: group[0].type,
-            terminal: group[0].terminal,
-            msi: group[0].msi,
-            payments: group,
-            groupNumber: group[0].group
-        }
+      return {
+        type: group[0].type,
+        name: group[0].name,
+        label: group[0].type,
+        terminal: group[0].terminal,
+        msi: group[0].msi,
+        payments: group,
+        groupNumber: group[0].group
+      };
     });
 
     var paymentsGroups = _.groupBy(methods, 'groupNumber');
     for(var key in paymentsGroups){
+      var sortedMethods = sortMethodsByGroup(paymentsGroups[key], key);
       groups.push({
         groupNumber: key,
-        methods: paymentsGroups[key]
+        methods: sortedMethods
       });
     }
     return groups;
+  }
+
+  function sortMethodsByGroup(methods, groupNumber){
+    var sorted = [];
+    var groups = paymentService.getPaymentMethodsGroups();
+    groupNumber = parseInt(groupNumber);
+    var group = _.findWhere(groups, {group: groupNumber});
+    for(var i = 0; i< group.methods.length; i++){
+      var matches = _.where(methods, {type: group.methods[i].type});
+      if(matches && matches.length > 0){
+        sorted = sorted.concat(matches);
+      }      
+    }
+    return sorted;
   }
 
   function getTotalByMethod(method){
@@ -130,6 +145,13 @@ function UserProfileCtrl(
         acum += current.ammount;
       }
       return acum;
+    },0);
+    return total;
+  }
+
+  function getTotalByGroup(group){
+    var total = group.methods.reduce(function(acum, method){
+      return acum += getTotalByMethod(method);
     },0);
     return total;
   }

@@ -164,18 +164,21 @@
                 if(column.yesNo){
                   data = data ? 'Si' : 'No';
                 }
-                if(!data && data != 0){
-                  data = data ? data : 'No asignado';
-                }
                 if(column.defaultValue){
                   data = data ? data : column.defaultValue;
+                }                                
+                if(!data && data != 0){
+                  data = data ? data : 'No asignado';
                 }
                 if(column.mapper){
                   var data_b = data;
                   data = column.mapper[data] || data;
                 }
+                if(column.dateTime){                  
+                  data = $filter('date')(data, 'd/MMM/yyyy h:mm a');
+                }
                 if(column.date){
-                  data = $filter('date')(data, 'dd/MM/yyyy');
+                  data = $filter('date')(data, 'd/MMM/yyyy');
                 }
                 if(column.currency){
                   data = $filter('currency')(data);

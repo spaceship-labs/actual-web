@@ -33,6 +33,19 @@ function QuotationsListCtrl(
     {key:'Client.E_Mail', label:'Email', defaultValue:'Sin cliente'},
     {key:'createdAt', label:'Cotización' ,date:true},
     {key:'total', label: 'Total', currency:true},
+    {key:'status', label:'Status', 
+      mapper:{
+        'to-order':'Cerrada(orden)',
+        'closed': 'Cerrada',
+      },
+      defaultValue: 'Abierta'
+    },
+    {
+      key:'tracing', 
+      label:'Seguimiento', 
+      defaultValue: moment().add(5,'days').toDate(),
+      dateTime: true
+    },
     {
       key:'Acciones',
       label:'Acciones',

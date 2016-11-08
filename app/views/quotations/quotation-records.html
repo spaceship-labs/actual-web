@@ -93,10 +93,10 @@
     </thead>
     <tbody ng-repeat="record in vm.quotation.Records">
       <tr>
-        <td>{{record.createdAt | date: 'MMM d, y h:mm:ss a'}}</td>
+        <td>{{record.createdAt | date: 'd/MMM/yyyy h:mm a'}}</td>
         <td>{{record.eventType}}</td>
         <td>{{record.User.firstName + ' ' + record.User.lastName}}</td>
-        <td>{{record.dateTime | date:'MMM d, y h:mm:ss a' }}</td>
+        <td>{{record.dateTime | date:'d/MMM/yyyy h:mm a' }}</td>
         <td>{{record.files.length || 0}}</td>
         <td>
           <a ng-click="vm.toggleRecord(record)" href="#">
