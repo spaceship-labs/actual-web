@@ -150,7 +150,7 @@
             <span>{{payment.createdAt | date:'d/MMM/yyyy'}}</span>
           </div>
           <div flex class="order-payment-item-data">
-            <span>#{{ payment.id | limitTo: 14 }}{{payment.id.length > 14 ? '...' : ''}}</span>
+            <span>#{{payment.folio}}</span>
           </div>
           <div flex class="order-payment-item-data">
             <span>{{vm.getPaymentType(payment)}}</span>

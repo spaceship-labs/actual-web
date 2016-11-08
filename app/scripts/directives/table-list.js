@@ -9,10 +9,11 @@
     var controller = function($scope, $rootScope , $timeout, DTOptionsBuilder, DTColumnBuilder, dialogService, $compile, $filter){
       $scope.dtInstance = {};
       $scope.isExporting = false;
+      $scope.sortedCount = 0;
 
       $scope.showDestroyDialog = function(ev, id){
         dialogService.showDestroyDialog(ev, $scope.destroyFn, id);
-      }
+      };
 
       $scope.dtOptions = DTOptionsBuilder
         .newOptions()
@@ -29,9 +30,14 @@
         //.withPaginationType('numbers')
         .withPaginationType('input')
         .withDOM('<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>')
-        .withOption('createdRow', function(row) {
+        .withOption('createdRow', function(row, data, index) {
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);
+            console.log('row data',data);
+            console.log('row', row);
+            if($scope.createdRowCb){
+              $scope.createdRowCb(row, data, index);
+            }
         })
         .withOption('initComplete', function() {
           if($('#new-search').length <= 0){
@@ -94,12 +100,15 @@
             query.page = page;
         }
 
-        if($scope.orderBy && !sortingColumnName){
-          query.orderby = $scope.orderBy;
+        if($scope.sortedCount === 0 && $scope.orderBy && $scope.sortDirection){
+          sortingColumnName = $scope.orderBy;
+          sortingDirection = $scope.sortDirection;
         }
+
         //Do not sort when is a destroy column
-        else if(!$scope.columns[sortingColumnIndex].destroy && !$scope.columns[sortingColumnIndex].editUrl){
+        if( !isActionColum(sortingColumnIndex) ){
           query.orderby = sortingColumnName + ' ' + sortingDirection;
+          console.log('query orderBy elseif', query.orderby);
           $('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ sortingColumnLabel);
         }
 
@@ -131,6 +140,7 @@
 
         $scope.query = query;
         $scope.page = page;
+        console.log('querty', $scope.query);
 
         $scope.apiResource(page,query)
           .then(
@@ -142,12 +152,17 @@
                   'recordsFiltered': res.total,
                   'data': res.data
               };
+              $scope.sortedCount++;
               fnCallback(records);
             },
             function(err){
               console.log(err);
             }
           );
+      }
+
+      function isActionColum(columnIndex){
+        return $scope.columns[columnIndex].destroy || $scope.columns[columnIndex].editUrl;
       }
 
       $scope.dtColumns = [];
@@ -256,10 +271,7 @@
           var callback = function(json){console.log(json);}
           var resetPaging = false;
           if($scope.dtInstance){
-            console.log('dtInstance');
-            console.log($scope.dtInstance.DataTable);
             var searchValue = $('.dataTables_filter input').val();
-            console.log('searchValue', searchValue);
             $scope.dtInstance.DataTable.search(searchValue).draw();
           }
         }, 100);
@@ -324,10 +336,12 @@
           actionUrl: '=',
           searchText: '@',
           orderBy: '@',
+          sortDirection: '@',
           filters: '=',
           dateRange: '=',
           exportQuery: '=',
-          exportColumns: '='
+          exportColumns: '=',
+          createdRowCb: '='
         },
         templateUrl : 'views/directives/table-list.html'
       };

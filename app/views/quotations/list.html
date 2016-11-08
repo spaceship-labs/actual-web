@@ -127,7 +127,10 @@
             class="table-list table-list-v2"
             columns="vm.columnsLeads"
             api-resource="vm.apiResourceLeads"
+            order-by="{{vm.orderBy}}"
+            sort-direction="{{vm.sortDirection}}"
             date-range="vm.dateRange"
+            created-row-cb="vm.createdRowCb"
             filters="vm.filters"></div>
         </section>
       </div>

@@ -27,6 +27,8 @@ function QuotationsListCtrl(
   vm.getTotalByDateRange = getTotalByDateRange;
   vm.filters = false;
   vm.dateEnd = false;
+  vm.orderBy = 'tracing';
+  vm.sortDirection = 'DESC';
   vm.columnsLeads = [
     {key: 'folio', label:'Folio'},
     {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
@@ -43,7 +45,9 @@ function QuotationsListCtrl(
     {
       key:'tracing', 
       label:'Seguimiento', 
-      defaultValue: moment().add(5,'days').toDate(),
+      defaultValue: '-',
+      color: 'red',
+      //defaultValue: moment().add(5,'days').toDate(),
       dateTime: true
     },
     {
@@ -57,6 +61,14 @@ function QuotationsListCtrl(
   ];
   vm.quotationsData = {};
   vm.apiResourceLeads = quotationService.getList;
+  vm.createdRowCb = function(row, data, index){
+    var day = moment().startOf('day').format('MM-DD-YYYY');
+    if(data.tracing){
+      if(moment(data.tracing).startOf('day').format('MM-DD-YYYY') === day){
+        $(row).addClass('highlight').children().css( "background-color", "#faadb2" );
+      }
+    }
+  };
 
 
   function getQuotationsData(){
