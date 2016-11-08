@@ -30,7 +30,8 @@ function CheckoutPaymentsCtrl(
     authService,
     clientService,
     paymentService,
-    localStorageService
+    localStorageService,
+    $interval
   ){
   var vm = this;
 
@@ -53,6 +54,7 @@ function CheckoutPaymentsCtrl(
     customFullscreen: $mdMedia('xs') || $mdMedia('sm'),
     singlePayment: true,
     multiplePayment: false,
+    loadingEstimate: 0,
     payments: [],
     paymentMethodsGroups: [],
     roundCurrency: commonService.roundCurrency
@@ -63,6 +65,7 @@ function CheckoutPaymentsCtrl(
   var EWALLET_GROUP_INDEX = 0;
 
   function init(){
+    animateProgress();
     vm.isLoading = true;
 
     quotationService.getById($routeParams.id).then(function(res){
@@ -493,7 +496,7 @@ function CheckoutPaymentsCtrl(
       else if( ($scope.payment.remaining - $scope.payment.ammount) >= $scope.payment.min ){
         return true;
       }
-      $scope.errMsg = 'Cantidad no valida';
+      $scope.errMsg = 'La cantidad restante es menor al monto minimo';
       return false;
     } 
 
@@ -573,20 +576,21 @@ function CheckoutPaymentsCtrl(
     if( isMinimumPaid() ){
       confirmOrder()
         .then(function(){
-          vm.isLoading = true;
+          vm.isLoadingProgress = true;
+          vm.loadingEstimate = 0;
           var params = {
             paymentGroup: vm.quotation.paymentGroup || 1
           };
+          animateProgress();
           return orderService.createFromQuotation(vm.quotation.id, params);
         })
         .catch(function(err){
           console.log(err);
           dialogService.showDialog('Hubo un error, revisa tus datos <br/>' + err.data);
-          vm.isLoading = false;
           return $q.reject('cancelled-by-user');
         })
         .then(function(res){
-          vm.isLoading = false;
+          vm.isLoadingProgress = false;
           vm.order = res.data;
           if(vm.order.id){
             quotationService.setActiveQuotation(false);
@@ -595,11 +599,20 @@ function CheckoutPaymentsCtrl(
         }).catch(function(err){
           if(err !== 'cancelled-by-user'){
             commonService.showDialog('Hubo un error, revisa los datos e intenta de nuevo');
-            vm.isLoading = false;
+            vm.isLoadingProgress = false;
             console.log(err);
           }
         });
     }
+  }
+
+  function animateProgress(){
+    $interval(function(){
+      vm.loadingEstimate += 5;
+      if(vm.loadingEstimate >= 100){
+        vm.loadingEstimate = 0;
+      }
+    },1000);
   }
 
   function confirmOrder(){

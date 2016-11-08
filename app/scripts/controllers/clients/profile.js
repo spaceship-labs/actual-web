@@ -78,7 +78,9 @@ function ClientProfileCtrl(
     apiResourceOrders: orderService.getList,
     updateContact: updateContact,
     createContact: createContact,
-    openMapDialog: openMapDialog
+    openMapDialog: openMapDialog,
+    showNewFiscalForm: showNewFiscalForm,
+    showNewAddressForm: showNewAddressForm
   });
 
   function init(){
@@ -97,6 +99,8 @@ function ClientProfileCtrl(
         vm.activeTab = $location.search().activeTab;
       }
 
+      vm.client = setClientDefaultData(vm.client);
+
       commonService.getStatesSap().then(function(res){
         console.log(res);
         vm.states = res.data;
@@ -106,6 +110,37 @@ function ClientProfileCtrl(
 
     });
   }
+
+  function setClientDefaultData(client){
+    client.FiscalAddresses = client.FiscalAddresses.map(function(fiscalAddress){
+      if(!fiscalAddress.E_Mail || fiscalAddress.E_Mail === ''){
+        fiscalAddress.E_Mail = angular.copy(client.E_Mail);
+      }
+      return fiscalAddress;
+    });
+    client.Contacts = client.Contacts.map(function(contact){
+      if(!contact.E_Mail || contact.E_Mail === ''){
+        contact.E_Mail = angular.copy(client.E_Mail);
+      }
+      return contact;
+    });    
+    return client;
+  }
+
+  function showNewFiscalForm(){
+    vm.isNewFiscalFormActive = true;
+    vm.newFiscalAddress = {
+      E_Mail:angular.copy(vm.client.E_Mail)
+    };
+  }
+
+  function showNewAddressForm(){
+    vm.isNewAddressFormActive = true;
+    vm.newContact = {
+      E_Mail:angular.copy(vm.client.E_Mail)
+    };
+  }
+
 
   function formatClient(client){
     client.Birthdate = client.Birthdate  ? client.Birthdate : new Date();

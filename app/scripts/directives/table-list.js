@@ -33,8 +33,6 @@
         .withOption('createdRow', function(row, data, index) {
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);
-            console.log('row data',data);
-            console.log('row', row);
             if($scope.createdRowCb){
               $scope.createdRowCb(row, data, index);
             }

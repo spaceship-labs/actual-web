@@ -1,6 +1,14 @@
 <section action="#" class="form-section-content">
 
-  <div layout="row">
+  <div class="checkbox-client-type">
+    <md-checkbox
+      ng-model="vm.client.isMoral"
+      aria-label="Persona moral">
+      <strong>Persona moral</strong>
+    </md-checkbox>    
+  </div>
+
+  <div layout="row" ng-if="!vm.client.isMoral">
     <div flex="20" class="input-element select-element-wrapper">
       <label><strong>Titulo</strong></label>
       <md-select
@@ -49,6 +57,7 @@
           type="text"
           pikaday="vm.pikadayDate"
           readonly
+          name="birthdate"
           show-month-after-year="true"
           year-range="[1900,2016]"
           on-select="vm.onPikadaySelect(pikaday)">
@@ -74,7 +83,7 @@
       </div>
     </div>
 
-    <div flex class="input-element">
+    <div flex class="input-element" ng-if="!vm.client.isMoral">
       <label>
         <strong>
           Apellidos <span class="hl-label">*</span>
@@ -103,10 +112,9 @@
       </label>
         <div class="input-element-inner">
           <input
-            type="text"
+            type="tel"
             name="phone"
             ng-model="vm.client.Phone1"
-            required
             placeholder="Lada + Número"
           >
         </div>
@@ -121,11 +129,10 @@
       </label>
       <div class="input-element-inner">
         <input
-          type="text"
-          name="mobilePhone"
+          type="tel"
+          name="mobile"
           ng-model="vm.client.Cellular"
           placeholder="Lada + Número"
-          required
         >
       </div>
 

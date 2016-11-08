@@ -33,9 +33,11 @@
         <label><strong>Teléfono <span class="hl-label">*</span></strong></label>
         <div class="input-element-inner">
           <input
-            type="text"
+            type="tel"
+            name="phone"
             ng-model="fiscalAddress.Phone1"
             required
+            autocomplete="tel"
             placeholder="Lada + Número">
         </div>
       </div>
@@ -43,7 +45,12 @@
       <div flex="30" class="input-element">
         <label><strong>Email</strong></label>
         <div class="input-element-inner">
-          <input type="email" ng-model="fiscalAddress.E_Mail" required>
+          <input 
+            type="email"
+            name="email" 
+            ng-model="fiscalAddress.E_Mail" 
+            required
+            autocomplete="email">
         </div>
       </div>
     </div>
@@ -55,7 +62,12 @@
       <div flex="20" class="input-element">
         <label><strong>Calle</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.Street">
+          <input 
+            type="text" 
+            name="street"
+            ng-model="fiscalAddress.Street"
+            autocomplete="street-address" 
+          >
         </div>
       </div>
 
@@ -83,7 +95,10 @@
       <div flex="20" class="input-element">
         <label><strong>Municipio</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.U_Localidad">
+          <input 
+            type="text" 
+            ng-model="fiscalAddress.U_Localidad"
+            autocomplete="address-level1">
         </div>
       </div>
 
@@ -94,7 +109,12 @@
       <div flex="20" class="input-element">
         <label><strong>Ciudad</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.City">
+          <input 
+          type="text" 
+          name="city"
+          ng-model="fiscalAddress.City"
+          autocomplete="address-level2" 
+          >
         </div>
       </div>
 
@@ -111,7 +131,12 @@
       <div flex="15" class="input-element">
         <label><strong>Código postal</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.ZipCode">
+          <input 
+            type="text" 
+            name="postal"
+            ng-model="fiscalAddress.ZipCode"
+            autocomplete="postal-code" 
+          >
         </div>
       </div>
 

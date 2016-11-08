@@ -2,10 +2,25 @@
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
+<div 
+  ng-show="vm.isLoadingProgress" 
+  class="container container-xxlg loading-circle"
+  layout="row"
+  layout-align="center center">
+  <div class="progress-bar">
+    <p><strong>Procesando orden</strong></p>
+    <md-progress-linear 
+      class="md-accent"
+      md-mode="determinate" 
+      value="{{vm.loadingEstimate}}">
+    </md-progress-linear>
+  </div>
+</div>
+
 <form
   name="createForm"
   ng-submit="vm.createOrder(createForm)"
-  ng-show="!vm.isLoading"
+  ng-show="!vm.isLoading && !vm.isLoadingProgress"
   class="form-view cart-view checkout-view container container-xxlg"
 >
 

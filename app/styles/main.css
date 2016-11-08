@@ -57,6 +57,10 @@ md-dialog .md-button[ng-click="dialog.abort()"]{
 }
 
 .loading-circle{min-height: 250px;}
+.loading-circle .progress-bar{
+  text-align: center;
+  width: 80%;
+}
 .no-border{border: 0!important;}
 .no-margin{margin: 0!important}
 .no-padding{padding: 0!important}
@@ -227,6 +231,7 @@ select{
 .input-element .input-element-inner input[type="text"],
 .input-element .input-element-inner input[type="email"],
 .input-element .input-element-inner input[type="number"],
+.input-element .input-element-inner input[type="tel"],
 .input-element .input-element-inner input[type="password"],
 .input-element .input-element-inner textarea{
   font-size: 14px;
@@ -255,6 +260,7 @@ select{
 .input-element .input-element-inner input[type="text"].ng-invalid.ng-dirty,
 .input-element .input-element-inner input[type="email"].ng-invalid.ng-dirty,
 .input-element .input-element-inner input[type="number"].ng-invalid.ng-dirty,
+.input-element .input-element-inner input[type="tel"].ng-invalid.ng-dirty,
 .input-element .input-element-inner input[type="password"].ng-invalid.ng-dirty,
 .input-element .input-element-inner textarea.ng-invalid.ng-dirty{
   border:2px solid red;
@@ -264,6 +270,7 @@ select{
 .input-element .input-element-inner input[type="text"].ng-invalid.ng-touched,
 .input-element .input-element-inner input[type="email"].ng-invalid.ng-touched,
 .input-element .input-element-inner input[type="number"].ng-invalid.ng-touched,
+.input-element .input-element-inner input[type="tel"].ng-invalid.ng-touched,
 .input-element .input-element-inner input[type="password"].ng-invalid.ng-touched,
 .input-element .input-element-inner textarea.ng-invalid.ng-touched{
   border:2px solid red;
@@ -2437,6 +2444,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   border: 0;
 }
 
+.form-section-content .checkbox-client-type{
+  margin: 10px 0;
+  font-size: 12px;
+}
+.form-section-content .checkbox-client-type md-checkbox{margin:0;}
 .form-section-content .copy-data{
   margin: 4px 0;
 }
