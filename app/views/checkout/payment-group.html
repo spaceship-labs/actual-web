@@ -54,7 +54,7 @@
   </ul>
   <div flex="20" class="method-block-prices">
     <h2 class="price-now" ng-class="{'price-hl' : $index == 0 }">
-      {{ paymentGroup.total | roundCurrency }}
+      {{ vm.calculateRemaining(paymentGroup.total) | roundCurrency }}
     </h2>
   </div>
 </div>

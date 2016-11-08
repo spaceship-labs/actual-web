@@ -378,6 +378,22 @@
       return range;
     }
 
+    function roundCurrency(ammount, options){
+      options = options || {up:true};
+      var integers = Math.floor(ammount);
+      var cents = (ammount - integers);
+      var roundedCents = 0;
+      if(cents > 0){
+        if(options.up){
+          roundedCents = Math.ceil( (cents*100) ) / 100;
+        }else{
+          roundedCents = Math.floor( (cents*100) ) / 100;        
+        }
+      }
+      var rounded = integers + roundedCents;
+      return rounded;
+    }    
+
     var service = {
       combineDateTime: combineDateTime,
       getCountries: getCountries,
@@ -386,6 +402,7 @@
       getMonthDateRange: getMonthDateRange,
       getFortnightRange: getFortnightRange,
       roundIntegerCurrency: roundIntegerCurrency,
+      roundCurrency: roundCurrency,
       showDialog: showDialog
     };
 

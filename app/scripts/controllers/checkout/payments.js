@@ -38,6 +38,7 @@ function CheckoutPaymentsCtrl(
     addPayment: addPayment,
     applyTransaction: applyTransaction,
     authorizeOrder: authorizeOrder,
+    calculateRemaining: calculateRemaining,
     createOrder: createOrder,
     clearActiveMethod: clearActiveMethod,
     chooseMethod: chooseMethod,
@@ -54,7 +55,7 @@ function CheckoutPaymentsCtrl(
     multiplePayment: false,
     payments: [],
     paymentMethodsGroups: [],
-    roundCurrency: roundCurrency
+    roundCurrency: commonService.roundCurrency
   });
 
   var EWALLET_TYPE = 'ewallet';
@@ -126,7 +127,7 @@ function CheckoutPaymentsCtrl(
 
   function getEwalletDescription(balance){
     var description = '';
-    var balanceRounded = roundCurrency( balance, {up:false} );
+    var balanceRounded = commonService.roundCurrency( balance, {up:false} );
     var balanceStr = $filter('currency')(balanceRounded);
     description = 'Saldo disponible: ' + balanceStr +' MXN';    
     return description;
@@ -344,9 +345,10 @@ function CheckoutPaymentsCtrl(
       if(method.msi || method.terminals){
         controller    = TerminalController;
       }
+      paymentOpts.ammount = ammount;
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
-        controller: ['$scope', '$mdDialog', 'formatService', 'payment', controller],
+        controller: ['$scope', '$mdDialog', 'formatService','commonService', 'payment', controller],
         templateUrl: templateUrl,
         parent: angular.element(document.body),
         targetEvent: ev,
@@ -368,6 +370,10 @@ function CheckoutPaymentsCtrl(
     }
   }
 
+  function calculateRemaining(ammount){
+    return ammount - vm.quotation.ammountPaid;
+  }
+
   function authManager(manager){
     vm.isLoading = true;
     authService.authManager(manager)
@@ -383,7 +389,6 @@ function CheckoutPaymentsCtrl(
         return quotationService.update(vm.quotation.id, params);
       })
       .then(function(quotationUpdated){
-        console.log(quotationUpdated);
         vm.isLoading = false;
       })
       .catch(function(err){
@@ -417,12 +422,12 @@ function CheckoutPaymentsCtrl(
   }
 
 
-  function DepositController($scope, $mdDialog, formatService, payment) {
+  function DepositController($scope, $mdDialog, formatService, commonService, payment) {
 
     $scope.init = function(){
       $scope.payment = payment;
       if(payment.type !== EWALLET_TYPE){ 
-        $scope.payment.ammount = roundCurrency($scope.payment.ammount);
+        $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);
       }
       $scope.needsVerification = payment.needsVerification;
       $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
@@ -461,10 +466,12 @@ function CheckoutPaymentsCtrl(
     $scope.init();
   }
 
-  function TerminalController($scope, $mdDialog, formatService, payment) {
+  function TerminalController($scope, $mdDialog, formatService, commonService, payment) {
     $scope.payment = payment;
     $scope.needsVerification = payment.needsVerification;
-    $scope.payment.ammount = roundCurrency($scope.payment.ammount); 
+    //$scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount); 
+    console.log('$scope.payment.ammount', $scope.payment.ammount);
+    
     $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
 
     $scope.numToLetters = function(num){
@@ -491,6 +498,7 @@ function CheckoutPaymentsCtrl(
     } 
 
     $scope.isvalidPayment = function(){
+      console.log('scope payment in isValidStock', $scope.payment.ammount);
       $scope.payment.min = $scope.payment.min || 0;
       if($scope.payment.ammount < $scope.payment.min){
         $scope.minStr = $filter('currency')($scope.payment.min);
@@ -618,21 +626,6 @@ function CheckoutPaymentsCtrl(
     return percentage;
   }
 
-  function roundCurrency(ammount, options){
-    options = options || {up:true};
-    var integers = Math.floor(ammount);
-    var cents = (ammount - integers);
-    var roundedCents = 0;
-    if(cents > 0){
-      if(options.up){
-        roundedCents = Math.ceil( (cents*100) ) / 100;
-      }else{
-        roundedCents = Math.floor( (cents*100) ) / 100;        
-      }
-    }
-    var rounded = integers + roundedCents;
-    return rounded;
-  }
 
   function isMinimumPaid(){
     if(vm.quotation){
