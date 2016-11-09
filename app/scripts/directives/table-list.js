@@ -9,7 +9,7 @@
     var controller = function($scope, $rootScope , $timeout, DTOptionsBuilder, DTColumnBuilder, dialogService, $compile, $filter){
       $scope.dtInstance = {};
       $scope.isExporting = false;
-      $scope.sortedCount = 0;
+      $scope.currentOrderColumnIndex = 0;
 
       $scope.showDestroyDialog = function(ev, id){
         dialogService.showDestroyDialog(ev, $scope.destroyFn, id);
@@ -37,10 +37,11 @@
               $scope.createdRowCb(row, data, index);
             }
         })
+        .withOption('order', getDefaultSortOption())
         .withOption('initComplete', function() {
           if($('#new-search').length <= 0){
             $('<p class="sorting-by-label"></p>').appendTo('.dataTables_wrapper .top');
-            $('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ $scope.columns[0].label);
+            createOrderByLabel();
             $('<button/>').text('Buscar').attr('id', 'new-search').appendTo('.dataTables_filter');
 
             if($scope.exportQuery){
@@ -74,6 +75,46 @@
         ])
         */
 
+      function getDefaultSortOption(){
+        var defaultSort = [0,'asc'];
+        $scope.currentOrderColumnIndex = 0;
+        if($scope.defaultSort){
+          defaultSort = $scope.defaultSort;
+          $scope.currentOrderColumnIndex = $scope.defaultSort[0];
+        }
+        return defaultSort;
+      }
+
+      function createOrderByLabel(){
+        var columnName = $scope.columns[$scope.currentOrderColumnIndex].label;
+        var orderColumn;
+        if($scope.sortColumName){
+          orderColumn = $scope.columns[$scope.currentOrderColumnIndex];
+          columnName = orderColumn.label;
+        }
+        $('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ columnName);
+      }
+
+      function getSortingColumnIndex(sorting){
+        var index;
+        if(angular.isArray(sorting)){
+          index = sorting[0];
+        }else{
+          index = sorting;
+        }
+        return  index;
+      }
+
+      function getSortingDirection(sortingSettings){
+        var direction;
+        if(angular.isArray(sortingSettings[0])){
+          direction = sortingSettings[0][1];
+        }else{
+          direction = sortingSettings[1];
+        }
+        return  direction;
+      }
+
       function serverData(sSource, aoData, fnCallback, oSettings) {
 
         //All the parameters you need is in the aoData variable
@@ -85,29 +126,22 @@
         var page = 0;
         var query = {};
         var sorting = oSettings.aaSorting[0];
-
-        var sortingColumnIndex = sorting[0];
-        var sortingColumnLabel = $scope.columns[sortingColumnIndex].label;
+        var sortingDirection = getSortingDirection(oSettings.aaSorting);
+        var sortingColumnIndex = getSortingColumnIndex(sorting);
         var sortingColumnName = columns[sortingColumnIndex].data;
-        var sortingDirection = sorting[1].toUpperCase();
 
-        page = (start==0) ? 1 : (start/length) + 1;
-        if(search != ''){
-            query = {page:page,term:search.value}
+        page = (start===0) ? 1 : (start/length) + 1;
+        if(search !== ''){
+            query = {page:page,term:search.value};
         }else{
             query.page = page;
         }
 
-        if($scope.sortedCount === 0 && $scope.orderBy && $scope.sortDirection){
-          sortingColumnName = $scope.orderBy;
-          sortingDirection = $scope.sortDirection;
-        }
-
         //Do not sort when is a destroy column
         if( !isActionColum(sortingColumnIndex) ){
+          $scope.currentOrderColumnIndex = sortingColumnIndex;
           query.orderby = sortingColumnName + ' ' + sortingDirection;
-          console.log('query orderBy elseif', query.orderby);
-          $('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ sortingColumnLabel);
+          createOrderByLabel();
         }
 
         query.fields = [];
@@ -138,7 +172,7 @@
 
         $scope.query = query;
         $scope.page = page;
-        console.log('querty', $scope.query);
+        console.log('query', $scope.query);
 
         $scope.apiResource(page,query)
           .then(
@@ -333,8 +367,7 @@
           columns: '=',
           actionUrl: '=',
           searchText: '@',
-          orderBy: '@',
-          sortDirection: '@',
+          defaultSort: '=',
           filters: '=',
           dateRange: '=',
           exportQuery: '=',
