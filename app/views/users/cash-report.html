@@ -1,0 +1,66 @@
+<section class="cash-report-inner">
+  <h1>REPORTE DE CAJA</h1>
+
+  <h3><strong>Usuario:</strong> {{main.user.firstName + ' ' + main.user.lastName}}</h3>
+  <h3>
+    <strong>Periodo:</strong>
+    {{vm.cashRegister.startDate | date:'dd/MM/yyyy h:mm a'}} |
+    {{vm.cashRegister.endDate | date:'dd/MM/yyyy h:mm a'}}
+  </h3>
+
+  <section ng-repeat="group in vm.paymentsGroups">
+    <h2>Grupo de pago {{group.groupNumber}}</h2>
+    <div 
+      class="payment-group" 
+      ng-repeat="method in group.methods track by $index"
+    >
+      <h3 ng-if="method.terminal"><strong>{{method.name}} | {{ main.mapTerminalCode(method.terminal) }}</strong></h3>
+      <h3 ng-if="!method.terminal"><strong>{{method.name}}</strong></h3>
+      <div>
+        <div layout="row">
+          <div class="payment-item-header" flex="10"><strong>Folio</strong></div>
+          <div class="payment-item-header" flex="20"><strong>Tienda</strong></div>
+          <div class="payment-item-header" flex><strong>Verificación</strong></div>
+          <div class="payment-item-header" flex="20"><strong>Fecha</strong></div>
+          <div class="payment-item-header" flex="10"><strong>Pedido</strong></div>
+          <div class="payment-item-header" flex><strong>Cantidad</strong></div>
+          <div class="payment-item-header" flex="10"><strong>Moneda</strong></div>
+          <div class="payment-item-header" flex><strong>Tipo de cambio</strong></div>
+        </div>
+        <div layout="row" ng-repeat="payment in method.payments" class="payment-item">
+          <div class="payment-item-cell" flex="10">{{payment.folio}}</div>
+          <div class="payment-item-cell" flex="20">{{payment.Store.name}}</div>
+          <div class="payment-item-cell" flex>{{payment.verificationCode}}</div>
+          <div class="payment-item-cell" flex="20">{{payment.createdAt | date:'dd/MM/yyyy h:mm a'}}</div>
+          <div class="payment-item-cell" flex="10">
+            <span ng-if="payment.Order.folio">#{{payment.Order.folio}}</span>
+            <span ng-if="!payment.Order.folio">-</span>
+          </div>
+          <div class="payment-item-cell" flex>{{payment.ammount | currency}}</div>
+          <div class="payment-item-cell to-upper" flex="10">{{payment.currency}}</div>
+          <div class="payment-item-cell" flex>{{payment.exchangeRate | currency}}</div>
+        </div>
+      </div>
+      <p class="pull-right total-method">
+        <strong>Total </strong>
+        <strong ng-if="method.terminal">{{method.name}} | {{method.terminal}}:</strong>
+        <strong ng-if="!method.terminal">{{method.name}}:</strong>         
+        {{vm.getTotalByMethod(method) | currency}} MXN
+      </p>
+    </div>
+    <h2 class="pull-right total-group">
+      <strong>Total grupo {{group.groupNumber}}: {{vm.getTotalByGroup(group) | currency}} MXN</strong>
+    </h2>
+  </section>
+
+  <div layout="row" layout-align="center center" class="form-view-btns no-margin">
+    <button
+      ng-click="vm.print()"
+      flex="50"
+      class="form-view-btn form-view-btn-primary print-btn"
+    >
+      Imprimir reporte
+    </button>
+  </div>
+
+</section>

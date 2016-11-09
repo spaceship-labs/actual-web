@@ -31,7 +31,8 @@
     storeService,
     $mdDialog,
     dialogService,
-    deliveryService
+    deliveryService,
+    commonService
   ){
     var vm = this;
     angular.extend(vm, {
@@ -42,6 +43,7 @@
       isLoadingLogin: false,
       isMiActual: $rootScope.isMiActual,
       logInForm: {},
+      mapTerminalCode: commonService.mapTerminalCode,
       menuCategories: [],
       menuCategoriesOn: false,
       pointersSidenav: [],
@@ -468,7 +470,8 @@
     'storeService',
     '$mdDialog',
     'dialogService',
-    'deliveryService'
+    'deliveryService',
+    'commonService'
   ];
 
 })();

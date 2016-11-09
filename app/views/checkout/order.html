@@ -156,7 +156,7 @@
             <span>{{vm.getPaymentType(payment)}}</span>
           </div>
           <div flex class="order-payment-item-data">
-            <span>{{payment.terminal}}</span>
+            <span>{{ main.mapTerminalCode(payment.terminal) }}</span>
           </div>
           <div flex class="order-payment-item-data">
             <span ng-if="payment.type !='cash-usd'">{{payment.ammount | roundCurrency:false}} MXN</span>

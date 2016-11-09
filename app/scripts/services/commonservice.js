@@ -392,6 +392,17 @@
       }
       var rounded = integers + roundedCents;
       return rounded;
+    }
+
+    function mapTerminalCode(code){
+      var mapper = {
+        'american-express': 'American express',
+        'banamex': 'Banamex',
+        'bancomer': 'Bancomer',
+        'banorte': 'Banorte',
+        'santander': 'Santander'       
+      };
+      return mapper[code];
     }    
 
     var service = {
@@ -401,6 +412,7 @@
       getStatesSap: getStatesSap,
       getMonthDateRange: getMonthDateRange,
       getFortnightRange: getFortnightRange,
+      mapTerminalCode: mapTerminalCode,
       roundIntegerCurrency: roundIntegerCurrency,
       roundCurrency: roundCurrency,
       showDialog: showDialog

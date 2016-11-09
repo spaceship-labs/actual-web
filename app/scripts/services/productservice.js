@@ -286,6 +286,7 @@
                 FILTERS_VARIANTS.forEach(function (filter){
                   var values = _.where( product.FilterValues, { Filter: filter.id } );
                   values.forEach(function(val){
+                    console.log('product', product);
                     val.product = product.ItemCode;
                     val.stock   = product.Available;
                     val.stock   = product[activeStore.code];
