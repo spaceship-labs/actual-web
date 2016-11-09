@@ -2794,6 +2794,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .quotation-view .cart-view{padding: 20px 0;}
 .quotation-view .transfers-table-block{margin: 30px 0}
+.quotation-view .chosen-container{width: 200px!important;}
 
 .quotation-view .quotation-texts ul{
   list-style: none;

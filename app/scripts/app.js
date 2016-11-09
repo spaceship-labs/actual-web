@@ -30,7 +30,8 @@ angular
     'infinite-scroll',
     'ngPhotoswipe',
     'ui.utils.masks',
-    'leaflet-directive'
+    'leaflet-directive',
+    'localytics.directives'
   ])
 
   .config(function (

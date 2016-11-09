@@ -33,6 +33,7 @@ function QuotationsEditCtrl(
   angular.extend(vm, {
     newRecord: {},
     api: api,
+    brokers: [],
     isLoadingRecords: false,
     recordTypes: ['Email', 'Llamada', 'WhatsApp', 'Visita'],
     closeTypes: [
@@ -76,8 +77,6 @@ function QuotationsEditCtrl(
     print: print,
     daysDiff: daysDiff
   });
-
-  vm.brokers = [];
 
   $rootScope.$on('activeStoreAssigned', function(){
     vm.activeStore = $rootScope.activeStore;

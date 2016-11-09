@@ -43,20 +43,15 @@
         <label for="">Vendedor</label>
         <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
       </div>
-      <div flex="25" layout layout-wrap>
-        <label for="">Broker </label>
-        <md-input-container flex="100" style="margin:0;">
-          <md-select ng-model="vm.quotation.Broker">
-            <md-option ng-value="undefined">Ninguno</md-option>
-            <md-option 
-              ng-repeat="broker in vm.brokers | orderBy:'firstName' " 
-              ng-value="broker.id"
-              ng-selected="broker.id === vm.quotation.Broker"
-            >
-              {{broker.firstName + ' ' + broker.lastName}}
-            </md-option>
-          </md-select>
-        </md-input-container>
+      <div flex="25">
+        <p><label for="">Broker</label></p>
+        <select
+          chosen
+          ng-model="vm.quotation.Broker"
+          ng-options="broker.id as broker.firstName + ' ' + broker.lastName for broker in vm.brokers | orderBy:'firstName'"
+        >
+        </select>
+
       </div>
     </div>
 
