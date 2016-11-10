@@ -317,6 +317,11 @@ angular
         controller: 'RefundsPaymentsCtrl',
         controllerAs: 'vm'
       })
+      .when('/politicas-de-entrega', {
+        templateUrl: 'views/delivery-policy.html',
+        controller: 'DeliveryPolicyCtrl',
+        controllerAs: 'deliveryPolicy'
+      })
       .otherwise({
         redirectTo: '/'
       });
