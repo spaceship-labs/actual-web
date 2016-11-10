@@ -307,6 +307,16 @@ angular
           }
         }
       })
+      .when('/refunds/products/:id', {
+        templateUrl: 'views/refunds/products.html',
+        controller: 'RefundsProductsCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/refunds/payments/:id', {
+        templateUrl: 'views/refunds/payments.html',
+        controller: 'RefundsPaymentsCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

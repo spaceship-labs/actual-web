@@ -47,8 +47,6 @@ function CheckoutPaymentsCtrl(
     getPaidPercentage: getPaidPercentage,
     isActiveGroup: isActiveGroup,
     isMinimumPaid: isMinimumPaid,
-    selectMultiple: selectMultiple,
-    selectSingle: selectSingle,
     setMethod: setMethod,
 
     customFullscreen: $mdMedia('xs') || $mdMedia('sm'),
@@ -199,11 +197,6 @@ function CheckoutPaymentsCtrl(
       });
   }
 
-  function selectSingle(){
-    vm.singlePayment = true;
-    vm.multiplePayment = false;
-  }
-
   function isActiveGroup(index){
     var activeKeys = ['paymentGroup1','paymentGroup2','paymentGroup3','paymentGroup4','paymentGroup5'];
     if(vm.validMethods){
@@ -228,11 +221,6 @@ function CheckoutPaymentsCtrl(
       group = quotation.Payments[paymentsCount - 1].group;
     }
     return group;
-  }
-
-  function selectMultiple(){
-    vm.multiplePayment = true;
-    vm.singlePayment = false;
   }
 
   function setMethod(method, group){
