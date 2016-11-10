@@ -17,7 +17,7 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
     activeTab       : 0,
     client          :{},
     contacts        :[{}],
-    fiscalAddresses :[{}],
+    fiscalAddress   :{},
     titles: [
       {label:'Sr.', value:'Sr'},
       {label:'Sra.', value: 'Sra'},
@@ -29,7 +29,6 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
     ],
     states          : [],
     countries       : commonService.getCountries(),
-    addFiscalForm   : addFiscalForm,
     addContactForm  : addContactForm,
     create          : create,
     onPikadaySelect : onPikadaySelect
@@ -42,10 +41,6 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
 
   function addContactForm(){
     vm.contacts.push({});
-  }
-
-  function addFiscalForm(){
-    vm.fiscalAddresses.push({});
   }
 
   function addContact(form){
@@ -62,12 +57,9 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
     })
     .catch(function(err){
       console.log(err);
-    })
+    });
   }
 
-  function filterFiscalAddresses(fiscalAddress){
-    return !_.isUndefined(fiscalAddress.companyName);
-  }
 
   function filterContacts(contact){
     return !_.isUndefined(contact.FirstName);
@@ -76,7 +68,7 @@ function ClientCreateCtrl($location, $rootScope, dialogService, commonService, c
   function create(){
     vm.isLoading = true;
     vm.client.contacts = vm.contacts.filter(filterContacts);
-    vm.client.fiscalAddresses = vm.fiscalAddresses.filter(filterFiscalAddresses);
+    vm.client.fiscalAddress = vm.fiscalAddress || false;
 
     clientService.create(vm.client)
       .then(function(res){

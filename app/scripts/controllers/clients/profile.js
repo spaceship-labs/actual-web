@@ -112,12 +112,11 @@ function ClientProfileCtrl(
   }
 
   function setClientDefaultData(client){
-    client.FiscalAddresses = client.FiscalAddresses.map(function(fiscalAddress){
-      if(!fiscalAddress.E_Mail || fiscalAddress.E_Mail === ''){
-        fiscalAddress.E_Mail = angular.copy(client.E_Mail);
+    if(client.FiscalAddress){
+      if(!client.FiscalAddress.E_Mail || client.FiscalAddress.E_Mail === ''){
+        client.FiscalAddress.E_Mail = angular.copy(client.E_Mail);
       }
-      return fiscalAddress;
-    });
+    }
     client.Contacts = client.Contacts.map(function(contact){
       if(!contact.E_Mail || contact.E_Mail === ''){
         contact.E_Mail = angular.copy(client.E_Mail);
@@ -176,7 +175,7 @@ function ClientProfileCtrl(
   }
 
   function updateFiscalAddress(){
-    var fiscalAddress = vm.client.FiscalAddresses[0] || {};
+    var fiscalAddress = vm.client.FiscalAddress || {};
     vm.isLoading =  true;
     if(fiscalAddress.id){
       clientService.updateFiscalAddress(fiscalAddress.id, vm.client.CardCode,fiscalAddress)

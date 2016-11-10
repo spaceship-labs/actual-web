@@ -10,13 +10,13 @@
     </div>
   </div>
 
-  <div class="client-item-info" ng-repeat="fiscalAddress in vm.fiscalAddresses">
+  <div class="client-item-info">
 
     <div layout="row">
       <div flex="45" class="input-element">
         <label><strong>Razón social <span class="hl-label">*</span></strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.companyName" required>
+          <input type="text" ng-model="vm.fiscalAddress.companyName" required>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
       <div flex="20" class="input-element">
         <label><strong>RFC <span class="hl-label">*</span></strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.rfc" required>
+          <input type="text" ng-model="vm.fiscalAddress.rfc" required>
         </div>
       </div>
       -->
@@ -37,7 +37,7 @@
           <input
             type="tel"
             name="phone"
-            ng-model="fiscalAddress.Phone1"
+            ng-model="vm.fiscalAddress.Phone1"
             required
             autocomplete="tel"
             placeholder="Lada + Número">
@@ -50,7 +50,7 @@
           <input 
             type="email"
             name="email" 
-            ng-model="fiscalAddress.E_Mail" 
+            ng-model="vm.fiscalAddress.E_Mail" 
             required
             autocomplete="email">
         </div>
@@ -67,7 +67,7 @@
           <input 
             type="text" 
             name="street"
-            ng-model="fiscalAddress.Street"
+            ng-model="vm.fiscalAddress.Street"
             autocomplete="street-address" 
           >
         </div>
@@ -76,21 +76,21 @@
       <div flex="10" class="input-element">
         <label><strong>No. exterior</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.U_NumExt">
+          <input type="text" ng-model="vm.fiscalAddress.U_NumExt">
         </div>
       </div>
 
       <div flex="10" class="input-element">
         <label><strong>No. interior</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.U_NumInt">
+          <input type="text" ng-model="vm.fiscalAddress.U_NumInt">
         </div>
       </div>
 
       <div flex="25" class="input-element">
         <label><strong>Colonia</strong></label>
         <div class="input-element-inner">
-          <input type="text" ng-model="fiscalAddress.Block">
+          <input type="text" ng-model="vm.fiscalAddress.Block">
         </div>
       </div>
 
@@ -99,7 +99,7 @@
         <div class="input-element-inner">
           <input 
             type="text" 
-            ng-model="fiscalAddress.U_Localidad"
+            ng-model="vm.fiscalAddress.U_Localidad"
             autocomplete="address-level1">
         </div>
       </div>
@@ -114,7 +114,7 @@
           <input 
           type="text" 
           name="city"
-          ng-model="fiscalAddress.City"
+          ng-model="vm.fiscalAddress.City"
           autocomplete="address-level2" 
           >
         </div>
@@ -123,7 +123,7 @@
 
       <div flex="30" class="input-element select-element-wrapper">
         <label><strong>Estado</strong></label>
-        <md-select ng-model="fiscalAddress.State" class="select-element">
+        <md-select ng-model="vm.fiscalAddress.State" class="select-element">
           <md-option ng-repeat="state in vm.states" ng-value="state.Code">
             {{state.Name}}
           </md-option>
@@ -136,7 +136,7 @@
           <input 
             type="text" 
             name="postal"
-            ng-model="fiscalAddress.ZipCode"
+            ng-model="vm.fiscalAddress.ZipCode"
             autocomplete="postal-code" 
           >
         </div>
@@ -144,17 +144,6 @@
 
     </div>
 
-  </div>
-
-  <div layout="row" layout-align="end center">
-    <a
-      href="#"
-      flex="30"
-      class="action-btn"
-      ng-click="vm.addFiscalForm()">
-      Agregar nueva dirección 
-      <i class="icon-cotizar add-icon"></i>
-    </a>
   </div>
 
 
