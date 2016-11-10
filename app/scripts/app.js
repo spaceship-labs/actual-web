@@ -322,6 +322,21 @@ angular
         controller: 'DeliveryPolicyCtrl',
         controllerAs: 'deliveryPolicy'
       })
+      .when('/politicas-de-instalacion-y-ensamble', {
+        templateUrl: 'views/ensamble-policy.html',
+        controller: 'EnsamblePolicyCtrl',
+        controllerAs: 'ensamblePolicy'
+      })
+      .when('/politicas-de-almacenaje', {
+        templateUrl: 'views/storage-policy.html',
+        controller: 'StoragePolicyCtrl',
+        controllerAs: 'storagePolicy'
+      })
+      .when('/politicas-de-garantia', {
+        templateUrl: 'views/warranty-policy.html',
+        controller: 'WarrantyPolicyCtrl',
+        controllerAs: 'warrantyPolicy'
+      })
       .otherwise({
         redirectTo: '/'
       });
