@@ -416,12 +416,12 @@ function CheckoutPaymentsCtrl(
   function DepositController($scope, $mdDialog, formatService, commonService, payment) {
 
     $scope.init = function(){
+      console.log('init DepositController');
       $scope.payment = payment;
       /*
       if(payment.type !== EWALLET_TYPE){ 
-        $scope.payment.ammount2 = commonService.roundCurrency($scope.payment.ammount);
+        $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);
         console.log('$scope.payment.ammount', $scope.payment.ammount);
-        console.log('$scope.payment.ammount2', $scope.payment.ammount2);
       }
       */
       $scope.needsVerification = payment.needsVerification;
@@ -438,8 +438,6 @@ function CheckoutPaymentsCtrl(
     };
 
     $scope.isvalidPayment = function(){
-      console.log('$scope.maxAmmount', $scope.maxAmmount);
-      console.log('$scope.payment.ammount', $scope.payment.ammount);
       if($scope.maxAmmount){
         return ($scope.payment.ammount <= $scope.maxAmmount);
       }

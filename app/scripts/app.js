@@ -31,7 +31,8 @@ angular
     'ngPhotoswipe',
     'ui.utils.masks',
     'leaflet-directive',
-    'localytics.directives'
+    'localytics.directives',
+    'ng-currency'
   ])
 
   .config(function (

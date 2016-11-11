@@ -80,12 +80,14 @@
               type="text"
               max="{{maxAmmount}}"
               ng-model="payment.ammount"
-              ui-money-mask>
+              ng-currency
+              >
             <input
               ng-if="!maxAmmount"
               type="text"
+              ng-currency
               ng-model="payment.ammount"
-              ui-money-mask>
+              >
 
           </div>
         </div>

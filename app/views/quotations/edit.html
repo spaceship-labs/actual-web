@@ -47,6 +47,7 @@
         <p><label for="">Broker</label></p>
         <select
           chosen
+          data-placeholder-text-single="'Seleccionar un broker'"
           ng-model="vm.quotation.Broker"
           ng-options="broker.id as broker.firstName + ' ' + broker.lastName for broker in vm.brokers | orderBy:'firstName'"
         >
