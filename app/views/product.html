@@ -212,6 +212,7 @@
                   >
                     <td>
                       {{deliveryGroup.date | date: "d/MMM/yyyy"}} (en {{deliveryGroup.days}} días)
+                      <!--
                       <p>
                         <span 
                           class="comma-separated"
@@ -220,6 +221,7 @@
                           {{ vm.getWarehouseName(d.companyFrom) }}: {{d.available}} ({{d.date | date: 'd/MMM/yyyy'}})
                         </span>
                       </p>
+                      -->
                     </td>
                     <td class="delivery-date-stock">
                       {{deliveryGroup.available | number: 0}} {{vm.getPiecesString(deliveryGroup.available)}}

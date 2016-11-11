@@ -12,9 +12,12 @@ angular.module('dashexampleApp')
 
 function DashboardCtrl($rootScope, $filter, orderService, quotationService){
   var vm = this;
-
-  vm.quotationsData = {}
-  vm.ordersData = {}
+  angular.extend(vm,{
+    quotationsData: {},
+    ordersData:{},
+    getAverageTicket: getAverageTicket,
+    getClosingPercentage: getClosingPercentage
+  });
 
   function getQuotationsData(){
     var dateRange = {
@@ -100,6 +103,25 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
           colors: ["#C92933", "#48C7DB", "#FFCE56"]
         };
       });
+  }
+
+  function getAverageTicket(){
+    var average = 0;
+    if(vm.ordersData.monthQty && vm.ordersData.monthAmmount){
+      average = vm.ordersData.monthAmmount / vm.ordersData.monthQty;
+    }
+    return average;
+  }
+
+  function getClosingPercentage(){
+    var percentage = 0;
+    var onePercent = 0;
+    if(vm.quotationsData.monthQty && vm.ordersData.monthQty){
+      onePercent = vm.quotationsData.monthQty / 100;
+      percentage = vm.ordersData.monthQty / onePercent;
+    }
+    percentage = percentage.toFixed(2);
+    return percentage + '%';
   }
 
   function init(){

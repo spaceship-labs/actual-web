@@ -83,16 +83,18 @@
           </h3>
         </div>
       </div>
-      <!--
+
       <p class="bottom-text">
         <strong>Entrega aproximada: </strong> {{detailGroup.shipDate | date: "d/MMM/yyyy"}}
       </p>
-      -->
+      
+      <!--
       <p class="bottom-text" ng-repeat="detail in detailGroup.details">
         <strong>Entrega aproximada:</strong>
         {{detail.shipDate | date: "d/MMM/yyyy"}}
         (en {{vm.daysDiff(detail.shipDate)}} días) | {{ vm.getWarehouseById(detail.shipCompanyFrom).WhsName }}  | Cantidad: {{detail.quantity}} | Valido: {{detail.validStock}}
       </p>
+      -->
       <p
         ng-if="
           vm.appliesForPackageOrPromotionDiscount(detailGroup) == 'packageDiscount'

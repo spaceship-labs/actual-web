@@ -69,6 +69,7 @@ function ClientProfileCtrl(
         ]
       },
     ],
+    createOrUpdateFiscalAddress: createOrUpdateFiscalAddress,
     createQuotation: createQuotation,
     changeTab: changeTab,
     onPikadaySelect: onPikadaySelect,
@@ -161,7 +162,7 @@ function ClientProfileCtrl(
   function updatePersonalData(){
     vm.isLoading = true;
     var params = angular.copy(vm.client);
-    delete params.FiscalAddresses;
+    delete params.FiscalAddress;
     delete params.Contacts;
     console.log('params', params);
     clientService.update(vm.client.CardCode, params).then(function (res){
@@ -174,23 +175,6 @@ function ClientProfileCtrl(
     });
   }
 
-  function updateFiscalAddress(){
-    var fiscalAddress = vm.client.FiscalAddress || {};
-    vm.isLoading =  true;
-    if(fiscalAddress.id){
-      clientService.updateFiscalAddress(fiscalAddress.id, vm.client.CardCode,fiscalAddress)
-        .then(function(res){
-          console.log(res);
-          vm.isLoading = false;
-          dialogService.showDialog('Datos de facturación actualizados');
-        })
-        .catch(function(err){
-          console.log(err);
-          vm.isLoading = false;
-          dialogService.showDialog('Hubo un error, revisa los campos');
-        });
-    }
-  }
 
   function createQuotation(){
     var params = {
@@ -249,27 +233,62 @@ function ClientProfileCtrl(
     }
   }
 
-  function createFiscalAddress(form){
+  function createOrUpdateFiscalAddress(form){
+    console.log('vm.client.FiscalAddress', vm.client.FiscalAddress);
+    console.log('form', form);
     if(form.$valid){
-      vm.isLoading = true;
-      console.log(vm.newFiscalAddress);
-      clientService.createFiscalAddress(vm.client.CardCode,vm.newFiscalAddress)
+      console.log('valid');
+      if(vm.client.FiscalAddress && vm.client.FiscalAddress.id){
+        console.log('update');
+        updateFiscalAddress(vm.client.FiscalAddress);
+      }else{
+        console.log('update');
+        createFiscalAddress(vm.client.FiscalAddress);
+      }
+    }else{
+      dialogService.showDialog('Datos incompletos, revisa tus datos e intenta de nuevo');
+    }
+  }
+
+  function createFiscalAddress(fiscalAddress){
+    console.log('createFiscalAddress');
+    vm.isLoading = true;
+    console.log(fiscalAddress);
+    clientService.createFiscalAddress(vm.client.CardCode,fiscalAddress)
+      .then(function(res){
+        console.log(res);
+        vm.isLoading = false;
+        vm.showNewFiscal = false;
+        fiscalAddress = {};
+        dialogService.showDialog('Dirección creada');
+        var created = res.data;
+        vm.client.FiscalAddress = created;
+      })
+      .catch(function(err){
+        vm.isLoading = false;
+        console.log(err);
+        dialogService.showDialog('Hubo un error');
+      });
+  }  
+
+  function updateFiscalAddress(fiscalAddress){
+    console.log('updateFiscalAddress');
+    fiscalAddress = fiscalAddress || {};
+    if(fiscalAddress.id){
+      vm.isLoading =  true;
+      clientService.updateFiscalAddress(fiscalAddress.id, vm.client.CardCode,fiscalAddress)
         .then(function(res){
           console.log(res);
           vm.isLoading = false;
-          vm.showNewFiscal = false;
-          vm.newFiscalAddress = {};
-          dialogService.showDialog('Dirección creada');
-          var created = res.data;
-          vm.client.FiscalAddresses.push(created);
+          dialogService.showDialog('Datos de facturación actualizados');
         })
         .catch(function(err){
-          vm.isLoading = false;
           console.log(err);
-          dialogService.showDialog('Hubo un error');
+          vm.isLoading = false;
+          dialogService.showDialog('Hubo un error, revisa los campos');
         });
     }else{
-      dialogService.showDialog('Campos incompletos');
+      dialogService.showDialog('La dirección no tiene un id asignado');
     }
   }  
 

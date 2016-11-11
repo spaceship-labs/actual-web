@@ -172,7 +172,7 @@
 
         $scope.query = query;
         $scope.page = page;
-        console.log('query', $scope.query);
+        //console.log('query', $scope.query);
 
         $scope.apiResource(page,query)
           .then(

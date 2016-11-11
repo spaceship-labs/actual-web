@@ -2530,6 +2530,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   padding: 10px;
   margin: 0
 }
+.chart-section h2 a{color: #000;}
 .chart-section .chart-section-inner{
   padding: 10px;
 }
@@ -2573,6 +2574,27 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .chart-section .chart-legends .legend-sqr2{
   background: #EADE56;
+}
+
+/*---------------/
+  #PERFORMANCE-CARD
+/*--------------*/
+.performance-card{padding: 20px 30px 10px!important;}
+.performance-card .performance-card-title{
+  margin-bottom: 20px;
+  text-align: center;
+}
+.performance-card p{margin:0;}
+.performance-card .performance-table-header{margin-bottom: 20px;}
+.performance-card .performance-table-header p{
+  font-size: 12px;
+}
+.performance-card .performance-table-row{
+  padding: 10px 0;
+}
+.performance-card .performance-table-row + .performance-table-row{border-top: 1px solid #000}
+.performance-card .performance-table-row .row-label{
+  font-size: 12px;
 }
 
 /*--------------/
@@ -3055,6 +3077,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .dashboard-view .dashboard-card{
   border: 1px solid #000;
   margin: 10px 15px;
+  min-height: 450px;
   -webkit-box-shadow: 0px 6px 3px -2px rgba(0,0,0,0.44);
   -moz-box-shadow: 0px 6px 3px -2px rgba(0,0,0,0.44);
   box-shadow: 0px 6px 3px -2px rgba(0,0,0,0.44);

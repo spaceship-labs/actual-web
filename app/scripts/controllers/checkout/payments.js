@@ -417,9 +417,13 @@ function CheckoutPaymentsCtrl(
 
     $scope.init = function(){
       $scope.payment = payment;
+      /*
       if(payment.type !== EWALLET_TYPE){ 
-        $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);
+        $scope.payment.ammount2 = commonService.roundCurrency($scope.payment.ammount);
+        console.log('$scope.payment.ammount', $scope.payment.ammount);
+        console.log('$scope.payment.ammount2', $scope.payment.ammount2);
       }
+      */
       $scope.needsVerification = payment.needsVerification;
       $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
 
@@ -434,6 +438,8 @@ function CheckoutPaymentsCtrl(
     };
 
     $scope.isvalidPayment = function(){
+      console.log('$scope.maxAmmount', $scope.maxAmmount);
+      console.log('$scope.payment.ammount', $scope.payment.ammount);
       if($scope.maxAmmount){
         return ($scope.payment.ammount <= $scope.maxAmmount);
       }
@@ -574,6 +580,7 @@ function CheckoutPaymentsCtrl(
         })
         .catch(function(err){
           console.log(err);
+          vm.isLoadingProgress = false;
           dialogService.showDialog('Hubo un error, revisa tus datos <br/>' + err.data);
           return $q.reject('cancelled-by-user');
         })
