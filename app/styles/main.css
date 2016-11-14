@@ -2798,6 +2798,9 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 10px 0;
   padding: 0 20px;
 }
+.quotation-view .company-data{display: none;}
+.quotation-view .company-data p{margin: 0;}
+.quotation-view .quotation-validity{display: none;}
 .quotation-view .quotation-data .active{color: #33BA2C}
 .quotation-view .quotation-data .closed{color: red}
 .quotation-view .quotation-data .order-link{
@@ -2826,6 +2829,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   color:#000;
   text-decoration: underline;
 }
+.quotation-view .client-signature{
+  display: none;
+  padding: 40px 0;
+}
+.quotation-view .client-signature .signature-line{border-bottom: 2px solid #000;}
 
 /*--------------/
   #CART-VIEW
@@ -3901,6 +3909,11 @@ padding-left: 16px;
   #footer{display: none!important;}
 
   .cash-report h1{font-size: 16px;}
+  .quotation-view .client-signature{
+    display: flex;
+  }
+  .quotation-view .company-data,
+  .quotation-view .quotation-validity{display: block;}
 
 }
 

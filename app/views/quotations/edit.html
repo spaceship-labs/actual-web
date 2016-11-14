@@ -6,6 +6,11 @@
   ng-show="!vm.isLoading" 
   class="form-view container container-xlg quotation-view"
 >
+  <div class="center-content company-data">
+    <h1>AH ACTUAL SA DE CV</h1>
+    <p>AV. XCARET MZA. 2 LOTE 3 04 B SM 36 CANCUN, BENITO JUAREZ Q.R</p>
+    <p>RFC: AAC130902PR7</p>
+  </div>
 
   <h1><i class="icon-attachment"></i> <strong>OPORTUNIDAD #{{vm.quotation.folio}}</strong></h1>
   <hr/>
@@ -36,9 +41,9 @@
         <p>{{vm.quotation.Client.CardName || 'Sin cliente asignado'}}</p>
       </div>
       <div flex="25">
-        <label for="">Fecha de cotización</label>
-        <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
-      </div>
+        <label for="">E-mail</label>
+        <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
+      </div>      
       <div flex="25">
         <label for="">Vendedor</label>
         <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
@@ -66,9 +71,18 @@
         <p>{{vm.quotation.Client.Cellular || 'No proporcionado'}}</p>
       </div>
       <div flex="25">
-        <label for="">E-mail</label>
-        <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
+        <label for="">Fecha de cotización</label>
+        <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
       </div>
+      <div flex="25">
+        <label>Hora</label>
+        <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>        
+      </div>
+    </div>
+
+    <div class="quotation-data-row quotation-validity">
+      <label>Vigencia</label>
+      <p>Hasta agotar existencias y sujeto a términos de promociones.</p>
     </div>
 
   </section>
@@ -100,6 +114,11 @@
           class="action-btn print-btn">
           AGREGAR NUEVO ARTÍCULO
         </a>
+
+        <div class="client-signature" layout="row">
+          <span flex="25">Firma cliente:</span>
+          <span flex class="signature-line"></span>
+        </div>
 
       </section>
 
@@ -175,7 +194,7 @@
           ng-if="vm.quotation.Client"
           ng-click="vm.sendByEmail()"
           href="#"
-          class="action-btn">
+          class="action-btn print-btn">
           ENVIAR POR EMAIL
         </a>
 
