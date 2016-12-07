@@ -1,0 +1,12 @@
+<slick ng-if="areImagesLoaded" arrows="true" >
+  <div ng-repeat="image in images track by $index" layout="row" layout-align="center center">
+    <img
+      ng-src="{{image.url}}"
+      alt=""
+    >
+  </div>
+</slick>
+<a ng-href="/product/{{product.ItemCode}}" layout="row" layout-align="center center">
+  <i class="icon-search"></i>
+</a>
+<p>{{product.Name}}</p>

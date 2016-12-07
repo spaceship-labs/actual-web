@@ -14,7 +14,8 @@ function HomeCtrl(
   $location, 
   $rootScope,
   api, 
-  dialogService
+  dialogService,
+  productService
 ){
   var vm = this;
   angular.extend(vm,{
@@ -27,6 +28,22 @@ function HomeCtrl(
     if($location.search().startQuotation){
       dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización')
     }
+
+      vm.search = {
+        items: 10,
+        page: 1,
+        populateImgs : true
+      };
+      vm.isLoading = true;
+      productService.searchByFilters(vm.search).then(function(res){
+        vm.totalResults = res.data.total;
+        vm.isLoading = false;
+        return productService.formatProducts(res.data.products);
+      })
+      .then(function(fProducts){
+        vm.products = fProducts;
+        vm.areProductsLoaded = true;
+      })
   }
 
   $rootScope.$on('activeStoreAssigned', setCategoryStockProperty);
@@ -45,5 +62,6 @@ HomeCtrl.$inject = [
   '$location',
   '$rootScope',
   'api',
-  'dialogService'
+  'dialogService',
+  'productService'
 ];

@@ -10,9 +10,16 @@ angular.module('dashexampleApp')
   .directive('listingProduct',['$timeout','api', 'commonService' ,function ($timeout, api, commonService) {
     return {
       scope:{
-        product:'='
+        product:'=',
+        mini:'='
       },
-      templateUrl: 'views/directives/listing-product.html',
+      //templateUrl: 'views/directives/listing-product.html',
+      templateUrl: function(elem, attrs){
+        if(attrs.mini){
+          return 'views/directives/listing-product-mini.html'
+        }
+        return 'views/directives/listing-product.html';
+      },
       restrict: 'E',
       link: function postLink(scope) {
         scope.areImagesLoaded = false;

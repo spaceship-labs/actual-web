@@ -58,11 +58,31 @@ function ProductCtrl(
 
   vm.init($routeParams.id);
 
+  function getProducts(){
+      vm.search = {
+        items: 10,
+        page: 1,
+        populateImgs : true
+      };
+      vm.isLoading = true;
+      productService.searchByFilters(vm.search).then(function(res){
+        vm.totalResults = res.data.total;
+        vm.isLoading = false;
+        return productService.formatProducts(res.data.products);
+      })
+      .then(function(fProducts){
+        vm.products = fProducts;
+        vm.areProductsLoaded = true;
+      })
+  }
+
   function init(productId, reload){
     vm.filters               = [];
     vm.activeVariants        = {};
     vm.galleryImages         = [];
     vm.isLoading             = true;
+
+    getProducts();
 
     productService.getById(productId)
       .then(function(res){

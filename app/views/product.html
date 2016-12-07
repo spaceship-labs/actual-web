@@ -1,14 +1,3 @@
-<!--
-<div class="breadcrumb">
-  <div class="container container-xxlg">
-    <p>
-      <a href="#">Inicio</a>
-      <a href="#"> > Muebles</a>
-      <a href="#" class="breadcrumb-active"> > Salas</a>
-    </p>
-  </div>
-</div>
--->
 <div class="content-block listing-view">
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
@@ -429,8 +418,141 @@
 
       </section>
       <!--END PRODUCT VIEW CONTENT-->
+
     </div>
     <!-- MAIN VIEW -->
 
   </div>
+
+  <div class="other-products" layout="row" layout-wrap layout-align="space-between start">
+
+      <div class="filters" layout="column" flex-gt-sm="20" flex-sm="30" flex="100">
+          <div class="head-filters" layout="row" layout-align="center center">
+              <p>filtrar resultados</p>
+          </div>
+          <div class="box" layout="column">
+            <div class="title" layout="row">
+              <i class="icon-down-open"></i>
+              <strong>PRECIO:</strong>
+            </div>
+            <div layout="row" layout-align="center center">
+              <select>
+                <option>Min.</option>
+                <option>$1200</option>
+                <option>$1300</option>
+              </select>
+              <p class="minus">-</p>
+              <select>
+                <option>Max.</option>
+                <option>$1200</option>
+                <option>$1300</option>
+              </select>
+              <button>
+                <i class="icon-right-open"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box" layout="column">
+            <div class="title" layout="row">
+              <i class="icon-down-open"></i>
+              <strong>MATERIAL:</strong>
+            </div>
+            <div class="material" layout="column">
+              <strong class="subtitle">> Madera: <small>(90)</small></strong>
+              <div class="option" layout="row">
+                <md-radio-group class="md-primary">
+
+                    <md-radio-button value="Melanina"> <p>Melanina <strong><small>(35)</small></strong> </p></md-radio-button>
+                    <md-radio-button value="MDF"> <p>MDF <strong><small>(35)</small></strong> </p></md-radio-button>
+                    <md-radio-button value="Pino"> <p>Pino <strong><small>(35)</small></strong> </p></md-radio-button>
+                    <md-radio-button value="Nogal"> <p>Nogal <strong><small>(35)</small></strong> </p></md-radio-button>
+
+                </md-radio-group>
+              </div>
+            </div>
+            <div class="material" layout="column">
+              <strong class="subtitle">> Metal: <small>(90)</small></strong>
+              <div class="option" layout="row">
+                <md-radio-group class="md-primary">
+
+                    <md-radio-button value="Acero"> <p>Acero <strong><small>(35)</small></strong> </p></md-radio-button>
+                    <md-radio-button value="Acero inoxidable"> <p>Acero inoxidable <strong><small>(35)</small></strong> </p></md-radio-button>
+                    <md-radio-button value="Aluminio"> <p>Aluminio <strong><small>(35)</small></strong> </p></md-radio-button>
+                    <md-radio-button value="Chromo"> <p>Chromo <strong><small>(35)</small></strong> </p></md-radio-button>
+
+                </md-radio-group>
+              </div>
+            </div>
+          </div>
+          <div class="box" layout="column">
+            <div class="title" layout="row">
+              <i class="icon-down-open"></i>
+              <strong>color:</strong>
+            </div>
+            <div class="material" layout="column">
+              <div class="option" layout="row" layout-wrap layout-align="space-between center">
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="products" layout="column" flex-gt-sm="75" flex-sm="65" flex="100" ng-if="vm.areProductsLoaded" arrows="true" class="products-list-slider" infinite="true" draggable="false">
+          <div class="title" layout="column">
+            <h3>Otros productos <strong>similares</strong></h3>
+          </div>
+          <div layout="row">
+            <div class="arrows" layout="row" layout-align="center center">
+              <div layout="row" layout-align="center center">
+                <i class="icon-left-open"></i>
+              </div>
+            </div>
+            <div class="box" layout="row" layout-wrap flex>
+              <div class="product" layout="column" flex-gt-sm="25" flex-sm="33" flex="100" ng-repeat="product in vm.products">
+                <listing-product product="product" layout="column" mini="true"></listing-product>
+              </div>
+            </div>
+           <div class="arrows" layout="row" layout-align="center center">
+              <div layout="row" layout-align="center center">
+                <i class="icon-right-open"></i>
+              </div>
+          </div>
+          </div>
+      </div>
+
+  </div>
+
 </div>
+<!--
+<div class="product" layout="column" flex="25" flex-xs="33">
+  <img src="images/bordeaux-side-table-white-gloss-lifestyle2.jpg" alt="">
+  <i class="icon-search"></i>
+  <p>Salas modernas</p>
+</div>
+-->
