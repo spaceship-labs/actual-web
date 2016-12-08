@@ -338,30 +338,25 @@ angular
         controller: 'WarrantyPolicyCtrl',
         controllerAs: 'warrantyPolicy'
       })
-      .when('/profile/mi-perfil', {
-        templateUrl: 'views/profile/mi-perfil.html',
-        controller: 'ProfileMiPerfilCtrl',
-        controllerAs: 'profile/miPerfil'
+      .when('/users/invoices', {
+        templateUrl: 'views/users/invoices.html',
+        controller: 'UsersInvoicesCtrl',
+        controllerAs: 'users/invoices'
       })
-      .when('/profile/envios', {
-        templateUrl: 'views/profile/envios.html',
-        controller: 'ProfileEnviosCtrl',
-        controllerAs: 'profile/envios'
+      .when('/users/user-deliveries', {
+        templateUrl: 'views/users/user-deliveries.html',
+        controller: 'UsersUserDeliveriesCtrl',
+        controllerAs: 'users/userDeliveries'
       })
-      .when('/profile/facturas', {
-        templateUrl: 'views/profile/facturas.html',
-        controller: 'ProfileFacturasCtrl',
-        controllerAs: 'profile/facturas'
+      .when('/users/user-payments', {
+        templateUrl: 'views/users/user-payments.html',
+        controller: 'UsersUserPaymentsCtrl',
+        controllerAs: 'users/userPayments'
       })
-      .when('/profile/monedero', {
-        templateUrl: 'views/profile/monedero.html',
-        controller: 'ProfileMonederoCtrl',
-        controllerAs: 'profile/monedero'
-      })
-      .when('/profile/pagos', {
-        templateUrl: 'views/profile/pagos.html',
-        controller: 'ProfilePagosCtrl',
-        controllerAs: 'profile/pagos'
+      .when('/users/user-purse', {
+        templateUrl: 'views/users/user-purse.html',
+        controller: 'UsersUserPurseCtrl',
+        controllerAs: 'users/userPurse'
       })
       .otherwise({
         redirectTo: '/'
