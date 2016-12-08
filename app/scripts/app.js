@@ -338,25 +338,30 @@ angular
         controller: 'WarrantyPolicyCtrl',
         controllerAs: 'warrantyPolicy'
       })
-      .when('/users/invoices', {
-        templateUrl: 'views/users/invoices.html',
-        controller: 'UsersInvoicesCtrl',
-        controllerAs: 'users/invoices'
+      .when('/profile/user-profile', {
+        templateUrl: 'views/profile/user-profile.html',
+        controller: 'ProfileUserProfileCtrl',
+        controllerAs: 'profile/userProfile'
       })
-      .when('/users/user-deliveries', {
-        templateUrl: 'views/users/user-deliveries.html',
-        controller: 'UsersUserDeliveriesCtrl',
-        controllerAs: 'users/userDeliveries'
+      .when('/profile/user-invoices', {
+        templateUrl: 'views/profile/user-invoices.html',
+        controller: 'ProfileUserInvoicesCtrl',
+        controllerAs: 'profile/userInvoices'
       })
-      .when('/users/user-payments', {
-        templateUrl: 'views/users/user-payments.html',
-        controller: 'UsersUserPaymentsCtrl',
-        controllerAs: 'users/userPayments'
+      .when('/profile/user-deliveries', {
+        templateUrl: 'views/profile/user-deliveries.html',
+        controller: 'ProfileUserDeliveriesCtrl',
+        controllerAs: 'profile/userDeliveries'
       })
-      .when('/users/user-purse', {
-        templateUrl: 'views/users/user-purse.html',
-        controller: 'UsersUserPurseCtrl',
-        controllerAs: 'users/userPurse'
+      .when('/profile/user-payments', {
+        templateUrl: 'views/profile/user-payments.html',
+        controller: 'ProfileUserPaymentsCtrl',
+        controllerAs: 'profile/userPayments'
+      })
+      .when('/profile/user-purse', {
+        templateUrl: 'views/profile/user-purse.html',
+        controller: 'ProfileUserPurseCtrl',
+        controllerAs: 'profile/userPurse'
       })
       .otherwise({
         redirectTo: '/'

@@ -246,6 +246,9 @@
     function getActiveModule(){
       var activeModule = false;
       var path = $location.path();
+      var profilePaths = [
+        '/profile/user-profile'
+      ];
       if(path.indexOf('dashboard') >= 0){
         activeModule = 'dashboard';
       }else if(path.indexOf('addquotation') >= 0){
@@ -260,6 +263,8 @@
         activeModule = 'commissions';
       }else if(path.indexOf('scorecard') >= 0){
         activeModule = 'scorecard';
+      }else if(profilePaths.indexOf(path) > -1){
+        activeModule = 'profiles';
       }
       return activeModule;
     }
