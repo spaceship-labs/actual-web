@@ -475,7 +475,7 @@ select{
 .header-top-bar-menu .header-top-bar-menu-item i{
   font-size: 28px;
   padding: 0 4px;
-  color: #000;
+  color: white;
   margin: 0 10px;
   vertical-align: middle;
 }
@@ -766,7 +766,7 @@ select{
 
 .nav-categories-item > i{
   display: block;
-  font-size: 22px;
+  font-size: 40px;
   color: #000;
   margin-bottom: 6px;
 }
@@ -821,6 +821,7 @@ select{
   left: 0;
   text-align: left;
   width: 100%;
+  background: #000;
   /*display: block;
   display: none;
   */
@@ -828,7 +829,6 @@ select{
 }
 .menu-subcategories-nav > .container{position: relative;}
 .menu-subcategories-nav-item{
-  background: #000;
   padding: 14px 10px;
   text-transform: uppercase;
   color: #fff;
@@ -3992,9 +3992,9 @@ padding-left: 16px;
 .other-products .filters .box .title{margin-bottom: 15px }
 .other-products .filters .box .title i{color: #DEAF14;font-size: 15px ;margin-right: 7px }
 .other-products .filters .box .title strong{font-size: 15px ;letter-spacing: 2px ;text-transform:uppercase;}
-.other-products .filters .box .select{background: rgb(250,250,250);box-shadow: 0px  1px  3px  0px  rgba(0, 0, 0, 0.2), 0px  1px  1px  0px  rgba(0, 0, 0, 0.14), 0px  2px  1px  -1px  rgba(0, 0, 0, 0.12);position: relative;overflow: visible;height: 36px ;font-weight: 700!important;font-size:14px ;outline: none!important;}
+.other-products .filters .box select{background: rgb(250,250,250);box-shadow: 0px  1px  3px  0px  rgba(0, 0, 0, 0.2), 0px  1px  1px  0px  rgba(0, 0, 0, 0.14), 0px  2px  1px  -1px  rgba(0, 0, 0, 0.12);position: relative;overflow: visible;height: 36px ;font-weight: 700!important;font-size:14px ;outline: none!important;}
 .other-products .filters .box .minus{margin: 0 8px }
-.other-products .filters .box button{height:36px ;padding: 015px ;border: inherit;background: #092F57}
+.other-products .filters .box button{padding: 10px 20px ;border: inherit;background: #092F57}
 .other-products .filters .box button i{color: #DEAF14}
 .other-products .filters .box .material{padding: 0 22px ;margin-bottom: 20px }
 .other-products .filters .box .material:last-child{margin: 0px }
@@ -4012,8 +4012,8 @@ padding-left: 16px;
 .other-products .products .product:hover{border: 1px  solidblack}
 .other-products .products .product img{height: 140px ;margin: 0 auto}
 .other-products .products .product p{text-align: center;font-weight: bold;margin: 0px ;font-size: 13px }
-.other-products .products .product a{color: black}
-.other-products .products.product a i.icon-search{margin: 0 auto;margin-top: 5px ;margin-bottom: 5px ;font-size: 20px ;opacity: 0:color:black;}
+.other-products .products .product a{color: black;margin: 10px 0}
+.other-products .products .product a i.icon-search{margin: 0 auto;margin-top: 5px ;margin-bottom: 5px ;font-size: 20px ;opacity: 0:color:black;}
 .other-products .products .product:hover i.icon-search{opacity: 1}
 .other-products .products .arrows div{background: rgb(250,250,250);box-shadow: 0px  1px  3px  0px  rgba(0, 0, 0, 0.2), 0px  1px  1px  0px  rgba(0, 0, 0, 0.14),0px  2px  1px  -1px  rgba(0, 0, 0, 0.12);padding: 10px ;margin: 0 5px ;cursor: pointer;}
 .other-products .products .arrows div i{font-size: 20px ;}
