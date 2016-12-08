@@ -53,7 +53,7 @@
 
           <div layout="column" flex>
             <ng-include 
-            ng-if="main.activeModule !== 'policies' && main.activeModule !== 'manuals' && main.activeModule !== 'profile' "
+            ng-if="main.hintHader() "
                 src="'views/header.html'"></ng-include>
             <md-content ng-view autoscroll>
             </md-content>

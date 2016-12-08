@@ -268,7 +268,9 @@
       }
       return activeModule;
     }
-
+    function hintHeader(){
+      activeModule !== 'policies' && activeModule !== 'manuals' && activeModule !== 'profile';
+    }
     /*
     $rootScope.$on('newActiveQuotation', function(event, data){
       if($rootScope.user){
