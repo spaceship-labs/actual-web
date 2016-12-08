@@ -338,6 +338,31 @@ angular
         controller: 'WarrantyPolicyCtrl',
         controllerAs: 'warrantyPolicy'
       })
+      .when('/profile/mi-perfil', {
+        templateUrl: 'views/profile/mi-perfil.html',
+        controller: 'ProfileMiPerfilCtrl',
+        controllerAs: 'profile/miPerfil'
+      })
+      .when('/profile/envios', {
+        templateUrl: 'views/profile/envios.html',
+        controller: 'ProfileEnviosCtrl',
+        controllerAs: 'profile/envios'
+      })
+      .when('/profile/facturas', {
+        templateUrl: 'views/profile/facturas.html',
+        controller: 'ProfileFacturasCtrl',
+        controllerAs: 'profile/facturas'
+      })
+      .when('/profile/monedero', {
+        templateUrl: 'views/profile/monedero.html',
+        controller: 'ProfileMonederoCtrl',
+        controllerAs: 'profile/monedero'
+      })
+      .when('/profile/pagos', {
+        templateUrl: 'views/profile/pagos.html',
+        controller: 'ProfilePagosCtrl',
+        controllerAs: 'profile/pagos'
+      })
       .otherwise({
         redirectTo: '/'
       });
