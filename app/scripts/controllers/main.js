@@ -264,7 +264,7 @@
       }else if(path.indexOf('scorecard') >= 0){
         activeModule = 'scorecard';
       }else if(profilePaths.indexOf(path) > -1){
-        activeModule = 'profiles';
+        activeModule = 'profile';
       }
       return activeModule;
     }
