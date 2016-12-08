@@ -338,6 +338,26 @@ angular
         controller: 'WarrantyPolicyCtrl',
         controllerAs: 'warrantyPolicy'
       })
+      .when('/users/invoices', {
+        templateUrl: 'views/users/invoices.html',
+        controller: 'UsersInvoicesCtrl',
+        controllerAs: 'users/invoices'
+      })
+      .when('/users/user-deliveries', {
+        templateUrl: 'views/users/user-deliveries.html',
+        controller: 'UsersUserDeliveriesCtrl',
+        controllerAs: 'users/userDeliveries'
+      })
+      .when('/users/user-payments', {
+        templateUrl: 'views/users/user-payments.html',
+        controller: 'UsersUserPaymentsCtrl',
+        controllerAs: 'users/userPayments'
+      })
+      .when('/users/user-purse', {
+        templateUrl: 'views/users/user-purse.html',
+        controller: 'UsersUserPurseCtrl',
+        controllerAs: 'users/userPurse'
+      })
       .otherwise({
         redirectTo: '/'
       });
