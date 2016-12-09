@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:ProfileUserInvoicesCtrl
+ * @name dashexampleApp.controller:UsersUserPurseCtrl
  * @description
- * # ProfileUserInvoicesCtrl
+ * # UsersUserPurseCtrl
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('ProfileUserInvoicesCtrl', function () {
+  .controller('UsersUserPurseCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
