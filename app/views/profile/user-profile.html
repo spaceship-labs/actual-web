@@ -1,1 +1,192 @@
-<p>This is the profile/user-profile view.</p>
+<section id="profile-view" class="form-view container container-xlg">
+  <h1><i class="icon-login"></i> <strong>MI PERFIL |</strong> {{vm.user.firstName + ' ' + vm.user.lastName }}</h1>
+
+  <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+    <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+  </div>
+
+  <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)" class="form-view-content">
+
+    <section class="form-section">
+      <!--DATOS PERSONALES-->
+      <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+
+        <!--
+        <div flex="20" class="avatar-placeholder-wrap">
+          <div class="avatar-placeholder">
+            <span>+</span>
+          </div>
+          <p><strong>FOTO DE PERFIL</strong></p>
+        </div>
+        -->
+
+        <div flex="100">
+          <div layout="row">
+            <div flex="40" class="input-element">
+              <label>
+                <strong>Nombre(s) <span class="hl-label">*</span></strong>
+              </label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="vm.user.firstName" required>
+              </div>
+            </div>
+
+            <div flex="60" class="input-element">
+              <label>
+                <strong>Apellidos <span class="hl-label">*</span></strong>
+              </label>
+              <div class="input-element-inner">
+                <input type="text" ng-model="vm.user.lastName" required>
+              </div>
+            </div>
+
+          </div>
+
+          <div layout="row">
+
+            <div flex="30" class="input-element">
+              <label>
+                <strong>Email</strong> <span class="hl-label">*</span>
+              </label>
+              <div class="input-element-inner">
+                <input type="email" ng-model="vm.user.email" required>
+              </div>
+            </div>
+
+           <div flex="30" class="input-element">
+              <label>
+                <strong>Confirmar email</strong>
+                <span class="hl-label">*</span>
+              </label>
+              <div class="input-element-inner">
+                <input
+                  name="confirmEmail"
+                  type="email"
+                  ng-model="_email"
+                  ng-pattern="vm.user.email"
+                  required
+                >
+              </div>
+            </div>
+
+          </div>
+
+          <hr/>
+
+          <p class="modify-password">
+            <a
+              href="http://admin.miactual.com/auth/forgot-password"
+            >
+              <i class="icon-login"></i>
+              <strong>MODIFICAR CONTRASEÑA</strong>
+            </a>
+          </p>
+
+        </div>
+
+      </section>
+      <!--END DATOS PERSONALES-->
+
+    </section>
+    <!--END FORM SECTION-->
+
+    <div layout="row" class="form-view-btns no-margin">
+      <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
+      <button
+        ng-submit="vm.update(updateForm)"
+        flex="50"
+        class="form-view-btn form-view-btn-primary">
+        Guardar información
+      </button>
+    </div>
+
+  </form>
+  <!--END PROFILE EDIT-->
+
+  <!--CASH REPORT-->
+  <section class="cash-report-config">
+
+    <h2>Generar reporte de caja</h2>
+
+    <section layout="row" layout-align="space-between center">
+      <div class="input-element" flex="40" flex-sm="100" flex-xs="100">
+        <label><strong>Fecha de inicio*</strong></label>
+        <div layout="row">
+          <div flex="60" class="input-element-inner">
+            <input
+              type="text"
+              pikaday="vm.myPickerStartDate"
+              set-default-date="true"
+              default-date="{{vm.cashRegister.startDate.toString()}}"
+              on-select="vm.onSelectStartDate(pikaday)"
+              format="DD/MM/YYYY"
+              readonly
+              required
+            >
+          </div>
+          <div flex="40" class="input-element-inner">
+            <input
+              type="text"
+              ui-timepicker
+              ui-timepicker="vm.timePickerOptions"
+              ng-model="vm.cashRegister.startTime"
+              placeholder="Hora"
+              required>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-element" flex="40" flex-sm="100" flex-xs="100">
+        <label><strong>Fecha de vencimiento*</strong></label>
+        <div layout="row">
+          <div flex="60" class="input-element-inner">
+            <input
+              type="text"
+              pikaday="vm.myPickerEndDate"
+              set-default-date="true"
+              format="DD/MM/YYYY"
+              default-date="{{vm.cashRegister.endDate.toString()}}"
+              on-select="vm.onSelectEndDate(pikaday)"
+              readonly required>
+          </div>
+          <div flex="40" class="input-element-inner">
+            <input
+              type="text"
+              ui-timepicker
+              ui-timepicker="vm.timePickerOptions"
+              ng-model="vm.cashRegister.endTime"
+              placeholder="Hora"
+              required>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <div layout="row" class="form-view-btns no-margin">
+      <button
+        ng-click="vm.getCashReport()"
+        flex="50"
+        class="form-view-btn form-view-btn-primary"
+      >
+        Generar reporte
+      </button>
+    </div>
+
+  </section>
+  <!--END CASH REPORT-->
+
+</section>
+
+<div ng-if="vm.isLoadingReport" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+  <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+</div>
+
+<section
+  ng-if="!vm.isLoadingReport && vm.paymentsGroups"
+  id="cash-report"
+  class="cash-report container container-xlg"
+>
+  <ng-include src="'views/users/cash-report.html'"></ng-include>
+
+</section>

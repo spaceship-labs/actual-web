@@ -263,14 +263,15 @@
         activeModule = 'commissions';
       }else if(path.indexOf('scorecard') >= 0){
         activeModule = 'scorecard';
-      }else if(profilePaths.indexOf(path) > -1){
+      }
+      else if(profilePaths.indexOf(path) > -1){
         activeModule = 'profile';
+      }else if(path.indexOf('users') >= 0){
+        activeModule = 'users';
       }
       return activeModule;
     }
-    function hintHeader(){
-      activeModule !== 'policies' && activeModule !== 'manuals' && activeModule !== 'profile';
-    }
+
     /*
     $rootScope.$on('newActiveQuotation', function(event, data){
       if($rootScope.user){
