@@ -1,3 +1,118 @@
+<section>
+  <!--START TOP BAR-->
+  <div class="header-top-bar actual-home" fixed-element  top="70" ng-class="{'fixed-head': scrolled}">
+    <div class="container container-lg" layout="row" layout-align="center center">
+
+      <!--ON SCROLL-->
+
+      <div flex="15" class="logo" layout-align="center center">
+        <a href="/" >
+          <img src="images/logo.png" alt="Actual Group">
+        </a>
+      </div>
+
+      <div 
+        class="categories-btn-wrap" 
+        flex="15" 
+        layout-align="center center"
+      >
+      </div>
+
+
+      <!--END ONLY ON SCROLL-->
+
+
+      <form 
+        action="/search" 
+        method="GET" 
+        class="searcher-wrapper" 
+        layout="row"
+      >
+        <div class="searcher">
+          <div class="searcher-inner">
+            <i class="icon-search"></i>
+            <input
+              type="text"
+              name="term"
+              ng-attr-name="{{vm.isItemCodeSearch && 'itemcode' || 'term' }}"
+              >
+          </div>
+        </div>
+        <input type="submit" value="BUSCAR" class="searcher-btn">
+      </form>
+
+      <div 
+        class="header-top-bar-menu" 
+        layout="row" 
+        layout-align="center center"
+      >
+
+        <!--IF ACTIVE QUOTATION-->
+        <div
+          ng-if="main.user && main.activeQuotation"
+          ng-click="main.toggleCartModal()"
+          flex
+          href="#"
+          class="header-top-bar-menu-item"
+        >
+          <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
+          <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
+          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+        </div>
+
+        <!--IF NOT ACTIVE QUOTATION-->
+        <a
+          ng-if="main.user && !main.activeQuotation"
+          flex
+          href="/"
+          class="header-top-bar-menu-item"
+        >
+          <i class="icon-carro"></i>
+          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+        </a>
+
+
+        <div
+          ng-if="!main.user"
+          flex
+          class="header-top-bar-menu-item">
+          <i class="icon-login" ng-click="main.toggleLoginModal()"></i>
+          <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
+        </div>
+
+        <!--IF logged in-->
+        <div
+          ng-if="main.user"
+          flex
+          href="#"
+          ng-click="main.toggleProfileModal()"
+          class="header-top-bar-menu-item header-top-bar-menu-item-name"
+        >
+          <a href="#" >
+            <i class="icon-login"></i>
+            <!--<span >Bienvenido <strong>{{main.user.firstName}}</strong></span>-->
+          </a>
+          <ng-include ng-if="main.toggleProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
+        </div>
+
+      <!--
+        <div class="header-top-bar-menu-item" flex>
+          <md-button class="pointer-btn md-fab md-mini md-primary" ng-click="main.togglePointerSidenav()">
+            <i class="icon-pointer"></i>
+          </md-button>
+        </div>
+
+      -->
+
+        <!---end if Logged in -->
+
+      </div>
+
+    </div>
+
+  </div>
+  <!--END TOP BAR-->
+</section>
 <section id="profile-view" class="form-view container container-xlg">
   <h1><i class="icon-login"></i> <strong>MI PERFIL |</strong> {{vm.user.firstName + ' ' + vm.user.lastName }}</h1>
 
@@ -103,90 +218,4 @@
   </form>
   <!--END PROFILE EDIT-->
 
-  <!--CASH REPORT-->
-  <section class="cash-report-config">
-
-    <h2>Generar reporte de caja</h2>
-
-    <section layout="row" layout-align="space-between center">
-      <div class="input-element" flex="40" flex-sm="100" flex-xs="100">
-        <label><strong>Fecha de inicio*</strong></label>
-        <div layout="row">
-          <div flex="60" class="input-element-inner">
-            <input
-              type="text"
-              pikaday="vm.myPickerStartDate"
-              set-default-date="true"
-              default-date="{{vm.cashRegister.startDate.toString()}}"
-              on-select="vm.onSelectStartDate(pikaday)"
-              format="DD/MM/YYYY"
-              readonly
-              required
-            >
-          </div>
-          <div flex="40" class="input-element-inner">
-            <input
-              type="text"
-              ui-timepicker
-              ui-timepicker="vm.timePickerOptions"
-              ng-model="vm.cashRegister.startTime"
-              placeholder="Hora"
-              required>
-          </div>
-        </div>
-      </div>
-
-      <div class="input-element" flex="40" flex-sm="100" flex-xs="100">
-        <label><strong>Fecha de vencimiento*</strong></label>
-        <div layout="row">
-          <div flex="60" class="input-element-inner">
-            <input
-              type="text"
-              pikaday="vm.myPickerEndDate"
-              set-default-date="true"
-              format="DD/MM/YYYY"
-              default-date="{{vm.cashRegister.endDate.toString()}}"
-              on-select="vm.onSelectEndDate(pikaday)"
-              readonly required>
-          </div>
-          <div flex="40" class="input-element-inner">
-            <input
-              type="text"
-              ui-timepicker
-              ui-timepicker="vm.timePickerOptions"
-              ng-model="vm.cashRegister.endTime"
-              placeholder="Hora"
-              required>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <div layout="row" class="form-view-btns no-margin">
-      <button
-        ng-click="vm.getCashReport()"
-        flex="50"
-        class="form-view-btn form-view-btn-primary"
-      >
-        Generar reporte
-      </button>
-    </div>
-
-  </section>
-  <!--END CASH REPORT-->
-
-</section>
-
-<div ng-if="vm.isLoadingReport" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
-  <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
-</div>
-
-<section
-  ng-if="!vm.isLoadingReport && vm.paymentsGroups"
-  id="cash-report"
-  class="cash-report container container-xlg"
->
-  <ng-include src="'views/users/cash-report.html'"></ng-include>
-
-</section>
+</section>  

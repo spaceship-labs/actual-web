@@ -65,7 +65,7 @@
     <div class="clear"></div>
 
     <!--FOOTER-->
-    <ng-include src="'views/footer.html'"></ng-include>
+    <ng-include ng-if=" main.activeModule !== 'users'" src="'views/footer.html'"></ng-include>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!--
