@@ -126,7 +126,7 @@
   <!--END TOP BAR-->
 
   <!--START MENU-->
-    <ng-include src="'views/partials/header-menu-miactual.html'"></ng-include>
+    <ng-include ng-if="main.activeModule !== 'users'" src="'views/partials/header-menu-miactual.html'"></ng-include>
   <!--END MENU-->
 
 </div>

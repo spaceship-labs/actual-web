@@ -247,7 +247,11 @@
       var activeModule = false;
       var path = $location.path();
       var usersPaths = [
-        '/user/profile'
+        '/user/profile',
+        '/user/user-invoices',
+        '/user/user-payments',
+        '/user/user-deliveries',
+        '/user/user-purse'
       ];
       if(path.indexOf('dashboard') >= 0){
         activeModule = 'dashboard';

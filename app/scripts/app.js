@@ -338,22 +338,22 @@ angular
         controller: 'WarrantyPolicyCtrl',
         controllerAs: 'warrantyPolicy'
       })
-      .when('/users/user-deliveries', {
+      .when('/user/user-deliveries', {
         templateUrl: 'views/users/user-deliveries.html',
         controller: 'UsersUserDeliveriesCtrl',
         controllerAs: 'users/userDeliveries'
       })
-      .when('/users/user-invoices', {
+      .when('/user/user-invoices', {
         templateUrl: 'views/users/user-invoices.html',
         controller: 'UsersUserInvoicesCtrl',
         controllerAs: 'users/userInvoices'
       })
-      .when('/users/user-payments', {
+      .when('/user/user-payments', {
         templateUrl: 'views/users/user-payments.html',
         controller: 'UsersUserPaymentsCtrl',
         controllerAs: 'users/userPayments'
       })
-      .when('/users/user-purse', {
+      .when('/user/user-purse', {
         templateUrl: 'views/users/user-purse.html',
         controller: 'UsersUserPurseCtrl',
         controllerAs: 'users/userPurse'
