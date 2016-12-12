@@ -2524,7 +2524,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   vertical-align: middle;
   margin-right: 6px;
 }
-
+.form-view .modify-icon i{
+  vertical-align: middle;
+  font-weight: 600;
+  font-size: 30px;
+}
 .form-view-content .modify-password{
   font-size: 13px;
   color: #000;

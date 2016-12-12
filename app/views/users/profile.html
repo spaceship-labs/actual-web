@@ -1,97 +1,122 @@
-<section id="profile-view" class="form-view container container-xlg">
-  <h1 align="center"><i class="icon-login"></i> <strong>MI PERFIL |</strong> {{vm.user.firstName + ' ' + vm.user.lastName }}</h1>
-
-  <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
-    <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+<div layout="row" layout-wrap>
+  <div flex="100" class="logo" layout="row" layout-align="center center">
+        <a flex="20"  href="/" layout="row" layout-align="center center">
+          <img src="images/logo.png" alt="Actual Group">
+        </a>
   </div>
+  <div flex="20">
+    <section id="profile-view" class="form-view container container-xlg">
+      <p  style="margin: 0" align="center"><font size="5px">BIENVENIDO A</font></p>
+      <p style="margin: 0" align="center"><font size="5px"><strong>MI ACTUAL</strong></font></p>
+      <hr/>
+      <ul style="list-style-type: none">
+        <li><strong>MI PERFIL</strong></li>
+        <li><strong>MIS COMPRAS</strong></li>
+        <li><strong>MIS FACTURAS</strong></li>
+        <li><strong>MI MONEDERO</strong></li>
+        <li><strong>MIS ENVÍOS</strong></li>
+        <li><strong>MIS FORMAS DE PAGO</strong></li>
+      </ul>
+    </section>
+  </div>
+  <div flex="80">
+    <section id="profile-view" class="form-view container container-xlg">
+      <h1 align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
+      <p class="modify-icon">
+        <i class="icon-login"></i>
+        <strong>MI PERFIL</strong>
+      </p>
+      <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+        <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+      </div>
 
-  <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)" class="form-view-content">
+      <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)" class="form-view-content">
 
-    <section class="form-section">
-      <!--DATOS PERSONALES-->
-      <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+        <section class="form-section">
+          <!--DATOS PERSONALES-->
+          <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+            <div flex="100">
+              <div layout="row">
+                <div flex="40" class="input-element">
+                  <label>
+                    <strong>Nombre(s) <span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="vm.user.firstName" required>
+                  </div>
+                </div>
 
-        <div flex="100">
-          <div layout="row">
-            <div flex="40" class="input-element">
-              <label>
-                <strong>Nombre(s) <span class="hl-label">*</span></strong>
-              </label>
-              <div class="input-element-inner">
-                <input type="text" ng-model="vm.user.firstName" required>
+                <div flex="60" class="input-element">
+                  <label>
+                    <strong>Apellidos <span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="vm.user.lastName" required>
+                  </div>
+                </div>
+
               </div>
-            </div>
 
-            <div flex="60" class="input-element">
-              <label>
-                <strong>Apellidos <span class="hl-label">*</span></strong>
-              </label>
-              <div class="input-element-inner">
-                <input type="text" ng-model="vm.user.lastName" required>
+              <div layout="row">
+
+                <div flex="50" class="input-element">
+                  <label>
+                    <strong>Email</strong> <span class="hl-label">*</span>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="vm.user.email" required>
+                  </div>
+                </div>
+
+               <div flex="50" class="input-element">
+                  <label>
+                    <strong>Confirmar email</strong>
+                    <span class="hl-label">*</span>
+                  </label>
+                  <div class="input-element-inner">
+                    <input
+                      name="confirmEmail"
+                      type="email"
+                      ng-model="_email"
+                      ng-pattern="vm.user.email"
+                      required
+                    >
+                  </div>
+                </div>
+
               </div>
-            </div>
 
-          </div>
+              <hr/>
 
-          <div layout="row">
-
-            <div flex="30" class="input-element">
-              <label>
-                <strong>Email</strong> <span class="hl-label">*</span>
-              </label>
-              <div class="input-element-inner">
-                <input type="email" ng-model="vm.user.email" required>
-              </div>
-            </div>
-
-           <div flex="30" class="input-element">
-              <label>
-                <strong>Confirmar email</strong>
-                <span class="hl-label">*</span>
-              </label>
-              <div class="input-element-inner">
-                <input
-                  name="confirmEmail"
-                  type="email"
-                  ng-model="_email"
-                  ng-pattern="vm.user.email"
-                  required
+              <p class="modify-password">
+                <a
+                  href="http://admin.miactual.com/auth/forgot-password"
                 >
-              </div>
+                  <strong>MODIFICAR CONTRASEÑA</strong>
+                </a>
+              </p>
+
             </div>
 
-          </div>
+          </section>
+          <!--END DATOS PERSONALES-->
 
-          <hr/>
+        </section>
+        <!--END FORM SECTION-->
 
-          <p class="modify-password">
-            <a
-              href="http://admin.miactual.com/auth/forgot-password"
-            >
-              <i class="icon-login"></i>
-              <strong>MODIFICAR CONTRASEÑA</strong>
-            </a>
-          </p>
-
+        <div layout="row" class="form-view-btns no-margin">
+          <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
+          <button
+            ng-submit="vm.update(updateForm)"
+            flex="50"
+            class="form-view-btn form-view-btn-primary">
+            Guardar información
+          </button>
         </div>
 
-      </section>
-      <!--END DATOS PERSONALES-->
+      </form>
+      <!--END PROFILE EDIT-->
 
     </section>
-    <!--END FORM SECTION-->
-
-    <div layout="row" class="form-view-btns no-margin">
-      <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
-      <button
-        ng-submit="vm.update(updateForm)"
-        flex="50"
-        class="form-view-btn form-view-btn-primary">
-        Guardar información
-      </button>
-    </div>
-
-  </form>
-  <!--END PROFILE EDIT-->
-
-</section>  
+  </div>
+</div>  
