@@ -2512,7 +2512,15 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   color: #000;
   text-decoration: underline;
 }
-
+.form-view .principal-icon i{
+  margin: none;
+  vertical-align: middle;
+  font-weight: 500;
+  font-size: 90px;
+}
+.from-view .verticalLine{
+  border-left: thick solid #ff0000;
+}
 .form-view .action-links a{
   color: #000;
 }
@@ -2526,17 +2534,23 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .form-view .modify-icon i{
   vertical-align: middle;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 40px;
+}
+.form-view .modify-icon a{
+  color: #000;
+}
+.form-view .modify-icon{
   font-size: 30px;
 }
-.form-view-content .modify-password{
+.form-view .modify-password{
   font-size: 13px;
   color: #000;
 }
-.form-view-content .modify-password a{
+.form-view .modify-password a{
   color: #000;
 }
-.form-view-content .modify-password i{
+.form-view .modify-password i{
   vertical-align: middle;
   font-weight: 700;
   font-size: 16px;

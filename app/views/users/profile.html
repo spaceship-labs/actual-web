@@ -19,13 +19,42 @@
       </ul>
     </section>
   </div>
-  <div flex="80">
+  <div flex hide-sm hide-xs></div>
+  <div flex="70">
     <section id="profile-view" class="form-view container container-xlg">
-      <h1 align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
-      <p class="modify-icon">
-        <i class="icon-login"></i>
-        <strong>MI PERFIL</strong>
-      </p>
+      <h1 class="principal-icon" align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
+        <div layout="row" layout-xs="column" layout-align="center center">
+          <div layout="column">
+            <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}|</strong></div>
+            <div flex align="center" style="margin: 0"><p>Nombre(s)</p></div>
+          </div>
+          <div layout="column">
+            <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
+            <div flex align="center" style="margin: 0"><p>Nombre(s)</p></div>
+          </div>
+          <div layout="column">
+            <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
+            <div flex align="center" style="margin: 0"><p>Nombre(s)</p></div>
+          </div>        
+        </div>
+      <div layout="row" layout-xs="column" layout-align="center right">
+        <div flex="50">
+          <p class="modify-icon">
+            <i class="icon-login"></i>
+            <font size="6">              
+            <strong>MI PERFIL</strong>
+            </font>
+          </p>
+        </div>
+        <div flex="50">
+            <p class="modify-password" align="right">
+              <i class="icon-settings"></i>
+                <a href="http://admin.miactual.com/auth/forgot-password">
+                  <strong>MODIFICAR CONTRASEÑA</strong>
+                </a>
+            </p>
+        </div>
+      </div>
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
         <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
       </div>
@@ -36,8 +65,8 @@
           <!--DATOS PERSONALES-->
           <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
             <div flex="100">
-              <div layout="row">
-                <div flex="40" class="input-element">
+              <div layout="row" layout-wrap>
+                <div flex="25" class="input-element">
                   <label>
                     <strong>Nombre(s) <span class="hl-label">*</span></strong>
                   </label>
@@ -45,21 +74,36 @@
                     <input type="text" ng-model="vm.user.firstName" required>
                   </div>
                 </div>
-
-                <div flex="60" class="input-element">
+                <div flex="25" class="input-element"></div>
+                <div flex="25" class="input-element">
                   <label>
-                    <strong>Apellidos <span class="hl-label">*</span></strong>
+                    <strong>Género <span class="hl-label">*</span></strong>
                   </label>
                   <div class="input-element-inner">
                     <input type="text" ng-model="vm.user.lastName" required>
                   </div>
                 </div>
-
+                <div flex="25"></div>
               </div>
 
-              <div layout="row">
-
-                <div flex="50" class="input-element">
+              <div layout="row" layout-wrap>
+                <div flex="25" class="input-element">
+                  <label>
+                    <strong>Teléfon fijo</strong> <span class="hl-label">*</span>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="" required>
+                  </div>
+                </div>
+                <div flex="25" class="input-element">
+                  <label>
+                    <strong>Teléfono celular</strong> <span class="hl-label">*</span>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="" required>
+                  </div>
+                </div>
+                <div flex="25" class="input-element">
                   <label>
                     <strong>Email</strong> <span class="hl-label">*</span>
                   </label>
@@ -67,35 +111,8 @@
                     <input type="email" ng-model="vm.user.email" required>
                   </div>
                 </div>
-
-               <div flex="50" class="input-element">
-                  <label>
-                    <strong>Confirmar email</strong>
-                    <span class="hl-label">*</span>
-                  </label>
-                  <div class="input-element-inner">
-                    <input
-                      name="confirmEmail"
-                      type="email"
-                      ng-model="_email"
-                      ng-pattern="vm.user.email"
-                      required
-                    >
-                  </div>
-                </div>
-
+                <div flex="25"></div>
               </div>
-
-              <hr/>
-
-              <p class="modify-password">
-                <a
-                  href="http://admin.miactual.com/auth/forgot-password"
-                >
-                  <strong>MODIFICAR CONTRASEÑA</strong>
-                </a>
-              </p>
-
             </div>
 
           </section>
@@ -104,13 +121,13 @@
         </section>
         <!--END FORM SECTION-->
 
-        <div layout="row" class="form-view-btns no-margin">
+        <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
           <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
           <button
             ng-submit="vm.update(updateForm)"
             flex="50"
             class="form-view-btn form-view-btn-primary">
-            Guardar información
+            Editar información
           </button>
         </div>
 
