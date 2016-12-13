@@ -1,11 +1,11 @@
 <div id="header">
   <!--START TOP BAR-->
   <div class="header-top-bar actual-home" fixed-element  top="70" ng-class="{'fixed-head': scrolled}">
-    <div class="container container-lg" layout="row" layout-align="center center">
+    <div class="container" layout="row" layout-xs="column" layout-wrap layout-align="center center">
 
       <!--ON SCROLL-->
 
-      <div flex="15" class="logo" layout-align="center center">
+      <div flex-gt-xs="15" class="logo" layout-align="center center">
         <a href="/" >
           <img src="images/logo.png" alt="Actual Group">
         </a>
@@ -13,7 +13,7 @@
 
       <div 
         class="categories-btn-wrap" 
-        flex="15" 
+        flex-gt-xs="15" 
         layout-align="center center"
       >
         <a ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
@@ -23,13 +23,15 @@
       <!--END ONLY ON SCROLL-->
 
 
-      <form 
+      <form  
         action="/search" 
         method="GET" 
         class="searcher-wrapper" 
         layout="row"
+        layout-xs="column"
+        layout-sm="column"
       >
-        <div class="searcher">
+        <div class="searcher" flex>
           <div class="searcher-inner">
             <i class="icon-search"></i>
             <input
