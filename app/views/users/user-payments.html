@@ -1,214 +1,51 @@
-<div ng-if="vm.isLoading" layout="row" layout-align="center center" class="loading-circle">
-  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
-</div>
-
-<div 
-  ng-show="vm.isLoadingProgress" 
-  class="container container-xxlg loading-circle"
-  layout="row"
-  layout-align="center center">
-  <div class="progress-bar">
-    <p><strong>Procesando orden</strong></p>
-    <md-progress-linear 
-      class="md-accent"
-      md-mode="determinate" 
-      value="{{vm.loadingEstimate}}">
-    </md-progress-linear>
+<div layout="row" layout-wrap>
+  <div flex="100" class="logo" layout="row" layout-align="center center">
+        <a flex="20"  href="/" layout="row" layout-align="center center">
+          <img src="images/logo.png" alt="Actual Group">
+        </a>
   </div>
-</div>
-
-<form
-  name="createForm"
-  ng-submit="vm.createOrder(createForm)"
-  ng-show="!vm.isLoading && !vm.isLoadingProgress"
-  class="form-view cart-view checkout-view container container-xxlg"
->
-
-  <div class="steps-bar" layout="row">
-    <a ng-href="/quotations/edit/{{vm.quotation.id}}" flex="25" class="steps-bar-item">
-      <span><i class="icon-carro"></i> 1. Mi carrito</span>
-    </a>
-    <a ng-href="/checkout/client/{{vm.quotation.id}}" flex="25" class="steps-bar-item">
-      <span><i class="icon-login"></i> 2. Datos personales</span>
-    </a>
-    <div flex="25" class="steps-bar-item steps-bar-item-active">
-      <span><i class="icon-terminal"></i> 3. Método de pago</span>
-    </div>
-    <div flex="25" class="steps-bar-item">
-      <span><i class="icon-oportunidades"></i> 4. Confirmación</span>
-    </div>
-  </div>
-
-  <div class="checkout-view-inner">
-    <h3><strong>1. Elige tu plan de pago</strong> Se pueden aplicar múltiples pagos, pero solo del mismo grupo de pago.</h3>
-
-    <section layout="row">
-      <div flex="75">
-
-        <md-radio-group 
-          ng-model="vm.activeMethod"
-        >
-
-          <div class="pay-method-wrap" >
-            <ng-include
-              src="'views/checkout/payment-group.html'">
-            </ng-include>
-
-          </div>
-
-        </md-radio-group>
-
-        
-        <md-radio-group 
-          ng-model="vm.refundOption"
-        >
-          <h3 class="refunds-link">
-            <a href="#" ng-click="vm.showRefunds = !vm.showRefunds">
-              <strong>Reembolsos</strong>
-            </a>
-          </h3>
-          <div ng-show="vm.showRefunds" class="pay-method-wrap" >
-            <ul flex="75">              
-              <ng-include
-                ng-repeat="option in vm.quotation.Payments track by $index"
-                src="'views/checkout/refund-option.html'">
-              </ng-include>                
-            </ul>
-
-          </div>
-        </md-radio-group>
-        
-        <div 
-          ng-show="vm.quotation.Payments && vm.quotation.Payments.length > 0" 
-          class="second-step-payment"
-        >
-
-          <section>
-            <h3><strong>2. Pagos aplicados</strong></h3>
-            <hr />
-
-            <div class="pay-method-wrap pay-method-wrap-v2" >
-              <ng-include src="'views/checkout/payments-applied.html'"></ng-include>
-            </div>
-          </section>
-
-        </div>
-
-      </div>
-
-      <aside flex top="100"  class="cart-aside">
-        <h1 class="cart-title"><i class="icon-carro"><span>{{vm.quotation.totalProducts}}</span></i> <strong>RESUMEN</strong></h1>
-
-        <div class="cart-summary">
-          <table>
-            <tr>
-              <td><strong>Subtotal ({{vm.quotation.totalProducts}}) productos:</strong></td>
-              <td><strong>{{ vm.quotation.subtotal | roundCurrency }}</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Descuento:</strong></td>
-              <td><strong>{{ vm.quotation.discount | roundCurrency }}</strong></td>
-            </tr>
-            <tr>
-              <td>Costo de envío:</td>
-              <td><strong>GRATIS</strong></td>
-            </tr>
-          </table>
-          <hr>
-          <div class="cart-totals" layout="row" layout-align="space-between end">
-            <div flex="30">
-              <h1><strong>TOTAL:</strong></h1>
-            </div>
-            <div flex="70">
-              <h1 class="price-main">
-                <strong>{{ vm.quotation.total | roundCurrency }}</strong>
-              </h1>
-            </div>
-          </div>
-          <hr>
-          <table>
-            <tr>
-              <td><strong>Pagado:</strong></td>
-              <td>
-                <strong>
-                  {{ vm.quotation.ammountPaid | roundCurrency }}
-                </strong>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Porcentaje pagado:</strong></td>
-              <td>
-                <strong>
-                  {{ vm.getPaidPercentage() | number:2 }}%
-                </strong>
-              </td>
-            </tr>
-
-            <tr>
-              <td><strong>Restante:</strong></td>
-              <td>
-                <strong
-                  ng-class="
-                    {
-                      'hl-text' : (vm.quotation.total - vm.quotation.ammountPaid) > 0,
-                      'hl-text-v2' : (vm.quotation.total - vm.quotation.ammountPaid) <= 0
-                    }
-                  ">
-                  {{ (vm.quotation.total - vm.quotation.ammountPaid) | roundCurrency }}
-                </strong>
-              </td>
-            </tr>
-          </table>
-
-          <hr>
-
-          <input
-            type="submit"
-            value="CONTINUAR"
-            class="cart-view-btn"
-            ng-disabled="!vm.isMinimumPaid()"
-            ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid() }">
-
-          <p 
-            ng-if="vm.isMinimumPaid()"
-            class="cart-summary-note"
-          >
-            *Hacer click para generar el folio de la venta.
-          </p>
-
-          <p 
-            ng-if="!vm.isMinimumPaid()"
-            class="cart-summary-note"
-          >
-            *Se necesita saldar el monto total para poder procesar la venta
-          </p>
-
-
-          <!--
-          <p
-
-            ng-if="vm.quotation.minPaidPercentage != 60"
-            class="cart-summary-custom-link"
-          >
-            <a ng-click="vm.authorizeOrder()" href="#">
-              Autorizar orden con el 60% pagado (o mayor) del total.
-            </a>
-          </p>
-
-          <p
-            ng-if="vm.quotation.minPaidPercentage == 60"
-            class="cart-summary-note"
-          >
-            Autorizado con el 60% minimo pagado por: {{vm.quotation.Manager.firstName}} {{vm.quotation.Manager.lastName}}.
-          </p>
-          -->
-
-
-        </div>
-
-      </aside>
-
+  <div flex="25">
+    <section id="profile-view" class="form-view container container-xlg">
+      <p  style="margin: 0" align="center"><font size="5px">BIENVENIDO A</font></p>
+      <p style="margin: 0" align="center"><font size="5px"><strong>MI ACTUAL</strong></font></p>
+      <hr/>
+      <ul style="list-style-type: none" class="modify-password">
+        <li><a href="user/profile"><strong>MI PERFIL</strong></a></li>
+        <li><a href="/user/user-purchases"><strong>MIS COMPRAS</strong></a></li>
+        <li><a href="/user/user-invoices"><strong>MIS FACTURAS</strong></a></li>
+        <li><a href="/user/user-purse"><strong>MI MONEDERO</strong></a></li>
+        <li><a href="/user/user-deliveries"><strong>MIS ENVÍOS</strong></a></li>
+        <li><a href="/user/user-payments"><strong>MIS FORMAS DE PAGO</strong></a></li>
+      </ul>
     </section>
-
   </div>
-</form>
+  <div flex hide-sm hide-xs></div> 
+   <div flex="70">
+    <section id="profile-view" class="form-view container container-xlg">
+      <h1 class="principal-icon" align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
+        <div layout="row" layout-xs="column" layout-align="center center" >
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
+            <div flex layout-align="center center"><p>NOMBRE(S)</p></div>
+          </div>
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>13. 09. 85</strong></div>
+            <div flex layout-align="center center"><p>CUMPLEAÑOS</p></div>
+          </div>
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>$1,561.50 MXN</strong></div>
+            <div flex layout-align="center center"><p>MI MONEDERO</p></div>
+          </div>        
+        </div>
+      <div flex>
+          <p class="modify-icon" >
+            <i class="icon-cash"></i>
+              <font size="6">              
+              <strong>MIS FORMAS DE PAGO</strong>
+              </font>
+          </p>
+      </div>
+      <hr/>
+    </section>
+  </div>
+</div>  
