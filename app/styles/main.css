@@ -333,10 +333,10 @@ select{
 /*---------------/
   #SEARCHER
 /*---------------*/
+.searcher-wrapper{width: 90%;max-width: 400px;}
 .searcher{
   background: rgb(250,250,250);
-  min-width: 400px;
-  max-width: 100%;
+  /*min-width: 400px;*/
   border-radius: 2px;
   display: block;
   height: 32px;
@@ -368,7 +368,7 @@ select{
   border: none;
   box-shadow: none;
   outline: none;
-  background: transparent;
+  background: white;
   width: 100%;
   padding: 0 15px;
   line-height: 32px;
@@ -385,6 +385,7 @@ select{
   text-transform: uppercase;
   border: 0;
   padding: 0 22px;
+  height: 32px;
 }
 .searcher-wrapper .searcher-checkbox{
   vertical-align: middle;
@@ -739,8 +740,8 @@ select{
 
 .header-top-bar .categories-btn,
 .menu .categories-btn{
-  border: 2px solid #000;
-  color: #000;
+  border: 2px solid white;
+  color: white;
   font-size: 10px;
   font-weight: 700;
   padding: 8px 24px;
@@ -772,7 +773,7 @@ select{
 }
 
 .nav-categories-item .nav-categories-item-add{
-  color: #50C841;
+  /*color: #50C841;*/
 }
 
 .nav-categories-item > span{
@@ -4065,3 +4066,14 @@ padding-left: 16px;
 .header-top-bar.actual-kidz{background: #34B3E7;}
 .footer-bottom.actual-kidz{background: #34B3E7;}
 .header-top-barfixed-head{background: #F8F8F8}
+
+@media(max-width:800px){
+  .header-top-bar-menu{margin: 0 auto}
+}
+
+@media(max-width:600px){
+  .titles-head h3{font-size: 20px}
+  .titles-head h3:before, .titles-head h3:after{width: 15%}
+  .header-top-bar .categories-btn,
+  .menu .categories-btn{margin: 5px 0;}
+}
