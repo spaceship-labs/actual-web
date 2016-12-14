@@ -2563,6 +2563,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-weight: 700;
   font-size: 16px;
 }
+.form-view .modify-purse{
+  font-size: 15px;
+}
+.form-view .purse-color{
+  color: #33BA2C;
+}
 .form-view .form-view-filters .select-element-wrapper{
   margin: 0;
   font-size: 12px;

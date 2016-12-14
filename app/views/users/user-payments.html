@@ -45,7 +45,78 @@
               </font>
           </p>
       </div>
-      <hr/>
+        <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)" class="form-view-content">
+        <section class="form-section">
+          <!--DATOS PERSONALES-->
+          <h3><strong>MIS TARJETAS</strong></h3>
+          <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+            <div flex="100">
+              <div layout="row" layout-wrap>
+                <div flex="45" class="input-element">
+                  <label>
+                    <strong>Nombre(s) del titular<span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="vm.user.firstName" required>
+                  </div>
+                </div>
+                <div flex="45" class="input-element">
+                  <label>
+                    <strong>Apellido(s) del titular<span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="vm.user.lastName" required>
+                  </div>
+                </div>
+              </div>
+              <div layout="row" layout-wrap>
+                <div flex="45" class="input-element">
+                  <label>
+                    <strong>Número de tarjeta<span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="vm.user.firstName" required>
+                  </div>
+                </div>
+                <div flex="20" class="input-element">
+                  <label>
+                    <strong>Fecha de vencimiento<span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="vm.user.lastName" required>
+                  </div>
+                </div>
+                <div flex="25" class="input-element">
+                  <label>
+                    <strong>Código postal<span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="vm.user.lastName" required>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+          <!--END DATOS PERSONALES-->
+
+        </section>
+        <!--END FORM SECTION-->
+
+        <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
+          <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
+          <button
+            ng-submit="vm.update(updateForm)"
+            flex="50"
+            class="form-view-btn form-view-btn-primary">
+            Guardar información
+          </button>
+        </div>
+        <h3><strong>MIS TRANSFERENCIAS</strong></h3>
+
+      </form>
+      <!--END PROFILE EDIT-->
     </section>
   </div>
 </div>  
