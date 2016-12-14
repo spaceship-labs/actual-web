@@ -251,7 +251,8 @@
         '/user/user-invoices',
         '/user/user-payments',
         '/user/user-deliveries',
-        '/user/user-purse'
+        '/user/user-purse',
+        '/user/user-purchases'
       ];
       if(path.indexOf('dashboard') >= 0){
         activeModule = 'dashboard';

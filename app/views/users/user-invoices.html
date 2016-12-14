@@ -1,1 +1,126 @@
-<p>This is the users/user-invoices view.</p>
+<div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+</div>
+<div layout="row" layout-wrap>
+  <div flex="100" class="logo" layout="row" layout-align="center center">
+        <a flex="20"  href="/" layout="row" layout-align="center center">
+          <img src="images/logo.png" alt="Actual Group">
+        </a>
+  </div>
+  <div flex="20">
+    <section id="profile-view" class="form-view container container-xlg">
+      <p  style="margin: 0" align="center"><font size="5px">BIENVENIDO A</font></p>
+      <p style="margin: 0" align="center"><font size="5px"><strong>MI ACTUAL</strong></font></p>
+      <hr/>
+      <ul style="list-style-type: none" class="modify-password">
+        <li><a href="user/profile"><strong>MI PERFIL</strong></a></li>
+        <li><a href="/user/user-purchases"><strong>MIS COMPRAS</strong></a></li>
+        <li><a href="/user/user-invoices"><strong>MIS FACTURAS</strong></a></li>
+        <li><a href="/user/user-purse"><strong>MI MONEDERO</strong></a></li>
+        <li><a href="/user/user-deliveries"><strong>MIS ENVÍOS</strong></a></li>
+        <li><a href="/user/user-payments"><strong>MIS FORMAS DE PAGO</strong></a></li>
+      </ul>
+    </section>
+  </div>
+  <div flex hide-sm hide-xs></div> 
+   <div flex="70">
+    <section id="profile-view" class="form-view container container-xlg">
+      <h1 class="principal-icon" align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
+        <div layout="row" layout-xs="column" layout-align="center center" >
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
+            <div flex layout-align="center center"><p>NOMBRE(S)</p></div>
+          </div>
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>13. 09. 85</strong></div>
+            <div flex layout-align="center center"><p>CUMPLEAÑOS</p></div>
+          </div>
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>$1,561.50 MXN</strong></div>
+            <div flex layout-align="center center"><p>MI MONEDERO</p></div>
+          </div>        
+        </div>
+      <div flex="50">
+        <p class="modify-icon">
+            <i class="icon-checkout-ticket"></i>
+            	<strong>MIS FACTURAS</strong>
+        </p>
+      </div>
+       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+        <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+      </div>
+      <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)" class="form-view-content">
+
+        <section class="form-section">
+          <!--DATOS PERSONALES-->
+          <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+            <div flex="100">
+              <div layout="row" layout-wrap>
+                <div flex="30" class="input-element">
+                  <label>
+                    <strong>RFC <span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="" required>
+                  </div>
+                </div>
+                <div flex="65" class="input-element">
+                  <label>
+                    <strong>Razón Social <span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="" required>
+                  </div>
+                </div>
+              </div>
+
+              <div layout="row" layout-wrap>
+                <div flex="25" class="input-element">
+                  <label>
+                    <strong>Nombre de la empresa</strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="">
+                  </div>
+                </div>
+                <div flex="5" class="input-element">
+                  <label>
+                    <strong>Teléfono</strong> <span class="hl-label">*</span>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="" placeholder="(998)" required>
+                  </div>
+                </div>
+                <div flex="25" class="input-element">
+                  <label>
+                    <strong>Email</strong> <span class="hl-label">*</span>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="vm.user.email" required>
+                  </div>
+                </div>
+                <div flex="45"></div>
+              </div>
+            </div>
+
+          </section>
+          <!--END DATOS PERSONALES-->
+
+        </section>
+        <!--END FORM SECTION-->
+
+        <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
+          <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
+          <button
+            ng-submit="vm.update(updateForm)"
+            flex="50"
+            class="form-view-btn form-view-btn-primary">
+            guardar información
+          </button>
+        </div>
+
+      </form>
+      <!--END PROFILE EDIT-->
+    </section >
+  </div>
+</div>  

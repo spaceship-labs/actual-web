@@ -2518,6 +2518,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-weight: 500;
   font-size: 90px;
 }
+.form-view .info-row p{
+  font-size: 10px;
+  margin-top: 0;
+}
 .from-view .verticalLine{
   border-left: thick solid #ff0000;
 }

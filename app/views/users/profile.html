@@ -9,13 +9,13 @@
       <p  style="margin: 0" align="center"><font size="5px">BIENVENIDO A</font></p>
       <p style="margin: 0" align="center"><font size="5px"><strong>MI ACTUAL</strong></font></p>
       <hr/>
-      <ul style="list-style-type: none">
-        <li><strong>MI PERFIL</strong></li>
-        <li><strong>MIS COMPRAS</strong></li>
-        <li><strong>MIS FACTURAS</strong></li>
-        <li><strong>MI MONEDERO</strong></li>
-        <li><strong>MIS ENVÍOS</strong></li>
-        <li><strong>MIS FORMAS DE PAGO</strong></li>
+      <ul style="list-style-type: none" class="modify-password">
+        <li><a href="user/profile"><strong>MI PERFIL</strong></a></li>
+        <li><a href="/user/user-purchases"><strong>MIS COMPRAS</strong></a></li>
+        <li><a href="/user/user-invoices"><strong>MIS FACTURAS</strong></a></li>
+        <li><a href="/user/user-purse"><strong>MI MONEDERO</strong></a></li>
+        <li><a href="/user/user-deliveries"><strong>MIS ENVÍOS</strong></a></li>
+        <li><a href="/user/user-payments"><strong>MIS FORMAS DE PAGO</strong></a></li>
       </ul>
     </section>
   </div>
@@ -23,23 +23,23 @@
    <div flex="70">
     <section id="profile-view" class="form-view container container-xlg">
       <h1 class="principal-icon" align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
-        <div layout="row" layout-xs="column" layout-align="center center">
-          <div flex="33" layout="column" layout-align="center center">
+        <div layout="row" layout-xs="column" layout-align="center center" >
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
             <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
-            <div flex layout-align="center center" style="margin: 0"><p>NOMBRE(S)</p></div>
+            <div flex layout-align="center center"><p>NOMBRE(S)</p></div>
           </div>
-          <div flex="33" layout="column" layout-align="center center">
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
             <div flex><strong>13. 09. 85</strong></div>
-            <div flex layout-align="center center" style="margin: 0"><p>CUMPLEAÑOS</p></div>
+            <div flex layout-align="center center"><p>CUMPLEAÑOS</p></div>
           </div>
-          <div flex="33" layout="column" layout-align="center center">
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
             <div flex><strong>$1,561.50 MXN</strong></div>
-            <div flex layout-align="center center" style="margin: 0"><p>MI MONEDERO</p></div>
+            <div flex layout-align="center center"><p>MI MONEDERO</p></div>
           </div>        
         </div>
       <div layout="row" layout-xs="column" layout-align="center right">
         <div flex="50">
-          <p class="modify-icon">
+          <p class="modify-icon" >
             <i class="icon-login"></i>
             <font size="6">              
             <strong>MI PERFIL</strong>

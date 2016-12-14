@@ -1,1 +1,124 @@
-<p>This is the users/user-deliveries view.</p>
+<div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+</div>
+<div layout="row" layout-wrap>
+  <div flex="100" class="logo" layout="row" layout-align="center center">
+        <a flex="20"  href="/" layout="row" layout-align="center center">
+          <img src="images/logo.png" alt="Actual Group">
+        </a>
+  </div>
+  <div flex="20">
+    <section id="profile-view" class="form-view container container-xlg">
+      <p  style="margin: 0" align="center"><font size="5px">BIENVENIDO A</font></p>
+      <p style="margin: 0" align="center"><font size="5px"><strong>MI ACTUAL</strong></font></p>
+      <hr/>
+      <ul style="list-style-type: none" class="modify-password">
+        <li><a href="user/profile"><strong>MI PERFIL</strong></a></li>
+        <li><a href="/user/user-purchases"><strong>MIS COMPRAS</strong></a></li>
+        <li><a href="/user/user-invoices"><strong>MIS FACTURAS</strong></a></li>
+        <li><a href="/user/user-purse"><strong>MI MONEDERO</strong></a></li>
+        <li><a href="/user/user-deliveries"><strong>MIS ENVÍOS</strong></a></li>
+        <li><a href="/user/user-payments"><strong>MIS FORMAS DE PAGO</strong></a></li>
+      </ul>
+    </section>
+  </div>
+  <div flex hide-sm hide-xs></div> 
+   <div flex="70">
+    <section id="profile-view" class="form-view container container-xlg">
+      <h1 class="principal-icon" align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
+        <div layout="row" layout-xs="column" layout-align="center center" >
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
+            <div flex layout-align="center center"><p>NOMBRE(S)</p></div>
+          </div>
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>13. 09. 85</strong></div>
+            <div flex layout-align="center center"><p>CUMPLEAÑOS</p></div>
+          </div>
+          <div flex="33" layout="column" layout-align="center center" class="info-row">
+            <div flex><strong>$1,561.50 MXN</strong></div>
+            <div flex layout-align="center center"><p>MI MONEDERO</p></div>
+          </div>        
+        </div>
+    </section >
+    <section ng-show="!vm.isLoading" class="form-view cart-view checkout-view order-view container container-xxlg">
+      <div flex="50">
+            <p class="modify-icon">
+              <i class="icon-envio"></i>
+                  <strong>MIS ENVIOS</strong>
+            </p>
+      </div>
+      <!--ORDER ITEMS-->
+      <div class="order-block">
+        <h3><strong><i class="icon-checkout-ticket"></i> ARTÍCULOS ADQUIRIDOS</strong></h3>
+        <div class="order-items order-block-inner">
+
+          <div class="order-table-header" layout="row" layout-align="space-between start">
+            <div flex="35"></div>
+            <div flex="20"><strong>CANTIDAD</strong></div>
+            <div flex="20"><strong>ENTREGA APROXIMADA</strong></div>
+            <div flex="20"><strong>PRECIO</strong></div>
+          </div>
+
+          <div 
+            class="order-item" 
+            ng-repeat="detailGroup in vm.order.DetailsGroups track by $index"
+          >
+            <h3><strong>{{detailGroup.Product.Name}}</strong></h3>
+            <div layout="row" layout-align="space-between start">
+              <div flex="35" layout="row">
+                <div class="order-item-img">
+                  <img src="{{detailGroup.Product.icons[0].url}}" alt="">
+                </div>
+                <div flex class="order-item-features">
+                  <ul>
+                    <li><strong>Código: </strong> {{detailGroup.Product.ItemCode}}</li>
+                    <li
+                      ng-repeat="filter in detailGroup.Product.Filters"
+                      ng-if="
+                        filter.Handle == 'codigo' ||
+                        filter.Handle == 'material' ||
+                        filter.Handle == 'garantia'
+                      "
+                    >
+                      <strong>{{filter.Name}}: </strong>
+                      <span ng-repeat="value in filter.Values track by $index">
+                        <span ng-if="value.Handle != 'color-paleta'">{{value.Name}}</span>
+                        <span ng-if="$index < (filter.Values.length-1)">,</span>
+                      </span>
+                    </li>
+                    <li ng-if="detailGroup.Product.DetailedColor">
+                      <strong>Color</strong>
+                      <span>{{detailGroup.Product.DetailedColor}}</span>
+                    </li>                  
+                  </ul>
+                </div>
+              </div>
+              <div flex="20" class="order-item-data"><span>{{detailGroup.quantity}}</span></div>
+              <div flex="20" class="order-item-data"><span>{{detailGroup.shipDate | date:'d/MMM/yyyy'}}</span></div>
+              <div flex="20" class="order-item-data">
+                <span>{{detailGroup.total | roundCurrency:false}} MXN</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--END ORDER ITEMS-->
+      <!--DIRECCIONES DE ENVIO-->
+      <div class="order-block">
+        <h3><strong>REGISTRO DE DIRECCIONES DE ENVÍO</strong></h3>
+         <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
+          <button
+            ng-submit="vm.update(updateForm)"
+            flex="50"
+            class="form-view-btn form-view-btn-primary">
+            Guardar información
+          </button>
+        </div>
+
+      </div>
+      <!--FIN DIRECCIONES DE ENVIO-->
+    </section>
+  </div>
+</div>  
