@@ -358,6 +358,11 @@ angular
         controller: 'UsersUserPurseCtrl',
         controllerAs: 'users/userPurse'
       })
+      .when('/user/user-purchases', {
+        templateUrl: 'views/users/user-purchases.html',
+        controller: 'UsersUserPurchasesCtrl',
+        controllerAs: 'users/userPurchases'
+      })
       .otherwise({
         redirectTo: '/'
       });

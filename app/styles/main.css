@@ -2519,6 +2519,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-weight: 500;
   font-size: 90px;
 }
+.form-view .info-row p{
+  font-size: 10px;
+  margin-top: 0;
+}
 .from-view .verticalLine{
   border-left: thick solid #ff0000;
 }
@@ -2544,6 +2548,9 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .form-view .modify-icon{
   font-size: 30px;
 }
+.form-view .modify-invoice{
+  font-size: 20px;
+}
 .form-view .modify-password{
   font-size: 13px;
   color: #000;
@@ -2556,7 +2563,6 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-weight: 700;
   font-size: 16px;
 }
-
 .form-view .form-view-filters .select-element-wrapper{
   margin: 0;
   font-size: 12px;
