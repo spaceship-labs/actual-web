@@ -4028,7 +4028,7 @@ padding-left: 16px;
 .other-products .products .title h3:before{right: 0;}
 .other-products .products .title h3:after{left: 0;}
 .other-products .products .product{padding: 7px ;border:1px  solid white;}
-.other-products .products .product:hover{border: 1px  solidblack}
+.other-products .products .product:hover{border: 1px  solid black}
 .other-products .products .product img{height: 140px ;margin: 0 auto}
 .other-products .products .product p{text-align: center;font-weight: bold;margin: 0px ;font-size: 13px }
 .other-products .products .product a{color: black;margin: 10px 0}
