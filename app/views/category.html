@@ -10,9 +10,9 @@
 </div>
 -->
 <div class="content-block listing-view">
-  <div class="container container-xxlg" layout="row" layout-align="space-between start">
+  <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
     <!--START NAV-->
-    <aside flex="20">
+    <aside flex-gt-sm="20" flex="100">
       <sidebar-categories
         categories-tree="main.categoriesTree"
         selected-category-id="vm.category.id">
@@ -96,7 +96,7 @@
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
-    <div flex="75">
+    <div flex-gt-sm="75" flex="100">
 
       <div
         ng-if="vm.isLoading"
@@ -163,7 +163,7 @@
             ng-cloak
           >
             <div
-              flex="30"
+               flex-gt-sm="33" flex-sm="45" flex="100"
               class="listing-product-wrap"
               ng-repeat="product in vm.products track by product.ItemCode">
               <listing-product product="product"></listing-product>
