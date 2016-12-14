@@ -2548,6 +2548,9 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .form-view .modify-icon{
   font-size: 30px;
 }
+.form-view .modify-invoice{
+  font-size: 20px;
+}
 .form-view .modify-password{
   font-size: 13px;
   color: #000;

@@ -7,7 +7,7 @@
           <img src="images/logo.png" alt="Actual Group">
         </a>
   </div>
-  <div flex="20">
+  <div flex="25">
     <section id="profile-view" class="form-view container container-xlg">
       <p  style="margin: 0" align="center"><font size="5px">BIENVENIDO A</font></p>
       <p style="margin: 0" align="center"><font size="5px"><strong>MI ACTUAL</strong></font></p>
@@ -83,14 +83,15 @@
                     <input type="email" ng-model="">
                   </div>
                 </div>
-                <div flex="5" class="input-element">
+                <div flex class="input-element">
                   <label>
                     <strong>Teléfono</strong> <span class="hl-label">*</span>
                   </label>
                   <div class="input-element-inner">
-                    <input type="text" ng-model="" placeholder="(998)" required>
+                    <input type="email" ng-model="" placeholder="(998)">
                   </div>
                 </div>
+
                 <div flex="25" class="input-element">
                   <label>
                     <strong>Email</strong> <span class="hl-label">*</span>
@@ -99,16 +100,78 @@
                     <input type="email" ng-model="vm.user.email" required>
                   </div>
                 </div>
-                <div flex="45"></div>
+              </div>
+              <h3><strong>DIRECCIÓN FISCAL</strong></h3>
+              <div layout="row" layout-wrap>
+              	<div flex class="input-element">
+                <label>
+                    <strong>Calle</strong>
+                </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="">
+                  </div>
+                </div>
+                <div flex class="input-element">
+                  <label>
+                    <strong>No. Exterior</strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="">
+                  </div>
+                </div>
+                <div flex class="input-element">
+                	<label>
+                    	<strong>No. Interior</strong>
+                  	</label>
+                 	<div class="input-element-inner">
+                    	<input type="email" ng-model="">
+                  	</div>
+                </div>
+                <div flex class="input-element">
+                  <label>
+                    <strong>Colonia</strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="" >
+                  </div>
+                </div>
+              </div>
+              <div layout="row" layout-wrap>
+              	<div flex class="input-element">
+                <label>
+                    <strong>Ciudad</strong>
+                </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="">
+                  </div>
+                </div>
+                <div flex class="input-element">
+                  <label>
+                    <strong>Estado</strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="">
+                  </div>
+                </div>
+                <div flex class="input-element">
+                	<label>
+                    	<strong>código postal</strong> <span class="hl-label">*</span>
+                  	</label>
+                 	<div class="input-element-inner">
+                    	<input type="email" ng-model="" required>
+                  	</div>
+                </div>
+                <div flex class="input-element">
+                  <label>
+                    <strong>Municipio</strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="">
+                  </div>
+                </div>
               </div>
             </div>
-
           </section>
-          <!--END DATOS PERSONALES-->
-
-        </section>
-        <!--END FORM SECTION-->
-
         <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
           <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
           <button
@@ -118,9 +181,123 @@
             guardar información
           </button>
         </div>
+          <!--END DATOS PERSONALES-->
+        </section>
+        <!--END FORM SECTION-->
+
 
       </form>
       <!--END PROFILE EDIT-->
+			<hr/>
+		<div flex="50">
+        <p class="modify-invoice">
+            <strong>LISTA DE MIS PEDIDOS</strong>
+        </p>
+      	</div>
+      	<section class="transfers-table-block">
+		    <div class="table-list">
+		      <table class="dataTable row-border hover">
+		          <thead>
+		          <tr>
+		              <th>Pedidos</th>
+		              <th>Fecha del pedido</th>
+		              <th>Monto</th>
+		              <th>Monto facturado</th>
+		              <th>Monto Pendinete</th>
+		              <th>Folio factura</th>
+		              <th>Acción</th>
+		          </tr>
+		          </thead>
+
+		          <tbody ng-if="vm.activeStore.group === 'studio' ">
+		            <tr>
+		              <td>Pesos</td>
+		              <td>Banamex</td>
+		              <td>7004</td>
+		              <td>6988750</td>
+		              <td>002691700469887500</td>
+		              <td>BNMXMXMM</td>
+		            </tr>
+		            <tr>
+		              <td>Pesos</td>
+		              <td>Bancomer</td>
+		              <td></td>
+		              <td>194554957</td>
+		              <td>012691001945549572</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>Pesos</td>
+		              <td>Santander</td>
+		              <td>7852</td>
+		              <td>65504120542</td>
+		              <td>014691655041205423</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>Pesos</td>
+		              <td>Banorte</td>
+		              <td></td>
+		              <td>0201852130</td>
+		              <td>072691002018521301</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>Dólares</td>
+		              <td>Banamex</td>
+		              <td>0001</td>
+		              <td>3416508</td>
+		              <td>002691000134165082</td>
+		              <td>BNMXMXMM</td>
+		            </tr>
+		          </tbody>
+
+		          <tbody ng-if="vm.activeStore.group !== 'studio' ">
+		            <tr>
+		              <td>Pesos</td>
+		              <td>Banamex</td>
+		              <td>7010</td>
+		              <td>7336557</td>
+		              <td>002691701073365572</td>
+		              <td>BNMXMXMM</td>
+		            </tr>
+		            <tr>
+		              <td>Pesos</td>
+		              <td>Bancomer</td>
+		              <td></td>
+		              <td>105822122</td>
+		              <td>012691001058221224</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>Pesos</td>
+		              <td>Santander</td>
+		              <td>7195</td>
+		              <td>22000506285</td>
+		              <td>014691220005062859</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>Pesos</td>
+		              <td>Banorte</td>
+		              <td></td>
+		              <td>0429431982</td>
+		              <td>072691004294319827</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>Dólares</td>
+		              <td>Banamex</td>
+		              <td>7002</td>
+		              <td>9089130</td>
+		              <td>002691700290891309</td>
+		              <td>BNMXMXMM</td>
+		            </tr>
+		          </tbody>
+
+		      </table>
+		    </div>
+		  </section>
     </section >
   </div>
 </div>  
