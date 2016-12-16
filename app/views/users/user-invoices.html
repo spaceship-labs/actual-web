@@ -64,7 +64,7 @@
                     <input type="text" ng-model="" required>
                   </div>
                 </div>
-                <div flex="65" class="input-element">
+                <div flex class="input-element">
                   <label>
                     <strong>Razón Social <span class="hl-label">*</span></strong>
                   </label>
@@ -83,16 +83,25 @@
                     <input type="email" ng-model="">
                   </div>
                 </div>
-                <div flex class="input-element">
+                <div flex="40" class="input-element">
                   <label>
                     <strong>Teléfono</strong> <span class="hl-label">*</span>
                   </label>
-                  <div class="input-element-inner">
-                    <input type="email" ng-model="" placeholder="(998)">
+                  <div flex layout="row" layout-xs="column">
+	                  <div flex="20">
+		                  <div class="input-element-inner">
+		                    <input type="email" ng-model="" placeholder="(998)">
+		                  </div>
+	                  </div>
+	                  <div flex="60" style="margin-left: 1em">
+	                  	<div class="input-element-inner">
+		                    <input type="email" ng-model="">
+		                </div>
+	                  </div>
                   </div>
                 </div>
 
-                <div flex="25" class="input-element">
+                <div flex="25" class="input-element" >
                   <label>
                     <strong>Email</strong> <span class="hl-label">*</span>
                   </label>
@@ -150,7 +159,7 @@
                     <strong>Estado</strong>
                   </label>
                   <div class="input-element-inner">
-                    <input type="text" ng-model="">
+                    <input type="text" ng-model="" placeholder="Elige un estado">
                   </div>
                 </div>
                 <div flex class="input-element">

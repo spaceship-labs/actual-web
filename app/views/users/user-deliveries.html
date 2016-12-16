@@ -108,6 +108,18 @@
       <!--DIRECCIONES DE ENVIO-->
       <div class="order-block">
         <h3><strong>REGISTRO DE DIRECCIONES DE ENVÍO</strong></h3>
+        <div>
+          <i>*Si necesita cambiar una dirección de envío que ha sido asignada a un pedido favor de contactar a un aesor de ventas con uno de nuesrtos ejecutivos.</i>
+        </div>
+        <div layout="row" layout-xs="column">
+          <div flex>
+            <div class="delivery-list" ng-repeat="item in [0,1] track by $index" style="margin-top: 1em">
+              <md-radio-group>
+                <md-radio-button value="{{$index}}" class="md-primary"><strong>Ciudad | </strong>Dirección | <u>ELIMINAR</u></md-radio-button>
+            </div>
+              </md-radio-group>
+          </div>
+        </div>
          <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
           <button
             ng-submit="vm.update(updateForm)"
@@ -116,7 +128,6 @@
             Guardar información
           </button>
         </div>
-
       </div>
       <!--FIN DIRECCIONES DE ENVIO-->
     </section>
