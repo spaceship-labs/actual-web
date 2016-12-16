@@ -46,10 +46,10 @@
 	        </p>
 	    </div>
 	    <hr/>
-	    <div class="box-list" ng-repeat="item in [0,1,2]">
+	    <div class="box-list" ng-repeat="item in [0,1,2]" style="margin: 1em">
 		    <div flex style="height:150px;border:1px solid #000;">
 				<div style="background-color: #000000; margin-top: 0">
-		    		<p style="margin-top: 0; color: #FFFFFF; margin-left: 1em">PEDIDO</p>
+		    		<p style="margin-top: 0; color: #FFFFFF; margin-left: 1em">PEDIDO <strong>#2069700497</strong></p>
 				</div>
 				<div layout="row" layout-xs="column">
 					<div flex layout="column">
@@ -58,6 +58,23 @@
 							<p>TIENDA:</p>
 							<p>MONTO TOTAL:</p>
 						</div>
+					</div>
+					<div flex layout="column">
+						<div flex>
+							<p style="margin-top: 0"><strong>16/FEB/2016</strong></p>
+							<p><strong>www.actualkids.com</strong></p>
+							<p><strong>$27,496.37 MXN</strong></p>
+						</div>
+					</div>
+					<div flex="50" layout="row" class="form-view-btns no-margin" layout-align="center center">
+						<div flex>
+					          <button
+					            ng-submit="vm.update(updateForm)"
+					            flex="50"
+					            class="form-view-btn form-view-btn-primary">
+					            Ver detalles de pedido
+					          </button>
+        				</div>
 					</div>	
 				</div>
 		    </div>
