@@ -108,6 +108,57 @@
       <!--DIRECCIONES DE ENVIO-->
       <div class="order-block">
         <h3><strong>REGISTRO DE DIRECCIONES DE ENVÍO</strong></h3>
+        <div>
+          <i>*Si necesita cambiar una dirección de envío que ha sido asignada a un pedido favor de contactar a un aesor de ventas con uno de nuesrtos ejecutivos.</i>
+        </div>
+        <div class="invoice-box" style="margin-top: 1em">
+              <md-radio-group >
+                <md-radio-button value="Ciudad" class="md-primary">
+                <strong>Ciudad | </strong>Dirección | <u>ELIMINAR</u>
+                </md-radio-button>
+                <md-radio-button value="Nuevo" class="md-primary">
+                  <strong><u>Nuevo</u></strong>
+                </md-radio-button>
+              </md-radio-group>
+        </div>
+        <div layout="row" layout-xs="column" style="margin-top: 1em">
+          <div flex>
+            <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)" class="form-view-content">
+              <section class="form-section">
+                <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+                  <div flex ="100">
+                    <div layout="row" layout-wrap>
+                      <div flex>
+                        <label>
+                          <strong>NOMBRE(S) DEL DESTINATARIO <span class="hl-label">*</span></strong>
+                        </label>
+                        <div class="input-element-inner">
+                          <input type="text" ng-model="" required>
+                        </div>
+                        <div flex>
+                          <label>
+                            <strong>APELLIDOS DEL DESTINATARIO <span class="hl-label">*</span></strong>
+                          </label>
+                          <div class="input-element-inner">
+                            <input type="text" ng-model="" required>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
+                  <button
+                    ng-submit="vm.update(updateForm)"
+                    flex="50"
+                    class="form-view-btn form-view-btn-primary">
+                    guardar información
+                  </button>
+                </div>
+              </section>
+            </form>
+          </div>
+        </div>
          <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
           <button
             ng-submit="vm.update(updateForm)"
@@ -116,7 +167,6 @@
             Guardar información
           </button>
         </div>
-
       </div>
       <!--FIN DIRECCIONES DE ENVIO-->
     </section>
