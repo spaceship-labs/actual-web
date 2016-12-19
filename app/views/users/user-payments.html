@@ -1,13 +1,13 @@
-<div layout="row" layout-wrap>
+<div id="my-profile" layout="row" layout-wrap>
   <div flex="100" class="logo" layout="row" layout-align="center center">
         <a flex="20"  href="/" layout="row" layout-align="center center">
           <img src="images/logo.png" alt="Actual Group">
         </a>
   </div>
-  <div flex="25">
-    <section id="profile-view" class="form-view container container-xlg">
-      <p  style="margin: 0" align="center"><font size="5px">BIENVENIDO A</font></p>
-      <p style="margin: 0" align="center"><font size="5px"><strong>MI ACTUAL</strong></font></p>
+  <div class="menu-profile" flex-gt-xs="25" flex="100">
+    <section id="profile-view" class=" container container-xlg">
+      <p>BIENVENIDO A</p>
+      <p><strong>MI ACTUAL</strong></p>
       <hr/>
       <ul style="list-style-type: none" class="modify-password">
         <li><a href="user/profile"><strong>MI PERFIL</strong></a></li>
@@ -20,39 +20,37 @@
     </section>
   </div>
   <div flex hide-sm hide-xs></div> 
-   <div flex="70">
-    <section id="profile-view" class="form-view container container-xlg">
-      <h1 class="principal-icon" align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
-        <div layout="row" layout-xs="column" layout-align="center center" >
-          <div flex="33" layout="column" layout-align="center center" class="info-row">
+   <div flex-gt-xs="70" flex="100">
+    <section id="profile-view" class="container container-xlg">
+      <h1 class="principal-icon" layout="row" layout-align="center center" ><i class="icon-login"></i> </h1>
+        <div class="box-head-profile" layout="row" layout-xs="column" layout-align="center center" >
+          <div layout="column" layout-align="center center" class="info-row">
             <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
             <div flex layout-align="center center"><p>NOMBRE(S)</p></div>
           </div>
-          <div flex="33" layout="column" layout-align="center center" class="info-row">
+          <div layout="column" layout-align="center center" class="info-row">
             <div flex><strong>13. 09. 85</strong></div>
             <div flex layout-align="center center"><p>CUMPLEAÑOS</p></div>
           </div>
-          <div flex="33" layout="column" layout-align="center center" class="info-row">
+          <div layout="column" layout-align="center center" class="info-row">
             <div flex><strong>$1,561.50 MXN</strong></div>
             <div flex layout-align="center center"><p>MI MONEDERO</p></div>
           </div>        
         </div>
-      <div flex>
-          <p class="modify-icon" >
-            <i class="icon-cash"></i>
-              <font size="6">              
-              <strong>MIS FORMAS DE PAGO</strong>
-              </font>
-          </p>
-      </div>
+        <div class="head-profile" layout="row" layout-xs="column" layout-align="space-between center">
+          <div layout="row" layout-align="center center">
+              <i class="icon-cash"></i>
+              <h1>MIS FORMAS DE PAGO</h1>
+          </div>
+        </div>
         <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)" class="form-view-content">
         <section class="form-section">
           <!--DATOS PERSONALES-->
           <h3><strong>MIS TARJETAS</strong></h3>
           <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
-            <div flex="100">
+            <div  class="input-container" flex="100">
               <div layout="row" layout-wrap>
-                <div flex="45" class="input-element">
+                <div flex-gt-sm="45" flex="100" class="input-element">
                   <label>
                     <strong>Nombre(s) del titular<span class="hl-label">*</span></strong>
                   </label>
@@ -60,7 +58,7 @@
                     <input type="text" ng-model="vm.user.firstName" required>
                   </div>
                 </div>
-                <div flex="45" class="input-element">
+                <div flex-gt-sm="45" flex="100" class="input-element">
                   <label>
                     <strong>Apellido(s) del titular<span class="hl-label">*</span></strong>
                   </label>
@@ -70,7 +68,7 @@
                 </div>
               </div>
               <div layout="row" layout-wrap>
-                <div flex="45" class="input-element">
+                <div flex-gt-sm="35" flex="100" class="input-element">
                   <label>
                     <strong>Número de tarjeta<span class="hl-label">*</span></strong>
                   </label>
@@ -78,7 +76,7 @@
                     <input type="text" ng-model="vm.user.firstName" required>
                   </div>
                 </div>
-                <div flex="20" class="input-element">
+                <div flex-gt-sm="25" flex="100" class="input-element">
                   <label>
                     <strong>Fecha de vencimiento<span class="hl-label">*</span></strong>
                   </label>
@@ -86,7 +84,7 @@
                     <input type="text" ng-model="vm.user.lastName" required>
                   </div>
                 </div>
-                <div flex="25" class="input-element">
+                <div flex-gt-sm="25" flex="100" class="input-element">
                   <label>
                     <strong>Código postal<span class="hl-label">*</span></strong>
                   </label>

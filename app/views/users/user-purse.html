@@ -1,13 +1,13 @@
-<div layout="row" layout-wrap>
+<div id="my-profile" layout="row" layout-wrap>
   <div flex="100" class="logo" layout="row" layout-align="center center">
         <a flex="20"  href="/" layout="row" layout-align="center center">
           <img src="images/logo.png" alt="Actual Group">
         </a>
   </div>
-  <div flex="25">
-    <section id="profile-view" class="form-view container container-xlg">
-      <p  style="margin: 0" align="center"><font size="5px">BIENVENIDO A</font></p>
-      <p style="margin: 0" align="center"><font size="5px"><strong>MI ACTUAL</strong></font></p>
+  <div class="menu-profile" flex-gt-xs="25" flex="100">
+    <section id="profile-view" class=" container container-xlg">
+      <p>BIENVENIDO A</p>
+      <p><strong>MI ACTUAL</strong></p>
       <hr/>
       <ul style="list-style-type: none" class="modify-password">
         <li><a href="user/profile"><strong>MI PERFIL</strong></a></li>
@@ -20,30 +20,30 @@
     </section>
   </div>
   <div flex hide-sm hide-xs></div> 
-   <div flex="70">
-    <section id="profile-view" class="form-view container container-xlg">
-    	<h1 class="principal-icon" align="center"><i flex="80" layout="row" layout-align="center center" class="icon-login"></i> </h1>
-        <div layout="row" layout-xs="column" layout-align="center center" >
-          <div flex="33" layout="column" layout-align="center center" class="info-row">
+    <div flex-gt-xs="70" flex="100">
+    <section id="profile-view" class="container container-xlg">
+      <h1 class="principal-icon" layout="row" layout-align="center center" ><i class="icon-login"></i> </h1>
+        <div class="box-head-profile" layout="row" layout-xs="column" layout-align="center center" >
+          <div layout="column" layout-align="center center" class="info-row">
             <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
             <div flex layout-align="center center"><p>NOMBRE(S)</p></div>
           </div>
-          <div flex="33" layout="column" layout-align="center center" class="info-row">
+          <div layout="column" layout-align="center center" class="info-row">
             <div flex><strong>13. 09. 85</strong></div>
             <div flex layout-align="center center"><p>CUMPLEAÑOS</p></div>
           </div>
-          <div flex="33" layout="column" layout-align="center center" class="info-row">
+          <div layout="column" layout-align="center center" class="info-row">
             <div flex><strong>$1,561.50 MXN</strong></div>
             <div flex layout-align="center center"><p>MI MONEDERO</p></div>
           </div>        
         </div>
 	    <div flex>
-	        <p class="modify-icon" >
-	        	<i class="icon-monedero"></i>
-	            <font size="6">              
-	            <strong>MI MONEDERO</strong>
-	            </font>
-	        </p>
+	       <div class="head-profile" layout="row" layout-xs="column" layout-align="space-between center">
+        <div layout="row" layout-align="center center">
+            <i class="icon-monedero"></i>
+            <h1>MI MONEDERO</h1>
+        </div>
+      </div>
 	    </div>
 	    <hr/>
 	    <div layout="row">
@@ -56,7 +56,7 @@
 	    </div>
     	<hr/>
     	<section class="transfers-table-block">
-		<div flex="50">
+		<div flexgt-sm="50" flex=100>
 	        <p class="modify-purse">
 	            <strong>HISTORIAL DE MOVIMIENTOS CON SALDO ACTUAL</strong>
 	        </p>
