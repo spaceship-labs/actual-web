@@ -47,12 +47,22 @@
         <section class="form-section">
           <!--DATOS PERSONALES-->
           <h3><strong>MIS TARJETAS</strong></h3>
+            <div class="invoice-box" style="margin-top: 1em">
+              <md-radio-group >
+                <md-radio-button value="Ciudad" class="md-primary">
+                <strong>SANTANDER ORO | </strong>****3124 | <u>ELIMINAR</u>
+                </md-radio-button>
+                <md-radio-button value="Nuevo" class="md-primary">
+                  <strong><u>Nuevo</u></strong>
+                </md-radio-button>
+              </md-radio-group>
+            </div>
           <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
             <div  class="input-container" flex="100">
               <div layout="row" layout-wrap>
                 <div flex-gt-sm="45" flex="100" class="input-element">
                   <label>
-                    <strong>Nombre(s) del titular<span class="hl-label">*</span></strong>
+                    <p><strong>Nombre(s) del titular<span class="hl-label">*</span></strong>(Tal cual aparece en el plástico)</p>
                   </label>
                   <div class="input-element-inner">
                     <input type="text" ng-model="vm.user.firstName" required>
@@ -60,7 +70,7 @@
                 </div>
                 <div flex-gt-sm="45" flex="100" class="input-element">
                   <label>
-                    <strong>Apellido(s) del titular<span class="hl-label">*</span></strong>
+                    <p><strong>Apellido(s) del titular<span class="hl-label">*</span></strong>(Tal cual aparece en el plástico)</p>
                   </label>
                   <div class="input-element-inner">
                     <input type="text" ng-model="vm.user.lastName" required>
@@ -70,7 +80,7 @@
               <div layout="row" layout-wrap>
                 <div flex-gt-sm="35" flex="100" class="input-element">
                   <label>
-                    <strong>Número de tarjeta<span class="hl-label">*</span></strong>
+                    <p><strong>Número de tarjeta<span class="hl-label">*</span></strong>(Ingresar los 16 dígitos)</p>
                   </label>
                   <div class="input-element-inner">
                     <input type="text" ng-model="vm.user.firstName" required>
@@ -93,7 +103,16 @@
                   </div>
                 </div>
               </div>
-
+              <div layout="row" layout-wrap>
+                <div flex-gt-sm="100" flex="100" class="input-element">
+                  <label>
+                    <strong>Alias<span class="hl-label">*</span></strong>
+                  </label>
+                  <div class="input-element-inner">
+                    <input type="text" ng-model="vm.user.firstName" required>
+                  </div>
+                </div>
+              </div>
             </div>
 
           </section>
