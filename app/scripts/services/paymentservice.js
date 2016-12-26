@@ -5,226 +5,13 @@
     .module('dashexampleApp')
     .factory('paymentService', paymentService);
 
-  function paymentService(api, $filter){
+  function paymentService(api, $filter, $http, quotationService){
     var service = {
+      addPayment: addPayment,
       getPaymentMethodsGroups: getPaymentMethodsGroups,
       getPaymentOptionsByMethod: getPaymentOptionsByMethod,
       getRefundsOptions: getRefundsOptions
     };
-
-var paymentGroups = [
-      {
-        group:1,
-        discountKey:'discountPg1',
-        methods: [
-          {
-            label:'Monedero electrónico',
-            name:'Monedero electrónico',
-            type:'ewallet',
-            description:'Sujeto a verificación contable',
-            currency: 'mxn',
-            needsVerification: false
-          },
-          {
-            label:'1 pago con',
-            name:'Una sola exhibición terminal',
-            type:'single-payment-terminal',
-            //type:'credit-card',
-            description:'VISA, MasterCard, American Express',
-            cardsImages:['images/visa.png','images/mastercard.png','images/american.png'],
-            cards:['Visa','MasterCard','American Express'],
-            terminals:[
-              {label:'American Express', value:'american-express'},
-              {label:'Banamex', value:'banamex'}
-            ],
-            currency: 'mxn',
-            needsVerification: true,
-            min:0
-          },
-        ]
-      },
-      {
-        group:2,
-        discountKey:'discountPg2',
-        methods: [
-          {
-            label:'3',
-            name:'3 meses sin intereses',
-            type:'3-msi',
-            msi:3,
-            cardsImages:[
-              'images/amexcard.png',
-              'images/banamex.png',
-              'images/bancomer.png',
-            ],
-            cards: [
-              'Afirme',
-              'Banbajio',
-              'Banca Mifel',
-              'Banco Ahorro Famsa',
-              'Banjercito',
-              'Banorte',
-              'Banregio',
-              'Inbursa',
-              'Itaucard',
-              'Ixe',
-              'Liverpool Premium Card',
-              'Santander',
-              'Scotiabank'
-            ],
-            moreCards: true,
-            terminals:[
-              {label:'American Express', value:'american-express'},
-              {label:'Banamex', value:'banamex'},
-              {label:'Bancomer', value:'bancomer'},
-              {label:'Banorte', value:'banorte'},
-              {label:'Santander', value:'santander'}
-            ],
-            currency: 'mxn',
-            min:300,
-            needsVerification: true
-          }
-        ]
-      },
-      {
-        group:3,
-        discountKey:'discountPg3',
-        methods: [
-          {
-            label:'6',
-            name:'6 meses sin intereses',
-            type:'6-msi',
-            msi:6,
-            cardsImages:[
-              'images/amexcard.png',
-              'images/banamex.png',
-              'images/bancomer.png',
-            ],
-            cards:[
-              'Afirme',
-              'Banbajio',
-              'Banca Mifel',
-              'Banco Ahorro Famsa',
-              'Banjercito',
-              'Banorte',
-              'Banregio',
-              'Inbursa',
-              'Itaucard',
-              'Ixe',
-              'Liverpool Premium Card',
-              'Santander',
-              'Scotiabank'
-            ],
-            moreCards: true,
-            terminals:[
-              {label:'American Express', value:'american-express'},
-              {label:'Banamex', value:'banamex'},
-              {label:'Bancomer', value:'bancomer'},
-              {label:'Banorte', value:'banorte'},
-              {label:'Santander', value:'santander'}
-            ],
-            currency: 'mxn',
-            min:600,
-            needsVerification: true
-          },
-          {
-            label:'9',
-            name:'9 meses sin intereses',
-            type:'9-msi',
-            msi:9,
-            cardsImages:[
-              'images/amexcard.png',
-              'images/banamex.png',
-              'images/bancomer.png',
-            ],
-            cards:[
-              'Banorte',
-              'Santander'
-            ],
-            moreCards: true,
-            terminals:[
-              {label:'American Express', value:'american-express'},
-              {label:'Banamex', value:'banamex'},
-              {label:'Bancomer', value:'bancomer'},
-              {label:'Santander', value:'santander'}
-            ],
-            currency: 'mxn',
-            min:900,
-            needsVerification: true
-          },
-        ]
-      },
-      {
-        group:4,
-        discountKey:'discountPg4',
-        methods: [
-          {
-            label:'12',
-            name:'12 meses sin intereses',
-            type:'12-msi',
-            msi:12,
-            cardsImages:[
-              'images/amexcard.png',
-              'images/banamex.png',
-              'images/bancomer.png',
-            ],
-            cards:[
-              'Afirme',
-              'Banbajio',
-              'Banca Mifel',
-              'Banco Ahorro Famsa',
-              'Banjercito',
-              'Banorte',
-              'Banregio',
-              'Inbursa',
-              'Itaucard',
-              'Ixe',
-              'Liverpool Premium Card',
-              'Santander',
-              'Scotiabank'
-            ],
-            moreCards: true,
-            terminals:[
-              {label:'American Express', value:'american-express'},
-              {label:'Banamex', value:'banamex'},
-              {label:'Bancomer', value:'bancomer'},
-              {label:'Banorte', value:'banorte'},
-              {label:'Santander', value:'santander'}
-            ],
-            currency: 'mxn',
-            min: 1200,
-            needsVerification: true
-          },
-        ]
-      },
-      {
-        group:5,
-        discountKey:'discountPg5',
-        methods: [
-          {
-            label:'18',
-            name:'18 meses sin intereses',
-            type:'18-msi',
-            msi:18,
-            cardsImages:[
-              'images/banamex.png',
-              'images/amexcard.png'
-            ],
-            cards: [
-              'American Express',
-              'Banamex'
-            ],
-            terminals:[
-              {label:'American Express', value:'american-express'},
-              {label:'Banamex', value:'banamex'}
-            ],
-            currency: 'mxn',
-            needsVerification: true,
-            min:2000
-          },
-        ]
-      },
-    ];
 
     var refundsOptions = [
       {
@@ -458,13 +245,19 @@ var paymentGroups = [
    	}
 
     function getPaymentMethodsGroups(){
-      return paymentGroups;
-    }    
+      var url = '/paymentgroups';
+      return api.$http.get(url);
+    }
 
     function getRefundsOptions(){
       return refundsOptions;
     }
-    
+
+    function addPayment(quotationId, params){
+      var url = '/payment/add/' + quotationId;
+      return api.$http.post(url,params);
+    }
+  
     return service;
   }
 

@@ -18,7 +18,6 @@
         page: page || 1
       });
       return api.$http.post(url, params);
-
     }
 
     function getTotalByUser(user, dateFrom, dateTo) {

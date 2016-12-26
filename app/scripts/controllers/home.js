@@ -12,12 +12,13 @@ angular.module('dashexampleApp')
 
 function HomeCtrl(
   $location, 
+  $scope,
   $rootScope,
   api, 
-  dialogService,
-  productService
+  dialogService
 ){
   var vm = this;
+  var mainDataListener;
   angular.extend(vm,{
     areProductsLoaded: false,
     api: api,
@@ -26,42 +27,30 @@ function HomeCtrl(
   function init(){
     setCategoryStockProperty();
     if($location.search().startQuotation){
-      dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización')
+      //dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización');
     }
-
-      vm.search = {
-        items: 10,
-        page: 1,
-        populateImgs : true
-      };
-      vm.isLoading = true;
-      productService.searchByFilters(vm.search).then(function(res){
-        vm.totalResults = res.data.total;
-        vm.isLoading = false;
-        return productService.formatProducts(res.data.products);
-      })
-      .then(function(fProducts){
-        vm.products = fProducts;
-        vm.areProductsLoaded = true;
-      })
+    mainDataListener = $rootScope.$on('mainDataLoaded', setCategoryStockProperty);
   }
 
-  $rootScope.$on('activeStoreAssigned', setCategoryStockProperty);
-
-  function setCategoryStockProperty(event, activeStore){
+  function setCategoryStockProperty(event, mainData){
+    var activeStore = mainData ?  mainData.activeStore : false;
     vm.stockProperty = 'productsNum';
-    if(activeStore && activeStore.code != 'proyectos'){
+    if(activeStore && activeStore.code !== 'proyectos'){
       vm.stockProperty = activeStore.code;
     }
   }
 
   init();
+
+  $scope.$on('$destroy', function(){
+    mainDataListener();
+  });
 }
 
 HomeCtrl.$inject = [
   '$location',
+  '$scope',
   '$rootScope',
   'api',
-  'dialogService',
-  'productService'
+  'dialogService'
 ];

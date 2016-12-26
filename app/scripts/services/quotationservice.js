@@ -6,11 +6,20 @@
         .factory('quotationService', quotationService);
 
     /** @ngInject */
-    function quotationService($http, $location, $q, $rootScope, api, Upload, productService, localStorageService){
+    function quotationService(
+      $http, 
+      $location, 
+      $q, 
+      $rootScope, 
+      api, 
+      Upload, 
+      productService, 
+      localStorageService,
+      dialogService
+    ){
 
       var service = {
         addDetail: addDetail,
-        addPayment: addPayment,
         addProduct: addProduct,
         addRecord: addRecord,
         addMultipleProducts: addMultipleProducts,
@@ -18,9 +27,11 @@
         calculateSubTotal: calculateSubTotal,
         calculateTotal: calculateTotal,
         calculateTotalDiscount: calculateTotalDiscount,
+        closeQuotation: closeQuotation,
         create: create,
         isValidStock: isValidStock,
         getActiveQuotation: getActiveQuotation,
+        getActiveQuotationId: getActiveQuotationId,
         getByClient: getByClient,
         getById: getById,
         getCountByUser: getCountByUser,
@@ -31,16 +42,22 @@
         getRecords: getRecords,
         getTotalByPaymentMethod: getTotalByPaymentMethod,
         getTotalsByUser: getTotalsByUser,
+        getClosingReasons: getClosingReasons,
+        getPaymentOptions: getPaymentOptions,
+        getRecordTypes: getRecordTypes,
         loadProductFilters: loadProductFilters,
         newQuotation: newQuotation,
         mapDetailsStock: mapDetailsStock,
         removeDetail: removeDetail,
         removeDetailsGroup: removeDetailsGroup,
+        removeCurrentQuotation: removeCurrentQuotation,
         setActiveQuotation: setActiveQuotation,
         sendByEmail: sendByEmail,
+        showStockAlert: showStockAlert,
         update: update,
         updateSource: updateSource,
         updateBroker: updateBroker,
+        validateQuotationStockById: validateQuotationStockById
       };
 
       return service;
@@ -115,6 +132,10 @@
         return api.$http.post(url,params);
       }
 
+      function closeQuotation(id, params){
+        var url = '/quotation/' + id  + '/close';
+        return api.$http.post(url,params);
+      }      
 
       function calculateSubTotal(quotation){
         var subTotal = 0;
@@ -197,16 +218,20 @@
             populate_fields: ['FilterValues','Promotions']
           };
           var page = 1;
-          productService.getList(page,params).then(function(res){
-            return productService.formatProducts(res.data.data);
-          })
-          .then(function(fProducts){
-            //Match detail - product
-            quotation.Details.forEach(function(detail){
-              detail.Product = _.findWhere( fProducts, {id : detail.Product } );
+          productService.getList(page,params)
+            .then(function(res){
+              return productService.formatProducts(res.data.data);
+            })
+            .then(function(fProducts){
+              //Match detail - product
+              quotation.Details.forEach(function(detail){
+                detail.Product = _.findWhere( fProducts, {id : detail.Product } );
+              });
+              deferred.resolve(quotation.Details);
+            })
+            .catch(function(err){
+              deferred.reject(err);
             });
-            deferred.resolve(quotation.Details);
-          });
         }else{
           deferred.resolve([]);
         }
@@ -223,11 +248,21 @@
         return getById(quotationId);
       }
 
-      function setActiveQuotation(quotationId){
-        localStorageService.set('quotation', quotationId);
-        $rootScope.$broadcast('newActiveQuotation', quotationId);
+      function getActiveQuotationId(){
+        return localStorageService.get('quotation');
       }
 
+      function setActiveQuotation(quotationId){
+        if(getActiveQuotationId() !== quotationId || !quotationId){
+          localStorageService.set('quotation', quotationId);
+          $rootScope.$broadcast('newActiveQuotation', quotationId);          
+        }
+      }
+
+      function removeCurrentQuotation(){
+        localStorageService.remove('quotation');
+        $rootScope.$broadcast('newActiveQuotation', false); 
+      }
 
       function newQuotation(params, goToSearch){
         create(params).then(function(res){
@@ -237,7 +272,8 @@
             if(goToSearch){
               $location.path('/').search({startQuotation:true});
             }else{
-              $location.path('/quotations/edit/'+quotation.id);
+              $location.path('/quotations/edit/'+quotation.id)
+                .search({startQuotation:true});
             }
           }
         });
@@ -249,6 +285,7 @@
           quantity: params.quantity,
           Quotation: quotationId,
           shipDate: params.shipDate,
+          productDate: params.productDate,
           shipCompany: params.shipCompany,
           shipCompanyFrom: params.shipCompanyFrom,
           PromotionPackage: params.promotionPackage || null
@@ -332,11 +369,6 @@
         }
       }
 
-      function addPayment(quotationId, params){
-        var url = '/quotation/addpayment/' + quotationId;
-        return api.$http.post(url,params);
-      }
-
       function loadProductFilters(details){
         var deferred = $q.defer();
         productService.getAllFilters({quickread:true}).then(function(res){
@@ -387,6 +419,11 @@
         return api.$http.post(url);
       }
 
+      function getPaymentOptions(id){
+        var url = '/quotation/'+id+'/paymentoptions';
+        return api.$http.post(url);
+      }
+
       function mapDetailsStock(details, detailsStock){
         var details = details.map(function(detail){
           var detailStock = _.findWhere(detailsStock, {id:detail.id});
@@ -406,6 +443,57 @@
         }
         return true;
       }
+
+      function validateQuotationStockById(id){
+        var url = '/quotation/validatestock/' + id;
+        var deferred = $q.defer();
+        api.$http.post(url)
+          .then(function(response){
+            if(response.data.isValid){
+              deferred.resolve(true);
+            }else{
+              deferred.resolve(false);
+            }
+          })
+          .catch(function(err){
+            deferred.reject(err);
+          });
+        return deferred.promise;
+      }
+
+      function getClosingReasons(){
+        var closingReasons = [
+          'Cliente compró en otra tienda de la empresa.',
+          'Cliente compró en otra mueblería.',
+          'Cliente se murió',
+          'Cliente solicita no ser contactado más',
+          'Cliente ya no está interesado',
+          'Cliente es incontactable',
+          'Cliente se mudó',
+          'Vendedor no dio seguimiento suficiente',
+          'Vendedor cotizó artículos equivocados',
+          'Los precios son altos',
+          'Las fechas de entrega son tardadas',
+          'No vendemos el articulo solicitado',
+          'Otra razón (especificar)',        
+        ];
+        return closingReasons;
+      }
+
+      function getRecordTypes(){
+        var recordTypes = [
+          'Email',
+          'Llamada', 
+          'WhatsApp', 
+          'Visita'
+        ];
+        return recordTypes;
+      }
+
+      function showStockAlert(){
+        var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
+        dialogService.showDialog(msg);        
+      }      
 
     }
 

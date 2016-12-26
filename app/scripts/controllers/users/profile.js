@@ -16,29 +16,32 @@ function UserProfileCtrl(
   $location, 
   $mdDialog, 
   commonService, 
-  userService, 
+  userService,
+  authService, 
   localStorageService,
   paymentService
 ){
   var vm = this;
   vm.user = angular.copy($rootScope.user);
-  vm.cashRegister = {};
-  vm.update = update;
-  vm.onSelectStartDate = onSelectStartDate;
-  vm.onSelectEndDate = onSelectEndDate;
-  vm.init = init;
-  vm.getCashReport = getCashReport;
-  vm.getTotalByMethod = getTotalByMethod;
-  vm.getTotalByGroup = getTotalByGroup;
-  vm.print = print;
+  vm.cashRegister       = {};
+  vm.paymentsGroups     = [];
+  vm.update             = update;
+  vm.onSelectStartDate  = onSelectStartDate;
+  vm.onSelectEndDate    = onSelectEndDate;
+  vm.init               = init;
+  vm.getCashReport      =  getCashReport;
+  vm.getTotalByMethod   = getTotalByMethod;
+  vm.getTotalByGroup    = getTotalByGroup;
+  vm.getGeneralTotal    = getGeneralTotal;
+  vm.print              = print;
 
-  if(vm.user.userType == 'broker'){
+  if(vm.user.role.name === authService.USER_ROLES.BROKER){
     $location.path('/users/brokerprofile');
   }
 
   function init(){
     var role = $rootScope.user.role.name;
-    if(role === 'broker'){
+    if(role === authService.USER_ROLES.BROKER){
       $location.path('/users/brokerprofile');
     }
     var monthRange = commonService.getMonthDateRange();
@@ -79,23 +82,28 @@ function UserProfileCtrl(
   function getCashReport(){
     vm.cashRegister.startDate = commonService.combineDateTime(vm.cashRegister.startDate,vm.cashRegister.startTime);
     vm.cashRegister.endDate = commonService.combineDateTime(vm.cashRegister.endDate,vm.cashRegister.endTime,59);
+    
     var params = {
       startDate: vm.cashRegister.startDate,
       endDate: vm.cashRegister.endDate
     };
+
     vm.isLoadingReport = true;
-    userService.getCashReport(params).then(function(res){
-      console.log(res);
-      var payments = res.data;
-      vm.paymentsGroups = groupPayments(payments);
-      vm.isLoadingReport = false;
-    }).catch(function(err){
-      console.log(err);
-      vm.isLoadingReport = false;
-    });
+    
+    userService.getCashReport(params)
+      .then(function(res){
+        console.log(res);
+        var payments = res.data;
+        loadPaymentGroups(payments);
+        vm.isLoadingReport = false;
+      })
+      .catch(function(err){
+        console.log(err);
+        vm.isLoadingReport = false;
+      });
   }
 
-  function groupPayments(payments){
+  function loadPaymentGroups(payments){
     var groups = [];
     var auxGroups = _.groupBy(payments, function(payment){
       return payment.type + '#' + payment.terminal;
@@ -113,21 +121,30 @@ function UserProfileCtrl(
     });
 
     var paymentsGroups = _.groupBy(methods, 'groupNumber');
-    for(var key in paymentsGroups){
-      var sortedMethods = sortMethodsByGroup(paymentsGroups[key], key);
-      groups.push({
-        groupNumber: key,
-        methods: sortedMethods
+    paymentService.getPaymentMethodsGroups()
+      .then(function(res){
+        var methodGroups = res.data;
+        for(var key in paymentsGroups){
+          var sortedMethods = sortMethodsByGroup(paymentsGroups[key], key, methodGroups);
+          groups.push({
+            groupNumber: key,
+            methods: sortedMethods
+          });
+        }
+
+      })
+      .catch(function(err){
+        console.log('err');
       });
-    }
-    return groups;
+    
+
+    vm.paymentsGroups = groups;
   }
 
-  function sortMethodsByGroup(methods, groupNumber){
+  function sortMethodsByGroup(methods, groupNumber, methodGroups){
     var sorted = [];
-    var groups = paymentService.getPaymentMethodsGroups();
     groupNumber = parseInt(groupNumber);
-    var group = _.findWhere(groups, {group: groupNumber});
+    var group = _.findWhere(methodGroups, {group: groupNumber});
     for(var i = 0; i< group.methods.length; i++){
       var matches = _.where(methods, {type: group.methods[i].type});
       if(matches && matches.length > 0){
@@ -139,7 +156,7 @@ function UserProfileCtrl(
 
   function getTotalByMethod(method){
     var total = method.payments.reduce(function(acum, current){
-      if(current.currency == 'usd'){
+      if(current.currency === 'usd'){
         acum += (current.ammount * current.exchangeRate);
       }else{
         acum += current.ammount;
@@ -156,6 +173,15 @@ function UserProfileCtrl(
     return total;
   }
 
+  function getGeneralTotal(){
+    var generalTotal = vm.paymentsGroups.reduce(function(acum, group){
+      acum += getTotalByGroup(group);
+      return acum;
+    },0);
+    return generalTotal;
+  }
+
+
   function showConfirm() {
     var confirm = $mdDialog.confirm()
       .title('¿Quieres cambiar tus datos?')
@@ -169,6 +195,6 @@ function UserProfileCtrl(
     $window.print();
   }
 
-  vm.init();
+  init();
 
 }

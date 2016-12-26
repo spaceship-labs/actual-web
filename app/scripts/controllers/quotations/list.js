@@ -15,233 +15,392 @@ function QuotationsListCtrl(
     $rootScope,
     $filter,
     commonService,
+    authService,
     quotationService,
     storeService
   ){
 
   var vm = this;
-  vm.applyFilters = applyFilters;
-  vm.onDateStartSelect = onDateStartSelect;
-  vm.onDateEndSelect = onDateEndSelect;
-  vm.getQuotationsData = getQuotationsData;
-  vm.getTotalByDateRange = getTotalByDateRange;
-  vm.filters = false;
-  vm.dateEnd = false;
-  vm.defaultSort = [6, 'desc'];
-  vm.orderBy = 'tracing';
-  vm.sortDirection = 'DESC';
-  vm.columnsLeads = [
-    {key: 'folio', label:'Folio'},
-    {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
-    {key:'Client.E_Mail', label:'Email', defaultValue:'Sin cliente'},
-    {key:'createdAt', label:'Cotización' ,date:true},
-    {key:'total', label: 'Total', currency:true},
-    {key:'status', label:'Status', 
-      mapper:{
-        'to-order':'Cerrada(orden)',
-        'closed': 'Cerrada',
+  angular.extend(vm,{
+    apiResourceQuotations: quotationService.getList,
+    applyFilters: applyFilters,
+    createdRowCb: createdRowCb,
+    isUserAdminOrManager: isUserAdminOrManager,
+    isUserSellerOrAdmin:isUserSellerOrAdmin,
+    onDateEndSelect: onDateEndSelect,
+    onDateStartSelect: onDateStartSelect,
+    dateEnd: false,
+    defaultSort: [6, 'asc'],
+    closedOptions: [
+      {label: 'Abiertas', value: {'!': true}},
+      {label:'Cerradas', value: true}
+    ],    
+    columnsLeads: [
+      {key: 'folio', label:'Folio'},
+      {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
+      {key:'Client.E_Mail', label:'Email', defaultValue:'Sin cliente'},
+      {key:'createdAt', label:'Cotización' ,date:true},
+      {key:'total', label: 'Total', currency:true},
+      {key:'status', label:'Status', 
+        mapper:{
+          'to-order':'Cerrada(orden)',
+          'closed': 'Cerrada',
+        },
+        defaultValue: 'Abierta'
       },
-      defaultValue: 'Abierta'
+      {
+        key:'tracing', 
+        label:'Seguimiento', 
+        defaultValue: '-',
+        color: 'red',
+        //defaultValue: moment().add(5,'days').toDate(),
+        dateTime: true
+      },
+      {
+        key:'source',
+        label:'Fuente',
+        defaultValue:'-'
+      },
+      {
+        key:'Acceder',
+        label:'Acceder',
+        propId: 'id',
+        actions:[
+          {url:'/quotations/edit/',type:'edit'},
+        ]
+      },
+    ],
+    endDate: false,
+    quotationsData:{},
+    listScopes: [],
+    filters: {
+      User: $rootScope.user.id,
+      isClosed: {'!': true}
     },
-    {
-      key:'tracing', 
-      label:'Seguimiento', 
-      defaultValue: '-',
-      color: 'red',
-      //defaultValue: moment().add(5,'days').toDate(),
-      dateTime: true
-    },
-    {
-      key:'Acciones',
-      label:'Acciones',
-      propId: 'id',
-      actions:[
-        {url:'/quotations/edit/',type:'edit'},
-      ]
-    },
+    startDate: false,
+    store:{
+      ammounts:{}
+    },    
+    user: $rootScope.user,
+  });
+
+  vm.globalDateRange = {
+    field: 'tracing',
+    start: vm.startDate,
+    end: vm.endDate
+  }; 
+
+  vm.listScopes = [
+    {label: 'Mis oportunidades', value: vm.user.id},
+    {label: 'Todas las oportunidades', value:'none'}
   ];
-  vm.quotationsData = {};
-  vm.apiResourceLeads = quotationService.getList;
-  vm.createdRowCb = function(row, data, index){
-    var day = moment().startOf('day').format('MM-DD-YYYY');
+
+  function createdRowCb(row, data, index){
+    var day = moment().startOf('day').toDate();
     if(data.tracing){
-      if(moment(data.tracing).startOf('day').format('MM-DD-YYYY') === day){
+      var tracing = moment(data.tracing).startOf('day').toDate();
+      if(tracing <= day){
         $(row).addClass('highlight').children().css( "background-color", "#faadb2" );
       }
     }
-  };
-
-
-  function getQuotationsData(){
-    var dateRange = {
-      startDate: moment().startOf('day'),
-      endDate: moment().endOf('day'),
-    };
-    quotationService.getTotalsByUser($rootScope.user.id, dateRange)
-      .then(function(res){
-        vm.quotationsData.todayAmmount = res.data.dateRange;
-        vm.quotationsData.rangeAmmount = res.data.all;
-        vm.quotationsData.ammounts = {
-          labels: ["Hoy", "Resto del mes"],
-          data: [
-            vm.quotationsData.todayAmmount,
-            (vm.quotationsData.rangeAmmount - vm.quotationsData.todayAmmount)
-          ],
-          colors: ["#C92933", "#48C7DB", "#FFCE56"],
-          options:{
-            tooltips: {
-              callbacks: {
-                label: function(tooltipItem, data) {
-                  return data.labels[tooltipItem.index] + ': ' + $filter('currency')(data.datasets[0].data[tooltipItem.index]);
-                }
-              }
-            }
-          },
-
-        };
-      });
-
-    quotationService.getCountByUser($rootScope.user.id, dateRange)
-      .then(function(res){
-        console.log(res);
-        vm.quotationsData.todayQty = res.data.dateRange;
-        vm.quotationsData.rangeQty = res.data.all;
-        vm.quotationsData.quantities = {
-          labels: ["Hoy", "Resto del mes"],
-          data: [
-            vm.quotationsData.todayQty,
-            (vm.quotationsData.rangeQty - vm.quotationsData.todayQty)
-          ],
-          colors: ["#C92933", "#48C7DB", "#FFCE56"]
-        };
-      });
   }
-
 
   function init(){
-    var monthRange = commonService.getMonthDateRange();
-    var fortnightRange = commonService.getFortnightRange();
-    vm.startDate = fortnightRange.start.toString();
-    vm.endDate = fortnightRange.end.toString();
-    vm.filters = {
-      User: $rootScope.user.id,
-    };
-    vm.dateRange = {
-      field: 'createdAt',
-      start: vm.startDate,
-      end: vm.endDate
-    };
-    vm.user = $rootScope.user;
-    vm.getQuotationsData();
-    vm.getTotalByDateRange(vm.user.id, {
-      startDate: vm.startDate,
-      endDate: vm.endDate,
-    });
-
-    vm.getTotalByDateRange(vm.user.id, {
-      startDate: vm.startDate,
-      endDate: vm.endDate,
-    });
-
-    if(vm.user.role.name == 'store manager' && vm.user.mainStore){
+    if(isUserManager()){
       getSellersByStore(vm.user.mainStore.id);
     }
-  }
-
-  function getTotalByDateRange(userId, dateRange){
-    var params = angular.extend(dateRange, {all:false});
-    quotationService.getTotalsByUser($rootScope.user.id, params)
-      .then(function(res){
-        console.log(res);
-        vm.totalDateRange = res.data.dateRange || 0;
-      })
-      .catch(function(err){
-        console.log(err);
-      });
-  }
-
-  function applyFilters(){
-    if(vm.dateStart._d && vm.dateEnd._d){
-      vm.dateRange = {
-        field: 'createdAt',
-        start: vm.dateStart._d,
-        end: moment(vm.dateEnd._d).endOf('day')
-      };
-    }
-
-    vm.getTotalByDateRange(vm.user.id, {
-      startDate: vm.dateRange.start,
-      endDate: vm.dateRange.end,
-    });
-    updateSellersTotals();
-    $rootScope.$broadcast('reloadTable', true);
-  }
-
-  function onDateStartSelect(pikaday){
-    console.log(pikaday);
-  }
-
-  function onDateEndSelect(pikaday){
-    console.log(pikaday);
-  }
-
-  function updateSellersTotals(){
-    console.log('updateSellersTotals');
-    if(vm.sellers){
-      var promisesTotals = [];
-      for(var i = 0; i< vm.sellers.length; i++){
-        var s = vm.sellers[i];
-        var params = {
-          startDate: vm.dateRange.start,
-          endDate: vm.dateRange.end,
-          all: false
-        };
-        promisesTotals.push(quotationService.getTotalsByUser(s.id, params));
-      }
-      $q.all(promisesTotals)
-        .then(function(totals){
-          console.log(totals);
-          vm.sellers = vm.sellers.map(function(s, index){
-            s.total = totals[index].data.dateRange;
-            return s;
-          })
+    else{
+      getQuotationDataByUser(vm.user.id)
+        .then(function(values){
+          var userTotals = values[0];
+          var userCounts = values[1];
+          setupSellerChart(userTotals, userCounts);
         })
         .catch(function(err){
-          console.log(err);
-        })
+          console.log('err', err);
+        });
+      getCurrentUserTotal(vm.user.id, {
+        startDate: vm.startDate,
+        endDate: vm.endDate,
+      });
     }
+    
   }
 
   function getSellersByStore(storeId){
+    var deferred = $q.defer();
     storeService.getSellersByStore(storeId)
       .then(function(res){
         vm.sellers = res.data;
-        var promisesTotals = [];
-        vm.sellers = vm.sellers.map(function(s){
-          s.filters = {
-            User: s.id
+        vm.sellers = vm.sellers.map(function(seller){
+          seller.filters = {
+            User: seller.id
           };
-          var params = {
-            startDate: vm.startDate,
-            endDate: vm.endDate,
-            all: false
-          };
-          promisesTotals.push(quotationService.getTotalsByUser(s.id, params));
-          return s;
+          return seller;
         });
-        console.log(vm.sellers);
-        return $q.all(promisesTotals);
+        return updateSellersTotals();
       })
-      .then(function(totals){
-        vm.sellers = vm.sellers.map(function(s, i){
-          s.total = totals[i].data.dateRange;
-          return s;
+      .then(function(){
+        deferred.resolve();
+      })
+      .catch(function(err){
+        console.log(err);
+        deferred.reject(err);
+      });
+
+    return deferred.promise;
+  }
+
+  function updateSellersTotals(){
+    var deferred = $q.defer();
+
+    if(vm.sellers){
+      var promisesTotals = vm.sellers.map(function(seller){
+        var params = {
+          startDate: vm.startDate,
+          endDate: vm.endDate,
+          all: false,
+          dateField: 'tracing',
+          isClosed: vm.closedOptions[0].value
+        };
+        params.isClosed = seller.filters.isClosed || params.isClosed;
+        return quotationService.getTotalsByUser(seller.id, params);
+      });
+
+      $q.all(promisesTotals)
+        .then(function(totals){
+          vm.sellers = vm.sellers.map(function(seller, index){
+            seller.total = totals[index].data.byDateRange;
+            return seller;
+          });
+          
+          vm.store.ammounts.total = getStoreTotal(vm.sellers);
+          var promises = vm.sellers.map(function(seller){
+            return getQuotationDataByUser(seller.id);
+          });
+          return $q.all(promises);
+        })
+        .then(function(sellersData){
+
+          var sellersAmounts = sellersData.map(function(data){
+            return data[0];
+          });
+          var sellersQuantities = sellersData.map(function(data){
+            return data[1];
+          });
+          setupStoreCharts(sellersAmounts, sellersQuantities);
+          deferred.resolve();          
+        })
+        .catch(function(err){
+          console.log(err);
+          deferred.reject(err);
         });
-        console.log(vm.sellers);
+    }else{
+      deferred.resolve();
+    }
+    return deferred.promise;
+  }  
+
+  function getStoreTotal(sellers){
+    var total = sellers.reduce(function(acum,seller){
+      return acum += seller.total;
+    },0);    
+    return total;
+  }
+
+  function getQuotationDataByUser(userId, params){
+    var deferred = $q.defer();
+    var defaultParams = {
+      startDate : vm.startDate,
+      endDate   : vm.endDate,
+      dateField : 'tracing',
+      isClosed  : {'!': true}
+    };
+    params = params || defaultParams;
+    $q.all([
+      quotationService.getTotalsByUser(userId, params),
+      quotationService.getCountByUser(userId, params)
+    ])
+      .then(function(result){
+        console.log('result', result);
+        var values = [
+          result[0].data,
+          result[1].data
+        ];
+        deferred.resolve(values);
+      })
+      .catch(function(err){
+        console.log(err);
+        deferred.reject(err);
+      });
+
+    return deferred.promise;
+  }      
+
+  function getCurrencyTooltip(tooltipItem, data){
+    return data.labels[tooltipItem.index] + ': ' + $filter('currency')(data.datasets[0].data[tooltipItem.index]);
+  }  
+
+  function setupSellerChart(userTotals, userCounts){
+    vm.quotationsData.untilTodayAmount  = userTotals.untilToday;
+    vm.quotationsData.allByDateRangeAmount = userTotals.allByDateRange;
+    vm.quotationsData.ammounts = {
+      labels: ["Hoy", "FTD"],
+      data: [
+        vm.quotationsData.untilTodayAmount,
+        (vm.quotationsData.allByDateRangeAmount - vm.quotationsData.untilTodayAmount)
+      ],
+      colors: ["#C92933", "#48C7DB", "#FFCE56"],
+      options:{
+        tooltips: {
+          callbacks: {
+            label: getCurrencyTooltip
+          }
+        }
+      },
+    };
+
+    vm.quotationsData.untilTodayQty = userCounts.untilToday;
+    vm.quotationsData.allByDateRangeQty = userCounts.allByDateRange;
+    vm.quotationsData.quantities = {
+      labels: ["Hoy", "Resto del mes"],
+      data: [
+        vm.quotationsData.untilTodayQty,
+        (vm.quotationsData.allByDateRangeQty - vm.quotationsData.untilTodayQty)
+      ],
+      colors: ["#C92933", "#48C7DB", "#FFCE56"]
+    };    
+  }
+
+  function getCurrentUserTotal(userId, dateRange){
+    var deferred = $q.defer();
+    var params = angular.extend(dateRange, {
+      all:false,
+      dateField: 'tracing'
+    });
+    quotationService.getTotalsByUser($rootScope.user.id, params)
+      .then(function(res){
+        var values = res.data;
+        var total = values.byDateRange || 0;
+        vm.currentUserTotal = total;
+        deferred.resolve();
+      })
+      .catch(function(err){
+        console.log(err);
+        deferred.reject(err);
+      });
+
+    return deferred.promise;
+  }
+
+  function applyFilters(){
+    vm.globalDateRange = {
+      field: 'tracing',
+      start: vm.startDate,
+      end: vm.endDate
+    }; 
+
+    var promises = [
+      getCurrentUserTotal(vm.user.id, {
+        startDate: vm.startDate,
+        endDate: vm.endDate,
+      }),
+      updateSellersTotals()
+    ];
+
+    if(!isUserManager()){
+      promises.push(getQuotationDataByUser(vm.user.id));
+    }
+
+    vm.isLoading = true;
+    $q.all(promises)
+      .then(function(results){
+        $rootScope.$broadcast('reloadTable', true);
+
+        if(!isUserManager()){
+          var userTotals = results[2][0];
+          var userCounts = results[2][1];
+          setupSellerChart(userTotals, userCounts);
+        }
+
+        vm.isLoading = false;
       })
       .catch(function(err){
         console.log(err);
       });
+      
+  }
+
+  function onDateStartSelect(pikaday){
+    vm.startDate = pikaday._d;
+  }
+
+  function onDateEndSelect(pikaday){
+    vm.endDate = pikaday._d;
+  }
+
+  //@param sellers Array of seller object with untiltoday and bydaterange amounts and quantities
+  function setupStoreCharts(sellersAmounts, sellersQuantities){
+    vm.store.untilTodayAmount = sellersAmounts.reduce(function(acum, seller){
+      acum += seller.untilToday;
+      return acum;
+    }, 0);
+     vm.store.allByDateRangeAmount = sellersAmounts.reduce(function(acum, seller){
+      acum += seller.allByDateRange;
+      return acum;
+    }, 0);
+    vm.store.ammounts = {
+      labels: ["Hoy", "Resto de la quincena"],
+      data: [
+        vm.store.untilTodayAmount,
+        (vm.store.allByDateRangeAmount - vm.store.untilTodayAmount)
+      ],
+      colors: ["#C92933", "#48C7DB", "#FFCE56"],
+      options:{
+        tooltips: {
+          callbacks: {
+            label: getCurrencyTooltip
+          }
+        }
+      },
+    };
+
+    vm.store.untilTodayQty = sellersQuantities.reduce(function(acum, seller){
+      acum += seller.untilToday;
+      return acum;
+    }, 0);
+     vm.store.allByDateRangeQty = sellersQuantities.reduce(function(acum, seller){
+      acum += seller.allByDateRange;
+      return acum;
+    }, 0);
+
+    vm.store.quantities = {
+      labels: ["Hoy", "Resto del mes"],
+      data: [
+        vm.store.untilTodayQty,
+        (vm.store.allByDateRangeQty - vm.store.untilTodayQty)
+      ],
+      colors: ["#C92933", "#48C7DB", "#FFCE56"]
+    };    
+  }
+
+
+  function isUserAdminOrManager(){
+    return $rootScope.user.role && 
+      ( $rootScope.user.role.name === authService.USER_ROLES.ADMIN 
+        || $rootScope.user.role.name === authService.USER_ROLES.STORE_MANAGER 
+      );
+  }  
+
+  function isUserSellerOrAdmin(){
+    return $rootScope.user.role && 
+      ( $rootScope.user.role.name === authService.USER_ROLES.ADMIN 
+        || $rootScope.user.role.name === authService.USER_ROLES.SELLER 
+      );
+  }  
+
+  function isUserManager(){
+    return vm.user.role.name === authService.USER_ROLES.STORE_MANAGER && vm.user.mainStore;
   }
 
   init();
