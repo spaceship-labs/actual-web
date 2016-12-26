@@ -6,7 +6,15 @@
         .factory('authService', authService);
 
     /** @ngInject */
-    function authService($http,$rootScope,$location,localStorageService, api){
+    function authService(
+      $http,
+      $rootScope,
+      $location,
+      localStorageService, 
+      api,
+      jwtHelper,
+      userService
+    ){
 
       var service = {
         authManager: authManager,

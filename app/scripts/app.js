@@ -363,6 +363,11 @@ angular
         controller: 'UsersUserPurchasesCtrl',
         controllerAs: 'users/userPurchases'
       })
+      .when('/checkout/payment-info', {
+        templateUrl: 'views/checkout/payment-info.html',
+        controller: 'CheckoutPaymentInfoCtrl',
+        controllerAs: 'checkout/paymentInfo'
+      })
       .otherwise({
         redirectTo: '/'
       });

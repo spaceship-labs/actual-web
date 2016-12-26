@@ -17,52 +17,6 @@ var paymentGroups = [
         group:1,
         discountKey:'discountPg1',
         methods: [
-         {
-            label:'Efectivo MXN',
-            name:'Efectivo MXN',
-            type:'cash',
-            currency: 'mxn',
-            needsVerification: false
-          },
-          {
-            label:'Efectivo USD',
-            name:'Efectivo USD',
-            type:'cash-usd',
-            currency:'usd',
-            description:'Tipo de cambio $18.76 MXN',
-            needsVerification: false
-          },
-          {
-            label:'Cheque',
-            name:'Cheque',
-            type:'cheque',
-            description:'Sujeto a verificación contable',
-            currency:'mxn',
-            needsVerification: false
-          },
-          {
-            label:'Deposito',
-            name:'Deposito',
-            type:'deposit',
-            description:'Sujeto a verificación contable',
-            currency:'mxn',
-            needsVerification: false
-          },
-          {
-            label:'Transferencia',
-            name:'Transferencia',
-            type:'transfer',
-            description:'Sujeto a verificación contable',
-            currency: 'mxn',
-            terminals:[
-              {label:'American Express', value:'american-express'},
-              {label:'Banamex', value:'banamex'},
-              {label:'Bancomer', value:'bancomer'},
-              {label:'Banorte', value:'banorte'},
-              {label:'Santander', value:'santander'}
-            ],            
-            needsVerification: true
-          },
           {
             label:'Monedero electrónico',
             name:'Monedero electrónico',
