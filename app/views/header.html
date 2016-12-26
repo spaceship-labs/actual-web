@@ -11,9 +11,9 @@
         </a>
       </div>
 
-      <div 
-        class="categories-btn-wrap" 
-        flex-gt-xs="15" 
+      <div
+        class="categories-btn-wrap"
+        flex-gt-xs="15"
         layout-align="center center"
       >
         <a hide-xs ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
@@ -23,11 +23,11 @@
       <!--END ONLY ON SCROLL-->
 
 
-      <form 
-        hide-xs 
-        action="/search" 
-        method="GET" 
-        class="searcher-wrapper" 
+      <form
+        hide-xs
+        action="/search"
+        method="GET"
+        class="searcher-wrapper"
         layout="row"
         layout-xs="column"
         layout-sm="column"
@@ -56,9 +56,9 @@
         -->
       </form>
 
-      <div 
-        class="header-top-bar-menu" 
-        layout="row" 
+      <div
+        class="header-top-bar-menu"
+        layout="row"
         layout-align="center center"
       >
 
@@ -107,7 +107,7 @@
             <i class="icon-login"></i>
             <!--<span >Bienvenido <strong>{{main.user.firstName}}</strong></span>-->
           </a>
-          <ng-include ng-if="main.toggleProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
+          <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
       <!--
