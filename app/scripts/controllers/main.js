@@ -99,6 +99,7 @@
 
       moment.locale('es');
 
+      /*
       $(document).click(function(e){
         var $target = $(event.target);
         var profileHeader = $('#profile-header');
@@ -120,6 +121,7 @@
         }
         $scope.$apply();
       });
+      */
 
     }
 
