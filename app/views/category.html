@@ -121,7 +121,7 @@
             class="sub-wrapper"
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}"
             ng-if="subcategory[main.activeStore.code] > 0"
-            flex="33"
+            flex-gt-sm="33" flex="100"
           >
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />            
           </div>
@@ -135,7 +135,7 @@
             class="sub-wrapper"
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}"
             ng-if="subcategory[main.activeStore.code] > 0"
-            flex="33"
+            flex-gt-sm="33" flex="100"
           >
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>

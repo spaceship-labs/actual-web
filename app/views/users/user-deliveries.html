@@ -54,7 +54,7 @@
         <div class="order-items order-block-inner">
 
           <div class="order-table-header" layout="row" layout-align="space-between start">
-            <div flex="35"></div>
+            <div flex="35" hide-xs></div>
             <div flex="20"><strong>CANTIDAD</strong></div>
             <div flex="20"><strong>ENTREGA APROXIMADA</strong></div>
             <div flex="20"><strong>PRECIO</strong></div>
@@ -130,7 +130,7 @@
             <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
               <div flex="100">
                 <div layout="row" layout-wrap>
-                  <div flex class="input-element">
+                  <div flex flex-xs="100" class="input-element">
                     <label>
                       <strong>Nombre(s) del destinatario<span class="hl-label">*</span></strong>
                     </label>
@@ -138,7 +138,7 @@
                       <input type="text" ng-model="vm.user.firstName" required>
                     </div>
                   </div>
-                  <div flex class="input-element">
+                  <div flex flex-xs="100" class="input-element">
                     <label>
                       <strong>Apellidos del destinatario <span class="hl-label">*</span></strong>
                     </label>
@@ -148,7 +148,7 @@
                   </div>
                 </div>
                 <div layout="row" layout-wrap>
-                  <div flex class="input-element">
+                  <div flex flex-xs="100" class="input-element">
                     <label>
                       <strong>Teléfono fijo<span class="hl-label">*</span></strong>
                     </label>
@@ -156,7 +156,7 @@
                       <input type="text" ng-model="" required>
                     </div>
                   </div>
-                  <div flex class="input-element">
+                  <div flex flex-xs="100" class="input-element">
                     <label>
                       <strong>Teléfono celular<span class="hl-label">*</span></strong>
                     </label>
@@ -164,7 +164,7 @@
                       <input type="text" ng-model="" required>
                     </div>
                   </div>
-                  <div flex class="input-element">
+                  <div flex flex-xs="100" class="input-element">
                     <label>
                       <strong>Email<span class="hl-label">*</span></strong>
                     </label>
@@ -172,7 +172,7 @@
                       <input type="text" ng-model="" required>
                     </div>
                   </div>
-                  <div flex class="input-element">
+                  <div flex flex-xs="100" class="input-element">
                     <label>
                       <strong>Confirmar Email<span class="hl-label">*</span></strong>
                     </label>
@@ -195,7 +195,7 @@
             <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
               <div flex="100">
                 <div layout="row" layout-wrap>
-                  <div flex="25" class="input-element">
+                  <div flex="25" flex-xs="45" class="input-element">
                     <label>
                       <strong>Calle</strong>
                     </label>
@@ -203,7 +203,7 @@
                       <input type="text" ng-model="vm.user.firstName">
                     </div>
                   </div>
-                  <div flex="10" class="input-element">
+                  <div flex="10" flex-xs="45" class="input-element">
                     <label>
                       <strong>No. Exterior</strong>
                     </label>
@@ -211,7 +211,7 @@
                       <input type="text" ng-model="vm.user.lastName">
                     </div>
                   </div>
-                  <div flex="10" class="input-element">
+                  <div flex="10" flex-xs="45" class="input-element">
                     <label>
                       <strong>No. Interior</strong>
                     </label>
@@ -219,7 +219,7 @@
                       <input type="text" ng-model="vm.user.lastName">
                     </div>
                   </div>
-                  <div flex class="input-element">
+                  <div flex flex-xs="45" class="input-element">
                     <label>
                       <strong>Colonia</strong>
                     </label>
@@ -227,7 +227,7 @@
                       <input type="text" ng-model="vm.user.lastName">
                     </div>
                   </div>
-                  <div flex class="input-element">
+                  <div flex flex-xs="45" class="input-element">
                     <label>
                       <strong>Municipio</strong>
                     </label>
@@ -237,7 +237,7 @@
                   </div>
                 </div>
                 <div layout="row" layout-wrap>
-                  <div flex="25" class="input-element">
+                  <div flex="25" flex-xs="45" class="input-element">
                     <label>
                       <strong>Ciudad</strong>
                     </label>
@@ -245,7 +245,7 @@
                       <input type="text" ng-model="vm.user.firstName">
                     </div>
                   </div>
-                  <div flex="25" class="input-element">
+                  <div flex="25" flex-xs="45" class="input-element">
                     <label>
                       <strong>Estado</strong>
                     </label>
@@ -253,7 +253,7 @@
                       <input type="text" ng-model="vm.user.lastName" placeholder="Elige un estado">
                     </div>
                   </div>
-                  <div flex class="input-element">
+                  <div flex flex-xs="45" class="input-element">
                     <label>
                       <strong>Código postal<span class="hl-label">*</span></strong>
                     </label>
@@ -265,7 +265,7 @@
 
                 </div>
                 <div layout="row" layout-wrap>
-                  <div flex="25" class="input-element">
+                  <div flex="25" flex-xs="40" class="input-element">
                     <label>
                       <strong>Entre calle</strong>
                     </label>
@@ -273,12 +273,12 @@
                       <input type="text" ng-model="vm.user.firstName">
                     </div>
                   </div>
-                  <div flex="0" class="input-element">
+                  <div flex="5" class="input-element">
                     <label>
                       <strong>Y</strong>
                     </label>
                   </div>
-                  <div flex="25" class="input-element">
+                  <div flex="25" flex-xs="40" class="input-element">
                     <label>
                       <strong>Calle</strong>
                     </label>
@@ -286,7 +286,7 @@
                       <input type="text" ng-model="vm.user.lastName">
                     </div>
                   </div>
-                  <div flex class="input-element">
+                  <div flex flex-xs="45" class="input-element">
                     <label>
                       <strong>Referencias cercanas</strong>
                     </label>

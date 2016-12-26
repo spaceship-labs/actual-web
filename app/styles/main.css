@@ -407,6 +407,7 @@ select{
   z-index: 9999999;
 }
 
+.menu i.icon-paragraph-justify{margin-right: 20px;font-size: 30px}
 
 .header-top-bar-menu{
   position: relative;
@@ -4101,6 +4102,12 @@ padding-left: 16px;
 #my-profile .input-container .input-element{padding: 15px}
 
 @media(max-width:800px){
+
+  .header-top-bar-menu .header-top-bar-menu-item-name{min-width: 75px;}
+
+}
+
+@media(max-width:800px){
   .header-top-bar-menu{margin: 0 auto}
 }
 
@@ -4109,4 +4116,15 @@ padding-left: 16px;
   .titles-head h3:before, .titles-head h3:after{width: 15%}
   .header-top-bar .categories-btn,
   .menu .categories-btn{margin: 5px 0;}
+
+  .section-header .cont h3{font-size: 25px}
+  .section-header .cont p{font-size: 12px}
+
+  .nav-categories-item > i{font-size: 25px}
+  .nav-categories-item > span{font-size: 11px}
+
+  .menu-subcategories-nav-item{padding: 10px 5px;font-size: 10px}
+
+  .form-view .input-element{margin: 0px;padding:5px}
+
 }

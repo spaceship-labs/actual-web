@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?x5mich');
-  src:  url('fonts/icomoon.eot?x5mich#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?x5mich') format('truetype'),
-    url('fonts/icomoon.woff?x5mich') format('woff'),
-    url('fonts/icomoon.svg?x5mich#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?fepsfn');
+  src:  url('fonts/icomoon.eot?fepsfn#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?fepsfn') format('truetype'),
+    url('fonts/icomoon.woff?fepsfn') format('woff'),
+    url('fonts/icomoon.svg?fepsfn#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-paragraph-justify:before {
+  content: "\ea7a";
+}
 .icon-down-open:before {
   content: "\e89b";
 }
@@ -36,139 +39,151 @@
 .icon-up-open:before {
   content: "\e89e";
 }
-.icon-alert:before {
+.icon-comedores:before {
   content: "\e900";
 }
-.icon-ambientes:before {
+.icon-recamaras:before {
   content: "\e901";
 }
-.icon-arrow:before {
+.icon-bebes:before {
   content: "\e902";
 }
-.icon-attachment:before {
+.icon-blancos:before {
   content: "\e903";
 }
-.icon-attatch:before {
+.icon-alert:before {
   content: "\e904";
 }
-.icon-bebes:before {
+.icon-ambientes:before {
   content: "\e905";
 }
-.icon-blancos:before {
+.icon-arrow:before {
   content: "\e906";
 }
-.icon-carro:before {
+.icon-attachment:before {
   content: "\e907";
 }
-.icon-cash:before {
+.icon-attatch:before {
   content: "\e908";
 }
-.icon-checkmark:before {
+.icon-bebes2:before {
   content: "\e909";
 }
-.icon-checkout-ticket:before {
+.icon-blancos2:before {
   content: "\e90a";
 }
-.icon-clients:before {
+.icon-carro:before {
   content: "\e90b";
 }
-.icon-colchones:before {
+.icon-cash:before {
   content: "\e90c";
 }
-.icon-comisiones:before {
+.icon-checkmark:before {
   content: "\e90d";
 }
-.icon-cotizar:before {
+.icon-checkout-ticket:before {
   content: "\e90e";
 }
-.icon-dashboard:before {
+.icon-clients:before {
   content: "\e90f";
 }
-.icon-decoracion:before {
+.icon-colchones:before {
   content: "\e910";
 }
-.icon-envio:before {
+.icon-comisiones:before {
   content: "\e911";
 }
-.icon-file:before {
+.icon-cotizar:before {
   content: "\e912";
 }
-.icon-home:before {
+.icon-dashboard:before {
   content: "\e913";
 }
-.icon-info:before {
+.icon-decoracion:before {
   content: "\e914";
 }
-.icon-jardin:before {
+.icon-envio:before {
   content: "\e915";
 }
-.icon-login:before {
+.icon-file:before {
   content: "\e916";
 }
-.icon-mail:before {
+.icon-home:before {
   content: "\e917";
 }
-.icon-mesas:before {
+.icon-info:before {
   content: "\e918";
 }
-.icon-metodo-pago:before {
+.icon-jardin:before {
   content: "\e919";
 }
-.icon-monedero:before {
+.icon-login:before {
   content: "\e91a";
 }
-.icon-murbles:before {
+.icon-mail:before {
   content: "\e91b";
 }
-.icon-ninos:before {
+.icon-mesas:before {
   content: "\e91c";
 }
-.icon-ofertas:before {
+.icon-metodo-pago:before {
   content: "\e91d";
 }
-.icon-office:before {
+.icon-monedero:before {
   content: "\e91e";
 }
-.icon-oportunidades:before {
+.icon-murbles:before {
   content: "\e91f";
 }
-.icon-pedidos:before {
+.icon-ninos:before {
   content: "\e920";
 }
-.icon-phone:before {
+.icon-ofertas:before {
   content: "\e921";
 }
-.icon-photo:before {
+.icon-office:before {
   content: "\e922";
 }
-.icon-place:before {
+.icon-oportunidades:before {
   content: "\e923";
 }
-.icon-pointer:before {
+.icon-pedidos:before {
   content: "\e924";
 }
-.icon-scorecard:before {
+.icon-phone:before {
   content: "\e925";
 }
-.icon-search:before {
+.icon-photo:before {
   content: "\e926";
 }
-.icon-settings:before {
+.icon-place:before {
   content: "\e927";
 }
-.icon-sillas:before {
+.icon-pointer:before {
   content: "\e928";
 }
-.icon-sofa:before {
+.icon-scorecard:before {
   content: "\e929";
 }
-.icon-terminal:before {
+.icon-search:before {
   content: "\e92a";
 }
-.icon-transfer:before {
+.icon-settings:before {
   content: "\e92b";
 }
-.icon-vendedor:before {
+.icon-sillas:before {
   content: "\e92c";
+}
+.icon-sofa:before {
+  content: "\e92d";
+}
+.icon-terminal:before {
+  content: "\e92e";
+}
+.icon-transfer:before {
+  content: "\e92f";
+}
+.icon-vendedor:before {
+  content: "\e930";
 }
 
