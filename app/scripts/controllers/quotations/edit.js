@@ -468,15 +468,9 @@ function QuotationsEditCtrl(
       quotationService.update(vm.quotation.id, params)
         .then(function(res){
           vm.isLoading = false;
-          if(vm.quotation.Client){
             quotationService.setActiveQuotation(vm.quotation.id);
             $location.path('/checkout/client/' + vm.quotation.id);
-          }else{
-            console.log('No hay cliente');
-            quotationService.setActiveQuotation(vm.quotation.id);
-            localStorageService.set('inCheckoutProcess', true);
-            $location.path('/continuequotation').search({goToCheckout:true});
-          }
+          
         })
         .catch(function(err){
           $log.error(err);
