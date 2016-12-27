@@ -12,9 +12,9 @@
 </div>
 
 <div ng-if="!main.isLoadingCategoriesTree" class="content-block listing-view">
-  <div class="container container-xxlg" layout="row" layout-align="space-between start">
+  <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
     <!--START NAV-->
-    <aside flex="20">
+    <aside flex-gt-sm="20" flex="100">
       <sidebar-categories 
         categories-tree="main.categoriesTree"
         active-store="main.activeStore"
@@ -24,21 +24,21 @@
     <!--END NAV-->
 
     <!--CATEGORIES-->
-    <div flex="75">
+    <div flex-gt-sm="75" flex="100">
       <div class="subs-container">
         <div  class="subs-container-list" layout="row" layout-wrap>
           <div
             class="sub-wrapper"
             ng-repeat="category in main.categoriesTree"
             ng-if="category[vm.stockProperty] > 0"
-            flex="33">
+            flex-gt-sm="33" flex="50" flex-xs="100">
             <category-item category="category" stock-key="{{vm.stockProperty}}" />
           </div>
 
           <!--OFERTAS-->
           <div
             class="sub-wrapper"
-            flex="33">
+            flex-gt-sm="33" flex="50" flex-xs="100">
             <div
               class="sub"
               ng-style="main.getCategoryBackground('ofertas')">
