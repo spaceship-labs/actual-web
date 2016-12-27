@@ -7,31 +7,31 @@
         </a>
       </div>
       <nav flex-gt-sm="80" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false" class="nav-categories" >
-        <a  ng-click="main.toggleMenuCategory(0)" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'dashboard'}">
+        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'dashboard'}">
           <i class="icon-recamaras"></i>
           <span class="nav-categories-item-text" href="#">Recámaras</span>
         </a>
-        <a  ng-click="main.toggleMenuCategory(1)" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'addquotation'}">
+        <a href="/category/salas" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'addquotation'}">
           <i class="icon-sofa nav-categories-item-add"></i>
           <span class="nav-categories-item-text" href="#">Salas</span>
         </a>
-        <a  ng-click="main.toggleMenuCategory(2)" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'clients'}">
+        <a href="/category/comedores" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'clients'}">
           <i class="icon-comedores"></i>
           <span class="nav-categories-item-text" href="#">comedores</span>
         </a>
-        <a  ng-click="main.toggleMenuCategory(3)" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'quotations'}">
+        <a href="/category/exteriores" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'quotations'}">
           <i class="icon-jardin"></i>
           <span class="nav-categories-item-text" href="#">Exteriores</span>
         </a>
-        <a  ng-click="main.toggleMenuCategory(4)" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'orders'}">
+        <a href="/category/oficina" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'orders'}">
           <i class="icon-office"></i>
           <span class="nav-categories-item-text" href="#">Oficina</span>
         </a>
-        <a  ng-click="main.toggleMenuCategory(5)" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'commissions'}">
+        <a href="/category/lamparas" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'commissions'}">
           <i class="icon-decoracion"></i>
           <span class="nav-categories-item-text" href="#">Lamparas</span>
         </a>
-        <a  ng-click="main.toggleMenuCategory(6)" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'scorecard'}">
+        <a href="/category/ofertas" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'scorecard'}">
           <i class="icon-ofertas"></i>
           <span class="nav-categories-item-text" href="#">ofertas</span>
         </a>
@@ -44,7 +44,7 @@
         <ng-include src="'views/menus/menu-categories.html'"></ng-include>
       </div>
     </div>
-
+<!--
       <menu-categories  ng-show="main.menuCategories[0].isActive" categories="main.menuCategories[0].Childs"></menu-categories>
       <menu-categories  ng-show="main.menuCategories[1].isActive" categories="main.menuCategories[1].Childs"></menu-categories>
       <menu-categories  ng-show="main.menuCategories[2].isActive" categories="main.menuCategories[2].Childs"></menu-categories>
@@ -53,5 +53,5 @@
       <menu-categories  ng-show="main.menuCategories[5].isActive" categories="main.menuCategories[5].Childs"></menu-categories>
       <menu-categories  ng-show="main.menuCategories[6].isActive" categories="main.menuCategories[6].Childs"></menu-categories>
       <menu-categories  ng-show="main.menuCategories[7].isActive" categories="main.menuCategories[7].Childs"></menu-categories>
-
+-->
   </div>

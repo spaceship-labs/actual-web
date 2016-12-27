@@ -1,113 +1,64 @@
-<div class="home" layout="row" layout-wrap layout-align="center cneter">
-  
-  <div class="section-header" layout="row" layout-align="center end" flex="100">
-      <div class="cont" layout="column" flex="100">
-        <h3>más de <strong>10,000 </strong> productos</h3>
-        <p>El mejor catálogo online de la <strong>industria mueblera</strong></p>
+<div class="container container-xxlg">
+  <div
+    ng-if="main.isLoadingCategoriesTree"
+    layout-fill
+    layout="row"
+    layout-sm="column"
+    layout-align="center center"
+    class="loading-circle"
+  >
+    <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
+  </div>
+</div>
+
+<div ng-if="!main.isLoadingCategoriesTree" class="content-block listing-view">
+  <div class="container container-xxlg" layout="row" layout-align="space-between start">
+    <!--START NAV-->
+    <aside flex="20">
+      <sidebar-categories 
+        categories-tree="main.categoriesTree"
+        active-store="main.activeStore"
+      >
+      </sidebar-categories>
+    </aside>
+    <!--END NAV-->
+
+    <!--CATEGORIES-->
+    <div flex="75">
+      <div class="subs-container">
+        <div  class="subs-container-list" layout="row" layout-wrap>
+          <div
+            class="sub-wrapper"
+            ng-repeat="category in main.categoriesTree"
+            ng-if="category[vm.stockProperty] > 0"
+            flex="33">
+            <category-item category="category" stock-key="{{vm.stockProperty}}" />
+          </div>
+
+          <!--OFERTAS-->
+          <div
+            class="sub-wrapper"
+            flex="33">
+            <div
+              class="sub"
+              ng-style="main.getCategoryBackground('ofertas')">
+              <div class="sub-text">
+                <h4>
+                  <a ng-href="/ofertas">
+                    <strong>Ofertas</strong>
+                  </a>
+                </h4>
+              </div>
+              <a ng-href="ofertas" class="absolute-link"></a>
+            </div>
+          </div>
+          <!--END OFERTAS-->
+
+        </div>
+
       </div>
-  </div>
-
-  <div class="container container-xxlg" layout="row" layout-align="center center" layout-wrap>
-
-    <div class="other-products" layout="row" layout-wrap>
-
-      <div class="products" layout="column" flex="100" ng-if="vm.areProductsLoaded" arrows="true" class="products-list-slider" infinite="true" draggable="false">
-          <div class="titles-head" layout="column" layout-align="center center">
-              <h3>ofertas especiales</h3>
-              <small>Los mejores productos al <strong>mejor precio</strong></small>
-          </div>
-          <div layout="row">
-            <div class="arrows" layout="row" layout-align="center center">
-              <div layout="row" layout-align="center center">
-                <i class="icon-left-open"></i>
-              </div>
-            </div>
-            <div class="box" layout="row" layout-wrap flex>
-              <div class="product" layout="column" flex-gt-sm="25" flex-sm="33" flex="100" ng-repeat="product in vm.products">
-                <listing-product product="product" layout="column" mini="true"></listing-product>
-              </div>
-            </div>
-           <div class="arrows" layout="row" layout-align="center center">
-              <div layout="row" layout-align="center center">
-                <i class="icon-right-open"></i>
-              </div>
-          </div>
-          </div>
-      </div>
-
     </div>
-    
-  </div>
-
-  <div class="home-image" flex="100"></div>
-
-  <div class="" layout="row" layout-align="center center" layout-wrap flex="100">
-
-    <div class="special-oferts" layout="column" flex="90" ng-if="vm.areProductsLoaded">
-        <div class="titles-head" layout="column" layout-align="center center">
-            <h3>nuestras marcas</h3>
-          </div>
-    </div>
-    
-  </div>
-
-  <div class="marcas" layout="row" layout-align="center center" flex="100">
-    <div layout="row" layout-wrap layout-align="space-around center" flex="90">
-      <a href="" layout="row" layout-align="center center" flex-gt-xs="33" flex="90">
-        <img src="images/Logo-A-Home.png" alt="" flex="80">
-      </a>
-      <a href="" layout="row" layout-align="center center" flex-gt-xs="33" flex="90">
-        <img src="images/Logo-A-Kids.png" alt="" flex="80">
-      </a>
-      <a href="" layout="row" layout-align="center center" flex-gt-xs="33" flex="90">
-        <img src="images/Logo-A-Studio.png" alt="" flex="80">
-      </a>
-    </div>
-  </div>
-
-  <div class="box-option" layout="row" layout-wrap layout-align="center center">
-    <div class="box" layout="column" layout-align="center center" >
-      <p class="title">outlet</p>
-      <p class="text">selección de productos <br> a un precios especial...</p>
-    </div>
-    <div class="box" layout="column" layout-align="center center" >
-      <p class="title">marcas</p>
-      <p class="text">consulta nuestras <br> marcas oficiales...</p>
-    </div>
-    <div class="box" layout="column" layout-align="center center" >
-      <p class="title">ofertas</p>
-      <p class="text">enterate de las <br> mejores promociones</p>
-    </div>
-  </div>
-  
-  <div class="other-products" layout="row" layout-wrap>
-
-      <div class="products" layout="column" flex="100" ng-if="vm.areProductsLoaded" arrows="true" class="products-list-slider" infinite="true" draggable="false">
-          <div class="titles-head" layout="column" layout-align="center center">
-              <h3>ofertas especiales</h3>
-              <small>Los mejores productos al <strong>mejor precio</strong></small>
-          </div>
-          <div layout="row">
-            <div class="arrows" layout="row" layout-align="center center">
-              <div layout="row" layout-align="center center">
-                <i class="icon-left-open"></i>
-              </div>
-            </div>
-            <div class="box" layout="row" layout-wrap flex>
-              <div class="product" layout="column" flex-gt-sm="25" flex-sm="33" flex="100" ng-repeat="product in vm.products">
-                <listing-product product="product" layout="column" mini="true"></listing-product>
-              </div>
-            </div>
-           <div class="arrows" layout="row" layout-align="center center">
-              <div layout="row" layout-align="center center">
-                <i class="icon-right-open"></i>
-              </div>
-          </div>
-          </div>
-      </div>
+    <!-- END CATEGORIES-->
 
   </div>
-  
-
-
 </div>
