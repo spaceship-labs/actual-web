@@ -6,7 +6,14 @@
         .factory('productService', productService);
 
     /** @ngInject */
-    function productService($http, $q, api, storeService, localStorageService){
+    function productService(
+      $http, 
+      $q, 
+      api, 
+      storeService, 
+      localStorageService,
+      $rootScope
+    ){
       var FILTERS_VARIANTS = [
         {id:'5743703aef7d5e62e508e22d', key:'color', handle:'color', name: 'Color'},
         {id:'5743703aef7d5e62e508e223', key:'forma', handle:'forma', name: 'Forma'},
@@ -36,6 +43,7 @@
         searchByFilters: searchByFilters,
         sortProductImages: sortProductImages,
         searchCategoryByFilters: searchCategoryByFilters,
+        substractProductStockByQuotationDetails: substractProductStockByQuotationDetails,
         delivery: delivery
       };
 
@@ -114,11 +122,16 @@
       function formatSingleProduct(product){
         var deferred = $q.defer();
         var activeStoreId = localStorageService.get('activeStore');
-        storeService.getPromosByStore(activeStoreId).then(function(res){
-          storePromotions = res.data;
-          var fProduct = formatProduct(product);
-          deferred.resolve(fProduct);
-        });
+        storeService.getPromosByStore(activeStoreId)
+          .then(function(res){
+            storePromotions = res.data;
+            var fProduct = formatProduct(product);
+            deferred.resolve(fProduct);
+          })
+          .catch(function(err){
+            deferred.reject(err);
+          });
+          
         return deferred.promise;
       }
 
@@ -174,11 +187,15 @@
       function formatProducts(products){
         var deferred = $q.defer();
         var activeStoreId = localStorageService.get('activeStore');
-        storeService.getPromosByStore(activeStoreId).then(function(res){
-          storePromotions = res.data;
-          var formatted = products.map(formatProduct);
-          deferred.resolve(formatted);
-        });
+        storeService.getPromosByStore(activeStoreId)
+          .then(function(res){
+            storePromotions = res.data;
+            var formatted = products.map(formatProduct);
+            deferred.resolve(formatted);
+          })
+          .catch(function(err){
+            deferred.reject(err);
+          });
         return deferred.promise;
         //return formatted;
       }
@@ -277,23 +294,38 @@
           .then(function(result){
             var products = result.data || [];
             if(products.length > 0){
+              
               FILTERS_VARIANTS.forEach(function(filter){
                 variants[filter.key] = {};
                 angular.copy(filter, variants[filter.key]);
                 variants[filter.key].products = [];
               });
+
               products.forEach(function( product ){
                 FILTERS_VARIANTS.forEach(function (filter){
+                  
                   var values = _.where( product.FilterValues, { Filter: filter.id } );
                   values.forEach(function(val){
-                    console.log('product', product);
+
+                    if($rootScope.activeQuotation){
+                      product = substractProductStockByQuotationDetails(
+                        product,
+                        $rootScope.activeQuotation.Details,
+                        activeStore
+                      );
+                    }else{
+                      console.log('no $rootScope.activeQuotation');
+                    }
+
                     val.product = product.ItemCode;
                     val.stock   = product.Available;
                     val.stock   = product[activeStore.code];
                   });
+
                   values = values.filter(function(val){
                     return val.stock > 0;
                   });
+                  
                   if(values.length > 0){
                     var aux = {id: product.ItemCode, filterValues : values};
                     variants[filter.key].products.push(aux);
@@ -308,6 +340,21 @@
           });
         return deferred.promise;
       }
+
+      //TODO complete function
+      function substractProductStockByQuotationDetails(product, details, activeStore){
+        console.log('before product', product);
+        for(var i=0;i<details.length;i++){
+          if(product.id === details[i].Product.id){
+            console.log('details product', details[i].Product);
+            product.Available -= details[i].quantity;
+            product[activeStore.code] -= details[i].quantity;
+          }
+        }
+        console.log('product', product);
+        return product;
+      }        
+
 
 
     }

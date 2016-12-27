@@ -381,7 +381,7 @@
     function roundCurrency(ammount, options){
       options = options || {up:true};
       var integers = Math.floor(ammount);
-      var cents = (ammount - integers);
+      var cents = (ammount - integers).toPrecision(6);
       var roundedCents = 0;
       if(cents > 0){
         if(options.up){
@@ -403,7 +403,42 @@
         'santander': 'Santander'       
       };
       return mapper[code];
-    }    
+    }  
+
+
+    function isValidEmail(email, opts){
+      var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var options = opts || {};
+      if(options.excludeActualDomains){
+        if(regex.test(email) && hasEmailValidDomain(email)){
+          return true;
+        }
+      }else{
+        if(regex.test(email)){
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function hasEmailValidDomain(email){
+      var excludedDomains = [
+        'actualdecoracion.com',
+        'actual-studio.com',
+        'actualstudio.com',
+        'actualg.com',
+        'actualhome.com',
+        'actualkids.com'
+      ];
+      var valid = true;
+      for(var i=0;i<excludedDomains.length;i++){
+        if(email.indexOf(excludedDomains[i]) > -1){
+          valid = false;
+        }
+      }    
+      return valid;
+    }
+
 
     var service = {
       combineDateTime: combineDateTime,
@@ -412,6 +447,7 @@
       getStatesSap: getStatesSap,
       getMonthDateRange: getMonthDateRange,
       getFortnightRange: getFortnightRange,
+      isValidEmail: isValidEmail,
       mapTerminalCode: mapTerminalCode,
       roundIntegerCurrency: roundIntegerCurrency,
       roundCurrency: roundCurrency,

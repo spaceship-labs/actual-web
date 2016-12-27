@@ -48,13 +48,23 @@ function RefundsProductsCtrl(
   });
 
   $rootScope.$on('activeStoreAssigned', function(){
-    vm.activeStore = $rootScope.activeStore;
   });
+
+  if($rootScope.isMainDataLoaded){
+    vm.activeStore = $rootScope.activeStore;
+    init();
+  }else{
+    var mainDataListener = $rootScope.$on('mainDataLoaded', function(ev, mainData){
+      init();
+    });
+  }  
 
   function init(){
     vm.isLoading = true;
     loadWarehouses();
     showAlerts();
+    vm.activeStore = $rootScope.activeStore;
+    vm.brokers     = $rootScope.brokers;
 
     orderService.getById($routeParams.id)
       .then(function(res){
@@ -101,9 +111,6 @@ function RefundsProductsCtrl(
         $log.error(err);
       });
 
-    userService.getBrokers().then(function(brokers){
-      vm.brokers = brokers;
-    });
   }
 
   function alertRemoveDetail(ev, detailsGroup) {
@@ -129,13 +136,8 @@ function RefundsProductsCtrl(
       dialogService.showDialog('Cliente registrado');
     }
     if($location.search().stockAlert){
-      showStockAlert();
+      quotationService.showStockAlert();
     }
-  }
-
-  function showStockAlert(){
-    var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
-    dialogService.showDialog(msg);        
   }
 
   function loadWarehouses(){
@@ -212,7 +214,7 @@ function RefundsProductsCtrl(
           );
           vm.order.DetailsGroups = deliveryService.groupDetails(vm.order.Details);
         }
-        return $rootScope.getActiveQuotation();
+        return $rootScope.loadActiveQuotation();
       })
       .then(function(){
         deferred.resolve();
@@ -242,7 +244,7 @@ function RefundsProductsCtrl(
             updatedQuotation.Details
           );
         }
-        $rootScope.getActiveQuotation();
+        $rootScope.loadActiveQuotation();
       })
       .catch(function(err){
         $log.error(err);
@@ -255,12 +257,13 @@ function RefundsProductsCtrl(
       var detail = details[i];
       var match = _.findWhere(newDetails, { id: detail.id } );
       if(match){
-        detail.unitPrice        = match.unitPrice;
-        detail.discountPercent  = match.discountPercent;
-        detail.discount         = match.discount;
-        detail.subtotal         = match.subtotal;
-        detail.total            = match.total;
-        detail.Promotion        = match.Promotion;
+        detail.unitPrice              = match.unitPrice;
+        detail.discountPercentPromos  = match.discountPercentPromos;        
+        detail.discountPercent        = match.discountPercent;
+        detail.discount               = match.discount;
+        detail.subtotal               = match.subtotal;
+        detail.total                  = match.total;
+        detail.Promotion              = match.Promotion;
         detail.PromotionPackageApplied = match.PromotionPackageApplied;
       }
     }
@@ -292,7 +295,9 @@ function RefundsProductsCtrl(
     return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
   }
 
-  init();
+  $scope.$on('$destroy', function(){
+    mainDataListener();
+  });
 
 }
 

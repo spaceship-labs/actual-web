@@ -54,7 +54,7 @@
 
           <div layout="column" flex>
             <ng-include 
-            ng-if="main.activeModule !== 'policies' && main.activeModule !== 'manuals'"
+            ng-if="main.activeModule !== 'policies' && main.activeModule !== 'manuals' && main.activeModule !== 'order'"
                 src="'views/header.html'"></ng-include>
             <md-content ng-view autoscroll>
             </md-content>
@@ -162,6 +162,7 @@
     <script src="bower_components/chosen/chosen.jquery.js"></script>
     <script src="bower_components/angular-chosen-localytics/dist/angular-chosen.js"></script>
     <script src="bower_components/ng-currency/dist/ng-currency.js"></script>
+    <script src="bower_components/conekta.js/dist/conekta.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -242,6 +243,7 @@
         <script src="scripts/controllers/users/user-purse.js"></script>
         <script src="scripts/controllers/users/user-invoices.js"></script>
         <script src="scripts/controllers/users/user-purchases.js"></script>
+        <script src="scripts/controllers/checkout/payment-info.js"></script>
         <!-- endbuild -->
 </body>
 </html>

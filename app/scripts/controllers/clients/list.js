@@ -32,10 +32,14 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
     },
 
   ];
-
+  vm.filterOptions = [
+    {label: 'Mis clientes', value: vm.user.Seller.SlpCode},
+    {label:'Todos los clientes', value: 'none'}
+  ];
   vm.apiResourceClients = clientService.getClients;
   vm.filters = {
-    SlpCode: $rootScope.user.SlpCode.id
+    SlpCode: 'none'
+    //SlpCode: $rootScope.user.Seller.SlpCode
   };
 
   function applyFilters(){

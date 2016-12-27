@@ -40,7 +40,7 @@
   </div>
 
   <div class="checkout-view-inner">
-    <h3><strong>1. Elige tu plan de pago</strong> Se pueden aplicar múltiples pagos, pero solo del mismo grupo de pago.</h3>
+    <h3><strong>1. Elige tu opción de pago</strong> Puedes aplicar múltiples pagos.</h3>
 
     <section layout="row">
       <div flex="75">
@@ -52,7 +52,7 @@
           <div class="pay-method-wrap" >
             <ng-include
               ng-repeat="paymentGroup in vm.paymentMethodsGroups track by $index"
-              ng-if="vm.isActiveGroup($index)"
+              ng-if="vm.isActiveGroup(paymentGroup)"
               src="'views/checkout/payment-group.html'">
             </ng-include>
 
@@ -109,11 +109,7 @@
             </tr>
             <tr>
               <td><strong>Descuento:</strong></td>
-              <td><strong>{{ vm.quotation.discount | roundCurrency }}</strong></td>
-            </tr>
-            <tr>
-              <td>Costo de envío:</td>
-              <td><strong>GRATIS</strong></td>
+              <td><strong><span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
             </tr>
           </table>
           <hr>

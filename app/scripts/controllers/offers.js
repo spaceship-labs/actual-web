@@ -120,6 +120,7 @@ function OffersCtrl(
       var deliveryDate = productDeliveryDates[i];
       if( product.quantity <=  parseInt(deliveryDate.available) ){
         product.shipDate = deliveryDate.date;
+        product.productDate = deliveryDate.productDate,
         product.shipCompany = deliveryDate.company;
         product.shipCompanyFrom = deliveryDate.companyFrom;
         product.promotionPackage = packageId;

@@ -45,8 +45,9 @@ function ProductCtrl(
     getWarehouseName: getWarehouseName,
     getPiecesString: getPiecesString,
     init: init,
+    isImmediateDelivery: isImmediateDelivery,
+    isLoading: true,
     resetCartQuantity: resetCartQuantity,
-    showMessageCart: showMessageCart,
     trustAsHtml: trustAsHtml,
     sas:{
       '001': 'Studio',
@@ -56,25 +57,15 @@ function ProductCtrl(
     }  
   });
 
-  vm.init($routeParams.id);
-
-  function getProducts(){
-      vm.search = {
-        items: 10,
-        page: 1,
-        populateImgs : true
-      };
-      vm.isLoading = true;
-      productService.searchByFilters(vm.search).then(function(res){
-        vm.totalResults = res.data.total;
-        vm.isLoading = false;
-        return productService.formatProducts(res.data.products);
-      })
-      .then(function(fProducts){
-        vm.products = fProducts;
-        vm.areProductsLoaded = true;
-      })
+  if($rootScope.isMainDataLoaded){
+    init($routeParams.id);
+  }else{
+    var mainDataListener = $rootScope.$on('mainDataLoaded', function(ev, mainData){
+      init($routeParams.id);
+    });
   }
+  
+  //init($routeParams.id);
 
   function init(productId, reload){
     vm.filters               = [];
@@ -82,14 +73,11 @@ function ProductCtrl(
     vm.galleryImages         = [];
     vm.isLoading             = true;
 
-    getProducts();
-
     productService.getById(productId)
       .then(function(res){
         return productService.formatSingleProduct(res.data.data);
       })
       .then(function(fProduct){
-        var promises = [];
         vm.product = fProduct;
         vm.mainPromo = vm.product.mainPromo;
         vm.lowestCategory = getLowestCategory();
@@ -97,37 +85,24 @@ function ProductCtrl(
           quantity: 1
         };
         if(reload){
-          $location.path('/product/' + productId, false);
+          $location.path('/product/' + productId, false)
+            .search({variantReload:'true'});
           loadProductFilters(vm.product);
         }else{
           loadProductFilters(vm.product);
-          if($rootScope.activeStore){
-            getWarehouses($rootScope.activeStore);
-            productService.loadVariants(vm.product, $rootScope.activeStore)
-              .then(function(variants){
-                vm.variants = variants;
-                vm.hasVariants = checkIfHasVariants(vm.variants);
-              });
-          }else{
-            $rootScope.$on('activeStoreAssigned',function(e,data){
-              activeStore = data;
-              getWarehouses(activeStore);
-              productService.loadVariants(vm.product)
-                .then(function(variants, activeStore){
-                  vm.variants = variants;
-                  vm.hasVariants = checkIfHasVariants(vm.variants);
-                });
-            });
+          if($rootScope.activeStore){ 
+            loadWarehouses($rootScope.activeStore);
+            loadVariants(vm.product);
           }
         }
+
         vm.isLoading = false;
         return productService.delivery(productId, activeStoreId);
       })
       .then(function(deliveries){
         deliveries = $filter('orderBy')(deliveries, 'date');        
-        vm.available = deliveryService.getAvailableByDeliveries(deliveries);
         if($rootScope.activeQuotation){
-          deliveries = deliveryService.substractDeliveriesStockByDetails(
+          deliveries = deliveryService.substractDeliveriesStockByQuotationDetails(
             $rootScope.activeQuotation.Details, 
             deliveries,
             vm.product.id
@@ -136,6 +111,7 @@ function ProductCtrl(
         vm.deliveries  = deliveries;
         vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
         vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
+        vm.available = deliveryService.getAvailableByDeliveries(deliveries);
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
         }else{
@@ -144,7 +120,7 @@ function ProductCtrl(
         return productService.addSeenTime(vm.product.ItemCode);
       })
       .then(function(seenTime){
-        console.log(seenTime);
+        //console.log(seenTime);
       })
       .catch(function(err){
         $log.error(err);
@@ -157,12 +133,26 @@ function ProductCtrl(
       .catch(function(err){
         $log.error(err);
       });
+
+    //Unsuscribing  mainDataListener
+    mainDataListener();
+  }
+
+  function loadVariants(product){
+    productService.loadVariants(product, $rootScope.activeStore)
+      .then(function(variants){
+        vm.variants = variants;
+        vm.hasVariants = checkIfHasVariants(vm.variants);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
   }
 
   function checkIfHasVariants(variants){
     var hasVariants = false;
     for(var key in variants){
-      if(variants[key].products.length > 0){
+      if(variants[key].products.length > 1){
         hasVariants = true;
       }
     }
@@ -185,7 +175,7 @@ function ProductCtrl(
     return name;
   }
 
-  function getWarehouses(activeStore){
+  function loadWarehouses(activeStore){
     api.$http.get('/company/find')
       .then(function(res) {
         vm.warehouses = res.data;
@@ -257,6 +247,7 @@ function ProductCtrl(
         id: vm.product.id,
         quantity: item.quantity,
         shipDate: item.date,
+        productDate: item.productDate,
         shipCompany: item.company,
         shipCompanyFrom: item.companyFrom
       };
@@ -267,6 +258,7 @@ function ProductCtrl(
           id: vm.product.id,
           quantity: item.quantity,
           shipDate: item.date,
+          productDate: item.productDate,
           shipCompany: item.company,
           shipCompanyFrom: item.companyFrom
         };
@@ -315,21 +307,6 @@ function ProductCtrl(
     return productCartItems;
   }
 
-  function showMessageCart(ev) {
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
-    $mdDialog.show({
-      controller: DialogController,
-      templateUrl: 'views/partials/added-to-cart.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true,
-      fullscreen: useFullScreen
-    })
-    .then(function(answer) {
-      console.log(answer);
-    });
-  }
-
   function getQtyArray(n){
     n = n || 0;
     var arr = [];
@@ -339,17 +316,16 @@ function ProductCtrl(
     return arr;
   }
 
-  function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
-    };
+  function isImmediateDelivery(date){
+    var currentDate = moment().startOf('date');
+    date = moment(date).startOf('date');
+    return (currentDate.format() === date.format());
   }
+
+
+  $scope.$on('$destroy', function(){
+    mainDataListener();
+  });
 
 }
 

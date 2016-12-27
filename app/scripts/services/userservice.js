@@ -20,7 +20,6 @@
       return service;
 
       function getClients(page, params){
-        //var seller = params.SlpCode;
         var p      = page || 1;
         var seller = $rootScope.user.SlpCode || 49;
         var url    = '/client/findbyseller/' + seller;

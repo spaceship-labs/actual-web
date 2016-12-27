@@ -16,7 +16,8 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
     quotationsData: {},
     ordersData:{},
     getAverageTicket: getAverageTicket,
-    getClosingPercentage: getClosingPercentage
+    getClosingPercentage: getClosingPercentage,
+    currentDate: new Date()
   });
 
   function getQuotationsData(){
@@ -27,12 +28,12 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
     quotationService.getTotalsByUser($rootScope.user.id, dateRange)
       .then(function(res){
         vm.quotationsData.todayAmmount = res.data.dateRange;
-        vm.quotationsData.monthAmmount = res.data.all;
+        vm.quotationsData.fortnightAmount = res.data.fortnight;
         vm.quotationsData.ammounts = {
-          labels: ["Hoy", "Resto del mes"],
+          labels: ["Hoy", "Resto de la quincena"],
           data: [
             vm.quotationsData.todayAmmount,
-            (vm.quotationsData.monthAmmount - vm.quotationsData.todayAmmount)
+            (vm.quotationsData.fortnightAmount - vm.quotationsData.todayAmmount)
           ],
           colors: ["#C92933", "#48C7DB", "#FFCE56"],
           options:{
@@ -49,16 +50,18 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
 
     quotationService.getCountByUser($rootScope.user.id, dateRange)
       .then(function(res){
+        console.log('res',res);
         vm.quotationsData.todayQty = res.data.dateRange;
-        vm.quotationsData.monthQty = res.data.all;
+        vm.quotationsData.fortnightQty = res.data.fortnight;
         vm.quotationsData.quantities = {
           labels: ["Hoy", "Resto del mes"],
           data: [
             vm.quotationsData.todayQty,
-            (vm.quotationsData.monthQty - vm.quotationsData.todayQty)
+            (vm.quotationsData.fortnightQty - vm.quotationsData.todayQty)
           ],
           colors: ["#C92933", "#48C7DB", "#FFCE56"]
         };
+        console.log('quotationsData', vm.quotationsData);
       });
   }
 
@@ -69,13 +72,14 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
     };
     orderService.getTotalsByUser($rootScope.user.id, dateRange)
       .then(function(res){
+        console.log('res', res);
         vm.ordersData.todayAmmount = res.data.dateRange;
-        vm.ordersData.monthAmmount = res.data.all;
+        vm.ordersData.fortnightAmount = res.data.fortnight;
         vm.ordersData.ammounts = {
           labels: ["Hoy", "Resto del mes"],
           data: [
             vm.ordersData.todayAmmount,
-            (vm.ordersData.monthAmmount - vm.ordersData.todayAmmount)
+            (vm.ordersData.fortnightAmount - vm.ordersData.todayAmmount)
           ],
           colors: ["#C92933", "#48C7DB", "#FFCE56"],
           options:{
@@ -93,12 +97,12 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
     orderService.getCountByUser($rootScope.user.id, dateRange)
       .then(function(res){
         vm.ordersData.todayQty = res.data.dateRange;
-        vm.ordersData.monthQty = res.data.all;
+        vm.ordersData.fortnightQty = res.data.fortnight;
         vm.ordersData.quantities = {
           labels: ["Hoy", "Resto del mes"],
           data: [
             vm.ordersData.todayQty,
-            (vm.ordersData.monthQty - vm.ordersData.todayQty)
+            (vm.ordersData.fortnightQty - vm.ordersData.todayQty)
           ],
           colors: ["#C92933", "#48C7DB", "#FFCE56"]
         };
@@ -107,8 +111,8 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
 
   function getAverageTicket(){
     var average = 0;
-    if(vm.ordersData.monthQty && vm.ordersData.monthAmmount){
-      average = vm.ordersData.monthAmmount / vm.ordersData.monthQty;
+    if(vm.ordersData.fortnightQty && vm.ordersData.monthAmmount){
+      average = vm.ordersData.monthAmmount / vm.ordersData.fortnightQty;
     }
     return average;
   }
@@ -116,9 +120,9 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
   function getClosingPercentage(){
     var percentage = 0;
     var onePercent = 0;
-    if(vm.quotationsData.monthQty && vm.ordersData.monthQty){
-      onePercent = vm.quotationsData.monthQty / 100;
-      percentage = vm.ordersData.monthQty / onePercent;
+    if(vm.quotationsData.fortnightQty && vm.ordersData.fortnightQty){
+      onePercent = vm.quotationsData.fortnightQty / 100;
+      percentage = vm.ordersData.fortnightQty / onePercent;
     }
     percentage = percentage.toFixed(2);
     return percentage + '%';

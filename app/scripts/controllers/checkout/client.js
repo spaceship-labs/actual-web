@@ -26,18 +26,19 @@ function CheckoutClientCtrl(
   var vm = this;
   angular.extend(vm,{
     continueProcess: continueProcess,
+    isClientFiscalDataValid: isClientFiscalDataValid
   });
 
   function init(){
+    $location.search({});
     vm.isLoading = true;
     quotationService.getById($routeParams.id).then(function(res){
       vm.quotation = res.data;
       vm.isLoading = false;
-      return quotationService.getCurrentStock(vm.quotation.id); 
+      return quotationService.validateQuotationStockById(vm.quotation.id); 
     })
-    .then(function(response){
-      var quotationDetailsStock = response.data;
-      if( !quotationService.isValidStock(quotationDetailsStock) ){
+    .then(function(isValidStock){
+      if( !isValidStock){
         $location.path('/quotations/edit/' + vm.quotation.id)
           .search({stockAlert:true});
       }
@@ -47,20 +48,17 @@ function CheckoutClientCtrl(
       }
 
       if(vm.quotation.Client){
-        clientService.getContacts(vm.quotation.Client.CardCode).then(function(res){
-          vm.contacts = res.data;
-          vm.contacts = vm.contacts.map(function(c){
-            c.completeAdrress = buildAddress(c);
-            return c;
+        clientService.getById(vm.quotation.Client.id)
+          .then(function(res){
+            vm.client = res.data;
+            vm.contacts = vm.client.Contacts.map(function(contact){
+              contact.completeAdrress = buildAddress(contact);
+              return contact;
+            });
+            if(!vm.quotation.Address && vm.contacts.length > 0){
+              vm.quotation.Address = vm.contacts[0].id;
+            }            
           });
-          if(!vm.quotation.Address && vm.contacts.length > 0){
-            vm.quotation.Address = vm.contacts[0].id;
-            console.log('No habia direccion');
-          }
-        })
-        .catch(function(err){
-          console.log(err);
-        });
       }
       
     });
@@ -83,17 +81,41 @@ function CheckoutClientCtrl(
     return address;
   }
 
+  function isClientFiscalDataValid(client){
+    if(client && client.FiscalAddress){
+      return client.LicTradNum && client.FiscalAddress.companyName && client.FiscalAddress.companyName != '';
+    }
+    return false;
+  }
+
   function continueProcess(){
-    vm.isLoading = true;
-    var params = angular.copy(vm.quotation);
-    quotationService.update(vm.quotation.id, params).then(function(res){
-      vm.isLoading = false;
-      $location.path('/checkout/paymentmethod/' + vm.quotation.id);
-    })
-    .catch(function(err){
-      console.log(err);
-      dialogService.showDialog('Hubo un error: <br/>' + err);
-    });
+    //if(vm.quotation.Address && isClientFiscalDataValid(vm.client)){
+    if(vm.quotation.Address){
+      vm.isLoading = true;
+      var params = angular.copy(vm.quotation);
+      quotationService.update(vm.quotation.id, params).then(function(res){
+        vm.isLoading = false;
+        $location.path('/checkout/paymentmethod/' + vm.quotation.id);
+      })
+      .catch(function(err){
+        console.log(err);
+        dialogService.showDialog('Hubo un error: <br/>' + err);
+      });
+    }
+    /*
+    else if(!isClientFiscalDataValid(vm.client) ){
+      dialogService.showDialog('Datos fiscales incompletos');
+    }
+    */
+    else{
+      dialogService.showDialog('Asigna una dirección de envío',function(){
+        $location.path('/clients/profile/' + vm.quotation.Client.id)
+          .search({
+            activeTab:3,
+            checkoutProcess: vm.quotation.id
+          });
+      });
+    }
   }
 
   init();

@@ -12,19 +12,25 @@
     	groupDeliveryDates2: groupDeliveryDates2,
     	groupDetails: groupDetails,
     	sortDeliveriesByHierarchy: sortDeliveriesByHierarchy,
-    	substractDeliveriesStockByDetails: substractDeliveriesStockByDetails
+    	substractDeliveriesStockByQuotationDetails: substractDeliveriesStockByQuotationDetails,
     };
 
-    function substractDeliveriesStockByDetails(details, deliveries, productId){
+    function substractDeliveriesStockByQuotationDetails(details, deliveries, productId){
     	details = details.filter(function(detail){
-    		return detail.Product === productId || detail.Product.id === productId;
+    		var detailProductId;
+    		if(angular.isObject(detail.Product)){
+    			detailProductId = detail.Product.id;
+    		}else{
+    			detailProductId = detail.Product;
+    		}
+    		return detailProductId === productId;
     	});
     	for(var i = 0; i<deliveries.length; i++){
     		for(var j=0; j<details.length; j++){
     			var detailShipDate = moment(details[j].shipDate).startOf('day').format('DD-MM-YYYY');
     			var deliveryDate = moment(deliveries[i].date).startOf('day').format('DD-MM-YYYY');
     			if(
-    				detailShipDate === deliveryDate &&
+    				//detailShipDate === deliveryDate &&
   					details[j].shipCompany === deliveries[i].company && 
   					details[j].shipCompanyFrom === deliveries[i].companyFrom  					
     			){
@@ -65,12 +71,17 @@
     	return groups;
     }
 
+    function convertDatetimeToDate(datetime){
+    	var date = moment(datetime).startOf('day').toDate();
+    	return date;
+    }
+
     function groupDeliveryDates(deliveries){
 	    var groups = [];
 	    for(var i= (deliveries.length-1); i>= 0; i--){
 	    	var items = _.filter(deliveries, function(delivery){
 	    		if(delivery.companyFrom !== deliveries[i].companyFrom && 
-	    			new Date(delivery.date) <= new Date(deliveries[i].date)
+	    			convertDatetimeToDate(delivery.date) <= convertDatetimeToDate(deliveries[i].date)
 	    		){
 	    			return true;
 	    		}

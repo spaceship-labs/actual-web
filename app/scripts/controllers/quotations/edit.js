@@ -20,12 +20,16 @@ function QuotationsEditCtrl(
   $rootScope,
   $mdMedia,
   $mdDialog,
+  $filter,
   quotationService,
   api,
   dialogService,
   userService,
   packageService,
+  paymentService,
   deliveryService,
+  authService,
+  siteService,
   DTOptionsBuilder, 
   DTColumnDefBuilder
 ){
@@ -35,66 +39,73 @@ function QuotationsEditCtrl(
     api: api,
     brokers: [],
     isLoadingRecords: false,
-    recordTypes: ['Email', 'Llamada', 'WhatsApp', 'Visita'],
-    closeTypes: [
-      'Cliente compró en otra tienda de la empresa.',
-      'Cliente compró en otra mueblería.',
-      'Cliente se murió',
-      'Cliente solicita no ser contactado más',
-      'Cliente ya no está interesado',
-      'Cliente es incontactable',
-      'Cliente se mudó',
-      'Vendedor no dio seguimiento suficiente',
-      'Vendedor cotizó artículos equivocados',
-      'Los precios son altos',
-      'Las fechas de entrega son tardadas',
-      'No vendemos el articulo solicitado',
-      'Otra razón (especificar)',
-    ],
+    isLoading: true,
+    recordTypes: quotationService.getRecordTypes(),
+    closeTypes: quotationService.getClosingReasons(),
     timePickerOptions: {
         step: 20,
         timeFormat: 'g:ia',
         appendTo: 'body',
         disableTextInput:true
     },
-    promotionPackages: [],
     addNewProduct: addNewProduct,
-    appliesForPackageOrPromotionDiscount: appliesForPackageOrPromotionDiscount,
     addRecord: addRecord,
     alertRemoveDetail: alertRemoveDetail,
+    appliesForPackageOrPromotionDiscount: appliesForPackageOrPromotionDiscount,
     attachImage: attachImage,
     closeQuotation: closeQuotation,
     continueBuying: continueBuying,
+    daysDiff: daysDiff,
     getPromotionPackageById: getPromotionPackageById,
     getUnitPriceWithDiscount: getUnitPriceWithDiscount,
     getWarehouseById: getWarehouseById,
+    isUserAdminOrManager: isUserAdminOrManager,
     isValidStock: isValidStock,
+    print: print,
+    promotionPackages: [],
     removeDetail: removeDetail,
     removeDetailsGroup: removeDetailsGroup,
-    toggleRecord: toggleRecord,
     sendByEmail: sendByEmail,
+    showBigTicketDialog: showBigTicketDialog,
     showDetailGroupStockAlert: showDetailGroupStockAlert,
-    print: print,
-    daysDiff: daysDiff
+    toggleRecord: toggleRecord,
   });
 
-  $rootScope.$on('activeStoreAssigned', function(){
-    vm.activeStore = $rootScope.activeStore;
-  });
+  if($rootScope.isMainDataLoaded){
+    init($routeParams.id);
+  }else{
+    var mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
+      init($routeParams.id);
+    });
+  }
 
-  function init(){
+  function init(quotationId, options){
+    console.log('llego a carrito de compras');
+
+    vm.activeStore       = $rootScope.activeStore;
+    vm.brokers           = $rootScope.brokers;
+    vm.promotionPackages = [];
+    options              = options || {};
+
     vm.isLoading = true;
     loadWarehouses();
     showAlerts();
 
-    quotationService.getById($routeParams.id)
+    quotationService.getById(quotationId)
       .then(function(res){
         vm.isLoading = false;
         vm.quotation = res.data;
+        quotationService.setActiveQuotation(vm.quotation.id);
+
         vm.status = 'Abierta';
         if(vm.quotation.Order || vm.quotation.isClosed){
           vm.status = 'Cerrada';
         }
+
+        if(options.relaod){
+          loadPaymentMethods();
+        }
+
         return quotationService.populateDetailsWithProducts(vm.quotation);
       })
       .then(function(details){
@@ -107,15 +118,10 @@ function QuotationsEditCtrl(
         return quotationService.getCurrentStock(vm.quotation.id);       
       })
       .then(function(response){
+        var promisesArray = [];
         var detailsStock = response.data;
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
-        return quotationService.getRecords(vm.quotation.id);
-      })
-      .then(function(result){
-        var promisesArray = [];
-        vm.quotation.Records = result.data;
-        vm.isLoadingRecords = false;
         var packagesIds = vm.quotation.Details.reduce(function(acum, d){
           if(d.PromotionPackageApplied){
             acum.push(d.PromotionPackageApplied);
@@ -136,28 +142,37 @@ function QuotationsEditCtrl(
         vm.promotionPackages = results.map(function(r){
           return r.data;
         });
+
+        if(options.reload){
+          var deferred = $q.defer();
+          deferred.resolve(false);
+          return deferred.promise;
+        }
+
+        return quotationService.getRecords(vm.quotation.id);
+      })
+      .then(function(result){
+        if(result){
+          vm.quotation.Records = result.data;
+        }
+        vm.isLoadingRecords = false;
       })
       .catch(function(err){
         $log.error(err);
       });
 
-    userService.getBrokers().then(function(brokers){
-      vm.brokers = brokers;
-    });
   }
 
   function showAlerts(){
+    if($location.search().startQuotation){
+      //dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización');
+    }    
     if($location.search().createdClient){
       dialogService.showDialog('Cliente registrado');
     }
     if($location.search().stockAlert){
-      showStockAlert();
+      quotationService.showStockAlert();
     }
-  }
-
-  function showStockAlert(){
-    var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
-    dialogService.showDialog(msg);        
   }
 
   function loadWarehouses(){
@@ -169,6 +184,17 @@ function QuotationsEditCtrl(
     });
   }
 
+  function loadPaymentMethods(){
+    quotationService.getPaymentOptions(vm.quotation.id)
+      .then(function(response){
+        var groups = response.data || [];
+        vm.paymentMethodsGroups = groups;
+      })
+      .catch(function(err){
+        console.log('err', err);
+      });
+  }
+ 
   function print(){
     window.print();
   }
@@ -246,35 +272,48 @@ function QuotationsEditCtrl(
         })
         .catch(function(err){
           $log.error(err);
+          vm.isLoadingRecords = false;
         });
     }
+  }
+
+
+  function getLastTracingDate(quotation){
+    var tracingDate = new Date();
+    if(quotation.Records && quotation.Records.length > 1){
+      var lastIndex = quotation.Records.length - 2;
+      tracingDate = quotation.Records[lastIndex].dateTime;
+    }
+    return tracingDate;
+  }
+
+  function isUserAdminOrManager(){
+    return $rootScope.user.role && 
+      ( $rootScope.user.role.name === authService.USER_ROLES.ADMIN 
+        || $rootScope.user.role.name === authService.USER_ROLES.STORE_MANAGER 
+      );
   }
 
   function closeQuotation(form,closeReason, extraNotes){
     if(closeReason){
       vm.isLoading = true;
       var params = {
-        dateTime: new Date(),
-        eventType: 'Cierre',
         notes: extraNotes,
-        User: $rootScope.user.id
+        User: $rootScope.user.id,
+        tracing: getLastTracingDate(vm.quotation),
+        notes: extraNotes,
+        closeReason: closeReason,
+        extraNotes: extraNotes
       };
-      quotationService.addRecord(vm.quotation.id, params)
+      quotationService.closeQuotation(vm.quotation.id, params)
         .then(function(res){
-          if(res.data.id){
-            vm.quotation.Records.push(res.data);
+          var record = res.data.record;
+          var quotation = res.data.quotation;
+          if(record){
+            vm.quotation.Records.push(record);
           }
-          var updateParams = {
-            isClosed: true,
-            isClosedReason: closeReason,
-            isClosedNotes: extraNotes,
-            status: 'closed'
-          };
-          return quotationService.update(vm.quotation.id, updateParams);
-        })
-        .then(function(result){
-          if(result.data){
-            vm.quotation.isClosed = result.data.isClosed;
+          if(quotation){
+            vm.quotation.isClosed = quotation.isClosed;
             if(vm.quotation.isClosed){
               vm.status = 'Cerrada';
             }
@@ -282,8 +321,8 @@ function QuotationsEditCtrl(
           vm.isLoading = false;
           vm.quotation.Records.forEach(function(rec){
             rec.isActive = false;
-          });
-        })
+          }); 
+        })         
         .catch(function(err){
           $log.error(err);
         });
@@ -344,7 +383,7 @@ function QuotationsEditCtrl(
           );
           vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         }
-        return $rootScope.getActiveQuotation();
+        return $rootScope.loadActiveQuotation();
       })
       .then(function(){
         deferred.resolve();
@@ -374,7 +413,7 @@ function QuotationsEditCtrl(
             updatedQuotation.Details
           );
         }
-        $rootScope.getActiveQuotation();
+        $rootScope.loadActiveQuotation();
       })
       .catch(function(err){
         $log.error(err);
@@ -387,12 +426,13 @@ function QuotationsEditCtrl(
       var detail = details[i];
       var match = _.findWhere(newDetails, { id: detail.id } );
       if(match){
-        detail.unitPrice        = match.unitPrice;
-        detail.discountPercent  = match.discountPercent;
-        detail.discount         = match.discount;
-        detail.subtotal         = match.subtotal;
-        detail.total            = match.total;
-        detail.Promotion        = match.Promotion;
+        detail.unitPrice              = match.unitPrice;
+        detail.discountPercentPromos  = match.discountPercentPromos;
+        detail.discountPercent        = match.discountPercent;
+        detail.discount               = match.discount;
+        detail.subtotal               = match.subtotal;
+        detail.total                  = match.total;
+        detail.Promotion              = match.Promotion;
         detail.PromotionPackageApplied = match.PromotionPackageApplied;
       }
     }
@@ -411,7 +451,7 @@ function QuotationsEditCtrl(
 
   function continueBuying(){
     if( !isValidStock(vm.quotation.Details) ){
-      showStockAlert();
+      quotationService.showStockAlert();
       return;
     }
     if(!vm.quotation.Order){
@@ -434,6 +474,7 @@ function QuotationsEditCtrl(
           }else{
             console.log('No hay cliente');
             quotationService.setActiveQuotation(vm.quotation.id);
+            localStorageService.set('inCheckoutProcess', true);
             $location.path('/continuequotation').search({goToCheckout:true});
           }
         })
@@ -487,32 +528,107 @@ function QuotationsEditCtrl(
 
   function StockDialogController($scope, $mdDialog, $location, detailGroup){
     
-    function setActiveQuotation(){
-      quotationService.setActiveQuotation(vm.quotation.id);
-      $rootScope.$emit('newActiveQuotation', vm.quotation.id);
-    }
-
     $scope.cancel = function(){
       $mdDialog.cancel();
     };
 
     $scope.delete = function(){
       $mdDialog.hide();
-      setActiveQuotation();        
+      quotationService.setActiveQuotation(vm.quotation.id);        
       removeDetailsGroup(detailGroup);
     };
   
     $scope.modify = function(){
       $mdDialog.hide();   
       var itemCode = angular.copy(detailGroup.Product.ItemCode);  
-      setActiveQuotation(); 
-      removeDetailsGroup(detailGroup).then(function(){
-        $location.path('/product/' + itemCode);
-      });
+      quotationService.setActiveQuotation(vm.quotation.id);
+      removeDetailsGroup(detailGroup)
+        .then(function(){
+          $location.path('/product/' + itemCode);
+        })
+        .catch(function(err){
+          console.log('err',err);
+        });
     };
   }
 
-  init();
+  function showBigTicketDialog(ev){
+    var controller = BigTicketController;
+    var options = {
+      bigticketMaxPercentage: vm.quotation.bigticketMaxPercentage,
+      bigticketPercentage: vm.quotation.bigticketPercentage || 0
+    };
+    $mdDialog.show({
+      controller: [
+        '$scope',
+        '$mdDialog',
+        'options', 
+        controller
+      ],
+      templateUrl: 'views/quotations/bigticket-dialog.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: false,
+      locals:{
+        options: options
+      }
+    })
+    .then(function(percentage) {
+      console.log('Big ticket aplicado');
+      vm.isLoading = true;
+      quotationService.update(vm.quotation.id, {bigticketPercentage: percentage})
+        .then(function(res){
+          var quotation = res.data;
+          console.log('res', res);
+          init(quotation.id, {reload:true});
+        })
+        .catch(function(err){
+          vm.isLoading = false;
+          console.log('err', err);
+        });
+    }, function() {
+      console.log('No autorizado');
+    });    
+  } 
+  
+  function BigTicketController($scope, $mdDialog, options){
+    $scope.bigticketPercentage = options.bigticketPercentage;
+    $scope.bigticketMaxPercentage = options.bigticketMaxPercentage || 0;
+    $scope.init = function(){
+      $scope.bigticketPercentage = options.bigticketPercentage;
+    };
+    $scope.getPercentages = function(){
+      var percentages = [0];
+      for(var i=1;i<=$scope.bigticketMaxPercentage;i++){
+        percentages.push(i);
+      }
+      return percentages;
+    };
+
+    $scope.percentages = [
+      {label:'1%',value:1},
+      {label:'2%',value:2},
+      {label:'3%',value:3},
+      {label:'4%',value:4},
+      {label:'5%',value:5},
+    ];
+
+
+    $scope.cancel = function(){
+      $mdDialog.cancel();
+    };
+
+    $scope.applyPercentage = function(){
+      $mdDialog.hide($scope.bigticketPercentage);
+    };
+
+    $scope.init();    
+  }
+
+  $scope.$on('$destroy', function(){
+    mainDataListener();
+  });
 
 }
 
@@ -526,12 +642,16 @@ QuotationsEditCtrl.$inject = [
   '$rootScope',
   '$mdMedia',
   '$mdDialog',
+  '$filter',
   'quotationService',
   'api',
   'dialogService',
   'userService',
   'packageService',
+  'paymentService',
   'deliveryService',
+  'authService',
+  'siteService',
   'DTOptionsBuilder', 
   'DTColumnDefBuilder'
 ];

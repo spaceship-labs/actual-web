@@ -16,6 +16,7 @@ function CommissionsListCtrl(
   $scope,
   $location,
   commissionService,
+  authService,
   storeService
 ) {
   var vm = this;
@@ -23,6 +24,8 @@ function CommissionsListCtrl(
   vm.filters = {};
   vm.user = Object.assign({}, $rootScope.user);
   vm.sellers = [];
+  vm.USER_ROLES = authService.USER_ROLES;
+  
   $scope.year = today.getFullYear();
   $scope.month = today.getMonth();
   $scope.period = today.getDate() < 16 ? 1: 2;
@@ -38,7 +41,7 @@ function CommissionsListCtrl(
       {key: 'status', label: 'Estatus',  mapper: {paid: 'pagada', pending: 'pendiente'}, color: {paid: 'green', pending: 'red'}},
       {key: 'user.name', label: 'Usuario'},
   ];
-  vm.apiResource = commissionService.getCommissions;
+  vm.apiResource = setChart;
   vm.years  = range(new Date().getFullYear(), 1999, -1);
   vm.months = [
     'Enero',
@@ -58,10 +61,10 @@ function CommissionsListCtrl(
   init();
 
   function init() {
-    if (vm.user.role.name == 'seller') {
+    if (vm.user.role.name === authService.USER_ROLES.SELLER) {
       vm.filters.user = vm.user.id;
       totalsSeller();
-    } else if (vm.user.role.name == 'store manager') {
+    } else if (vm.user.role.name === authService.USER_ROLES.STORE_MANAGER) {
       getSellersByStore(vm.user.mainStore.id)
         .then(function(sellers) {
           vm.sellers = sellers;
@@ -165,161 +168,25 @@ function CommissionsListCtrl(
     var date = new Date(date);
     return new Date(date.getFullYear(), date.getMonth() + 1, 0);
   }
-}
-/**
-angular.module('dashexampleApp')
-  .controller('CommissionsListCtrl', CommissionsListCtrl);
 
-function CommissionsListCtrl($q, $rootScope, $location, commissionService, storeService) {
-  var date        = new Date();
-  var first       = new Date(date.getFullYear(), date.getMonth(), 1);
-  var mid         = new Date(date.getFullYear(), date.getMonth(), 15);
-  var mid2        = new Date(date.getFullYear(), date.getMonth(), 16);
-  var last        = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  var vm          = this;
-  vm.user         = $rootScope.user;
-  vm.sellers      = [];
-  vm.columns      = [
-    {key: 'folio', label: 'FOLIO'},
-    {key: 'datePayment', label: 'FECHA VENTA', date: true},
-    {key: 'ammountPayment', label: 'MONTO COBRADO', currency: true},
-    {key: 'rate', label: '% COMISIÓN', rate: true, isRateNormalized: true},
-    {key: 'ammount', label: 'MONTO COMISIÓN', currency: true},
-    {key: 'ammountPaid', label: 'COMISIÓN PAGADA', currency: true},
-    {key: 'ammountLeft', label: 'COMISIÓN PENDIENTE', currency: true},
-  ];
-  vm.dateStart    = date.getDate() <= 15? first : mid2;
-  vm.dateEnd      = date.getDate() <= 15? mid : last;
-  vm.filters      = {
-    user: vm.user.id,
-    datePayment: {
-      '>=': vm.dateStart,
-      '<': vm.dateEnd
-    }
-  };
-  vm.chart        = {
-    data: [30, 70],
-    labels: ['vendido', 'faltante'],
-    colors: ['#C92933', '#48C7DB', '#FFCE56']
-  };
-  vm.applyFilters = applyFilters;
-  vm.setFromDate  = setFromDate;
-  vm.setToDate    = setToDate;
-  vm.apiResource  = commissionService.getCommissions;
-
-  init();
-
-  function applyFilters(){
-    if(vm.dateStart && vm.dateEnd){
-      var start  = moment(vm.dateStart);
-      var end    = moment(vm.dateEnd).endOf('day');
-      vm.filters = Object.assign({}, vm.filters, {
-        datePayment: {
-          '>=': start,
-          '<': end
-        }
+  function setChart(page, params) {
+    return commissionService
+      .getCommissions(page, params)
+      .then(function(res) {
+        vm.chart = res.data.data.reduce(function(acum, current) {
+          var date = moment(current.createdAt).date();
+          var index = acum.labels.indexOf(date);
+          if (index === -1) {
+            acum.labels = acum.labels.concat(date);
+            acum.data[acum.labels.length - 1] = current.ammount;
+          } else {
+            acum.data[index] += current.ammount;
+          }
+          return acum;
+        }, {data: [], labels:[]});
+        return res;
       });
-    }
-    $rootScope.$broadcast('reloadTable', true);
-    init();
-  }
+  };
 
-  function setFromDate(pikaday){
-    vm.dateStart = pikaday._d;
-  }
-
-  function setToDate(pikaday){
-    vm.dateEnd   = pikaday._d;
-  }
-
-  function init() {
-    if (vm.user.role.name == 'store manager') {
-      getSellersByStore(vm.user.mainStore.id)
-        .then(function(sellers){
-          vm.sellers = sellers;
-          vm.user.total = sellers.reduce(function(acum, current) {
-            return acum + current.total;
-         }, 0);
-        })
-        .then(function() {
-          getGoal()
-            .then(function(goal) {
-              var goal = goal.goal / 2;
-              var labels = [
-                'vendido',
-                (vm.user.total >  goal && 'superado') || 'faltante'
-              ];
-              vm.chart        = {
-                data: [vm.user.total, Math.abs(vm.user.total - goal)],
-                labels: labels,
-                colors: ['#C92933', '#48C7DB', '#FFCE56']
-              };
-            });
-        });
-    } else {
-      getTotalByUser(vm.user.id)
-        .then(function(res){
-          vm.user.total = res.total;
-          vm.user.commissions = res.commissions;
-        })
-        .then(function() {
-          getGoal()
-            .then(function(goal) {
-              var goal = goal.goal / goal.sellers / 2;
-              var labels = [
-                'vendido',
-                (vm.user.total >  goal && 'superado') || 'faltante'
-              ];
-              vm.chart        = {
-                data: [vm.user.total, Math.abs(vm.user.total - goal)],
-                labels: labels,
-                colors: ['#C92933', '#48C7DB', '#FFCE56']
-              };
-            });
-        });
-    }
-  }
-
-  function getSellersByStore(storeId){
-    return storeService
-      .getSellersByStore(storeId)
-      .then(function(res){
-        return res.data;
-      })
-      .then(function(sellers) {
-        return sellers.reduce(function(promise, seller) {
-          return promise.then(function(sellers) {
-            return getTotalByUser(seller.id).then(function(total) {
-              seller.commissions = total.commissions;
-              seller.total       = total.total;
-              return sellers.concat(seller);
-            });
-          });
-        }, $q.when([]));
-      })
-      .then(function(sellers) {
-        return sellers.map(function(seller) {
-          seller.filters = Object.assign({}, vm.filters, {user: seller.id});
-          return seller;
-        });
-      });
-  }
-
-  function getTotalByUser (user) {
-    return commissionService.getTotalByUser(user, vm.dateStart, vm.dateEnd);
-  }
-
-  function getGoal() {
-    return commissionService.getGoal(vm.user.mainStore.id, vm.dateStart, vm.dateEnd).then(function(goal) {
-      vm.goal = goal;
-      return goal;
-    });
-  }
 }
- * @ngdoc function
- * @name dashexampleApp.controller:CommissionsListCtrl
- * @description
- * # CommissionsListCtrl
- * Controller of the dashexampleApp
- */
 
