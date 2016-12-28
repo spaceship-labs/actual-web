@@ -441,8 +441,9 @@ select{
 .header-top-bar-menu .header-top-bar-menu-item-name strong{
   text-transform: uppercase;
 }
+/*
 .header-top-bar-menu .header-top-bar-menu-item-name:after{
-  content: '';
+  content: 'e906';
   height: 12px;
   width: 12px;
   display: inline-block;
@@ -452,7 +453,7 @@ select{
   top: -1px;
   position: relative;
 }
-
+*/
 .header-top-bar-menu .header-top-bar-menu-item-logout{
   padding: 20px 10px;
 }
@@ -467,7 +468,7 @@ select{
   font-size: 28px;
   padding: 0 4px;
   color: white;
-  margin: 0 10px;
+  margin: 0 6px;
   vertical-align: middle;
 }
 .header-top-bar-menu .cart-active{
@@ -1438,6 +1439,7 @@ md-backdrop.md-sidenav-backdrop{
   font-weight: 400;
   /*text-transform: uppercase;*/
 }
+/*
 .listing-view-nav > li > h3:before{
   content: '';
   width: 20px;
@@ -1447,6 +1449,7 @@ md-backdrop.md-sidenav-backdrop{
   display: inline-block;
   vertical-align: middle;
 }
+*/
 .listing-view-nav > li > ul{
   max-height: 0;
   overflow: hidden;
@@ -2192,7 +2195,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .filters .filter-block{
   border-top: 1px solid #E7E7E7;
-  padding: 6px 14px;
+  /*padding: 6px 14px;*/
 }
 .filters .filter-block-prices{
   padding: 6px 2px;
@@ -2220,6 +2223,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 14px;
   text-transform: uppercase;
 }
+/*
 .filters .filter-block h4:before{
   content: '';
   background: url(../images/arrow-down.png) center no-repeat;
@@ -2229,12 +2233,13 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin-right: 10px;
   vertical-align: middle;
 }
+*/
 .filters .filter-block h4.active-arrow:before{
   background: url(../images/arrow-up.png) center no-repeat;
 }
 
 .filters .filter-block .filter-block-inner{
-  padding: 0 10px;
+ padding: 0 10px;
 }
 
 .filters .filter-block md-checkbox{
@@ -4063,6 +4068,8 @@ padding-left: 16px;
 
 .text-sep{padding: 1px 8px;border-left: 1px solid black;border-right: 1px solid black;margin: 0 10px}
 
+.table-list td i{color: #33BA2C;margin: 0 2px;font-size: 25px;cursor: pointer;}
+
 @media(max-width:800px){
 
   .header-top-bar-menu .header-top-bar-menu-item-name{min-width: 75px;}
@@ -4095,7 +4102,7 @@ padding-left: 16px;
 
   .header-top-bar.actual-home{background: black}
 
-  
+  aside{display: none} 
 
 }
 
@@ -4162,5 +4169,18 @@ padding-left: 16px;
 .product-view .desc-head-item-on{
   background: #092F57;
 }
+
+.header-top-bar-menu .header-top-bar-menu-item i.icon-down-open{
+  font-size: 10px;
+  color: #DDA901;
+  vertical-align: middle;
+  margin: 0px;
+}
+
+.icon-right-open.aside{color: #DDA901;margin-right: 3px;margin-top: 1px}
+
+.head-filt{margin-bottom: 10px}
+.head-filt i{color: #DDA901;margin-left: 13px;margin-right: 8px;font-size: 18px}
+.head-filt h4{padding: 0px!important;}
 
 /*actual home*/

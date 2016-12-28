@@ -22,7 +22,10 @@
         <h3 class="filters-head">FILTRAR RESULTADOS</h3>
         <div class="filters-inner">
           <div class="filter-block filter-block-prices">
-            <h4><strong>PRECIO:</strong></h4>
+            <div class="head-filt" layout="row" layout-align="start center">
+              <i class="icon-right-open"></i> 
+              <h4><strong>PRECIO:</strong></h4>
+            </div>
             <div class="filter-block-inner">
 
               <div layout="row" layout-align="space-between center">
@@ -59,9 +62,10 @@
           </div>
 
           <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
-            <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
-              <strong>{{filter.Name}}:</strong>
-            </h4>
+            <div class="head-filt" layout="row" layout-align="start center" ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
+              <i class="icon-right-open"></i> 
+              <h4><strong>{{filter.Name}}:</strong></h4>
+            </div>
             <div ng-show="vm.filters[$index].active" class="filter-block-inner">
 
               <div ng-if=" filter.Handle != 'color' " >
