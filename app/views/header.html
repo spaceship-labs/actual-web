@@ -62,9 +62,10 @@
         layout-wrap
         layout-align="center center"
         layout-align-xs="space-between center"
+        ng-controller="movil"
       >
 
-        <i class="icon-pointer icon-menu-m" ></i>
+        <i class="icon-pointer icon-menu-m" ng-click="openMenu()"></i>
 
         <a href="/" class="logo-movil">
           <img src="images/actual-home-blanco.png" alt="Actual Group">
@@ -149,4 +150,13 @@
 
 </div>
 
+<md-sidenav md-component-id="left" class="md-sidenav-left movil">
+<aside flex-gt-sm="20" flex="100">
+      <sidebar-categories 
+        categories-tree="main.categoriesTree"
+        active-store="main.activeStore"
+      >
+      </sidebar-categories>
+    </aside>
+</md-sidenav>
   

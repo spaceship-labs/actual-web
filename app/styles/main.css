@@ -391,9 +391,7 @@ select{
   background: #F8F8F8;
   padding: 4px 0;
   position: relative;
-  /*z-index: 99999999999999999999;*/
-  /*z-index: 999;*/
-  z-index: 9999999;
+  z-index: 999;
 }
 
 .menu i.icon-paragraph-justify{margin-right: 20px;font-size: 30px}
@@ -990,7 +988,7 @@ select{
 /*--------------*/
 md-backdrop.md-sidenav-backdrop{
   position: fixed;
-  z-index: 9999999;
+  z-index: 1000;
 }
 .pointers-sidenav{
   z-index: 99999999;
@@ -4103,7 +4101,7 @@ padding-left: 16px;
 
   .header-top-bar.actual-home{background: black}
 
- /* aside{display: none} */
+  /*aside{display: none} */
 
 }
 
@@ -4187,4 +4185,5 @@ padding-left: 16px;
 .head-title i{color: #DDA901;margin-right: 8px;font-size: 18px}
 .head-title h2{margin: 0px!important;;}
 
+.md-sidenav-left, md-sidenav{z-index: 9999999999999999;padding-left: 25px;position: fixed!important}
 /*actual home*/

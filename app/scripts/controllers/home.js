@@ -54,3 +54,8 @@ HomeCtrl.$inject = [
   'api',
   'dialogService'
 ];
+angular.module('dashexampleApp').controller('movil', function($scope, $mdSidenav) {
+  $scope.openMenu = function() {
+    $mdSidenav('left').toggle();
+  };
+});
