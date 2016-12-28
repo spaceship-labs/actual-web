@@ -113,7 +113,10 @@
       </div>
 
       <div ng-if="!vm.isLoading" class="subs-container">
-        <h2 class="listing-view-title">{{vm.category.Name}}</h2>
+        <div class="head-title" layout="row" layout-align="start center">
+          <i class="icon-right-open"></i>
+          <h2 class="listing-view-title">{{vm.category.Name}}</h2>
+        </div>
         <!--SUBCATEGORIES LIST LEVEL 2-->
         <div 
           ng-if="vm.category.Childs.length > 0 && vm.showLevel2" 

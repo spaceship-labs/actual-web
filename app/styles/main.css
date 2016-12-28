@@ -1500,6 +1500,7 @@ md-backdrop.md-sidenav-backdrop{
   margin:  0 0 12px;
   line-height: 1;
 }
+/*
 .listing-view .listing-view-title:before{
   content: '';
   width: 20px;
@@ -1510,7 +1511,7 @@ md-backdrop.md-sidenav-backdrop{
   vertical-align: middle;
   margin-right: 20px;
 }
-
+*/
 .listing-view .subs-container-list{
   margin-left: -20px;
   margin-right: -20px;
@@ -4102,7 +4103,7 @@ padding-left: 16px;
 
   .header-top-bar.actual-home{background: black}
 
-  aside{display: none} 
+ /* aside{display: none} */
 
 }
 
@@ -4182,5 +4183,8 @@ padding-left: 16px;
 .head-filt{margin-bottom: 10px}
 .head-filt i{color: #DDA901;margin-left: 13px;margin-right: 8px;font-size: 18px}
 .head-filt h4{padding: 0px!important;}
+
+.head-title i{color: #DDA901;margin-right: 8px;font-size: 18px}
+.head-title h2{margin: 0px!important;;}
 
 /*actual home*/

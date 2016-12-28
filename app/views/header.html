@@ -64,7 +64,7 @@
         layout-align-xs="space-between center"
       >
 
-        <i class="icon-pointer icon-menu-m" ng-click="openMenu()"></i>
+        <i class="icon-pointer icon-menu-m" ></i>
 
         <a href="/" class="logo-movil">
           <img src="images/actual-home-blanco.png" alt="Actual Group">
@@ -118,10 +118,13 @@
           </a>
           <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
-
+<!--
         <div class="movil-head" flex="100">
-          
+          <div class="movil-category" layout="column">
+            <div layout="ro"></div>
+          </div>
         </div>
+-->
       <!--
         <div class="header-top-bar-menu-item" flex>
           <md-button class="pointer-btn md-fab md-mini md-primary" ng-click="main.togglePointerSidenav()">
@@ -146,3 +149,4 @@
 
 </div>
 
+  
