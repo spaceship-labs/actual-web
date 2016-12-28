@@ -38,7 +38,7 @@
     <div layout="row" class="quotation-data-row">
       <div flex="25">
         <label for="">Nombre del cliente</label>
-        <p>{{vm.quotation.Client.CardName || 'Sin cliente asignado'}}</p>
+        <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
       </div>
       <div flex="25">
         <label for="">E-mail</label>
@@ -157,33 +157,19 @@
           <input
             type="submit"
             value="CONTINUAR"
-            ng-if="!vm.quotation.Order && !vm.quotation.isClosed && vm.quotation.Client"
+            ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
             ng-disabled="!vm.isValidStock(vm.quotation.Details)"
             ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) }"
             class="cart-view-btn print-btn"
           >
 
-          <input
-            type="submit"
-            value="ASIGNAR CLIENTE"
-            ng-disabled="!vm.isValidStock(vm.quotation.Details)"
-            ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.Client"
-            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) }"
-            class="cart-view-btn print-btn"
-          >
-
-          <p class="cart-summary-note" ng-if="!vm.quotation.Client">
-            A continuación puedes elegir un cliente o asignar un nuevo cliente
-          </p>
-
-          <p class="cart-summary-note" ng-if="vm.quotation.Client">
+          <p class="cart-summary-note" ng-if="!vm.quotation.Order">
             *Precios en Pesos Mexicanos con impuestos incluidos.
           </p>
 
         </div>
 
         <a
-          ng-if="vm.quotation.Client"
           href="#"
           ng-click="vm.print()"
           class="action-btn print-btn">
@@ -191,7 +177,6 @@
         </a>
 
         <a
-          ng-if="vm.quotation.Client"
           ng-click="vm.sendByEmail()"
           href="#"
           class="action-btn print-btn">
