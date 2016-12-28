@@ -1,126 +1,170 @@
 <md-dialog class="deposit-dialog" aria-label="Terminal"  ng-cloak>
   <div class="deposit-dialog-inner">
-    <h2><i class="icon-transfer"></i> APLICA <strong>EL PAGO</strong> COMO SE INDICA</h2>
+    <h2><strong>2. INGRESA LOS DATOS DE TU TARJETA DE DÉBITO O CRÉDITO</strong></h2>
     <hr />
-
-    <p ng-if="payment.terminals && payment.type !== 'transfer' ">
-      <strong>Tarjeta:</strong> 
-      <small ng-if="payment.msi">Selecciona la tarjeta de credito a utilizar</small>
-      <small ng-if="!payment.msi">Selecciona la tarjeta de credito/debito a utilizar</small>
-    </p>
-
-    <p ng-if="payment.type === 'transfer' ">
-      <strong>Banco</strong>
-      <p>Selecciona un banco para la transferencia</p>
-    </p>
-
-    <div class="dialog-block" layout="row" layout-align="space-between end">
-      <!--TERMINALS-->
-      <div flex="45" ng-if="payment.terminals && payment.type === 'transfer' ">
-        <div class="input-element select-element-wrapper">
-          <md-select ng-model="payment.terminal" class="select-element">
-            <md-option
-              ng-repeat="terminal in payment.terminals track by $index"
-              ng-selected="$index==0"
-              ng-value="terminal.value">
-              {{terminal.label}}
-            </md-option>
-          </md-select>
-        </div>
-      </div>
-      <!--END TERMINALS-->
-
-      <!--CARDs-->
-      <div flex="45" ng-if="payment.options.length > 0">
-        <div class="input-element select-element-wrapper">
-          <md-select 
-            ng-model="payment.card"
-            ng-change="onChangeCard(payment.card)" 
-            class="select-element"
-          >
-            <md-option
-              ng-repeat="option in payment.options track by $index"
-              ng-selected="$index==0"
-              ng-value="option.card.value">
-              {{option.card.label}}
-            </md-option>
-          </md-select>
-        </div>
-        <input type="hidden" name="card" ng-model="payment.card">
-      </div>
-      <!--END CARDS-->
-
-      <div flex="50" ng-if="payment.msi">
-        <h3><strong>{{payment.msi}}</strong> Meses SIN INTERESES</h3>
-      </div>
-    </div>
-
-    <p ng-if="terminal">
-      <strong>Terminal:</strong> <small>La terminal de cobro que debes usar es: </small> <strong class="to-upper">{{terminal.label}}</strong>
-    </p>
-
-    <div class="dialog-block" >
-      <p>
-        <strong>Cantidad:</strong> <small>Se muestra el saldo total pendiente por cobrar. Puedes cobrar cualquier monto menor, pero después debes aplicar otro cobro para saldar esta venta.</small>
-      </p>
-      <br/>
-      <p><strong>Restante:</strong> {{payment.remaining | roundCurrency}}</p>
-      
-      <!--<p ng-if="payment.ammount > maxAmmount">
-        Máximo excedido
-      </p>
-      -->
-      <p class="error-msg" ng-if="errMsg">{{errMsg}}</p>
-
-      <div class="ammount-input" layout="row" layout-align="start center">
-        <div class="input-element" flex="60">
-          <div class="input-element-inner">
-            <input
-              ng-if="maxAmmount && maxAmmount >=0"
-              type="text"
-              max="{{maxAmmount}}"
-              ng-model="payment.ammount"
-              ng-currency
-              >
-            <input
-              ng-if="!maxAmmount"
-              type="text"
-              ng-currency
-              ng-model="payment.ammount"
-              >
-
+    
+    <form action="" method="POST" id="card-form">
+      <span class="card-errors"></strong></span>
+      <div flex="100"  class="input-container"> 
+        <div layout="row" layout-wrap>  
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>NOMBRE DEL TARJETAHAMBIENTE<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner"> 
+              <input type="text" data-conekta="card[name]"/>
+            </div>
+          </div>
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>TIPO DE TARJETA<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner">
+              <input type="text" data-conekta="card[number]"/>
+            </div>
           </div>
         </div>
-        <div class="currency-label">
-          <span ng-if="payment.currency != 'usd'">MXN</span>
-          <span ng-if="payment.currency == 'usd'">USD ({{ getAmmountMXN(payment.ammount) | currency}} MXN)</span>
+        <div layout="row" layout-wrap>  
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>NÚMERO DE TARJETA<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner">
+              <input type="text" data-conekta="card[number]"/>
+            </div>
+          </div>
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>FECHA DE EXPIRACIÓN<span class="hl-label">*</span></strong>
+            </label>
+            <div flex layout="row" layout-xs="column">
+              <div flex="20">
+                <div class="input-element-inner">
+                  <input type="text" data-conekta="card[cvc]" placeholder="MM">
+                </div>
+              </div>
+              <div flex="60" style="margin-left: 1em">
+                <div class="input-element-inner">
+                  <input type="text" data-conekta="card[exp_year]" placeholder="AA">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>CÓDIGO CVC<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner">
+              <input type="text" data-conekta="card[cvc]" placeholder="999" />
+            </div>
+          </div>
+        </div>
+        <div layout="row" layout-wrap>  
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>PAÍS<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner"> 
+              <input type="text" data-conekta="card[address][country]"/>
+            </div>
+          </div>
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>ESTADO<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner">
+              <input type="text" data-conekta="card[address][state]"/>
+            </div>
+          </div>
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>CÓDIGO POSTAL<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner">
+              <input type="text" data-conekta="card[address][zip]"/>
+            </div>
+          </div>
+        </div>
+        <div layout="row" layout-wrap>  
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>CIUDAD<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner"> 
+              <input type="text" data-conekta="card[address][city]"/>
+            </div>
+          </div>
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>COLONIA<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner">
+              <input type="text" data-conekta="card[address][street2]"/>
+            </div>
+          </div>
+          <div flex-gt-sm="33" flex="100" class="input-element">
+            <label>
+              <strong>CALLE Y NÚMERO<span class="hl-label">*</span></strong>
+            </label>
+            <div class="input-element-inner">
+              <input type="text" data-conekta="card[address][street1]"/>
+            </div>
+          </div>
         </div>
       </div>
-      <p ng-if="payment.currency == 'usd'">
-        <small>Tipo de cambio: {{payment.exchangeRate | currency}} MXN</small>
-      </p>
-    </div>
-
-    <div  layout="row" layout-align="space-between end">
-      <div ng-if="needsVerification" flex="70">
-        <p>
-          <strong># AUTORIZACIÓN:</strong> <small>Ingresa el # de autorización de esta transacción</small>
+      <div class="dialog-block" >
+        <br/>
+        <p><strong>Restante:</strong> {{payment.remaining | roundCurrency}}</p>
+        
+        <!--<p ng-if="payment.ammount > maxAmmount">
+          Máximo excedido
         </p>
-        <div class="input-element verification-code">
-          <div class="input-element-inner">
-            <input type="text" ng-model="payment.verificationCode" required>
+        -->
+        <p class="error-msg" ng-if="errMsg">{{errMsg}}</p>
+
+        <div class="ammount-input" layout="row" layout-align="start center">
+          <div class="input-element" flex="60">
+            <div class="input-element-inner">
+              <input
+                ng-if="maxAmmount && maxAmmount >=0"
+                type="text"
+                max="{{maxAmmount}}"
+                ng-model="payment.ammount"
+                ng-currency
+                >
+              <input
+                ng-if="!maxAmmount"
+                type="text"
+                ng-currency
+                ng-model="payment.ammount"
+                >
+
+            </div>
+          </div>
+          <div class="currency-label">
+            <span ng-if="payment.currency != 'usd'">MXN</span>
+            <span ng-if="payment.currency == 'usd'">USD ({{ getAmmountMXN(payment.ammount) | currency}} MXN)</span>
           </div>
         </div>
+        <p ng-if="payment.currency == 'usd'">
+          <small>Tipo de cambio: {{payment.exchangeRate | currency}} MXN</small>
+        </p>
       </div>
-      <div flex="30" ng-if="!needsVerification"></div>
-      <a 
-        ng-click="save()"
-        ng-class="{'action-btn-disabled': isValidPayment() }" 
-        class="action-btn action-btn-save" 
-        href="#" 
-        flex="25">
-        <strong>GUARDAR</strong>
-      </a>
-    </div>
+      <div class="dialog-block" layout="row" layout-align="space-between end">
+        <div flex="50" ng-if="payment.msi">
+        <h3><strong>{{payment.msi}}</strong> Meses SIN INTERESES</h3>
+        </div>
+      </div>
+      <div  layout="row" layout-align="space-between end">
+        <a 
+          ng-click="save()"
+          ng-class="{'action-btn-disabled': isValidPayment() }" 
+          class="action-btn action-btn-save" 
+          href="#" 
+          flex="25">
+          <strong>PAGAR</strong>
+        </a>
+      </div>
+    </form>
   </div>
 </md-dialog>
