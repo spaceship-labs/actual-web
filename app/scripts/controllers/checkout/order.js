@@ -126,6 +126,7 @@ function CheckoutOrderCtrl(
     return address;
   }
 
+  
   function getPaymentType(payment){
     var type = '1 sola exhibición';
     if(payment.type === 'cash' || payment.type === 'cash-usd'){
@@ -178,6 +179,6 @@ function CheckoutOrderCtrl(
         dialogService.showDialog(error);
       });
   }
-
+  
   init();
 }

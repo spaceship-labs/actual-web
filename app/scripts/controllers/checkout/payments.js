@@ -57,7 +57,8 @@ function CheckoutPaymentsCtrl(
     loadingEstimate: 0,
     payments: [],
     paymentMethodsGroups: [],
-    roundCurrency: commonService.roundCurrency
+    roundCurrency: commonService.roundCurrency,
+    tranfer: tranfer
   });
 
   var EWALLET_TYPE = 'ewallet';
@@ -650,5 +651,22 @@ function CheckoutPaymentsCtrl(
   $scope.$on('$destroy', function(){
     mainDataListener();
   });
+
+ 
+ function tranfer(){
+    Conekta.token.create({ card : {
+                        number: vm.cardInfo.cardNumber,//"4242424242424242",
+                        name: vm.cardInfo.cardHolder,
+                        exp_year: vm.cardInfo.cardYear,
+                        exp_month: vm.cardInfo.cardMonth,
+                        cvc: vm.cardInfo.cardCode
+                        }
+                    },function(e){ //success
+                        console.log(e);
+                    },function(e) { //error
+                        $scope.cardMessage = e;
+                        //console.log(e);alert('error');
+                    });
+  }
 
 }
