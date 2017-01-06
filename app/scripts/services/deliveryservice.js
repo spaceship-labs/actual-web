@@ -9,7 +9,6 @@
     var service = {
     	getAvailableByDeliveries: getAvailableByDeliveries,
     	groupDeliveryDates: groupDeliveryDates,
-    	groupDeliveryDates2: groupDeliveryDates2,
     	groupDetails: groupDetails,
     	sortDeliveriesByHierarchy: sortDeliveriesByHierarchy,
     	substractDeliveriesStockByQuotationDetails: substractDeliveriesStockByQuotationDetails,
@@ -27,10 +26,7 @@
     	});
     	for(var i = 0; i<deliveries.length; i++){
     		for(var j=0; j<details.length; j++){
-    			var detailShipDate = moment(details[j].shipDate).startOf('day').format('DD-MM-YYYY');
-    			var deliveryDate = moment(deliveries[i].date).startOf('day').format('DD-MM-YYYY');
     			if(
-    				//detailShipDate === deliveryDate &&
   					details[j].shipCompany === deliveries[i].company && 
   					details[j].shipCompanyFrom === deliveries[i].companyFrom  					
     			){
@@ -59,9 +55,9 @@
     	 		var detail = groupedDetails[key][i];
     	 		group.quantity += detail.quantity;
     	 		group.subtotal += detail.subtotal;
-    	 		group.total += detail.total;
+    	 		group.total 	 += detail.total;
     	 		group.discount += detail.discount;
-    	 		group.ewallet += detail.ewallet;
+    	 		group.ewallet  += detail.ewallet;
     	 	}
     		group.details = groupedDetails[key];
     	 	var invalidStock = _.findWhere(group.details, {validStock: false});
@@ -125,35 +121,6 @@
 		  return farthestDelivery;
     }
 
-	  function groupDeliveryDates2(deliveries){
-	    var groups = [];
-	    for(var i=0;i<deliveries.length;i++){
-	      var items = _.where(deliveries, {
-	        date: deliveries[i].date,
-	        available: deliveries[i].available
-	      });
-	      var group = {
-	        days: deliveries[i].days,
-	        date: deliveries[i].date,
-	        hash: deliveries[i].date + '#' + deliveries[i].available,
-	        deliveries: items,
-	      };
-	      groups.push(group);
-	    }
-	    groups = _.uniq(groups, false, function(g){
-	      return g.hash;
-	    });
-	    groups = groups.map(function(g){
-	      g.available = g.deliveries.reduce(function(acum, delivery){
-	        acum+= delivery.available;
-	        return acum;
-	      }, 0);
-	      return g;
-	    });
-	    return groups;
-	    //return deliveries;
-	  }
-
     function getAvailableByDeliveries(deliveries){
     	var warehousesIds = getWarehousesIdsByDeliveries(deliveries);
       var available = 0;
@@ -201,6 +168,9 @@
 	      var delivery = _.findWhere(deliveries, {companyFrom: warehouses[i].id});
 	      sortedDeliveries.push( delivery );
 	    }
+
+	    sortedDeliveries = sortDeliveriesByDate(sortedDeliveries);
+
 	    return sortedDeliveries;    
 	  }
 
@@ -219,6 +189,15 @@
 	      }
 	    }
 	    return sorted;
+	  }
+
+	  function sortDeliveriesByDate(deliveries){
+	  	var sortedByDate = deliveries.sort(function(a,b){
+		    var dateA = new Date(a.date).getTime();
+		    var dateB = new Date(b.date).getTime();
+		    return dateA < dateB ? 1 : -1;  	  	
+	  	});
+	  	return sortedByDate;
 	  }
 
 	  function getWarehouseHash(warehouse){
@@ -256,7 +235,7 @@
 	    rulesHashes.push('#'+region);
 	    rulesHashes = rulesHashes.concat(otherRegionsRules);
 	    return rulesHashes;
-	  }    
+	  }
 
     return service;
 

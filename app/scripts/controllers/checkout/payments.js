@@ -41,6 +41,7 @@ function CheckoutPaymentsCtrl(
     applyTransaction: applyTransaction,
     authorizeOrder: authorizeOrder,
     areMethodsDisabled: areMethodsDisabled,
+    cancelPayment     : cancelPayment,
     calculateRemaining: calculateRemaining,
     createOrder: createOrder,
     chooseMethod: chooseMethod,
@@ -57,8 +58,7 @@ function CheckoutPaymentsCtrl(
     loadingEstimate: 0,
     payments: [],
     paymentMethodsGroups: [],
-    roundCurrency: commonService.roundCurrency,
-    tranfer: tranfer
+    roundCurrency: commonService.roundCurrency
   });
 
   var EWALLET_TYPE = 'ewallet';
@@ -258,6 +258,44 @@ function CheckoutPaymentsCtrl(
     return quotation;
   }
 
+  function updateVMQuoatation(newQuotation){
+    vm.quotation.ammountPaid = newQuotation.ammountPaid;
+    vm.quotation.paymentGroup = newQuotation.paymentGroup;
+    vm.quotation = setQuotationTotalsByGroup(vm.quotation);            
+    delete vm.activeMethod;
+  }
+
+  function cancelPayment(payment){
+    confirmPaymentCancel(payment)
+      .then(function(){
+        vm.isLoading = true;
+        vm.isLoadingPayments = true;
+        
+        return paymentService.cancelPayment(vm.quotation.id, payment.id);
+      })
+      .then(function(res){
+        if(res.data){
+          var quotation = res.data;
+          vm.quotation.Payments = quotation.Payments;
+
+          updateVMQuoatation(quotation);
+
+          vm.isLoadingPayments = false;
+          vm.isLoading = false;
+
+          delete vm.activeMethod;        
+        }
+      })
+      .catch(function(err){
+        console.log(err);
+        vm.isLoadingPayments = false;
+        vm.isLoading = false;
+        if(err && err.data){
+          dialogService.showDialog('Error: <br/>' + err.data);
+        }
+      });      
+  }
+
   function addPayment(payment){
     if(
         ( (payment.ammount > 0) && (vm.quotation.ammountPaid < vm.quotation.total) )
@@ -269,10 +307,10 @@ function CheckoutPaymentsCtrl(
         .then(function(res){
           if(res.data){
             var quotation = res.data;
-            vm.quotation.ammountPaid = quotation.ammountPaid;
-            vm.quotation.paymentGroup = quotation.paymentGroup;
             vm.quotation.Payments.push(payment);
-            vm.quotation = setQuotationTotalsByGroup(vm.quotation);            
+
+            updateVMQuoatation(quotation)
+
             vm.isLoadingPayments = false;
             vm.isLoading = false;
 
@@ -614,6 +652,25 @@ function CheckoutPaymentsCtrl(
     },1000);
   }
 
+  function confirmPaymentCancel(payment){
+    var amount = $filter('currency')(payment.ammount);
+    var currency = 'MXN';
+    if(payment.currency === 'usd'){
+      currency = 'USD';
+    }
+    var dialogMsg = '¿Desea cancelar este pago por: ';
+    dialogMsg += amount + currency;
+    dialogMsg += '?';
+    var confirm = $mdDialog.confirm()
+          .title('CANCELAR PAGO')
+          .textContent(dialogMsg)
+          .ariaLabel('Cancelar pago')
+          .targetEvent(null)
+          .ok('Cancelar')
+          .cancel('Regresar');
+    return $mdDialog.show(confirm);
+  }
+
   function confirmOrder(){
     var paidPercent = $filter('number')(getPaidPercentage(),2);
     var dialogMsg = 'El pedido ha sido pagado al ' + paidPercent + '%';
@@ -651,22 +708,5 @@ function CheckoutPaymentsCtrl(
   $scope.$on('$destroy', function(){
     mainDataListener();
   });
-
- 
- function tranfer(){
-    Conekta.token.create({ card : {
-                        number: vm.cardInfo.cardNumber,//"4242424242424242",
-                        name: vm.cardInfo.cardHolder,
-                        exp_year: vm.cardInfo.cardYear,
-                        exp_month: vm.cardInfo.cardMonth,
-                        cvc: vm.cardInfo.cardCode
-                        }
-                    },function(e){ //success
-                        console.log(e);
-                    },function(e) { //error
-                        $scope.cardMessage = e;
-                        //console.log(e);alert('error');
-                    });
-  }
 
 }

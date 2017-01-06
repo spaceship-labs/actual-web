@@ -4,34 +4,14 @@
     <hr />
 
     <p ng-if="payment.terminals && payment.type !== 'transfer' ">
-      <strong>Tarjeta:</strong> 
+      <strong>NOMBRE DEL TARJETAHAMBIENTE:</strong> 
       <small ng-if="payment.msi">Selecciona la tarjeta de credito a utilizar</small>
-      <small ng-if="!payment.msi">Selecciona la tarjeta de credito/debito a utilizar</small>
-    </p>
-
-    <p ng-if="payment.type === 'transfer' ">
-      <strong>Banco</strong>
-      <p>Selecciona un banco para la transferencia</p>
+      <small ng-if="!payment.msi">(Como aparece en el plástico)</small>
     </p>
 
     <div class="dialog-block" layout="row" layout-align="space-between end">
-      <!--TERMINALS-->
-      <div flex="45" ng-if="payment.terminals && payment.type === 'transfer' ">
-        <div class="input-element select-element-wrapper">
-          <md-select ng-model="payment.terminal" class="select-element">
-            <md-option
-              ng-repeat="terminal in payment.terminals track by $index"
-              ng-selected="$index==0"
-              ng-value="terminal.value">
-              {{terminal.label}}
-            </md-option>
-          </md-select>
-        </div>
-      </div>
-      <!--END TERMINALS-->
-
       <!--CARDs-->
-      <div flex="45" ng-if="payment.options.length > 0">
+      <div flex="65" ng-if="payment.options.length > 0">
         <div class="input-element select-element-wrapper">
           <md-select 
             ng-model="payment.card"
@@ -49,10 +29,11 @@
         <input type="hidden" name="card" ng-model="payment.card">
       </div>
       <!--END CARDS-->
-
+      <!-- MESES SIN INTERESES-->
       <div flex="50" ng-if="payment.msi">
         <h3><strong>{{payment.msi}}</strong> Meses SIN INTERESES</h3>
       </div>
+      
     </div>
 
     <p ng-if="terminal">

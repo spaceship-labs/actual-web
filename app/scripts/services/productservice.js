@@ -341,17 +341,13 @@
         return deferred.promise;
       }
 
-      //TODO complete function
       function substractProductStockByQuotationDetails(product, details, activeStore){
-        console.log('before product', product);
         for(var i=0;i<details.length;i++){
           if(product.id === details[i].Product.id){
-            console.log('details product', details[i].Product);
             product.Available -= details[i].quantity;
             product[activeStore.code] -= details[i].quantity;
           }
         }
-        console.log('product', product);
         return product;
       }        
 

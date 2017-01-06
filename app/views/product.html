@@ -1,16 +1,27 @@
+<!--
+<div class="breadcrumb">
+  <div class="container container-xxlg">
+    <p>
+      <a href="#">Inicio</a>
+      <a href="#"> > Muebles</a>
+      <a href="#" class="breadcrumb-active"> > Salas</a>
+    </p>
+  </div>
+</div>
+-->
 <div class="content-block listing-view">
-  <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
+  <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
-    <sidebar-categories hide-xs
+    <sidebar-categories
       selected-category-id="vm.lowestCategory.id"
       categories-tree="main.categoriesTree"
-      flex-gt-sm="20" flex="100">
+      flex="20">
     </sidebar-categories>
     <!--END NAV-->
 
     <!--MAIN VIEW-->
-    <div class="product-view" flex-gt-sm="75" flex="100">
+    <div class="product-view" flex="75">
       <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
         <md-progress-circular 
@@ -22,8 +33,8 @@
       <!--PRODUCT VIEW CONTENT-->
       <section ng-if="!vm.isLoading" class="product-view-content">
 
-        <div layout="row" layout-wrap>
-          <div class="product-view-gallery-wrap" flex-gt-sm="50" flex="100">
+        <div layout="row">
+          <div class="product-view-gallery-wrap" flex="50">
             <!--<ng-include src="'views/partials/product-gallery.html'"></ng-include>-->
             <product-gallery 
               ng-if="vm.product"
@@ -32,266 +43,13 @@
           </div>
 
           <!--PRODUCT VIEW DATA-->
-          <div flex-gt-sm="50" flex="100" class="product-view-data">
-            <div class="product-view-data-block">
-              <h4 ng-click="vm.nextSlide()"><strong>CARACTERISTICAS</strong></h4>
-              <table>
-                <tr>
-                  <td>Código:</td>
-                  <td><strong>{{vm.product.ItemCode}}</strong></td>
-                </tr>
-                <tr>
-                  <td>Sociedad (SAP):</td>
-                  <td><strong>{{vm.sas[vm.product.U_Empresa]}}</strong></td>
-                </tr>
-                <tr>
-                  <td>Marca (SAP)</td>
-                  <td><strong>{{vm.product.ItmsGrpNam}}</strong></td>
-                </tr>
-                <tr ng-repeat="filter in vm.filters">
-                  <td 
-                    ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'">
-                    {{filter.Name}}: 
-                  </td>
-                  <td 
-                    ng-if="filter.Values.length > 0 && filter.Handle != 'color' && filter.Handle != 'ubicacion-uso'"
-                  >
-                    <span ng-repeat="value in filter.Values track by $index">
-                      <strong>{{value.Name}}</strong>
-                      <span ng-if="$index < (filter.Values.length-1)">,</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Color</td>
-                  <td><strong>{{vm.product.DetailedColor || vm.product.U_COLOR}}</strong></td>
-                </tr>
-              </table>
+          <div flex="50" class="product-view-data">
 
-            </div>
-            <div class="product-view-data-block"
-              ng-if="
-                vm.product.Length ||
-                vm.product.Width  ||
-                vm.product.Height ||
-                vm.product.Volume ||
-                vm.product.Weight ||
-                vm.product.Depth  ||
-                vm.product.SeatHeight ||
-                vm.product.ChairBackHeight||
-                vm.product.ArmRestHeight
-              "
-            >
-              <h4><strong>DIMENSIONES</strong></h4>
-              <table>
-                <tr ng-if="vm.product.Length && vm.product.Length > 0">
-                  <td>Largo:</td>
-                  <td><strong>{{vm.product.Length | number:2}} {{vm.product.LengthUnitMsr}}</strong></td>
-                </tr>
-                <tr ng-if="vm.product.Width && vm.product.Width > 0">
-                  <td>Ancho:</td>
-                  <td><strong>{{vm.product.Width | number:2}} {{vm.product.WidthUnitMsr}}</strong></td>
-                </tr>
-                <tr ng-if="vm.product.Height && vm.product.Height > 0">
-                  <td>Alto:</td>
-                  <td><strong>{{vm.product.Height | number:2}} {{vm.product.HeightUnitMsr}}</strong></td>
-                </tr>
-                <tr ng-if="vm.product.Volume && vm.product.Volume > 0">
-                  <td>Volumen:</td>
-                  <td><strong>{{vm.product.Volume | number:2}} {{vm.product.VolumeUnitMsr}}</strong></td>
-                </tr>
-                <tr ng-if="vm.product.Weight && vm.product.Weight > 0">
-                  <td>Peso:</td>
-                  <td><strong>{{vm.product.Weight | number:2}} {{vm.product.WeightUnitMsr}}</strong></td>
-                </tr>
-                <tr ng-if="vm.product.Depth && vm.product.Depth > 0">
-                  <td>Profundidad: </td>
-                  <td><strong>{{vm.product.Depth | number:2}} {{vm.product.DepthUnitMsr}}</strong></td>
-                </tr>
-                <tr ng-if="vm.product.SeatHeight && vm.product.SeatHeight > 0">
-                  <td>Altura asiento: </td>
-                  <td><strong>{{vm.product.SeatHeight | number:2}} {{vm.product.SeatHeightUnitMsr}}</strong></td>
-                </tr>
-                <tr ng-if="vm.product.ChairBackHeight && vm.product.ChairBackHeight > 0">
-                  <td>Altura respaldo: </td>
-                  <td><strong>{{vm.product.ChairBackHeight | number:2}} {{vm.product.ChairBackHeightUnitMsr}}</strong></td>
-                </tr>
-                <tr ng-if="vm.product.ArmRestHeight && vm.product.ArmRestHeight > 0">
-                  <td>Altura reposa brazos: </td>
-                  <td><strong>{{vm.product.ArmRestHeight | number:2}} {{vm.product.ArmRestHeightUnitMsr}}</strong></td>
-                </tr>
+            <ng-include src="'views/partials/product-features.html'"></ng-include>
+            <ng-include src="'views/partials/product-variants.html'"></ng-include>
+            <ng-include src="'views/partials/product-stock.html'"></ng-include>
+            <ng-include src="'views/partials/product-promotions.html'"></ng-include>
 
-
-              </table>
-            </div>
-
-            <div ng-if="vm.hasVariants" class="product-view-data-block">
-              <h4 class="product-view-data-block-toggle" ng-class="{'opened-toggle': vm.toggleVariants}">
-                <a href="#"  ng-click="vm.toggleVariants = !vm.toggleVariants">
-                  <strong>VARIANTES</strong>
-                </a>
-              </h4>
-              <div 
-                ng-show="vm.toggleVariants" 
-                class="hl-data variants-picker"
-              >
-              
-                  <div ng-repeat="variant in vm.variants">
-                    <div 
-                      class="variant-row" 
-                      ng-if="variant.products.length > 0" 
-                      layout="row"
-                    >
-                      <div flex="30"><strong>{{variant.name}}:</strong></div>
-
-                      <div 
-                        ng-if=" variant.handle == 'color' " 
-                        flex="70"
-                        class="variant-row-options"
-                      >
-
-                        <div
-                          class="variant-color"
-                          layout="row"
-                          layout-wrap
-                          ng-repeat="prod in variant.products"
-                          ng-click="vm.init(prod.id, true)"
-                          ng-class="{'variant-color-on': prod.id == vm.product.ItemCode}"
-                        >
-                          <span
-                            class="variant-color-val"
-                            data-color="{{val.Name}}"
-                            ng-repeat="val in prod.filterValues track by $index"
-                            ng-style=" {'background' : val.Code, 'width' : (100 / prod.filterValues.length) +'%' } "
-                          >
-                          </span>
-
-                        </div>
-
-                      </div>
-
-                      <div ng-if=" variant.handle != 'color'  " flex="70" >
-                        <md-radio-group ng-model="vm.product.ItemCode" class="md-primary">
-
-                          <md-radio-button
-                              ng-repeat="prod in variant.products"
-                              ng-value="prod.id"
-                              ng-click="vm.init(prod.id, true)"
-                              class="" >
-                             <span ng-repeat="val in prod.filterValues track by $index">
-                              {{val.Name}}<span ng-if="$index < (prod.filterValues.length-1) ">, </span>
-                             </span>
-                          </md-radio-button>
-
-                        </md-radio-group>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
-
-            <div class="product-view-data-block">
-              <h4 >
-                <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available | number: 0}} {{ vm.getPiecesString(vm.available) }}</strong> disponibles
-              </h4>
-              <div ng-if="vm.available">
-                <table class="delivery-table">
-                  <tr 
-                    ng-repeat="deliveryGroup in vm.deliveriesGroups"
-                  >
-                    <td>
-                      {{deliveryGroup.date | date: "d/MMM/yyyy"}} (en {{deliveryGroup.days}} días)
-                      <!--
-                      <p>
-                        <span 
-                          class="comma-separated"
-                          ng-repeat="d in deliveryGroup.deliveries track by $index"
-                        >
-                          {{ vm.getWarehouseName(d.companyFrom) }}: {{d.available}} ({{d.date | date: 'd/MMM/yyyy'}})
-                        </span>
-                      </p>
-                      -->
-                    </td>
-                    <td class="delivery-date-stock">
-                      {{deliveryGroup.available | number: 0}} {{vm.getPiecesString(deliveryGroup.available)}}
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-
-            <div ng-if="vm.mainPromo" class="product-view-data-block product-view-data-block-v2">
-              <h4 class="product-view-data-block-toggle" ng-click="vm.discountToggle = !vm.discountToggle">
-                <a flex href="#" >
-                  <strong>MÁXIMO DESCUENTO</strong>
-                </a>
-              </h4>
-              <div ng-show="vm.discountToggle" class="hl-data">
-                <table>
-                  <tr>
-                    <td>Precio Lista:</td>
-                    <td class="price-col"><strong>{{vm.product.priceBefore | currency }}</strong></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>{{ vm.mainPromo.discountTextPg1 ||  'Pago ÚNICO'}}
-                        <span class="hl-text">(-{{vm.mainPromo.discountPg1}}%)</span>
-                      </strong>
-                    </td>
-                    <td class="price-col">
-                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
-                       | <strong class="hl-text">{{ vm.applyDiscount(vm.mainPromo.discountPg1,vm.product.priceBefore) | currency }}</strong>
-                    </td>
-                  </tr>
-                  <tr ng-if="vm.validPayments.paymentGroup2">
-                    <td>
-                      <strong>{{ vm.mainPromo.discountTextPg2 ||  '3 Meses sin intereses'}}
-                        <span class="hl-text">(-{{vm.mainPromo.discountPg2}}%)</span>
-                      </strong>
-                    </td>
-                    <td class="price-col">
-                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
-                       | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg2,vm.product.priceBefore) | currency }}</strong>
-                    </td>
-                  </tr>
-                  <tr ng-if="vm.validPayments.paymentGroup3">
-                    <td>
-                      <strong>{{ vm.mainPromo.discountTextPg3 ||  '6 y 9 Meses sin intereses'}}
-                        <span class="hl-text">(-{{vm.mainPromo.discountPg3}}%)</span>
-                      </strong>
-                    </td>
-                    <td class="price-col">
-                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
-                       | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg3,vm.product.priceBefore) | currency }}</strong>
-                    </td>
-                  </tr>
-                  <tr ng-if="vm.validPayments.paymentGroup4">
-                    <td>
-                      <strong>{{ vm.mainPromo.discountTextPg4 ||  '12 Meses sin intereses'}}
-                        <span class="hl-text">(-{{vm.mainPromo.discountPg4}}%)</span>
-                      </strong>
-                    </td>
-                    <td class="price-col">
-                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
-                       | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg4,vm.product.priceBefore) | currency }}</strong>
-                    </td>
-                  </tr>
-                  <tr ng-if="vm.validPayments.paymentGroup5">
-                    <td>
-                      <strong>{{ vm.mainPromo.discountTextPg5 ||  '18 Meses sin intereses'}}
-                        <span class="hl-text">(-{{vm.mainPromo.discountPg5}}%)</span>
-                      </strong>
-                    </td>
-                    <td class="price-col">
-                      <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
-                       | <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg5,vm.product.priceBefore) | currency }}</strong>
-                    </td>
-                  </tr>
-
-                </table>
-                <p>*Descuento aplicado con promoción: {{vm.mainPromo.publicName}}</p>
-              </div>
-            </div>
 
             <div class="product-view-prices" layout="row" layout-align="space-between end">
               <div flex="15">
@@ -322,7 +80,7 @@
                   <select
                     class="select-element"
                     ng-model="vm.productCart.deliveryGroup"
-                    ng-change="vm.resetCartQuantity(deliveryGrop.available)"
+                    ng-change="vm.resetProductCartQuantity(deliveryGrop.available)"
                     ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in vm.deliveriesGroups"
                   >
                   </select>
@@ -418,145 +176,8 @@
 
       </section>
       <!--END PRODUCT VIEW CONTENT-->
-
     </div>
     <!-- MAIN VIEW -->
 
   </div>
-
-  <div class="other-products" layout="row" layout-wrap layout-align="space-between start">
-      
-      <!--
-      <div class="filters" layout="column" flex-gt-sm="20" flex-sm="30" flex="100">
-          <div class="head-filters" layout="row" layout-align="center center">
-              <p>filtrar resultados</p>
-          </div>
-          <div class="box" layout="column">
-            <div class="title" layout="row">
-              <i class="icon-down-open"></i>
-              <strong>PRECIO:</strong>
-            </div>
-            <div layout="row" layout-align="center center">
-              <select>
-                <option>Min.</option>
-                <option>$1200</option>
-                <option>$1300</option>
-              </select>
-              <p class="minus">-</p>
-              <select>
-                <option>Max.</option>
-                <option>$1200</option>
-                <option>$1300</option>
-              </select>
-              <button>
-                <i class="icon-right-open"></i>
-              </button>
-            </div>
-          </div>
-          <div class="box" layout="column">
-            <div class="title" layout="row">
-              <i class="icon-down-open"></i>
-              <strong>MATERIAL:</strong>
-            </div>
-            <div class="material" layout="column">
-              <strong class="subtitle">> Madera: <small>(90)</small></strong>
-              <div class="option" layout="row">
-                <md-radio-group class="md-primary">
-
-                    <md-radio-button value="Melanina"> <p>Melanina <strong><small>(35)</small></strong> </p></md-radio-button>
-                    <md-radio-button value="MDF"> <p>MDF <strong><small>(35)</small></strong> </p></md-radio-button>
-                    <md-radio-button value="Pino"> <p>Pino <strong><small>(35)</small></strong> </p></md-radio-button>
-                    <md-radio-button value="Nogal"> <p>Nogal <strong><small>(35)</small></strong> </p></md-radio-button>
-
-                </md-radio-group>
-              </div>
-            </div>
-            <div class="material" layout="column">
-              <strong class="subtitle">> Metal: <small>(90)</small></strong>
-              <div class="option" layout="row">
-                <md-radio-group class="md-primary">
-
-                    <md-radio-button value="Acero"> <p>Acero <strong><small>(35)</small></strong> </p></md-radio-button>
-                    <md-radio-button value="Acero inoxidable"> <p>Acero inoxidable <strong><small>(35)</small></strong> </p></md-radio-button>
-                    <md-radio-button value="Aluminio"> <p>Aluminio <strong><small>(35)</small></strong> </p></md-radio-button>
-                    <md-radio-button value="Chromo"> <p>Chromo <strong><small>(35)</small></strong> </p></md-radio-button>
-
-                </md-radio-group>
-              </div>
-            </div>
-          </div>
-          <div class="box" layout="column">
-            <div class="title" layout="row">
-              <i class="icon-down-open"></i>
-              <strong>color:</strong>
-            </div>
-            <div class="material" layout="column">
-              <div class="option" layout="row" layout-wrap layout-align="space-between center">
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                  <span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-      -->
-
-      <!--
-      <div class="products" layout="column" flex-gt-sm="75" flex-sm="65" flex="100" ng-if="vm.areProductsLoaded" arrows="true" class="products-list-slider" infinite="true" draggable="false">
-          <div class="title" layout="column">
-            <h3>Otros productos <strong>similares</strong></h3>
-          </div>
-          <div layout="row">
-            <div class="arrows" layout="row" layout-align="center center">
-              <div layout="row" layout-align="center center">
-                <i class="icon-left-open"></i>
-              </div>
-            </div>
-            <div class="box" layout="row" layout-wrap flex>
-              <div class="product" layout="column" flex-gt-sm="25" flex-sm="33" flex="100" ng-repeat="product in vm.products">
-                <listing-product product="product" layout="column" mini="true"></listing-product>
-              </div>
-            </div>
-           <div class="arrows" layout="row" layout-align="center center">
-              <div layout="row" layout-align="center center">
-                <i class="icon-right-open"></i>
-              </div>
-          </div>
-          </div>
-      </div>
-      -->
-
-  </div>
-
 </div>
-<!--
-<div class="product" layout="column" flex="25" flex-xs="33">
-  <img src="images/bordeaux-side-table-white-gloss-lifestyle2.jpg" alt="">
-  <i class="icon-search"></i>
-  <p>Salas modernas</p>
-</div>
--->

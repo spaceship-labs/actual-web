@@ -8,6 +8,7 @@
   function paymentService(api, $filter, $http, quotationService){
     var service = {
       addPayment: addPayment,
+      cancelPayment: cancelPayment,
       getPaymentMethodsGroups: getPaymentMethodsGroups,
       getPaymentOptionsByMethod: getPaymentOptionsByMethod,
       getRefundsOptions: getRefundsOptions
@@ -30,61 +31,61 @@
       }
     ];
 
-   	var paymentsOptions = [
-   		{
-   			card: {label:'American Express', value:'american-express'},
-   			paymentTypes: ['single-payment-terminal'],
-   			storesTypes:['home','studio'],
-   			terminal: {label:'American Express', value:'american-express'}
-   		},
-   		{
-   			card: {label:'American Express', value:'american-express'},
-   			paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
-   			storesTypes:['studio'],
-   			terminal: {label:'American Express', value:'american-express'}
-   		},
-   		{
-   			card:{label:'Banamex', value:'banamex'},
-   			paymentTypes: ['single-payment-terminal'],
-   			storesTypes:['home', 'studio'],
-   			terminal: {label:'Banamex', value:'banamex'}
-   		},   		
-   		{
-   			card:{label:'Banamex', value:'banamex'},
-   			paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
-   			storesTypes:['home','studio'],
-   			terminal: {label:'Banamex', value:'banamex'}
-   		},
-   		{
-   			card:{label:'Santander', value:'santander'},
-   			paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
-   			storesTypes:['home', 'studio'],
-   			terminal: {label:'Santander', value:'santander'}
-   		},
-   		{
-   			card:{label:'Santander', value:'santander'},
-   			paymentTypes: ['single-payment-terminal'],
-   			storesTypes:['home', 'studio'],
-   			terminal: {label:'Banamex', value:'banamex'}
-   		},    		
-			{
-   			card:{label:'Bancomer', value:'bancomer'},
-   			paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
-   			storesTypes:['home','studio'],
-   			terminal: {label:'Bancomer', value:'bancomer'}				
-			},
-   		{
-   			card:{label:'Bancomer', value:'bancomer'},
-   			paymentTypes: ['single-payment-terminal'],
-   			storesTypes:['home', 'studio'],
-   			terminal: {label:'Banamex', value:'banamex'}
-   		},
+    var paymentsOptions = [
+      {
+        card: {label:'American Express', value:'american-express'},
+        paymentTypes: ['single-payment-terminal'],
+        storesTypes:['home','studio'],
+        terminal: {label:'American Express', value:'american-express'}
+      },
+      {
+        card: {label:'American Express', value:'american-express'},
+        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        storesTypes:['studio'],
+        terminal: {label:'American Express', value:'american-express'}
+      },
+      {
+        card:{label:'Banamex', value:'banamex'},
+        paymentTypes: ['single-payment-terminal'],
+        storesTypes:['home', 'studio'],
+        terminal: {label:'Banamex', value:'banamex'}
+      },      
+      {
+        card:{label:'Banamex', value:'banamex'},
+        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        storesTypes:['home','studio'],
+        terminal: {label:'Banamex', value:'banamex'}
+      },
+      {
+        card:{label:'Santander', value:'santander'},
+        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        storesTypes:['home', 'studio'],
+        terminal: {label:'Santander', value:'santander'}
+      },
+      {
+        card:{label:'Santander', value:'santander'},
+        paymentTypes: ['single-payment-terminal'],
+        storesTypes:['home', 'studio'],
+        terminal: {label:'Banamex', value:'banamex'}
+      },        
+      {
+        card:{label:'Bancomer', value:'bancomer'},
+        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        storesTypes:['home','studio'],
+        terminal: {label:'Bancomer', value:'bancomer'}        
+      },
+      {
+        card:{label:'Bancomer', value:'bancomer'},
+        paymentTypes: ['single-payment-terminal'],
+        storesTypes:['home', 'studio'],
+        terminal: {label:'Banamex', value:'banamex'}
+      },
       {
         card:{label:'Banorte', value:'banorte'},
         paymentTypes: ['single-payment-terminal'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banamex', value:'banamex'}        
-      }, 			    		   		
+      },                    
       {
         card:{label:'Banorte', value:'banorte'},
         paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
@@ -223,26 +224,26 @@
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },      
-   	];
-		
+    ];
+    
 
-   	function getPaymentOptionsByMethod(method){
-   		var options = _.filter(paymentsOptions, function(option){
-   			var hasPaymentType = false;
-   			var hasStore = false;
- 			 	if(option.paymentTypes.indexOf(method.type) > -1){
- 			 		hasPaymentType = true;
- 			 	}
- 			 	if(option.storesTypes.indexOf(method.storeType) > -1 ){
- 			 		hasStore = true;
- 			 	}
- 			 	if(hasStore && hasPaymentType){
- 			 		return true;
- 			 	}
- 			 	return false;
-   		});
-   		return options;
-   	}
+    function getPaymentOptionsByMethod(method){
+      var options = _.filter(paymentsOptions, function(option){
+        var hasPaymentType = false;
+        var hasStore = false;
+        if(option.paymentTypes.indexOf(method.type) > -1){
+          hasPaymentType = true;
+        }
+        if(option.storesTypes.indexOf(method.storeType) > -1 ){
+          hasStore = true;
+        }
+        if(hasStore && hasPaymentType){
+          return true;
+        }
+        return false;
+      });
+      return options;
+    }
 
     function getPaymentMethodsGroups(){
       var url = '/paymentgroups';
@@ -257,6 +258,12 @@
       var url = '/payment/add/' + quotationId;
       return api.$http.post(url,params);
     }
+
+    function cancelPayment(quotationId, paymentId){
+      var url = '/payment/cancel/' + quotationId + '/' + paymentId;
+      return api.$http.post(url);
+    }
+
   
     return service;
   }

@@ -1,0 +1,33 @@
+<div class="product-view-data-block">
+  <h4 >
+    <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available | number: 0}} {{ vm.getPiecesString(vm.available) }}</strong> disponibles
+  </h4>
+  <div ng-if="vm.available">
+    <table class="delivery-table">
+      <tr 
+        ng-repeat="deliveryGroup in vm.deliveriesGroups"
+      >
+        <td>
+          {{deliveryGroup.date | date: "d/MMM/yyyy"}} 
+          <span ng-show="!vm.isImmediateDelivery(deliveryGroup.date)">
+            (en {{deliveryGroup.days}} días)
+          </span>
+          <span ng-show="vm.isImmediateDelivery(deliveryGroup.date)" class="immediate-delivery">
+            Entrega inmediata
+          </span> 
+
+          <p>Debug</p>                       
+          <span 
+              class="comma-separated"
+              ng-repeat="d in deliveryGroup.deliveries track by $index"
+            >
+            {{ vm.getWarehouseName(d.companyFrom) }}: {{d.available}} ({{d.date | date: 'd/MMM/yyyy'}})
+          </span>
+        </td>
+        <td class="delivery-date-stock">
+          {{deliveryGroup.available | number: 0}} {{vm.getPiecesString(deliveryGroup.available)}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

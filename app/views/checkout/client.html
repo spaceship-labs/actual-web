@@ -4,39 +4,55 @@
 
 <section ng-show="!vm.isLoading" class="form-view cart-view checkout-view container container-xxlg" >
 
+  <div class="steps-bar" layout="row">
+    <a ng-href="/quotations/edit/{{vm.quotation.id}}" flex="25" class="steps-bar-item">
+      <span><i class="icon-carro"></i> 1. Mi carrito</span>
+    </a>
+    <div flex="25" class="steps-bar-item steps-bar-item-active">
+      <span><i class="icon-login"></i> 2. Datos personales</span>
+    </div>
+    <div flex="25" class="steps-bar-item">
+      <span><i class="icon-terminal"></i> 3. Método de pago</span>
+    </div>
+    <div flex="25" class="steps-bar-item">
+      <span><i class="icon-oportunidades"></i> 4. Confirmación</span>
+    </div>
+  </div>
+
+
   <div class="checkout-view-inner" layout="row" layout-align="space-between start">
 
     <section flex="75">
       <h3>
         <strong>Datos personales</strong>
-        <a class="small-link" href="#" ng-href="/clients/profile/{{vm.quotation.Client.id}}">Cambiar mis datos personales</a>
+        <a class="small-link" href="#" ng-href="./user/profile">Cambiar mis datos personales</a>
       </h3>
       <form ng-submit="vm.continueProcess()" class="client-checkout" action="#">
 
         <!--PERSONAL DATA-->
         <div layout="row">
-          <div flex="45" class="input-element">
+          <div flex="25" class="input-element">
             <label><strong>Nombre(s) del cliente</strong> <span class="hl-label">*</span></label>
-            <p>{{vm.quotation.Client.FirstName || vm.quotation.Client.CardName}}</p>
+            <p>{{vm.quotation.User.firstName}}</p>
           </div>
-          <div flex="45" class="input-element">
+          <div flex="25" class="input-element">
             <label><strong>Apellido(s) del cliente</strong> <span class="hl-label">*</span></label>
-            <p>{{vm.quotation.Client.LastName}}</p>
+            <p>{{vm.quotation.User.lastName}}</p>
           </div>
         </div>
 
         <div layout="row">
-          <div flex="20" class="input-element">
+          <div flex="25" class="input-element">
             <label><strong>Teléfono fijo <span class="hl-label">*</span></strong></label>
             <p>{{vm.quotation.Client.Phone1}}</p>
           </div>
-          <div flex="20" class="input-element">
+          <div flex="25" class="input-element">
             <label><strong>Teléfono celular <span class="hl-label">*</span></strong></label>
             <p>{{vm.quotation.Client.Cellular}}</p>
           </div>
-          <div flex class="input-element">
+          <div flex="25" class="input-element">
             <label><strong>Email</strong> <span class="hl-label">*</span></label>
-            <p>{{vm.quotation.Client.E_Mail}}</p>
+            <p>{{vm.quotation.User.email}}</p>
           </div>
         </div>
         <!--END PERSONAL DATA-->

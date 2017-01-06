@@ -119,10 +119,11 @@ function OffersCtrl(
     for(var i = (productDeliveryDates.length-1); i>=0; i--){
       var deliveryDate = productDeliveryDates[i];
       if( product.quantity <=  parseInt(deliveryDate.available) ){
-        product.shipDate = deliveryDate.date;
-        product.productDate = deliveryDate.productDate,
-        product.shipCompany = deliveryDate.company;
-        product.shipCompanyFrom = deliveryDate.companyFrom;
+        product.shipDate         = deliveryDate.date;
+        product.originalShipDate = angular.copy(deliveryDate.date);
+        product.productDate      = deliveryDate.productDate,
+        product.shipCompany      = deliveryDate.company;
+        product.shipCompanyFrom  = deliveryDate.companyFrom;
         product.promotionPackage = packageId;
       }
     }

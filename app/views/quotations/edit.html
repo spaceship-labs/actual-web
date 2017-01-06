@@ -12,29 +12,11 @@
     <p>RFC: AAC130902PR7</p>
   </div>
 
-  <h1><i class="icon-attachment"></i> <strong>OPORTUNIDAD #{{vm.quotation.folio}}</strong></h1>
+  <h1><i class="icon-attachment"></i> <strong>PEDIDO #{{vm.quotation.folio}}</strong></h1>
   <hr/>
 
 
   <section class="quotation-data">
-    <div>
-      <label>Status</label>
-      <p>
-        <span 
-          ng-class="{
-            'active': !vm.quotation.Order,
-            'closed': vm.quotation.Order
-          }">
-          {{vm.status}}
-        </span>
-        <a
-          class="order-link"
-          ng-href="/checkout/order/{{vm.quotation.Order.id}}"
-          ng-if="vm.quotation.Order">
-          | Haz click aqui para ver el pedido
-        </a>
-      </p>
-    </div>
     <div layout="row" class="quotation-data-row">
       <div flex="25">
         <label for="">Nombre del cliente</label>
@@ -42,23 +24,8 @@
       </div>
       <div flex="25">
         <label for="">E-mail</label>
-        <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
+        <p>{{vm.quotation.User.email || 'No proporcionado'}}</p>
       </div>      
-      <div flex="25">
-        <label for="">Vendedor</label>
-        <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
-      </div>
-      <div flex="25">
-        <p><label for="">Broker</label></p>
-        <select
-          chosen
-          data-placeholder-text-single="'Seleccionar un broker'"
-          ng-model="vm.quotation.Broker"
-          ng-options="broker.id as broker.firstName + ' ' + broker.lastName for broker in vm.brokers | orderBy:'firstName'"
-        >
-        </select>
-
-      </div>
     </div>
 
     <div layout="row" layout-align="start center" class="quotation-data-row">
@@ -73,10 +40,6 @@
       <div flex="25">
         <label for="">Fecha de cotización</label>
         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
-      </div>
-      <div flex="25">
-        <label>Hora</label>
-        <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>        
       </div>
     </div>
 
@@ -188,13 +151,5 @@
     </div>
 
   </form>
-
-  <ng-include 
-    src="'views/quotations/transfers-table.html'"></ng-include>    
-
-  <ng-include 
-    src="'views/quotations/quotation-records.html'"></ng-include>    
-
-  <ng-include src="'views/quotations/quotation-texts.html'"></ng-include>
 
 </section>

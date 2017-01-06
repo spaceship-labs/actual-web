@@ -285,6 +285,7 @@
           quantity: params.quantity,
           Quotation: quotationId,
           shipDate: params.shipDate,
+          originalShipDate: params.originalShipDate,
           productDate: params.productDate,
           shipCompany: params.shipCompany,
           shipCompanyFrom: params.shipCompanyFrom,
@@ -493,7 +494,7 @@
       function showStockAlert(){
         var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
         dialogService.showDialog(msg);        
-      }      
+      }                
 
     }
 

@@ -178,7 +178,7 @@ md-dialog .md-button[ng-click="dialog.abort()"]{
   #ACTION-BTN
 /*------------*/
 .action-btn{
-  background: #000;
+  background: #092F57;
   color: #fff;
   text-transform: uppercase;
   border: 0;
@@ -470,7 +470,7 @@ select{
   vertical-align: middle;
 }
 .header-top-bar-menu .cart-active{
-  color: #50C841!important;
+  color: #DDA901!important;
 }
 
 .header-top-bar-menu .header-top-bar-menu-item .pointer-btn{
@@ -583,7 +583,7 @@ select{
 .modal-header .input-element{background: #fff;}
 .modal-header a{color: #000;}
 .modal-header .action-btn{
-  background: #000;
+  background: #092F57;
   color: #fff;
   text-transform: uppercase;
   border: 0;
@@ -675,7 +675,7 @@ select{
   text-align: center;
 }
 .profile-modal-header-btn{
-  background: #000;
+  background: #092F57;
   padding: 10px 16px;
   color: #fff!important;
   font-weight: 700;
@@ -3516,6 +3516,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .deposit-dialog .deposit-dialog-inner{
   padding: 15px 20px;
   max-width: 600px;
+  min-width: 200px;
 }
 .deposit-dialog h2{
   font-weight: 400;
@@ -3523,10 +3524,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 4px 0;
 }
 .deposit-dialog hr{
-  height: 2px;
+  height: 1px;
   background: #000;
   border:0;
-  margin: 10px 0;
+  margin: 18px 0;
 }
 .deposit-dialog h2 i{
   color: #33BA2C;
@@ -3542,11 +3543,13 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .deposit-dialog .deposit-type{
   margin:0 0 10px;
 }
-.deposit-dialog p{margin: 0;}
+.deposit-dialog p{
+  margin: 0;
+  font-size: 12px;
+}
 .deposit-dialog .action-btn-save{margin: 0}
 .deposit-dialog small{
   font-size: 12px;
-  font-style: italic;
 }
 .deposit-dialog .dialog-block:first-child,
 .deposit-dialog .dialog-block:first-of-type{margin-top: 0}

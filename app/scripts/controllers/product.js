@@ -27,7 +27,8 @@ function ProductCtrl(
   quotationService,
   pmPeriodService,
   localStorageService,
-  deliveryService
+  deliveryService,
+  cartService
 ) {
   var vm = this;
   var activeStoreId = localStorageService.get('activeStore'); 
@@ -47,7 +48,7 @@ function ProductCtrl(
     init: init,
     isImmediateDelivery: isImmediateDelivery,
     isLoading: true,
-    resetCartQuantity: resetCartQuantity,
+    resetProductCartQuantity: resetProductCartQuantity,
     trustAsHtml: trustAsHtml,
     sas:{
       '001': 'Studio',
@@ -236,75 +237,29 @@ function ProductCtrl(
 
   function addToCart($event){
     vm.isLoading = true;
-    var productCartItems = getProductCartItems(
+    var productCartItems = cartService.getProductCartItems(
       vm.productCart.deliveryGroup,
-      vm.productCart.quantity
+      vm.productCart.quantity,
+      vm.warehouses,
+      activeStoreWarehouse
     );
 
-    if(productCartItems.length == 1){
-      var item = productCartItems[0];
-      var params = {
-        id: vm.product.id,
-        quantity: item.quantity,
-        shipDate: item.date,
-        productDate: item.productDate,
-        shipCompany: item.company,
-        shipCompanyFrom: item.companyFrom
-      };
+    if(productCartItems.length === 1){
+      var cartItem = productCartItems[0];
+      var params = cartService.buildAddProductToCartParams(vm.product.id, cartItem);
+      console.log('params', params);
       quotationService.addProduct(vm.product.id, params);      
-    }else if(productCartItems.length > 1){
-      var multiParams = productCartItems.map(function(item){
-        return {
-          id: vm.product.id,
-          quantity: item.quantity,
-          shipDate: item.date,
-          productDate: item.productDate,
-          shipCompany: item.company,
-          shipCompanyFrom: item.companyFrom
-        };
+    }
+    else if(productCartItems.length > 1){
+      var multiParams = productCartItems.map(function(cartItem){
+        return cartService.buildAddProductToCartParams(vm.product.id, cartItem);
       });
       quotationService.addMultipleProducts(multiParams);
     }
   }
 
-  function resetCartQuantity(){
-    var available = vm.productCart.deliveryGroup.available;
-    if(vm.productCart.quantity >= available){
-      vm.productCart.quantity = available;
-    }
-    else if(!vm.productCart.quantity && available){
-      vm.productCart.quantity = 1;
-    }
-  }
-
-  function getProductCartItems(deliveryGroup, quantity){
-    var productCartItems = [];
-    var warehouses = [];
-     if(deliveryGroup.deliveries.length == 1){
-      var productCartItem = deliveryGroup.deliveries[0];
-      productCartItem.quantity = quantity;
-      productCartItems.push( productCartItem );
-    }else{
-      var deliveries = deliveryService.sortDeliveriesByHierarchy(
-        deliveryGroup.deliveries, 
-        vm.warehouses,
-        activeStoreWarehouse
-      );
-      productCartItems = deliveries.map(function(delivery){
-        if(quantity > delivery.available){
-          delivery.quantity = delivery.available;
-          quantity -= delivery.available;
-        }else{
-          delivery.quantity = quantity;
-          quantity = 0;
-        }
-        return delivery;
-      });
-      productCartItems = productCartItems.filter(function(item){
-        return item.quantity > 0;
-      });
-    } 
-    return productCartItems;
+  function resetProductCartQuantity(){
+    vm.productCart = cartService.resetProductCartQuantity(vm.productCart);
   }
 
   function getQtyArray(n){
@@ -346,7 +301,8 @@ ProductCtrl.$inject = [
   'quotationService',
   'pmPeriodService',
   'localStorageService',
-  'deliveryService'
+  'deliveryService',
+  'cartService'
 ];
 /*
 angular.element(document).ready(function() {
