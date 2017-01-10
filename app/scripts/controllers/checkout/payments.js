@@ -59,6 +59,7 @@ function CheckoutPaymentsCtrl(
     payments: [],
     paymentMethodsGroups: [],
     roundCurrency: commonService.roundCurrency
+    
   });
 
   var EWALLET_TYPE = 'ewallet';
@@ -105,7 +106,7 @@ function CheckoutPaymentsCtrl(
       .then(function(response){
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
-        updateEwalletBalance();
+        //updateEwalletBalance();
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
           vm.quotation = setQuotationTotalsByGroup(vm.quotation);
         }        
@@ -116,7 +117,7 @@ function CheckoutPaymentsCtrl(
           
   }
 
-  function updateEwalletBalance(){
+  /*function updateEwalletBalance(){
     var group = vm.paymentMethodsGroups[EWALLET_GROUP_INDEX];
     var ewalletPaymentMethod = _.findWhere(group.methods, {type:EWALLET_TYPE});
     var ewalletPayments = _.where(vm.quotation.Payments, {type:EWALLET_TYPE});
@@ -133,7 +134,7 @@ function CheckoutPaymentsCtrl(
       .catch(function(err){
         console.log(err);
       });
-  }
+  }*/
 
   function getEwalletDescription(balance){
     var description = '';
@@ -347,13 +348,10 @@ function CheckoutPaymentsCtrl(
   function applyTransaction(ev, method, ammount) {
     if(method){
       var templateUrl = 'views/checkout/payment-dialog.html';
-      var controller  = DepositController;
+      var controller  = PaymentDialogController;
       method.currency = method.currency || 'MXP';
       method.ammount  = ammount;
       var paymentOpts = angular.copy(method);
-      if(method.msi || method.terminals){
-        controller    = TerminalController;
-      }
       paymentOpts.ammount = ammount;
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
@@ -430,6 +428,11 @@ function CheckoutPaymentsCtrl(
     }
   }
 
+  function PaymentDialogController($scope, $mdDialog, formatService, commonService, payment) {
+    $scope.paymentConekta = function(){
+        console.log("Hola");
+    };
+  }
 
   function DepositController($scope, $mdDialog, formatService, commonService, payment) {
 
@@ -478,122 +481,6 @@ function CheckoutPaymentsCtrl(
     };
 
     $scope.init();
-  }
-
-  function TerminalController($scope, $mdDialog, formatService, commonService, payment) {
-    $scope.payment = payment;
-    $scope.needsVerification = payment.needsVerification;
-    $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
-
-    //ROUNDING
-    $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);     
-    $scope.payment.remaining = commonService.roundCurrency($scope.payment.remaining); 
-    if($scope.maxAmmount){
-      $scope.maxAmmount = commonService.roundCurrency($scope.maxAmmount);
-    }
-    if($scope.payment.min){
-      $scope.payment.min = commonService.roundCurrency($scope.payment.min);      
-    }
-
-    $scope.numToLetters = function(num){
-      return formatService.numberToLetters(num);
-    };
-
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-
-    $scope.isMinimumValid = function(){
-      $scope.payment.min = $scope.payment.min || 0;   
-      if($scope.payment.ammount === $scope.payment.remaining){
-        $scope.errMsg = '';
-        return true;
-      }
-      else if( ($scope.payment.remaining - $scope.payment.ammount) >= $scope.payment.min && 
-        $scope.payment.ammount >= $scope.payment.min
-      ){
-        $scope.errMsg = '';
-        return true;
-      }
-      
-      if($scope.remaining < $scope.payment.min){
-        $scope.errMsg = 'El monto mínimo para esta forma de pago es '+$filter('currency')($scope.payment.min)+' pesos.';
-      }
-      else if($scope.payment.ammount < $scope.payment.min){
-        $scope.errMsg = 'El monto mínimo para esta forma de pago es '+$filter('currency')($scope.payment.min)+' pesos.';
-      }
-      else{
-        $scope.errMsg = 'Favor de aplicar el saldo total';
-      }
-      return false;
-    }; 
-
-    $scope.$watch('payment.ammount', function(newVal, oldVal){
-      if(newVal !== oldVal){
-        $scope.isMinimumValid();
-      }
-    });
-
-    function isValidVerificationCode(){
-      if($scope.payment.type !== 'deposit'){
-        return $scope.payment.verificationCode && $scope.payment.verificationCode !== '';
-      }
-      return true;
-    }
-
-    $scope.isvalidPayment = function(){
-      $scope.payment.min = $scope.payment.min || 0;
-      if($scope.payment.ammount < $scope.payment.min){
-        $scope.minStr = $filter('currency')($scope.payment.min);
-        $scope.errMsg = 'La cantidad minima es: ' +  $scope.minStr;
-      }else{
-        $scope.errMin = false;        
-      }
-
-      if( $scope.maxAmmount ){
-        return (
-          $scope.isMinimumValid() &&
-          ($scope.payment.ammount <= $scope.maxAmmount) &&
-          isValidVerificationCode() &&
-          $scope.payment.ammount >= $scope.payment.min
-        );
-      }
-      return (
-        $scope.payment.ammount && 
-        isValidVerificationCode() &&
-        $scope.payment.ammount >= $scope.payment.min        
-      );
-    };
-
-    $scope.onChangeCard = function(card){
-      $scope.terminal = getSelectedTerminal(card);
-    };
-
-    function getSelectedTerminal(card){
-      var option = _.find($scope.payment.options, function(option){
-        return option.card.value === card;
-      });
-      if(option){
-        return option.terminal;
-      }
-      return false;
-    }
-
-    $scope.save = function() {
-      if( $scope.isvalidPayment() ){
-        if($scope.payment.options.length > 0){
-          $scope.terminal = getSelectedTerminal($scope.payment.card);
-          $scope.payment.terminal = $scope.terminal.value;
-        }        
-        //alert('cumple');
-        $mdDialog.hide($scope.payment);
-      }else{
-        console.log('no cumple');
-      }
-    };
   }
 
   function AuthorizeOrderController($scope, $mdDialog){
@@ -705,8 +592,8 @@ function CheckoutPaymentsCtrl(
     return false;
   }
 
+
   $scope.$on('$destroy', function(){
     mainDataListener();
   });
-
 }
