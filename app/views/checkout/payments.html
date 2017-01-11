@@ -52,7 +52,7 @@
           <div class="pay-method-wrap" >
             <ng-include
               ng-repeat="paymentGroup in vm.paymentMethodsGroups track by $index"
-              ng-if="vm.isActiveGroup(paymentGroup)"
+              ng-if="vm.isActiveGroup(paymentGroup, vm.quotation)"
               src="'views/checkout/payment-group.html'">
             </ng-include>
 
@@ -137,7 +137,7 @@
               <td><strong>Porcentaje pagado:</strong></td>
               <td>
                 <strong>
-                  {{ vm.getPaidPercentage() | number:2 }}%
+                  {{ vm.getPaidPercentage(vm.quotation) | number:2 }}%
                 </strong>
               </td>
             </tr>
@@ -164,18 +164,18 @@
             type="submit"
             value="CONTINUAR"
             class="cart-view-btn"
-            ng-disabled="!vm.isMinimumPaid()"
-            ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid() }">
+            ng-disabled="!vm.isMinimumPaid(vm.quotation)"
+            ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid(vm.quotation) }">
 
           <p 
-            ng-if="vm.isMinimumPaid()"
+            ng-if="vm.isMinimumPaid(vm.quotation)"
             class="cart-summary-note"
           >
             *Hacer click para generar el folio de la venta.
           </p>
 
           <p 
-            ng-if="!vm.isMinimumPaid()"
+            ng-if="!vm.isMinimumPaid(vm.quotation)"
             class="cart-summary-note"
           >
             *Se necesita saldar el monto total para poder procesar la venta
