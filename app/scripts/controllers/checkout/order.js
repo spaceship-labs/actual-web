@@ -20,22 +20,20 @@ function CheckoutOrderCtrl(
   quotationService,
   orderService,
   deliveryService,
-  invoiceService
+  invoiceService,
+  paymentService
 ){
   var vm = this;
   var EWALLET_POSITIVE = 'positive';
   var EWALLET_NEGATIVE = 'negative';
 
 
-  angular.extend(vm, {
-    calculateBalance: calculateBalance,
-    print: print,
-    getPaymentType: getPaymentType,
-    formatAddress: formatAddress,
+  angular.extend(vm, {    
     toggleRecord: toggleRecord,
     isLoading: false,
     api: api,
     generateInvoice: generateInvoice,
+    getPaymentTypeString: paymentService.getPaymentTypeString,
     sendInvoice: sendInvoice,
   });
 
@@ -46,11 +44,12 @@ function CheckoutOrderCtrl(
     orderService.getById($routeParams.id).then(function(res){
       vm.order = res.data;
       vm.order.Details = vm.order.Details || [];
-      vm.order.Address = vm.formatAddress(vm.order.Address);
+      console.log('vm.order', vm.order);
+      vm.order.Address = orderService.formatAddress(vm.order.Address);
 
       vm.ewallet = {
-        positive: getEwalletAmmount(vm.order.EwalletRecords, EWALLET_POSITIVE),
-        negative: getEwalletAmmount(vm.order.EwalletRecords,EWALLET_NEGATIVE),
+        positive: orderService.getEwalletAmmount(vm.order.EwalletRecords, EWALLET_POSITIVE),
+        negative: orderService.getEwalletAmmount(vm.order.EwalletRecords,EWALLET_NEGATIVE),
       };
       vm.ewallet.before = vm.order.Client.ewallet + vm.ewallet.negative - vm.ewallet.positive;
       vm.ewallet.current = vm.order.Client.ewallet;
@@ -90,58 +89,15 @@ function CheckoutOrderCtrl(
 
   }
 
-  function calculateBalance(paid, total){
-    //var paidRounded = commonService.roundCurrency(paid);
-    //var totalRounded = commonService.roundCurrency(total);
-    return (paid - total);
-    //return (paidRounded - totalRounded);
-  }
-
-  function getEwalletAmmount(ewalletRecords, type){
-    ewalletRecords = ewalletRecords || [];
-    ewalletRecords = ewalletRecords.filter(function(record){
-      return record.type === type;
-    });
-    var amount = ewalletRecords.reduce(function(acum, record){
-      acum += record.amount;
-      return acum;
-    },0);
-    return amount;
-  }
-
   function toggleRecord(record){
     vm.records.forEach(function(rec){
-      if(rec.id != record.id){
+      if(rec.id !== record.id){
         rec.isActive = false;
       }
     });
     record.isActive = !record.isActive;
   }
 
-  function formatAddress(address){
-    address.name = (address.FirstName&&address.LastName) ? address.FirstName+' '+address.LastName : address.Name;
-    address.address = address.Address;
-    address.phone = address.phone || address.Tel1;
-    address.mobile = address.mobilePhone || address.Cellolar;
-    return address;
-  }
-
-  
-  function getPaymentType(payment){
-    var type = '1 sola exhibición';
-    if(payment.type === 'cash' || payment.type === 'cash-usd'){
-      type = 'Pago de contado';
-    }else if(payment.msi){
-      type = payment.msi + ' meses sin intereses';
-    }else if(payment.type === 'transfer'){
-      type = 'Transferencia';
-    }else if(payment.type === 'deposit'){
-      type = 'Deposito';
-    }else if(payment.type === 'ewallet'){
-      type = 'Monedero electrónico';
-    }
-    return type;
-  }
 
   function print(){
     window.print();
@@ -179,6 +135,6 @@ function CheckoutOrderCtrl(
         dialogService.showDialog(error);
       });
   }
-  
+
   init();
 }

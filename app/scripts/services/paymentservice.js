@@ -11,6 +11,7 @@
       cancelPayment: cancelPayment,
       getPaymentMethodsGroups: getPaymentMethodsGroups,
       getPaymentOptionsByMethod: getPaymentOptionsByMethod,
+      getPaymentTypeString: getPaymentTypeString,
       getRefundsOptions: getRefundsOptions
     };
 
@@ -88,7 +89,7 @@
       },                    
       {
         card:{label:'Banorte', value:'banorte'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },
@@ -100,7 +101,7 @@
       },                    
       {
         card:{label:'IXE', value:'ixe'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },  
@@ -112,7 +113,7 @@
       },                    
       {
         card:{label:'ScotiaBank', value:'scotiabank'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -124,7 +125,7 @@
       },                    
       {
         card:{label:'Inbursa', value:'inbursa'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -136,7 +137,7 @@
       },                    
       {
         card:{label:'Afirme', value:'afirme'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -148,7 +149,7 @@
       },                    
       {
         card:{label:'Banbajio', value:'banbajio'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -160,7 +161,7 @@
       },                    
       {
         card:{label:'Banjercito', value:'banjercito'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -172,7 +173,7 @@
       },                    
       {
         card:{label:'Bancamifel', value:'bancamifel'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -184,7 +185,7 @@
       },                    
       {
         card:{label:'Itaucard', value:'itaucard'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },
@@ -196,7 +197,7 @@
       },                    
       {
         card:{label:'Liverpool Premium Card', value:'liverpool-premium-card'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },                                                                                
@@ -208,7 +209,7 @@
       },                    
       {
         card:{label:'Banregio', value:'banregio'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },
@@ -220,7 +221,7 @@
       },                    
       {
         card:{label:'Banco Ahorro Famsa', value:'banco-ahorro-famsa'},
-        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },      
@@ -263,6 +264,22 @@
       var url = '/payment/cancel/' + quotationId + '/' + paymentId;
       return api.$http.post(url);
     }
+
+    function getPaymentTypeString(payment){
+      var type = '1 sola exhibición';
+      if(payment.type === 'cash' || payment.type === 'cash-usd'){
+        type = 'Pago de contado';
+      }else if(payment.msi){
+        type = payment.msi + ' meses sin intereses';
+      }else if(payment.type === 'transfer'){
+        type = 'Transferencia';
+      }else if(payment.type === 'deposit'){
+        type = 'Deposito';
+      }else if(payment.type === 'ewallet'){
+        type = 'Monedero electrónico';
+      }
+      return type;
+    }    
 
   
     return service;

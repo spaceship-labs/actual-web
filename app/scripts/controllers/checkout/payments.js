@@ -31,6 +31,8 @@ function CheckoutPaymentsCtrl(
     clientService,
     paymentService,
     localStorageService,
+    ewalletService,
+    checkoutService,
     $interval,
     api
   ){
@@ -40,17 +42,16 @@ function CheckoutPaymentsCtrl(
     api: api,
     applyTransaction: applyTransaction,
     authorizeOrder: authorizeOrder,
-    areMethodsDisabled: areMethodsDisabled,
+    areMethodsDisabled: checkoutService.areMethodsDisabled,
     cancelPayment     : cancelPayment,
     calculateRemaining: calculateRemaining,
     createOrder: createOrder,
     chooseMethod: chooseMethod,
-    getExchangeRate:getExchangeRate,
-    getPaidPercentage: getPaidPercentage,
-    isActiveGroup: isActiveGroup,
-    isActiveMethod: isActiveMethod,
-    isMinimumPaid: isMinimumPaid,
-
+    getPaidPercentage: checkoutService.getPaidPercentage,
+    isActiveGroup: checkoutService.isActivePaymentGroup,
+    isActiveMethod: checkoutService.isActiveMethod,
+    isMinimumPaid: checkoutService.isMinimumPaid,
+    intervalProgress: false,
     customFullscreen: $mdMedia('xs') || $mdMedia('sm'),
     singlePayment: true,
     multiplePayment: false,
@@ -59,12 +60,9 @@ function CheckoutPaymentsCtrl(
     payments: [],
     paymentMethodsGroups: [],
     roundCurrency: commonService.roundCurrency
-    
   });
 
-  var EWALLET_TYPE = 'ewallet';
-  var CASH_USD_TYPE = 'cash-usd';
-  var EWALLET_GROUP_INDEX = 0;
+  var EWALLET_TYPE = ewalletService.ewalletType;
 
   if($rootScope.isMainDataLoaded){
     init();
@@ -106,7 +104,7 @@ function CheckoutPaymentsCtrl(
       .then(function(response){
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
-        //updateEwalletBalance();
+        //ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
           vm.quotation = setQuotationTotalsByGroup(vm.quotation);
         }        
@@ -117,90 +115,6 @@ function CheckoutPaymentsCtrl(
           
   }
 
-  /*function updateEwalletBalance(){
-    var group = vm.paymentMethodsGroups[EWALLET_GROUP_INDEX];
-    var ewalletPaymentMethod = _.findWhere(group.methods, {type:EWALLET_TYPE});
-    var ewalletPayments = _.where(vm.quotation.Payments, {type:EWALLET_TYPE});
-    clientService.getEwalletById(vm.quotation.Client.id)
-      .then(function(res){
-        var balance = res.data || 0;
-        var description = getEwalletDescription(balance);;
-        ewalletPaymentMethod.description = description;
-        ewalletPayments = ewalletPayments.map(function(payment){
-          payment.description = description;
-          return payment;
-        });
-      })
-      .catch(function(err){
-        console.log(err);
-      });
-  }*/
-
-  function getEwalletDescription(balance){
-    var description = '';
-    var balanceRounded = commonService.roundCurrency( balance, {up:false} );
-    var balanceStr = $filter('currency')(balanceRounded);
-    description = 'Saldo disponible: ' + balanceStr +' MXN';    
-    return description;
-  }
-
-  function getExchangeRate(){
-    var deferred = $q.defer();
-    siteService.findByHandle('actual-group').then(function(res){
-      var site = res.data || {};
-      deferred.resolve(site.exchangeRate);
-    }).catch(function(err){
-      deferred.reject(err);
-    });
-    return deferred.promise;
-  }
-
-  function areMethodsDisabled(methods){
-    var disabledCount = 0;
-    for(var i=0;i<methods.length > 0;i++){
-      if( !isActiveMethod(methods[i]) ){
-        disabledCount++;
-      }
-    }
-    return disabledCount === methods.length;
-  }
-
-  function isActiveGroup(group){
-    var activeKeys = [
-      'paymentGroup1',
-      'paymentGroup2',
-      'paymentGroup3',
-      'paymentGroup4',
-      'paymentGroup5'
-    ];
-    var isGroupUsed = false;
-    var groupIndex = group.group - 1;
-    var groupNumber = group.group;
-    var currentGroup = getGroupByQuotation(vm.quotation);
-    var areGroupMethodsDisabled = areMethodsDisabled(group.methods);
-    if( currentGroup < 0 || currentGroup === 1){
-      isGroupUsed = true;
-    }else if(currentGroup > 0 && currentGroup === groupNumber){
-      isGroupUsed = true;
-    }
-    return isGroupUsed && !areGroupMethodsDisabled;
-  }
-
-  function isActiveMethod(method){
-    var remaining = method.total - vm.quotation.ammountPaid;
-    var min = method.min || 0;
-    return remaining >= min;
-  }
-
-  function getGroupByQuotation(quotation){
-    var group = -1;
-    if(quotation.Payments.length > 0){
-      group = quotation.paymentGroup;
-      var paymentsCount = quotation.Payments.length;
-      group = quotation.Payments[paymentsCount - 1].group;
-    }
-    return group;
-  }
 
   function setMethod(method, group){
     method.storeType = $rootScope.activeStore.group;
@@ -241,7 +155,7 @@ function CheckoutPaymentsCtrl(
       group = vm.paymentMethodsGroups[0];
       firstMethod = group.methods[0];
     }else{
-      var groupIndex = getGroupByQuotation(vm.quotation) - 1;
+      var groupIndex = checkoutService.getGroupByQuotation(vm.quotation) - 1;
       group = vm.paymentMethodsGroups[groupIndex];
       firstMethod = group.methods[0];
     }
@@ -249,7 +163,7 @@ function CheckoutPaymentsCtrl(
   }
 
   function setQuotationTotalsByGroup(quotation){
-    var paymentGroup = getGroupByQuotation(quotation);
+    var paymentGroup = checkoutService.getGroupByQuotation(quotation);
     var currentGroup = _.findWhere(vm.paymentMethodsGroups, {group: paymentGroup});
     var firstMethod = currentGroup.methods[0];
     quotation.paymentGroup = paymentGroup;
@@ -330,7 +244,7 @@ function CheckoutPaymentsCtrl(
         })
         .then(function(){
           if(payment.type === EWALLET_TYPE){
-            updateEwalletBalance();
+            ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
           }
         })
         .catch(function(err){
@@ -348,14 +262,25 @@ function CheckoutPaymentsCtrl(
   function applyTransaction(ev, method, ammount) {
     if(method){
       var templateUrl = 'views/checkout/payment-dialog.html';
-      var controller  = PaymentDialogController;
+      var controller  = DepositController;
       method.currency = method.currency || 'MXP';
       method.ammount  = ammount;
       var paymentOpts = angular.copy(method);
+      if(method.msi || method.terminals){
+        controller    = TerminalController;
+      }
       paymentOpts.ammount = ammount;
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
-        controller: ['$scope', '$mdDialog', 'formatService','commonService', 'payment', controller],
+        controller: [
+          '$scope', 
+          '$mdDialog', 
+          'formatService',
+          'commonService', 
+          'ewalletService',
+          'payment', 
+          controller
+        ],
         templateUrl: templateUrl,
         parent: angular.element(document.body),
         targetEvent: ev,
@@ -376,6 +301,26 @@ function CheckoutPaymentsCtrl(
       commonService.showDialog('Revisa los datos, e intenta de nuevo');
     }
   }
+
+  function PaymentDialogController($scope, $mdDialog, formatService, commonService, payment) {
+    success = function(token){
+      return console.log(token);
+    };
+    error = function(err){
+      return console.log(error.message);
+    };
+    $scope.paymentConekta = function(form){
+        console.log('Hola');
+        if (form.$valid) {
+          Conekta.Token.create(form, success, error);
+          return false;
+        }else{
+          console.log('Hubo un error')
+        }
+
+    };
+  }
+
 
   function calculateRemaining(ammount){
     return ammount - vm.quotation.ammountPaid;
@@ -406,8 +351,7 @@ function CheckoutPaymentsCtrl(
   }
 
   function authorizeOrder(ev, method, ammount) {
-    //if( method && ammount && !isNaN(ammount) ){
-    if( getPaidPercentage() >= 60 ){
+    if( checkoutService.getPaidPercentage(vm.quotation) >= 60 ){
       var controller  = AuthorizeOrderController;
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
@@ -428,79 +372,8 @@ function CheckoutPaymentsCtrl(
     }
   }
 
-  function PaymentDialogController($scope, $mdDialog, formatService, commonService, payment) {
-    $scope.paymentConekta = function(){
-        console.log("Hola");
-    };
-  }
-
-  function DepositController($scope, $mdDialog, formatService, commonService, payment) {
-
-    $scope.init = function(){
-      $scope.payment = payment;
-      $scope.needsVerification = payment.needsVerification;
-      $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
-
-      if($scope.payment.currency === 'usd'){
-        $scope.payment.ammount = $scope.payment.ammount / $scope.payment.exchangeRate;
-        $scope.payment.ammountMXN = $scope.getAmmountMXN($scope.payment.ammount);
-      }
-
-      //ROUNDING
-      if(payment.type !== EWALLET_TYPE){ 
-        $scope.payment.remaining = commonService.roundCurrency($scope.payment.remaining); 
-        $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);
-        $scope.maxAmmount = commonService.roundCurrency($scope.maxAmmount);
-      }
-
-    };
-
-    $scope.getAmmountMXN = function(ammount){
-      return ammount * $scope.payment.exchangeRate;
-    };
-
-    $scope.isvalidPayment = function(){
-      if($scope.maxAmmount){
-        return ($scope.payment.ammount <= $scope.maxAmmount);
-      }
-      return true;
-    };
-
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-    $scope.save = function() {
-      if( $scope.isvalidPayment() ){
-        $mdDialog.hide($scope.payment);
-      }else{
-        dialogService.showDialog('No hay fondos suficientes');
-      }
-    };
-
-    $scope.init();
-  }
-
-  function AuthorizeOrderController($scope, $mdDialog){
-    $scope.manager = {};
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
-    $scope.authorize = function(form) {
-      if(form.$valid){
-        $mdDialog.hide($scope.manager);
-      }
-    };
-  }
-
-
   function createOrder(form){
-    if( isMinimumPaid() ){
+    if( checkoutService.isMinimumPaid(vm.quotation) ){
       confirmOrder()
         .then(function(){
           vm.isLoadingProgress = true;
@@ -531,7 +404,7 @@ function CheckoutPaymentsCtrl(
   }
 
   function animateProgress(){
-    $interval(function(){
+    vm.intervalProgress = $interval(function(){
       vm.loadingEstimate += 5;
       if(vm.loadingEstimate >= 100){
         vm.loadingEstimate = 0;
@@ -559,8 +432,9 @@ function CheckoutPaymentsCtrl(
   }
 
   function confirmOrder(){
-    var paidPercent = $filter('number')(getPaidPercentage(),2);
-    var dialogMsg = 'El pedido ha sido pagado al ' + paidPercent + '%';
+    var paidPercentage = checkoutService.getPaidPercentage(vm.quotation);
+    var paidPercentStr = $filter('number')(paidPercentage,2);
+    var dialogMsg = 'El pedido ha sido pagado al ' + paidPercentStr + '%';
     dialogMsg += ' ( '+ $filter('currency')(vm.quotation.ammountPaid) +' de ';
     dialogMsg += ' '+ $filter('currency')(vm.quotation.total) +' )';
     var confirm = $mdDialog.confirm()
@@ -573,27 +447,12 @@ function CheckoutPaymentsCtrl(
     return $mdDialog.show(confirm);
   }
 
-  function getPaidPercentage(){
-    var percentage = 0;
-    if(vm.quotation){
-      percentage = vm.quotation.ammountPaid / (vm.quotation.total / 100);
-    }
-    return percentage;
-  }
-
-
-  function isMinimumPaid(){
-    if(vm.quotation){
-      var minPaidPercentage = 100;
-      if( getPaidPercentage() >= minPaidPercentage ){
-        return true;
-      }
-    }
-    return false;
-  }
-
 
   $scope.$on('$destroy', function(){
     mainDataListener();
+    if(vm.intervalProgress){
+      $interval.cancel(vm.intervalProgress);
+    }
   });
+
 }
