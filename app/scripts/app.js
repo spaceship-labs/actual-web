@@ -32,7 +32,8 @@ angular
     'ui.utils.masks',
     'leaflet-directive',
     'localytics.directives',
-    'ng-currency'
+    'ng-currency',
+    'envconfig'
   ])
 
   .config(function (

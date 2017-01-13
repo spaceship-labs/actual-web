@@ -27,6 +27,9 @@ module.exports = function (grunt) {
 
   var modRewrite = require('connect-modrewrite');
 
+  grunt.loadNpmTasks('grunt-ng-constant');
+  var environmentTask = getEnvironmentTask(grunt.option('env'));
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -434,7 +437,52 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    }
+    },
+
+    //ENV AND CONSTANTS SETTINGS
+    ngconstant: {
+      // Options for all targets
+      options: {
+        space: '  ',
+        wrap: '"use strict";\n\n {\%= __ngModule %}',
+        name: 'envconfig',
+      },
+      // Environment targets
+      sandbox: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/envconfig.js'
+        },
+        constants: {
+          ENV: {
+            name: 'sandbox',
+            apiEndpoint: 'http://sandbox-actual-api.herokuapp.com'
+          }
+        }
+      },
+      demo: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/envconfig.js'
+        },
+        constants: {
+          ENV: {
+            name: 'demo',
+            apiEndpoint: 'http://demo-actual-api.herokuapp.com'
+          }
+        }
+      },      
+      production: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/envconfig.js'
+        },
+        constants: {
+          ENV: {
+            name: 'production',
+            apiEndpoint: 'http://actual-api.herokuapp.com'
+          }
+        }
+      }
+    },
+
   });
 
 
@@ -445,6 +493,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      environmentTask,
       'wiredep',
       'concurrent:server',
       'postcss:server',
@@ -469,6 +518,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    environmentTask,
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -492,3 +542,25 @@ module.exports = function (grunt) {
     'build'
   ]);
 };
+
+
+function getEnvironmentTask(envOption){
+  console.log('envOption', envOption);
+  envOption = envOption || 'sandbox';
+  var task;
+  switch (envOption){
+    case 'sandbox':
+      task = 'ngconstant:sandbox';
+      break;
+    case 'demo':
+      task = 'ngconstant:demo';
+      break;
+    case 'production':
+      task = 'ngconstant:production';
+      break;
+    default:
+      task = 'ngconstant:sandbox';
+      break;
+  }
+  return task;
+}
