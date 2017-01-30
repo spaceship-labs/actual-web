@@ -1,24 +1,27 @@
 <div id="header">
   <!--START TOP BAR-->
-  <div class="header-top-bar actual-home" fixed-element  top="70" ng-class="{'fixed-head': scrolled}" >
+  <div 
+    class="header-top-bar {{main.siteTheme}}" 
+    fixed-element  
+    top="70" 
+    ng-class="{'fixed-head': scrolled}">
     <div class="container" layout="row" layout-xs="column" layout-wrap layout-align="center center">
 
       <!--ON SCROLL-->
 
       <div flex-gt-xs="15" class="logo" layout-align="center center">
-        <a href="/" hide-xs>
+        <a href="/" >
           <img src="images/actual-home-blanco.png" alt="Actual Group">
         </a>
       </div>
 
-      <div
-        class="categories-btn-wrap"
+      <div 
+        class="categories-btn-wrap" 
         flex-gt-xs="15"
         layout-align="center center"
       >
-        <a hide-xs ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
+        <a ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
       </div>
-
 
       <!--END ONLY ON SCROLL-->
 
@@ -43,46 +46,28 @@
           </div>
         </div>
         <input type="submit" value="BUSCAR" class="searcher-btn">
-        <!--<div flex class="searcher-checkbox">-->
-        <!--
-          <input
-            type="checkbox"
-            class="searcher-checkbox"
-            ng-checked="main.searchingItemCode"
-            ng-model="vm.isItemCodeSearch"
-            id="isItemCode">
-          <label for="isItemCode" class="searcher-checkbox-label">ItemCode</label>
-        </div>
-        -->
       </form>
 
-      <div
-        class="header-top-bar-menu"
-        layout="row"
-        layout-wrap
+      <div 
+        class="header-top-bar-menu" 
+        layout="row" 
+        layout-align="center center"
         layout-align="center center"
         layout-align-xs="space-between center"
-        ng-controller="movil"
+
       >
 
-        <i class="icon-pointer icon-menu-m" ng-click="openMenu()"></i>
-
-        <a href="/" class="logo-movil">
-          <img src="images/actual-home-blanco.png" alt="Actual Group">
-        </a>
-
         <!--IF ACTIVE QUOTATION-->
-        <div
+        <a
           ng-if="main.user && main.activeQuotation"
-          ng-click="main.toggleCartModal()"
           flex
-          href="#"
+          ng-href="/quotations/edit/{{main.activeQuotation.id}}"
           class="header-top-bar-menu-item"
         >
           <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
           <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
           <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
-        </div>
+        </a>
 
         <!--IF NOT ACTIVE QUOTATION-->
         <a
@@ -99,6 +84,7 @@
         <div
           ng-if="!main.user"
           flex
+          id="login-header-trigger"
           class="header-top-bar-menu-item">
           <i class="icon-login" ng-click="main.toggleLoginModal()"></i>
           <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
@@ -109,31 +95,19 @@
           ng-if="main.user"
           flex
           href="#"
+          id="profile-header-trigger"
           ng-click="main.toggleProfileModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-name"
         >
           <a href="#" >
             <i class="icon-login"></i>
-            <i class="icon-down-open"></i>
-            <!--<span >Bienvenido <strong>{{main.user.firstName}}</strong></span>-->
+            <span >Bienvenido <strong>{{main.user.firstName}}</strong></span>
           </a>
-          <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
-        </div>
-<!--
-        <div class="movil-head" flex="100">
-          <div class="movil-category" layout="column">
-            <div layout="ro"></div>
-          </div>
-        </div>
--->
-      <!--
-        <div class="header-top-bar-menu-item" flex>
-          <md-button class="pointer-btn md-fab md-mini md-primary" ng-click="main.togglePointerSidenav()">
-            <i class="icon-pointer"></i>
-          </md-button>
+          <ng-include 
+            ng-if="main.isActiveProfileHeader" 
+            src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
-      -->
 
         <!---end if Logged in -->
 

@@ -45,7 +45,8 @@
         getClosingReasons: getClosingReasons,
         getPaymentOptions: getPaymentOptions,
         getRecordTypes: getRecordTypes,
-        loadProductFilters: loadProductFilters,
+        getSapOrderConnectionLogs: getSapOrderConnectionLogs,
+        loadProductsFilters: loadProductsFilters,
         newQuotation: newQuotation,
         mapDetailsStock: mapDetailsStock,
         removeDetail: removeDetail,
@@ -82,9 +83,9 @@
         return api.$http.post(url, params);
       }
 
-      function getById(id){
+      function getById(id, params){
         var url = '/quotation/findbyid/' + id;
-        return api.$http.post(url);
+        return api.$http.post(url, params);
       }
 
 
@@ -136,6 +137,11 @@
         var url = '/quotation/' + id  + '/close';
         return api.$http.post(url,params);
       }      
+
+      function getSapOrderConnectionLogs(id){
+        var url = '/quotation/' + id  + '/saporderconnectionlogs';
+        return api.$http.post(url);
+      }           
 
       function calculateSubTotal(quotation){
         var subTotal = 0;
@@ -206,7 +212,8 @@
         return items;
       }
 
-      function populateDetailsWithProducts(quotation){
+      function populateDetailsWithProducts(quotation, options){
+        options = options || {};
         var deferred = $q.defer();
         var productsIds = [];
         if(quotation){
@@ -215,7 +222,7 @@
           });
           var params = {
             filters: {id: productsIds},
-            populate_fields: ['FilterValues','Promotions']
+            populate_fields: options.populate || []
           };
           var page = 1;
           productService.getList(page,params)
@@ -264,14 +271,24 @@
         $rootScope.$broadcast('newActiveQuotation', false); 
       }
 
-      function newQuotation(params, goToSearch){
+      function newQuotation(params, options){
+        options = options || {};
         create(params).then(function(res){
           var quotation = res.data;
           if(quotation){
             setActiveQuotation(quotation.id);
-            if(goToSearch){
+            /*
+            if(options.goToSearch){
               $location.path('/').search({startQuotation:true});
-            }else{
+            }*/
+            if(options.createClient){
+              $location.path('/clients/create')
+                .search({
+                  checkoutProcess: quotation.id,
+                  startQuotation: true
+                });
+            }
+            else{
               $location.path('/quotations/edit/'+quotation.id)
                 .search({startQuotation:true});
             }
@@ -370,7 +387,7 @@
         }
       }
 
-      function loadProductFilters(details){
+      function loadProductsFilters(details){
         var deferred = $q.defer();
         productService.getAllFilters({quickread:true}).then(function(res){
           //Assign filters to every product
@@ -378,18 +395,26 @@
           details.forEach(function(detail){
             filters = filters.map(function(filter){
               filter.Values = [];
-              detail.Product.FilterValues.forEach(function(value){
-                if(value.Filter === filter.id){
-                  filter.Values.push(value);
-                }
-              });
+              
+              if(detail.Product && detail.Product.FilterValues){
+                detail.Product.FilterValues.forEach(function(value){
+                  if(value.Filter === filter.id){
+                    filter.Values.push(value);
+                  }
+                });
+              }
+              
               return filter;
             });
 
             filters = filters.filter(function(filter){
               return filter.Values.length > 0;
             });
-            detail.Product.Filters = filters;
+
+            if(detail.Product && detail.Product.Filters){
+              detail.Product.Filters = filters;
+            }
+          
           });
 
           deferred.resolve(details);

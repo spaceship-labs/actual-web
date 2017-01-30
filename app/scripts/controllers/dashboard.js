@@ -10,7 +10,14 @@
 angular.module('dashexampleApp')
   .controller('DashboardCtrl', DashboardCtrl);
 
-function DashboardCtrl($rootScope, $filter, orderService, quotationService){
+function DashboardCtrl(
+    $rootScope, 
+    $filter, 
+    $q, 
+    orderService, 
+    quotationService,
+    commonService
+  ){
   var vm = this;
   angular.extend(vm,{
     quotationsData: {},
@@ -20,49 +27,79 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
     currentDate: new Date()
   });
 
-  function getQuotationsData(){
-    var dateRange = {
-      startDate: moment().startOf('day'),
-      endDate: moment().endOf('day'),
+  function setupSellerChart(userTotals, userCounts){
+    vm.quotationsData.untilTodayAmount  = userTotals.untilToday;
+    vm.quotationsData.byDateRangeAmount = userTotals.byDateRange;
+    vm.quotationsData.ammounts = {
+      labels: ["Hoy", "FTD"],
+      data: [
+        vm.quotationsData.untilTodayAmount,
+        (vm.quotationsData.byDateRangeAmount - vm.quotationsData.untilTodayAmount)
+      ],
+      colors: ["#C92933", "#48C7DB", "#FFCE56"],
+      options:{
+        tooltips: {
+          callbacks: {
+            label: commonService.getCurrencyTooltip
+          }
+        }
+      },
     };
-    quotationService.getTotalsByUser($rootScope.user.id, dateRange)
-      .then(function(res){
-        vm.quotationsData.todayAmmount = res.data.dateRange;
-        vm.quotationsData.fortnightAmount = res.data.fortnight;
-        vm.quotationsData.ammounts = {
-          labels: ["Hoy", "Resto de la quincena"],
-          data: [
-            vm.quotationsData.todayAmmount,
-            (vm.quotationsData.fortnightAmount - vm.quotationsData.todayAmmount)
-          ],
-          colors: ["#C92933", "#48C7DB", "#FFCE56"],
-          options:{
-            tooltips: {
-              callbacks: {
-                label: function(tooltipItem, data) {
-                  return $filter('currency')(data.datasets[0].data[tooltipItem.index]);
-                }
-              }
-            }
-          },
-        };
+
+    vm.quotationsData.untilTodayQty = userCounts.untilToday;
+    vm.quotationsData.byDateRangeQty = userCounts.byDateRange;
+    vm.quotationsData.quantities = {
+      labels: ["Hoy", "Resto del mes"],
+      data: [
+        vm.quotationsData.untilTodayQty,
+        (vm.quotationsData.byDateRangeQty - vm.quotationsData.untilTodayQty)
+      ],
+      colors: ["#C92933", "#48C7DB", "#FFCE56"]
+    };    
+  }  
+
+  function getQuotationDataByUser(userId, params){
+    var deferred = $q.defer();
+    var fortnightRange = commonService.getFortnightRange();
+    var defaultParams = {
+      startDate : fortnightRange.start,
+      endDate   : fortnightRange.end,
+      dateField : 'tracing',
+      isClosed  : {'!': true}
+    };
+    params = params || defaultParams;
+    $q.all([
+      quotationService.getTotalsByUser(userId, params),
+      quotationService.getCountByUser(userId, params)
+    ])
+      .then(function(result){
+        console.log('result', result);
+        var values = [
+          result[0].data,
+          result[1].data
+        ];
+        deferred.resolve(values);
+      })
+      .catch(function(err){
+        console.log(err);
+        deferred.reject(err);
       });
 
-    quotationService.getCountByUser($rootScope.user.id, dateRange)
-      .then(function(res){
-        console.log('res',res);
-        vm.quotationsData.todayQty = res.data.dateRange;
-        vm.quotationsData.fortnightQty = res.data.fortnight;
-        vm.quotationsData.quantities = {
-          labels: ["Hoy", "Resto del mes"],
-          data: [
-            vm.quotationsData.todayQty,
-            (vm.quotationsData.fortnightQty - vm.quotationsData.todayQty)
-          ],
-          colors: ["#C92933", "#48C7DB", "#FFCE56"]
-        };
-        console.log('quotationsData', vm.quotationsData);
+    return deferred.promise;
+  }     
+
+  function getQuotationsData(){
+
+    getQuotationDataByUser($rootScope.user.id)
+      .then(function(values){
+        var userTotals = values[0];
+        var userCounts = values[1];
+        setupSellerChart(userTotals, userCounts);
+      })
+      .catch(function(err){
+        console.log('err', err);
       });
+
   }
 
   function getOrdersData(){
@@ -140,6 +177,8 @@ function DashboardCtrl($rootScope, $filter, orderService, quotationService){
 DashboardCtrl.$inject = [
   '$rootScope',
   '$filter',
+  '$q',
   'orderService',
-  'quotationService'
+  'quotationService',
+  'commonService'
 ];

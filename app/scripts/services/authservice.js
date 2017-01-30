@@ -31,6 +31,9 @@
         dennyAccessBroker: dennyAccessBroker,
         dennyAccessStoreManager: dennyAccessStoreManager,
         isBroker: isBroker,
+        isUserAdminOrManager:isUserAdminOrManager,
+        isUserSellerOrAdmin:isUserSellerOrAdmin,
+        isUserManager: isUserManager,
         runPolicies: runPolicies,
         USER_ROLES: USER_ROLES
       };
@@ -65,7 +68,6 @@
         localStorageService.remove('quotation');
         localStorageService.remove('broker');
         localStorageService.remove('activeStore');
-        localStorageService.remove('activeStoreName');
         localStorageService.remove('companyActive');
         localStorageService.remove('companyActiveName');
         localStorageService.remove('currentQuotation');
@@ -96,6 +98,25 @@
       function isStoreManager(user){
         return !!(user && user.role && user.role.name === USER_ROLES.BROKER);
       }
+
+      function isUserAdminOrManager(){
+        return $rootScope.user.role && 
+          ( $rootScope.user.role.name === USER_ROLES.ADMIN 
+            || $rootScope.user.role.name === USER_ROLES.STORE_MANAGER 
+          );
+      }  
+
+      function isUserSellerOrAdmin(){
+        return $rootScope.user.role && 
+          ( $rootScope.user.role.name === USER_ROLES.ADMIN 
+            || $rootScope.user.role.name === USER_ROLES.SELLER 
+          );
+      }     
+
+      function isUserManager(){
+        return $rootScope.user.role.name === USER_ROLES.STORE_MANAGER 
+          && $rootScope.user.mainStore;
+      }       
 
       function runPolicies(){
         var _token = localStorageService.get('token') || false;
@@ -132,7 +153,8 @@
                 $location.path('/');
               });
             }else{
-              userService.getUser(_user.id).then(function(res){
+              console.log('getUser');
+              userService.getUser(_user.id, {quickRead: true}).then(function(res){
                 _user = res.data.data;
                 localStorageService.set('user', _user);
                 $rootScope.user = _user;

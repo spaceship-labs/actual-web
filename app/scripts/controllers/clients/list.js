@@ -24,7 +24,7 @@ function ClientsListCtrl($location,$routeParams, $q ,productService, clientServi
     {key:'Phone1', label:'Télefono'},
     {
       key:'Acciones',
-      label:'Acción',
+      label:'Acceder',
       propId: 'id',
       actions:[
         {url:'/clients/profile/',type:'edit'},

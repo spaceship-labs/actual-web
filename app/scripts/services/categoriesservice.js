@@ -11,6 +11,7 @@
       createCategoriesTree: createCategoriesTree,
       getCategoryByHandle: getCategoryByHandle,
       getCategoryIcon: getCategoryIcon,
+      getLowestCategory: getLowestCategory
     };
 
     function getCategoriesGroups(){
@@ -46,6 +47,18 @@
       }
       return 'murbles';
 
+    }
+
+    function getLowestCategory(categories){
+      var lowestCategoryLevel = 0;
+      var lowestCategory = false;
+      categories.forEach(function(category){
+        if(category.CategoryLevel > lowestCategoryLevel){
+          lowestCategory = category;
+          lowestCategoryLevel = category.CategoryLevel;
+        }
+      });
+      return lowestCategory;
     }
 
     var backgrounds = [

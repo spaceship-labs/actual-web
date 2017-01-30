@@ -59,6 +59,7 @@
         return api.$http.post(url,params);
       }
 
+
       function calculateBalance(paid, total){
         return (paid - total);
       }

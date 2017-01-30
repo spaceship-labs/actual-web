@@ -28,8 +28,8 @@ function OrdersListCtrl(
 
   var vm = this;
   vm.applyFilters = applyFilters;
-  vm.isUserAdminOrManager = isUserAdminOrManager;
-  vm.isUserSellerOrAdmin  = isUserSellerOrAdmin; 
+  vm.isUserAdminOrManager = authService.isUserAdminOrManager;
+  vm.isUserSellerOrAdmin  = authService.isUserSellerOrAdmin; 
 
   vm.currentDate = new Date();
   vm.dateRange = false;
@@ -43,7 +43,7 @@ function OrdersListCtrl(
     {key:'createdAt', label:'Venta', date:true},
     {
       key:'Acciones',
-      label:'Acciones',
+      label:'Acceder',
       actions:[
         {url:'/checkout/order/',type:'edit'},
       ]
@@ -54,9 +54,6 @@ function OrdersListCtrl(
   vm.getStoreTotal      = getStoreTotal;
   vm.goal = 600000; 
 
-  function getCurrencyTooltip(tooltipItem, data){
-    return data.labels[tooltipItem.index] + ': ' + $filter('currency')(data.datasets[0].data[tooltipItem.index]);
-  }
 
   function getOrdersData(options){
     options = options || {};
@@ -103,7 +100,7 @@ function OrdersListCtrl(
           options:{
             tooltips: {
               callbacks: {
-                label: getCurrencyTooltip
+                label: commonService.getCurrencyTooltip
               }
             }
           },
@@ -270,7 +267,7 @@ function OrdersListCtrl(
         },
         tooltips: {
           callbacks: {
-            label: getCurrencyTooltip
+            label: commonService.getCurrencyTooltip
           }
         }
       },
@@ -292,20 +289,6 @@ function OrdersListCtrl(
       number = 2;
     }
     return number;
-  }
-
-  function isUserAdminOrManager(){
-    return $rootScope.user.role && 
-      ( $rootScope.user.role.name === authService.USER_ROLES.ADMIN 
-        || $rootScope.user.role.name === authService.USER_ROLES.STORE_MANAGER 
-      );
-  }  
-
-  function isUserSellerOrAdmin(){
-    return $rootScope.user.role && 
-      ( $rootScope.user.role.name === authService.USER_ROLES.ADMIN 
-        || $rootScope.user.role.name === authService.USER_ROLES.SELLER 
-      );
   }
 
   function getStoreTotal(sellers){

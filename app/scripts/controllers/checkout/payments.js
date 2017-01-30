@@ -23,7 +23,6 @@ function CheckoutPaymentsCtrl(
     dialogService,
     formatService,
     orderService,
-    pmPeriodService,
     productService,
     quotationService,
     siteService,
@@ -58,11 +57,14 @@ function CheckoutPaymentsCtrl(
     isLoading: true,
     loadingEstimate: 0,
     payments: [],
+    sapLogs: [],
     paymentMethodsGroups: [],
+    CLIENT_BALANCE_TYPE: paymentService.clientBalanceType,
     roundCurrency: commonService.roundCurrency
   });
 
   var EWALLET_TYPE = ewalletService.ewalletType;
+  var CLIENT_BALANCE_TYPE = paymentService.clientBalanceType;
 
   if($rootScope.isMainDataLoaded){
     init();
@@ -76,43 +78,91 @@ function CheckoutPaymentsCtrl(
     animateProgress();
     vm.isLoading = true;
 
-    quotationService.getById($routeParams.id).then(function(res){
+    quotationService.getById($routeParams.id, {payments:true}).then(function(res){
         vm.quotation = res.data;
-        return quotationService.validateQuotationStockById(vm.quotation.id); 
+        loadSapLogs(vm.quotation.id);
+
+        return $q.all([
+          quotationService.validateQuotationStockById(vm.quotation.id),
+          loadPaymentMethods()
+        ]);
       })
-      .then(function(isValidStock){
+      .then(function(result){
+        var isValidStock = result[0]; 
+
         if( !isValidStock){
           $location.path('/quotations/edit/' + vm.quotation.id)
             .search({stockAlert:true});
+        }
+
+        if(!vm.quotation.Details || vm.quotation.Details.length === 0){
+          $location.path('/quotations/edit/' + vm.quotation.id);
+        }        
+
+        if(!validateQuotationAddress(vm.quotation)){
+          $location.path('/quotation/edit/' + vm.quotation.id);
         }
 
         if(vm.quotation.Order){
           $location.path('/checkout/order/' + vm.quotation.Order.id);
         }
         vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
-        loadPaymentMethods();
 
-        pmPeriodService.getActive().then(function(res){
-          vm.validMethods = res.data;
-        });
         vm.isLoading = false;
-    });
+      })
+      .catch(function(err){
+        console.log('err', err);
+        dialogService.showDialog('Error: \n' + err.data);
+      });
+
+  }
+
+  function loadSapLogs(quotationId){
+    vm.isLoadingSapLogs = true;
+    quotationService.getSapOrderConnectionLogs(quotationId)
+      .then(function(res){
+        vm.sapLogs = res.data;
+        console.log('sapLogs', vm.sapLogs);
+        vm.isLoadingSapLogs = false;
+      })
+      .catch(function(err){
+        console.log('err', err);
+        vm.isLoadingSapLogs = false;        
+      });
+  }
+
+  function validateQuotationAddress(quotation){
+    if(quotation.immediateDelivery){
+      return true;
+    }
+
+    if(quotation.Address){
+      return true;
+    }
+    return false;
   }
 
   function loadPaymentMethods(){
+    var deferred = $q.defer();
     quotationService.getPaymentOptions(vm.quotation.id)
       .then(function(response){
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
-        //ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
+        
+        ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
+        paymentService.updateQuotationClientBalance(vm.quotation, vm.paymentMethodsGroups);
+      
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
           vm.quotation = setQuotationTotalsByGroup(vm.quotation);
-        }        
+        }
+        deferred.resolve();        
       })
       .catch(function(err){
         console.log('err', err);
+        deferred.reject(err);
       });
-          
+
+    return deferred.promise;    
   }
 
 
@@ -132,14 +182,17 @@ function CheckoutPaymentsCtrl(
     var remaining = vm.quotation.total - vm.quotation.ammountPaid;
     vm.activeMethod.remaining = remaining;
     vm.activeMethod.maxAmmount = remaining;
-    if(method.type === EWALLET_TYPE){
-      var balance = vm.quotation.Client.ewallet || 0;
+    
+    if(method.type === EWALLET_TYPE || method.type === CLIENT_BALANCE_TYPE){
+      var balance = paymentService.getMethodAvailableBalance(method, vm.quotation);
+      console.log('balance', balance);
       vm.activeMethod.maxAmmount = balance;
       if(balance <= remaining){
         remaining = balance;
       }
     }
-    if(vm.activeMethod.maxAmmount <= 0){
+    
+    if(vm.activeMethod.maxAmmount < 0.01){
       dialogService.showDialog('Fondos insuficientes');
       return false;
     }
@@ -176,7 +229,8 @@ function CheckoutPaymentsCtrl(
   function updateVMQuoatation(newQuotation){
     vm.quotation.ammountPaid = newQuotation.ammountPaid;
     vm.quotation.paymentGroup = newQuotation.paymentGroup;
-    vm.quotation = setQuotationTotalsByGroup(vm.quotation);            
+    vm.quotation.Client = newQuotation.Client || vm.quotation.Client;            
+    vm.quotation = setQuotationTotalsByGroup(vm.quotation);
     delete vm.activeMethod;
   }
 
@@ -206,7 +260,7 @@ function CheckoutPaymentsCtrl(
         vm.isLoadingPayments = false;
         vm.isLoading = false;
         if(err && err.data){
-          dialogService.showDialog('Error: <br/>' + err.data);
+          dialogService.showDialog('Error: \n' + err.data);
         }
       });      
   }
@@ -224,7 +278,7 @@ function CheckoutPaymentsCtrl(
             var quotation = res.data;
             vm.quotation.Payments.push(payment);
 
-            updateVMQuoatation(quotation)
+            updateVMQuoatation(quotation);
 
             vm.isLoadingPayments = false;
             vm.isLoading = false;
@@ -246,12 +300,17 @@ function CheckoutPaymentsCtrl(
           if(payment.type === EWALLET_TYPE){
             ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
           }
+
+          if(payment.type === CLIENT_BALANCE_TYPE){
+            paymentService.updateQuotationClientBalance(vm.quotation, vm.paymentMethodsGroups);
+          }
+
         })
         .catch(function(err){
           console.log(err);
           vm.isLoadingPayments = false;
           vm.isLoading = false;
-          dialogService.showDialog('Error: <br/>' + err.data);
+          dialogService.showDialog('Error: \n' + err.data);
         });
     }else{
       createOrder();
@@ -274,10 +333,12 @@ function CheckoutPaymentsCtrl(
       $mdDialog.show({
         controller: [
           '$scope', 
-          '$mdDialog', 
+          '$mdDialog',
+          '$filter', 
           'formatService',
           'commonService', 
           'ewalletService',
+          'dialogService',
           'payment', 
           controller
         ],
@@ -301,26 +362,6 @@ function CheckoutPaymentsCtrl(
       commonService.showDialog('Revisa los datos, e intenta de nuevo');
     }
   }
-
-  function PaymentDialogController($scope, $mdDialog, formatService, commonService, payment) {
-    success = function(token){
-      return console.log(token);
-    };
-    error = function(err){
-      return console.log(error.message);
-    };
-    $scope.paymentConekta = function(form){
-        console.log('Hola');
-        if (form.$valid) {
-          Conekta.Token.create(form, success, error);
-          return false;
-        }else{
-          console.log('Hubo un error')
-        }
-
-    };
-  }
-
 
   function calculateRemaining(ammount){
     return ammount - vm.quotation.ammountPaid;
@@ -373,6 +414,11 @@ function CheckoutPaymentsCtrl(
   }
 
   function createOrder(form){
+    if(!vm.quotation.Details || vm.quotation.Details.length === 0){
+      dialogService.showDialog('No hay aritculos en esta cotización');
+      return;
+    }
+    
     if( checkoutService.isMinimumPaid(vm.quotation) ){
       confirmOrder()
         .then(function(){
@@ -389,15 +435,17 @@ function CheckoutPaymentsCtrl(
           vm.order = res.data;
           if(vm.order.id){
             quotationService.removeCurrentQuotation();
-            $location.path('/checkout/order/' + vm.order.id);
+            $location.path('/checkout/order/' + vm.order.id)
+              .search({orderCreated:true});
           }
         }).catch(function(err){
           console.log('err', err);
           var errMsg = '';
           if(err){
             errMsg = err.data || '';            
-            dialogService.showDialog('Hubo un error, revisa los datos e intenta de nuevo <br/>' + errMsg);
+            dialogService.showDialog('Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg);
           }
+          loadSapLogs(vm.quotation.id);
           vm.isLoadingProgress = false;
         });
     }

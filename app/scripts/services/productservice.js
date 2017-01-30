@@ -106,15 +106,25 @@
             {url: '', size:'default'}
           ];
         }
+        
         product.mainPromo = getMainPromo(product);
+        
         if(product.mainPromo){
           var maxDiscount = product.mainPromo.discountPg1;
           product.maxDiscount = maxDiscount;
           product.priceBefore = product.Price;
           product.Price = product.Price - ( ( product.Price / 100) * maxDiscount );
-        }else{
+        }
+        else if($rootScope.activeStore.code){
+          var storeDiscountPriceKey = 'discountPrice_' + $rootScope.activeStore.code;
+          if(product.Price !== product[storeDiscountPriceKey] ){
+            product.priceBefore = product.Price;
+          }
+          product.Price = product[storeDiscountPriceKey] || product.Price;
+        }
+        else{
           product.maxDiscount = 0;
-          product.pricebefore = product.Price;
+          //product.pricebefore = product.Price;
         }
         return product;
       }
@@ -136,13 +146,21 @@
       }
 
       function getMainPromo(product){
+        if(product.mainPromo){
+          return product.mainPromo;
+        }
+
         if(product.Promotions && product.Promotions.length > 0){
           var indexMaxPromo = 0;
           var maxPromo = 0;
-          //Intersection product promotions and storePromotions
-          product.Promotions = product.Promotions.filter(function(promotion){
-            return _.findWhere(storePromotions, {id:promotion.id});
-          });
+          
+          if(storePromotions){
+            //Intersection product promotions and storePromotions
+            product.Promotions = product.Promotions.filter(function(promotion){
+              return _.findWhere(storePromotions, {id:promotion.id});
+            });
+          }
+
           product.Promotions.forEach(function(promo, index){
             if(promo.discountPg1 >= maxPromo){
               maxPromo = promo.discountPg1;
@@ -186,18 +204,9 @@
 
       function formatProducts(products){
         var deferred = $q.defer();
-        var activeStoreId = localStorageService.get('activeStore');
-        storeService.getPromosByStore(activeStoreId)
-          .then(function(res){
-            storePromotions = res.data;
-            var formatted = products.map(formatProduct);
-            deferred.resolve(formatted);
-          })
-          .catch(function(err){
-            deferred.reject(err);
-          });
+        var formatted = products.map(formatProduct);
+        deferred.resolve(formatted);
         return deferred.promise;
-        //return formatted;
       }
 
       //CATEGORIES

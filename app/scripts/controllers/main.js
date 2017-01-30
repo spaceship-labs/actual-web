@@ -31,7 +31,9 @@
     $mdDialog,
     dialogService,
     deliveryService,
-    commonService
+    commonService,
+    ENV,
+    SITE
   ){
     var vm = this;
     angular.extend(vm, {
@@ -64,7 +66,9 @@
       toggleProfileModal: toggleProfileModal,
       getStores: getStores,
       saveBroker: saveBroker,
-      saveSource: saveSource
+      saveSource: saveSource,
+      adminUrl: ENV.adminUrl,
+      siteTheme: SITE.name
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
 
@@ -74,7 +78,6 @@
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
       vm.activeStoreId = localStorageService.get('activeStore');
-      vm.activeStoreName = localStorageService.get('activeStoreName');
       $rootScope.user = vm.user;
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
@@ -99,7 +102,6 @@
 
       moment.locale('es');
 
-      /*
       $(document).click(function(e){
         var $target = $(event.target);
         var profileHeader = $('#profile-header');
@@ -121,7 +123,6 @@
         }
         $scope.$apply();
       });
-      */
 
     }
 
@@ -168,6 +169,7 @@
     $scope.$on("$routeChangeSuccess", function(event, next, current) {
       //Patch for autocomplete which doesn't remove
       //TODO search a better solution
+      /*
       angular.element('body')[0].style = '';
       if(angular.element('.md-scroll-mask')[0]){
           angular.element('.md-scroll-mask')[0].remove();
@@ -180,6 +182,7 @@
       if(angular.element('.md-dialog-container')[0]){
         angular.element('.md-dialog-container')[0].remove();
       }
+      */
 
       if($rootScope.user){
         //loadMainData();
@@ -191,15 +194,13 @@
       $q.all([
         loadActiveQuotation(),
         loadActiveStore(),
-        loadBrokers(),
         loadSiteInfo()
       ])
       .then(function(data){
         var mainData = {
           activeQuotation: data[0],
           activeStore: data[1],
-          brokers: data[2],
-          site: data[3]
+          site: data[2]
         };
         $rootScope.$emit('mainDataLoaded', mainData);
         $rootScope.isMainDataLoaded = true;
@@ -294,18 +295,24 @@
 
     function togglePointerSidenav(){
       $mdSidenav('right').toggle();
+      if($mdSidenav('right').isOpen() && !vm.brokers){
+        loadBrokers();
+      }
     }
 
     function getCategoryIcon(handle){
       return categoriesService.getCategoryIcon(handle);
     }
 
-    $scope.$on('$routeChangeStart', function(next, current) {
     //$rootScope.$on("$locationChangeStart",function(event, next, current){
-      vm.menuCategoriesOn = false;
-      authService.runPolicies();
-      loadSiteInfo();
+    $scope.$on('$routeChangeStart', function(event, next, current) {
+      
+      if(current){
+        authService.runPolicies();
+      }
+
       loadMainData();
+      vm.menuCategoriesOn = false;
       vm.menuCategories.forEach(function(category){
         category.isActive = false;
       });
@@ -435,6 +442,13 @@
       vm.isActiveBackdrop = false;
     }
 
+    function handleSignInError(err){
+      vm.isLoadingLogin = false;
+      if(err){
+        vm.loginErr = 'Datos incorrectos';
+        console.log('vm.loginErr', vm.loginErr);
+      }
+    }
 
     function signIn(){
       vm.isLoadingLogin = true;
@@ -443,10 +457,11 @@
         password: vm.logInForm.password,
         activeStore: vm.logInForm.activeStoreId
       };
-      authService.signIn(formData, $rootScope.successAuth, function(){
-        console.log('Invalid');
-        vm.isLoadingLogin = false;
-      });
+      authService.signIn(
+        formData, 
+        $rootScope.successAuth, 
+        handleSignInError
+      );
     }
 
     function logOut(){
@@ -459,6 +474,7 @@
     $rootScope.successAuth = function(res){
       vm.token = res.token;
       vm.user  = res.user;
+      console.log('res.user', res.user);
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', res.token);
       localStorageService.set('user' , res.user);
@@ -556,7 +572,9 @@
     '$mdDialog',
     'dialogService',
     'deliveryService',
-    'commonService'
+    'commonService',
+    'ENV',
+    'SITE'
   ];
 
 })();

@@ -26,9 +26,9 @@
         return api.$http.post(url, params);
       }
 
-      function getUser(id){
+      function getUser(id, params){
         var url = '/user/findbyid/' + id;
-        return api.$http.post(url);
+        return api.$http.post(url, params);
       }
 
       function update(params){

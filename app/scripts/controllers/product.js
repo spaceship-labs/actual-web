@@ -28,11 +28,12 @@ function ProductCtrl(
   pmPeriodService,
   localStorageService,
   deliveryService,
-  cartService
+  cartService,
+  commonService,
+  categoriesService
 ) {
   var vm = this;
   var activeStoreId = localStorageService.get('activeStore'); 
-  var activeStore = $rootScope.activeStore;
   var activeStoreWarehouse = false;
 
 
@@ -50,12 +51,7 @@ function ProductCtrl(
     isLoading: true,
     resetProductCartQuantity: resetProductCartQuantity,
     trustAsHtml: trustAsHtml,
-    sas:{
-      '001': 'Studio',
-      '002': 'Home',
-      '003': 'Ambas',
-      '004': 'Kids'
-    }  
+    sas: commonService.getSasHash()
   });
 
   if($rootScope.isMainDataLoaded){
@@ -81,7 +77,7 @@ function ProductCtrl(
       .then(function(fProduct){
         vm.product = fProduct;
         vm.mainPromo = vm.product.mainPromo;
-        vm.lowestCategory = getLowestCategory();
+        vm.lowestCategory = categoriesService.getLowestCategory(vm.product.Categories);
         vm.productCart = {
           quantity: 1
         };
@@ -200,18 +196,6 @@ function ProductCtrl(
   }
 
 
-  function getLowestCategory(){
-    var lowestCategoryLevel = 0;
-    var lowestCategory = false;
-    vm.product.Categories.forEach(function(category){
-      if(category.CategoryLevel > lowestCategoryLevel){
-        lowestCategory = category;
-        lowestCategoryLevel = category.CategoryLevel;
-      }
-    });
-    return lowestCategory;
-  }
-
   function loadProductFilters(product){
     productService.getAllFilters({quickread:true})
       .then(function(res){
@@ -302,7 +286,9 @@ ProductCtrl.$inject = [
   'pmPeriodService',
   'localStorageService',
   'deliveryService',
-  'cartService'
+  'cartService',
+  'commonService',
+  'categoriesService'
 ];
 /*
 angular.element(document).ready(function() {

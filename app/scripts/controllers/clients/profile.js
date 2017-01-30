@@ -21,6 +21,7 @@ function ClientProfileCtrl(
     commonService,
     clientService,
     quotationService,
+    checkoutService,
     orderService,
     dialogService
   ){
@@ -28,22 +29,16 @@ function ClientProfileCtrl(
 
   angular.extend(vm, {
     activeTab: 0,
-    genders: [
-      {label:'Masculino', value: 'M'},
-      {label: 'Femenino', value: 'F'}
-    ],
-    titles: [
-      {label:'Sr.', value:'Sr'},
-      {label:'Sra.', value: 'Sra'},
-      {label: 'Srita.', value: 'Srita'}
-    ],
+    personalEditEnabled: false,    
+    titles  : clientService.getTitles(),
+    genders : clientService.getGenders(),
     states: [],
     countries: commonService.getCountries(),
     columnsLeads: [
       {key: 'folio', label:'Folio'},
       {key:'Client.CardName', label:'Cliente'},
       {key:'Client.E_Mail', label:'Email'},
-      {key:'createdAt', label:'Cotización'},
+      {key:'createdAt', label:'Fecha', date:true},
       {key:'total', label: 'Total', currency:true},
       {key:'ammountPaid', label: 'Cobrado', currency:true},
       {
@@ -58,8 +53,9 @@ function ClientProfileCtrl(
     columnsOrders: [
       {key: 'folio', label:'Folio'},
       {key:'Client.CardName', label:'Cliente'},
-      {key:'total', label: 'Total', currency:true},
+      {key:'createdAt', label:'Fecha' ,date:true},
       {key:'discount', label:'Descuento', currency:true},
+      {key:'total', label: 'Total', currency:true},      
       {key:'ammountPaid', label:'Cobrado', currency:true},
       {
         key:'Acciones',
@@ -74,6 +70,7 @@ function ClientProfileCtrl(
     createQuotation: createQuotation,
     changeTab: changeTab,
     contactAction: contactAction,
+    copyPersonalDataToContact: copyPersonalDataToContact,
     onPikadaySelect: onPikadaySelect,
     updatePersonalData: updatePersonalData,
     apiResourceLeads: quotationService.getByClient,
@@ -81,6 +78,7 @@ function ClientProfileCtrl(
     updateContact: updateContact,
     createContact: createContact,
     openMapDialog: openMapDialog,
+    personalDataAction: personalDataAction,
     isContactEditModeActive: isContactEditModeActive,
     showNewFiscalForm: showNewFiscalForm,
     showNewAddressForm: showNewAddressForm
@@ -90,7 +88,13 @@ function ClientProfileCtrl(
     vm.isLoading = true;
 
     if($location.search().createdClient){
-      dialogService.showDialog('Cliente registrado');
+
+      dialogService.showDialog('Cliente registrado', function(){
+        if($rootScope.activeQuotation){
+          return $location.path('/quotations/edit/' + $rootScope.activeQuotation.id);
+        }
+        checkoutService.returnToCheckout();
+      });
     }
 
     clientService.getById($routeParams.id).then(function(res){
@@ -102,7 +106,7 @@ function ClientProfileCtrl(
         vm.activeTab = $location.search().activeTab;
       }
 
-      vm.client = setClientDefaultData(vm.client);
+      vm.client = clientService.setClientDefaultData(vm.client);
 
       commonService.getStatesSap().then(function(res){
         console.log(res);
@@ -114,33 +118,25 @@ function ClientProfileCtrl(
     });
   }
 
-  function setClientDefaultData(client){
-    if(!client.FiscalAddress){
-      client.FiscalAddress = {};
+  function copyPersonalDataToContact(client,contact){
+    console.log('copyingPersonalData', contact);
+    if(!contact.copyingPersonalData){
+      contact.FirstName = _.clone(client.FirstName);
+      contact.LastName = _.clone(client.LastName);
+      contact.Tel1 = _.clone(client.Phone1);
+      contact.Cellolar = _.clone(client.Cellular);
+      contact.E_Mail = _.clone(client.E_Mail);
+      contact._email = _.clone(client.E_Mail);
     }
-    if(!client.FiscalAddress.U_Correos){
-      client.FiscalAddress.U_Correos = angular.copy(client.E_Mail);
+    else{
+      delete contact.FirstName;
+      delete contact.LastName;
+      delete contact.Tel1;
+      delete contact.Cellolar;
+      delete contact.E_Mail;
+      delete contact._email;
     }
-
-    client.Contacts = client.Contacts.map(function(contact){
-      if(!contact.E_Mail){
-        contact.E_Mail = angular.copy(client.E_Mail);
-      }
-      if(!contact.FirstName){
-        contact.FirstName = angular.copy(client.CardName);
-      }
-      if(!contact.Tel1){
-        contact.Tel1 = angular.copy(client.Phone1);
-      }
-      if(!contact.Cellolar){
-        contact.Cellolar = angular.copy(client.Cellular);
-      }
-      contact.editEnabled = false;
-
-      return contact;
-    });    
-    return client;
-  }
+  }  
 
   function showNewFiscalForm(){
     vm.isNewFiscalFormActive = true;
@@ -174,6 +170,14 @@ function ClientProfileCtrl(
     vm.client.Birthdate = pikaday._d;
   }
 
+  function personalDataAction(form){
+    if(vm.personalEditEnabled){
+      updatePersonalData(form);
+    }else{
+      vm.personalEditEnabled = true;
+    }
+  }
+
   function updatePersonalData(form){
     var isValidEmail = commonService.isValidEmail(
       vm.client.E_Mail,
@@ -188,7 +192,7 @@ function ClientProfileCtrl(
       clientService.update(vm.client.CardCode, params).then(function (res){
         console.log(res);
         vm.isLoading = false;
-        dialogService.showDialog('Datos personales actualizados',returnToCheckout);
+        dialogService.showDialog('Datos personales actualizados',checkoutService.returnToCheckout);
       }).catch(function(err){
         console.log(err);
         dialogService.showDialog('Hubo un error, revisa los campos');
@@ -209,9 +213,8 @@ function ClientProfileCtrl(
       User: $rootScope.user.id,
       Client: vm.client.id,
     };
-    var goToSearch = false;
     vm.isLoading = true;
-    quotationService.newQuotation(params, goToSearch);
+    quotationService.newQuotation(params);
   }
 
   function contactAction(form, contact){
@@ -239,7 +242,8 @@ function ClientProfileCtrl(
       ).then(function(res){
         console.log(res);
         contact.isLoading = false;
-        dialogService.showDialog('Dirección de entrega actualizada', returnToCheckout);
+        contact.editEnabled = false;
+        dialogService.showDialog('Dirección de entrega actualizada', checkoutService.returnToCheckout);
       })
       .catch(function(err){
         console.log(err);
@@ -268,11 +272,12 @@ function ClientProfileCtrl(
           console.log(res);
           vm.isLoading = false;
           vm.showNewContact = false;
+          vm.isNewAddressFormActive = false;
           vm.newContact = {};
-          dialogService.showDialog('Dirección creada', returnToCheckout);
           var created = res.data;
           vm.client.Contacts.push(created);
-          
+          //dialogService.showDialog('Dirección creada');
+          dialogService.showDialog('Dirección creada', checkoutService.returnToCheckout);
         })
         .catch(function(err){
           vm.isLoading = false;
@@ -305,8 +310,6 @@ function ClientProfileCtrl(
       {excludeActualDomains: true}
     );
     if(form.$valid && isValidEmail){
-      var promise;
-      var creating = false;
       var params = angular.copy(vm.client.FiscalAddress);
       params.LicTradNum = angular.copy(vm.client.LicTradNum);
 
@@ -317,12 +320,12 @@ function ClientProfileCtrl(
       )
       .then(function(results){
         vm.isLoading = false;        
-        dialogService.showDialog('Datos guardados');
+        dialogService.showDialog('Datos guardados', checkoutService.returnToCheckout);
       })
       .catch(function(err){
         vm.isLoading = false;
         console.log(err);
-        dialogService.showDialog('Hubo un error al guardar datos de facturación');
+        dialogService.showDialog('Hubo un error al guardar datos de facturación: ' + (err.data || err));
       });
     }else if(!isValidEmail){
       vm.isLoading = false;
@@ -334,12 +337,6 @@ function ClientProfileCtrl(
 
   }
 
-  function returnToCheckout(){
-    if($location.search() && $location.search().checkoutProcess){
-      var quotationId = $location.search().checkoutProcess;
-      $location.path('/checkout/client/' + quotationId);
-    }
-  }
 
 
   function openMapDialog(){

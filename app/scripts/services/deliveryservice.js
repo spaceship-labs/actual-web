@@ -24,6 +24,7 @@
     		}
     		return detailProductId === productId;
     	});
+
     	for(var i = 0; i<deliveries.length; i++){
     		for(var j=0; j<details.length; j++){
     			if(
@@ -34,6 +35,7 @@
     			}
     		}
     	}
+    	
     	return deliveries;
     }
 
@@ -42,7 +44,7 @@
     	var groupedDetails = _.groupBy(details, function(detail){
     		var discountPercent = detail.discountPercent || 0;
     		var date = moment(detail.shipDate).startOf('day');
-    		return detail.Product.ItemCode + '#' + date + discountPercent;
+    		return detail.Product.ItemCode + '#' + date + '#' + discountPercent;
     	});
     	for(var key in groupedDetails){
     		var group = angular.copy(groupedDetails[key][0]);

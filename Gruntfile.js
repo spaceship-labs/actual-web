@@ -29,6 +29,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-ng-constant');
   var environmentTask = getEnvironmentTask(grunt.option('env'));
+  var siteTask        = getSiteTask(grunt.option('site'));
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -445,42 +446,101 @@ module.exports = function (grunt) {
       options: {
         space: '  ',
         wrap: '"use strict";\n\n {\%= __ngModule %}',
-        name: 'envconfig',
       },
       // Environment targets
       sandbox: {
         options: {
-          dest: '<%= yeoman.app %>/scripts/envconfig.js'
+          dest: '<%= yeoman.app %>/scripts/envconfig.js',
+          name: 'envconfig'
         },
         constants: {
           ENV: {
             name: 'sandbox',
-            apiEndpoint: 'http://sandbox-actual-api.herokuapp.com'
+            apiEndpoint: 'http://sandbox-actual-api.herokuapp.com',
+            adminUrl: 'http://sandboxadmin.miactual.com',
+            tokenPrefix: 'sandbox'
           }
         }
       },
       demo: {
         options: {
-          dest: '<%= yeoman.app %>/scripts/envconfig.js'
+          dest: '<%= yeoman.app %>/scripts/envconfig.js',
+          name: 'envconfig'
         },
         constants: {
           ENV: {
             name: 'demo',
-            apiEndpoint: 'http://demo-actual-api.herokuapp.com'
+            apiEndpoint: 'http://demo-actual-api.herokuapp.com',
+            adminUrl: 'http://sandboxadmin.miactual.com',
+            tokenPrefix: 'demo'            
           }
         }
       },      
       production: {
         options: {
-          dest: '<%= yeoman.app %>/scripts/envconfig.js'
+          dest: '<%= yeoman.app %>/scripts/envconfig.js',
+          name: 'envconfig'
         },
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://actual-api.herokuapp.com'
+            apiEndpoint: 'http://166.78.47.146',
+            adminUrl: 'http://admin.miactual.com',
+            tokenPrefix: 'production'            
           }
         }
-      }
+      },
+      dev: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/envconfig.js',
+          name: 'envconfig'
+        },
+        constants: {
+          ENV: {
+            name: 'dev',
+            apiEndpoint: 'http://sandbox-actual-api.herokuapp.com',
+            adminUrl: 'http://localhost:3000',
+            tokenPrefix: 'dev'
+          }
+        }
+      },
+
+      actualHome: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/siteconfig.js',
+          name: 'siteconfig'
+        },
+        constants: {
+          SITE: {
+            name: 'actual-home',
+          }
+        }
+      },
+
+      actualStudio: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/siteconfig.js',
+          name: 'siteconfig'
+        },
+        constants: {
+          SITE: {
+            name: 'actual-studio',
+          }
+        }
+      },
+
+      actualKids: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/siteconfig.js',
+          name: 'siteconfig'
+        },
+        constants: {
+          SITE: {
+            name: 'actual-kids',
+          }
+        }
+      }                    
+
     },
 
   });
@@ -494,6 +554,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       environmentTask,
+      siteTask,
       'wiredep',
       'concurrent:server',
       'postcss:server',
@@ -519,6 +580,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     environmentTask,
+    siteTask,
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -546,7 +608,7 @@ module.exports = function (grunt) {
 
 function getEnvironmentTask(envOption){
   console.log('envOption', envOption);
-  envOption = envOption || 'sandbox';
+  envOption = envOption;
   var task;
   switch (envOption){
     case 'sandbox':
@@ -559,7 +621,28 @@ function getEnvironmentTask(envOption){
       task = 'ngconstant:production';
       break;
     default:
-      task = 'ngconstant:sandbox';
+      task = 'ngconstant:dev';
+      break;
+  }
+  return task;
+}
+
+function getSiteTask(siteOption){
+  console.log('siteOption', siteOption);
+  siteOption = siteOption;
+  var task;
+  switch (siteOption){
+    case 'studio':
+      task = 'ngconstant:actualStudio';
+      break;
+    case 'home':
+      task = 'ngconstant:actualHome';
+      break;
+    case 'kids':
+      task = 'ngconstant:actualKids';
+      break;
+    default:
+      task = 'ngconstant:actualHome';
       break;
   }
   return task;

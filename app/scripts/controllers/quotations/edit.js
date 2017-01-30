@@ -29,9 +29,7 @@ function QuotationsEditCtrl(
   paymentService,
   deliveryService,
   authService,
-  siteService,
-  DTOptionsBuilder, 
-  DTColumnDefBuilder
+  siteService
 ){
   var vm = this;
   angular.extend(vm, {
@@ -59,7 +57,7 @@ function QuotationsEditCtrl(
     getPromotionPackageById: getPromotionPackageById,
     getUnitPriceWithDiscount: getUnitPriceWithDiscount,
     getWarehouseById: getWarehouseById,
-    isUserAdminOrManager: isUserAdminOrManager,
+    isUserAdminOrManager: authService.isUserAdminOrManager,
     isValidStock: isValidStock,
     print: print,
     promotionPackages: [],
@@ -80,15 +78,13 @@ function QuotationsEditCtrl(
   }
 
   function init(quotationId, options){
-    console.log('llego a carrito de compras');
-
     vm.activeStore       = $rootScope.activeStore;
-    vm.brokers           = $rootScope.brokers;
     vm.promotionPackages = [];
     options              = options || {};
 
     vm.isLoading = true;
     loadWarehouses();
+    loadBrokers();
     showAlerts();
 
     quotationService.getById(quotationId)
@@ -102,19 +98,20 @@ function QuotationsEditCtrl(
           vm.status = 'Cerrada';
         }
 
-        if(options.relaod){
-          loadPaymentMethods();
-        }
+        loadPaymentMethods();
 
-        return quotationService.populateDetailsWithProducts(vm.quotation);
+        return quotationService.populateDetailsWithProducts(
+          vm.quotation,{
+            populate: ['FilterValues','Promotions']
+          }
+        );
       })
       .then(function(details){
         vm.quotation.Details = details;
-        return quotationService.loadProductFilters(vm.quotation.Details);
+        return quotationService.loadProductsFilters(vm.quotation.Details);
       })
       .then(function(detailsWithFilters){
         vm.quotation.Details = detailsWithFilters;
-        vm.isLoadingRecords = true;
         return quotationService.getCurrentStock(vm.quotation.id);       
       })
       .then(function(response){
@@ -142,13 +139,7 @@ function QuotationsEditCtrl(
         vm.promotionPackages = results.map(function(r){
           return r.data;
         });
-
-        if(options.reload){
-          var deferred = $q.defer();
-          deferred.resolve(false);
-          return deferred.promise;
-        }
-
+        vm.isLoadingRecords = true;
         return quotationService.getRecords(vm.quotation.id);
       })
       .then(function(result){
@@ -158,9 +149,20 @@ function QuotationsEditCtrl(
         vm.isLoadingRecords = false;
       })
       .catch(function(err){
+        dialogService.showDialog('Hubo un error: ' + (err.data || err) );
         $log.error(err);
       });
 
+  }
+
+  function loadBrokers(){
+    userService.getBrokers()
+      .then(function(brokers) {
+        vm.brokers = brokers;
+      })
+      .catch(function(err){
+        console.log(err);
+      });    
   }
 
   function showAlerts(){
@@ -278,30 +280,12 @@ function QuotationsEditCtrl(
   }
 
 
-  function getLastTracingDate(quotation){
-    var tracingDate = new Date();
-    if(quotation.Records && quotation.Records.length > 1){
-      var lastIndex = quotation.Records.length - 2;
-      tracingDate = quotation.Records[lastIndex].dateTime;
-    }
-    return tracingDate;
-  }
-
-  function isUserAdminOrManager(){
-    return $rootScope.user.role && 
-      ( $rootScope.user.role.name === authService.USER_ROLES.ADMIN 
-        || $rootScope.user.role.name === authService.USER_ROLES.STORE_MANAGER 
-      );
-  }
-
   function closeQuotation(form,closeReason, extraNotes){
     if(closeReason){
       vm.isLoading = true;
       var params = {
         notes: extraNotes,
         User: $rootScope.user.id,
-        tracing: getLastTracingDate(vm.quotation),
-        notes: extraNotes,
         closeReason: closeReason,
         extraNotes: extraNotes
       };
@@ -454,30 +438,60 @@ function QuotationsEditCtrl(
       quotationService.showStockAlert();
       return;
     }
+
+    if(!vm.quotation.Details || vm.quotation.Details.length === 0){
+      dialogService.showDialog('No hay aritculos en esta cotización');
+      return;
+    }
+
+    if(  quotationHasImmediateDeliveryProducts(vm.quotation) ){
+      dialogService.showDialog('Esta cotización contiene articulos de entrega inmediata');
+    }
+
     if(!vm.quotation.Order){
       vm.isLoading = true;
 
+      //Not updating Details, not necessary
       var params = angular.copy(vm.quotation);
-      if(params.Details){
-        params.Details = params.Details.map(function(detail){
-          detail.Product = detail.Product.id;
-          return detail;
-        });
-      }
+      delete params.Details;
 
       quotationService.update(vm.quotation.id, params)
         .then(function(res){
+          var quotationUpdated = res.data;
           vm.isLoading = false;
+          if(vm.quotation.Client){
             quotationService.setActiveQuotation(vm.quotation.id);
+            
+            if(quotationUpdated.immediateDelivery){
+              return $location.path('/checkout/paymentmethod/' + quotationUpdated.id);
+            }
+
             $location.path('/checkout/client/' + vm.quotation.id);
           
+          }else{
+            console.log('No hay cliente');
+            quotationService.setActiveQuotation(vm.quotation.id);
+            //localStorageService.set('inCheckoutProcess', true);
+            $location.path('/continuequotation')
+              .search({
+                checkoutProcess: vm.quotation.id,
+                goToCheckout:true
+              });
+          }
         })
         .catch(function(err){
           $log.error(err);
         });
+
     }else{
       dialogService.showDialog('Esta cotización ya tiene un pedido asignado');
     }
+  }
+
+  function quotationHasImmediateDeliveryProducts(quotation){
+    return _.some(quotation.Details, function(detail){
+      return detail.immediateDelivery;
+    });
   }
 
   function getUnitPriceWithDiscount(unitPrice,discountPercent){
@@ -501,8 +515,10 @@ function QuotationsEditCtrl(
       controller: [
         '$scope', 
         '$mdDialog',
-        '$location', 
-        'detailGroup', 
+        '$location',
+        'quotationService', 
+        'vm', 
+        'detailGroup',
         controller
       ],
       templateUrl: 'views/quotations/stock-dialog.html',
@@ -511,40 +527,17 @@ function QuotationsEditCtrl(
       clickOutsideToClose: true,
       fullscreen: useFullScreen,
       locals:{
+        vm: vm,
         detailGroup: detailGroup
       }
     })
-    .then(function(manager) {
-    }, function() {
-      console.log('No autorizado');
+    .then(function() {
+    })
+    .catch(function() {
+      console.log('cancelled');
     });    
   }
 
-  function StockDialogController($scope, $mdDialog, $location, detailGroup){
-    
-    $scope.cancel = function(){
-      $mdDialog.cancel();
-    };
-
-    $scope.delete = function(){
-      $mdDialog.hide();
-      quotationService.setActiveQuotation(vm.quotation.id);        
-      removeDetailsGroup(detailGroup);
-    };
-  
-    $scope.modify = function(){
-      $mdDialog.hide();   
-      var itemCode = angular.copy(detailGroup.Product.ItemCode);  
-      quotationService.setActiveQuotation(vm.quotation.id);
-      removeDetailsGroup(detailGroup)
-        .then(function(){
-          $location.path('/product/' + itemCode);
-        })
-        .catch(function(err){
-          console.log('err',err);
-        });
-    };
-  }
 
   function showBigTicketDialog(ev){
     var controller = BigTicketController;
@@ -585,40 +578,7 @@ function QuotationsEditCtrl(
       console.log('No autorizado');
     });    
   } 
-  
-  function BigTicketController($scope, $mdDialog, options){
-    $scope.bigticketPercentage = options.bigticketPercentage;
-    $scope.bigticketMaxPercentage = options.bigticketMaxPercentage || 0;
-    $scope.init = function(){
-      $scope.bigticketPercentage = options.bigticketPercentage;
-    };
-    $scope.getPercentages = function(){
-      var percentages = [0];
-      for(var i=1;i<=$scope.bigticketMaxPercentage;i++){
-        percentages.push(i);
-      }
-      return percentages;
-    };
 
-    $scope.percentages = [
-      {label:'1%',value:1},
-      {label:'2%',value:2},
-      {label:'3%',value:3},
-      {label:'4%',value:4},
-      {label:'5%',value:5},
-    ];
-
-
-    $scope.cancel = function(){
-      $mdDialog.cancel();
-    };
-
-    $scope.applyPercentage = function(){
-      $mdDialog.hide($scope.bigticketPercentage);
-    };
-
-    $scope.init();    
-  }
 
   $scope.$on('$destroy', function(){
     mainDataListener();
@@ -646,6 +606,4 @@ QuotationsEditCtrl.$inject = [
   'deliveryService',
   'authService',
   'siteService',
-  'DTOptionsBuilder', 
-  'DTColumnDefBuilder'
 ];

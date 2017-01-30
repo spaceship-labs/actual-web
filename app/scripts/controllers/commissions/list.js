@@ -15,6 +15,7 @@ function CommissionsListCtrl(
   $rootScope,
   $scope,
   $location,
+  $filter,
   commissionService,
   authService,
   storeService
@@ -25,7 +26,7 @@ function CommissionsListCtrl(
   vm.user = Object.assign({}, $rootScope.user);
   vm.sellers = [];
   vm.USER_ROLES = authService.USER_ROLES;
-  
+
   $scope.year = today.getFullYear();
   $scope.month = today.getMonth();
   $scope.period = today.getDate() < 16 ? 1: 2;
@@ -41,7 +42,7 @@ function CommissionsListCtrl(
       {key: 'status', label: 'Estatus',  mapper: {paid: 'pagada', pending: 'pendiente'}, color: {paid: 'green', pending: 'red'}},
       {key: 'user.name', label: 'Usuario'},
   ];
-  vm.apiResource = setChart;
+  vm.apiResource = commissionService.getCommissions;
   vm.years  = range(new Date().getFullYear(), 1999, -1);
   vm.months = [
     'Enero',
@@ -58,6 +59,7 @@ function CommissionsListCtrl(
     'Diciembre'
   ].map(function(m, i) { return [i, m]; });
   vm.setFilterDate = setFilterDate;
+  vm.getFortnightNumber = getFortnightNumber;
   init();
 
   function init() {
@@ -71,7 +73,25 @@ function CommissionsListCtrl(
         });
       totalsSellers();
     }
+    var f = vm.filters.createdAt;
+    var dateFrom = f['>='];
+    var dateTo = f['<'];
+    commissionService
+      .getGoal(vm.user.mainStore.id, dateFrom, dateTo)
+      .then(function(g){
+        vm.goal = g;
+      });
   }
+
+  function getFortnightNumber(){
+    var number = 1;
+    var day = moment().format('D');
+    if(day > 15){
+      number = 2;
+    }
+    return number;
+  }
+
 
   function totalsSeller() {
     $scope.$watch(function() {
@@ -80,6 +100,7 @@ function CommissionsListCtrl(
       totalsUser(vm.user.id).then(function(totals){
         vm.user.total = totals.total;
         vm.user.commissions = totals.commissions;
+        setChart();
       });
       $rootScope.$broadcast('reloadTable', true);
     });
@@ -94,16 +115,14 @@ function CommissionsListCtrl(
         return s;
       });
       var totals = vm.sellers.map(function(s) {
-        console.log('1 asdsadasdasdasdasadas');
         return totalsUser(s.id);
       });
-      totals.forEach(function(t, i) {
-        console.log('2 asdsadasdasdasdasadas');
-        t.then(function(_totals) {
-          console.log('3 asdsadasdasdasdasadas');
-          vm.sellers[i].commissions = _totals.commissions;
-          vm.sellers[i].total = _totals.total;
+      $q.all(totals).then(function(totals) {
+        totals.forEach(function(t, i) {
+          vm.sellers[i].commissions = t.commissions;
+          vm.sellers[i].total = t.total;
         });
+        setChart();
       });
       $rootScope.$broadcast('reloadTable', true);
     });
@@ -169,24 +188,54 @@ function CommissionsListCtrl(
     return new Date(date.getFullYear(), date.getMonth() + 1, 0);
   }
 
-  function setChart(page, params) {
-    return commissionService
-      .getCommissions(page, params)
-      .then(function(res) {
-        vm.chart = res.data.data.reduce(function(acum, current) {
-          var date = moment(current.createdAt).date();
-          var index = acum.labels.indexOf(date);
-          if (index === -1) {
-            acum.labels = acum.labels.concat(date);
-            acum.data[acum.labels.length - 1] = current.ammount;
-          } else {
-            acum.data[index] += current.ammount;
-          }
-          return acum;
-        }, {data: [], labels:[]});
-        return res;
-      });
-  };
-
+  function setChart() {
+    if (!vm.goal) {
+      return;
+    }
+    if (vm.user.role.name === authService.USER_ROLES.SELLER) {
+      vm.goal = vm.goal.goal / vm.goal.sellers / 2;
+      vm.current = vm.user.total;
+      vm.remaining = vm.goal - vm.current;
+      vm.currentDate = new Date();
+      vm.currentPercent = 100 * vm.current / vm.goal;
+      vm.chartOptions = {
+        labels: [
+          'Venta al ' + $filter('date')(new Date(),'d/MMM/yyyy'),
+          'Falta para el objetivo'
+        ],
+        colors: ["#48C7DB", "#EADE56"],
+        data: [vm.current, vm.remaining],
+      };
+    } else  {
+      vm.goal = vm.goal.goal / 2;
+      vm.current = vm.sellers.reduce(function(acum, s) {
+        var c = s.total || 0;
+        return acum + c;
+      }, 0);
+      vm.remaining = vm.goal - vm.current;
+      vm.currentDate = new Date();
+      vm.currentPercent = 100 * vm.current / vm.goal;
+      vm.chartOptions = {
+        labels: [
+          'Venta al ' + $filter('date')(new Date(),'d/MMM/yyyy'),
+          'Falta para el objetivo'
+        ],
+        colors: ["#48C7DB", "#EADE56"],
+        data: [vm.current, vm.remaining],
+      };
+      vm.store = {};
+      vm.store.ammounts = {
+        total: vm.sellers.reduce(function(acum,seller){return acum+=seller.total;},0),
+        labels: vm.sellers.map(function(seller){return seller.firstName + ' ' + seller.lastName;}),
+        data: vm.sellers.map(function(seller){return seller.total;}),
+        options:{
+          legend:{
+            display:true,
+            position: 'bottom'
+          },
+        },
+      };
+    }
+  }
 }
 

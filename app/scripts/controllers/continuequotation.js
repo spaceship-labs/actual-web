@@ -14,6 +14,7 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
   var vm = this;
   vm.queryClients = queryClients;
   vm.selectedItemChange = selectedItemChange;
+  vm.activeQuotationId = quotationService.getActiveQuotationId();
 
   function init(){
   }

@@ -26,6 +26,7 @@ function CheckoutClientCtrl(
   var vm = this;
   angular.extend(vm,{
     continueProcess: continueProcess,
+    getContactName: getContactName,
     isClientFiscalDataValid: clientService.isClientFiscalDataValid
   });
 
@@ -41,6 +42,10 @@ function CheckoutClientCtrl(
       if( !isValidStock){
         $location.path('/quotations/edit/' + vm.quotation.id)
           .search({stockAlert:true});
+      }
+
+      if(!vm.quotation.Details || vm.quotation.Details.length === 0){
+        $location.path('/quotations/edit/' + vm.quotation.id);
       }
 
       if(vm.quotation.Order){
@@ -64,11 +69,25 @@ function CheckoutClientCtrl(
     });
   }
 
+  function getContactName(contact){
+    var name = '';
+    if(contact.FirstName || contact.LastName){
+      name = contact.FirstName + ' ' + contact.LastName;
+    }else{
+      name = contact.Name
+    }
+    return name;
+  }
 
   function continueProcess(){
+    if(!vm.quotation.Details || vm.quotation.Details.length === 0){
+      dialogService.showDialog('No hay aritculos en esta cotización');
+      return;
+    }
+    
     if(vm.quotation.Address || vm.quotation.immediateDelivery){
       vm.isLoading = true;
-      var params = angular.copy(vm.quotation);
+      var params = {Address: vm.quotation.Address};
       quotationService.update(vm.quotation.id, params).then(function(res){
         vm.isLoading = false;
         $location.path('/checkout/paymentmethod/' + vm.quotation.id);

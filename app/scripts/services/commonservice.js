@@ -439,11 +439,28 @@
       return valid;
     }
 
+    function getSasHash(){
+      var sas = {
+        '001': 'Studio',
+        '002': 'Home',
+        '003': 'Ambas',
+        '004': 'Kids'
+      };
+      return sas;        
+    }
+
+    function getCurrencyTooltip(tooltipItem, data){
+      var tooltip = data.labels[tooltipItem.index] + ': ';
+      tooltip     += $filter('currency')(data.datasets[0].data[tooltipItem.index]);
+      return tooltip;
+    }  
 
     var service = {
       combineDateTime: combineDateTime,
       getCountries: getCountries,
+      getCurrencyTooltip: getCurrencyTooltip,
       getStates: getStates,
+      getSasHash: getSasHash,
       getStatesSap: getStatesSap,
       getMonthDateRange: getMonthDateRange,
       getFortnightRange: getFortnightRange,

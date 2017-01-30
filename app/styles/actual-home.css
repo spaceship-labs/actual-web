@@ -1,0 +1,7 @@
+.header-top-bar.actual-home{background: #092F57!important;}
+.footer-bottom.actual-home{background: #092F57!important;}
+
+
+@media(max-width:600px){
+  .header-top-bar.actual-home{background: black!important}
+}

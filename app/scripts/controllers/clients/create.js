@@ -11,42 +11,84 @@ angular.module('dashexampleApp')
   .controller('ClientCreateCtrl', ClientCreateCtrl);
 
 function ClientCreateCtrl(
+    $scope,
     $location, 
     $rootScope, 
     dialogService, 
     commonService, 
     clientService,
     quotationService,
-    localStorageService){
+    checkoutService,
+    localStorageService,
+    $interval
+  ){
   var vm = this;
+  var PERSONAL_DATA_TAB = 0;
+  var FISCAL_DATA_TAB = 1;
+  var DELIVERY_DATA_TAB = 3;
 
   angular.extend(vm, {
     activeTab       : 0,
     client          :{},
     contacts        :[{}],
     fiscalAddress   :{},
-    titles: [
-      {label:'Sr.', value:'Sr'},
-      {label:'Sra.', value: 'Sra'},
-      {label: 'Srita.', value: 'Srita'}
-    ],
-    genders: [
-      {label:'Masculino', value: 'M'},
-      {label: 'Femenino', value: 'F'}
-    ],
+    loadingEstimate :0,
+    isLoadingProgress: false,
+    intervalProgress: false,
+    titles          : clientService.getTitles(),
+    genders         : clientService.getGenders(),
     states          : [],
     countries       : commonService.getCountries(),
     addContactForm  : addContactForm,
     create          : create,
-    onPikadaySelect : onPikadaySelect
+    onPikadaySelect : onPikadaySelect,
+    removeContactForm: removeContactForm,
+    clearTabFields  : clearTabFields,
+    copyPersonalDataToContact: copyPersonalDataToContact,
+    PERSONAL_DATA_TAB: 0,
+    FISCAL_DATA_TAB: 1,
+    DELIVERY_DATA_TAB: 3
   });
 
   function onPikadaySelect(pikaday){
     vm.client.Birthdate = pikaday._d;
   }
 
+  function clearPersonalDataTab(){
+    vm.client = {};
+    vm.pikadayDate.setDate(null);
+  }
+
+  function clearFiscalAddressTab(){
+    vm.fiscalAddress = {};
+    vm.client.LicTradNum = null;
+  }
+
+  function clearContactsTab(){
+    vm.contacts = [{}];
+  }
+
+  function clearTabFields(){
+    switch(vm.activeTab){
+      case vm.PERSONAL_DATA_TAB:
+        clearPersonalDataTab();
+        break;
+      case vm.FISCAL_DATA_TAB:
+        clearFiscalAddressTab();
+        break;
+      case DELIVERY_DATA_TAB:
+        clearContactsTab();
+    }
+  }
+
   function addContactForm(){
     vm.contacts.push({});
+  }
+
+  function removeContactForm(contactFormIndex){
+    if(vm.contacts){
+      vm.contacts.splice(contactFormIndex, 1);
+    }
   }
 
   function addContact(form){
@@ -83,7 +125,9 @@ function ClientCreateCtrl(
       }
     }
 
+    //if(client.fiscalAddress && !_.isEmpty(client.fiscalAddress) && !_.isEmpty(client.fiscalAddress.U_Correos)){
     if(client.fiscalAddress && !_.isEmpty(client.fiscalAddress) ){
+
       if(!commonService.isValidEmail(client.fiscalAddress.U_Correos, {excludeActualDomains: true})){
         return false;
       }
@@ -99,61 +143,140 @@ function ClientCreateCtrl(
 
   function getFilledForms(formsRelations){
     var filledForms = formsRelations.reduce(function(acum, formRelation){
+
       if( angular.isArray(formRelation.data) ){
-        var areFilled = false;
+        var requiresValidation = false;
+
+        //Validation for contact forms(multiple)
         for(var i = 0; i<formRelation.data.length; i++){
-          if( !_.isEmpty(formRelation.data[i]) ){
-            areFilled = true;
+          if( !_.isEmpty(formRelation.data[i]) || formRelation.isRequired){
+            requiresValidation = true;
           }
         }
-        if(areFilled){
-          console.log('pushing array form');
+
+        if(requiresValidation){
+          console.log('requiresValidation', formRelation.form);
+          formRelation.form.tab = formRelation.tab;
           acum.push(formRelation.form);
         }
       }
-      else if( !_.isEmpty(formRelation.data) ){
-        console.log('pushing normal form');
+
+      //Validation for fiscal form
+      else if( !_.isEmpty(formRelation.data)  || formRelation.isRequired){
+        formRelation.form.tab = formRelation.tab;
         acum.push(formRelation.form);
       }
       return acum;
     },[]);
+
     return filledForms;
   }
 
-  function areFormsValid(forms){
+  function validateForms(forms){
     if(forms.length > 0){
       var validFlag = true;
+      var errorTabs = [];
+
       for(var i=0;i<forms.length;i++){
         if(!forms[i].$valid){
           validFlag = false;
+          errorTabs = errorTabs.concat(forms[i].tab);
         }
       }
-      return validFlag;
+      return {
+        valid: validFlag,
+        errorTabs: errorTabs
+      };
     }
-    return true;
+    return {
+      valid: true
+    };
+  }
+
+  function validateAddedContactsIfNeeded(contacts){
+    if( !$location.search().checkoutProcess ){
+      return true;
+    }
+
+    if( $rootScope.activeQuotation ){
+      if($rootScope.activeQuotation.immediateDelivery){
+        return true;
+      } 
+    }
+
+    if(contacts.length > 0){
+      var areNotEmpty  = contacts.every(function(c){
+        return !_.isEmpty(c);
+      });
+      return areNotEmpty;
+    }
+    return false;
+  }
+
+  function copyPersonalDataToContact(client,contact){
+    console.log('contact', contact);
+    if(!contact.copyingPersonalData){
+      contact.FirstName = _.clone(client.FirstName);
+      contact.LastName = _.clone(client.LastName);
+      contact.Tel1 = _.clone(client.Phone1);
+      contact.Cellolar = _.clone(client.Cellular);
+      contact.E_Mail = _.clone(client.E_Mail);
+      contact._email = _.clone(client._email);
+    }
+    else{
+      delete contact.FirstName;
+      delete contact.LastName;
+      delete contact.Tel1;
+      delete contact.Cellolar;
+      delete contact.E_Mail;
+      delete contact._email;
+    }
   }
 
   function create(createPersonalForm, createFiscalForm, createDeliveryForm){
-    vm.isLoading = true;
+    vm.isLoadingProgress = true;
+    vm.loadingEstimate = 0;    
+    animateProgress();
+
     vm.client.contacts = vm.contacts.filter(filterContacts);
     vm.client.fiscalAddress = vm.fiscalAddress || false;
+    
     var formsRelations = [
-      {form: createFiscalForm, data: vm.client.fiscalAddress},
-      {form: createDeliveryForm, data: vm.client.contacts}      
+      {form: createFiscalForm, data: vm.client.fiscalAddress, tab:'dirección fiscal'},
+      {form: createDeliveryForm, data: vm.client.contacts,  tab: 'contactos'}      
     ];
+
+    if($location.search().checkoutProcess && $rootScope.activeQuotation){
+      //Require validation for contact forms
+      if($rootScope.activeQuotation.immediateDelivery){
+        formsRelations[1].isRequired = true;
+      }
+    }
+
     var areValidEmails = validateClientEmails(vm.client);
     var filledForms = getFilledForms(formsRelations);
-    if(areFormsValid(filledForms) && createPersonalForm.$valid && areValidEmails){
+    var validateFormsResult = validateForms(filledForms);
+    var areFormsValid = validateFormsResult.valid;
+    var formsValidationErrors = validateFormsResult.errorTabs;
+
+    if( 
+        areFormsValid && 
+        createPersonalForm.$valid && 
+        areValidEmails && 
+        validateAddedContactsIfNeeded(vm.contacts)
+      ){
       clientService.create(vm.client)
         .then(function(res){
           console.log(res);
           var created = res.data;
-          vm.isLoading = false;
+          //vm.isLoadingProgress = false;
+          cancelProgressInterval();
           if(created.CardCode){
-            var isInCheckoutProcess = localStorageService.get('inCheckoutProcess');
-            if($location.search().continueQuotation || isInCheckoutProcess){
+            //var isInCheckoutProcess = localStorageService.get('inCheckoutProcess');
+            if($location.search().continueQuotation || $location.search().checkoutProcess){
               assignClientToQuotation(created.id);
-            }else{
+            }
+            else{
               $location
                 .path('/clients/profile/'+created.id)
                 .search({createdClient:true});
@@ -162,18 +285,59 @@ function ClientCreateCtrl(
         })
         .catch(function(err){
           console.log(err);
-          vm.isLoading = false;
-          dialogService.showDialog('Hubo un error: ' + (err.data || err) );
+          vm.isLoadingProgress = false;
+          cancelProgressInterval();
+          dialogService.showDialog('Hubo un error: ' + (err.data || err));
         });
     }
     else if(!areValidEmails){
-      vm.isLoading = false;
+      vm.isLoadingProgress = false;
+      cancelProgressInterval();
       dialogService.showDialog('Emails no validos');
-    }else{
-      vm.isLoading = false;
+    }
+    else{
+      vm.isLoadingProgress = false;
+      cancelProgressInterval();
       dialogService.showDialog('Datos incompletos');
+
+      if( (formsValidationErrors && formsValidationErrors.length > 0) || !createPersonalForm.$valid){
+        var errorTabs = [];
+        var errorString = 'Datos incompletos, revisa las siguientes pestañas: ';
+        if(!createPersonalForm.$valid){
+          errorTabs = errorTabs.concat(['datos personales']);
+        }
+
+        if( (formsValidationErrors && formsValidationErrors.length > 0) ){
+          errorTabs = errorTabs.concat(formsValidationErrors);
+        }
+
+        errorString += errorTabs.join(',');
+
+        dialogService.showDialog(errorString);
+      }
+
+      if( !validateAddedContactsIfNeeded(vm.contacts) ){
+        dialogService.showDialog('Agrega al menos una dirección de envio');
+      }
+
     }
 
+  }
+
+  function cancelProgressInterval(){
+    if(vm.intervalProgress){
+      $interval.cancel(vm.intervalProgress);
+    }    
+  }
+
+  function animateProgress(){
+    vm.loadingEstimate = 0;
+    vm.intervalProgress = $interval(function(){
+      vm.loadingEstimate += 5;
+      if(vm.loadingEstimate >= 100){
+        vm.loadingEstimate = 0;
+      }
+    },1000);
   }
 
   function assignClientToQuotation(clientId){
@@ -183,12 +347,28 @@ function ClientCreateCtrl(
       quotationService.update(activeQuotation.id, params)
       .then(function(res){
         var quotation = res.data;
+        
         if(quotation && quotation.id){
           quotationService.setActiveQuotation(activeQuotation.id);
           localStorageService.remove('inCheckoutProcess');
-          $location
-            .path('/quotation/edit/' + activeQuotation.id)
-            .search({createdClient:true});        
+          
+          if($location.search().checkoutProcess && 
+            $rootScope.activeQuotation.total && 
+            !$location.search().startQuotation
+          ){
+            $location
+              .path('/clients/profile/'+clientId)
+              .search({
+                createdClient:true,
+                checkoutProcess: $location.search().checkoutProcess
+              });            
+          }
+
+          else{
+            $location
+              .path('/quotations/edit/' + quotation.id)
+              .search({createdClient:true});        
+          }
         }
       })
       .catch(function(err){
@@ -196,6 +376,11 @@ function ClientCreateCtrl(
       });
     }
   }
+
+
+  $scope.$on('$destroy', function(){
+    cancelProgressInterval();
+  });  
 
   init();
 

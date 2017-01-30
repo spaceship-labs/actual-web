@@ -33,7 +33,8 @@ angular
     'leaflet-directive',
     'localytics.directives',
     'ng-currency',
-    'envconfig'
+    'envconfig',
+    'siteconfig'
   ])
 
   .config(function (

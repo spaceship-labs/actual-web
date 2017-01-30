@@ -20,6 +20,7 @@ function AddquotationCtrl(
   vm.queryClients = queryClients;
   vm.selectedItemChange = selectedItemChange;
   vm.createQuotation = createQuotation;
+  vm.addQuotationAndClient = addQuotationAndClient;
   vm.isLoading = false;
 
   function queryClients(term){
@@ -42,7 +43,12 @@ function AddquotationCtrl(
     }
   }
 
-  function createQuotation(clientId){
+  function addQuotationAndClient(){
+    createQuotation(null, {createClient:true});
+  }
+
+  function createQuotation(clientId, options){
+    options = options || {};
     var params = {
       User: $rootScope.user.id
     };
@@ -51,9 +57,16 @@ function AddquotationCtrl(
       params.Client = clientId;
     }
     
-    var goToSearch = false;
     vm.isLoading = true;
-    quotationService.newQuotation(params, goToSearch);
+    var createClient = false;
+
+    if(options.createClient){
+      createClient =  true;
+    }
+
+    quotationService.newQuotation(params, {
+      createClient: createClient
+    });
   }
 }
 AddquotationCtrl.$inject = [

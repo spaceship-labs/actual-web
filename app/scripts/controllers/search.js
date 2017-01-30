@@ -10,7 +10,7 @@
 angular.module('dashexampleApp')
   .controller('SearchCtrl', SearchCtrl);
 
-function SearchCtrl($location, $timeout,$routeParams ,productService){
+function SearchCtrl($location, $timeout,$routeParams, $q ,productService, dialogService){
   var vm = this;
   vm.loadMore = loadMore;
   vm.searchByFilters = searchByFilters;
@@ -31,13 +31,25 @@ function SearchCtrl($location, $timeout,$routeParams ,productService){
       vm.isLoading = true;
       vm.search = {};
       vm.search.itemcode = $routeParams.itemcode;
-      productService.getById($routeParams.itemcode).then(function(res){
-        productService.formatSingleProduct(res.data.data).then(function(fProduct){
+      productService.getById($routeParams.itemcode)
+        .then(function(res){
+          var foundProduct = res.data.data;
+          if(!foundProduct){
+            vm.isLoading = false;
+            return $q.reject();
+          }
+          return productService.formatSingleProduct(res.data.data);
+        })
+        .then(function(fProduct){
+            vm.isLoading = false;
+            vm.totalResults = 1;
+            vm.products = [fProduct];
+        })
+        .catch(function(err){
+          //dialogService.showDialog('Hubo un error: \n ' + err);
           vm.isLoading = false;
-          vm.totalResults = 1;
-          vm.products = [fProduct];
         });
-      });
+
     }
     else{
       if($routeParams.term){
@@ -154,5 +166,7 @@ SearchCtrl.$inject = [
   '$location',
   '$timeout',
   '$routeParams',
-  'productService'
+  '$q',
+  'productService',
+  'dialogService'
 ];

@@ -78,7 +78,7 @@ function RefundsProductsCtrl(
       })
       .then(function(details){
         vm.order.Details = details;
-        return quotationService.loadProductFilters(vm.order.Details);
+        return quotationService.loadProductsFilters(vm.order.Details);
       })
       .then(function(detailsWithFilters){
         vm.order.Details = detailsWithFilters;
