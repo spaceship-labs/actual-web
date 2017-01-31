@@ -57,7 +57,7 @@
 
           <div layout="column" flex>
             <ng-include 
-            ng-if="main.activeModule !== 'policies' && main.activeModule !== 'manuals' && main.activeModule !== 'order'"
+            ng-if="main.activeModule !== 'order'"
                 src="'views/header.html'"></ng-include>
             <md-content ng-view autoscroll>
             </md-content>
@@ -250,6 +250,23 @@
         <script src="scripts/controllers/users/user-invoices.js"></script>
         <script src="scripts/controllers/users/user-purchases.js"></script>
         <script src="scripts/controllers/checkout/payment-info.js"></script>
+        <script src="scripts/controllers/shippinganddelivery.js"></script>
+        <script src="scripts/controllers/refundstext.js"></script>
+        <script src="scripts/controllers/manual/pieles.js"></script>
+        <script src="scripts/controllers/manual/aceros.js"></script>
+        <script src="scripts/controllers/manual/aluminios.js"></script>
+        <script src="scripts/controllers/manual/cristales.js"></script>
+        <script src="scripts/controllers/manual/cromados.js"></script>
+        <script src="scripts/controllers/manual.js"></script>
+        <script src="scripts/controllers/manual/maderas.js"></script>
+        <script src="scripts/controllers/manual/piezas-plasticas.js"></script>
+        <script src="scripts/controllers/manual/textiles.js"></script>
+        <script src="scripts/controllers/manual/vinilos.js"></script>
+        <script src="scripts/controllers/manual/pintura-electrostatica.js"></script>
+        
+        <script src="scripts/controllers/securebuy.js"></script>
+        <script src="scripts/controllers/paymentmethods.js"></script>
+        <script src="scripts/controllers/faq.js"></script>
         <!-- endbuild -->
 </body>
 </html>

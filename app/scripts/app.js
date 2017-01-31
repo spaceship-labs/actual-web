@@ -370,6 +370,96 @@ angular
         controller: 'CheckoutPaymentInfoCtrl',
         controllerAs: 'checkout/paymentInfo'
       })
+      .when('/envio-y-entrega', {
+        templateUrl: 'views/shippinganddelivery.html',
+        controller: 'ShippinganddeliveryCtrl',
+        controllerAs: 'shippinganddelivery'
+      })
+      .when('/cambios-devoluciones-y-cancelaciones', {
+        templateUrl: 'views/refundstext.html',
+        controller: 'RefundstextCtrl',
+        controllerAs: 'refundstext'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/pieles', {
+        templateUrl: 'views/manual/pieles.html',
+        controller: 'ManualPielesCtrl',
+        controllerAs: 'manual/pieles'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/aceros', {
+        templateUrl: 'views/manual/aceros.html',
+        controller: 'ManualAcerosCtrl',
+        controllerAs: 'manual/aceros'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/aluminios', {
+        templateUrl: 'views/manual/aluminios.html',
+        controller: 'ManualAluminiosCtrl',
+        controllerAs: 'manual/aluminios'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/cristales', {
+        templateUrl: 'views/manual/cristales.html',
+        controller: 'ManualCristalesCtrl',
+        controllerAs: 'manual/cristales'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/cromados', {
+        templateUrl: 'views/manual/cromados.html',
+        controller: 'ManualCromadosCtrl',
+        controllerAs: 'manual/cromados'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones', {
+        templateUrl: 'views/manual.html',
+        controller: 'ManualCtrl',
+        controllerAs: 'manual'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/maderas', {
+        templateUrl: 'views/manual/maderas.html',
+        controller: 'ManualMaderasCtrl',
+        controllerAs: 'manual/maderas'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/piezas-plasticas', {
+        templateUrl: 'views/manual/piezas-plasticas.html',
+        controller: 'ManualPiezasPlasticasCtrl',
+        controllerAs: 'manual/piezasPlasticas'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/textiles', {
+        templateUrl: 'views/manual/textiles.html',
+        controller: 'ManualTextilesCtrl',
+        controllerAs: 'manual/textiles'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/viniles', {
+        templateUrl: 'views/manual/viniles.html',
+        controller: 'ManualVinilesCtrl',
+        controllerAs: 'manual/viniles'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/vinilos', {
+        templateUrl: 'views/manual/vinilos.html',
+        controller: 'ManualVinilosCtrl',
+        controllerAs: 'manual/vinilos'
+      })
+      .when('/manual-de-cuidados-y-recomendaciones/pintura-electrostatica', {
+        templateUrl: 'views/manual/pintura-electrostatica.html',
+        controller: 'ManualPinturaElectrostaticaCtrl',
+        controllerAs: 'manual/pinturaElectrostatica'
+      })      
+      .when('/compra-fiable', {
+        templateUrl: 'views/securebuy.html',
+        controller: 'SecurebuyCtrl',
+        controllerAs: 'securebuy'
+      })
+      .when('/formas-de-pago', {
+        templateUrl: 'views/paymentmethods.html',
+        controller: 'PaymentmethodsCtrl',
+        controllerAs: 'paymentmethods'
+      })
+      .when('/preguntas-frecuentes', {
+        templateUrl: 'views/faq.html',
+        controller: 'FaqCtrl',
+        controllerAs: 'faq'
+      })
+      .when('/faq', {
+        templateUrl: 'views/faq.html',
+        controller: 'FaqCtrl',
+        controllerAs: 'faq'
+      })
       .otherwise({
         redirectTo: '/'
       });

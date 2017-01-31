@@ -139,7 +139,12 @@
           '/manual-de-cuidados-y-recomendaciones/textiles',
           '/manual-de-cuidados-y-recomendaciones/viniles',
           '/manual-de-cuidados-y-recomendaciones/vinilos',
-          '/manual-de-cuidados-y-recomendaciones/pintura-electrostatica'
+          '/manual-de-cuidados-y-recomendaciones/pintura-electrostatica',
+          '/cambios-devoluciones-y-cancelaciones',
+          '/envio-y-entrega',
+          '/compra-fiable',
+          '/formas-de-pago',
+          '/preguntas-frecuentes'
         ];
         var isPublicPath = function(path){
           return publicPaths.indexOf(path) > -1;
