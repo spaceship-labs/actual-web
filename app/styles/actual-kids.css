@@ -1,2 +1,26 @@
-.header-top-bar.actual-kids{background: #34B3E7!important;}
-.footer-bottom.actual-kids{background: #34B3E7!important;}
+.actual-kids .searcher-wrapper .searcher-btn{
+	background: #CC262F;
+	color: #fff;
+}
+
+.actual-kids .header-top-bar{background: #34B3E7!important;}
+.actual-kids .footer-bottom{background: #34B3E7!important;}
+.actual-kids .nav-categories-item-active,
+.actual-kids .nav-categories-item:hover{
+  background: #CC262F;
+}
+
+.actual-kids .listing-view-nav > li.active h3 a, 
+.actual-kids .listing-view-nav > li h3 a.active, 
+.actual-kids .listing-view-nav > li h3 a:hover,
+.actual-kids .listing-view-nav .icon-right-open.aside,
+.actual-kids .listing-view-nav-wrapper > h2 a.active,
+.actual-kids .listing-view-subnav a.active,
+.actual-kids .filters .head-filt i{
+	color: #34B3E7;
+}
+
+.actual-kids .filters .filter-block-price-btn,
+.actual-kids .filters .filters-head,
+.actual-kids .product-view .desc-head-item-on{background: #34B3E7}
+

@@ -1,2 +1,24 @@
-.header-top-bar.actual-studio{background:#000000!important;}
-.footer-bottom.actual-studio{background: #CC262F!important;}
+.actual-studio .searcher-wrapper .searcher-btn{
+	background: #CC262F;
+	color: #fff;
+}
+.actual-studio .header-top-bar{background:#000000!important;}
+.actual-studio .footer-bottom{background: #CC262F!important;}
+.actual-studio .nav-categories-item-active,
+.actual-studio .nav-categories-item:hover{
+  background: #CC262F;
+}
+
+.actual-studio .listing-view-nav > li.active h3 a, 
+.actual-studio .listing-view-nav > li h3 a.active, 
+.actual-studio .listing-view-nav > li h3 a:hover,
+.actual-studio .listing-view-nav .icon-right-open.aside,
+.actual-studio .listing-view-nav-wrapper > h2 a.active,
+.actual-studio .listing-view-subnav a.active,
+.actual-studio .filters .head-filt i{
+	color: #CC262F;
+}
+
+.actual-studio .filters .filter-block-price-btn,
+.actual-studio .filters .filters-head,
+.actual-studio .product-view .desc-head-item-on{background: #000}

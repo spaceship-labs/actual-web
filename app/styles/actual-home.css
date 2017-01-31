@@ -1,7 +1,10 @@
-.header-top-bar.actual-home{background: #092F57!important;}
-.footer-bottom.actual-home{background: #092F57!important;}
-
+.actual-home .header-top-bar{background: #092F57!important;}
+.actual-home .footer-bottom{background: #092F57!important;}
+.actual-home .nav-categories-item-active,
+.actual-home .nav-categories-item:hover{
+  background: #DDA901;
+}
 
 @media(max-width:600px){
-  .header-top-bar.actual-home{background: black!important}
+  .actual-home .header-top-bar{background: black!important}
 }
