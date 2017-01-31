@@ -10,8 +10,11 @@
       <!--ON SCROLL-->
 
       <div flex-gt-xs="15" class="logo" layout-align="center center">
-        <a href="/" >
-          <img src="images/actual-home-blanco.png" alt="Actual Group">
+        <a href="/" ng-switch on="main.siteTheme">
+          <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group">
+          <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group">
+          <img ng-switch-when="actual-kids" src="images/actual-kids-blanco.png" alt="Actual Group">
+          <img ng-switch-default src="images/actual-home-blanco.png" alt="Actual Group">
         </a>
       </div>
 
@@ -20,7 +23,9 @@
         flex-gt-xs="15"
         layout-align="center center"
       >
+        <!--
         <a ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
+        -->
       </div>
 
       <!--END ONLY ON SCROLL-->

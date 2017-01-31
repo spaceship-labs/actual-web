@@ -1,4 +1,4 @@
-// Generated on 2016-01-15 using generator-angular 0.15.1
+http://sandbox-actual-api-web.herokuapp.com// Generated on 2016-01-15 using generator-angular 0.15.1
 'use strict';
 
 // # Globbing
@@ -456,7 +456,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'sandbox',
-            apiEndpoint: 'http://sandbox-actual-api.herokuapp.com',
+            apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'sandbox'
           }
@@ -470,7 +470,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'demo',
-            apiEndpoint: 'http://demo-actual-api.herokuapp.com',
+            apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'demo'            
           }
@@ -484,7 +484,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://166.78.47.146',
+            apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
             adminUrl: 'http://admin.miactual.com',
             tokenPrefix: 'production'            
           }
@@ -498,7 +498,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'dev',
-            apiEndpoint: 'http://sandbox-actual-api.herokuapp.com',
+            apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
             adminUrl: 'http://localhost:3000',
             tokenPrefix: 'dev'
           }

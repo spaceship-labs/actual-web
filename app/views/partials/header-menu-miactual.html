@@ -2,9 +2,13 @@
     <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between stretch">
       <div flex-gt-sm="15" flex="100" class="logo" layout="row" layout-align="center center">
         <!--<i ng-click="isReplyFormOpen = !isReplyFormOpen" class="icon-paragraph-justify" hide-gt-xs></i>-->
-        <a href="/" >
-          <img src="images/Logo-A-Home.png" alt="Actual Group">
+        <a href="/" ng-switch on="main.siteTheme">
+          <img ng-switch-when="actual-home" src="images/Logo-A-Home.png" alt="Actual Group">
+          <img ng-switch-when="actual-studio" src="images/Logo-A-Studio.png" alt="Actual Group">
+          <img ng-switch-when="actual-kids" src="images/Logo-A-Kids.png" alt="Actual Group">
+          <img ng-switch-default src="images/Logo-A-Home.png" alt="Actual Group">
         </a>
+        
       </div>
       <nav flex-gt-sm="80" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false" class="nav-categories" >
         <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item" ng-class="{'nav-categories-item-active':main.activeModule == 'dashboard'}">
