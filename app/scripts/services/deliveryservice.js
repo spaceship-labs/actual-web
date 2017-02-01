@@ -74,12 +74,21 @@
     	return date;
     }
 
+    function isImmediateDelivery(delivery){
+    	var currentDate = convertDatetimeToDate(new Date());
+    	var deliveryDate = convertDatetimeToDate(delivery.date);
+    	return moment(currentDate).format() === moment(deliveryDate).format();
+    }
+
     function groupDeliveryDates(deliveries){
 	    var groups = [];
 	    for(var i= (deliveries.length-1); i>= 0; i--){
+	    	
 	    	var items = _.filter(deliveries, function(delivery){
-	    		if(delivery.companyFrom !== deliveries[i].companyFrom && 
-	    			convertDatetimeToDate(delivery.date) <= convertDatetimeToDate(deliveries[i].date)
+	    		if(
+	    			delivery.companyFrom !== deliveries[i].companyFrom && 
+	    			convertDatetimeToDate(delivery.date) <= convertDatetimeToDate(deliveries[i].date) && 
+	    			!isImmediateDelivery(delivery)
 	    		){
 	    			return true;
 	    		}
@@ -88,6 +97,7 @@
 	    		}
 	    	});
     		items.push(deliveries[i]);
+
 				if(items.length > 0){	    	
 					items = $filter('orderBy')(items, 'date');
 		    	var farthestDelivery = getFarthestDelivery(items);
