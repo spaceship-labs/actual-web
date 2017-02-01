@@ -144,7 +144,11 @@
           '/envio-y-entrega',
           '/compra-fiable',
           '/formas-de-pago',
-          '/preguntas-frecuentes'
+          '/preguntas-frecuentes',
+          '/quienes-somos',
+          '/filosofia',
+          '/nuestras-marcas',
+          '/nuestras-tiendas'
         ];
         var isPublicPath = function(path){
           return publicPaths.indexOf(path) > -1;

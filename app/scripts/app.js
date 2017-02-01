@@ -460,6 +460,36 @@ angular
         controller: 'FaqCtrl',
         controllerAs: 'faq'
       })
+      .when('/quienes-somos', {
+        templateUrl: 'views/aboutus.html',
+        controller: 'AboutusCtrl',
+        controllerAs: 'aboutus'
+      })
+      .when('/filosofia', {
+        templateUrl: 'views/philosophy.html',
+        controller: 'PhilosophyCtrl',
+        controllerAs: 'philosophy'
+      })
+      .when('/nuestras-marcas', {
+        templateUrl: 'views/ourbrands.html',
+        controller: 'OurbrandsCtrl',
+        controllerAs: 'ourbrands'
+      })
+      .when('/nuestras-tiendas', {
+        templateUrl: 'views/ourstores.html',
+        controller: 'OurstoresCtrl',
+        controllerAs: 'ourstores'
+      })
+      .when('/ourstores', {
+        templateUrl: 'views/ourstores.html',
+        controller: 'OurstoresCtrl',
+        controllerAs: 'ourstores'
+      })
+      .when('/aviso-de-privacidad', {
+        templateUrl: 'views/privacy.html',
+        controller: 'PrivacyCtrl',
+        controllerAs: 'privacy'
+      })
       .otherwise({
         redirectTo: '/'
       });

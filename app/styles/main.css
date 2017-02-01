@@ -3940,6 +3940,32 @@ padding-left: 16px;
   text-decoration: underline;
 }
 
+/*-------------------/
+  #PAYMENT-METHODS-TABLES
+/*------------------*/
+.payments-methods-info{padding: 20px 0;}
+.payments-methods-info table td{padding: 10px;}
+.payments-methods-info p{font-size: 12px;}
+
+/*-------------------/
+  #ABOUT-US
+/*---------*/
+.about-us ul li{margin: 8px 0}
+
+/*------------------
+  #OUR-BRANDS
+/*------------------*/
+.our-brands .brand-logo{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.our-brands .brand-logo img{max-width: 80%;}
+.our-brands .brand{padding: 0 12px}
+.our-brands .brand .slogan{text-align: center;}
+.our-brands .brand h3{text-align: center;}
+
+
 /*--------------/#FOOTER/*-------------*/
 #footer{min-height: 83px !important;}
 #footer .footer-menu{background: #F8F8F8;padding: 30px  0;}
