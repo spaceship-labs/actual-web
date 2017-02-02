@@ -1,0 +1,22 @@
+<div class="sitemap">
+	
+	<div class="container container-xxlg">
+	
+		<div class="sitemap-block" ng-repeat="mainCategory in main.categoriesTree">
+			<h3><a ng-href="/category/{{mainCategory.Handle}}">{{mainCategory.Name}}</a></h3>
+			<div layout="row">
+				<div flex ng-repeat="category in mainCategory.Childs | orderBy: 'Name' ">
+					<p><strong><a ng-href="/category/{{category.Handle}}">{{category.Name}}</a></strong></p>
+					<ul>
+						<li ng-repeat="subcategory in category.Childs | orderBy: 'Name' ">
+		          <a ng-href="/category/{{subcategory.Handle}}">
+	            	{{subcategory.Name}}
+	          	</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

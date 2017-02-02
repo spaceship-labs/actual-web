@@ -148,7 +148,10 @@
           '/quienes-somos',
           '/filosofia',
           '/nuestras-marcas',
-          '/nuestras-tiendas'
+          '/nuestras-tiendas',
+          '/aviso-de-privacidad',
+          '/terminos-y-condiciones',
+          '/seguridad'
         ];
         var isPublicPath = function(path){
           return publicPaths.indexOf(path) > -1;

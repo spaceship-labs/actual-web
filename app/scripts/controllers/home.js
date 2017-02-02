@@ -18,7 +18,7 @@ function HomeCtrl(
   dialogService
 ){
   var vm = this;
-  var mainDataListener;
+  var mainDataListener = function(){};
   angular.extend(vm,{
     areProductsLoaded: false,
     api: api,
@@ -54,8 +54,3 @@ HomeCtrl.$inject = [
   'api',
   'dialogService'
 ];
-angular.module('dashexampleApp').controller('movil', function($scope, $mdSidenav) {
-  $scope.openMenu = function() {
-    $mdSidenav('left').toggle();
-  };
-});

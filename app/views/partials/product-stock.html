@@ -2,6 +2,20 @@
   <h4 >
     <strong>DISPONIBILIDAD:</strong> quedan <strong>{{vm.available | number: 0}} {{ vm.getPiecesString(vm.available) }}</strong> disponibles
   </h4>
+
+  <div 
+    ng-if="vm.isLoadingDeliveries" 
+    layout-fill layout="row" 
+    layout-sm="column" 
+    layout-align="center center" 
+    class="loading-circle-small">
+    <md-progress-circular 
+      md-mode="indeterminate" 
+      class="md-accent" 
+      md-diameter="50">
+    </md-progress-circular>
+  </div>
+
   <div ng-if="vm.available">
     <table class="delivery-table">
       <tr 
@@ -13,7 +27,7 @@
             (en {{deliveryGroup.days}} días)
           </span>
           <span ng-show="vm.isImmediateDelivery(deliveryGroup.date)" class="immediate-delivery">
-            Entrega inmediata
+            Entrega en tienda
           </span> 
 
           <p>Debug</p>                       

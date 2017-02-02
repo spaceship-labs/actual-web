@@ -23,6 +23,7 @@
     <!--MAIN VIEW-->
     <div class="product-view" flex="75">
       <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
+
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
         <md-progress-circular 
           md-mode="indeterminate" 
@@ -30,6 +31,7 @@
           md-diameter="150">
         </md-progress-circular>
       </div>
+
       <!--PRODUCT VIEW CONTENT-->
       <section ng-if="!vm.isLoading" class="product-view-content">
 

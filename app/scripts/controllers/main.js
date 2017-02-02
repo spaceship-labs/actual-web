@@ -71,6 +71,7 @@
       siteTheme: SITE.name
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
+    $scope.mainData;
 
     init();
 
@@ -82,6 +83,9 @@
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
+
+      loadMainData();
+
       buildPointersSidenav();
       vm.isLoadingCategoriesTree = true;
       categoriesService.createCategoriesTree()
@@ -166,30 +170,8 @@
       category.isActive = !category.isActive;
     }
 
-    $scope.$on("$routeChangeSuccess", function(event, next, current) {
-      //Patch for autocomplete which doesn't remove
-      //TODO search a better solution
-      /*
-      angular.element('body')[0].style = '';
-      if(angular.element('.md-scroll-mask')[0]){
-          angular.element('.md-scroll-mask')[0].remove();
-      }
-
-      if(angular.element('md-dialog')){
-        angular.element('md-dialog').remove();
-      }
-
-      if(angular.element('.md-dialog-container')[0]){
-        angular.element('.md-dialog-container')[0].remove();
-      }
-      */
-
-      if($rootScope.user){
-        //loadMainData();
-      }
-    });
-
     function loadMainData(){
+      console.log('cargando main data', new Date());
       $rootScope.isMainDataLoaded = false;
       $q.all([
         loadActiveQuotation(),
@@ -197,13 +179,14 @@
         loadSiteInfo()
       ])
       .then(function(data){
-        var mainData = {
+        $scope.mainData = {
           activeQuotation: data[0],
           activeStore: data[1],
           site: data[2]
         };
-        $rootScope.$emit('mainDataLoaded', mainData);
+        $rootScope.$emit('mainDataLoaded', $scope.mainData);
         $rootScope.isMainDataLoaded = true;
+        console.log('termino main data', new Date());
       })
       .catch(function(err){
         console.log('err', err);
@@ -211,13 +194,16 @@
     }
 
     function loadActiveStore() {
+      console.log('loadActiveStore start', new Date());
       var deferred = $q.defer();
       userService.getActiveStore()
         .then(function(activeStore) {
           vm.activeStore = activeStore;
           $rootScope.activeStore = activeStore;
+          console.log('loadActiveStore end', new Date());
           //$rootScope.$emit('activeStoreAssigned', activeStore);
           deferred.resolve(activeStore);
+
         })
         .catch(function(err){
           console.log(err);
@@ -229,23 +215,20 @@
 
     function loadActiveQuotation(){
       var deferred = $q.defer();
+      console.log('start loadActiveQuotation', new Date());
+
       quotationService.getActiveQuotation()
         .then(function(res){
           var quotation = res.data;
           if(quotation && quotation.id){
-            quotationService.populateDetailsWithProducts(quotation)
-              .then(function(details){
-                quotation.Details = details;
-                quotation.DetailsGroups = deliveryService.groupDetails(details);
-                vm.activeQuotation = quotation;
-                $rootScope.activeQuotation = quotation;
-                $rootScope.$emit('activeQuotationAssigned', vm.activeQuotation);
-                deferred.resolve(vm.activeQuotation);
-              })
-              .catch(function(err){
-                console.log(err);
-                deferred.reject(err);
-              });
+
+            vm.activeQuotation = quotation;
+            $rootScope.activeQuotation = quotation;
+            $rootScope.$emit('activeQuotationAssigned', vm.activeQuotation);
+            deferred.resolve(vm.activeQuotation);            
+
+            console.log('finish loadActiveQuotation', new Date());
+
           }else{
             vm.activeQuotation = false;
             $rootScope.activeQuotation = false;
@@ -272,11 +255,13 @@
 
     function loadSiteInfo(){
       var deferred = $q.defer();
+      console.log('loadSiteInfo start', new Date());
       siteService.findByHandle('actual-group')
         .then(function(res){
           vm.site = res.data || {};
           $rootScope.site = res.data || {};
           deferred.resolve(vm.site);
+          console.log('loadSiteInfo end', new Date());
         })
         .catch(function(err){
           console.log(err);
@@ -306,12 +291,24 @@
 
     //$rootScope.$on("$locationChangeStart",function(event, next, current){
     $scope.$on('$routeChangeStart', function(event, next, current) {
-      
+      console.log('current', current);
+
       if(current){
         authService.runPolicies();
+  
+        //Only updating active quotation on every page change
+        console.log('loadActiveQuotation change page', new Date());
+        loadActiveQuotation()
+          .then(function(){
+            $scope.mainData.activeQuotation = $rootScope.activeQuotation;
+            $rootScope.$emit('mainDataLoaded', $scope.mainData);
+            $rootScope.isMainDataLoaded = true;
+            console.log('end loadActiveQuotation change page', new Date());
+          });
+
       }
 
-      loadMainData();
+      //loadMainData();
       vm.menuCategoriesOn = false;
       vm.menuCategories.forEach(function(category){
         category.isActive = false;
@@ -322,6 +319,7 @@
       }else{
         vm.searchingItemCode = false;
       }
+
 
     });
 
@@ -573,8 +571,7 @@
     'dialogService',
     'deliveryService',
     'commonService',
-    'ENV',
-    'SITE'
+    'ENV'
   ];
 
 })();

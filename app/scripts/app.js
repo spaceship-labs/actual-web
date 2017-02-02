@@ -480,15 +480,20 @@ angular
         controller: 'OurstoresCtrl',
         controllerAs: 'ourstores'
       })
-      .when('/ourstores', {
-        templateUrl: 'views/ourstores.html',
-        controller: 'OurstoresCtrl',
-        controllerAs: 'ourstores'
-      })
       .when('/aviso-de-privacidad', {
         templateUrl: 'views/privacy.html',
         controller: 'PrivacyCtrl',
         controllerAs: 'privacy'
+      })
+      .when('/terminos-y-condiciones', {
+        templateUrl: 'views/termsandconditions.html',
+        controller: 'TermsandconditionsCtrl',
+        controllerAs: 'termsandconditions'
+      })
+      .when('/seguridad', {
+        templateUrl: 'views/security.html',
+        controller: 'SecurityCtrl',
+        controllerAs: 'security'
       })
       .otherwise({
         redirectTo: '/'

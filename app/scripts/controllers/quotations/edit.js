@@ -32,6 +32,7 @@ function QuotationsEditCtrl(
   siteService
 ){
   var vm = this;
+  var mainDataListener = function(){};
   angular.extend(vm, {
     newRecord: {},
     api: api,
@@ -72,7 +73,7 @@ function QuotationsEditCtrl(
   if($rootScope.isMainDataLoaded){
     init($routeParams.id);
   }else{
-    var mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
+    mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
       init($routeParams.id);
     });
   }
@@ -83,6 +84,8 @@ function QuotationsEditCtrl(
     options              = options || {};
 
     vm.isLoading = true;
+    vm.isLoadingDetails = true;
+
     loadWarehouses();
     loadBrokers();
     showAlerts();
@@ -119,6 +122,9 @@ function QuotationsEditCtrl(
         var detailsStock = response.data;
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+
+        vm.isLoadingDetails = false;
+
         var packagesIds = vm.quotation.Details.reduce(function(acum, d){
           if(d.PromotionPackageApplied){
             acum.push(d.PromotionPackageApplied);
@@ -170,7 +176,7 @@ function QuotationsEditCtrl(
       //dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización');
     }    
     if($location.search().createdClient){
-      dialogService.showDialog('Cliente registrado');
+      //dialogService.showDialog('Cliente registrado');
     }
     if($location.search().stockAlert){
       quotationService.showStockAlert();
@@ -445,7 +451,7 @@ function QuotationsEditCtrl(
     }
 
     if(  quotationHasImmediateDeliveryProducts(vm.quotation) ){
-      dialogService.showDialog('Esta cotización contiene articulos de entrega inmediata');
+      dialogService.showDialog('Has elegido un artículo de "entrega en tienda", recuerda que el cliente se lo llevara por sus medios de la tienda al finalizar la orden de compra');
     }
 
     if(!vm.quotation.Order){
