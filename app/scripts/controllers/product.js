@@ -35,7 +35,7 @@ function ProductCtrl(
   var vm = this;
   var activeStoreId = localStorageService.get('activeStore'); 
   var activeStoreWarehouse = false;
-
+  var mainDataListener = function(){};
 
   angular.extend(vm, {
     customFullscreen: ($mdMedia('xs') || $mdMedia('sm') ),
@@ -57,7 +57,7 @@ function ProductCtrl(
   if($rootScope.isMainDataLoaded){
     init($routeParams.id);
   }else{
-    var mainDataListener = $rootScope.$on('mainDataLoaded', function(ev, mainData){
+    mainDataListener = $rootScope.$on('mainDataLoaded', function(ev, mainData){
       init($routeParams.id);
     });
   }
@@ -69,6 +69,8 @@ function ProductCtrl(
     vm.activeVariants        = {};
     vm.galleryImages         = [];
     vm.isLoading             = true;
+    vm.isLoadingDeliveries   = true;
+
 
     productService.getById(productId)
       .then(function(res){

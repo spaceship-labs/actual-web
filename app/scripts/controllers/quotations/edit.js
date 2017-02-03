@@ -32,6 +32,7 @@ function QuotationsEditCtrl(
   siteService
 ){
   var vm = this;
+  var mainDataListener = function(){};
   angular.extend(vm, {
     newRecord: {},
     api: api,
@@ -70,9 +71,10 @@ function QuotationsEditCtrl(
   });
 
   if($rootScope.isMainDataLoaded){
+    console.log('init if');
     init($routeParams.id);
   }else{
-    var mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
+    mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
       init($routeParams.id);
     });
   }
@@ -83,6 +85,8 @@ function QuotationsEditCtrl(
     options              = options || {};
 
     vm.isLoading = true;
+    vm.isLoadingDetails = true;
+
     loadWarehouses();
     loadBrokers();
     showAlerts();
@@ -100,6 +104,7 @@ function QuotationsEditCtrl(
 
         loadPaymentMethods();
 
+        console.log('details not populated', _.clone(vm.quotation.Details) );
         return quotationService.populateDetailsWithProducts(
           vm.quotation,{
             populate: ['FilterValues','Promotions']
@@ -107,6 +112,7 @@ function QuotationsEditCtrl(
         );
       })
       .then(function(details){
+        console.log('details post populateDetailsWithProducts', _.clone(details) );
         vm.quotation.Details = details;
         return quotationService.loadProductsFilters(vm.quotation.Details);
       })
@@ -117,8 +123,12 @@ function QuotationsEditCtrl(
       .then(function(response){
         var promisesArray = [];
         var detailsStock = response.data;
+        console.log('details', _.clone(vm.quotation.Details) );
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+
+        vm.isLoadingDetails = false;
+
         var packagesIds = vm.quotation.Details.reduce(function(acum, d){
           if(d.PromotionPackageApplied){
             acum.push(d.PromotionPackageApplied);

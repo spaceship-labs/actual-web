@@ -18,7 +18,7 @@ function HomeCtrl(
   dialogService
 ){
   var vm = this;
-  var mainDataListener;
+  var mainDataListener = function(){};
   angular.extend(vm,{
     areProductsLoaded: false,
     api: api,
