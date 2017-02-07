@@ -39,10 +39,12 @@
         getMainCategories: getMainCategories,
         getMainPromo: getMainPromo,
         loadVariants: loadVariants,
+        multipleGetByIds: multipleGetByIds,
         search: search,
         searchByFilters: searchByFilters,
         sortProductImages: sortProductImages,
         searchCategoryByFilters: searchCategoryByFilters,
+        syncProductByItemcode: syncProductByItemcode,
         substractProductStockByQuotationDetails: substractProductStockByQuotationDetails,
         delivery: delivery
       };
@@ -67,6 +69,16 @@
         return api.$http.post(url);
       }
 
+      function syncProductByItemcode(itemCode){
+        var url = '/product/syncproductbyitemcode/' + itemCode;
+        return api.$http.post(url);
+      }      
+
+      function multipleGetByIds(params){
+        var url = '/product/multiplefindbyids/';
+        return api.$http.post(url, params);
+      }
+
       function search(params){
         var url = '/product/search/';
         return api.$http.post(url, params);
@@ -83,7 +95,8 @@
 
 
       function formatProduct(product){
-        product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+        product.Name = capitalizeFirstLetter(product.ItemName);
+        //product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
         /*
         if( product.Name && isUpperCase(product.Name) ) {
           product.Name = capitalizeFirstLetter(product.ItemName);
@@ -93,7 +106,10 @@
         */
         if (product.icon_filename && product.icon_filename !== 'null') {
           product.icons = [
-            {url: api.baseUrl + '/uploads/products/' +  product.icon_filename, size:'default'}
+            {
+              url: api.baseUrl + '/uploads/products/' +  product.icon_filename, 
+              size:'default'
+            }
           ];
           api.imageSizes.avatar.forEach(function(size){
             product.icons.push({
@@ -115,7 +131,7 @@
           product.priceBefore = product.Price;
           product.Price = product.Price - ( ( product.Price / 100) * maxDiscount );
         }
-        else if($rootScope.activeStore.code){
+        else if($rootScope.activeStore && $rootScope.activeStore.code){
           var storeDiscountPriceKey = 'discountPrice_' + $rootScope.activeStore.code;
           if(product.Price !== product[storeDiscountPriceKey] ){
             product.priceBefore = product.Price;

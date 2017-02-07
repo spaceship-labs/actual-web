@@ -298,6 +298,14 @@ function ClientCreateCtrl(
     else{
       vm.isLoadingProgress = false;
       cancelProgressInterval();
+
+      if( !validateAddedContactsIfNeeded(vm.contacts) ){
+        dialogService.showDialog('Agregar direccion de envio', function(){
+          vm.activeTab = 3;
+        });
+        return;
+      }
+
       dialogService.showDialog('Datos incompletos');
 
       if( (formsValidationErrors && formsValidationErrors.length > 0) || !createPersonalForm.$valid){
@@ -314,10 +322,6 @@ function ClientCreateCtrl(
         errorString += errorTabs.join(',');
 
         dialogService.showDialog(errorString);
-      }
-
-      if( !validateAddedContactsIfNeeded(vm.contacts) ){
-        dialogService.showDialog('Agrega al menos una dirección de envio');
       }
 
     }

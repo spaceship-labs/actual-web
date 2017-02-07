@@ -68,28 +68,38 @@ function QuotationsEditCtrl(
     showBigTicketDialog: showBigTicketDialog,
     showDetailGroupStockAlert: showDetailGroupStockAlert,
     toggleRecord: toggleRecord,
+    deattachImage: deattachImage
   });
 
-  if($rootScope.isMainDataLoaded){
-    console.log('init if');
+  if($rootScope.activeStore){
     init($routeParams.id);
   }else{
-    mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
+    mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
       init($routeParams.id);
     });
   }
 
   function init(quotationId, options){
+    console.log('entered init.js', new Date());
+
     vm.activeStore       = $rootScope.activeStore;
     vm.promotionPackages = [];
     options              = options || {};
-
     vm.isLoading = true;
     vm.isLoadingDetails = true;
 
     loadWarehouses();
     loadBrokers();
     showAlerts();
+
+    console.log('start loading quotation', new Date());
+    /*var forceLatestData = true;
+    if($rootScope.activeQuotation){
+      if(quotationId === $rootScope.activeQuotation.id){
+        forceLatestData = false;
+      }
+    }
+    */
 
     quotationService.getById(quotationId)
       .then(function(res){
@@ -104,51 +114,33 @@ function QuotationsEditCtrl(
 
         loadPaymentMethods();
 
-        console.log('details not populated', _.clone(vm.quotation.Details) );
+        console.log('details not populated '+ new Date(), _.clone(vm.quotation.Details) );
         return quotationService.populateDetailsWithProducts(
           vm.quotation,{
-            populate: ['FilterValues','Promotions']
+            populate: ['FilterValues']
           }
         );
       })
       .then(function(details){
-        console.log('details post populateDetailsWithProducts', _.clone(details) );
+        console.log('details post populateDetailsWithProducts' + new Date(), _.clone(details) );
         vm.quotation.Details = details;
         return quotationService.loadProductsFilters(vm.quotation.Details);
       })
       .then(function(detailsWithFilters){
         vm.quotation.Details = detailsWithFilters;
+        vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+        vm.isLoadingDetails = false;
+        vm.isValidatingStock = true;
         return quotationService.getCurrentStock(vm.quotation.id);       
       })
       .then(function(response){
-        var promisesArray = [];
         var detailsStock = response.data;
-        console.log('details', _.clone(vm.quotation.Details) );
+        console.log('details' + new Date(), _.clone(vm.quotation.Details) );
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
 
-        vm.isLoadingDetails = false;
-
-        var packagesIds = vm.quotation.Details.reduce(function(acum, d){
-          if(d.PromotionPackageApplied){
-            acum.push(d.PromotionPackageApplied);
-          }
-          return acum;
-        },[]);
-        packagesIds = _.uniq(packagesIds);
-        packagesIds.forEach(function(pId){
-          promisesArray.push(packageService.getDetailedPackage(pId));
-        });
-        if(promisesArray.length > 0){
-          return $q.all(promisesArray);
-        }
-        return [];
-      })
-      .then(function(results){
-        //Mapping HTTP response
-        vm.promotionPackages = results.map(function(r){
-          return r.data;
-        });
+        console.log('end loading quotation', new Date());
+        vm.isValidatingStock = false;
         vm.isLoadingRecords = true;
         return quotationService.getRecords(vm.quotation.id);
       })
@@ -159,8 +151,10 @@ function QuotationsEditCtrl(
         vm.isLoadingRecords = false;
       })
       .catch(function(err){
-        dialogService.showDialog('Hubo un error: ' + (err.data || err) );
-        $log.error(err);
+        var error = err.data || err;
+        error = error ? error.toString() : '';
+        dialogService.showDialog('Hubo un error: ' + (error) );
+        $log.error(error);
       });
 
   }
@@ -247,7 +241,7 @@ function QuotationsEditCtrl(
     var appliesFor = false;
     if(detail.PromotionPackageApplied){
       appliesFor = 'packageDiscount';
-    }else if(detail.Product.mainPromo){
+    }else if(detail.discount){
       appliesFor = 'promoDiscount';
     }
     return appliesFor;
@@ -281,11 +275,16 @@ function QuotationsEditCtrl(
           }
           vm.newRecord = {};
           vm.isLoadingRecords = false;
+          dialogService.showDialog('Evento guardado');
         })
         .catch(function(err){
+          dialogService.showDialog('Hubo un error ' + (err.data || err) );
           $log.error(err);
           vm.isLoadingRecords = false;
         });
+
+    }else{
+      dialogService.showDialog('Datos incompletos, revisa los campos');
     }
   }
 
@@ -329,6 +328,12 @@ function QuotationsEditCtrl(
 
   function attachImage(file){
     vm.newRecord.file = file;
+  }
+
+  function deattachImage(){
+    if(vm.newRecord){
+      delete vm.newRecord.file;
+    }
   }
 
   function addNewProduct(){
@@ -443,6 +448,37 @@ function QuotationsEditCtrl(
     return quotationService.isValidStock(details);    
   }
 
+  function showInvoiceDataAlertIfNeeded(ev){
+    var controller = InvoiceDialogController;
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')); 
+
+    if(!vm.quotation.immediateDelivery || !vm.quotation.Client){
+      var deferred = $q.defer();
+      deferred.resolve(true);
+      return  deferred.promise;
+    }
+
+    return $mdDialog.show({
+      controller: [
+        '$scope', 
+        '$mdDialog',
+        '$location',
+        'quotation',
+        'client',
+        controller
+      ],
+      templateUrl: 'views/checkout/invoice-dialog.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen,
+      locals:{
+        quotation: vm.quotation,
+        client: vm.quotation.Client
+      }
+    });
+  }  
+
   function continueBuying(){
     if( !isValidStock(vm.quotation.Details) ){
       quotationService.showStockAlert();
@@ -454,33 +490,42 @@ function QuotationsEditCtrl(
       return;
     }
 
-    if(  quotationHasImmediateDeliveryProducts(vm.quotation) ){
-      dialogService.showDialog('Has elegido un artículo de "entrega en tienda", recuerda que el cliente se lo llevara por sus medios de la tienda al finalizar la orden de compra');
-    }
-
     if(!vm.quotation.Order){
-      vm.isLoading = true;
 
       //Not updating Details, not necessary
       var params = angular.copy(vm.quotation);
       delete params.Details;
 
-      quotationService.update(vm.quotation.id, params)
+
+      showInvoiceDataAlertIfNeeded()
+        .then(function(continueProcess){
+          if(!continueProcess){
+            return $q.reject();
+          }
+          vm.isLoading = true;
+          return quotationService.update(vm.quotation.id, params);
+        })
         .then(function(res){
           var quotationUpdated = res.data;
-          vm.isLoading = false;
+
+          if(  quotationHasImmediateDeliveryProducts(vm.quotation) ){
+            var immediateDeliveryMsg = 'Has elegido un artículo de "entrega en tienda", recuerda que el cliente se lo llevara por sus medios al finalizar la orden de compra';
+            dialogService.showDialog(immediateDeliveryMsg);
+          }
+
+
           if(vm.quotation.Client){
-            quotationService.setActiveQuotation(vm.quotation.id);
+            //quotationService.setActiveQuotation(vm.quotation.id);
             
             if(quotationUpdated.immediateDelivery){
               return $location.path('/checkout/paymentmethod/' + quotationUpdated.id);
             }
 
             $location.path('/checkout/client/' + vm.quotation.id);
-          
-          }else{
+          }
+          else{
             console.log('No hay cliente');
-            quotationService.setActiveQuotation(vm.quotation.id);
+            //quotationService.setActiveQuotation(vm.quotation.id);
             //localStorageService.set('inCheckoutProcess', true);
             $location.path('/continuequotation')
               .search({
@@ -488,6 +533,7 @@ function QuotationsEditCtrl(
                 goToCheckout:true
               });
           }
+          vm.isLoading = false;        
         })
         .catch(function(err){
           $log.error(err);

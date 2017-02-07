@@ -18,7 +18,6 @@ function UsersBrokerCtrl($rootScope, commonService, userService,localStorageServ
   vm.countries = commonService.getCountries();
 
   function update(form){
-    console.log(form);
     if(form.$valid){
       vm.isLoading = true;
       userService.update(vm.user).then(function(res){

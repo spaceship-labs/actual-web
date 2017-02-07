@@ -14,10 +14,23 @@
         getStores: getStores,
         getActiveStore: getActiveStore,
         getCashReport: getCashReport,
-        update: update
+        update: update,
+        sendPasswordRecovery: sendPasswordRecovery,
+        resetPassword: resetPassword
       };
 
       return service;
+
+      function resetPassword(params){
+        var url = '/user/update_password';
+        return api.$http.post(url, params);        
+      }
+
+      function sendPasswordRecovery(email){
+        var params = {email:email};
+        var url = '/user/send_password_recovery';
+        return api.$http.post(url, params);
+      }
 
       function getClients(page, params){
         var p      = page || 1;

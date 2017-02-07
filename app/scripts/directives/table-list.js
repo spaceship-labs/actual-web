@@ -10,6 +10,7 @@
       $scope.dtInstance = {};
       $scope.isExporting = false;
       $scope.currentOrderColumnIndex = 0;
+      $scope.wrapperElementId = '';
 
       $scope.showDestroyDialog = function(ev, id){
         dialogService.showDestroyDialog(ev, $scope.destroyFn, id);
@@ -38,15 +39,23 @@
             }
         })
         .withOption('order', getDefaultSortOption())
-        .withOption('initComplete', function() {
+        .withOption('initComplete', function(options) {
+          $scope.wrapperElementId = '#'+options.nTableWrapper.id;
+
           if($('#new-search').length <= 0){
-            $('<p class="sorting-by-label"></p>').appendTo('.dataTables_wrapper .top');
+            $('<p class="sorting-by-label"></p>').appendTo($scope.wrapperElementId + ' .dataTables_wrapper .top');
             createOrderByLabel();
-            $('<button/>').text('Buscar').attr('id', 'new-search').appendTo('.dataTables_filter');
+
+            if( $scope.clientSearch ){
+              $('<label class="populate-search-checkbox" for="'+$scope.wrapperElementId+'-checkbox"><input type="checkbox" id="'+$scope.wrapperElementId+'-checkbox" />Buscar por cliente | </label>')
+                .appendTo($scope.wrapperElementId + ' .dataTables_filter');
+            }
+
+            $('<button/>').text('Buscar').attr('id', 'new-search').appendTo($scope.wrapperElementId + ' .dataTables_filter');
 
             if($scope.exportQuery){
               $('<a class="export-button" href="" ng-click="exportToExcel()">Exportar registros</a>')
-                .appendTo('.dataTables_wrapper .top .sorting-by-label');
+                .appendTo($scope.wrapperElementId + ' .dataTables_wrapper .top .sorting-by-label');
               $compile($('.export-button'))($scope);
             }
 
@@ -55,11 +64,11 @@
           $('.dataTables_filter input').unbind();
           $('.dataTables_filter input').keypress(function(e){
             if(e.which == 10 || e.which == 13) {
-              $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
+              $scope.dtInstance.DataTable.search($($scope.wrapperElementId + ' .dataTables_filter input').val()).draw();
             }
           })
           $('#new-search').on('click', function() {
-              $scope.dtInstance.DataTable.search($('.dataTables_filter input').val()).draw();
+              $scope.dtInstance.DataTable.search($($scope.wrapperElementId + ' .dataTables_filter input').val()).draw();
           })
 
         })
@@ -92,7 +101,8 @@
           orderColumn = $scope.columns[$scope.currentOrderColumnIndex];
           columnName = orderColumn.label;
         }
-        $('.dataTables_wrapper .top .sorting-by-label').text('Ordenado por: '+ columnName);
+        $($scope.wrapperElementId + ' .dataTables_wrapper .top .sorting-by-label')
+          .text('Ordenado por: '+ columnName);
       }
 
       function getSortingColumnIndex(sorting){
@@ -146,11 +156,22 @@
 
         query.fields = [];
         query.filters = $scope.filters || false;
+        
+        var clientSearchCheckbox = document.getElementById($scope.wrapperElementId+'-checkbox');
+        if( clientSearchCheckbox && clientSearchCheckbox.checked ){
+          query.clientSearch = true;          
+        }else{
+          query.clientSearch = false;
+        }
 
         //Cleaning filters
         var aux = {};
         for(var key in query.filters){
-          if(query.filters[key] != 'none'){
+
+          if(query.filters[key] === true || query.filters[key] === false){
+            aux[key] = query.filters[key];
+          }
+          else if(query.filters[key] != 'none'){
             if(!isNaN(query.filters[key])){
               aux[key] = parseFloat(query.filters[key]);
             }else{
@@ -172,7 +193,6 @@
 
         $scope.query = query;
         $scope.page = page;
-        //console.log('query', $scope.query);
 
         $scope.apiResource(page,query)
           .then(
@@ -303,7 +323,7 @@
           var callback = function(json){console.log(json);}
           var resetPaging = false;
           if($scope.dtInstance){
-            var searchValue = $('.dataTables_filter input').val();
+            var searchValue = $($scope.wrapperElementId + ' .dataTables_filter input').val();
             $scope.dtInstance.DataTable.search(searchValue).draw();
           }
         }, 100);
@@ -372,7 +392,8 @@
           dateRange: '=',
           exportQuery: '=',
           exportColumns: '=',
-          createdRowCb: '='
+          createdRowCb: '=',
+          clientSearch: '='
         },
         templateUrl : 'views/directives/table-list.html'
       };

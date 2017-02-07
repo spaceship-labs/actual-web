@@ -90,7 +90,7 @@ function ClientProfileCtrl(
     if($location.search().createdClient){
 
       dialogService.showDialog('Cliente registrado', function(){
-        if($rootScope.activeQuotation){
+        if($rootScope.activeQuotation && $location.search().checkoutProcess){
           return $location.path('/quotations/edit/' + $rootScope.activeQuotation.id);
         }
         checkoutService.returnToCheckout();
@@ -156,6 +156,17 @@ function ClientProfileCtrl(
   function formatClient(client){
     client.Birthdate = client.Birthdate  ? client.Birthdate : new Date();
     client.FirstName = client.FirstName || angular.copy(client.CardName);
+
+    if(client.Contacts){
+      client.Contacts = client.Contacts.map(function(contact){
+        if(!contact.FirstName){
+          contact.FirstName = contact.Name;
+        }
+        return contact;
+      });
+    }
+
+
     vm.filtersQuotations = {Client: client.id};
     vm.filtersOrders = {Client: client.id};
     return client;
@@ -189,15 +200,18 @@ function ClientProfileCtrl(
       delete params.FiscalAddress;
       delete params.Contacts;
       console.log('params', params);
-      clientService.update(vm.client.CardCode, params).then(function (res){
-        console.log(res);
-        vm.isLoading = false;
-        dialogService.showDialog('Datos personales actualizados',checkoutService.returnToCheckout);
-      }).catch(function(err){
-        console.log(err);
-        dialogService.showDialog('Hubo un error, revisa los campos');
-        vm.isLoading = false;
-      });
+      clientService.update(vm.client.CardCode, params)
+        .then(function (res){
+          console.log(res);
+          vm.isLoading = false;
+          dialogService.showDialog('Datos personales actualizados',checkoutService.returnToCheckout);
+        }).catch(function(err){
+          console.log('err', err);
+          var error = err.data || err;
+          error = error ? error.toString() : '';
+          dialogService.showDialog('Hubo un error: ' + error );          
+          vm.isLoading = false;
+        });
     }else if(!isValidEmail){
       vm.isLoading = false;
       dialogService.showDialog('Email no valido');
@@ -247,7 +261,9 @@ function ClientProfileCtrl(
       })
       .catch(function(err){
         console.log(err);
-        dialogService.showDialog('Hubo un error');
+        var error = err.data || err;
+        error = error ? error.toString() : '';
+        dialogService.showDialog('Hubo un error: ' + error );          
         contact.isLoading = false;
       });
     }else if(!isValidEmail){
@@ -282,7 +298,9 @@ function ClientProfileCtrl(
         .catch(function(err){
           vm.isLoading = false;
           console.log(err);
-          dialogService.showDialog('Hubo un error');
+          var error = err.data || err;
+          error = error ? error.toString() : '';
+          dialogService.showDialog('Hubo un error: ' + error );          
         });
     }else if(!isValidEmail){
       vm.isLoading = false;

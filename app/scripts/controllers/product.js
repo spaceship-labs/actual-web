@@ -30,12 +30,14 @@ function ProductCtrl(
   deliveryService,
   cartService,
   commonService,
-  categoriesService
+  categoriesService,
+  dialogService
 ) {
   var vm = this;
   var activeStoreId = localStorageService.get('activeStore'); 
   var activeStoreWarehouse = false;
   var mainDataListener = function(){};
+  var activeQuotationListener = function(){};
 
   angular.extend(vm, {
     customFullscreen: ($mdMedia('xs') || $mdMedia('sm') ),
@@ -54,17 +56,19 @@ function ProductCtrl(
     sas: commonService.getSasHash()
   });
 
-  if($rootScope.isMainDataLoaded){
+
+  if($rootScope.activeStore){
     init($routeParams.id);
   }else{
-    mainDataListener = $rootScope.$on('mainDataLoaded', function(ev, mainData){
+    mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
       init($routeParams.id);
     });
-  }
+  }  
   
   //init($routeParams.id);
 
   function init(productId, reload){
+    console.log('start loading product', new Date());
     vm.filters               = [];
     vm.activeVariants        = {};
     vm.galleryImages         = [];
@@ -73,7 +77,12 @@ function ProductCtrl(
 
     productService.getById(productId)
       .then(function(res){
-        return productService.formatSingleProduct(res.data.data);
+        var productFound = res.data.data;
+        if(!productFound || !productFound.ItemCode){
+          dialogService.showDialog('No se encontro el articulo');
+        }
+
+        return productService.formatSingleProduct(productFound);
       })
       .then(function(fProduct){
         vm.product = fProduct;
@@ -98,25 +107,13 @@ function ProductCtrl(
         return productService.delivery(productId, activeStoreId);
       })
       .then(function(deliveries){
-        deliveries = $filter('orderBy')(deliveries, 'date');        
-        if($rootScope.activeQuotation){
-          deliveries = deliveryService.substractDeliveriesStockByQuotationDetails(
-            $rootScope.activeQuotation.Details, 
-            deliveries,
-            vm.product.id
-          );
-        }
-        vm.deliveries  = deliveries;
-        vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
-        vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
-        vm.available = deliveryService.getAvailableByDeliveries(deliveries);
-        if(vm.deliveries && vm.deliveries.length > 0){
-          vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
+        if($rootScope.activeQuotation || $rootScope.isActiveQuotationLoaded){
+          setUpDeliveries(deliveries);
         }else{
-          vm.productCart.quantity = 0;
-        }
-        vm.isLoadingDeliveries = false;
-
+          activeQuotationListener = $rootScope.$on('activeQuotationAssigned', function(e){
+            setUpDeliveries(deliveries);
+          });
+        }          
 
         return productService.addSeenTime(vm.product.ItemCode);
       })
@@ -138,6 +135,28 @@ function ProductCtrl(
     //Unsuscribing  mainDataListener
     mainDataListener();
   }
+
+  function setUpDeliveries(deliveries){
+    deliveries = $filter('orderBy')(deliveries, 'date');        
+    if($rootScope.activeQuotation){
+      deliveries = deliveryService.substractDeliveriesStockByQuotationDetails(
+        $rootScope.activeQuotation.Details, 
+        deliveries,
+        vm.product.id
+      );
+    }
+    vm.deliveries  = deliveries;
+    vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
+    vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
+    vm.available = deliveryService.getAvailableByDeliveries(deliveries);
+    if(vm.deliveries && vm.deliveries.length > 0){
+      vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
+    }else{
+      vm.productCart.quantity = 0;
+    }
+    vm.isLoadingDeliveries = false;
+    activeQuotationListener();  
+  } 
 
   function loadVariants(product){
     productService.loadVariants(product, $rootScope.activeStore)
@@ -224,6 +243,10 @@ function ProductCtrl(
 
 
   function addToCart($event){
+    if(vm.isLoadingDeliveries){
+      return;
+    }
+
     vm.isLoading = true;
     var productCartItems = cartService.getProductCartItems(
       vm.productCart.deliveryGroup,
@@ -267,7 +290,9 @@ function ProductCtrl(
 
 
   $scope.$on('$destroy', function(){
+    //unsuscribing listeners
     mainDataListener();
+    activeQuotationListener();
   });
 
 }
@@ -292,7 +317,8 @@ ProductCtrl.$inject = [
   'deliveryService',
   'cartService',
   'commonService',
-  'categoriesService'
+  'categoriesService',
+  'dialogService'
 ];
 /*
 angular.element(document).ready(function() {

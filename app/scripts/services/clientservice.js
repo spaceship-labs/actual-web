@@ -117,6 +117,7 @@
           client.FiscalAddress.U_Correos = angular.copy(client.E_Mail);
         }
 
+
         /*
         client.Contacts = client.Contacts.map(function(contact){
           if(!contact.E_Mail){

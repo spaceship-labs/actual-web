@@ -10,8 +10,19 @@
 angular.module('dashexampleApp')
   .controller('SearchCtrl', SearchCtrl);
 
-function SearchCtrl($location, $timeout,$routeParams, $q ,productService, dialogService){
+function SearchCtrl(
+  $scope,
+  $rootScope,
+  $location, 
+  $timeout,
+  $routeParams, 
+  $q ,
+  productService, 
+  dialogService
+){
   var vm = this;
+  var mainDataListener = function(){};
+
   vm.loadMore = loadMore;
   vm.searchByFilters = searchByFilters;
   vm.toggleColorFilter = toggleColorFilter;
@@ -23,7 +34,16 @@ function SearchCtrl($location, $timeout,$routeParams, $q ,productService, dialog
   vm.searchValues = [];
   vm.removeSearchValue = removeSearchValue;
 
-  init();
+  vm.isLoading = true;
+  vm.syncProcessActive = false;
+
+  if($rootScope.activeStore){
+    init();
+  }else{
+    mainDataListener = $rootScope.$on('activeStoreAssigned', function(ev){
+      init();
+    });
+  }  
 
   function init(){
     var keywords = [''];
@@ -36,18 +56,27 @@ function SearchCtrl($location, $timeout,$routeParams, $q ,productService, dialog
           var foundProduct = res.data.data;
           if(!foundProduct){
             vm.isLoading = false;
-            return $q.reject();
+            vm.syncProcessActive = true;
+            return $q.reject('Producto no encontrado');
+            //return $q.reject('Este producto no existe, verificando en SAP...');
           }
           return productService.formatSingleProduct(res.data.data);
         })
         .then(function(fProduct){
-            vm.isLoading = false;
-            vm.totalResults = 1;
-            vm.products = [fProduct];
+          vm.isLoading = false;
+          vm.totalResults = 1;
+          vm.products = [fProduct];
         })
         .catch(function(err){
-          //dialogService.showDialog('Hubo un error: \n ' + err);
+          console.log(err);
+          dialogService.showDialog(err);
           vm.isLoading = false;
+
+          /*
+          if(vm.syncProcessActive){
+            syncProduct(vm.searc.itemcode);
+          }*/
+
         });
 
     }
@@ -68,9 +97,11 @@ function SearchCtrl($location, $timeout,$routeParams, $q ,productService, dialog
       })
       .then(function(fProducts){
         vm.products = fProducts;
+        mainDataListener();
       })
       .catch(function(err){
         console.log(err);
+        mainDataListener();
       });
 
     }
@@ -79,6 +110,25 @@ function SearchCtrl($location, $timeout,$routeParams, $q ,productService, dialog
     productService.getAllFilters().then(function(res){
       vm.filters = res.data;
     });
+  }
+
+  function syncProduct(){
+    vm.isLoading = true;
+    productService.syncProductByItemcode(vm.search.itemcode)
+      .then(function(newProduct){
+        return productService.formatSingleProduct(newProduct);
+      })
+      .then(function(fProduct){
+        vm.isLoading = false;
+        vm.totalResults = 1;
+        vm.products = [fProduct];
+      })
+      .catch(function(err){
+        console.log('err', err);
+        var error = err.data || err;
+        error = error ? error.toString() : '';
+        dialogService.showDialog('Hubo un error: ' + error );          
+      });
   }
 
   function removeSearchValue(removeValue){
@@ -160,9 +210,15 @@ function SearchCtrl($location, $timeout,$routeParams, $q ,productService, dialog
     );
   }
 
+  $scope.$on('$destroy', function(){
+    mainDataListener();
+  });
+
 }
 
 SearchCtrl.$inject = [
+  '$scope',
+  '$rootScope',
   '$location',
   '$timeout',
   '$routeParams',

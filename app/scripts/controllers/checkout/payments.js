@@ -65,11 +65,12 @@ function CheckoutPaymentsCtrl(
 
   var EWALLET_TYPE = ewalletService.ewalletType;
   var CLIENT_BALANCE_TYPE = paymentService.clientBalanceType;
+  var mainDataListener = function(){};
 
   if($rootScope.isMainDataLoaded){
     init();
   }else{
-    var mainDataListener = $rootScope.$on('mainDataLoaded',function(e,data){
+    mainDataListener = $rootScope.$on('mainDataLoaded',function(e,data){
       init();
     });
   }
@@ -78,7 +79,20 @@ function CheckoutPaymentsCtrl(
     animateProgress();
     vm.isLoading = true;
 
-    quotationService.getById($routeParams.id, {payments:true}).then(function(res){
+    var forceLatestData = true;
+    if($rootScope.activeQuotation){
+      if($routeParams.id === $rootScope.activeQuotation.id){
+        forceLatestData = false;
+      }
+    }
+
+    var getParams = {
+      payments:true,
+      forceLatestData: forceLatestData
+    };
+
+    quotationService.getById($routeParams.id, getParams)
+      .then(function(res){
         vm.quotation = res.data;
         loadSapLogs(vm.quotation.id);
 
@@ -196,6 +210,14 @@ function CheckoutPaymentsCtrl(
       dialogService.showDialog('Fondos insuficientes');
       return false;
     }
+
+    if(vm.quotation.Client){
+      if(vm.activeMethod.currency === 'usd' && vm.quotation.Client.Currency === 'MXP'){
+        dialogService.showDialog('Pagos en dolares no disponibles para este cliente por configuración en SAP');
+        return false;      
+      }
+    }
+
     return vm.applyTransaction(null, vm.activeMethod, remaining);
   }
 
@@ -229,7 +251,7 @@ function CheckoutPaymentsCtrl(
   function updateVMQuoatation(newQuotation){
     vm.quotation.ammountPaid = newQuotation.ammountPaid;
     vm.quotation.paymentGroup = newQuotation.paymentGroup;
-    vm.quotation.Client = newQuotation.Client || vm.quotation.Client;            
+    //vm.quotation.Client = newQuotation.Client || vm.quotation.Client;            
     vm.quotation = setQuotationTotalsByGroup(vm.quotation);
     delete vm.activeMethod;
   }
@@ -310,7 +332,11 @@ function CheckoutPaymentsCtrl(
           console.log(err);
           vm.isLoadingPayments = false;
           vm.isLoading = false;
-          dialogService.showDialog('Error: \n' + err.data);
+          var error = err.data || err;
+          error = error ? error.toString() : '';
+          dialogService.showDialog('Hubo un error: ' + error );          
+          //
+          //dialogService.showDialog('Error: \n' + (err.data || err) );
         });
     }else{
       createOrder();
@@ -442,7 +468,8 @@ function CheckoutPaymentsCtrl(
           console.log('err', err);
           var errMsg = '';
           if(err){
-            errMsg = err.data || '';            
+            errMsg = err.data || err;
+            errMsg = errMsg ? errMsg.toString() : '';
             dialogService.showDialog('Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg);
           }
           loadSapLogs(vm.quotation.id);

@@ -124,6 +124,8 @@
         var currentPath = $location.path();
         var publicPaths = [
           '/',
+          '/forgot-password',
+          '/reset-password',
           '/politicas-de-entrega',
           '/politicas-de-garantia',
           '/politicas-de-almacenaje',
@@ -139,19 +141,7 @@
           '/manual-de-cuidados-y-recomendaciones/textiles',
           '/manual-de-cuidados-y-recomendaciones/viniles',
           '/manual-de-cuidados-y-recomendaciones/vinilos',
-          '/manual-de-cuidados-y-recomendaciones/pintura-electrostatica',
-          '/cambios-devoluciones-y-cancelaciones',
-          '/envio-y-entrega',
-          '/compra-fiable',
-          '/formas-de-pago',
-          '/preguntas-frecuentes',
-          '/quienes-somos',
-          '/filosofia',
-          '/nuestras-marcas',
-          '/nuestras-tiendas',
-          '/aviso-de-privacidad',
-          '/terminos-y-condiciones',
-          '/seguridad'
+          '/manual-de-cuidados-y-recomendaciones/pintura-electrostatica'
         ];
         var isPublicPath = function(path){
           return publicPaths.indexOf(path) > -1;

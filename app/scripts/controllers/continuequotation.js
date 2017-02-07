@@ -57,7 +57,7 @@ function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productSe
   function continueQuotationByClient(client){
     var params = {Client: client.id};
     quotationService.update($rootScope.activeQuotation.id, params).then(function(res){
-      quotationService.setActiveQuotation($rootScope.activeQuotation.id);
+      //quotationService.setActiveQuotation($rootScope.activeQuotation.id);
       if($location.search().goToCheckout){
         $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
       }

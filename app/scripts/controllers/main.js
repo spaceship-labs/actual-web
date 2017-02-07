@@ -67,7 +67,6 @@
       getStores: getStores,
       saveBroker: saveBroker,
       saveSource: saveSource,
-      adminUrl: ENV.adminUrl,
       siteTheme: SITE.name
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
@@ -85,6 +84,7 @@
       }
 
       loadMainData();
+      loadSiteInfo();
 
       buildPointersSidenav();
       vm.isLoadingCategoriesTree = true;
@@ -174,16 +174,15 @@
       console.log('cargando main data', new Date());
       $rootScope.isMainDataLoaded = false;
       $q.all([
-        loadActiveQuotation(),
         loadActiveStore(),
-        loadSiteInfo()
+        loadActiveQuotation(),        
       ])
       .then(function(data){
         $scope.mainData = {
-          activeQuotation: data[0],
-          activeStore: data[1],
-          site: data[2]
+          activeStore: data[0],
+          activeQuotation: data[1]
         };
+        console.log('$scope.mainData', $scope.mainData);
         $rootScope.$emit('mainDataLoaded', $scope.mainData);
         $rootScope.isMainDataLoaded = true;
         console.log('termino main data', new Date());
@@ -201,7 +200,7 @@
           vm.activeStore = activeStore;
           $rootScope.activeStore = activeStore;
           console.log('loadActiveStore end', new Date());
-          //$rootScope.$emit('activeStoreAssigned', activeStore);
+          $rootScope.$emit('activeStoreAssigned', activeStore);
           deferred.resolve(activeStore);
 
         })
@@ -220,17 +219,17 @@
       quotationService.getActiveQuotation()
         .then(function(res){
           var quotation = res.data;
+          $rootScope.isActiveQuotationLoaded = true;
           if(quotation && quotation.id){
             vm.activeQuotation = quotation;
             $rootScope.activeQuotation = quotation;
             $rootScope.$emit('activeQuotationAssigned', vm.activeQuotation);
             deferred.resolve(vm.activeQuotation);            
-
             console.log('finish loadActiveQuotation', new Date());
-
           }else{
             vm.activeQuotation = false;
             $rootScope.activeQuotation = false;
+            $rootScope.$emit('activeQuotationAssigned', false);
             deferred.resolve(false);
           }
         });
@@ -297,13 +296,17 @@
   
         //Only updating active quotation on every page change
         console.log('loadActiveQuotation change page', new Date());
+        $rootScope.isActiveQuotationLoaded = false;
         loadActiveQuotation()
           .then(function(){
+            console.log('scope.mainData', $scope.mainData);
+            $scope.mainData = $scope.mainData || {};
             $scope.mainData.activeQuotation = $rootScope.activeQuotation;
             $rootScope.$emit('mainDataLoaded', $scope.mainData);
             $rootScope.isMainDataLoaded = true;
             console.log('end loadActiveQuotation change page', new Date());
           });
+
       }
 
       //loadMainData();
@@ -569,7 +572,8 @@
     'dialogService',
     'deliveryService',
     'commonService',
-    'ENV'
+    'ENV',
+    'SITE'
   ];
 
 })();

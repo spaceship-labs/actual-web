@@ -13,6 +13,7 @@
 
         // Base Url
         api.baseUrl = ENV.apiEndpoint;
+        //api.baseUrl = 'http://166.78.47.146';
         //api.baseUrl = 'http://localhost:1337';
 
         api.sample = $resource(api.baseUrl + 'sample/sample.json');
@@ -44,8 +45,8 @@
         };
 
         api.imageSizes = {
-          avatar : ['600x600','593x331','80x80','50x50','184x73','177x171','196x140','201x201','1000x1000','300x300'],
-          gallery : ['110x105','593x331','600x600','1000x1000','300x300'],
+          avatar : ['300x300','600x600','1000x1000'],
+          gallery : ['300x300','600x600','1000x1000'],
         };
 
         api.$http = function(req) {

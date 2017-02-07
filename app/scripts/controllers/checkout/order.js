@@ -40,17 +40,33 @@ function CheckoutOrderCtrl(
     calculateBalance: orderService.calculateBalance
   });
 
+  function showImmediateDeliveryDialog(order){
+    if(order.Details){
+      var hasImmediateDelivery = order.Details.some(function(detail){
+        return detail.immediateDelivery;
+      });
+      if(hasImmediateDelivery){
+        dialogService.showDialog('Favor de entregarle al cliente los artículos que se llevara de la tienda por sus medios');
+      }
+    }
+  }
+
   function init(){
     //vm.isLoading = false;
     vm.isLoading = true;
     vm.isLoadingRecords = true;
 
     if($location.search().orderCreated){
-      dialogService.showDialog('Pedido y factura creados');
+      dialogService.showDialog('Pedido creado');
     }
 
     orderService.getById($routeParams.id).then(function(res){
       vm.order = res.data;
+
+      if($location.search().orderCreated){
+        showImmediateDeliveryDialog(vm.order);
+      }
+
       loadOrderQuotationRecords(vm.order);
       calculateEwalletAmounts(vm.order);
 
@@ -82,6 +98,9 @@ function CheckoutOrderCtrl(
     })
     .catch(function(err){
       console.log(err);
+      var error = err.data || err;
+      error = error ? error.toString() : '';
+      dialogService.showDialog('Hubo un error: ' + error );          
       vm.isLoading = false;
     });
 

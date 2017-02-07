@@ -18,8 +18,6 @@ angular.module('dashexampleApp')
       restrict: 'E',
       link: function postLink(scope) {
 
-        console.log('stockKey', scope.stockKey);
-
         scope.getCategoryBackground = function(handle){
           var image =  '/images/mesas.jpg';
           image = api.baseUrl + '/categories/' + handle + '.jpg';

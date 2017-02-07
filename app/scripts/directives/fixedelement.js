@@ -9,7 +9,6 @@
 angular.module('dashexampleApp')
   .directive('fixedElement', function ($window) {
     return function(scope, element, attrs) {
-        console.log(attrs);
         var top = attrs.top || 70;
         angular.element($window).bind("scroll", function() {
              if (this.pageYOffset >= top) {
