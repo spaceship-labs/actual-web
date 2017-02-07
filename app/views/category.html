@@ -15,87 +15,13 @@
     <aside flex-gt-sm="20" flex="100" hide-xs>
       <sidebar-categories
         categories-tree="main.categoriesTree"
-        selected-category-id="vm.category.id">
+        selected-category-id="vm.category.id"
+        active-store="main.activeStore">
       </sidebar-categories>
 
-      <section class="filters">
-        <h3 class="filters-head">FILTRAR RESULTADOS</h3>
-        <div class="filters-inner">
-          <div class="filter-block filter-block-prices">
-            <div class="head-filt" layout="row" layout-align="start center">
-              <i class="icon-right-open"></i> 
-              <h4><strong>PRECIO:</strong></h4>
-            </div>
-            <div class="filter-block-inner">
-
-              <div layout="row" layout-align="space-between center">
-                <div flex class="input-element input-element-from">
-                  <div class="input-element-inner">
-                    <input
-                      ng-model="vm.minPrice"
-                      ui-money-mask="0"
-                      placeholder="Min."
-                      type="text"
-                    >
-                  </div>
-                </div>
-                <span>a</span>
-                <div flex class="input-element input-element-to">
-                  <div class="input-element-inner">
-                    <input
-                      ng-model="vm.maxPrice"
-                      ui-money-mask="0"
-                      placeholder="Max."
-                      type="text"
-                    >
-                  </div>
-                </div>
-                <a href="#" class="filter-block-price-btn"
-                  ng-click="vm.getProductsByCategory()"
-                >
-                  <img src="images/arrow-right.png" alt="">
-                </a>
-              </div>
-
-
-            </div>
-          </div>
-
-          <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
-            <div class="head-filt" layout="row" layout-align="start center" ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
-              <i class="icon-right-open"></i> 
-              <h4><strong>{{filter.Name}}:</strong></h4>
-            </div>
-            <div ng-show="vm.filters[$index].active" class="filter-block-inner">
-
-              <div ng-if=" filter.Handle != 'color' " >
-                <md-checkbox
-                  ng-repeat="value in filter.Values"
-                  ng-model="value.selected"
-                  ng-change="vm.getProductsByCategory()"
-                  aria-label="Checkbox Indeterminate">
-                  {{value.Name}}
-                </md-checkbox>
-              </div>
-
-
-              <div ng-if=" filter.Handle == 'color' " class="color-picker-sp" layout="row" layout-wrap>
-                <a
-                  class="color-picker-sp-value"
-                  ng-repeat="value in filter.Values"
-                  ng-click="vm.toggleColorFilter(value, filter)"
-                  ng-style="{'background-color' : value.Code}"
-                  ng-class="{'active': value.selected}"
-                  href="#"
-                  flex>
-                  <span></span>
-                </a>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
+      <!--
+      <ng-include src="'views/partials/category-filters.html'"></ng-include>  
+      -->
     </aside>
     <!--END NAV-->
 
@@ -113,10 +39,7 @@
       </div>
 
       <div ng-if="!vm.isLoading" class="subs-container">
-        <div class="head-title" layout="row" layout-align="start center">
-          <i class="icon-right-open"></i>
-          <h2 class="listing-view-title">{{vm.category.Name}}</h2>
-        </div>
+        <h2 class="listing-view-title">{{vm.category.Name}}</h2>
         <!--SUBCATEGORIES LIST LEVEL 2-->
         <div 
           ng-if="vm.category.Childs.length > 0 && vm.showLevel2" 
@@ -129,6 +52,7 @@
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}"
             ng-if="subcategory[main.activeStore.code] > 0"
             flex-gt-sm="33" flex="100"
+
           >
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />            
           </div>
@@ -143,6 +67,7 @@
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}"
             ng-if="subcategory[main.activeStore.code] > 0"
             flex-gt-sm="33" flex="100"
+
           >
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
@@ -153,7 +78,7 @@
         <!--RESULTS-->
         <div class="results"
           infinite-scroll="vm.getProductsByCategory(true)"
-          infinite-scroll-disabled="vm.isLoadingProducts"
+          infinite-scroll-disabled="!(vm.totalProducts > vm.products.length && !vm.isLoadingProducts && vm.products.length > 0)"
           infinite-scroll-distance="0"
         >
           <h2 class="center-content">
@@ -170,7 +95,7 @@
             ng-cloak
           >
             <div
-               flex-gt-sm="33" flex-sm="45" flex="100"
+              flex-gt-sm="33" flex-sm="45" flex="100"
               class="listing-product-wrap"
               ng-repeat="product in vm.products track by product.ItemCode">
               <listing-product product="product"></listing-product>
@@ -179,6 +104,10 @@
 
         </div>
         <!--END RESULTS-->
+
+        <div ng-if="vm.isLoadingProducts" layout="row" layout-align="center center" class="loading-circle">
+          <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+        </div>
 
       </div>
     </div>
