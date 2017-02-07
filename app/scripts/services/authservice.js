@@ -166,11 +166,15 @@
               });
             }else{
               console.log('getUser');
-              userService.getUser(_user.id, {quickRead: true}).then(function(res){
-                _user = res.data.data;
-                localStorageService.set('user', _user);
-                $rootScope.user = _user;
-              });
+              userService.getUser(_user.id, {quickRead: true})
+                .then(function(res){
+                  _user = res.data.data;
+                  localStorageService.set('user', _user);
+                  $rootScope.user = _user;
+                })
+                .catch(function(err){
+                  console.log('err', err);
+                });
             }
         }else{
           logout();

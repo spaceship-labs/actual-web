@@ -71,6 +71,7 @@ function QuotationsEditCtrl(
   });
 
   if($rootScope.isMainDataLoaded){
+    console.log('init if');
     init($routeParams.id);
   }else{
     mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
@@ -103,6 +104,7 @@ function QuotationsEditCtrl(
 
         loadPaymentMethods();
 
+        console.log('details not populated', _.clone(vm.quotation.Details) );
         return quotationService.populateDetailsWithProducts(
           vm.quotation,{
             populate: ['FilterValues','Promotions']
@@ -110,6 +112,7 @@ function QuotationsEditCtrl(
         );
       })
       .then(function(details){
+        console.log('details post populateDetailsWithProducts', _.clone(details) );
         vm.quotation.Details = details;
         return quotationService.loadProductsFilters(vm.quotation.Details);
       })
@@ -120,6 +123,7 @@ function QuotationsEditCtrl(
       .then(function(response){
         var promisesArray = [];
         var detailsStock = response.data;
+        console.log('details', _.clone(vm.quotation.Details) );
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
         vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
 

@@ -221,6 +221,7 @@
             productsIds.push(detail.Product);
           });
           var params = {
+            items: 100,
             filters: {id: productsIds},
             populate_fields: options.populate || []
           };
@@ -229,10 +230,10 @@
             .then(function(res){
               return productService.formatProducts(res.data.data);
             })
-            .then(function(fProducts){
+            .then(function(formattedProducts){
               //Match detail - product
               quotation.Details.forEach(function(detail){
-                detail.Product = _.findWhere( fProducts, {id : detail.Product } );
+                detail.Product = _.findWhere( formattedProducts, {id : detail.Product } );
               });
               deferred.resolve(quotation.Details);
             })
@@ -389,39 +390,47 @@
 
       function loadProductsFilters(details){
         var deferred = $q.defer();
-        productService.getAllFilters({quickread:true}).then(function(res){
-          //Assign filters to every product
-          var filters = res.data;
-          details.forEach(function(detail){
-            filters = filters.map(function(filter){
-              filter.Values = [];
-              
-              if(detail.Product && detail.Product.FilterValues){
-                detail.Product.FilterValues.forEach(function(value){
-                  if(value.Filter === filter.id){
-                    filter.Values.push(value);
-                  }
-                });
+
+        if(details.length === 0){
+          deferred.resolve(details);
+          return deferred.promise;
+        }
+
+        productService.getAllFilters({quickread:true})
+          .then(function(res){
+            //Assign filters to every product
+            var filters = res.data;
+            details.forEach(function(detail){
+              filters = filters.map(function(filter){
+                filter.Values = [];
+                
+                if(detail.Product && detail.Product.FilterValues){
+                  detail.Product.FilterValues.forEach(function(value){
+                    if(value.Filter === filter.id){
+                      filter.Values.push(value);
+                    }
+                  });
+                }
+                
+                return filter;
+              });
+
+              filters = filters.filter(function(filter){
+                return filter.Values.length > 0;
+              });
+
+              if(detail.Product && detail.Product.Filters){
+                detail.Product.Filters = filters;
               }
-              
-              return filter;
+            
             });
 
-            filters = filters.filter(function(filter){
-              return filter.Values.length > 0;
-            });
+            deferred.resolve(details);
 
-            if(detail.Product && detail.Product.Filters){
-              detail.Product.Filters = filters;
-            }
-          
+          }).catch(function(err){
+            deferred.reject(err);
           });
 
-          deferred.resolve(details);
-
-        }).catch(function(err){
-          deferred.reject(err);
-        });
         return deferred.promise;
       }
 

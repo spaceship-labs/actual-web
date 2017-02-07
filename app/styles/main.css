@@ -57,6 +57,7 @@ md-dialog .md-button[ng-click="dialog.abort()"]{
 }
 
 .loading-circle{min-height: 250px;}
+.loading-circle-small{min-height: 60px;}
 .loading-circle .progress-bar{
   text-align: center;
   width: 80%;

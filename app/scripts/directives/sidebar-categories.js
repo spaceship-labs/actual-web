@@ -22,17 +22,21 @@ function SidebarCategories(
     scope:{
       categoriesTree: '=',
       selectedCategoryId: '=',
+      activeStore: '=?activeStore'
     },
     controller: ['$scope', '$rootScope' ,function($scope, $rootScope) {
       $scope.storeCode = false;
 
       $scope.init = function(){
-        console.log('init');
         $scope.isActiveOffers = false;
-        if($location.path() == '/ofertas'){
+        if($location.path() === '/ofertas'){
           $scope.isActiveOffers = true;
         }
-        if(!$scope.activeStore){
+
+        if($scope.activeStore){
+          $scope.storeCode = $scope.activeStore.code;
+        }
+        else{
           $scope.storeCode = 'productsNum';
         }
       };
@@ -55,8 +59,10 @@ function SidebarCategories(
         }
       });
 
-      $rootScope.$on('activeStoreAssigned', function(e, data){
-        $scope.activeStore = data;
+      var mainDataListener = function(){};
+      mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
+        $scope.activeStore = mainData.activeStore;
+        $scope.storeCode = $scope.activeStore.code;
       });
 
       $scope.showSelectedCategoryId = function(){
@@ -149,6 +155,7 @@ function SidebarCategories(
 
       $scope.$on('$destroy', function() {
         $scope.cleanUp();
+        mainDataListener();
       });
 
       $scope.init();

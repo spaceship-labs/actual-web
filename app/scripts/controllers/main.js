@@ -221,7 +221,6 @@
         .then(function(res){
           var quotation = res.data;
           if(quotation && quotation.id){
-
             vm.activeQuotation = quotation;
             $rootScope.activeQuotation = quotation;
             $rootScope.$emit('activeQuotationAssigned', vm.activeQuotation);
@@ -305,7 +304,6 @@
             $rootScope.isMainDataLoaded = true;
             console.log('end loadActiveQuotation change page', new Date());
           });
-
       }
 
       //loadMainData();
