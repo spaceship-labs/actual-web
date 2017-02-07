@@ -57,7 +57,10 @@
               ng-if="detailGroup.discountPercent > 0" 
               class="discount-label"
             >
-              -{{detailGroup.discountPercent}}%
+              -{{detailGroup.discountPercentPromos}}%
+              <span ng-if="detailGroup.bigticketDiscountPercentage > 0"> 
+                y -{{detailGroup.bigticketDiscountPercentage}}% adicional
+              </span>
             </p>
             <p 
               class="price-crossed"
@@ -84,37 +87,49 @@
         </div>
       </div>
 
-      <p class="bottom-text">
+      <p ng-if="!detailGroup.immediateDelivery" class="bottom-text">
         <strong>Entrega aproximada: </strong> {{detailGroup.shipDate | date: "d/MMM/yyyy"}}
       </p>
-      
-      <!--
+
+      <p ng-if="detailGroup.immediateDelivery" class="bottom-text">
+        <span class="immediate-delivery-label">Entrega en tienda</span>
+      </p>
+
       <p class="bottom-text" ng-repeat="detail in detailGroup.details">
         <strong>Entrega aproximada:</strong>
         {{detail.shipDate | date: "d/MMM/yyyy"}}
-        (en {{vm.daysDiff(detail.shipDate)}} días) | {{ vm.getWarehouseById(detail.shipCompanyFrom).WhsName }}  | Cantidad: {{detail.quantity}} | Valido: {{detail.validStock}}
+        (en {{vm.daysDiff(detail.shipDate)}} días)  
+        <span 
+          ng-if="detail.immediateDelivery"
+          class="immediate-delivery-label"
+        >
+          Entrega en tienda
+        </span>
+        | {{ vm.getWarehouseById(detail.shipCompanyFrom).WhsName }}  | Cantidad: {{detail.quantity}} | Valido: {{detail.validStock}}
       </p>
-      -->
       <p
         ng-if="
           vm.appliesForPackageOrPromotionDiscount(detailGroup) == 'packageDiscount'
         "
         class="bottom-text"
       >
-        Paquete: {{ vm.getPromotionPackageById(detailGroup.PromotionPackageApplied).Name }}
+        Paquete: {{detailGroup.discountName}}
       </p>
       <div 
         ng-if="vm.appliesForPackageOrPromotionDiscount(detailGroup) == 'promoDiscount'"
       >
-        <p
-          class="bottom-text">
-          Promoción: {{detailGroup.Product.mainPromo.publicName}}
+        <p class="bottom-text">
+          Promoción: {{detailGroup.discountName}}
         </p>
         <p class="bottom-text" ng-if="detailGroup.ewallet > 0">
           Beneficio monedero eléctronico: {{detailGroup.ewallet | currency}}
         </p>                  
       </div>
-   
+      <div ng-if="detailGroup.bigticketDiscountPercentage > 0">
+        <p class="bottom-text">
+          Descuento Big Ticket: -{{detailGroup.bigticketDiscountPercentage}}% adicional
+        </p>
+      </div>
     </div>
     <!--END ITEM DATA-->
 
@@ -137,14 +152,10 @@
     > 
       <div class="stock-alert-content">
         <p>
-          <a>
-            <i class="icon-alert"></i>
-          </a>
+          <a><i class="icon-alert"></i></a>
         </p>
         <p>
-          <a>
-            ALERTA
-          </a>
+          <a>ALERTA</a>
         </p>
       </div>
     </div>

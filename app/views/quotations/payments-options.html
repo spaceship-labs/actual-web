@@ -1,0 +1,37 @@
+<section class="payments-options-totals">
+		
+	<div layout="row" class="data-header">
+		<div flex="25" class="data-head"><p><strong>Formas de pago</strong></p></div>
+		<div flex="60" class="data-head"><p><strong>Tarjetas participantes</strong></p></div>
+		<div flex="15" class="data-head"><p><strong>Totales</strong></p></div>
+	</div>
+
+	<div layout="row">
+		<div flex="25" class="data-cell"><p>1 pago de contado</p></div>
+		<div flex="60" class="data-cell">
+			<p>
+				Efectivo, cheque, deposito, transferencia, Visa, Mastercard, American Express
+			</p>
+		</div>
+		<div flex="15" class="totals data-cell">
+			<p><strong>{{ vm.quotation.total | roundCurrency  }}</strong></p>
+		</div>
+	</div>	
+
+	<div 
+		ng-repeat="paymentGroup in vm.paymentMethodsGroups | filter: {group: '!1'}"
+	>
+		<div layout="row" class="method-row" ng-repeat="method in paymentGroup.methods">
+			<div flex="25" class="data-cell"><p>{{method.name}}</p></div>
+			<div flex="60" class="data-cell">
+				<p>
+					<span class="comma-separated" ng-repeat="card in method.cards">{{card}}</span>
+				</p>
+			</div>
+			<div flex="15" class="totals data-cell">
+				<p><strong>{{ method.total | roundCurrency  }}</strong></p>
+			</div>
+		</div>
+	</div>
+
+</section>

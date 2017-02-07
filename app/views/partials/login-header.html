@@ -56,13 +56,16 @@
         </select>
       </div>
 
+      <p ng-if="main.loginErr" class="error-msg">
+        {{main.loginErr}}
+      </p>
 
       <input class="action-btn" type="submit" value="Iniciar sesión">
 
     </form>
 
-    <p><a href="http://admin.miactual.com/auth/forgot-password">Olvide mi contraseña</a></p>
-
+    <p><a ng-href="/forgot-password">Olvide mi contraseña</a></p>
+    
     <!--
     <hr/>
     <h3>¿Nuevo en <strong>Mi actual?</strong></h3>

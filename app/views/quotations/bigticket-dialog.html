@@ -1,0 +1,47 @@
+<md-dialog class="bigticket-alert-dialog" aria-label="Alerta bigticket"  ng-cloak>
+  <div class="bigticket-alert-inner">
+		
+		<a 
+			href="#" 
+			ng-click="cancel()"
+			class="bigticket-alert-cancel">
+			x
+		</a>
+
+		<h2>Big ticket</h2>
+		<p>Esta oportunidad esta sujeta a un descuento extra Big Ticket. Favor de elegir el porcentaje correspondiente:</p>
+
+    <div class="input-element select-element-wrapper discount-input">
+      <label><strong>Descuento</strong></label>
+      <select 
+        ng-model="bigticketPercentage" 
+        class="select-element"
+        ng-options="percentage as percentage + '%' for percentage in getPercentages()"
+      >
+      </select>      
+    </div>
+
+		<div 
+			class="btns-section" 
+			layout="row"
+			layout-align="space-between start">
+			<div flex class="btns-section-block">
+				<a 
+					href="#" 
+					ng-click="cancel()"
+					class="action-btn action-btn-inline action-btn-delete">
+						Cancelar
+				</a>
+			</div>
+			<div flex class="btns-section-block">
+				<a 
+					href="#"
+					ng-click="applyPercentage()" 
+					class="action-btn action-btn-save action-btn-inline">
+						Aplicar
+				</a>
+			</div>
+		</div>
+
+	</div>
+</md-dialog>
