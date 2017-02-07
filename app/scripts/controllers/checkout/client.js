@@ -125,7 +125,7 @@ function CheckoutClientCtrl(
 
   function continueProcess(){
     if(!vm.quotation.Details || vm.quotation.Details.length === 0){
-      dialogService.showDialog('No hay aritculos en esta cotización');
+      dialogService.showDialog('No hay artículos en esta cotización');
       return;
     }
 
