@@ -498,7 +498,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'dev',
-            apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
+            apiEndpoint: 'http://localhost:1337',
             adminUrl: 'http://localhost:3000',
             tokenPrefix: 'dev'
           }

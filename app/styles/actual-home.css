@@ -4,6 +4,8 @@
 .actual-home .nav-categories-item:hover{
   background: #DDA901;
 }
+.actual-home .modal-header .profile-modal-header-btn{background: #092F57}
+
 
 @media(max-width:600px){
   .actual-home .header-top-bar{background: black!important}

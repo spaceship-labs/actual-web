@@ -1487,6 +1487,7 @@ md-backdrop.md-sidenav-backdrop{
   background: url(../images/arrow-down.png) center no-repeat;
   background-size: 100%;
   display: inline-block;
+  display: none;
   vertical-align: middle;
 }
 .listing-view-nav h3{margin: 0;}
