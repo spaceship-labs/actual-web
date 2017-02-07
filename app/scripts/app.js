@@ -85,49 +85,6 @@ angular
         templateUrl: 'views/addquotation.html',
         controller: 'AddquotationCtrl',
         controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService){
-            authService.dennyAccessBroker();
-            authService.dennyAccessStoreManager();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
-      .when('/clients/create', {
-        templateUrl: 'views/clients/create.html',
-        controller: 'ClientCreateCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
-      .when('/clients/profile/:id', {
-        templateUrl: 'views/clients/profile.html',
-        controller: 'ClientProfileCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
-      .when('/clients/list', {
-        templateUrl: 'views/clients/list.html',
-        controller: 'ClientsListCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService){
-            authService.dennyAccessBroker();
-            authService.dennyAccessStoreManager();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
       })
       .when('/user/profile', {
         templateUrl: 'views/users/profile.html',
@@ -140,61 +97,12 @@ angular
           }
         }
       })
-      .when('/cart/:id', {
-        templateUrl: 'views/cart.html',
-        controller: 'CartCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
-      .when('/quotations/list', {
-        templateUrl: 'views/quotations/list.html',
-        controller: 'QuotationsListCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope,authService){
-            authService.dennyAccessBroker();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
-      .when('/quotations/records', {
-        templateUrl: 'views/quotations/records.html',
-        controller: 'QuotationsRecordsCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService){
-            authService.dennyAccessBroker();
-            authService.dennyAccessStoreManager();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
       .when('/quotations/edit/:id', {
         templateUrl: 'views/quotations/edit.html',
         controller: 'QuotationsEditCtrl',
         controllerAs: 'vm',
         resolve: {
           isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
-      .when('/dashboard', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService){
-            authService.dennyAccessBroker();
-            authService.dennyAccessStoreManager();
             $rootScope.isMiActual = true;
             return true;
           }
@@ -226,45 +134,6 @@ angular
             return true;
           }
         }
-
-      })
-      .when('/continuequotation', {
-        templateUrl: 'views/continuequotation.html',
-        controller: 'ContinuequotationCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService){
-            authService.dennyAccessBroker();
-            authService.dennyAccessStoreManager();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-
-      })
-      .when('/commissions/list', {
-        templateUrl: 'views/commissions/list.html',
-        controller: 'CommissionsListCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-
-      })
-      .when('/orders/list', {
-        templateUrl: 'views/orders/list.html',
-        controller: 'OrdersListCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-
       })
       .when('/checkout/order/:id', {
         templateUrl: 'views/checkout/order.html',
@@ -277,48 +146,10 @@ angular
           }
         }
       })
-      .when('/refunds/:id', {
-        templateUrl: 'views/refunds.html',
-        controller: 'CheckoutRefundsCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
-      .when('/users/brokerprofile', {
-        templateUrl: 'views/users/broker.html',
-        controller: 'UsersBrokerCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
       .when('/ofertas', {
         templateUrl: 'views/offers.html',
         controller: 'OffersCtrl',
         controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-      })
-      .when('/refunds/products/:id', {
-        templateUrl: 'views/refunds/products.html',
-        controller: 'RefundsProductsCtrl',
-        controllerAs: 'vm'
-      })
-      .when('/refunds/payments/:id', {
-        templateUrl: 'views/refunds/payments.html',
-        controller: 'RefundsPaymentsCtrl',
-        controllerAs: 'vm'
       })
       .when('/politicas-de-entrega', {
         templateUrl: 'views/delivery-policy.html',

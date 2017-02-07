@@ -33,13 +33,18 @@ function SidebarCategories(
           $scope.isActiveOffers = true;
         }
 
+        console.log('$scope.activeStore', $scope.activeStore);
+
         if($scope.activeStore){
-          $scope.storeCode = $scope.activeStore.code;
+          $scope.storeCode = $scope.activeStore.code || 'productsNum';
         }
         else{
           $scope.storeCode = 'productsNum';
         }
+  
+        console.log('$scope.storeCode', $scope.storeCode);
       };
+
 
       $scope.$on('$routeChangeSuccess', function(next, current) {
         if($location.path() == '/ofertas'){

@@ -2,6 +2,6 @@
 
  angular.module('siteconfig', [])
 
-.constant('SITE', {name:'actual-kids'})
+.constant('SITE', {name:'actual-home'})
 
 ;

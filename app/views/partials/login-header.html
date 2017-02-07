@@ -42,20 +42,6 @@
         </div>
       </div>
 
-      <div class="input-element">
-        <select 
-          class="select-element input-element-inner" 
-          name="activeStore"
-          ng-model="main.logInForm.activeStoreId" 
-          ng-options="store.id as store.name for store in main.stores"
-          required
-        >
-          <option value="" disabled hidden>
-            Tienda
-          </option>
-        </select>
-      </div>
-
       <p ng-if="main.loginErr" class="error-msg">
         {{main.loginErr}}
       </p>
