@@ -141,14 +141,6 @@ function QuotationsEditCtrl(
 
         console.log('end loading quotation', new Date());
         vm.isValidatingStock = false;
-        vm.isLoadingRecords = true;
-        return quotationService.getRecords(vm.quotation.id);
-      })
-      .then(function(result){
-        if(result){
-          vm.quotation.Records = result.data;
-        }
-        vm.isLoadingRecords = false;
       })
       .catch(function(err){
         var error = err.data || err;

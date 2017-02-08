@@ -348,9 +348,14 @@
         }else{
           //Crear cotizacion con producto agregado
           var params = {
-            User: $rootScope.user.id,
+            //User: $rootScope.user.id,
             Details: [detail]
           };
+
+          if($rootScope.user){
+            params.User = $rootScope.user.id;
+          }
+
           create(params).then(function(res){
             var quotation = res.data;
             if(quotation){
