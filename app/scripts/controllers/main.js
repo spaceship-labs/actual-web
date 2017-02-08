@@ -197,6 +197,7 @@
       var deferred = $q.defer();
       userService.getActiveStore()
         .then(function(activeStore) {
+          console.log('activestore', activeStore);
           vm.activeStore = activeStore;
           $rootScope.activeStore = activeStore;
           console.log('loadActiveStore end', new Date());
