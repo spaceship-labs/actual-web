@@ -66,9 +66,8 @@ function OffersCtrl(
 
   function getProductsDeliveriesPromises(products){
     var promises    = [];
-    var activeStoreId = localStorageService.get('activeStore');
     for(var i = 0; i<products.length;i++){
-      promises.push(productService.delivery(products[i].ItemCode, activeStoreId));
+      promises.push(productService.delivery(products[i].ItemCode));
     }
     return promises;
   }

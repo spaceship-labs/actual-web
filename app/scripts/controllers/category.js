@@ -10,7 +10,12 @@
 angular.module('dashexampleApp')
   .controller('CategoryCtrl', CategoryCtrl);
 
-function CategoryCtrl($routeParams ,categoriesService, productService){
+function CategoryCtrl(
+  $routeParams,
+  categoriesService, 
+  productService, 
+  dialogService
+){
   var vm     = this;
   vm.filters = [];
   vm.subnavIndex = 0;
@@ -33,23 +38,38 @@ function CategoryCtrl($routeParams ,categoriesService, productService){
 
   function getCategories() {
     vm.isLoading = true;
-    categoriesService.getCategoryByHandle($routeParams.category).then(function(res){
-      vm.category = res.data;
-      var hasLevel2Categories = false;
-      var filters = vm.category.Filters.map(function(filter){
-        return filter.id;
-      });
-      productService.getAllFilters({ids: filters}).then(function(res){
-        vm.filters = res.data;
-      });
-      hasLevel2Categories = !!vm.category.Childs.find(function(child) {
-        return child.CategoryLevel === 2;
-      });
-      vm.showLevel2 = hasLevel2Categories;
-      vm.showLevel3 = !hasLevel2Categories;
-      vm.isLoading = false;
-    });
+    categoriesService.getCategoryByHandle($routeParams.category)
+      .then(function(res){
+        vm.category = res.data;
+        if(!vm.category){
+          dialogService.showDialog('Categoria no encontrada');
+        }
+        var hasLevel2Categories = false;
+        var filters = vm.category.Filters.map(function(filter){
+          return filter.id;
+        });
 
+        hasLevel2Categories = !!vm.category.Childs.find(function(child) {
+          return child.CategoryLevel === 2;
+        });
+        vm.showLevel2 = hasLevel2Categories;
+        vm.showLevel3 = !hasLevel2Categories;
+        vm.isLoading = false;
+      })
+      .catch(function(err){
+        console.log('err', err);
+      })
+
+  }
+
+  function loadFilters(){
+    productService.getAllFilters({ids: filters})
+      .then(function(res){
+        vm.filters = res.data;
+      })
+      .catch(function(err){
+        console.log('err',err);
+      })    
   }
 
   function getProductsByCategory(next){
@@ -96,4 +116,5 @@ CategoryCtrl.$inject = [
   '$routeParams',
   'categoriesService',
   'productService',
+  'dialogService'
 ];
