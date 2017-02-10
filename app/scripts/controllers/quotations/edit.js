@@ -488,15 +488,7 @@ function QuotationsEditCtrl(
       var params = angular.copy(vm.quotation);
       delete params.Details;
 
-
-      showInvoiceDataAlertIfNeeded()
-        .then(function(continueProcess){
-          if(!continueProcess){
-            return $q.reject();
-          }
-          vm.isLoading = true;
-          return quotationService.update(vm.quotation.id, params);
-        })
+        quotationService.update(vm.quotation.id, params)
         .then(function(res){
           var quotationUpdated = res.data;
 
@@ -506,10 +498,10 @@ function QuotationsEditCtrl(
           }
 
 
-          if(vm.quotation.Client){
+          if(vm.quotation.Client || true){
             //quotationService.setActiveQuotation(vm.quotation.id);
             
-            if(quotationUpdated.immediateDelivery){
+            if(quotationUpdated.immediateDelivery || true){
               return $location.path('/checkout/paymentmethod/' + quotationUpdated.id);
             }
 

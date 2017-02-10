@@ -114,7 +114,7 @@ function CheckoutPaymentsCtrl(
         }        
 
         if(!validateQuotationAddress(vm.quotation)){
-          $location.path('/quotation/edit/' + vm.quotation.id);
+          //$location.path('/quotations/edit/' + vm.quotation.id);
         }
 
         if(vm.quotation.Order){
@@ -163,8 +163,8 @@ function CheckoutPaymentsCtrl(
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
         
-        ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
-        paymentService.updateQuotationClientBalance(vm.quotation, vm.paymentMethodsGroups);
+        //ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
+        //paymentService.updateQuotationClientBalance(vm.quotation, vm.paymentMethodsGroups);
       
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
           vm.quotation = setQuotationTotalsByGroup(vm.quotation);
