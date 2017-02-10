@@ -1,4 +1,3 @@
-http://sandbox-actual-api-web.herokuapp.com// Generated on 2016-01-15 using generator-angular 0.15.1
 'use strict';
 
 // # Globbing

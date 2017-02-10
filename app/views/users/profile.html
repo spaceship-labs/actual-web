@@ -39,7 +39,7 @@
         </div>
         <div layout="row" layout-align="center center">
           <i class="icon-settings"></i>
-          <a href="http://admin.miactual.com/auth/forgot-password">
+          <a href="/forgot-password">
             MODIFICAR CONTRASEÑA
           </a>
         </div>
@@ -56,19 +56,26 @@
               <div class="input-container" layout="row" layout-wrap flex="100">
                 <div flex-gt-sm="33" flex="100" class="input-element">
                   <label>
-                    <p><strong>Nombre(s) <span class="hl-label">*</span></strong></p>
+                    <p><strong>Nombre(s)*</strong></p>
                   </label>
                   <div class="input-element-inner">
-                    <input type="text" ng-model="vm.user.firstName" required>
+                    <input 
+                      type="text" 
+                      ng-model="vm.user.firstName" 
+                      required
+                      ng-disabled="!vm.isActiveEditMode">
                   </div>
                 </div>
-                <div flex-gt-sm="33" flex="100" class="input-element"></div>
                 <div flex-gt-sm="33" flex="100" class="input-element">
                   <label>
-                    <p><strong>Género <span class="hl-label">*</span></strong></p>
+                    <p><strong>Género*</strong></p>
                   </label>
                   <div class="input-element-inner">
-                    <input type="text" ng-model="vm.user.lastName" required>
+                    <input 
+                      type="text" 
+                      ng-model="vm.user.lastName" 
+                      required
+                      ng-disabled="!vm.isActiveEditMode">
                   </div>
                 </div>
                 <div flex-gt-sm="33" flex="100"></div>
@@ -77,26 +84,38 @@
               <div class="input-container" layout="row" layout-wrap flex="100">
                 <div flex-gt-sm="33" flex="100" class="input-element">
                   <label>
-                    <p><strong>Teléfon fijo</strong> <span class="hl-label">*</span></p>
+                    <p><strong>Teléfon fijo</strong>*</p>
                   </label>
                   <div class="input-element-inner">
-                    <input type="email" ng-model="" required>
+                    <input 
+                      type="email" 
+                      ng-model="" 
+                      required
+                      ng-disabled="!vm.isActiveEditMode">
                   </div>
                 </div>
                 <div flex-gt-sm="33" flex="100" class="input-element">
                   <label>
-                    <p><strong>Teléfono celular</strong> <span class="hl-label">*</span></p>
+                    <p><strong>Teléfono celular</strong>*</p>
                   </label>
                   <div class="input-element-inner">
-                    <input type="email" ng-model="" required>
+                    <input 
+                      type="email" 
+                      ng-model="" 
+                      required
+                      ng-disabled="!vm.isActiveEditMode">
                   </div>
                 </div>
                 <div flex-gt-sm="33" flex="100" class="input-element">
                   <label>
-                    <p><strong>Email</strong> <span class="hl-label">*</span></p>
+                    <p><strong>Email</strong>*</p>
                   </label>
                   <div class="input-element-inner">
-                    <input type="email" ng-model="vm.user.email" required>
+                    <input 
+                      type="email" 
+                      ng-model="vm.user.email" 
+                      required
+                      ng-disabled="!vm.isActiveEditMode">
                   </div>
                 </div>
                 <div flex-gt-sm="33" flex="100"></div>
@@ -109,13 +128,26 @@
         <!--END FORM SECTION-->
 
         <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
-          <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
+
+
           <button
-            ng-submit="vm.update(updateForm)"
+            ng-click="vm.toggleEditMode()"
+            ng-if="!vm.isActiveEditMode"
             flex="50"
             class="form-view-btn form-view-btn-primary">
             Editar información
           </button>
+
+
+          <button
+            ng-submit="vm.update(updateForm)"
+            ng-if="vm.isActiveEditMode"
+            flex="50"
+            class="form-view-btn form-view-btn-primary">
+            Guardar información
+          </button>
+
+
         </div>
 
       </form>
