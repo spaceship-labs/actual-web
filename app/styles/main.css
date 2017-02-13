@@ -3534,13 +3534,13 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 /*------------*/
 .deposit-dialog .deposit-dialog-inner{
   padding: 15px 10px;
-  max-width: 700px;
-  min-width: 400px;
+  min-width: 800px;
+  min-height: 450px;
 }
 .deposit-dialog h2{
   font-weight: 400;
   font-size: 18px;
-  margin: 4px 0;
+  margin: 4px 0 10px 5px;
 }
 .deposit-dialog hr{
   height: 1px;
@@ -3588,6 +3588,14 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   max-width: 300px;
 }
 
+.input-element p{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.date-margin{
+  margin-right: 10px;
+}
 
 /*---------------/
   #AUTHORIZE DIALOG
