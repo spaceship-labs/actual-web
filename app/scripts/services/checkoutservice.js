@@ -83,6 +83,7 @@
 
       function isActiveMethod(method, quotation){
         if(!quotation){
+          console.log("si no hay contizacion");
           return false;
         }
 
@@ -93,6 +94,7 @@
         //console.log('min', min);
 
         if(remaining === 0){
+          console.log("si quedan 0");
           return false;
         }
 

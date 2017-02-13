@@ -39,26 +39,15 @@
     <div layout="row" class="quotation-data-row">
       <div flex="25">
         <label for="">Nombre del cliente</label>
-        <p>{{vm.quotation.Client.CardName || 'Sin cliente asignado'}}</p>
+        <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
       </div>
       <div flex="25">
         <label for="">E-mail</label>
         <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
       </div>      
       <div flex="25">
-        <label for="">Vendedor</label>
-        <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
-      </div>
-      <div flex="25" class="only-hide-print">
-        <p><label for="">Broker</label></p>
-        <select
-          chosen
-          data-placeholder-text-single="'Seleccionar un broker'"
-          ng-model="vm.quotation.Broker"
-          ng-options="broker.id as broker.firstName + ' ' + broker.lastName for broker in vm.brokers | orderBy:'firstName'"
-        >
-        </select>
-
+        <label>Hora</label>
+        <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>        
       </div>
     </div>
 
@@ -74,10 +63,6 @@
       <div flex="25">
         <label for="">Fecha de cotización</label>
         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
-      </div>
-      <div flex="25">
-        <label>Hora</label>
-        <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>        
       </div>
     </div>
 
@@ -160,21 +145,12 @@
           <input
             type="submit"
             value="CONTINUAR"
-            ng-if="!vm.quotation.Order && !vm.quotation.isClosed && vm.quotation.Client"
+            ng-if="!vm.quotation.Order && !vm.quotation.isClosed "
             ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock"
             ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock }"
             class="cart-view-btn print-btn"
           >
 
-          <input
-            type="submit"
-            value="ASIGNAR CLIENTE"
-            ng-disabled="!vm.isValidStock(vm.quotation.Details)"
-            ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.Client"
-            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) }"
-            class="cart-view-btn print-btn"
-          >
-          
 
           <div 
             class="alert-btn-wrap" 
@@ -230,24 +206,14 @@
 
   </form>
 
-  <ng-include 
-    src="'views/quotations/quotation-records.html'"></ng-include>    
-
   <section>
     <div class="hr"><hr /></div>
     <ng-include src="'views/quotations/payments-options.html'">
     </ng-include>
   </section>
-
+  
   <div class="hr"><hr /></div>
   
-  <ng-include 
-    src="'views/quotations/transfers-table.html'"></ng-include>    
-    
-  <div class="hr"><hr /></div>
-
-  <ng-include src="'views/quotations/quotation-seller-info.html'"></ng-include>
-
   <ng-include src="'views/quotations/quotation-texts.html'"></ng-include>
 
 </section>

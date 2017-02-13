@@ -7,7 +7,7 @@
     <li
       ng-repeat="method in paymentGroup.methods"
       ng-if="method.web"
-      ng-show="vm.isActiveMethod(method)"
+      ng-show="vm.isActiveMethod(method,vm.quotation)"
       layout="row"
       layout-align="space-between center"
     >
