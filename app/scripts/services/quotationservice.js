@@ -45,6 +45,7 @@
         getTotalsByUser: getTotalsByUser,
         getClosingReasons: getClosingReasons,
         getPaymentOptions: getPaymentOptions,
+        getPayments: getPayments,
         getRecordTypes: getRecordTypes,
         getSapOrderConnectionLogs: getSapOrderConnectionLogs,
         loadProductsFilters: loadProductsFilters,
@@ -478,6 +479,11 @@
         var url = '/quotation/'+id+'/paymentoptions';
         return api.$http.post(url);
       }
+
+      function getPayments(id){
+        var url = '/quotation/'+id+'/payments';
+        return api.$http.get(url);
+      }      
 
       function mapDetailsStock(details, detailsStock){
         var details = details.map(function(detail){

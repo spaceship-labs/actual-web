@@ -326,6 +326,21 @@ angular
         controller: 'SecurityCtrl',
         controllerAs: 'security'
       })
+      .when('/forgot-password', {
+        templateUrl: 'views/forgot-password.html',
+        controller: 'ForgotPasswordCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/reset-password', {
+        templateUrl: 'views/reset-password.html',
+        controller: 'ResetPasswordCtrl',
+        controllerAs: 'vm'
+      })      
+      .when('/continuequotation', {
+        templateUrl: 'views/continuequotation.html',
+        controller: 'ContinuequotationCtrl',
+        controllerAs: 'vm',
+      })      
       .otherwise({
         redirectTo: '/'
       });
@@ -367,30 +382,8 @@ angular
 
   .run(function(localStorageService, authService, jwtHelper, userService, $location, $rootScope, $route){
 
-      var _token = localStorageService.get('token') || false;
-      var _user  = localStorageService.get('user')  || false;
 
-      //Check if token is expired
-      if(_token){
-          var expiration = jwtHelper.getTokenExpirationDate(_token);
-          if(expiration <= new Date()){
-            console.log('expirado');
-            authService.logout(function(){
-              $location.path('/');
-            });
-          }else{
-            userService.getUser(_user.id).then(function(res){
-              _user = res.data.data;
-              console.log('getting _user');
-              console.log(_user);
-              localStorageService.set('user', _user);
-              $rootScope.user = _user;
-            });
-          }
-      }else{
-        console.log('no hay token');
-      }
-
+      authService.runPolicies();
       //Configures $location.path second parameter, for no reloading
 
       var original = $location.path;

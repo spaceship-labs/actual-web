@@ -301,6 +301,7 @@ function CheckoutPaymentsCtrl(
             vm.quotation.Payments.push(payment);
 
             updateVMQuoatation(quotation);
+            loadPayments();
 
             vm.isLoadingPayments = false;
             vm.isLoading = false;
@@ -343,6 +344,20 @@ function CheckoutPaymentsCtrl(
       //dialogService.showDialog('Cantidad total pagada');
     }
   }
+
+  function loadPayments(){
+    quotationService.getPayments(vm.quotation.id)
+      .then(function(res){
+        var payments = res.data;
+        vm.quotation.Payments = payments;
+        vm.isLoadingPayments = false;
+      })
+      .catch(function(err){
+        console.log('err', err);
+        dialogService.showDialog('Hubo un error, recarga la página');
+        vm.isLoadingPayments = false;
+      });
+  }  
 
   function applyTransaction(ev, method, ammount) {
     if(method){

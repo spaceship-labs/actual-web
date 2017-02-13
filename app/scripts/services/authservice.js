@@ -149,6 +149,7 @@
                 });
             }
         }else{
+          console.log('else');
           logout();
           if(isPrivatePath(currentPath)){
             $location.path('/');
