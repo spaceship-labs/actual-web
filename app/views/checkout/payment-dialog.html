@@ -47,8 +47,8 @@
             <label>
               <p><strong>CÓDIGO CVC</strong>*</p>
             </label>
-            <div class="input-element-inner">
-              <input type="text" ng-model="cvc" size="15" placeholder="999" required>
+            <div flex="50" class="input-element-inner">
+              <input type="text" ng-model="cvc" placeholder="999" required>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
             <label>
               <p><strong>PAÍS</strong>*</p>
             </label>
-            <div class="input-element-inner">
+            <div flex="85" class="input-element-inner">
               <input type="text" ng-model="cardCountry" required>
             </div>
           </div>
@@ -65,7 +65,7 @@
             <label>
               <p><strong>ESTADO</strong>*</p>
             </label>
-            <div class="input-element-inner">
+            <div flex="85" class="input-element-inner">
               <input type="text" ng-model="cardState" required>
             </div>
           </div>
@@ -73,38 +73,37 @@
             <label>
               <p><strong>CÓDIGO POSTAL</strong>*</p>
             </label>
-            <div class="input-element-inner">
+            <div flex="75" class="input-element-inner">
               <input type="text" ng-model="cardZip" required>
             </div>
           </div>
         </div>
         <div class="input-container" layout="row" layout-wrap flex="100">
-          <div class="input-element" flex="10">
+          <div class="input-element">
             <label>
               <p><strong>CIUDAD</strong>*</p>
             </label>
-            <div class="input-element-inner">
+            <div flex="90" class="input-element-inner">
               <input type="text" ng-model="cardCity" required>
             </div>
           </div>
-          <div class="input-element" flex="10">
+          <div flex="30" class="input-element">
             <label>
               <p><strong>COLONIA</strong>*</p>
             </label>
-            <div class="input-element-inner">
+            <div flex="95" class="input-element-inner">
               <input type="text" ng-model="cardAdress1" required>
             </div>
           </div>
-          <div class="input-element" flex="40">
+          <div flex class="input-element" >
             <label>
               <p><strong>CALLE Y NÚMERO</strong>*</p>
             </label>
-            <div class="input-element-inner">
+            <div flex="70" class="input-element-inner">
               <input type="text" ng-model="cardAdress2" required>
             </div>
           </div>
         </div>
-        <input type="submit" value="PAGAR">
     </form>    
    <!-- <div class="dialog-block" layout="row" layout-align="space-between end">
     <div flex="60">
