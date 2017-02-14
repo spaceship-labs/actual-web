@@ -38,64 +38,64 @@
       }
     ];
 
-   	var paymentsOptions = [
-   		{
-   			card: {label:'American Express', value:'american-express'},
-   			paymentTypes: ['single-payment-terminal'],
-   			storesTypes:['home','studio'],
-   			terminal: {label:'American Express', value:'american-express'}
-   		},
-   		{
-   			card: {label:'American Express', value:'american-express'},
-   			paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
-   			storesTypes:['studio'],
-   			terminal: {label:'American Express', value:'american-express'}
-   		},
-   		{
-   			card:{label:'Banamex', value:'banamex'},
-   			paymentTypes: ['single-payment-terminal'],
-   			storesTypes:['home', 'studio'],
-   			terminal: {label:'Banamex', value:'banamex'}
-   		},   		
-   		{
-   			card:{label:'Banamex', value:'banamex'},
-   			paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
-   			storesTypes:['home','studio'],
-   			terminal: {label:'Banamex', value:'banamex'}
-   		},
-   		{
-   			card:{label:'Santander', value:'santander'},
-   			paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
-   			storesTypes:['home', 'studio'],
-   			terminal: {label:'Santander', value:'santander'}
-   		},
-   		{
-   			card:{label:'Santander', value:'santander'},
-   			paymentTypes: ['single-payment-terminal'],
-   			storesTypes:['home', 'studio'],
-   			terminal: {label:'Banamex', value:'banamex'}
-   		},    		
-			{
-   			card:{label:'Bancomer', value:'bancomer'},
-   			paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
-   			storesTypes:['home','studio'],
-   			terminal: {label:'Bancomer', value:'bancomer'}				
-			},
-   		{
-   			card:{label:'Bancomer', value:'bancomer'},
-   			paymentTypes: ['single-payment-terminal'],
-   			storesTypes:['home', 'studio'],
-   			terminal: {label:'Banamex', value:'banamex'}
-   		},
+    var paymentsOptions = [
+      {
+        card: {label:'American Express', value:'american-express'},
+        paymentTypes: ['single-payment-terminal'],
+        storesTypes:['home','studio'],
+        terminal: {label:'American Express', value:'american-express'}
+      },
+      {
+        card: {label:'American Express', value:'american-express'},
+        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        storesTypes:['studio'],
+        terminal: {label:'American Express', value:'american-express'}
+      },
+      {
+        card:{label:'Banamex', value:'banamex'},
+        paymentTypes: ['single-payment-terminal'],
+        storesTypes:['home', 'studio'],
+        terminal: {label:'Banamex', value:'banamex'}
+      },      
+      {
+        card:{label:'Banamex', value:'banamex'},
+        paymentTypes: ['3-msi','6-msi','9-msi','12-msi','18-msi'],
+        storesTypes:['home','studio'],
+        terminal: {label:'Banamex', value:'banamex'}
+      },
+      {
+        card:{label:'Santander', value:'santander'},
+        paymentTypes: ['3-msi','6-msi','9-msi','12-msi'],
+        storesTypes:['home', 'studio'],
+        terminal: {label:'Santander', value:'santander'}
+      },
+      {
+        card:{label:'Santander', value:'santander'},
+        paymentTypes: ['single-payment-terminal'],
+        storesTypes:['home', 'studio'],
+        terminal: {label:'Banamex', value:'banamex'}
+      },        
+      {
+        card:{label:'Bancomer', value:'bancomer'},
+        paymentTypes: ['3-msi','6-msi','9-msi','12-msi'],
+        storesTypes:['home','studio'],
+        terminal: {label:'Bancomer', value:'bancomer'}        
+      },
+      {
+        card:{label:'Bancomer', value:'bancomer'},
+        paymentTypes: ['single-payment-terminal'],
+        storesTypes:['home', 'studio'],
+        terminal: {label:'Banamex', value:'banamex'}
+      },
       {
         card:{label:'Banorte', value:'banorte'},
         paymentTypes: ['single-payment-terminal'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banamex', value:'banamex'}        
-      }, 			    		   		
+      },                    
       {
         card:{label:'Banorte', value:'banorte'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },
@@ -107,7 +107,7 @@
       },                    
       {
         card:{label:'IXE', value:'ixe'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },  
@@ -119,7 +119,7 @@
       },                    
       {
         card:{label:'ScotiaBank', value:'scotiabank'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -131,7 +131,7 @@
       },                    
       {
         card:{label:'Inbursa', value:'inbursa'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -143,7 +143,7 @@
       },                    
       {
         card:{label:'Afirme', value:'afirme'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -155,7 +155,7 @@
       },                    
       {
         card:{label:'Banbajio', value:'banbajio'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -167,7 +167,7 @@
       },                    
       {
         card:{label:'Banjercito', value:'banjercito'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -179,7 +179,7 @@
       },                    
       {
         card:{label:'Bancamifel', value:'bancamifel'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       }, 
@@ -191,7 +191,7 @@
       },                    
       {
         card:{label:'Itaucard', value:'itaucard'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },
@@ -203,7 +203,7 @@
       },                    
       {
         card:{label:'Liverpool Premium Card', value:'liverpool-premium-card'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },                                                                                
@@ -215,7 +215,7 @@
       },                    
       {
         card:{label:'Banregio', value:'banregio'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },
@@ -227,12 +227,12 @@
       },                    
       {
         card:{label:'Banco Ahorro Famsa', value:'banco-ahorro-famsa'},
-        paymentTypes: ['3-msi','6-msi','12-msi','18-msi'],
+        paymentTypes: ['3-msi','6-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}        
       },      
-   	];
-		
+    ];
+    
 
    	function getPaymentOptionsByMethod(method){
    		var options = _.filter(paymentsOptions, function(option){

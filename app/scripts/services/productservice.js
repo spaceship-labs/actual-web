@@ -69,8 +69,13 @@
         return api.$http.post(url);
       }
 
+      function getMainPromo(id){
+        var url = '/product/mainpromo/' + id;
+        return api.$http.get(url);
+      }
+
       function syncProductByItemcode(itemCode){
-        var url = '/product/syncproductbyitemcode/' + itemCode;
+        var url = '/sync/syncproductbyitemcode/' + itemCode;
         return api.$http.post(url);
       }      
 
@@ -94,7 +99,8 @@
       }
 
 
-      function formatProduct(product){
+      function formatProduct(product, options){
+        options = options || {};
         product.Name = capitalizeFirstLetter(product.ItemName);
         //product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
         /*
@@ -122,21 +128,17 @@
             {url: '', size:'default'}
           ];
         }
-        
-        product.mainPromo = getMainPromo(product);
-        
+                
         if(product.mainPromo){
           var maxDiscount = product.mainPromo.discountPg1;
           product.maxDiscount = maxDiscount;
           product.priceBefore = product.Price;
           product.Price = product.Price - ( ( product.Price / 100) * maxDiscount );
         }
-        else if($rootScope.activeStore && $rootScope.activeStore.code){
-          var storeDiscountPriceKey = 'discountPrice_' + $rootScope.activeStore.code;
-          if(product.Price !== product[storeDiscountPriceKey] ){
-            product.priceBefore = product.Price;
-          }
-          product.Price = product[storeDiscountPriceKey] || product.Price;
+        else if(product.DiscountPrice && product.Discount > 0){
+          product.maxDiscount = product.Discount;
+          product.priceBefore = product.Price;
+          product.Price = product.DiscountPrice;
         }
         else{
           product.maxDiscount = 0;
@@ -147,46 +149,20 @@
 
       function formatSingleProduct(product){
         var deferred = $q.defer();
-        var activeStoreId = localStorageService.get('activeStore');
-        storeService.getPromosByStore(activeStoreId)
+        
+        getMainPromo(product.id)
           .then(function(res){
-            storePromotions = res.data;
-            var fProduct = formatProduct(product);
-            deferred.resolve(fProduct);
+            var mainPromo = res.data;
+            product.mainPromo = mainPromo;
+            product = formatProduct(product);
+            deferred.resolve(product);
           })
           .catch(function(err){
+            console.log(err);
             deferred.reject(err);
           });
-          
+
         return deferred.promise;
-      }
-
-      function getMainPromo(product){
-        if(product.mainPromo){
-          return product.mainPromo;
-        }
-
-        if(product.Promotions && product.Promotions.length > 0){
-          var indexMaxPromo = 0;
-          var maxPromo = 0;
-          
-          if(storePromotions){
-            //Intersection product promotions and storePromotions
-            product.Promotions = product.Promotions.filter(function(promotion){
-              return _.findWhere(storePromotions, {id:promotion.id});
-            });
-          }
-
-          product.Promotions.forEach(function(promo, index){
-            if(promo.discountPg1 >= maxPromo){
-              maxPromo = promo.discountPg1;
-              indexMaxPromo = index;
-            }
-          });
-          return product.Promotions[indexMaxPromo];
-        }else{
-          return false;
-        }
       }
 
       function sortProductImages(product){
