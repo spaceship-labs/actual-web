@@ -104,65 +104,27 @@
             </div>
           </div>
         </div>
-    </form>    
-   <!-- <div class="dialog-block" layout="row" layout-align="space-between end">
-    <div flex="60">
-      <p>
-        <strong>NOMBRE DEL TARJETAHAMBIENTE:</strong> 
-        <small >(Como aparece en el plástico)</small>
-      </p>
-      <div class="input-element">
-        <input type="text" name="card" ng-model="payment.card">
-      </div>
-    </div>  -->
-      <!--CARDs-->
-     <!-- <div flex="70" ng-if="payment.options.length > 0">
-        <div class="input-element select-element-wrapper">
-          <md-select 
-            ng-model="payment.card"
-            ng-change="onChangeCard(payment.card)" 
-            class="select-element"
-          >
-            <md-option
-              ng-repeat="option in payment.options track by $index"
-              ng-selected="$index==0"
-              ng-value="option.card.value">
-              {{option.card.label}}
-            </md-option>
-          </md-select>
+        <div class="input-container" layout="row" flex="100" layout-align="center center">
+          <div flex class="input-element dialog-row" >
+            
+                <div  >
+                  <div class="cart-totals" layout="row">
+                    <div >
+                      <h1><strong>TOTAL:</strong></h1>
+                    </div>
+                    <div class="dialog-price">
+                      <h1 >
+                        <strong>{{payment.maxAmmount | roundCurrency}} MXN</strong>
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div flex class="input-element dialog-row">
+            <p>Meses</p>
+          </div>
         </div>
-        <input type="hidden" name="card" ng-model="payment.card">
-      </div> -->
-      <!--END CARDS-->
-     <!-- MESES SIN INTERESES-->
-      <!--<div flex="50" ng-if="payment.msi">
-        <h3><strong>{{payment.msi}}</strong> Meses SIN INTERESES</h3>
-      </div>-->
-      <!--END MESES SIN INTERESES--> 
-    <!--</div>-->
-
-    <!--<div class="dialog-block" >
-      <br/>
-      <p><strong>Restante:</strong> {{payment.remaining | roundCurrency}}</p>-->
-      
-      <!--<p ng-if="payment.ammount > maxAmmount">
-        Máximo excedido
-      </p>
-      -->
-     <!-- <p class="error-msg" ng-if="errMsg">{{errMsg}}</p>
-    </div>
-
-    <div  layout="row" layout-align="space-between end">
-      <div flex="30" ng-if="!needsVerification"></div>
-      <a 
-        ng-click="save()"
-        ng-class="{'action-btn-disabled': isValidPayment() }"
-        ng-disabled="payment.msi" 
-        class="action-btn action-btn-save" 
-        href="#" 
-        flex="25">
-        <strong>GUARDAR</strong>
-      </a>
-    </div>-->
+    </form>
+    
   </div>
 </md-dialog>

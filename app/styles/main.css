@@ -3597,6 +3597,17 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin-right: 10px;
 }
 
+.dialog-price{
+  font-size: 11px;
+  color: #E2023F;
+}
+
+.dialog-row:nth-child(2){
+  border-left: 1px solid black;border-right: 1px solid black
+}
+.dialog-row{
+  padding: 0 25px;margin-top: 20px;font-size: 11px;
+}
 /*---------------/
   #AUTHORIZE DIALOG
 /*--------------*/
