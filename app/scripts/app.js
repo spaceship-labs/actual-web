@@ -341,6 +341,11 @@ angular
         controller: 'ContinuequotationCtrl',
         controllerAs: 'vm',
       })      
+      .when('/sitemap', {
+        templateUrl: 'views/sitemap.html',
+        controller: 'SitemapCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

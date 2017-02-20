@@ -46,6 +46,7 @@
       <div flex="75">
 
         <md-radio-group 
+          ng-if="!vm.isMinimumPaid(vm.quotation)"
           ng-model="vm.activeMethod"
         >
 
