@@ -475,9 +475,9 @@
         return api.$http.post(url);
       }
 
-      function getPaymentOptions(id){
+      function getPaymentOptions(id, params){
         var url = '/quotation/'+id+'/paymentoptions';
-        return api.$http.post(url);
+        return api.$http.post(url, params);
       }
 
       function getPayments(id){

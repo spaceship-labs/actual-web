@@ -1,4 +1,8 @@
-<section class="payments-options-totals">
+<div ng-if="vm.isLoadingPaymentMethods" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+  <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+</div>
+
+<section ng-if="!vm.isLoadingPaymentMethods" class="payments-options-totals">
 		
 	<div layout="row" class="data-header">
 		<div flex="25" class="data-head"><p><strong>Formas de pago</strong></p></div>
@@ -13,8 +17,11 @@
 				Efectivo, cheque, deposito, transferencia, Visa, Mastercard, American Express
 			</p>
 		</div>
-		<div flex="15" class="totals data-cell">
-			<p><strong>{{ vm.quotation.total | roundCurrency  }}</strong></p>
+		<div 
+			ng-if="vm.paymentMethodsGroups && vm.paymentMethodsGroups.length > 0" 
+			flex="15" 
+			class="totals data-cell">
+			<p><strong>{{ vm.paymentMethodsGroups[0].total | roundCurrency  }}</strong></p>
 		</div>
 	</div>	
 

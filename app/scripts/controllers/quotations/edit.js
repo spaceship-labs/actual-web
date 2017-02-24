@@ -183,13 +183,16 @@ function QuotationsEditCtrl(
   }
 
   function loadPaymentMethods(){
+    vm.isLoadingPaymentMethods = true;
     quotationService.getPaymentOptions(vm.quotation.id)
       .then(function(response){
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
+        vm.isLoadingPaymentMethods = false;
       })
       .catch(function(err){
         console.log('err', err);
+        vm.isLoadingPaymentMethods = false;
       });
   }
  
