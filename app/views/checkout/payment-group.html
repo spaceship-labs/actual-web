@@ -3,7 +3,7 @@
   layout="row" 
   layout-align="space-between center"
 >
-  <ul flex="75">
+  <ul flex="75" flex-md="85" flex-sm="85">
     <li
       ng-repeat="method in paymentGroup.methods"
       ng-if="method.web"
@@ -11,7 +11,11 @@
       layout="row"
       layout-align="space-between center"
     >
-      <div ng-attr-flex="{{method.cardsImages && '40' || '100' }}" >
+      <div 
+        ng-attr-flex="{{method.cardsImages && '40' || '100' }}"
+        ng-attr-flex-md="{{method.cardsImages && '50' || '100' }}"
+        ng-attr-flex-md="{{method.cardsImages && '60' || '100' }}"
+         >
 
         <md-radio-button
           ng-click="vm.chooseMethod(method , paymentGroup.group)"
@@ -30,7 +34,14 @@
         <span ng-if="method.msi" class="method-text">Meses</span>
         <div ng-if="method.msi" class="hl-label"><strong>Sin intereses</strong></div>
       </div>
-      <div ng-if="method.cardsImages" flex="60" class="bank-icons">
+      
+      <div 
+        ng-if="method.cardsImages" 
+        flex="60" 
+        flex-md="55"
+        flex-sm="55"
+        class="bank-icons"
+      >
         <img 
           ng-repeat="card in method.cardsImages"  
           ng-src="{{ vm.api.baseUrl + card}}" 
@@ -58,7 +69,9 @@
 
   </ul>
   <div 
-    flex="20" 
+    flex="20"
+    flex-md="15"
+    flex-sm="15" 
     class="method-block-prices"
     ng-show="!vm.areMethodsDisabled(paymentGroup.methods)"
   >

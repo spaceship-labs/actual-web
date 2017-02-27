@@ -12,8 +12,7 @@
     <p>RFC: AAC130902PR7</p>
   </div>
 
-  <h1 class="hide-print"><i class="icon-attachment"></i> <strong>OPORTUNIDAD #{{vm.quotation.folio}}</strong></h1>
-  <h1 class="show-print"><i class="icon-attachment"></i> <strong>COTIZACIÓN #{{vm.quotation.folio}}</strong></h1>
+  <h1><i class="icon-attachment"></i> <strong>COTIZACIÓN #{{vm.quotation.folio}}</strong></h1>
   <hr/>
 
 
@@ -37,30 +36,30 @@
       </p>
     </div>
     <div layout="row" class="quotation-data-row">
-      <div flex="25">
+      <div flex>
         <label for="">Nombre del cliente</label>
         <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
       </div>
-      <div flex="25">
+      <div flex>
         <label for="">E-mail</label>
         <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
       </div>      
-      <div flex="25">
+      <div flex>
         <label>Hora</label>
         <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>        
       </div>
     </div>
 
     <div layout="row" layout-align="start center" class="quotation-data-row">
-      <div flex="25">
+      <div flex>
         <label for="">Télefono fijo</label>
         <p>{{vm.quotation.Client.Phone1 || 'No proporcionado'}}</p>
       </div>
-      <div flex="25">
+      <div flex>
         <label for="">Télefono celular</label>
         <p>{{vm.quotation.Client.Cellular || 'No proporcionado'}}</p>
       </div>
-      <div flex="25">
+      <div flex>
         <label for="">Fecha de cotización</label>
         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
       </div>
@@ -83,9 +82,17 @@
     ng-submit="vm.continueBuying()" 
     class="cart-view container container-xxlg" 
   >
-    <div layout="row" layout-align="space-between start">
+    <div 
+      layout="row" 
+      layout-wrap
+      layout-align="space-between start">
 
-      <section flex="70" class="cart-list">
+      <section 
+        flex="70" 
+        flex-sm="100"
+        flex-xs="100"
+        class="cart-list"
+      >
         <h1 class="cart-title"><strong>ARTICULOS AGREGADOS</strong></h1>
         <div ng-if="vm.isLoadingDetails" layout="row" layout-align="center center" class="loading-circle">
           <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
@@ -114,7 +121,12 @@
 
       </section>
 
-      <aside flex class="cart-aside">
+      <aside 
+        flex 
+        flex-sm="100"
+        flex-xs="100"      
+        class="cart-aside"
+      >
         <h1 class="cart-title"><i class="icon-carro"><span>{{ vm.quotation.totalProducts }}</span></i> <strong>MI CARRITO</strong></h1>
 
         <div class="cart-summary">

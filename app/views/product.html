@@ -16,12 +16,17 @@
     <sidebar-categories
       selected-category-id="vm.lowestCategory.id"
       categories-tree="main.categoriesTree"
+      hide-xs
       flex="20">
     </sidebar-categories>
     <!--END NAV-->
 
     <!--MAIN VIEW-->
-    <div class="product-view" flex="75">
+    <div 
+      class="product-view" 
+      flex="75"
+      flex-xs="100"
+    >
       <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
 
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
@@ -35,8 +40,12 @@
       <!--PRODUCT VIEW CONTENT-->
       <section ng-if="!vm.isLoading" class="product-view-content">
 
-        <div layout="row">
-          <div class="product-view-gallery-wrap" flex="50">
+        <div layout="row" layout-wrap>
+          <div 
+            class="product-view-gallery-wrap" 
+            flex="50"
+            flex-sm="100"
+            flex-xs="100">
             <!--<ng-include src="'views/partials/product-gallery.html'"></ng-include>-->
             <product-gallery 
               ng-if="vm.product"
@@ -45,7 +54,12 @@
           </div>
 
           <!--PRODUCT VIEW DATA-->
-          <div flex="50" class="product-view-data">
+          <div 
+            flex="50" 
+            flex-sm="100"
+            flex-xs="100"
+            class="product-view-data"
+          >
 
             <ng-include src="'views/partials/product-features.html'"></ng-include>
             <ng-include src="'views/partials/product-variants.html'"></ng-include>

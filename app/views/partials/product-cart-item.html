@@ -6,10 +6,15 @@
       <strong>{{detailGroup.Product.Name || detailGroup.Product.ItemCode}}</strong>
     </a>
   </h3>
-  <div layout="row">
+
+  <div layout="row" layout-wrap>
 
     <!--ITEM PROD IMG-->
-    <div flex="40" class="cart-item-prod">
+    <div 
+      flex="40" 
+      flex-xs="100"
+      class="cart-item-prod"
+    >
       <div layout="row">
         <div class="cart-item-prod-img">
           <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
@@ -48,7 +53,11 @@
     <!--END ITEM PROD IMG-->
 
     <!--ITEM DATA-->
-    <div class="cart-item-data" flex="55">
+    <div 
+      class="cart-item-data" 
+      flex="55"
+      flex-xs="100"
+    >
       <div class="cart-item-data-inner">
 
         <div class="cart-item-data-prices" layout="row" layout-align="space-between center">

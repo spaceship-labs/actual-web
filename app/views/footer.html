@@ -144,11 +144,28 @@
 
     </div>
 
-    <div class="container container-xxlg footer-menu-bottom" layout="row" layout-wrap layout-align="center center">
-      <div class="box-bottom" layout="row" layout-align="center center" flex-gt-sm="33" flex="100">
-        <img src="images/paypal_visa_mastercard_amex_debit_new.png" alt="">
+    <div 
+      class="container container-xxlg footer-menu-bottom" 
+      layout="row" 
+      layout-wrap 
+      layout-align="center center"
+    >
+      <div 
+        class="box-bottom" 
+        layout="row" 
+        layout-align="center center" 
+        flex="33"
+        flex-xs="100"
+      >
+        <img class="payment-options-img" src="images/paypal_visa_mastercard_amex_debit_new.png" alt="">
       </div>
-      <div class="box-bottom" layout="row" layout-align="center center" flex-gt-sm="33" flex="100">
+
+      <div 
+        class="box-bottom social-networks" 
+        layout="row" 
+        layout-align="center center"  
+        flex="33"
+        flex-xs="100">
         <a href=""><img src="images/fb.png" alt=""></a>
         <a href=""><img src="images/tw.png" alt=""></a>
         <a href=""><img src="images/pinterest.png" alt=""></a>
@@ -159,14 +176,30 @@
         class="box-bottom" 
         layout="row" 
         layout-align="center center" 
-        flex-gt-sm="33" 
-        flex="100"
+        flex="33"
+        flex-xs="100"
         ng-switch on="main.siteTheme">
         
-          <img ng-switch-when="actual-home"  src="images/Logo-A-Home.png" alt="">
-          <img ng-switch-when="actual-studio" src="images/Logo-A-Studio.png" alt="">
-          <img ng-switch-when="actual-kids"  src="images/Logo-A-Kids.png" alt="">
-          <img ng-switch-default src="images/Logo-A-Home.png" alt="">
+          <img 
+            ng-switch-when="actual-home"  
+            class="logo" 
+            src="images/Logo-A-Home.png" 
+            alt="Actual home">
+          <img 
+            ng-switch-when="actual-studio" 
+            class="logo" 
+            src="images/Logo-A-Studio.png" 
+            alt="Actual studio">
+          <img 
+            ng-switch-when="actual-kids"  
+            class="logo" 
+            src="images/Logo-A-Kids.png" 
+            alt="Actual kids">
+          <img 
+            ng-switch-default 
+            class="logo" 
+            src="images/Logo-A-Home.png" 
+            alt="Actual home">
       
       </div>
     

@@ -4151,9 +4151,12 @@ padding-left: 16px;
 .menu-profile li{
   font-size: 12px;
   color: black;
+}
+.menu-profile li a{
+  color: black;
+  display: block;
   padding: 10px 36px;
 }
-.menu-profile li a{color: black}
 .menu-profile li:hover{background: #E9E8E8}
 
 #my-profile .box-head-profile{margin-top: 30px}
@@ -4168,6 +4171,7 @@ padding-left: 16px;
 #my-profile .head-profile h1{font-weight: bold;font-size: 30px;margin-left: 5px}
 #my-profile .head-profile i.icon-settings{font-size: 25px}
 #my-profile .head-profile a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
+#my-profile #profile-view{max-width: 900px;}
 
 #my-profile .input-container .input-element{padding: 15px}
 
@@ -4275,38 +4279,74 @@ padding-left: 16px;
 /*actual home*/
 
 
-@media screenand (max-width:1024px ){
+@media screen and (max-width:1200px ){
+  .checkout-view{padding: 20px;}
+  .checkout-view h3{font-size: 16px;}
+  .pay-method-wrap .method-block ul li strong{font-size: 16px;}
+
+  .pay-method-wrap .method-block .bank-icons img{max-width: 38px;}
+  .pay-method-wrap .method-block .bank-icons .card{max-width: 64px;}
+  .pay-method-wrap .method-block .price-now{font-size: 28px;}
+  .pay-method-wrap .method-block .hl-label{
+    padding: 4px 5px;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width:1024px ){
   .products-list-slider .slick-prev{left: 0;}
   .products-list-slider .slick-next{right: 0;}
   listing-product .listing-product-gallery .slick-prev,
   listing-product .listing-product-gallery .slick-next{  
     display: block!important;
   }
+
+  .pay-method-wrap .method-block .price-now{font-size: 22px;}
+  .cart-view .cart-view-btn{
+    font-size: 16px;
+    padding: 10px;
+  }
 }
 
 @media screen and (max-width: 960px ){
+  .form-view h1{
+    font-size: 20px;
+    margin: 4px 0;
+  }
+  .form-view h1 i{
+    font-size: 30px;
+    margin-right: 2px;
+  }
   .header-top-barfixed-head{position:static;}
-}
-
-@mediaprint{
-  #header,.steps-bar,.checkout-view > .checkout-title,
-  #records-view,#profile-view,.print-btn,
-  .records-view,
-  #footer{display: none!important;}
-  
-  .cash-report h1{font-size: 16px ;}
-  .quotation-view.client-signature{  display:flex;}
-  .quotation-view .company-data,.quotation-view .quotation-validity{display: block;}
-}
-
-@media(max-width:800px){
-
-  .header-top-bar-menu .header-top-bar-menu-item-name{min-width: 75px;}
+  .quotation-view{padding: 20px;}
+  .quotation-view .cart-list{margin: 0 0 20px;}
+  .quotation-view .quotation-data p{font-size: 14px}
+  .action-btn-print{
+    max-width: 200px;
+    margin: 0 auto;
+  }
 
 }
+
 
 @media(max-width:800px){
   .header-top-bar-menu{margin: 0 auto}
+  .header-top-bar-menu .header-top-bar-menu-item-name{min-width: 75px;}
+  .quotation-view .quotation-data{padding: 0}
+  .cart-view .cart-item{position: relative;}
+  .cart-view .cart-item-data-inner{padding: 10px 0}
+  .cart-view .cart-item-remove-wrap{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  .cart-view .cart-summary .cart-totals h1{font-size: 18px;}
+  .cart-view .cart-view-btn{
+    font-size: 16px;
+    padding: 10px;
+  }
+  .quotation-text-block h3{font-size: 16px};
+  .quotation-text-block p{font-size: 12px;}
 }
 
 @media(max-width:600px){
@@ -4329,8 +4369,35 @@ padding-left: 16px;
 
   .icon-menu-m, .logo-movil img{display: inherit;}
 
-  .header-top-bar{z-index: 999}
+  /*.header-top-bar{z-index: 999}*/
+  .header-top-bar.fixed-head .header-top-bar-menu{display: none;}
+
+  #footer .footer-menu-col h2{
+    font-size: 16px;
+    padding: 0;
+  }
+  #footer .footer-menu-col h2,
+  #footer .footer-menu-col ul{
+    margin: 4px 0;
+    padding: 0;
+  }
+  #footer .payment-options-img{max-width: 200px}
+  #footer .logo{max-width: 200px}
+  #footer .social-networks{margin: 4px 0;}
+  #footer .social-networks img{max-width: 45px;}
 
   /*aside{display: none} */
 
+}
+
+
+@media print{
+  #header,.steps-bar,.checkout-view > .checkout-title,
+  #records-view,#profile-view,.print-btn,
+  .records-view,
+  #footer{display: none!important;}
+  
+  .cash-report h1{font-size: 16px ;}
+  .quotation-view.client-signature{  display:flex;}
+  .quotation-view .company-data,.quotation-view .quotation-validity{display: block;}
 }
