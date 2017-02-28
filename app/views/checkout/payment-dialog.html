@@ -107,22 +107,38 @@
         <div class="input-container" layout="row" flex="100" layout-align="center center">
           <div flex="35" class="input-element dialog-row" >
             
-                <div  >
-                  <div class="cart-totals" layout="row">
-                    <div >
-                      <h1><strong>TOTAL:</strong></h1>
-                    </div>
-                    <div class="dialog-price">
-                      <h1 >
-                        <strong>{{payment.maxAmmount | roundCurrency}} MXN</strong>
-                      </h1>
-                    </div>
-                  </div>
+            <div 
+              class="ammount-input" 
+              layout="row" 
+              layout-align="start center"
+            >
+              <div class="input-element" flex="60">
+                <div class="input-element-inner">
+                  <input
+                    ng-if="maxAmmount && maxAmmount >=0"
+                    type="text"
+                    max="{{maxAmmount}}"
+                    ng-model="payment.ammount"
+                    class="with-maxammount"
+                    ng-currency
+                    >
+                  <input
+                    ng-if="!maxAmmount"
+                    type="text"
+                    ng-currency
+                    ng-model="payment.ammount"
+                    >
+
                 </div>
+              </div>
+              <div class="currency-label">
+                <span>MXN</span>
+              </div>
+            </div>
           </div>
           <div flex="35" class="input-element dialog-row ">
-            <p ng-show="!payment.msi" ><strong>1 Pago de </strong>{{payment.maxAmmount | roundCurrency}} MXN</p>
-            <p ng-show="payment.msi"><strong>{{payment.msi}} Meses SIN INTERESES de </strong>{{payment.maxAmmount / payment.msi | roundCurrency}} MXN</p>
+            <p ng-show="!payment.msi" ><strong>1 Pago de </strong>{{payment.ammount | roundCurrency}} MXN</p>
+            <p ng-show="payment.msi"><strong>{{payment.msi}} Meses SIN INTERESES de </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
             <small>*Precios en Pesos Mexicanos con impuestos incluidos.</small>
 
           </div>
