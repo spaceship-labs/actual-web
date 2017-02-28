@@ -16,8 +16,22 @@
             <label>
               <p><strong>TIPO DE TARJETA</strong>*</p>
             </label>
-            <div flex="70" class="input-element-inner">
-              <input type="text" ng-model="payment.cardType" required>
+            <div flex="70" ng-if="payment.options.length > 0">
+              <div class="input-element select-element-wrapper">
+                <md-select 
+                  ng-model="payment.card"
+                  ng-change="onChangeCard(payment.card)" 
+                  class="select-element"
+                >
+                  <md-option
+                    ng-repeat="option in payment.options track by $index"
+                    ng-selected="$index==0"
+                    ng-value="option.card.value">
+                    {{option.card.label}}
+                  </md-option>
+                </md-select>
+              </div>
+              <input type="hidden" name="card" ng-model="payment.card">
             </div>
           </div>
         </div>
