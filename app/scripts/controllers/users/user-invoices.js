@@ -8,10 +8,22 @@
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('UsersUserInvoicesCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('UsersUserInvoicesCtrl', UsersUserInvoicesCtrl);
+
+function UsersUserInvoicesCtrl(
+  $rootScope, 
+  $window, 
+  $location, 
+  $mdDialog, 
+  commonService, 
+  userService,
+  authService, 
+  localStorageService,
+  paymentService
+){
+  var vm = this;
+  angular.extend(vm,{
+    user: angular.copy($rootScope.user),
   });
+
+}

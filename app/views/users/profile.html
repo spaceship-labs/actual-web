@@ -1,25 +1,14 @@
 <div id="my-profile" layout="row" layout-wrap>
+
   <div class="menu-profile" flex-gt-xs="25" flex="100">
     <ng-include src="'views/users/menu-profile.html'"></ng-include>
   </div>
-  <div flex hide-sm hide-xs></div> 
-   <div flex-gt-xs="70" flex="100">
+
+  <div flex-gt-xs="70" flex="100">
     <section id="profile-view" class="container container-lg">
-      <h1 class="principal-icon" layout="row" layout-align="center center" ><i class="icon-login"></i> </h1>
-        <div class="box-head-profile" layout="row" layout-xs="column" layout-align="center center" >
-          <div layout="column" layout-align="center center" class="info-row">
-            <div flex><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></div>
-            <div flex layout-align="center center"><p>NOMBRE(S)</p></div>
-          </div>
-          <div layout="column" layout-align="center center" class="info-row">
-            <div flex><strong>13. 09. 85</strong></div>
-            <div flex layout-align="center center"><p>CUMPLEAÑOS</p></div>
-          </div>
-          <div layout="column" layout-align="center center" class="info-row">
-            <div flex><strong>$1,561.50 MXN</strong></div>
-            <div flex layout-align="center center"><p>MI MONEDERO</p></div>
-          </div> 
-        </div>
+
+      <ng-include src="'views/users/box-head-profile.html'"></ng-include>
+
       <div class="head-profile" layout="row" layout-xs="column" layout-align="space-between center">
         <div layout="row" layout-align="center center">
             <i class="icon-login"></i>
@@ -78,7 +67,7 @@
                   </label>
                   <div class="input-element-inner">
                     <input 
-                      type="email" 
+                      type="text" 
                       ng-model="vm.user.phone"
                       required
                       ng-disabled="!vm.isActiveEditMode">
@@ -90,7 +79,7 @@
                   </label>
                   <div class="input-element-inner">
                     <input 
-                      type="email" 
+                      type="text" 
                       ng-model="vm.user.mobilePhone"
                       required
                       ng-disabled="!vm.isActiveEditMode">
