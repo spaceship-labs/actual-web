@@ -87,13 +87,11 @@ function TerminalController(
       return (
         $scope.isMinimumValid() &&
         ($scope.payment.ammount <= $scope.maxAmmount) &&
-        isValidVerificationCode() &&
         $scope.payment.ammount >= $scope.payment.min
       );
     }
     return (
       $scope.payment.ammount && 
-      isValidVerificationCode() &&
       $scope.payment.ammount >= $scope.payment.min        
     );
   };
