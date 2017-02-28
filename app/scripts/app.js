@@ -171,30 +171,30 @@ angular
         controller: 'WarrantyPolicyCtrl',
         controllerAs: 'warrantyPolicy'
       })
-      .when('/user/user-deliveries', {
+      .when('/user/deliveries', {
         templateUrl: 'views/users/user-deliveries.html',
         controller: 'UsersUserDeliveriesCtrl',
-        controllerAs: 'users/userDeliveries'
+        controllerAs: 'vm'
       })
-      .when('/user/user-invoices', {
+      .when('/user/invoices', {
         templateUrl: 'views/users/user-invoices.html',
         controller: 'UsersUserInvoicesCtrl',
-        controllerAs: 'users/userInvoices'
+        controllerAs: 'vm'
       })
-      .when('/user/user-payments', {
+      .when('/user/payments', {
         templateUrl: 'views/users/user-payments.html',
         controller: 'UsersUserPaymentsCtrl',
-        controllerAs: 'users/userPayments'
+        controllerAs: 'vm'
       })
-      .when('/user/user-purse', {
-        templateUrl: 'views/users/user-purse.html',
-        controller: 'UsersUserPurseCtrl',
-        controllerAs: 'users/userPurse'
+      .when('/user/ewallet', {
+        templateUrl: 'views/users/user-ewallet.html',
+        controller: 'UsersUserEwalletCtrl',
+        controllerAs: 'vm'
       })
-      .when('/user/user-purchases', {
+      .when('/user/purchases', {
         templateUrl: 'views/users/user-purchases.html',
         controller: 'UsersUserPurchasesCtrl',
-        controllerAs: 'users/userPurchases'
+        controllerAs: 'vm'
       })
       .when('/checkout/payment-info', {
         templateUrl: 'views/checkout/payment-info.html',

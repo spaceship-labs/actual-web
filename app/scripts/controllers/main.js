@@ -290,22 +290,18 @@
 
     //$rootScope.$on("$locationChangeStart",function(event, next, current){
     $scope.$on('$routeChangeStart', function(event, next, current) {
-      console.log('current', current);
 
       if(current){
         authService.runPolicies();
   
         //Only updating active quotation on every page change
-        console.log('loadActiveQuotation change page', new Date());
         $rootScope.isActiveQuotationLoaded = false;
         loadActiveQuotation()
           .then(function(){
-            console.log('scope.mainData', $scope.mainData);
             $scope.mainData = $scope.mainData || {};
             $scope.mainData.activeQuotation = $rootScope.activeQuotation;
             $rootScope.$emit('mainDataLoaded', $scope.mainData);
             $rootScope.isMainDataLoaded = true;
-            console.log('end loadActiveQuotation change page', new Date());
           });
 
       }
@@ -348,26 +344,15 @@
         '/manual-de-cuidados-y-recomendaciones/vinilos',
         '/manual-de-cuidados-y-recomendaciones/pintura-electrostatica'
       ];
-      if(path.indexOf('dashboard') >= 0){
-        activeModule = 'dashboard';
-      }
-      else if(path.indexOf('addquotation') >= 0){
+
+      if(path.indexOf('addquotation') >= 0){
         activeModule = 'addquotation';
-      }
-      else if(path.indexOf('clients') >= 0){
-        activeModule = 'clients';
       }
       else if(path.indexOf('quotations') >= 0){
         activeModule = 'quotations';
       }
       else if(path.indexOf('orders') >= 0){
         activeModule = 'orders';
-      }
-      else if(path.indexOf('commissions') >= 0){
-        activeModule = 'commissions';
-      }
-      else if(path.indexOf('scorecard') >= 0){
-        activeModule = 'scorecard';
       }
       else if(policiesPaths.indexOf(path) > -1){
         activeModule = 'policies';

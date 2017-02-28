@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:UsersUserPaymentsCtrl
+ * @name dashexampleApp.controller:UsersUserEwalletCtrl
  * @description
- * # UsersUserPaymentsCtrl
+ * # UsersUserEwalletCtrl
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('UsersUserPaymentsCtrl', UsersUserPaymentsCtrl);
+  .controller('UsersUserEwalletCtrl', UsersUserEwalletCtrl);
 
-function UsersUserPaymentsCtrl(
+function UsersUserEwalletCtrl(
   $rootScope, 
   $window, 
   $location, 
