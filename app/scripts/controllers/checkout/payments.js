@@ -40,9 +40,7 @@ function CheckoutPaymentsCtrl(
   angular.extend(vm,{
     api: api,
     applyTransaction: applyTransaction,
-    authorizeOrder: authorizeOrder,
     areMethodsDisabled: checkoutService.areMethodsDisabled,
-    cancelPayment     : cancelPayment,
     calculateRemaining: calculateRemaining,
     createOrder: createOrder,
     chooseMethod: chooseMethod,
@@ -79,16 +77,8 @@ function CheckoutPaymentsCtrl(
     animateProgress();
     vm.isLoading = true;
 
-    var forceLatestData = true;
-    if($rootScope.activeQuotation){
-      if($routeParams.id === $rootScope.activeQuotation.id){
-        forceLatestData = false;
-      }
-    }
-
     var getParams = {
       payments:true,
-      forceLatestData: forceLatestData
     };
 
     quotationService.getById($routeParams.id, getParams)
@@ -146,10 +136,6 @@ function CheckoutPaymentsCtrl(
   }
 
   function validateQuotationAddress(quotation){
-    if(quotation.immediateDelivery){
-      return true;
-    }
-
     if(quotation.Address){
       return true;
     }
@@ -168,7 +154,6 @@ function CheckoutPaymentsCtrl(
         vm.paymentMethodsGroups = groups;
         
         //ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
-        //paymentService.updateQuotationClientBalance(vm.quotation, vm.paymentMethodsGroups);
       
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
           vm.quotation = setQuotationTotalsByGroup(vm.quotation);
@@ -260,37 +245,6 @@ function CheckoutPaymentsCtrl(
     delete vm.activeMethod;
   }
 
-  function cancelPayment(payment){
-    confirmPaymentCancel(payment)
-      .then(function(){
-        vm.isLoading = true;
-        vm.isLoadingPayments = true;
-        
-        return paymentService.cancelPayment(vm.quotation.id, payment.id);
-      })
-      .then(function(res){
-        if(res.data){
-          var quotation = res.data;
-          vm.quotation.Payments = quotation.Payments;
-
-          updateVMQuoatation(quotation);
-
-          vm.isLoadingPayments = false;
-          vm.isLoading = false;
-
-          delete vm.activeMethod;        
-        }
-      })
-      .catch(function(err){
-        console.log(err);
-        vm.isLoadingPayments = false;
-        vm.isLoading = false;
-        if(err && err.data){
-          dialogService.showDialog('Error: \n' + err.data);
-        }
-      });      
-  }
-
   function addPayment(payment){
     if(
         ( (payment.ammount > 0) && (vm.quotation.ammountPaid < vm.quotation.total) )
@@ -306,18 +260,21 @@ function CheckoutPaymentsCtrl(
 
             updateVMQuoatation(quotation);
             loadPayments();
+  
             loadPaymentMethods().then(function(){
                vm.isLoading = false;
+              delete vm.activeMethod;
+
+              if(vm.quotation.ammountPaid >= vm.quotation.total){
+                createOrder();
+                //dialogService.showDialog('Cantidad total pagada');
+              }else{
+                dialogService.showDialog('Pago aplicado');
+              }
+  
             });
 
-            delete vm.activeMethod;
 
-            if(vm.quotation.ammountPaid >= vm.quotation.total){
-              createOrder();
-              //dialogService.showDialog('Cantidad total pagada');
-            }else{
-              dialogService.showDialog('Pago aplicado');
-            }
           }else{
             dialogService.showDialog('Hubo un error');
           }
@@ -328,10 +285,6 @@ function CheckoutPaymentsCtrl(
             ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
           }
 
-          if(payment.type === CLIENT_BALANCE_TYPE){
-            paymentService.updateQuotationClientBalance(vm.quotation, vm.paymentMethodsGroups);
-          }
-
         })
         .catch(function(err){
           console.log(err);
@@ -340,12 +293,9 @@ function CheckoutPaymentsCtrl(
           var error = err.data || err;
           error = error ? error.toString() : '';
           dialogService.showDialog('Hubo un error: ' + error );          
-          //
-          //dialogService.showDialog('Error: \n' + (err.data || err) );
         });
     }else{
       createOrder();
-      //dialogService.showDialog('Cantidad total pagada');
     }
   }
 
@@ -366,13 +316,10 @@ function CheckoutPaymentsCtrl(
   function applyTransaction(ev, method, ammount) {
     if(method){
       var templateUrl = 'views/checkout/payment-dialog.html';
-      var controller  = DepositController;
+      var controller  = TerminalController;
       method.currency = method.currency || 'MXP';
       method.ammount  = ammount;
       var paymentOpts = angular.copy(method);
-      if(method.msi || method.terminals){
-        controller    = TerminalController;
-      }
       paymentOpts.ammount = ammount;
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
@@ -410,52 +357,6 @@ function CheckoutPaymentsCtrl(
 
   function calculateRemaining(ammount){
     return ammount - vm.quotation.ammountPaid;
-  }
-
-  function authManager(manager){
-    vm.isLoading = true;
-    authService.authManager(manager)
-      .then(function(res){
-        var manager = res.data;
-        if(!manager.id){
-          return $q.reject('Error en la autorización');
-        }
-        var params = {
-          Manager: manager.id,
-          minPaidPercentage: 60,
-        };
-        return quotationService.update(vm.quotation.id, params);
-      })
-      .then(function(quotationUpdated){
-        vm.isLoading = false;
-      })
-      .catch(function(err){
-        vm.isLoading = false;
-        console.log(err);
-        dialogService.showDialog('Error en la autorización');
-      });
-  }
-
-  function authorizeOrder(ev, method, ammount) {
-    if( checkoutService.getPaidPercentage(vm.quotation) >= 60 ){
-      var controller  = AuthorizeOrderController;
-      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
-      $mdDialog.show({
-        controller: ['$scope', '$mdDialog', controller],
-        templateUrl: 'views/checkout/authorize-dialog.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose: true,
-        fullscreen: useFullScreen,
-      })
-      .then(function(manager) {
-        authManager(manager);
-      }, function() {
-        console.log('No autorizado');
-      });
-    }else{
-      commonService.showDialog('La suma pagada debe ser mayor o igual al 60% del total de la orden');
-    }
   }
 
   function createOrder(form){
@@ -504,25 +405,6 @@ function CheckoutPaymentsCtrl(
         vm.loadingEstimate = 0;
       }
     },1000);
-  }
-
-  function confirmPaymentCancel(payment){
-    var amount = $filter('currency')(payment.ammount);
-    var currency = 'MXN';
-    if(payment.currency === 'usd'){
-      currency = 'USD';
-    }
-    var dialogMsg = '¿Desea cancelar este pago por: ';
-    dialogMsg += amount + currency;
-    dialogMsg += '?';
-    var confirm = $mdDialog.confirm()
-          .title('CANCELAR PAGO')
-          .textContent(dialogMsg)
-          .ariaLabel('Cancelar pago')
-          .targetEvent(null)
-          .ok('Cancelar')
-          .cancel('Regresar');
-    return $mdDialog.show(confirm);
   }
 
   function confirmOrder(){

@@ -3466,8 +3466,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 .pay-method-wrap .method-block .price-now{font-size: 32px;}
 .pay-method-wrap .method-block .price-now.price-hl{
-  /*font-size: 32px;*/
-  font-size: 28px;
+  font-size: 32px;
+  /*font-size: 28px;*/
 }
 .pay-method-wrap .method-block .price-hl{color: #E2023F;}
 .pay-method-wrap .method-block p{
