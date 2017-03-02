@@ -21,18 +21,12 @@
       var service = {
         addDetail: addDetail,
         addProduct: addProduct,
-        addRecord: addRecord,
         addMultipleProducts: addMultipleProducts,
-        calculateItemsNumber: calculateItemsNumber,
-        calculateSubTotal: calculateSubTotal,
-        calculateTotal: calculateTotal,
-        calculateTotalDiscount: calculateTotalDiscount,
         closeQuotation: closeQuotation,
         create: create,
         isValidStock: isValidStock,
         getActiveQuotation: getActiveQuotation,
         getActiveQuotationId: getActiveQuotationId,
-        getByClient: getByClient,
         getById: getById,
         getByIdQuickRead: getByIdQuickRead,
         getCountByUser: getCountByUser,
@@ -43,10 +37,8 @@
         getRecords: getRecords,
         getTotalByPaymentMethod: getTotalByPaymentMethod,
         getTotalsByUser: getTotalsByUser,
-        getClosingReasons: getClosingReasons,
         getPaymentOptions: getPaymentOptions,
         getPayments: getPayments,
-        getRecordTypes: getRecordTypes,
         getSapOrderConnectionLogs: getSapOrderConnectionLogs,
         loadProductsFilters: loadProductsFilters,
         newQuotation: newQuotation,
@@ -59,7 +51,6 @@
         showStockAlert: showStockAlert,
         update: update,
         updateSource: updateSource,
-        updateBroker: updateBroker,
         validateQuotationStockById: validateQuotationStockById
       };
 
@@ -80,11 +71,6 @@
         return api.$http.post(url, params);
       }
 
-      function updateBroker(id, params){
-        var url = '/quotation/' + id + '/broker';
-        return api.$http.post(url, params);
-      }
-
       function getById(id, params){
         var url = '/quotation/findbyid/' + id;
         return api.$http.post(url, params);
@@ -96,11 +82,6 @@
       }
 
 
-      function getByClient(page, params){
-        var p = page || 1;
-        var url = '/quotation/findbyclient/' + p;
-        return api.$http.post(url,params);
-      }
 
       function getList(page, params){
         var p = page || 1;
@@ -108,11 +89,6 @@
         return api.$http.post(url,params);
       }
 
-      function addRecord(quotationId, params){
-        var url = '/quotation/addrecord/' + quotationId;
-        return Upload.upload({url: api.baseUrl + url, data:params});
-        //return api.$http.post(url,params);
-      }
 
       function addDetail(quotationId, params){
         var url = '/quotation/adddetail/' + quotationId;
@@ -155,46 +131,6 @@
         return api.$http.post(url);
       }           
 
-      function calculateSubTotal(quotation){
-        var subTotal = 0;
-        if(quotation.Details){
-          var details = quotation.Details;
-          details.forEach(function(detail){
-            if(detail.Product && detail.Product.priceBefore){
-              subTotal+= detail.Product.priceBefore * detail.quantity;
-            }
-          });
-        }
-        return subTotal;
-
-      }
-
-      function calculateTotal(quotation){
-        var total = 0;
-        if(quotation.Details){
-          var details = quotation.Details;
-          details.forEach(function(detail){
-            if(detail.Product && detail.Product.Price){
-              total+= detail.Product.Price * detail.quantity;
-            }
-          });
-        }
-        return total;
-      }
-
-      //Siempre toma el precio actual como la promocion con pago unico
-      function calculateTotalDiscount(quotation){
-        var totalDiscount = 0;
-        if(quotation.Details){
-          var details = quotation.Details;
-          details.forEach(function(detail){
-            if(detail.Product && detail.Product.Price && detail.Product.priceBefore){
-              totalDiscount += ( detail.Product.priceBefore - detail.Product.Price) * detail.quantity;
-            }
-          });
-        }
-        return totalDiscount;
-      }
 
       function getTotalByPaymentMethod(quotation, paymentDiscountKey){
         var total = 0;
@@ -211,17 +147,6 @@
           });
         }
         return total;
-      }
-
-      function calculateItemsNumber(quotation){
-        var items = 0;
-        if(quotation.Details){
-          var details = quotation.Details;
-          details.forEach(function(detail){
-            items += detail.quantity;
-          });
-        }
-        return items;
       }
 
       function populateDetailsWithProducts(quotation, options){
@@ -524,34 +449,6 @@
         return deferred.promise;
       }
 
-      function getClosingReasons(){
-        var closingReasons = [
-          'Cliente compró en otra tienda de la empresa.',
-          'Cliente compró en otra mueblería.',
-          'Cliente se murió',
-          'Cliente solicita no ser contactado más',
-          'Cliente ya no está interesado',
-          'Cliente es incontactable',
-          'Cliente se mudó',
-          'Vendedor no dio seguimiento suficiente',
-          'Vendedor cotizó artículos equivocados',
-          'Los precios son altos',
-          'Las fechas de entrega son tardadas',
-          'No vendemos el articulo solicitado',
-          'Otra razón (especificar)',        
-        ];
-        return closingReasons;
-      }
-
-      function getRecordTypes(){
-        var recordTypes = [
-          'Email',
-          'Llamada', 
-          'WhatsApp', 
-          'Visita'
-        ];
-        return recordTypes;
-      }
 
       function showStockAlert(){
         var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
