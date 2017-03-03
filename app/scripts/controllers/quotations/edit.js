@@ -39,8 +39,6 @@ function QuotationsEditCtrl(
     brokers: [],
     isLoadingRecords: false,
     isLoading: true,
-    recordTypes: quotationService.getRecordTypes(),
-    closeTypes: quotationService.getClosingReasons(),
     timePickerOptions: {
         step: 20,
         timeFormat: 'g:ia',
