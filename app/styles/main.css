@@ -3533,9 +3533,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   #DEPOSIT-DIALOG
 /*------------*/
 .deposit-dialog .deposit-dialog-inner{
-  padding: 15px 10px;
+  padding: 15px 40px;
   min-width: 800px;
-  min-height: 450px;
 }
 .deposit-dialog h2{
   font-weight: 400;
@@ -3587,6 +3586,23 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 6px 0 0;
   max-width: 300px;
 }
+.deposit-dialog .input-element p{margin-bottom: 5px;}
+.deposit-dialog .input-element .select-element{margin: 0;}
+
+
+.deposit-dialog .deposit-dialog-footer{
+  background: #F8F8F8;
+  padding: 20px 40px;
+  min-width: 800px;  
+}
+.deposit-dialog .ammount-input .input-element{
+  margin-right: 8px;
+}
+.deposit-dialog .ammount-description{
+  border-left: 1px solid #000;
+  padding-left: 10px;
+}
+.deposit-dialog .ammount-description p{margin:0;}
 
 .input-element p{
   margin-top: 15px;

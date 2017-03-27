@@ -5,17 +5,18 @@
         <hr>
         <div class="input-container" layout="row" layout-wrap flex="100">
           <div flex="50" class="input-element">
-            <label>
-              <p><strong>NOMBRE DEL TARJETAHABIENTE</strong>*<small>(Como aparece en el plástico)</small></p>
-            </label>
+            <p>
+              <label><strong>NOMBRE DEL TARJETAHABIENTE</strong>*<small>(Como aparece en el plástico)</small>
+              </label>
+            </p>
             <div flex="95" class="input-element-inner">
               <input type="text" ng-model="payment.cardName" required>
             </div>
           </div>
           <div flex class="input-element">
-            <label>
-              <p><strong>TIPO DE TARJETA</strong>*</p>
-            </label>
+            <p>
+              <label><strong>TIPO DE TARJETA</strong>*</label>
+            </p>
             <div flex="70" ng-if="payment.options.length > 0">
               <div class="input-element select-element-wrapper">
                 <md-select 
@@ -37,17 +38,17 @@
         </div>
         <div class="input-container" layout="row" layout-wrap flex="100">
           <div  flex="50" class="input-element">
-            <label>
-              <p><strong>NÚMERO DE TARJETA</strong>*<small>(Ingresar sin espacios y sin guiones)</small></p>
-            </label>
+            <p>
+              <label><strong>NÚMERO DE TARJETA</strong>*<small>(Ingresar sin espacios y sin guiones)</small></label>
+            </p>
             <div flex="95" class="input-element-inner">
               <input type="text" ng-model="payment.cardNumber" size="52" placeholder="0000 0000 0000 ****" required>
             </div>
           </div>
           <div class="input-element" flex="20">
-            <label>
-              <p><strong>FECHA DE EXPIRACIÓN</strong>*</p>
-            </label>
+            <p>
+              <label><strong>FECHA DE EXPIRACIÓN</strong>*</label>
+            </p>
             <div layout="row" layout-xs="column" class="expiration-inner">
               <div flex="35" class="input-element-inner date-margin">
                 <input type="text" ng-model="payment.dateMonth" placeholder="MM" required>
@@ -58,35 +59,40 @@
             </div>
           </div>
           <div class="input-element" flex>
-            <label>
-              <p><strong>CÓDIGO CVC</strong>*</p>
-            </label>
+            <p>
+              <label><strong>CÓDIGO CVC</strong>*</label>
+            </p>
             <div flex="50" class="input-element-inner">
               <input type="text" ng-model="payment.cvc" placeholder="999" required>
             </div>
           </div>
+          
+          <div>
+            <img src="/images/banamex.png" alt="">
+          </div>
+
         </div>
         <div class="input-container" layout="row" layout-wrap flex="100">
           <div class="input-element" flex="35">
-            <label>
-              <p><strong>PAÍS</strong>*</p>
-            </label>
+            <p>
+              <label><strong>PAÍS</strong>*</label>
+            </p>
             <div flex="85" class="input-element-inner">
               <input type="text" ng-model="payment.cardCountry" required>
             </div>
           </div>
           <div class="input-element" flex="35">
-            <label>
-              <p><strong>ESTADO</strong>*</p>
-            </label>
+            <p>
+              <label><strong>ESTADO</strong>*</label>
+            </p>
             <div flex="85" class="input-element-inner">
               <input type="text" ng-model="payment.cardState" required>
             </div>
           </div>
           <div class="input-element" flex="20">
-            <label>
-              <p><strong>CÓDIGO POSTAL</strong>*</p>
-            </label>
+            <p>
+              <label><strong>CÓDIGO POSTAL</strong>*</label>
+            </p>
             <div flex="75" class="input-element-inner">
               <input type="text" ng-model="payment.cardZip" required>
             </div>
@@ -94,80 +100,85 @@
         </div>
         <div class="input-container" layout="row" layout-wrap flex="100">
           <div class="input-element">
-            <label>
-              <p><strong>CIUDAD</strong>*</p>
-            </label>
+            <p>
+              <label><strong>CIUDAD</strong>*</label>
+            </p>
             <div flex="90" class="input-element-inner">
               <input type="text" ng-model="payment.cardCity" required>
             </div>
           </div>
           <div flex="30" class="input-element">
-            <label>
-              <p><strong>COLONIA</strong>*</p>
-            </label>
+            <p>
+              <label><strong>COLONIA</strong>*</label>
+            </p>
             <div flex="95" class="input-element-inner">
               <input type="text" ng-model="payment.cardAdress1" required>
             </div>
           </div>
           <div flex class="input-element" >
-            <label>
-              <p><strong>CALLE Y NÚMERO</strong>*</p>
-            </label>
+            <p>
+              <label><strong>CALLE Y NÚMERO</strong>*</label>
+            </p>
             <div flex="70" class="input-element-inner">
               <input type="text" ng-model="payment.cardAdress2" required>
             </div>
           </div>
         </div>
-        <div class="input-container" layout="row" flex="100" layout-align="center center">
-          <div flex="35" class="input-element dialog-row" >
-            
-            <div 
-              class="ammount-input" 
-              layout="row" 
-              layout-align="start center"
-            >
-              <div class="input-element" flex="60">
-                <div class="input-element-inner">
-                  <input
-                    ng-if="maxAmmount && maxAmmount >=0"
-                    type="text"
-                    max="{{maxAmmount}}"
-                    ng-model="payment.ammount"
-                    class="with-maxammount"
-                    ng-currency
-                    >
-                  <input
-                    ng-if="!maxAmmount"
-                    type="text"
-                    ng-currency
-                    ng-model="payment.ammount"
-                    >
 
-                </div>
-              </div>
-              <div class="currency-label">
-                <span>MXN</span>
-              </div>
-            </div>
-          </div>
-          <div flex="35" class="input-element dialog-row ">
-            <p ng-show="!payment.msi" ><strong>1 Pago de </strong>{{payment.ammount | roundCurrency}} MXN</p>
-            <p ng-show="payment.msi"><strong>{{payment.msi}} Meses SIN INTERESES de </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
-            <small>*Precios en Pesos Mexicanos con impuestos incluidos.</small>
-
-          </div>
-          <div flex="30" class="input-element dialog-row">
-            <a 
-              ng-click="save()"
-              ng-class="{'action-btn-disabled': isValidPayment() }" 
-              class="action-btn action-btn-save" 
-              href="#" 
-              flex="80">
-              <strong>PAGAR</strong>
-            </a>
-          </div>
-        </div>
     </form>
     
   </div>
+
+  <div class="deposit-dialog-footer">
+    <div class="input-container" layout="row" flex="100" layout-align="center center">
+      <div flex="30" class="input-element " >
+        
+        <div 
+          class="ammount-input" 
+          layout="row" 
+          layout-align="start center"
+        >
+          <div class="input-element" flex="60">
+            <div class="input-element-inner">
+              <input
+                ng-if="maxAmmount && maxAmmount >=0"
+                type="text"
+                max="{{maxAmmount}}"
+                ng-model="payment.ammount"
+                class="with-maxammount"
+                ng-currency
+                >
+              <input
+                ng-if="!maxAmmount"
+                type="text"
+                ng-currency
+                ng-model="payment.ammount"
+                >
+
+            </div>
+          </div>
+          <div class="currency-label">
+            <span>MXN</span>
+          </div>
+        </div>
+      </div>
+      <div flex="40" class="input-element ammount-description">
+        <p ng-show="!payment.msi" ><strong>1 Pago de </strong>{{payment.ammount | roundCurrency}} MXN</p>
+        <p ng-show="payment.msi"><strong>{{payment.msi}} Meses SIN INTERESES de </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
+        <small>*Precios en Pesos Mexicanos con impuestos incluidos.</small>
+
+      </div>
+      <div flex="30" class="input-element">
+        <a 
+          ng-click="save()"
+          ng-class="{'action-btn-disabled': isValidPayment() }" 
+          class="action-btn action-btn-save" 
+          href="#" 
+          flex="80">
+          <strong>PAGAR</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+
 </md-dialog>
