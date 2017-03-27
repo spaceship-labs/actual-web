@@ -4280,7 +4280,10 @@ padding-left: 16px;
 
 
 @media screen and (max-width:1200px ){
+  .user-profile-view,
+  .terms-view,
   .checkout-view{padding: 20px;}
+
   .checkout-view h3{font-size: 16px;}
   .pay-method-wrap .method-block ul li strong{font-size: 16px;}
 
@@ -4291,6 +4294,12 @@ padding-left: 16px;
     padding: 4px 5px;
     margin: 0;
   }
+
+  .terms-view .banner{min-height: 240px;}
+  .terms-view p{font-size: 14px;}
+  .terms-view h2{font-size: 22px;}
+
+  #footer .footer-bottom{padding: 10px;}
 }
 
 @media screen and (max-width:1024px ){

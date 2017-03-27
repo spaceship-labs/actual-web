@@ -1,7 +1,7 @@
 <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
-<div id="my-profile" layout="row" layout-wrap>
+<div id="my-profile" class="user-profile-view" layout="row" layout-wrap>
   <div class="menu-profile" flex-gt-xs="25" flex="100">
     <ng-include src="'views/users/menu-profile.html'"></ng-include>
   </div>
@@ -54,17 +54,17 @@
                     <input type="email" ng-model="">
                   </div>
                 </div>
-                <div flex="40" class="input-element">
+                <div flex-gt-sm="40" flex="100" class="input-element">
                   <label>
                     <p><strong>Teléfono</strong> <span class="hl-label">*</span></p>
                   </label>
-                  <div flex layout="row" layout-xs="column">
-	                  <div flex="20">
+                  <div flex layout="row" layout-wrap>
+	                  <div flex="30">
 		                  <div class="input-element-inner">
 		                    <input type="email" ng-model="" placeholder="(998)">
 		                  </div>
 	                  </div>
-	                  <div flex="60" style="margin-left: 1em">
+	                  <div flex="60" flex-offset="10">
 	                  	<div class="input-element-inner">
 		                    <input type="email" ng-model="">
 		                </div>
@@ -134,7 +134,7 @@
                 </div>
                 <div flex flex-sm="100" flex-xs="100" class="input-element">
                 	<label>
-                    	<p><strong>código postal</strong> <span class="hl-label">*</span></p>
+                    	<p><strong>Código postal</strong> <span class="hl-label">*</span></p>
                   	</label>
                  	<div class="input-element-inner">
                     	<input type="email" ng-model="" required>
