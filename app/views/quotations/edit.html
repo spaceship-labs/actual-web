@@ -177,10 +177,6 @@
             Validando disponibilidad...
           </p>          
 
-          <p class="cart-summary-note" ng-show="!vm.quotation.Client">
-            A continuación puedes elegir un cliente o asignar un nuevo cliente
-          </p>
-
           <p class="cart-summary-note" ng-show="vm.quotation.Client">
             *Precios en Pesos Mexicanos con impuestos incluidos.
           </p>
@@ -195,7 +191,7 @@
         >
           <div flex="45">
             <a
-              ng-if="vm.quotation.Client && vm.quotation.Details.length > 0"
+              ng-if="vm.quotation.Details.length > 0"
               href="#"
               ng-click="vm.print()"
               class="action-btn-print print-btn">
@@ -204,7 +200,7 @@
           </div>
           <div flex="50">
             <a
-              ng-if="vm.quotation.Client && vm.quotation.Details.length > 0"
+              ng-if="vm.quotation.Details.length > 0"
               ng-click="vm.sendByEmail()"
               href="#"
               class="action-btn-print print-btn">

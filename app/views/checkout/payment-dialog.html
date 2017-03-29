@@ -42,20 +42,69 @@
               <label><strong>NÚMERO DE TARJETA</strong>*<small>(Ingresar sin espacios y sin guiones)</small></label>
             </p>
             <div flex="95" class="input-element-inner">
-              <input type="text" ng-model="payment.cardNumber" size="52" placeholder="0000 0000 0000 ****" required>
+              <input 
+                type="text" 
+                ng-model="payment.cardObject.number" 
+                size="52" 
+                placeholder="0000 0000 0000 ****" 
+                required
+              />
             </div>
           </div>
           <div class="input-element" flex="20">
             <p>
               <label><strong>FECHA DE EXPIRACIÓN</strong>*</label>
             </p>
-            <div layout="row" layout-xs="column" class="expiration-inner">
+            <div 
+              layout="row" 
+              layout-align="space-between center" 
+              layout-wrap 
+              class="expiration-inner"
+            >
+              
+              <div flex="35" class="input-element select-element-wrapper">
+                <md-select 
+                  ng-model="payment.cardObject.expMonth"
+                  class="select-element"
+                >
+                  <md-option
+                    ng-repeat="month in months track by $index"
+                    ng-selected="$index==0"
+                    ng-value="month">
+                    {{month}}
+                  </md-option>
+                </md-select>
+              </div>
+
+              <div flex="60" class="input-element select-element-wrapper">
+                <md-select 
+                  ng-model="payment.cardObject.expYear"
+                  class="select-element"
+                >
+                  <md-option
+                    ng-repeat="year in years track by $index"
+                    ng-selected="$index==0"
+                    ng-value="year">
+                    {{year}}
+                  </md-option>
+                </md-select>
+              </div>                            
+              <!--
               <div flex="35" class="input-element-inner date-margin">
-                <input type="text" ng-model="payment.dateMonth" placeholder="MM" required>
+                <input 
+                  type="number" 
+                  ng-model="payment.cardObject.expMonth" 
+                  placeholder="MM" 
+                  required>
               </div>
               <div flex="35" class="input-element-inner">
-                <input type="text" ng-model="payment.dateYear" placeholder="AA" required>
+                <input 
+                  type="number" 
+                  ng-model="payment.cardObject.expYear" 
+                  placeholder="AA" 
+                  required>
               </div>
+              -->
             </div>
           </div>
           <div class="input-element" flex>
@@ -63,7 +112,7 @@
               <label><strong>CÓDIGO CVC</strong>*</label>
             </p>
             <div flex="50" class="input-element-inner">
-              <input type="text" ng-model="payment.cvc" placeholder="999" required>
+              <input type="text" ng-model="payment.cardObject.cvc" placeholder="999" required>
             </div>
           </div>
           
@@ -112,7 +161,7 @@
               <label><strong>COLONIA</strong>*</label>
             </p>
             <div flex="95" class="input-element-inner">
-              <input type="text" ng-model="payment.cardAdress1" required>
+              <input type="text" ng-model="payment.cardAddress1" required>
             </div>
           </div>
           <div flex class="input-element" >
@@ -120,7 +169,7 @@
               <label><strong>CALLE Y NÚMERO</strong>*</label>
             </p>
             <div flex="70" class="input-element-inner">
-              <input type="text" ng-model="payment.cardAdress2" required>
+              <input type="text" ng-model="payment.cardAddress2" required>
             </div>
           </div>
         </div>

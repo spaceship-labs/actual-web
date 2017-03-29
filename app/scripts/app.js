@@ -34,7 +34,7 @@ angular
     'localytics.directives',
     'ng-currency',
     'envconfig',
-    'siteconfig'
+    'siteconfig',
   ])
 
   .config(function (
@@ -42,7 +42,8 @@ angular
     $httpProvider,
     $locationProvider,
     $mdThemingProvider,
-    localStorageServiceProvider
+    localStorageServiceProvider,
+    ENV
   ) {
 
 
@@ -172,27 +173,27 @@ angular
         controllerAs: 'warrantyPolicy'
       })
       .when('/user/deliveries', {
-        templateUrl: 'views/users/user-deliveries.html',
+        templateUrl: 'views/users/deliveries.html',
         controller: 'UsersUserDeliveriesCtrl',
         controllerAs: 'vm'
       })
       .when('/user/invoices', {
-        templateUrl: 'views/users/user-invoices.html',
+        templateUrl: 'views/users/invoices.html',
         controller: 'UsersUserInvoicesCtrl',
         controllerAs: 'vm'
       })
       .when('/user/payments', {
-        templateUrl: 'views/users/user-payments.html',
+        templateUrl: 'views/users/payments.html',
         controller: 'UsersUserPaymentsCtrl',
         controllerAs: 'vm'
       })
       .when('/user/ewallet', {
-        templateUrl: 'views/users/user-ewallet.html',
+        templateUrl: 'views/users/ewallet.html',
         controller: 'UsersUserEwalletCtrl',
         controllerAs: 'vm'
       })
       .when('/user/purchases', {
-        templateUrl: 'views/users/user-purchases.html',
+        templateUrl: 'views/users/purchases.html',
         controller: 'UsersUserPurchasesCtrl',
         controllerAs: 'vm'
       })
@@ -350,7 +351,7 @@ angular
         redirectTo: '/'
       });
 
-    localStorageServiceProvider.setPrefix('actualFront');
+    localStorageServiceProvider.setPrefix(ENV.tokenPrefix + 'actualWeb');
 
     //JWT TOKENS CONFIG
     $httpProvider.interceptors.push([

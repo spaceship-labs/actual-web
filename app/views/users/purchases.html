@@ -18,9 +18,9 @@
 
 	   <!--ORDERS LIST -->
      <section class="orders-list">
-        <div class="order-item" ng-repeat="item in [0,1,2]">
+        <div class="order-item" ng-repeat="order in vm.orders">
   		    <div flex class="order-item-head">
-		    		<p>PEDIDO <strong>#2069700497</strong></p>
+		    		<p>PEDIDO <strong>#{{order.folio}}</strong></p>
   				</div>
   				<div class="order-item-content" layout="row" layout-wrap>
             <div layout="row" class="order-data">
@@ -33,21 +33,18 @@
     					</div>
     					<div flex class="order-data-col">
     						<div>
-    							<p ><strong>16/FEB/2016</strong></p>
+    							<p ><strong>{{ order.createdAt | date:'d/MMM/yyyy' }}</strong></p>
     							<p><strong>www.actualkids.com</strong></p>
-    							<p><strong>$27,496.37 MXN</strong></p>
+    							<p><strong>{{order.total | currency}} MXN</strong></p>
     						</div>
     					</div>
             </div>
   					<div flex="50" flex-xs="100" layout="row" class="form-view-btns no-margin" layout-align="center center">
   						<div layout="row" layout-align="center center" flex>
-  					          <button
-  					            ng-submit="vm.update(updateForm)"
-  					            flex="50"
-  					            class="form-view-btn form-view-btn-primary">
-  					            Ver detalles de pedido
-  					          </button>
-          				</div>
+  		          <a ng-href="#{{order.id}}" class="form-view-btn form-view-btn-primary">
+  		            Ver detalles de pedido
+  		          </a>
+      				</div>
   					</div>	
   				</div>
   		    </div>

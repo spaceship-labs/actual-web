@@ -1,15 +1,24 @@
 <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
+
+
 <div id="my-profile" class="user-profile-view" layout="row" layout-wrap>
+  
   <div class="menu-profile" flex-gt-xs="25" flex="100">
     <ng-include src="'views/users/menu-profile.html'"></ng-include>
   </div>
-  <div flex-gt-xs="70" flex="100">
+
+  <div flex-gt-xs="75" flex="100">
+    
     <section id="profile-view" class="container container-lg">
       <ng-include src="'views/users/box-head-profile.html'"></ng-include>
     </section >
-    <section ng-show="!vm.isLoading" class="form-view cart-view checkout-view order-view container container-xxlg">
+    
+    <section 
+      ng-show="!vm.isLoading" 
+      class="form-view deliveries-view order-view container container-xlg">
+      
       <div class="head-profile" layout="row" layout-xs="column" layout-align="space-between center">
         <div layout="row" layout-align="center center">
             <i class="icon-envio"></i>
@@ -78,19 +87,19 @@
       <div class="order-block">
         <h3><strong>REGISTRO DE DIRECCIONES DE ENVÍO</strong></h3>
         <div>
-          <i>*Si necesita cambiar una dirección de envío que ha sido asignada a un pedido favor de contactar a un aesor de ventas con uno de nuesrtos ejecutivos.</i>
+          <i>*Si necesita cambiar una dirección de envío que ha sido asignada a un pedido favor de contactar a un asesor de ventas con uno de nuestros ejecutivos.</i>
         </div>
-        <div class="invoice-box" style="margin-top: 1em">
-              <md-radio-group >
-                <md-radio-button value="Ciudad" class="md-primary">
-                <div layout="row" layout-align="center center"><strong>Ciudad </strong> <p class="text-sep" >Dirección</p> <u class="text-red">ELIMINAR</u></div>
-                </md-radio-button>
-                <md-radio-button value="Nuevo" class="md-primary">
-                  <strong><u>Nuevo</u></strong>
-                </md-radio-button>
-              </md-radio-group>
+        <div class="invoice-box">
+          <md-radio-group >
+            <md-radio-button value="Ciudad" class="md-primary">
+            <div layout="row" layout-align="center center"><strong>Ciudad </strong> <p class="text-sep" >Dirección</p> <u class="text-red">ELIMINAR</u></div>
+            </md-radio-button>
+            <md-radio-button value="Nuevo" class="md-primary">
+              <strong><u>Nuevo</u></strong>
+            </md-radio-button>
+          </md-radio-group>
         </div>
-        <div style="margin-top: 1em"></div>
+        
         <form ng-if="!vm.isLoading" name="updateForm" ng-submit="vm.update(updateForm)">
 
           <section class="form-section">
@@ -278,10 +287,10 @@
               class="form-view-btn form-view-btn-primary">
               Guardar información
             </button>
-        </div>
-      </div>
+          </div>
       <!--FIN DIRECCIONES DE ENVIO-->
-      </form>
+        </form>
+      </div>
     </section>
   </div>
 </div>  

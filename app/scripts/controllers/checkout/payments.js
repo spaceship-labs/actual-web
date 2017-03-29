@@ -81,6 +81,8 @@ function CheckoutPaymentsCtrl(
       payments:true,
     };
 
+    Conekta.setPublicKey('key_KJysdbf6PotS2ut2');
+
     quotationService.getById($routeParams.id, getParams)
       .then(function(res){
         vm.quotation = res.data;
@@ -245,6 +247,46 @@ function CheckoutPaymentsCtrl(
     delete vm.activeMethod;
   }
 
+  function tokenizePaymentCard(payment){
+    var deferred = $q.defer();
+
+    var onSuccess = function(token){
+      console.log('token', token);
+      deferred.resolve(token.id);
+    };
+
+    var onError = function(err){
+      console.log('err', err);
+      deferred.reject(err);
+    };
+
+    console.log('payment', payment);
+    var tokenParams = {
+      card:{
+        name: payment.cardName,
+        number: _.clone(payment.cardObject.number),
+        exp_month: _.clone(payment.cardObject.expMonth),
+        exp_year: _.clone(payment.cardObject.expYear),
+        cvc: _.clone(payment.cardObject.cvc)
+      },
+      address:{
+        country: payment.cardCountry,
+        state: payment.cardState,
+        zipcode: payment.cardZip,
+        city: payment.cardCity,
+        street1: payment.cardAddress1,
+        street2: payment.cardAddress1
+      }
+    };
+
+    delete payment.cardObject;
+    console.log('tokenParams', tokenParams);
+
+    Conekta.Token.create(tokenParams, onSuccess, onError);
+
+    return deferred.promise;    
+  }
+
   function addPayment(payment){
     if(
         ( (payment.ammount > 0) && (vm.quotation.ammountPaid < vm.quotation.total) )
@@ -252,6 +294,16 @@ function CheckoutPaymentsCtrl(
       ){
       vm.isLoadingPayments = true;
       vm.isLoading = true;
+      
+
+      tokenizePaymentCard(payment)
+        .then(function(token){
+          delete payment.cardObject;
+          payment.cardToken = token;
+        });
+
+      return;
+
       paymentService.addPayment(vm.quotation.id, payment)
         .then(function(res){
           if(res.data){

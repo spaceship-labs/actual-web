@@ -61,6 +61,8 @@
 
           }
 
+          //$('.dataTables_filter label:first').text('Buscar');
+
           $('.dataTables_filter input').unbind();
           $('.dataTables_filter input').keypress(function(e){
             if(e.which == 10 || e.which == 13) {
@@ -70,6 +72,8 @@
           $('#new-search').on('click', function() {
               $scope.dtInstance.DataTable.search($($scope.wrapperElementId + ' .dataTables_filter input').val()).draw();
           })
+
+          changePaginationLabels();
 
         })
         /*
@@ -83,6 +87,15 @@
           },
         ])
         */
+
+      function changePaginationLabels(){
+        $('.dataTables_wrapper .first.paginate_button').text('Inicio');
+        $('.dataTables_wrapper .previous.paginate_button').text('Anterior');
+        $('.dataTables_wrapper .paginate_page').text('Página');
+        $('.dataTables_wrapper .next.paginate_button').text('Siguiente');
+        $('.dataTables_wrapper .last.paginate_button').text('Último');
+
+      }
 
       function getDefaultSortOption(){
         var defaultSort = [0,'asc'];

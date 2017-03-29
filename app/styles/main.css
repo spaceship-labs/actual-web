@@ -322,6 +322,9 @@ select{
   border: 0!important;
 }
 
+.select-element-wrapper label{font-size: 12px;}
+.select-element-wrapper md-select{margin: 6px 0;}
+
 .input-element .input-element-inner input[type="number"]{
   padding-right: 0;
 }
@@ -467,7 +470,8 @@ select{
   vertical-align: middle;
 }
 .header-top-bar-menu .cart-active{
-  color: #fff!important;
+  color: #50C841!important;
+  /*color: #fff!important;*/
 }
 
 .header-top-bar-menu .header-top-bar-menu-item .pointer-btn{
@@ -2773,6 +2777,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 16px;
   margin: 0 4px;
 }
+.table-list .dataTables_wrapper .top{padding: 0;}
 
 /*--------------/
   #TABLE-LIST-V2
@@ -3558,6 +3563,9 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-weight: 400;
   margin: 4px 0;
 }
+
+.deposit-dialog .expiration-inner{margin-right: 10px;}
+
 .deposit-dialog .deposit-type{
   margin:0 0 10px;
 }
@@ -3586,7 +3594,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin: 6px 0 0;
   max-width: 300px;
 }
-.deposit-dialog .input-element p{margin-bottom: 5px;}
+.deposit-dialog .input-element p{margin: 15px 0;}
 .deposit-dialog .input-element .select-element{margin: 0;}
 
 
@@ -3605,8 +3613,8 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .deposit-dialog .ammount-description p{margin:0;}
 
 .input-element p{
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 5px 0;
+  font-size: 12px;
 }
 
 .date-margin{
@@ -4028,7 +4036,10 @@ padding-left: 16px;
 }
 .orders-list .order-item-content{padding: 12px;}
 .orders-list .order-item-content .order-data-col{padding: 6px;}
-.orders-list .order-item-content .order-data-col p{margin: 6px 0;}
+.orders-list .order-item-content .order-data-col p{
+  margin: 6px 0;
+  font-size: 14px;
+}
 
 
 /*--------------/#FOOTER/*-------------*/
@@ -4189,7 +4200,9 @@ padding-left: 16px;
 #my-profile .head-profile a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
 #my-profile #profile-view{max-width: 900px;}
 
-#my-profile .input-container .input-element{padding: 15px}
+#my-profile .input-container .input-element{padding: 5px}
+
+#my-profile .deliveries-view{padding: 20px;}
 
 .button-generar{padding: 10px;background: #33BA2C;color: white;text-transform: uppercase;font-size: 10px}
 

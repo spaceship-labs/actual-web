@@ -11,19 +11,26 @@ angular.module('dashexampleApp')
   .controller('UsersUserPurchasesCtrl', UsersUserPurchasesCtrl);
 
 function UsersUserPurchasesCtrl(
-  $rootScope, 
-  $window, 
-  $location, 
-  $mdDialog, 
-  commonService, 
-  userService,
-  authService, 
-  localStorageService,
-  paymentService
+  $rootScope,
+  orderService
 ){
   var vm = this;
   angular.extend(vm,{
-    user: angular.copy($rootScope.user),
+    user: angular.copy($rootScope.user)
   });
+
+  init();
+
+  function init(){
+    orderService.getList()
+      .then(function(res){
+        console.log(res);
+        vm.orders = res.data.data;
+        vm.ordersTotal = res.data.total;
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+  }
 
 }
