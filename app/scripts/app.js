@@ -347,6 +347,11 @@ angular
         controller: 'SitemapCtrl',
         controllerAs: 'vm'
       })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

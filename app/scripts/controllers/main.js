@@ -111,7 +111,7 @@
         var profileHeader = $('#profile-header');
         var profileHeaderTrigger = $('#profile-header-trigger');
         var loginHeader = $('#login-header');
-        var loginHeaderTrigger = $('#login-header-trigger');
+        var loginHeaderTrigger = $('#login-header-trigger, .login-toggler');
 
         if(
           !$target.is(profileHeader) && !$target.is(profileHeaderTrigger) &&
@@ -365,6 +365,8 @@
 
 
     function toggleLoginModal(){
+      console.log('toggleLoginModal');
+
       if( vm.isActiveLogin ){
         vm.isActiveLogin = false;
         vm.isActiveBackdrop = false;
@@ -457,13 +459,12 @@
     }
 
     $rootScope.successAuth = function(res){
-      vm.token = res.token;
-      vm.user  = res.user;
-      console.log('res.user', res.user);
+      vm.token = res.data.token;
+      vm.user = res.data.user;
       localStorageService.remove('currentQuotation');
-      localStorageService.set('token', res.token);
-      localStorageService.set('user' , res.user);
-      localStorageService.set('activeStore', res.user.activeStore);
+      localStorageService.set('token', vm.token);
+      localStorageService.set('user' , vm.user);
+      localStorageService.set('activeStore', vm.user.activeStore);
       $window.location.reload();
     };
 

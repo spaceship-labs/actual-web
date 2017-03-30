@@ -43,8 +43,8 @@
 
       function signUp(data, success, error) {
          $http.post(api.baseUrl + '/user/create', data)
-          .success(success)
-          .error(error);
+          .then(success)
+          .catch(error);
       }
 
       function signIn(data, success, error) {
@@ -53,8 +53,8 @@
         localStorageService.remove('quotation');
         localStorageService.remove('broker');
         $http.post(api.baseUrl + '/auth/signin', data)
-          .success(success)
-          .error(error);
+          .then(success)
+          .catch(error);
       }
 
       function authManager(params){

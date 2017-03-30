@@ -23,14 +23,12 @@
         </p>
       </div>
       <div layout="column" layout-align="center end" flex="45">
-      <!--
-        <div class="colors" layout="row" layout-align="end center">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      -->
-        <p><strong class="small">visto 16 veces hoy</strong></p>
+        <p>
+          <strong class="small">visto {{product.seenTimes}} 
+            <span ng-if="product.seenTimes > 1">veces</span>
+            <span ng-if="product.seenTimes <= 1">veces</span>
+           hoy</strong>
+        </p>
       </div>
     </div>
   </div>

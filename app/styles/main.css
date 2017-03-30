@@ -395,7 +395,8 @@ select{
   background: #F8F8F8;
   padding: 4px 0;
   position: relative;
-  z-index: 9999999999;
+  /*z-index: 9999999999;*/
+  z-index: 999999;
 }
 
 .menu i.icon-paragraph-justify{margin-right: 20px;font-size: 30px}
@@ -1007,135 +1008,6 @@ select{
 .menu-categories-group ul li a:hover{text-decoration: underline;}
 .menu-categories-group ul li a:before{content: '> '}
 
-/*--------------/
-  #POINTERS sidenav
-/*--------------*/
-md-backdrop.md-sidenav-backdrop{
-  position: fixed;
-  z-index: 1000;
-}
-.pointers-sidenav{
-  z-index: 99999999;
-  width: 400px;
-  max-width: 100%;
-  position: fixed;
-  background: #000;
-  color: #fff;
-}
-.pointers-sidenav .pointer-close-btn{
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  background: #000!important;
-  /* color: #C82828; */
-  font-weight: 700;
-  font-size: 28px;
-  height: 28px!important;
-  width: 28px!important;
-  min-height: 28px;
-  vertical-align: middle;
-  padding: 0;
-  text-align: center;
-  transform: rotate(45deg);
-  line-height: 1!important;
-}
-.pointers-sidenav .pointer-close-btn i{
-  color: #C82828;
-}
-.pointers-sidenav md-radio-button.md-default-theme.md-checked .md-off,
-.pointers-sidenav md-radio-button.md-checked .md-off{
-  border-color:#fff!important;
-}
-
-.pointers-sidenav md-radio-button.md-default-theme .md-off,
-.pointers-sidenav md-radio-button .md-off{
-  border-color:#fff!important;
-}
-.pointers-sidenav md-radio-button .md-on{background-color: #fff}
-
-.pointers-sidenav md-content{
-  background: #000;
-  color: #fff;
-}
-.pointers-sidenav .md-toolbar-tools{
-  background: #000;
-  color: #fff;
-  display: block;
-  font-weight: 700;
-  padding: 20px 50px;
-  font-size: 30px;
-  text-align: center;
-  height: auto;
-  max-height: none;
-}
-.pointers-sidenav .md-toolbar-tools i{
-  font-size: 40px;
-  vertical-align: middle;
-  margin-left: 10px;
-}
-.pointers-sidenav .pointer-item{
-  border-top: 1px solid rgba(255,255,255,0.5);
-  padding: 10px 20px;
-}
-.pointers-sidenav .pointer-item-head{
-  color: #fff;
-  cursor: pointer;
-  outline: none;
-}
-.pointers-sidenav .pointer-item-head a{
-  color: #fff;
-  font-size: 14px;
-  text-transform: uppercase;
-}
-.pointers-sidenav .pointer-item-head a .circle{
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 2px solid #C82828;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
-}
-.pointers-sidenav .pointer-item-head-active a .circle{
-  background: #fff;
-}
-.pointers-sidenav .pointer-item ul{
-  margin: 8px 0 0;
-  padding-left: 16px;
-}
-.pointers-sidenav .pointer-item li{
-  font-size: 13px;
-  position: relative;
-}
-.pointers-sidenav .pointer-item li:before{
-  content:'\25CF';
-  margin-right: 10px;
-  position: absolute;
-  left: -12px;
-}
-
-.pointers-sidenav .pointer-item-content{
-  padding-left: 20px;
-}
-.pointers-sidenav .pointer-item-content p{
-  font-size: 13px;
-}
-.pointers-sidenav .pointer-item-content .md-label{font-size: 13px;}
-.pointers-sidenav md-radio-group md-radio-button{margin: 8px 0;}
-.pointers-sidenav .action-btn{
-  background: #fff;
-  padding: 6px 10px;
-  color: #000;
-  display: block;
-  max-width: 150px;
-  margin: 10px auto;
-}
-.pointers-sidenav .broker-select{
-  background: rgb(255, 255, 255);
-  margin-left: 26px;
-  padding: 5px;
-}
 
 /*---------------/
   #HOME
@@ -3868,38 +3740,6 @@ padding-left: 16px;
 }
 .order-view .sap-docs p{margin: 4px 0}
 
-/*---------------/
-  #CASH-REPORT
-/*--------------*/
-.cash-report-config{
-  border: 1px solid #000;
-  margin: 10px 0;
-  padding:20px;
-}
-.cash-report{
-  border: 1px solid #000;
-  padding:20px;
-  margin-bottom: 20px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.cash-report h3{font-weight: 400;}
-.cash-report .payment-group{
-  padding: 5px 0;
-  font-size: 14px;
-}
-.cash-report .payment-item{margin: 6px 0;}
-.cash-report .payment-group + .payment-group{
-  border-top: 1px solid;
-}
-.cash-report .payment-item-header,
-.cash-report .payment-item-cell{
-  padding: 6px;
-  text-align: right;
-}
-.cash-report .total-group{/*font-size:18px;*/}
-.cash-report .cash-report-total{font-size: 30px;}
 
 /*---------------/
   #CLIENT ITEM INFO
@@ -4082,6 +3922,16 @@ padding-left: 16px;
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+
+/*-------------------/
+  #REGISTER
+/*------------------*/
+#register .input-container{margin: 20px 0;}
+#register .form-view-btn{
+  display: block;
+  width: 100%;
 }
 
 

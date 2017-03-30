@@ -108,6 +108,7 @@
             </div>
 
             <a
+              ng-if="main.user"
               ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#"
               class="add-cart-btn"
               ng-class="
@@ -122,7 +123,14 @@
               </span>
               <strong>Agregar al carrito</strong>
             </a>
-            <!--<p class="seen-number"><strong>Visto 16 veces hoy</strong></p>-->
+
+
+            <p class="seen-number">
+              <strong class="small">visto {{vm.product.seenTimes}} 
+                <span ng-if="vm.product.seenTimes > 1">veces</span>
+                <span ng-if="vm.product.seenTimes <= 1">veces</span>
+               hoy</strong>
+            </p>
 
           </div>
           <!--END PRODUCT VIEW DATA-->

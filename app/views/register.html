@@ -1,0 +1,98 @@
+<section id="register" class="form-view">
+	
+	<div class="container container-lg">
+		
+    <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+      <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+    </div>
+
+		<section ng-if="!vm.isLoading && vm.registerDone">
+			<h1>Usuario registrado con éxito</h1>
+			<p>Haz click <a ng-click="main.toggleLoginModal()" href="" class="login-toggler">aqui</a> para iniciar sesión</p>
+		</section>
+
+    <form 
+    	ng-if="!vm.isLoading && !vm.registerDone" 
+    	name="registerForm" 
+    	ng-submit="vm.register(registerForm)" 
+    	>
+
+
+				<h1><i class="icon-login"></i> Regístrate</h1>
+
+				<hr/>
+
+	      <div class="input-container">
+	        <div class="input-element">
+            <p><label><strong>Nombre(s)*</strong></label></p>
+	          <div class="input-element-inner">
+	            <input 
+	              type="text" 
+	              ng-model="vm.newUser.firstName" 
+	              required>
+	          </div>
+	        </div>
+	      </div>
+
+				<div class="input-container">
+	        <div class="input-element">
+            <p><label><strong>Apellidos(s)*</strong></label></p>
+	          <div class="input-element-inner">
+	            <input 
+	              type="text" 
+	              ng-model="vm.newUser.lastName" 
+	              required>
+	          </div>
+	        </div>
+	      </div>
+
+				<div class="input-container">
+	        <div class="input-element">
+            <p><label><strong>Email*</strong></label></p>
+	          <div class="input-element-inner">
+	            <input 
+	              type="email" 
+	              ng-model="vm.newUser.email" 
+	              required>
+	          </div>
+	        </div>
+	      </div>	      
+
+				<div class="input-container">
+	        <div class="input-element">
+            <p><label><strong>Contraseña*</strong></label></p>
+	          <div class="input-element-inner">
+	            <input 
+	              type="password" 
+	              ng-model="vm.newUser.password" 
+	              required>
+	          </div>
+	        </div>
+	      </div>	
+
+				<div class="input-container">
+	        <div class="input-element">
+            <p><label><strong>Confirmar contraseña*</strong></label></p>
+	          <div class="input-element-inner">
+	            <input 
+	              type="password" 
+	              ng-model="vm.newUser._password" 
+	              ng-pattern="vm.newUser.password"
+	              required>
+	          </div>
+	        </div>
+	      </div>	
+
+	      <button
+					type="submit"
+	        class="form-view-btn form-view-btn-primary"
+	      >
+	        Registrarse
+	      </button>
+
+
+    </form>
+
+	</div>
+
+</section>

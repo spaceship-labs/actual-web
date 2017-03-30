@@ -16,7 +16,8 @@
         getCashReport: getCashReport,
         update: update,
         sendPasswordRecovery: sendPasswordRecovery,
-        resetPassword: resetPassword
+        resetPassword: resetPassword,
+        register: register
       };
 
       return service;
@@ -42,6 +43,11 @@
       function getUser(id, params){
         var url = '/user/findbyid/' + id;
         return api.$http.post(url, params);
+      }
+
+      function register(params){
+        var url = '/user/register/';
+        return api.$http.post(url,params);
       }
 
       function update(params){
