@@ -43,7 +43,8 @@ angular
     $locationProvider,
     $mdThemingProvider,
     localStorageServiceProvider,
-    ENV
+    ENV,
+    SITE
   ) {
 
 
@@ -357,6 +358,28 @@ angular
       });
 
     localStorageServiceProvider.setPrefix(ENV.tokenPrefix + 'actualWeb');
+
+    function getConektaKeyBySite(){
+      var key;
+      switch(SITE.name){
+        case 'actual-home':
+          key = ENV.conektaHomeKey;
+          break;
+        case 'actual-kids':
+          key = ENV.conektaKidsKey;
+          break;
+        case 'actual-studio':
+          key = ENV.conektaStudioKey;
+          break;
+        default:
+          break;
+      }
+      console.log('conekta key', key);
+      return key;
+    }
+
+    Conekta.setPublicKey( getConektaKeyBySite() );
+
 
     //JWT TOKENS CONFIG
     $httpProvider.interceptors.push([

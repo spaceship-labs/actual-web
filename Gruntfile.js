@@ -457,7 +457,11 @@ module.exports = function (grunt) {
             name: 'sandbox',
             apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
             adminUrl: 'http://sandboxadmin.miactual.com',
-            tokenPrefix: 'sandbox'
+            tokenPrefix: 'sandbox',
+            conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
+            conektaKidsKey: 'key_S9FzaWYMDisHvS5iXqJ8oQ',
+            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
+
           }
         }
       },
@@ -471,7 +475,11 @@ module.exports = function (grunt) {
             name: 'demo',
             apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
             adminUrl: 'http://sandboxadmin.miactual.com',
-            tokenPrefix: 'demo'            
+            tokenPrefix: 'demo',
+            conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
+            conektaKidsKey: 'key_S9FzaWYMDisHvS5iXqJ8oQ',
+            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
+
           }
         }
       },      
@@ -485,7 +493,10 @@ module.exports = function (grunt) {
             name: 'production',
             apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
             adminUrl: 'http://admin.miactual.com',
-            tokenPrefix: 'production'            
+            tokenPrefix: 'production',
+            conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
+            conektaKidsKey: 'key_S9FzaWYMDisHvS5iXqJ8oQ',
+            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'                    
           }
         }
       },
@@ -499,7 +510,10 @@ module.exports = function (grunt) {
             name: 'dev',
             apiEndpoint: 'http://localhost:1337',
             adminUrl: 'http://localhost:3000',
-            tokenPrefix: 'dev'
+            tokenPrefix: 'dev',
+            conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
+            conektaKidsKey: 'key_S9FzaWYMDisHvS5iXqJ8oQ',
+            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'            
           }
         }
       },

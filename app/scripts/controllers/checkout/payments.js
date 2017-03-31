@@ -81,8 +81,6 @@ function CheckoutPaymentsCtrl(
       payments:true,
     };
 
-    Conekta.setPublicKey('key_KJysdbf6PotS2ut2');
-
     quotationService.getById($routeParams.id, getParams)
       .then(function(res){
         vm.quotation = res.data;
