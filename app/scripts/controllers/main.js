@@ -65,7 +65,6 @@
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       getStores: getStores,
-      saveBroker: saveBroker,
       saveSource: saveSource,
       siteTheme: SITE.name
     });
@@ -237,21 +236,6 @@
       return deferred.promise;
     }
 
-    function loadBrokers() {
-      var deferred = $q.defer();
-      userService.getBrokers()
-        .then(function(brokers) {
-          vm.brokers = brokers;
-          $rootScope.brokers = brokers;
-          deferred.resolve(brokers);
-        })
-        .catch(function(err){
-          console.log(err);
-          deferred.reject(err);
-        });
-      return deferred.promise;
-    }
-
     function loadSiteInfo(){
       var deferred = $q.defer();
       console.log('loadSiteInfo start', new Date());
@@ -279,9 +263,6 @@
 
     function togglePointerSidenav(){
       $mdSidenav('right').toggle();
-      if($mdSidenav('right').isOpen() && !vm.brokers){
-        loadBrokers();
-      }
     }
 
     function getCategoryIcon(handle){
@@ -492,18 +473,16 @@
       });
     }
 
-    function saveBroker(broker) {
-      localStorageService.set('broker', broker);
-      togglePointerSidenav();
-    }
 
     function saveSource(source){
-      if(source === 'Broker'){
-        quotationService.updateBroker(vm.quotation, {brokerId:vm.activeQuotation.Broker})
+      if(vm.quotation){
+        vm.pointersLoading = true;
+        quotationService.updateSource(vm.quotation, {source:source})
           .then(function(res){
             vm.pointersLoading = false;
             togglePointerSidenav();
             dialogService.showDialog('Datos guardados');
+            console.log(res);
           })
           .catch(function(err){
             vm.pointersLoading = false;
@@ -511,23 +490,6 @@
             togglePointerSidenav();
             dialogService.showDialog('Hubo un error, revisa tus datos');
           });
-      }else{
-        if(vm.quotation){
-          vm.pointersLoading = true;
-          quotationService.updateSource(vm.quotation, {source:source})
-            .then(function(res){
-              vm.pointersLoading = false;
-              togglePointerSidenav();
-              dialogService.showDialog('Datos guardados');
-              console.log(res);
-            })
-            .catch(function(err){
-              vm.pointersLoading = false;
-              console.log(err);
-              togglePointerSidenav();
-              dialogService.showDialog('Hubo un error, revisa tus datos');
-            });
-        }
       }
     }
 

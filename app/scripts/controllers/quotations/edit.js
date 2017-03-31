@@ -36,7 +36,6 @@ function QuotationsEditCtrl(
   angular.extend(vm, {
     newRecord: {},
     api: api,
-    brokers: [],
     isLoadingRecords: false,
     isLoading: true,
     timePickerOptions: {
@@ -87,7 +86,6 @@ function QuotationsEditCtrl(
     vm.isLoadingDetails = true;
 
     loadWarehouses();
-    loadBrokers();
     showAlerts();
 
     console.log('start loading quotation', new Date());
@@ -144,19 +142,9 @@ function QuotationsEditCtrl(
         var error = err.data || err;
         error = error ? error.toString() : '';
         dialogService.showDialog('Hubo un error: ' + (error) );
-        $log.error(error);
+        console.log('error', err);
       });
 
-  }
-
-  function loadBrokers(){
-    userService.getBrokers()
-      .then(function(brokers) {
-        vm.brokers = brokers;
-      })
-      .catch(function(err){
-        console.log(err);
-      });    
   }
 
   function showAlerts(){

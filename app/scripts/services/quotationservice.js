@@ -411,10 +411,12 @@
       }      
 
       function mapDetailsStock(details, detailsStock){
-        console.log("valid: ",details);
+        console.log("mapDetailsStock: ",details);
+        console.log('detailsStock', detailsStock);
         var details = details.map(function(detail){
           var detailStock = _.findWhere(detailsStock, {id:detail.id});
           if(detailsStock){
+            console.log('detailStock', detailStock);
             detail.validStock = detailStock.validStock;
             console.log("Valid stock detail", detailStock.validStock);
           }

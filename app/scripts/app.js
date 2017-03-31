@@ -116,7 +116,6 @@ angular
         controllerAs: 'vm',
         resolve: {
           isMiActual: function($rootScope, authService){
-            authService.dennyAccessBroker();
             authService.dennyAccessStoreManager();
             $rootScope.isMiActual = true;
             return true;
@@ -130,7 +129,6 @@ angular
         controllerAs: 'vm',
         resolve: {
           isMiActual: function($rootScope, authService){
-            authService.dennyAccessBroker();
             authService.dennyAccessStoreManager();
             $rootScope.isMiActual = true;
             return true;

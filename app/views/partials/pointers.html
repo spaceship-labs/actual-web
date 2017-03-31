@@ -76,31 +76,6 @@
               Medios impresos
             </md-radio-button>
             
-            <md-radio-button  
-              value="Broker">
-              Broker
-            </md-radio-button>
-            
-            <select 
-              class="broker-select" 
-              ng-model="main.activeQuotation.Broker" 
-              ng-show="main.activeQuotation.source === 'Broker'">
-              <option 
-                value="" 
-                selected 
-                disabled 
-                hidden>
-                Escoge un broker
-              </option>
-              <option 
-                ng-repeat="broker in main.brokers" 
-                ng-value="broker.id"
-                ng-selected="broker.id === main.activeQuotation.Broker"
-              >
-                {{broker.firstName +  ' ' +broker.lastName}}
-              </option>
-            </select>
-
             <md-radio-button value="Otro">Otro</md-radio-button>
 
           </md-radio-group>
