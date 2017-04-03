@@ -459,7 +459,7 @@ module.exports = function (grunt) {
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'sandbox',
             conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
-            conektaKidsKey: 'key_S9FzaWYMDisHvS5iXqJ8oQ',
+            conektaKidsKey: 'key_FAVz7GZoqMy4PwugqgHNrag',
             conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
 
           }
@@ -477,7 +477,7 @@ module.exports = function (grunt) {
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'demo',
             conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
-            conektaKidsKey: 'key_S9FzaWYMDisHvS5iXqJ8oQ',
+            conektaKidsKey: 'key_FAVz7GZoqMy4PwugqgHNrag',
             conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
 
           }
@@ -495,8 +495,8 @@ module.exports = function (grunt) {
             adminUrl: 'http://admin.miactual.com',
             tokenPrefix: 'production',
             conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
-            conektaKidsKey: 'key_S9FzaWYMDisHvS5iXqJ8oQ',
-            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'                    
+            conektaKidsKey: 'key_FAVz7GZoqMy4PwugqgHNrag',
+            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
           }
         }
       },

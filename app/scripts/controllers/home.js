@@ -15,13 +15,15 @@ function HomeCtrl(
   $scope,
   $rootScope,
   api, 
-  dialogService
+  dialogService,
+  siteService
 ){
   var vm = this;
   var mainDataListener = function(){};
   angular.extend(vm,{
     areProductsLoaded: false,
     api: api,
+    test: test
   });
 
   function init(){
@@ -40,6 +42,16 @@ function HomeCtrl(
     }
   }
 
+  function test(){
+    siteService.test()
+      .then(function(res){
+        console.log('res', res);
+      })
+      .catch(function(err){
+        console.log('err', err);
+      });
+  }
+
   init();
 
   $scope.$on('$destroy', function(){
@@ -52,5 +64,6 @@ HomeCtrl.$inject = [
   '$scope',
   '$rootScope',
   'api',
-  'dialogService'
+  'dialogService',
+  'siteService'
 ];
