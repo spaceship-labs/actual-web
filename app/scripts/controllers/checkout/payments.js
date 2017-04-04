@@ -298,11 +298,8 @@ function CheckoutPaymentsCtrl(
         .then(function(token){
           delete payment.cardObject;
           payment.cardToken = token;
-        });
-
-      return;
-
-      paymentService.addPayment(vm.quotation.id, payment)
+          return paymentService.addPayment(vm.quotation.id, payment);
+        })
         .then(function(res){
           if(res.data){
             var quotation = res.data;

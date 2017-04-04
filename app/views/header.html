@@ -33,8 +33,7 @@
 
       <form
         hide-xs
-        action="/search"
-        method="GET"
+        ng-submit="main.handleSearch()"
         class="searcher-wrapper"
         layout="row"
       >
@@ -44,7 +43,7 @@
             <input
               type="text"
               name="term"
-              ng-attr-name="{{vm.isItemCodeSearch && 'itemcode' || 'term' }}"
+              ng-model="main.searchValue"
               >
           </div>
         </div>

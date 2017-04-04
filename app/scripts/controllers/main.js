@@ -56,6 +56,7 @@
       getActiveModule: getActiveModule,
       getCategoryBackground: getCategoryBackground,
       getCategoryIcon: getCategoryIcon,
+      handleSearch: handleSearch,
       logOut: logOut,
       removeCurrentQuotation: removeCurrentQuotation,
       signIn: signIn,
@@ -127,6 +128,18 @@
         $scope.$apply();
       });
 
+    }
+
+    function handleSearch(){
+      var params = {
+        term: vm.searchValue
+      };
+
+      $location.path('/search').search(params);
+    }
+
+    function resetSearchBox(){
+      vm.searchValue = '';
     }
 
     function buildPointersSidenav(){
@@ -285,6 +298,7 @@
             $rootScope.isMainDataLoaded = true;
           });
 
+        resetSearchBox();
       }
 
       //loadMainData();
