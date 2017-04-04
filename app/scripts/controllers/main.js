@@ -92,6 +92,8 @@
         .then(function(res){
           vm.isLoadingCategoriesTree = false;
           vm.categoriesTree = res.data;
+          $rootScope.categoriesTree = vm.categoriesTree;
+          $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
           vm.menuCategories = buildMenuCategories(vm.categoriesTree);
         })
         .catch(function(err){

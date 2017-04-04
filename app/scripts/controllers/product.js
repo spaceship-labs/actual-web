@@ -31,12 +31,14 @@ function ProductCtrl(
   cartService,
   commonService,
   categoriesService,
-  dialogService
+  dialogService,
+  breadcrumbService
 ) {
   var vm = this;
   var activeStoreId = localStorageService.get('activeStore'); 
   var activeStoreWarehouse = false;
   var mainDataListener = function(){};
+  var categoriesTreeListener = function(){};
   var activeQuotationListener = function(){};
 
   angular.extend(vm, {
@@ -53,7 +55,9 @@ function ProductCtrl(
     isLoading: true,
     resetProductCartQuantity: resetProductCartQuantity,
     trustAsHtml: trustAsHtml,
-    sas: commonService.getSasHash()
+    sas: commonService.getSasHash(),
+    breadcrumbItems: [],
+    isActiveBreadcrumbItem: breadcrumbService.isActiveBreadcrumbItem
   });
 
 
@@ -88,9 +92,12 @@ function ProductCtrl(
         vm.product = fProduct;
         vm.mainPromo = vm.product.mainPromo;
         vm.lowestCategory = categoriesService.getLowestCategory(vm.product.Categories);
+        vm.breadcrumbItems = breadcrumbService.buildProductBreadcrumb(vm.product.Categories);
+
         vm.productCart = {
           quantity: 1
         };
+
         if(reload){
           $location.path('/product/' + productId, false)
             .search({variantReload:'true'});
@@ -135,6 +142,7 @@ function ProductCtrl(
     //Unsuscribing  mainDataListener
     mainDataListener();
   }
+
 
   function setUpDeliveries(deliveries){
     deliveries = $filter('orderBy')(deliveries, 'date');        
@@ -318,7 +326,8 @@ ProductCtrl.$inject = [
   'cartService',
   'commonService',
   'categoriesService',
-  'dialogService'
+  'dialogService',
+  'breadcrumbService'
 ];
 /*
 angular.element(document).ready(function() {

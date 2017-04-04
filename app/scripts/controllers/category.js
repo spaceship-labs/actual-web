@@ -11,10 +11,13 @@ angular.module('dashexampleApp')
   .controller('CategoryCtrl', CategoryCtrl);
 
 function CategoryCtrl(
+  $scope,
+  $rootScope,
   $routeParams,
   categoriesService, 
   productService, 
-  dialogService
+  dialogService,
+  breadcrumbService
 ){
   var vm     = this;
   vm.filters = [];
@@ -25,6 +28,11 @@ function CategoryCtrl(
   vm.showLevel3 = false;
   vm.page  = 1;
   vm.limit = 10;
+  vm.breadcrumbItems = [];
+  vm.isFilledBreadcrumb = breadcrumbService.isFilledBreadcrumb;
+  vm.isActiveBreadcrumbItem = breadcrumbService.isActiveBreadcrumbItem;
+
+  var categoriesTreeFormatListener = function(){};
 
 
   function setSubnavIndex(index){
@@ -44,6 +52,7 @@ function CategoryCtrl(
         if(!vm.category){
           dialogService.showDialog('Categoria no encontrada');
         }
+
         var hasLevel2Categories = false;
         var filters = vm.category.Filters.map(function(filter){
           return filter.id;
@@ -55,10 +64,15 @@ function CategoryCtrl(
         vm.showLevel2 = hasLevel2Categories;
         vm.showLevel3 = !hasLevel2Categories;
         vm.isLoading = false;
+
+        categoriesTreeFormatListener = $rootScope.$on('formattedCategoriesTree', function(e, categoriesTree){
+          vm.breadcrumbItems = breadcrumbService.buildCategoryBreadcrumb(categoriesTree, vm.category.id);
+        });
+
       })
       .catch(function(err){
         console.log('err', err);
-      })
+      });
 
   }
 
@@ -110,11 +124,19 @@ function CategoryCtrl(
   }
 
   init();
+
+  $scope.$on('$destroy', function(){
+    categoriesTreeFormatListener();
+  });
+
 }
 
 CategoryCtrl.$inject = [
+  '$scope',
+  '$rootScope',
   '$routeParams',
   'categoriesService',
   'productService',
-  'dialogService'
+  'dialogService',
+  'breadcrumbService'
 ];

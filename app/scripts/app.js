@@ -73,6 +73,7 @@ angular
         controller: 'CategoryCtrl',
         controllerAs: 'vm'
       })
+      //.when('/product/:name/:id', {
       .when('/product/:id', {
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',

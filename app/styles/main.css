@@ -1280,6 +1280,9 @@ select{
   font-size: 14px;
   text-decoration: none;
 }
+.breadcrumb .breadcrumb-item + .breadcrumb-item:before{
+  content: ', ';
+}
 .breadcrumb .breadcrumb-active{
   color: #E2023F;
   font-weight: 700;

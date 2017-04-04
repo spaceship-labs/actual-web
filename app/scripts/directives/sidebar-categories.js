@@ -107,6 +107,10 @@ function SidebarCategories(
             }
           });
         }
+
+        console.log('$scope.categoriesTree', $scope.categoriesTree);
+        $rootScope.$emit('formattedCategoriesTree', $scope.categoriesTree);
+
       }
 
       $scope.toggleMainCategory = function(mainCategory,event){
