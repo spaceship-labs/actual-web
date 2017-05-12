@@ -1,41 +1,38 @@
+<!--
 <div class="breadcrumb">
   <div class="container container-xxlg">
     <p>
-      <a 
-        href="/">
-        Inicio
-      </a>
-      <span ng-repeat="itemGroup in vm.breadcrumbItems track by $index" ng-show="itemGroup.length > 0">
-        > 
-          <a 
-            ng-repeat="item in itemGroup"
-            ng-href="/category/{{item.Handle}}"
-            class="breadcrumb-item"
-            ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}"
-          >{{item.Name}}</a>
-      </span>
+      <a href="#">Inicio</a>
+      <a href="#"> > Muebles</a>
+      <a href="#" class="breadcrumb-active"> > Salas</a>
     </p>
   </div>
 </div>
+-->
+<a 
+  ng-click="vm.toggleSearchSidenav()" 
+  href="" 
+  class="filters-sidenav-trigger">
+    Filtros
+</a>
 
 <div class="content-block listing-view">
-  <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
+  <div class="container container-xxlg" layout="row" layout-align="space-between start">
     <!--START NAV-->
-    <aside flex-gt-sm="20" flex="100" hide-xs>
+    <aside flex="20">
       <sidebar-categories
         categories-tree="main.categoriesTree"
         selected-category-id="vm.category.id"
         active-store="main.activeStore">
       </sidebar-categories>
 
-      <!--
-      <ng-include src="'views/partials/category-filters.html'"></ng-include>  
-      -->
+      <ng-include src="'views/partials/search-filters.html'"></ng-include>  
+      
     </aside>
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
-    <div flex-gt-sm="75" flex="100">
+    <div flex="75">
 
       <div
         ng-if="vm.isLoading"
@@ -60,8 +57,7 @@
             class="sub-wrapper"
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}"
             ng-if="subcategory[main.activeStore.code] > 0"
-            flex-gt-sm="33" flex="100"
-
+            flex="33"
           >
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />            
           </div>
@@ -75,40 +71,46 @@
             class="sub-wrapper"
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}"
             ng-if="subcategory[main.activeStore.code] > 0"
-            flex-gt-sm="33" flex="100"
-
+            flex="33"
           >
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
         </div>
         <!--END SUBCATEGORIES LIST LEVEL 3-->
 
-
         <!--RESULTS-->
-        <div class="results"
-          infinite-scroll="vm.getProductsByCategory(true)"
-          infinite-scroll-disabled="!(vm.totalProducts > vm.products.length && !vm.isLoadingProducts && vm.products.length > 0)"
-          infinite-scroll-distance="0"
-        >
-          <h2 class="center-content">
-            <strong>
-              <i class="icon-search"></i> <span class="hl-text">{{vm.totalProducts}}</span> Resultados
-            </strong>
-          </h2>
+        <div id="products-results">
 
-          <div
-            class="products-list"
-            layout="row"
-            layout-wrap
-            layout-align="start center"
-            ng-cloak
+          <ng-include src="'views/partials/search-options.html'"></ng-include>
+
+          <div 
+            ng-if="!vm.isLoadingProducts || vm.search.page > 1"
+            class="results"
+            infinite-scroll="vm.loadMore()"
+            infinite-scroll-disabled="!(vm.totalProducts > vm.products.length && !vm.isLoadingProducts && vm.products.length > 0)"
+            infinite-scroll-distance="1"
           >
+            <h2 class="center-content">
+              <strong>
+                <i class="icon-search"></i> <span class="hl-text">{{vm.totalProducts}}</span> Resultados
+              </strong>
+            </h2>
+
             <div
-              flex-gt-sm="33" flex-sm="45" flex="100"
-              class="listing-product-wrap"
-              ng-repeat="product in vm.products track by product.ItemCode">
-              <listing-product product="product"></listing-product>
+              class="products-list"
+              layout="row"
+              layout-wrap
+              layout-align="start center"
+              ng-cloak
+            >
+              <div
+                flex="33"
+                class="listing-product-wrap"
+                ng-repeat="product in vm.products track by product.ItemCode">
+                <listing-product product="product"></listing-product>
+              </div>
             </div>
+
           </div>
 
         </div>

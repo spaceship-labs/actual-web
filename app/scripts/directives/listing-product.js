@@ -7,7 +7,7 @@
  * # listingProduct
  */
 angular.module('dashexampleApp')
-  .directive('listingProduct',['$timeout','api', 'commonService' ,function ($timeout, api, commonService) {
+  .directive('listingProduct',['$rootScope', '$timeout','api', 'commonService' ,function ($rootScope,$timeout, api, commonService) {
     return {
       scope:{
         product:'='
@@ -17,6 +17,7 @@ angular.module('dashexampleApp')
       link: function postLink(scope) {
         scope.areImagesLoaded = false;
         scope.images = [];
+        scope.activeStore = $rootScope.activeStore;
 
         scope.setUpImages = function(){
           scope.imageSizeIndexGallery = 2;

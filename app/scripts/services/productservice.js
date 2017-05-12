@@ -32,6 +32,7 @@
         getById: getById,
         getCategories: getCategories,
         getCategoryById: getCategoryById,
+        getCustomBrands: getCustomBrands,
         getGroupProducts: getGroupProducts,
         getGroupVariants: getGroupVariants,
         getList: getList,
@@ -68,6 +69,11 @@
         var url = '/product/findbyid/' + id;
         return api.$http.post(url);
       }
+
+      function getCustomBrands(){
+        var url = '/custombrand/getall';
+        return api.$http.post(url);
+      }        
 
       function getMainPromo(id){
         var url = '/product/mainpromo/' + id;

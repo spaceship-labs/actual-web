@@ -10,123 +10,37 @@
   </div>
 </div>
 -->
+<a 
+  ng-click="vm.toggleSearchSidenav()" 
+  href="" 
+  class="filters-sidenav-trigger">
+    Filtros
+</a>
+
 
 <div class="content-block listing-view search-view" id="search-page">
-  <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
+  <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
-    <aside flex-gt-sm="20" flex="100">
+    <aside flex="20">
       <sidebar-categories 
+        active-store="main.activeStore"
         categories-tree="main.categoriesTree">
       </sidebar-categories>
 
-      <section class="filters">
-        <h3 class="filters-head">FILTRAR RESULTADOS</h3>
-        <div class="filters-inner">
-          <div class="filter-block filter-block-prices">
-            <h4><strong>PRECIO:</strong></h4>
-            <div class="filter-block-inner">
-
-              <div layout="row" layout-align="space-between center">
-                <div flex class="input-element input-element-from">
-                  <div class="input-element-inner">
-                    <input ng-model="vm.minPrice" ui-money-mask="0" placeholder="Min." type="text">
-                  </div>
-                </div>
-                <span>a</span>
-                <div flex class="input-element input-element-to">
-                  <div class="input-element-inner">
-                    <input ng-model="vm.maxPrice" ui-money-mask="0" placeholder="Max." type="text">
-                  </div>
-                </div>
-                <a href="#" class="filter-block-price-btn" ng-click="vm.searchByFilters()">
-                  <img src="images/arrow-right.png" alt="">
-                </a>
-              </div>
-
-
-            </div>
-          </div>
-
-          <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
-            <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
-              <strong>{{filter.Name}}:</strong>
-            </h4>
-            <div ng-show="vm.filters[$index].active" class="filter-block-inner">
-
-              <div ng-if=" filter.Handle != 'color' " >
-                <md-checkbox
-                  ng-repeat="value in filter.Values"
-                  ng-model="value.selected"
-                  ng-change="vm.searchByFilters()"
-                  aria-label="Checkbox Indeterminate">
-                  {{value.Name}}
-                </md-checkbox>
-              </div>
-
-
-              <div ng-if=" filter.Handle == 'color' " class="color-picker-sp" layout="row" layout-wrap>
-                <a
-                  class="color-picker-sp-value"
-                  ng-repeat="value in filter.Values"
-                  ng-click="vm.toggleColorFilter(value, filter)"
-                  ng-style="{'background-color' : value.Code}"
-                  ng-class="{'active': value.selected}"
-                  href="#"
-                  flex>
-                  <span></span>
-                </a>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
+      <!--FILTERS-->
+      <ng-include src="'views/partials/search-filters.html'"></ng-include>
+      <!--END FILTERS-->
 
     </aside>
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
-    <div flex-gt-sm="75" flex="100">
+    <div flex="75">
 
       <div class="subs-container">
 
-        <div class="filters-selected-list" ng-if="vm.searchValues.length > 0">
-          <span>Filtros aplicados:</span>
-          <span ng-repeat="searchValue in vm.searchValues track by $index" class="filters-selected-item">
-            {{searchValue.Name}}
-            <a href="#" ng-click="vm.removeSearchValue(searchValue)" class="remove-item">
-              <i class="icon-cotizar"></i>
-            </a>
-          </span>
-
-          <!--
-          <span ng-repeat="keyword in vm.search.keywords track by $index" class="filters-selected-item">
-            "{{keyword}}"
-            <a href="#" ng-click="vm.removeKeyword(keyword)" class="remove-item">
-              <i class="icon-cotizar"></i>
-            </a>
-          </span>
-          -->
-
-
-        </div>
-
-        <div layout="row" layout-align="space-between start">
-          <h2 ng-if="vm.search.term" class="listing-view-title">
-            Resultados para "{{vm.search.term}}"
-          </h2>
-          <h2 ng-if="vm.search.itemcode" class="listing-view-title">
-            Resultados para "{{vm.search.itemcode}}"
-          </h2>
-          <h2 ng-if="vm.search.keywords" class="listing-view-title">
-            Resultados para "<span ng-repeat="keyword in vm.search.keywords">{{keyword}} </span>"
-          </h2>
-
-          <h3 ng-if="!vm.isLoading">
-            <i class="icon-search"></i> <span class="hl-text">{{vm.totalResults}}</span> Resultados
-          </h3>
-        </div>
+        <ng-include src="'views/partials/search-options.html'"></ng-include>
 
         <!--RESULTS-->
         <div
@@ -141,7 +55,7 @@
             layout="row"
             layout-wrap
             layout-align="start center">
-            <div flex-gt-sm="33" flex-sm="45" flex="100" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
+            <div flex="33" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
               <listing-product product="product"></listing-product>
             </div>
           </div>

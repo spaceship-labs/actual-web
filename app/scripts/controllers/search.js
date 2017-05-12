@@ -17,25 +17,41 @@ function SearchCtrl(
   $timeout,
   $routeParams, 
   $q ,
+  $mdSidenav,
   productService, 
-  dialogService
+  dialogService,
+  productSearchService
 ){
   var vm = this;
+
+  angular.extend(vm, {
+    totalResults:0,
+    isLoading: true,
+    filters: [],
+    searchValues: [],
+    syncProcessActive: false,
+    enableSortOptions: true,    
+    discountFilters: productSearchService.DISCOUNTS_SEARCH_OPTIONS,
+    stockFilters: productSearchService.STOCK_SEARCH_OPTIONS,
+    societyFilters: productSearchService.SOCIETY_OPTIONS,
+    sortOptions: productSearchService.SORT_OPTIONS,
+    loadMore: loadMore,
+    getFilterById: getFilterById,
+    searchByFilters: searchByFilters,
+    toggleColorFilter: toggleColorFilter,
+    scrollTo: scrollTo,
+    toggleSearchSidenav: toggleSearchSidenav,
+    removeSearchValue:removeSearchValue,
+    removeBrandSearchValue: removeBrandSearchValue,
+    removeSelectedDiscountFilter: removeSelectedDiscountFilter,
+    removeSelectedStockFilter: removeSelectedStockFilter,
+    removeSelectedSocietyFilter: removeSelectedSocietyFilter,
+    removeMinPrice: removeMinPrice,
+    removeMaxPrice: removeMaxPrice,
+    setActiveSortOption: setActiveSortOption
+  });
+
   var mainDataListener = function(){};
-
-  vm.loadMore = loadMore;
-  vm.searchByFilters = searchByFilters;
-  vm.toggleColorFilter = toggleColorFilter;
-  vm.scrollTo = scrollTo;
-
-  vm.totalResults = 0;
-  vm.isLoading = false;
-  vm.filters = [];
-  vm.searchValues = [];
-  vm.removeSearchValue = removeSearchValue;
-
-  vm.isLoading = true;
-  vm.syncProcessActive = false;
 
   if($rootScope.activeStore){
     init();
@@ -47,38 +63,14 @@ function SearchCtrl(
 
   function init(){
     var keywords = [''];
+    var activeSortOptionKey = 'DiscountPrice';
+    vm.activeSortOption = _.findWhere(vm.sortOptions,{key: activeSortOptionKey});
+
     if($routeParams.itemcode) {
       vm.isLoading = true;
       vm.search = {};
       vm.search.itemcode = $routeParams.itemcode;
-      productService.getById($routeParams.itemcode)
-        .then(function(res){
-          var foundProduct = res.data.data;
-          if(!foundProduct){
-            vm.isLoading = false;
-            vm.syncProcessActive = true;
-            return $q.reject('Producto no encontrado');
-            //return $q.reject('Este producto no existe, verificando en SAP...');
-          }
-          return productService.formatSingleProduct(res.data.data);
-        })
-        .then(function(fProduct){
-          vm.isLoading = false;
-          vm.totalResults = 1;
-          vm.products = [fProduct];
-        })
-        .catch(function(err){
-          console.log(err);
-          dialogService.showDialog(err);
-          vm.isLoading = false;
-
-          /*
-          if(vm.syncProcessActive){
-            syncProduct(vm.searc.itemcode);
-          }*/
-
-        });
-
+      syncProduct(vm.search.itemcode);
     }
     else{
       if($routeParams.term){
@@ -90,88 +82,240 @@ function SearchCtrl(
         page: 1
       };
       vm.isLoading = true;
-      productService.searchByFilters(vm.search).then(function(res){
-        vm.totalResults = res.data.total;
-        vm.isLoading = false;
-        return productService.formatProducts(res.data.products);
+      doInitialSearch();
+
+    }
+
+    loadFilters();
+    loadCustomBrands();
+
+  }
+
+  function doInitialSearch(){
+    productService.searchByFilters(vm.search).then(function(res){
+      vm.totalResults = res.data.total;
+      vm.isLoading = false;
+      return productService.formatProducts(res.data.products);
+    })
+    .then(function(fProducts){
+      vm.products = fProducts;
+      mainDataListener();
+    })
+    .catch(function(err){
+      console.log(err);
+      var error = err.data || err;
+      error = error ? error.toString() : '';
+      dialogService.showDialog('Hubo un error: ' + error );           
+      mainDataListener();
+    });    
+  }
+
+  function syncProduct(itemcode){
+    productService.syncProductByItemcode(itemcode)
+      .then(function(res){
+        var foundProduct = res.data;
+        if(!foundProduct){
+          vm.isLoading = false;
+          return $q.reject('Producto no encontrado');
+        }
+        return productService.formatSingleProduct(foundProduct);
       })
-      .then(function(fProducts){
-        vm.products = fProducts;
+      .then(function(formattedProduct){
+        vm.isLoading = false;
+        dialogService.showDialog('Producto sincronizado');
+        vm.totalResults = 1;
+        vm.products = [formattedProduct];
         mainDataListener();
       })
       .catch(function(err){
         console.log(err);
+        var error = err.data || err;
+        error = error ? error.toString() : '';
+        dialogService.showDialog('Hubo un error: ' + error );           
+        vm.isLoading = false;
         mainDataListener();
-      });
-
-    }
-
-
-    productService.getAllFilters().then(function(res){
-      vm.filters = res.data;
-    });
+      });    
   }
 
-  function syncProduct(){
-    vm.isLoading = true;
-    productService.syncProductByItemcode(vm.search.itemcode)
-      .then(function(newProduct){
-        return productService.formatSingleProduct(newProduct);
-      })
-      .then(function(fProduct){
-        vm.isLoading = false;
-        vm.totalResults = 1;
-        vm.products = [fProduct];
+  function loadFilters(){
+    productService.getAllFilters()
+      .then(function(res){
+        vm.filters = res.data;
+        vm.filters = vm.filters.filter(function(filter){
+          return filter.Handle !== 'marcas';
+        });
       })
       .catch(function(err){
         console.log('err', err);
-        var error = err.data || err;
-        error = error ? error.toString() : '';
-        dialogService.showDialog('Hubo un error: ' + error );          
-      });
+      });    
   }
 
-  function removeSearchValue(removeValue){
-    var removeIndex = vm.searchValues.indexOf(removeValue);
+  function loadCustomBrands(){
+    productService.getCustomBrands()
+      .then(function(res){
+        vm.customBrands = res.data;
+        console.log('customBrands', vm.customBrands);
+      })
+      .catch(function(err){
+        console.log('err', err);
+      });    
+  }
+
+  function toggleSearchSidenav(){
+    $mdSidenav('searchFilters').toggle();
+  }
+
+  function removeSearchValue(value){
+    var removeIndex = vm.searchValues.indexOf(value);
     if(removeIndex > -1){
       vm.searchValues.splice(removeIndex, 1);
     }
     vm.filters.forEach(function(filter){
       filter.Values.forEach(function(val){
-        if(val.id == removeValue.id){
+        if(val.id === value.id){
           val.selected = false;
         }
       });
     });
-    vm.searchByFilters();
+
+    searchByFilters();
   }
+
+  function removeBrandSearchValue(value){
+    var removeIndex = vm.brandSearchValues.indexOf(value);
+    if(removeIndex > -1){
+      vm.brandSearchValues.splice(removeIndex, 1);
+    }
+    vm.customBrands.forEach(function(brand){
+      if(brand.id === value.id){
+        brand.selected = false;
+      }
+    });
+
+    searchByFilters();
+  }
+
+  function removeSelectedDiscountFilter(discount){
+    var removeIndex = vm.discountFiltersSelected.indexOf(discount);
+    if(removeIndex > -1){
+      vm.discountFiltersSelected.splice(removeIndex, 1);
+    }
+    vm.discountFilters.forEach(function(discountFilter){
+      if(discountFilter.value === discount.value){
+        discountFilter.selected = false;
+      }
+    });
+
+    searchByFilters();
+
+  }
+
+  function removeSelectedSocietyFilter(society){
+    var removeIndex = vm.societyFiltersSelected.indexOf(society);
+    if(removeIndex > -1){
+      vm.societyFiltersSelected.splice(removeIndex, 1);
+    }
+    vm.societyFilters.forEach(function(societyFilter){
+      if(societyFilter.code === society.code){
+        societyFilter.selected = false;
+      }
+    });
+
+    searchByFilters();
+
+  }  
+
+  function removeSelectedStockFilter(stockRangeObject){
+    var removeIndex = vm.stockFiltersSelected.indexOf(stockRangeObject);
+    if(removeIndex > -1){
+      vm.stockFiltersSelected.splice(removeIndex, 1);
+    }
+    vm.stockFilters.forEach(function(stockFilters){
+      if(stockFilters.id === stockRangeObject.id){
+        stockFilters.selected = false;
+      }
+    });
+
+    searchByFilters();
+
+  }  
+
+  function removeMinPrice(){
+    delete vm.minPrice;
+    searchByFilters();
+  }
+
+  function removeMaxPrice(){
+    delete vm.maxPrice;
+    searchByFilters();
+  }
+
 
   function searchByFilters(options){
     if(!options || !angular.isDefined(options.isLoadingMore)){
       vm.search.page = 1;
     }
     vm.isLoading = true;
-    vm.searchValues = [];
-    var searchValuesIds = [];
-    vm.filters.forEach(function(filter){
-      filter.Values.forEach(function(val){
-        if(val.selected){
-          vm.searchValues.push(val);
-        }
-      });
+    
+    //SEARCH VALUES
+    vm.searchValues = productSearchService.getSearchValuesByFilters(vm.filters);
+    var searchValuesIds = productSearchService.getSearchValuesIds(vm.searchValues);
+
+    //BRANDS
+    vm.brandSearchValues = vm.customBrands.filter(function(brand){
+      return brand.selected;
+    });
+    var brandSearchValuesIds = vm.brandSearchValues.map(function(brand){
+      return brand.id;
     });
 
-    vm.searchValues.forEach(function(searchVal){
-      searchValuesIds.push(searchVal.id);
+    //DISCOUNTS
+    vm.discountFiltersSelected = vm.discountFilters.filter(function(discount){
+      return discount.selected;
     });
+    var discountFiltersValues = vm.discountFiltersSelected.map(function(discount){
+      return discount.value;
+    });
+
+    //STOCK
+    vm.stockFiltersSelected = vm.stockFilters.filter(function(stock){
+      return stock.selected;
+    });
+    var stockFiltersValues = vm.stockFiltersSelected.map(function(stock){
+      return stock.value;
+    });
+
+    //SOCIETIES
+    vm.societyFiltersSelected = vm.societyFilters.filter(function(society){
+      return society.selected;
+    });
+    var societyFiltersValues = vm.societyFiltersSelected.map(function(society){
+      return society.code;
+    });
+
 
     var params = {
       ids: searchValuesIds,
+      brandsIds: brandSearchValuesIds,
+      discounts: discountFiltersValues,
+      societyCodes: societyFiltersValues,
+      stockRanges: stockFiltersValues,
       keywords: vm.search.keywords,
       minPrice: vm.minPrice,
       maxPrice: vm.maxPrice,
-      page: vm.search.page
+      page: vm.search.page,
+      sortOption: vm.activeSortOption
     };
+
+    if(vm.activeSortOption && vm.activeSortOption.key === 'slowMovement'){
+      params.slowMovement = true;      
+    }
+    else if(vm.activeSortOption && vm.activeSortOption.key === 'spotlight'){
+      params.spotlight = true;      
+    }
+
+
+    console.log('params', params);
 
     productService.searchByFilters(params).then(function(res){
       vm.totalResults = res.data.total;
@@ -187,6 +331,22 @@ function SearchCtrl(
       }
       vm.isLoading = false;
     });
+  }
+
+  function setActiveSortOption(sortOption){
+
+    if(vm.activeSortOption.key  === sortOption.key){
+      sortOption.direction = sortOption.direction === 'ASC' ? 'DESC' : 'ASC';
+    }else{
+      sortOption.direction = 'ASC';
+    }
+
+    vm.activeSortOption = sortOption;
+    searchByFilters();
+  }
+
+  function getFilterById(filterId){
+    return _.findWhere(vm.filters, {id: filterId});
   }
 
   function toggleColorFilter(value, filter){
@@ -223,6 +383,8 @@ SearchCtrl.$inject = [
   '$timeout',
   '$routeParams',
   '$q',
+  '$mdSidenav',
   'productService',
-  'dialogService'
+  'dialogService',
+  'productSearchService'
 ];
