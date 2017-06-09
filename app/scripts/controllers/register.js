@@ -11,7 +11,7 @@ angular.module('dashexampleApp')
   .controller('RegisterCtrl', RegisterCtrl);
 
 function RegisterCtrl(
-	userService,
+	clientService,
 	dialogService
 ){
 	var vm = this;
@@ -28,7 +28,7 @@ function RegisterCtrl(
 		if(form.$valid){
 			vm.isLoading = true;
 
-			userService.register(vm.newUser)
+			clientService.create(vm.newClient)
 				.then(function(res){
 					console.log('res', res);
 					dialogService.showDialog('Usuario registrado con éxito');
@@ -48,6 +48,6 @@ function RegisterCtrl(
 }
 
 RegisterCtrl.$inject = [
-	'userService',
+	'clientService',
 	'dialogService'
 ];

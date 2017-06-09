@@ -1,0 +1,106 @@
+<md-dialog class="zipcode-dialog" aria-label="Zipcode dialog"  ng-cloak>
+  <div class="zipcode-dialog-inner">
+
+    <div ng-if="ctrl.isLoading" layout="row" layout-align="center center" class="loading-circle">
+      <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+    </div>
+
+    <form 
+      ng-if="!ctrl.isLoading" 
+      name="zipcodeForm" 
+      ng-submit="ctrl.submit(zipcodeForm, zipcode)" 
+      class="form-section" 
+    >
+
+      <section ng-if="!ctrl.isLoading && ctrl.user">
+        <h2><strong>Selecciona tu direccion de envío</strong></h2>
+        <p><a ng-click="ctrl.addNewAddress()">Agregar una nueva dirección de envío</a></p>
+
+          <section class="delivery-options">
+
+            <md-radio-group 
+              ng-model="ctrl.zipcode"
+              layout="row"
+              layout-wrap
+              layout-align="space-between start"
+            >
+              
+              <div
+                class="delivery-option"
+                ng-repeat="address in ctrl.addresses"
+                flex="50"
+                layout="row"
+                layout-align="start center"
+              >
+                <div class="delivery-option-radio" flex="10">
+                  <md-radio-button ng-value="address.U_CP"></md-radio-button>
+                </div>
+                <div  flex="80" class="delivery-option-data">
+                  <ul>
+                    <li><strong>Calle:</strong> {{address.Address}}</li>
+                    <li><strong>No. exterior: </strong>{{address.U_Noexterior}}</li>
+                    <li><strong>No. interior: </strong>{{address.U_Nointerior}}</li>
+                    <li><strong>Colonia: </strong>{{address.U_Colonia}}</li>
+                    <li><strong>Municipio: </strong>{{address.U_Mpio}}</li>
+                    <li><strong>Ciudad: </strong>{{address.U_Ciudad}}</li>
+                    <li><strong>Estado: </strong>{{address.U_Estado}}</li>
+                    <li><strong>C.P.: </strong>{{address.U_CP}}</li>
+                    <li><strong>Entre calle: </strong>{{address.U_Entrecalle}}</li>
+                    <li><strong>Y calle: </strong>{{address.U_Ycalle}}</li>
+                    <li><strong>Referencias: </strong>{{address.U_Notes1}}</li>
+
+                  </ul>
+                  <p>
+                    <a
+                      class="small-link"
+                      href="#"
+                      ng-click="ctrl.editAddress()">
+                      Editar datos de dirección
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+            </md-radio-group>
+            
+          </section>
+
+      </section>
+
+
+      <section ng-if="!ctrl.user">
+        <h2><strong>Ingresa tu código postal</strong></h2>
+
+        <div class="input-element">
+          <p>
+            <label>Ingresa tu código postal para calcular los dias de entrega de tu producto.</label>
+          </p>
+          <p ng-if="ctrl.errMessage">
+            <strong>{{ctrl.errMessage}}</strong>
+          </p>
+          <div class="input-element-inner">
+            <input 
+              type="text" 
+              ng-model="ctrl.zipcode"
+              required
+            />
+          </div>
+        </div>
+      </section>
+
+      <div layout="row" flex="30">
+        <button ng-if="!ctrl.user" type="submit" class="action-btn action-btn-save">
+          Ingresar
+        </button>
+
+        <button ng-if="ctrl.user" type="submit" class="action-btn action-btn-save">
+          Seleccionar
+        </button>
+
+
+      </div>
+
+    </form>
+    
+  </div>
+</md-dialog>

@@ -13,7 +13,7 @@
       localStorageService, 
       api,
       jwtHelper,
-      userService
+      clientService
     ){
 
       var USER_ROLES = {
@@ -121,6 +121,7 @@
       function runPolicies(){
         var _token = localStorageService.get('token') || false;
         var _user  = localStorageService.get('user')  || false;
+        console.log('_user', _user);
         var currentPath = $location.path();
         var privatePaths = [
           '/user/profile'
@@ -138,9 +139,9 @@
               });
             }else{
               console.log('getUser');
-              userService.getUser(_user.id, {quickRead: true})
+              clientService.getById(_user.id, {quickRead: true})
                 .then(function(res){
-                  _user = res.data.data;
+                  _user = res.data;
                   localStorageService.set('user', _user);
                   $rootScope.user = _user;
                 })

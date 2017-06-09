@@ -64,6 +64,16 @@
           return api.$http(req);
         };
 
+        api.$http.put = function(url, data) {
+          var req = {method: 'put', url: url, data: data};
+          return api.$http(req);
+        };
+
+        api.$http.delete = function(url, data) {
+          var req = {method: 'delete', url: url, data: data};
+          return api.$http(req);
+        };        
+
         api.serialize = function(req) {
           req.url = api.baseUrl + req.url;
           req.data = req.data || {};

@@ -89,7 +89,9 @@
                   <strong>{{vm.product.Price | currency:'$':0 }}</strong>
                 </p>
               </div>
-              <div flex="15">
+
+              <!--ONLY IF ZIPCODE IS ASSIGNED-->
+              <div ng-show="vm.zipcodeDelivery" flex="15">
                 <div class="product-view-qty input-element">
                   <label>Piezas</label>
                   <select
@@ -100,7 +102,7 @@
                   </select>
                 </div>
               </div>
-              <div flex="30">
+              <div ng-show="vm.zipcodeDelivery" flex="30">
                 <div class="input-element select-element-wrapper">
                   <label>Entrega aproximada{{vm.selectedDelivery}}</label>
                   <select
@@ -112,6 +114,8 @@
                   </select>
                 </div>
               </div>
+              <!--END CONDITION-->
+
               <h3 flex="25" class="product-view-price-hl product-view-price-main">
                 <strong>{{vm.product.Price * vm.productCart.quantity | currency:'$':0 }}</strong>
               </h3>
@@ -132,6 +136,8 @@
               </span>
               <strong>Agregar al carrito</strong>
             </a>
+
+
 
 
             <p class="seen-number">

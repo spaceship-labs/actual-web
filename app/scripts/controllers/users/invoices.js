@@ -13,12 +13,15 @@ angular.module('dashexampleApp')
 function UsersUserInvoicesCtrl(
   $rootScope,
   orderService,
-  commonService
+  commonService,
+  clientService,
+  dialogService
 ){
   var vm = this;
   angular.extend(vm,{
     user: angular.copy($rootScope.user),
     apiResourceOrders: orderService.getList,
+    fiscalAddressConstraints: clientService.fiscalAddressConstraints,
     columnsOrders: [
       {key: 'folio', label:'Pedido'},
       {key:'createdAt', label:'Fecha del pedido', date:true},
@@ -32,13 +35,29 @@ function UsersUserInvoicesCtrl(
           {url:'#',type:'edit'},
         ]
       },
-    ]
+    ],
+    updateFiscalAddress:updateFiscalAddress
   });
 
   init();
 
   function init(){
     getStates();
+    loadFiscalAddress();
+  }
+
+  function loadFiscalAddress(){
+    vm.isLoading = true;
+    clientService.getFiscalAddress(vm.user.CardCode)
+      .then(function(res){
+        vm.fiscalAddress = res;
+        vm.fiscalAddress.LicTradNum = vm.user.LicTradNum;
+        vm.isLoading = false;  
+      })
+      .catch(function(err){
+        console.log('err',err);
+        vm.isLoading = false;
+      })
   }
 
   function getStates(){
@@ -50,6 +69,40 @@ function UsersUserInvoicesCtrl(
       .catch(function(err){
         console.log(err);
       });
+  }
+
+  function updateFiscalAddress(form){
+    vm.isLoading = true;
+    var isValidEmail = commonService.isValidEmail(
+      vm.fiscalAddress.U_Correos,
+      {excludeActualDomains: true}
+    );
+    if(form.$valid && isValidEmail){
+      var params = _.clone(vm.fiscalAddress);
+      params.LicTradNum = _.clone(vm.fiscalAddress.LicTradNum);
+
+      clientService.updateFiscalAddress(
+        params.id, 
+        vm.user.CardCode,
+        params
+      )
+      .then(function(results){
+        vm.isLoading = false;        
+        dialogService.showDialog('Datos guardados');
+      })
+      .catch(function(err){
+        vm.isLoading = false;
+        console.log(err);
+        dialogService.showDialog('Hubo un error al guardar datos de facturación: ' + (err.data || err));
+      });
+    }else if(!isValidEmail){
+      vm.isLoading = false;
+      dialogService.showDialog('Email no valido');
+    }else{
+      vm.isLoading = false;
+      dialogService.showDialog('Campos incompletos');
+    }
+
   }
 
 }

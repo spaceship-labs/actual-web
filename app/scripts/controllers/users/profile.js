@@ -16,7 +16,7 @@ function UserProfileCtrl(
   $location, 
   $mdDialog, 
   commonService, 
-  userService,
+  clientService,
   authService, 
   localStorageService,
   paymentService
@@ -42,19 +42,22 @@ function UserProfileCtrl(
 
   function update(form){
     if(form.$valid){
+      /*
       showConfirm().then(function(ok) {
         if (!ok) {return;}
-        vm.isLoading = true;
-        userService.update(vm.user).then(function(res){
-          vm.isLoading = false;
-          commonService.showDialog('Datos actualizados');
-          if(res.data.id){
-            $rootScope.user = res.data;
-            vm.user = $rootScope.user;
-            localStorageService.set('user',res.data);
-          }
-        });
+      */
+      vm.isLoading = true;
+      var cardCode = vm.user.CardCode;
+      clientService.update(cardCode,vm.user).then(function(res){
+        vm.isLoading = false;
+        commonService.showDialog('Datos actualizados');
+        if(res.data.id){
+          $rootScope.user = res.data;
+          vm.user = $rootScope.user;
+          localStorageService.set('user',res.data);
+        }
       });
+      //});
     }
   }
 

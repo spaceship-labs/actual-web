@@ -260,12 +260,16 @@
         return api.$http.post(url, params);
       }
 
-      function delivery(productCode, storeId) {
+      function delivery(productCode, storeId, zipcodeDeliveryId) {
         var url    = '/shipping/product';
         var params = {
           productCode: productCode,
-          storeId: storeId
+          storeId: storeId,
         };
+        if(zipcodeDeliveryId){
+          params.zipcodeDeliveryId = zipcodeDeliveryId;
+        }
+
         return api.$http.get(url, params).then(function(res){
           return res.data;
         });

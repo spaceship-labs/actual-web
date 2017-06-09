@@ -38,7 +38,7 @@
     <div layout="row" class="quotation-data-row">
       <div flex>
         <label for="">Nombre del cliente</label>
-        <p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
+        <p>{{vm.quotation.Client.FirstName + ' ' + vm.quotation.Client.LastName}}</p>
       </div>
       <div flex>
         <label for="">E-mail</label>
@@ -65,15 +65,26 @@
       </div>
     </div>
 
-    <div ng-show="vm.quotation.source" class="quotation-data-row">
-      <label>¿Cómo se entero de Actual?</label>
-      <p>{{vm.quotation.source}}</p>
+
+    <div layout="row" layout-align="start center" class="quotation-data-row">
+      <div flex ng-if="vm.quotation.ZipcodeDelivery">
+        <label>Calculo de entrega para: </label>
+        <p>{{vm.quotation.ZipcodeDelivery.estado}}, {{vm.quotation.ZipcodeDelivery.municipio}}, {{vm.quotation.ZipcodeDelivery.asentamiento}}, C.P: {{vm.quotation.ZipcodeDelivery.cp}}</p>
+      </div>
+
+      <!--
+      <div flex ng-show="vm.quotation.source">
+        <label>¿Cómo se entero de Actual?</label>
+        <p>{{vm.quotation.source}}</p>
+      </div>
+      -->
+
+      <div flex class="quotation-validity">
+        <label>Vigencia</label>
+        <p>Hasta agotar existencias y sujeto a términos de promociones.</p>
+      </div>
     </div>
 
-    <div class="quotation-data-row quotation-validity">
-      <label>Vigencia</label>
-      <p>Hasta agotar existencias y sujeto a términos de promociones.</p>
-    </div>
   <div class="hr"><hr /></div>
 
   </section>

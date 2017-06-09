@@ -5,16 +5,22 @@
   <div layout="row" layout-xs="column" layout-align="center center" >
     
     <div class="info-row center-content">
-      <p><strong>{{vm.user.firstName}} {{vm.user.lastName}}</strong></p>
+      <p><strong>{{vm.user.FirstName}} {{vm.user.LastName}}</strong></p>
       <p>NOMBRE(S)</p>
     </div>
     <div class="info-row center-content">
       <p><strong>13. 09. 85</strong></p>
       <p>CUMPLEAÑOS</p>
     </div>
+    <!--
     <div class="info-row center-content">
       <p><strong>$1,561.50 MXN</strong></p>
       <p>MI MONEDERO</p>
+    </div> 
+    -->
+    <div class="info-row center-content">
+      <p><strong>{{::vm.user.CardCode}}</strong></p>
+      <p>ID</p>
     </div> 
   </div>
 

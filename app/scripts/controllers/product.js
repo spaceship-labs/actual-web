@@ -32,7 +32,8 @@ function ProductCtrl(
   commonService,
   categoriesService,
   dialogService,
-  breadcrumbService
+  breadcrumbService,
+  clientService
 ) {
   var vm = this;
   var activeStoreId = localStorageService.get('activeStore'); 
@@ -111,14 +112,27 @@ function ProductCtrl(
         }
 
         vm.isLoading = false;
-        return productService.delivery(productId, activeStoreId);
-      })
-      .then(function(deliveries){
         if($rootScope.activeQuotation || $rootScope.isActiveQuotationLoaded){
-          setUpDeliveries(deliveries);
+          var zipcodeDeliveryId =  $rootScope.activeQuotation ? $rootScope.activeQuotation.ZipcodeDelivery : false;
+
+          loadZipCodeDeliveryById(zipcodeDeliveryId);          
+          setUpDeliveries({
+            productId: vm.product.ItemCode,
+            activeStoreId: activeStoreId,
+            zipcodeDeliveryId: zipcodeDeliveryId
+          });
+
         }else{
           activeQuotationListener = $rootScope.$on('activeQuotationAssigned', function(e){
-            setUpDeliveries(deliveries);
+            var zipcodeDeliveryId =  $rootScope.activeQuotation ? $rootScope.activeQuotation.ZipcodeDelivery : false;
+            
+            loadZipCodeDeliveryById(zipcodeDeliveryId);          
+            setUpDeliveries({
+              productId: vm.product.ItemCode,
+              activeStoreId: activeStoreId,
+              zipcodeDeliveryId: zipcodeDeliveryId
+            });            
+
           });
         }          
 
@@ -143,27 +157,50 @@ function ProductCtrl(
     mainDataListener();
   }
 
+  function loadZipCodeDeliveryById(id){
+    deliveryService.getZipcodeDeliveryById(id)
+      .then(function(res){
+        vm.zipcodeDelivery = res;
+      });
+  }
 
-  function setUpDeliveries(deliveries){
-    deliveries = $filter('orderBy')(deliveries, 'date');        
-    if($rootScope.activeQuotation){
-      deliveries = deliveryService.substractDeliveriesStockByQuotationDetails(
-        $rootScope.activeQuotation.Details, 
-        deliveries,
-        vm.product.id
-      );
-    }
-    vm.deliveries  = deliveries;
-    vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
-    vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
-    vm.available = deliveryService.getAvailableByDeliveries(deliveries);
-    if(vm.deliveries && vm.deliveries.length > 0){
-      vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
-    }else{
-      vm.productCart.quantity = 0;
-    }
-    vm.isLoadingDeliveries = false;
-    activeQuotationListener();  
+  function setUpDeliveries(options){
+    options = options || {};
+
+    productService.delivery(options.productId, options.activeStoreId, options.zipcodeDeliveryId)
+      .then(function(deliveries){
+        deliveries = $filter('orderBy')(deliveries, 'date');        
+
+        if($rootScope.activeQuotation){
+          deliveries = deliveryService.substractDeliveriesStockByQuotationDetails(
+            $rootScope.activeQuotation.Details, 
+            deliveries,
+            vm.product.id
+          );
+        }
+
+        console.log('deliveries', deliveries);
+        vm.deliveries  = deliveries;
+        vm.deliveriesGroups = deliveryService.groupDeliveryDates(vm.deliveries);
+        vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
+        console.log('deliveriesGroups', vm.deliveriesGroups);
+        vm.available = deliveryService.getAvailableByDeliveries(deliveries);
+        
+        if(vm.deliveries && vm.deliveries.length > 0){
+          vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
+        }else{
+          vm.productCart.quantity = 0;
+        }
+        
+        vm.isLoadingDeliveries = false;
+        if(options.callback && _.isFunction(options.callback) ){
+          options.callback();
+        }
+        activeQuotationListener();  
+      })
+      .catch(function(err){
+        console.log('err', err);
+      })
   } 
 
   function loadVariants(product){
@@ -251,6 +288,11 @@ function ProductCtrl(
 
 
   function addToCart($event){
+    if(!vm.zipcodeDelivery){
+      showZipcodeDialog(null);
+      return;
+  }
+
     if(vm.isLoadingDeliveries){
       return;
     }
@@ -266,16 +308,74 @@ function ProductCtrl(
     if(productCartItems.length === 1){
       var cartItem = productCartItems[0];
       var params = cartService.buildAddProductToCartParams(vm.product.id, cartItem);
-      console.log('params', params);
+      params.zipcodeDeliveryId = vm.zipcodeDelivery.id;
       quotationService.addProduct(vm.product.id, params);      
     }
     else if(productCartItems.length > 1){
       var multiParams = productCartItems.map(function(cartItem){
         return cartService.buildAddProductToCartParams(vm.product.id, cartItem);
       });
-      quotationService.addMultipleProducts(multiParams);
+      var options = {
+        zipcodeDeliveryId: vm.zipcodeDelivery.id
+      }
+      quotationService.addMultipleProducts(multiParams, options);
     }
   }
+
+  function showZipcodeDialog(ev) {
+    var deferred = $q.defer();
+    var zipcode;
+    var templateUrl = 'views/partials/zipcode-dialog.html';
+    console.log('zipcodedialogcontroller',ZipcodeDialogController);
+    var controller  = ZipcodeDialogController;
+    $mdDialog.show({
+      controller: [
+        '$scope', 
+        '$mdDialog',
+        '$rootScope',
+        '$location',
+        'clientService',
+        controller
+      ],
+      controllerAs: 'ctrl',
+      templateUrl: templateUrl,
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: false,
+    })
+    .then(function(_zipcode) {
+      zipcode = _zipcode;
+      vm.isLoadingDeliveries = true;
+      return deliveryService.getZipcodeDelivery(zipcode)
+    })
+    .then(function(zipcodeDelivery){
+      console.log('zipcodedelivery', zipcodeDelivery);
+      if(zipcodeDelivery){
+        vm.isLoadingDeliveries = true;
+        vm.zipcodeDelivery = zipcodeDelivery;
+        var callback = function(){
+          dialogService.showDialog('Fechas de entrega actualizadas');
+        }
+
+        return setUpDeliveries({
+          productId: vm.product.ItemCode,
+          activeStoreId: activeStoreId,
+          zipcodeDeliveryId: zipcodeDelivery.id,
+          callback: callback
+        });        
+
+      }else{
+        if(zipcode){
+          dialogService.showDialog('Código postal no valido');
+        }
+        return deferred.reject();
+      }
+    })
+    .catch(function(err){
+      console.log('err', err);
+    })
+  }  
 
   function resetProductCartQuantity(){
     vm.productCart = cartService.resetProductCartQuantity(vm.productCart);
@@ -327,7 +427,8 @@ ProductCtrl.$inject = [
   'commonService',
   'categoriesService',
   'dialogService',
-  'breadcrumbService'
+  'breadcrumbService',
+  'clientService'
 ];
 /*
 angular.element(document).ready(function() {

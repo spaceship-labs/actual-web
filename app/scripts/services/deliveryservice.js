@@ -12,7 +12,24 @@
     	groupDetails: groupDetails,
     	sortDeliveriesByHierarchy: sortDeliveriesByHierarchy,
     	substractDeliveriesStockByQuotationDetails: substractDeliveriesStockByQuotationDetails,
+			getZipcodeDelivery: getZipcodeDelivery,
+			getZipcodeDeliveryById: getZipcodeDeliveryById
     };
+
+		function getZipcodeDelivery(zipcode){
+			var params = {zipcode: zipcode};
+			var url = '/shipping/zipcodedelivery';
+			return api.$http.get(url, params).then(function(res){
+				return res.data;
+			});        
+		}
+
+		function getZipcodeDeliveryById(id){
+			var url = '/shipping/zipcodedelivery/' + id;
+			return api.$http.get(url).then(function(res){
+				return res.data;
+			});        
+		}		
 
     function substractDeliveriesStockByQuotationDetails(details, deliveries, productId){
     	details = details.filter(function(detail){
@@ -252,5 +269,6 @@
     return service;
 
   }
+	
 
 })();

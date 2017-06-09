@@ -272,17 +272,18 @@
             })
 
         }else{
+
           //Crear cotizacion con producto agregado
-          var params = {
-            //User: $rootScope.user.id,
-            Details: [detail]
+          var quotationParams = {
+            Details: [detail],
+            ZipcodeDelivery: params.zipcodeDeliveryId
           };
 
           if($rootScope.user){
-            params.User = $rootScope.user.id;
+            quotationParams.Client = $rootScope.user.id;
           }
 
-          create(params).then(function(res){
+          create(quotationParams).then(function(res){
             var quotation = res.data;
             if(quotation){
               setActiveQuotation(quotation.id);
@@ -296,7 +297,8 @@
       }
 
       //@params: Object products, containing id, quantity
-      function addMultipleProducts(products){
+      function addMultipleProducts(products, options){
+        options = options || {};
         var quotationId = localStorageService.get('quotation');
         if( quotationId ){
           var detailsParams = products.map(function(product){
@@ -314,15 +316,16 @@
 
         }else{
           //Crear cotizacion con producto agregado
-          var params = {
-            User: $rootScope.user.id,
+          var quotationParams = {
+            ZipcodeDelivery: options.zipcodeDeliveryId,
+            Client: $rootScope.user.id,
             Details: products.map(function(product){
               var detail = createDetailFromParams(product.id, product);
               return detail;
             })
           };
           
-          create(params).then(function(res){
+          create(quotationParams).then(function(res){
             var quotation = res.data;
             if(quotation){
               setActiveQuotation(quotation.id);

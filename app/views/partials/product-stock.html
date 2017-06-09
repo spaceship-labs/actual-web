@@ -19,7 +19,12 @@
     </md-progress-circular>
   </div>
 
-  <div ng-if="vm.available">
+  <div ng-if="vm.available && !vm.isLoadingDeliveries">
+
+    <div ng-if="vm.zipcodeDelivery">
+      <p>{{vm.zipcodeDelivery.estado}}, {{vm.zipcodeDelivery.municipio}}, {{vm.zipcodeDelivery.asentamiento}}, C.P: {{vm.zipcodeDelivery.cp}}</p>
+    </div>
+
     <table class="delivery-table">
       <tr 
         ng-repeat="deliveryGroup in vm.deliveriesGroups"

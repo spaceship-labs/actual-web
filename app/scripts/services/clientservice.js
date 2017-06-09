@@ -18,16 +18,26 @@
         getContacts: getContacts,
         getEwalletById: getEwalletById,
         getBalanceById: getBalanceById,
+        getFiscalAddress: getFiscalAddress,
         getTitles: getTitles, 
         getGenders:getGenders,
         isClientFiscalDataValid: isClientFiscalDataValid,
         setClientDefaultData: setClientDefaultData,
         update: update,
         updateFiscalAddress: updateFiscalAddress,
-        updateContact: updateContact
+        updateContact: updateContact,
+        fiscalAddressConstraints:{
+          LicTradNum:{min:12,max:13},
+          companyName:{max:50},
+          Street:{max:100},
+          U_NumExt:{max:20},
+          U_NumInt:{max:20},
+          Block:{max:100},
+        }        
       };
 
       return service;
+
 
       function create(params){
         var url = '/client/create/';
@@ -50,24 +60,35 @@
         return api.$http.post(url, params);
       }
 
-      function getContacts(clientSlpCode){
-        var url = '/client/'+clientSlpCode+'/contacts';
-        return api.$http.post(url);
+      function getContacts(cardCode){
+        var url = '/client/'+cardCode+'/contacts';
+        return api.$http.get(url).then(function(res){
+          return res.data;
+        });
+      }
+
+      function getFiscalAddress(cardCode){
+        var url = '/client/'+cardCode+'/fiscaladdress';
+        return api.$http.get(url).then(function(res){
+         return res.data;
+        });
       }
 
       function updateFiscalAddress(id,cardCode,params){
-        var url = '/client/update/fiscaladdress/' + id + '/' + cardCode;
-        return api.$http.post(url, params);
+        var url = '/client/'+cardCode+'/fiscaladdress';
+        return api.$http.put(url, params);
       }
 
       function updateContact(contactCode, cardCode, params){
-        var url = '/client/'+cardCode+'/update/contact/'+contactCode;
-        return api.$http.post(url, params);
+        var url = '/client/'+cardCode+'/contacts/'+contactCode;
+        return api.$http.put(url, params);
       }
 
       function createContact(cardCode, params){
-        var url = '/client/'+cardCode+'/contact/create';
-        return api.$http.post(url, params);
+        var url = '/client/'+cardCode+'/contacts';
+        return api.$http.post(url, params).then(function(res){
+          return res.data;
+        });
       }
 
       function createFiscalAddress(cardCode, params){
