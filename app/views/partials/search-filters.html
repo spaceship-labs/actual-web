@@ -46,41 +46,6 @@
 
         </div>
 
-        <!--NORMAL FILTERS-->
-        <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
-          <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
-            <strong>{{filter.Name}}:</strong>
-          </h4>
-          <div ng-show="vm.filters[$index].active" class="filter-block-inner">
-
-            <div ng-if=" filter.Handle != 'color' " >
-              <md-checkbox
-                ng-repeat="value in filter.Values"
-                ng-model="value.selected"
-                ng-change="vm.searchByFilters()"
-                aria-label="Checkbox Indeterminate">
-                {{value.Name}}
-              </md-checkbox>
-            </div>
-
-
-            <div ng-if=" filter.Handle == 'color' " class="color-picker-sp" layout="row" layout-wrap>
-              <a
-                class="color-picker-sp-value"
-                ng-repeat="value in filter.Values"
-                ng-click="vm.toggleColorFilter(value, filter)"
-                ng-style="{'background-color' : value.Code}"
-                ng-class="{'active': value.selected}"
-                href="#"
-                flex>
-                <span></span>
-              </a>
-            </div>
-
-          </div>
-        </div>
-        <!--END NORMAL FILTERS-->
-        
         <!--BRAND FILTER-->
         <div class="filter-block">
           <h4 ng-click="vm.isBrandFilterActive = !vm.isBrandFilterActive" ng-class="{'active-arrow': vm.isBrandFilterActive}">
@@ -147,6 +112,7 @@
         <!--END STOCK FILTER-->
 
         <!--STOCK FILTER-->
+        <!--
         <div class="filter-block">
           <h4 ng-click="vm.isSocietyFilterActive = !vm.isSocietyFilterActive" ng-class="{'active-arrow': vm.isSocietyFilterActive}">
             <strong>Sociedad:</strong>
@@ -165,7 +131,45 @@
 
           </div>
         </div>
-        <!--END STOCK FILTER-->
+        -->
+        <!--END STOCK FILTER-->        
+
+        <!--NORMAL FILTERS-->
+        <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
+          <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
+            <strong>{{filter.Name}}:</strong>
+          </h4>
+          <div ng-show="vm.filters[$index].active" class="filter-block-inner">
+
+            <div ng-if=" filter.Handle != 'color' " >
+              <md-checkbox
+                ng-repeat="value in filter.Values | orderBy:filter.orderBy"
+                ng-model="value.selected"
+                ng-change="vm.searchByFilters()"
+                aria-label="Checkbox Indeterminate">
+                {{value.Name}}
+              </md-checkbox>
+            </div>
+
+
+            <div ng-if=" filter.Handle == 'color' " class="color-picker-sp" layout="row" layout-wrap>
+              <a
+                class="color-picker-sp-value"
+                ng-repeat="value in filter.Values"
+                ng-click="vm.toggleColorFilter(value, filter)"
+                ng-style="{'background-color' : value.Code}"
+                ng-class="{'active': value.selected}"
+                href="#"
+                flex>
+                <span></span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <!--END NORMAL FILTERS-->
+        
+
 
 
       </div>

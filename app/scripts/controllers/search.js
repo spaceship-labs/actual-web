@@ -144,6 +144,10 @@ function SearchCtrl(
         vm.filters = vm.filters.filter(function(filter){
           return filter.Handle !== 'marcas';
         });
+        vm.filters = vm.filters.map(function(filter){
+          filter.orderBy = filter.customOrder ? 'createdAt' : 'Name';
+          return filter;
+        });        
       })
       .catch(function(err){
         console.log('err', err);

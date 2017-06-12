@@ -39,6 +39,7 @@
         getTotalsByUser: getTotalsByUser,
         getPaymentOptions: getPaymentOptions,
         getPayments: getPayments,
+        getQuotationZipcodeDelivery: getQuotationZipcodeDelivery,
         getSapOrderConnectionLogs: getSapOrderConnectionLogs,
         loadProductsFilters: loadProductsFilters,
         newQuotation: newQuotation,
@@ -80,8 +81,6 @@
         var url = '/quotation/findbyidquickread/' + id;
         return api.$http.post(url, params);
       }
-
-
 
       function getList(page, params){
         var p = page || 1;
@@ -191,6 +190,7 @@
       function getActiveQuotation(){
         var deferred = $q.defer();
         var quotationId = localStorageService.get('quotation');
+        console.log('quotationId', quotationId);
         if(!quotationId){
           deferred.resolve(false);
           return deferred.promise;
@@ -205,6 +205,7 @@
       function setActiveQuotation(quotationId){
         if(getActiveQuotationId() !== quotationId || !quotationId){
           localStorageService.set('quotation', quotationId);
+          console.log('localstorage activequotationid', localStorageService.get('quotation'));
           $rootScope.$broadcast('newActiveQuotation', quotationId);          
         }
       }
@@ -413,15 +414,18 @@
         return api.$http.get(url);
       }      
 
+      function getQuotationZipcodeDelivery(id){
+        var url = '/quotation/'+id+'/zipcodedelivery';
+        return api.$http.get(url).then(function(res) {
+          return res.data;
+        });
+      }      
+
       function mapDetailsStock(details, detailsStock){
-        console.log("mapDetailsStock: ",details);
-        console.log('detailsStock', detailsStock);
         var details = details.map(function(detail){
           var detailStock = _.findWhere(detailsStock, {id:detail.id});
           if(detailsStock){
-            console.log('detailStock', detailStock);
             detail.validStock = detailStock.validStock;
-            console.log("Valid stock detail", detailStock.validStock);
           }
           return detail;
         });

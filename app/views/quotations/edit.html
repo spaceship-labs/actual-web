@@ -38,7 +38,7 @@
     <div layout="row" class="quotation-data-row">
       <div flex>
         <label for="">Nombre del cliente</label>
-        <p>{{vm.quotation.Client.FirstName + ' ' + vm.quotation.Client.LastName}}</p>
+        <p>{{vm.quotation.Client.CardName || 'No asignado'}}</p>
       </div>
       <div flex>
         <label for="">E-mail</label>

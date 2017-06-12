@@ -83,6 +83,10 @@ function CategoryCtrl(
       });
       productService.getAllFilters({ids: filters}).then(function(res){
         vm.filters = res.data;
+        vm.filters = vm.filters.map(function(filter){
+          filter.orderBy = filter.customOrder ? 'createdAt' : 'Name';
+          return filter;
+        });        
       });
       hasLevel2Categories = !!vm.category.Childs.find(function(child) {
         return child.CategoryLevel === 2;

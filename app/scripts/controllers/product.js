@@ -367,9 +367,10 @@ function ProductCtrl(
 
       }else{
         if(zipcode){
+          vm.isLoadingDeliveries = false;
           dialogService.showDialog('Código postal no valido');
         }
-        return deferred.reject();
+        //return deferred.reject();
       }
     })
     .catch(function(err){

@@ -1,7 +1,14 @@
 <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
-<div id="my-profile" class="user-profile-view" layout="row" layout-wrap>
+
+<div 
+  ng-if="!vm.isLoading"
+  id="my-profile" 
+  class="user-profile-view" 
+  layout="row" 
+  layout-wrap
+>
   <div class="menu-profile" flex-gt-xs="25" flex="100">
     <ng-include src="'views/users/menu-profile.html'"></ng-include>
   </div>

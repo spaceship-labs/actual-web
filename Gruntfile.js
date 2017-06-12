@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-ng-constant');
   var environmentTask = getEnvironmentTask(grunt.option('env'));
-  var siteTask        = getSiteTask(grunt.option('site'));
+  var siteTask        = getSiteTask(grunt.option('site')); //grunt serve --site <kids|studio|home>
 
   // Define the configuration for all the tasks
   grunt.initConfig({

@@ -1419,12 +1419,18 @@ select{
 }
 
 .listing-view .listing-view-title{
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 400;
   /*text-transform: uppercase;*/
   margin:  0 0 12px;
   line-height: 1;
 }
+
+.listing-view .results-block-header h3{
+  margin-top: 0;
+  font-size: 16px;
+}
+
 /*
 .listing-view .listing-view-title:before{
   content: '';

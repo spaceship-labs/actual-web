@@ -40,6 +40,22 @@
 
       <div class="subs-container">
 
+        <div class="results-block-header" layout="row" layout-align="space-between start">
+          <h2 ng-if="vm.search.term" class="listing-view-title">
+            Resultados para "{{vm.search.term}}"
+          </h2>
+          <h2 ng-if="vm.search.itemcode" class="listing-view-title">
+            Resultados para "{{vm.search.itemcode}}"
+          </h2>
+          <h2 ng-if="vm.search.keywords" class="listing-view-title">
+            Resultados para "<span class="keyword" ng-repeat="keyword in vm.search.keywords">{{keyword}}</span>"
+          </h2>
+
+          <h3 ng-if="!vm.isLoading">
+            <i class="icon-search"></i> <span class="hl-text">{{vm.totalResults}}</span> Resultados
+          </h3>
+        </div>
+
         <ng-include src="'views/partials/search-options.html'"></ng-include>
 
         <!--RESULTS-->

@@ -88,15 +88,6 @@ function QuotationsEditCtrl(
     loadWarehouses();
     showAlerts();
 
-    console.log('start loading quotation', new Date());
-    /*var forceLatestData = true;
-    if($rootScope.activeQuotation){
-      if(quotationId === $rootScope.activeQuotation.id){
-        forceLatestData = false;
-      }
-    }
-    */
-
     quotationService.getById(quotationId)
       .then(function(res){
         vm.isLoading = false;
@@ -478,8 +469,9 @@ function QuotationsEditCtrl(
       //Not updating Details, not necessary
       var params = angular.copy(vm.quotation);
       delete params.Details;
+      vm.isLoading = true;
 
-        quotationService.update(vm.quotation.id, params)
+      quotationService.update(vm.quotation.id, params)
         .then(function(res){
           var quotationUpdated = res.data;
 
@@ -489,7 +481,7 @@ function QuotationsEditCtrl(
           }
 
 
-          if(vm.quotation.Client || true){
+          if(vm.quotation.Client){
             //quotationService.setActiveQuotation(vm.quotation.id);
             
             if(quotationUpdated.immediateDelivery || true){
@@ -499,13 +491,10 @@ function QuotationsEditCtrl(
             $location.path('/checkout/client/' + vm.quotation.id);
           }
           else{
-            console.log('No hay cliente');
-            //quotationService.setActiveQuotation(vm.quotation.id);
-            //localStorageService.set('inCheckoutProcess', true);
-            $location.path('/continuequotation')
+            $location.path('/register')
               .search({
-                checkoutProcess: vm.quotation.id,
-                goToCheckout:true
+                addContact:true,
+                quotation: vm.quotation.id
               });
           }
           vm.isLoading = false;        
