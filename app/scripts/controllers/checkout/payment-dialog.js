@@ -60,64 +60,10 @@ function TerminalController(
     $mdDialog.cancel();
   };
 
-  $scope.isMinimumValid = function(){
-    $scope.payment.min = $scope.payment.min || 0;   
-    if($scope.payment.ammount === $scope.payment.remaining){
-      $scope.errMsg = '';
-      return true;
-    }
-    else if( ($scope.payment.remaining - $scope.payment.ammount) >= $scope.payment.min && 
-      $scope.payment.ammount >= $scope.payment.min
-    ){
-      $scope.errMsg = '';
-      return true;
-    }
-    
-    if($scope.remaining < $scope.payment.min){
-      $scope.errMsg = 'El monto mínimo para esta forma de pago es '+$filter('currency')($scope.payment.min)+' pesos.';
-    }
-    else if($scope.payment.ammount < $scope.payment.min){
-      $scope.errMsg = 'El monto mínimo para esta forma de pago es '+$filter('currency')($scope.payment.min)+' pesos.';
-    }
-    else{
-      $scope.errMsg = 'Favor de aplicar el saldo total';
-    }
-    return false;
-  }; 
 
-  $scope.$watch('payment.ammount', function(newVal, oldVal){
-    if(newVal !== oldVal){
-      $scope.isMinimumValid();
-    }
-  });
-
-  function isValidVerificationCode(){
-    if($scope.payment.type !== 'deposit'){
-      return $scope.payment.verificationCode && $scope.payment.verificationCode !== '';
-    }
-    return true;
-  }
 
   $scope.isvalidPayment = function(){
-    $scope.payment.min = $scope.payment.min || 0;
-    if($scope.payment.ammount < $scope.payment.min){
-      $scope.minStr = $filter('currency')($scope.payment.min);
-      $scope.errMsg = 'La cantidad minima es: ' +  $scope.minStr;
-    }else{
-      $scope.errMin = false;        
-    }
-
-    if( $scope.maxAmmount ){
-      return (
-        $scope.isMinimumValid() &&
-        ($scope.payment.ammount <= $scope.maxAmmount) &&
-        $scope.payment.ammount >= $scope.payment.min
-      );
-    }
-    return (
-      $scope.payment.ammount && 
-      $scope.payment.ammount >= $scope.payment.min        
-    );
+    return true;
   };
 
   $scope.onChangeCard = function(card){

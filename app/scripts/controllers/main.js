@@ -18,6 +18,7 @@
     $location,
     $window,
     $route,
+    $timeout,
     $mdSidenav,
     authService,
     cartService,
@@ -66,7 +67,6 @@
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       getStores: getStores,
-      saveSource: saveSource,
       siteTheme: SITE.name
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
@@ -234,6 +234,7 @@
       quotationService.getActiveQuotation()
         .then(function(res){
           var quotation = res.data;
+          console.log('quotation', quotation);
           $rootScope.isActiveQuotationLoaded = true;
           if(quotation && quotation.id){
             vm.activeQuotation = quotation;
@@ -438,8 +439,7 @@
       vm.isLoadingLogin = true;
       var formData = {
         email: vm.logInForm.email,
-        password: vm.logInForm.password,
-        activeStore: vm.logInForm.activeStoreId
+        password: vm.logInForm.password
       };
       authService.signIn(
         formData, 
@@ -455,18 +455,24 @@
       });
     }
 
-    $rootScope.successAuth = function(res){
+    function setUserTokensOnResponse(res){
       vm.token = res.data.token;
       vm.user = res.data.user;
-      console.log('vm.user', vm.user);
 
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', vm.token);
       localStorageService.set('user' , vm.user);
-      localStorageService.set('activeStore', vm.user.activeStore);
+      localStorageService.set('activeStore', vm.user.activeStore);      
+    }    
 
+    $rootScope.successAuth = function(res){
+      setUserTokensOnResponse(res);
       $window.location.reload();
     };
+
+    $rootScope.successAuthInCheckout = function(res){
+      setUserTokensOnResponse(res);
+    };    
 
 
     function getCategoryBackground(handle){
@@ -492,27 +498,17 @@
       });
     }
 
+    $rootScope.scrollTo = function(target){
+      $timeout(
+        function(){
+          $('html, body').animate({
+            scrollTop: $('#' + target).offset().top - 100
+          }, 600);
+        },
+        300
+      );
+    }    
 
-    function saveSource(source){
-      if(vm.quotation){
-        vm.pointersLoading = true;
-        quotationService.updateSource(vm.quotation, {source:source})
-          .then(function(res){
-            vm.pointersLoading = false;
-            togglePointerSidenav();
-            dialogService.showDialog('Datos guardados');
-            console.log(res);
-          })
-          .catch(function(err){
-            vm.pointersLoading = false;
-            console.log(err);
-            togglePointerSidenav();
-            dialogService.showDialog('Hubo un error, revisa tus datos');
-          });
-      }
-    }
-
-    //$scope.$on('$destroy', $mdUtil.enableScrolling);
 
   }
 
@@ -526,6 +522,7 @@
     '$location',
     '$window',
     '$route',
+    '$timeout',
     '$mdSidenav',
     'authService',
     'cartService',

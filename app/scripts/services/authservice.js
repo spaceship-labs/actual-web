@@ -52,7 +52,7 @@
         localStorageService.remove('user');
         localStorageService.remove('quotation');
         localStorageService.remove('broker');
-        $http.post(api.baseUrl + '/auth/signin', data)
+        return $http.post(api.baseUrl + '/auth/signin', data)
           .then(success)
           .catch(error);
       }
@@ -65,12 +65,15 @@
       function logout(successCB) {
         localStorageService.remove('token');
         localStorageService.remove('user');
-        localStorageService.remove('quotation');
-        localStorageService.remove('broker');
         localStorageService.remove('activeStore');
         localStorageService.remove('companyActive');
         localStorageService.remove('companyActiveName');
-        localStorageService.remove('currentQuotation');
+
+        console.log('loging out', $rootScope.activeQuotation);
+        if($rootScope.activeQuotation && $rootScope.activeQuotation.Client){
+          localStorageService.remove('quotation');
+        }
+
         delete $rootScope.user;
         if(successCB){
           successCB();

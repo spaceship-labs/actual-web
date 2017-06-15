@@ -41,12 +41,14 @@
 
       function create(params){
         var url = '/client/create/';
-        return api.$http.post(url, params);
+        return api.$http.post(url, params).then(function(res){
+         return res.data;
+        });
       }
 
-      function getById(id){
-        var url = '/client/findbyid/' + id;
-        return api.$http.post(url);
+      function getById(id, params){
+        var url = '/client/' + id;
+        return api.$http.get(url,params);
       }
 
       function getClients(page, params){

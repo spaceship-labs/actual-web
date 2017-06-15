@@ -1,5 +1,10 @@
 <md-dialog class="zipcode-dialog" aria-label="Zipcode dialog"  ng-cloak>
-  <div class="zipcode-dialog-inner">
+  <div 
+    class="zipcode-dialog-inner"
+    ng-class="{
+      'zipcode-dialog-inner-large': ctrl.user
+    }"
+  >
 
     <div ng-if="ctrl.isLoading" layout="row" layout-align="center center" class="loading-circle">
       <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>

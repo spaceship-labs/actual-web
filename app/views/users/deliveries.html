@@ -3,7 +3,13 @@
 </div>
 
 
-<div id="my-profile" class="user-profile-view" layout="row" layout-wrap>
+<div
+  ng-if="!vm.isLoading"
+  id="my-profile" 
+  class="user-profile-view" 
+  layout="row" 
+  layout-wrap
+>
   
   <div class="menu-profile" flex-gt-xs="25" flex="100">
     <ng-include src="'views/users/menu-profile.html'"></ng-include>
@@ -25,65 +31,6 @@
             <h1>MIS ENVIOS</h1>
         </div>
       </div>
-      <!--ORDER ITEMS-->
-      <!--
-      <div class="order-block">
-        <h3><strong><i class="icon-checkout-ticket"></i> ARTÍCULOS ADQUIRIDOS</strong></h3>
-        <div class="order-items order-block-inner">
-
-          <div class="order-table-header" layout="row" layout-align="space-between start">
-            <div flex="35" hide-xs></div>
-            <div flex="20"><strong>CANTIDAD</strong></div>
-            <div flex="20"><strong>ENTREGA APROXIMADA</strong></div>
-            <div flex="20"><strong>PRECIO</strong></div>
-          </div>
-
-          <div 
-            class="order-item" 
-            ng-repeat="detailGroup in vm.order.DetailsGroups track by $index"
-          >
-            <h3><strong>{{detailGroup.Product.Name}}</strong></h3>
-            <div layout="row" layout-align="space-between start">
-              <div flex="35" layout="row">
-                <div class="order-item-img">
-                  <img src="{{detailGroup.Product.icons[0].url}}" alt="">
-                </div>
-                <div flex class="order-item-features">
-                  <ul>
-                    <li><strong>Código: </strong> {{detailGroup.Product.ItemCode}}</li>
-                    <li
-                      ng-repeat="filter in detailGroup.Product.Filters"
-                      ng-if="
-                        filter.Handle == 'codigo' ||
-                        filter.Handle == 'material' ||
-                        filter.Handle == 'garantia'
-                      "
-                    >
-                      <strong>{{filter.Name}}: </strong>
-                      <span ng-repeat="value in filter.Values track by $index">
-                        <span ng-if="value.Handle != 'color-paleta'">{{value.Name}}</span>
-                        <span ng-if="$index < (filter.Values.length-1)">,</span>
-                      </span>
-                    </li>
-                    <li ng-if="detailGroup.Product.DetailedColor">
-                      <strong>Color</strong>
-                      <span>{{detailGroup.Product.DetailedColor}}</span>
-                    </li>                  
-                  </ul>
-                </div>
-              </div>
-              <div flex="20" class="order-item-data"><span>{{detailGroup.quantity}}</span></div>
-              <div flex="20" class="order-item-data"><span>{{detailGroup.shipDate | date:'d/MMM/yyyy'}}</span></div>
-              <div flex="20" class="order-item-data">
-                <span>{{detailGroup.total | roundCurrency:false}} MXN</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      -->
-      <!--END ORDER ITEMS-->
 
       <!--DIRECCIONES DE ENVIO-->
       <div class="order-block">
@@ -105,7 +52,7 @@
         -->
         <div class="records-list">
           <h3>Datos registrados 
-            <a href="#" ng-click="vm.isCreateModeActive = true" class="enable-create-mode">
+            <a href="#" ng-click="vm.enableCreateMode()" class="enable-create-mode">
               <i class="icon-cotizar"></i>
               Agregar dirección
             </a>

@@ -85,6 +85,7 @@ function CheckoutPaymentsCtrl(
       .then(function(res){
         vm.quotation = res.data;
         loadSapLogs(vm.quotation.id);
+        loadPayments();
 
         return $q.all([
           quotationService.validateQuotationStockById(vm.quotation.id),
@@ -290,16 +291,26 @@ function CheckoutPaymentsCtrl(
         ( (payment.ammount > 0) && (vm.quotation.ammountPaid < vm.quotation.total) )
         || payment.ammount < 0
       ){
-      vm.isLoadingPayments = true;
-      vm.isLoading = true;
+      vm.isLoadingProgress = true;
+      //vm.isLoading = true;
       
-
       tokenizePaymentCard(payment)
         .then(function(token){
           delete payment.cardObject;
           payment.cardToken = token;
-          //return paymentService.addPayment(vm.quotation.id, payment);
-          createOrder(payment);
+          console.log('token in tokenize', token);
+        /*  
+          return paymentService.addPayment(vm.quotation.id, payment);
+        })
+        .then(function(){
+        */
+          return createOrder(payment);
+        })
+        .catch(function(err){
+          vm.isLoadingProgress = false;
+          console.log('err', err);
+          var errMsg = err.message_to_purchaser || err;
+          dialogService.showDialog(errMsg);
         })
 
     }
@@ -367,41 +378,40 @@ function CheckoutPaymentsCtrl(
   }
 
   function createOrder(payment){
+    console.log('llego a createorder');
     if(!vm.quotation.Details || vm.quotation.Details.length === 0){
       dialogService.showDialog('No hay artículos en esta cotización');
       return;
     }
     
-    if( checkoutService.isMinimumPaid(vm.quotation) ){
-
-      vm.isLoadingProgress = true;
-      vm.loadingEstimate = 0;
-      var params = {
-        paymentGroup: vm.quotation.paymentGroup || 1,
-        payment: payment
-      };
-      animateProgress();
-      orderService.createFromQuotation(vm.quotation.id, params)
-        .then(function(res){
-          vm.isLoadingProgress = false;
-          vm.order = res.data;
-          if(vm.order.id){
-            quotationService.removeCurrentQuotation();
-            $location.path('/checkout/order/' + vm.order.id)
-              .search({orderCreated:true});
-          }
-        }).catch(function(err){
-          console.log('err', err);
-          var errMsg = '';
-          if(err){
-            errMsg = err.data || err;
-            errMsg = errMsg ? errMsg.toString() : '';
-            dialogService.showDialog('Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg);
-          }
-          loadSapLogs(vm.quotation.id);
-          vm.isLoadingProgress = false;
-        });
-    }
+    vm.isLoadingProgress = true;
+    vm.loadingEstimate = 0;
+    var params = {
+      paymentGroup: vm.quotation.paymentGroup || 1,
+      payment: payment
+    };
+    animateProgress();
+    console.log('params', params);
+    orderService.createFromQuotation(vm.quotation.id, params)
+      .then(function(res){
+        vm.isLoadingProgress = false;
+        vm.order = res.data;
+        if(vm.order.id){
+          quotationService.removeCurrentQuotation();
+          $location.path('/checkout/order/' + vm.order.id)
+            .search({orderCreated:true});
+        }
+      }).catch(function(err){
+        console.log('err', err);
+        var errMsg = '';
+        if(err){
+          errMsg = err.data || err;
+          errMsg = errMsg ? errMsg.toString() : '';
+          dialogService.showDialog('Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg);
+        }
+        loadSapLogs(vm.quotation.id);
+        vm.isLoadingProgress = false;
+      });
   }
 
   function animateProgress(){

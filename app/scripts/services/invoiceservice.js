@@ -8,6 +8,7 @@
       create: create,
       find: find,
       send: send,
+      getInvoiceLogs: getInvoiceLogs
     };
 
     function create(orderID) {
@@ -33,5 +34,13 @@
         return res.data;
       });
     }
+
+
+    function getInvoiceLogs(orderID) {
+      var url = '/order/invoicelogs/' + orderID;
+      return api.$http.post(url).then(function(res) {
+        return res.data;
+      });
+    }    
   }
 })();

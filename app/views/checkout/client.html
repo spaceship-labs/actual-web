@@ -25,7 +25,7 @@
     <section flex="75">
       <h3>
         <strong>Datos personales</strong>
-        <a class="small-link" href="#" ng-href="./user/profile">Cambiar mis datos personales</a>
+        <a class="small-link" href="#" ng-href="/user/profile">Cambiar mis datos personales</a>
       </h3>
       <form ng-submit="vm.continueProcess()" class="client-checkout" action="#">
 
@@ -33,11 +33,11 @@
         <div layout="row">
           <div flex="25" class="input-element">
             <label><strong>Nombre(s) del cliente</strong> <span class="hl-label">*</span></label>
-            <p>{{vm.quotation.User.firstName}}</p>
+            <p>{{vm.quotation.Client.FirstName}}</p>
           </div>
           <div flex="25" class="input-element">
             <label><strong>Apellido(s) del cliente</strong> <span class="hl-label">*</span></label>
-            <p>{{vm.quotation.User.lastName}}</p>
+            <p>{{vm.quotation.Client.LastName}}</p>
           </div>
         </div>
 
@@ -52,7 +52,7 @@
           </div>
           <div flex="25" class="input-element">
             <label><strong>Email</strong> <span class="hl-label">*</span></label>
-            <p>{{vm.quotation.User.email}}</p>
+            <p>{{vm.quotation.Client.E_Mail}}</p>
           </div>
         </div>
         <!--END PERSONAL DATA-->
@@ -97,7 +97,7 @@
                   <a
                     class="small-link"
                     href="#"
-                    ng-href="/clients/profile/{{vm.quotation.Client.id}}?activeTab=3">
+                    ng-href="/user/deliveries">
                     Editar datos de dirección
                   </a>
                 </p>

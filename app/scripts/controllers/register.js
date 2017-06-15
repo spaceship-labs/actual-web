@@ -11,10 +11,12 @@ angular.module('dashexampleApp')
   .controller('RegisterCtrl', RegisterCtrl);
 
 function RegisterCtrl(
+	authService,
 	clientService,
 	dialogService,
 	quotationService,
 	commonService,
+	$rootScope,
 	$routeParams,
 	$location,
 	$q
@@ -99,8 +101,12 @@ function RegisterCtrl(
 
 	function register(form){
 		console.log('register');
+		var clientCreated;
+
 		if(form.$valid){
 			vm.isLoading = true;
+
+			$rootScope.scrollTo('main');
 
 			if(vm.newAddress && vm.newAddress.Address){
 				vm.newClient.contacts = [ vm.newAddress ];
@@ -109,35 +115,56 @@ function RegisterCtrl(
 			clientService.create(vm.newClient)
 				.then(function(res){
 					console.log('res', res);
+					clientCreated = res;
 					dialogService.showDialog('Usuario registrado con éxito');
 					vm.isLoading = false;
 					vm.registerDone = true;
 
-					if($routeParams.quotation){
-						var quotationId = $routeParams.quotation;
-						var params = {
-							Client: res.id,
-						}
-						if(res.Contacts && res.Contacts.length > 0){
-							params.Address = res.Contacts[0].id
-						}
-						return quotationService.update(quotationId, params);
-					}else{
-						var deferred = $q.defer();						
-						return deferred.resolve();	
+
+					var formData = {
+						email: vm.newClient.E_Mail,
+						password: vm.newClient.password
+					};
+
+					var handleSignInError = function(err){
+						console.log('err', err);
+						dialogService.showDialog('Error al iniciar sesión');
 					}
+
+					authService.signIn(
+						formData, 
+						$rootScope.successAuthInCheckout, 
+						handleSignInError
+					)
+				})
+				.then(function(){
+
+						if($routeParams.quotation){
+							var quotationId = $routeParams.quotation;
+							var params = {
+								Client: clientCreated.id,
+							}
+							if(clientCreated.Contacts && clientCreated.Contacts.length > 0){
+								params.Address = clientCreated.Contacts[0].id
+							}
+							return quotationService.update(quotationId, params);
+						}else{
+							var deferred = $q.defer();						
+							return deferred.resolve();	
+						}
 
 				})
 				.then(function(updated){
 					if(updated){
-						dialogService.showDialog('updated', updated);
+						dialogService.showDialog('Registrado con exito');
 						$location.path('/checkout/client/' + $routeParams.quotation);
 					}
 				})
 				.catch(function(err){
 					vm.isLoading = false;
+					var errMsg = err.data || err;
 					console.log('err', err);
-					dialogService.showDialog('Hubo un error, revisa tus datos');
+					dialogService.showDialog('Hubo un error, revisa tus datos ' + errMsg);
 				});
 		}else{
 			dialogService.showDialog('Campos incompletos, revisa tus datos');
@@ -147,10 +174,12 @@ function RegisterCtrl(
 }
 
 RegisterCtrl.$inject = [
+	'authService',
 	'clientService',
 	'dialogService',
 	'quotationService',
 	'commonService',
+	'$rootScope',
 	'$routeParams',
 	'$location',
 	'$q'

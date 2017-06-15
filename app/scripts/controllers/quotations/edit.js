@@ -470,6 +470,7 @@ function QuotationsEditCtrl(
       var params = angular.copy(vm.quotation);
       delete params.Details;
       vm.isLoading = true;
+      $rootScope.scrollTo('main');
 
       quotationService.update(vm.quotation.id, params)
         .then(function(res){
@@ -484,10 +485,6 @@ function QuotationsEditCtrl(
           if(vm.quotation.Client){
             //quotationService.setActiveQuotation(vm.quotation.id);
             
-            if(quotationUpdated.immediateDelivery || true){
-              return $location.path('/checkout/paymentmethod/' + quotationUpdated.id);
-            }
-
             $location.path('/checkout/client/' + vm.quotation.id);
           }
           else{

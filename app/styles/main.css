@@ -3456,9 +3456,12 @@ md-backdrop.md-sidenav-backdrop{
 .checkout-title{
   background: #F8F8F8;
   padding: 10px 14px;
-  font-size: 26px!important;
   font-weight: 700!important;
 }
+.checkout-title h1{
+  font-size: 26px!important;
+}
+.checkout-title p{font-size: 12px;}
 
 .steps-bar{
   margin: 20px 0;
@@ -3552,7 +3555,10 @@ md-backdrop.md-sidenav-backdrop{
 .checkout-view .delivery-option-data .small-link{margin:0;}
 .checkout-view .delivery-option-data h4{margin: 0 0 10px;}
 .checkout-view .input-element label{margin-bottom: 5px;}
-.checkout-view .input-element p{margin:0;}
+.checkout-view .input-element p{
+  font-size: 14px;
+  margin:0;
+}
 .checkout-view .delivery-option-radio{text-align: center;}
 .checkout-view .delivery-option-radio md-radio-button{
   display: inline-block;
@@ -3751,8 +3757,9 @@ md-backdrop.md-sidenav-backdrop{
 .deposit-dialog h2{
   font-weight: 400;
   font-size: 18px;
-  margin: 4px 0 10px 5px;
+  margin: 0;
 }
+.deposit-dialog .payment-amount{font-size: 22px;}
 .deposit-dialog hr{
   height: 1px;
   background: #000;
@@ -3880,8 +3887,8 @@ md-backdrop.md-sidenav-backdrop{
 /*------------------*/
 .zipcode-dialog .zipcode-dialog-inner{
   padding: 15px 40px;
-  min-width: 800px;
 }
+.zipcode-dialog .zipcode-dialog-inner-large{min-width: 800px;}
 .zipcode-dialog h2{
   font-weight: 400;
   font-size: 18px;
@@ -4415,7 +4422,6 @@ padding-left: 16px;
 #my-profile .box-head-profile .info-row p{font-size: 12px;margin-top: 5px}
 #my-profile .principal-icon .icon-login{font-size: 100px}
 
-#my-profile .head-profile{padding: 0 10px}
 #my-profile .head-profile i{font-size: 35px;}
 #my-profile .head-profile h1{font-weight: bold;font-size: 30px;margin-left: 5px}
 #my-profile .head-profile i.icon-settings{font-size: 25px}

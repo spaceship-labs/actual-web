@@ -52,6 +52,7 @@
         showStockAlert: showStockAlert,
         update: update,
         updateSource: updateSource,
+        updateAddress: updateAddress,
         validateQuotationStockById: validateQuotationStockById
       };
 
@@ -70,6 +71,11 @@
       function updateSource(id, params){
         var url = '/quotation/' + id + '/source';
         return api.$http.post(url, params);
+      }
+
+      function updateAddress(id, params){
+        var url = '/quotation/' + id + '/address';
+        return api.$http.put(url, params);
       }
 
       function getById(id, params){

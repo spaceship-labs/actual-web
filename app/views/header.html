@@ -61,14 +61,14 @@
 
         <!--IF ACTIVE QUOTATION-->
         <a
-          ng-if="main.user && main.activeQuotation"
+          ng-if="main.activeQuotation"
           flex
           ng-href="/quotations/edit/{{main.activeQuotation.id}}"
           class="header-top-bar-menu-item"
         >
           <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
           <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+          <ng-include ng-if="main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
         </a>
 
         <!--IF NOT ACTIVE QUOTATION-->

@@ -28,7 +28,8 @@ function UsersUserDeliveriesCtrl(
     updateAddress: updateAddress,
     deleteAddress: deleteAddress,
     edit: edit,
-    isCreateModeActive: true
+    enableCreateMode: enableCreateMode,
+    isCreateModeActive: true,
   });
 
   init();
@@ -76,7 +77,8 @@ function UsersUserDeliveriesCtrl(
         })
         .catch(function(err){
           console.log('err', err);
-          dialogService.showDialog(err);
+          var errMsg = err.data || err
+          dialogService.showDialog(errMsg);
           vm.isLoadingCreate = false;
         });
     }else{
@@ -96,7 +98,8 @@ function UsersUserDeliveriesCtrl(
         })
         .catch(function(err){
           console.log('err', err);
-          dialogService.showDialog(err);
+          var errMsg = err.data || err
+          dialogService.showDialog(errMsg);
           vm.isLoadingEdit = false;
         });
     }else{
@@ -130,6 +133,11 @@ function UsersUserDeliveriesCtrl(
     vm.isCreateModeActive = false;
     vm.editAddress = _.clone(address);
     scrollTo('deliveries-edit');
+  }
+
+  function enableCreateMode(){
+    vm.isCreateModeActive = true;
+    scrollTo('deliveries-create');
   }
 
   function scrollTo(target){

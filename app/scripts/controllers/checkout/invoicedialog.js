@@ -10,9 +10,8 @@ function InvoiceDialogController($scope, $mdDialog, $location, quotation, client
 
   $scope.modify = function(){
     console.log('modify');
-    $location.path('/clients/profile/' + client.id)
+    $location.path('/user/invoices/')
       .search({
-        activeTab: 1,
         checkoutProcess: quotation.id
       });
     $mdDialog.hide(false);

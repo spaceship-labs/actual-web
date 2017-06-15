@@ -117,7 +117,7 @@
           </div>
           
           <div>
-            <img src="/images/banamex.png" alt="">
+            <!--<img src="/images/banamex.png" alt="">-->
           </div>
 
         </div>
@@ -187,24 +187,8 @@
           layout="row" 
           layout-align="start center"
         >
-          <div class="input-element" flex="60">
-            <div class="input-element-inner">
-              <input
-                ng-if="maxAmmount && maxAmmount >=0"
-                type="text"
-                max="{{maxAmmount}}"
-                ng-model="payment.ammount"
-                class="with-maxammount"
-                ng-currency
-                >
-              <input
-                ng-if="!maxAmmount"
-                type="text"
-                ng-currency
-                ng-model="payment.ammount"
-                >
-
-            </div>
+          <div flex="60">
+            <h2 class="payment-amount"><strong>{{payment.ammount | currency}}</strong></h2>
           </div>
           <div class="currency-label">
             <span>MXN</span>

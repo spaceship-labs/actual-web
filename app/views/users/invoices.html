@@ -24,31 +24,29 @@
             <h1>MIS FACTURAS</h1>
         </div>
       </div>
-       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+
+      <section ng-if="!vm.isLoading" class="transfers-table-block">
+
+        <section class="table-list-wrap table-list-wrap-nomargin">
+          <div
+            table-list
+            class="table-list table-list-v2"
+            columns="vm.columnsOrders"
+            api-resource="vm.apiResourceOrders"
+            ></div>
+        </section>
+
+		  </section>
+
+      <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
         <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
       </div>
 
       <ng-include src="'views/users/partials/invoice-form.html'"></ng-include>
 
       <!--END PROFILE EDIT-->
-			<hr/>
-		<div flex="50">
-        <p class="modify-invoice">
-            <strong>LISTA DE MIS PEDIDOS</strong>
-        </p>
-      	</div>
-      	<section class="transfers-table-block">
 
-          <section class="table-list-wrap table-list-wrap-nomargin">
-            <div
-              table-list
-              class="table-list table-list-v2"
-              columns="vm.columnsOrders"
-              api-resource="vm.apiResourceOrders"
-              ></div>
-          </section>
 
-		  </section>
     </section >
   </div>
 </div>  

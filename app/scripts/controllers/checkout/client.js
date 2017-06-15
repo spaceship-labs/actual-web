@@ -59,7 +59,8 @@ function CheckoutClientCtrl(
         }
 
         if(vm.quotation.Client){
-          clientService.getById(vm.quotation.Client.id)
+          var params = {populate:true};
+          clientService.getById(vm.quotation.Client.id, params)
             .then(function(res){
               vm.client = res.data;
               vm.isLoadingClient = false;
@@ -152,8 +153,8 @@ function CheckoutClientCtrl(
             return $q.reject();
           }
           vm.isLoading = true;
-          var params = {Address: vm.quotation.Address};
-          return quotationService.update(vm.quotation.id, params);
+          var params = {addressId: vm.quotation.Address};
+          return quotationService.updateAddress(vm.quotation.id, params);
         })
         .then(function(res){
           vm.isLoading = false;

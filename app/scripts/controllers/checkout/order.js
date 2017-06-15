@@ -13,6 +13,8 @@ angular.module('dashexampleApp')
 function CheckoutOrderCtrl(
   api,
   commonService ,
+  $interval,
+  $scope,
   $routeParams,
   $rootScope,
   $location,
@@ -21,7 +23,8 @@ function CheckoutOrderCtrl(
   orderService,
   deliveryService,
   invoiceService,
-  paymentService
+  paymentService,
+  authService
 ){
   var vm = this;
   var EWALLET_POSITIVE = 'positive';
@@ -35,18 +38,26 @@ function CheckoutOrderCtrl(
     generateInvoice: generateInvoice,
     getPaymentTypeString: paymentService.getPaymentTypeString,
     getSerieByDetailId: getSerieByDetailId,
+    showInvoiceErrorIfNeeded: showInvoiceErrorIfNeeded,
     sendInvoice: sendInvoice,
     print: print,
+    invoices: [],
+    invoicesInterval: false,
+    invoiceLoadCounter: 0,
+    invoiceLoadLimit: 5,
+    invoiceLogInterval: false,    
+    invoiceLogLoadCounter: 0,
+    invoiceLogLoadLimit: 5,    
     calculateBalance: orderService.calculateBalance
   });
 
   function showImmediateDeliveryDialog(order){
     if(order.Details){
       var hasImmediateDelivery = order.Details.some(function(detail){
-        return detail.immediateDelivery;
+        return detail.immediateDelivery && !detail.isSRService;
       });
       if(hasImmediateDelivery){
-        dialogService.showDialog('Favor de entregarle al cliente los artículos que se llevara de la tienda por sus medios');
+        dialogService.showDialog('!Favor de entregar al cliente los artículos que se llevará¡');
       }
     }
   }
@@ -69,10 +80,14 @@ function CheckoutOrderCtrl(
 
       loadOrderQuotationRecords(vm.order);
       calculateEwalletAmounts(vm.order);
+      loadSapLogs(vm.order.Quotation);
 
-      vm.sapLogs = [];
-      if(vm.order.SapOrderConnectionLog){
-        vm.sapLogs.push(vm.order.SapOrderConnectionLog);
+      vm.alegraLogs = [];
+      if(vm.order.AlegraLogs){
+        vm.alegraLogs = vm.order.AlegraLogs;
+        if( showInvoiceErrorIfNeeded(vm.alegraLogs) ){
+          dialogService.showDialog('Hubo un error en la generación de la factura');
+        }
       }
 
       vm.order.Details = vm.order.Details || [];
@@ -95,6 +110,21 @@ function CheckoutOrderCtrl(
           console.log(err);
         });
 
+
+      vm.invoicesInterval = $interval(function(){
+        if(vm.invoiceLoadCounter <= vm.invoiceLoadLimit && !vm.invoiceExists ){
+          loadInvoices(); 
+          vm.invoiceLoadCounter++;     
+        }
+      }, 3000);
+
+      vm.invoiceLogInterval = $interval(function(){
+        if(vm.invoiceLogLoadCounter <= vm.invoiceLogLoadLimit ){
+          loadLogsInvoice(); 
+          vm.invoiceLogLoadCounter++;     
+        }
+      }, 3000);        
+
     })
     .catch(function(err){
       console.log(err);
@@ -104,9 +134,62 @@ function CheckoutOrderCtrl(
       vm.isLoading = false;
     });
 
-    invoiceService.find($routeParams.id).then(function(invoices){
-      vm.invoiceExists = invoices.length > 0;
+    //loadInvoices();
+
+
+
+  }
+
+  function loadSapLogs(quotationId){
+    vm.isLoadingSapLogs = true;
+    quotationService.getSapOrderConnectionLogs(quotationId)
+      .then(function(res){
+        vm.sapLogs = res.data;
+        console.log('sapLogs', vm.sapLogs);
+        vm.isLoadingSapLogs = false;
+      })
+      .catch(function(err){
+        console.log('err', err);
+        vm.isLoadingSapLogs = false;        
+      });
+  }  
+
+  function loadInvoices(){
+    if(vm.invoices.length === 0){
+      invoiceService.find($routeParams.id)
+        .then(function(invoices){
+          vm.invoices = invoices;
+          vm.invoiceExists = invoices.length > 0;
+          if(vm.invoiceExists && $location.search().orderCreated){
+            dialogService.showDialog('Factura emitida');          
+          }
+        });    
+    }
+  }
+
+  function loadLogsInvoice(){
+    if(vm.alegraLogs.length === 0){
+      invoiceService.getInvoiceLogs($routeParams.id)
+        .then(function(logs){
+          vm.alegraLogs = logs;
+          //console.log('vm.invoices', vm.invoices);
+          //console.log('logs');
+          if( showInvoiceErrorIfNeeded(logs) ){
+            dialogService.showDialog('Hubo un error en la generación de la factura');
+          } 
+        })
+        .catch(function(err){
+          console.log('err',err);
+        });
+    }
+  }
+
+  function showInvoiceErrorIfNeeded(logs){
+    logs = logs || [];
+    var errorExists = _.some(logs, function(log){
+      return log.isError;
     });
+    return errorExists && (!vm.invoices || vm.invoices.length === 0);
   }
 
   function calculateEwalletAmounts(order){
@@ -183,6 +266,9 @@ function CheckoutOrderCtrl(
     invoiceService
       .create($routeParams.id)
       .then(function(res) {
+        var invoice = res.data;
+
+        vm.invoices.push(invoice);
         vm.isLoading = false;
         vm.invoiceExists = true;
         dialogService.showDialog('Factura creada exitosamente');
@@ -190,6 +276,7 @@ function CheckoutOrderCtrl(
       })
       .catch(function(err) {
         vm.isLoading = false;
+        console.log('err', err);
         var error = err.data.message;
         dialogService.showDialog('Error al crear factura: ' + error);
       });
@@ -206,10 +293,20 @@ function CheckoutOrderCtrl(
       })
       .catch(function(err) {
         vm.isLoading = false;
-        var error = err.data.message;
+        var error = err.data;
         dialogService.showDialog(error);
       });
   }
+
+  $scope.$on('$destroy', function(){
+    if(vm.invoicesInterval){
+      $interval.cancel(vm.invoicesInterval);
+    }
+    if(vm.invoiceLogInterval){
+      $interval.cancel(vm.invoiceLogInterval);
+      
+    }
+  });  
 
   init();
 }
