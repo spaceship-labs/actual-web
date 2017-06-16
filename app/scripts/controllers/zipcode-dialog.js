@@ -39,8 +39,6 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, clien
   }
 
    function submit($form, zipcode){
-    console.log('zipcode', zipcode);
-    console.log('ctrl.zipcode', ctrl.zipcode);
     var _isValidZipcode = isValidZipcode(ctrl.zipcode);
     
     if($form.$valid &&  _isValidZipcode){
