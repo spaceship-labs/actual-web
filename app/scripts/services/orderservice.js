@@ -36,7 +36,7 @@
       function getList(page, params){
         var p = page || 1;
         var url = '/order/find/' + p;
-        return api.$http.post(url,params);
+        return api.$http.get(url,params);
       }
 
       function createFromQuotation(quotationId, params){

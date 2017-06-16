@@ -197,6 +197,11 @@ angular
         controller: 'UsersUserPurchasesCtrl',
         controllerAs: 'vm'
       })
+      .when('/user/quotations', {
+        templateUrl: 'views/users/quotations.html',
+        controller: 'UsersUserQuotationsCtrl',
+        controllerAs: 'vm'
+      })
       .when('/checkout/payment-info', {
         templateUrl: 'views/checkout/payment-info.html',
         controller: 'CheckoutPaymentInfoCtrl',

@@ -65,7 +65,8 @@ function QuotationsEditCtrl(
     showBigTicketDialog: showBigTicketDialog,
     showDetailGroupStockAlert: showDetailGroupStockAlert,
     toggleRecord: toggleRecord,
-    deattachImage: deattachImage
+    deattachImage: deattachImage,
+    user: $rootScope.user
   });
 
   if($rootScope.activeStore){

@@ -29,8 +29,8 @@
         </span>
         <a
           class="order-link"
-          ng-href="/checkout/order/{{vm.quotation.Order.id}}"
-          ng-if="vm.quotation.Order">
+          ng-href="/checkout/order/{{vm.quotation.OrderWeb.id}}"
+          ng-if="vm.quotation.OrderWeb && vm.quotation.Client.id === vm.user.id">
           | Haz click aqui para ver el pedido
         </a>
       </p>

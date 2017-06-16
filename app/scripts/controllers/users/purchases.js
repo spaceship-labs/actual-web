@@ -18,7 +18,6 @@ function UsersUserPurchasesCtrl(
   var vm = this;
   angular.extend(vm,{
     user: angular.copy($rootScope.user),
-    apiResourceLeads: quotationService.getByClient,
     apiResourceOrders: orderService.getList,    
     columnsLeads: [
       {key: 'folio', label:'Folio'},
@@ -52,15 +51,6 @@ function UsersUserPurchasesCtrl(
   init();
 
   function init(){
-    orderService.getList()
-      .then(function(res){
-        console.log(res);
-        vm.orders = res.data.data;
-        vm.ordersTotal = res.data.total;
-      })
-      .catch(function(err){
-        console.log(err);
-      });
   }
 
 }

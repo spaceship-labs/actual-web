@@ -1,0 +1,30 @@
+<div id="my-profile" layout="row" layout-wrap>
+  <div class="menu-profile" flex-gt-xs="25" flex="100">
+    <ng-include src="'views/users/menu-profile.html'"></ng-include>
+  </div>
+   <div flex-gt-xs="75" flex="100">
+    <section id="profile-view" class="container container-lg user-profile-view">
+
+      <ng-include src="'views/users/box-head-profile.html'"></ng-include>
+
+      <div class="head-profile" layout="row" layout-xs="column" layout-align="space-between center">
+        <div layout="row" layout-align="center center">
+            <i class="icon-pedidos"></i>
+            <h1>MIS COTIZACIONES</h1>
+        </div>
+      </div>
+	    
+      <hr/>
+
+			<section class="table-list-wrap">
+				<div
+					table-list
+					class="table-list"
+					columns="vm.columnsQuotations"
+					api-resource="vm.apiResourceQuotations">
+				</div>
+			</section>
+
+    </section>
+  </div>
+</div>  

@@ -248,7 +248,11 @@
             $rootScope.$emit('activeQuotationAssigned', false);
             deferred.resolve(false);
           }
-        });
+        })
+        .catch(function(err){
+          $rootScope.activeQuotation = false;
+          localStorageService.remove('quotation');
+        })
       return deferred.promise;
     }
 
