@@ -58,11 +58,6 @@ angular
     $locationProvider.hashPrefix('!');
 
     $routeProvider
-      .when('/:id', {
-        templateUrl: 'views/product.html',
-        controller: 'ProductCtrl',
-        controllerAs: 'vm'
-      })    
       .when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
@@ -356,6 +351,11 @@ angular
         controller: 'RegisterCtrl',
         controllerAs: 'vm'
       })
+      .when('/:id', {
+        templateUrl: 'views/product.html',
+        controller: 'ProductCtrl',
+        controllerAs: 'vm'
+      })          
       .otherwise({
         redirectTo: '/'
       });
