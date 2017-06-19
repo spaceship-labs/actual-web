@@ -58,6 +58,11 @@ angular
     $locationProvider.hashPrefix('!');
 
     $routeProvider
+      .when('/:id', {
+        templateUrl: 'views/product.html',
+        controller: 'ProductCtrl',
+        controllerAs: 'vm'
+      })    
       .when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
@@ -71,12 +76,6 @@ angular
       .when('/category/:category', {
         templateUrl: 'views/category.html',
         controller: 'CategoryCtrl',
-        controllerAs: 'vm'
-      })
-      //.when('/product/:name/:id', {
-      .when('/product/:id', {
-        templateUrl: 'views/product.html',
-        controller: 'ProductCtrl',
         controllerAs: 'vm'
       })
       .when('/search', {

@@ -1,6 +1,5 @@
-<div
-  class="sub"
-  ng-style="getCategoryBackground(category.Handle)">
+<div class="sub">
+  <img class="sub-image" src="{{getCategoryImage(category.Handle)}}" alt="{{category.Name}}">  
   <div class="sub-text">
     <h4>
       <a ng-href="/category/{{category.Handle}}">

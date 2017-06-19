@@ -24,6 +24,13 @@ angular.module('dashexampleApp')
           return {'background-image' : 'url(' + image + ')'};
         }
 
+        scope.getCategoryImage = function(handle){
+          var image =  '/images/mesas.jpg';
+          image = api.baseUrl + '/categories/' + handle + '.jpg';
+          return image;
+        }
+
+
       }
     };
   }]);

@@ -100,7 +100,7 @@ function ProductCtrl(
         };
 
         if(reload){
-          $location.path('/product/' + productId, false)
+          $location.path('/' + productId, false)
             .search({variantReload:'true'});
           loadProductFilters(vm.product);
         }else{

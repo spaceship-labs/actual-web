@@ -2,7 +2,7 @@
   class="cart-item" 
 >
   <h3>
-    <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
+    <a ng-href="/{{detailGroup.Product.ItemCode}}">
       <strong>{{detailGroup.Product.Name || detailGroup.Product.ItemCode}}</strong>
     </a>
   </h3>
@@ -17,7 +17,7 @@
     >
       <div layout="row">
         <div class="cart-item-prod-img">
-          <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
+          <a ng-href="/{{detailGroup.Product.ItemCode}}">
             <img ng-src="{{detailGroup.Product.icons[0].url}}" alt="">
           </a>
         </div>

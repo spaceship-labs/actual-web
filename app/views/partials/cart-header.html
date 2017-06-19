@@ -33,7 +33,7 @@
           class="cart-modal-item-wrap" 
           flex="33"
         >
-          <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
+          <a ng-href="/{{detailGroup.Product.ItemCode}}">
             <img 
               class="cart-modal-item-img" 
               ng-src="{{detailGroup.Product.icons[10].url}}" alt=""
@@ -41,7 +41,7 @@
           </a>
           <div class="cart-modal-item-desc">
             <p>
-              <a ng-href="/product/{{detailGroup.Product.ItemCode}}">
+              <a ng-href="/{{detailGroup.Product.ItemCode}}">
                 <strong>
                   {{ detailGroup.Product.Name | limitTo: 12 }}{{detailGroup.Product.Name.length > 12 ? '...' : ''}}
                 </strong>
