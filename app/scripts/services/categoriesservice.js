@@ -35,7 +35,6 @@
         'ambientes': 'ambientes',
         'colchones': 'colchones',
         'mesas': 'mesas',
-        'ambientes': 'ambientes',
         'sillas': 'sillas',
         'bebes': 'bebes',
         'ninos': 'ninos',

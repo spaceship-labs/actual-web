@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="dashexampleApp">
+<html>
   <head>
     <meta charset="utf-8">
     <title>Actual</title>
@@ -42,7 +42,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
   </head>
-  <body ng-class="main.siteTheme" ng-controller="MainCtrl as main">
+  <body ng-cloak ng-class="main.siteTheme" ng-app="dashexampleApp" ng-controller="MainCtrl as main">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -180,9 +180,6 @@
         <script src="scripts/angular-photoswipe.js"></script>
         <script src="scripts/ng-infinite-scroll.min.js"></script>
         <script src="scripts/filters/roundcurrency.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/home.js"></script>
         <script src="scripts/services/api.js"></script>
         <script src="scripts/services/authservice.js"></script>
         <script src="scripts/directives/listing-product.js"></script>
@@ -219,6 +216,9 @@
         <script src="scripts/controllers/quotations/stockdialog.js"></script>
         <script src="scripts/directives/menucategories.js"></script>
         <script src="scripts/directives/menusubcategories.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/home.js"></script>        
         <script src="scripts/controllers/checkout/client.js"></script>
         <script src="scripts/controllers/checkout/payments.js"></script>
         <script src="scripts/controllers/continuequotation.js"></script>

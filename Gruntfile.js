@@ -621,7 +621,6 @@ module.exports = function (grunt) {
 
 function getEnvironmentTask(envOption){
   console.log('envOption', envOption);
-  envOption = envOption;
   var task;
   switch (envOption){
     case 'sandbox':
@@ -642,7 +641,6 @@ function getEnvironmentTask(envOption){
 
 function getSiteTask(siteOption){
   console.log('siteOption', siteOption);
-  siteOption = siteOption;
   var task;
   switch (siteOption){
     case 'studio':
