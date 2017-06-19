@@ -45,8 +45,10 @@
               <input 
                 type="text" 
                 ng-model="payment.cardObject.number" 
-                size="52" 
-                placeholder="0000 0000 0000 ****" 
+                minlength="14"
+                ng-minlength="14"
+                maxlength="19"
+                ng-maxlength="19"
                 required
               />
             </div>
@@ -112,7 +114,15 @@
               <label><strong>CÓDIGO CVC</strong>*</label>
             </p>
             <div flex="50" class="input-element-inner">
-              <input type="text" ng-model="payment.cardObject.cvc" placeholder="999" required>
+              <input 
+                type="text" 
+                ng-model="payment.cardObject.cvc" 
+                minlength="3"
+                ng-minlength="3"
+                maxlength="4"
+                ng-maxlength="4"
+                required
+              />
             </div>
           </div>
           
@@ -127,7 +137,10 @@
               <label><strong>PAÍS</strong>*</label>
             </p>
             <div flex="85" class="input-element-inner">
-              <input type="text" ng-model="payment.cardCountry" required>
+              <input 
+                type="text" 
+                ng-model="payment.cardCountry" 
+                required>
             </div>
           </div>
           <div class="input-element" flex="35">
@@ -135,7 +148,10 @@
               <label><strong>ESTADO</strong>*</label>
             </p>
             <div flex="85" class="input-element-inner">
-              <input type="text" ng-model="payment.cardState" required>
+              <input 
+                type="text" 
+                ng-model="payment.cardState" 
+                required>
             </div>
           </div>
           <div class="input-element" flex="20">
@@ -143,7 +159,15 @@
               <label><strong>CÓDIGO POSTAL</strong>*</label>
             </p>
             <div flex="75" class="input-element-inner">
-              <input type="text" ng-model="payment.cardZip" required>
+              <input 
+                type="text" 
+                ng-model="payment.cardZip" 
+                required
+                minlength="5"
+                ng-minlength="5"
+                maxlength="5"
+                ng-maxlength="5"              
+              >
             </div>
           </div>
         </div>
@@ -153,7 +177,10 @@
               <label><strong>CIUDAD</strong>*</label>
             </p>
             <div flex="90" class="input-element-inner">
-              <input type="text" ng-model="payment.cardCity" required>
+              <input 
+                type="text" 
+                ng-model="payment.cardCity" 
+                required>
             </div>
           </div>
           <div flex="30" class="input-element">
@@ -161,7 +188,10 @@
               <label><strong>COLONIA</strong>*</label>
             </p>
             <div flex="95" class="input-element-inner">
-              <input type="text" ng-model="payment.cardAddress1" required>
+              <input 
+                type="text" 
+                ng-model="payment.cardAddress1" 
+                required>
             </div>
           </div>
           <div flex class="input-element" >
@@ -169,7 +199,11 @@
               <label><strong>CALLE Y NÚMERO</strong>*</label>
             </p>
             <div flex="70" class="input-element-inner">
-              <input type="text" ng-model="payment.cardAddress2" required>
+              <input 
+                type="text" 
+                ng-model="payment.cardAddress2" 
+                required
+              >
             </div>
           </div>
         </div>
