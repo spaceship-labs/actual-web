@@ -67,7 +67,8 @@
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       getStores: getStores,
-      siteTheme: SITE.name
+      siteTheme: SITE.name,
+      siteConstants: SITE
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
     $scope.mainData;
@@ -75,6 +76,7 @@
     init();
 
     function init(){
+      console.log('vm.site', vm.site);
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
       vm.activeStoreId = localStorageService.get('activeStore');
