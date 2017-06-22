@@ -71,6 +71,7 @@
       siteConstants: SITE
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
+    $rootScope.toggleLoginModal = toggleLoginModal;
     $scope.mainData;
 
     init();

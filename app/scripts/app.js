@@ -33,6 +33,7 @@ angular
     'leaflet-directive',
     'localytics.directives',
     'ng-currency',
+    'angular-google-analytics',
     'envconfig',
     'siteconfig',
   ])
@@ -43,10 +44,12 @@ angular
     $locationProvider,
     $mdThemingProvider,
     localStorageServiceProvider,
+    AnalyticsProvider,
     ENV,
     SITE
   ) {
 
+    AnalyticsProvider.setAccount('UU-XXXXXXX-X');  //UU-XXXXXXX-X should be your tracking code
 
     $mdThemingProvider.theme('default')
       .accentPalette('red', {

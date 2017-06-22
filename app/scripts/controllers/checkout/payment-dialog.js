@@ -62,8 +62,9 @@ function TerminalController(
 
 
 
-  $scope.isvalidPayment = function(){
-    return true;
+  $scope.isvalidPayment = function($form){
+    console.log('$form',$form);
+    return ($form.$valid);
   };
 
   $scope.onChangeCard = function(card){
@@ -80,8 +81,8 @@ function TerminalController(
     return false;
   }
 
-  $scope.save = function() {
-    if( $scope.isvalidPayment() ){
+  $scope.save = function($form){
+    if($form.$valid){
       if($scope.payment.options.length > 0){
         $scope.terminal = getSelectedTerminal($scope.payment.card);
         $scope.payment.terminal = $scope.terminal.value;
@@ -90,7 +91,8 @@ function TerminalController(
       console.log('$scope.payment save', $scope.payment);
       $mdDialog.hide($scope.payment);
     }else{
-      console.log('no cumple');
+      console.log('No valido');
     }
   };
+
 }

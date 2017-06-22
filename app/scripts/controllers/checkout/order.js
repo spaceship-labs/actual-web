@@ -78,9 +78,8 @@ function CheckoutOrderCtrl(
         showImmediateDeliveryDialog(vm.order);
       }
 
-      loadOrderQuotationRecords(vm.order);
       calculateEwalletAmounts(vm.order);
-      loadSapLogs(vm.order.Quotation);
+      loadSapLogs(vm.order.QuotationWeb);
 
       vm.alegraLogs = [];
       if(vm.order.AlegraLogs){
@@ -123,7 +122,7 @@ function CheckoutOrderCtrl(
           loadLogsInvoice(); 
           vm.invoiceLogLoadCounter++;     
         }
-      }, 3000);        
+      }, 3000);   
 
     })
     .catch(function(err){
@@ -199,18 +198,6 @@ function CheckoutOrderCtrl(
     };
     vm.ewallet.before = order.Client.ewallet + vm.ewallet.negative - vm.ewallet.positive;
     vm.ewallet.current = order.Client.ewallet;
-  }
-
-  function loadOrderQuotationRecords(order){
-    quotationService.getRecords(order.Quotation)
-      .then(function(result){
-        console.log(result);
-        vm.records = result.data;
-        vm.isLoadingRecords = false;
-      })
-      .catch(function(err){
-        console.log(err);
-      });
   }
 
 

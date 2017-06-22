@@ -378,7 +378,9 @@ function CheckoutPaymentsCtrl(
   }
 
   function createOrder(payment){
-    console.log('llego a createorder');
+    //Removing listener
+    mainDataListener();
+
     if(!vm.quotation.Details || vm.quotation.Details.length === 0){
       dialogService.showDialog('No hay artículos en esta cotización');
       return;
@@ -397,9 +399,9 @@ function CheckoutPaymentsCtrl(
         vm.isLoadingProgress = false;
         vm.order = res.data;
         if(vm.order.id){
+          $rootScope.scrollTo('main');
           quotationService.removeCurrentQuotation();
-          $location.path('/checkout/order/' + vm.order.id)
-            .search({orderCreated:true});
+          $location.path('/checkout/order/' + vm.order.id).search({orderCreated:true});
         }
       }).catch(function(err){
         console.log('err', err);

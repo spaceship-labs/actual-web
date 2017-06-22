@@ -3,6 +3,7 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, clien
   ctrl.init = init;
   ctrl.editAddress = editAddress;
   ctrl.submit = submit;
+  ctrl.toggleLoginModal = toggleLoginModal;
 
   function init(){
     if($rootScope.user){
@@ -10,6 +11,12 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, clien
       ctrl.user = $rootScope.user;
       loadClientAddresses();
     }
+  }
+
+  function toggleLoginModal(){
+    console.log('toggleLoginModal');
+    $rootScope.toggleLoginModal();
+    $mdDialog.cancel();
   }
 
   function addNewAddress(){

@@ -3895,7 +3895,6 @@ md-backdrop.md-sidenav-backdrop{
 .zipcode-dialog h2{
   font-weight: 400;
   font-size: 18px;
-  margin: 4px 0 10px 5px;
 }
 .zipcode-dialog .zipcode-dialog-inner p{margin: 4px 0;}
 .zipcode-dialog .zipcode-dialog-inner a{
@@ -3903,7 +3902,7 @@ md-backdrop.md-sidenav-backdrop{
   color: #33BA2C;
   text-decoration: underline;
 }
-
+.zipcode-dialog .zipcode-dialog-inner a.login-link{font-size: 14px;}
 .zipcode-dialog .delivery-option-radio{text-align: center;}
 .zipcode-dialog .delivery-option-radio md-radio-button{
   display: inline-block;

@@ -211,7 +211,6 @@
       function setActiveQuotation(quotationId){
         if(getActiveQuotationId() !== quotationId || !quotationId){
           localStorageService.set('quotation', quotationId);
-          console.log('localstorage activequotationid', localStorageService.get('quotation'));
           $rootScope.$broadcast('newActiveQuotation', quotationId);          
         }
       }
