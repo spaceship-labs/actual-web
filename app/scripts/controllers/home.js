@@ -31,7 +31,11 @@ function HomeCtrl(
     if($location.search().startQuotation){
       //dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización');
     }
-    mainDataListener = $rootScope.$on('mainDataLoaded', setCategoryStockProperty);
+    if($rootScope.activeStore){
+      setCategoryStockProperty(null, {activeStore: $rootScope.activeStore});
+    }else{
+      mainDataListener = $rootScope.$on('mainDataLoaded', setCategoryStockProperty);
+    }
   }
 
   function setCategoryStockProperty(event, mainData){

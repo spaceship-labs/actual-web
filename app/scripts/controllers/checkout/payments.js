@@ -39,7 +39,7 @@ function CheckoutPaymentsCtrl(
 
   angular.extend(vm,{
     api: api,
-    applyTransaction: applyTransaction,
+    openTransactionDialog: openTransactionDialog,
     areMethodsDisabled: checkoutService.areMethodsDisabled,
     calculateRemaining: calculateRemaining,
     createOrder: createOrder,
@@ -64,6 +64,7 @@ function CheckoutPaymentsCtrl(
   var EWALLET_TYPE = ewalletService.ewalletType;
   var CLIENT_BALANCE_TYPE = paymentService.clientBalanceType;
   var mainDataListener = function(){};
+  var selectedMethod;
 
   if($rootScope.isMainDataLoaded){
     init();
@@ -208,7 +209,7 @@ function CheckoutPaymentsCtrl(
       }
     }
 
-    return vm.applyTransaction(null, vm.activeMethod, remaining);
+    return openTransactionDialog(vm.activeMethod, remaining);
   }
 
   function clearActiveMethod(){
@@ -278,7 +279,7 @@ function CheckoutPaymentsCtrl(
       }
     };
 
-    delete payment.cardObject;
+    //delete payment.cardObject;
     console.log('tokenParams', tokenParams);
 
     Conekta.Token.create(tokenParams, onSuccess, onError);
@@ -292,27 +293,47 @@ function CheckoutPaymentsCtrl(
         || payment.ammount < 0
       ){
       vm.isLoadingProgress = true;
-      //vm.isLoading = true;
-      
+      var cardObjectAux = _.clone(payment.cardObject);
       tokenizePaymentCard(payment)
         .then(function(token){
           delete payment.cardObject;
           payment.cardToken = token;
+          console.log('payment after tonekinze', payment);
           console.log('token in tokenize', token);
-        /*  
-          return paymentService.addPayment(vm.quotation.id, payment);
-        })
-        .then(function(){
-        */
+
           return createOrder(payment);
         })
-        .catch(function(err){
+        .then(function(res){
           vm.isLoadingProgress = false;
-          console.log('err', err);
-          var errMsg = err.message_to_purchaser || err;
-          dialogService.showDialog(errMsg);
+          vm.order = res.data;
+          if(vm.order.id){
+            $rootScope.scrollTo('main');
+            quotationService.removeCurrentQuotation();
+            $location.path('/checkout/order/' + vm.order.id).search({orderCreated:true});
+          }
         })
+        .catch(function(err){
+          console.log('err', err);
+          var errMsg = '';
+          if(err){
+            errMsg = err.data || err;
 
+            if(errMsg.message_to_purchaser){
+              errMsg = errMsg.message_to_purchaser;
+            }
+            errMsg = errMsg ? errMsg.toString() : '';
+
+            var callback = function(){
+              payment.cardObject = cardObjectAux;
+              console.log('payment to openTransactionDialog again', payment);
+              openTransactionDialog(selectedMethod, vm.quotation.total, payment);          
+            };
+
+            dialogService.showDialog('Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg, callback);
+          }
+          loadSapLogs(vm.quotation.id);
+          vm.isLoadingProgress = false;
+        });
     }
   }
 
@@ -331,14 +352,29 @@ function CheckoutPaymentsCtrl(
   }
   
 
-  function applyTransaction(ev, method, ammount) {
+  function openTransactionDialog(method, ammount, paymentDefaults) {
+    var ev = null;
+    selectedMethod = method;
     if(method){
       var templateUrl = 'views/checkout/payment-dialog.html';
-      var controller  = TerminalController;
+      var controller  = PaymentDialogController;
       method.currency = method.currency || 'MXP';
       method.ammount  = ammount;
       var paymentOpts = angular.copy(method);
       paymentOpts.ammount = ammount;
+
+      if(paymentDefaults){
+        console.log('paymentOpts before', paymentOpts);
+        console.log('paymentDefaults', paymentDefaults);
+        if(paymentDefaults.cardObject){
+          console.log('extending');
+          paymentOpts.cardObject = paymentDefaults.cardObject;
+          console.log('paymmentops extended', paymentOpts);
+        }
+        paymentOpts = _.extend(paymentOpts, paymentDefaults);
+        console.log('paymentOpts after', paymentOpts);
+      }
+
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
         controller: [
@@ -364,10 +400,17 @@ function CheckoutPaymentsCtrl(
       .then(function(payment) {
         console.log('Pago aplicado');
         addPayment(payment);
-      }, function() {
+      })
+      .catch(function(err){
+        console.log('Pago no aplicado');
+        clearActiveMethod();        
+      });
+      /*
+      , function() {
         console.log('Pago no aplicado');
         clearActiveMethod();
       });
+      */
     }else{
       commonService.showDialog('Revisa los datos, e intenta de nuevo');
     }
@@ -394,26 +437,7 @@ function CheckoutPaymentsCtrl(
     };
     animateProgress();
     console.log('params', params);
-    orderService.createFromQuotation(vm.quotation.id, params)
-      .then(function(res){
-        vm.isLoadingProgress = false;
-        vm.order = res.data;
-        if(vm.order.id){
-          $rootScope.scrollTo('main');
-          quotationService.removeCurrentQuotation();
-          $location.path('/checkout/order/' + vm.order.id).search({orderCreated:true});
-        }
-      }).catch(function(err){
-        console.log('err', err);
-        var errMsg = '';
-        if(err){
-          errMsg = err.data || err;
-          errMsg = errMsg ? errMsg.toString() : '';
-          dialogService.showDialog('Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg);
-        }
-        loadSapLogs(vm.quotation.id);
-        vm.isLoadingProgress = false;
-      });
+    return orderService.createFromQuotation(vm.quotation.id, params);
   }
 
   function animateProgress(){

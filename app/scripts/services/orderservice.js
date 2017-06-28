@@ -18,7 +18,8 @@
         getById: getById,
         getTotalsByUser: getTotalsByUser,
         getCountByUser: getCountByUser,
-        formatAddress: formatAddress
+        formatAddress: formatAddress,
+        generateOrderSapById: generateOrderSapById
       };
 
       return service;
@@ -59,6 +60,10 @@
         return api.$http.post(url,params);
       }
 
+      function generateOrderSapById(orderId){
+        var url = '/order/'+orderId+'/ordersap';
+        return api.$http.post(url);
+      }
 
       function calculateBalance(paid, total){
         return (paid - total);

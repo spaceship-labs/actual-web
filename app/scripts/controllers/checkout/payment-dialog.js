@@ -1,4 +1,4 @@
-function TerminalController(
+function PaymentDialogController(
   $scope, 
   $mdDialog, 
   $filter,
@@ -9,8 +9,11 @@ function TerminalController(
   payment
 ) {
 
+  'use strict';
+
+  console.log('payment in dialog', payment);
   $scope.payment = payment;
-  $scope.payment.cardObject = {};
+  $scope.payment.cardObject = $scope.payment.cardObject || {};
   $scope.needsVerification = payment.needsVerification;
   $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
   $scope.months  = getMonths();

@@ -298,6 +298,15 @@
           <a href="#" ng-if="vm.invoiceExists" ng-click="vm.sendInvoice()" class="action-btn action-btn-save print-btn">
             <strong>ENVIAR FACTURA</strong>
           </a>
+
+          <a 
+            href="#" 
+            ng-if="vm.orderSapPending"
+            ng-click="vm.generateSapOrder()" 
+            class="action-btn action-btn-save print-btn"
+          >
+            <strong>GENERAR PEDIDO EN SAP</strong>
+          </a>
         </div>
       </div>
     </div>
@@ -312,12 +321,12 @@
   <hr/>
 
   <section 
-    ng-show="vm.order.OrdersSap && vm.order.OrdersSap.length > 0" 
+    ng-show="vm.order.OrdersSapWeb && vm.order.OrdersSapWeb.length > 0" 
     class="sap-docs only-hide-print"
   >
     <h3><strong>Documentos SAP</strong></h3>
     <ul>
-      <li ng-repeat="orderSap in vm.order.OrdersSap">
+      <li ng-repeat="orderSap in vm.order.OrdersSapWeb">
         <p ng-show="orderSap.document">
           <strong>Orden SAP</strong>: {{orderSap.document}}
         </p>
@@ -326,7 +335,7 @@
         </p>
         <p><strong>Pagos</strong>:</p>
         <ul>
-          <li ng-repeat="paymentSap in orderSap.PaymentsSap">{{paymentSap.document}}</li>
+          <li ng-repeat="paymentSap in orderSap.PaymentsSapWeb">{{paymentSap.document}}</li>
         </ul>
       </li>
     </ul>
@@ -334,38 +343,5 @@
 
   <ng-include class="only-hide-print" src="'views/checkout/sap-connection-logs.html'"></ng-include>
   <ng-include class="only-hide-print" src="'views/checkout/alegra-connection-logs.html'"></ng-include>
-
-
-  <!--SELLER-->
-  <div 
-    class="order-block seller-block seller-block-last order-block-info" 
-    layout="row" 
-    layout-align="space-between end"
-  >
-
-    <div>
-      <h3><strong><i class="icon-vendedor"></i> ASESOR DE INTERIORES</strong></h3>
-      <div class="order-block-inner" >
-          <p><strong>{{vm.order.User.firstName + ' ' + vm.order.User.lastName}}</strong></p>
-          <p><strong>Teléfono: </strong>{{vm.order.User.phone}}</p>
-          <p><strong>Celular: </strong>{{vm.order.User.mobilePhone}}</p>
-          <p><strong>Email:</strong> {{vm.order.User.email}}</p>
-      </div>
-    </div>
-
-    <section class="order-texts">
-      <div class="signature-section signature-section-flex">
-
-        <div class="client-signature">
-          <p><span class="signature-line"></span></p>
-          <p><span>Firma Asesor de Interiores {{vm.order.User.firstName + ' ' +vm.order.User.lastName}}:</span><p>
-          <p>Recibí las formas de pagos aplicadas en esta orden</p>
-        </div>
-      </div>
-    </section>
-
-  </div>
-  <hr class="only-show-print"/>
-  <!--END SELLER-->
 
 </section>

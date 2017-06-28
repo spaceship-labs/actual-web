@@ -48,7 +48,8 @@ function CheckoutOrderCtrl(
     invoiceLogInterval: false,    
     invoiceLogLoadCounter: 0,
     invoiceLogLoadLimit: 5,    
-    calculateBalance: orderService.calculateBalance
+    calculateBalance: orderService.calculateBalance,
+    generateSapOrder: generateSapOrder
   });
 
   function showImmediateDeliveryDialog(order){
@@ -91,7 +92,10 @@ function CheckoutOrderCtrl(
 
       vm.order.Details = vm.order.Details || [];
       vm.order.Address = orderService.formatAddress(vm.order.Address);
-      vm.series = groupSeries(vm.order.OrdersSap);
+      vm.series = groupSeries(vm.order.OrdersSapWeb);
+      if(vm.order.status === 'pending-sap'){
+        vm.orderSapPending = true;
+      }
 
       vm.isLoading = false;
 
@@ -134,10 +138,27 @@ function CheckoutOrderCtrl(
     });
 
     //loadInvoices();
-
-
-
   }
+
+  function generateSapOrder(){
+    if(vm.orderSapPending){
+      vm.isLoading = true;
+      orderService.generateOrderSapById(vm.order.id)
+        .then(function(res){
+          dialogService.showDialog('Pedido creado en SAP');
+          //loadSapDocuments();
+          vm.isLoading = false;
+          vm.orderSapPending = false;
+        })
+        .catch(function(err){
+          var error = err.data || err;
+          error = error ? error.toString() : '';
+          dialogService.showDialog('Hubo un error: ' + error );              
+          vm.isLoading = false;
+        });
+    }
+  }
+
 
   function loadSapLogs(quotationId){
     vm.isLoadingSapLogs = true;

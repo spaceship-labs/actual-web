@@ -8,10 +8,12 @@
 
     function dialogController($scope, $mdDialog, params){
       $scope.init = function(){
+        console.log('params', params);
         $scope.message = params.message || '';
       };
       $scope.closeDialog = function(){
           $mdDialog.hide();
+          console.log('callback', params.callback);
           if(params.callback){
             params.callback();
           }
@@ -31,6 +33,7 @@
         return service;
 
         function showDialog(message, callback, parent, ev){
+          console.log('callback showDialog', callback);
           var parentCon = angular.element('body');
           if(parent){
             parentCon = angular.element(parent);
