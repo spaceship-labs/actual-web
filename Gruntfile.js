@@ -455,7 +455,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'sandbox',
-            apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
+            apiEndpoint: 'http://13.58.180.222:8081',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'sandbox',
             conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
@@ -473,7 +473,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'demo',
-            apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
+            apiEndpoint: 'http://13.58.180.222:8081',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'demo',
             conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
@@ -482,7 +482,7 @@ module.exports = function (grunt) {
 
           }
         }
-      },      
+      },
       production: {
         options: {
           dest: '<%= yeoman.app %>/scripts/envconfig.js',
@@ -491,7 +491,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://sandbox-actual-api-web.herokuapp.com',
+            apiEndpoint: 'http://13.58.180.222:8081',
             adminUrl: 'http://admin.miactual.com',
             tokenPrefix: 'production',
             conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
@@ -513,7 +513,7 @@ module.exports = function (grunt) {
             tokenPrefix: 'dev',
             conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
             conektaKidsKey: 'key_S9FzaWYMDisHvS5iXqJ8oQ',
-            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'            
+            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
           }
         }
       },
@@ -529,7 +529,7 @@ module.exports = function (grunt) {
             fb_url: 'https://www.facebook.com/ActualHomeMx',
             instagram_url: 'https://www.instagram.com/actual_studio/',
             foursquare_url: 'https://es.foursquare.com/p/actual-home/90458136',
-            pinterest_url: 'https://es.pinterest.com/ActualGroup/'                        
+            pinterest_url: 'https://es.pinterest.com/ActualGroup/'
           }
         }
       },
@@ -545,7 +545,7 @@ module.exports = function (grunt) {
             fb_url: 'https://www.facebook.com/actualstudioo',
             instagram_url: 'https://www.instagram.com/actual_studio/',
             foursquare_url: 'https://es.foursquare.com/p/actual-studio/87584627',
-            pinterest_url: 'https://es.pinterest.com/ActualGroup/'                                    
+            pinterest_url: 'https://es.pinterest.com/ActualGroup/'
           }
         }
       },
@@ -561,10 +561,10 @@ module.exports = function (grunt) {
             fb_url:'https://www.facebook.com/ActualKids',
             instagram_url: 'https://www.instagram.com/actual_studio/',
             foursquare_url: 'https://es.foursquare.com/p/actual-studio/87584627',
-            pinterest_url: 'https://es.pinterest.com/ActualGroup/'                                                                                    
+            pinterest_url: 'https://es.pinterest.com/ActualGroup/'
           }
         }
-      }                    
+      }
 
     },
 
