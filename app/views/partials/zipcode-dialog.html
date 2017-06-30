@@ -1,5 +1,5 @@
 <md-dialog class="zipcode-dialog" aria-label="Zipcode dialog"  ng-cloak>
-  <div 
+  <div
     class="zipcode-dialog-inner"
     ng-class="{
       'zipcode-dialog-inner-large': ctrl.user
@@ -10,11 +10,11 @@
       <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
     </div>
 
-    <form 
-      ng-if="!ctrl.isLoading" 
-      name="zipcodeForm" 
-      ng-submit="ctrl.submit(zipcodeForm, zipcode)" 
-      class="form-section" 
+    <form
+      ng-if="!ctrl.isLoading"
+      name="zipcodeForm"
+      ng-submit="ctrl.submit(zipcodeForm, zipcode)"
+      class="form-section"
     >
 
       <section ng-if="!ctrl.isLoading && ctrl.user">
@@ -23,17 +23,19 @@
 
           <section class="delivery-options">
 
-            <md-radio-group 
+            <md-radio-group
               ng-model="ctrl.zipcode"
               layout="row"
               layout-wrap
               layout-align="space-between start"
             >
-              
+
               <div
                 class="delivery-option"
                 ng-repeat="address in ctrl.addresses"
                 flex="50"
+                flex-sm="100"
+                flex-xs="100"
                 layout="row"
                 layout-align="start center"
               >
@@ -67,7 +69,7 @@
               </div>
 
             </md-radio-group>
-            
+
           </section>
 
       </section>
@@ -84,8 +86,8 @@
             <strong>{{ctrl.errMessage}}</strong>
           </p>
           <div class="input-element-inner">
-            <input 
-              type="text" 
+            <input
+              type="text"
               ng-model="ctrl.zipcode"
               required
             />
@@ -98,7 +100,7 @@
 
       </section>
 
-      <div layout="row" flex="30">
+      <div layout="row" flex="30" flex-sm="80" flex-xs="80">
         <button ng-if="!ctrl.user" type="submit" class="action-btn action-btn-save">
           Ingresar
         </button>
@@ -111,6 +113,6 @@
       </div>
 
     </form>
-    
+
   </div>
 </md-dialog>

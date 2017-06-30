@@ -11,18 +11,18 @@ angular.module('dashexampleApp')
   .controller('CheckoutClientCtrl', CheckoutClientCtrl);
 
 function CheckoutClientCtrl(
-  commonService, 
+  commonService,
   clientService ,
   $timeout,
   $q,
-  $routeParams, 
+  $routeParams,
   $rootScope, 
   $location,
   $mdDialog,
   $mdMedia,
-  categoriesService, 
-  productService, 
-  quotationService, 
+  categoriesService,
+  productService,
+  quotationService,
   orderService,
   dialogService
 ){
@@ -37,12 +37,12 @@ function CheckoutClientCtrl(
     $location.search({});
     vm.isLoading = true;
     vm.isLoadingClient = true;
-    
+
     quotationService.getById($routeParams.id)
       .then(function(res){
         vm.quotation = res.data;
         vm.isLoading = false;
-        return quotationService.validateQuotationStockById(vm.quotation.id); 
+        return quotationService.validateQuotationStockById(vm.quotation.id);
       })
       .then(function(isValidStock){
         if( !isValidStock){
@@ -71,18 +71,18 @@ function CheckoutClientCtrl(
               });
               if(!vm.quotation.Address && vm.contacts.length > 0){
                 vm.quotation.Address = vm.contacts[0].id;
-              }            
+              }
             })
             .catch(function(err){
               vm.isLoadingClient = false;
               var error = err.data || err;
               console.log('err', err);
               error = error ? error.toString() : '';
-              dialogService.showDialog('Hubo un error: ' + error );          
+              dialogService.showDialog('Hubo un error: ' + error );
 
             });
         }
-        
+
       });
   }
 
@@ -102,10 +102,10 @@ function CheckoutClientCtrl(
 
   function showInvoiceDataAlert(ev){
     var controller = InvoiceDialogController;
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     return $mdDialog.show({
       controller: [
-        '$scope', 
+        '$scope',
         '$mdDialog',
         '$location',
         'quotation',
@@ -122,7 +122,7 @@ function CheckoutClientCtrl(
         client: vm.client
       }
     });
-  }  
+  }
 
   function continueProcess(){
     if(!vm.quotation.Details || vm.quotation.Details.length === 0){
@@ -144,15 +144,16 @@ function CheckoutClientCtrl(
         return;
       }
     }
-    
+
     if( vm.quotation.Address || vm.quotation.immediateDelivery){
-  
+
       showInvoiceDataAlert()
         .then(function(goToPayments){
           if(!goToPayments){
             return $q.reject();
           }
           vm.isLoading = true;
+          $rootScope.scrollTo('main');
           var params = {addressId: vm.quotation.Address};
           return quotationService.updateAddress(vm.quotation.id, params);
         })
@@ -164,9 +165,9 @@ function CheckoutClientCtrl(
           console.log(err);
           var error = err.data || err;
           error = error ? error.toString() : '';
-          dialogService.showDialog('Hubo un error: ' + error );          
+          dialogService.showDialog('Hubo un error: ' + error );
         });
-  
+
     }
 
     else{

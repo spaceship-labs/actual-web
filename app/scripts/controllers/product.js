@@ -36,7 +36,7 @@ function ProductCtrl(
   clientService
 ) {
   var vm = this;
-  var activeStoreId = localStorageService.get('activeStore'); 
+  var activeStoreId = localStorageService.get('activeStore');
   var activeStoreWarehouse = false;
   var mainDataListener = function(){};
   var categoriesTreeListener = function(){};
@@ -68,8 +68,8 @@ function ProductCtrl(
     mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
       init($routeParams.id);
     });
-  }  
-  
+  }
+
   //init($routeParams.id);
 
   function init(productId, reload){
@@ -105,7 +105,7 @@ function ProductCtrl(
           loadProductFilters(vm.product);
         }else{
           loadProductFilters(vm.product);
-          if($rootScope.activeStore){ 
+          if($rootScope.activeStore){
             loadWarehouses($rootScope.activeStore);
             loadVariants(vm.product);
           }
@@ -115,7 +115,7 @@ function ProductCtrl(
         if($rootScope.activeQuotation || $rootScope.isActiveQuotationLoaded){
           var zipcodeDeliveryId =  $rootScope.activeQuotation ? $rootScope.activeQuotation.ZipcodeDelivery : false;
 
-          loadZipCodeDeliveryById(zipcodeDeliveryId);          
+          loadZipCodeDeliveryById(zipcodeDeliveryId);
           setUpDeliveries({
             productId: vm.product.ItemCode,
             activeStoreId: activeStoreId,
@@ -125,16 +125,16 @@ function ProductCtrl(
         }else{
           activeQuotationListener = $rootScope.$on('activeQuotationAssigned', function(e){
             var zipcodeDeliveryId =  $rootScope.activeQuotation ? $rootScope.activeQuotation.ZipcodeDelivery : false;
-            
-            loadZipCodeDeliveryById(zipcodeDeliveryId);          
+
+            loadZipCodeDeliveryById(zipcodeDeliveryId);
             setUpDeliveries({
               productId: vm.product.ItemCode,
               activeStoreId: activeStoreId,
               zipcodeDeliveryId: zipcodeDeliveryId
-            });            
+            });
 
           });
-        }          
+        }
 
         return productService.addSeenTime(vm.product.ItemCode);
       })
@@ -169,11 +169,11 @@ function ProductCtrl(
 
     productService.delivery(options.productId, options.activeStoreId, options.zipcodeDeliveryId)
       .then(function(deliveries){
-        deliveries = $filter('orderBy')(deliveries, 'date');        
+        deliveries = $filter('orderBy')(deliveries, 'date');
 
         if($rootScope.activeQuotation){
           deliveries = deliveryService.substractDeliveriesStockByQuotationDetails(
-            $rootScope.activeQuotation.Details, 
+            $rootScope.activeQuotation.Details,
             deliveries,
             vm.product.id
           );
@@ -185,23 +185,23 @@ function ProductCtrl(
         vm.deliveriesGroups = $filter('orderBy')(vm.deliveriesGroups, 'date');
         console.log('deliveriesGroups', vm.deliveriesGroups);
         vm.available = deliveryService.getAvailableByDeliveries(deliveries);
-        
+
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
         }else{
           vm.productCart.quantity = 0;
         }
-        
+
         vm.isLoadingDeliveries = false;
         if(options.callback && _.isFunction(options.callback) ){
           options.callback();
         }
-        activeQuotationListener();  
+        activeQuotationListener();
       })
       .catch(function(err){
         console.log('err', err);
       })
-  } 
+  }
 
   function loadVariants(product){
     productService.loadVariants(product, $rootScope.activeStore)
@@ -297,6 +297,7 @@ function ProductCtrl(
       return;
     }
 
+    $rootScope.scrollTo('main');
     vm.isLoading = true;
     var productCartItems = cartService.getProductCartItems(
       vm.productCart.deliveryGroup,
@@ -309,7 +310,7 @@ function ProductCtrl(
       var cartItem = productCartItems[0];
       var params = cartService.buildAddProductToCartParams(vm.product.id, cartItem);
       params.zipcodeDeliveryId = vm.zipcodeDelivery.id;
-      quotationService.addProduct(vm.product.id, params);      
+      quotationService.addProduct(vm.product.id, params);
     }
     else if(productCartItems.length > 1){
       var multiParams = productCartItems.map(function(cartItem){
@@ -330,7 +331,7 @@ function ProductCtrl(
     var controller  = ZipcodeDialogController;
     $mdDialog.show({
       controller: [
-        '$scope', 
+        '$scope',
         '$mdDialog',
         '$rootScope',
         '$location',
@@ -363,7 +364,7 @@ function ProductCtrl(
           activeStoreId: activeStoreId,
           zipcodeDeliveryId: zipcodeDelivery.id,
           callback: callback
-        });        
+        });
 
       }else{
         if(zipcode){
@@ -376,7 +377,7 @@ function ProductCtrl(
     .catch(function(err){
       console.log('err', err);
     })
-  }  
+  }
 
   function resetProductCartQuantity(){
     vm.productCart = cartService.resetProductCartQuantity(vm.productCart);

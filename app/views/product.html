@@ -1,13 +1,13 @@
 <div class="breadcrumb">
   <div class="container container-xxlg">
     <p>
-      <a 
+      <a
         href="/">
         Inicio
       </a>
       <span ng-repeat="itemGroup in vm.breadcrumbItems track by $index" ng-show="itemGroup.length > 0">
-        > 
-          <a 
+        >
+          <a
             ng-repeat="item in itemGroup"
             ng-href="/category/{{item.Handle}}"
             class="breadcrumb-item"
@@ -33,17 +33,17 @@
     <!--END NAV-->
 
     <!--MAIN VIEW-->
-    <div 
-      class="product-view" 
+    <div
+      class="product-view"
       flex="75"
       flex-xs="100"
     >
       <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
 
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
-        <md-progress-circular 
-          md-mode="indeterminate" 
-          class="md-accent" 
+        <md-progress-circular
+          md-mode="indeterminate"
+          class="md-accent"
           md-diameter="150">
         </md-progress-circular>
       </div>
@@ -52,21 +52,21 @@
       <section ng-if="!vm.isLoading" class="product-view-content">
 
         <div layout="row" layout-wrap>
-          <div 
-            class="product-view-gallery-wrap" 
+          <div
+            class="product-view-gallery-wrap"
             flex="50"
             flex-sm="100"
             flex-xs="100">
             <!--<ng-include src="'views/partials/product-gallery.html'"></ng-include>-->
-            <product-gallery 
+            <product-gallery
               ng-if="vm.product"
               product="vm.product">
             </product-gallery>
           </div>
 
           <!--PRODUCT VIEW DATA-->
-          <div 
-            flex="50" 
+          <div
+            flex="50"
             flex-sm="100"
             flex-xs="100"
             class="product-view-data"
@@ -78,10 +78,15 @@
             <ng-include src="'views/partials/product-promotions.html'"></ng-include>
 
 
-            <div class="product-view-prices" layout="row" layout-align="space-between end">
-              <div flex="15">
-                <p 
-                  class="product-view-price-discount" 
+            <div
+              class="product-view-prices"
+              layout="row"
+              layout-wrap
+              layout-align="space-between end"
+            >
+              <div flex="15" flex-sm="100" flex-xs="100">
+                <p
+                  class="product-view-price-discount"
                   ng-if="vm.product.mainPromo">
                   - {{vm.mainPromo.discountPg1}}%
                 </p>
@@ -92,7 +97,7 @@
               </div>
 
               <!--ONLY IF ZIPCODE IS ASSIGNED-->
-              <div ng-show="vm.zipcodeDelivery" flex="15">
+              <div ng-show="vm.zipcodeDelivery" flex="15" flex-sm="50" flex-xs="50">
                 <div class="product-view-qty input-element">
                   <label>Piezas</label>
                   <select
@@ -103,7 +108,7 @@
                   </select>
                 </div>
               </div>
-              <div ng-show="vm.zipcodeDelivery" flex="30">
+              <div ng-show="vm.zipcodeDelivery" flex="30" flex-sm="50" flex-xs="50">
                 <div class="input-element select-element-wrapper">
                   <label>Entrega aproximada{{vm.selectedDelivery}}</label>
                   <select
@@ -115,11 +120,17 @@
                   </select>
                 </div>
               </div>
-              <!--END CONDITION-->
 
-              <h3 flex="25" class="product-view-price-hl product-view-price-main">
+              <h3
+                ng-show="vm.zipcodeDelivery"
+                flex="25"
+                flex-sm="100"
+                flex-xs="100"
+                class="product-view-price-hl product-view-price-main">
                 <strong>{{vm.product.Price * vm.productCart.quantity | currency:'$':0 }}</strong>
               </h3>
+              <!--END CONDITION-->
+
             </div>
 
             <a
@@ -142,7 +153,7 @@
 
 
             <p class="seen-number">
-              <strong class="small">visto {{vm.product.seenTimes}} 
+              <strong class="small">visto {{vm.product.seenTimes}}
                 <span ng-if="vm.product.seenTimes > 1">veces</span>
                 <span ng-if="vm.product.seenTimes <= 1">veces</span>
                hoy</strong>

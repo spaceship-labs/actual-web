@@ -3,18 +3,21 @@
   layout="row"
   layout-align="space-between center"
 >
-  <ul flex="75" flex-md="85" flex-sm="85">
+  <ul flex="75" flex-md="65" flex-sm="65">
     <li
       ng-repeat="method in paymentGroup.methods"
       ng-show="vm.isActiveMethod(method,vm.quotation)"
       layout="row"
+      layout-wrap
       layout-align="space-between center"
     >
       <div
         ng-attr-flex="{{method.cardsImages && '40' || '100' }}"
         ng-attr-flex-md="{{method.cardsImages && '50' || '100' }}"
         ng-attr-flex-md="{{method.cardsImages && '60' || '100' }}"
-         >
+        flex-sm="100"
+        flex-xs="100"
+      >
 
         <md-radio-button
           ng-click="vm.chooseMethod(method , paymentGroup.group)"
@@ -37,8 +40,8 @@
       <div
         ng-if="method.cardsImages"
         flex="60"
-        flex-md="55"
-        flex-sm="55"
+        flex-md="50"
+        flex-sm="50"
         class="bank-icons"
       >
         <img
@@ -69,7 +72,8 @@
   <div
     flex="20"
     flex-md="15"
-    flex-sm="15"
+    flex-sm="30"
+    flex-xs="30"
     class="method-block-prices"
     ng-show="!vm.areMethodsDisabled(paymentGroup.methods)"
   >

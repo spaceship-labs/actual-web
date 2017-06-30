@@ -48,8 +48,7 @@ function CheckoutPaymentsCtrl(
     isActiveGroup: checkoutService.isActivePaymentGroup,
     isActiveMethod: checkoutService.isActiveMethod,
     isMinimumPaid: checkoutService.isMinimumPaid,
-    intervalProgress: false,
-    customFullscreen: $mdMedia('xs') || $mdMedia('sm'),
+    intervalProgress: $mdMedia('xs') || $mdMedia('sm'),
     singlePayment: true,
     multiplePayment: false,
     isLoading: true,
@@ -379,7 +378,7 @@ function CheckoutPaymentsCtrl(
         console.log('paymentOpts after', paymentOpts);
       }
 
-      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
       $mdDialog.show({
         controller: [
           '$scope',

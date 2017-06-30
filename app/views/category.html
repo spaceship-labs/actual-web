@@ -9,9 +9,11 @@
   </div>
 </div>
 -->
-<a 
-  ng-click="vm.toggleSearchSidenav()" 
-  href="" 
+<a
+  ng-click="vm.toggleSearchSidenav()"
+  href=""
+  hide-sm
+  hide-xs
   class="filters-sidenav-trigger">
     Filtros
 </a>
@@ -19,20 +21,20 @@
 <div class="content-block listing-view">
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
     <!--START NAV-->
-    <aside flex="20">
+    <aside flex="20" hide-sm hide-xs>
       <sidebar-categories
         categories-tree="main.categoriesTree"
         selected-category-id="vm.category.id"
         active-store="main.activeStore">
       </sidebar-categories>
 
-      <ng-include src="'views/partials/search-filters.html'"></ng-include>  
-      
+      <ng-include src="'views/partials/search-filters.html'"></ng-include>
+
     </aside>
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
-    <div flex="75">
+    <div flex="75" flex-sm="100" flex-xs="100">
 
       <div
         ng-if="vm.isLoading"
@@ -47,10 +49,10 @@
       <div ng-if="!vm.isLoading" class="subs-container">
         <h2 class="listing-view-title">{{vm.category.Name}}</h2>
         <!--SUBCATEGORIES LIST LEVEL 2-->
-        <div 
-          ng-if="vm.category.Childs.length > 0 && vm.showLevel2" 
-          class="subs-container-list" 
-          layout="row" 
+        <div
+          ng-if="vm.category.Childs.length > 0 && vm.showLevel2"
+          class="subs-container-list"
+          layout="row"
           layout-wrap
         >
           <div
@@ -58,8 +60,10 @@
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}"
             ng-if="subcategory[main.activeStore.code] > 0"
             flex="33"
+            flex-sm="100"
+            flex-xs="100"
           >
-            <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />            
+            <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
         </div>
         <!--END SUBCATEGORIES LIST LEVEL 2-->
@@ -72,6 +76,8 @@
             ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}"
             ng-if="subcategory[main.activeStore.code] > 0"
             flex="33"
+            flex-sm="100"
+            flex-xs="100"
           >
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
@@ -83,7 +89,7 @@
 
           <ng-include src="'views/partials/search-options.html'"></ng-include>
 
-          <div 
+          <div
             ng-if="!vm.isLoadingProducts || vm.search.page > 1"
             class="results"
             infinite-scroll="vm.loadMore()"
@@ -105,6 +111,8 @@
             >
               <div
                 flex="33"
+                flex-sm="100"
+                flex-xs="100"
                 class="listing-product-wrap"
                 ng-repeat="product in vm.products track by product.ItemCode">
                 <listing-product product="product"></listing-product>

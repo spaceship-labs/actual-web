@@ -1,9 +1,9 @@
 <div id="header">
   <!--START TOP BAR-->
-  <div 
-    class="header-top-bar" 
-    fixed-element  
-    top="70" 
+  <div
+    class="header-top-bar"
+    fixed-element
+    top="70"
     ng-class="{'fixed-head': scrolled}">
     <div class="container" layout="row" layout-xs="column" layout-wrap layout-align="center center">
 
@@ -18,8 +18,8 @@
         </a>
       </div>
 
-      <div 
-        class="categories-btn-wrap" 
+      <div
+        class="categories-btn-wrap"
         flex-gt-xs="15"
         layout-align="center center"
       >
@@ -50,14 +50,23 @@
         <input type="submit" value="BUSCAR" class="searcher-btn">
       </form>
 
-      <div 
-        class="header-top-bar-menu" 
-        layout="row" 
+      <div
+        class="header-top-bar-menu"
+        layout="row"
         layout-align="center center"
         layout-align="center center"
         layout-align-xs="space-between center"
 
       >
+
+        <div flex-gt-xs="15" class="logo logo-mobile" layout-align="center center">
+          <a href="/" ng-switch on="main.siteTheme">
+            <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group">
+            <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group">
+            <img ng-switch-when="actual-kids" src="images/actual-kids-blanco.png" alt="Actual Group">
+            <img ng-switch-default src="images/actual-home-blanco.png" alt="Actual Group">
+          </a>
+        </div>
 
         <!--IF ACTIVE QUOTATION-->
         <a
@@ -105,8 +114,8 @@
             <i class="icon-login"></i>
             <span >Bienvenido <strong>{{main.user.FirstName}}</strong></span>
           </a>
-          <ng-include 
-            ng-if="main.isActiveProfileHeader" 
+          <ng-include
+            ng-if="main.isActiveProfileHeader"
             src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
@@ -128,11 +137,10 @@
 
 <md-sidenav md-component-id="left" class="md-sidenav-left movil">
 <aside flex-gt-sm="20" flex="100">
-      <sidebar-categories 
+      <sidebar-categories
         categories-tree="main.categoriesTree"
         active-store="main.activeStore"
       >
       </sidebar-categories>
     </aside>
 </md-sidenav>
-  
