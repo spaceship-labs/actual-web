@@ -8,9 +8,18 @@
           <img ng-switch-when="actual-kids" src="images/Logo-A-Kids.png" alt="Actual Group">
           <img ng-switch-default src="images/Logo-A-Home.png" alt="Actual Group">
         </a>
-        
+
       </div>
-      <nav flex-gt-sm="80" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false" class="nav-categories" >
+
+      <nav
+        ng-if="main.siteTheme !== 'actual-kids' "
+        flex-gt-sm="80"
+        flex="100"
+        layout="row"
+        layout-wrap
+        ng-mouseover="main.menuCategoriesOn = false"
+        class="nav-categories"
+      >
         <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-recamaras"></i>
           <span class="nav-categories-item-text" href="#">Recámaras</span>
@@ -35,12 +44,53 @@
           <i class="icon-decoracion"></i>
           <span class="nav-categories-item-text" href="#">Lamparas</span>
         </a>
-        <a href="/category/ofertas" flex flex-xs="25" class="nav-categories-item">
+        <a href="/ofertas" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-ofertas"></i>
-          <span class="nav-categories-item-text" href="#">ofertas</span>
+          <span class="nav-categories-item-text" href="#">Ofertas</span>
         </a>
 
       </nav>
+
+      <nav
+        ng-if="main.siteTheme === 'actual-kids' "
+        flex-gt-sm="80"
+        flex="100"
+        layout="row"
+        layout-wrap
+        ng-mouseover="main.menuCategoriesOn = false"
+        class="nav-categories"
+      >
+        <a href="/category/camas" flex flex-xs="25" class="nav-categories-item">
+          <i class="icon-recamaras"></i>
+          <span class="nav-categories-item-text" href="#">Camas</span>
+        </a>
+        <a href="/category/cunas" flex flex-xs="25" class="nav-categories-item">
+          <i class="icon-bebes nav-categories-item-add"></i>
+          <span class="nav-categories-item-text" href="#">Cunas</span>
+        </a>
+        <a href="/category/accesorios" flex flex-xs="25" class="nav-categories-item">
+          <i class="icon-ambientes"></i>
+          <span class="nav-categories-item-text" href="#">Accesorios</span>
+        </a>
+        <a href="/category/lamparas" flex flex-xs="25" class="nav-categories-item">
+          <i class="icon-decoracion"></i>
+          <span class="nav-categories-item-text" href="#">Lamparas</span>
+        </a>
+        <a href="/category/mesas" flex flex-xs="25" class="nav-categories-item">
+          <i class="icon-mesas"></i>
+          <span class="nav-categories-item-text" href="#">Mesas</span>
+        </a>
+        <a href="/category/comoda" flex flex-xs="25" class="nav-categories-item" >
+          <i class="icon-decoracion"></i>
+          <span class="nav-categories-item-text" href="#">Comodas</span>
+        </a>
+        <a href="/ofertas" flex flex-xs="25" class="nav-categories-item">
+          <i class="icon-ofertas"></i>
+          <span class="nav-categories-item-text" href="#">Ofertas</span>
+        </a>
+
+      </nav>
+
     </div>
 
     <div class="container container-xxlg absolute-menus" layout="row" >
