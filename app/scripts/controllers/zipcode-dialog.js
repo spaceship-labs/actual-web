@@ -4,6 +4,7 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, clien
   ctrl.editAddress = editAddress;
   ctrl.submit = submit;
   ctrl.toggleLoginModal = toggleLoginModal;
+  ctrl.addNewAddress = addNewAddress;
 
   function init(){
     if($rootScope.user){
@@ -20,6 +21,7 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, clien
   }
 
   function addNewAddress(){
+    console.log('addNewAddress');
     $mdDialog.hide();
     $location.path('/user/deliveries');
   }
@@ -42,12 +44,12 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, clien
       .catch(function(err){
         console.log('err', err);
         ctrl.isLoading = false;
-      }); 
+      });
   }
 
    function submit($form, zipcode){
     var _isValidZipcode = isValidZipcode(ctrl.zipcode);
-    
+
     if($form.$valid &&  _isValidZipcode){
       $mdDialog.hide(ctrl.zipcode);//
     }

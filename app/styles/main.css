@@ -728,7 +728,7 @@ select{
 .login-modal-header .error-msg{
   color: #C82828;
   font-weight: 700;
-  text-align: center;  
+  text-align: center;
 }
 
 
@@ -2268,7 +2268,7 @@ md-backdrop.md-sidenav-backdrop{
   transform: rotate(-90deg) translateY(-50%);
 
   margin: 0;
-  z-index: 9;  
+  z-index: 9;
 }
 .filters{
   color: #000;
@@ -3713,7 +3713,7 @@ md-backdrop.md-sidenav-backdrop{
   max-width: 80px;
 }
 .pay-method-wrap .method-block .cards-tooltip{
-  
+
 }
 
 .pay-method-wrap .method-block .input-element label{
@@ -3762,6 +3762,7 @@ md-backdrop.md-sidenav-backdrop{
   font-size: 18px;
   margin: 0;
 }
+.deposit-dialog .form-section-transfer{margin-top: 0}
 .deposit-dialog .payment-amount{font-size: 22px;}
 .deposit-dialog hr{
   height: 1px;
@@ -3818,7 +3819,7 @@ md-backdrop.md-sidenav-backdrop{
 .deposit-dialog .deposit-dialog-footer{
   background: #F8F8F8;
   padding: 20px 40px;
-  min-width: 800px;  
+  min-width: 800px;
 }
 .deposit-dialog .ammount-input .input-element{
   margin-right: 8px;
@@ -4209,7 +4210,7 @@ padding-left: 16px;
   width: 80%;
 }
 .terms-view a{
-  color: #000; 
+  color: #000;
   text-decoration: underline;
 }
 
@@ -4247,8 +4248,8 @@ padding-left: 16px;
   margin: 14px 0;
 }
 .orders-list .order-item-head{
-  background-color: #000000; 
-  margin-top: 0;  
+  background-color: #000000;
+  margin-top: 0;
   padding: 8px 10px;
 }
 .orders-list .order-item-head p{
@@ -4582,7 +4583,7 @@ padding-left: 16px;
   .products-list-slider .slick-prev{left: 0;}
   .products-list-slider .slick-next{right: 0;}
   listing-product .listing-product-gallery .slick-prev,
-  listing-product .listing-product-gallery .slick-next{  
+  listing-product .listing-product-gallery .slick-next{
     display: block!important;
   }
 
@@ -4681,7 +4682,7 @@ padding-left: 16px;
   #records-view,#profile-view,.print-btn,
   .records-view,
   #footer{display: none!important;}
-  
+
   .cash-report h1{font-size: 16px ;}
   .quotation-view.client-signature{  display:flex;}
   .quotation-view .company-data,.quotation-view .quotation-validity{display: block;}

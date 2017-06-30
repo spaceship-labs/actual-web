@@ -7,8 +7,8 @@
 
     /** @ngInject */
     function checkoutService(
-      $http, 
-      $location, 
+      $http,
+      $location,
       $q,
       $filter,
       api,
@@ -17,7 +17,7 @@
       quotationService
     ){
 
-     
+
       var service = {
         areMethodsDisabled: areMethodsDisabled,
         isActivePaymentGroup:isActivePaymentGroup,
@@ -49,7 +49,7 @@
           }
         }
         return false;
-      }   
+      }
 
       function areMethodsDisabled(methods, quotation){
         if(!quotation){
@@ -83,18 +83,14 @@
 
       function isActiveMethod(method, quotation){
         if(!quotation){
-          console.log("si no hay contizacion");
           return false;
         }
 
-        var remaining = method.total - quotation.ammountPaid;
+        var remaining = method.total - (quotation.ammountPaid || 0);
         remaining = commonService.roundCurrency(remaining);
         var min = method.min || 0;
-        //console.log('remaining', remaining);
-        //console.log('min', min);
 
         if(remaining === 0){
-          console.log("si quedan 0");
           return false;
         }
 
@@ -123,7 +119,7 @@
             $location.path('/checkout/client/' + quotationId);
           }
         }
-      }            
+      }
 
       return service;
 

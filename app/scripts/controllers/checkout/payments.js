@@ -94,7 +94,7 @@ function CheckoutPaymentsCtrl(
         ]);
       })
       .then(function(result){
-        var isValidStock = result[0]; 
+        var isValidStock = result[0];
 
         if( !isValidStock){
           $location.path('/quotations/edit/' + vm.quotation.id)
@@ -103,7 +103,7 @@ function CheckoutPaymentsCtrl(
 
         if(!vm.quotation.Details || vm.quotation.Details.length === 0){
           $location.path('/quotations/edit/' + vm.quotation.id);
-        }        
+        }
 
         if(!validateQuotationAddress(vm.quotation)){
           //$location.path('/quotations/edit/' + vm.quotation.id);
@@ -133,7 +133,7 @@ function CheckoutPaymentsCtrl(
       })
       .catch(function(err){
         console.log('err', err);
-        vm.isLoadingSapLogs = false;        
+        vm.isLoadingSapLogs = false;
       });
   }
 
@@ -154,20 +154,20 @@ function CheckoutPaymentsCtrl(
       .then(function(response){
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
-        
+
         //ewalletService.updateQuotationEwalletBalance(vm.quotation, vm.paymentMethodsGroups);
-      
+
         if(vm.quotation.Payments && vm.quotation.Payments.length > 0){
           vm.quotation = setQuotationTotalsByGroup(vm.quotation);
         }
-        deferred.resolve();        
+        deferred.resolve();
       })
       .catch(function(err){
         console.log('err', err);
         deferred.reject(err);
       });
 
-    return deferred.promise;    
+    return deferred.promise;
   }
 
 
@@ -187,7 +187,7 @@ function CheckoutPaymentsCtrl(
     var remaining = vm.quotation.total - vm.quotation.ammountPaid;
     vm.activeMethod.remaining = remaining;
     vm.activeMethod.maxAmmount = remaining;
-    
+
     if(method.type === EWALLET_TYPE || method.type === CLIENT_BALANCE_TYPE){
       var balance = paymentService.getMethodAvailableBalance(method, vm.quotation);
       console.log('balance', balance);
@@ -196,7 +196,7 @@ function CheckoutPaymentsCtrl(
         remaining = balance;
       }
     }
-    
+
     if(vm.activeMethod.maxAmmount < 0.01){
       dialogService.showDialog('Fondos insuficientes');
       return false;
@@ -205,7 +205,7 @@ function CheckoutPaymentsCtrl(
     if(vm.quotation.Client){
       if(vm.activeMethod.currency === 'usd' && vm.quotation.Client.Currency === 'MXP'){
         dialogService.showDialog('Pagos en dolares no disponibles para este cliente por configuración en SAP');
-        return false;      
+        return false;
       }
     }
 
@@ -242,13 +242,18 @@ function CheckoutPaymentsCtrl(
   function updateVMQuoatation(newQuotation){
     vm.quotation.ammountPaid = newQuotation.ammountPaid;
     vm.quotation.paymentGroup = newQuotation.paymentGroup;
-    //vm.quotation.Client = newQuotation.Client || vm.quotation.Client;            
+    //vm.quotation.Client = newQuotation.Client || vm.quotation.Client;
     vm.quotation = setQuotationTotalsByGroup(vm.quotation);
     delete vm.activeMethod;
   }
 
   function tokenizePaymentCard(payment){
     var deferred = $q.defer();
+
+    if(payment.type === 'transfer'){
+        deferred.resolve(false);
+        return deferred.promise;
+    }
 
     var onSuccess = function(token){
       console.log('token', token);
@@ -281,10 +286,9 @@ function CheckoutPaymentsCtrl(
 
     //delete payment.cardObject;
     console.log('tokenParams', tokenParams);
-
     Conekta.Token.create(tokenParams, onSuccess, onError);
 
-    return deferred.promise;    
+    return deferred.promise;
   }
 
   function addPayment(payment){
@@ -326,7 +330,7 @@ function CheckoutPaymentsCtrl(
             var callback = function(){
               payment.cardObject = cardObjectAux;
               console.log('payment to openTransactionDialog again', payment);
-              openTransactionDialog(selectedMethod, vm.quotation.total, payment);          
+              openTransactionDialog(selectedMethod, vm.quotation.total, payment);
             };
 
             dialogService.showDialog('Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg, callback);
@@ -350,7 +354,7 @@ function CheckoutPaymentsCtrl(
         vm.isLoadingPayments = false;
       });
   }
-  
+
 
   function openTransactionDialog(method, ammount, paymentDefaults) {
     var ev = null;
@@ -378,14 +382,14 @@ function CheckoutPaymentsCtrl(
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && vm.customFullscreen;
       $mdDialog.show({
         controller: [
-          '$scope', 
+          '$scope',
           '$mdDialog',
-          '$filter', 
+          '$filter',
           'formatService',
-          'commonService', 
+          'commonService',
           'ewalletService',
           'dialogService',
-          'payment', 
+          'payment',
           controller
         ],
         templateUrl: templateUrl,
@@ -403,7 +407,7 @@ function CheckoutPaymentsCtrl(
       })
       .catch(function(err){
         console.log('Pago no aplicado');
-        clearActiveMethod();        
+        clearActiveMethod();
       });
       /*
       , function() {
@@ -428,7 +432,7 @@ function CheckoutPaymentsCtrl(
       dialogService.showDialog('No hay artículos en esta cotización');
       return;
     }
-    
+
     vm.isLoadingProgress = true;
     vm.loadingEstimate = 0;
     var params = {

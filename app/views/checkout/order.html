@@ -32,7 +32,7 @@
           <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
             <strong>IMPRIMIR RECIBO</strong>
           </a>
-          
+
           <p ng-if="!vm.invoiceExists && !vm.showInvoiceErrorIfNeeded(vm.alegraLogs)">
             <strong>Generación/Lectura de factura en proceso</strong>
           </p>
@@ -47,7 +47,7 @@
       <p>Estimado <strong>{{vm.order.Client.CardName}}</strong></p>
       <p>Su compra ha sido procesada y en breve estará recibiendo su confirmación al correo electrónico <strong>{{vm.order.Address.E_Mail || vm.order.Client.E_Mail}}</strong>.</p>
       <br/>
-      
+
       <!--
       <p>
         <a class="refunds-link" ng-href="/refunds/payments/{{vm.order.id}}">Generar reembolsos</a>
@@ -116,9 +116,9 @@
             <div flex="20" class="order-item-data"><span>{{detailGroup.quantity}}</span></div>
             <div flex="20" class="order-item-data">
               <span>
-                {{detailGroup.shipDate | date:'d/MMM/yyyy'}}</span>  
-                <span 
-                  class="immediate-delivery-tag" 
+                {{detailGroup.shipDate | date:'d/MMM/yyyy'}}</span>
+                <span
+                  class="immediate-delivery-tag"
                   ng-if="detailGroup.immediateDelivery && !detailGroup.isSRService">
                   Entrega en tienda
                 </span>
@@ -182,11 +182,17 @@
             <span>{{ main.mapTerminalCode(payment.terminal) }}</span>
           </div>
           <div flex class="order-payment-item-data">
-            <span ng-if="payment.type !='cash-usd'">{{payment.ammount | currency}} MXN</span>
+            <!--<span ng-if="payment.type !='cash-usd'">{{payment.ammount | currency}} MXN</span>-->
+            <span ng-if="payment.type !='cash-usd'">{{vm.order.total | currency}} MXN</span>
             <span ng-if="payment.type =='cash-usd'">{{payment.ammount | currency}} USD.</span>
           </div>
         </div>
       </div>
+
+      <ng-include
+        ng-if="vm.order.isSpeiOrder"
+        src="'views/checkout/spei-card.html'">
+      </ng-include>
 
       <div class="order-payment-totals" layout="row" layout-align="space-between center">
         <div flex="60">
@@ -197,7 +203,7 @@
           <p><strong>DESCUENTOS COMPRA:</strong></p>
           <p><strong>TOTAL COMPRA:</strong></p>
           <p><strong>TOTAL PAGADO:</strong></p>
-          <p><strong>SALDO:</strong></p>
+          <!--<p><strong>SALDO:</strong></p>-->
 
           <br/>
           <p><strong>SALDO CLIENTE:</strong></p>
@@ -209,8 +215,9 @@
           <p ng-if="vm.order.discount <= 0"><strong>{{vm.order.discount | currency}} MXN</strong></p>
 
           <p><strong>{{vm.order.total | currency}} MXN</strong></p>
-          <p><strong>{{vm.order.ammountPaid | roundCurrency}} MXN</strong></p>
-          <p><strong>{{vm.calculateBalance( vm.order.ammountPaid, vm.order.total ) | currency }} MXN</strong></p>
+          <p><strong>{{vm.order.total | currency}} MXN</strong></p>
+          <!--<p><strong>{{vm.order.ammountPaid | roundCurrency}} MXN</strong></p>-->
+          <!--<p><strong>{{vm.calculateBalance( vm.order.ammountPaid, vm.order.total ) | currency }} MXN</strong></p>-->
 
           <br/>
           <p><strong>{{(vm.order.Client.Balance) | currency}}</strong></p>
@@ -299,10 +306,10 @@
             <strong>ENVIAR FACTURA</strong>
           </a>
 
-          <a 
-            href="#" 
+          <a
+            href="#"
             ng-if="vm.orderSapPending"
-            ng-click="vm.generateSapOrder()" 
+            ng-click="vm.generateSapOrder()"
             class="action-btn action-btn-save print-btn"
           >
             <strong>GENERAR PEDIDO EN SAP</strong>
@@ -320,8 +327,8 @@
 
   <hr/>
 
-  <section 
-    ng-show="vm.order.OrdersSapWeb && vm.order.OrdersSapWeb.length > 0" 
+  <section
+    ng-show="vm.order.OrdersSapWeb && vm.order.OrdersSapWeb.length > 0"
     class="sap-docs only-hide-print"
   >
     <h3><strong>Documentos SAP</strong></h3>

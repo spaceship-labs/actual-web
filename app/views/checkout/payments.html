@@ -2,16 +2,16 @@
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
-<div 
-  ng-show="vm.isLoadingProgress" 
+<div
+  ng-show="vm.isLoadingProgress"
   class="container container-xxlg loading-circle"
   layout="row"
   layout-align="center center">
   <div class="progress-bar">
     <p><strong>Procesando orden</strong></p>
-    <md-progress-linear 
+    <md-progress-linear
       class="md-accent"
-      md-mode="determinate" 
+      md-mode="determinate"
       value="{{vm.loadingEstimate}}">
     </md-progress-linear>
   </div>
@@ -43,10 +43,10 @@
     <h3><strong>1. Elige tu opción de pago</strong> Puedes aplicar múltiples pagos.</h3>
 
     <section layout="row" layout-wrap>
-      
+
       <div flex="75" flex-sm="100" flex-xs="100">
 
-        <md-radio-group 
+        <md-radio-group
           ng-if="!vm.isMinimumPaid(vm.quotation)"
           ng-model="vm.activeMethod"
         >
@@ -61,9 +61,9 @@
           </div>
 
         </md-radio-group>
-        
-        <div 
-          ng-show="vm.quotation.Payments && vm.quotation.Payments.length > 0" 
+
+        <div
+          ng-show="vm.quotation.Payments && vm.quotation.Payments.length > 0"
           class="second-step-payment"
         >
 
@@ -80,10 +80,10 @@
 
       </div>
 
-      <aside 
-        flex 
-        flex-sm="100" 
-        flex-xs="100" 
+      <aside
+        flex
+        flex-sm="100"
+        flex-xs="100"
         class="cart-aside"
       >
         <h1 class="cart-title"><i class="icon-carro"><span>{{vm.quotation.totalProducts}}</span></i> <strong>RESUMEN</strong></h1>
@@ -154,14 +154,14 @@
             ng-disabled="!vm.isMinimumPaid(vm.quotation)"
             ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid(vm.quotation) }">
 
-          <p 
+          <p
             ng-if="vm.isMinimumPaid(vm.quotation)"
             class="cart-summary-note"
           >
             *Hacer click para generar el folio de la venta.
           </p>
 
-          <p 
+          <p
             ng-if="!vm.isMinimumPaid(vm.quotation)"
             class="cart-summary-note"
           >

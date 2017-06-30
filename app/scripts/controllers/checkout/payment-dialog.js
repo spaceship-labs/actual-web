@@ -1,11 +1,11 @@
 function PaymentDialogController(
-  $scope, 
-  $mdDialog, 
+  $scope,
+  $mdDialog,
   $filter,
-  formatService, 
-  commonService, 
+  formatService,
+  commonService,
   ewalletService,
-  dialogService,  
+  dialogService,
   payment
 ) {
 
@@ -20,13 +20,13 @@ function PaymentDialogController(
   $scope.years = getYears();
 
   //ROUNDING
-  $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);     
-  $scope.payment.remaining = commonService.roundCurrency($scope.payment.remaining); 
+  $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);
+  $scope.payment.remaining = commonService.roundCurrency($scope.payment.remaining);
   if($scope.maxAmmount){
     $scope.maxAmmount = commonService.roundCurrency($scope.maxAmmount);
   }
   if($scope.payment.min){
-    $scope.payment.min = commonService.roundCurrency($scope.payment.min);      
+    $scope.payment.min = commonService.roundCurrency($scope.payment.min);
   }
 
   function getYears(){
@@ -86,10 +86,11 @@ function PaymentDialogController(
 
   $scope.save = function($form){
     if($form.$valid){
-      if($scope.payment.options.length > 0){
+
+      if($scope.payment.options.length > 0 && $scope.payment.type !== 'transfer'){
         $scope.terminal = getSelectedTerminal($scope.payment.card);
         $scope.payment.terminal = $scope.terminal.value;
-      }        
+      }
       //alert('cumple');
       console.log('$scope.payment save', $scope.payment);
       $mdDialog.hide($scope.payment);
