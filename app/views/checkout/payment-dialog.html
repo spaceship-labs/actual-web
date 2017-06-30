@@ -13,16 +13,16 @@
       <h2><strong>2. INGRESA LOS DATOS DE TU TARJETA DE DÉBITO O CRÉDITO</strong></h2>
       <hr>
       <div class="input-container" layout="row" layout-wrap flex="100">
-        <div flex="50" class="input-element">
+        <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
           <p>
-            <label><strong>NOMBRE DEL TARJETAHABIENTE</strong>*<small>(Como aparece en el plástico)</small>
+            <label><strong>NOMBRE DEL TARJETAHABIENTE</strong>*<small> (Como aparece en el plástico)</small>
             </label>
           </p>
           <div flex="95" class="input-element-inner">
             <input type="text" ng-model="payment.cardName" required>
           </div>
         </div>
-        <div flex class="input-element">
+        <div flex flex-sm="100" flex-xs="100" class="input-element">
           <p>
             <label><strong>TIPO DE TARJETA</strong>*</label>
           </p>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="input-container" layout="row" layout-wrap flex="100">
-        <div  flex="50" class="input-element">
+        <div  flex="50" flex-sm="100" flex-xs="100" class="input-element">
           <p>
             <label><strong>NÚMERO DE TARJETA</strong>*<small>(Ingresar sin espacios y sin guiones)</small></label>
           </p>
@@ -62,7 +62,7 @@
             />
           </div>
         </div>
-        <div class="input-element" flex="20">
+        <div class="input-element" flex="20" flex-sm="70" flex-xs="70">
           <p>
             <label><strong>FECHA DE EXPIRACIÓN</strong>*</label>
           </p>
@@ -118,11 +118,11 @@
             -->
           </div>
         </div>
-        <div class="input-element" flex>
+        <div class="input-element cvc-input" flex flex-sm="30" flex-xs="30">
           <p>
             <label><strong>CÓDIGO CVC</strong>*</label>
           </p>
-          <div flex="50" class="input-element-inner">
+          <div flex="50" flex-sm="100" flex-xs="100" class="input-element-inner">
             <input
               type="text"
               ng-model="payment.cardObject.cvc"
@@ -141,7 +141,7 @@
 
       </div>
       <div class="input-container" layout="row" layout-wrap flex="100">
-        <div class="input-element" flex="35">
+        <div class="input-element" flex="35" flex-sm="100" flex-xs="100">
           <p>
             <label><strong>PAÍS</strong>*</label>
           </p>
@@ -152,7 +152,7 @@
               required>
           </div>
         </div>
-        <div class="input-element" flex="35">
+        <div class="input-element" flex="35" flex-sm="65" flex-xs="65">
           <p>
             <label><strong>ESTADO</strong>*</label>
           </p>
@@ -163,7 +163,7 @@
               required>
           </div>
         </div>
-        <div class="input-element" flex="20">
+        <div class="input-element" flex="20" flex-sm="35" flex-xs="35">
           <p>
             <label><strong>CÓDIGO POSTAL</strong>*</label>
           </p>
@@ -181,7 +181,7 @@
         </div>
       </div>
       <div class="input-container" layout="row" layout-wrap flex="100">
-        <div class="input-element">
+        <div class="input-element" flex-sm="100" flex-xs="100">
           <p>
             <label><strong>CIUDAD</strong>*</label>
           </p>
@@ -192,7 +192,7 @@
               required>
           </div>
         </div>
-        <div flex="30" class="input-element">
+        <div flex="30" class="input-element" flex-sm="100" flex-xs="100">
           <p>
             <label><strong>COLONIA</strong>*</label>
           </p>
@@ -203,7 +203,7 @@
               required>
           </div>
         </div>
-        <div flex class="input-element" >
+        <div flex class="input-element" flex-sm="100" flex-xs="100" >
           <p>
             <label><strong>CALLE Y NÚMERO</strong>*</label>
           </p>
@@ -217,11 +217,12 @@
         </div>
       </div>
 
+      <p>Los datos de la dirección deben ser exactamente iguales al estado de cuenta de la tarjeta proporcionada</p>
     </div>
 
     <div class="deposit-dialog-footer">
-      <div class="input-container" layout="row" flex="100" layout-align="center center">
-        <div flex="30" class="input-element " >
+      <div class="input-container" layout="row" layout-wrap layout-align="center center">
+        <div flex="30" flex-sm="100" flex-xs="100" class="input-element " >
 
           <div
             class="ammount-input"
@@ -229,14 +230,18 @@
             layout-align="start center"
           >
             <div flex="60">
-              <h2 class="payment-amount"><strong>{{payment.ammount | currency}}</strong></h2>
+              <h2 class="payment-amount">
+                <strong>{{payment.ammount | currency}}</strong>
+                <span show-sm show-xs>MXN</span>
+              </h2>
+
             </div>
-            <div class="currency-label">
+            <div class="currency-label" hide-sm hide-xs>
               <span>MXN</span>
             </div>
           </div>
         </div>
-        <div flex="40" class="input-element ammount-description">
+        <div flex="40" flex-sm="100" flex-xs="100" class="input-element ammount-description">
           <p ng-show="payment.type === 'transfer'" ><strong>Transferencia de </strong>{{payment.ammount | roundCurrency}} MXN</p>
           <p ng-show="!payment.msi && payment.type !== 'transfer'" ><strong>1 Pago de </strong>{{payment.ammount | roundCurrency}} MXN</p>
           <p ng-show="payment.msi && payment.type !== 'transfer'"><strong>{{payment.msi}} Meses SIN INTERESES de </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
@@ -244,7 +249,7 @@
 
         </div>
         {{isValidPayment(paymentForm)}}
-        <div flex="30" class="input-element">
+        <div flex="30" flex-sm="100" flex-xs="100" class="input-element">
           <button
             type="submit"
             ng-class="{'action-btn-disabled': isValidPayment(paymentForm) }"

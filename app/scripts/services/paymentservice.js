@@ -42,7 +42,7 @@
       {
         card: {label:'American Express', value:'american-express'},
         paymentTypes: ['single-payment-terminal','3-msi','6-msi','9-msi','12-msi','18-msi'],
-        storesTypes:['studio'],
+        storesTypes:['home','studio'],
         terminal: {label:'American Express', value:'american-express'}
       },
       {

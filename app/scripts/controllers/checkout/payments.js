@@ -295,6 +295,7 @@ function CheckoutPaymentsCtrl(
         ( (payment.ammount > 0) && (vm.quotation.ammountPaid < vm.quotation.total) )
         || payment.ammount < 0
       ){
+      $rootScope.scrollTo('main');
       vm.isLoadingProgress = true;
       var cardObjectAux = _.clone(payment.cardObject);
       tokenizePaymentCard(payment)

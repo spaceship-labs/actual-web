@@ -3089,7 +3089,7 @@ md-backdrop.md-sidenav-backdrop{
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 
-.cart-view .cart-aside{
+|{
   margin-left: 20px;
 }
 .cart-view .cart-aside.cart-aside-fixed{
@@ -4619,6 +4619,13 @@ padding-left: 16px;
 @media(max-width:800px){
   .header-top-bar-menu{margin: 0 auto}
   .header-top-bar-menu .header-top-bar-menu-item-name{min-width: 75px;}
+
+  .login-modal-header{
+    left: 0;
+    top: 60px;
+    position: fixed;
+  }
+
   .quotation-view .quotation-data{padding: 0}
   .cart-view .cart-item{position: relative;}
   .cart-view .cart-item-data-inner{padding: 10px 0}
@@ -4725,7 +4732,7 @@ padding-left: 16px;
   .pay-method-wrap{padding: 1px 10px;}
   .pay-method-wrap .method-block .price-now.price-hl,
   .pay-method-wrap .method-block .price-now.price{
-    font-size: 22px;
+    font-size: 20px;
   }
   .pay-method-wrap .method-block{padding: 10px;}
   .pay-method-wrap .method-block ul li{padding: 10px 0;}
@@ -4739,6 +4746,36 @@ padding-left: 16px;
     max-width: 48px;
     margin: 0 1px;
   }
+
+  .cart-view .cart-aside{margin-left: 0}
+
+  .deposit-dialog .form-section{margin-top: 72px;}
+  .deposit-dialog .deposit-dialog-inner{
+    min-width: 0;
+    padding: 10px;
+  }
+  .deposit-dialog h2{font-size: 14px;}
+  .deposit-dialog .input-element{margin: 6px 0;}
+  .deposit-dialog .input-element p{
+    font-size: 10px;
+    margin: 4px 0;
+  }
+  .deposit-dialog .cvc-input{
+    position: relative;
+    top: 6px;
+  }
+  .deposit-dialog .deposit-dialog-footer{
+    min-width: 0;
+    padding: 10px;
+  }
+  .deposit-dialog .ammount-description{
+    padding-left: 0;
+    border: none;
+  }
+  .deposit-dialog .deposit-dialog-footer .input-element{
+    margin: 2px 0;
+  }
+  .deposit-dialog .action-btn-save{margin: 2px auto;}
 
   #footer .footer-menu-col h2{
     font-size: 14px;
