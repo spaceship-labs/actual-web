@@ -7,8 +7,8 @@
  * # productGallery
  */
 angular.module('dashexampleApp')
-  .directive('productGallery',['api','productService', '$q', '$timeout' ,
-  function (api, productService, $q, $timeout) {
+  .directive('productGallery',['api','productService', '$q', '$timeout', '$rootScope' ,
+  function (api, productService, $q, $timeout, $rootScope) {
     return {
       scope:{
         product:'='
@@ -16,6 +16,7 @@ angular.module('dashexampleApp')
       templateUrl: 'views/directives/product-gallery.html',
       restrict: 'E',
       link: function postLink(scope) {
+        scope.siteTheme = $rootScope.siteTheme;
         scope.galleryImages = [];
         scope.opts = {
           index:0,

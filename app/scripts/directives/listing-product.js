@@ -15,6 +15,7 @@ angular.module('dashexampleApp')
       templateUrl: 'views/directives/listing-product.html',
       restrict: 'E',
       link: function postLink(scope) {
+        scope.siteTheme = $rootScope.siteTheme;
         scope.areImagesLoaded = false;
         scope.images = [];
         scope.activeStore = $rootScope.activeStore;

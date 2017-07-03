@@ -27,7 +27,6 @@ function UsersUserInvoicesCtrl(
       {key:'createdAt', label:'Fecha del pedido', date:true},
       {key:'total', label: 'Monto', currency:true},
       {key:'total', label: 'Monto facturado', currency:true},
-      {key:'invoice.id', label: 'Folio factura'},
       {
         key:'Acciones',
         label:'Acceder',

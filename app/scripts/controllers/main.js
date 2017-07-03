@@ -72,6 +72,7 @@
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
     $rootScope.toggleLoginModal = toggleLoginModal;
+    $rootScope.siteTheme = vm.siteTheme;
     $scope.mainData;
 
     init();

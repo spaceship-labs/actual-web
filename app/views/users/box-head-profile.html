@@ -1,17 +1,29 @@
 <section class="box-head-profile">
 
-  <h1 class="principal-icon" layout="row" layout-align="center center" ><i class="icon-login"></i> </h1>
+  <h1 
+    class="principal-icon" 
+    layout="row" 
+    layout-align="center center"
+    hide-sm
+    hide-xs
+  >
+      <i class="icon-login"></i>
+  </h1>
 
-  <div layout="row" layout-xs="column" layout-align="center center" >
+  <div 
+    layout="row" 
+    layout-align="center center"
+    layout-row
+  >
     
     <div class="info-row center-content">
       <p><strong>{{vm.user.FirstName}} {{vm.user.LastName}}</strong></p>
       <p>NOMBRE(S)</p>
     </div>
-    <div class="info-row center-content">
+    <!--<div class="info-row center-content">
       <p><strong>13. 09. 85</strong></p>
       <p>CUMPLEAÑOS</p>
-    </div>
+    </div>-->
     <!--
     <div class="info-row center-content">
       <p><strong>$1,561.50 MXN</strong></p>

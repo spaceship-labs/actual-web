@@ -16,10 +16,14 @@
   </div>
 
   <div
-    ng-if="product.mainPromo && product.mainPromo.hasLM"
+    ng-show="product.slowMovement"
     class="slow-movement-sticker"
+    ng-switch on="siteTheme"
   >
-    <img src="images/boton-lm.png" alt="">
+      <img ng-switch-when="actual-home" src="images/slowmovement-home.png" alt="Lento movimiento">
+      <img ng-switch-when="actual-studio" src="images/slowmovement-studio.png" alt="Lento movimiento">
+      <img ng-switch-when="actual-kids" src="images/slowmovement-kids.png" alt="Lento movimiento">
+      <img ng-switch-default src="images/slowmovement.png" alt="Lento movimiento">
   </div>
 
   <div class="product-view-gallery">

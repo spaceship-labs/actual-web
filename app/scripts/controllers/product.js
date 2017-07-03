@@ -54,6 +54,7 @@ function ProductCtrl(
     init: init,
     isImmediateDelivery: isImmediateDelivery,
     isLoading: true,
+    siteTheme: $rootScope.siteTheme,
     resetProductCartQuantity: resetProductCartQuantity,
     trustAsHtml: trustAsHtml,
     sas: commonService.getSasHash(),

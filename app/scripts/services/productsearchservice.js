@@ -10,12 +10,11 @@
 
         var SORT_OPTIONS = [
             {
-                label:'Mi actual recomienda',
-                key: 'spotlight',
-                direction: 'ASC'
+                label:'Lo más vendido',
+                key: 'salesCount'
             },
             {
-                label:'Existencia',
+                label:'Disponibilidad',
                 key: 'stock',
                 direction: 'ASC'
             },
@@ -25,15 +24,9 @@
                 direction: 'ASC'
             },
             {
-                label:'Descuento',
-                key: 'Discount',
-                direction: 'ASC'
-            },
-
-            {
-                label:'Oportunidad',
+                label:'Promociones',
                 key: 'slowMovement',
-                direction: 'ASC'
+                direction: 'DESC'
             },
         ];
 

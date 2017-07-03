@@ -330,7 +330,11 @@ function CategoryCtrl(
 
     if(vm.activeSortOption.key  === sortOption.key){
       sortOption.direction = sortOption.direction === 'ASC' ? 'DESC' : 'ASC';
-    }else{
+    }
+    else if(sortOption.key === 'salesCount' || sortOption.key === 'slowMovement'){
+      sortOption.direction = 'DESC';
+    }
+    else{
       sortOption.direction = 'ASC';
     }
 
