@@ -4,30 +4,20 @@
 
 <section ng-show="!vm.isLoading" class="form-view cart-view checkout-view order-view container container-xxlg" >
 
-  <div class="steps-bar" layout="row">
-    <a flex="25" class="steps-bar-item">
-      <span><i class="icon-carro"></i> 1. Mi carrito</span>
-    </a>
-    <div flex="25" class="steps-bar-item">
-      <span><i class="icon-login"></i> 2. Datos personales</span>
-    </div>
-    <div flex="25" class="steps-bar-item">
-      <span><i class="icon-terminal"></i> 3. Método de pago</span>
-    </div>
-    <div flex="25" class="steps-bar-item steps-bar-item-active">
-      <span><i class="icon-oportunidades"></i> 4. Confirmación</span>
-    </div>
-  </div>
-
   <div class="checkout-view-inner">
 
-    <div class="checkout-title order-title" layout="row" layout-align="space-between center">
-        <h1 flex="40">
+    <div 
+      class="checkout-title order-title" 
+      layout="row"
+      layout-wrap
+      layout-align="space-between center"
+    >
+        <h1 flex="40" flex-sm="100" flex-xs="100">
           <strong>
             <span><i class="icon-checkmark"></i> NÚMERO DE ORDEN: <span class="order-folio">#{{vm.order.folio}}</span>
           </strong>
         </h1>
-        <div flex="50" class="order-title-extra">
+        <div flex="50" flex-sm="100" flex-xs="100" class="order-title-extra">
           <span class="order-date">{{vm.order.createdAt | date:'d/MMM/yyyy'}}</span>
           <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
             <strong>IMPRIMIR RECIBO</strong>
@@ -142,46 +132,52 @@
     <!--ORDER PAYMENTS-->
     <div class="order-block">
       <h3><strong><i class="icon-metodo-pago"></i> PAGOS</strong></h3>
-      <div class="order-block-inner">
-        <div class="order-table-header" layout="row" layout-align="space-between start">
-          <div flex class="pull-left"><strong>FORMA DE PAGO</strong></div>
-          <div flex><strong>FECHA</strong></div>
-          <div flex><strong>FOLIO</strong></div>
-          <div flex><strong>TIPO DE PAGO</strong></div>
-          <div flex><strong>TERMINAL</strong></div>
-          <div flex><strong>MONTO COBRADO</strong></div>
+      <div class="order-block-inner order-payments">
+        <div 
+          class="order-table-header" 
+          layout="row" 
+          layout-wrap
+          layout-align="space-between start"
+        >
+          <div flex flex-sm="100" flex-xs="100" class="pull-left"><strong>FORMA DE PAGO</strong></div>
+          <div flex flex-sm="100" flex-xs="100"><strong>FECHA</strong></div>
+          <div flex flex-sm="100" flex-xs="100"><strong>FOLIO</strong></div>
+          <div flex flex-sm="100" flex-xs="100"><strong>TIPO DE PAGO</strong></div>
+          <div flex flex-sm="100" flex-xs="100"><strong>TERMINAL</strong></div>
+          <div flex flex-sm="100" flex-xs="100"><strong>MONTO COBRADO</strong></div>
         </div>
 
         <div
           class="order-payment-item"
           layout="row"
+          layout-wrap
           layout-align="space-between center"
           ng-repeat="payment in vm.order.Payments"
         >
-          <div ng-if="payment.type == 'cash'" flex class="order-payment-item-data">
+          <div ng-if="payment.type == 'cash'" flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (MXN)</strong>
           </div>
-          <div ng-if="payment.type == 'cash-usd'" flex class="order-payment-item-data">
+          <div ng-if="payment.type == 'cash-usd'" flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (USD)</strong>
             <p class="small-note">Tipo de cambio: {{payment.exchangeRate | currency}} MXN</p>
           </div>
-          <div ng-if="payment.type !== 'cash' && payment.type !== 'cash-usd' " flex class="order-payment-item-data">
+          <div ng-if="payment.type !== 'cash' && payment.type !== 'cash-usd' " flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <span><i class="icon-terminal"></i></span> <strong>{{payment.name}}</strong>
           </div>
 
-          <div flex class="order-payment-item-data">
+          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <span>{{payment.createdAt | date:'d/MMM/yyyy'}}</span>
           </div>
-          <div flex class="order-payment-item-data">
+          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <span>#{{payment.folio}}</span>
           </div>
-          <div flex class="order-payment-item-data">
+          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <span>{{vm.getPaymentTypeString(payment)}}</span>
           </div>
-          <div flex class="order-payment-item-data">
+          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <span>{{ main.mapTerminalCode(payment.terminal) }}</span>
           </div>
-          <div flex class="order-payment-item-data">
+          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <!--<span ng-if="payment.type !='cash-usd'">{{payment.ammount | currency}} MXN</span>-->
             <span ng-if="payment.type !='cash-usd'">{{vm.order.total | currency}} MXN</span>
             <span ng-if="payment.type =='cash-usd'">{{payment.ammount | currency}} USD.</span>
@@ -195,10 +191,10 @@
       </ng-include>
 
       <div class="order-payment-totals" layout="row" layout-align="space-between center">
-        <div flex="60">
+        <div hide-sm hide-xs flex="60">
           <p class="order-payment-totals-note">* Todos los montos incluyen impuestos.</p>
         </div>
-        <div class="reduction" flex="20">
+        <div class="reduction" flex="20" flex-sm="100" flex-xs="100">
           <p><strong>SUBTOTAL COMPRA:</strong></p>
           <p><strong>DESCUENTOS COMPRA:</strong></p>
           <p><strong>TOTAL COMPRA:</strong></p>
@@ -208,7 +204,7 @@
           <br/>
           <p><strong>SALDO CLIENTE:</strong></p>
         </div>
-        <div class="price-reduction" flex="20">
+        <div class="price-reduction" flex="20" flex-sm="60" flex-xs="60">
           <p><strong>{{vm.order.subtotal | currency}} MXN</strong></p>
 
           <p ng-if="vm.order.discount > 0"><strong>-{{vm.order.discount | currency}} MXN</strong></p>
@@ -224,6 +220,7 @@
 
         </div>
       </div>
+      <p class="order-payment-totals-note" show-sm show-xs>* Todos los montos incluyen impuestos.</p>
 
     </div>
     <!--END ORDER PAYMENTS-->
@@ -289,13 +286,13 @@
     <!--ATENCION A CLIENTES-->
     <div class="order-block seller-block order-block-info">
       <h3><strong><i class="icon-vendedor"></i> ATENCIÓN A CLIENTES</strong></h3>
-      <div class="order-block-inner" layout="row" layout-align="space-between center">
-        <div flex="40">
+      <div class="order-block-inner" layout="row" layout-wrap layout-align="space-between center">
+        <div flex="40" flex-sm="100" flex-xs="100">
           <p><strong>Celular: </strong>(998) 195 8376</p>
           <p><strong>Celular: </strong>(998) 195 6839</p>
           <p><strong>Email:</strong> clientes@actualg.com</p>
         </div>
-        <div flex="20">
+        <div flex="20" flex-sm="100" flex-xs="100">
           <a href="#"  ng-click="vm.print()" class="action-btn action-btn-save print-btn">
             <strong>IMPRIMIR RECIBO</strong>
           </a>

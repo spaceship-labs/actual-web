@@ -4602,7 +4602,7 @@ padding-left: 16px;
 
 @media screen and (max-width: 960px ){
   .form-view h1{
-    font-size: 20px;
+    font-size: 20px!important;
     margin: 4px 0;
   }
   .form-view h1 i{
@@ -4617,6 +4617,30 @@ padding-left: 16px;
     max-width: 200px;
     margin: 0 auto;
   }
+
+  .order-view .order-payments{
+    display: flex;
+  }
+  .order-view .order-payments .order-table-header,
+  .order-view .order-payments .order-table-header .pull-left{
+    text-align: right!important;
+  }
+  .order-view .order-payment-item-data{
+    text-align: right!important;
+  }
+  .order-view .order-payments .order-table-header{
+    text-align: left;
+    line-height: 1.2;
+  }
+  .order-view .order-payment-item-data{
+    text-align: right!important;
+    font-size: 12px;
+    line-height: 1.2;
+    margin: 0;
+  }    
+  .order-view .order-payment-item-data i{display: none;}
+  .order-view .order-payment-totals{text-align: left;}
+  .order-view .order-payment-totals .price-reduction{text-align: right; }  
 
 }
 
@@ -4735,7 +4759,6 @@ padding-left: 16px;
   }
   .zipcode-dialog .zipcode-dialog-inner-large{min-width: 0;}
   .form-view h1 i{font-size: 22px}
-  .form-view h1{font-size: 16px;}
   .quotation-view{padding: 12px;}
   .quotation-view .cart-view{padding: 0}
   .quotation-view .quotation-data p{font-size: 12px;}
@@ -4839,8 +4862,25 @@ padding-left: 16px;
     font-size: 19px;    
   }
 
+  .checkout-title{padding: 4px 14px;}
+  .checkout-title p{margin: 4px 0;}
+  .order-view .order-text-block{
+    margin: 4px 0;
+    padding: 4px 12px;
+  }
+  .order-view .order-table-header{
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  .checkout-view h3{
+    font-size: 14px;
+    margin: 8px 0;
+  }
+
+
   #footer .footer-menu-col h2{
     font-size: 14px;
+    text-align: center;
     padding: 0;
   }
   #footer .footer-menu-col h2,
