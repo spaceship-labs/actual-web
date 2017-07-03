@@ -19,17 +19,29 @@ function UserProfileCtrl(
   clientService,
   authService, 
   localStorageService,
-  paymentService
+  userService,
+  dialogService
 ){
   var vm = this;
+  console.log('rootScope.user', $rootScope.user);
   angular.extend(vm,{
-    user: angular.copy($rootScope.user),
+    user: _.clone($rootScope.user),
     update: update,
     init: init,
     toggleEditMode: toggleEditMode
   });
 
   function init(){
+    vm.isLoading = true;
+    userService.getUserClient()
+      .then(function(client){
+        vm.client = client;
+        vm.isLoading = false;
+      })
+      .catch(function(err){
+        console.log('err', err);
+        vm.isLoading = false;
+      });
   }
 
   function toggleEditMode(){
@@ -42,20 +54,24 @@ function UserProfileCtrl(
 
   function update(form){
     if(form.$valid){
-      /*
-      showConfirm().then(function(ok) {
-        if (!ok) {return;}
-      */
       vm.isLoading = true;
-      var cardCode = vm.user.CardCode;
-      clientService.update(cardCode,vm.user).then(function(res){
+
+      userService.update(vm.client).then(function(res){
         vm.isLoading = false;
         commonService.showDialog('Datos actualizados');
-        if(res.data.id){
-          $rootScope.user = res.data;
+        if(res){
+          $rootScope.user = res.user;
           vm.user = $rootScope.user;
-          localStorageService.set('user',res.data);
+          vm.client = res.client;
+          localStorageService.set('user',res.user);
         }
+      })
+      .catch(function(err){
+        vm.isLoading = false;
+        console.log(err);
+        var error = err.data || err;
+        error = error ? error.toString() : '';
+        dialogService.showDialog('Hubo un error: ' + error );
       });
       //});
     }

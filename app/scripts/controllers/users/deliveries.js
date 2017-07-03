@@ -16,9 +16,9 @@ function UsersUserDeliveriesCtrl(
   $location, 
   $mdDialog, 
   dialogService,
-  userService,
   commonService,
   clientService,
+  userService,
   $timeout
 ){
   var vm = this;
@@ -41,7 +41,7 @@ function UsersUserDeliveriesCtrl(
 
   function loadAddresses(){
     vm.isLoading = true;
-    clientService.getContacts(vm.user.CardCode)
+    userService.getUserContacts()
       .then(function(res){
         console.log('res', res);
         vm.addresses = res;
@@ -67,7 +67,7 @@ function UsersUserDeliveriesCtrl(
   function createAddress(form){
     vm.isLoadingCreate = true;
     if(form.$valid){
-      clientService.createContact(vm.user.CardCode,vm.newAddress)
+      userService.createUserContact(vm.newAddress)
         .then(function(res){
           console.log('res', res);
           vm.isLoadingCreate = false;

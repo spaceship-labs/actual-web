@@ -4847,7 +4847,7 @@ padding-left: 16px;
   #my-profile .box-head-profile{
     margin-top: 4px;
   }
-  #profile-view{padding: 4px;}
+  #profile-view{padding: 4px 10px;}
   #my-profile .box-head-profile .info-row{margin-top: 0;}
   #my-profile .head-profile h1{font-size: 20px;}
   #my-profile .head-profile i{font-size: 24px;}

@@ -101,7 +101,8 @@ function RegisterCtrl(
 
 	function register(form){
 		console.log('register');
-		var clientCreated;
+		var createdClient;
+		var createdUser;
 
 		if(form.$valid){
 			vm.isLoading = true;
@@ -115,37 +116,40 @@ function RegisterCtrl(
 			clientService.create(vm.newClient)
 				.then(function(res){
 					console.log('res', res);
-					clientCreated = res;
+					res = res || {};
+					createdClient = res.client;
+					createdUser = res.user;
+
 					dialogService.showDialog('Usuario registrado con éxito');
 					vm.isLoading = false;
 					vm.registerDone = true;
 
 
 					var formData = {
-						email: vm.newClient.E_Mail,
-						password: vm.newClient.password
+						email: createdUser.email,
+						password: createdUser.password
 					};
 
 					var handleSignInError = function(err){
 						console.log('err', err);
 						dialogService.showDialog('Error al iniciar sesión');
-					}
+					};
 
 					authService.signIn(
 						formData, 
 						$rootScope.successAuthInCheckout, 
 						handleSignInError
-					)
+					);
 				})
 				.then(function(){
 
 						if($routeParams.quotation){
 							var quotationId = $routeParams.quotation;
 							var params = {
-								Client: clientCreated.id,
-							}
-							if(clientCreated.Contacts && clientCreated.Contacts.length > 0){
-								params.Address = clientCreated.Contacts[0].id
+								Client: createdClient.id,
+							};
+							if(createdClient.Contacts && createdClient.Contacts.length > 0){
+								params.Address = createdClient.Contacts[0].id;
 							}
 							return quotationService.update(quotationId, params);
 						}else{

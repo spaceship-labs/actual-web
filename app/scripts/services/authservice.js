@@ -13,7 +13,7 @@
       localStorageService, 
       api,
       jwtHelper,
-      clientService
+      userService
     ){
 
       var USER_ROLES = {
@@ -141,10 +141,10 @@
                 $location.path('/');
               });
             }else{
-              console.log('getUser');
-              clientService.getById(_user.id, {quickRead: true})
+              userService.getMyUser()
                 .then(function(res){
-                  _user = res.data;
+                  console.log('getUser', res);
+                  _user = res;
                   localStorageService.set('user', _user);
                   $rootScope.user = _user;
                 })
