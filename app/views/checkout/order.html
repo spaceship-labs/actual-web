@@ -1,4 +1,4 @@
-<div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
+<div ng-if="vm.isLoading" layout-fill layout="row"  layout-align="center center" class="loading-circle">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
@@ -275,8 +275,8 @@
     <div class="order-block delivery-block order-block-info">
       <h3><strong><i class="icon-envio"></i> ENVÍO</strong></h3>
       <div class="order-block-inner">
-        <div class="resp-delivery" layout="row" layout-xs="column">
-          <div flex>
+        <div class="resp-delivery" layout="row" layout-wrap>
+          <div flex flex-sm="100">
             <p><strong>Email: </strong>{{vm.order.E_Mail}}</p>
             <p><strong>Télefono: </strong>{{vm.order.Tel1}}</p>
             <p><strong>Celular: </strong>{{vm.order.Cellolar}}</p>
@@ -285,7 +285,7 @@
             <p><strong>No. interior: </strong>{{vm.order.U_Nointerior}}</p>
             <p><strong>Colonia: </strong>{{vm.order.U_Colonia}}</p>
           </div>
-          <div flex>
+          <div flex flex-sm="100">
             <p><strong>Municipio: </strong>{{vm.order.U_Mpio}}</p>
             <p><strong>Ciudad: </strong>{{vm.order.U_Ciudad}}</p>
             <p><strong>Estado: </strong>{{vm.order.U_Estado}}</p>

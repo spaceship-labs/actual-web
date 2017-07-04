@@ -190,9 +190,9 @@
         <div
           layout="row"
           layout-align="space-between center"
-          layout-xs="column"
+          layout-wrap
         >
-          <div flex="45">
+          <div flex="45" flex-xs="100">
             <a
               ng-if="vm.quotation.Details.length > 0"
               href="#"
@@ -201,7 +201,7 @@
               IMPRIMIR
             </a>
           </div>
-          <div flex="50">
+          <div flex="50" flex-xs="100">
             <a
               ng-if="vm.quotation.Details.length > 0"
               ng-click="vm.sendByEmail()"
