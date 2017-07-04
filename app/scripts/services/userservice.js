@@ -8,20 +8,20 @@
     /** @ngInject */
     function userService($http, $q, $rootScope, api){
       var service = {
-        getClients: getClients,
-        getBrokers: getBrokers,
-        getUser: getUser,
         getStores: getStores,
         getActiveStore: getActiveStore,
         getCashReport: getCashReport,
         getMyUser: getMyUser,
         getUserClient: getUserClient,        
+        getUserFiscalAddress: getUserFiscalAddress,
         update: update,
         sendPasswordRecovery: sendPasswordRecovery,
         resetPassword: resetPassword,
         register: register,
         getUserContacts: getUserContacts,
-        createUserContact: createUserContact
+        createUserContact: createUserContact,
+        updateUserContact: updateUserContact,
+        updateUserFiscalAddress: updateUserFiscalAddress
       };
 
       return service;
@@ -51,6 +51,12 @@
         });
       }
 
+      function updateUserContact(contactCode, params){
+        var url = '/me/client/contacts/'+contactCode;
+        return api.$http.put(url, params).then(function(res){
+          return res.data;
+        });
+      }
 
       function getUserContacts(params){
         var url = '/me/client/contacts';
@@ -59,11 +65,18 @@
         });
       }
 
-      function getClients(page, params){
-        var p      = page || 1;
-        var seller = $rootScope.user.SlpCode || 49;
-        var url    = '/client/findbyseller/' + seller;
-        return api.$http.post(url, params);
+      function getUserFiscalAddress(){
+        var url = '/me/client/fiscaladdress';
+        return api.$http.get(url).then(function(res){
+         return res.data;
+        });
+      }
+
+      function updateUserFiscalAddress(params){
+        var url = '/me/client/fiscaladdress';
+        return api.$http.put(url, params).then(function(res){
+         return res.data;
+        });
       }
 
       function getMyUser(){
@@ -71,11 +84,6 @@
         return api.$http.get(url).then(function(res){
           return res.data;
         });
-      }
-
-      function getUser(id, params){
-        var url = '/user/findbyid/' + id;
-        return api.$http.post(url, params);
       }
 
       function register(params){
@@ -86,16 +94,6 @@
       function update(params){
         var url = '/me/update';
         return api.$http.put(url, params).then(function(res){
-         return res.data;
-        });
-      }
-
-      function getBrokers(page, limit) {
-        var url      = '/user/brokers';
-        var params   = {};
-        params.page  = page  || 0;
-        params.limit = limit || 10;
-        return api.$http.get(url, params).then(function(res){
          return res.data;
         });
       }

@@ -24,7 +24,8 @@ function CheckoutClientCtrl(
   productService,
   quotationService,
   orderService,
-  dialogService
+  dialogService,
+  userService
 ){
   var vm = this;
   angular.extend(vm,{
@@ -59,13 +60,12 @@ function CheckoutClientCtrl(
         }
 
         if(vm.quotation.Client){
-          var params = {populate:true};
-          clientService.getById(vm.quotation.Client.id, params)
-            .then(function(res){
-              vm.client = res.data;
-              vm.isLoadingClient = false;
 
-              vm.contacts = vm.client.Contacts.map(function(contact){
+          userService.getUserContacts()
+            .then(function(res){
+              vm.isLoadingClient = false;
+              res = res || [];
+              vm.contacts = res.map(function(contact){
                 contact.completeAdrress = clientService.buildAddressStringByContact(contact);
                 return contact;
               });

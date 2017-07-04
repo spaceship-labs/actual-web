@@ -1,4 +1,4 @@
-function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, clientService) {
+function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userService) {
   var ctrl = this;
   ctrl.init = init;
   ctrl.editAddress = editAddress;
@@ -32,7 +32,7 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, clien
   }
 
   function loadClientAddresses(){
-    clientService.getContacts($rootScope.user.CardCode)
+    userService.getUserContacts()
       .then(function(res){
         ctrl.addresses = res;
         if(ctrl.addresses.length > 0){

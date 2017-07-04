@@ -226,21 +226,9 @@
           var quotation = res.data;
           if(quotation){
             setActiveQuotation(quotation.id);
-            /*
-            if(options.goToSearch){
-              $location.path('/').search({startQuotation:true});
-            }*/
-            if(options.createClient){
-              $location.path('/clients/create')
-                .search({
-                  checkoutProcess: quotation.id,
-                  startQuotation: true
-                });
-            }
-            else{
-              $location.path('/quotations/edit/'+quotation.id)
-                .search({startQuotation:true});
-            }
+
+            $location.path('/quotations/edit/'+quotation.id)
+              .search({startQuotation:true});
           }
         });
       }
@@ -275,7 +263,7 @@
             })
             .catch(function(err){
               console.log(err);
-            })
+            });
 
         }else{
 
@@ -284,10 +272,6 @@
             Details: [detail],
             ZipcodeDelivery: params.zipcodeDeliveryId
           };
-
-          if($rootScope.user){
-            quotationParams.Client = $rootScope.user.id;
-          }
 
           create(quotationParams).then(function(res){
             var quotation = res.data;
@@ -324,7 +308,6 @@
           //Crear cotizacion con producto agregado
           var quotationParams = {
             ZipcodeDelivery: options.zipcodeDeliveryId,
-            Client: $rootScope.user.id,
             Details: products.map(function(product){
               var detail = createDetailFromParams(product.id, product);
               return detail;

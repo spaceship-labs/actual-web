@@ -18,6 +18,8 @@
 
       <ng-include src="'views/users/box-head-profile.html'"></ng-include>
 
+      <ng-include src="'views/users/partials/invoice-form.html'"></ng-include>
+
       <div class="head-profile" layout="row"  layout-align="space-between center">
         <div layout="row" layout-align="center center">
             <i class="icon-login"></i>
@@ -41,8 +43,6 @@
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-sm="column" layout-align="center center" class="loading-circle">
         <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
       </div>
-
-      <ng-include src="'views/users/partials/invoice-form.html'"></ng-include>
 
       <!--END PROFILE EDIT-->
 

@@ -3094,7 +3094,7 @@ md-backdrop.md-sidenav-backdrop{
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 
-|{
+.cart-view .cart-aside{
   margin-left: 20px;
 }
 .cart-view .cart-aside.cart-aside-fixed{

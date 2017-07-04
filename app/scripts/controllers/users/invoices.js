@@ -15,7 +15,8 @@ function UsersUserInvoicesCtrl(
   orderService,
   commonService,
   clientService,
-  dialogService
+  dialogService,
+  userService
 ){
   var vm = this;
   angular.extend(vm,{
@@ -47,16 +48,15 @@ function UsersUserInvoicesCtrl(
 
   function loadFiscalAddress(){
     vm.isLoading = true;
-    clientService.getFiscalAddress(vm.user.CardCode)
+    userService.getUserFiscalAddress()
       .then(function(res){
         vm.fiscalAddress = res;
-        vm.fiscalAddress.LicTradNum = vm.user.LicTradNum;
         vm.isLoading = false;  
       })
       .catch(function(err){
         console.log('err',err);
         vm.isLoading = false;
-      })
+      });
   }
 
   function getStates(){
@@ -71,6 +71,7 @@ function UsersUserInvoicesCtrl(
   }
 
   function updateFiscalAddress(form){
+    $rootScope.scrollTo('main');
     vm.isLoading = true;
     var isValidEmail = commonService.isValidEmail(
       vm.fiscalAddress.U_Correos,
@@ -80,20 +81,17 @@ function UsersUserInvoicesCtrl(
       var params = _.clone(vm.fiscalAddress);
       params.LicTradNum = _.clone(vm.fiscalAddress.LicTradNum);
 
-      clientService.updateFiscalAddress(
-        params.id, 
-        vm.user.CardCode,
-        params
-      )
-      .then(function(results){
-        vm.isLoading = false;        
-        dialogService.showDialog('Datos guardados');
-      })
-      .catch(function(err){
-        vm.isLoading = false;
-        console.log(err);
-        dialogService.showDialog('Hubo un error al guardar datos de facturación: ' + (err.data || err));
-      });
+      userService.updateUserFiscalAddress(params)
+        .then(function(results){
+          vm.isLoading = false;        
+          dialogService.showDialog('Datos guardados');
+        })
+        .catch(function(err){
+          vm.isLoading = false;
+          console.log(err);
+          dialogService.showDialog('Hubo un error al guardar datos de facturación: ' + (err.data || err));
+        });
+  
     }else if(!isValidEmail){
       vm.isLoading = false;
       dialogService.showDialog('Email no valido');

@@ -89,7 +89,7 @@ function UsersUserDeliveriesCtrl(
   function updateAddress(form, address){
     vm.isLoadingEdit = true;
     if(form.$valid){
-      clientService.updateContact(address.CntctCode,vm.user.CardCode,address)
+      userService.updateUserContact(address.CntctCode,address)
         .then(function(res){
           console.log('res', res);
           vm.isLoadingEdit = false;

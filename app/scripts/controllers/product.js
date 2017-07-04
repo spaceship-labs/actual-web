@@ -33,7 +33,7 @@ function ProductCtrl(
   categoriesService,
   dialogService,
   breadcrumbService,
-  clientService
+  userService
 ) {
   var vm = this;
   var activeStoreId = localStorageService.get('activeStore');
@@ -319,7 +319,7 @@ function ProductCtrl(
       });
       var options = {
         zipcodeDeliveryId: vm.zipcodeDelivery.id
-      }
+      };
       quotationService.addMultipleProducts(multiParams, options);
     }
   }
@@ -336,7 +336,7 @@ function ProductCtrl(
         '$mdDialog',
         '$rootScope',
         '$location',
-        'clientService',
+        'userService',
         controller
       ],
       controllerAs: 'ctrl',
@@ -431,7 +431,7 @@ ProductCtrl.$inject = [
   'categoriesService',
   'dialogService',
   'breadcrumbService',
-  'clientService'
+  'userService'
 ];
 /*
 angular.element(document).ready(function() {
