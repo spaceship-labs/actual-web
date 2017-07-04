@@ -2789,7 +2789,7 @@ md-backdrop.md-sidenav-backdrop{
   #TABLE-LIST
 /*--------------*/
 .table-list-wrap{
-  margin: 30px 0;
+  margin: 12px 0;
 }
 .table-list-wrap-nomargin{
   margin: 10px 0;
@@ -3339,6 +3339,10 @@ md-backdrop.md-sidenav-backdrop{
   vertical-align: middle;
   position: relative;
   top: -2px;
+}
+.orderby-selectors .orderby-item-active{
+  background: #000;
+  color: #fff;
 }
 .orderby-selectors .orderby-item-active span{
   position: relative;
@@ -4426,14 +4430,15 @@ padding-left: 16px;
 .menu-profile li:hover{background: #E9E8E8}
 
 #my-profile .box-head-profile{margin-top: 30px}
+#my-profile .box-head-profile h1{margin:0;}
 #my-profile .box-head-profile .info-row{padding: 0 25px;margin-top: 20px;font-size: 15px}
 #my-profile .box-head-profile .info-row:nth-child(2){border-left: 1px solid black;/*border-right: 1px solid black*/}
 #my-profile .box-head-profile .info-row p, #my-profile .box-head-profile .info-row strong{margin: 0px}
 #my-profile .box-head-profile .info-row p{font-size: 12px;margin-top: 5px}
-#my-profile .principal-icon .icon-login{font-size: 100px}
+#my-profile .principal-icon .icon-login{font-size: 62px}
 
 #my-profile .head-profile i{font-size: 35px;}
-#my-profile .head-profile h1{font-weight: bold;font-size: 30px;margin-left: 5px}
+#my-profile .head-profile h1{font-weight: bold;font-size: 30px;margin: 10px 0;margin-left: 5px}
 #my-profile .head-profile i.icon-settings{font-size: 25px}
 #my-profile .head-profile a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
 #my-profile #profile-view{max-width: 900px;}
@@ -4618,6 +4623,8 @@ padding-left: 16px;
     margin: 0 auto;
   }
 
+  #my-profile .head-profile h1{font-size: 19px}
+
   .order-view .order-payments{
     display: flex;
   }
@@ -4632,6 +4639,16 @@ padding-left: 16px;
     text-align: left;
     line-height: 1.2;
   }
+  .order-view .order-table-header > div:first-child{
+    padding-left: 0;
+    text-align: left;
+  }
+
+  .order-view .order-item-data-qty{
+    padding-left: 0;
+    text-align: left;    
+  }
+
   .order-view .order-payment-item-data{
     text-align: right!important;
     font-size: 12px;
@@ -4748,6 +4765,7 @@ padding-left: 16px;
   .product-view-qty{margin:0}
   .product-view-price-main{margin-top: 10px;}
   .product-view-gallery-thumb-inner{min-height: 48px;}
+  .product-view-gallery-thumbs img{max-height: 48px;}
 
   md-dialog{
     min-width: 95%;
@@ -4771,6 +4789,8 @@ padding-left: 16px;
   .steps-bar{display: none;}
 
   #register{padding: 10px;}
+
+  .options-alert-inner{padding-top: 62px;}
 
   .checkout-view{padding: 10px;}
   .checkout-view-inner{

@@ -28,8 +28,7 @@ function OffersCtrl(
 
   function init(){
     vm.isLoading = true;
-    var activeStoreId = localStorageService.get('activeStore');
-    packageService.getPackagesByStore(activeStoreId)
+    packageService.getPackagesByCurrentStore()
       .then(function(res){
         vm.packages = res.data || [];
         vm.packages = vm.packages.map(function(p){

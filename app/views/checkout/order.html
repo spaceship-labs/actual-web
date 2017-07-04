@@ -51,7 +51,7 @@
       <h3><strong><i class="icon-checkout-ticket"></i> ARTÍCULOS ADQUIRIDOS</strong></h3>
       <div class="order-items order-block-inner">
 
-        <div class="order-table-header" layout="row" layout-align="space-between start">
+        <div hide-sm hide-xs class="order-table-header" layout="row" layout-align="space-between start">
           <div flex="35"></div>
           <div flex="20"><strong>CANTIDAD</strong></div>
           <div flex="20"><strong>ENTREGA APROXIMADA</strong></div>
@@ -64,8 +64,12 @@
         >
           <h3><strong>{{detailGroup.Product.Name}}</strong></h3>
 
-          <div layout="row" layout-align="space-between start">
-            <div flex="35" layout="row">
+          <div 
+            layout="row" 
+            layout-align="space-between start"
+            layout-wrap
+          >
+            <div flex="35" flex-sm="100" flex-xs="100" layout="row">
               <div class="order-item-img">
                 <img src="{{detailGroup.Product.icons[0].url}}" alt="">
               </div>
@@ -103,8 +107,27 @@
                 </ul>
               </div>
             </div>
-            <div flex="20" class="order-item-data"><span>{{detailGroup.quantity}}</span></div>
-            <div flex="20" class="order-item-data">
+
+            <div 
+              flex-sm="100"
+              flex-xs="100"
+              hide-gt-sm 
+              class="order-table-header" 
+              layout="row" 
+              layout-align="space-between start">
+              <div flex="20"><strong>CANTIDAD</strong></div>
+              <div flex="40"><strong>ENTREGA APROXIMADA</strong></div>
+              <div flex="40"><strong>PRECIO</strong></div>
+            </div>
+
+            <div 
+              flex="20" 
+              flex-sm="20" 
+              flex-xs="20" 
+              class="order-item-data order-item-data-qty">
+              <span>{{detailGroup.quantity}}</span>
+            </div>
+            <div flex="20" flex-sm="40" flex-xs="40" class="order-item-data">
               <span>
                 {{detailGroup.shipDate | date:'d/MMM/yyyy'}}</span>
                 <span
@@ -113,7 +136,7 @@
                   Entrega en tienda
                 </span>
             </div>
-            <div flex="20" class="order-item-data">
+            <div flex="20" flex-sm="40" flex-xs="40" class="order-item-data">
               <span>{{detailGroup.total | currency}} MXN</span>
             </div>
           </div>
@@ -305,7 +328,7 @@
 
           <a
             href="#"
-            ng-if="vm.orderSapPending"
+            ng-if="vm.orderSapPending && !vm.order.inSapWriteProgress"
             ng-click="vm.generateSapOrder()"
             class="action-btn action-btn-save print-btn"
           >
