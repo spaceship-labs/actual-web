@@ -124,7 +124,6 @@
       function runPolicies(){
         var _token = localStorageService.get('token') || false;
         var _user  = localStorageService.get('user')  || false;
-        console.log('_user', _user);
         var currentPath = $location.path();
         var privatePaths = [
           '/user/profile'

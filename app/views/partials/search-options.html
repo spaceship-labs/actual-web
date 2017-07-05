@@ -71,8 +71,9 @@
 </div>
 
 <div ng-if="vm.enableSortOptions" class="orderby-section">
-  <div layout="row" class="orderby-selectors">
+  <div layout="row" layout-wrap class="orderby-selectors">
     <a 
+      flex-xs="100"
       ng-repeat="sortOption in vm.sortOptions track by $index"
       ng-attr-flex="{{sortOption.key === 'spotlight' && '30' || '' }}"
       class="orderby-item" 

@@ -476,6 +476,7 @@ select{
   margin: 0 6px;
   vertical-align: middle;
 }
+.header-top-bar-menu .header-top-bar-menu-item i.icon-search{font-size: 24px;}
 .header-top-bar-menu .cart-active{
   color: #50C841!important;
   /*color: #fff!important;*/
@@ -2010,7 +2011,7 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .cart-view .cart-item-data .bottom-text{
   margin-bottom: 0;
   margin-right: 15px;
-  margin-top: 6px;
+  margin-top: 2px;
   font-size: 12px;
   text-align: right;
 }
@@ -4662,6 +4663,13 @@ padding-left: 16px;
   .order-view .order-payment-totals{text-align: left;}
   .order-view .order-payment-totals .price-reduction{text-align: right; }  
 
+
+  .orderby-selectors .orderby-item{
+    padding: 4px 6px;
+    font-size: 10px;
+    line-height: 1.1;
+  }
+  .orderby-selectors .orderby-item-active span{background-size: 26px;}
 }
 
 
@@ -4900,6 +4908,15 @@ padding-left: 16px;
     margin: 8px 0;
   }
 
+  .orderby-selectors .orderby-item{
+    font-size: 11px;
+    text-transform: none;
+    border:0;
+    border-left: 0!important;
+    border-bottom: 1px solid #b9b9b9;
+  }
+
+  .listing-view .results-block-header h3{font-size: 12px;}
 
   #footer .footer-menu-col h2{
     font-size: 14px;
