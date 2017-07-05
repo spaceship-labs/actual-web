@@ -18,7 +18,7 @@
           </strong>
         </h1>
         <div flex="50" flex-sm="100" flex-xs="100" class="order-title-extra">
-          <span class="order-date">{{vm.order.createdAt | date:'d/MMM/yyyy'}}</span>
+          <span class="order-date">{{vm.order.createdAt | date:'d/MMM/yyyy h:mm a' }}</span>
           <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
             <strong>IMPRIMIR RECIBO</strong>
           </a>
@@ -36,6 +36,7 @@
       <h3><strong>¡GRACIAS POR SU COMPRA!</strong></h3>
       <p>Estimado <strong>{{vm.order.Client.CardName}}</strong></p>
       <p>Su compra ha sido procesada y en breve estará recibiendo su confirmación al correo electrónico <strong>{{vm.order.Address.E_Mail || vm.order.Client.E_Mail}}</strong>.</p>
+      <p><strong>Estatus</strong>: {{vm.status}}</p>
       <br/>
 
       <!--

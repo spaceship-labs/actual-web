@@ -180,6 +180,7 @@ function QuotationsEditCtrl(
 
   function sendByEmail(){
     vm.isLoading = true;
+    $rootScope.scrollTo('main');
     quotationService.sendByEmail(vm.quotation.id)
     .then(function(res){
       vm.isLoading = false;

@@ -74,6 +74,7 @@ function CheckoutOrderCtrl(
 
     orderService.getById($routeParams.id).then(function(res){
       vm.order = res.data;
+      vm.status = orderService.getOrderStatusLabel(vm.order.status);
 
       if($location.search().orderCreated){
         showImmediateDeliveryDialog(vm.order);

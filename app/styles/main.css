@@ -3474,7 +3474,10 @@ md-backdrop.md-sidenav-backdrop{
 .checkout-title h1{
   font-size: 26px!important;
 }
-.checkout-title p{font-size: 12px;}
+.checkout-title p{
+  font-size: 12px;
+  margin: 4px 0;
+}
 
 .steps-bar{
   margin: 20px 0;

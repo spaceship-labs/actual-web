@@ -241,6 +241,7 @@
                 var html = '';
                 var id = 'id';
                 var icon = '<i class="icon-search"></i>';
+                console.log('column', column);
                 if(column.yesNo){
                   data = data ? 'Si' : 'No';
                 }

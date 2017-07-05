@@ -19,10 +19,27 @@
         getTotalsByUser: getTotalsByUser,
         getCountByUser: getCountByUser,
         formatAddress: formatAddress,
-        generateOrderSapById: generateOrderSapById
+        generateOrderSapById: generateOrderSapById,
+        getOrderStatusMapper: getOrderStatusMapper,
+        getOrderStatusLabel: getOrderStatusLabel
       };
 
       return service;
+
+      function getOrderStatusMapper(){
+        var statusMap = {
+          'pending': 'Pendiente',
+          'pending-sap': 'Pagado y procesando',
+          'completed': 'Pagado',
+          'pending-payment': 'Pendiente de pago'
+        };        
+        return statusMap;
+      }
+
+      function getOrderStatusLabel(status){
+        var statusMap = getOrderStatusMapper();
+        return statusMap[status] || status;
+      }
 
       function create(params){
         var url = '/order/create';

@@ -104,6 +104,7 @@
         <span class="immediate-delivery-label">Entrega en tienda</span>
       </p>
 
+      <!--
       <p class="bottom-text" ng-repeat="detail in detailGroup.details">
         <strong>Entrega aproximada:</strong>
         {{detail.shipDate | date: "d/MMM/yyyy"}}
@@ -116,6 +117,8 @@
         </span>
         | {{ vm.getWarehouseById(detail.shipCompanyFrom).WhsName }}  | Cantidad: {{detail.quantity}} | Valido: {{detail.validStock}}
       </p>
+      -->
+
       <p
         ng-if="
           vm.appliesForPackageOrPromotionDiscount(detailGroup) == 'packageDiscount'
