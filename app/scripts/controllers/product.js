@@ -65,9 +65,11 @@ function ProductCtrl(
 
   if($rootScope.activeStore){
     init($routeParams.id);
+    //init($routeParams.slug);    
   }else{
     mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
       init($routeParams.id);
+      //init($routeParams.slug);    
     });
   }
 
@@ -81,10 +83,11 @@ function ProductCtrl(
     vm.isLoading             = true;
     vm.isLoadingDeliveries   = true;
 
+    //productService.getBySlug(productSlug)
     productService.getById(productId)
       .then(function(res){
         var productFound = res.data.data;
-        if(!productFound || !productFound.ItemCode){
+        if(!productFound || !productFound.ItemCode || !res.data){
           dialogService.showDialog('No se encontro el articulo');
         }
 
@@ -101,7 +104,7 @@ function ProductCtrl(
         };
 
         if(reload){
-          $location.path('/' + productId, false)
+          $location.path('//' + productId, false)
             .search({variantReload:'true'});
           loadProductFilters(vm.product);
         }else{

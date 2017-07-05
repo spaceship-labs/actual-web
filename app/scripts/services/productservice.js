@@ -30,6 +30,7 @@
         getAllCategories: getAllCategories,
         getAllFilters: getAllFilters,
         getById: getById,
+        getBySlug: getBySlug,
         getCategories: getCategories,
         getCategoryById: getCategoryById,
         getCustomBrands: getCustomBrands,
@@ -47,7 +48,8 @@
         searchCategoryByFilters: searchCategoryByFilters,
         syncProductByItemcode: syncProductByItemcode,
         substractProductStockByQuotationDetails: substractProductStockByQuotationDetails,
-        delivery: delivery
+        delivery: delivery,
+        getProductUrl:getProductUrl
       };
 
       return service;
@@ -67,7 +69,12 @@
 
       function getById(id){
         var url = '/product/findbyid/' + id;
-        return api.$http.post(url);
+        return api.$http.get(url);
+      }
+
+      function getBySlug(slug){
+        var url = '/product/findbyslug/' + slug;
+        return api.$http.get(url);
       }
 
       function getCustomBrands(){
@@ -104,11 +111,21 @@
         return text.charAt(0).toUpperCase() + text.slice(1);
       }
 
+      function getProductUrl(product){
+        product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+        var _name = product.Name.replace(new RegExp(' ', 'g'), '-');
+        _name = _name.toLowerCase();
+        var slug = encodeURIComponent(_name);
+        var url = '/' + slug + '/' + product.ItemCode;
+        return url;
+      }
+
 
       function formatProduct(product, options){
         options = options || {};
-        product.Name = capitalizeFirstLetter(product.ItemName);
-        //product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+        //product.Name = capitalizeFirstLetter(product.ItemName);
+        product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+        product.url = getProductUrl(product);
         /*
         if( product.Name && isUpperCase(product.Name) ) {
           product.Name = capitalizeFirstLetter(product.ItemName);

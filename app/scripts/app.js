@@ -354,7 +354,8 @@ angular
         controller: 'RegisterCtrl',
         controllerAs: 'vm'
       })
-      .when('/:id', {
+      //.when('/:id', {
+      .when('/:slug/:id', {      
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',
         controllerAs: 'vm'

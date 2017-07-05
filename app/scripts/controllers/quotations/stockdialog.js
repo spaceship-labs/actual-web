@@ -18,7 +18,7 @@ function StockDialogController($scope, $mdDialog, $location, quotationService, v
     vm.removeDetailsGroup(detailGroup)
       .then(function(){
         vm.isLoading = true;
-        $location.path('/' + itemCode);
+        $location.path(detailGroup.Product.url);
       })
       .catch(function(err){
         console.log('err',err);
