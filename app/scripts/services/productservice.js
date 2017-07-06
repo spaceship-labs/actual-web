@@ -114,6 +114,7 @@
       function getProductUrl(product){
         product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
         var _name = product.Name.replace(new RegExp(' ', 'g'), '-');
+        _name = _name.replace(new RegExp('/', 'g'), '-');
         _name = _name.toLowerCase();
         var slug = encodeURIComponent(_name);
         var url = '/' + slug + '/' + product.ItemCode;
