@@ -10,6 +10,16 @@
 
   <h2><strong>Registrar una dirección de envío</strong></h2>
 
+  <div class="checkbox-client-type">
+    <md-checkbox
+      ng-click="vm.copyPersonalDataToNewAddress()"
+      ng-model="vm.copyingPersonalDataToContact"
+      aria-label="">
+      <strong>Los mismos que mis datos de envío</strong>
+    </md-checkbox>    
+  </div>
+
+
   <section class="form-section">
     <!--DATOS PERSONALES-->
     <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
@@ -57,6 +67,7 @@
               <input type="text" ng-model="vm.newAddress.E_Mail" required>
             </div>
           </div>
+          <!--
           <div flex flex-xs="100" class="input-element">
             <label>
               <strong>Confirmar Email<span class="hl-label">*</span></strong>
@@ -65,6 +76,7 @@
               <input type="text" ng-model="vm.newAddress._E_Mail" required>
             </div>
           </div>
+          -->
         </div>
 
       </div>

@@ -77,6 +77,7 @@ function ProductCtrl(
   //init($routeParams.id);
 
   function init(productId, reload){
+    $rootScope.scrollTo('main');
     console.log('start loading product', new Date());
     vm.filters               = [];
     vm.activeVariants        = {};

@@ -23,12 +23,20 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userS
   function addNewAddress(){
     console.log('addNewAddress');
     $mdDialog.hide();
-    $location.path('/user/deliveries');
+    var currentPath = $location.path();
+    $location.path('/user/deliveries')
+      .search({
+        returnTo: currentPath
+      });
   }
 
   function editAddress(){
     $mdDialog.hide();
-    $location.path('/user/deliveries');
+    var currentPath = $location.path();
+    $location.path('/user/deliveries')
+      .search({
+        returnTo: currentPath
+      });
   }
 
   function loadClientAddresses(){
