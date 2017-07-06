@@ -33,7 +33,8 @@ function ProductCtrl(
   categoriesService,
   dialogService,
   breadcrumbService,
-  userService
+  userService,
+  metaTagsService
 ) {
   var vm = this;
   var activeStoreId = localStorageService.get('activeStore');
@@ -95,6 +96,13 @@ function ProductCtrl(
       })
       .then(function(fProduct){
         vm.product = fProduct;
+
+        var metaTags = {
+          title: $rootScope.siteConstants.publicName + ' | ' + vm.product.Name
+        };
+        metaTagsService.setMetaTags(metaTags);
+
+
         vm.mainPromo = vm.product.mainPromo;
         vm.lowestCategory = categoriesService.getLowestCategory(vm.product.Categories);
         vm.breadcrumbItems = breadcrumbService.buildProductBreadcrumb(vm.product.Categories);
@@ -434,7 +442,8 @@ ProductCtrl.$inject = [
   'categoriesService',
   'dialogService',
   'breadcrumbService',
-  'userService'
+  'userService',
+  'metaTagsService'
 ];
 /*
 angular.element(document).ready(function() {

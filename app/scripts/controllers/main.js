@@ -33,6 +33,7 @@
     dialogService,
     deliveryService,
     commonService,
+    metaTagsService,
     ENV,
     SITE
   ){
@@ -73,12 +74,19 @@
     $rootScope.loadActiveQuotation = loadActiveQuotation;
     $rootScope.toggleLoginModal = toggleLoginModal;
     $rootScope.siteTheme = vm.siteTheme;
+    $rootScope.siteConstants = vm.siteConstants;
     $scope.mainData;
+
+    metaTagsService.setMetaTags();
+    vm.metatags = $rootScope.metatags;
+
+    $rootScope.$on('metatagsChanged',function(ev, metatags){
+      vm.metatags = metatags;
+    });
 
     init();
 
     function init(){
-      console.log('vm.site', vm.site);
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
       vm.activeStoreId = localStorageService.get('activeStore');
@@ -87,6 +95,7 @@
         vm.searchingItemCode = true;
       }
 
+      
       loadMainData();
       loadSiteInfo();
 
@@ -545,6 +554,7 @@
     'dialogService',
     'deliveryService',
     'commonService',
+    'metaTagsService',
     'ENV',
     'SITE'
   ];

@@ -14,9 +14,11 @@ function CategoryCtrl(
   $routeParams, 
   $mdSidenav, 
   $timeout,
+  $rootScope,
   categoriesService, 
   productService,
-  productSearchService
+  productSearchService,
+  metaTagsService
 ){
   var vm     = this;
 
@@ -72,6 +74,12 @@ function CategoryCtrl(
     vm.isLoading = true;
     categoriesService.getCategoryByHandle($routeParams.category).then(function(res){
       vm.category = res.data;
+
+      var metaTags = {
+        title: $rootScope.siteConstants.publicName + ' | ' + vm.category.Name
+      };
+      metaTagsService.setMetaTags(metaTags);
+
 
       if(vm.category && vm.category.Childs.length === 0){
         vm.enableSortOptions = true;
@@ -354,7 +362,9 @@ CategoryCtrl.$inject = [
   '$routeParams',
   '$mdSidenav',
   '$timeout',
+  '$rootScope',
   'categoriesService',
   'productService',
-  'productSearchService'
+  'productSearchService',
+  'metaTagsService'
 ];

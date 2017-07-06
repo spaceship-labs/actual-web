@@ -16,7 +16,8 @@ function HomeCtrl(
   $rootScope,
   api, 
   dialogService,
-  siteService
+  siteService,
+  metaTagsService
 ){
   var vm = this;
   var mainDataListener = function(){};
@@ -27,6 +28,8 @@ function HomeCtrl(
   });
 
   function init(){
+    metaTagsService.setMetaTags({});
+
     setCategoryStockProperty();
     if($location.search().startQuotation){
       //dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización');
@@ -69,5 +72,6 @@ HomeCtrl.$inject = [
   '$rootScope',
   'api',
   'dialogService',
-  'siteService'
+  'siteService',
+  'metaTagsService'
 ];

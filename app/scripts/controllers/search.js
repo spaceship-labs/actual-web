@@ -20,7 +20,8 @@ function SearchCtrl(
   $mdSidenav,
   productService, 
   dialogService,
-  productSearchService
+  productSearchService,
+  metaTagsService
 ){
   var vm = this;
 
@@ -62,6 +63,13 @@ function SearchCtrl(
   }  
 
   function init(){
+
+    var metaTags = {
+      title: $rootScope.siteConstants.publicName + ' | ' + 'Búsqueda'
+    };
+    metaTagsService.setMetaTags(metaTags);
+
+
     var keywords = [''];
     var activeSortOptionKey = 'DiscountPrice';
     vm.activeSortOption = _.findWhere(vm.sortOptions,{key: activeSortOptionKey});
@@ -394,5 +402,6 @@ SearchCtrl.$inject = [
   '$mdSidenav',
   'productService',
   'dialogService',
-  'productSearchService'
+  'productSearchService',
+  'metaTagsService'
 ];

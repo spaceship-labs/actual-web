@@ -1,15 +1,50 @@
 <!doctype html>
-<html>
+<html  ng-app="dashexampleApp" ng-controller="MainCtrl as main">
   <head>
     <meta charset="utf-8">
-    <title>Actual</title>
+    <title ng-bind="main.metatags.title">Actual | Más de 25 años de experiencia en muebles e interiorismo.</title>
 
     <base href="/" />
     <meta name="fragment" content="!">
 
-    <meta name="description" content="">
+    <meta name="description" content="Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.">
     <meta name="viewport" content="width=device-width, user-scalable=yes">
     <meta name="google-site-verification" content="Al9YYcB_iYqFkycbTwFq7qbbms-sH4H66zDtwyz97fU" />
+    
+
+    <link itemprop="url" href="https://actualstudio.com">
+    <meta itemtype="logo" content="Logo-A-Home.png">
+
+    <meta
+      name="description"
+      ng-attr-content="{{ main.metatags.description }}"
+      content="Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas." >
+    <meta
+      name="keywords"
+      ng-attr-content="{{ main.metatags.keywords }}" >
+    <meta
+      property="fb:app_id"
+      content="1630031427237305" >
+    <meta
+      property="og:url"
+      ng-attr-content="{{ main.metatags.fb_url }}"
+      content="https://actualstudio.com" >
+    <meta
+      property="og:title"
+      ng-attr-content="{{ main.metatags.fb_title }}"
+      content="Actual | Más de 25 años de experiencia en muebles e interiorismo." >
+    <meta
+      property="og:image"
+      ng-attr-content="{{ main.metatags.fb_image }}"
+      content="https://actualstudio.com/images/Logo-A-Studio.png"  >
+    <meta
+      property="og:description"
+      ng-attr-content="{{ main.metatags.fb_description }}"
+      content="Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas." >
+    <meta
+      property="og:site_name"
+      content="ActualGroup" >
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -43,7 +78,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
   </head>
-  <body ng-cloak ng-class="main.siteTheme" ng-app="dashexampleApp" ng-controller="MainCtrl as main">
+  <body ng-cloak ng-class="main.siteTheme">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -194,6 +229,8 @@
         <script src="scripts/services/cartservice.js"></script>
         <script src="scripts/services/deliveryservice.js"></script>
         <script src="scripts/services/commonservice.js"></script>
+        <script src="scripts/services/metatagsservice.js"></script>
+        <script src="scripts/services/htmltoplaintext.js"></script>
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/services/productservice.js"></script>
         <script src="scripts/services/userservice.js"></script>
