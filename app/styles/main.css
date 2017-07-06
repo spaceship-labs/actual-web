@@ -48,6 +48,7 @@ md-tooltip .md-content {
 }
 md-tooltip .md-content ul{
   padding-left: 0;
+  margin: 0;
 }
 md-dialog-content{padding: 20px 10px;}
 md-dialog-content h1{font-size: 24px;}
@@ -3637,7 +3638,7 @@ md-backdrop.md-sidenav-backdrop{
 }
 .pay-method-wrap .method-block ul li{
   border-bottom: 1px solid #d2d2d2;
-  padding: 12px 10px;
+  padding: 4px 10px;
 }
 .pay-method-wrap .method-block ul li md-radio-button{
   display: inline-block;
@@ -3725,6 +3726,9 @@ md-backdrop.md-sidenav-backdrop{
 }
 .pay-method-wrap .method-block .bank-icons .card{
   max-width: 80px;
+}
+.pay-method-wrap .method-block .bank-icons .more-cards-btn{
+  cursor: pointer;
 }
 .pay-method-wrap .method-block .cards-tooltip{
 
@@ -3826,9 +3830,9 @@ md-backdrop.md-sidenav-backdrop{
   margin: 6px 0 0;
   max-width: 300px;
 }
-.deposit-dialog .input-element p{margin: 15px 0;}
+.deposit-dialog .input-element p{margin: 8px 0 4px;}
 .deposit-dialog .input-element .select-element{margin: 0;}
-
+.deposit-dialog .bottom-note{margin: 6px 0;}
 
 .deposit-dialog .deposit-dialog-footer{
   background: #F8F8F8;

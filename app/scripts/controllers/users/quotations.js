@@ -18,6 +18,7 @@ function UsersUserQuotationsCtrl(
   angular.extend(vm,{
     user: angular.copy($rootScope.user),
     apiResourceQuotations: quotationService.getList,    
+    defaultSort: [1, "desc"], //created at    
     columnsQuotations: [
       {key: 'folio', label:'Folio'},
       {key:'createdAt', label:'Fecha' ,date:true},

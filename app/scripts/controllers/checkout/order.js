@@ -144,6 +144,7 @@ function CheckoutOrderCtrl(
   function generateSapOrder(){
     if(vm.orderSapPending){
       vm.isLoading = true;
+      $rootScope.scrollTo('main');
       orderService.generateOrderSapById(vm.order.id)
         .then(function(res){
           dialogService.showDialog('Pedido creado en SAP');

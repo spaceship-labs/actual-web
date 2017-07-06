@@ -10,7 +10,15 @@
   >
 
     <div ng-if="payment.type !== 'transfer'" class="deposit-dialog-inner">
-      <h2><strong>2. INGRESA LOS DATOS DE TU TARJETA DE DÉBITO O CRÉDITO</strong></h2>
+
+      <h2 ng-show="payment.type === 'debit-card'">
+        <strong>2. INGRESA LOS DATOS DE TU TARJETA DE DÉBITO</strong>
+      </h2>
+      <h2 ng-show="payment.type !== 'debit-card'">
+        <strong>2. INGRESA LOS DATOS DE TU TARJETA DE CRÉDITO</strong>
+      </h2>
+
+
       <hr>
       <div class="input-container" layout="row" layout-wrap flex="100">
         <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
@@ -217,7 +225,7 @@
         </div>
       </div>
 
-      <p>Los datos de la dirección deben ser exactamente iguales al estado de cuenta de la tarjeta proporcionada</p>
+      <p class="bottom-note">Los datos de la dirección deben ser exactamente iguales al estado de cuenta de la tarjeta proporcionada</p>
     </div>
 
     <div class="deposit-dialog-footer">

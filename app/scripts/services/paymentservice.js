@@ -41,112 +41,119 @@
     var paymentsOptions = [
       {
         card: {label:'American Express', value:'american-express'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi','9-msi','12-msi'],
         storesTypes:['home','studio'],
         terminal: {label:'American Express', value:'american-express'}
       },
       {
         card:{label:'Banamex', value:'banamex'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['credit-card','debit-card','3-msi','6-msi','9-msi','12-msi'],
         storesTypes:['home','studio'],
         terminal: {label:'Banamex', value:'banamex'}
       },
       {
         card:{label:'Santander', value:'santander'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['credit-card', 'debit-card','3-msi','6-msi','9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Santander', value:'santander'}
       },
       {
         card:{label:'Bancomer', value:'bancomer'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi','9-msi','12-msi','18-msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi','9-msi','12-msi'],
         storesTypes:['home','studio'],
         terminal: {label:'Bancomer', value:'bancomer'}
       },
       {
         card:{label:'Banorte', value:'banorte'},
-        paymentTypes: ['single-payment-terminal'],
+        paymentTypes: ['credit-card'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banamex', value:'banamex'}
       },
       {
         card:{label:'Banorte', value:'banorte'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi','18.msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
       {
+        card: {label:'HSBC', value:'hsbc'},
+        paymentTypes: ['credit-card','debit-card','3-msi','6-msi', '9-msi','12-msi'],
+        storesTypes:['home','studio','proyectos'],
+        terminal: {label:'Banorte', value:'banorte'}
+      },
+
+      {
         card:{label:'IXE', value:'ixe'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
       {
         card:{label:'ScotiaBank', value:'scotiabank'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banamex', value:'banamex'}
       },
       {
         card:{label:'Inbursa', value:'inbursa'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card', 'debit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banamex', value:'banamex'}
       },
       {
         card:{label:'Afirme', value:'afirme'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banamex', value:'banamex'}
-      },
-      {
-        card:{label:'Afirme', value:'afirme'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
-        storesTypes:['home', 'studio'],
-        terminal: {label:'Banorte', value:'banorte'}
       },
       {
         card:{label:'Banbajio', value:'banbajio'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
       {
         card:{label:'Banjercito', value:'banjercito'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
       {
         card:{label:'Bancamifel', value:'bancamifel'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
       {
         card:{label:'Itaucard', value:'itaucard'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
       {
         card:{label:'Liverpool Premium Card', value:'liverpool-premium-card'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
       {
         card:{label:'Banregio', value:'banregio'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
       {
         card:{label:'Banco Ahorro Famsa', value:'banco-ahorro-famsa'},
-        paymentTypes: ['single-payment-terminal','3-msi','6-msi', '9-msi','12-msi','18.msi'],
+        paymentTypes: ['credit-card','3-msi','6-msi', '9-msi','12-msi'],
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
+      {
+        card: {label:'Otra', value:'other'},
+        paymentTypes: ['credit-card'],
+        storesTypes:['home','studio'],
+        terminal: {label:'American Express', value:'american-express'}
+      },      
     ];
 
 

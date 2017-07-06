@@ -57,7 +57,8 @@ function CheckoutPaymentsCtrl(
     sapLogs: [],
     paymentMethodsGroups: [],
     CLIENT_BALANCE_TYPE: paymentService.clientBalanceType,
-    roundCurrency: commonService.roundCurrency
+    roundCurrency: commonService.roundCurrency,
+    showCardsDialog: showCardsDialog
   });
 
   var EWALLET_TYPE = ewalletService.ewalletType;
@@ -327,6 +328,11 @@ function CheckoutPaymentsCtrl(
             }
             errMsg = errMsg ? errMsg.toString() : '';
 
+            var conektaOrderMsg = getMessageFromConektaOrderError(err);
+            if(conektaOrderMsg){
+              errMsg = conektaOrderMsg;
+            }
+
             var callback = function(){
               payment.cardObject = cardObjectAux;
               console.log('payment to openTransactionDialog again', payment);
@@ -339,6 +345,16 @@ function CheckoutPaymentsCtrl(
           vm.isLoadingProgress = false;
         });
     }
+  }
+
+  function getMessageFromConektaOrderError(err){
+    var msg = false;
+    if(err.data){
+      if(err.data.details && err.data.details.length > 0){
+        msg = (err.data.details[0] || {}).message;
+      }
+    }
+    return msg;
   }
 
   function loadPayments(){
@@ -451,6 +467,12 @@ function CheckoutPaymentsCtrl(
         vm.loadingEstimate = 0;
       }
     },1000);
+  }
+
+  function showCardsDialog(method){
+    var cards = method.cards || [];
+    var msg = 'Bancos participantes: ' + cards.join(', ');
+    dialogService.showDialog(msg);
   }
 
   $scope.$on('$destroy', function(){

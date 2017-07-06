@@ -55,15 +55,16 @@
             ng-if="method.moreCards"
             src="images/mas-bancos.png"
             alt="Más bancos"
-            class="card"
+            ng-click="vm.showCardsDialog(method)"
+            class="card more-cards-btn"
           >
-          <md-tooltip class="banks-tooltip">
+          <!--<md-tooltip class="banks-tooltip">
             <ul>
               <li ng-repeat="card in method.cards track by $index">
                 {{card}}
               </li>
             </ul>
-          </md-tooltip>
+          </md-tooltip>-->
         </span>
       </div>
     </li>

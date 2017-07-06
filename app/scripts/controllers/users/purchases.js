@@ -15,9 +15,11 @@ function UsersUserPurchasesCtrl(
   orderService
 ){
   var vm = this;
+
   angular.extend(vm,{
     user: angular.copy($rootScope.user),
     apiResourceOrders: orderService.getList,    
+    defaultSort: [1, "desc"], //created at
     columnsOrders: [
       {key: 'folio', label:'Folio'},
       {key:'createdAt', label:'Fecha' ,date:true},
