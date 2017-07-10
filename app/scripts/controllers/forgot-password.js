@@ -21,8 +21,8 @@ function ForgotPasswordCtrl(
 
   function sendPasswordRecovery(form){
 		if(form.$valid && vm.email){
-			vm.isLoading = true;
-	  	userService.sendPasswordRecovery(vm.email)
+			vm.isLoading = true
+;	  	userService.sendPasswordRecovery(vm.email)
 	  		.then(function(res){
 	  			vm.isLoading = false;
           if(res.data.success){
@@ -36,7 +36,8 @@ function ForgotPasswordCtrl(
 	  		})
 	  		.catch(function(err){
           vm.isLoading = false;
-          vm.message = 'Hubo un error, intenta de nuevo';
+          var errMsg = err.data || err;
+          vm.message = 'Hubo un error, intenta de nuevo. ' + errMsg;
           dialogService.showDialog(vm.message);	  			
 	  		});
 		}else{

@@ -177,7 +177,7 @@
             "
           >
             <div
-              ng-if="!hideProductDescription"
+              ng-show="!hideProductDescription"
               flex="100"
               class="desc-head-item"
               ng-class="{'desc-head-item-on' : !vm.toggleProductDescription }"
@@ -193,7 +193,7 @@
             </div>
           </div>
           <div class="desc-cont">
-            <article ng-if="!vm.toggleProductDescription">
+            <article ng-show="!vm.toggleProductDescription">
               <div ng-if="vm.product.Description">
                 <div ng-bind-html="vm.trustAsHtml(vm.product.Description)"></div>
               </div>

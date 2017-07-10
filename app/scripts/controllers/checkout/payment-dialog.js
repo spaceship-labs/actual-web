@@ -13,6 +13,7 @@ function PaymentDialogController(
 
   console.log('payment in dialog', payment);
   $scope.payment = payment;
+  $scope.payment.cardCountry = $scope.payment.cardCountry || 'Mexico';
   $scope.payment.cardObject = $scope.payment.cardObject || {};
   $scope.needsVerification = payment.needsVerification;
   $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;

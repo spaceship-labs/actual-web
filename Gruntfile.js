@@ -527,6 +527,7 @@ module.exports = function (grunt) {
           SITE: {
             name: 'actual-home',
             publicName:'Actual Home',
+            baseUrl: 'https://actualhome.com',            
             fb_url: 'https://www.facebook.com/ActualHomeMx',
             instagram_url: 'https://www.instagram.com/actual_studio/',
             foursquare_url: 'https://es.foursquare.com/p/actual-home/90458136',
@@ -544,6 +545,7 @@ module.exports = function (grunt) {
           SITE: {
             name: 'actual-studio',
             publicName: 'Actual Studio',
+            baseUrl: 'https://actualstudio.com',            
             fb_url: 'https://www.facebook.com/actualstudioo',
             instagram_url: 'https://www.instagram.com/actual_studio/',
             foursquare_url: 'https://es.foursquare.com/p/actual-studio/87584627',
@@ -561,6 +563,7 @@ module.exports = function (grunt) {
           SITE: {
             name: 'actual-kids',
             publicName: 'Actual Kids',
+            baseUrl: 'https://actualkids.com',
             fb_url:'https://www.facebook.com/ActualKids',
             instagram_url: 'https://www.instagram.com/actual_studio/',
             foursquare_url: 'https://es.foursquare.com/p/actual-studio/87584627',

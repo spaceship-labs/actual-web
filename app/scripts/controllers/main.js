@@ -75,6 +75,7 @@
     $rootScope.toggleLoginModal = toggleLoginModal;
     $rootScope.siteTheme = vm.siteTheme;
     $rootScope.siteConstants = vm.siteConstants;
+    console.log('vm.siteConstants', vm.siteConstants);
     $scope.mainData;
 
     metaTagsService.setMetaTags();
