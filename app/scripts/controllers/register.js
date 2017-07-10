@@ -127,7 +127,7 @@ function RegisterCtrl(
 
 					var formData = {
 						email: createdUser.email,
-						password: createdUser.password
+						password: vm.newClient.password
 					};
 
 					var handleSignInError = function(err){
@@ -167,6 +167,11 @@ function RegisterCtrl(
 				.catch(function(err){
 					vm.isLoading = false;
 					var errMsg = err.data || err;
+
+					if(typeof errMsg !== 'string'){
+						errMsg = JSON.stringify(errMsg);
+					}
+
 					console.log('err', err);
 					dialogService.showDialog('Hubo un error, revisa tus datos ' + errMsg);
 				});
