@@ -8,7 +8,8 @@
       create: create,
       find: find,
       send: send,
-      getInvoiceLogs: getInvoiceLogs
+      getInvoiceLogs: getInvoiceLogs,
+      sendFiscalData: sendFiscalData
     };
 
     function create(orderID) {
@@ -30,6 +31,19 @@
     function send(orderID) {
       var url = '/invoice/send/';
       var params = { order: orderID };
+      return api.$http.post(url, params).then(function(res) {
+        return res.data;
+      });
+    }
+
+    function sendFiscalData(email, name, form) {
+      var params = {
+        email: email,
+        name: name,
+        form: form
+      };
+
+      var url = '/sendfiscaldata';
       return api.$http.post(url, params).then(function(res) {
         return res.data;
       });

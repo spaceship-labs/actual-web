@@ -354,6 +354,11 @@ angular
         controller: 'RegisterCtrl',
         controllerAs: 'vm'
       })
+      .when('/facturacion', {
+        templateUrl: 'views/invoicing.html',
+        controller: 'InvoicingCtrl',
+        controllerAs: 'vm'
+      })      
       //.when('/:id', {
       .when('/:slug/:id', {      
         templateUrl: 'views/product.html',

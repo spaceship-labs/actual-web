@@ -4282,6 +4282,12 @@ padding-left: 16px;
 }
 
 
+/*-------------------/
+  #INVOICING-VIEW
+/*------------------*/
+.invoicing-view .select-element-wrapper{margin-top: 16px;}
+
+
 /*--------------/#FOOTER/*-------------*/
 #footer{min-height: 83px !important;}
 #footer .footer-menu{background: #F8F8F8;padding: 30px  0;}
