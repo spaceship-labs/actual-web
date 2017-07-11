@@ -1,0 +1,102 @@
+<section class="form-view">
+
+	<div class="container container-lg">
+
+    <div ng-if="vm.isLoading" layout-fill layout="row"  layout-align="center center" class="loading-circle">
+      <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+    </div>
+
+		<section ng-if="!vm.isLoading && vm.sentData">
+			<h1>Gracias, tu mensaje se ha enviado correctamente</h1>
+		</section>
+
+    <form
+    	ng-if="!vm.isLoading && !vm.sentData"
+    	name="contactForm"
+    	ng-submit="vm.sendContact(contactForm)"
+    	>
+
+
+			<h1><i class="icon-login"></i> Conáctanos</h1>
+			<hr>
+
+      <div class="input-container">
+        <div class="input-element">
+          <p><label><strong>Nombre*</strong></label></p>
+          <div class="input-element-inner">
+            <input
+              type="text"
+              ng-model="vm.form.name"
+              required>
+          </div>
+        </div>
+      </div>
+
+			<div class="input-container">
+        <div class="input-element">
+          <p><label><strong>Email *</strong></label></p>
+          <div class="input-element-inner">
+            <input
+              type="text"
+              ng-model="vm.form.email"
+              required>
+          </div>
+        </div>
+      </div>
+
+			<div class="input-container">
+        <div class="input-element">
+          <p><label><strong>Confirmar email</strong></label></p>
+          <div class="input-element-inner">
+            <input
+              type="email"
+              ng-model="vm.form.e_mail"
+              ng-pattern="vm.form.email"
+              required>
+          </div>
+        </div>
+      </div>
+
+			<div class="input-container">
+        <div class="input-element">
+          <p><label><strong>Télefono (opcional)</strong></label></p>
+          <div class="input-element-inner">
+            <input
+              type="text"
+              ng-model="vm.form.phone"
+              >
+          </div>
+        </div>
+      </div>
+
+			<div class="input-container">
+        <div class="input-element textarea-element">
+          <p><label><strong>Tu mensaje</strong></label></p>
+          <div class="input-element-inner">
+            <textarea 
+              ng-model="vm.form.message"
+              name="" 
+              id="" 
+              cols="30" 
+              rows="5"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+      <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
+        <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
+        <button
+          type="submit"
+          flex="50"
+          class="form-view-btn form-view-btn-primary">
+          Enviar
+        </button>
+      </div>
+
+
+    </form>
+
+	</div>
+
+</section>

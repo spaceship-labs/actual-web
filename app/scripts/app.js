@@ -360,6 +360,11 @@ angular
         controllerAs: 'vm'
       })      
       //.when('/:id', {
+      .when('/contactanos', {
+        templateUrl: 'views/contactus.html',
+        controller: 'ContactusCtrl',
+        controllerAs: 'vm'
+      })
       .when('/:slug/:id', {      
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',

@@ -4231,6 +4231,14 @@ padding-left: 16px;
   color: #000;
   text-decoration: underline;
 }
+.terms-view .verified-logos{
+  text-align: center;
+}
+.terms-view .verified-logos img{
+  max-width: 15%;
+  margin: 0 4px;
+  display: inline-block;
+}
 
 /*-------------------/
   #PAYMENT-METHODS-TABLES

@@ -421,6 +421,19 @@
       return false;
     }
 
+    function sendContact(email, name, form) {
+      var params = {
+        email: email,
+        name: name,
+        form: form
+      };
+
+      var url = '/sendcontact';
+      return api.$http.post(url, params).then(function(res) {
+        return res.data;
+      });
+    }    
+
     function hasEmailValidDomain(email){
       var excludedDomains = [
         'actualdecoracion.com',
@@ -468,7 +481,8 @@
       mapTerminalCode: mapTerminalCode,
       roundIntegerCurrency: roundIntegerCurrency,
       roundCurrency: roundCurrency,
-      showDialog: showDialog
+      showDialog: showDialog,
+      sendContact: sendContact
     };
 
     return service;
