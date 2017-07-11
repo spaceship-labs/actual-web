@@ -38,6 +38,7 @@ function CheckoutClientCtrl(
     $location.search({});
     vm.isLoading = true;
     vm.isLoadingClient = true;
+    vm.isLoadingContacts = true;
 
     quotationService.getById($routeParams.id)
       .then(function(res){
@@ -61,9 +62,10 @@ function CheckoutClientCtrl(
 
         if(vm.quotation.Client){
 
+          vm.isLoadingContacts = true;
           userService.getUserContacts()
             .then(function(res){
-              vm.isLoadingClient = false;
+              vm.isLoadingContacts = false;
               res = res || [];
               vm.contacts = res.map(function(contact){
                 contact.completeAdrress = clientService.buildAddressStringByContact(contact);
@@ -74,7 +76,7 @@ function CheckoutClientCtrl(
               }
             })
             .catch(function(err){
-              vm.isLoadingClient = false;
+              vm.isLoadingContacts = false;
               var error = err.data || err;
               console.log('err', err);
               error = error ? error.toString() : '';

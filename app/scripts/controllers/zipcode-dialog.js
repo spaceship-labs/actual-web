@@ -7,11 +7,13 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userS
   ctrl.addNewAddress = addNewAddress;
 
   function init(){
+    /*
     if($rootScope.user){
       ctrl.isLoading = true;
       ctrl.user = $rootScope.user;
       loadClientAddresses();
     }
+    */
   }
 
   function toggleLoginModal(){
