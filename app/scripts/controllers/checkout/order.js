@@ -49,7 +49,9 @@ function CheckoutOrderCtrl(
     invoiceLogLoadCounter: 0,
     invoiceLogLoadLimit: 5,    
     calculateBalance: orderService.calculateBalance,
-    generateSapOrder: generateSapOrder
+    generateSapOrder: generateSapOrder,
+    user: $rootScope.user,
+    isUserAdmin: authService.isUserAdmin($rootScope.user)
   });
 
   function showImmediateDeliveryDialog(order){

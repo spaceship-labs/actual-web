@@ -317,19 +317,33 @@
           <p><strong>Email:</strong> clientes@actualg.com</p>
         </div>
         <div flex="20" flex-sm="100" flex-xs="100">
-          <a href="#"  ng-click="vm.print()" class="action-btn action-btn-save print-btn">
+          <a 
+            href="#"  
+            ng-click="vm.print()" 
+            class="action-btn action-btn-save print-btn"
+          >
             <strong>IMPRIMIR RECIBO</strong>
           </a>
-          <a href="#" ng-if="!vm.invoiceExists" ng-click="vm.generateInvoice()" class="action-btn action-btn-save print-btn">
+          <a 
+            href="#" 
+            ng-if="!vm.invoiceExists && vm.isUserAdmin" 
+            ng-click="vm.generateInvoice()" 
+            class="action-btn action-btn-save print-btn"
+          >
             <strong>GENERAR FACTURA</strong>
           </a>
-          <a href="#" ng-if="vm.invoiceExists" ng-click="vm.sendInvoice()" class="action-btn action-btn-save print-btn">
+          <a 
+            href="#" 
+            ng-if="vm.invoiceExists && vm.isUserAdmin"
+            ng-click="vm.sendInvoice()" 
+            class="action-btn action-btn-save print-btn"
+          >
             <strong>ENVIAR FACTURA</strong>
           </a>
 
           <a
             href="#"
-            ng-if="vm.orderSapPending && !vm.order.inSapWriteProgress"
+            ng-if="vm.orderSapPending && !vm.order.inSapWriteProgress && vm.isUserAdmin"
             ng-click="vm.generateSapOrder()"
             class="action-btn action-btn-save print-btn"
           >
@@ -369,7 +383,11 @@
     </ul>
   </section>
 
-  <ng-include class="only-hide-print" src="'views/checkout/sap-connection-logs.html'"></ng-include>
-  <ng-include class="only-hide-print" src="'views/checkout/alegra-connection-logs.html'"></ng-include>
+  <ng-include 
+    ng-show="vm.isUserAdmin"
+    class="only-hide-print" src="'views/checkout/sap-connection-logs.html'"></ng-include>
+  <ng-include 
+    ng-show="vm.isUserAdmin"
+    class="only-hide-print" src="'views/checkout/alegra-connection-logs.html'"></ng-include>
 
 </section>

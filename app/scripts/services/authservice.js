@@ -30,6 +30,7 @@
         logout: logout,
         dennyAccessBroker: dennyAccessBroker,
         dennyAccessStoreManager: dennyAccessStoreManager,
+        isUserAdmin: isUserAdmin,
         isBroker: isBroker,
         isUserAdminOrManager:isUserAdminOrManager,
         isUserSellerOrAdmin:isUserSellerOrAdmin,
@@ -92,6 +93,10 @@
         if( isStoreManager(_user) ){
           $location.path('/');
         }
+      }
+
+      function isUserAdmin(user){
+        return user.role === USER_ROLES.ADMIN;
       }
 
       function isBroker(user){
