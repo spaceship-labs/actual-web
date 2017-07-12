@@ -382,7 +382,7 @@ function ProductCtrl(
       }else{
         if(zipcode){
           vm.isLoadingDeliveries = false;
-          dialogService.showDialog('¡Lo sentimos! En breve su código postal estará en nuestra área de cobertura');
+          dialogService.showDialog('"Por el momento, su código postal esta fuera de nuestra área de cobertura');
         }
         //return deferred.reject();
       }
