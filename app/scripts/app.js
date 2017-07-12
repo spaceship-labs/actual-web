@@ -45,6 +45,7 @@ angular
     $mdThemingProvider,
     localStorageServiceProvider,
     AnalyticsProvider,
+    pikadayConfigProvider,
     ENV,
     SITE
   ) {
@@ -396,6 +397,22 @@ angular
     }
 
     Conekta.setPublicKey( getConektaKeyBySite() );
+
+    moment.locale('es');
+    var locales = {
+      es: {
+        months        : moment.localeData()._months,
+        weekdays      : moment.localeData()._weekdays,
+        weekdaysShort : moment.localeData()._weekdaysShort,
+      }
+    };
+    console.log('locales', locales);
+    pikadayConfigProvider.setConfig({
+      i18n: locales.es,
+      locales: locales,
+      format: 'D/MM/YYYY'
+    });
+
 
 
     //JWT TOKENS CONFIG

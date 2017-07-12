@@ -4293,6 +4293,7 @@ padding-left: 16px;
 /*-------------------/
   #INVOICING-VIEW
 /*------------------*/
+.invoicing-view .datepicker-element,
 .invoicing-view .select-element-wrapper{margin-top: 16px;}
 
 

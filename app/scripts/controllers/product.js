@@ -382,14 +382,14 @@ function ProductCtrl(
       }else{
         if(zipcode){
           vm.isLoadingDeliveries = false;
-          dialogService.showDialog('Código postal no valido');
+          dialogService.showDialog('¡Lo sentimos! En breve su código postal estará en nuestra área de cobertura');
         }
         //return deferred.reject();
       }
     })
     .catch(function(err){
       console.log('err', err);
-    })
+    });
   }
 
   function resetProductCartQuantity(){

@@ -25,13 +25,18 @@ function InvoicingCtrl(
 		init: init,
 		fiscalAddressConstraints: clientService.fiscalAddressConstraints,
 		form:{},
-		sendFiscalData: sendFiscalData
+		sendFiscalData: sendFiscalData,
+		onPikadaySelect: onPikadaySelect
 	});
 
 	init();
 
 	function init(){
 		loadStates();
+	}
+
+	function onPikadaySelect(pikaday){
+		vm.form.orderDate = pikaday._d;
 	}
 
 	function loadStates(){

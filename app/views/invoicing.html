@@ -20,39 +20,11 @@
 
 	      <div  class="input-container">
 
-					<h2>Datos de contacto</h2>
-	        <div layout="row" layout-wrap>
-	          <div flex-gt-sm="25" flex="100" class="input-element">
-	            <label>
-	             <p> <strong>Nombre de contacto</strong></p>
-	            </label>
-	            <div class="input-element-inner">
-	              <input 
-	                type="text"
-	                ng-model="vm.name"
-	              >
-	            </div>
-	          </div>
-	          <div flex-gt-sm="25" flex="100" class="input-element">
-	            <label>
-	              <p><strong>Email de contacto</strong> <span class="hl-label">*</span></p>
-	            </label>
-	            <div class="input-element-inner">
-	              <input 
-	                type="email" 
-	                ng-model="vm.email" 
-	                required
-	              >
-	            </div>
-	          </div>
-	        </div>
-
-	        <hr>
-
-	        <div layout="row" layout-wrap>
+					<div layout="row" layout-wrap>
+						
 	          <div flex-gt-sm="20" flex="100" class="input-element">
 	            <label>
-	              <p><strong>Folio de compra <span class="hl-label">*</span></strong></p>
+	              <p><strong>Ordern de compra<span class="hl-label">*</span></strong></p>
 	            </label>
 	            <div class="input-element-inner">
 	              <input 
@@ -61,9 +33,30 @@
 	                ng-model="vm.form.orderFolio">
 	            </div>
 	            <p class="input-note">
-								Folio de compra debe contener 6 digitos
+								Ingrese los 6 digitos
 	            </p>            
 	          </div>
+
+				    <div flex-gt-sm="25" flex="100" class="input-element datepicker-element">
+				      <label><strong>Fecha de compra</strong></label>
+				      <div class="input-element-inner">
+				        <input
+				          type="text"
+				          pikaday="vm.pikadayDate"
+				          set-default-date="true"
+				          readonly
+				          required
+				          show-month-after-year="true"
+				          on-select="vm.onPikadaySelect(pikaday)"
+				        >
+				      </div>
+				    </div>
+
+					</div>
+
+	        <hr>
+
+	        <div layout="row" layout-wrap>
 	          <div flex-gt-sm="20" flex="100" class="input-element">
 	            <label>
 	              <p><strong>RFC <span class="hl-label">*</span></strong></p>
@@ -264,6 +257,37 @@
 	          </div>
 	        </div>
 	      </div>
+
+
+				<hr/>
+
+				<h4>Datos de envío de factura</h4>
+        <div layout="row" layout-wrap>
+          <div flex-gt-sm="25" flex="100" class="input-element">
+            <label>
+             <p> <strong>Nombre</strong></p>
+            </label>
+            <div class="input-element-inner">
+              <input 
+                type="text"
+                ng-model="vm.name"
+              >
+            </div>
+          </div>
+          <div flex-gt-sm="25" flex="100" class="input-element">
+            <label>
+              <p><strong>Email</strong> <span class="hl-label">*</span></p>
+            </label>
+            <div class="input-element-inner">
+              <input 
+                type="email" 
+                ng-model="vm.email" 
+                required
+              >
+            </div>
+          </div>
+        </div>
+
 	    </section>
 	  <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
 	    <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
@@ -275,6 +299,9 @@
 	    </button>
 	  </div>
 	    <!--END DATOS PERSONALES-->
+
+		<p><strong>Atenta nota: </strong>Por disposición tributaria, toda factura deberá ser solicitada en el mes que fue realizada su compra</p>
+
 	  </section>
 	  <!--END FORM SECTION-->
 
