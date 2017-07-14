@@ -4822,12 +4822,14 @@ padding-left: 16px;
   }
   
   .searcher-wrapper{
+    display: none;
     position: absolute;
     top: 100%;
     z-index: 9999999;
     background: #092F57!important;
     padding: 10px;    
   }
+  .searcher-wrapper-show-mobile{display: flex;}
   .searcher-wrapper .searcher-btn{padding: 0 12px;}
   /*.searcher-wrapper .searcher{display: inline-block;}*/
   .searcher-wrapper .searcher input{font-size: 12px}

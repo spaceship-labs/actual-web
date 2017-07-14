@@ -32,7 +32,9 @@
 
 
       <form
-        ng-show="main.showSearchBar"
+        ng-class="{
+          'searcher-wrapper-show-mobile':main.showSearchBar
+        }"
         ng-submit="main.handleSearch()"
         class="searcher-wrapper"
         layout="row"
