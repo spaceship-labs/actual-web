@@ -491,12 +491,12 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'https://sandboxapi.actualstudio.com',
+            apiEndpoint: 'https://api.actualstudio.com',
             adminUrl: 'http://admin.miactual.com',
             tokenPrefix: 'production',
-            conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
-            conektaKidsKey: 'key_FAVz7GZoqMy4PwugqgHNrag',
-            conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
+            conektaHomeKey:'key_fTqfbsS7oxfpqZxtP9qZqdw',
+            conektaKidsKey: 'key_QCgrTimPycx55HtzxStvXZw',
+            conektaStudioKey: 'key_YrdmsrYuzSnqfZYryJxrjiQ'
           }
         }
       },

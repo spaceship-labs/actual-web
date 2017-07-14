@@ -4265,6 +4265,28 @@ padding-left: 16px;
 .our-brands .brand .slogan{text-align: center;}
 .our-brands .brand h3{text-align: center;}
 
+/*-----------------/
+  #OUR-STORES
+/*-----------------*/
+.our-stores .store-item{margin: 20px 0;}
+.our-stores .store-item img{max-width: 100%;}
+
+.our-stores .store-item .map{
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+  overflow: hidden;
+}
+
+.our-stores .store-item .map iframe{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /*----------------------/
   #ORDERS-LIST
 /*---------------------*/
@@ -4295,6 +4317,17 @@ padding-left: 16px;
 /*------------------*/
 .invoicing-view .datepicker-element,
 .invoicing-view .select-element-wrapper{margin-top: 16px;}
+
+/*---------------/
+  #DELIVIERIES-CITIES
+/*----------------*/
+.deliveries-cities .state-block small{
+  font-size: 12px;
+  font-weight: 400;
+}
+.deliveries-cities ul{
+  padding-left: 20px;
+}
 
 
 /*--------------/#FOOTER/*-------------*/

@@ -7,7 +7,7 @@
  * # categoryItem
  */
 angular.module('dashexampleApp')
-  .directive('categoryItem',['api' ,function (api) {
+  .directive('categoryItem',['api','$rootScope' ,function (api,$rootScope) {
     return {
       scope:{
         activeStore:'=',
@@ -22,13 +22,14 @@ angular.module('dashexampleApp')
           var image =  '/images/mesas.jpg';
           image = api.baseUrl + '/categories/' + handle + '.jpg';
           return {'background-image' : 'url(' + image + ')'};
-        }
+        };
 
         scope.getCategoryImage = function(handle){
           var image =  '/images/mesas.jpg';
-          image = api.baseUrl + '/categories/' + handle + '.jpg';
+          var subfolder = $rootScope.siteTheme;
+          image = api.baseUrl + '/categories/' + subfolder +'/' + handle + '.jpg';
           return image;
-        }
+        };
 
 
       }

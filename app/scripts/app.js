@@ -366,11 +366,21 @@ angular
         controller: 'ContactusCtrl',
         controllerAs: 'vm'
       })
+      .when('/ciudades-de-entrega', {
+        templateUrl: 'views/deliveries-locations.html',
+        controller: 'DeliveriesLocationsCtrl',
+        controllerAs: 'deliveriesLocations'
+      })      
       .when('/:slug/:id', {      
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',
         controllerAs: 'vm'
       })          
+      .when('/security', {
+        templateUrl: 'views/security.html',
+        controller: 'SecurityCtrl',
+        controllerAs: 'security'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -343,7 +343,7 @@
 
           <a
             href="#"
-            ng-if="vm.orderSapPending && !vm.order.inSapWriteProgress && vm.isUserAdmin"
+            ng-if="vm.orderSapPending && vm.isUserAdmin"
             ng-click="vm.generateSapOrder()"
             class="action-btn action-btn-save print-btn"
           >
