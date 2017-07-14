@@ -68,6 +68,7 @@
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       getStores: getStores,
+      getFaviconUrl: getFaviconUrl,
       siteTheme: SITE.name,
       siteConstants: SITE
     });
@@ -86,6 +87,23 @@
     });
 
     init();
+
+    function getFaviconUrl(){
+      var faviconUrl = '/images/favicon.ico';
+      switch(vm.siteTheme){
+        case 'actual-home':
+          faviconUrl = '/images/actual-home-favicon.ico';
+          break;
+        case 'actual-studio':
+          faviconUrl = '/images/actual-studio-favicon.ico';
+          break;
+        case 'actual-kids':
+          faviconUrl = '/images/actual-kids-favicon.ico';
+          break;
+      }
+      return faviconUrl;
+
+    }
 
     function init(){
       vm.token = localStorageService.get('token');

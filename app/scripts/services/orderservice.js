@@ -29,8 +29,10 @@
       function getOrderStatusMapper(){
         var statusMap = {
           'pending': 'Pendiente',
-          'pending-sap': 'Pagado y procesando',
-          'completed': 'Pagado',
+          'completed': 'Procesado',
+          'pending-sap': 'Procesado',          
+          //'pending-sap': 'Pagado y procesando',
+          //'completed': 'Pagado',
           'pending-payment': 'Pendiente de pago'
         };        
         return statusMap;
