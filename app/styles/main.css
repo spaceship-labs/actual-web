@@ -4821,6 +4821,16 @@ padding-left: 16px;
     top: 60px;    
   }
   
+  .searcher-wrapper{
+    position: absolute;
+    top: 100%;
+    z-index: 9999999;
+    background: #092F57!important;
+    padding: 10px;    
+  }
+  .searcher-wrapper .searcher-btn{padding: 0 12px;}
+  /*.searcher-wrapper .searcher{display: inline-block;}*/
+  .searcher-wrapper .searcher input{font-size: 12px}
 
   .listing-view .listing-view-title{font-size: 18px;}
   .product-view-gallery-wrap{padding: 10px;}

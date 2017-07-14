@@ -50,7 +50,6 @@ angular
     SITE
   ) {
 
-    AnalyticsProvider.setAccount('UU-XXXXXXX-X');  //UU-XXXXXXX-X should be your tracking code
 
     $mdThemingProvider.theme('default')
       .accentPalette('red', {
@@ -402,11 +401,32 @@ angular
         default:
           break;
       }
-      console.log('conekta key', key);
+      //console.log('conekta key', key);
       return key;
     }
 
+    function getAnalyticsCodeBySite(){
+      var code;
+      switch(SITE.name){
+        case 'actual-home':
+          code = ENV.homeAnalytics || '';
+          break;
+        case 'actual-kids':
+          code = ENV.kidsAnalytics || '';
+          break;
+        case 'actual-studio':
+          code = ENV.studioAnalytics || '';
+          break;
+        default:
+          break;
+      }
+      //console.log('analytics code', code);
+      return code;
+    }    
+
     Conekta.setPublicKey( getConektaKeyBySite() );
+    AnalyticsProvider.setAccount( getAnalyticsCodeBySite() );  //UU-XXXXXXX-X should be your tracking code
+
 
     moment.locale('es');
     var locales = {

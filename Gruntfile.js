@@ -496,7 +496,10 @@ module.exports = function (grunt) {
             tokenPrefix: 'production',
             conektaHomeKey:'key_fTqfbsS7oxfpqZxtP9qZqdw',
             conektaKidsKey: 'key_QCgrTimPycx55HtzxStvXZw',
-            conektaStudioKey: 'key_YrdmsrYuzSnqfZYryJxrjiQ'
+            conektaStudioKey: 'key_YrdmsrYuzSnqfZYryJxrjiQ',
+            studioAnalytics: 'UA-54662003-1',
+            homeAnalytics: 'UA-78979962-1',
+            kidsAnalytics: 'UA-55789134-1'
           }
         }
       },

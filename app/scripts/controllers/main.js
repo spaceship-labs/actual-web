@@ -150,6 +150,7 @@
       var params = {
         term: vm.searchValue
       };
+      vm.showSearchBar = false;
 
       $location.path('/search').search(params);
     }

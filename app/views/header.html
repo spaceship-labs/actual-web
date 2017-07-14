@@ -32,12 +32,12 @@
 
 
       <form
-        hide-xs
+        ng-show="main.showSearchBar"
         ng-submit="main.handleSearch()"
         class="searcher-wrapper"
         layout="row"
       >
-        <div class="searcher" flex>
+        <div class="searcher" flex flex-xs="70">
           <div class="searcher-inner">
             <i class="icon-search"></i>
             <input
@@ -47,7 +47,7 @@
               >
           </div>
         </div>
-        <input type="submit" value="BUSCAR" class="searcher-btn">
+        <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn">
       </form>
 
       <div
@@ -96,7 +96,8 @@
         <a
           flex
           hide-gt-sm
-          href="/search"
+          href="#"
+          ng-click="main.showSearchBar = !main.showSearchBar"
           class="header-top-bar-menu-item"
         >
           <i class="icon-search"></i>
