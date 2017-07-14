@@ -60,7 +60,8 @@ function ProductCtrl(
     trustAsHtml: trustAsHtml,
     sas: commonService.getSasHash(),
     breadcrumbItems: [],
-    isActiveBreadcrumbItem: breadcrumbService.isActiveBreadcrumbItem
+    isActiveBreadcrumbItem: breadcrumbService.isActiveBreadcrumbItem,
+    showZipcodeDialog: showZipcodeDialog
   });
 
 
@@ -337,6 +338,8 @@ function ProductCtrl(
   }
 
   function showZipcodeDialog(ev) {
+    ev = null;
+    console.log('showZipcodeDialog');
     var deferred = $q.defer();
     var zipcode;
     var templateUrl = 'views/partials/zipcode-dialog.html';
