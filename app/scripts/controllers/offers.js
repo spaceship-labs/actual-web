@@ -13,6 +13,7 @@ angular.module('dashexampleApp')
 function OffersCtrl(
   $q,
   $filter,
+  $rootScope,
   packageService,
   quotationService,
   api,
@@ -44,6 +45,7 @@ function OffersCtrl(
 
   function addPackageToCart(packageId){
     vm.isLoading = true;
+    $rootScope.scrollTo('main');
     var products = [];
     packageService.getProductsByPackage(packageId)
       .then(function(res){
@@ -55,12 +57,13 @@ function OffersCtrl(
       .then(function(deliveries){
         var packageProducts = mapProductsDeliveryDates(products, deliveries, packageId);
         if(packageProducts.length > 0){
+          console.log('packageProducts', packageProducts);
           quotationService.addMultipleProducts(packageProducts);
         }
       })
       .catch(function(err){
         console.log(err);
-      })
+      });
   }
 
   function getProductsDeliveriesPromises(products){
@@ -149,6 +152,7 @@ function OffersCtrl(
 OffersCtrl.$inject = [
   '$q',
   '$filter',
+  '$rootScope',
   'packageService',
   'quotationService',
   'api',

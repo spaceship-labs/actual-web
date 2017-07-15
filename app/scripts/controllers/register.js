@@ -147,6 +147,7 @@ function RegisterCtrl(
 							var quotationId = $routeParams.quotation;
 							var params = {
 								Client: createdClient.id,
+								UserWeb: createdUser.id
 							};
 							if(createdClient.Contacts && createdClient.Contacts.length > 0){
 								params.Address = createdClient.Contacts[0].id;

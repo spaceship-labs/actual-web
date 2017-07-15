@@ -11,6 +11,7 @@
    */
   function MainCtrl(
     api,
+    $routeParams,
     $mdUtil,
     $rootScope,
     $q,
@@ -67,7 +68,6 @@
       toggleMenuCategory: toggleMenuCategory,
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
-      getStores: getStores,
       getFaviconUrl: getFaviconUrl,
       siteTheme: SITE.name,
       siteConstants: SITE
@@ -467,6 +467,7 @@
     function handleSignInError(err){
       vm.isLoadingLogin = false;
       if(err){
+        console.log('err handleSignInError', err);
         vm.loginErr = 'Datos incorrectos';
         console.log('vm.loginErr', vm.loginErr);
       }
@@ -504,13 +505,56 @@
 
     $rootScope.successAuth = function(res){
       setUserTokensOnResponse(res);
-      $window.location.reload();
+      console.log('SUCCESS AUTH');
+
+      assignCurrentUserToQuotationIfNeeded()
+        .then(function(quotationUpdated){
+          console.log('quotationUpdated', quotationUpdated);
+
+          if(quotationUpdated){
+            $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
+            return;
+          }
+
+          var quotationPath ='/quotations/edit';
+          if($location.path().indexOf(quotationPath) > -1){
+            $window.location = '/';
+          }else{
+            $window.location.reload();
+          }
+
+        })
+        .catch(function(err){
+          console.log('err successAuth', err);
+        });
+
+
     };
 
     $rootScope.successAuthInCheckout = function(res){
       setUserTokensOnResponse(res);
     };    
 
+    function assignCurrentUserToQuotationIfNeeded(){
+      var activeQuotationHasClient = ($rootScope.activeQuotation || {}).Client ? true : false;
+
+      console.log('$rootScope.activeQuotation', $rootScope.activeQuotation);
+      console.log('activeQuotationHasClient', activeQuotationHasClient);
+
+      if($rootScope.activeQuotation && !activeQuotationHasClient){
+        var quotationId = $rootScope.activeQuotation.id;
+        var params = {
+          Client: vm.user.Client,
+          UserWeb: vm.user.id
+        };
+        return quotationService.update(quotationId, params);
+      }else{
+        var deferred = $q.defer();            
+        deferred.resolve();  
+        return deferred.promise;
+      }
+
+    }
 
     function getCategoryBackground(handle){
       var image =  '/images/mesas.jpg';
@@ -525,15 +569,6 @@
       vm.isActiveCart = false;
       vm.isLoadingLogin = false;
     });
-
-    function getStores(email) {
-      userService.getStores(email).then(function(stores){
-        vm.stores = stores;
-        if(vm.stores.length > 0){
-          vm.logInForm.activeStoreId = vm.stores[0].id;
-        }
-      });
-    }
 
     $rootScope.scrollTo = function(target){
       $timeout(
@@ -552,6 +587,7 @@
   angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
   MainCtrl.$inject = [
     'api',
+    '$routeParams',
     '$mdUtil',
     '$rootScope',
     '$q',

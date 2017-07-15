@@ -42,10 +42,11 @@
           ng-repeat="package in vm.packages track by $index"
           class="package-wrapper">
 
-          <a
+          <!--<a
             ng-click="vm.addPackageToCart(package.id)"
             href="#"
-            >
+            >-->
+          <a href="#">
             <img ng-src="{{package.image}}" alt="{{package.image}}">
           </a>
           <div class="package-text">
