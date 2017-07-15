@@ -3269,6 +3269,11 @@ md-backdrop.md-sidenav-backdrop{
   margin: 4px 0 0;
   text-align: right;
 }
+.cart-view .cart-summary .taxes-included{
+  margin: 0;
+  text-align: right;
+  font-size: 11px;  
+}
 
 .cart-view .cart-summary .cart-totals .price-crossed .currency-label,
 .cart-view .cart-summary .cart-totals .price-main .currency-label,

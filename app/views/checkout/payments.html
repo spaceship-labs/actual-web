@@ -100,7 +100,7 @@
             </tr>
           </table>
           <hr>
-          <div class="cart-totals" layout="row" layout-align="space-between end">
+          <div class="cart-totals" layout="row" layout-align="space-between start">
             <div flex="30">
               <h1><strong>TOTAL:</strong></h1>
             </div>
@@ -109,6 +109,7 @@
                 <span class="currency-label">MXN</span>
                 <strong>{{ vm.quotation.total | roundCurrency }}</strong>
               </h1>
+              <p class="taxes-included">Impuestos incluidos</p>
             </div>
           </div>
           <hr>
