@@ -61,7 +61,7 @@
       <div class="cart-item-data-inner">
 
         <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
-          <div flex="30">
+          <div flex="35">
             <p 
               ng-if="detailGroup.discountPercent > 0" 
               class="discount-label"
@@ -75,15 +75,16 @@
               class="price-crossed"
               ng-if="vm.getUnitPriceWithDiscount(detailGroup.unitPrice, detailGroup.discountPercent) != detailGroup.unitPrice"
             >
-              {{ detailGroup.unitPrice | roundCurrency }}
+              <span class="currency-label">MXN</span>{{ detailGroup.unitPrice | roundCurrency }}
             </p>
             <p class="price-hl">
+              <span class="currency-label">MXN</span>
               <strong>
                 {{ vm.getUnitPriceWithDiscount(detailGroup.unitPrice, detailGroup.discountPercent) | roundCurrency }}
               </strong>
             </p>
           </div>
-          <div flex="30" class="cart-item-data-qty">
+          <div flex="25" class="cart-item-data-qty">
             <p>
               {{detailGroup.quantity}}
               <span ng-if="detailGroup.quantity == 1">pieza</span>
@@ -91,6 +92,7 @@
             </p>
           </div>
           <h3 flex class="product-view-price-hl product-view-price-main">
+            <span class="currency-label">MXN</span>
             <strong>{{detailGroup.total | roundCurrency }}</strong>
           </h3>
         </div>

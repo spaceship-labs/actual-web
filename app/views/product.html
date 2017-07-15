@@ -85,20 +85,20 @@
               layout-wrap
               layout-align="space-between end"
             >
-              <div flex="15" flex-sm="100" flex-xs="100">
+              <div flex="20" flex-sm="100" flex-xs="100">
                 <p
                   class="product-view-price-discount"
                   ng-if="vm.product.mainPromo">
                   - {{vm.mainPromo.discountPg1}}%
                 </p>
-                <p class="product-view-price-crossed">{{vm.product.priceBefore | currency:'$':0 }}</p>
+                <p class="product-view-price-crossed"><span class="currency-label">MXN</span> {{vm.product.priceBefore | currency:'$':0 }}</p>
                 <p class="product-view-price-hl">
-                  <strong>{{vm.product.Price | currency:'$':0 }}</strong>
+                  <span class="currency-label">MXN</span><strong>{{vm.product.Price | currency:'$':0 }}</strong>
                 </p>
               </div>
 
               <!--ONLY IF ZIPCODE IS ASSIGNED-->
-              <div  flex="15" flex-sm="50" flex-xs="50">
+              <div  flex="10" flex-sm="50" flex-xs="50">
                 <div class="product-view-qty input-element">
                   
                   <div 
@@ -136,13 +136,15 @@
                 </div>
               </div>
 
-              <h3
+              <div
                 flex="25"
                 flex-sm="100"
                 flex-xs="100"
                 class="product-view-price-hl product-view-price-main">
-                <strong>{{vm.product.Price * vm.productCart.quantity | currency:'$':0 }}</strong>
-              </h3>
+                <h3><span class="currency-label">MXN</span><strong>{{vm.product.Price * vm.productCart.quantity | currency:'$':0 }}</strong></h3>
+                <span class="taxes-included">Impuestos incluidos</span>
+              </div>
+
               <!--END CONDITION-->
 
             </div>

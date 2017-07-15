@@ -136,11 +136,11 @@
           <table>
             <tr>
               <td><strong>Subtotal ({{ vm.quotation.totalProducts }} productos):</strong></td>
-              <td><strong>{{ vm.quotation.subtotal | currency }}</strong></td>
+              <td><strong>MXN {{ vm.quotation.subtotal | currency }}</strong></td>
             </tr>
             <tr>
               <td>Descuento:</td>
-              <td><strong><span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
+              <td><strong>MXN<span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
             </tr>
           </table>
           <hr>
@@ -151,9 +151,9 @@
             </div>
             <div flex="70">
               <h3 class="price-crossed" ng-show="vm.quotation.subtotal != vm.quotation.total">
-                {{ vm.quotation.subtotal | roundCurrency  }}
+                <span class="currency-label">MXN</span> {{ vm.quotation.subtotal | roundCurrency  }}
               </h3>
-              <h1 class="price-main">{{ vm.quotation.total | roundCurrency  }}</h1>
+              <h1 class="price-main"><span class="currency-label">MXN</span> {{ vm.quotation.total | roundCurrency  }}</h1>
             </div>
           </div>
 

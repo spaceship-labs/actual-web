@@ -46,13 +46,17 @@
       <p><strong>{{product.Name}}</strong></p>
       
       <div layout="row" layout-align="space-between center">
-        <p flex="40" class="stock-available">
+        <p flex="30" class="stock-available">
           {{product[activeStore.code]}} <strong class="small">disponibles</strong>
         </p>      
-        <p flex="55" class="price">
+        <p flex="70" class="price">
+          <span class="price-before-currency">MXN</span>
           <span class="price-before">{{product.priceBefore | currency:'$':0}}</span>
           <span ng-if="product.priceBefore">|</span>
+          <strong class="price-now-currency">MXN</strong>
           <strong class="price-now">{{product.Price | currency:'$':0}}</strong>
+          <br/>
+          <span class="taxes-included">Impuestos incluidos</span>
         </p>
       </div>
       

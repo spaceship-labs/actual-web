@@ -21,7 +21,7 @@
 			ng-if="vm.paymentMethodsGroups && vm.paymentMethodsGroups.length > 0"
 			flex="35"
 			class="totals data-cell">
-			<p><strong>{{ vm.paymentMethodsGroups[0].total | roundCurrency  }}</strong></p>
+			<p><strong>MXN {{ vm.paymentMethodsGroups[0].total | roundCurrency  }}</strong></p>
 		</div>
 	</div>
 
@@ -38,7 +38,7 @@
 			</div>
       -->
 			<div flex="35" class="totals data-cell">
-				<p><strong>{{ method.total | roundCurrency  }}</strong></p>
+				<p><strong>MXN {{ method.total | roundCurrency  }}</strong></p>
 			</div>
 		</div>
 	</div>

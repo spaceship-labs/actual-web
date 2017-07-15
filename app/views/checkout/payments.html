@@ -92,11 +92,11 @@
           <table>
             <tr>
               <td><strong>Subtotal ({{vm.quotation.totalProducts}}) productos:</strong></td>
-              <td><strong>{{ vm.quotation.subtotal | roundCurrency }}</strong></td>
+              <td><strong>MXN {{ vm.quotation.subtotal | roundCurrency }}</strong></td>
             </tr>
             <tr>
               <td><strong>Descuento:</strong></td>
-              <td><strong><span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
+              <td><strong>MXN <span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
             </tr>
           </table>
           <hr>
@@ -106,6 +106,7 @@
             </div>
             <div flex="70">
               <h1 class="price-main">
+                <span class="currency-label">MXN</span>
                 <strong>{{ vm.quotation.total | roundCurrency }}</strong>
               </h1>
             </div>
@@ -116,7 +117,7 @@
               <td><strong>Pagado:</strong></td>
               <td>
                 <strong>
-                  {{ vm.quotation.ammountPaid | roundCurrency }}
+                  MXN {{ vm.quotation.ammountPaid | roundCurrency }}
                 </strong>
               </td>
             </tr>
@@ -139,7 +140,7 @@
                       'hl-text-v2' : (vm.quotation.total - vm.quotation.ammountPaid) <= 0
                     }
                   ">
-                  {{ (vm.quotation.total - vm.quotation.ammountPaid) | roundCurrency }}
+                  MXN {{ (vm.quotation.total - vm.quotation.ammountPaid) | roundCurrency }}
                 </strong>
               </td>
             </tr>
