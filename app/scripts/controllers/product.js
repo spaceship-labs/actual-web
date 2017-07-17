@@ -181,7 +181,7 @@ function ProductCtrl(
   function setUpDeliveries(options){
     options = options || {};
 
-    productService.delivery(options.productId, options.activeStoreId, options.zipcodeDeliveryId)
+    productService.delivery(options.productId, options.zipcodeDeliveryId)
       .then(function(deliveries){
         deliveries = $filter('orderBy')(deliveries, 'date');
 
@@ -339,11 +339,9 @@ function ProductCtrl(
 
   function showZipcodeDialog(ev) {
     ev = null;
-    console.log('showZipcodeDialog');
     var deferred = $q.defer();
     var zipcode;
     var templateUrl = 'views/partials/zipcode-dialog.html';
-    console.log('zipcodedialogcontroller',ZipcodeDialogController);
     var controller  = ZipcodeDialogController;
     $mdDialog.show({
       controller: [
@@ -352,6 +350,7 @@ function ProductCtrl(
         '$rootScope',
         '$location',
         'userService',
+        'params',
         controller
       ],
       controllerAs: 'ctrl',
@@ -360,6 +359,9 @@ function ProductCtrl(
       targetEvent: ev,
       clickOutsideToClose: true,
       fullscreen: false,
+      locals:{
+        params:{}
+      }
     })
     .then(function(_zipcode) {
       zipcode = _zipcode;

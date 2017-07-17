@@ -13,22 +13,45 @@ angular.module('dashexampleApp')
 function OffersCtrl(
   $q,
   $filter,
+  $scope,
   $rootScope,
+  $mdDialog,
   packageService,
   quotationService,
   api,
   localStorageService,
   productService,
-  dialogService
+  dialogService,
+  deliveryService
 ){
+  var mainDataListener = function(){};
   var vm = this;
   angular.extend(vm,{
     init:init,
-    addPackageToCart: addPackageToCart
+    addPackageToCart: addPackageToCart,
   });
+
+  if($rootScope.activeQuotation){
+    init();    
+  }else{
+    mainDataListener = $rootScope.$on('mainDataLoaded', function(e){
+      init();
+    });
+  }
+
+  function loadZipcodeDeliveryByActiveQuotation(){
+    var zipcodeDeliveryId =  $rootScope.activeQuotation ? $rootScope.activeQuotation.ZipcodeDelivery : false;
+    if($rootScope.activeQuotation){
+      return loadZipCodeDeliveryById(zipcodeDeliveryId);
+    }
+
+    return $q.resolve();    
+  }
 
   function init(){
     vm.isLoading = true;
+    loadZipcodeDeliveryByActiveQuotation();
+
     packageService.getPackagesByCurrentStore()
       .then(function(res){
         vm.packages = res.data || [];
@@ -41,13 +64,33 @@ function OffersCtrl(
       .catch(function(err){
         console.log(err);
       });
+
+    //Unsuscribing  mainDataListener
+    mainDataListener();
   }
 
+  function loadZipCodeDeliveryById(id){
+    return deliveryService.getZipcodeDeliveryById(id)
+      .then(function(res){
+        vm.zipcodeDelivery = res;
+        return true;
+      });
+  }  
+
   function addPackageToCart(packageId){
-    vm.isLoading = true;
     $rootScope.scrollTo('main');
     var products = [];
-    packageService.getProductsByPackage(packageId)
+
+    showZipcodeDialogIfNeeded(null)
+      .then(function(hasValidZipcode){
+        if(!hasValidZipcode){
+          return $q.reject('Código postal no valido');
+        }
+
+        vm.isLoading = true;
+        $rootScope.scrollTo('main');
+        return packageService.getProductsByPackage(packageId);
+      })
       .then(function(res){
         products     = res.data;
         products     = mapPackageProducts(products);
@@ -57,8 +100,11 @@ function OffersCtrl(
       .then(function(deliveries){
         var packageProducts = mapProductsDeliveryDates(products, deliveries, packageId);
         if(packageProducts.length > 0){
-          console.log('packageProducts', packageProducts);
-          quotationService.addMultipleProducts(packageProducts);
+          
+          var params = {
+            zipcodeDeliveryId: vm.zipcodeDelivery.id
+          };
+          quotationService.addMultipleProducts(packageProducts, params);
         }
       })
       .catch(function(err){
@@ -69,7 +115,8 @@ function OffersCtrl(
   function getProductsDeliveriesPromises(products){
     var promises    = [];
     for(var i = 0; i<products.length;i++){
-      promises.push(productService.delivery(products[i].ItemCode));
+      var deliveryPromise = productService.delivery(products[i].ItemCode,vm.zipcodeDelivery.id);
+      promises.push(deliveryPromise);
     }
     return promises;
   }
@@ -136,27 +183,91 @@ function OffersCtrl(
 
   function showUnavailableStockMsg(products){
     var htmlProducts = products.reduce(function(acum, p){
-      acum+="<li>"+p.name+'</li>';
+      //console.log('p', p);
+      //acum+="<li>"+p.name+'</li>';
+      acum += p.name + '('+ p.ItemCode +'), ';
       return acum;
-    }, '<ul>');
-    htmlProducts += '</ul>';
+    }, '');
+    //htmlProducts += '</ul>';
     dialogService.showDialog(
-      'No hay stock disponible de los siguientes productos: '
-      + htmlProducts
+      'No hay stock disponible de los siguientes productos: '+ htmlProducts
     );
   }
 
-  vm.init();
+  function showZipcodeDialogIfNeeded(ev) {
+    ev = null;
+    var zipcode;
+    var templateUrl = 'views/partials/zipcode-dialog.html';
+    var controller  = ZipcodeDialogController;
+    
+    if(vm.zipcodeDelivery){
+      return $q.resolve(true);
+    }
+
+    return $mdDialog.show({
+      controller: [
+        '$scope',
+        '$mdDialog',
+        '$rootScope',
+        '$location',
+        'userService',
+        'params',
+        controller
+      ],
+      controllerAs: 'ctrl',
+      templateUrl: templateUrl,
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: false,
+      locals:{
+        params: {
+          inPackagesView: true
+        }
+      }
+    })
+    .then(function(_zipcode) {
+      zipcode = _zipcode;
+      vm.isLoadingDeliveries = true;
+      return deliveryService.getZipcodeDelivery(zipcode);
+    })
+    .then(function(zipcodeDelivery){
+      console.log('zipcodedelivery', zipcodeDelivery);
+      if(zipcodeDelivery){
+        vm.isLoadingDeliveries = true;
+        vm.zipcodeDelivery = zipcodeDelivery;
+        return true;
+      }else{
+        if(zipcode){
+          vm.isLoadingDeliveries = false;
+          dialogService.showDialog('"Por el momento, su código postal esta fuera de nuestra área de cobertura');
+        }
+        return false;
+      }
+    })
+    .catch(function(err){
+      console.log('err', err);
+    });
+  }
+
+  $scope.$on('$destroy', function(){
+    //unsuscribing listeners
+    mainDataListener();
+  });
+
 }
 
 OffersCtrl.$inject = [
   '$q',
   '$filter',
+  '$scope',
   '$rootScope',
+  '$mdDialog',
   'packageService',
   'quotationService',
   'api',
   'localStorageService',
   'productService',
-  'dialogService'
+  'dialogService',
+  'deliveryService'
 ];

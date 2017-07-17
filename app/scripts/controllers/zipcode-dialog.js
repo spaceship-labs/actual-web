@@ -1,10 +1,16 @@
-function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userService) {
+function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userService, params) {
+  'use strict';
+
   var ctrl = this;
+  console.log('params', params);
+  params = params || {};
+
   ctrl.init = init;
   ctrl.editAddress = editAddress;
   ctrl.submit = submit;
   ctrl.toggleLoginModal = toggleLoginModal;
   ctrl.addNewAddress = addNewAddress;
+  ctrl.params = params;
 
   function init(){
     /*

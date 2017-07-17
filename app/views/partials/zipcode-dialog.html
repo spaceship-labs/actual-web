@@ -17,6 +17,7 @@
       class="form-section"
     >
 
+      <!--
       <section ng-if="!ctrl.isLoading && ctrl.user">
         <h2><strong>Selecciona tu direccion de envío</strong></h2>
         <p><a ng-click="ctrl.addNewAddress()">Agregar una nueva dirección de envío</a></p>
@@ -74,13 +75,17 @@
           </section>
 
       </section>
+      -->
 
 
-      <section ng-if="!ctrl.user">
+      <section>
         <h2><strong>Ingresa tu código postal</strong></h2>
 
         <div class="input-element">
-          <p>
+          <p ng-show="ctrl.params.inPackagesView">
+            <label>Ingresa tu código postal para calcular los dias de entrega de tus productos.</label>
+          </p>
+          <p ng-show="!ctrl.params.inPackagesView">
             <label>Ingresa tu código postal para calcular los dias de entrega de tu producto.</label>
           </p>
           <p ng-if="ctrl.errMessage">

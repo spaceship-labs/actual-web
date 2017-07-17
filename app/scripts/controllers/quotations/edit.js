@@ -336,6 +336,7 @@ function QuotationsEditCtrl(
 
   function removeDetailsGroup(detailsGroup){
     var deferred = $q.defer();
+    $rootScope.scrollTo('main');
     vm.isLoadingDetails = true;
     var detailsIds = detailsGroup.details.map(function(d){return d.id;});
     var params = {

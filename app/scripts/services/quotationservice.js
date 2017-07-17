@@ -237,7 +237,7 @@
         var detail = {
           Product: productId,
           quantity: params.quantity,
-          Quotation: quotationId,
+          QuotationWeb: quotationId,
           shipDate: params.shipDate,
           originalShipDate: params.originalShipDate,
           productDate: params.productDate,
@@ -246,7 +246,7 @@
           PromotionPackage: params.promotionPackage || null
         };
         if(quotationId){
-          detail.Quotation = quotationId;
+          detail.QuotationWeb = quotationId;
         }
         return detail;
       }

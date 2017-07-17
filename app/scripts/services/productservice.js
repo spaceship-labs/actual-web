@@ -278,11 +278,10 @@
         return api.$http.post(url, params);
       }
 
-      function delivery(productCode, storeId, zipcodeDeliveryId) {
+      function delivery(productCode, zipcodeDeliveryId) {
         var url    = '/shipping/product';
         var params = {
           productCode: productCode,
-          storeId: storeId,
         };
         if(zipcodeDeliveryId){
           params.zipcodeDeliveryId = zipcodeDeliveryId;
