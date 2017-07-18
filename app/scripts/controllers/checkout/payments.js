@@ -58,7 +58,8 @@ function CheckoutPaymentsCtrl(
     paymentMethodsGroups: [],
     CLIENT_BALANCE_TYPE: paymentService.clientBalanceType,
     roundCurrency: commonService.roundCurrency,
-    showCardsDialog: showCardsDialog
+    showCardsDialog: showCardsDialog,
+    showTransferInstructionDialog: showTransferInstructionDialog
   });
 
   var EWALLET_TYPE = ewalletService.ewalletType;
@@ -85,6 +86,13 @@ function CheckoutPaymentsCtrl(
     quotationService.getById($routeParams.id, getParams)
       .then(function(res){
         vm.quotation = res.data;
+
+        if(vm.quotation && vm.quotation.OrderWeb){
+          if(vm.quotation.OrderWeb){
+            vm.hasAnSpeiOrder = true;
+          }
+        }
+
         loadSapLogs(vm.quotation.id);
         loadPayments();
 
@@ -312,6 +320,14 @@ function CheckoutPaymentsCtrl(
           vm.isLoadingProgress = false;
           vm.order = res.data;
           if(vm.order.id){
+
+            //FOR SPEI PAYMENTS
+            if(vm.order.isSpeiOrder){
+              vm.hasAnSpeiOrder = true;
+              return;
+            }
+
+
             $rootScope.scrollTo('main');
             quotationService.removeCurrentQuotation();
             $location.path('/checkout/order/' + vm.order.id).search({orderCreated:true});
@@ -474,6 +490,23 @@ function CheckoutPaymentsCtrl(
     var msg = 'Bancos participantes: ' + cards.join(', ');
     dialogService.showDialog(msg);
   }
+
+  function showTransferInstructionDialog(ev){
+    var controller = TransferInstructionsDialogController;
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+    return $mdDialog.show({
+      controller: [
+        '$scope',
+        '$mdDialog',
+        controller
+      ],
+      templateUrl: 'views/checkout/transfer-instructions-dialog.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen,
+    });
+  }  
 
   $scope.$on('$destroy', function(){
     mainDataListener();

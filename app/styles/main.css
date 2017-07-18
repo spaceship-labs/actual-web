@@ -3709,10 +3709,16 @@ md-backdrop.md-sidenav-backdrop{
   border-bottom: 0;
 }
 .pay-method-wrap .method-block ul li strong{
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 10px;
 }
 .pay-method-wrap .method-block ul li span{font-size: 14px;}
+.pay-method-wrap .method-block .spei-instructions-trigger{font-size: 14px;}
+.pay-method-wrap .method-block .spei-instructions-trigger a{
+  cursor: pointer;
+  color: #33BA2C;
+  font-weight: 700;  
+}
 
 .pay-method-wrap .method-block .method-text{
   display: inline-block;
@@ -3902,6 +3908,8 @@ md-backdrop.md-sidenav-backdrop{
   padding-left: 10px;
 }
 .deposit-dialog .ammount-description p{margin:0;}
+.deposit-dialog .terms-checkbox-block{margin: 10px 0;}
+.deposit-dialog .terms-checkbox-block md-checkbox{margin:0;}
 
 .input-element p{
   margin: 5px 0;
@@ -4688,7 +4696,11 @@ padding-left: 16px;
   .pay-method-wrap .method-block ul li strong{font-size: 16px;}
 
   .pay-method-wrap .method-block .bank-icons img{max-width: 38px;}
-  .pay-method-wrap .method-block .bank-icons .card{max-width: 64px;}
+  .pay-method-wrap .method-block .bank-icons .card{
+    /*max-width: 64px;*/
+    max-width: 38px;
+  }
+  .pay-method-wrap .method-block .bank-icons{text-align: left;}
   .pay-method-wrap .method-block .price-now{font-size: 22px;}
   .pay-method-wrap .method-block .hl-label{
     padding: 4px 5px;

@@ -40,14 +40,23 @@
   </div>
 
   <div class="checkout-view-inner">
-    <h3><strong>1. Elige tu opción de pago</strong> Puedes aplicar múltiples pagos.</h3>
+    
+    <h3 ng-if="!vm.hasAnSpeiOrder">
+      <strong>1. Elige tu opción de pago</strong> Puedes aplicar múltiples pagos.
+    </h3>
 
     <section layout="row" layout-wrap>
 
       <div flex="75" flex-sm="100" flex-xs="100">
 
+        <ng-include
+          ng-if="vm.hasAnSpeiOrder"
+          src="'views/checkout/spei-card-instructions.html'">
+        </ng-include>
+        
+
         <md-radio-group
-          ng-if="!vm.isMinimumPaid(vm.quotation)"
+          ng-if="!vm.isMinimumPaid(vm.quotation) && !vm.quotation.OrderWeb && !vm.hasAnSpeiOrder"
           ng-model="vm.activeMethod"
         >
 
@@ -63,6 +72,7 @@
         </md-radio-group>
 
         <div
+          ng-if="!vm.hasAnSpeiOrder"
           ng-show="vm.quotation.Payments && vm.quotation.Payments.length > 0"
           class="second-step-payment"
         >
@@ -113,7 +123,8 @@
             </div>
           </div>
           <hr>
-          <table>
+
+          <table  ng-if="!vm.hasAnSpeiOrder">
             <tr>
               <td><strong>Pagado:</strong></td>
               <td>
@@ -147,28 +158,32 @@
             </tr>
           </table>
 
-          <hr>
+          <div ng-if="!vm.hasAnSpeiOrder">
+            <hr>
+            <input
+              type="submit"
+              value="CONTINUAR"
+              class="cart-view-btn"
+              ng-disabled="!vm.isMinimumPaid(vm.quotation)"
+              ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid(vm.quotation) }">
 
-          <input
-            type="submit"
-            value="CONTINUAR"
-            class="cart-view-btn"
-            ng-disabled="!vm.isMinimumPaid(vm.quotation)"
-            ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid(vm.quotation) }">
+            <p
+              ng-if="vm.isMinimumPaid(vm.quotation)"
+              class="cart-summary-note"
+            >
+              *Hacer click para generar el folio de la venta.
+            </p>
 
-          <p
-            ng-if="vm.isMinimumPaid(vm.quotation)"
-            class="cart-summary-note"
-          >
-            *Hacer click para generar el folio de la venta.
-          </p>
+            <p
+              ng-if="!vm.isMinimumPaid(vm.quotation)"
+              class="cart-summary-note"
+            >
+              *Se necesita saldar el monto total para poder procesar la venta
+            </p>
 
-          <p
-            ng-if="!vm.isMinimumPaid(vm.quotation)"
-            class="cart-summary-note"
-          >
-            *Se necesita saldar el monto total para poder procesar la venta
-          </p>
+          </div>
+
+
         </div>
 
       </aside>
