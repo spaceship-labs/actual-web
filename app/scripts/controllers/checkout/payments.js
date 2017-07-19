@@ -324,6 +324,7 @@ function CheckoutPaymentsCtrl(
             //FOR SPEI PAYMENTS
             if(vm.order.isSpeiOrder){
               vm.hasAnSpeiOrder = true;
+              vm.quotation.OrderWeb = vm.order;
               return;
             }
 
