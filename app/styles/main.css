@@ -3902,6 +3902,12 @@ md-backdrop.md-sidenav-backdrop{
   padding-left: 10px;
 }
 .deposit-dialog .ammount-description p{margin:0;}
+.deposit-dialog .terms-checkbox-block{margin: 10px 0;}
+.deposit-dialog .terms-checkbox-block md-checkbox{margin:0;}
+.deposit-dialog .terms-checkbox-block a{
+  color: #000;
+  text-decoration: underline;
+}
 
 .input-element p{
   margin: 5px 0;

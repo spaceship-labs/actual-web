@@ -256,7 +256,6 @@
           <small>*Precios en Pesos Mexicanos con impuestos incluidos.</small>
 
         </div>
-        {{isValidPayment(paymentForm)}}
         <div flex="30" flex-sm="100" flex-xs="100" class="input-element">
           <button
             type="submit"
@@ -268,6 +267,13 @@
           </button>
         </div>
       </div>
+
+      <p class="terms-checkbox-block">
+        <md-checkbox ng-model="acceptTerms" aria-label="Acepta terminos" required>
+          He leído  y estoy de acuerdo con los <a href="/terminos-y-condiciones" target="_blank">términos y condiciones</a>
+        </md-checkbox>        
+      </p>
+
     </div>
   </form>
 </md-dialog>

@@ -292,7 +292,7 @@
     function loadSiteInfo(){
       var deferred = $q.defer();
       console.log('loadSiteInfo start', new Date());
-      siteService.findByHandle('actual-group')
+      siteService.findByHandle(vm.siteTheme)
         .then(function(res){
           vm.site = res.data || {};
           $rootScope.site = res.data || {};
