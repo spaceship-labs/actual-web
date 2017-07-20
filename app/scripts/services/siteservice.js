@@ -10,7 +10,8 @@
 
       var service = {
         findByHandle: findByHandle,
-        test: test
+        getStoresIdMapper:getStoresIdMapper,
+        test: test,
       };
 
       return service;
@@ -23,6 +24,16 @@
       function test(){
         var url = '/payment/test';
         return api.$http.post(url);
+      }
+
+      function getStoresIdMapper(){
+        var storesMap = {
+          '5876b417d21cb61c6e57db63': 'actualhome.com',
+          '589b5fdd24b5055c104fd5b8': 'actualstudio.com',
+          '58ab5fa9d21cb61c6ec4473c': 'actualkids.com' 
+        };
+
+        return storesMap;
       }
 
     }

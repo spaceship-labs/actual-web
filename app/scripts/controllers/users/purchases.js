@@ -12,7 +12,8 @@ angular.module('dashexampleApp')
 
 function UsersUserPurchasesCtrl(
   $rootScope,
-  orderService
+  orderService,
+  siteService
 ){
   var vm = this;
 
@@ -26,12 +27,18 @@ function UsersUserPurchasesCtrl(
       {key:'discount', label:'Descuento', currency:true},
       {key:'total', label: 'Total', currency:true},      
       {key:'status', label:'Estatus', mapper:orderService.getOrderStatusMapper()},
+      {key:'Store', label: 'Sitio', mapper: siteService.getStoresIdMapper()},      
       {
         key:'Acciones',
         label:'Acciones',
         propId: 'id',
+        domainMapper:siteService.getStoresIdMapper(),
+        domainColumn: 'Store',
         actions:[
-          {url:'/checkout/order/',type:'edit'},
+          {
+            url:'/checkout/order/',
+            type:'edit',
+          },
         ]
       },
     ],    

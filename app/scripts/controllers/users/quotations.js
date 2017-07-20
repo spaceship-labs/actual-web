@@ -12,7 +12,8 @@ angular.module('dashexampleApp')
 
 function UsersUserQuotationsCtrl(
   $rootScope,
-  quotationService
+  quotationService,
+  siteService
 ){
   var vm = this;
   angular.extend(vm,{
@@ -23,7 +24,8 @@ function UsersUserQuotationsCtrl(
       {key: 'folio', label:'Folio'},
       {key:'createdAt', label:'Fecha' ,date:true},
       {key:'discount', label:'Descuento', currency:true},
-      {key:'total', label: 'Total', currency:true},      
+      {key:'total', label: 'Total', currency:true},    
+      {key:'Store', label: 'Sitio', mapper: siteService.getStoresIdMapper()},      
       {
         key:'Acciones',
         label:'Acciones',
