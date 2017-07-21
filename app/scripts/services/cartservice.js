@@ -26,7 +26,9 @@
         originalShipDate: cartItem.originalDate,
         productDate: cartItem.productDate,
         shipCompany: cartItem.company,
-        shipCompanyFrom: cartItem.companyFrom
+        shipCompanyFrom: cartItem.companyFrom,
+        PurchaseAfter: cartItem.PurchaseAfter,
+        PurchaseDocument: cartItem.PurchaseDocument        
       };
       return params;
     }    
@@ -49,6 +51,9 @@
 	      console.log('productCartItem')
 	      productCartItem.quantity = quantity;
 	      productCartItem.originalDate = productCartItem.date;
+	      productCartItem.PurchaseAfter = productCartItem.PurchaseAfter;
+	      productCartItem.PurchaseDocument = productCartItem.PurchaseDocument;
+	      
 	      productCartItems.push( productCartItem );
 	    }else{
 	      var deliveries = deliveryService.sortDeliveriesByHierarchy(

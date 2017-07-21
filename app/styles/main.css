@@ -3868,6 +3868,12 @@ md-backdrop.md-sidenav-backdrop{
 .deposit-dialog small{
   font-size: 12px;
 }
+.deposit-dialog .payment-cardtype-chooser md-radio-button{margin-right: 60px;}
+.deposit-dialog .payment-cardtype-chooser img{
+  max-width: 46px;
+  position: relative;  
+  top: 6px;
+}
 .deposit-dialog .dialog-block:first-child,
 .deposit-dialog .dialog-block:first-of-type{margin-top: 0}
 .deposit-dialog .main-dialog-block{margin-top:0!important;}
@@ -4784,6 +4790,8 @@ padding-left: 16px;
     line-height: 1.1;
   }
   .orderby-selectors .orderby-item-active span{background-size: 26px;}
+
+  .deposit-dialog .payment-cardtype-chooser md-radio-button{margin-right: 20px;}
 }
 
 

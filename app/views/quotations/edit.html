@@ -22,6 +22,7 @@
         <label>Status</label>
         <p>
           <span
+            ng-if="!vm.quotation.OrderWeb"
             ng-class="{
               'active': !vm.quotation.Order,
               'closed': vm.quotation.Order || vm.quotation.isClosed,
@@ -32,7 +33,7 @@
             class="order-link"
             ng-href="/checkout/order/{{vm.quotation.OrderWeb.id}}"
             ng-if="vm.quotation.OrderWeb && vm.quotation.Client.id === vm.user.Client">
-            | Haz click aqui para ver el pedido
+            Haz click aqui para ver el pedido
           </a>
         </p>
       </div>
