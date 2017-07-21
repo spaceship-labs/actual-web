@@ -115,6 +115,10 @@
       }  
 
       function isUserSellerOrAdmin(){
+        if(!$rootScope.user){
+          return false;
+        }
+
         return $rootScope.user.role && 
           ( $rootScope.user.role === USER_ROLES.ADMIN 
             || $rootScope.user.role === USER_ROLES.SELLER 
