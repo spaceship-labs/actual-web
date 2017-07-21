@@ -110,6 +110,8 @@
       vm.user = localStorageService.get('user');
       vm.activeStoreId = localStorageService.get('activeStore');
       $rootScope.user = vm.user;
+      vm.isUserSellerOrAdmin = authService.isUserSellerOrAdmin();
+
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }

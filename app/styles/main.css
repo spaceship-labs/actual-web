@@ -4690,6 +4690,24 @@ padding-left: 16px;
 .md-sidenav-left, md-sidenav{z-index: 9999999999999999;padding-left: 25px;position: fixed!important}
 /*actual home*/
 
+/*----------------/
+  #REPORTS
+/*----------------*/
+
+#reports{padding: 30px 20px;}
+#reports .box-head-profile{margin-top: 30px}
+#reports .box-head-profile h1{margin:0;}
+#reports .box-head-profile .info-row{padding: 0 25px;margin-top: 20px;font-size: 15px}
+#reports .box-head-profile .info-row:nth-child(2){border-left: 1px solid black;/*border-right: 1px solid black*/}
+#reports .box-head-profile .info-row p, #reports .box-head-profile .info-row strong{margin: 0px}
+#reports .box-head-profile .info-row p{font-size: 12px;margin-top: 5px}
+#reports .principal-icon .icon-login{font-size: 62px}
+
+#reports .head-reports i{font-size: 35px;}
+#reports .head-reports h1{font-weight: bold;font-size: 30px;margin: 10px 0;margin-left: 5px}
+#reports .head-reports i.icon-settings{font-size: 25px}
+#reports .head-reports a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
+
 
 @media screen and (max-width:1200px ){
   .user-profile-view,

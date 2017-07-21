@@ -370,16 +370,26 @@ angular
         controller: 'DeliveriesLocationsCtrl',
         controllerAs: 'deliveriesLocations'
       })      
-      .when('/:slug/:id', {      
-        templateUrl: 'views/product.html',
-        controller: 'ProductCtrl',
-        controllerAs: 'vm'
-      })          
       .when('/security', {
         templateUrl: 'views/security.html',
         controller: 'SecurityCtrl',
         controllerAs: 'security'
       })
+      .when('/reports/orders', {
+        templateUrl: 'views/reports/orders.html',
+        controller: 'ReportsOrdersCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/reports/quotations', {
+        templateUrl: 'views/reports/quotations.html',
+        controller: 'ReportsQuotationsCtrl',
+        controllerAs: 'vm'
+      })      
+      .when('/:slug/:id', {      
+        templateUrl: 'views/product.html',
+        controller: 'ProductCtrl',
+        controllerAs: 'vm'
+      })          
       .otherwise({
         redirectTo: '/'
       });

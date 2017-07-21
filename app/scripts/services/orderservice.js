@@ -6,7 +6,7 @@
         .factory('orderService', orderService);
 
     /** @ngInject */
-    function orderService($http, $q, $rootScope, api){
+    function orderService($http, $q, $rootScope, api, authService){
 
       var service = {
         calculateBalance: calculateBalance,
@@ -15,6 +15,7 @@
         addPayment: addPayment,
         getEwalletAmmount: getEwalletAmmount,
         getList: getList,
+        getGeneralList: getGeneralList,
         getById: getById,
         getTotalsByUser: getTotalsByUser,
         getCountByUser: getCountByUser,
@@ -34,7 +35,12 @@
           //'pending-sap': 'Pagado y procesando',
           //'completed': 'Pagado',
           'pending-payment': 'Pendiente de pago'
-        };        
+        };   
+
+        if(authService.isUserSellerOrAdmin()){
+          statusMap['pending-sap'] = 'Pendiente SAP';
+        }
+
         return statusMap;
       }
 
@@ -56,6 +62,13 @@
       function getList(page, params){
         var p = page || 1;
         var url = '/order/find/' + p;
+        return api.$http.get(url,params);
+      }
+
+
+      function getGeneralList(page, params){
+        var p = page || 1;
+        var url = '/order/all/find/' + p;
         return api.$http.get(url,params);
       }
 

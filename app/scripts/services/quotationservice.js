@@ -31,6 +31,7 @@
         getByIdQuickRead: getByIdQuickRead,
         getCountByUser: getCountByUser,
         getList: getList,
+        getGeneralList: getGeneralList,
         populateDetailsWithProducts: populateDetailsWithProducts,
         getQuotationTotals: getQuotationTotals,
         getCurrentStock: getCurrentStock,        
@@ -91,6 +92,12 @@
       function getList(page, params){
         var p = page || 1;
         var url = '/quotation/find/' + p;
+        return api.$http.post(url,params);
+      }
+
+      function getGeneralList(page, params){
+        var p = page || 1;
+        var url = '/quotation/all/find/' + p;
         return api.$http.post(url,params);
       }
 

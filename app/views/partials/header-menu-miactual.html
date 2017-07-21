@@ -49,6 +49,29 @@
           <span class="nav-categories-item-text" href="#">Ofertas</span>
         </a>
 
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/orders" 
+          flex 
+          flex-xs="25" 
+          class="nav-categories-item"
+        >
+          <i class="icon-attachment"></i>
+          <span class="nav-categories-item-text" href="#">Pedidos</span>
+        </a>
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/quotations" 
+          flex 
+          flex-xs="25" 
+          class="nav-categories-item"
+        >
+          <i class="icon-oportunidades"></i>
+          <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+        </a>
+
       </nav>
 
       <nav
@@ -88,6 +111,28 @@
           <i class="icon-ofertas"></i>
           <span class="nav-categories-item-text" href="#">Ofertas</span>
         </a>
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/orders" 
+          flex 
+          flex-xs="25" 
+          class="nav-categories-item"
+        >
+          <i class="icon-attachment"></i>
+          <span class="nav-categories-item-text" href="#">Pedidos</span>
+        </a>
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/quotations" 
+          flex 
+          flex-xs="25" 
+          class="nav-categories-item"
+        >
+          <i class="icon-oportunidades"></i>
+          <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+        </a>        
 
       </nav>
 

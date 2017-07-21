@@ -116,8 +116,8 @@
 
       function isUserSellerOrAdmin(){
         return $rootScope.user.role && 
-          ( $rootScope.user.role.name === USER_ROLES.ADMIN 
-            || $rootScope.user.role.name === USER_ROLES.SELLER 
+          ( $rootScope.user.role === USER_ROLES.ADMIN 
+            || $rootScope.user.role === USER_ROLES.SELLER 
           );
       }     
 

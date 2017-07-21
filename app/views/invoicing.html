@@ -86,15 +86,15 @@
 	              <input 
 	                type="text" 
 	                ng-model="vm.form.companyName" 
-	                ng-maxlength="vm.fiscalAddressConstraints.companyName.max"
-	                maxlength="vm.fiscalAddressConstraints.companyName.max"
-	                max="vm.fiscalAddressConstraints.companyName.max" 
+	                ng-maxlength="100"
+	                maxlength="100"
+	                max="100" 
 	                name="companyName"
 	                required
 	              />              
 	            </div>
 	            <p class="input-note">
-	              Caracteres <strong>{{vm.fiscalDataForm.companyName.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.companyName.max }}</strong>        
+	              Caracteres <strong>{{vm.fiscalDataForm.companyName.$viewValue.length || 0}} de 100</strong>        
 	            </p>
 	            
 	          </div>
