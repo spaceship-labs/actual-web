@@ -2913,6 +2913,17 @@ md-backdrop.md-sidenav-backdrop{
   margin: 0 4px;
 }
 .table-list .dataTables_wrapper .top{padding: 0;}
+.table-list .populate-search-checkbox input{
+  width: auto;
+  height: auto;
+  margin: 0 4px 0 0;
+  vertical-align: middle;
+}
+.table-list .populate-search-checkbox{
+  font-size: 12px;
+  vertical-align: middle;
+  float: none;
+}
 
 /*--------------/
   #TABLE-LIST-V2

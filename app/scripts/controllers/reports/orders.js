@@ -18,6 +18,7 @@ angular.module('dashexampleApp')
 	  angular.extend(vm,{
 	    user: angular.copy($rootScope.user),
 	    apiResourceOrders: orderService.getGeneralList,    
+	    clientSearch: true,
 	    defaultSort: [1, "desc"], //created at
 	    columnsOrders: [
 	      {key: 'folio', label:'Folio'},
@@ -25,6 +26,8 @@ angular.module('dashexampleApp')
 	      {key:'discount', label:'Descuento', currency:true},
 	      {key:'total', label: 'Total', currency:true},      
 	      {key:'status', label:'Estatus', mapper:orderService.getOrderStatusMapper()},
+	      {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
+	      {key:'Client.E_Mail', label:'Email', defaultValue:'Sin cliente'},		      	      
 	      {key:'Store', label: 'Sitio', mapper: siteService.getStoresIdMapper()},      
 	      {
 	        key:'Acciones',
