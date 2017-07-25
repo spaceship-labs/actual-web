@@ -22,7 +22,7 @@
       <hr>
 
       <md-radio-group 
-        ng-if="payment.type === 'credit-card' " 
+        ng-if="payment.type === 'credit-card' || payment.msi " 
         ng-init="payment.cardType = 'master-card' "
         ng-model="payment.cardType"
         class="payment-cardtype-chooser"
