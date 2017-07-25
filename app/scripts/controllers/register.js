@@ -135,13 +135,14 @@ function RegisterCtrl(
 						dialogService.showDialog('Error al iniciar sesión');
 					};
 
-					authService.signIn(
+					return authService.signIn(
 						formData, 
 						$rootScope.successAuthInCheckout, 
 						handleSignInError
 					);
 				})
 				.then(function(){
+						console.log('termino authService');
 
 						if($routeParams.quotation){
 							var quotationId = $routeParams.quotation;

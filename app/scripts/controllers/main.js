@@ -101,7 +101,6 @@
           faviconUrl = '/images/actual-kids-favicon.png';
           break;
       }
-      console.log('favicon url', faviconUrl);
       return faviconUrl;
 
     }
@@ -497,6 +496,7 @@
     }
 
     function setUserTokensOnResponse(res){
+      console.log('res setUserTokensOnResponse', res);
       vm.token = res.data.token;
       vm.user = res.data.user;
 
@@ -515,6 +515,7 @@
           console.log('quotationUpdated', quotationUpdated);
 
           if(quotationUpdated){
+            console.log('redirecting');
             $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
             return;
           }
@@ -535,6 +536,7 @@
     };
 
     $rootScope.successAuthInCheckout = function(res){
+      console.log('successAuthInCheckout')
       setUserTokensOnResponse(res);
     };    
 
