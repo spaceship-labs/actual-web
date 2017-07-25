@@ -130,9 +130,11 @@ function CategoryCtrl(
       })
       .then(function(productsFormatted){
         vm.products = productsFormatted;
+        window.prerenderReady = true;
         console.log('vm.products', vm.products);
       })
       .catch(function(err){
+        window.prerenderReady = true;
         console.log('err', err);
       });
   }  
