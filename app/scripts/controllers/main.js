@@ -92,15 +92,16 @@
       var faviconUrl = '/images/favicon.ico';
       switch(vm.siteTheme){
         case 'actual-home':
-          faviconUrl = '/images/actual-home-favicon.ico';
+          faviconUrl = '/images/actual-home-favicon.png';
           break;
         case 'actual-studio':
-          faviconUrl = '/images/actual-studio-favicon.ico';
+          faviconUrl = '/images/actual-studio-favicon.png';
           break;
         case 'actual-kids':
-          faviconUrl = '/images/actual-kids-favicon.ico';
+          faviconUrl = '/images/actual-kids-favicon.png';
           break;
       }
+      console.log('favicon url', faviconUrl);
       return faviconUrl;
 
     }
