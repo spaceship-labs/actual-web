@@ -15,15 +15,18 @@
     <link 
         rel="shortcut icon" 
         href="/favicon.ico"
-        ng-attr-href="main.getFaviconUrl()" 
+        ng-attr-href="{{main.getFaviconUrl()}}" 
         type="image/x-icon"
     >
+
+    <!--
     <link 
         rel="icon" 
         href="/favicon.ico"
         ng-attr-href="main.getFaviconUrl()" 
         type="image/x-icon"
     >
+    -->
 
     <link itemprop="url" href="https://actualstudio.com">
     <meta itemtype="logo" content="Logo-A-Home.png">
@@ -328,6 +331,8 @@
         <script src="scripts/controllers/invoicing.js"></script>
         <script src="scripts/controllers/contactus.js"></script>
         <script src="scripts/controllers/deliveries-locations.js"></script>
+        <script src="scripts/controllers/reports/orders.js"></script>
+        <script src="scripts/controllers/reports/quotations.js"></script>
         <!-- endbuild -->
 </body>
 </html>

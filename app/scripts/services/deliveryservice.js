@@ -186,6 +186,7 @@
 
 	  function sortDeliveriesByHierarchy(deliveries, allWarehouses, activeStoreWarehouse){
 	    var sortedDeliveries = [];
+
 	    var warehouses = deliveries.map(function(delivery){
 	      var warehouse = _.findWhere(allWarehouses, {
 	        id: delivery.companyFrom
@@ -193,14 +194,39 @@
 	      return warehouse;
 	    });
 	    warehouses = sortWarehousesByHierarchy(warehouses, activeStoreWarehouse);
+	    
+	    var afterPurchaseDeliveries = getAfterPurchaseDeliveries(deliveries);
+	    var onWarehouseDeliveries = getOnWarehouseDeliveries(deliveries);
+
 	    for(var i = 0; i < warehouses.length; i++){
-	      var delivery = _.findWhere(deliveries, {companyFrom: warehouses[i].id});
-	      sortedDeliveries.push( delivery );
+	      var deliveriesWithWhsMatch = _.where(afterPurchaseDeliveries, {companyFrom:warehouses[i].id});
+	      sortedDeliveries = sortedDeliveries.concat( deliveriesWithWhsMatch );
+	      //var delivery = _.findWhere(deliveries, {companyFrom: warehouses[i].id});
+	      //sortedDeliveries.push( delivery );
 	    }
 
-	    sortedDeliveries = sortDeliveriesByDate(sortedDeliveries);
+	    for(i = 0; i < warehouses.length; i++){
+	      var deliveriesWithWhsMatch2 = _.where(onWarehouseDeliveries, {companyFrom:warehouses[i].id});
+	      sortedDeliveries = sortedDeliveries.concat( deliveriesWithWhsMatch2 );
+	      //var delivery = _.findWhere(deliveries, {companyFrom: warehouses[i].id});
+	      //sortedDeliveries.push( delivery );
+	    }
 
 	    return sortedDeliveries;    
+	  }
+
+	  function getAfterPurchaseDeliveries(deliveries){
+	  	var afterPurchaseDeliveries = [];
+	  	return afterPurchaseDeliveries = deliveries.filter(function(delivery){
+	  		return delivery.PurchaseAfter;
+	  	});
+	  }
+
+	  function getOnWarehouseDeliveries(deliveries){
+	  	var onWarehouseDeliveries = [];
+	  	return onWarehouseDeliveries = deliveries.filter(function(delivery){
+	  		return !delivery.PurchaseAfter;
+	  	});
 	  }
 
 	  function sortWarehousesByHierarchy(warehouses, activeStoreWarehouse){

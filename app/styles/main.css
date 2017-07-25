@@ -2913,6 +2913,17 @@ md-backdrop.md-sidenav-backdrop{
   margin: 0 4px;
 }
 .table-list .dataTables_wrapper .top{padding: 0;}
+.table-list .populate-search-checkbox input{
+  width: auto;
+  height: auto;
+  margin: 0 4px 0 0;
+  vertical-align: middle;
+}
+.table-list .populate-search-checkbox{
+  font-size: 12px;
+  vertical-align: middle;
+  float: none;
+}
 
 /*--------------/
   #TABLE-LIST-V2
@@ -3874,6 +3885,12 @@ md-backdrop.md-sidenav-backdrop{
 .deposit-dialog small{
   font-size: 12px;
 }
+.deposit-dialog .payment-cardtype-chooser md-radio-button{margin-right: 60px;}
+.deposit-dialog .payment-cardtype-chooser img{
+  max-width: 46px;
+  position: relative;  
+  top: 6px;
+}
 .deposit-dialog .dialog-block:first-child,
 .deposit-dialog .dialog-block:first-of-type{margin-top: 0}
 .deposit-dialog .main-dialog-block{margin-top:0!important;}
@@ -3910,6 +3927,10 @@ md-backdrop.md-sidenav-backdrop{
 .deposit-dialog .ammount-description p{margin:0;}
 .deposit-dialog .terms-checkbox-block{margin: 10px 0;}
 .deposit-dialog .terms-checkbox-block md-checkbox{margin:0;}
+.deposit-dialog .terms-checkbox-block a{
+  color: #000;
+  text-decoration: underline;
+}
 
 .input-element p{
   margin: 5px 0;
@@ -4686,6 +4707,24 @@ padding-left: 16px;
 .md-sidenav-left, md-sidenav{z-index: 9999999999999999;padding-left: 25px;position: fixed!important}
 /*actual home*/
 
+/*----------------/
+  #REPORTS
+/*----------------*/
+
+#reports{padding: 30px 20px;}
+#reports .box-head-profile{margin-top: 30px}
+#reports .box-head-profile h1{margin:0;}
+#reports .box-head-profile .info-row{padding: 0 25px;margin-top: 20px;font-size: 15px}
+#reports .box-head-profile .info-row:nth-child(2){border-left: 1px solid black;/*border-right: 1px solid black*/}
+#reports .box-head-profile .info-row p, #reports .box-head-profile .info-row strong{margin: 0px}
+#reports .box-head-profile .info-row p{font-size: 12px;margin-top: 5px}
+#reports .principal-icon .icon-login{font-size: 62px}
+
+#reports .head-reports i{font-size: 35px;}
+#reports .head-reports h1{font-weight: bold;font-size: 30px;margin: 10px 0;margin-left: 5px}
+#reports .head-reports i.icon-settings{font-size: 25px}
+#reports .head-reports a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
+
 
 @media screen and (max-width:1200px ){
   .user-profile-view,
@@ -4790,6 +4829,8 @@ padding-left: 16px;
     line-height: 1.1;
   }
   .orderby-selectors .orderby-item-active span{background-size: 26px;}
+
+  .deposit-dialog .payment-cardtype-chooser md-radio-button{margin-right: 20px;}
 }
 
 

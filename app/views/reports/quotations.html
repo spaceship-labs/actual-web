@@ -1,0 +1,26 @@
+<div id="reports">
+	
+	<div class="container container-xlg">
+
+      <div class="head-reports" layout="row"  layout-align="space-between center">
+        <div layout="row" layout-align="center center">
+            <i class="icon-pedidos"></i>
+            <h1>COTIZACIONES</h1>
+        </div>
+      </div>
+	    
+      <hr/>
+
+			<section class="table-list-wrap">
+				<div
+					table-list
+					class="table-list"
+          default-sort="vm.defaultSort"
+					columns="vm.columnsQuotations"
+					client-search="vm.clientSearch"
+					api-resource="vm.apiResourceQuotations">
+				</div>
+			</section>	
+	</div>
+
+</div>

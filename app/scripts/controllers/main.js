@@ -92,15 +92,16 @@
       var faviconUrl = '/images/favicon.ico';
       switch(vm.siteTheme){
         case 'actual-home':
-          faviconUrl = '/images/actual-home-favicon.ico';
+          faviconUrl = '/images/actual-home-favicon.png';
           break;
         case 'actual-studio':
-          faviconUrl = '/images/actual-studio-favicon.ico';
+          faviconUrl = '/images/actual-studio-favicon.png';
           break;
         case 'actual-kids':
-          faviconUrl = '/images/actual-kids-favicon.ico';
+          faviconUrl = '/images/actual-kids-favicon.png';
           break;
       }
+      console.log('favicon url', faviconUrl);
       return faviconUrl;
 
     }
@@ -110,6 +111,8 @@
       vm.user = localStorageService.get('user');
       vm.activeStoreId = localStorageService.get('activeStore');
       $rootScope.user = vm.user;
+      vm.isUserSellerOrAdmin = authService.isUserSellerOrAdmin();
+
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
@@ -292,7 +295,7 @@
     function loadSiteInfo(){
       var deferred = $q.defer();
       console.log('loadSiteInfo start', new Date());
-      siteService.findByHandle('actual-group')
+      siteService.findByHandle(vm.siteTheme)
         .then(function(res){
           vm.site = res.data || {};
           $rootScope.site = res.data || {};

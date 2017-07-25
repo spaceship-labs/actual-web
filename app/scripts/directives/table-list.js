@@ -6,7 +6,17 @@
         .module('dashexampleApp')
         .directive('tableList', tableList);
 
-    var controller = function($scope, $rootScope , $timeout, DTOptionsBuilder, DTColumnBuilder, dialogService, $compile, $filter){
+    var controller = function(
+      $scope, 
+      $rootScope, 
+      $timeout, 
+      DTOptionsBuilder, 
+      DTColumnBuilder, 
+      dialogService, 
+      $compile, 
+      $filter,
+      ENV
+    ){
       $scope.dtInstance = {};
       $scope.isExporting = false;
       $scope.currentOrderColumnIndex = 0;
@@ -241,7 +251,9 @@
                 var html = '';
                 var id = 'id';
                 var icon = '<i class="icon-search"></i>';
-                console.log('column', column);
+                var siteDomain = getSiteDomainByMapper(column.domainMapper, column.domainColumn, full);
+                //console.log('column', column);
+
                 if(column.yesNo){
                   data = data ? 'Si' : 'No';
                 }
@@ -301,11 +313,11 @@
                   column.actions.forEach(function(action){
                     if(action.type === 'edit'){
                       icon = '<i class="icon-search edit-icon"></i>';
-                      html += '<a href="'+(action.url + full[id])+'">' + icon + '</a>';
+                      html += '<a href="'+(siteDomain + action.url + full[id])+'">' + icon + '</a>';
                     }
                     else if(action.type === 'delete'){
                       icon = '<i class="icon-ofertas delete-icon"></i>';
-                      html += '<a href="'+(action.url + full[id])+'">' + icon + '</a>';
+                      html += '<a href="'+(siteDomain + action.url + full[id])+'">' + icon + '</a>';
                     }
                   });
                 }
@@ -319,7 +331,7 @@
                     if($scope.quickEdit){
                       html = '<a href="#" ng-click="editFn($event'+ ', \'' + full[id]+ '\')">' + data + '</a>';
                     }else{
-                      html = '<a href="'+(column.actionUrl + full[id])+'">' + data + '</a>';
+                      html = '<a href="'+(siteDomain + column.actionUrl + full[id])+'">' + data + '</a>';
                     }
                   }else{
                     html = data;
@@ -331,6 +343,28 @@
             )
         );
       });
+
+      function getSiteDomainByMapper(domainMapper, domainColumn, row){
+        if(domainColumn && domainMapper && row){
+          var protocol = 'https://';
+
+          var siteId = row[domainColumn];
+          var siteDomain = domainMapper[siteId];
+          var currentSiteDomain =  $rootScope.siteConstants.domain;
+
+          if(siteDomain === currentSiteDomain){
+            return '';
+          }
+
+          if(ENV.name === 'sandbox'){
+            siteDomain = 'sandbox.' + siteDomain;
+          }
+
+          return protocol + siteDomain;
+
+        }
+        return '';
+      }
 
       $rootScope.$on('reloadTable', function(event, data){
         $timeout(function(){
@@ -387,7 +421,17 @@
       }
 
     };
-    controller.$inject = ['$scope','$rootScope', '$timeout','DTOptionsBuilder','DTColumnBuilder','dialogService','$compile','$filter'];
+    controller.$inject = [
+      '$scope',
+      '$rootScope', 
+      '$timeout',
+      'DTOptionsBuilder',
+      'DTColumnBuilder',
+      'dialogService',
+      '$compile',
+      '$filter',
+      'ENV'
+    ];
 
     /** @ngInject */
     function tableList(){

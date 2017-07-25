@@ -21,7 +21,7 @@
         class="nav-categories"
       >
         <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-recamaras"></i>
+          <i class="icon-ninos"></i>
           <span class="nav-categories-item-text" href="#">Recámaras</span>
         </a>
         <a href="/category/salas" flex flex-xs="25" class="nav-categories-item">
@@ -29,7 +29,7 @@
           <span class="nav-categories-item-text" href="#">Salas</span>
         </a>
         <a href="/category/comedores" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-comedores"></i>
+          <i class="icon-sillas"></i>
           <span class="nav-categories-item-text" href="#">comedores</span>
         </a>
         <a href="/category/muebles-para-jardin" flex flex-xs="25" class="nav-categories-item">
@@ -49,6 +49,29 @@
           <span class="nav-categories-item-text" href="#">Ofertas</span>
         </a>
 
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/orders" 
+          flex 
+          flex-xs="25" 
+          class="nav-categories-item"
+        >
+          <i class="icon-attachment"></i>
+          <span class="nav-categories-item-text" href="#">Pedidos</span>
+        </a>
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/quotations" 
+          flex 
+          flex-xs="25" 
+          class="nav-categories-item"
+        >
+          <i class="icon-oportunidades"></i>
+          <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+        </a>
+
       </nav>
 
       <nav
@@ -61,7 +84,7 @@
         class="nav-categories"
       >
         <a href="/category/camas" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-recamaras"></i>
+          <i class="icon-ninos"></i>
           <span class="nav-categories-item-text" href="#">Camas</span>
         </a>
         <a href="/category/cunas-para-bebes" flex flex-xs="25" class="nav-categories-item">
@@ -81,13 +104,35 @@
           <span class="nav-categories-item-text" href="#">Mesas</span>
         </a>
         <a href="/category/comoda" flex flex-xs="25" class="nav-categories-item" >
-          <i class="icon-decoracion"></i>
+          <i class="icon-comoda"></i>
           <span class="nav-categories-item-text" href="#">Comodas</span>
         </a>
         <a href="/ofertas" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-ofertas"></i>
           <span class="nav-categories-item-text" href="#">Ofertas</span>
         </a>
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/orders" 
+          flex 
+          flex-xs="25" 
+          class="nav-categories-item"
+        >
+          <i class="icon-attachment"></i>
+          <span class="nav-categories-item-text" href="#">Pedidos</span>
+        </a>
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/quotations" 
+          flex 
+          flex-xs="25" 
+          class="nav-categories-item"
+        >
+          <i class="icon-oportunidades"></i>
+          <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+        </a>        
 
       </nav>
 

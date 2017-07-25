@@ -173,6 +173,9 @@ function OffersCtrl(
         product.shipCompany      = deliveryDate.company;
         product.shipCompanyFrom  = deliveryDate.companyFrom;
         product.promotionPackage = packageId;
+        product.PurchaseAfter    = deliveryDate.PurchaseAfter;
+        product.PurchaseDocument = deliveryDate.PurchaseDocument;
+        
       }
     }
     if(!product.shipDate){

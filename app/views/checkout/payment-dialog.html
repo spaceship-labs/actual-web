@@ -20,6 +20,26 @@
 
 
       <hr>
+
+      <md-radio-group 
+        ng-if="payment.type === 'credit-card' " 
+        ng-init="payment.cardType = 'master-card' "
+        ng-model="payment.cardType"
+        class="payment-cardtype-chooser"
+        layout="row"
+      >
+        <md-radio-button value="master-card" class="md-primary">
+          <img src="/images/mastercard.png" alt="">
+        </md-radio-button>
+        <md-radio-button value="visa" class="md-primary">
+          <img src="/images/visa.png" alt="">          
+        </md-radio-button>
+        <md-radio-button value="american-express" class="md-primary">
+          <img src="/images/american.png" alt="">          
+        </md-radio-button>
+
+      </md-radio-group>
+
       <div class="input-container" layout="row" layout-wrap flex="100">
         <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
           <p>
@@ -32,7 +52,7 @@
         </div>
         <div flex flex-sm="100" flex-xs="100" class="input-element">
           <p>
-            <label><strong>TIPO DE TARJETA</strong>*</label>
+            <label><strong>SELECCIONA UN BANCO</strong>*</label>
           </p>
           <div flex="70" ng-if="payment.options.length > 0">
             <div class="input-element select-element-wrapper">
@@ -269,9 +289,9 @@
         </div>
       </div>
 
-      <p ng-if="payment.type === 'transfer' " class="terms-checkbox-block">
+      <p class="terms-checkbox-block">
         <md-checkbox ng-model="acceptTerms" aria-label="Acepta terminos" required>
-          He leído  y estoy de acuerdo con los términos y condiciones
+          He leído  y estoy de acuerdo con los <a href="/terminos-y-condiciones" target="_blank">términos, politicas y condiciones</a>
         </md-checkbox>        
       </p>
 
