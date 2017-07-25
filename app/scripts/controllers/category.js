@@ -96,7 +96,7 @@ function CategoryCtrl(
           return filter;
         });        
       });
-      hasLevel2Categories = !!vm.category.Childs.find(function(child) {
+      hasLevel2Categories = vm.category.Childs.find(function(child) {
         return child.CategoryLevel === 2;
       });
       vm.showLevel2 = hasLevel2Categories;
@@ -130,11 +130,9 @@ function CategoryCtrl(
       })
       .then(function(productsFormatted){
         vm.products = productsFormatted;
-        window.prerenderReady = true;
         console.log('vm.products', vm.products);
       })
       .catch(function(err){
-        window.prerenderReady = true;
         console.log('err', err);
       });
   }  
