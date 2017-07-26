@@ -4349,6 +4349,7 @@ padding-left: 16px;
 /*-----------------*/
 .our-stores .store-item{margin: 20px 0;}
 .our-stores .store-item img{max-width: 100%;}
+.our-stores .store-item .highlight{color: #50C841;}
 
 .our-stores .store-item .map{
   position: relative;

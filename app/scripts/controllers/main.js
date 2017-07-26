@@ -516,8 +516,15 @@
 
           if(quotationUpdated){
             console.log('redirecting');
-            $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
-            return;
+
+            if($routeParams.redirectTo){
+              $location.path($routeParams.redirectTo);              
+              return;
+            }else{
+              $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
+              return;              
+            }
+
           }
 
           var quotationPath ='/quotations/edit';

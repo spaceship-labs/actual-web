@@ -39,6 +39,7 @@ function CheckoutClientCtrl(
     vm.isLoading = true;
     vm.isLoadingClient = true;
     vm.isLoadingContacts = true;
+    $rootScope.scrollTo('main');    
 
     quotationService.getById($routeParams.id)
       .then(function(res){
@@ -132,15 +133,17 @@ function CheckoutClientCtrl(
       return;
     }
 
+    console.log('vm.quotation.Address', vm.quotation.Address);
+
     if(vm.quotation.Address && !vm.quotation.immediateDelivery){
       var selectedContact = findContactById(vm.quotation.Address);
-      console.log('vm.quotation.Address', selectedContact)
+      
+      console.log('vm.quotation.Address', selectedContact);
       if(!selectedContact.Address){
         dialogService.showDialog('Agrega los datos de envio',function(){
-          $location.path('/clients/profile/' + vm.quotation.Client.id)
+          $location.path('/user/deliveries')
             .search({
-              activeTab:3,
-              checkoutProcess: vm.quotation.id
+              returnTo: '/checkout/client/' + vm.quotation.id
             });
         });
         return;
@@ -174,10 +177,9 @@ function CheckoutClientCtrl(
 
     else{
       dialogService.showDialog('Asigna una dirección de envío',function(){
-        $location.path('/clients/profile/' + vm.quotation.Client.id)
+        $location.path('/user/deliveries')
           .search({
-            activeTab:3,
-            checkoutProcess: vm.quotation.id
+            returnTo: '/checkout/client/' + vm.quotation.id
           });
       });
     }

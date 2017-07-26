@@ -80,6 +80,7 @@ function QuotationsEditCtrl(
   function init(quotationId, options){
     console.log('entered init.js', new Date());
 
+    $rootScope.scrollTo('main');    
     vm.activeStore       = $rootScope.activeStore;
     vm.promotionPackages = [];
     options              = options || {};
@@ -179,6 +180,18 @@ function QuotationsEditCtrl(
   }
 
   function sendByEmail(){
+    console.log('vm.quotation', vm.quotation);
+
+    if(!vm.quotation.Client){
+      $location.path('/register')
+        .search({
+          //addContact:true,
+          quotation: vm.quotation.id,
+          redirectTo: '/quotations/edit/' + vm.quotation.id
+        });
+      return;
+    }
+
     vm.isLoading = true;
     $rootScope.scrollTo('main');
     quotationService.sendByEmail(vm.quotation.id)
