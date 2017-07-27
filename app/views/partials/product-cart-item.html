@@ -72,10 +72,9 @@
               </span>
             </p>
             <p 
-              class="price-crossed"
               ng-if="vm.getUnitPriceWithDiscount(detailGroup.unitPrice, detailGroup.discountPercent) != detailGroup.unitPrice"
             >
-              <span class="currency-label">MXN</span>{{ detailGroup.unitPrice | roundCurrency }}
+              <span class="currency-label">MXN</span> <span class="price-crossed">{{ detailGroup.unitPrice | roundCurrency }}</span>
             </p>
             <p class="price-hl">
               <span class="currency-label">MXN</span>

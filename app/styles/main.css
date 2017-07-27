@@ -1793,15 +1793,20 @@ select{
   font-weight: 700;
   font-size: 14px;
 }
+.product-view p{margin:0;}
 .product-view-price-crossed{
   text-decoration: line-through;
-  margin: 0 4px;
+  /*margin: 0 4px;*/
+  margin: 0;  
 }
 .product-view-price-main,
 .product-view-price-hl{
   color: #E2023F;
-  margin: 6px 4px 0;
+  /*margin: 6px 4px 0;*/
+  margin: 6px 0px 0!important;  
 }
+
+.product-view .currency-label,
 .product-view-price-crossed .currency-label,
 .product-view-price-hl .currency-label {
   font-size: 10px;
@@ -3198,6 +3203,7 @@ md-backdrop.md-sidenav-backdrop{
   font-size: 20px;
   text-align: right;
 }
+.cart-item .cart-item-data-prices p{margin: 0;}
 .cart-item .cart-item-data-prices h3 .currency-label{
   font-size: 10px;
 }
@@ -3213,12 +3219,13 @@ md-backdrop.md-sidenav-backdrop{
 }
 .cart-item .cart-item-data-prices .price-crossed{
   text-decoration: line-through;
-  margin: 0 4px;
+  /*margin: 0 4px;*/
 }
 .cart-item .cart-item-data-prices .price-main,
 .cart-item .cart-item-data-prices .price-hl{
   color: #E2023F;
-  margin: 6px 4px 0;
+  margin: 6px 0;
+  /*margin: 6px 4px 0;*/
 }
 
 .cart-view .cart-summary{
@@ -3275,7 +3282,7 @@ md-backdrop.md-sidenav-backdrop{
   font-size: 24px;
   margin: 0;
 }
-.cart-view .cart-summary .cart-totals .price-crossed,
+.cart-view .cart-summary .cart-totals .price-crossed-block,
 .cart-view .cart-summary .cart-totals .price-main,
 .cart-view .cart-summary .cart-totals .price-main-v2{
   margin: 4px 0 0;
@@ -3287,7 +3294,8 @@ md-backdrop.md-sidenav-backdrop{
   font-size: 11px;  
 }
 
-.cart-view .cart-summary .cart-totals .price-crossed .currency-label,
+.cart-view .cart-item-data .currency-label,
+.cart-view .cart-summary .cart-totals .price-crossed-block .currency-label,
 .cart-view .cart-summary .cart-totals .price-main .currency-label,
 .cart-view .cart-summary .cart-totals .price-main-v2 .currency-label{
   font-size: 10px;

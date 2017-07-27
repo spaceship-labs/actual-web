@@ -91,9 +91,12 @@
                   ng-if="vm.product.mainPromo">
                   - {{vm.mainPromo.discountPg1}}%
                 </p>
-                <p class="product-view-price-crossed"><span class="currency-label">MXN</span> {{vm.product.priceBefore | currency:'$':0 }}</p>
+                <p>
+                  <span class="currency-label">MXN</span> 
+                  <span class="product-view-price-crossed">{{vm.product.priceBefore | currency:'$':0 }}</span>
+                </p>
                 <p class="product-view-price-hl">
-                  <span class="currency-label">MXN</span><strong>{{vm.product.Price | currency:'$':0 }}</strong>
+                  <span class="currency-label">MXN</span> <strong>{{vm.product.Price | currency:'$':0 }}</strong>
                 </p>
               </div>
 

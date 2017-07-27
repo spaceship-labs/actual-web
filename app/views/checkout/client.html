@@ -143,8 +143,8 @@
             <h1><strong>TOTAL:</strong></h1>
           </div>
           <div flex="70">
-            <h3 class="price-crossed" ng-show="vm.quotation.subtotal != vm.quotation.total">
-              <span class="currency-label">MXN</span> {{vm.quotation.subtotal | roundCurrency }}
+            <h3 class="price-crossed-block" ng-show="vm.quotation.subtotal != vm.quotation.total">
+              <span class="currency-label">MXN</span> <span class="price-crossed">{{ vm.quotation.subtotal | roundCurrency  }}</span>
             </h3>
             <h1 class="price-main"> <span class="currency-label">MXN</span><strong>{{vm.quotation.total | roundCurrency }}</strong></h1>
           </div>
