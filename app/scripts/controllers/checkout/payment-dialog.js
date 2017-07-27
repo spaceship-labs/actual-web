@@ -86,6 +86,11 @@ function PaymentDialogController(
   }
 
   $scope.save = function($form){
+    if(!$scope.acceptTerms){
+      alert('Acepta los terminos y condiciones');
+      return;
+    }
+
     if($form.$valid){
 
       if($scope.payment.options.length > 0 && $scope.payment.type !== 'transfer'){

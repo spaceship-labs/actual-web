@@ -66,6 +66,8 @@ function QuotationsEditCtrl(
     showDetailGroupStockAlert: showDetailGroupStockAlert,
     toggleRecord: toggleRecord,
     deattachImage: deattachImage,
+    isOrderPending: isOrderPending,
+    hasSpeiOrder: hasSpeiOrder,
     user: $rootScope.user
   });
 
@@ -94,11 +96,9 @@ function QuotationsEditCtrl(
       .then(function(res){
         vm.isLoading = false;
         vm.quotation = res.data;
-        quotationService.setActiveQuotation(vm.quotation.id);
-
-        vm.status = 'Abierta';
-        if(vm.quotation.Order || vm.quotation.isClosed){
-          vm.status = 'Cerrada';
+        
+        if(!vm.quotation.OrderWeb){
+          quotationService.setActiveQuotation(vm.quotation.id);
         }
 
         loadPaymentMethods();
@@ -138,6 +138,20 @@ function QuotationsEditCtrl(
         console.log('error', err);
       });
 
+  }
+
+  function isOrderPending(order){
+    if(!order){
+      return false;
+    }
+    return order.status === 'pending-sap'  || order.status === 'pending-payment';
+  }
+
+  function hasSpeiOrder(order){
+    if(!order){
+      return false;
+    }
+    return order.isSpeiOrder;
   }
 
   function showAlerts(){

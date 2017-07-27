@@ -12,7 +12,7 @@
       layout-align="space-between center"
     >
       <div
-        ng-attr-flex="{{method.cardsImages && '40' || '100' }}"
+        ng-attr-flex="{{method.cardsImages && '50' || '100' }}"
         ng-attr-flex-md="{{method.cardsImages && '50' || '100' }}"
         ng-attr-flex-md="{{method.cardsImages && '60' || '100' }}"
         flex-sm="100"
@@ -27,11 +27,8 @@
 
           <strong>{{method.label}}</strong>
         </md-radio-button>
-        <span
-          ng-if="!method.msi && method.type != 'single-payment-terminal' "
-          class="method-text"
-        >
-          {{method.description}}
+        <span ng-if="method.type === 'transfer'" class="spei-instructions-trigger">
+          <a href="" ng-click="vm.showTransferInstructionDialog()">¿Cómo funciona?</a>
         </span>
         <span ng-if="method.msi" class="method-text">Meses</span>
         <div ng-if="method.msi" class="hl-label"><strong>Sin intereses</strong></div>
@@ -39,7 +36,7 @@
 
       <div
         ng-if="method.cardsImages"
-        flex="60"
+        flex="50"
         flex-md="50"
         flex-sm="50"
         class="bank-icons"

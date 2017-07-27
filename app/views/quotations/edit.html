@@ -15,27 +15,38 @@
   <h1><i class="icon-attachment"></i> <strong>COTIZACIÓN #{{vm.quotation.folio}}</strong></h1>
   <hr/>
 
+  <div ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb) && vm.isOrderPending(vm.quotation.OrderWeb)" class="spei-msg">
+    <p>Su orden de compra estará EN PROCESO y SUJETA A DISPONIBILIDAD, le sugerimos no volver a generar la misma cotización para evitar una duplicidad</p>
+  </div>
+
+  <div>
+    <ng-include 
+      ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb)"
+      src="'views/checkout/spei-card-instructions.html'"
+      >
+    </ng-include>
+  </div>
 
   <section class="quotation-data">
+
     <div layout="row" layout-wrap class="quotation-data-row">
-      <div flex flex-sm="100" class="only-hide-print">
-        <label>Status</label>
+      
+      <div ng-if="vm.quotation.OrderWeb" flex flex-sm="100" class="only-hide-print">
+        <label>Estatus</label>
         <p>
-          <span
-            ng-if="!vm.quotation.OrderWeb"
-            ng-class="{
-              'active': !vm.quotation.Order,
-              'closed': vm.quotation.Order || vm.quotation.isClosed,
-            }">
-            {{vm.status}}
-          </span>
+
           <a
             class="order-link"
             ng-href="/checkout/order/{{vm.quotation.OrderWeb.id}}"
-            ng-if="vm.quotation.OrderWeb && vm.quotation.Client.id === vm.user.Client">
+            ng-if="vm.quotation.OrderWeb && vm.quotation.Client.id === vm.user.Client && !vm.quotation.OrderWeb.status === 'pending-sap' ">
             Haz click aqui para ver el pedido
           </a>
         </p>
+
+        <p ng-if="vm.quotation.OrderWeb && vm.isOrderPending(vm.quotation.OrderWeb)">
+          Procesando
+        </p>
+
       </div>
       <div flex hide-sm hide-xs>
         <label for="">Nombre del cliente</label>
@@ -218,7 +229,7 @@
 
   </form>
 
-  <section>
+  <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb)">
     <div class="hr"><hr /></div>
     <ng-include src="'views/quotations/payments-options.html'">
     </ng-include>
