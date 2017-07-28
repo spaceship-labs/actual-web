@@ -164,6 +164,8 @@ function RegisterCtrl(
 					if(updated){
 						dialogService.showDialog('Registrado con exito');
 						$location.path('/checkout/client/' + $routeParams.quotation);
+					}else{
+						$location.path('/');
 					}
 				})
 				.catch(function(err){
