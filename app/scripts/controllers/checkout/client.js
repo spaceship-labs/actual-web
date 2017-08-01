@@ -150,7 +150,8 @@ function CheckoutClientCtrl(
       }
     }
 
-    if( vm.quotation.Address || vm.quotation.immediateDelivery){
+    /*TODO: Remove true*/
+    if( vm.quotation.Address || vm.quotation.immediateDelivery || true){
 
       showInvoiceDataAlert()
         .then(function(goToPayments){

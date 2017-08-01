@@ -97,8 +97,12 @@ function QuotationsEditCtrl(
         vm.isLoading = false;
         vm.quotation = res.data;
         
-        if(!vm.quotation.OrderWeb){
+        if(!vm.quotation.OrderWeb && !vm.quotation.rateLimitReported){
           quotationService.setActiveQuotation(vm.quotation.id);
+        }
+
+        if(vm.quotation.rateLimitReported){
+          quotationService.removeCurrentQuotation();
         }
 
         loadPaymentMethods();

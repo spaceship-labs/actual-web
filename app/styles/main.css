@@ -3366,6 +3366,11 @@ md-backdrop.md-sidenav-backdrop{
   font-weight: 400;
 }
 
+.cart-view .secure-logos{
+  text-align: center;
+  margin: 10px 0 0;
+}
+
 /*--------------/
   #SEARCH-VIEW
 /*-------------*/
@@ -4409,6 +4414,15 @@ padding-left: 16px;
   font-size: 14px;
 }
 
+
+/*------------------/
+  #ORDER-PROCESSING-MSG
+/*-------------------*/
+.order-processing-msg table p{
+  margin: 0;
+}
+.order-processing-msg table td{padding: 10px;}
+.order-processing-msg table td:first-child{padding-left: 0px;}
 
 /*-------------------/
   #INVOICING-VIEW

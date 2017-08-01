@@ -117,6 +117,10 @@ function CheckoutPaymentsCtrl(
           //$location.path('/quotations/edit/' + vm.quotation.id);
         }
 
+        if(vm.quotation.rateLimitReported){
+          //$location.path('/quotations/edit/' + vm.quotation.id);          
+        }
+
         if(vm.quotation.Order){
           $location.path('/checkout/order/' + vm.quotation.Order.id);
         }
@@ -320,7 +324,6 @@ function CheckoutPaymentsCtrl(
           vm.isLoadingProgress = false;
           vm.order = res.data;
           if(vm.order.id){
-
             $rootScope.scrollTo('main');
             quotationService.removeCurrentQuotation();
 
@@ -347,6 +350,15 @@ function CheckoutPaymentsCtrl(
               errMsg = errMsg.message_to_purchaser;
             }
             errMsg = errMsg ? errMsg.toString() : '';
+
+            if(err.data){
+              if(err.data.conektaLimitErrorThrown){
+                $rootScope.scrollTo('main');
+                quotationService.removeCurrentQuotation();              
+                $location.path('/quotations/edit/' + vm.quotation.id);
+                return;
+              }
+            }
 
             var conektaOrderMsg = getMessageFromConektaOrderError(err);
             if(conektaOrderMsg){

@@ -19,15 +19,18 @@
     <p>Su orden de compra estará EN PROCESO y SUJETA A DISPONIBILIDAD, le sugerimos no volver a generar la misma cotización para evitar una duplicidad</p>
   </div>
 
-  <div>
-    
+  <div>    
     <ng-include 
       ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb)"
       src="'views/checkout/spei-card-instructions.html'"
       >
     </ng-include>
     
-
+    <ng-include 
+      ng-if="vm.quotation.rateLimitReported"
+      src="'views/quotations/rate-limit-message.html'"
+      >
+    </ng-include>
   </div>
 
   <section class="quotation-data">
@@ -127,7 +130,7 @@
         <hr>
         <a
           href="#"
-          ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
+          ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
           ng-click="vm.addNewProduct()"
           class="action-btn-print print-btn">
           AGREGAR NUEVO ARTÍCULO
@@ -175,7 +178,7 @@
           <input
             type="submit"
             value="CONTINUAR"
-            ng-if="!vm.quotation.Order && !vm.quotation.isClosed "
+            ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
             ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock"
             ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock }"
             class="cart-view-btn print-btn"
