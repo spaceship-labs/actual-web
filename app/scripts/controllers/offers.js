@@ -78,6 +78,10 @@ function OffersCtrl(
   }  
 
   function addPackageToCart(packageId){
+    if($rootScope.siteTheme !== 'actual-studio'){
+      return;
+    }
+
     $rootScope.scrollTo('main');
     var products = [];
 
