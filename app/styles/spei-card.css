@@ -2,17 +2,27 @@
 	margin-bottom: 10px;
 	font-size: 15px;
 	font-weight: 600;
+	color: #000;
 	text-transform: uppercase;
 }
 
+.spei-card .spei-card-inner{
+	width: 500px;
+	margin: 0 auto;	
+}
+.spei-card .ps-block{
+	padding: 0 45px;	
+}
 .spei-card .ps {
-	width: 496px;
-	border-radius: 4px;
+	/*width: 496px;*/
 	box-sizing: border-box;
-	padding: 0 45px;
-	margin: 40px auto;
+	/*padding: 0 45px;*/
+	margin: 0 auto;
+	/*margin: 40px auto;*/
 	overflow: hidden;
 	border: 1px solid #b0afb5;
+	border-top: 0;
+	border-radius: 0 0 4px 4px;
 	font-family: 'Open Sans', sans-serif;
 	color: #4f5365;
 }
@@ -43,8 +53,16 @@
 }
 
 .spei-card .ps-brand {
+	/*
 	width: 45%;
 	float: left;
+	*/
+}
+
+.spei-card .ps-actual-logo img{
+	max-width: 80%;
+	margin: 0 auto;
+	display: block;
 }
 
 .spei-card .ps-brand img {
@@ -53,15 +71,58 @@
 }
 
 .spei-card .ps-amount {
+	/*
 	width: 55%;
 	float: right;
+	*/
+	background: #f5f5f5;
+	text-align: center;
+	padding: 20px 0;
 }
+.spei-card .amount-to-pay{
+	font-weight: 300;
+	color: #000;
+	margin: 0;
+}
+.spei-card .ps-alert{
+	background: #33BA2C;
+	padding: 6px 0;
+	color: #fff;
+	text-align: center;
+	font-size: 14px;
+}
+.spei-card .ps-alert p{margin: 0;}
+.spei-card .ps-spei-brand{
+	margin: 20px 0;
+	text-align: center;
+}
+.spei-card .ps-spei-brand img{max-width: 60px}
 
+.spei-card .ps-company-data-title{
+	color: #000;
+	margin: 0;
+}
+.spei-card .ps-company-data-title span{
+	background: #f5f5f5;
+	font-size: 12px;
+	font-weight: 700;
+	padding: 10px;
+}
+.spei-card .ps-company-data{
+	color: #000;
+	border: 15px solid #f5f5f5;
+	padding: 10px;
+}
+.spei-card .ps-company-data table{
+	font-size: 14px;
+	width: 100%;
+}
 .spei-card .ps-amount h2 {
 	font-size: 36px;
 	color: #000000;
 	line-height: 24px;
-	margin-bottom: 15px;
+	margin: 0;
+	/*margin-bottom: 15px;*/
 }
 
 .spei-card .ps-amount h2 sup {
@@ -85,20 +146,31 @@
 	text-align: center;
 	margin-top: -1px;
 	padding: 6px 0 7px;
-	border: 1px solid #b0afb5;
+	border: 1px solid #000;	
+	/*border: 1px solid #b0afb5;
 	border-radius: 4px;
-	background: #f8f9fa;
+	background: #f8f9fa;*/
 }
 
 .spei-card .ps-instructions {
+	/*
 	margin: 32px -45px 0;
 	padding: 32px 45px 45px;
+	*/
+	margin: 0 -45px 0;
+	padding: 0 45px 45px;	
 	border-top: 1px solid #b0afb5;
-	background: #f8f9fa;
+	/*background: #f8f9fa;*/
 }
 
 .spei-card ol {
+	padding-left: 0;
 	margin: 17px 0 0 16px;
+}
+
+.spei-card .ps-instructions li{
+	font-size: 14px;
+	color: #000;
 }
 
 .spei-card li + li {
@@ -116,6 +188,6 @@
 	color: #108f30;
 	text-align: center;
 	border: 1px solid #108f30;
-	border-radius: 4px;
+	/*border-radius: 4px;*/
 	background: #ffffff;
 }

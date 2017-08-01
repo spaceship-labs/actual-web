@@ -20,11 +20,14 @@
   </div>
 
   <div>
+    
     <ng-include 
       ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb)"
       src="'views/checkout/spei-card-instructions.html'"
       >
     </ng-include>
+    
+
   </div>
 
   <section class="quotation-data">
