@@ -3412,6 +3412,10 @@ md-backdrop.md-sidenav-backdrop{
   text-align: center;
   margin: 10px 0 0;
 }
+.cart-view .secure-logos img{
+  max-width: 100px;
+  margin: 4px 0;
+}
 
 /*--------------/
   #SEARCH-VIEW

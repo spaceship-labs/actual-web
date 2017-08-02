@@ -374,7 +374,7 @@ function ProductCtrl(
         vm.isLoadingDeliveries = true;
         vm.zipcodeDelivery = zipcodeDelivery;
         var callback = function(){
-          dialogService.showDialog('Fechas de entrega actualizadas sobre tu C.P');
+          //dialogService.showDialog('Fechas de entrega actualizadas sobre tu C.P');
         }
 
         return setUpDeliveries({

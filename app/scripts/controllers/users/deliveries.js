@@ -33,6 +33,10 @@ function UsersUserDeliveriesCtrl(
     copyPersonalDataToNewAddress: copyPersonalDataToNewAddress
   });
 
+
+  var searchParams = $location.search() || {};
+  vm.returnTo = searchParams.returnTo;
+
   init();
 
   function init(){
@@ -83,7 +87,9 @@ function UsersUserDeliveriesCtrl(
         .then(function(res){
           console.log('res', res);
           vm.isLoadingCreate = false;
-          dialogService.showDialog('Dirección registrada');
+          if(!vm.returnTo){
+            dialogService.showDialog('Dirección registrada');
+          }
           returnToLocationIfneeded();
           vm.newAddress = {};
           loadAddresses();
@@ -108,7 +114,9 @@ function UsersUserDeliveriesCtrl(
         .then(function(res){
           console.log('res', res);
           vm.isLoadingEdit = false;
-          dialogService.showDialog('Información  actualizada');
+          if(!vm.returnTo){
+            dialogService.showDialog('Información  actualizada');
+          }
           returnToLocationIfneeded();
           loadAddresses();  
         })

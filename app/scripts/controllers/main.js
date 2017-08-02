@@ -52,6 +52,7 @@
       menuCategories: [],
       menuCategoriesOn: false,
       pointersSidenav: [],
+      currentYear: moment().format('YYYY'),
       activateCartModal: activateCartModal,
       activateLoginModal: activateLoginModal,
       deactivateCartModal: deactivateCartModal,

@@ -274,7 +274,7 @@ angular
         controller: 'ManualPinturaElectrostaticaCtrl',
         controllerAs: 'manual/pinturaElectrostatica'
       })      
-      .when('/compra-fiable', {
+      .when('/compra-segura', {
         templateUrl: 'views/securebuy.html',
         controller: 'SecurebuyCtrl',
         controllerAs: 'securebuy'

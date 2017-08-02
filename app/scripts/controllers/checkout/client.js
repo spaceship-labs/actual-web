@@ -35,11 +35,11 @@ function CheckoutClientCtrl(
   });
 
   function init(){
+    $rootScope.scrollTo('main');    
     $location.search({});
     vm.isLoading = true;
     vm.isLoadingClient = true;
     vm.isLoadingContacts = true;
-    $rootScope.scrollTo('main');    
 
     quotationService.getById($routeParams.id)
       .then(function(res){
@@ -153,16 +153,17 @@ function CheckoutClientCtrl(
     /*TODO: Remove true*/
     if( vm.quotation.Address || vm.quotation.immediateDelivery || true){
 
+      /*
       showInvoiceDataAlert()
         .then(function(goToPayments){
           if(!goToPayments){
             return $q.reject();
           }
-          vm.isLoading = true;
-          $rootScope.scrollTo('main');
-          var params = {addressId: vm.quotation.Address};
-          return quotationService.updateAddress(vm.quotation.id, params);
-        })
+      */
+      vm.isLoading = true;
+      $rootScope.scrollTo('main');
+      var params = {addressId: vm.quotation.Address};
+      quotationService.updateAddress(vm.quotation.id, params)
         .then(function(res){
           vm.isLoading = false;
           $location.path('/checkout/paymentmethod/' + vm.quotation.id);
