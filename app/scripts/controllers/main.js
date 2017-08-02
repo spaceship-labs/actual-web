@@ -69,6 +69,7 @@
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       getFaviconUrl: getFaviconUrl,
+      toggleMobileSidenav: toggleMobileSidenav,
       siteTheme: SITE.name,
       siteConstants: SITE
     });
@@ -164,6 +165,10 @@
         $scope.$apply();
       });
 
+    }
+
+    function toggleMobileSidenav(){
+      $mdSidenav('mobileSidenav').toggle();
     }
 
     function handleSearch(){

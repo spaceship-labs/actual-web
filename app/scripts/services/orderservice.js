@@ -31,12 +31,12 @@
         var statusMap = {
           'pending': 'Pendiente',
           'completed': 'Procesado',
-          'pending-sap': 'Procesado',          
+          'pending-sap': 'Procesado',
           //'pending-sap': 'Pagado y procesando',
           //'completed': 'Pagado',
-          'pending-payment': 'Pendiente de pago'
-        };   
-
+          'pending-payment': 'Pendiente de pago',
+          'cancelled': 'Cancelado'
+        };  
         if(authService.isUserSellerOrAdmin()){
           statusMap['pending-sap'] = 'Pendiente SAP';
         }

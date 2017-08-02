@@ -174,6 +174,7 @@ function SearchCtrl(
   }
 
   function toggleSearchSidenav(){
+    console.log('toggleSearchSidenav');
     $mdSidenav('searchFilters').toggle();
   }
 

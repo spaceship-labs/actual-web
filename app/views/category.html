@@ -19,6 +19,10 @@
 </a>
 
 <div class="content-block listing-view">
+
+  <ng-include src="'views/partials/search-filters.html'"></ng-include>
+
+
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
     <!--START NAV-->
     <aside flex="20" hide-sm hide-xs>
@@ -27,8 +31,6 @@
         selected-category-id="vm.category.id"
         active-store="main.activeStore">
       </sidebar-categories>
-
-      <ng-include src="'views/partials/search-filters.html'"></ng-include>
 
     </aside>
     <!--END NAV-->

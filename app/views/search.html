@@ -19,7 +19,13 @@
 
 
 <div class="content-block listing-view search-view" id="search-page">
+
+  <!--FILTERS-->
+  <ng-include src="'views/partials/search-filters.html'"></ng-include>
+  <!--END FILTERS-->
+
   <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
+
 
     <!--START NAV-->
     <aside flex="20" hide-sm hide-xs>
@@ -27,10 +33,6 @@
         active-store="main.activeStore"
         categories-tree="main.categoriesTree">
       </sidebar-categories>
-
-      <!--FILTERS-->
-      <ng-include src="'views/partials/search-filters.html'"></ng-include>
-      <!--END FILTERS-->
 
     </aside>
     <!--END NAV-->

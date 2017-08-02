@@ -1,0 +1,121 @@
+<md-sidenav 
+  class="md-sidenav-left md-whiteframe-4dp pointers-sidenav mobile-sidenav" 
+  md-component-id="mobileSidenav"
+>
+  <md-button 
+    ng-click="main.toggleMobileSidenav()" 
+    class="close-btn md-fab md-mini md-primary"
+  >
+    <i class="icon-cotizar"></i>
+  </md-button>
+
+  <!--
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Filtrar resultados <i class="icon-pointer"></i></h1>
+  </md-toolbar>
+  -->
+
+  <md-content>
+
+    <nav ng-if="main.siteTheme !== 'actual-kids' ">
+      <a href="/category/recamaras" class="nav-categories-item">
+        <i class="icon-ninos"></i>
+        <span class="nav-categories-item-text" href="#">Recámaras</span>
+      </a>
+      <a href="/category/salas" class="nav-categories-item">
+        <i class="icon-sofa nav-categories-item-add"></i>
+        <span class="nav-categories-item-text" href="#">Salas</span>
+      </a>
+      <a href="/category/comedores" class="nav-categories-item">
+        <i class="icon-sillas"></i>
+        <span class="nav-categories-item-text" href="#">comedores</span>
+      </a>
+      <a href="/category/muebles-de-jardin" class="nav-categories-item">
+        <i class="icon-jardin"></i>
+        <span class="nav-categories-item-text" href="#">Exteriores</span>
+      </a>
+      <a href="/category/muebles-para-oficina" class="nav-categories-item">
+        <i class="icon-office"></i>
+        <span class="nav-categories-item-text" href="#">Oficina</span>
+      </a>
+      <a href="/category/lamparas" class="nav-categories-item" >
+        <i class="icon-decoracion"></i>
+        <span class="nav-categories-item-text" href="#">Lamparas</span>
+      </a>
+      <a href="/ofertas" class="nav-categories-item">
+        <i class="icon-ofertas"></i>
+        <span class="nav-categories-item-text" href="#">Ofertas</span>
+      </a>
+
+      <a 
+        ng-if="main.isUserSellerOrAdmin" 
+        href="/reports/orders" 
+        class="nav-categories-item"
+      >
+        <i class="icon-attachment"></i>
+        <span class="nav-categories-item-text" href="#">Pedidos</span>
+      </a>
+
+      <a 
+        ng-if="main.isUserSellerOrAdmin" 
+        href="/reports/quotations" 
+        class="nav-categories-item"
+      >
+        <i class="icon-oportunidades"></i>
+        <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+      </a>
+
+    </nav>
+
+
+    <nav ng-if="main.siteTheme === 'actual-kids' ">
+        <a href="/category/camas"  class="nav-categories-item">
+          <i class="icon-ninos"></i>
+          <span class="nav-categories-item-text" href="#">Camas</span>
+        </a>
+        <a href="/category/cunas-para-bebes"  class="nav-categories-item">
+          <i class="icon-bebes nav-categories-item-add"></i>
+          <span class="nav-categories-item-text" href="#">Cunas</span>
+        </a>
+        <a href="/category/accesorios"  class="nav-categories-item">
+          <i class="icon-ambientes"></i>
+          <span class="nav-categories-item-text" href="#">Accesorios</span>
+        </a>
+        <a href="/category/lamparas"  class="nav-categories-item">
+          <i class="icon-decoracion"></i>
+          <span class="nav-categories-item-text" href="#">Lamparas</span>
+        </a>
+        <a href="/category/mesas"  class="nav-categories-item">
+          <i class="icon-mesas"></i>
+          <span class="nav-categories-item-text" href="#">Mesas</span>
+        </a>
+        <a href="/category/comoda"  class="nav-categories-item" >
+          <i class="icon-comoda"></i>
+          <span class="nav-categories-item-text" href="#">Comodas</span>
+        </a>
+        <a href="/ofertas"  class="nav-categories-item">
+          <i class="icon-ofertas"></i>
+          <span class="nav-categories-item-text" href="#">Ofertas</span>
+        </a>
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/orders" 
+          class="nav-categories-item"
+        >
+          <i class="icon-attachment"></i>
+          <span class="nav-categories-item-text" href="#">Pedidos</span>
+        </a>
+
+        <a 
+          ng-if="main.isUserSellerOrAdmin" 
+          href="/reports/quotations" 
+          class="nav-categories-item"
+        >
+          <i class="icon-oportunidades"></i>
+          <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+        </a>       
+    </nav>
+
+  </md-content>
+</md-sidenav>
