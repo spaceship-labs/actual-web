@@ -18,7 +18,8 @@ function CategoryCtrl(
   categoriesService, 
   productService,
   productSearchService,
-  metaTagsService
+  metaTagsService,
+  breadcrumbService
 ){
   var vm     = this;
 
@@ -74,6 +75,18 @@ function CategoryCtrl(
     vm.isLoading = true;
     categoriesService.getCategoryByHandle($routeParams.category).then(function(res){
       vm.category = res.data;
+      vm.breadcrumbItems = [];
+
+      $rootScope.$on('formattedCategoriesTree', function(e){
+
+        console.log('on categoriesTreeLoaded');
+        vm.breadcrumbItems = breadcrumbService.buildCategoryBreadcrumb(
+          $rootScope.categoriesTree,
+          vm.category.id
+        );
+        console.log('vm.breadcrumbItems', vm.breadcrumbItems);
+      }); 
+
 
       var metaTags = {
         title: $rootScope.siteConstants.publicName + ' | ' + vm.category.Name
@@ -366,5 +379,6 @@ CategoryCtrl.$inject = [
   'categoriesService',
   'productService',
   'productSearchService',
-  'metaTagsService'
+  'metaTagsService',
+  'breadcrumbService'
 ];

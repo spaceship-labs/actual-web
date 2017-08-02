@@ -9,6 +9,27 @@
   </div>
 </div>
 -->
+
+<div class="breadcrumb">
+  <div class="container container-xxlg">
+    <p>
+      <a
+        href="/">
+        Inicio
+      </a>
+      <span ng-repeat="itemGroup in vm.breadcrumbItems track by $index" ng-show="itemGroup.length > 0">
+        >
+          <a
+            ng-repeat="item in itemGroup"
+            ng-href="/category/{{item.Handle}}"
+            class="breadcrumb-item"
+            ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}"
+          >{{item.Name}}</a>
+      </span>
+    </p>
+  </div>
+</div>
+
 <a
   ng-click="vm.toggleSearchSidenav()"
   href=""

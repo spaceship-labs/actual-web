@@ -31,8 +31,10 @@ angular.module('dashexampleApp')
     }
 
     function buildCategoryBreadcrumb(categoriesTree, currentCategoryId){
+        console.log('categoriesTree', categoriesTree);
     	var categoriesLvl1 = filterCategories(categoriesTree, currentCategoryId);
-    	
+        console.log('categoriesLvl1', categoriesLvl1);
+
     	var categoriesLvl2 = categoriesTree.reduce(function(acum, categoryLvl1){
     		if(categoryLvl1.Childs){
     			acum = acum.concat(categoryLvl1.Childs);
@@ -40,6 +42,7 @@ angular.module('dashexampleApp')
     		return acum;
     	},[]);
     	categoriesLvl2 = filterCategories(categoriesLvl2, currentCategoryId);
+        console.log('categoriesLvl2', categoriesLvl2);
 
     	var categoriesLvl3 = categoriesLvl2.reduce(function(acum, categoryLvl2){
     		if(categoryLvl2.Childs){
@@ -48,6 +51,7 @@ angular.module('dashexampleApp')
     		return acum;
     	},[]);
     	categoriesLvl3 = filterCategories(categoriesLvl3, currentCategoryId);
+        console.log('categoriesLvl3', categoriesLvl3);
 
     	var breadcrumb = [categoriesLvl1, categoriesLvl2, categoriesLvl3];
     	return breadcrumb;
