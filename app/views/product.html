@@ -75,6 +75,9 @@
 
             <ng-include src="'views/partials/product-features.html'"></ng-include>
             <ng-include src="'views/partials/product-variants.html'"></ng-include>
+            <ng-include 
+              ng-if="vm.zipcodeDelivery" 
+              src="'views/partials/product-delivery.html'"></ng-include>            
             <ng-include src="'views/partials/product-stock.html'"></ng-include>
             <ng-include src="'views/partials/product-promotions.html'"></ng-include>
 
@@ -157,7 +160,8 @@
               class="add-cart-btn"
               ng-class="
               {
-                'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity
+                'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity,
+                'add-cart-btn-blink': vm.zipcodeDelivery
               }
               "
             >

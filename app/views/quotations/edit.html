@@ -63,13 +63,15 @@
         <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
       </div>
 
-    </div>
-
-    <div layout="row" layout-wrap layout-align="start center" class="quotation-data-row">
       <div flex flex-sm="100" flex-xs="100" ng-if="vm.quotation.ZipcodeDelivery">
         <label>Calculo de entrega para: </label>
         <p>{{vm.quotation.ZipcodeDelivery.estado}}, {{vm.quotation.ZipcodeDelivery.municipio}}, {{vm.quotation.ZipcodeDelivery.asentamiento}}, C.P: {{vm.quotation.ZipcodeDelivery.cp}}</p>
       </div>
+
+
+    </div>
+
+    <div layout="row" layout-wrap layout-align="start center" class="quotation-data-row">
       <div flex hide-sm hide-xs>
         <label for="">Fecha de cotización</label>
         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>

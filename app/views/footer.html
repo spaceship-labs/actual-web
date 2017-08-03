@@ -141,21 +141,25 @@
     >
       <div 
         class="box-bottom" 
-        layout="row" 
-        layout-align="center center" 
-        flex="33"
+        flex="40"
         flex-xs="100"
       >
-        <!--
-        <img class="payment-options-img" src="images/paypal_visa_mastercard_amex_debit_new.png" alt="">
-        -->
+
+        <p class="verified-logos">
+          <img src="/images/trust_brands_trustwave.svg" alt="Trustwave">
+          <img src="/images/trust_brands_prosa.svg" alt="Prosa">
+          <img src="/images/trust_brands_kount.svg" alt="Kount">
+          <img src="/images/trust_brands_mcafee.svg" alt="Mcafee">
+          <img src="/images/trust_brands_digicert.svg" alt="Digicert">
+        </p>
+
       </div>
 
       <div 
         class="box-bottom social-networks" 
         layout="row" 
         layout-align="center center"  
-        flex="33"
+        flex="30"
         flex-xs="100">
         <a ng-href="{{main.siteConstants.fb_url}}" target="_blank">
           <img src="images/fb.png" alt="Facebook {{main.siteName}}">
@@ -165,9 +169,18 @@
           <img src="images/tw.png" alt="Twitter {{main.siteName}}">
         </a>
         -->
-        <a ng-href="{{main.siteConstants.pinterest_url}}" target="_blank">
+        <a ng-show="main.siteConstants.pinterest_url" ng-href="{{main.siteConstants.pinterest_url}}" target="_blank">
           <img src="images/pinterest.png" alt="Pinterest {{main.siteName}}">
         </a>
+
+        <a ng-show="main.siteConstants.foursquare_url" ng-href="{{main.siteConstants.foursquare_url}}" target="_blank">
+          <img src="images/foursquare.png" alt="Foursquare {{main.siteName}}">
+        </a>
+
+        <a ng-show="main.siteConstants.instagram_url" ng-href="{{main.siteConstants.instagram_url}}" target="_blank">
+          <img src="images/instagram.png" alt="Instagram {{main.siteName}}">
+        </a>
+
         <!--
         <a ng-href="" target="_blank">
           <img src="images/youtube.png" alt="Youtube {{main.siteName}}">
@@ -179,7 +192,7 @@
         class="box-bottom" 
         layout="row" 
         layout-align="center center" 
-        flex="33"
+        flex="30"
         flex-xs="100"
         ng-switch on="main.siteTheme">
         

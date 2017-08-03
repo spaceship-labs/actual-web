@@ -264,6 +264,8 @@
         var quotationId = localStorageService.get('quotation');
         var detail = createDetailFromParams(productId, params, quotationId);
         if( quotationId ){
+
+          detail.ZipcodeDelivery = params.zipcodeDeliveryId;
           //Agregar al carrito
           addDetail(quotationId, detail)
             .then(function(res){
@@ -304,7 +306,12 @@
             return createDetailFromParams(product.id, product, quotationId);
           });
 
-          addMultipleDetails(quotationId, {Details: detailsParams})
+          var params = {
+            Details: detailsParams,
+            ZipcodeDelivery: options.zipcodeDeliveryId
+          };
+
+          addMultipleDetails(quotationId, params)
             .then(function(details){
               //setActiveQuotation(quotationId);
               $location.path('/quotations/edit/' + quotationId);

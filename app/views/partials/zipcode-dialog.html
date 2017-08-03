@@ -83,14 +83,6 @@
 
         <div class="input-element">
           <p>Calcule la fecha de entrega aproximada de sus artículos</p>
-          <!--
-          <p ng-show="ctrl.params.inPackagesView">
-            <label>Ingresa tu código postal para calcular los dias de entrega de tus productos.</label>
-          </p>
-          <p ng-show="!ctrl.params.inPackagesView">
-            <label>Ingresa tu código postal para calcular los dias de entrega de tu producto.</label>
-          </p>
-          -->
           <p ng-if="ctrl.errMessage">
             <strong>{{ctrl.errMessage}}</strong>
           </p>
@@ -104,12 +96,6 @@
             />
           </div>
         </div>
-
-        <!--
-        <p>
-          <a ng-click="ctrl.toggleLoginModal()" class="login-link login-toggler">O inicia sesión</a>
-        </p>
-        -->
 
       </section>
 

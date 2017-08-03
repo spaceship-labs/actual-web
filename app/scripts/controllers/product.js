@@ -60,8 +60,10 @@ function ProductCtrl(
     trustAsHtml: trustAsHtml,
     sas: commonService.getSasHash(),
     breadcrumbItems: [],
+    zipcodeForm: {},
     isActiveBreadcrumbItem: breadcrumbService.isActiveBreadcrumbItem,
-    showZipcodeDialog: showZipcodeDialog
+    showZipcodeDialog: showZipcodeDialog,
+    submitZipcodeForm: submitZipcodeForm
   });
 
 
@@ -365,37 +367,59 @@ function ProductCtrl(
     })
     .then(function(_zipcode) {
       zipcode = _zipcode;
-      vm.isLoadingDeliveries = true;
-      return deliveryService.getZipcodeDelivery(zipcode)
-    })
-    .then(function(zipcodeDelivery){
-      console.log('zipcodedelivery', zipcodeDelivery);
-      if(zipcodeDelivery){
-        vm.isLoadingDeliveries = true;
-        vm.zipcodeDelivery = zipcodeDelivery;
-        var callback = function(){
-          //dialogService.showDialog('Fechas de entrega actualizadas sobre tu C.P');
-        }
-
-        return setUpDeliveries({
-          productId: vm.product.ItemCode,
-          activeStoreId: activeStoreId,
-          zipcodeDeliveryId: zipcodeDelivery.id,
-          callback: callback
-        });
-
-      }else{
-        if(zipcode){
-          vm.isLoadingDeliveries = false;
-          dialogService.showDialog('Por el momento, su código postal esta fuera de nuestra área de cobertura');
-        }
-        //return deferred.reject();
-      }
+      return setUpDeliveriesByZipcode(zipcode);
     })
     .catch(function(err){
       console.log('err', err);
     });
   }
+
+  function setUpDeliveriesByZipcode(zipcode){
+    vm.isLoadingDeliveries = true;
+    return deliveryService.getZipcodeDelivery(zipcode)
+      .then(function(zipcodeDelivery){
+        console.log('zipcodedelivery', zipcodeDelivery);
+        if(zipcodeDelivery){
+          vm.isLoadingDeliveries = true;
+          vm.zipcodeDelivery = zipcodeDelivery;
+
+          return setUpDeliveries({
+            productId: vm.product.ItemCode,
+            activeStoreId: activeStoreId,
+            zipcodeDeliveryId: zipcodeDelivery.id,
+          });
+
+        }else{
+          if(zipcode){
+            vm.isLoadingDeliveries = false;
+            dialogService.showDialog('Por el momento, su código postal esta fuera de nuestra área de cobertura');
+          }
+          return $q.resolve();
+        }
+      });    
+  }  
+
+  function submitZipcodeForm($form, zipcode){
+    var _isValidZipcode = isValidZipcode(zipcode);
+
+    if($form.$valid &&  _isValidZipcode){
+      setUpDeliveriesByZipcode(zipcode)
+        .then(function(){
+          vm.cpFormToggle = false;
+        });
+    }
+    else if(!_isValidZipcode){
+      vm.zipcodeForm.errMessage = 'El código postal no es valido';
+    }
+    else{
+      vm.zipcodeForm.errMessage = "Ingresa tus datos";
+    }
+  }
+
+  function isValidZipcode(zipcode){
+    return zipcode.length === 5;
+  }
+
 
   function resetProductCartQuantity(){
     vm.productCart = cartService.resetProductCartQuantity(vm.productCart);

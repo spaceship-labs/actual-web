@@ -1916,8 +1916,36 @@ select{
   letter-spacing: 2px;
   display: block;
 }
+
+@-webkit-keyframes zoomInAndOutAnimation {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.02); }
+}
+@-moz-keyframes zoomInAndOutAnimation {
+  0%   { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100%   { transform: scale(1); }
+}
+@-o-keyframes zoomInAndOutAnimation {
+  0%   { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100%   { transform: scale(1); }
+}
+@keyframes zoomInAndOutAnimation {
+  0%   { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100%   { transform: scale(1); }
+}
+
 .product-view .add-cart-btn-disabled{
   background: gray;
+}
+
+.product-view .add-cart-btn-blink{
+  -webkit-animation: zoomInAndOutAnimation 1.5s infinite; /* Safari 4+ */
+  -moz-animation:    zoomInAndOutAnimation 1.5s infinite; /* Fx 5+ */
+  -o-animation:      zoomInAndOutAnimation 1.5s infinite; /* Opera 12+ */
+  animation:         zoomInAndOutAnimation 1.5s infinite; /* IE 10+, Fx 29+ */  
 }
 
 .product-view .add-cart-btn-icon{
@@ -1992,6 +2020,14 @@ select{
   margin: 0;
   padding-left: 20px;
 }
+
+.product-view .product-delivery-form-wrapper{
+  background: #F8F8F8;
+  padding: 6px 10px;
+  text-align: center;
+  margin-top: 6px;
+}
+.product-view .product-delivery-form-wrapper h2{margin: 0 0 4px;}
 
 /*---------------/
   #VARIANT-PICKER
@@ -4539,7 +4575,11 @@ padding-left: 16px;
 #footer .footer-contact-item p{margin:4px  0;}
 #footer .footer-contact-item i{font-size: 20px ;margin-right: 5px ;margin-top: 1px }
 #footer .footer-menu-bottom{/*margin-top: 30px ;*/}
-#footer .footer-menu-bottom .box-bottom a{max-width:50px ;margin: 5px }
+#footer .footer-menu-bottom .box-bottom a{
+  cursor: pointer;
+  max-width:50px ;
+  margin: 5px;
+}
 #footer .footer-menu-bottom .box-bottom a img{width: 100%}
 #footer .footer-bottom{background: #092F57;color: #fff;padding: 10px 0;}
 #footer .footer-bottom p{font-size: 13px ;margin: 10px  0;}
@@ -4549,6 +4589,11 @@ padding-left: 16px;
 .box-bottom img{width: auto}
 
 #footer .footer-logo{max-width: 100%!important;}
+#footer .verified-logos{text-align: center;}
+#footer .verified-logos img{
+  max-width: 82px;
+  margin: 10px 4px;
+}
 
 /*-------------------/
   #SITEMAP
