@@ -70,9 +70,11 @@ function CheckoutOrderCtrl(
     vm.isLoading = true;
     vm.isLoadingRecords = true;
 
+    /*
     if($location.search().orderCreated){
       dialogService.showDialog('Pedido creado');
     }
+    */
 
     orderService.getById($routeParams.id).then(function(res){
       vm.order = res.data;

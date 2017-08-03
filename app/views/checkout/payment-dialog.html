@@ -17,10 +17,10 @@
     <div ng-if="payment.type !== 'transfer'" class="deposit-dialog-inner">
 
       <h2 ng-show="payment.type === 'debit-card'">
-        <strong>INGRESA LOS DATOS DE TU TARJETA DE DÉBITO</strong>
+        <strong>INGRESA LOS DATOS DE SU TARJETA DE DÉBITO</strong>
       </h2>
       <h2 ng-show="payment.type !== 'debit-card'">
-        <strong>INGRESA LOS DATOS DE TU TARJETA DE CRÉDITO</strong>
+        <strong>INGRESA LOS DATOS DE SU TARJETA DE CRÉDITO</strong>
       </h2>
 
 
@@ -70,16 +70,30 @@
           </div>
         </div>
 
-        <div class="input-element" flex="35" flex-sm="100" flex-xs="100">
+        <div class="input-element select-element-wrapper" flex="35" flex-sm="100" flex-xs="100">
           <p>
             <label><strong>PAÍS</strong>*</label>
           </p>
+          <md-select
+            ng-model="payment.cardCountry"
+            class="select-element"
+          >
+            <md-option
+              ng-repeat="country in countries track by $index"
+              ng-selected="$index==0"
+              ng-value="country.name">
+              {{country.name}}
+            </md-option>
+          </md-select>          
+          <!--
           <div flex="85" class="input-element-inner">
             <input
               type="text"
               ng-model="payment.cardCountry"
               required>
           </div>
+          -->
+
         </div>
 
 
@@ -186,7 +200,13 @@
       </div>
       <div class="input-container" layout="row" layout-wrap flex="100">
 
-        <div class="input-element" flex="35" flex-sm="65" flex-xs="65">
+        <div 
+          ng-if="payment.cardCountry !== 'Mexico' && payment.cardCountry !== 'México'" 
+          class="input-element" 
+          flex="35" 
+          flex-sm="65" 
+          flex-xs="65"
+        >
           <p>
             <label><strong>ESTADO</strong>*</label>
           </p>
@@ -197,6 +217,32 @@
               required>
           </div>
         </div>
+
+        <div 
+          ng-if="payment.cardCountry === 'Mexico' || payment.cardCountry === 'México'" 
+          class="input-element" 
+          flex="35" 
+          flex-sm="65" 
+          flex-xs="65"
+        >
+          <p>
+            <label><strong>ESTADO</strong>*</label>
+          </p>
+          <md-select
+            flex="85"
+            ng-model="payment.cardState"
+            class="select-element state-selector"
+          >
+            <md-option
+              ng-repeat="state in states track by $index"
+              ng-selected="$index==0"
+              ng-value="state.name">
+              {{state.name}}
+            </md-option>
+          </md-select>          
+
+        </div>
+
 
         <div class="input-element" flex-sm="100" flex-xs="100">
           <p>
@@ -281,8 +327,12 @@
         </div>
         <div flex="40" flex-sm="100" flex-xs="100" class="input-element ammount-description">
           <p ng-show="payment.type === 'transfer'" ><strong>Transferencia de </strong>{{payment.ammount | roundCurrency}} MXN</p>
+
           <p ng-show="!payment.msi && payment.type !== 'transfer'" ><strong>1 Pago de </strong>{{payment.ammount | roundCurrency}} MXN</p>
-          <p ng-show="payment.msi && payment.type !== 'transfer'"><strong>{{payment.msi}} Meses SIN INTERESES de </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
+
+
+          <p ng-show="payment.msi"><strong>Plan de pago:</strong> {{payment.msi}} Meses SIN INTERESES</p>
+          <p ng-show="payment.msi"><strong>{{payment.msi}} pagos de </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
           <small>*Precios en Pesos Mexicanos.</small>
 
         </div>

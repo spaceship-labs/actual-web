@@ -43,8 +43,12 @@
     ];
 
     var countries = [
+      { name: "Mexico", code: "MX" },    
+      { name: "Estados Unidos", code: "US" },
+      { name: "Canada", code: "CA" },
+
       { name: "Afghanistan", code: "AF" },
-      { name: "Åland Islands", code: "AX" },
+      { name: "Aland Islands", code: "AX" },
       { name: "Albania", code: "AL" },
       { name: "Algeria", code: "DZ" },
       { name: "American Samoa", code: "AS" },
@@ -81,7 +85,6 @@
       { name: "Burundi", code: "BI" },
       { name: "Cambodia", code: "KH" },
       { name: "Cameroon", code: "CM" },
-      { name: "Canada", code: "CA" },
       { name: "Cape Verde", code: "CV" },
       { name: "Cayman Islands", code: "KY" },
       { name: "Central African Republic", code: "CF" },
@@ -185,7 +188,6 @@
       { name: "Mauritania", code: "MR" },
       { name: "Mauritius", code: "MU" },
       { name: "Mayotte", code: "YT" },
-      { name: "Mexico", code: "MX" },
       { name: "Micronesia, Federated States of", code: "FM" },
       { name: "Moldova, Republic of", code: "MD" },
       { name: "Monaco", code: "MC" },
@@ -274,7 +276,6 @@
       { name: "Ukraine", code: "UA" },
       { name: "United Arab Emirates", code: "AE" },
       { name: "United Kingdom", code: "GB" },
-      { name: "United States", code: "US" },
       { name: "United States Minor Outlying Islands", code: "UM" },
       { name: "Uruguay", code: "UY" },
       { name: "Uzbekistan", code: "UZ" },

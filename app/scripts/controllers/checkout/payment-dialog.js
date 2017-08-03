@@ -18,6 +18,8 @@ function PaymentDialogController(
   $scope.payment.cardObject = $scope.payment.cardObject || {};
   $scope.needsVerification = payment.needsVerification;
   $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
+  $scope.countries = commonService.getCountries();
+  $scope.states = commonService.getStates();
   $scope.months  = getMonths();
   $scope.years = getYears();
 

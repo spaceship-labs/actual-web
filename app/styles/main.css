@@ -3980,6 +3980,10 @@ md-backdrop.md-sidenav-backdrop{
 .deposit-dialog .main-dialog-block{margin-top:0!important;}
 .deposit-dialog .dialog-block{margin: 12px 0;}
 .deposit-dialog .dialog-block md-select{margin: 0;}
+.deposit-dialog .state-selector{
+  max-width: 85%;
+  min-width: 0px;
+}
 .deposit-dialog .dialog-block .error-msg{
   color: red;
   margin: 6px 0;
