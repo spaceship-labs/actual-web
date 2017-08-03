@@ -12,6 +12,7 @@ function PaymentDialogController(
   'use strict';
 
   console.log('payment in dialog', payment);
+
   $scope.payment = payment;
   $scope.payment.cardCountry = $scope.payment.cardCountry || 'Mexico';
   $scope.payment.cardObject = $scope.payment.cardObject || {};
@@ -19,6 +20,10 @@ function PaymentDialogController(
   $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
   $scope.months  = getMonths();
   $scope.years = getYears();
+
+  if($scope.payment.options){
+    $scope.paymentOptionsOriginal = _.clone($scope.payment.options);
+  }
 
   //ROUNDING
   $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);
@@ -74,6 +79,29 @@ function PaymentDialogController(
   $scope.onChangeCard = function(card){
     $scope.terminal = getSelectedTerminal(card);
   };
+
+
+  $scope.$watch('payment.cardType',function(newVal, oldVal){
+    //console.log('new val', newVal);
+    if(newVal !== oldVal){
+
+      console.log('newVal', newVal);
+
+      if(newVal === 'american-express'){
+        $scope.payment.options = [];
+        $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(option){
+          return option.card.value === 'american-express';
+        });
+      }else{
+        $scope.payment.options = [];
+        $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(option){
+          return option.card.value !== 'american-express';
+        });        
+      }
+
+    }
+  });
+  
 
   function getSelectedTerminal(card){
     var option = _.find($scope.payment.options, function(option){

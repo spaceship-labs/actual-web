@@ -403,7 +403,8 @@ select{
   padding: 4px 0;
   position: relative;
   /*z-index: 9999999999;*/
-  z-index: 999999;
+  /*z-index: 999999;*/
+  z-index: 70;
 }
 
 .menu i.icon-paragraph-justify{margin-right: 20px;font-size: 30px}
@@ -3903,8 +3904,23 @@ md-backdrop.md-sidenav-backdrop{
 /*------------/
   #DEPOSIT-DIALOG
 /*------------*/
+.deposit-dialog{max-height: 90%;}
+.deposit-dialog .close-btn{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: none;
+  border: 0;
+  color: #33BA2C;
+}
+.deposit-dialog .close-btn i{
+  transform: rotate(45deg);
+  display: block;
+  font-size: 34px;
+}
+
 .deposit-dialog .deposit-dialog-inner{
-  padding: 15px 40px;
+  padding: 5px 40px 15px;
   min-width: 800px;
 }
 .deposit-dialog h2{
@@ -3914,11 +3930,14 @@ md-backdrop.md-sidenav-backdrop{
 }
 .deposit-dialog .form-section-transfer{margin-top: 0}
 .deposit-dialog .payment-amount{font-size: 22px;}
+.deposit-dialog .payment-amount .currency-label{font-size: 12px;}
+
+
 .deposit-dialog hr{
   height: 1px;
   background: #000;
   border:0;
-  margin: 18px 0;
+  margin: 8px 0;
 }
 .deposit-dialog h2 i{
   color: #33BA2C;
@@ -3945,6 +3964,11 @@ md-backdrop.md-sidenav-backdrop{
 .deposit-dialog small{
   font-size: 12px;
 }
+.deposit-dialog .payment-cardtype-chooser{
+  background: #F4F7F9;
+  padding: 5px 10px;
+  max-width: 400px;
+}
 .deposit-dialog .payment-cardtype-chooser md-radio-button{margin-right: 60px;}
 .deposit-dialog .payment-cardtype-chooser img{
   max-width: 46px;
@@ -3961,7 +3985,7 @@ md-backdrop.md-sidenav-backdrop{
   margin: 6px 0;
   font-size: 12px;
 }
-.deposit-dialog .dialog-block .ammount-input{margin-top: 10px;}
+.deposit-dialog .dialog-block .ammount-block{margin-top: 10px;}
 .deposit-dialog .dialog-block .price-sign{margin-right: 10px;}
 .deposit-dialog .dialog-block .currency-label{margin-left: 10px;}
 .deposit-dialog .verification-code{
@@ -3971,10 +3995,11 @@ md-backdrop.md-sidenav-backdrop{
 .deposit-dialog .input-element p{margin: 8px 0 4px;}
 .deposit-dialog .input-element .select-element{margin: 0;}
 .deposit-dialog .bottom-note{margin: 6px 0;}
+.deposit-dialog .footer-note{margin: 10px 0;}
 
 .deposit-dialog .deposit-dialog-footer{
   background: #F8F8F8;
-  padding: 20px 40px;
+  padding: 15px 40px;
   min-width: 800px;
 }
 .deposit-dialog .ammount-input .input-element{
@@ -3984,6 +4009,7 @@ md-backdrop.md-sidenav-backdrop{
   border-left: 1px solid #000;
   padding-left: 10px;
 }
+
 .deposit-dialog .ammount-description p{margin:0;}
 .deposit-dialog .terms-checkbox-block{margin: 10px 0;}
 .deposit-dialog .terms-checkbox-block md-checkbox{margin:0;}
@@ -5087,10 +5113,14 @@ padding-left: 16px;
 
   .cart-view .cart-aside{margin-left: 0}
 
-  .deposit-dialog .form-section{margin-top: 72px;}
+  .deposit-dialog .form-section{/*margin-top: 72px;*/}
   .deposit-dialog .deposit-dialog-inner{
     min-width: 0;
-    padding: 10px;
+    padding: 20px 10px 10px;
+  }
+  .deposit-dialog .close-btn{
+    top: 5px;
+    right: 10px;
   }
   .deposit-dialog h2{font-size: 14px;}
   .deposit-dialog .input-element{margin: 6px 0;}
