@@ -120,7 +120,7 @@ function RegisterCtrl(
 					createdClient = res.client;
 					createdUser = res.user;
 
-					if(!routeParams.addContact){
+					if(!$routeParams.addContact){
 						dialogService.showDialog('Usuario registrado con éxito');
 					}
 					//vm.isLoading = false;
