@@ -150,8 +150,7 @@ function CheckoutClientCtrl(
       }
     }
 
-    /*TODO: Remove true*/
-    if( vm.quotation.Address || vm.quotation.immediateDelivery || true){
+    if( vm.quotation.Address || vm.quotation.immediateDelivery){
 
       /*
       showInvoiceDataAlert()

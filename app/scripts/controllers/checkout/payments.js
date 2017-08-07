@@ -114,7 +114,7 @@ function CheckoutPaymentsCtrl(
         }
 
         if(!validateQuotationAddress(vm.quotation)){
-          //$location.path('/quotations/edit/' + vm.quotation.id);
+          $location.path('/quotations/edit/' + vm.quotation.id);
         }
 
         if(vm.quotation.rateLimitReported){
