@@ -27,6 +27,7 @@ function RegisterCtrl(
 		register: register,
 		copyDeliveryDataToPersonalData: copyDeliveryDataToPersonalData,
 		newClient: {},
+		phonePattern: ".*\\d{10}$"
 	});
 
 	init();

@@ -29,6 +29,7 @@ function CheckoutClientCtrl(
 ){
   var vm = this;
   angular.extend(vm,{
+    contacts: [],
     continueProcess: continueProcess,
     getContactName: getContactName,
     isClientFiscalDataValid: clientService.isClientFiscalDataValid

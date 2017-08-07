@@ -370,7 +370,14 @@ function ProductCtrl(
       return setUpDeliveriesByZipcode(zipcode);
     })
     .catch(function(err){
+      vm.isLoadingDeliveries = false;      
       console.log('err', err);
+      var errMsg = '';
+      if(err){
+        errMsg = err.data || err;
+        errMsg = errMsg ? errMsg.toString() : '';
+        dialogService.showDialog(errMsg);
+      }      
     });
   }
 
@@ -406,6 +413,16 @@ function ProductCtrl(
       setUpDeliveriesByZipcode(zipcode)
         .then(function(){
           vm.cpFormToggle = false;
+        })
+        .catch(function(err){
+          vm.isLoadingDeliveries = false;
+          console.log('err', err);
+          var errMsg = '';
+          if(err){
+            errMsg = err.data || err;
+            errMsg = errMsg ? errMsg.toString() : '';
+            dialogService.showDialog(errMsg);
+          }      
         });
     }
     else if(!_isValidZipcode){
