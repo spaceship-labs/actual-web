@@ -4643,6 +4643,10 @@ padding-left: 16px;
   margin: 0;
 }
 
+/*--------------/
+  #PAYMENT-BANKS
+/*-------------------*/
+.payment-banks img{max-width: 100px;}
 
 /*-------------------/
   #REGISTER
