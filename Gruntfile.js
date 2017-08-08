@@ -391,7 +391,8 @@ module.exports = function (grunt) {
             'styles/fonts/{,*/}*.*',
             'fonts/{,*/}*.*',
             'fonts/dashboard-fonts/{,*/}*.*',
-            '.htaccess'
+            '.htaccess',
+            'sitemap.xml'
           ]
         }, {
           expand: true,
