@@ -331,7 +331,7 @@ function CheckoutPaymentsCtrl(
             if(vm.order.isSpeiOrder){
               vm.hasAnSpeiOrder = true;
               vm.quotation.OrderWeb = vm.order;
-              dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
+              //dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
               $location.path('/quotations/edit/' + vm.quotation.id);
               return;
             }

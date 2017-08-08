@@ -221,7 +221,7 @@
         <div 
           ng-if="payment.cardCountry === 'Mexico' || payment.cardCountry === 'México'" 
           class="input-element" 
-          flex="35" 
+          flex="30" 
           flex-sm="65" 
           flex-xs="65"
         >
@@ -248,10 +248,34 @@
           <p>
             <label><strong>CIUDAD</strong>*</label>
           </p>
-          <div flex="90" class="input-element-inner">
+          <div flex="95" class="input-element-inner">
             <input
               type="text"
               ng-model="payment.cardCity"
+              required>
+          </div>
+        </div>
+
+        <div class="input-element" flex-sm="100" flex-xs="100">
+          <p>
+            <label><strong>TÉLEFONO</strong>*</label>
+          </p>
+          <div flex="95" class="input-element-inner">
+            <input
+              type="text"
+              ng-model="payment.phone"
+              required>
+          </div>
+        </div>
+
+        <div class="input-element" flex-sm="100" flex-xs="100">
+          <p>
+            <label><strong>EMAIL</strong>*</label>
+          </p>
+          <div flex="95" class="input-element-inner">
+            <input
+              type="email"
+              ng-model="payment.email"
               required>
           </div>
         </div>
