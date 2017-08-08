@@ -37,7 +37,7 @@
       </tr>
       <tr ng-if="vm.validPayments.paymentGroup3">
         <td>
-          <strong>6 y 9 meses sin intereses
+          <strong>6 meses sin intereses
             <span class="hl-text">(-{{vm.mainPromo.discountPg3}}%)</span>
           </strong>
         </td>
@@ -46,6 +46,18 @@
            | <span class="currency-label">MXN</span> <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg3,vm.product.priceBefore) | currency }}</strong>
         </td>
       </tr>
+      <tr ng-if="vm.validPayments.paymentGroup3">
+        <td>
+          <strong>9 meses sin intereses
+            <span class="hl-text">(-{{vm.mainPromo.discountPg3}}%)</span>
+          </strong>
+        </td>
+        <td class="price-col">
+          <span class="currency-label">MXN</span> <span class="crossed-text">{{vm.product.priceBefore | currency }}</span>
+           | <span class="currency-label">MXN</span> <strong>{{ vm.applyDiscount(vm.mainPromo.discountPg3,vm.product.priceBefore) | currency }}</strong>
+        </td>
+      </tr>
+
       <tr ng-if="vm.validPayments.paymentGroup4">
         <td>
           <strong>12 meses sin intereses
@@ -71,7 +83,7 @@
 
     </table>
     <br/>
-    <p>*Descuento aplicado con promoción: {{vm.mainPromo.publicName}}</p>
     <p>Impuestos incluidos</p>
+    <p>Descuento aplicado con promoción: {{vm.mainPromo.publicName}}</p>
   </div>
 </div>

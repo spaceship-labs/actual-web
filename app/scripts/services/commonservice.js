@@ -435,6 +435,19 @@
       });
     }    
 
+    function sendSuggestions(email, name, form) {
+      var params = {
+        email: email,
+        name: name,
+        form: form
+      };
+
+      var url = '/sendsuggestions';
+      return api.$http.post(url, params).then(function(res) {
+        return res.data;
+      });
+    }       
+
     function hasEmailValidDomain(email){
       var excludedDomains = [
         'actualdecoracion.com',
@@ -483,7 +496,8 @@
       roundIntegerCurrency: roundIntegerCurrency,
       roundCurrency: roundCurrency,
       showDialog: showDialog,
-      sendContact: sendContact
+      sendContact: sendContact,
+      sendSuggestions: sendSuggestions
     };
 
     return service;

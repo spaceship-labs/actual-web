@@ -42,7 +42,7 @@
                       type="text" 
                       ng-model="vm.client.FirstName" 
                       required
-                      ng-disabled="!vm.isActiveEditMode">
+                    >
                   </div>
                 </div>
                 <div flex-gt-sm="33" flex="100" class="input-element">
@@ -54,13 +54,9 @@
                       type="text" 
                       ng-model="vm.client.LastName" 
                       required
-                      ng-disabled="!vm.isActiveEditMode">
+                    >
                   </div>
                 </div>
-                <div flex-gt-sm="33" flex="100"></div>
-              </div>
-
-              <div class="input-container" layout="row" layout-wrap flex="100">
                 <div flex-gt-sm="33" flex="100" class="input-element">
                   <label>
                     <p><strong>Teléfon fijo</strong>*</p>
@@ -70,9 +66,13 @@
                       type="text" 
                       ng-model="vm.client.Phone1"
                       required
-                      ng-disabled="!vm.isActiveEditMode">
+                    >
                   </div>
                 </div>
+              </div>
+
+              <div class="input-container" layout="row" layout-wrap flex="100">
+
                 <div flex-gt-sm="33" flex="100" class="input-element">
                   <label>
                     <p><strong>Teléfono celular</strong>*</p>
@@ -82,7 +82,7 @@
                       type="text" 
                       ng-model="vm.client.Cellular"
                       required
-                      ng-disabled="!vm.isActiveEditMode">
+                    >
                   </div>
                 </div>
                 <div flex-gt-sm="33" flex="100" class="input-element">
@@ -94,10 +94,23 @@
                       type="email" 
                       ng-model="vm.client.E_Mail" 
                       required
-                      ng-disabled="!vm.isActiveEditMode">
+                    >
                   </div>
                 </div>
-                <div flex-gt-sm="33" flex="100"></div>
+
+                <div flex-gt-sm="33" flex="100" class="input-element">
+                  <label>
+                    <p><strong>Confirmar email</strong>*</p>
+                  </label>
+                  <div class="input-element-inner">
+                    <input 
+                      type="text" 
+                      ng-model="vm.client._E_Mail"
+                      ng-pattern="vm.client.E_Mail"
+                      required
+                    >
+                  </div>
+                </div>
               </div>
 
           </section>
@@ -108,7 +121,7 @@
 
         <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
 
-
+          <!--
           <button
             ng-click="vm.toggleEditMode()"
             ng-if="!vm.isActiveEditMode"
@@ -116,6 +129,7 @@
             class="form-view-btn form-view-btn-primary">
             Editar información
           </button>
+          -->
 
 
           <button

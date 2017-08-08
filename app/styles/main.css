@@ -4571,6 +4571,21 @@ padding-left: 16px;
 }
 
 
+/*---------------/
+  #CONTACT-US
+/*--------------*/
+.contact-us h1 small{font-size: 12px;}
+.contact-us .info-column{
+  padding: 0 20px;
+}
+.contact-us .info-column h2{
+  font-weight: 400;
+  margin-top: 60px;
+}
+.contact-us .info-column p{
+  margin: 4px 0;
+}
+
 /*--------------/#FOOTER/*-------------*/
 #footer{min-height: 83px !important;}
 #footer .footer-menu{background: #F8F8F8;padding: 30px  0;}
@@ -4602,6 +4617,11 @@ padding-left: 16px;
 #footer .footer-bottom p{font-size: 13px ;margin: 10px  0;}
 #footer .footer-bottom a{color: #fff}
 #footer .footer-bottom span{font-size: 11px ;}
+#footer .footer-bottom h3{
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;  
+}
 .box-bottom{font-size: 12px ;}
 .box-bottom img{width: auto}
 

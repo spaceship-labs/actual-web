@@ -152,7 +152,7 @@ angular
       .when('/politicas-de-entrega', {
         templateUrl: 'views/delivery-policy.html',
         controller: 'DeliveryPolicyCtrl',
-        controllerAs: 'deliveryPolicy'
+        controllerAs: 'vm'
       })
       .when('/politicas-de-instalacion-y-ensamble', {
         templateUrl: 'views/ensamble-policy.html',
@@ -383,6 +383,11 @@ angular
       .when('/reports/quotations', {
         templateUrl: 'views/reports/quotations.html',
         controller: 'ReportsQuotationsCtrl',
+        controllerAs: 'vm'
+      })      
+      .when('/sugerencias-y-quejas', {
+        templateUrl: 'views/suggestions.html',
+        controller: 'SuggestionsCtrl',
         controllerAs: 'vm'
       })      
       .when('/:slug/:id', {      

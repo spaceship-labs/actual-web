@@ -8,10 +8,14 @@
  * Controller of the dashexampleApp
  */
 angular.module('dashexampleApp')
-  .controller('DeliveryPolicyCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('DeliveryPolicyCtrl', function ($sce) {
+
+		var vm = this;
+		angular.extend(vm,{
+			trustAsHtml: trustAsHtml
+		});  	
+
+	  function trustAsHtml(string) {
+	    return $sce.trustAsHtml(string);
+	  }
   });

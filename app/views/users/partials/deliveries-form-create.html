@@ -8,7 +8,8 @@
   ng-submit="vm.createAddress(createForm)"
 >
 
-  <h2><strong>Registrar una dirección de envío</strong></h2>
+  <!--<h2><strong>Registrar una dirección de envío</strong></h2>-->
+  <h2><strong>Datos del destinatario</strong></h2>  
 
   <div class="checkbox-client-type">
     <md-checkbox
@@ -27,7 +28,7 @@
         <div layout="row" layout-wrap>
           <div flex flex-xs="100" class="input-element">
             <label>
-              <strong>Nombre(s) del destinatario<span class="hl-label">*</span></strong>
+              <strong>Nombre(s)<span class="hl-label">*</span></strong>
             </label>
             <div class="input-element-inner">
               <input type="text" ng-model="vm.newAddress.FirstName" required>
@@ -35,7 +36,7 @@
           </div>
           <div flex flex-xs="100" class="input-element">
             <label>
-              <strong>Apellidos del destinatario <span class="hl-label">*</span></strong>
+              <strong>Apellido(s)<span class="hl-label">*</span></strong>
             </label>
             <div class="input-element-inner">
               <input type="text" ng-model="vm.newAddress.LastName" required>
@@ -43,6 +44,7 @@
           </div>
         </div>
         <div layout="row" layout-wrap>
+          <!--
           <div flex flex-xs="100" class="input-element">
             <label>
               <strong>Teléfono fijo<span class="hl-label">*</span></strong>
@@ -51,6 +53,7 @@
               <input type="text" ng-model="vm.newAddress.Tel1" required>
             </div>
           </div>
+          -->
           <div flex flex-xs="100" class="input-element">
             <label>
               <strong>Teléfono celular<span class="hl-label">*</span></strong>
@@ -67,16 +70,14 @@
               <input type="text" ng-model="vm.newAddress.E_Mail" required>
             </div>
           </div>
-          <!--
           <div flex flex-xs="100" class="input-element">
             <label>
               <strong>Confirmar Email<span class="hl-label">*</span></strong>
             </label>
             <div class="input-element-inner">
-              <input type="text" ng-model="vm.newAddress._E_Mail" required>
+              <input type="text" ng-model="vm.newAddress._E_Mail" ng-pattern="vm.newAddress.E_Mail" required>
             </div>
           </div>
-          -->
         </div>
 
       </div>
