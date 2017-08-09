@@ -201,6 +201,8 @@ function QuotationsEditCtrl(
     console.log('vm.quotation', vm.quotation);
 
     if(!vm.quotation.Client){
+      return;
+
       $location.path('/register')
         .search({
           //addContact:true,

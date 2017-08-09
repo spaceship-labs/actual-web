@@ -221,7 +221,7 @@ md-dialog .md-button[ng-click="dialog.abort()"]{
   background: #33BA2C;
 }
 .action-btn-disabled{
-  background: gray;
+  background: gray!important;
 }
 .action-btn-print{
   background: #33BA2C;

@@ -225,6 +225,9 @@
             <a
               ng-if="vm.quotation.Details.length > 0"
               ng-click="vm.sendByEmail()"
+              ng-class="{
+                'action-btn-disabled': !vm.quotation.Client
+              }"
               href="#"
               class="action-btn-print print-btn">
               ENVIAR POR EMAIL

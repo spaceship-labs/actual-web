@@ -89,7 +89,8 @@ function CategoryCtrl(
 
 
       var metaTags = {
-        title: $rootScope.siteConstants.publicName + ' | ' + vm.category.Name
+        title: $rootScope.siteConstants.publicName + ' | ' + vm.category.Name,
+        description: $rootScope.siteConstants.publicName + ' | ' + vm.category.Name + '. Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.'
       };
       metaTagsService.setMetaTags(metaTags);
 
