@@ -71,57 +71,57 @@
       <div layout="row" layout-wrap>
         <div flex="25" flex-xs="45" class="input-element">
           <label>
-            <strong>Calle</strong>
+            <strong>Calle<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.Address">
+            <input type="text" ng-model="vm.newAddress.Address" required>
           </div>
         </div>
         <div flex="15" flex-xs="45" class="input-element">
           <label>
-            <strong>No. Exterior</strong>
+            <strong>No. Exterior<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.U_Noexterior">
+            <input type="text" ng-model="vm.newAddress.U_Noexterior" required>
           </div>
         </div>
         <div flex="15" flex-xs="45" class="input-element">
           <label>
-            <strong>No. Interior</strong>
+            <strong>No. Interior <span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.U_Nointerior">
+            <input type="text" ng-model="vm.newAddress.U_Nointerior" required>
           </div>
         </div>
         <div flex flex-xs="45" class="input-element">
           <label>
-            <strong>Colonia</strong>
+            <strong>Colonia<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.U_Colonia">
+            <input type="text" ng-model="vm.newAddress.U_Colonia" required>
           </div>
         </div>
         <div flex flex-xs="45" class="input-element">
           <label>
-            <strong>Municipio</strong>
+            <strong>Municipio<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.U_Mpio">
+            <input type="text" ng-model="vm.newAddress.U_Mpio" required> 
           </div>
         </div>
       </div>
       <div layout="row" layout-wrap>
         <div flex="25" flex-xs="45" class="input-element">
           <label>
-            <strong>Ciudad</strong>
+            <strong>Ciudad<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.U_Ciudad">
+            <input type="text" ng-model="vm.newAddress.U_Ciudad" required>
           </div>
         </div>
         <div flex="25" flex-xs="45" class="input-element">
           <label>
-            <strong>Estado</strong>
+            <strong>Estado<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
             <md-select ng-model="vm.newAddress.U_Estado" class="select-element" required>
