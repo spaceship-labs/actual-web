@@ -102,7 +102,8 @@ function ProductCtrl(
         vm.product = fProduct;
 
         var metaTags = {
-          title: $rootScope.siteConstants.publicName + ' | ' + vm.product.Name
+          title: $rootScope.siteConstants.publicName + ' | ' + vm.product.Name,
+          description: vm.product.Description
         };
         metaTagsService.setMetaTags(metaTags);
 
