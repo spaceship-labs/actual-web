@@ -4498,17 +4498,27 @@ padding-left: 16px;
 /*-----------------/
   #OUR-STORES
 /*-----------------*/
-.our-stores .store-item{margin: 20px 0;}
+.our-stores .store-item{
+  border-bottom: 1px solid gray;
+  margin: 10px 0;
+  padding: 10px 0;
+}
+.our-stores .store-item .store-item-column{padding: 0 10px;}
+.our-stores .store-item h3{margin-top: 0;}
+.our-stores .store-item p{font-size: 14px;}
 .our-stores .store-item img{max-width: 100%;}
 .our-stores .store-item .highlight{color: #50C841;}
 
 .our-stores .store-item .map{
   position: relative;
   /*padding-bottom: 56.25%;*/ /* 16:9 */
-  padding-bottom: 44.25%;
+  padding-bottom: 53.25%;
   padding-top: 25px;
   height: 0;
   overflow: hidden;
+}
+.our-stores .store-item .map-puertocancun{
+  padding-bottom: 64.25%;
 }
 
 .our-stores .store-item .map iframe{
@@ -4517,6 +4527,14 @@ padding-left: 16px;
   left: 0;
   width: 100% !important;
   height: 100% !important;
+}
+.our-stores .store-info-table h4{
+  font-size: 13px;
+  margin: 4px 0;
+}
+.our-stores .store-info-table p{
+  font-size: 11px;
+  margin: 4px 0;
 }
 
 /*----------------------/
@@ -5292,6 +5310,11 @@ padding-left: 16px;
   }
 
   .listing-view .results-block-header h3{font-size: 12px;}
+
+  .our-stores .store-info-table p{
+    margin: 2px 0;
+    padding: 2px;
+  }
 
   #footer .footer-menu-col h2{
     font-size: 14px;
