@@ -107,8 +107,9 @@ function CheckoutOrderCtrl(
       quotationService.populateDetailsWithProducts(vm.order)
         .then(function(details){
           vm.order.Details = details;
-          vm.order.DetailsGroups = deliveryService.groupDetails(details);
-          vm.order.DetailsGroups = assignSeriesToDeliveryGroups(vm.order.DetailsGroups);
+          vm.order.Details = assignSeriesToDetails(details);
+          //vm.order.DetailsGroups = deliveryService.groupDetails(details);
+          //vm.order.DetailsGroups = assignSeriesToDetailsGroups(vm.order.DetailsGroups);
           return quotationService.loadProductsFilters(vm.order.Details);
         })
         .then(function(details2){
@@ -227,8 +228,22 @@ function CheckoutOrderCtrl(
     vm.ewallet.current = order.Client.ewallet;
   }
 
+  function assignSeriesToDetails(details){
+    var mappedDetails = details.map(function(detail){
+      var hasSeries = false;
+      var productSerie = getSerieByDetailId(detail.id);
+      if(productSerie){
+        detail.productSerie = productSerie;
+        hasSeries = true;
+      }
+      detail.hasSeries = hasSeries;
+      return detail;
+    });
+    return mappedDetails;
+  }
 
-  function assignSeriesToDeliveryGroups(deliveryGroups){
+  //TODO: Check if ventas.miactual.com has the name function name
+  function assignSeriesToDetailsGroups(deliveryGroups){
     var mappedDeliveryGroups = deliveryGroups.map(function(group){
       var hasSeries = false;
       group.details = group.details.map(function(detail){

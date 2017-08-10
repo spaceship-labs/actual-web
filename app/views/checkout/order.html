@@ -61,9 +61,9 @@
 
         <div
           class="order-item"
-          ng-repeat="detailGroup in vm.order.DetailsGroups track by $index"
+          ng-repeat="detail in vm.order.Details track by $index"
         >
-          <h3><strong>{{detailGroup.Product.Name}}</strong></h3>
+          <h3><strong>{{detail.Product.Name}}</strong></h3>
 
           <div 
             layout="row" 
@@ -72,13 +72,13 @@
           >
             <div flex="35" flex-sm="100" flex-xs="100" layout="row">
               <div class="order-item-img">
-                <img src="{{detailGroup.Product.icons[0].url}}" alt="">
+                <img src="{{detail.Product.icons[0].url}}" alt="">
               </div>
               <div flex class="order-item-features">
                 <ul>
-                  <li><strong>Código: </strong> {{detailGroup.Product.ItemCode}}</li>
+                  <li><strong>Código: </strong> {{detail.Product.ItemCode}}</li>
                   <li
-                    ng-repeat="filter in detailGroup.Product.Filters"
+                    ng-repeat="filter in detail.Product.Filters"
                     ng-if="
                       filter.Handle == 'codigo' ||
                       filter.Handle == 'material' ||
@@ -91,18 +91,16 @@
                       <span ng-if="$index < (filter.Values.length-1)">,</span>
                     </span>
                   </li>
-                  <li ng-if="detailGroup.Product.DetailedColor">
+                  <li ng-if="detail.Product.DetailedColor">
                     <strong>Color:</strong>
-                    <span>{{detailGroup.Product.DetailedColor}}</span>
+                    <span>{{detail.Product.DetailedColor}}</span>
                   </li>
-                  <li ng-show="detailGroup.hasSeries">
+                  <li ng-show="detail.hasSeries">
                     <strong>Series:</strong>
-                    <span ng-repeat="detail in detailGroup.details track by $index">
-                      <span ng-if="detail.productSerie">
-                        <a class="comma-separated" ng-repeat="number in detail.productSerie.seriesNumbers">
-                          {{number}}
-                        </a>
-                      </span>
+                    <span ng-if="detail.productSerie">
+                      <a class="comma-separated" ng-repeat="number in detail.productSerie.seriesNumbers">
+                        {{number}}
+                      </a>
                     </span>
                   </li>
                 </ul>
@@ -126,23 +124,23 @@
               flex-sm="20" 
               flex-xs="20" 
               class="order-item-data order-item-data-qty">
-              <span>{{detailGroup.quantity}}</span>
+              <span>{{detail.quantity}}</span>
             </div>
             <div flex="20" flex-sm="40" flex-xs="40" class="order-item-data">
               <span>
-                {{detailGroup.shipDate | date:'d/MMM/yyyy'}}</span>
+                {{detail.shipDate | date:'d/MMM/yyyy'}}</span>
                 <span
                   class="immediate-delivery-tag"
-                  ng-if="detailGroup.immediateDelivery && !detailGroup.isSRService">
+                  ng-if="detail.immediateDelivery && !detail.isSRService">
                   Entrega en tienda
                 </span>
             </div>
             <div flex="20" flex-sm="40" flex-xs="40" class="order-item-data">
-              <span>{{detailGroup.total | currency}} MXN</span>
+              <span>{{detail.total | currency}} MXN</span>
             </div>
           </div>
 
-          <p ng-if="detailGroup.immediateDelivery && !detailGroup.isSRService" class="immediate-delivery-text">
+          <p ng-if="detail.immediateDelivery && !detail.isSRService" class="immediate-delivery-text">
             ¡Recibí artículo en perfectas condiciones directamente en tienda!
           </p>
 

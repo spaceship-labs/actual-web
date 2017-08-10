@@ -113,8 +113,8 @@
       }
 
       function removeDetail(id, quotationId){
-        var url = '/quotation/removedetail/' + id  + '/' + quotationId;
-        return api.$http.post(url);
+        var url = '/quotation/' + quotationId + '/removedetail/' + id;
+        return api.$http.delete(url);
       }
 
       function removeDetailsGroup(detailsGroup, quotationId){

@@ -29,7 +29,9 @@ function QuotationsEditCtrl(
   paymentService,
   deliveryService,
   authService,
-  siteService
+  siteService,
+  productService,
+  cartService
 ){
   var vm = this;
   var mainDataListener = function(){};
@@ -44,6 +46,7 @@ function QuotationsEditCtrl(
         appendTo: 'body',
         disableTextInput:true
     },
+    getQtyArray: getQtyArray,
     addNewProduct: addNewProduct,
     addRecord: addRecord,
     alertRemoveDetail: alertRemoveDetail,
@@ -60,16 +63,21 @@ function QuotationsEditCtrl(
     print: print,
     promotionPackages: [],
     removeDetail: removeDetail,
-    removeDetailsGroup: removeDetailsGroup,
+    //removeDetailsGroup: removeDetailsGroup,
     sendByEmail: sendByEmail,
     showBigTicketDialog: showBigTicketDialog,
     showDetailGroupStockAlert: showDetailGroupStockAlert,
+    showDetailStockAlert: showDetailStockAlert,
     toggleRecord: toggleRecord,
     deattachImage: deattachImage,
     isOrderPending: isOrderPending,
     hasSpeiOrder: hasSpeiOrder,
+    resetProductCartQuantity: resetProductCartQuantity,
     user: $rootScope.user
   });
+
+  var activeQuotationListener = function(){};
+  var activeStoreId = localStorageService.get('activeStore');
 
   if($rootScope.activeStore){
     init($routeParams.id);
@@ -121,7 +129,7 @@ function QuotationsEditCtrl(
       })
       .then(function(detailsWithFilters){
         vm.quotation.Details = detailsWithFilters;
-        vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+        //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         vm.isLoadingDetails = false;
         vm.isValidatingStock = true;
         return quotationService.getCurrentStock(vm.quotation.id);       
@@ -130,7 +138,13 @@ function QuotationsEditCtrl(
         var detailsStock = response.data;
         console.log('details' + new Date(), _.clone(vm.quotation.Details) );
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
-        vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+
+        loadDetailsDeliveries(vm.quotation.Details)
+          .then(function(details){
+            console.log('details after loadDetailsDeliveries', details);
+          });
+
+        //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
 
         console.log('end loading quotation', new Date());
         vm.isValidatingStock = false;
@@ -142,6 +156,92 @@ function QuotationsEditCtrl(
         console.log('error', err);
       });
 
+  }
+
+  function loadDetailsDeliveries(details){
+    /*for(var i = 0; i < details.length; i++){
+      loadDeliveriesByDetail( details[i] );
+    }*/
+    var promises = details.map(function(detail){
+      return loadDeliveriesByDetail(detail);
+    });
+
+    return $q.all(promises);
+  }
+  
+  function loadDeliveriesByDetail(detail){
+    return setUpDetailDeliveries(detail, {
+      productId: detail.Product.id,
+      productItemCode: detail.Product.ItemCode,
+      activeStoreId: activeStoreId,
+      zipcodeDeliveryId: vm.quotation.ZipcodeDelivery.id
+    });  
+  }
+
+  function resetProductCartQuantity(detail){
+    console.log('resetProductCartQuantity')
+    detail.productCart = cartService.resetProductCartQuantity(detail.productCart);
+    console.log('detail.productCart', detail.productCart);
+  }  
+
+  function setUpDetailDeliveries(detail, options){
+    options = options || {};
+    detail.productCart = {
+      quantity: 1
+    };
+
+    return productService.delivery(options.productItemCode, options.zipcodeDeliveryId)
+      .then(function(deliveries){
+        console.log('deliveries', deliveries);
+        deliveries = $filter('orderBy')(deliveries, 'date');
+        detail.deliveries  = deliveries;
+        detail.deliveriesGroups = deliveryService.groupDeliveryDates(detail.deliveries);
+        detail.deliveriesGroups = $filter('orderBy')(detail.deliveriesGroups, 'date');
+
+        detail.productCart = {
+          quantity: 1
+        };
+
+        if(detail.deliveries && detail.deliveries.length > 0){
+          detail.productCart.deliveryGroup = detail.deliveriesGroups[0];
+
+          if(detail.quantity <= detail.productCart.deliveryGroup.available){
+            detail.productCart.quantity = detail.quantity;
+          }
+
+          var deliveryGroupMatch = isShipDateInDeliveriesGroup(detail.shipDate, detail.deliveriesGroups);
+          console.log('deliveryGroupMatch', deliveryGroupMatch);
+
+          if( deliveryGroupMatch && deliveryGroupMatch.available >= detail.quantity){
+            detail.productCart.deliveryGroup = deliveryGroupMatch;
+            detail.productCart.quantity = detail.quantity;
+          }
+        }
+
+        else{
+          detail.productCart.quantity = 0;
+        }
+
+        return detail;
+      });
+  }  
+
+  function isShipDateInDeliveriesGroup(shipDate, deliveriesGroups){
+    console.log('shipDate', shipDate);
+    var exists = _.find(deliveriesGroups, function(deliveryGroup){
+      return moment(shipDate).format('DD-MM-YYYY') === moment(deliveryGroup.date).format('DD-MM-YYYY');
+    });
+    return exists;
+  }
+
+
+  function getQtyArray(n){
+    n = n || 0;
+    var arr = [];
+    for(var i=0;i<n;i++){
+      arr.push(i+1);
+    }
+    return arr;
   }
 
   function isOrderPending(order){
@@ -349,24 +449,26 @@ function QuotationsEditCtrl(
     $location.path('/');
   }
 
-  function alertRemoveDetail(ev, detailsGroup) {
+  function alertRemoveDetail(ev, detail) {
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog
       .confirm()
       .title('¿Eliminar articulo de la cotizacion?')
-      .textContent('-' + detailsGroup.Product.Name)
+      .textContent('-' + detail.Product.Name)
       .ariaLabel('')
       .targetEvent(ev)
       .ok('Eliminar')
       .cancel('Cancelar');
     
     $mdDialog.show(confirm).then(function() {
-      removeDetailsGroup(detailsGroup);
+      removeDetail(detail);
+      //removeDetailsGroup(detailsGroup);
     }, function() {
       console.log('Eliminado');
     });
   }
 
+  /*
   function removeDetailsGroup(detailsGroup){
     var deferred = $q.defer();
     $rootScope.scrollTo('main');
@@ -404,13 +506,19 @@ function QuotationsEditCtrl(
 
     return deferred.promise;
   }
+  */
 
-  function removeDetail(detailId, index){
+  function removeDetail(detail){
+    var detailId = detail.id;
     vm.isLoadingDetails = true;
     quotationService.removeDetail(detailId, vm.quotation.id)
       .then(function(res){
         var updatedQuotation = res.data;
-        vm.quotation.Details.splice(index,1);
+
+        //Removing deleted detail from local variables
+        var removedDetailIndex = getRemovedDetailIndex(detailId, vm.quotation.Details);
+        vm.quotation.Details.splice(removedDetailIndex,1);
+
         vm.isLoadingDetails        = false;
         vm.quotation.total         = updatedQuotation.total;
         vm.quotation.subtotal      = updatedQuotation.subtotal;
@@ -418,15 +526,33 @@ function QuotationsEditCtrl(
         vm.quotation.totalProducts = updatedQuotation.totalProducts;
         if(updatedQuotation.Details){
           vm.quotation.Details =  updateDetailsInfo(
-            updatedQuotation.Details, 
+            vm.quotation.Details, 
             updatedQuotation.Details
           );
+          //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         }
-        $rootScope.loadActiveQuotation();
+
+        loadPaymentMethods();
+        return $rootScope.loadActiveQuotation();
       })
       .catch(function(err){
         $log.error(err);
       });
+  }
+
+  function getRemovedDetailIndex(detailId, allDetails){
+    var indexes = allDetails.map(function(detail, index){
+      if(detailId === detail.id){
+        return index;
+      }else{
+        return  'invalidIndex';
+      }
+    });
+    var validIndexes = indexes.filter(function(index){
+      return index !== 'invalidIndex';
+    });
+
+    return validIndexes[0];
   }
 
   function updateDetailsInfo(details, newDetails){
@@ -561,6 +687,39 @@ function QuotationsEditCtrl(
     return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
   }
 
+
+  function showDetailStockAlert(ev,detail){
+    var controller = StockDialogController;
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
+    $mdDialog.show({
+      controller: [
+        '$scope', 
+        '$mdDialog',
+        '$location',
+        'quotationService', 
+        'vm', 
+        'detail',
+        controller
+      ],
+      templateUrl: 'views/quotations/stock-dialog.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen,
+      locals:{
+        vm: vm,
+        detail: detail
+      }
+    })
+    .then(function() {
+    })
+    .catch(function() {
+      console.log('cancelled');
+    });    
+  }
+
+
+
   function showDetailGroupStockAlert(ev,detailGroup){
     var controller = StockDialogController;
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
@@ -659,4 +818,6 @@ QuotationsEditCtrl.$inject = [
   'deliveryService',
   'authService',
   'siteService',
+  'productService',
+  'cartService'
 ];

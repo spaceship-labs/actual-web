@@ -122,13 +122,22 @@
         </div>
 
         <!--<hr class="style1">-->
-
+        <!--
         <div ng-if="!vm.isLoadingDetails" class="cart-items">
           <ng-include
             class="cart-item-wrapper"
             ng-repeat="detailGroup in vm.quotation.DetailsGroups track by $index"
             src="'views/partials/product-cart-item.html'"></ng-include>
         </div>
+        -->
+
+        <div ng-if="!vm.isLoadingDetails" class="cart-items">
+          <ng-include
+            class="cart-item-wrapper"
+            ng-repeat="detail in vm.quotation.Details track by $index"
+            src="'views/partials/product-cart-item.html'"></ng-include>
+        </div>        
+
         <hr>
         <a
           href="#"
@@ -195,7 +204,16 @@
               <i class="icon-alert"></i>
             </a>
           </div>
-
+          
+          <!--
+          <p 
+            ng-if="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock" 
+            class="cart-summary-note"
+          >
+            <strong>Hubo un cambio en la disponibilidad de tus articulos, actualiza tus fechas de entrega</strong>
+          </p>
+          -->
+        
           <p class="cart-summary-note" ng-show="vm.isValidatingStock && vm.quotation.Details">
             Validando disponibilidad...
           </p>
