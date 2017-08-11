@@ -94,6 +94,7 @@
                 {{ detail.unitPriceWithDiscount | roundCurrency }}
               </strong>
             </p>
+            <p class="included-taxes-label">Impuesto incluido</p>
           </div>
           <div flex="25" class="cart-item-data-qty">
             <p>
@@ -102,10 +103,13 @@
               <span ng-if="detail.quantity > 1">piezas</span>
             </p>
           </div>
-          <h3 flex class="product-view-price-hl product-view-price-main">
-            <span class="currency-label">MXN</span>
-            <strong>{{detail.total | roundCurrency }}</strong>
-          </h3>
+          <div flex>
+            <h3 class="product-view-price-hl product-view-price-main">
+              <span class="currency-label">MXN</span>
+              <strong>{{detail.total | roundCurrency }}</strong>
+            </h3>
+            <p class="included-taxes-label pull-right">Impuesto incluido</p>
+          </div>
         </div>
       </div>
 

@@ -3331,6 +3331,13 @@ md-backdrop.md-sidenav-backdrop{
 .cart-item .cart-item-data-prices h3 .currency-label{
   font-size: 10px;
 }
+.cart-item .cart-item-data-prices .included-taxes-label{
+  text-align: left;
+  font-size: 12px;
+}
+.cart-item .cart-item-data-prices .included-taxes-label.pull-right{
+  text-align: right;
+}
 .cart-item .cart-item-data-prices .discount-label{
   background: #FDE932;
   color: #000;
