@@ -190,10 +190,20 @@
             type="submit"
             value="CONTINUAR"
             ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
+            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock }"
+            class="cart-view-btn print-btn"
+          >
+
+          <!--
+          <input
+            type="submit"
+            value="CONTINUAR"
+            ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
             ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock"
             ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock }"
             class="cart-view-btn print-btn"
           >
+          -->
 
 
           <div
@@ -219,7 +229,7 @@
           </p>
 
           <p class="cart-summary-note" ng-show="vm.quotation.Client">
-            *Precios en Pesos Mexicanos con impuestos incluidos.
+            Precios con impuestos incluidos.
           </p>
 
         </div>

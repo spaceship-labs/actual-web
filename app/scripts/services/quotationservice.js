@@ -52,6 +52,7 @@
         sendByEmail: sendByEmail,
         showStockAlert: showStockAlert,
         update: update,
+        updateDetails: updateDetails,
         updateSource: updateSource,
         updateAddress: updateAddress,
         validateQuotationStockById: validateQuotationStockById
@@ -67,6 +68,11 @@
       function update(id, params){
         var url = '/quotation/update/' + id;
         return api.$http.post(url,params);
+      }
+
+      function updateDetails(id, params){
+        var url = '/quotation/updatedetails/' + id;
+        return api.$http.put(url,params);
       }
 
       function updateSource(id, params){

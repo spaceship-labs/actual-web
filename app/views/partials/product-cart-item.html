@@ -71,6 +71,7 @@
                 y -{{detail.bigticketDiscountPercentage}}% adicional
               </span>
             </p>
+            <!--
             <p 
               ng-if="vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) != detail.unitPrice"
             >
@@ -80,6 +81,17 @@
               <span class="currency-label">MXN</span>
               <strong>
                 {{ vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) | roundCurrency }}
+              </strong>
+            </p>
+            -->
+            <p 
+            >
+              <span class="currency-label">MXN</span> <span class="price-crossed">{{ detail.unitPrice | roundCurrency }}</span>
+            </p>
+            <p class="price-hl">
+              <span class="currency-label">MXN</span>
+              <strong>
+                {{ detail.unitPriceWithDiscount | roundCurrency }}
               </strong>
             </p>
           </div>
@@ -99,8 +111,13 @@
 
       <!--<p ng-if="!detail.validStock && !vm.quotation.OrderWeb">Alerta</p>-->
 
+      <div ng-show="vm.isLoadingDetailsDeliveries" layout="row" layout-align="center center">
+        <md-progress-circular class="md-accent" md-diameter="40px"></md-progress-circular>
+      </div>
+
+
       <div 
-        ng-if="detail.productCart" 
+        ng-if="detail.productCart && !vm.isLoadingDetailsDeliveries" 
         class="stock-selection" 
         layout="row"
         layout-align="end start"
@@ -113,6 +130,7 @@
             <select
               class="select-element"
               ng-model="detail.productCart.quantity"
+              ng-change="vm.onDetailQuantityChange(detail)"
               ng-options="qty for qty in vm.getQtyArray(detail.productCart.deliveryGroup.available)"
             >
             </select>
@@ -121,7 +139,8 @@
         <div  flex="40" flex-sm="50" flex-xs="50">
           <div class="delivery-selection input-element select-element-wrapper">
 
-            <label>Entrega aproximada{{vm.selectedDelivery}}</label>
+            <!--<label>Entrega aproximada{{vm.selectedDelivery}}</label>-->
+            <label>Fecha entrega estimada{{vm.selectedDelivery}}</label>
             <select
               class="select-element"
               ng-class="{
@@ -183,13 +202,11 @@
     <strong>ALERTA: La disponibilidad y/o fecha de entrega de este artículo ha cambiado</strong>
   </p>
 
-  <p ng-if="!detail.immediateDelivery" class="bottom-text">
+  
+  <p ng-show="vm.isLoadingDetailsDeliveries" class="bottom-text">
     <strong>Entrega aproximada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
   </p>
-
-  <p ng-if="detail.immediateDelivery" class="bottom-text">
-    <span class="immediate-delivery-label">Entrega en tienda</span>
-  </p>
+  
 
   <!--
   <p class="bottom-text" ng-repeat="detail in detail.details">
@@ -230,4 +247,5 @@
     </p>
   </div>
 
+  <div class="clear"></div>
 </div>

@@ -69,6 +69,7 @@ md-dialog .md-button[ng-click="dialog.abort()"]{
   text-align: center;
   width: 80%;
 }
+.clear{clear: both;}
 .no-border{border: 0!important;}
 .no-margin{margin: 0!important}
 .no-padding{padding: 0!important}
@@ -2166,14 +2167,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   margin-top: 0!important;
 }
 
-.cart-view .cart-item-data .stock-selection{
-  margin-bottom: 10px;
-}
-.cart-view .cart-item-data .stock-selection .product-view-qty{
-  max-width: 100px;
-}
+.cart-view .cart-item-data .stock-selection{margin-bottom: 10px;}
+.cart-view .cart-item-data md-progress-circular{left: 15%}
+.cart-view .cart-item-data .stock-selection .product-view-qty{max-width: 100px;}
 .cart-view .cart-item-data .stock-selection label{
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
 }
 

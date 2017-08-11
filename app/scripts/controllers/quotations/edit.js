@@ -48,11 +48,9 @@ function QuotationsEditCtrl(
     },
     getQtyArray: getQtyArray,
     addNewProduct: addNewProduct,
-    addRecord: addRecord,
     alertRemoveDetail: alertRemoveDetail,
     appliesForPackageOrPromotionDiscount: appliesForPackageOrPromotionDiscount,
     attachImage: attachImage,
-    closeQuotation: closeQuotation,
     continueBuying: continueBuying,
     daysDiff: daysDiff,
     getPromotionPackageById: getPromotionPackageById,
@@ -65,14 +63,13 @@ function QuotationsEditCtrl(
     removeDetail: removeDetail,
     //removeDetailsGroup: removeDetailsGroup,
     sendByEmail: sendByEmail,
-    showBigTicketDialog: showBigTicketDialog,
     showDetailGroupStockAlert: showDetailGroupStockAlert,
     showDetailStockAlert: showDetailStockAlert,
     toggleRecord: toggleRecord,
-    deattachImage: deattachImage,
     isOrderPending: isOrderPending,
     hasSpeiOrder: hasSpeiOrder,
     resetProductCartQuantity: resetProductCartQuantity,
+    onDetailQuantityChange: onDetailQuantityChange,
     user: $rootScope.user
   });
 
@@ -96,6 +93,7 @@ function QuotationsEditCtrl(
     options              = options || {};
     vm.isLoading = true;
     vm.isLoadingDetails = true;
+    vm.isLoadingDetailsDeliveries = true;    
 
     loadWarehouses();
     showAlerts();
@@ -136,12 +134,12 @@ function QuotationsEditCtrl(
       })
       .then(function(response){
         var detailsStock = response.data;
-        console.log('details' + new Date(), _.clone(vm.quotation.Details) );
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
 
         loadDetailsDeliveries(vm.quotation.Details)
           .then(function(details){
             console.log('details after loadDetailsDeliveries', details);
+            vm.isLoadingDetailsDeliveries = false;
           });
 
         //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
@@ -179,10 +177,53 @@ function QuotationsEditCtrl(
   }
 
   function resetProductCartQuantity(detail){
-    console.log('resetProductCartQuantity')
     detail.productCart = cartService.resetProductCartQuantity(detail.productCart);
-    console.log('detail.productCart', detail.productCart);
   }  
+
+  function onDetailQuantityChange(detail){
+    detail.originalQuantity = _.clone(detail.quantity);
+
+    detail.quantity = detail.productCart.quantity;
+    detail.subtotal = detail.productCart.quantity * detail.unitPrice;
+    detail.total = detail.productCart.quantity * detail.unitPriceWithDiscount;
+
+    detail.totalPg1 = detail.quantity * detail.unitPriceWithDiscountPg1;
+    detail.totalPg2 = detail.quantity * detail.unitPriceWithDiscountPg2;
+    detail.totalPg3 = detail.quantity * detail.unitPriceWithDiscountPg3;
+    detail.totalPg4 = detail.quantity * detail.unitPriceWithDiscountPg4;
+    detail.totalPg5 = detail.quantity * detail.unitPriceWithDiscountPg5;
+    updateQuotationLocalVars();
+    console.log('detail', detail);
+  }
+
+  function updateQuotationLocalVars(){
+    var quotationAux = {
+      totalProducts: 0,
+      subtotal: 0,
+      total: 0,
+      totalPg1: 0,
+      totalPg2: 0,
+      totalPg3: 0,
+      totalPg4: 0,
+      totalPg5: 0
+    };
+    quotationAux = _.reduce(vm.quotation.Details, function(quotation,detail){
+      quotation.totalProducts += detail.quantity;
+      quotation.subtotal += detail.subtotal;
+      quotation.total += detail.total;
+
+      quotation.totalPg1 += detail.totalPg1;
+      quotation.totalPg2 += detail.totalPg2;
+      quotation.totalPg3 += detail.totalPg3;
+      quotation.totalPg4 += detail.totalPg4;
+      quotation.totalPg5 += detail.totalPg5;
+
+      return quotation;
+    }, quotationAux);
+
+    vm.quotation = _.extend(vm.quotation, quotationAux);
+    vm.quotation.discount = vm.quotation.total - vm.quotation.subtotal;
+  }
 
   function setUpDetailDeliveries(detail, options){
     options = options || {};
@@ -192,7 +233,6 @@ function QuotationsEditCtrl(
 
     return productService.delivery(options.productItemCode, options.zipcodeDeliveryId)
       .then(function(deliveries){
-        console.log('deliveries', deliveries);
         deliveries = $filter('orderBy')(deliveries, 'date');
         detail.deliveries  = deliveries;
         detail.deliveriesGroups = deliveryService.groupDeliveryDates(detail.deliveries);
@@ -210,7 +250,6 @@ function QuotationsEditCtrl(
           }
 
           var deliveryGroupMatch = isShipDateInDeliveriesGroup(detail.shipDate, detail.deliveriesGroups);
-          console.log('deliveryGroupMatch', deliveryGroupMatch);
 
           if( deliveryGroupMatch && deliveryGroupMatch.available >= detail.quantity){
             detail.productCart.deliveryGroup = deliveryGroupMatch;
@@ -354,80 +393,6 @@ function QuotationsEditCtrl(
     return appliesFor;
   }
 
-  function addRecord(form){
-    if(vm.newRecord.eventType && form.$valid){
-      vm.isLoadingRecords = true;
-
-      //Formatting date and time
-      var date = moment(vm.newRecord.date._d);
-      var time = vm.newRecord.time;
-      var year = date.get('year');
-      var month = date.get('month');
-      var day = date.get('date');
-      var dateTime = moment(time).set('year',year).set('month',month).set('date',day)._d;
-
-      vm.newRecord.dateTime = dateTime;
-      var params = {
-        dateTime: vm.newRecord.dateTime,
-        eventType: vm.newRecord.eventType,
-        notes: vm.newRecord.notes,
-        User: $rootScope.user.id,
-        file: vm.newRecord.file
-      };
-
-      quotationService.addRecord(vm.quotation.id, params)
-        .then(function(res){
-          if(res.data.id){
-            vm.quotation.Records.push(res.data);
-          }
-          vm.newRecord = {};
-          vm.isLoadingRecords = false;
-          dialogService.showDialog('Evento guardado');
-        })
-        .catch(function(err){
-          dialogService.showDialog('Hubo un error ' + (err.data || err) );
-          $log.error(err);
-          vm.isLoadingRecords = false;
-        });
-
-    }else{
-      dialogService.showDialog('Datos incompletos, revisa los campos');
-    }
-  }
-
-
-  function closeQuotation(form,closeReason, extraNotes){
-    if(closeReason){
-      vm.isLoading = true;
-      var params = {
-        notes: extraNotes,
-        User: $rootScope.user.id,
-        closeReason: closeReason,
-        extraNotes: extraNotes
-      };
-      quotationService.closeQuotation(vm.quotation.id, params)
-        .then(function(res){
-          var record = res.data.record;
-          var quotation = res.data.quotation;
-          if(record){
-            vm.quotation.Records.push(record);
-          }
-          if(quotation){
-            vm.quotation.isClosed = quotation.isClosed;
-            if(vm.quotation.isClosed){
-              vm.status = 'Cerrada';
-            }
-          }
-          vm.isLoading = false;
-          vm.quotation.Records.forEach(function(rec){
-            rec.isActive = false;
-          }); 
-        })         
-        .catch(function(err){
-          $log.error(err);
-        });
-    }
-  }
 
   function getPromotionPackageById(packageId){
     return _.findWhere(vm.promotionPackages, {id:packageId}); 
@@ -435,12 +400,6 @@ function QuotationsEditCtrl(
 
   function attachImage(file){
     vm.newRecord.file = file;
-  }
-
-  function deattachImage(){
-    if(vm.newRecord){
-      delete vm.newRecord.file;
-    }
   }
 
   function addNewProduct(){
@@ -468,49 +427,11 @@ function QuotationsEditCtrl(
     });
   }
 
-  /*
-  function removeDetailsGroup(detailsGroup){
-    var deferred = $q.defer();
-    $rootScope.scrollTo('main');
-    vm.isLoadingDetails = true;
-    var detailsIds = detailsGroup.details.map(function(d){return d.id;});
-    var params = {
-      detailsIds: detailsIds
-    };
-    quotationService.removeDetailsGroup(params, vm.quotation.id)
-      .then(function(res){
-        var updatedQuotation = res.data;
-        vm.isLoadingDetails        = false;
-        vm.quotation.total         = updatedQuotation.total;
-        vm.quotation.subtotal      = updatedQuotation.subtotal;
-        vm.quotation.discount      = updatedQuotation.discount;
-        vm.quotation.totalProducts = updatedQuotation.totalProducts;
-        if(updatedQuotation.Details){
-          vm.quotation.Details =  updateDetailsInfo(
-            vm.quotation.Details, 
-            updatedQuotation.Details
-          );
-          vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
-        }
-
-        loadPaymentMethods();
-        return $rootScope.loadActiveQuotation();
-      })
-      .then(function(){
-        deferred.resolve();
-      })
-      .catch(function(err){
-        console.log(err);
-        deferred.reject(err);
-      });
-
-    return deferred.promise;
-  }
-  */
 
   function removeDetail(detail){
     var detailId = detail.id;
     vm.isLoadingDetails = true;
+    $rootScope.scrollTo('main');
     quotationService.removeDetail(detailId, vm.quotation.id)
       .then(function(res){
         var updatedQuotation = res.data;
@@ -556,7 +477,6 @@ function QuotationsEditCtrl(
   }
 
   function updateDetailsInfo(details, newDetails){
-    var removedDetailsIds = [];
     for(var i=0;i<details.length; i++){
       var detail = details[i];
       var match = _.findWhere(newDetails, { id: detail.id } );
@@ -584,42 +504,14 @@ function QuotationsEditCtrl(
     return quotationService.isValidStock(details);    
   }
 
-  function showInvoiceDataAlertIfNeeded(ev){
-    var controller = InvoiceDialogController;
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')); 
-
-    if(!vm.quotation.immediateDelivery || !vm.quotation.Client){
-      var deferred = $q.defer();
-      deferred.resolve(true);
-      return  deferred.promise;
-    }
-
-    return $mdDialog.show({
-      controller: [
-        '$scope', 
-        '$mdDialog',
-        '$location',
-        'quotation',
-        'client',
-        controller
-      ],
-      templateUrl: 'views/checkout/invoice-dialog.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: useFullScreen,
-      locals:{
-        quotation: vm.quotation,
-        client: vm.quotation.Client
-      }
-    });
-  }  
 
   function continueBuying(){
+    /*
     if( !isValidStock(vm.quotation.Details) ){
       quotationService.showStockAlert();
       return;
     }
+    */
 
     if(!vm.quotation.Details || vm.quotation.Details.length === 0){
       dialogService.showDialog('No hay artículos en esta cotización');
@@ -628,25 +520,27 @@ function QuotationsEditCtrl(
 
     if(!vm.quotation.Order){
 
-      //Not updating Details, not necessary
-      var params = angular.copy(vm.quotation);
-      delete params.Details;
+      var params = {
+        Details: angular.copy(vm.quotation.Details)
+      };
+
+      params.Details = params.Details.map(function(detail){
+        detail.originalShipDate = detail.productCart.deliveryGroup.date;
+        detail.shipDate = detail.originalShipDate;
+        detail.quantity = detail.productCart.quantity;
+        return detail;
+      });
+
+      //delete params.Details;
       vm.isLoading = true;
       $rootScope.scrollTo('main');
 
-      quotationService.update(vm.quotation.id, params)
+      quotationService.updateDetails(vm.quotation.id, params)
         .then(function(res){
-          var quotationUpdated = res.data;
-
-          if(  quotationHasImmediateDeliveryProducts(vm.quotation) ){
-            var immediateDeliveryMsg = 'Has elegido un artículo de "entrega en tienda", recuerda que el cliente se lo llevara por sus medios al finalizar la orden de compra';
-            dialogService.showDialog(immediateDeliveryMsg);
-          }
-
+          console.log('res updateDetails', res);
 
           if(vm.quotation.Client){
-            //quotationService.setActiveQuotation(vm.quotation.id);
-            
+            //quotationService.setActiveQuotation(vm.quotation.id);            
             $location.path('/checkout/client/' + vm.quotation.id);
           }
           else{
@@ -749,48 +643,6 @@ function QuotationsEditCtrl(
       console.log('cancelled');
     });    
   }
-
-
-  function showBigTicketDialog(ev){
-    var controller = BigTicketController;
-    var options = {
-      bigticketMaxPercentage: vm.quotation.bigticketMaxPercentage,
-      bigticketPercentage: vm.quotation.bigticketPercentage || 0
-    };
-    $mdDialog.show({
-      controller: [
-        '$scope',
-        '$mdDialog',
-        'options', 
-        controller
-      ],
-      templateUrl: 'views/quotations/bigticket-dialog.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: false,
-      locals:{
-        options: options
-      }
-    })
-    .then(function(percentage) {
-      console.log('Big ticket aplicado');
-      vm.isLoading = true;
-      quotationService.update(vm.quotation.id, {bigticketPercentage: percentage})
-        .then(function(res){
-          var quotation = res.data;
-          console.log('res', res);
-          init(quotation.id, {reload:true});
-        })
-        .catch(function(err){
-          vm.isLoading = false;
-          console.log('err', err);
-        });
-    }, function() {
-      console.log('No autorizado');
-    });    
-  } 
-
 
   $scope.$on('$destroy', function(){
     mainDataListener();
