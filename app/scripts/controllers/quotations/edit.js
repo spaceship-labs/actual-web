@@ -11,6 +11,7 @@ angular.module('dashexampleApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
 function QuotationsEditCtrl(
+  $timeout,
   $log,
   $location,
   $routeParams,
@@ -75,6 +76,7 @@ function QuotationsEditCtrl(
 
   var activeQuotationListener = function(){};
   var activeStoreId = localStorageService.get('activeStore');
+  //var validatedDetails = [];
 
   if($rootScope.activeStore){
     init($routeParams.id);
@@ -94,6 +96,7 @@ function QuotationsEditCtrl(
     vm.isLoading = true;
     vm.isLoadingDetails = true;
     vm.isLoadingDetailsDeliveries = true;    
+    vm.isValidatingStock = true;
 
     loadWarehouses();
     showAlerts();
@@ -129,7 +132,6 @@ function QuotationsEditCtrl(
         vm.quotation.Details = detailsWithFilters;
         //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         vm.isLoadingDetails = false;
-        vm.isValidatingStock = true;
         return quotationService.getCurrentStock(vm.quotation.id);       
       })
       .then(function(response){
@@ -139,6 +141,7 @@ function QuotationsEditCtrl(
         loadDetailsDeliveries(vm.quotation.Details)
           .then(function(details){
             console.log('details after loadDetailsDeliveries', details);
+            vm.quotation.Details = adjustSameProductsStock(vm.quotation.Details);
             vm.isLoadingDetailsDeliveries = false;
           });
 
@@ -168,32 +171,153 @@ function QuotationsEditCtrl(
   }
   
   function loadDeliveriesByDetail(detail){
-    return setUpDetailDeliveries(detail, {
+    var options = {
       productId: detail.Product.id,
       productItemCode: detail.Product.ItemCode,
       activeStoreId: activeStoreId,
       zipcodeDeliveryId: vm.quotation.ZipcodeDelivery.id
-    });  
+    };
+
+    return productService.delivery(options.productItemCode, options.zipcodeDeliveryId)
+      .then(function(deliveries){
+        deliveries = deliveries.map(function(delivery){
+          delivery.initalAvailable = _.clone(delivery.available);
+          return delivery;
+        });
+        return setUpDetailDeliveries(detail, deliveries);
+      });
+
   }
+
+  function setUpDetailDeliveries(detail, deliveries){
+    console.log('setUpDetailDeliveries detail id', detail.id);
+    console.log('deliveries', deliveries);
+    detail.productCart = {
+      quantity: 1
+    };
+
+    deliveries = $filter('orderBy')(deliveries, 'date');
+    detail.deliveries  = deliveries;
+    detail.deliveriesGroups = deliveryService.groupDeliveryDates(detail.deliveries);
+    detail.deliveriesGroups = $filter('orderBy')(detail.deliveriesGroups, 'date');
+
+    detail.productCart = {
+      quantity: 1
+    };
+
+    if(detail.deliveries && detail.deliveries.length > 0){
+      detail.productCart.deliveryGroup = detail.deliveriesGroups[0];
+
+      var deliveryGroupMatch = isShipDateInDeliveriesGroup(detail.shipDate, detail.deliveriesGroups);
+
+      if( deliveryGroupMatch && deliveryGroupMatch.available >= detail.quantity){
+        //Setting productCart quantity if the detail has shipping date and available date
+        console.log('setting detail productCart quantity 2', detail.quantity)
+        detail.productCart.deliveryGroup = deliveryGroupMatch;
+        detail.productCart.quantity = detail.quantity;
+      }else{
+        console.log('detail else 2', detail.id);
+        detail.productCart.quantity = 0;
+      }
+    }
+
+    else{
+      detail.productCart.quantity = 0;
+    }
+
+    return detail;
+  }
+
+  function adjustSameProductsStock(details){
+    details = details.map(function(detail){
+      var productTakenStock = getProductTakenStockFromRemainingDetails(detail, details);
+      console.log('detail.deliveries', detail.deliveries);
+      console.log('productTakenStock', productTakenStock);
+      console.log('detail.deliveries after', detail.deliveries);
+      var adjustedDetail = substractProductTakenStockFromDetail(
+          detail,
+          detail.deliveries,
+          productTakenStock
+        );
+      return adjustedDetail;
+    });
+    //console.log('details adjustSameProductsStock', details);
+    return details;
+  }
+
+  function getProductTakenStockFromRemainingDetails(currentDetail, allDetails){
+    return _.reduce(allDetails, function(takenStock, detail){
+      if(detail.Product.id === currentDetail.Product.id && detail.id !== currentDetail.id){
+        takenStock += detail.quantity;
+      }
+
+      return takenStock;
+    },0);
+  }
+
+  function substractProductTakenStockFromDetail(detail, deliveries, productTakenStock){
+    for(var i = 0; i<deliveries.length; i++){
+      console.log('deliveries[i]', deliveries[i]);
+      console.log('deliveries[i].date', deliveries[i].date);
+      console.log('deliveries[i].available', deliveries[i].available);
+      deliveries[i].available = deliveries[i].initalAvailable -  productTakenStock;
+    }
+    
+    //return deliveries;
+    return setUpDetailDeliveries(detail, deliveries);
+  }        
 
   function resetProductCartQuantity(detail){
     detail.productCart = cartService.resetProductCartQuantity(detail.productCart);
   }  
 
   function onDetailQuantityChange(detail){
-    detail.originalQuantity = _.clone(detail.quantity);
-
-    detail.quantity = detail.productCart.quantity;
-    detail.subtotal = detail.productCart.quantity * detail.unitPrice;
-    detail.total = detail.productCart.quantity * detail.unitPriceWithDiscount;
-
-    detail.totalPg1 = detail.quantity * detail.unitPriceWithDiscountPg1;
-    detail.totalPg2 = detail.quantity * detail.unitPriceWithDiscountPg2;
-    detail.totalPg3 = detail.quantity * detail.unitPriceWithDiscountPg3;
-    detail.totalPg4 = detail.quantity * detail.unitPriceWithDiscountPg4;
-    detail.totalPg5 = detail.quantity * detail.unitPriceWithDiscountPg5;
-    updateQuotationLocalVars();
+    console.log('%c onDetailQuantityChange triggered!!!','color: green');
+    console.log('detail id', detail.id);
     console.log('detail', detail);
+
+    if(detail.quantity){
+      vm.isLoadingDetailsDeliveries = true;
+      /*
+      detail.originalQuantity = _.clone(detail.quantity);
+      detail.quantity = detail.productCart.quantity;
+      */
+      var detailQuantity = _.clone(detail.productCart.quantity);
+      var quoationDetails = JSON.parse(JSON.stringify(vm.quotation.Details));
+
+
+      console.log('quantity assigned with select', detailQuantity);
+      console.log('vm.quotation.Details', quoationDetails);
+      console.log('quotationDetails', _.clone(quoationDetails));
+
+      for(var i= 0; i<quoationDetails.length; i++){
+        if(quoationDetails[i].id === detail.id){
+          console.log('quantity', detailQuantity);
+          quoationDetails[i].quantity = detailQuantity;
+        }
+      }
+      console.log('quoationDetails before adjustSameProductsStock', quoationDetails);
+      //vm.isLoading = true;
+
+      vm.quotation.Details = adjustSameProductsStock(quoationDetails);      
+
+      console.log('vm.quotation.Details after adjustSameProductsStock', vm.quotation.Details);
+
+      /*
+      detail.subtotal = detail.productCart.quantity * detail.unitPrice;
+      detail.total = detail.productCart.quantity * detail.unitPriceWithDiscount;
+
+      detail.totalPg1 = detail.quantity * detail.unitPriceWithDiscountPg1;
+      detail.totalPg2 = detail.quantity * detail.unitPriceWithDiscountPg2;
+      detail.totalPg3 = detail.quantity * detail.unitPriceWithDiscountPg3;
+      detail.totalPg4 = detail.quantity * detail.unitPriceWithDiscountPg4;
+      detail.totalPg5 = detail.quantity * detail.unitPriceWithDiscountPg5;
+      updateQuotationLocalVars();
+      console.log('detail', detail);
+      */
+      //vm.isLoading = false;
+      vm.isLoadingDetailsDeliveries = false; 
+    }
   }
 
   function updateQuotationLocalVars(){
@@ -224,49 +348,9 @@ function QuotationsEditCtrl(
     vm.quotation = _.extend(vm.quotation, quotationAux);
     vm.quotation.discount = vm.quotation.total - vm.quotation.subtotal;
   }
-
-  function setUpDetailDeliveries(detail, options){
-    options = options || {};
-    detail.productCart = {
-      quantity: 1
-    };
-
-    return productService.delivery(options.productItemCode, options.zipcodeDeliveryId)
-      .then(function(deliveries){
-        deliveries = $filter('orderBy')(deliveries, 'date');
-        detail.deliveries  = deliveries;
-        detail.deliveriesGroups = deliveryService.groupDeliveryDates(detail.deliveries);
-        detail.deliveriesGroups = $filter('orderBy')(detail.deliveriesGroups, 'date');
-
-        detail.productCart = {
-          quantity: 1
-        };
-
-        if(detail.deliveries && detail.deliveries.length > 0){
-          detail.productCart.deliveryGroup = detail.deliveriesGroups[0];
-
-          if(detail.quantity <= detail.productCart.deliveryGroup.available){
-            detail.productCart.quantity = detail.quantity;
-          }
-
-          var deliveryGroupMatch = isShipDateInDeliveriesGroup(detail.shipDate, detail.deliveriesGroups);
-
-          if( deliveryGroupMatch && deliveryGroupMatch.available >= detail.quantity){
-            detail.productCart.deliveryGroup = deliveryGroupMatch;
-            detail.productCart.quantity = detail.quantity;
-          }
-        }
-
-        else{
-          detail.productCart.quantity = 0;
-        }
-
-        return detail;
-      });
-  }  
+    
 
   function isShipDateInDeliveriesGroup(shipDate, deliveriesGroups){
-    console.log('shipDate', shipDate);
     var exists = _.find(deliveriesGroups, function(deliveryGroup){
       return moment(shipDate).format('DD-MM-YYYY') === moment(deliveryGroup.date).format('DD-MM-YYYY');
     });
@@ -535,6 +619,21 @@ function QuotationsEditCtrl(
       vm.isLoading = true;
       $rootScope.scrollTo('main');
 
+      if(vm.quotation.Client){
+        //quotationService.setActiveQuotation(vm.quotation.id);            
+        $location.path('/checkout/client/' + vm.quotation.id);
+      }
+      else{
+        $location.path('/register')
+          .search({
+            addContact:true,
+            quotation: vm.quotation.id
+          });
+      }
+      vm.isLoading = false;     
+
+      //TODO: Update details when edit mode is active
+      /*
       quotationService.updateDetails(vm.quotation.id, params)
         .then(function(res){
           console.log('res updateDetails', res);
@@ -555,6 +654,7 @@ function QuotationsEditCtrl(
         .catch(function(err){
           $log.error(err);
         });
+      */
 
     }else{
       dialogService.showDialog('Esta cotización ya tiene un pedido asignado');
@@ -651,6 +751,7 @@ function QuotationsEditCtrl(
 }
 
 QuotationsEditCtrl.$inject = [
+  '$timeout',
   '$log',
   '$location',
   '$routeParams',

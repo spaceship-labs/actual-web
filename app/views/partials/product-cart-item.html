@@ -4,7 +4,7 @@
   <h3>
     <a ng-href="{{detail.Product.url}}">
       <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
-    </a> 
+    </a>
   </h3>
 
   <div layout="row" layout-wrap>
@@ -113,12 +113,11 @@
         </div>
       </div>
 
-      <!--<p ng-if="!detail.validStock && !vm.quotation.OrderWeb">Alerta</p>-->
 
+      <!--
       <div ng-show="vm.isLoadingDetailsDeliveries" layout="row" layout-align="center center">
         <md-progress-circular class="md-accent" md-diameter="40px"></md-progress-circular>
       </div>
-
 
       <div 
         ng-if="detail.productCart && !vm.isLoadingDetailsDeliveries" 
@@ -126,11 +125,10 @@
         layout="row"
         layout-align="end start"
       >
-        <!--{{detail.deliveriesGroups}} -->        
         <div  flex="20" flex-sm="50" flex-xs="50">
           <div class="product-view-qty input-element">
                         
-            <label>Piezas</label>
+            <label>Piezas | Available: {{detail.productCart.deliveryGroup.available}}</label>
             <select
               class="select-element"
               ng-model="detail.productCart.quantity"
@@ -143,7 +141,6 @@
         <div  flex="40" flex-sm="50" flex-xs="50">
           <div class="delivery-selection input-element select-element-wrapper">
 
-            <!--<label>Entrega aproximada{{vm.selectedDelivery}}</label>-->
             <label>Fecha entrega estimada{{vm.selectedDelivery}}</label>
             <select
               class="select-element"
@@ -159,6 +156,7 @@
         </div>        
 
       </div>
+      -->
 
       <!--
       <p>
@@ -178,9 +176,9 @@
       <md-tooltip md-direction="bottom">Eliminar</md-tooltip>
     </a>
 
-    <!--
+    
     <div 
-      ng-show="!detail.validStock && !vm.quotation.OrderWeb" 
+      ng-show="!detail.validStock && !vm.quotation.OrderWeb && !vm.isValidatingStock" 
       layout="row"
       layout-align="center center"
       class="stock-alert-layer"
@@ -195,7 +193,7 @@
         </p>
       </div>
     </div>
-    -->
+    
 
   </div>
 
@@ -207,9 +205,15 @@
   </p>
 
   
+  <p class="bottom-text">
+    <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
+  </p>
+
+  <!--
   <p ng-show="vm.isLoadingDetailsDeliveries" class="bottom-text">
     <strong>Entrega aproximada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
   </p>
+  -->
   
 
   <!--
