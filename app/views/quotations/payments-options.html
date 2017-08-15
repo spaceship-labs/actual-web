@@ -7,7 +7,7 @@
 	<div layout="row" class="data-header">
 		<div flex="15" class="data-head"><p><strong>Formas de pago</strong></p></div>
 		<div flex="20" class="data-head"><p><strong>Plan de pago</strong></p></div>
-		<div flex="45" class="data-head"><p><strong>Grupos financieros participantes</strong></p></div>
+		<div flex="50" class="data-head"><p><strong>Grupos financieros participantes</strong></p></div>
 		<div flex="15" class="data-head"><p><strong>Totales</strong></p></div>
 	</div>
 
@@ -23,7 +23,7 @@
 				<p ng-show="paymentGroup.group === 1">Un solo pago</p>
 				<p ng-show="paymentGroup.group !== 1">{{method.name}}</p>
 			</div>
-      <div flex="45" class="data-cell">
+      <div flex="50" class="data-cell">
 				<p>
 					<span class="comma-separated" ng-repeat="card in method.cards">{{card}}</span>
 				</p>
@@ -35,6 +35,7 @@
 		</div>
 	</div>
 
+	<p class="bottom-note">Precios con impuestos incluidos</p>
+
 </section>
 
-<p>Impuestos incluidos</p>

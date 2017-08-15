@@ -51,16 +51,15 @@
           <p>
             <label><strong>SELECCIONA UN BANCO</strong>*</label>
           </p>
-          <div flex="70" ng-if="payment.options.length > 0">
+          <div flex="70" ng-if="payment.options.length > 0 && !changingOptions">
             <div class="input-element select-element-wrapper">
               <md-select
                 ng-model="payment.card"
-                ng-change="onChangeCard(payment.card)"
                 class="select-element"
+                required
               >
                 <md-option
                   ng-repeat="option in payment.options track by $index"
-                  ng-selected="$index==0"
                   ng-value="option.card.value">
                   {{option.card.label}}
                 </md-option>
@@ -133,10 +132,10 @@
               <md-select
                 ng-model="payment.cardObject.expMonth"
                 class="select-element"
+                required
               >
                 <md-option
                   ng-repeat="month in months track by $index"
-                  ng-selected="$index==0"
                   ng-value="month">
                   {{month}}
                 </md-option>
@@ -147,6 +146,7 @@
               <md-select
                 ng-model="payment.cardObject.expYear"
                 class="select-element"
+                required
               >
                 <md-option
                   ng-repeat="year in years track by $index"
@@ -232,10 +232,10 @@
             flex="85"
             ng-model="payment.cardState"
             class="select-element state-selector"
+            required
           >
             <md-option
               ng-repeat="state in states track by $index"
-              ng-selected="$index==0"
               ng-value="state.name">
               {{state.name}}
             </md-option>
@@ -256,32 +256,23 @@
           </div>
         </div>
 
-        <div class="input-element" flex-sm="100" flex-xs="100">
+        <div flex="30" class="input-element" flex-sm="100" flex-xs="100">
           <p>
-            <label><strong>TÉLEFONO</strong>*</label>
+            <label><strong>COLONIA</strong>*</label>
           </p>
           <div flex="95" class="input-element-inner">
             <input
               type="text"
-              ng-model="payment.phone"
+              ng-model="payment.cardAddress1"
               required>
           </div>
         </div>
 
-        <div class="input-element" flex-sm="100" flex-xs="100">
-          <p>
-            <label><strong>EMAIL</strong>*</label>
-          </p>
-          <div flex="95" class="input-element-inner">
-            <input
-              type="email"
-              ng-model="payment.email"
-              required>
-          </div>
-        </div>
+
 
       </div>
-      <div class="input-container" layout="row" layout-wrap flex="100">
+      
+      <div class="input-container" layout="row" layout-wrap flex="70">
 
         <div flex class="input-element" flex-sm="100" flex-xs="100" >
           <p>
@@ -295,19 +286,6 @@
             >
           </div>
         </div>
-
-        <div flex="30" class="input-element" flex-sm="100" flex-xs="100">
-          <p>
-            <label><strong>COLONIA</strong>*</label>
-          </p>
-          <div flex="95" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardAddress1"
-              required>
-          </div>
-        </div>
-
 
         <div class="input-element" flex="20" flex-sm="35" flex-xs="35">
           <p>
@@ -327,6 +305,60 @@
         </div>        
 
       </div>
+
+      <div class="input-container" layout="row" layout-wrap flex="100">
+
+        <div class="input-element" flex="25" flex-sm="100" flex-xs="100">
+          <p>
+            <label><strong>TÉLEFONO FIJO</strong>*</label>
+          </p>
+          <div flex="95" class="input-element-inner">
+            <input
+              type="text"
+              ng-model="payment.phone"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="input-element" flex="25" flex-sm="100" flex-xs="100">
+          <p>
+            <label><strong>TÉLEFONO MOVIL</strong>*</label>
+          </p>
+          <div flex="95" class="input-element-inner">
+            <input
+              type="text"
+              ng-model="payment.mobilePhone"
+              required>
+          </div>
+        </div>        
+
+        <div class="input-element" flex="25" flex-sm="100" flex-xs="100">
+          <p>
+            <label><strong>EMAIL</strong>*</label>
+          </p>
+          <div flex="95" class="input-element-inner">
+            <input
+              type="email"
+              ng-model="payment.email"
+              required>
+          </div>
+        </div>
+
+        <div class="input-element" flex="25" flex-sm="100" flex-xs="100">
+          <p>
+            <label><strong>CONFIRMAR EMAIL</strong>*</label>
+          </p>
+          <div flex="95" class="input-element-inner">
+            <input
+              type="email"
+              ng-model="payment._email"
+              ng-pattern="payment.email"
+              required>
+          </div>
+        </div>        
+
+      </div>      
 
       <p class="bottom-note">Los datos de la dirección deben ser exactamente iguales al estado de cuenta de la tarjeta proporcionada</p>
     </div>

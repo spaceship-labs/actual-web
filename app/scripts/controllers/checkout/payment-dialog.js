@@ -2,6 +2,7 @@ function PaymentDialogController(
   $scope,
   $mdDialog,
   $filter,
+  $timeout,
   formatService,
   commonService,
   ewalletService,
@@ -85,20 +86,30 @@ function PaymentDialogController(
 
   $scope.$watch('payment.cardType',function(newVal, oldVal){
     //console.log('new val', newVal);
-    if(newVal !== oldVal){
+    if(newVal !== oldVal && oldVal){
 
+      console.log('oldVal', oldVal);
       console.log('newVal', newVal);
 
       if(newVal === 'american-express'){
+        $scope.changingOptions = true;
         $scope.payment.options = [];
         $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(option){
           return option.card.value === 'american-express';
         });
+        $timeout(function(){
+          $scope.changingOptions = false;
+        }, 200);
       }else{
+        $scope.changingOptions = true;
         $scope.payment.options = [];
         $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(option){
           return option.card.value !== 'american-express';
-        });        
+        }); 
+        $timeout(function(){
+          $scope.changingOptions = false;
+        }, 200);
+
       }
 
     }

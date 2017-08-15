@@ -71,6 +71,7 @@
       toggleProfileModal: toggleProfileModal,
       getFaviconUrl: getFaviconUrl,
       toggleMobileSidenav: toggleMobileSidenav,
+      showPhoneNumberDialog: showPhoneNumberDialog,
       siteTheme: SITE.name,
       siteConstants: SITE
     });
@@ -578,6 +579,10 @@
       var image =  '/images/mesas.jpg';
       image = api.baseUrl + '/categories/' + handle + '.jpg';
       return {'background-image' : 'url(' + image + ')'};
+    }
+
+    function showPhoneNumberDialog(){
+      dialogService.showDialog('Asistencia en su compra: 01 (998) 884 1594');
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {
