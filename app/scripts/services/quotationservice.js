@@ -19,6 +19,7 @@
     ){
 
       var service = {
+        PAYMENT_ATTEMPTS_LIMIT: 3,
         addDetail: addDetail,
         addProduct: addProduct,
         addMultipleProducts: addMultipleProducts,
@@ -55,7 +56,8 @@
         updateDetails: updateDetails,
         updateSource: updateSource,
         updateAddress: updateAddress,
-        validateQuotationStockById: validateQuotationStockById
+        validateQuotationStockById: validateQuotationStockById,
+        getQuotationPaymentAttempts: getQuotationPaymentAttempts
       };
 
       return service;
@@ -430,6 +432,13 @@
           return res.data;
         });
       }      
+
+      function getQuotationPaymentAttempts(id){
+        var url = '/quotation/'+id+'/paymentattempts';
+        return api.$http.get(url).then(function(res) {
+          return res.data;
+        });
+      }   
 
       function mapDetailsStock(details, detailsStock){
         var details = details.map(function(detail){

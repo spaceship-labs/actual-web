@@ -39,6 +39,7 @@ function QuotationsEditCtrl(
   angular.extend(vm, {
     newRecord: {},
     api: api,
+    paymentAttemptsLimit: quotationService.PAYMENT_ATTEMPTS_LIMIT,
     isLoadingRecords: false,
     isLoading: true,
     timePickerOptions: {

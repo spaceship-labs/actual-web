@@ -305,6 +305,7 @@ function CheckoutPaymentsCtrl(
   }
 
   function addPayment(payment){
+
     if(
         ( (payment.ammount > 0) && (vm.quotation.ammountPaid < vm.quotation.total) )
         || payment.ammount < 0
@@ -353,10 +354,19 @@ function CheckoutPaymentsCtrl(
             errMsg = errMsg ? errMsg.toString() : '';
 
             if(err.data){
+
               if(err.data.conektaLimitErrorThrown){
                 $rootScope.scrollTo('main');
                 quotationService.removeCurrentQuotation();              
                 $location.path('/quotations/edit/' + vm.quotation.id);
+                return;
+              }
+
+              var paymentAttempts = getQuotationPaymentAttemptsByError(err);
+              vm.quotation.paymentAttempts = paymentAttempts;
+              if(paymentAttempts >= quotationService.PAYMENT_ATTEMPTS_LIMIT){
+                $rootScope.scrollTo('main');
+                $location.path('/quotations/edit/' + vm.quotation.id);                
                 return;
               }
             }
@@ -378,6 +388,19 @@ function CheckoutPaymentsCtrl(
           vm.isLoadingProgress = false;
         });
     }
+  }
+
+  function getQuotationPaymentAttemptsByError(err){
+    var errObj = _.clone(err);
+    var paymentAttempts = vm.quotation.paymentAttempts;
+    errObj = errObj || {};
+    if(errObj.data){
+      if( errObj.data.type === 'processing_error'  ){
+        paymentAttempts = paymentAttempts + 1;
+      }
+    }
+
+    return paymentAttempts;
   }
 
   function getMessageFromConektaOrderError(err){
@@ -405,7 +428,7 @@ function CheckoutPaymentsCtrl(
   }
 
 
-  function openTransactionDialog(method, ammount, paymentDefaults) {
+  function openTransactionDialog(method, ammount, paymentDefaults) {    
     var ev = null;
     selectedMethod = method;
     if(method){

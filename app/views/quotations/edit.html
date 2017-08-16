@@ -27,10 +27,11 @@
     </ng-include>
     
     <ng-include 
-      ng-if="vm.quotation.rateLimitReported"
+      ng-if="vm.quotation.rateLimitReported || vm.quotation.paymentAttempts >= vm.paymentAttemptsLimit"
       src="'views/quotations/rate-limit-message.html'"
       >
     </ng-include>
+
   </div>
 
   <section class="quotation-data">

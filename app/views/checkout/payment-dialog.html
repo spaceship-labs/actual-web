@@ -27,7 +27,7 @@
       <hr>
 
       <md-radio-group 
-        ng-if="payment.type === 'credit-card' || payment.msi " 
+        ng-if="payment.type === 'credit-card' || payment.type === 'debit-card' || payment.msi " 
         ng-init="payment.cardType = 'master-card' "
         ng-model="payment.cardType"
         class="payment-cardtype-chooser"
@@ -39,7 +39,13 @@
         <md-radio-button value="visa" class="md-primary">
           <img src="/images/visa.png" alt="">          
         </md-radio-button>
-        <md-radio-button value="american-express" class="md-primary">
+
+
+        <md-radio-button 
+          ng-if="payment.type !== 'debit-card' "
+          value="american-express" 
+          class="md-primary"
+        >
           <img src="/images/american.png" alt="">          
         </md-radio-button>
 
