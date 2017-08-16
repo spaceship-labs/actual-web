@@ -591,6 +591,9 @@
       vm.isActiveLogin = false;
       vm.isActiveCart = false;
       vm.isLoadingLogin = false;
+
+      $mdSidenav('mobileSidenav').close();
+
     });
 
     $rootScope.scrollTo = function(target){

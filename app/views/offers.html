@@ -1,18 +1,16 @@
-<!--
 <div class="breadcrumb">
   <div class="container container-xxlg">
     <p>
-      <a href="#">Inicio</a>
-      <a href="#"> > Muebles</a>
-      <a href="#" class="breadcrumb-active"> > Salas</a>
+      <a href="/">Inicio</a>
+      <a href="/ofertas" class="breadcrumb-active"> > Ofertas</a>
     </p>
   </div>
 </div>
--->
+
 <div class="content-block listing-view">
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
     <!--START NAV-->
-    <aside flex="20">
+    <aside flex="20"  hide-sm hide-xs>
       <sidebar-categories
         categories-tree="main.categoriesTree"
         selected-category-id="vm.category.id">
@@ -22,7 +20,7 @@
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
-    <div flex="75">
+    <div flex="75" flex-sm="100" flex-xs="100">
 
       <div
         ng-if="vm.isLoading"

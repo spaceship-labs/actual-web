@@ -30,14 +30,23 @@
         </a>
       </div>
 
+
       <div
         class="categories-btn-wrap"
         flex-gt-xs="15"
         layout-align="center center"
       >
-        <!--
-        <a ng-click="main.menuCategoriesOn = !main.menuCategoriesOn" href="#" class="categories-btn">CATEGORÍAS</a>
-        -->
+
+        <a
+          ng-if="main.activeQuotation"
+          flex
+          ng-href="/quotations/edit/{{main.activeQuotation.id}}"
+          class="header-top-bar-menu-item cart-fixed-item"
+        >
+          <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
+          <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
+          <ng-include ng-if="main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+        </a>
       </div>
 
       <!--END ONLY ON SCROLL-->

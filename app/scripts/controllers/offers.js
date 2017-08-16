@@ -34,9 +34,16 @@ function OffersCtrl(
   if($rootScope.activeQuotation){
     init();    
   }else{
-    mainDataListener = $rootScope.$on('mainDataLoaded', function(e){
+
+    if($rootScope.isMainDataLoaded){
+      console.log('init isMainDataLoaded');
       init();
-    });
+    }else{
+      mainDataListener = $rootScope.$on('mainDataLoaded', function(e){
+        init();
+      });    
+    }
+
   }
 
   function loadZipcodeDeliveryByActiveQuotation(){

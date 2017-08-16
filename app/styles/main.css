@@ -563,6 +563,35 @@ select{
   transform: translateX(-50%);
 }
 
+.header-top-bar.fixed-head .cart-fixed-item{
+  outline: none;
+  text-align: center;
+  min-width: 50px;
+  cursor: pointer;
+  position: relative;  
+  top: 3px;
+}
+
+.header-top-bar.fixed-head .cart-fixed-item .cart-n-items{
+  color: #50C841!important;
+  position: absolute;
+  left: 5px;
+  top: 0;
+  margin: 0 auto;
+  right: 0;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.header-top-bar.fixed-head .cart-fixed-item  i{
+  color: #50C841!important;
+  font-size: 28px;
+  padding: 0 4px;
+  color: white;
+  margin: 0 6px;
+  vertical-align: middle;
+}
+
 
 .menu-mobile-icon{
   display: block;
@@ -5102,6 +5131,26 @@ padding-left: 16px;
   .orderby-selectors .orderby-item-active span{background-size: 26px;}
 
   .deposit-dialog .payment-cardtype-chooser md-radio-button{margin-right: 20px;}
+
+
+  .product-view-prices .unit-data p{
+    display: inline-block;
+    width: 30%;
+    margin: 4px 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .product-view-qty{max-width: 90%;}
+  .product-view .product-view-price-main{text-align: center;}
+  .product-view .product-view-price-main h3{
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 32px!important;
+  }
+  .product-view .product-view-price-main .taxes-included{
+    display: inline-block;
+  }
 }
 
 
