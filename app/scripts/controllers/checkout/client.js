@@ -73,7 +73,7 @@ function CheckoutClientCtrl(
                 contact.completeAdrress = clientService.buildAddressStringByContact(contact);
                 return contact;
               });
-              if(!vm.quotation.Address && vm.contacts.length > 0){
+              if(/*!vm.quotation.Address &&*/ vm.contacts.length > 0){
                 vm.quotation.Address = vm.contacts[0].id;
               }
             })

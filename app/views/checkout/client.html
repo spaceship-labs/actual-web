@@ -30,7 +30,7 @@
     <section flex="75" flex-sm="100" flex-xs="100">
       <h3>
         <strong>Datos personales</strong>
-        <a class="small-link action-link" href="#" ng-href="/user/profile">Cambiar mis datos personales</a>
+        <a class="small-link action-link" href="#" ng-href="/user/profile">Editar</a>
       </h3>
       <form ng-submit="vm.continueProcess()" class="client-checkout" action="#">
 
@@ -64,7 +64,7 @@
 
         <h3>
           <strong>DIRECCIÓN DE ENTREGA</strong> 
-          <a ng-show="vm.contacts && vm.contacts.length > 0" href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}" class="small-link action-link">Editar direccíon de envío</a>
+          <a ng-show="vm.contacts && vm.contacts.length > 0" href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}" class="small-link action-link">Editar</a>
 
           <a ng-show="vm.contacts.length === 0" href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}" class="small-link action-link">Agregar direccíon de envío</a>
         </h3>
@@ -96,7 +96,7 @@
                   <li><strong>No. exterior: </strong>{{contact.U_Noexterior}}</li>
                   <li><strong>No. interior: </strong>{{contact.U_Nointerior}}</li>
                   <li><strong>Colonia: </strong>{{contact.U_Colonia}}</li>
-                  <li><strong>Municipio: </strong>{{contact.U_Mpio}}</li>
+                  <li><strong>Municipio o delegación: </strong>{{contact.U_Mpio}}</li>
                   <li><strong>Ciudad: </strong>{{contact.U_Ciudad}}</li>
                   <li><strong>Estado: </strong>{{contact.U_Estado}}</li>
                   <li><strong>C.P.: </strong>{{contact.U_CP}}</li>
@@ -110,7 +110,7 @@
                     class="small-link action-link"
                     href="#"
                     ng-href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}">
-                    Editar datos de dirección
+                    Editar
                   </a>
                 </p>
               </div>

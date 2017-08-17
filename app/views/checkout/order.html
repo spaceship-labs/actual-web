@@ -165,7 +165,7 @@
           <div flex flex-sm="100" flex-xs="100"><strong>FECHA</strong></div>
           <div flex flex-sm="100" flex-xs="100"><strong>FOLIO</strong></div>
           <div flex flex-sm="100" flex-xs="100"><strong>TIPO DE PAGO</strong></div>
-          <div flex flex-sm="100" flex-xs="100"><strong>TERMINAL</strong></div>
+          <div flex flex-sm="100" flex-xs="100"><strong>BANCO</strong></div>
           <div flex flex-sm="100" flex-xs="100"><strong>MONTO COBRADO</strong></div>
         </div>
 
@@ -197,7 +197,8 @@
             <span>{{vm.getPaymentTypeString(payment)}}</span>
           </div>
           <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
-            <span>{{ main.mapTerminalCode(payment.terminal) }}</span>
+            <!--<span>{{ main.mapTerminalCode(payment.terminal) }}</span>-->
+            <span>{{payment.card}}</span>
           </div>
           <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
             <!--<span ng-if="payment.type !='cash-usd'">{{payment.ammount | currency}} MXN</span>-->
