@@ -38,6 +38,14 @@ function PaymentDialogController(
     $scope.payment.min = commonService.roundCurrency($scope.payment.min);
   }
 
+  init();
+
+  function init(){
+    if($scope.payment.type !== 'transfer'){
+      setPaymentOptionsBasedOnCardType($scope.payment.cardType);
+    }
+  }
+
   function getYears(){
     var currentDate = moment().add(1,'year').format('YYYY');
     var years = [];
@@ -91,30 +99,34 @@ function PaymentDialogController(
       console.log('oldVal', oldVal);
       console.log('newVal', newVal);
 
-      if(newVal === 'american-express'){
-        $scope.changingOptions = true;
-        $scope.payment.options = [];
-        $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(option){
-          return option.card.value === 'american-express';
-        });
-        $timeout(function(){
-          $scope.changingOptions = false;
-        }, 200);
-      }else{
-        $scope.changingOptions = true;
-        $scope.payment.options = [];
-        $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(option){
-          return option.card.value !== 'american-express';
-        }); 
-        $timeout(function(){
-          $scope.changingOptions = false;
-        }, 200);
-
-      }
+      setPaymentOptionsBasedOnCardType(newVal);
 
     }
   });
   
+  function setPaymentOptionsBasedOnCardType(cardType){
+    if(cardType === 'american-express'){
+      $scope.changingOptions = true;
+      $scope.payment.options = [];
+      $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(option){
+        return option.card.value === 'american-express';
+      });
+      $timeout(function(){
+        $scope.changingOptions = false;
+      }, 200);
+    }else{
+      $scope.changingOptions = true;
+      $scope.payment.options = [];
+      $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(option){
+        return option.card.value !== 'american-express';
+      }); 
+      $timeout(function(){
+        $scope.changingOptions = false;
+      }, 200);
+
+    }    
+  }
+
 
   function getSelectedTerminal(card){
     var option = _.find($scope.payment.options, function(option){

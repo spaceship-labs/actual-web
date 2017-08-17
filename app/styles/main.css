@@ -3177,6 +3177,16 @@ md-backdrop.md-sidenav-backdrop{
 .quotation-view .hr{display: none;}
 .quotation-view .style1 {border-top: 2px solid #000000;}
 .quotation-view .spei-msg{padding: 0 20px;}
+.quotation-view .spei-note{
+  font-weight: 400;
+}
+.quotation-view .spei-note .main-info p{
+  font-size: 14px;
+  margin: 4px 0;
+  /*text-align: center;*/
+}
+
+
 .quotation-view .quotation-data{
   margin: 10px 0;
   padding: 0 20px;
@@ -3307,6 +3317,9 @@ md-backdrop.md-sidenav-backdrop{
   padding: 16px 10px;
   margin-top: 0;
 }
+.cart-view .cart-title span{
+  font-size: 14px;
+}
 .cart-view .cart-title i{
   font-size: 26px;
   vertical-align: middle;
@@ -3324,6 +3337,20 @@ md-backdrop.md-sidenav-backdrop{
   text-align: center;
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
+
+.cart-view .cart-list-full{
+  min-width: 100%;
+}
+.cart-view .cart-list-full .detail-total{
+  color: #E2023F;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.cart-view .cart-list-full .cart-item-data-column{
+  text-align: center;
+}
+.cart-view .cart-list-full .cart-item-data-column p{font-size: 14px;}
 
 .cart-view .cart-aside{
   margin-left: 20px;
@@ -5304,9 +5331,23 @@ padding-left: 16px;
   .cart-view .cart-item{padding: 0 0 10px;}
   .cart-item h3{margin: 6px 0;}
   .quotation-view .print-btn{margin-bottom: 4px;}
+  .cart-view .cart-list-full .cart-item-data-column{
+    text-align: left;
+    margin-bottom: 4px;
+  }
+
   .quotation-text-block h3{font-size: 14px;}
   .quotation-text-block ul li{font-size: 12px;}
   .quotation-texts p{font-size: 12px;}
+
+  .spei-card .spei-card-inner{width: 100%!important;}
+  .spei-card .ps-amount h2{font-size: 28px!important;}
+  .spei-card .ps-alert{
+    font-size: 12px!important;
+    padding: 6px!important;
+  }
+  .spei-card .ps-block{padding: 0 8px!important;}
+
   .steps-bar{display: none;}
 
   #register{padding: 10px;}

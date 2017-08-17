@@ -115,6 +115,10 @@ function QuotationsEditCtrl(
           quotationService.removeCurrentQuotation();
         }
 
+        if(vm.quotation.OrderWeb){
+          vm.quotation.isSpeiQuotation = vm.quotation.OrderWeb.isSpeiOrder;
+        }
+
         loadPaymentMethods();
 
         console.log('details not populated '+ new Date(), _.clone(vm.quotation.Details) );

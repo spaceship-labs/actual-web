@@ -36,7 +36,7 @@
 
   <section class="quotation-data">
 
-    <div layout="row" layout-wrap class="quotation-data-row">
+    <div ng-if="!vm.quotation.isSpeiQuotation" layout="row" layout-wrap class="quotation-data-row">
       
       <div ng-if="vm.quotation.OrderWeb" flex flex-sm="100" class="only-hide-print">
         <label>Estatus</label>
@@ -72,7 +72,7 @@
 
     </div>
 
-    <div layout="row" layout-wrap layout-align="start center" class="quotation-data-row">
+    <div ng-if="!vm.quotation.isSpeiQuotation" layout="row" layout-wrap layout-align="start center" class="quotation-data-row">
       <div flex hide-sm hide-xs>
         <label for="">Fecha de cotización</label>
         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
@@ -98,9 +98,38 @@
       </div>
     </div>
 
+
   <div class="hr"><hr /></div>
 
   </section>
+
+  <div ng-if="vm.quotation.isSpeiQuotation" class="spei-note">
+    <p>Estimado {{vm.quotation.Client.CardName}}, su orden de compra estará EN PROCESO, le sugerimos no volver a generar la misma cotización para evitar una duplicidad.</p>
+
+    <div layout="row" layout-wrap class="main-info">
+      <div flex="" flex-xs="50">
+        <p><strong>Télefono fijo</strong></p>
+        <p>{{vm.quotation.Client.Phone1}}</p>
+      </div>
+      <div flex="" flex-xs="50">
+        <p><strong>Télefono celular</strong></p>
+        <p>{{vm.quotation.Client.Cellular}}</p>
+      </div>
+      <div flex="" flex-xs="50">
+        <p><strong>Fecha de cotización</strong></p>
+         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
+      </div>
+      <div flex flex-xs="50">
+        <p><strong>Hora</strong></p>
+        <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>
+      </div>
+
+    </div>
+
+    <hr>
+
+  </div>
+
 
   <form
     ng-submit="vm.continueBuying()"
@@ -116,8 +145,20 @@
         flex-sm="100"
         flex-xs="100"
         class="cart-list"
+        ng-class="{
+          'cart-list-full': vm.quotation.isSpeiQuotation
+        }"
       >
-        <h1 class="cart-title" hide-sm hide-xs><strong>ARTICULOS AGREGADOS</strong></h1>
+        <h1 
+          class="cart-title" 
+          hide-sm hide-xs
+        >
+          <i ng-show="vm.quotation.isSpeiQuotation" class="icon-carro"></i>
+          <strong ng-show="vm.quotation.isSpeiQuotation">ARTICULOS</strong>
+          <strong ng-show="!vm.quotation.isSpeiQuotation">ARTICULOS AGREGADOS</strong>
+          <span ng-show="vm.quotation.isSpeiQuotation">Previa elección y presupuesto aceptado</span>
+        </h1>
+        
         <div ng-if="vm.isLoadingDetails" layout="row" layout-align="center center" class="loading-circle">
           <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
         </div>
@@ -132,12 +173,19 @@
         </div>
         -->
 
-        <div ng-if="!vm.isLoadingDetails" class="cart-items">
+        <div ng-if="!vm.isLoadingDetails && !vm.quotation.isSpeiQuotation" class="cart-items">
           <ng-include
             class="cart-item-wrapper"
             ng-repeat="detail in vm.quotation.Details track by $index"
             src="'views/partials/product-cart-item.html'"></ng-include>
         </div>        
+
+        <div ng-if="!vm.isLoadingDetails && vm.quotation.isSpeiQuotation" class="cart-items">
+          <ng-include
+            class="cart-item-wrapper"
+            ng-repeat="detail in vm.quotation.Details track by $index"
+            src="'views/partials/product-cart-item-v2.html'"></ng-include>
+        </div>  
 
         <hr>
         <a
@@ -159,6 +207,7 @@
         flex-sm="100"
         flex-xs="100"
         class="cart-aside"
+        ng-show="!vm.quotation.isSpeiQuotation"
       >
         <h1 class="cart-title"><i class="icon-carro"><span>{{ vm.quotation.totalProducts }}</span></i> <strong>MI CARRITO</strong></h1>
 
@@ -269,7 +318,7 @@
 
   </form>
 
-  <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb)">
+  <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation">
     <div class="hr"><hr /></div>
     <ng-include src="'views/quotations/payments-options.html'">
     </ng-include>
