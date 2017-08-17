@@ -7,7 +7,8 @@ function PaymentDialogController(
   commonService,
   ewalletService,
   dialogService,
-  payment
+  payment,
+  quotation
 ) {
 
   'use strict';
@@ -15,6 +16,8 @@ function PaymentDialogController(
   console.log('payment in dialog', payment);
 
   $scope.payment = payment;
+  $scope.quotation = quotation;
+  $scope.copyingClientDataToPayment = false;
   $scope.payment.cardCountry = $scope.payment.cardCountry || 'Mexico';
   $scope.payment.cardObject = $scope.payment.cardObject || {};
   $scope.needsVerification = payment.needsVerification;
@@ -136,6 +139,55 @@ function PaymentDialogController(
       return option.terminal;
     }
     return false;
+  }
+
+  /*
+  $scope.$watch('copyingClientDataToPayment', function(newVal, oldVal){
+    console.log('newVal', newVal);
+    console.log('oldVal', oldVal);    
+    if(newVal !== oldVal){
+      copyingClientDataToPayment();
+    }
+  })
+  */
+
+  $scope.copyClientDataToPayment = function(){
+    console.log('$scope.copyingClientDataToPayment', $scope.copyingClientDataToPayment);
+    if(!$scope.copyingClientDataToPayment){
+      console.log('llenando a vacio');
+      $scope.payment.cardName = _.clone($scope.quotation.Client.CardName);
+      $scope.payment.phone = _.clone($scope.quotation.Client.Phone1);
+      $scope.payment.mobilePhone = _.clone($scope.quotation.Client.Cellular);
+      $scope.payment.email = _.clone($scope.quotation.Client.E_Mail);
+      $scope.payment._email = _.clone($scope.quotation.Client.E_Mail);
+      $scope.payment.cardCity = _.clone($scope.quotation.Address.U_Ciudad);
+      $scope.payment.cardAddress1 = _.clone($scope.quotation.Address.U_Colonia);
+      $scope.payment.cardAddress2 = _.clone($scope.quotation.Address.Address);
+      $scope.payment.cardZip =_.clone( $scope.quotation.Address.U_CP);
+
+      $scope.payment.cardState = getStateNameByCode($scope.quotation.Address.U_Estado);
+    }else{
+      console.log('pasando a vacio');
+      $scope.payment.cardName =  null;
+      $scope.payment.phone =  null;
+      $scope.payment.mobilePhone = null;
+      $scope.payment.email =  null;
+      $scope.payment.cardCity = null;
+      $scope.payment.cardAddress1 = null;
+      $scope.payment.cardAddress2 = null;
+      $scope.payment.cardZip = null;
+      $scope.payment.cardState = null;
+    }
+  };
+
+  function getStateNameByCode(code){
+    var name = false;
+    var state = _.findWhere($scope.states, {code: code});
+    if(state){
+      name = state.name;
+    }
+    console.log('name ', name);
+    return name;
   }
 
   $scope.save = function($form){

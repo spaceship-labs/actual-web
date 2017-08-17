@@ -521,7 +521,7 @@ function QuotationsEditCtrl(
     var detailId = detail.id;
     vm.isLoadingDetails = true;
     $rootScope.scrollTo('main');
-    quotationService.removeDetail(detailId, vm.quotation.id)
+    return quotationService.removeDetail(detailId, vm.quotation.id)
       .then(function(res){
         var updatedQuotation = res.data;
 

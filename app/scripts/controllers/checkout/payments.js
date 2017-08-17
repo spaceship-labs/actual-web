@@ -82,6 +82,7 @@ function CheckoutPaymentsCtrl(
 
     var getParams = {
       payments:true,
+      address: true
     };
 
     quotationService.getById($routeParams.id, getParams)
@@ -463,6 +464,7 @@ function CheckoutPaymentsCtrl(
           'ewalletService',
           'dialogService',
           'payment',
+          'quotation',
           controller
         ],
         templateUrl: templateUrl,
@@ -471,7 +473,8 @@ function CheckoutPaymentsCtrl(
         clickOutsideToClose: true,
         fullscreen: useFullScreen,
         locals: {
-          payment: paymentOpts
+          payment: paymentOpts,
+          quotation: vm.quotation
         }
       })
       .then(function(payment) {

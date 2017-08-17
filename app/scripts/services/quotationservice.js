@@ -56,6 +56,7 @@
         updateDetails: updateDetails,
         updateSource: updateSource,
         updateAddress: updateAddress,
+        getAddress: getAddress,
         validateQuotationStockById: validateQuotationStockById,
         getQuotationPaymentAttempts: getQuotationPaymentAttempts
       };
@@ -86,6 +87,11 @@
         var url = '/quotation/' + id + '/address';
         return api.$http.put(url, params);
       }
+
+      function getAddress(id, params){
+        var url = '/quotation/' + id + '/address';
+        return api.$http.get(url, params);
+      }      
 
       function getById(id, params){
         var url = '/quotation/findbyid/' + id;

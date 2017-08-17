@@ -2085,6 +2085,10 @@ select{
   margin-top: 6px;
 }
 .product-view .product-delivery-form-wrapper h2{margin: 0 0 4px;}
+.product-view .product-delivery-form-wrapper a{
+  color: #33BA2C;
+  text-decoration: underline;
+}
 
 /*---------------/
   #VARIANT-PICKER
@@ -4140,6 +4144,13 @@ md-backdrop.md-sidenav-backdrop{
   position: relative;  
   top: 6px;
 }
+
+.deposit-dialog .copy-data-wrapper{margin: 10px 0}
+.deposit-dialog .copy-data-wrapper md-checkbox{
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
 .deposit-dialog .dialog-block:first-child,
 .deposit-dialog .dialog-block:first-of-type{margin-top: 0}
 .deposit-dialog .main-dialog-block{margin-top:0!important;}
@@ -4285,7 +4296,7 @@ md-backdrop.md-sidenav-backdrop{
 .zipcode-dialog .delivery-option-data h4{margin: 0 0 10px;}
 .zipcode-dialog .input-element label{margin-bottom: 5px;}
 .zipcode-dialog .input-element p{
-  margin:10px 0;
+  margin:4px 0;
   font-size: 14px;
 }
 .zipcode-dialog .delivery-option-radio{text-align: center;}
