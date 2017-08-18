@@ -4504,6 +4504,11 @@ padding-left: 16px;
   display: block;
 }
 
+/*------------------_/
+  #TRANSFERS INSTRUCTIONS DIALGO
+/*-----------------*/
+.transfer-instructions-dialog p{font-size: 14px;}
+
 /*--------------/
   PACKAGE-WRAPPER
 /*-------------*/
