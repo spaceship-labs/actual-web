@@ -4708,9 +4708,34 @@ padding-left: 16px;
 /*---------------/
   #DELIVIERIES-CITIES
 /*----------------*/
+.deliveries-cities .state-block{
+  margin: 10px 0;
+  padding: 0 10px;
+}
 .deliveries-cities .state-block small{
   font-size: 12px;
   font-weight: 400;
+}
+.deliveries-cities .state-block .state-image{
+  min-height: 186px;
+  border-radius: 3px;
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+}
+.deliveries-cities .state-block .state-image .state-label{
+  background: rgba(0,0,0,0.5);
+  padding: 8px 10px;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  bottom: 0;
+}
+.deliveries-cities .state-block .state-image .state-label h3{margin: 0}
+.deliveries-cities .state-block .state-image .state-label a{
+  color: #fff;
 }
 .deliveries-cities ul{
   padding-left: 20px;
@@ -5507,6 +5532,11 @@ padding-left: 16px;
 
 
   .product-view-data{margin-top: 6px;}
+  .deliveries-cities .state-block .state-image{min-height: 100px;}
+  .deliveries-cities .state-block .state-image .state-label h3{
+    margin: 0;
+    font-size: 12px;
+  }
   /*aside{display: none} */
 
 }
