@@ -83,7 +83,6 @@
 
         <div class="input-element">
           <p>Calcule la fecha de entrega aproximada de sus artículos</p>
-          <p><a href="/ciudades-de-entrega" target="_blank">Ver ciudades de entrega</a></p>
           <p ng-if="ctrl.errMessage">
             <strong>{{ctrl.errMessage}}</strong>
           </p>
@@ -100,16 +99,19 @@
 
       </section>
 
-      <div layout="row" flex="30" flex-sm="80" flex-xs="80">
-        <button ng-if="!ctrl.user" type="submit" class="action-btn action-btn-save">
+      <div layout="row" layout-align="space-between center" layout-wrap>
+        <button ng-if="!ctrl.user" type="submit" class="action-btn action-btn-save" flex="40" flex-sm="80" flex-xs="80">
           Ingresar
         </button>
 
-        <button ng-if="ctrl.user" type="submit" class="action-btn action-btn-save">
+        <button ng-if="ctrl.user" type="submit" class="action-btn action-btn-save" flex="40" flex-sm="80" flex-xs="80">
           Seleccionar
         </button>
 
-
+        <div flex="50" flex-xs="100">
+          <p><a href="/ciudades-de-entrega" target="_blank">Ver ciudades de entrega</a></p>
+        </div>
+  
       </div>
 
     </form>

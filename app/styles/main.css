@@ -4073,7 +4073,7 @@ md-backdrop.md-sidenav-backdrop{
 /*------------/
   #DEPOSIT-DIALOG
 /*------------*/
-.deposit-dialog{max-height: 90%;}
+.deposit-dialog{max-height: 98%;}
 .deposit-dialog .close-btn{
   position: absolute;
   right: 10px;
@@ -4271,6 +4271,7 @@ md-backdrop.md-sidenav-backdrop{
   cursor: pointer;
   color: #33BA2C;
   text-decoration: underline;
+  font-size: 14px;
 }
 .zipcode-dialog .zipcode-dialog-inner a.login-link{font-size: 14px;}
 .zipcode-dialog .delivery-option-radio{text-align: center;}

@@ -17,10 +17,10 @@
     <div ng-if="payment.type !== 'transfer'" class="deposit-dialog-inner">
 
       <h2 ng-show="payment.type === 'debit-card'">
-        <strong>INGRESA LOS DATOS DE SU TARJETA DE DÉBITO</strong>
+        <strong>INGRESE LOS DATOS DE SU TARJETA DE DÉBITO</strong>
       </h2>
       <h2 ng-show="payment.type !== 'debit-card'">
-        <strong>INGRESA LOS DATOS DE SU TARJETA DE CRÉDITO</strong>
+        <strong>INGRESE LOS DATOS DE SU TARJETA DE CRÉDITO</strong>
       </h2>
 
 
@@ -108,7 +108,9 @@
 
         <div  flex="50" flex-sm="100" flex-xs="100" class="input-element">
           <p>
-            <label><strong>NÚMERO DE TARJETA</strong>*<small>(Ingresar sin espacios y sin guiones)</small></label>
+            <label><strong>NÚMERO DE TARJETA</strong>*
+            <!--<small>(Ingresar sin espacios y sin guiones)</small>-->
+            </label>
           </p>
           <div flex="95" class="input-element-inner">
             <input
@@ -182,7 +184,7 @@
         
         <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
           <p>
-            <label><strong>NOMBRE DEL TARJETAHABIENTE</strong>*<small> (Como aparece en el plástico)</small>
+            <label><strong>NOMBRE DEL TITULAR QUE APARECE EN LA TARJETA</strong>*
             </label>
           </p>
           <div flex="95" class="input-element-inner">
@@ -321,6 +323,8 @@
 
       </div>
 
+      <p class="bottom-note">Los datos de la dirección deben ser exactamente iguales al estado de cuenta de la tarjeta proporcionada</p>      
+
       <div class="input-container" layout="row" layout-wrap flex="100">
 
         <div class="input-element" flex="25" flex-sm="100" flex-xs="100">
@@ -375,7 +379,7 @@
 
       </div>      
 
-      <p class="bottom-note">Los datos de la dirección deben ser exactamente iguales al estado de cuenta de la tarjeta proporcionada</p>
+      
     </div>
 
     <div class="deposit-dialog-footer">
@@ -399,12 +403,12 @@
         <div flex="40" flex-sm="100" flex-xs="100" class="input-element ammount-description">
           <p ng-show="payment.type === 'transfer'" ><strong>Transferencia de </strong>{{payment.ammount | roundCurrency}} MXN</p>
 
-          <p ng-show="!payment.msi && payment.type !== 'transfer'" ><strong>1 Pago de </strong>{{payment.ammount | roundCurrency}} MXN</p>
+          <p ng-show="!payment.msi && payment.type !== 'transfer'" ><strong>1 Pago de </strong> MXN {{payment.ammount | roundCurrency}}</p>
 
 
           <p ng-show="payment.msi"><strong>Plan de pago:</strong> {{payment.msi}} Meses SIN INTERESES</p>
           <p ng-show="payment.msi"><strong>{{payment.msi}} pagos de </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
-          <small>*Precios en Pesos Mexicanos.</small>
+          <small>Impuesto incluido</small>
 
         </div>
 
@@ -420,19 +424,14 @@
         </div>
       </div>
 
-      <div layout="row">
-        <div flex>
-          <p class="footer-note">Impuestos incluidos.</p>
-        </div>
-        <div flex>
-          <p class="terms-checkbox-block">
-            <md-checkbox ng-model="acceptTerms" aria-label="Acepta terminos" required>
-              He leído  y estoy de acuerdo con los <a href="/terminos-y-condiciones" target="_blank">términos, politicas y condiciones</a>
-            </md-checkbox>        
-          </p>
-        </div>
+      <div>
+        <p class="terms-checkbox-block">
+          <md-checkbox ng-model="acceptTerms" aria-label="Acepta terminos" required>
+            He leído  y estoy de acuerdo con los <a href="/terminos-y-condiciones" target="_blank">términos, politicas y condiciones</a>
+          </md-checkbox>        
+        </p>      
       </div>
-
+      
     </div>
   </form>
 </md-dialog>
