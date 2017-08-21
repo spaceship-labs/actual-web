@@ -827,6 +827,30 @@ select{
 }
 
 
+/*--------------/
+  #SCHEDULES-MODAL
+/*--------------*/
+.schedules-modal-header{
+  top: 20px;
+  background: #092F57!important;
+  min-width: 260px;
+}
+.schedules-modal-header .phone-assitance{display: none;}
+.schedules-modal-header .schedules-modal-header-content{
+  padding: 10px;
+}
+.schedules-modal-header-content th{text-align: left;}
+.schedules-modal-header-content td{ 
+  vertical-align: top;
+  padding: 0 4px;
+  text-align: left;
+}
+.schedules-modal-header-content td + td{
+  /*border-left: 1px solid #fff;*/  
+}
+.schedules-modal-header-content p{margin: 4px 0;}
+
+
 
 /*-------------/
   #MENU
@@ -5233,6 +5257,11 @@ padding-left: 16px;
     position: fixed;
   }
 
+  .schedules-modal-header{
+    top:45px;
+    left: -50px;
+  }
+
   .quotation-view .quotation-data{padding: 0}
   .cart-view .cart-item{position: relative;}
   .cart-view .cart-item-data-inner{padding: 10px 0}
@@ -5251,6 +5280,13 @@ padding-left: 16px;
 }
 
 @media(max-width:600px){
+  .schedules-modal-header{
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 60px;
+  }
+  .schedules-modal-header .phone-assitance{display: block;}
   .terms-view .section-title{margin: 10px 0}
   .titles-head h3{font-size: 20px}
   .titles-head h3:before, .titles-head h3:after{width: 15%}

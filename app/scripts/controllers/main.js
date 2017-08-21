@@ -46,6 +46,7 @@
       isActiveCart: false,
       isActiveLogin: false,
       isLoadingLogin: false,
+      isActiveSchedulesModal: false,
       isMiActual: $rootScope.isMiActual,
       logInForm: {},
       mapTerminalCode: commonService.mapTerminalCode,
@@ -66,6 +67,7 @@
       signIn: signIn,
       toggleCartModal: toggleCartModal,
       toggleLoginModal: toggleLoginModal,
+      toggleSchedulesModal: toggleSchedulesModal,
       toggleMenuCategory: toggleMenuCategory,
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
@@ -149,8 +151,13 @@
         var $target = $(event.target);
         var profileHeader = $('#profile-header');
         var profileHeaderTrigger = $('#profile-header-trigger');
+        
         var loginHeader = $('#login-header');
         var loginHeaderTrigger = $('#login-header-trigger, .login-toggler');
+
+        var schedulesModal = $('#schedules-modal');
+        var schedulesModalTrigger = $('.schedules-modal-trigger');
+
 
         if(
           !$target.is(profileHeader) && !$target.is(profileHeaderTrigger) &&
@@ -164,10 +171,64 @@
         ){
           toggleLoginModal();
         }
+        else if(
+          !$target.is(schedulesModal) && !$target.is(schedulesModalTrigger) &&
+          !schedulesModalTrigger.find($target).length && vm.isActiveSchedulesModal
+        ){
+          toggleSchedulesModal();
+        }
+
         $scope.$apply();
       });
 
     }
+
+    function toggleLoginModal(){
+      console.log('toggleLoginModal');
+
+      if( vm.isActiveLogin ){
+        vm.isActiveLogin = false;
+        vm.isActiveBackdrop = false;
+      }
+      else{
+        vm.isActiveLogin = true;
+        vm.isActiveBackdrop = true;
+        
+        vm.isActiveProfileHeader = false;
+        vm.isActiveCart = false;
+        vm.isActiveSchedulesModal = false;
+      }
+    }
+
+    function toggleProfileModal(){
+      if(vm.isActiveProfileHeader){
+        vm.isActiveProfileHeader = false;
+        vm.isActiveBackdrop = false;
+      }else{
+        vm.isActiveProfileHeader = true;
+        vm.isActiveBackdrop = true;
+
+        vm.isActiveCart = false;
+        vm.isActiveSchedulesModal = false;
+        vm.isActiveLogin = false;
+      }
+    }
+
+    function toggleSchedulesModal(){
+      console.log('toggleSchedulesModal');
+
+      if( vm.isActiveSchedulesModal ){
+        vm.isActiveSchedulesModal = false;
+        vm.isActiveBackdrop = false;
+      }else{
+        vm.isActiveSchedulesModal = true;
+        vm.isActiveBackdrop = true;
+
+        vm.isActiveLogin = false;
+        vm.isActiveProfileHeader = false;
+        vm.isActiveCart = false;
+      }
+    }    
 
     function toggleMobileSidenav(){
       $mdSidenav('mobileSidenav').toggle();
@@ -407,31 +468,6 @@
       return activeModule;
     }
 
-
-    function toggleLoginModal(){
-      console.log('toggleLoginModal');
-
-      if( vm.isActiveLogin ){
-        vm.isActiveLogin = false;
-        vm.isActiveBackdrop = false;
-      }else{
-        vm.isActiveLogin = true;
-        vm.isActiveBackdrop = true;
-        vm.isActiveProfileHeader = false;
-        vm.isActiveCart = false;
-      }
-    }
-
-    function toggleProfileModal(){
-      if(vm.isActiveProfileHeader){
-        vm.isActiveProfileHeader = false;
-        vm.isActiveBackdrop = false;
-      }else{
-        vm.isActiveProfileHeader = true;
-        vm.isActiveBackdrop = true;
-        vm.isActiveCart = false;
-      }
-    }
 
     function hideProfileModal(){
       vm.isActiveProfileHeader = false;

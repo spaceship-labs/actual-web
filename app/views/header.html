@@ -165,12 +165,17 @@
         <div
           flex
           href="#"
-          class="header-top-bar-menu-item header-top-bar-menu-item-phone"
+          ng-click="main.toggleSchedulesModal()"
+          class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger"
         >
           <span>
-            <strong ng-click="main.showPhoneNumberDialog()"><i class="icon-phone"></i></strong>
+            <strong><i class="icon-phone"></i></strong>
             <strong hide-xs>01 (998) 884 1594</strong>
           </span>
+
+          <ng-include 
+            ng-if="main.isActiveSchedulesModal"
+            src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
 
 
