@@ -615,7 +615,7 @@ select{
   background: #DDA901!important;
   position: absolute;
   right: 0;
-  transform: rotate(45deg);
+  /*transform: rotate(45deg);*/
   color: #DDA901;
 }
 .mobile-sidenav md-content{
