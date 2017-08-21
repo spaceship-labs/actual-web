@@ -22,3 +22,16 @@
 .actual-studio .filters .filter-block-price-btn,
 .actual-studio .filters .filters-head,
 .actual-studio .product-view .desc-head-item-on{background: #000}
+
+
+.actual-studio .mobile-sidenav .close-btn{background: #CC262F!important;}
+.actual-studio .mobile-sidenav .nav-categories-item{border-bottom: 1px solid #CC262F}
+.actual-studio .nav-categories-item-active, .actual-studio .nav-categories-item:hover{
+	border-bottom: 2px solid #CC262F;
+}
+
+@media(max-width:600px){
+  .actual-studio .searcher-wrapper{
+    background: #000!important;
+  }
+}

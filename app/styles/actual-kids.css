@@ -26,3 +26,15 @@
 .actual-kids .filters .filter-block-price-btn,
 .actual-kids .filters .filters-head,
 .actual-kids .product-view .desc-head-item-on{background: #34B3E7}
+
+.actual-kids .mobile-sidenav .close-btn{background: #34B3E7!important;}
+.actual-kids .mobile-sidenav .nav-categories-item{border-bottom: 1px solid #34B3E7}
+.actual-kids .nav-categories-item-active, .actual-kids .nav-categories-item:hover{
+	border-bottom: 2px solid #CC262F;
+}
+
+@media(max-width:600px){
+  .actual-kids .searcher-wrapper{
+    background: #34B3E7!important;
+  }
+}
