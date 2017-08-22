@@ -158,7 +158,7 @@ function QuotationsEditCtrl(
       .catch(function(err){
         var error = err.data || err;
         error = error ? error.toString() : '';
-        dialogService.showDialog('Hubo un error: ' + (error) );
+        dialogService.showDialog( (error) );
         console.log('error', err);
       });
 

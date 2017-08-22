@@ -30,6 +30,10 @@
 	border-bottom: 2px solid #CC262F;
 }
 
+.actual-studio .filters-sidenav-trigger{
+	background: #000!important;
+}
+
 @media(max-width:600px){
   .actual-studio .searcher-wrapper{
     background: #000!important;
