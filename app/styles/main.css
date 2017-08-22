@@ -404,7 +404,7 @@ select{
 /*----------*/
 .header-top-bar{
   background: #F8F8F8;
-  padding: 4px 0;
+  padding: 12px 0;
   position: relative;
   /*z-index: 9999999999;*/
   /*z-index: 999999;*/
@@ -444,12 +444,12 @@ select{
 .header-top-bar-menu .header-top-bar-menu-item-phone{
   text-align: center;
   color: #fff;
-  font-size: 14px;
-  min-width: 120px;
+  font-size: 22px;
+  min-width: 170px;
 }
 
 .header-top-bar-menu .header-top-bar-menu-item-phone i{
-  font-size: 14px!important;
+  font-size: 20px!important;
   padding: 0!important;
   margin: 0!important;
   vertical-align: middle!important;
@@ -461,7 +461,7 @@ select{
   text-align: left;
   min-width: 210px;
   vertical-align: middle;
-  padding: 20px 0;
+  /*padding: 20px 0;*/
   font-size: 12px;
   outline: 0;
 }
@@ -549,6 +549,7 @@ select{
 .header-top-bar.fixed-head{
   position: fixed;
   width: 100%;
+  padding: 2px 0;
 }
 .header-top-bar.fixed-head > .container-lg{
   max-width: 1300px;
@@ -831,7 +832,7 @@ select{
   #SCHEDULES-MODAL
 /*--------------*/
 .schedules-modal-header{
-  top: 20px;
+  top: 25px;
   background: #092F57!important;
   min-width: 260px;
 }
@@ -839,7 +840,10 @@ select{
 .schedules-modal-header .schedules-modal-header-content{
   padding: 10px;
 }
-.schedules-modal-header-content th{text-align: left;}
+.schedules-modal-header-content th{
+  font-size: 13px;
+  text-align: left;
+}
 .schedules-modal-header-content td{ 
   vertical-align: top;
   padding: 0 4px;
@@ -5249,7 +5253,14 @@ padding-left: 16px;
 
 @media(max-width:800px){
   .header-top-bar-menu{margin: 0 auto}
-  .header-top-bar-menu .header-top-bar-menu-item-name{min-width: 50px;}
+  .header-top-bar-menu .header-top-bar-menu-item-name{
+    padding: 2px 0;
+    min-width: 50px;
+  }
+  .header-top-bar-menu .header-top-bar-menu-item-phone{
+    font-size: 14px;
+    min-width: 140px;
+  }
 
   .login-modal-header{
     left: 0;
