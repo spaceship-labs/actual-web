@@ -183,6 +183,12 @@ function ProductCtrl(
 
   function setUpDeliveries(options){
     options = options || {};
+    
+    /*
+    vm.productCart = {
+      quantity: 1
+    };*/
+    
 
     productService.delivery(options.productId, options.zipcodeDeliveryId)
       .then(function(deliveries){
@@ -205,6 +211,7 @@ function ProductCtrl(
 
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
+          vm.productCart.quantity = 1;
         }else{
           vm.productCart.quantity = 0;
         }
@@ -217,7 +224,21 @@ function ProductCtrl(
       })
       .catch(function(err){
         console.log('err', err);
-      })
+        var PRODUCT_NOT_AVAILABLE_IN_ZONE_CODE = 'PRODUCT_NOT_AVAILABLE_IN_ZONE';
+        var error = err.data || err;
+        console.log('error', error);
+        var errMsg = error ? error.toString() : '';
+        if(errMsg === 'Error: ' + PRODUCT_NOT_AVAILABLE_IN_ZONE_CODE){
+          errMsg = "El artículo elegido no está disponible en su ciudad de entrega";
+        }
+        dialogService.showDialog(errMsg);
+        vm.isLoadingDeliveries = false;
+        vm.deliveries = [];
+        vm.productCart = {};
+        vm.deliveriesGroups = [];
+        vm.available = 0;
+        //dialogService.showDialog(errMsg);
+      });
   }
 
   function loadVariants(product){
