@@ -33,6 +33,10 @@
 	border-bottom: 2px solid #CC262F;
 }
 
+.actual-kids .filters-sidenav-trigger{
+	background: #34B3E7!important;
+}
+
 @media(max-width:600px){
   .actual-kids .searcher-wrapper{
     background: #34B3E7!important;
