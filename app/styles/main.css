@@ -1808,7 +1808,7 @@ select{
   border: 1px solid #000;
 }
 
-.pswp--open{z-index: 999999999}
+.pswp--open{z-index: 99999999999999999}
 .pswp img{
   background: #fff;
 }
@@ -5130,6 +5130,12 @@ padding-left: 16px;
   .terms-view,
   .checkout-view{padding: 20px;}
 
+  .fixed-head .header-top-bar-menu{
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+
   .checkout-view h3{font-size: 16px;}
   .pay-method-wrap .method-block ul li strong{font-size: 16px;}
 
@@ -5168,7 +5174,11 @@ padding-left: 16px;
 }
 
 @media screen and (max-width: 960px ){
-  .header-top-bar-menu{margin-left: 4px;}
+  .header-top-bar-menu{
+    margin-top: 10px;
+    margin-left: 4px;
+    min-width: 90%;
+  }
   .header-top-bar-menu .menu-mobile-icon-static{display: none;}
 
   .form-view h1{
@@ -5257,7 +5267,8 @@ padding-left: 16px;
 
 
 @media(max-width:800px){
-  .header-top-bar-menu{margin: 0 auto}
+  .header-top-bar-menu{margin: 10px auto 4px}
+  .fixed-head .header-top-bar-menu{margin: 0 auto 4px;}
   .header-top-bar-menu .header-top-bar-menu-item-name{
     padding: 2px 0;
     min-width: 50px;
