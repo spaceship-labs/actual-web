@@ -484,6 +484,7 @@ function ProductCtrl(
     //unsuscribing listeners
     mainDataListener();
     activeQuotationListener();
+    $mdDialog.hide();
   });
 
 }
