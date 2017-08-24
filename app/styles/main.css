@@ -3932,11 +3932,18 @@ md-backdrop.md-sidenav-backdrop{
 .checkout-view .delivery-option-data p{margin: 5px 0;}
 .checkout-view .delivery-option-data .small-link{margin:0;}
 .checkout-view .delivery-option-data h4{margin: 0 0 10px;}
-
+.checkout-view .delivery-option-active .delivery-option-data{
+  border: 3px solid #33BA2C;
+}
 
 /*----------------/
   #CHECKOUT PAYMENT-METHOD
 /*----------------*/
+.payments-view .delivery-option-data{border: none;}
+.payments-view .delivery-option-data li{
+  font-size: 13px;
+  margin: 4px 0;
+}
 .pay-method-tab{
   padding: 20px;
   text-align: center;

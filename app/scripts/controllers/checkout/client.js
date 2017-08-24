@@ -50,8 +50,12 @@ function CheckoutClientCtrl(
       })
       .then(function(isValidStock){
         if( !isValidStock){
-          $location.path('/quotations/edit/' + vm.quotation.id)
-            .search({stockAlert:true});
+          //$location.path('/quotations/edit/' + vm.quotation.id)
+          //  .search({stockAlert:true});
+        }
+
+        if(!vm.quotation.ZipcodeDelivery){
+          $location.path('/quotations/edit/' + vm.quotation.id);          
         }
 
         if(!vm.quotation.Details || vm.quotation.Details.length === 0){
@@ -73,9 +77,11 @@ function CheckoutClientCtrl(
                 contact.completeAdrress = clientService.buildAddressStringByContact(contact);
                 return contact;
               });
-              if(/*!vm.quotation.Address &&*/ vm.contacts.length > 0){
+              /*
+              if(vm.contacts.length > 0){
                 vm.quotation.Address = vm.contacts[0].id;
               }
+              */
             })
             .catch(function(err){
               vm.isLoadingContacts = false;
@@ -89,6 +95,8 @@ function CheckoutClientCtrl(
 
       });
   }
+
+  function ded(){}
 
   function getContactName(contact){
     var name = '';
