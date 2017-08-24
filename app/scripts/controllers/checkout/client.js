@@ -77,6 +77,12 @@ function CheckoutClientCtrl(
                 contact.completeAdrress = clientService.buildAddressStringByContact(contact);
                 return contact;
               });
+              console.log('get user contacts', vm.contacts);
+              if(vm.contacts.length > 0){
+                setSelectedContact(vm.contacts);
+                console.log('vm.contacts', vm.contacts);
+                vm.contacts = placeSelectedContactAtBeginning(vm.contacts);
+              }
               /*
               if(vm.contacts.length > 0){
                 vm.quotation.Address = vm.contacts[0].id;
@@ -96,7 +102,44 @@ function CheckoutClientCtrl(
       });
   }
 
-  function ded(){}
+  function setSelectedContact(contacts){
+    var selectedZipcode = vm.quotation.ZipcodeDelivery.cp;
+    var contactWithZipcodeMatch = _.findWhere(contacts,{U_CP: selectedZipcode});
+
+    if(vm.quotation.Address){
+      if(contactWithZipcodeMatch){
+        vm.quotation.Address = contactWithZipcodeMatch.id;
+      }     
+    }
+    else{
+      if(contactWithZipcodeMatch){
+        vm.quotation.Address = contactWithZipcodeMatch.id;
+      }else{
+        vm.quotation.Address = contacts[0].id;
+      }      
+    }
+  }
+
+  function placeSelectedContactAtBeginning(contacts){
+    var selectedContactIndex = getSelectedContactIndexInContacts(vm.quotation.Address, contacts);
+    var selectedContact = _.clone(contacts[selectedContactIndex]);
+    console.log('selectedContact', selectedContact);
+    console.log('selectedContactIndex', selectedContactIndex);
+
+    contacts.splice(selectedContactIndex, 1);
+    contacts.unshift(selectedContact);
+    return contacts;
+  }
+
+  function getSelectedContactIndexInContacts(selectedContactId, contacts){
+    var index = -1;
+    for(var i=0;i<contacts.length; i++){
+      if(selectedContactId === contacts[i].id){
+        index = i;
+      }
+    }
+    return index;
+  }
 
   function getContactName(contact){
     var name = '';
