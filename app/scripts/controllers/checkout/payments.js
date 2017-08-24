@@ -132,7 +132,8 @@ function CheckoutPaymentsCtrl(
       })
       .catch(function(err){
         console.log('err', err);
-        dialogService.showDialog('Error: \n' + err.data);
+        dialogService.showDialog(err.data);
+        $location.path('/quotations/edit/' + vm.quotation.id);
       });
 
   }
@@ -554,8 +555,7 @@ function CheckoutPaymentsCtrl(
 
   $scope.$on('$destroy', function(){
     mainDataListener();
-    $mdDialog.hide();
-    console.log('closing dialog');    
+    $mdDialog.cancel();
     if(vm.intervalProgress){
       $interval.cancel(vm.intervalProgress);
     }

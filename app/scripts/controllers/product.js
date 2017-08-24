@@ -486,6 +486,7 @@ function ProductCtrl(
     console.log('closing dialog');
     mainDataListener();
     activeQuotationListener();
+    $mdDialog.cancel();
   });
 
 }
