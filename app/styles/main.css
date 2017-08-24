@@ -348,7 +348,13 @@ select{
 /*---------------/
   #SEARCHER
 /*---------------*/
-.searcher-wrapper{width: 90%;max-width: 400px;}
+.searcher-wrapper{
+  /*width: 90%;*/
+  /*min-width: 320px;
+  max-width: 400px;
+  */
+  width: 400px;
+}
 .searcher{
   background: rgb(250,250,250);
   /*min-width: 400px;*/
