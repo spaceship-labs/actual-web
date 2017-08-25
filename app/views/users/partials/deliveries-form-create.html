@@ -6,19 +6,24 @@
 <form 
   ng-if="!vm.isLoadingCreate" 
   name="createForm" 
+  class="delivery-user-form"
   ng-submit="vm.createAddress(createForm)"
 >
 
   <!--<h2><strong>Registrar una dirección de envío</strong></h2>-->
-  <h2><strong>Persona y dirección de entrega</strong></h2>  
+  <div layout="row" layout-wrap layout-align="space-between center">
+    <div flex-sm="100" flex-xs="100">
+      <h2><strong>Persona y dirección de entrega</strong></h2>  
+    </div>
 
-  <div class="checkbox-client-type">
-    <md-checkbox
-      ng-click="vm.copyPersonalDataToNewAddress()"
-      ng-model="vm.copyingPersonalDataToContact"
-      aria-label="">
-      <strong>Los mismos que mis datos personales</strong>
-    </md-checkbox>    
+    <div class="checkbox-client-type" flex-sm="100" flex-xs="100">
+      <md-checkbox
+        ng-click="vm.copyPersonalDataToNewAddress()"
+        ng-model="vm.copyingPersonalDataToContact"
+        aria-label="">
+        <strong>Los mismos que mis datos personales</strong>
+      </md-checkbox>    
+    </div>
   </div>
 
 

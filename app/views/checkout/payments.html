@@ -188,10 +188,7 @@
           <div class="delivery-option-data">
             <h4><strong>Dirección de envío</strong></h4>
             <ul>
-              <li><strong>Destinatario </strong> {{vm.quotation.Address.FirstName + ' ' + vm.quotation.Address.LastName}}</li>
-              <li><strong>Email: </strong>{{vm.quotation.Address.E_Mail}}</li>
-              <li><strong>Télefono: </strong>{{vm.quotation.Address.Tel1}}</li>
-              <li><strong>Celular: </strong>{{vm.quotation.Address.Cellolar}}</li>
+              <li><strong>Calle: </strong>{{vm.quotation.Address.Address}}</li>
               <li><strong>No. exterior: </strong>{{vm.quotation.Address.U_Noexterior}}</li>
               <li><strong>No. interior: </strong>{{vm.quotation.Address.U_Nointerior}}</li>
               <li><strong>Colonia: </strong>{{vm.quotation.Address.U_Colonia}}</li>
@@ -202,7 +199,10 @@
               <li><strong>Entre calle: </strong>{{vm.quotation.Address.U_Entrecalle}}</li>
               <li><strong>Y calle: </strong>{{vm.quotation.Address.U_Ycalle}}</li>
               <li><strong>Referencias: </strong>{{vm.quotation.Address.U_Notes1}}</li>
-
+              <li><strong>Destinatario </strong> {{vm.quotation.Address.FirstName + ' ' + vm.quotation.Address.LastName}}</li>
+              <li><strong>Email: </strong>{{vm.quotation.Address.E_Mail}}</li>
+              <li><strong>Télefono: </strong>{{vm.quotation.Address.Tel1}}</li>
+              <li><strong>Celular: </strong>{{vm.quotation.Address.Cellolar}}</li>
             </ul>
             <p>
               <a
