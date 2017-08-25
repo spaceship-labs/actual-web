@@ -482,6 +482,8 @@ function ProductCtrl(
 
   $scope.$on('$destroy', function(){
     //unsuscribing listeners
+    $mdDialog.hide();
+    console.log('closing dialog');
     mainDataListener();
     activeQuotationListener();
     $mdDialog.cancel();
