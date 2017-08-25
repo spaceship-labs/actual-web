@@ -3940,6 +3940,10 @@ md-backdrop.md-sidenav-backdrop{
   #CHECKOUT PAYMENT-METHOD
 /*----------------*/
 .payments-view .delivery-option-data{border: none;}
+.payments-view .delivery-option-data ul{
+  list-style: none;
+  padding-left: 0;
+}
 .payments-view .delivery-option-data li{
   font-size: 13px;
   margin: 4px 0;
@@ -5035,7 +5039,10 @@ padding-left: 16px;
 }
 .user-profile-view .records-list a{color: #33BA2C}
 
-/*actual home*/
+
+.delivery-user-form h2{margin: 0;}
+.delivery-user-form md-checkbox{margin-bottom: 0;}
+
 
 .nav-categories-item-active,
 .nav-categories-item:hover{

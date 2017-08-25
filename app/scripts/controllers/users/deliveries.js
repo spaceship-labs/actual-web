@@ -11,6 +11,7 @@ angular.module('dashexampleApp')
   .controller('UsersUserDeliveriesCtrl', UsersUserDeliveriesCtrl);
 
 function UsersUserDeliveriesCtrl(
+  $q,
   $rootScope, 
   $window, 
   $location, 
@@ -19,6 +20,7 @@ function UsersUserDeliveriesCtrl(
   commonService,
   clientService,
   userService,
+  quotationService,
   $timeout
 ){
   var vm = this;
@@ -29,17 +31,21 @@ function UsersUserDeliveriesCtrl(
     deleteAddress: deleteAddress,
     edit: edit,
     enableCreateMode: enableCreateMode,
-    isCreateModeActive: true,
+    isCreateModeActive: false,
+    isEditModeActive:false,
     copyPersonalDataToNewAddress: copyPersonalDataToNewAddress
   });
 
 
   var searchParams = $location.search() || {};
+  vm.newAddress = {};
   vm.returnTo = searchParams.returnTo;
+  vm.quotationId = searchParams.quotationId;
 
   init();
 
   function init(){
+    $rootScope.scrollTo('main');
     loadAddresses();
     loadStates();
     vm.isLoading = true;
@@ -53,6 +59,30 @@ function UsersUserDeliveriesCtrl(
         vm.isLoading = false;
       });    
   }
+
+  function setNewClientDefaultDataIfNeeded(){
+    if(vm.quotationId){
+        quotationService.getQuotationZipcodeDelivery(vm.quotationId)
+          .then(function(zipcodeDelivery){
+            vm.zipcodeDelivery = zipcodeDelivery;
+            vm.newAddress.U_CP = vm.zipcodeDelivery.cp;
+            vm.newAddress.U_Mpio = vm.zipcodeDelivery.municipio;
+            vm.newAddress.U_Estado = getStateCodeByZipcodeDelivery(vm.zipcodeDelivery);
+          });
+    }
+  }
+
+  function getStateCodeByZipcodeDelivery(zipcodeDelivery){
+    var zipcodeStateName = (zipcodeDelivery.estado).toUpperCase();
+    console.log('zipcodeStateName', zipcodeStateName);
+    var stateItem = _.find(vm.states,function(state){
+      var stateName = (state.Name).toUpperCase();
+      return stateName === zipcodeStateName;
+    });
+    var stateCode = stateItem ? stateItem.Code : false;
+    console.log('stateItem', stateItem);
+    return stateCode;
+  }  
 
   function loadAddresses(){
     vm.isLoading = true;
@@ -73,6 +103,7 @@ function UsersUserDeliveriesCtrl(
       .then(function(res){
         console.log(res);
         vm.states = res.data;
+        setNewClientDefaultDataIfNeeded();
       })
       .catch(function(err){
         console.log(err);
@@ -86,7 +117,28 @@ function UsersUserDeliveriesCtrl(
       userService.createUserContact(vm.newAddress)
         .then(function(res){
           console.log('res', res);
+          var createdContact = res;
+          if(!(createdContact || {}).id){
+            return $q.reject('Hubo un error al agregar la dirección de entrega');
+          }
+
+          if(vm.quotationId){
+            var params = {addressId: createdContact.id};
+            return quotationService.updateAddress(vm.quotationId, params);
+          }
+          else{
+            return $q.resolve();
+          }
+        })
+        .then(function(){
           vm.isLoadingCreate = false;
+
+          if(vm.quotationId){
+            $location.path('/checkout/paymentmethod/' + vm.quotationId)
+              .search({});
+            return;
+          }
+
           if(!vm.returnTo){
             dialogService.showDialog('Dirección registrada');
           }
@@ -154,6 +206,7 @@ function UsersUserDeliveriesCtrl(
   }
 
   function edit(address){
+    vm.isEditModeActive = true;
     vm.isCreateModeActive = false;
     vm.editAddress = _.clone(address);
     scrollTo('deliveries-edit');
@@ -161,6 +214,7 @@ function UsersUserDeliveriesCtrl(
 
   function enableCreateMode(){
     vm.isCreateModeActive = true;
+    vm.isEditModeActive = false;
     scrollTo('deliveries-create');
   }
 

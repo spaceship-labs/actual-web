@@ -66,7 +66,7 @@ function RegisterCtrl(
 			})
 			.catch(function(err){
 				console.log('err', err);
-			})
+			});
 	}
 
 	function getStateCodeByZipcodeDelivery(zipcodeDelivery){
