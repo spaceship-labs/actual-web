@@ -265,6 +265,8 @@ function QuotationsEditCtrl(
       console.log('deliveries[i]', deliveries[i]);
       console.log('deliveries[i].date', deliveries[i].date);
       console.log('deliveries[i].available', deliveries[i].available);
+      console.log('deliveries[i].initalAvailable', deliveries[i].initalAvailable);
+
       deliveries[i].available = deliveries[i].initalAvailable -  productTakenStock;
     }
     
@@ -624,11 +626,14 @@ function QuotationsEditCtrl(
       vm.isLoading = true;
       $rootScope.scrollTo('main');
 
+      /*
       if(vm.quotation.Client){
         //quotationService.setActiveQuotation(vm.quotation.id);            
         $location.path('/checkout/client/' + vm.quotation.id);
       }
       else{
+      */
+      if(!vm.quotation.Client){      
         $location.path('/register')
           .search({
             addContact:true,
@@ -638,7 +643,7 @@ function QuotationsEditCtrl(
       vm.isLoading = false;     
 
       //TODO: Update details when edit mode is active
-      /*
+      
       quotationService.updateDetails(vm.quotation.id, params)
         .then(function(res){
           console.log('res updateDetails', res);
@@ -659,7 +664,7 @@ function QuotationsEditCtrl(
         .catch(function(err){
           $log.error(err);
         });
-      */
+      
 
     }else{
       dialogService.showDialog('Esta cotización ya tiene un pedido asignado');
