@@ -41,6 +41,7 @@ function UsersUserDeliveriesCtrl(
   vm.newAddress = {};
   vm.returnTo = searchParams.returnTo;
   vm.quotationId = searchParams.quotationId;
+  vm.addContact = searchParams.addContact;
 
   init();
 
@@ -53,6 +54,12 @@ function UsersUserDeliveriesCtrl(
       .then(function(client){
         vm.client = client;
         vm.isLoading = false;
+
+        if(vm.addContact){
+          vm.isCreateModeActive = true;
+          $rootScope.scrollTo('deliveries-create', 150);
+        }
+
       })
       .catch(function(err){
         console.log('err', err);

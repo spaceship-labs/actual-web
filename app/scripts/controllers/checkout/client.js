@@ -81,6 +81,14 @@ function CheckoutClientCtrl(
 
               var isZipcodeDeliveryIsInContacts = checkIfZipcodeDeliveryIsInContacts(vm.quotation.ZipcodeDelivery, vm.contacts);
               if(!isZipcodeDeliveryIsInContacts){
+                $location.path('/user/deliveries')
+                  .search({
+                    returnTo: '/checkout/client/' + vm.quotation.id,
+                    quotationId: vm.quotation.id,
+                    addContact:true
+                  });
+                
+                /*
                 var zipcodeMsg = 'Agrega una dirección de entrega con el código postal que seleccionaste';
                 dialogService.showDialog(zipcodeMsg, function(){
                   $location.path('/user/deliveries')
@@ -89,6 +97,7 @@ function CheckoutClientCtrl(
                       quotationId: vm.quotation.id
                     });
                 });
+                */
               }
 
               if(vm.contacts.length > 0){
