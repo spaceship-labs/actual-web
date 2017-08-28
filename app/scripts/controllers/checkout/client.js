@@ -78,6 +78,19 @@ function CheckoutClientCtrl(
                 return contact;
               });
               console.log('get user contacts', vm.contacts);
+
+              var isZipcodeDeliveryIsInContacts = checkIfZipcodeDeliveryIsInContacts(vm.quotation.ZipcodeDelivery, vm.contacts);
+              if(!isZipcodeDeliveryIsInContacts){
+                var zipcodeMsg = 'Agrega una dirección de entrega con el código postal que seleccionaste';
+                dialogService.showDialog(zipcodeMsg, function(){
+                  $location.path('/user/deliveries')
+                    .search({
+                      returnTo: '/checkout/client/' + vm.quotation.id,
+                      quotationId: vm.quotation.id
+                    });
+                });
+              }
+
               if(vm.contacts.length > 0){
                 setSelectedContact(vm.contacts);
                 console.log('vm.contacts', vm.contacts);
@@ -100,6 +113,16 @@ function CheckoutClientCtrl(
         }
 
       });
+  }
+
+  function checkIfZipcodeDeliveryIsInContacts(zipcodeDelivery, contacts){
+    if(!contacts || (contacts).length === 0){
+      return false;
+    }
+
+    return _.some(contacts, function(contact){
+      return zipcodeDelivery.cp === contact.U_CP;
+    });
   }
 
   function setSelectedContact(contacts){
