@@ -637,11 +637,13 @@
 
     });
 
-    $rootScope.scrollTo = function(target){
+    $rootScope.scrollTo = function(target, offset){
       $timeout(
         function(){
+          offset = offset || 100;
+
           $('html, body').animate({
-            scrollTop: $('#' + target).offset().top - 100
+            scrollTop: $('#' + target).offset().top - offset
           }, 600);
         },
         300

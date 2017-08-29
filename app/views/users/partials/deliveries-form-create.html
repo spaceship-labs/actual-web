@@ -1,3 +1,5 @@
+<hr/>
+
 <div ng-if="vm.isLoadingCreate" layout-fill layout="row"  layout-align="center center" class="loading-circle">
   <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
 </div>
@@ -11,9 +13,9 @@
 >
 
   <!--<h2><strong>Registrar una dirección de envío</strong></h2>-->
-  <div layout="row" layout-wrap layout-align="space-between center">
+  <div layout="row" layout-wrap layout-align="start center" class="form-title">
     <div flex-sm="100" flex-xs="100">
-      <h2><strong>Persona y dirección de entrega</strong></h2>  
+      <h2><strong>PERSONA Y DIRECCIÓN DE ENTREGA</strong></h2>  
     </div>
 
     <div class="checkbox-client-type" flex-sm="100" flex-xs="100">
@@ -21,7 +23,7 @@
         ng-click="vm.copyPersonalDataToNewAddress()"
         ng-model="vm.copyingPersonalDataToContact"
         aria-label="">
-        <strong>Los mismos que mis datos personales</strong>
+        Los mismos que mis datos personales
       </md-checkbox>    
     </div>
   </div>
@@ -90,11 +92,6 @@
     </section>
     <!--END DATOS PERSONALES-->
 
-  </section>
-  <!--END FORM SECTION-->        
-  
-  <h3><strong>DIRECCIÓN DE ENTREGA</strong></h3>
-  <section class="form-section">
     <!--DATOS PERSONALES-->
     <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
       <div flex="100">

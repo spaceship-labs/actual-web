@@ -101,6 +101,7 @@
                   <li><strong>Ciudad: </strong>{{contact.U_Ciudad}}</li>
                   <li><strong>Estado: </strong>{{contact.U_Estado}}</li>
                   <li><strong>C.P.: </strong>{{contact.U_CP}}</li>
+                  <li><strong>Calle: </strong>{{contact.Address}}</li>
                   <li><strong>Entre calle: </strong>{{contact.U_Entrecalle}}</li>
                   <li><strong>Y calle: </strong>{{contact.U_Ycalle}}</li>
                   <li><strong>Referencias: </strong>{{contact.U_Notes1}}</li>
@@ -112,7 +113,7 @@
                   <a
                     class="small-link action-link"
                     href="#"
-                    ng-href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}">
+                    ng-href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}&contactId={{contact.id}}">
                     Editar
                   </a>
                 </p>
