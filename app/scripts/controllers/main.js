@@ -640,7 +640,6 @@
     $rootScope.scrollTo = function(target, offset){
       $timeout(
         function(){
-
           offset = offset || 100;
 
           $('html, body').animate({

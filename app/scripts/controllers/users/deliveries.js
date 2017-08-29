@@ -42,6 +42,7 @@ function UsersUserDeliveriesCtrl(
   vm.returnTo = searchParams.returnTo;
   vm.quotationId = searchParams.quotationId;
   vm.addContact = searchParams.addContact;
+  vm.contactId = searchParams.contactId;
 
   init();
 
@@ -98,6 +99,14 @@ function UsersUserDeliveriesCtrl(
         console.log('res', res);
         vm.addresses = res;
         vm.isLoading = false;
+
+        if(vm.contactId){
+          var editContact =  _.findWhere(vm.addresses, {id: vm.contactId});
+          if(editContact){
+            edit(editContact);
+          }
+        }
+
       })
       .catch(function(err){
         console.log('err', err);
@@ -166,7 +175,7 @@ function UsersUserDeliveriesCtrl(
 
   function updateAddress(form, address){
     vm.isLoadingEdit = true;
-    $rootScope.scrollTo('deliveries-edit');
+    $rootScope.scrollTo('deliveries-edit', 150);
 
     if(form.$valid){
       userService.updateUserContact(address.CntctCode,address)
@@ -216,13 +225,13 @@ function UsersUserDeliveriesCtrl(
     vm.isEditModeActive = true;
     vm.isCreateModeActive = false;
     vm.editAddress = _.clone(address);
-    scrollTo('deliveries-edit');
+    $rootScope.scrollTo('deliveries-edit', 150);
   }
 
   function enableCreateMode(){
     vm.isCreateModeActive = true;
     vm.isEditModeActive = false;
-    scrollTo('deliveries-create');
+    $rootScope.scrollTo('deliveries-create');
   }
 
   function copyPersonalDataToNewAddress(){
@@ -253,15 +262,5 @@ function UsersUserDeliveriesCtrl(
     }
   }
 
-  function scrollTo(target){
-    $timeout(
-        function(){
-          $('html, body').animate({
-            scrollTop: $('#' + target).offset().top - 100
-          }, 600);
-        },
-        300
-    );
-  }  
 
 }
