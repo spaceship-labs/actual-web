@@ -132,7 +132,8 @@ function CheckoutPaymentsCtrl(
       })
       .catch(function(err){
         console.log('err', err);
-        dialogService.showDialog('Error: \n' + err.data);
+        dialogService.showDialog(err.data);
+        $location.path('/quotations/edit/' + vm.quotation.id);
       });
 
   }
@@ -152,7 +153,9 @@ function CheckoutPaymentsCtrl(
   }
 
   function validateQuotationAddress(quotation){
-    if(quotation.Address){
+    console.log('quotation.Address.U_CP', quotation.Address.U_CP);
+    console.log('quotation.ZipcodeDelivery.cp', quotation.ZipcodeDelivery.cp);
+    if(quotation.Address && quotation.Address.U_CP === quotation.ZipcodeDelivery.cp){
       return true;
     }
     return false;

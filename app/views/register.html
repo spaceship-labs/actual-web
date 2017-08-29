@@ -18,21 +18,21 @@
     	>
 
 
-		<h1><i class="icon-login"></i> Regístrate</h1>
+				<h1>
+					<i class="icon-login"></i> Regístrate
+					<small>o</small>
+					<a
+						href="" 
+						ng-click="main.toggleLoginModal()" 
+						class="login-link login-toggler action-link">inicia sesión</a>					
+				</h1>
+				
+				<hr>
 
-		<p>
-			<a
-				href="" 
-				ng-click="main.toggleLoginModal()" 
-				class="login-link login-toggler action-link">O inicia sesión</a>
-		</p>
-		
-		<hr>
-
-		<div ng-if="vm.isContactCreateActive">
-			<ng-include src="'views/partials/contact-form-register.html'"></ng-include>
-			<hr/>
-		</div>
+				<div ng-if="vm.isContactCreateActive">
+					<ng-include src="'views/partials/contact-form-register.html'"></ng-include>
+					<hr/>
+				</div>
 
 				<h4>DATOS PERSONALES DEL USUARIO</h4>
 

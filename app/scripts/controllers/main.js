@@ -334,6 +334,9 @@
       var deferred = $q.defer();
       console.log('start loadActiveQuotation', new Date());
 
+      //$rootScope.activeQuotation = false;
+      //$rootScope.isActiveQuotationLoaded = false;
+
       quotationService.getActiveQuotation()
         .then(function(res){
           var quotation = res.data;
@@ -628,15 +631,19 @@
       vm.isActiveCart = false;
       vm.isLoadingLogin = false;
 
-      $mdSidenav('mobileSidenav').close();
+      if( $mdSidenav('mobileSidenav').isOpen() ){
+        $mdSidenav('mobileSidenav').close();
+      }
 
     });
 
-    $rootScope.scrollTo = function(target){
+    $rootScope.scrollTo = function(target, offset){
       $timeout(
         function(){
+          offset = offset || 100;
+
           $('html, body').animate({
-            scrollTop: $('#' + target).offset().top - 100
+            scrollTop: $('#' + target).offset().top - offset
           }, 600);
         },
         300

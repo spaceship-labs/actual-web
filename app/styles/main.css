@@ -2815,7 +2815,8 @@ md-backdrop.md-sidenav-backdrop{
   padding: 15px 30px;
 }
 .form-section-content-v2{
-  padding: 0 0 30px;
+  /*padding: 0 0 30px;*/
+  padding: 0 0 15px;
   border: 0;
 }
 
@@ -3932,11 +3933,22 @@ md-backdrop.md-sidenav-backdrop{
 .checkout-view .delivery-option-data p{margin: 5px 0;}
 .checkout-view .delivery-option-data .small-link{margin:0;}
 .checkout-view .delivery-option-data h4{margin: 0 0 10px;}
-
+.checkout-view .delivery-option-active .delivery-option-data{
+  border: 3px solid #33BA2C;
+}
 
 /*----------------/
   #CHECKOUT PAYMENT-METHOD
 /*----------------*/
+.payments-view .delivery-option-data{border: none;}
+.payments-view .delivery-option-data ul{
+  list-style: none;
+  padding-left: 0;
+}
+.payments-view .delivery-option-data li{
+  font-size: 13px;
+  margin: 4px 0;
+}
 .pay-method-tab{
   padding: 20px;
   text-align: center;
@@ -5028,7 +5040,10 @@ padding-left: 16px;
 }
 .user-profile-view .records-list a{color: #33BA2C}
 
-/*actual home*/
+
+.delivery-user-form h2{margin: 0;}
+.delivery-user-form md-checkbox{margin-bottom: 0;}
+.delivery-user-form .form-title h2{margin-right: 10px;}
 
 .nav-categories-item-active,
 .nav-categories-item:hover{

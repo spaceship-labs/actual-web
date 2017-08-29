@@ -1,9 +1,12 @@
+<hr/>
+
 <div ng-if="vm.isLoadingEdit" layout-fill layout="row" layout-align="center center" class="loading-circle">
   <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
 </div>
 
 <form 
   ng-if="!vm.isLoadingEdit" 
+  class="delivery-user-form"
   name="editForm" 
   ng-submit="vm.updateAddress(editForm, vm.editAddress)"
 >
@@ -72,11 +75,8 @@
     </section>
     <!--END DATOS PERSONALES-->
 
-  </section>
   <!--END FORM SECTION-->        
   
-  <h3><strong>DIRECCIÓN DE ENTREGA</strong></h3>
-  <section class="form-section">
     <!--DATOS PERSONALES-->
     <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
       <div flex="100">
