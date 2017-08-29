@@ -5043,6 +5043,11 @@ padding-left: 16px;
 
 .delivery-user-form h2{margin: 0;}
 .delivery-user-form md-checkbox{margin-bottom: 0;}
+.delivery-user-form md-checkbox .md-label{
+  font-size: 13px;
+  margin-left: 22px;
+}
+.delivery-user-form md-checkbox .md-icon {transform: scale(.8);}
 .delivery-user-form .form-title h2{margin-right: 10px;}
 
 .nav-categories-item-active,
