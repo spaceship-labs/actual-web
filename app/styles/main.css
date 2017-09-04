@@ -5227,8 +5227,17 @@ padding-left: 16px;
   #my-profile .head-profile h1{font-size: 19px}
 
   .order-view .order-payments{
-    display: flex;
+    /*display: flex;*/
+    padding: 4px 0;
   }
+  .order-view .order-table-header > div{
+    font-size: 10px;
+    padding: 2px;
+  }
+  .order-view .order-payment-item-data{
+    padding: 2px;
+  }
+
   .order-view .order-payments .order-table-header,
   .order-view .order-payments .order-table-header .pull-left{
     text-align: right!important;
@@ -5596,6 +5605,9 @@ padding-left: 16px;
     font-size: 12px;
     margin-bottom: 6px;
   }
+  .order-view .order-payment-item-data{font-size: 10px;}
+
+
   .checkout-view h3{
     font-size: 14px;
     margin: 8px 0;
