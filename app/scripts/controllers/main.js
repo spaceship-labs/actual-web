@@ -75,7 +75,8 @@
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
       siteTheme: SITE.name,
-      siteConstants: SITE
+      siteConstants: SITE,
+      api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
     $rootScope.toggleLoginModal = toggleLoginModal;
