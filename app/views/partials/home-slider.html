@@ -3,9 +3,11 @@
     <div ng-repeat="banner in main.site.Banners" class="home-slide">
     	<a class="absolute-link" ng-href="{{banner.displayUrl}}" target="_blank" href=""></a>
     	<img ng-src="{{main.api.baseUrl + '/uploads/sites/banners/' + banner.filename}}" alt="{{banner.displayText}}">
+    	<!--
     	<div class="slide-text">
     		<h2>{{banner.displayText}}</h2>
     	</div>
+    	-->
     </div>
   </slick>
 </div>
