@@ -103,10 +103,24 @@ function PaymentDialogController(
       console.log('newVal', newVal);
 
       setPaymentOptionsBasedOnCardType(newVal);
-
+      setPaymentOptionsBasedOnCardCountry($scope.payment.cardCountry,newVal);
     }
   });
   
+
+  $scope.$watch('payment.cardCountry',function(newVal, oldVal){
+    //console.log('new val', newVal);
+    if(newVal !== oldVal && oldVal){
+
+      console.log('oldVal', oldVal);
+      console.log('newVal', newVal);
+
+      setPaymentOptionsBasedOnCardType($scope.payment.cardType);
+      setPaymentOptionsBasedOnCardCountry(newVal,$scope.payment.cardType);
+    }
+  });
+
+
   function setPaymentOptionsBasedOnCardType(cardType){
     if(cardType === 'american-express'){
       $scope.changingOptions = true;
@@ -128,6 +142,26 @@ function PaymentDialogController(
       }, 200);
 
     }    
+  }
+
+
+  function setPaymentOptionsBasedOnCardCountry(cardCountry, cardType){
+    if(cardCountry !== 'Mexico'){
+      $scope.changingOptions = true;
+      $scope.payment.options = [
+        {
+          card:{label:'Internacional', value:'internacional'},
+          terminal: {label:'Banamex', value:'banamex'}
+        }
+      ];
+  
+      console.log('new options', $scope.payment.options);
+      $timeout(function(){
+        $scope.changingOptions = false;
+      }, 200);
+
+
+    }
   }
 
 
