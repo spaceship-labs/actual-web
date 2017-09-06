@@ -89,6 +89,7 @@ function QuotationsEditCtrl(
 
   function init(quotationId, options){
     // quotations/edit/59ad8640a5416ef524daa06f
+    // product CO52060
 
     console.log('entered init.js', new Date());
 
@@ -263,6 +264,8 @@ function QuotationsEditCtrl(
   }
 
   function substractProductTakenStockFromDetail(detail, deliveries, productTakenStock){
+    console.log('detail id', detail.id);
+    console.log('in substractProductTakenStockFromDetail productTakenStock', productTakenStock);
     for(var i = 0; i<deliveries.length; i++){
       console.log('deliveries[i]', deliveries[i]);
       console.log('deliveries[i].date', deliveries[i].date);
@@ -270,6 +273,11 @@ function QuotationsEditCtrl(
       console.log('deliveries[i].initalAvailable', deliveries[i].initalAvailable);
 
       deliveries[i].available = deliveries[i].initalAvailable -  productTakenStock;
+      
+      if(productTakenStock > deliveries[i].initalAvailable){
+        console.log('TAKEN STOCK IS GREATER', detail.id);
+        deliveries[i].available = detail.quantity;        
+      }
     }
     
     //return deliveries;

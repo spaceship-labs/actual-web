@@ -4,6 +4,7 @@
   <h3>
     <a ng-href="{{detail.Product.url}}">
       <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
+      | {{detail.id}}
     </a>
   </h3>
 
@@ -141,7 +142,7 @@
         <div  flex="40" flex-sm="50" flex-xs="50">
           <div class="delivery-selection input-element select-element-wrapper">
 
-            <label>Fecha entrega estimada{{vm.selectedDelivery}}</label>
+            <label>Fecha entrega estimada</label>
             <select
               class="select-element"
               ng-class="{
