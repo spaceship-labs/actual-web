@@ -30,6 +30,12 @@ function HomeCtrl(
   function init(){
     metaTagsService.setMetaTags({});
 
+    siteService.findSiteBannersByHandle($rootScope.siteTheme)
+      .then(function(site){
+        console.log('site', site);
+        vm.siteBanners = site.Banners;
+      });
+
     setCategoryStockProperty();
     if($location.search().startQuotation){
       //dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización');

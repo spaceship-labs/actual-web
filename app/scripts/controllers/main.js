@@ -75,7 +75,8 @@
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
       siteTheme: SITE.name,
-      siteConstants: SITE
+      siteConstants: SITE,
+      api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
     $rootScope.toggleLoginModal = toggleLoginModal;
@@ -368,6 +369,7 @@
       siteService.findByHandle(vm.siteTheme)
         .then(function(res){
           vm.site = res.data || {};
+          vm.site.Banners = siteService.sortSiteBanners(vm.site);
           $rootScope.site = res.data || {};
           deferred.resolve(vm.site);
           console.log('loadSiteInfo end', new Date());

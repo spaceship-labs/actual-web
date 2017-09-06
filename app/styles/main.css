@@ -1206,6 +1206,73 @@ select{
 .home-gallery .home-gallery-bar p{margin: 0;}
 
 
+/*---------------/
+  #HOME-SLIDER
+/*--------------*/
+#home-slider-wrapper{}
+.home-slider{max-height: 340px; overflow: hidden;}
+.home-slider .home-slide{position: relative;max-height: 340px;}
+.home-slider .home-slide img{width: 100%;}
+.home-slider .home-slide .slide-text{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 8px 12px;
+  color: #fff;
+  background: rgba(0,0,0,0.6);
+  width: 100%;
+  box-sizing: border-box; 
+}
+.home-slider .home-slide .slide-text h2{
+  font-size: 24px;
+  margin:0;
+}
+.home-slider .home-slide .absolute-link{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+.home-slider .slick-prev,
+.home-slider .slick-next{
+  -webkit-box-shadow: 0px 6px 10px -2px rgba(0,0,0,0.64);
+  -moz-box-shadow: 0px 6px 10px -2px rgba(0,0,0,0.64);
+  box-shadow: 0px 6px 10px -2px rgba(0,0,0,0.64);
+  border-radius: 2px;
+  top:20px;
+  z-index: 9;
+  display: block!important;
+}
+
+.home-slider .slick-prev{
+  background: url(../images/arrow2-left.png) center no-repeat!important;
+  background-size: 100%!important;
+  background-color: #fff!important;
+  height: 30px;
+  width: 30px;
+  top: 50%;
+  translate: transformY(-50%);
+  left: 25px;
+}
+.home-slider .slick-next{
+  background: url(../images/arrow2-right.png) center no-repeat!important;
+  background-size: 100%!important;
+  background-color: #fff!important;
+  height: 30px;
+  width: 30px;
+  right: 25px;
+  top: 50%;
+  translate: transformY(-50%);
+}
+
+.home-slider .slick-prev:before,
+.home-slider .slick-next:before{
+  content: '';
+}
+
+
 
 /*--------------/
   #LISTING-PRODUCT
@@ -5439,6 +5506,10 @@ padding-left: 16px;
   .searcher-wrapper .searcher-btn{padding: 0 12px;}
   /*.searcher-wrapper .searcher{display: inline-block;}*/
   .searcher-wrapper .searcher input{font-size: 12px}
+
+  .home-slider .slick-prev,
+  .home-slider .slick-next{display: none!important;}
+  .home-slider .slide-text h2{font-size: 14px!important}
 
   .listing-view .listing-view-title{font-size: 18px;}
   .product-view-gallery-wrap{padding: 10px;}
