@@ -26,6 +26,7 @@ function PaymentDialogController(
   $scope.states = commonService.getStates();
   $scope.months  = getMonths();
   $scope.years = getYears();
+  $scope.phonePattern = ".*\\d{10}$";
 
   if($scope.payment.options){
     $scope.paymentOptionsOriginal = _.clone($scope.payment.options);
