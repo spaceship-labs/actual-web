@@ -52,6 +52,14 @@
         var unSortedImages = [];
         var orderedList = [];
 
+        if(!site.Banners){
+          return [];
+        }
+
+        if(site.Banners.length === 0){
+          return [];
+        }
+
         if(!site.bannersOrder || site.bannersOrder.length === 0){
           return site.Banners;
         }
