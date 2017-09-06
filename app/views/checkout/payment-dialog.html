@@ -51,7 +51,38 @@
 
       </md-radio-group>
 
-      <div class="input-container" layout="row" layout-wrap flex="100">
+      <div 
+        class="input-container" 
+        layout="row" 
+        layout-wrap 
+        layout-align="space-between center"
+        flex="100"
+      >
+
+        <div class="input-element select-element-wrapper" flex="35" flex-sm="100" flex-xs="100">
+          <p>
+            <label><strong>PAÍS</strong>*</label>
+          </p>
+          <md-select
+            ng-model="payment.cardCountry"
+            class="select-element"
+          >
+            <md-option
+              ng-repeat="country in countries track by $index"
+              ng-value="country.name">
+              {{country.name}}
+            </md-option>
+          </md-select>          
+          <!--
+          <div flex="85" class="input-element-inner">
+            <input
+              type="text"
+              ng-model="payment.cardCountry"
+              required>
+          </div>
+          -->
+
+        </div>
 
         <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
           <p>
@@ -74,33 +105,6 @@
             <input type="hidden" name="card" ng-model="payment.card">
           </div>
         </div>
-
-        <div class="input-element select-element-wrapper" flex="35" flex-sm="100" flex-xs="100">
-          <p>
-            <label><strong>PAÍS</strong>*</label>
-          </p>
-          <md-select
-            ng-model="payment.cardCountry"
-            class="select-element"
-          >
-            <md-option
-              ng-repeat="country in countries track by $index"
-              ng-selected="$index==0"
-              ng-value="country.name">
-              {{country.name}}
-            </md-option>
-          </md-select>          
-          <!--
-          <div flex="85" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardCountry"
-              required>
-          </div>
-          -->
-
-        </div>
-
 
       </div>
 
