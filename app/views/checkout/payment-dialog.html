@@ -340,6 +340,8 @@
               type="text"
               ng-model="payment.phone"
               required
+              placeholder="10 dígitos" 
+              ng-pattern="phonePattern"
             >
           </div>
         </div>
@@ -352,6 +354,7 @@
             <input
               type="text"
               ng-model="payment.mobilePhone"
+              placeholder="10 dígitos" ng-pattern="phonePattern"
               required>
           </div>
         </div>        
