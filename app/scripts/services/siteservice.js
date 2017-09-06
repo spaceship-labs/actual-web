@@ -10,6 +10,7 @@
 
       var service = {
         findByHandle: findByHandle,
+        findSiteBannersByHandle: findSiteBannersByHandle, 
         getStoresIdMapper:getStoresIdMapper,
         test: test,
         sortSiteBanners: sortSiteBanners
@@ -20,6 +21,14 @@
       function findByHandle(handle){
         var url = '/site/findbyhandle/' + handle;
         return api.$http.post(url);
+      }
+
+      function findSiteBannersByHandle(handle){
+        var url = '/site/banners/' + handle;
+        return api.$http.get(url).then(function(res) {
+          return res.data;
+        });        
+        //return api.$http.get(url);
       }
 
       function test(){

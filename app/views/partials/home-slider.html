@@ -1,6 +1,6 @@
-<div ng-if="main.site && main.site.Banners" id="home-slider-wrapper">
+<div ng-if="vm.siteBanners" id="home-slider-wrapper">
   <slick class="home-slider" infinite="true" autoplay="true" arrows="true">
-    <div ng-repeat="banner in main.site.Banners" class="home-slide">
+    <div ng-repeat="banner in vm.siteBanners" class="home-slide">
     	<a class="absolute-link" ng-href="{{banner.displayUrl}}" target="_blank" href=""></a>
     	<img ng-src="{{main.api.baseUrl + '/uploads/sites/banners/' + banner.filename}}" alt="{{banner.displayText}}">
     	<!--
