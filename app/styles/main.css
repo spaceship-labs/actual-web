@@ -4785,7 +4785,7 @@ padding-left: 16px;
   margin: 4px 0;
 }
 .our-stores .store-info-table p{
-  font-size: 11px;
+  font-size: 13px;
   margin: 4px 0;
 }
 
@@ -5697,6 +5697,7 @@ padding-left: 16px;
   .our-stores .store-info-table p{
     margin: 2px 0;
     padding: 2px;
+    font-size: 11px;
   }
 
   #footer .footer-menu-col h2{
