@@ -119,6 +119,8 @@
       <div ng-show="vm.isLoadingDetailsDeliveries" layout="row" layout-align="center center">
         <md-progress-circular class="md-accent" md-diameter="40px"></md-progress-circular>
       </div>
+      
+      <p>{{detail.productCart}}</p>
 
       <div 
         ng-if="detail.productCart && !vm.isLoadingDetailsDeliveries" 
@@ -133,7 +135,7 @@
             <select
               class="select-element"
               ng-model="detail.productCart.quantity"
-              ng-change="vm.onDetailQuantityChange(detail)"
+              ng-change="vm.onDetailQuantityChange($event, detail)"
               ng-options="qty for qty in vm.getQtyArray(detail.productCart.deliveryGroup.available)"
             >
             </select>

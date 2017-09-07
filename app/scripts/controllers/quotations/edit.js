@@ -124,7 +124,7 @@ function QuotationsEditCtrl(
 
         loadPaymentMethods();
 
-        console.log('details not populated '+ new Date(), _.clone(vm.quotation.Details) );
+        //console.log('details not populated '+ new Date(), _.clone(vm.quotation.Details) );
         return quotationService.populateDetailsWithProducts(
           vm.quotation,{
             populate: ['FilterValues']
@@ -132,7 +132,7 @@ function QuotationsEditCtrl(
         );
       })
       .then(function(details){
-        console.log('details post populateDetailsWithProducts' + new Date(), _.clone(details) );
+        //console.log('details post populateDetailsWithProducts' + new Date(), _.clone(details) );
         vm.quotation.Details = details;
         return quotationService.loadProductsFilters(vm.quotation.Details);
       })
@@ -148,8 +148,9 @@ function QuotationsEditCtrl(
 
         loadDetailsDeliveries(vm.quotation.Details)
           .then(function(details){
-            console.log('details after loadDetailsDeliveries', details);
+            //console.log('details after loadDetailsDeliveries', details);
             vm.quotation.Details = adjustSameProductsStock(vm.quotation.Details);
+            console.log('details after adjustSameProductsStock', vm.quotation.Details);
             vm.isLoadingDetailsDeliveries = false;
           });
 
@@ -200,37 +201,49 @@ function QuotationsEditCtrl(
   function setUpDetailDeliveries(detail, deliveries){
     console.log('setUpDetailDeliveries detail id', detail.id);
     console.log('deliveries', deliveries);
+    /*
     detail.productCart = {
       quantity: 1
     };
+    */
 
     deliveries = $filter('orderBy')(deliveries, 'date');
     detail.deliveries  = deliveries;
     detail.deliveriesGroups = deliveryService.groupDeliveryDates(detail.deliveries);
     detail.deliveriesGroups = $filter('orderBy')(detail.deliveriesGroups, 'date');
 
+    /*
     detail.productCart = {
       quantity: 1
     };
+    */
+    detail.productCart = detail.productCart || {};
 
     if(detail.deliveries && detail.deliveries.length > 0){
-      detail.productCart.deliveryGroup = detail.deliveriesGroups[0];
+      //detail.productCart.deliveryGroup = detail.deliveriesGroups[0];
 
       var deliveryGroupMatch = isShipDateInDeliveriesGroup(detail.shipDate, detail.deliveriesGroups);
 
-      if( deliveryGroupMatch && deliveryGroupMatch.available >= detail.quantity){
+      if( deliveryGroupMatch /* && deliveryGroupMatch.available >= detail.quantity*/){
         //Setting productCart quantity if the detail has shipping date and available date
-        console.log('setting detail productCart quantity 2', detail.quantity)
+        console.log('setting detail productCart quantity', detail.quantity);
+        console.log('setting deliveryGroupMatch', deliveryGroupMatch);
         detail.productCart.deliveryGroup = deliveryGroupMatch;
         detail.productCart.quantity = detail.quantity;
-      }else{
+      }
+      else{
+
+        console.log('ELSE');
+        console.log('deliveryGroupMatch', deliveryGroupMatch);
+        console.log('ELSE END');
+      }
+      /*
+      else{
         console.log('detail else 2', detail.id);
+        console.log('deliveryGroupMatch', deliveryGroupMatch);
         detail.productCart.quantity = 0;
       }
-    }
-
-    else{
-      detail.productCart.quantity = 0;
+      */
     }
 
     return detail;
@@ -238,6 +251,7 @@ function QuotationsEditCtrl(
 
   function adjustSameProductsStock(details){
     details = details.map(function(detail){
+      console.log('getProductTakenStockFromRemainingDetails', details);
       var productTakenStock = getProductTakenStockFromRemainingDetails(detail, details);
       console.log('detail.deliveries', detail.deliveries);
       console.log('productTakenStock', productTakenStock);
@@ -264,59 +278,101 @@ function QuotationsEditCtrl(
   }
 
   function substractProductTakenStockFromDetail(detail, deliveries, productTakenStock){
-    console.log('detail id', detail.id);
+    console.log('in substract detail id', detail.id);
     console.log('in substractProductTakenStockFromDetail productTakenStock', productTakenStock);
+    
+    var productMaxAvailable = _.clone(deliveries[deliveries.length - 1].initalAvailable);
+
     for(var i = 0; i<deliveries.length; i++){
       console.log('deliveries[i]', deliveries[i]);
-      console.log('deliveries[i].date', deliveries[i].date);
-      console.log('deliveries[i].available', deliveries[i].available);
-      console.log('deliveries[i].initalAvailable', deliveries[i].initalAvailable);
+      //console.log('deliveries[i].date', deliveries[i].date);
+      //console.log('deliveries[i].available', deliveries[i].available);
+      //console.log('deliveries[i].initalAvailable', deliveries[i].initalAvailable);
 
-      deliveries[i].available = deliveries[i].initalAvailable -  productTakenStock;
-      
-      if(productTakenStock > deliveries[i].initalAvailable){
-        console.log('TAKEN STOCK IS GREATER', detail.id);
-        deliveries[i].available = detail.quantity;        
+      deliveries[i].available = deliveries[i].initalAvailable -  productTakenStock;      
+      //deliveries[i].available = deliveries[i].initalAvailable -  productTakenStock;
+      console.log('original new available', deliveries[i].available);
+      if(deliveries[i].available < 0){
+        deliveries[i].available = 0;
       }
+      
+      console.log('modifie')
+
+      console.log('over stocked', productTakenStock > deliveries[i].available);
+      console.log('same selected date', areSameDates(detail.shipDate, deliveries[i].date));
+      console.log('available is zero', deliveries[i].available === 0);
+
+      if(
+        //productTakenStock > deliveries[i].available && 
+        areSameDates(detail.shipDate, deliveries[i].date) && 
+        //deliveries[i].available === 0
+        deliveries[i].available <= detail.quantity
+      ){
+        console.log('APARTANDO', detail.id);
+        //console.log('detail', detail);
+        deliveries[i].available = _.clone(detail.quantity);        
+      }
+      
+      /*
+      if(productTakenStock <= productMaxAvailable || true){
+
+        if(productTakenStock > deliveries[i].initalAvailable){
+          console.log('TAKEN STOCK IS GREATER', detail.id);
+          //console.log('detail', detail);
+          deliveries[i].available = _.clone(detail.quantity);        
+        }
+      }*/
+
+      console.log('new available', deliveries[i].available);
+
     }
     
     //return deliveries;
     return setUpDetailDeliveries(detail, deliveries);
   }        
 
+  function areSameDates(date1, date2){
+    var FORMAT = 'D/M/YYYY';
+    var date1Str = moment(date1).format(FORMAT);
+    var date2Str = moment(date2).format(FORMAT);    
+    return date1Str === date2Str;
+  }
+
   function resetProductCartQuantity(detail){
-    detail.productCart = cartService.resetProductCartQuantity(detail.productCart);
+    //detail.productCart = cartService.resetProductCartQuantity(detail.productCart);
   }  
 
-  function onDetailQuantityChange(detail){
-    console.log('%c onDetailQuantityChange triggered!!!','color: green');
-    console.log('detail id', detail.id);
-    console.log('detail', detail);
+  function onDetailQuantityChange($ev,detail){
+    if(detail.quantity && !vm.isCalculatingAvailability){
 
-    if(detail.quantity){
-      vm.isLoadingDetailsDeliveries = true;
+      console.log('%c onDetailQuantityChange triggered!!!','color: green');
+      console.log('detail id', detail.id);
+      console.log('detail', detail);    
+
+      vm.isCalculatingAvailability = true;
+      //vm.isLoadingDetailsDeliveries = true;
       /*
       detail.originalQuantity = _.clone(detail.quantity);
       detail.quantity = detail.productCart.quantity;
       */
       var detailQuantity = _.clone(detail.productCart.quantity);
-      var quoationDetails = JSON.parse(JSON.stringify(vm.quotation.Details));
+      var quotationDetails = JSON.parse(JSON.stringify(vm.quotation.Details));
 
 
       console.log('quantity assigned with select', detailQuantity);
-      console.log('vm.quotation.Details', quoationDetails);
-      console.log('quotationDetails', _.clone(quoationDetails));
+      //console.log('vm.quotation.Details', quotationDetails);
 
-      for(var i= 0; i<quoationDetails.length; i++){
-        if(quoationDetails[i].id === detail.id){
-          console.log('quantity', detailQuantity);
-          quoationDetails[i].quantity = detailQuantity;
+      for(var i= 0; i<quotationDetails.length; i++){
+        if( quotationDetails[i].id === detail.id ){
+          //console.log('quantity', detailQuantity);
+          console.log('changed detail', quotationDetails[i]);
+          quotationDetails[i].quantity = detailQuantity;
         }
       }
-      console.log('quoationDetails before adjustSameProductsStock', quoationDetails);
+      console.log('quotationDetails before adjustSameProductsStock', quotationDetails);
       //vm.isLoading = true;
 
-      vm.quotation.Details = adjustSameProductsStock(quoationDetails);      
+      vm.quotation.Details = adjustSameProductsStock(quotationDetails);      
 
       console.log('vm.quotation.Details after adjustSameProductsStock', vm.quotation.Details);
 
@@ -333,7 +389,10 @@ function QuotationsEditCtrl(
       console.log('detail', detail);
       */
       //vm.isLoading = false;
-      vm.isLoadingDetailsDeliveries = false; 
+      //vm.isLoadingDetailsDeliveries = false; 
+      $timeout(function(){
+        vm.isCalculatingAvailability = false;      
+      },800);
     }
   }
 
@@ -628,7 +687,7 @@ function QuotationsEditCtrl(
       params.Details = params.Details.map(function(detail){
         detail.originalShipDate = detail.productCart.deliveryGroup.date;
         detail.shipDate = detail.originalShipDate;
-        detail.quantity = detail.productCart.quantity;
+        detail.quantity = _.clone(detail.productCart.quantity);
         return detail;
       });
 

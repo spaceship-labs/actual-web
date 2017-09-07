@@ -118,7 +118,7 @@
 				if(items.length > 0){	    	
 					items = $filter('orderBy')(items, 'date');
 		    	var farthestDelivery = getFarthestDelivery(items);
-		    	console.log('items', items);
+		    	//console.log('items', items);
 		      var group = {
 		      	available: getAvailableByDeliveries(items),
 		      	days: farthestDelivery.days,
