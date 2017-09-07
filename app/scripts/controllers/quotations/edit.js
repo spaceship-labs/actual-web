@@ -436,7 +436,7 @@ function QuotationsEditCtrl(
 
   function getQtyArray(n){
     n = n || 0;
-    var arr = [];
+    var arr = [0];
     for(var i=0;i<n;i++){
       arr.push(i+1);
     }
