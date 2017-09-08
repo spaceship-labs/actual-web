@@ -4898,9 +4898,29 @@ padding-left: 16px;
   /*text-transform: uppercase;*/
 }
 #footer .footer-menu-col li .camel-case{text-transform: none;}
-#footer .footer-menu-col li p{margin: 0;}
-#footer .footer-menu-col li a{font-size: 12px;}
-#footer .footer-menu-col p,#footer .footer-menu-col li{font-size: 12px ;.margin: 6px  0;}
+#footer .footer-menu-col li p{
+  margin: 0;
+  font-size: 14px;
+}
+#footer .footer-menu-col li a{font-size: 14px;/*font-size: 12px;*/}
+#footer .footer-menu-col p,#footer .footer-menu-col li{font-size: 14px;/*font-size: 12px*/;margin: 6px  0;}
+#footer .footer-menu-col .italic{font-style: italic;}
+#footer .footer-menu-col .top-margin{margin-top: 10px}
+
+#footer .footer-menu-col table{
+  border-spacing: 0;
+  width: 100%;
+}
+#footer .footer-menu-col table td{
+  font-size: 14px;
+  padding: 4px 0;
+}
+#footer .footer-menu-col table td + td{
+  padding: 4px;
+  width: 60%;
+  text-align: right;
+}
+
 #footer .footer-contact-item{margin: 18px  0;padding-left: 20px ;}
 #footer .footer-contact-item p{margin:4px  0;}
 #footer .footer-contact-item i{font-size: 20px ;margin-right: 5px ;margin-top: 1px }
@@ -5371,6 +5391,7 @@ padding-left: 16px;
 
   .contact-us .info-column h2{margin: 10px 0;}
   .contact-us form{padding: 20px}
+  #footer .footer-menu-col li p{font-size: 12px;}
 }
 
 
