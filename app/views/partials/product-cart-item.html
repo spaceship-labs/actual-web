@@ -4,7 +4,7 @@
   <h3>
     <a ng-href="{{detail.Product.url}}">
       <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
-      | {{detail.id}}
+      <!--| <span>{{detail.id}}</span>-->
     </a>
   </h3>
 
@@ -120,7 +120,7 @@
         <md-progress-circular class="md-accent" md-diameter="40px"></md-progress-circular>
       </div>
       
-      <p>{{detail.productCart}}</p>
+      <!--<p>{{detail.productCart}}</p>-->
 
       <div 
         ng-if="detail.productCart && !vm.isLoadingDetailsDeliveries" 
@@ -151,8 +151,8 @@
                 'hl-select': !detail.validStock
               }"
               ng-model="detail.productCart.deliveryGroup"
-              ng-change="vm.resetProductCartQuantity(detail)"
-              ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in detail.deliveriesGroups"
+              ng-change="vm.onDetailShipDateChange(detail)"
+              ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in detail.deliveriesGroups | filter: vm.isValidGroupDelivery"
             >
             </select>
           </div>

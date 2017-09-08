@@ -72,6 +72,8 @@ function QuotationsEditCtrl(
     hasSpeiOrder: hasSpeiOrder,
     resetProductCartQuantity: resetProductCartQuantity,
     onDetailQuantityChange: onDetailQuantityChange,
+    onDetailShipDateChange: onDetailShipDateChange,
+    isValidGroupDelivery: isValidGroupDelivery,
     user: $rootScope.user
   });
 
@@ -168,6 +170,10 @@ function QuotationsEditCtrl(
 
   }
 
+  function isValidGroupDelivery(groupDelivery){
+    return (groupDelivery.available > 0);
+  }
+
   function loadDetailsDeliveries(details){
     /*for(var i = 0; i < details.length; i++){
       loadDeliveriesByDetail( details[i] );
@@ -200,6 +206,7 @@ function QuotationsEditCtrl(
 
   function setUpDetailDeliveries(detail, deliveries){
     console.log('setUpDetailDeliveries detail id', detail.id);
+    console.log('setUpDetailDeliveries detail obj', detail);
     console.log('deliveries', deliveries);
     /*
     detail.productCart = {
@@ -306,13 +313,23 @@ function QuotationsEditCtrl(
         //productTakenStock > deliveries[i].available && 
         areSameDates(detail.shipDate, deliveries[i].date) && 
         //deliveries[i].available === 0
-        deliveries[i].available <= detail.quantity
+        deliveries[i].available <= detail.quantity && 
+        detail.quantity <= deliveries[i].initalAvailable        
       ){
         console.log('APARTANDO', detail.id);
         //console.log('detail', detail);
         deliveries[i].available = _.clone(detail.quantity);        
       }
       
+      else if(
+        areSameDates(detail.shipDate, deliveries[i].date) && 
+        //deliveries[i].available === 0
+        deliveries[i].available <= detail.quantity && 
+        detail.quantity > deliveries[i].initalAvailable        
+      ){
+        console.log('TOMANDO LO QUE HAY', deliveries[i].available);
+        detail.quantity = deliveries[i].available;                
+      }
       /*
       if(productTakenStock <= productMaxAvailable || true){
 
@@ -338,62 +355,63 @@ function QuotationsEditCtrl(
     return date1Str === date2Str;
   }
 
-  function resetProductCartQuantity(detail){
+  function resetProductCartQuantity(deliveryGroup){
     //detail.productCart = cartService.resetProductCartQuantity(detail.productCart);
   }  
 
-  function onDetailQuantityChange($ev,detail){
-    if(detail.quantity && !vm.isCalculatingAvailability){
+  function cloneArrayOfObjects(arr){
+    return JSON.parse(JSON.stringify(arr));
+  }
 
-      console.log('%c onDetailQuantityChange triggered!!!','color: green');
-      console.log('detail id', detail.id);
-      console.log('detail', detail);    
-
+  function onDetailShipDateChange(detail){
+    if(!vm.isCalculatingAvailability){
       vm.isCalculatingAvailability = true;
-      //vm.isLoadingDetailsDeliveries = true;
-      /*
-      detail.originalQuantity = _.clone(detail.quantity);
-      detail.quantity = detail.productCart.quantity;
-      */
-      var detailQuantity = _.clone(detail.productCart.quantity);
-      var quotationDetails = JSON.parse(JSON.stringify(vm.quotation.Details));
 
-
-      console.log('quantity assigned with select', detailQuantity);
-      //console.log('vm.quotation.Details', quotationDetails);
+      var quotationDetails = cloneArrayOfObjects(vm.quotation.Details);
 
       for(var i= 0; i<quotationDetails.length; i++){
         if( quotationDetails[i].id === detail.id ){
-          //console.log('quantity', detailQuantity);
-          console.log('changed detail', quotationDetails[i]);
-          quotationDetails[i].quantity = detailQuantity;
+          quotationDetails[i].shipDate = detail.productCart.deliveryGroup.date;
         }
       }
-      console.log('quotationDetails before adjustSameProductsStock', quotationDetails);
-      //vm.isLoading = true;
 
       vm.quotation.Details = adjustSameProductsStock(quotationDetails);      
+      $timeout(function(){
+        vm.isCalculatingAvailability = false;      
+      },800);
+    }    
+  }
 
-      console.log('vm.quotation.Details after adjustSameProductsStock', vm.quotation.Details);
+  function onDetailQuantityChange($ev,detail){
+    if(detail.quantity && !vm.isCalculatingAvailability){
+      vm.isCalculatingAvailability = true;
 
-      /*
-      detail.subtotal = detail.productCart.quantity * detail.unitPrice;
-      detail.total = detail.productCart.quantity * detail.unitPriceWithDiscount;
+      var detailQuantity = _.clone(detail.productCart.quantity);
+      var quotationDetails = cloneArrayOfObjects(vm.quotation.Details);
 
-      detail.totalPg1 = detail.quantity * detail.unitPriceWithDiscountPg1;
-      detail.totalPg2 = detail.quantity * detail.unitPriceWithDiscountPg2;
-      detail.totalPg3 = detail.quantity * detail.unitPriceWithDiscountPg3;
-      detail.totalPg4 = detail.quantity * detail.unitPriceWithDiscountPg4;
-      detail.totalPg5 = detail.quantity * detail.unitPriceWithDiscountPg5;
-      updateQuotationLocalVars();
-      console.log('detail', detail);
-      */
-      //vm.isLoading = false;
-      //vm.isLoadingDetailsDeliveries = false; 
+      for(var i= 0; i<quotationDetails.length; i++){
+        if( quotationDetails[i].id === detail.id ){
+          quotationDetails[i].quantity = detailQuantity;
+          quotationDetails[i] = localDetailUpdate(quotationDetails[i]);
+        }
+      }
+
+      vm.quotation.Details = adjustSameProductsStock(quotationDetails);      
       $timeout(function(){
         vm.isCalculatingAvailability = false;      
       },800);
     }
+  }
+
+  function localDetailUpdate(detail){
+    detail.subtotal = detail.productCart.quantity * detail.unitPrice;
+    detail.total = detail.productCart.quantity * detail.unitPriceWithDiscount;
+    detail.totalPg1 = detail.quantity * detail.unitPriceWithDiscountPg1;
+    detail.totalPg2 = detail.quantity * detail.unitPriceWithDiscountPg2;
+    detail.totalPg3 = detail.quantity * detail.unitPriceWithDiscountPg3;
+    detail.totalPg4 = detail.quantity * detail.unitPriceWithDiscountPg4;
+    detail.totalPg5 = detail.quantity * detail.unitPriceWithDiscountPg5; 
+    return detail;
   }
 
   function updateQuotationLocalVars(){
@@ -436,7 +454,7 @@ function QuotationsEditCtrl(
 
   function getQtyArray(n){
     n = n || 0;
-    var arr = [0];
+    var arr = [];
     for(var i=0;i<n;i++){
       arr.push(i+1);
     }
