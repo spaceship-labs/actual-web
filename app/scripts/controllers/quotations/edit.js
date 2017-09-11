@@ -147,11 +147,14 @@ function QuotationsEditCtrl(
       .then(function(response){
         var detailsStock = response.data;
         vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
+        vm.quotation.Details = mapDetailsOriginalValues(vm.quotation.Details);
 
         loadDetailsDeliveries(vm.quotation.Details)
-          .then(function(details){
+          .then(function(){
             //console.log('details after loadDetailsDeliveries', details);
             vm.quotation.Details = adjustSameProductsStock(vm.quotation.Details);
+            vm.quotation.Details = localMultipleDetailsUpdate(vm.quotation.Details)
+            updateQuotationLocalVars();
             console.log('details after adjustSameProductsStock', vm.quotation.Details);
             vm.isLoadingDetailsDeliveries = false;
           });
@@ -168,6 +171,13 @@ function QuotationsEditCtrl(
         console.log('error', err);
       });
 
+  }
+
+  function mapDetailsOriginalValues(details){
+    return details.map(function(detail){
+      detail.originalQuantity = _.clone(detail.quantity);
+      return detail;
+    });
   }
 
   function isValidGroupDelivery(groupDelivery){
@@ -199,9 +209,25 @@ function QuotationsEditCtrl(
           delivery.initalAvailable = _.clone(delivery.available);
           return delivery;
         });
+
+        
+        if(detail.PromotionPackageApplied){
+          deliveries = removeInvalidDeliveriesForPackages(detail,deliveries);
+        }
+        
+
         return setUpDetailDeliveries(detail, deliveries);
       });
+  }
 
+  function removeInvalidDeliveriesForPackages(detail, deliveries){
+    if(detail.PromotionPackageApplied){
+      deliveries = deliveries.filter(function(delivery){
+        return delivery.available >= detail.promotionPackageRuleQuantity;
+      });
+    }
+
+    return deliveries;
   }
 
   function setUpDetailDeliveries(detail, deliveries){
@@ -266,6 +292,7 @@ function QuotationsEditCtrl(
       console.log('detail.deliveries', detail.deliveries);
       console.log('productTakenStock', productTakenStock);
       console.log('detail.deliveries after', detail.deliveries);
+
       var adjustedDetail = substractProductTakenStockFromDetail(
           detail,
           detail.deliveries,
@@ -291,8 +318,6 @@ function QuotationsEditCtrl(
     console.log('in substract detail id', detail.id);
     console.log('in substractProductTakenStockFromDetail productTakenStock', productTakenStock);
     
-    var productMaxAvailable = _.clone(deliveries[deliveries.length - 1].initalAvailable);
-
     for(var i = 0; i<deliveries.length; i++){
       console.log('deliveries[i]', deliveries[i]);
       //console.log('deliveries[i].date', deliveries[i].date);
@@ -306,8 +331,6 @@ function QuotationsEditCtrl(
         deliveries[i].available = 0;
       }
       
-      console.log('modifie')
-
       console.log('over stocked', productTakenStock > deliveries[i].available);
       console.log('same selected date', areSameDates(detail.shipDate, deliveries[i].date));
       console.log('available is zero', deliveries[i].available === 0);
@@ -328,7 +351,9 @@ function QuotationsEditCtrl(
         areSameDates(detail.shipDate, deliveries[i].date) && 
         //deliveries[i].available === 0
         deliveries[i].available <= detail.quantity && 
-        detail.quantity > deliveries[i].initalAvailable        
+        detail.quantity > deliveries[i].initalAvailable /* &&
+        !detail.PromotionPackageApplied        
+        */
       ){
         console.log('TOMANDO LO QUE HAY', deliveries[i].available);
         detail.quantity = deliveries[i].available;         
@@ -410,9 +435,17 @@ function QuotationsEditCtrl(
     }
   }
 
+  function localMultipleDetailsUpdate(details){
+    return details.map(localDetailUpdate);
+  }
+
   function localDetailUpdate(detail){
-    detail.subtotal = detail.productCart.quantity * detail.unitPrice;
-    detail.total = detail.productCart.quantity * detail.unitPriceWithDiscount;
+    //detail.subtotal = detail.productCart.quantity * detail.unitPrice;
+    //detail.total = detail.productCart.quantity * detail.unitPriceWithDiscount;
+    
+    detail.subtotal = detail.quantity * detail.unitPrice;
+    detail.total = detail.quantity * detail.unitPriceWithDiscount;
+
     detail.totalPg1 = detail.quantity * detail.unitPriceWithDiscountPg1;
     detail.totalPg2 = detail.quantity * detail.unitPriceWithDiscountPg2;
     detail.totalPg3 = detail.quantity * detail.unitPriceWithDiscountPg3;
@@ -638,6 +671,8 @@ function QuotationsEditCtrl(
           //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         }
 
+        updateQuotationLocalVars();
+        vm.quotation.Details = adjustSameProductsStock(vm.quotation.Details);
         loadPaymentMethods();
         return $rootScope.loadActiveQuotation();
       })
@@ -672,14 +707,26 @@ function QuotationsEditCtrl(
         detail.discount               = match.discount;
         detail.subtotal               = match.subtotal;
         detail.total                  = match.total;
+
+        detail.unitPriceWithDiscount    = match.unitPriceWithDiscount;
+        detail.unitPriceWithDiscountPg1 = match.unitPriceWithDiscountPg1;
+        detail.unitPriceWithDiscountPg2 = match.unitPriceWithDiscountPg2;
+        detail.unitPriceWithDiscountPg3 = match.unitPriceWithDiscountPg3;
+        detail.unitPriceWithDiscountPg4 = match.unitPriceWithDiscountPg4;
+        detail.unitPriceWithDiscountPg5 = match.unitPriceWithDiscountPg5;
+
+
         detail.Promotion              = match.Promotion;
         detail.PromotionPackageApplied = match.PromotionPackageApplied;
       }
+
     }
     details = details.filter(function(d){
       return _.findWhere(newDetails, {id: d.id});
     });
-    return details;
+
+    return localMultipleDetailsUpdate(details);
+    //return details;
   }
 
   function isValidStock(details){
