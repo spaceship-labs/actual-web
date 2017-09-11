@@ -239,7 +239,10 @@ function QuotationsEditCtrl(
         detail.productCart.quantity = detail.quantity;
       }
       else{
-
+        detail.productCart.deliveryGroup = detail.deliveriesGroups[0];
+        detail.shipDate = detail.productCart.deliveryGroup.date;
+        detail.productCart.quantity = detail.quantity;
+        detail.availabilityChanged = true;
         console.log('ELSE');
         console.log('deliveryGroupMatch', deliveryGroupMatch);
         console.log('ELSE END');
@@ -328,7 +331,8 @@ function QuotationsEditCtrl(
         detail.quantity > deliveries[i].initalAvailable        
       ){
         console.log('TOMANDO LO QUE HAY', deliveries[i].available);
-        detail.quantity = deliveries[i].available;                
+        detail.quantity = deliveries[i].available;         
+        detail.availabilityChanged = true;               
       }
       /*
       if(productTakenStock <= productMaxAvailable || true){
@@ -682,7 +686,21 @@ function QuotationsEditCtrl(
     if(!details){
       return false;
     }
-    return quotationService.isValidStock(details);    
+
+    var isQuotationValidStock = quotationService.isValidStock(details);
+    var detailsChanged = didDetailsChanged();
+
+    if(detailsChanged){
+      return true;
+    }
+
+    return isQuotationValidStock;
+  }
+
+  function didDetailsChanged(){
+    return _.some(vm.quotation.Details, function(detail){
+      return detail.availabilityChanged;
+    });
   }
 
 

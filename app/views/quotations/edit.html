@@ -254,7 +254,7 @@
             type="submit"
             value="CONTINUAR"
             ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
-            ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock"
+            ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries"
             ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock }"
             class="cart-view-btn print-btn"
           >

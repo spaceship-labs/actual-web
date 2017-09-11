@@ -2305,11 +2305,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   text-align: right;
 }
 .cart-view .cart-item .bottom-text-alert{
-  float: left;
+  /*float: left;*/
   color: #E2023F;
   font-size: 12px;
-  max-width: 50%;
-  margin-top: 6px;
+  /*max-width: 50%;*/
+  /*margin-top: 6px;*/
+  padding-right: 10px;
   text-align: left;
 }
 .cart-view .cart-item-data .price-crossed .currency-label{font-size: 11px;}

@@ -146,11 +146,14 @@
           <div class="delivery-selection input-element select-element-wrapper">
 
             <label>Fecha entrega estimada</label>
-            <select
-              class="select-element"
+            
+            <!--
               ng-class="{
                 'hl-select': !detail.validStock
               }"
+            -->
+            <select
+              class="select-element"
               ng-model="detail.productCart.deliveryGroup"
               ng-change="vm.onDetailShipDateChange(detail)"
               ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in detail.deliveriesGroups | filter: vm.isValidGroupDelivery"
@@ -180,7 +183,7 @@
       <md-tooltip md-direction="bottom">Eliminar</md-tooltip>
     </a>
 
-    
+    <!--
     <div 
       ng-show="!detail.validStock && !vm.quotation.OrderWeb && !vm.isValidatingStock" 
       layout="row"
@@ -197,7 +200,7 @@
         </p>
       </div>
     </div>
-    
+    -->
 
   </div>
 
@@ -208,10 +211,41 @@
     <strong>ALERTA: La disponibilidad y/o fecha de entrega de este artículo ha cambiado</strong>
   </p>
   -->
-  
-  <p class="bottom-text">
-    <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
-  </p>
+  <div layout="row" layout-align="space-between center">
+    <div flex="65">
+      <p 
+        class="bottom-text bottom-text-alert" 
+        ng-if="detail.availabilityChanged">
+        <strong>ALERTA: La disponibilidad original y/o fecha de entrega de este artículo ha cambiado</strong>
+      </p>
+      
+    </div>
+    <div flex>
+      <p class="bottom-text">
+        <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
+      </p>
+
+      <p
+        ng-if="
+          vm.appliesForPackageOrPromotionDiscount(detail) == 'packageDiscount'
+        "
+        class="bottom-text"
+      >
+        Paquete: {{detail.discountName}}
+      </p>
+      <div 
+        ng-if="vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'"
+      >
+        <p class="bottom-text">
+          <strong>Promoción:</strong> {{detail.discountName}}
+        </p>
+        <p class="bottom-text" ng-if="detail.ewallet > 0">
+          Beneficio monedero eléctronico: {{detail.ewallet | currency}}
+        </p>                  
+      </div>
+      
+    </div>
+  </div>
 
   <!--
   <p ng-show="vm.isLoadingDetailsDeliveries" class="bottom-text">
@@ -235,29 +269,7 @@
   </p>
   -->
 
-  <p
-    ng-if="
-      vm.appliesForPackageOrPromotionDiscount(detail) == 'packageDiscount'
-    "
-    class="bottom-text"
-  >
-    Paquete: {{detail.discountName}}
-  </p>
-  <div 
-    ng-if="vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'"
-  >
-    <p class="bottom-text">
-      <strong>Promoción:</strong> {{detail.discountName}}
-    </p>
-    <p class="bottom-text" ng-if="detail.ewallet > 0">
-      Beneficio monedero eléctronico: {{detail.ewallet | currency}}
-    </p>                  
-  </div>
-  <div ng-if="detail.bigticketDiscountPercentage > 0">
-    <p class="bottom-text">
-      Descuento Big Ticket: -{{detail.bigticketDiscountPercentage}}% adicional
-    </p>
-  </div>
+
 
   <div class="clear"></div>
 </div>
