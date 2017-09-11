@@ -372,10 +372,12 @@ function QuotationsEditCtrl(
       for(var i= 0; i<quotationDetails.length; i++){
         if( quotationDetails[i].id === detail.id ){
           quotationDetails[i].shipDate = detail.productCart.deliveryGroup.date;
+          quotationDetails[i] = localDetailUpdate(quotationDetails[i]);
         }
       }
 
-      vm.quotation.Details = adjustSameProductsStock(quotationDetails);      
+      vm.quotation.Details = adjustSameProductsStock(quotationDetails);
+      updateQuotationLocalVars();      
       $timeout(function(){
         vm.isCalculatingAvailability = false;      
       },800);
@@ -396,7 +398,8 @@ function QuotationsEditCtrl(
         }
       }
 
-      vm.quotation.Details = adjustSameProductsStock(quotationDetails);      
+      vm.quotation.Details = adjustSameProductsStock(quotationDetails);
+      updateQuotationLocalVars();      
       $timeout(function(){
         vm.isCalculatingAvailability = false;      
       },800);
@@ -697,6 +700,8 @@ function QuotationsEditCtrl(
     }
 
     if(!vm.quotation.Order){
+      vm.isLoading = true;
+      $rootScope.scrollTo('main');
 
       var params = {
         Details: angular.copy(vm.quotation.Details)
@@ -710,8 +715,7 @@ function QuotationsEditCtrl(
       });
 
       //delete params.Details;
-      vm.isLoading = true;
-      $rootScope.scrollTo('main');
+
 
       /*
       if(vm.quotation.Client){
@@ -720,6 +724,7 @@ function QuotationsEditCtrl(
       }
       else{
       */
+      /*
       if(!vm.quotation.Client){      
         $location.path('/register')
           .search({
@@ -727,7 +732,8 @@ function QuotationsEditCtrl(
             quotation: vm.quotation.id
           });
       }
-      vm.isLoading = false;     
+      */
+      //vm.isLoading = false;     
 
       //TODO: Update details when edit mode is active
       
