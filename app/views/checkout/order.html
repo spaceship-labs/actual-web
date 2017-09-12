@@ -161,12 +161,12 @@
           layout-wrap
           layout-align="space-between start"
         >
-          <div flex flex-sm="100" flex-xs="100" class="pull-left"><strong>FORMA DE PAGO</strong></div>
-          <div flex flex-sm="100" flex-xs="100"><strong>FECHA</strong></div>
-          <div flex flex-sm="100" flex-xs="100"><strong>FOLIO</strong></div>
-          <div flex flex-sm="100" flex-xs="100"><strong>TIPO DE PAGO</strong></div>
-          <div flex flex-sm="100" flex-xs="100"><strong>BANCO</strong></div>
-          <div flex flex-sm="100" flex-xs="100"><strong>MONTO COBRADO</strong></div>
+          <div flex  class="pull-left"><strong>FORMA DE PAGO</strong></div>
+          <div flex ><strong>FECHA</strong></div>
+          <div flex ><strong>FOLIO</strong></div>
+          <div flex ><strong>TIPO DE PAGO</strong></div>
+          <div flex ><strong>BANCO</strong></div>
+          <!--<div flex ><strong>MONTO COBRADO</strong></div>-->
         </div>
 
         <div
@@ -176,35 +176,37 @@
           layout-align="space-between center"
           ng-repeat="payment in vm.order.Payments"
         >
-          <div ng-if="payment.type == 'cash'" flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
+          <div ng-if="payment.type == 'cash'" flex  class="order-payment-item-data">
             <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (MXN)</strong>
           </div>
-          <div ng-if="payment.type == 'cash-usd'" flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
+          <div ng-if="payment.type == 'cash-usd'" flex  class="order-payment-item-data">
             <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (USD)</strong>
             <p class="small-note">Tipo de cambio: {{payment.exchangeRate | currency}} MXN</p>
           </div>
-          <div ng-if="payment.type !== 'cash' && payment.type !== 'cash-usd' " flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
+          <div ng-if="payment.type !== 'cash' && payment.type !== 'cash-usd' " flex  class="order-payment-item-data">
             <span><i class="icon-terminal"></i></span> <strong>{{payment.name}}</strong>
           </div>
 
-          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
+          <div flex  class="order-payment-item-data">
             <span>{{payment.createdAt | date:'d/MMM/yyyy'}}</span>
           </div>
-          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
+          <div flex  class="order-payment-item-data">
             <span>#{{payment.folio}}</span>
           </div>
-          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
+          <div flex  class="order-payment-item-data">
             <span>{{vm.getPaymentTypeString(payment)}}</span>
           </div>
-          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
+          <div flex  class="order-payment-item-data">
             <!--<span>{{ main.mapTerminalCode(payment.terminal) }}</span>-->
-            <span>{{payment.card}}</span>
+            <span ng-if="payment.type !== 'transfer' ">{{payment.card}}</span>
+            <span ng-if="payment.type === 'transfer' ">STP</span>
           </div>
-          <div flex flex-sm="100" flex-xs="100" class="order-payment-item-data">
-            <!--<span ng-if="payment.type !='cash-usd'">{{payment.ammount | currency}} MXN</span>-->
+          <!--
+          <div flex  class="order-payment-item-data">
             <span ng-if="payment.type !='cash-usd'">{{vm.order.total | currency}} MXN</span>
             <span ng-if="payment.type =='cash-usd'">{{payment.ammount | currency}} USD.</span>
           </div>
+          -->
         </div>
       </div>
 

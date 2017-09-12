@@ -2305,11 +2305,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   text-align: right;
 }
 .cart-view .cart-item .bottom-text-alert{
-  float: left;
+  /*float: left;*/
   color: #E2023F;
   font-size: 12px;
-  max-width: 50%;
-  margin-top: 6px;
+  /*max-width: 50%;*/
+  /*margin-top: 6px;*/
+  padding-right: 10px;
   text-align: left;
 }
 .cart-view .cart-item-data .price-crossed .currency-label{font-size: 11px;}
@@ -2370,6 +2371,11 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 40px;
 }
 .cart-view .cart-item .stock-alert-content a i{font-size: 50px}
+.cart-view .cart-item .out-of-stock-msg p{
+  margin: 10px 0 10px;
+  text-align: right;
+}
+
 
 /*---------------
   #STOCK-ALERT-DIALOG
@@ -5294,8 +5300,17 @@ padding-left: 16px;
   #my-profile .head-profile h1{font-size: 19px}
 
   .order-view .order-payments{
-    display: flex;
+    /*display: flex;*/
+    padding: 4px 0;
   }
+  .order-view .order-table-header > div{
+    font-size: 10px;
+    padding: 2px;
+  }
+  .order-view .order-payment-item-data{
+    padding: 2px;
+  }
+
   .order-view .order-payments .order-table-header,
   .order-view .order-payments .order-table-header .pull-left{
     text-align: right!important;
@@ -5404,7 +5419,8 @@ padding-left: 16px;
     position: fixed;
     left: 0;
     width: 100%;
-    top: 60px;
+    top: 76px;
+    /*top: 60px;*/
   }
   .schedules-modal-header .phone-assitance{display: block;}
   .terms-view .section-title{margin: 10px 0}
@@ -5666,6 +5682,9 @@ padding-left: 16px;
     font-size: 12px;
     margin-bottom: 6px;
   }
+  .order-view .order-payment-item-data{font-size: 10px;}
+
+
   .checkout-view h3{
     font-size: 14px;
     margin: 8px 0;

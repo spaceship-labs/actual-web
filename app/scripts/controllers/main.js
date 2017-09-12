@@ -411,6 +411,8 @@
             $scope.mainData.activeQuotation = $rootScope.activeQuotation;
             $rootScope.$emit('mainDataLoaded', $scope.mainData);
             $rootScope.isMainDataLoaded = true;
+
+            console.log('loaded activeQuotation', $rootScope.activeQuotation);
           });
 
         resetSearchBox();

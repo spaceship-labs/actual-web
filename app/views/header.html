@@ -100,30 +100,6 @@
           </a>
         </div>
 
-        <!--IF ACTIVE QUOTATION-->
-        <a
-          ng-if="main.activeQuotation"
-          flex
-          ng-href="/quotations/edit/{{main.activeQuotation.id}}"
-          class="header-top-bar-menu-item"
-        >
-          <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
-          <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-          <ng-include ng-if="main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
-        </a>
-
-        <!--IF NOT ACTIVE QUOTATION-->
-        <a
-          ng-if="main.user && !main.activeQuotation"
-          flex
-          href="/"
-          class="header-top-bar-menu-item"
-        >
-          <i class="icon-carro"></i>
-          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
-        </a>
-
-
         <a
           flex
           hide-gt-xs
@@ -178,7 +154,28 @@
             src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
 
+        <!--IF ACTIVE QUOTATION-->
+        <a
+          ng-if="main.activeQuotation"
+          flex
+          ng-href="/quotations/edit/{{main.activeQuotation.id}}"
+          class="header-top-bar-menu-item"
+        >
+          <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
+          <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
+          <ng-include ng-if="main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+        </a>
 
+        <!--IF NOT ACTIVE QUOTATION-->
+        <a
+          ng-if="main.user && !main.activeQuotation"
+          flex
+          href="/"
+          class="header-top-bar-menu-item"
+        >
+          <i class="icon-carro"></i>
+          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+        </a>
 
         <!---end if Logged in -->
 

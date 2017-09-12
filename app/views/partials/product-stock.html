@@ -33,7 +33,7 @@
             Entrega en tienda
           </span> 
 
-          <!--
+          
           <p>Debug</p>                       
           <span 
               class="comma-separated"
@@ -41,7 +41,7 @@
             >
             {{ vm.getWarehouseName(d.companyFrom) }}: {{d.available}} ({{d.date | date: 'd/MMM/yyyy'}})
           </span>
-          -->
+          
         </td>
         <td class="delivery-date-stock">
           {{deliveryGroup.available | number: 0}} {{vm.getPiecesString(deliveryGroup.available)}}
