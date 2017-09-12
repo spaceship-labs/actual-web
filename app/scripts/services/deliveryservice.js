@@ -13,7 +13,9 @@
     	sortDeliveriesByHierarchy: sortDeliveriesByHierarchy,
     	substractDeliveriesStockByQuotationDetails: substractDeliveriesStockByQuotationDetails,
 			getZipcodeDelivery: getZipcodeDelivery,
-			getZipcodeDeliveryById: getZipcodeDeliveryById
+			getZipcodeDeliveryById: getZipcodeDeliveryById,
+			setUpDetailDeliveries: setUpDetailDeliveries,
+			removeInvalidDeliveriesForPackages: removeInvalidDeliveriesForPackages
     };
 
 		function getZipcodeDelivery(zipcode){
@@ -293,8 +295,50 @@
 	    return rulesHashes;
 	  }
 
-    return service;
+    function removeInvalidDeliveriesForPackages(detail, deliveries){
+      if(detail.PromotionPackageApplied){
+        deliveries = deliveries.filter(function(delivery){
+          return delivery.available >= detail.promotionPackageRuleQuantity;
+        });
+      }
 
+      return deliveries;
+    } 
+
+	  function setUpDetailDeliveries(detail, deliveries){
+	    deliveries = $filter('orderBy')(deliveries, 'date');
+	    detail.deliveries  = deliveries;
+	    detail.deliveriesGroups = groupDeliveryDates(detail.deliveries);
+	    detail.deliveriesGroups = $filter('orderBy')(detail.deliveriesGroups, 'date');
+	    detail.productCart = detail.productCart || {};
+
+	    if(detail.deliveries && detail.deliveries.length > 0){
+	      var deliveryGroupMatch = isShipDateInDeliveriesGroup(detail.shipDate, detail.deliveriesGroups);
+
+	      if( deliveryGroupMatch ){
+	        //Setting productCart quantity if the detail has shipping date and available date
+	        detail.productCart.deliveryGroup = deliveryGroupMatch;
+	        detail.productCart.quantity = detail.quantity;
+	      }
+	      else{
+	        detail.productCart.deliveryGroup = detail.deliveriesGroups[0];
+	        detail.shipDate = detail.productCart.deliveryGroup.date;
+	        detail.productCart.quantity = detail.quantity;
+	        detail.availabilityChanged = true;
+	      }
+	    }
+
+	    return detail;
+	  }
+
+	  function isShipDateInDeliveriesGroup(shipDate, deliveriesGroups){
+	    var exists = _.find(deliveriesGroups, function(deliveryGroup){
+	      return moment(shipDate).format('DD-MM-YYYY') === moment(deliveryGroup.date).format('DD-MM-YYYY');
+	    });
+	    return exists;
+	  }	      
+
+    return service;
   }
 	
 

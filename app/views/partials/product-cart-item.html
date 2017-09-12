@@ -1,10 +1,7 @@
-<div 
-  class="cart-item" 
->
+<div class="cart-item">
   <h3>
     <a ng-href="{{detail.Product.url}}">
       <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
-      <!--| <span>{{detail.id}}</span>-->
     </a>
   </h3>
 
@@ -72,21 +69,8 @@
                 y -{{detail.bigticketDiscountPercentage}}% adicional
               </span>
             </p>
-            <!--
-            <p 
-              ng-if="vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) != detail.unitPrice"
-            >
-              <span class="currency-label">MXN</span> <span class="price-crossed">{{ detail.unitPrice | roundCurrency }}</span>
-            </p>
-            <p class="price-hl">
-              <span class="currency-label">MXN</span>
-              <strong>
-                {{ vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) | roundCurrency }}
-              </strong>
-            </p>
-            -->
-            <p 
-            >
+
+            <p>
               <span class="currency-label">MXN</span> <span class="price-crossed">{{ detail.unitPrice | roundCurrency }}</span>
             </p>
             <p class="price-hl">
@@ -120,21 +104,19 @@
         <md-progress-circular class="md-accent" md-diameter="40px"></md-progress-circular>
       </div>
             
-      <!--<p>{{detail.productCart}}</p>-->
       <div ng-if="!vm.isLoadingDetailsDeliveries && !detail.productCart.deliveryGroup" class="out-of-stock-msg">
         <p><strong>No hay piezas disponibles por el momento.</strong></p>
       </div>
   
       <div 
-        ng-if="detail.productCart && !vm.isLoadingDetailsDeliveries && detail.productCart.deliveryGroup" 
+        ng-if="vm.isDetailEditionEnabled(detail)" 
         class="stock-selection" 
         layout="row"
         layout-align="end start"
       >
-        <div ng-if="!detail.PromotionPackageApplied"  flex="20" flex-sm="50" flex-xs="50">
+        <div ng-if="vm.isDetailPiecesEditionEnabled(detail)"  flex="20" flex-sm="50" flex-xs="50">
           <div class="product-view-qty input-element">
                         
-            <!--<label>Piezas | Available: {{detail.productCart.deliveryGroup.available}}</label>-->
             <label>Piezas</label>
             <select
               class="select-element"
@@ -166,19 +148,11 @@
         </div>        
 
       </div>
-      
-
-      <!--
-      <p>
-        {{detail}}
-      </p>
-      -->
-
     </div>
     <!--END ITEM DATA-->
 
     <a href="#"
-      ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
+      ng-if="vm.isDetailRemoveOptionEnabled(detail)"
       ng-click="vm.alertRemoveDetail($event,detail, $index)"
       class="cart-item-remove"
     >
@@ -207,38 +181,30 @@
 
   </div>
 
-  <!--
-  <p 
-    class="bottom-text bottom-text-alert" 
-    ng-if="!detail.validStock && !vm.isValidatingStock">
-    <strong>ALERTA: La disponibilidad y/o fecha de entrega de este artículo ha cambiado</strong>
-  </p>
-  -->
   <div layout="row" layout-align="space-between center">
     <div flex="50">
       <p 
         class="bottom-text bottom-text-alert" 
-        ng-if="detail.availabilityChanged || (!vm.isLoadingDetailsDeliveries && !detail.productCart.deliveryGroup)">
+        ng-if="vm.isDetailAlertVisible(detail)">
         <strong>ALERTA: La disponibilidad original y/o fecha de entrega de este artículo ha cambiado. <span>Antes: {{detail.originalQuantity}} pieza(s) {{detail.originalShipDate | date: "d/MMM/yyyy"}}</span></strong>
       </p>
       
     </div>
+  
     <div flex ng-if="!vm.isLoadingDetailsDeliveries && detail.productCart.deliveryGroup">
       <p class="bottom-text">
         <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
       </p>
 
+
       <p
-        ng-if="
-          vm.appliesForPackageOrPromotionDiscount(detail) == 'packageDiscount'
-        "
+        ng-if="vm.appliesForPackageDiscount(detail)"
         class="bottom-text"
       >
         Paquete: {{detail.discountName}}
       </p>
-      <div 
-        ng-if="vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'"
-      >
+      
+      <div ng-if="vm.appliesForPromotionDiscount(detail)">
         <p class="bottom-text">
           <strong>Promoción:</strong> {{detail.discountName}}
         </p>
@@ -249,13 +215,6 @@
 
     </div>
   </div>
-
-  <!--
-  <p ng-show="vm.isLoadingDetailsDeliveries" class="bottom-text">
-    <strong>Entrega aproximada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
-  </p>
-  -->
-  
 
   <!--
   <p class="bottom-text" ng-repeat="detail in detail.details">
