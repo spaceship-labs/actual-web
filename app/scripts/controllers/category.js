@@ -171,6 +171,7 @@ function CategoryCtrl(
       .then(function(productsFormatted){
         vm.products = productsFormatted;
         console.log('vm.products', vm.products);
+        window.prerenderReady = true;
       })
       .catch(function(err){
         console.log('err', err);
