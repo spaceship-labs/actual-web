@@ -304,12 +304,16 @@
             </a>
           </div>
           <div flex="50">
-            <a
-              ng-if="vm.quotation.Details.length > 0"
-              ng-click="vm.sendByEmail()"
+
+            <!--
               ng-class="{
                 'action-btn-disabled': !vm.quotation.Client
               }"
+            -->
+
+            <a
+              ng-if="vm.quotation.Details.length > 0"
+              ng-click="vm.sendByEmail()"
               href="#"
               class="action-btn-print print-btn">
               ENVIAR POR EMAIL
@@ -321,6 +325,14 @@
     </div>
 
   </form>
+
+  <section ng-if="vm.isUserAdmin">
+    <hr>
+    <ng-include src="'views/quotations/leads-table.html'">
+    </ng-include>
+    <hr>
+  </section>
+
 
   <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation">
     <div class="hr"><hr /></div>

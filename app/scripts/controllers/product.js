@@ -156,6 +156,7 @@ function ProductCtrl(
         return productService.addSeenTime(vm.product.ItemCode);
       })
       .then(function(seenTime){
+        window.prerenderReady = true;
         //console.log(seenTime);
       })
       .catch(function(err){

@@ -369,7 +369,7 @@
       siteService.findByHandle(vm.siteTheme)
         .then(function(res){
           vm.site = res.data || {};
-          vm.site.Banners = siteService.sortSiteBanners(vm.site);
+          //vm.site.Banners = siteService.sortSiteBanners(vm.site);
           $rootScope.site = res.data || {};
           deferred.resolve(vm.site);
           console.log('loadSiteInfo end', new Date());
