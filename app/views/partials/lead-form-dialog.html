@@ -1,0 +1,88 @@
+<md-dialog class="lead-form-dialog" aria-label="Zipcode dialog"  ng-cloak>
+  <div
+    class="lead-form-dialog-inner"
+    ng-class="{
+      'lead-form-dialog-inner-large': ctrl.user
+    }"
+  >
+
+    <div ng-if="ctrl.isLoading" layout="row" layout-align="center center" class="loading-circle">
+      <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+    </div>
+
+    <form
+      ng-if="!ctrl.isLoading"
+      name="leadForm"
+      ng-submit="ctrl.submit(leadForm)"
+      class="form-section"
+    >
+
+      <section>
+        <h2><strong>Enviar cotización</strong></h2>
+
+        <div class="input-element">
+          <p>Nombre*</p>
+          <div class="input-element-inner">
+            <input
+              type="text"
+              autofocus
+              md-autofocus
+              ng-model="ctrl.lead.name"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="input-element">
+          <p>Email*</p>
+          <div class="input-element-inner">
+            <input
+              type="email"
+              autofocus
+              ng-model="ctrl.lead.email"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="input-element">
+          <p>Confirmar email*</p>
+          <div class="input-element-inner">
+            <input
+              type="email"
+              autofocus
+              ng-model="ctrl.lead._email"
+              ng-pattern="ctrl.lead.email"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="input-element">
+          <p>Télefono*</p>
+          <div class="input-element-inner">
+            <input
+              type="text"
+              autofocus
+              ng-model="ctrl.lead.phone"
+              required
+            />
+          </div>
+        </div>
+
+        <p ng-if="ctrl.errMessage">
+          <strong>{{ctrl.errMessage}}</strong>
+        </p>
+
+      </section>
+
+      <div layout="row" layout-align="space-between center" layout-wrap>
+        <button type="submit" class="action-btn action-btn-save" flex="40" flex-sm="80" flex-xs="80">
+          Enviar
+        </button>  
+      </div>
+
+    </form>
+
+  </div>
+</md-dialog>

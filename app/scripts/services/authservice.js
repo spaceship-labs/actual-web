@@ -96,6 +96,9 @@
       }
 
       function isUserAdmin(user){
+        if(!user){
+          return false;
+        }
         return user.role === USER_ROLES.ADMIN;
       }
 

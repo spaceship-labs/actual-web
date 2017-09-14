@@ -450,7 +450,7 @@ select{
 .header-top-bar-menu .header-top-bar-menu-item-phone{
   text-align: center;
   color: #fff;
-  font-size: 22px;
+  font-size: 20px;
   min-width: 170px;
 }
 
@@ -4440,6 +4440,27 @@ md-backdrop.md-sidenav-backdrop{
 .zipcode-dialog .delivery-option-data .small-link{margin:0;}
 .zipcode-dialog .delivery-option-data h4{margin: 0 0 10px;}
 
+/*----------------/
+  #LEAD-FORM-DIALOG
+/*----------------*/
+.lead-form-dialog .lead-form-dialog-inner{
+  min-width: 300px;
+  box-sizing: border-box;
+  padding: 15px 20px;
+}
+.lead-form-dialog .lead-form-dialog-inner-large{min-width: 800px;}
+.lead-form-dialog h2{
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+.lead-form-dialog .lead-form-dialog-inner p{margin: 4px 0;}
+.lead-form-dialog .lead-form-dialog-inner a{
+  cursor: pointer;
+  color: #33BA2C;
+  text-decoration: underline;
+  font-size: 14px;
+}
 
 /*---------------/
   #ORDER-VIEW
@@ -4785,7 +4806,7 @@ padding-left: 16px;
   margin: 4px 0;
 }
 .our-stores .store-info-table p{
-  font-size: 11px;
+  font-size: 13px;
   margin: 4px 0;
 }
 
@@ -4880,6 +4901,9 @@ padding-left: 16px;
 .contact-us .info-column p{
   margin: 4px 0;
 }
+.contact-us .info-column table td:first-child{
+  width: 40%;
+}
 
 /*--------------/#FOOTER/*-------------*/
 #footer{min-height: 83px !important;}
@@ -4895,9 +4919,29 @@ padding-left: 16px;
   /*text-transform: uppercase;*/
 }
 #footer .footer-menu-col li .camel-case{text-transform: none;}
-#footer .footer-menu-col li p{margin: 0;}
-#footer .footer-menu-col li a{font-size: 12px;}
-#footer .footer-menu-col p,#footer .footer-menu-col li{font-size: 12px ;.margin: 6px  0;}
+#footer .footer-menu-col li p{
+  margin: 0;
+  font-size: 14px;
+}
+#footer .footer-menu-col li a{font-size: 14px;/*font-size: 12px;*/}
+#footer .footer-menu-col p,#footer .footer-menu-col li{font-size: 14px;/*font-size: 12px*/;margin: 6px  0;}
+#footer .footer-menu-col .italic{font-style: italic;}
+#footer .footer-menu-col .top-margin{margin-top: 10px}
+
+#footer .footer-menu-col table{
+  border-spacing: 0;
+  width: 100%;
+}
+#footer .footer-menu-col table td{
+  font-size: 14px;
+  padding: 4px 0;
+}
+#footer .footer-menu-col table td + td{
+  padding: 4px;
+  width: 60%;
+  text-align: right;
+}
+
 #footer .footer-contact-item{margin: 18px  0;padding-left: 20px ;}
 #footer .footer-contact-item p{margin:4px  0;}
 #footer .footer-contact-item i{font-size: 20px ;margin-right: 5px ;margin-top: 1px }
@@ -5294,8 +5338,17 @@ padding-left: 16px;
   #my-profile .head-profile h1{font-size: 19px}
 
   .order-view .order-payments{
-    display: flex;
+    /*display: flex;*/
+    padding: 4px 0;
   }
+  .order-view .order-table-header > div{
+    font-size: 10px;
+    padding: 2px;
+  }
+  .order-view .order-payment-item-data{
+    padding: 2px;
+  }
+
   .order-view .order-payments .order-table-header,
   .order-view .order-payments .order-table-header .pull-left{
     text-align: right!important;
@@ -5356,6 +5409,10 @@ padding-left: 16px;
   .product-view .product-view-price-main .taxes-included{
     display: inline-block;
   }
+
+  .contact-us .info-column h2{margin: 10px 0;}
+  .contact-us form{padding: 20px}
+  #footer .footer-menu-col li p{font-size: 12px;}
 }
 
 
@@ -5404,7 +5461,8 @@ padding-left: 16px;
     position: fixed;
     left: 0;
     width: 100%;
-    top: 60px;
+    top: 76px;
+    /*top: 60px;*/
   }
   .schedules-modal-header .phone-assitance{display: block;}
   .terms-view .section-title{margin: 10px 0}
@@ -5666,6 +5724,9 @@ padding-left: 16px;
     font-size: 12px;
     margin-bottom: 6px;
   }
+  .order-view .order-payment-item-data{font-size: 10px;}
+
+
   .checkout-view h3{
     font-size: 14px;
     margin: 8px 0;
@@ -5684,6 +5745,7 @@ padding-left: 16px;
   .our-stores .store-info-table p{
     margin: 2px 0;
     padding: 2px;
+    font-size: 11px;
   }
 
   #footer .footer-menu-col h2{
