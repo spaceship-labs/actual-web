@@ -32,7 +32,8 @@ function QuotationsEditCtrl(
   authService,
   siteService,
   productService,
-  cartService
+  cartService,
+  leadService
 ){
   var vm = this;
   var mainDataListener = function(){};
@@ -72,7 +73,9 @@ function QuotationsEditCtrl(
     hasSpeiOrder: hasSpeiOrder,
     resetProductCartQuantity: resetProductCartQuantity,
     onDetailQuantityChange: onDetailQuantityChange,
-    user: $rootScope.user
+    showLeadFormDialog: showLeadFormDialog,
+    user: $rootScope.user,
+    isUserAdmin: authService.isUserAdmin($rootScope.user)
   });
 
   var activeQuotationListener = function(){};
@@ -120,6 +123,9 @@ function QuotationsEditCtrl(
         }
 
         loadPaymentMethods();
+        if(vm.isUserAdmin){
+          loadQuotationLeads();
+        }
 
         console.log('details not populated '+ new Date(), _.clone(vm.quotation.Details) );
         return quotationService.populateDetailsWithProducts(
@@ -425,10 +431,52 @@ function QuotationsEditCtrl(
     window.print();
   }
 
+  function sendQuotationAndSaveLead(){
+    showLeadFormDialog();
+  }
+
+  function showLeadFormDialog(ev) {
+    ev = null;
+    var templateUrl = 'views/partials/lead-form-dialog.html';
+    var controller  = LeadFormDialogController;
+    $mdDialog.show({
+      controller: [
+        '$mdDialog',
+        'leadService',
+        'params',
+        controller
+      ],
+      controllerAs: 'ctrl',
+      templateUrl: templateUrl,
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: false,
+      locals:{
+        params:{
+          quotationId: vm.quotation.id
+        }
+      }
+    })
+    .then(function(res) {
+      console.log('res', res);
+      dialogService.showDialog('Cotización enviada');
+    })
+    .catch(function(err){
+      var errMsg = '';
+      if(err){
+        errMsg = err.data || err;
+        errMsg = errMsg ? errMsg.toString() : '';
+        dialogService.showDialog(errMsg);
+      }      
+    });
+  }  
+
   function sendByEmail(){
     console.log('vm.quotation', vm.quotation);
 
     if(!vm.quotation.Client){
+      sendQuotationAndSaveLead();
       return;
 
       $location.path('/register')
@@ -686,6 +734,22 @@ function QuotationsEditCtrl(
     return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
   }
 
+  function loadQuotationLeads(){
+    vm.isLoadingLeads = true;
+
+    leadService.getQuotationLeads(vm.quotation.id)
+      .then(function(leads){
+        console.log('leads', leads);
+        vm.leads = leads;
+        vm.isLoadingLeads = false;
+      })
+      .catch(function(err){
+        console.log('err leads load', err);
+        vm.isLoadingLeads = false;
+
+      });
+  }
+
 
   function showDetailStockAlert(ev,detail){
     var controller = StockDialogController;
@@ -750,6 +814,7 @@ function QuotationsEditCtrl(
   }
 
   $scope.$on('$destroy', function(){
+    $mdDialog.hide();
     mainDataListener();
   });
 
@@ -777,5 +842,6 @@ QuotationsEditCtrl.$inject = [
   'authService',
   'siteService',
   'productService',
-  'cartService'
+  'cartService',
+  'leadService'
 ];

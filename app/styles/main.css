@@ -4440,6 +4440,27 @@ md-backdrop.md-sidenav-backdrop{
 .zipcode-dialog .delivery-option-data .small-link{margin:0;}
 .zipcode-dialog .delivery-option-data h4{margin: 0 0 10px;}
 
+/*----------------/
+  #LEAD-FORM-DIALOG
+/*----------------*/
+.lead-form-dialog .lead-form-dialog-inner{
+  min-width: 300px;
+  box-sizing: border-box;
+  padding: 15px 20px;
+}
+.lead-form-dialog .lead-form-dialog-inner-large{min-width: 800px;}
+.lead-form-dialog h2{
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+.lead-form-dialog .lead-form-dialog-inner p{margin: 4px 0;}
+.lead-form-dialog .lead-form-dialog-inner a{
+  cursor: pointer;
+  color: #33BA2C;
+  text-decoration: underline;
+  font-size: 14px;
+}
 
 /*---------------/
   #ORDER-VIEW
