@@ -707,7 +707,7 @@ function getMetaTagsBySite(siteOption){
   var metaTags = {
     title: 'Actual | Más de 25 años de experiencia en muebles e interiorismo.',
     description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
-    image: 'https://api.actualstudio.com/logos/studio.png',
+    image: 'https://api.actualstudio.com/logos/studio-og.png',
     url: 'https://actualstudio.com',
     favicon: 'https://api.actualStudio.com/icons/actual-studio-favicon.png'
   };
@@ -717,7 +717,7 @@ function getMetaTagsBySite(siteOption){
       metaTags = {
         title: 'Actual Studio | Más de 25 años de experiencia en muebles e interiorismo.',
         description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
-        image: 'https://api.actualstudio.com/logos/studio.png',
+        image: 'https://api.actualstudio.com/logos/studio-og.png',
         url: 'https://actualstudio.com',
         favicon: 'https://api.actualStudio.com/icons/actual-studio-favicon.png'
 
@@ -727,7 +727,7 @@ function getMetaTagsBySite(siteOption){
       metaTags = {
         title: 'Actual Home | Más de 25 años de experiencia en muebles e interiorismo.',
         description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
-        image: 'https://api.actualstudio.com/logos/home.png',
+        image: 'https://api.actualstudio.com/logos/home-og.png',
         url: 'https://actualhome.com',
         favicon: 'https://api.actualStudio.com/icons/actual-home-favicon.png'        
       };
@@ -736,7 +736,7 @@ function getMetaTagsBySite(siteOption){
         metaTags = {
           title: 'Actual Kids | Más de 25 años de experiencia en muebles e interiorismo.',
           description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
-          image: 'https://api.actualstudio.com/logos/kids.png',
+          image: 'https://api.actualstudio.com/logos/kids-og.png',
           url: 'https://actualkids.com',
           favicon: 'https://api.actualStudio.com/icons/actual-kids-favicon.png'          
         };
