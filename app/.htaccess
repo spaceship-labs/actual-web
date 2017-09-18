@@ -486,13 +486,14 @@ FileETag None
 # </IfModule>
 
 <IfModule mod_rewrite.c>
+    Options +FollowSymlinks
     RewriteEngine On
 
-    <IfModule mod_proxy_http.c>
-        RewriteCond %{HTTP_USER_AGENT} baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator [NC,OR]
-        RewriteCond %{QUERY_STRING} _escaped_fragment_
-        
-        # Only proxy the request to Prerender if it's a request for HTML
-        RewriteRule ^(?!.*?(\.js|\.css|\.xml|\.less|\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.txt|\.ico|\.rss|\.zip|\.mp3|\.rar|\.exe|\.wmv|\.doc|\.avi|\.ppt|\.mpg|\.mpeg|\.tif|\.wav|\.mov|\.psd|\.ai|\.xls|\.mp4|\.m4a|\.swf|\.dat|\.dmg|\.iso|\.flv|\.m4v|\.torrent|\.ttf|\.woff))(.*) https://prerender-spaceshiplabs.herokuapp.com/http://sandbox.actualstudio.com/$2 [P,L]
-    </IfModule>
+    # Handle Prerender.io
+    RequestHeader set X-Prerender-Token "2Ionl7uuohpyKxm18Yms"
+    RewriteCond %{HTTP_USER_AGENT} baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|bingbot|Baiduspider|Yahoo|YahooSeeker|quora\ link\ preview|showyoubot|outbrain|pinterest|applebot [NC,OR]
+    RewriteCond %{QUERY_STRING} _escaped_fragment_
+    # Proxy the request
+    RewriteRule ^(?!.*?(\.js|\.css|\.xml|\.less|\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.txt|\.ico|\.rss|\.zip|\.mp3|\.rar|\.exe|\.wmv|\.doc|\.avi|\.ppt|\.mpg|\.mpeg|\.tif|\.wav|\.mov|\.psd|\.ai|\.xls|\.mp4|\.m4a|\.swf|\.dat|\.dmg|\.iso|\.flv|\.m4v|\.torrent|\.ttf|\.woff))(.*) http://service.prerender.io///http://%{HTTP_HOST}/$2 [L]
+
 </IfModule>
