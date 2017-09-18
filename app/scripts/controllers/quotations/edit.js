@@ -78,6 +78,7 @@ function QuotationsEditCtrl(
     isDetailPiecesEditionEnabled: isDetailPiecesEditionEnabled,
     isDetailRemoveOptionEnabled: isDetailRemoveOptionEnabled,
     isDetailAlertVisible: isDetailAlertVisible, 
+    isDetailOutOfStock: isDetailOutOfStock,
     user: $rootScope.user
   });
 
@@ -188,6 +189,22 @@ function QuotationsEditCtrl(
   function isDetailAlertVisible(detail){
     return detail.availabilityChanged || 
       (!vm.isLoadingDetailsDeliveries && !detail.productCart.deliveryGroup);
+  }
+
+  function isDetailOutOfStock(detail){
+    if(!hasDetailDeliveries(detail) && !vm.isLoadingDetailsDeliveries){
+      return true;
+    }
+
+    return !hasDetailDeliveries(detail) && !vm.isLoadingDetailsDeliveries;
+  }
+
+  function hasDetailDeliveries(detail){
+    if(!detail.deliveries){
+      return false;
+    }
+
+    return detail.deliveries && detail.deliveries.length > 0;
   }
 
   function isValidGroupDelivery(groupDelivery){

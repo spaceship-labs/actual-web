@@ -104,10 +104,6 @@
         <md-progress-circular class="md-accent" md-diameter="40px"></md-progress-circular>
       </div>
             
-      <div ng-if="!vm.isLoadingDetailsDeliveries && !detail.productCart.deliveryGroup" class="out-of-stock-msg">
-        <p><strong>No hay piezas disponibles por el momento.</strong></p>
-      </div>
-  
       <div 
         ng-if="vm.isDetailEditionEnabled(detail)" 
         class="stock-selection" 
@@ -148,6 +144,44 @@
         </div>        
 
       </div>
+
+      <!--DISABLED EDITION ON OUT OF STOCK-->
+      <div 
+        ng-if="!vm.isLoadingDetailsDeliveries && !vm.isDetailEditionEnabled(detail)" 
+        class="stock-selection" 
+        layout="row"
+        layout-align="end start"
+      >
+        <div ng-if="vm.isDetailPiecesEditionEnabled(detail)"  flex="20" flex-sm="50" flex-xs="50">
+          <div class="product-view-qty input-element">
+                        
+            <label>Piezas</label>
+            <select
+              class="select-element"
+              ng-model="detail._auxPieces"
+              disabled
+              ng-disabled="true"
+            >
+            </select>
+          </div>
+        </div>
+        <div  flex="40" flex-sm="50" flex-xs="50">
+          <div class="delivery-selection input-element select-element-wrapper">
+
+            <label>Fecha entrega estimada</label>
+            <select
+              class="select-element"
+              ng-model="detail._auxDeliveries"
+              disabled
+              ng-disabled="true"
+            >
+            </select>
+          </div>
+        </div>        
+
+      </div>
+      <!--END DISABLED EDITION ON OUT OF STOCK-->
+
     </div>
     <!--END ITEM DATA-->
 
@@ -185,8 +219,12 @@
     <div flex="50">
       <p 
         class="bottom-text bottom-text-alert" 
-        ng-if="vm.isDetailAlertVisible(detail)">
-        <strong>ALERTA: La disponibilidad original y/o fecha de entrega de este artículo ha cambiado. <span>Antes: {{detail.originalQuantity}} pieza(s) {{detail.originalShipDate | date: "d/MMM/yyyy"}}</span></strong>
+        ng-if="vm.isDetailAlertVisible(detail) && !vm.isDetailOutOfStock(detail)">
+        <strong>ALERTA: La disponibilidad original de piezas elegidas y/o la fecha de entrega han cambiado. <span>Antes: {{detail.originalQuantity}} pieza(s) {{detail.originalShipDate | date: "d/MMM/yyyy"}}</span></strong>
+      </p>
+    
+      <p ng-if="vm.isDetailOutOfStock(detail)" class="bottom-text bottom-text-alert" >
+        <strong>ALERTA: La disponibilidad original de piezas estan AGOTADAS</strong>
       </p>
       
     </div>

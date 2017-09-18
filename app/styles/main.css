@@ -2287,6 +2287,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   text-align: center;
 }
 .cart-view .cart-item-data .select-element{height: 26px;}
+
+.cart-view .cart-item-data .select-element[disabled],
+.cart-view .cart-item-data .select-element[ng-disabled="true"]{
+  background: #d3d3d3;
+}
+
 .cart-view .cart-item-data .select-element.hl-select{
   border: 3px solid gray;
 }
