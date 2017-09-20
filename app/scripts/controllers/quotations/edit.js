@@ -82,6 +82,7 @@ function QuotationsEditCtrl(
     isDetailRemoveOptionEnabled: isDetailRemoveOptionEnabled,
     isDetailAlertVisible: isDetailAlertVisible, 
     isDetailOutOfStock: isDetailOutOfStock,
+    isOrderLinkVisible: isOrderLinkVisible,
     user: $rootScope.user
   });
 
@@ -176,6 +177,23 @@ function QuotationsEditCtrl(
         console.log('error', err);
       });
 
+  }
+
+  function isOrderLinkVisible(){
+    if (vm.quotation.OrderWeb){ 
+      if(
+          vm.isUserAdmin || 
+          (isQuotationOwnedByUser() && vm.quotation.OrderWeb.status !== 'pending-sap')
+        ){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  function isQuotationOwnedByUser(){
+    return vm.quotation.Client.id === vm.user.Client;
   }
 
   function isDetailRemoveOptionEnabled(detail){

@@ -19,6 +19,22 @@
     <p>Su ORDEN DE COMPRA está CONFIRMADA y EN PROCESO, su estatus de pago es PENIDIENTE DE PAGO, le pedimos no volver a generar la misma cotización para evitar una duplicidad.</p>
   </div>
 
+  <div ng-if="vm.quotation.isSpeiQuotation" class="quotation-data">
+    <div ng-if="vm.quotation.OrderWeb" flex flex-sm="100" class="only-hide-print">
+      <label>Estatus</label>
+      <p>
+
+        <a
+          class="order-link"
+          ng-href="/checkout/order/{{vm.quotation.OrderWeb.id}}"
+          ng-if="vm.isOrderLinkVisible()">
+          Haz click aqui para ver el pedido
+        </a>
+      </p>
+
+    </div>
+  </div>
+
   <div>    
     <ng-include 
       ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb)"
@@ -45,7 +61,7 @@
           <a
             class="order-link"
             ng-href="/checkout/order/{{vm.quotation.OrderWeb.id}}"
-            ng-if="vm.quotation.OrderWeb && vm.quotation.Client.id === vm.user.Client && !vm.quotation.OrderWeb.status === 'pending-sap' ">
+            ng-if="vm.isOrderLinkVisible()">
             Haz click aqui para ver el pedido
           </a>
         </p>
