@@ -25,12 +25,15 @@ angular.module('dashexampleApp')
 
       switch($rootScope.siteTheme){
         case 'actual-home':
+          defaultParams.title = 'Actual Home | Más de 25 años de experiencia en muebles e interiorismo.';
           defaultParams.image = domainUrl+'/images/Logo-A-Home.png';
           break;
         case 'actual-studio':
+          defaultParams.title = 'Actual Studio | Más de 25 años de experiencia en muebles e interiorismo.';
           defaultParams.image = domainUrl+'/images/Logo-A-Studio.png';
           break;
         case 'actual-kids':
+          defaultParams.title = 'Actual Kids | Más de 25 años de experiencia en muebles e interiorismo.';        
           defaultParams.image = domainUrl+'/images/Logo-A-Kids.png';
           break;
       }

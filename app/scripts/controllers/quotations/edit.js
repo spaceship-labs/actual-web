@@ -74,7 +74,6 @@ function QuotationsEditCtrl(
     hasSpeiOrder: hasSpeiOrder,
     onDetailQuantityChange: onDetailQuantityChange,
     showLeadFormDialog: showLeadFormDialog,
-    user: $rootScope.user,
     isUserAdmin: authService.isUserAdmin($rootScope.user),
     onDetailShipDateChange: onDetailShipDateChange,
     isValidGroupDelivery: isValidGroupDelivery,

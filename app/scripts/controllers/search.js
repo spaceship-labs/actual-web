@@ -142,6 +142,7 @@ function SearchCtrl(
       vm.products = fProducts;
       mainDataListener();
       activeQuotationListener();
+      window.prerenderReady = true;      
     })
     .catch(function(err){
       console.log(err);
