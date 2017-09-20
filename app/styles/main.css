@@ -2287,6 +2287,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   text-align: center;
 }
 .cart-view .cart-item-data .select-element{height: 26px;}
+
+.cart-view .cart-item-data .select-element[disabled],
+.cart-view .cart-item-data .select-element[ng-disabled="true"]{
+  background: #d3d3d3;
+}
+
 .cart-view .cart-item-data .select-element.hl-select{
   border: 3px solid gray;
 }
@@ -2305,11 +2311,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   text-align: right;
 }
 .cart-view .cart-item .bottom-text-alert{
-  float: left;
+  /*float: left;*/
   color: #E2023F;
   font-size: 12px;
-  max-width: 50%;
-  margin-top: 6px;
+  /*max-width: 50%;*/
+  /*margin-top: 6px;*/
+  padding-right: 10px;
   text-align: left;
 }
 .cart-view .cart-item-data .price-crossed .currency-label{font-size: 11px;}
@@ -2370,6 +2377,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
   font-size: 40px;
 }
 .cart-view .cart-item .stock-alert-content a i{font-size: 50px}
+.cart-view .cart-item .out-of-stock-msg p{
+  margin: 10px 0 10px;
+  text-align: right;
+}
+
+.cart-view .cart-item .delivery-block{margin-top: 10px;}
 
 /*---------------
   #STOCK-ALERT-DIALOG
