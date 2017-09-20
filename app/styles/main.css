@@ -2383,6 +2383,10 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 }
 
 .cart-view .cart-item .delivery-block{margin-top: 10px;}
+.cart-view .cart-item .delivery-block .bottom-text-alert{
+  max-width: 300px;
+  float: right;
+}
 
 /*---------------
   #STOCK-ALERT-DIALOG

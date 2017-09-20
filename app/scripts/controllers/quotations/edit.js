@@ -134,7 +134,12 @@ function QuotationsEditCtrl(
           vm.quotation.isSpeiQuotation = vm.quotation.OrderWeb.isSpeiOrder;
         }
 
+        if(vm.quotation.Address){
+          loadQuotationAddress();
+        }
+        
         loadPaymentMethods();
+        
         if(vm.isUserAdmin){
           loadQuotationLeads();
         }
@@ -177,6 +182,23 @@ function QuotationsEditCtrl(
         console.log('error', err);
       });
 
+  }
+
+  function loadQuotationAddress(){
+    quotationService.getAddress(vm.quotation.id)
+      .then(function(address){
+        console.log('address', address);
+        vm.addressString = buildAddressString(address);
+      });
+  }
+
+  function buildAddressString(address){
+    var str = 'Número ' + address.U_Noexterior + ' Entre calle ' + 
+      address.U_Entrecalle + ' y calle ' + address.U_Ycalle + ' colonia ' + 
+      address.U_Colonia + ', ' + address.U_Mpio + ', ' + address.U_Estado + 
+      ', ' + address.U_CP;
+
+    return str;
   }
 
   function isOrderLinkVisible(){

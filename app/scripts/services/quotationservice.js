@@ -98,7 +98,9 @@
 
       function getAddress(id, params){
         var url = '/quotation/' + id + '/address';
-        return api.$http.get(url, params);
+        return api.$http.get(url, params).then(function(res){
+          return res.data;
+        });        
       }      
 
       function getById(id, params){

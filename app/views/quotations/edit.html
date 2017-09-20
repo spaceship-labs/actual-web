@@ -54,7 +54,12 @@
 
     <div ng-if="!vm.quotation.isSpeiQuotation" layout="row" layout-wrap class="quotation-data-row">
       
-      <div ng-if="vm.quotation.OrderWeb" flex flex-sm="100" class="only-hide-print">
+      <div 
+        ng-if="vm.quotation.OrderWeb" 
+        flex="20" 
+        flex-sm="100" 
+        class="only-hide-print"
+      >
         <label>Estatus</label>
         <p>
 
@@ -71,16 +76,16 @@
         </p>
 
       </div>
-      <div flex hide-sm hide-xs>
+      <div flex="25" hide-sm hide-xs>
         <label for="">Nombre del cliente</label>
         <p>{{vm.quotation.Client.CardName || 'No asignado'}}</p>
       </div>
-      <div flex hide-sm hide-xs>
+      <div flex="25" hide-sm hide-xs>
         <label for="">E-mail</label>
         <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
       </div>
 
-      <div flex flex-sm="100" flex-xs="100" ng-if="vm.quotation.ZipcodeDelivery">
+      <div flex="30" flex-sm="100" flex-xs="100" ng-if="vm.quotation.ZipcodeDelivery">
         <label>Calculo de entrega para: </label>
         <p>{{vm.quotation.ZipcodeDelivery.estado}}, {{vm.quotation.ZipcodeDelivery.municipio}}, {{vm.quotation.ZipcodeDelivery.asentamiento}}, C.P: {{vm.quotation.ZipcodeDelivery.cp}}</p>
       </div>
@@ -89,13 +94,18 @@
     </div>
 
     <div ng-if="!vm.quotation.isSpeiQuotation" layout="row" layout-wrap layout-align="start center" class="quotation-data-row">
-      <div flex hide-sm hide-xs>
+      <div flex="25" hide-sm hide-xs>
         <label for="">Fecha de cotización</label>
         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
       </div>
-      <div flex hide-sm hide-xs>
+      <div flex="25" hide-sm hide-xs>
         <label>Hora</label>
         <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>
+      </div>
+
+      <div ng-if="vm.quotation.Address" flex="25" flex-sm="100" flex-xs="100">
+        <label>Dirección</label>
+        <p>{{vm.addressString}}</p>
       </div>
     </div>
 

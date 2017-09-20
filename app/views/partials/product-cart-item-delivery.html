@@ -1,0 +1,99 @@
+<div class="delivery-block" layout="row" layout-wrap>
+  <div flex flex-xs="100">
+    <p 
+      class="bottom-text bottom-text-alert" 
+      ng-if="vm.isDetailAlertVisible(detail) && !vm.isDetailOutOfStock(detail)">
+      <strong>ALERTA: La disponibilidad original de piezas elegidas y/o la fecha de entrega han cambiado. <!--<span>Antes: {{detail.originalQuantity}} pieza(s) {{detail.originalShipDate | date: "d/MMM/yyyy"}}</span>--></strong>
+    </p>
+  
+    <p ng-if="vm.isDetailOutOfStock(detail)" class="bottom-text bottom-text-alert" >
+      <strong>ALERTA: La disponibilidad original de piezas estan AGOTADAS</strong>
+    </p> 
+    <div class="clear"></div>       
+  </div>
+  <div flex="40" flex-xs="100" class="cart-item-data">
+  
+    <div ng-show="vm.isLoadingDetailsDeliveries" layout="row" layout-align="center center">
+      <md-progress-circular class="md-accent" md-diameter="40px"></md-progress-circular>
+    </div>
+          
+    <div 
+      ng-if="vm.isDetailEditionEnabled(detail)" 
+      class="stock-selection" 
+      layout="row"
+      layout-align="end start"
+    >
+      <div ng-if="vm.isDetailPiecesEditionEnabled(detail)"  flex="35" flex-sm="50" flex-xs="50">
+        <div class="product-view-qty input-element">
+                      
+          <label>Piezas</label>
+          <select
+            class="select-element"
+            ng-model="detail.productCart.quantity"
+            ng-change="vm.onDetailQuantityChange($event, detail)"
+            ng-options="qty for qty in vm.getQtyArray(detail.productCart.deliveryGroup.available)"
+          >
+          </select>
+        </div>
+      </div>
+      <div  flex="65" flex-sm="50" flex-xs="50">
+        <div class="delivery-selection input-element select-element-wrapper">
+
+          <label>Fecha entrega estimada</label>
+          
+          <!--
+            ng-class="{
+              'hl-select': !detail.validStock
+            }"
+          -->
+          <select
+            class="select-element"
+            ng-model="detail.productCart.deliveryGroup"
+            ng-change="vm.onDetailShipDateChange(detail)"
+            ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in detail.deliveriesGroups | filter: vm.isValidGroupDelivery"
+          >
+          </select>
+        </div>
+      </div>        
+
+    </div>
+
+    <!--DISABLED EDITION ON OUT OF STOCK-->
+    <div 
+      ng-if="!vm.isLoadingDetailsDeliveries && !vm.isDetailEditionEnabled(detail)" 
+      class="stock-selection" 
+      layout="row"
+      layout-align="end start"
+    >
+      <div ng-if="vm.isDetailPiecesEditionEnabled(detail)"  flex="35" flex-sm="50" flex-xs="50">
+        <div class="product-view-qty input-element">
+                      
+          <label>Piezas</label>
+          <select
+            class="select-element"
+            ng-model="detail._auxPieces"
+            disabled
+            ng-disabled="true"
+          >
+          </select>
+        </div>
+      </div>
+      <div  flex="65" flex-sm="50" flex-xs="50">
+        <div class="delivery-selection input-element select-element-wrapper">
+
+          <label>Fecha entrega estimada</label>
+          <select
+            class="select-element"
+            ng-model="detail._auxDeliveries"
+            disabled
+            ng-disabled="true"
+          >
+          </select>
+        </div>
+      </div>        
+
+    </div>
+    <!--END DISABLED EDITION ON OUT OF STOCK-->        
+  </div>
+
+</div>
