@@ -139,7 +139,7 @@
       <p 
         class="bottom-text bottom-text-alert" 
         ng-if="vm.isDetailAlertVisible(detail) && !vm.isDetailOutOfStock(detail)">
-        <strong>ALERTA: La disponibilidad original de piezas elegidas y/o la fecha de entrega han cambiado. <span>Antes: {{detail.originalQuantity}} pieza(s) {{detail.originalShipDate | date: "d/MMM/yyyy"}}</span></strong>
+        <strong>ALERTA: La disponibilidad original de piezas elegidas y/o la fecha de entrega han cambiado. <!--<span>Antes: {{detail.originalQuantity}} pieza(s) {{detail.originalShipDate | date: "d/MMM/yyyy"}}</span>--></strong>
       </p>
     
       <p ng-if="vm.isDetailOutOfStock(detail)" class="bottom-text bottom-text-alert" >
