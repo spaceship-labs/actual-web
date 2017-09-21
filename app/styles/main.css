@@ -2386,7 +2386,12 @@ md-radio-button.md-checked .md-off{border-color: #000!important;}
 .cart-view .cart-item .delivery-block .bottom-text-alert{
   max-width: 300px;
   float: right;
+  margin-right: 0;
+  /*padding-right: 0;*/
+  text-align: right;
 }
+.cart-view .cart-item .delivery-block .select-element-wrapper{margin-right: 0;}
+.cart-view .cart-item .delivery-block .select-element-wrapper label{margin-right: 0}
 
 /*---------------
   #STOCK-ALERT-DIALOG
