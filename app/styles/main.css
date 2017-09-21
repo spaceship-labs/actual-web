@@ -4775,12 +4775,19 @@ padding-left: 16px;
 /*------------------
   #OUR-BRANDS
 /*------------------*/
+.our-brands .group-logo-wrapper{
+  padding: 0 20px;
+  text-align: center;
+}
+.our-brands .group-logo-wrapper img{max-width: 100%;}
 .our-brands .brand-logo{
   display: block;
   margin: 0 auto;
   text-align: center;
 }
-.our-brands .brand-logo img{max-width: 80%;}
+.our-brands .brand-logo img{
+  width: 185px;
+}
 .our-brands .brand{padding: 0 12px}
 .our-brands .brand .slogan{text-align: center;}
 .our-brands .brand h3{text-align: center;}
