@@ -99,11 +99,6 @@ function QuotationsEditCtrl(
   }
 
   function init(quotationId, options){
-    // quotations/edit/59ad8640a5416ef524daa06f
-    // product CO52060
-    //product ST09960, ST01739
-    //paquete de promociones /quotations/edit/59b6d0dec7f12ce06aa92d77
-    // actualstudio.company
     console.log('entered init.js', new Date());
     options = options || {};
     $rootScope.scrollTo('main');    
