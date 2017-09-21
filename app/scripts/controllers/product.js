@@ -69,15 +69,11 @@ function ProductCtrl(
 
   if($rootScope.activeStore){
     init($routeParams.id);
-    //init($routeParams.slug);    
   }else{
     mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
       init($routeParams.id);
-      //init($routeParams.slug);    
     });
   }
-
-  //init($routeParams.id);
 
   function init(productId, reload){
     $rootScope.scrollTo('main');
@@ -88,7 +84,6 @@ function ProductCtrl(
     vm.isLoading             = true;
     vm.isLoadingDeliveries   = true;
 
-    //productService.getBySlug(productSlug)
     productService.getById(productId)
       .then(function(res){
         var productFound = res.data.data;
@@ -157,7 +152,6 @@ function ProductCtrl(
       })
       .then(function(seenTime){
         window.prerenderReady = true;
-        //console.log(seenTime);
       })
       .catch(function(err){
         $log.error(err);
@@ -238,7 +232,6 @@ function ProductCtrl(
         vm.productCart = {};
         vm.deliveriesGroups = [];
         vm.available = 0;
-        //dialogService.showDialog(errMsg);
       });
   }
 
@@ -518,8 +511,3 @@ ProductCtrl.$inject = [
   'userService',
   'metaTagsService'
 ];
-/*
-angular.element(document).ready(function() {
-  angular.bootstrap(document, ['dashexampleApp']);
-});
-*/

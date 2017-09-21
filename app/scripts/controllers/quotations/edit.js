@@ -88,7 +88,6 @@ function QuotationsEditCtrl(
 
   var activeQuotationListener = function(){};
   var activeStoreId = localStorageService.get('activeStore');
-  //var validatedDetails = [];
 
   if($rootScope.activeStore){
     init($routeParams.id);
