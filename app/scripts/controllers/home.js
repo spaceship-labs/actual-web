@@ -31,9 +31,10 @@ function HomeCtrl(
     metaTagsService.setMetaTags({});
 
     siteService.findSiteBannersByHandle($rootScope.siteTheme)
-      .then(function(site){
-        console.log('site', site);
-        vm.siteBanners = site.Banners;
+      .then(function(banners){
+        $rootScope.site.Banners = banners;
+        $rootScope.site.Banners = siteService.sortSiteBanners($rootScope.site);
+        vm.siteBanners = $rootScope.site.Banners;
       });
 
     setCategoryStockProperty();
