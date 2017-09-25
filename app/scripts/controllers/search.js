@@ -21,7 +21,8 @@ function SearchCtrl(
   productService, 
   dialogService,
   productSearchService,
-  metaTagsService
+  metaTagsService,
+  SITE
 ){
   var vm = this;
 
@@ -53,16 +54,38 @@ function SearchCtrl(
   });
 
   var mainDataListener = function(){};
+  var activeQuotationListener = function(){};
 
-  if($rootScope.activeStore){
-    init();
-  }else{
-    mainDataListener = $rootScope.$on('activeStoreAssigned', function(ev){
+  console.log('starting search', new Date());
+
+  if(SITE.name === 'actual-kids'){
+
+    if($rootScope.activeQuotation || $rootScope.isActiveQuotationLoaded){
+      console.log('init on actual kids preloaded', $rootScope.activeQuotation);
       init();
-    });
-  }  
+    }
+    else{
+      activeQuotationListener = $rootScope.$on('activeQuotationAssigned', function(e){
+        console.log('init on actual kids event', $rootScope.activeQuotation);
+        init();
+      });
+    }
+
+
+  }else{
+    if($rootScope.activeStore){
+      init();
+    }else{
+      mainDataListener = $rootScope.$on('activeStoreAssigned', function(ev){
+        init();
+      });
+    }
+  }    
+
+
 
   function init(){
+    console.log('init search', new Date());
 
     var metaTags = {
       title: $rootScope.siteConstants.publicName + ' | ' + 'Búsqueda'
@@ -78,6 +101,11 @@ function SearchCtrl(
       vm.isLoading = true;
       vm.search = {};
       vm.search.itemcode = $routeParams.itemcode;
+
+      if(SITE.name === 'actual-kids' && $rootScope.activeQuotation){
+        vm.search.zipcodeDeliveryId = $rootScope.activeQuotation.ZipcodeDelivery;
+      }
+
       syncProduct(vm.search.itemcode);
     }
     else{
@@ -89,6 +117,11 @@ function SearchCtrl(
         items: 10,
         page: 1
       };
+
+      if(SITE.name === 'actual-kids' && $rootScope.activeQuotation){
+        vm.search.zipcodeDeliveryId = $rootScope.activeQuotation.ZipcodeDelivery;
+      }
+
       vm.isLoading = true;
       doInitialSearch();
 
@@ -108,6 +141,8 @@ function SearchCtrl(
     .then(function(fProducts){
       vm.products = fProducts;
       mainDataListener();
+      activeQuotationListener();
+      window.prerenderReady = true;      
     })
     .catch(function(err){
       console.log(err);
@@ -115,6 +150,7 @@ function SearchCtrl(
       error = error ? error.toString() : '';
       dialogService.showDialog('Hubo un error: ' + error );           
       mainDataListener();
+      activeQuotationListener();
     });    
   }
 
@@ -134,6 +170,7 @@ function SearchCtrl(
         vm.totalResults = 1;
         vm.products = [formattedProduct];
         mainDataListener();
+        activeQuotationListener();
       })
       .catch(function(err){
         console.log(err);
@@ -142,6 +179,7 @@ function SearchCtrl(
         dialogService.showDialog('Hubo un error: ' + error );           
         vm.isLoading = false;
         mainDataListener();
+        activeQuotationListener();
       });    
   }
 
@@ -174,7 +212,6 @@ function SearchCtrl(
   }
 
   function toggleSearchSidenav(){
-    console.log('toggleSearchSidenav');
     $mdSidenav('searchFilters').toggle();
   }
 
@@ -317,7 +354,8 @@ function SearchCtrl(
       minPrice: vm.minPrice,
       maxPrice: vm.maxPrice,
       page: vm.search.page,
-      sortOption: vm.activeSortOption
+      sortOption: vm.activeSortOption,
+      zipcodeDeliveryId: vm.search.zipcodeDeliveryId
     };
 
     if(vm.activeSortOption && vm.activeSortOption.key === 'slowMovement'){
@@ -326,9 +364,6 @@ function SearchCtrl(
     else if(vm.activeSortOption && vm.activeSortOption.key === 'spotlight'){
       params.spotlight = true;      
     }
-
-
-    console.log('params', params);
 
     productService.searchByFilters(params).then(function(res){
       vm.totalResults = res.data.total;
@@ -389,6 +424,7 @@ function SearchCtrl(
 
   $scope.$on('$destroy', function(){
     mainDataListener();
+    activeQuotationListener();
   });
 
 }
@@ -404,5 +440,6 @@ SearchCtrl.$inject = [
   'productService',
   'dialogService',
   'productSearchService',
-  'metaTagsService'
+  'metaTagsService',
+  'SITE'
 ];

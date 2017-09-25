@@ -79,6 +79,9 @@
             <div
               class="delivery-option"
               ng-repeat="contact in vm.contacts"
+              ng-class="{
+                'delivery-option-active': contact.id === vm.quotation.Address
+              }"
               layout="row"
               layout-align="start center"
             >
@@ -90,9 +93,7 @@
                   <strong>{{contact.FirstName + ' ' + contact.LastName}}</strong>
                 </h4>
                 <ul>
-                  <li><strong>Email: </strong>{{contact.E_Mail}}</li>
-                  <li><strong>Télefono: </strong>{{contact.Tel1}}</li>
-                  <li><strong>Celular: </strong>{{contact.Cellolar}}</li>
+                  <li><strong>Calle: </strong>{{contact.Address}}</li>                  
                   <li><strong>No. exterior: </strong>{{contact.U_Noexterior}}</li>
                   <li><strong>No. interior: </strong>{{contact.U_Nointerior}}</li>
                   <li><strong>Colonia: </strong>{{contact.U_Colonia}}</li>
@@ -100,16 +101,19 @@
                   <li><strong>Ciudad: </strong>{{contact.U_Ciudad}}</li>
                   <li><strong>Estado: </strong>{{contact.U_Estado}}</li>
                   <li><strong>C.P.: </strong>{{contact.U_CP}}</li>
+                  <li><strong>Calle: </strong>{{contact.Address}}</li>
                   <li><strong>Entre calle: </strong>{{contact.U_Entrecalle}}</li>
                   <li><strong>Y calle: </strong>{{contact.U_Ycalle}}</li>
                   <li><strong>Referencias: </strong>{{contact.U_Notes1}}</li>
-
+                  <li><strong>Email: </strong>{{contact.E_Mail}}</li>
+                  <li><strong>Télefono: </strong>{{contact.Tel1}}</li>
+                  <li><strong>Celular: </strong>{{contact.Cellolar}}</li>
                 </ul>
                 <p>
                   <a
                     class="small-link action-link"
                     href="#"
-                    ng-href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}">
+                    ng-href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}&contactId={{contact.id}}">
                     Editar
                   </a>
                 </p>
@@ -135,8 +139,8 @@
             <td><strong>MXN {{vm.quotation.discount | roundCurrency }}</strong></td>
           </tr>
           <tr>
-            <td>Costo de envío:</td>
-            <td><strong>GRATIS</strong></td>
+            <td><strong>Costo de envío:</strong></td>
+            <td><strong>MXN $0.00</strong></td>
           </tr>
         </table>
         <hr>

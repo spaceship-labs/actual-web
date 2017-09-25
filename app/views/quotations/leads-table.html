@@ -1,0 +1,29 @@
+<div ng-show="vm.isLoadingLeads" layout="row" layout-align="center center" class="loading-circle">
+  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+</div>
+
+<h3>Leads:﻿⁠⁠⁠</h3>
+
+<div ng-show="!vm.isLoadingLeads" class="table-list">
+  <table 
+    class="dataTable row-border hover"
+  >
+      <thead>
+      <tr>
+          <th>Nombre</th>
+          <th>Télefono</th>
+          <th>Email</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="lead in vm.leads">
+          <td>{{lead.name}}</td>
+          <td>{{lead.phone}}</td>
+          <td>{{lead.email}}</td>
+
+        </tr>
+      </tbody>
+
+  </table>
+</div>

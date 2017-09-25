@@ -440,6 +440,8 @@ angular
     }    
 
     Conekta.setPublicKey( getConektaKeyBySite() );
+    console.log('ENV', ENV);
+    console.log('analytics', getAnalyticsCodeBySite());
     AnalyticsProvider.setAccount( getAnalyticsCodeBySite() );  //UU-XXXXXXX-X should be your tracking code
 
 
@@ -493,7 +495,16 @@ angular
 
 
 
-  .run(function(localStorageService, authService, jwtHelper, userService, $location, $rootScope, $route){
+  .run(function(
+    Analytics,
+    localStorageService, 
+    authService, 
+    jwtHelper, 
+    userService, 
+    $location, 
+    $rootScope, 
+    $route
+  ){
 
 
       authService.runPolicies();

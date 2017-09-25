@@ -15,7 +15,8 @@
       Upload, 
       productService, 
       localStorageService,
-      dialogService
+      dialogService,
+      deliveryService
     ){
 
       var service = {
@@ -23,6 +24,7 @@
         addDetail: addDetail,
         addProduct: addProduct,
         addMultipleProducts: addMultipleProducts,
+        adjustSameProductsDeliveriesAndStock: adjustSameProductsDeliveriesAndStock,
         closeQuotation: closeQuotation,
         create: create,
         isValidStock: isValidStock,
@@ -44,6 +46,12 @@
         getQuotationZipcodeDelivery: getQuotationZipcodeDelivery,
         getSapOrderConnectionLogs: getSapOrderConnectionLogs,
         loadProductsFilters: loadProductsFilters,
+        localMultipleDetailsUpdate: localMultipleDetailsUpdate,
+        localDetailUpdate: localDetailUpdate,
+        localDetailUpdateWithNewValues: localDetailUpdateWithNewValues,
+        localQuotationUpdate: localQuotationUpdate,
+        localQuotationUpdateWithNewValues: localQuotationUpdateWithNewValues,
+        mapDetailsOriginalValues: mapDetailsOriginalValues,
         newQuotation: newQuotation,
         mapDetailsStock: mapDetailsStock,
         removeDetail: removeDetail,
@@ -90,7 +98,9 @@
 
       function getAddress(id, params){
         var url = '/quotation/' + id + '/address';
-        return api.$http.get(url, params);
+        return api.$http.get(url, params).then(function(res){
+          return res.data;
+        });        
       }      
 
       function getById(id, params){
@@ -487,7 +497,155 @@
       function showStockAlert(){
         var msg = 'Hay un cambio de disponibilidad en uno o más de tus articulos';
         dialogService.showDialog(msg);        
-      }                
+      }  
+
+      function localMultipleDetailsUpdate(details){
+        return details.map(localDetailUpdate);
+      }
+
+      function localDetailUpdate(detail){
+        detail.subtotal = detail.quantity * detail.unitPrice;
+        detail.total = detail.quantity * detail.unitPriceWithDiscount;
+
+        detail.totalPg1 = detail.quantity * detail.unitPriceWithDiscountPg1;
+        detail.totalPg2 = detail.quantity * detail.unitPriceWithDiscountPg2;
+        detail.totalPg3 = detail.quantity * detail.unitPriceWithDiscountPg3;
+        detail.totalPg4 = detail.quantity * detail.unitPriceWithDiscountPg4;
+        detail.totalPg5 = detail.quantity * detail.unitPriceWithDiscountPg5; 
+        return detail;
+      }
+
+      function localDetailUpdateWithNewValues(detail, newDetailValues){
+        detail.unitPrice              = newDetailValues.unitPrice;
+        detail.discountPercentPromos  = newDetailValues.discountPercentPromos;
+        detail.discountPercent        = newDetailValues.discountPercent;
+        detail.discount               = newDetailValues.discount;
+        detail.subtotal               = newDetailValues.subtotal;
+        detail.total                  = newDetailValues.total;
+
+        detail.unitPriceWithDiscount    = newDetailValues.unitPriceWithDiscount;
+        detail.unitPriceWithDiscountPg1 = newDetailValues.unitPriceWithDiscountPg1;
+        detail.unitPriceWithDiscountPg2 = newDetailValues.unitPriceWithDiscountPg2;
+        detail.unitPriceWithDiscountPg3 = newDetailValues.unitPriceWithDiscountPg3;
+        detail.unitPriceWithDiscountPg4 = newDetailValues.unitPriceWithDiscountPg4;
+        detail.unitPriceWithDiscountPg5 = newDetailValues.unitPriceWithDiscountPg5;
+
+
+        detail.Promotion               = newDetailValues.Promotion;
+        detail.PromotionPackageApplied = newDetailValues.PromotionPackageApplied;
+        detail.discountName            = newDetailValues.discountName;
+
+        return detail;
+      }
+
+      function mapDetailsOriginalValues(details){
+        return details.map(function(detail){
+          detail.originalQuantity = _.clone(detail.quantity);
+          return detail;
+        });
+      }
+
+      function localQuotationUpdate(quotation){
+        var quotationAux = {
+          totalProducts: 0,
+          subtotal: 0,
+          total: 0,
+          totalPg1: 0,
+          totalPg2: 0,
+          totalPg3: 0,
+          totalPg4: 0,
+          totalPg5: 0
+        };
+
+        quotationAux = _.reduce(quotation.Details, function(quotationObj,detail){
+          quotationObj.totalProducts += detail.quantity;
+          quotationObj.subtotal += detail.subtotal;
+          quotationObj.total += detail.total;
+
+          quotationObj.totalPg1 += detail.totalPg1;
+          quotationObj.totalPg2 += detail.totalPg2;
+          quotationObj.totalPg3 += detail.totalPg3;
+          quotationObj.totalPg4 += detail.totalPg4;
+          quotationObj.totalPg5 += detail.totalPg5;
+
+          return quotationObj;
+        }, quotationAux);
+
+        quotation = _.extend(quotation, quotationAux);
+        quotation.discount = quotation.total - quotation.subtotal;
+        return quotation;
+      }
+
+      function localQuotationUpdateWithNewValues(quotation, newValues){
+        quotation.total         = newValues.total;
+        quotation.subtotal      = newValues.subtotal;
+        quotation.discount      = newValues.discount;
+        quotation.totalProducts = newValues.totalProducts;   
+
+        return quotation;
+      }   
+
+      function adjustSameProductsDeliveriesAndStock(details){
+        details = details.map(function(detail){
+          var productTakenStock = getProductTakenStockFromRemainingDetails(detail, details);
+          var adjustedDetail = substractProductTakenStockFromDetail(
+              detail,
+              detail.deliveries,
+              productTakenStock
+            );
+          return adjustedDetail;
+        });
+        return details;
+      }
+
+      function getProductTakenStockFromRemainingDetails(currentDetail, allDetails){
+        return _.reduce(allDetails, function(takenStock, detail){
+          if(detail.Product.id === currentDetail.Product.id && detail.id !== currentDetail.id){
+            takenStock += detail.quantity;
+          }
+          return takenStock;
+        },0);
+      }
+
+      function substractProductTakenStockFromDetail(detail, deliveries, productTakenStock){
+        for(var i = 0; i<deliveries.length; i++){
+          deliveries[i].available = deliveries[i].initalAvailable -  productTakenStock;      
+
+          //Avoiding negative values
+          if(deliveries[i].available < 0){
+            deliveries[i].available = 0;
+          }
+          
+          if(
+            areSameDates(detail.shipDate, deliveries[i].date) && 
+            deliveries[i].available <= detail.quantity && 
+            detail.quantity <= deliveries[i].initalAvailable        
+          ){
+            console.log('APARTANDO', detail.id);
+            deliveries[i].available = _.clone(detail.quantity);        
+          }
+          
+          else if(
+            areSameDates(detail.shipDate, deliveries[i].date) && 
+            deliveries[i].available <= detail.quantity && 
+            detail.quantity > deliveries[i].initalAvailable      
+          ){
+            //Takinkg what is available at time
+            detail.quantity = deliveries[i].available;         
+            detail.availabilityChanged = true;               
+          }
+
+        }
+        
+        return deliveryService.setUpDetailDeliveries(detail, deliveries);
+      }
+
+      function areSameDates(date1, date2){
+        var FORMAT = 'D/M/YYYY';
+        var date1Str = moment(date1).format(FORMAT);
+        var date2Str = moment(date2).format(FORMAT);    
+        return date1Str === date2Str;
+      }        
 
     }
 

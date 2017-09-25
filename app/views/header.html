@@ -78,12 +78,12 @@
         layout="row"
         layout-align="center center"
         layout-align="center center"
-        layout-align-sm="start center"
+        layout-align-sm="center center"
         layout-align-xs="start center"
 
       >
 
-        <div flex="10" hide-gt-sm>
+        <div flex="10" hide-gt-xs>
           <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static">
             <span></span>
             <span></span>
@@ -100,33 +100,9 @@
           </a>
         </div>
 
-        <!--IF ACTIVE QUOTATION-->
-        <a
-          ng-if="main.activeQuotation"
-          flex
-          ng-href="/quotations/edit/{{main.activeQuotation.id}}"
-          class="header-top-bar-menu-item"
-        >
-          <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
-          <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-          <ng-include ng-if="main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
-        </a>
-
-        <!--IF NOT ACTIVE QUOTATION-->
-        <a
-          ng-if="main.user && !main.activeQuotation"
-          flex
-          href="/"
-          class="header-top-bar-menu-item"
-        >
-          <i class="icon-carro"></i>
-          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
-        </a>
-
-
         <a
           flex
-          hide-gt-sm
+          hide-gt-xs
           href="#"
           ng-click="main.showSearchBar = !main.showSearchBar"
           class="header-top-bar-menu-item"
@@ -170,7 +146,8 @@
         >
           <span>
             <strong><i class="icon-phone"></i></strong>
-            <strong hide-xs>01 (998) 884 1594</strong>
+            <!--<strong hide-xs>998 246 3487</strong>-->
+            <strong hide-xs>(998) 884 1594</strong>
           </span>
 
           <ng-include 
@@ -178,7 +155,28 @@
             src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
 
+        <!--IF ACTIVE QUOTATION-->
+        <a
+          ng-if="main.activeQuotation"
+          flex
+          ng-href="/quotations/edit/{{main.activeQuotation.id}}"
+          class="header-top-bar-menu-item"
+        >
+          <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
+          <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
+          <ng-include ng-if="main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+        </a>
 
+        <!--IF NOT ACTIVE QUOTATION-->
+        <a
+          ng-if="main.user && !main.activeQuotation"
+          flex
+          href="/"
+          class="header-top-bar-menu-item"
+        >
+          <i class="icon-carro"></i>
+          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
+        </a>
 
         <!---end if Logged in -->
 

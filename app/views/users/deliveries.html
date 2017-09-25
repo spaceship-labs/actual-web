@@ -34,22 +34,9 @@
 
       <!--DIRECCIONES DE ENVIO-->
       <div class="order-block">
-        <h3><strong>REGISTRO DE DIRECCIONES DE ENVÍO</strong></h3>
         <div>
           <!--<i>*Si necesita cambiar una dirección de envío que ha sido asignada a un pedido favor de contactar a un asesor de ventas con uno de nuestros ejecutivos.</i>-->
         </div>
-        <!--
-        <div class="invoice-box">
-          <md-radio-group >
-            <md-radio-button value="Ciudad" class="md-primary">
-            <div layout="row" layout-align="center center"><strong>Ciudad </strong> <p class="text-sep" >Dirección</p> <u class="text-red">ELIMINAR</u></div>
-            </md-radio-button>
-            <md-radio-button value="Nuevo" class="md-primary">
-              <strong><u>Nuevo</u></strong>
-            </md-radio-button>
-          </md-radio-group>
-        </div>
-        -->
         <div class="records-list">
           <h3>Registros
             <a href="#" ng-click="vm.enableCreateMode()" class="enable-create-mode">
@@ -80,13 +67,12 @@
           </table>
         </div>
 
-
         <div id="deliveries-create" >
           <ng-include ng-if="vm.isCreateModeActive" src="'views/users/partials/deliveries-form-create.html'"></ng-include>
         </div> 
 
         <div id="deliveries-edit" >
-          <ng-include ng-if="!vm.isCreateModeActive" src="'views/users/partials/deliveries-form-edit.html'"></ng-include>
+          <ng-include ng-if="vm.isEditModeActive" src="'views/users/partials/deliveries-form-edit.html'"></ng-include>
         </div> 
           
 

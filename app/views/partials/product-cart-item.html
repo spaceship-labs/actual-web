@@ -1,6 +1,4 @@
-<div 
-  class="cart-item" 
->
+<div class="cart-item">
   <h3>
     <a ng-href="{{detail.Product.url}}">
       <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
@@ -16,12 +14,12 @@
       class="cart-item-prod"
     >
       <div layout="row">
-        <div class="cart-item-prod-img">
+        <div flex="40" class="cart-item-prod-img">
           <a ng-href="{{detail.Product.url}}">
             <img ng-src="{{detail.Product.icons[0].url}}" alt="">
           </a>
         </div>
-        <div>
+        <div flex="60">
           <ul>
             <li><strong>Código: </strong> {{detail.Product.ItemCode}}</li>
             <li
@@ -71,21 +69,8 @@
                 y -{{detail.bigticketDiscountPercentage}}% adicional
               </span>
             </p>
-            <!--
-            <p 
-              ng-if="vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) != detail.unitPrice"
-            >
-              <span class="currency-label">MXN</span> <span class="price-crossed">{{ detail.unitPrice | roundCurrency }}</span>
-            </p>
-            <p class="price-hl">
-              <span class="currency-label">MXN</span>
-              <strong>
-                {{ vm.getUnitPriceWithDiscount(detail.unitPrice, detail.discountPercent) | roundCurrency }}
-              </strong>
-            </p>
-            -->
-            <p 
-            >
+
+            <p>
               <span class="currency-label">MXN</span> <span class="price-crossed">{{ detail.unitPrice | roundCurrency }}</span>
             </p>
             <p class="price-hl">
@@ -111,64 +96,16 @@
             <p class="included-taxes-label pull-right">Impuesto incluido</p>
           </div>
         </div>
+
+
+        
       </div>
-
-
-      <!--
-      <div ng-show="vm.isLoadingDetailsDeliveries" layout="row" layout-align="center center">
-        <md-progress-circular class="md-accent" md-diameter="40px"></md-progress-circular>
-      </div>
-
-      <div 
-        ng-if="detail.productCart && !vm.isLoadingDetailsDeliveries" 
-        class="stock-selection" 
-        layout="row"
-        layout-align="end start"
-      >
-        <div  flex="20" flex-sm="50" flex-xs="50">
-          <div class="product-view-qty input-element">
-                        
-            <label>Piezas | Available: {{detail.productCart.deliveryGroup.available}}</label>
-            <select
-              class="select-element"
-              ng-model="detail.productCart.quantity"
-              ng-change="vm.onDetailQuantityChange(detail)"
-              ng-options="qty for qty in vm.getQtyArray(detail.productCart.deliveryGroup.available)"
-            >
-            </select>
-          </div>
-        </div>
-        <div  flex="40" flex-sm="50" flex-xs="50">
-          <div class="delivery-selection input-element select-element-wrapper">
-
-            <label>Fecha entrega estimada{{vm.selectedDelivery}}</label>
-            <select
-              class="select-element"
-              ng-class="{
-                'hl-select': !detail.validStock
-              }"
-              ng-model="detail.productCart.deliveryGroup"
-              ng-change="vm.resetProductCartQuantity(detail)"
-              ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in detail.deliveriesGroups"
-            >
-            </select>
-          </div>
-        </div>        
-
-      </div>
-      -->
-
-      <!--
-      <p>
-        {{detail}}
-      </p>
-      -->
 
     </div>
     <!--END ITEM DATA-->
 
     <a href="#"
-      ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
+      ng-if="vm.isDetailRemoveOptionEnabled(detail)"
       ng-click="vm.alertRemoveDetail($event,detail, $index)"
       class="cart-item-remove"
     >
@@ -176,83 +113,35 @@
       <md-tooltip md-direction="bottom">Eliminar</md-tooltip>
     </a>
 
-    
-    <div 
-      ng-show="!detail.validStock && !vm.quotation.OrderWeb && !vm.isValidatingStock" 
-      layout="row"
-      layout-align="center center"
-      class="stock-alert-layer"
-      ng-click="vm.showDetailGroupStockAlert($event, detail)"
-    > 
-      <div class="stock-alert-content">
-        <p>
-          <a><i class="icon-alert"></i></a>
+  </div>
+
+  <ng-include src="'views/partials/product-cart-item-delivery.html'"></ng-include>
+
+  <div layout="row" layout-align="space-between center">
+  
+    <div flex ng-if="!vm.isLoadingDetailsDeliveries && detail.productCart.deliveryGroup">
+      <p class="bottom-text">
+        <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
+      </p>
+
+
+      <p
+        ng-if="vm.appliesForPackageDiscount(detail)"
+        class="bottom-text"
+      >
+        Paquete: {{detail.discountName}}
+      </p>
+      
+      <div ng-if="vm.appliesForPromotionDiscount(detail)">
+        <p class="bottom-text">
+          <strong>Promoción:</strong> {{detail.discountName}}
         </p>
-        <p>
-          <a>ALERTA</a>
-        </p>
+        <p class="bottom-text" ng-if="detail.ewallet > 0">
+          Beneficio monedero eléctronico: {{detail.ewallet | currency}}
+        </p>                  
       </div>
+
     </div>
-    
-
-  </div>
-
-  <!--
-  <p 
-    class="bottom-text bottom-text-alert" 
-    ng-if="!detail.validStock && !vm.isValidatingStock">
-    <strong>ALERTA: La disponibilidad y/o fecha de entrega de este artículo ha cambiado</strong>
-  </p>
-  -->
-  
-  <p class="bottom-text">
-    <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
-  </p>
-
-  <!--
-  <p ng-show="vm.isLoadingDetailsDeliveries" class="bottom-text">
-    <strong>Entrega aproximada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
-  </p>
-  -->
-  
-
-  <!--
-  <p class="bottom-text" ng-repeat="detail in detail.details">
-    <strong>Entrega aproximada:</strong>
-    {{detail.shipDate | date: "d/MMM/yyyy"}}
-    (en {{vm.daysDiff(detail.shipDate)}} días)  
-    <span 
-      ng-if="detail.immediateDelivery"
-      class="immediate-delivery-label"
-    >
-      Entrega en tienda
-    </span>
-    | {{ vm.getWarehouseById(detail.shipCompanyFrom).WhsName }}  | Cantidad: {{detail.quantity}} | Valido: {{detail.validStock}}
-  </p>
-  -->
-
-  <p
-    ng-if="
-      vm.appliesForPackageOrPromotionDiscount(detail) == 'packageDiscount'
-    "
-    class="bottom-text"
-  >
-    Paquete: {{detail.discountName}}
-  </p>
-  <div 
-    ng-if="vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'"
-  >
-    <p class="bottom-text">
-      <strong>Promoción:</strong> {{detail.discountName}}
-    </p>
-    <p class="bottom-text" ng-if="detail.ewallet > 0">
-      Beneficio monedero eléctronico: {{detail.ewallet | currency}}
-    </p>                  
-  </div>
-  <div ng-if="detail.bigticketDiscountPercentage > 0">
-    <p class="bottom-text">
-      Descuento Big Ticket: -{{detail.bigticketDiscountPercentage}}% adicional
-    </p>
   </div>
 
   <div class="clear"></div>

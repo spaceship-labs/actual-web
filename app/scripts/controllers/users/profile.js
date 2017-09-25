@@ -63,6 +63,7 @@ function UserProfileCtrl(
           $rootScope.user = res.user;
           vm.user = $rootScope.user;
           vm.client = res.client;
+          vm.client._E_Mail = _.clone(vm.client.E_Mail);
           localStorageService.set('user',res.user);
         }
       })

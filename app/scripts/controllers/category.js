@@ -11,6 +11,7 @@ angular.module('dashexampleApp')
   .controller('CategoryCtrl', CategoryCtrl);
 
 function CategoryCtrl(
+  $scope,
   $routeParams, 
   $mdSidenav, 
   $timeout,
@@ -19,7 +20,8 @@ function CategoryCtrl(
   productService,
   productSearchService,
   metaTagsService,
-  breadcrumbService
+  breadcrumbService,
+  SITE
 ){
   var vm     = this;
 
@@ -51,6 +53,25 @@ function CategoryCtrl(
     getFilterById: getFilterById
   });
 
+  var activeQuotationListener = function(){};
+
+  if(SITE.name === 'actual-kids'){
+
+    if($rootScope.activeQuotation || $rootScope.isActiveQuotationLoaded){
+      console.log('init on actual kids preloaded', $rootScope.activeQuotation);
+      init();
+    }
+    else{
+      activeQuotationListener = $rootScope.$on('activeQuotationAssigned', function(e){
+        console.log('init on actual kids event', $rootScope.activeQuotation);
+        init();
+      });
+    }
+
+
+  }else{
+    init();
+  }   
 
   function setSubnavIndex(index){
     vm.subnavIndex = index;
@@ -66,9 +87,14 @@ function CategoryCtrl(
       category: $routeParams.category
     };
 
+    if(SITE.name === 'actual-kids' && $rootScope.activeQuotation){
+      vm.search.zipcodeDeliveryId = $rootScope.activeQuotation.ZipcodeDelivery;
+    } 
+
     loadCustomBrands();
     getCategories();
     doInitialProductsSearch();
+    activeQuotationListener();
   }
 
   function getCategories() {
@@ -145,6 +171,9 @@ function CategoryCtrl(
       .then(function(productsFormatted){
         vm.products = productsFormatted;
         console.log('vm.products', vm.products);
+        $timeout(function(){
+          window.prerenderReady = true;          
+        },2000);
       })
       .catch(function(err){
         console.log('err', err);
@@ -208,6 +237,8 @@ function CategoryCtrl(
       maxPrice: vm.maxPrice,
       category: $routeParams.category,
       page: vm.search.page,
+
+      zipcodeDeliveryId: vm.search.zipcodeDeliveryId
     };
 
     if(vm.activeSortOption && vm.activeSortOption.key === 'slowMovement'){
@@ -368,11 +399,14 @@ function CategoryCtrl(
     return _.findWhere(vm.filters, {id: filterId});
   }
 
+  $scope.$on('$destroy', function(){
+    activeQuotationListener();
+  });
 
-  init();
 }
 
 CategoryCtrl.$inject = [
+  '$scope',
   '$routeParams',
   '$mdSidenav',
   '$timeout',
@@ -381,5 +415,6 @@ CategoryCtrl.$inject = [
   'productService',
   'productSearchService',
   'metaTagsService',
-  'breadcrumbService'
+  'breadcrumbService',
+  'SITE'
 ];

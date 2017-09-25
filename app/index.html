@@ -2,7 +2,51 @@
 <html  ng-app="dashexampleApp" ng-controller="MainCtrl as main">
   <head>
     <meta charset="utf-8">
-    <title ng-bind="main.metatags.title">Actual | Más de 25 años de experiencia en muebles e interiorismo.</title>
+    <!--SEE GRUNTFILE processhtml-->
+    <!-- process:template
+    <title ng-bind="main.metatags.title"><%= metaTags.title %></title>
+    <link itemprop="url" href="https://actualstudio.com">
+    <meta itemtype="logo" content="Logo-A-Home.png">
+
+    <meta
+      name="description"
+      ng-attr-content="{{ main.metatags.description }}"
+      content="<%= metaTags.description %>" >
+    <meta
+      name="keywords"
+      ng-attr-content="{{ main.metatags.keywords }}" 
+      content="<%= metaTags.description %>">
+    <meta
+      property="fb:app_id"
+      content="1630031427237305" >
+    <meta
+      property="og:url"
+      ng-attr-content="{{ main.metatags.fb_url }}"
+      content="<%= metaTags.url %>" >
+    <meta
+      property="og:title"
+      ng-attr-content="{{ main.metatags.fb_title }}"
+      content="<%= metaTags.title %>" >
+    <meta
+      property="og:image"
+      ng-attr-content="{{ main.metatags.fb_image }}"
+      content="<%= metaTags.image %>"  >
+    <meta
+      property="og:description"
+      ng-attr-content="{{ main.metatags.fb_description }}"
+      content="<%= metaTags.description %>" >
+    <meta
+      property="og:site_name"
+      content="<%= metaTags.title %>" >
+
+    <link 
+        rel="shortcut icon" 
+        href="<%= metaTags.favicon %>"
+        ng-attr-href="{{main.getFaviconUrl()}}" 
+        type="image/x-icon"
+    >
+
+    /process -->
 
     <base href="/" />
     <meta name="fragment" content="!">
@@ -10,13 +54,6 @@
     <meta name="google-site-verification" content="Al9YYcB_iYqFkycbTwFq7qbbms-sH4H66zDtwyz97fU" />
     
     <meta name="robots" content="all, index, follow">
-
-    <link 
-        rel="shortcut icon" 
-        href="/favicon.ico"
-        ng-attr-href="{{main.getFaviconUrl()}}" 
-        type="image/x-icon"
-    >
 
     <!--
     <link 
@@ -27,38 +64,6 @@
     >
     -->
 
-    <link itemprop="url" href="https://actualstudio.com">
-    <meta itemtype="logo" content="Logo-A-Home.png">
-
-    <meta
-      name="description"
-      ng-attr-content="{{ main.metatags.description }}"
-      content="Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas." >
-    <meta
-      name="keywords"
-      ng-attr-content="{{ main.metatags.keywords }}" >
-    <meta
-      property="fb:app_id"
-      content="1630031427237305" >
-    <meta
-      property="og:url"
-      ng-attr-content="{{ main.metatags.fb_url }}"
-      content="https://actualstudio.com" >
-    <meta
-      property="og:title"
-      ng-attr-content="{{ main.metatags.fb_title }}"
-      content="Actual | Más de 25 años de experiencia en muebles e interiorismo." >
-    <meta
-      property="og:image"
-      ng-attr-content="{{ main.metatags.fb_image }}"
-      content="https://actualstudio.com/images/Logo-A-Studio.png"  >
-    <meta
-      property="og:description"
-      ng-attr-content="{{ main.metatags.fb_description }}"
-      content="Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas." >
-    <meta
-      property="og:site_name"
-      content="ActualGroup" >
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
@@ -79,6 +84,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
     <link rel="stylesheet" href="styles/stickyFooter.css">
     <link rel="stylesheet" href="styles/icomoon.css">
     <link rel="stylesheet" href="styles/custom.datatables.css">
@@ -227,6 +233,7 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="bower_components/ez-plus/src/jquery.ez-plus.js"></script>
+        <script src="scripts/find-polyfill.js"></script>
         <script src="scripts/envconfig.js"></script>
         <script src="scripts/siteconfig.js"></script>
         <script src="scripts/app.js"></script>
@@ -261,6 +268,7 @@
         <script src="scripts/services/siteservice.js"></script>
         <script src="scripts/services/pmperiodservice.js"></script>
         <script src="scripts/services/productsearchservice.js"></script>
+        <script src="scripts/services/leadservice.js"></script>
         <script src="scripts/directives/fixedelement.js"></script>
         <script src="scripts/controllers/addquotation.js"></script>
         <script src="scripts/directives/table-list.js"></script>
@@ -270,6 +278,7 @@
         <script src="scripts/datatables.input.js"></script>
         <script src="scripts/controllers/quotations/edit.js"></script>
         <script src="scripts/controllers/zipcode-dialog.js"></script>
+        <script src="scripts/controllers/lead-form-dialog.js"></script>
         <script src="scripts/controllers/quotations/stockdialog.js"></script>
         <script src="scripts/directives/menucategories.js"></script>
         <script src="scripts/directives/menusubcategories.js"></script>

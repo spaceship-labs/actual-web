@@ -75,7 +75,8 @@
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
       siteTheme: SITE.name,
-      siteConstants: SITE
+      siteConstants: SITE,
+      api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
     $rootScope.toggleLoginModal = toggleLoginModal;
@@ -334,6 +335,9 @@
       var deferred = $q.defer();
       console.log('start loadActiveQuotation', new Date());
 
+      //$rootScope.activeQuotation = false;
+      //$rootScope.isActiveQuotationLoaded = false;
+
       quotationService.getActiveQuotation()
         .then(function(res){
           var quotation = res.data;
@@ -365,6 +369,7 @@
       siteService.findByHandle(vm.siteTheme)
         .then(function(res){
           vm.site = res.data || {};
+          //vm.site.Banners = siteService.sortSiteBanners(vm.site);
           $rootScope.site = res.data || {};
           deferred.resolve(vm.site);
           console.log('loadSiteInfo end', new Date());
@@ -406,6 +411,8 @@
             $scope.mainData.activeQuotation = $rootScope.activeQuotation;
             $rootScope.$emit('mainDataLoaded', $scope.mainData);
             $rootScope.isMainDataLoaded = true;
+
+            console.log('loaded activeQuotation', $rootScope.activeQuotation);
           });
 
         resetSearchBox();
@@ -628,15 +635,19 @@
       vm.isActiveCart = false;
       vm.isLoadingLogin = false;
 
-      $mdSidenav('mobileSidenav').close();
+      if( $mdSidenav('mobileSidenav').isOpen() ){
+        $mdSidenav('mobileSidenav').close();
+      }
 
     });
 
-    $rootScope.scrollTo = function(target){
+    $rootScope.scrollTo = function(target, offset){
       $timeout(
         function(){
+          offset = offset || 100;
+
           $('html, body').animate({
-            scrollTop: $('#' + target).offset().top - 100
+            scrollTop: $('#' + target).offset().top - offset
           }, 600);
         },
         300

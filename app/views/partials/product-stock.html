@@ -42,6 +42,7 @@
             {{ vm.getWarehouseName(d.companyFrom) }}: {{d.available}} ({{d.date | date: 'd/MMM/yyyy'}})
           </span>
           -->
+
         </td>
         <td class="delivery-date-stock">
           {{deliveryGroup.available | number: 0}} {{vm.getPiecesString(deliveryGroup.available)}}

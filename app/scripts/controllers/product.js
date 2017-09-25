@@ -69,15 +69,11 @@ function ProductCtrl(
 
   if($rootScope.activeStore){
     init($routeParams.id);
-    //init($routeParams.slug);    
   }else{
     mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
       init($routeParams.id);
-      //init($routeParams.slug);    
     });
   }
-
-  //init($routeParams.id);
 
   function init(productId, reload){
     $rootScope.scrollTo('main');
@@ -88,7 +84,6 @@ function ProductCtrl(
     vm.isLoading             = true;
     vm.isLoadingDeliveries   = true;
 
-    //productService.getBySlug(productSlug)
     productService.getById(productId)
       .then(function(res){
         var productFound = res.data.data;
@@ -156,7 +151,7 @@ function ProductCtrl(
         return productService.addSeenTime(vm.product.ItemCode);
       })
       .then(function(seenTime){
-        //console.log(seenTime);
+        window.prerenderReady = true;
       })
       .catch(function(err){
         $log.error(err);
@@ -183,6 +178,12 @@ function ProductCtrl(
 
   function setUpDeliveries(options){
     options = options || {};
+    
+    /*
+    vm.productCart = {
+      quantity: 1
+    };*/
+    
 
     productService.delivery(options.productId, options.zipcodeDeliveryId)
       .then(function(deliveries){
@@ -205,6 +206,7 @@ function ProductCtrl(
 
         if(vm.deliveries && vm.deliveries.length > 0){
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
+          vm.productCart.quantity = 1;
         }else{
           vm.productCart.quantity = 0;
         }
@@ -217,7 +219,20 @@ function ProductCtrl(
       })
       .catch(function(err){
         console.log('err', err);
-      })
+        var PRODUCT_NOT_AVAILABLE_IN_ZONE_CODE = 'PRODUCT_NOT_AVAILABLE_IN_ZONE';
+        var error = err.data || err;
+        console.log('error', error);
+        var errMsg = error ? error.toString() : '';
+        if(errMsg === 'Error: ' + PRODUCT_NOT_AVAILABLE_IN_ZONE_CODE){
+          errMsg = "El artículo elegido no está disponible en su ciudad de entrega";
+        }
+        dialogService.showDialog(errMsg);
+        vm.isLoadingDeliveries = false;
+        vm.deliveries = [];
+        vm.productCart = {};
+        vm.deliveriesGroups = [];
+        vm.available = 0;
+      });
   }
 
   function loadVariants(product){
@@ -461,8 +476,11 @@ function ProductCtrl(
 
   $scope.$on('$destroy', function(){
     //unsuscribing listeners
+    $mdDialog.hide();
+    console.log('closing dialog');
     mainDataListener();
     activeQuotationListener();
+    $mdDialog.cancel();
   });
 
 }
@@ -493,8 +511,3 @@ ProductCtrl.$inject = [
   'userService',
   'metaTagsService'
 ];
-/*
-angular.element(document).ready(function() {
-  angular.bootstrap(document, ['dashexampleApp']);
-});
-*/

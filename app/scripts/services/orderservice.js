@@ -35,7 +35,7 @@
           //'pending-sap': 'Pagado y procesando',
           //'completed': 'Pagado',
           'pending-payment': 'Pendiente de pago',
-          'cancelled': 'Cancelado'
+          'canceled': 'Cancelado'
         };  
         if(authService.isUserSellerOrAdmin()){
           statusMap['pending-sap'] = 'Pendiente SAP';

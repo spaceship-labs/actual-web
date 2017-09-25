@@ -16,7 +16,23 @@
   <hr/>
 
   <div ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb) && vm.isOrderPending(vm.quotation.OrderWeb)" class="spei-msg">
-    <p>Su orden de compra estará EN PROCESO y SUJETA A DISPONIBILIDAD, le sugerimos no volver a generar la misma cotización para evitar una duplicidad</p>
+    <p>Su ORDEN DE COMPRA está CONFIRMADA y EN PROCESO, su estatus de pago es PENIDIENTE DE PAGO, le pedimos no volver a generar la misma cotización para evitar una duplicidad.</p>
+  </div>
+
+  <div ng-if="vm.quotation.isSpeiQuotation" class="quotation-data">
+    <div ng-if="vm.quotation.OrderWeb" flex flex-sm="100" class="only-hide-print">
+      <label>Estatus</label>
+      <p>
+
+        <a
+          class="order-link"
+          ng-href="/checkout/order/{{vm.quotation.OrderWeb.id}}"
+          ng-if="vm.isOrderLinkVisible()">
+          Haz click aqui para ver el pedido
+        </a>
+      </p>
+
+    </div>
   </div>
 
   <div>    
@@ -38,14 +54,19 @@
 
     <div ng-if="!vm.quotation.isSpeiQuotation" layout="row" layout-wrap class="quotation-data-row">
       
-      <div ng-if="vm.quotation.OrderWeb" flex flex-sm="100" class="only-hide-print">
+      <div 
+        ng-if="vm.quotation.OrderWeb" 
+        flex="20" 
+        flex-sm="100" 
+        class="only-hide-print"
+      >
         <label>Estatus</label>
         <p>
 
           <a
             class="order-link"
             ng-href="/checkout/order/{{vm.quotation.OrderWeb.id}}"
-            ng-if="vm.quotation.OrderWeb && vm.quotation.Client.id === vm.user.Client && !vm.quotation.OrderWeb.status === 'pending-sap' ">
+            ng-if="vm.isOrderLinkVisible()">
             Haz click aqui para ver el pedido
           </a>
         </p>
@@ -55,16 +76,16 @@
         </p>
 
       </div>
-      <div flex hide-sm hide-xs>
+      <div flex="25" hide-sm hide-xs>
         <label for="">Nombre del cliente</label>
         <p>{{vm.quotation.Client.CardName || 'No asignado'}}</p>
       </div>
-      <div flex hide-sm hide-xs>
+      <div flex="25" hide-sm hide-xs>
         <label for="">E-mail</label>
         <p>{{vm.quotation.Client.E_Mail || 'No proporcionado'}}</p>
       </div>
 
-      <div flex flex-sm="100" flex-xs="100" ng-if="vm.quotation.ZipcodeDelivery">
+      <div flex="30" flex-sm="100" flex-xs="100" ng-if="vm.quotation.ZipcodeDelivery">
         <label>Calculo de entrega para: </label>
         <p>{{vm.quotation.ZipcodeDelivery.estado}}, {{vm.quotation.ZipcodeDelivery.municipio}}, {{vm.quotation.ZipcodeDelivery.asentamiento}}, C.P: {{vm.quotation.ZipcodeDelivery.cp}}</p>
       </div>
@@ -73,13 +94,18 @@
     </div>
 
     <div ng-if="!vm.quotation.isSpeiQuotation" layout="row" layout-wrap layout-align="start center" class="quotation-data-row">
-      <div flex hide-sm hide-xs>
+      <div flex="25" hide-sm hide-xs>
         <label for="">Fecha de cotización</label>
         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
       </div>
-      <div flex hide-sm hide-xs>
+      <div flex="25" hide-sm hide-xs>
         <label>Hora</label>
         <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>
+      </div>
+
+      <div ng-if="vm.quotation.Address" flex="25" flex-sm="100" flex-xs="100">
+        <label>Dirección</label>
+        <p>{{vm.addressString}}</p>
       </div>
     </div>
 
@@ -221,6 +247,10 @@
               <td>Descuento:</td>
               <td><strong>MXN<span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
             </tr>
+            <tr>
+              <td><strong>Costo de envío:</strong></td>
+              <td><strong>MXN $0.00</strong></td>
+            </tr>            
           </table>
           <hr>
 
@@ -250,8 +280,8 @@
             type="submit"
             value="CONTINUAR"
             ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
-            ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock"
-            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock }"
+            ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries"
+            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries }"
             class="cart-view-btn print-btn"
           >
 
@@ -300,12 +330,16 @@
             </a>
           </div>
           <div flex="50">
-            <a
-              ng-if="vm.quotation.Details.length > 0"
-              ng-click="vm.sendByEmail()"
+
+            <!--
               ng-class="{
                 'action-btn-disabled': !vm.quotation.Client
               }"
+            -->
+
+            <a
+              ng-if="vm.quotation.Details.length > 0"
+              ng-click="vm.sendByEmail()"
               href="#"
               class="action-btn-print print-btn">
               ENVIAR POR EMAIL
@@ -317,6 +351,14 @@
     </div>
 
   </form>
+
+  <section ng-if="vm.isUserAdmin">
+    <hr>
+    <ng-include src="'views/quotations/leads-table.html'">
+    </ng-include>
+    <hr>
+  </section>
+
 
   <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation">
     <div class="hr"><hr /></div>
