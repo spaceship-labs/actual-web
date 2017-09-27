@@ -715,8 +715,8 @@ function getMetaTagsBySite(siteOption){
   switch (siteOption){
     case 'studio':
       metaTags = {
-        title: 'Actual Studio | Más de 25 años de experiencia en muebles e interiorismo.',
-        description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
+        title: 'Actual Studio',
+        description: 'Mobiliario y decoración para la persona práctica y jovial; una bienvenida al mobiliario moderno, honesto y, sobre todo, funcional.',
         image: 'https://api.actualstudio.com/logos/studio-og.png',
         url: 'https://actualstudio.com',
         favicon: 'https://api.actualStudio.com/icons/actual-studio-favicon.png'
@@ -725,8 +725,8 @@ function getMetaTagsBySite(siteOption){
       break;
     case 'home':
       metaTags = {
-        title: 'Actual Home | Más de 25 años de experiencia en muebles e interiorismo.',
-        description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
+        title: 'Actual Home',
+        description: 'Mobiliario y decoración para los más exigentes. Sofisticación absoluta que recuerda a los amantes del diseño la mezcla entre el modernismo y la exclusividad.',
         image: 'https://api.actualstudio.com/logos/home-og.png',
         url: 'https://actualhome.com',
         favicon: 'https://api.actualStudio.com/icons/actual-home-favicon.png'        
@@ -734,8 +734,8 @@ function getMetaTagsBySite(siteOption){
       break;
     case 'kids':
         metaTags = {
-          title: 'Actual Kids | Más de 25 años de experiencia en muebles e interiorismo.',
-          description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
+          title: 'Actual Kids',
+          description: 'Mobiliario y decoración para los más pequeños, la combinación perfecta de estilo, seguridad, interactividad y diversión.',
           image: 'https://api.actualstudio.com/logos/kids-og.png',
           url: 'https://actualkids.com',
           favicon: 'https://api.actualStudio.com/icons/actual-kids-favicon.png'          
