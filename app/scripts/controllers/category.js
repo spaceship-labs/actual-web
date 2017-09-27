@@ -78,13 +78,14 @@ function CategoryCtrl(
   }
 
   function init(){
-    var activeSortOptionKey = 'DiscountPrice';
+    var activeSortOptionKey = 'salesCount';
     vm.activeSortOption = _.findWhere(vm.sortOptions,{key: activeSortOptionKey});
         
     vm.search = {
       items: 10,
       page: 1,
-      category: $routeParams.category
+      category: $routeParams.category,
+      sortOption: vm.activeSortOption
     };
 
     if(SITE.name === 'actual-kids' && $rootScope.activeQuotation){
