@@ -1,15 +1,22 @@
 <div class="delivery-block" layout="row" layout-wrap>
   <div flex="15"></div>
   <div flex="45" flex-xs="100">
+    <!--
     <p 
       class="bottom-text bottom-text-alert" 
       ng-if="vm.isDetailAlertVisible(detail) && !vm.isDetailOutOfStock(detail)">
-      <strong>ALERTA: La disponibilidad original de piezas elegidas y/o la fecha de entrega han cambiado. <!--<span>Antes: {{detail.originalQuantity}} pieza(s) {{detail.originalShipDate | date: "d/MMM/yyyy"}}</span>--></strong>
+      <strong>ALERTA: La disponibilidad original de piezas elegidas y/o la fecha de entrega han cambiado. <span>Antes: {{detail.originalQuantity}} pieza(s) {{detail.originalShipDate | date: "d/MMM/yyyy"}}</span></strong>
     </p>
+    -->
   
-    <p ng-if="vm.isDetailOutOfStock(detail)" class="bottom-text bottom-text-alert" >
-      <strong>ALERTA: La disponibilidad original de piezas estan AGOTADAS</strong>
+    <p ng-show="vm.isDetailOutOfStock(detail)" class="bottom-text bottom-text-alert" >
+      <strong>ALERTA: La cantidad original de piezas elegidas están AGOTADAS</strong>
     </p> 
+
+    <p ng-show="vm.hasDetailChangedOriginalQuantity(detail)" class="bottom-text bottom-text-alert">
+      <strong>ALERTA: La cantidad original de piezas elegidas han cambiado</strong>
+    </p>
+
     <div class="clear"></div>       
   </div>
   <div flex="40" flex-xs="100" class="cart-item-data">

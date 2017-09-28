@@ -83,6 +83,7 @@ function QuotationsEditCtrl(
     isDetailAlertVisible: isDetailAlertVisible, 
     isDetailOutOfStock: isDetailOutOfStock,
     isOrderLinkVisible: isOrderLinkVisible,
+    hasDetailChangedOriginalQuantity: hasDetailChangedOriginalQuantity,
     user: $rootScope.user
   });
 
@@ -168,6 +169,9 @@ function QuotationsEditCtrl(
         vm.quotation.Details = quotationService.localMultipleDetailsUpdate(vm.quotation.Details);
         vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
         vm.isLoadingDetailsDeliveries = false;        
+      
+        showDetailsChangedDateAlertIfNeeded();
+
       })
       .catch(function(err){
         var error = err.data || err;
@@ -176,6 +180,25 @@ function QuotationsEditCtrl(
         console.log('error', err);
       });
 
+  }
+
+
+  function showDetailsChangedDateAlertIfNeeded(){
+    if( someDetailShipdateHasChanged() ){
+      dialogService.showDialog('Verifique su nueva fecha de entrega y cantidad de piezas');
+      console.log('alguno cambio');
+    }
+  }
+
+
+  function someDetailShipdateHasChanged(){
+    return _.some(vm.quotation.Details,function(detail){
+      return isDetailAlertVisible(detail);
+    });
+  }
+
+  function hasDetailChangedOriginalQuantity(detail){
+    return detail.quantity !== detail.originalQuantity;
   }
 
   function loadQuotationAddress(){
@@ -303,6 +326,7 @@ function QuotationsEditCtrl(
       $timeout(function(){
         vm.isCalculatingAvailability = false;      
       },800);
+
     }    
   }
 
@@ -325,6 +349,7 @@ function QuotationsEditCtrl(
       $timeout(function(){
         vm.isCalculatingAvailability = false;      
       },800);
+
     }
   }
     
@@ -543,6 +568,8 @@ function QuotationsEditCtrl(
 
         vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
         vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(vm.quotation.Details);
+
+        showDetailsChangedDateAlertIfNeeded();
         loadPaymentMethods();
         return $rootScope.loadActiveQuotation();
       })
