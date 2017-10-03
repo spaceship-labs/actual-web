@@ -194,8 +194,8 @@
           if(query.filters[key] === true || query.filters[key] === false){
             aux[key] = query.filters[key];
           }
-          else if(query.filters[key] != 'none'){
-            if(!isNaN(query.filters[key])){
+          else if(query.filters[key] !== 'none'){
+            if( !isNaN(query.filters[key]) && key !== 'folio' ){
               aux[key] = parseFloat(query.filters[key]);
             }else{
               aux[key] = query.filters[key];
@@ -331,7 +331,7 @@
                     if($scope.quickEdit){
                       html = '<a href="#" ng-click="editFn($event'+ ', \'' + full[id]+ '\')">' + data + '</a>';
                     }else{
-                      html = '<a href="'+(siteDomain + column.actionUrl + full[id])+'">' + data + '</a>';
+                      html = '<a href="'+(siteDomain + column.actionUrl + full[id])+'" class="action-url">' + data + '</a>';
                     }
                   }else{
                     html = data;

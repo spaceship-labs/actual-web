@@ -3206,6 +3206,7 @@ md-backdrop.md-sidenav-backdrop{
   width: 100%!important;
 }
 
+.table-list .action-url{color: #66ba4a;}
 .table-list .edit-icon{
   color: #95CF81;
 }
@@ -5290,6 +5291,7 @@ padding-left: 16px;
 #reports .head-reports i.icon-settings{font-size: 25px}
 #reports .head-reports a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
 
+#reports .report-filters{max-width: 600px;}
 
 @media screen and (max-width:1200px ){
   .user-profile-view,
