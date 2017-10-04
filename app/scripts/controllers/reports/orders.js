@@ -9,7 +9,9 @@
  */
 angular.module('dashexampleApp')
   .controller('ReportsOrdersCtrl', function (
+  	$scope,
 	  $rootScope,
+	  $q,
 	  orderService,
 	  siteService,
 	  clientService,
@@ -19,7 +21,8 @@ angular.module('dashexampleApp')
 
 	  angular.extend(vm,{
 	    user: angular.copy($rootScope.user),
-	    searchParams: {},
+	    searchParams: {
+	    },
 	    dateRange: {
 	    	field: 'createdAt'
 	    },
@@ -28,7 +31,6 @@ angular.module('dashexampleApp')
 	    onClientSelected: onClientSelected,
 	    onStartDateSelected: onStartDateSelected,    
 	    onEndDateSelected: onEndDateSelected,    
-	    clientSearch: true,
 	    defaultSort: [1, "desc"], //created at
 	    columnsOrders: [
 	      {
@@ -80,11 +82,29 @@ angular.module('dashexampleApp')
 	  function onClientSelected(item){
 	  	console.log('item', item);
 	  	if(item && item.id){
-	  		vm.searchParams.clientId  = item.id;
+	  		vm.searchParams.Client  = item.id;
 	  	}
 	  }
 
+	  $scope.$watch('vm.selectedClient',function(newVal, oldVal){
+	  	if(newVal !== oldVal && newVal){
+	  		console.log('newVal', newVal);
+	  		vm.searchParams.Client = newVal.id;
+	  	}
+
+	  	if(!newVal){
+	  		vm.searchParams.Client = 'none';
+	  	}
+	  });
+
 	  function queryClients(term){
+      /*
+      var params = {term: term, autocomplete: true};
+      return clientService.search(1,params).then(function(res){
+        return res.data.data;
+      });	
+      */    
+	    
 	    if(term !== '' && term){
 	      var params = {term: term, autocomplete: true};
 	      return clientService.search(1,params).then(function(res){
@@ -92,8 +112,9 @@ angular.module('dashexampleApp')
 	      });
 	    }
 	    else{
-	      return [];
+	      return $q.resolve([]);
 	    }
+	    
 	  }
 
 	  function loadPaymentsTypes(){

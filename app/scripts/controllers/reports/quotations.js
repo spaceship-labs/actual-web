@@ -9,6 +9,7 @@
  */
 angular.module('dashexampleApp')
   .controller('ReportsQuotationsCtrl', function (
+  	$scope,
 	  $rootScope,
 	  quotationService,
 	  siteService,
@@ -20,8 +21,15 @@ angular.module('dashexampleApp')
 	  var vm = this;
 	  angular.extend(vm,{
 	    user: angular.copy($rootScope.user),
-	    apiResourceQuotations: quotationService.getGeneralList,
 	    queryClients: queryClients,
+	    searchParams: {
+	    },
+	    dateRange: {
+	    	field: 'createdAt'
+	    },	    
+	    apiResourceQuotations: quotationService.getGeneralList,
+	    onStartDateSelected: onStartDateSelected,    
+	    onEndDateSelected: onEndDateSelected,  	    
 	    clientSearch: true, 
 	    defaultSort: [1, "desc"], //created at    
 	    columnsQuotations: [
@@ -38,7 +46,8 @@ angular.module('dashexampleApp')
 	      {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
 	      {key:'Client.E_Mail', label:'Email', defaultValue:'Sin cliente'},		      
 	      {key:'Store', label: 'Sitio', mapper: siteService.getStoresIdMapper()},
-	      {key:'paymentType', label:'Tipo pago'}  
+	      {key:'paymentType', label:'Tipo pago'},
+	      {key:'OrderWeb', label: 'OrderWeb'}  
 	    ],    
 	  });
 
@@ -55,6 +64,17 @@ angular.module('dashexampleApp')
 	  	loadPaymentsTypes();
 	  }
 
+	  $scope.$watch('vm.selectedClient',function(newVal, oldVal){
+	  	if(newVal !== oldVal && newVal){
+	  		console.log('newVal', newVal);
+	  		vm.searchParams.Client = newVal.id;
+	  	}
+
+	  	if(!newVal){
+	  		vm.searchParams.Client = 'none';
+	  	}
+	  });
+
 	  function queryClients(term){
 	    if(term !== '' && term){
 	      var params = {term: term, autocomplete: true};
@@ -63,8 +83,17 @@ angular.module('dashexampleApp')
 	      });
 	    }
 	    else{
-	      return [];
+	      return $q.resolve([]);
 	    }
+	    
+	  }	  
+
+	  function onStartDateSelected(pikaday){
+	  	vm.dateRange.start = pikaday._d;
+	  }
+
+	  function onEndDateSelected(pikaday){
+	  	vm.dateRange.end = pikaday._d;
 	  }
 
 	  function loadPaymentsTypes(){

@@ -56,7 +56,7 @@
             $('<p class="sorting-by-label"></p>').appendTo($scope.wrapperElementId + ' .dataTables_wrapper .top');
             createOrderByLabel();
 
-            if( $scope.clientSearch ){
+            if( $scope.clientSearch && !$scope.clientSearchTerm ){
               $('<label class="populate-search-checkbox" for="'+$scope.wrapperElementId+'-checkbox"><input type="checkbox" id="'+$scope.wrapperElementId+'-checkbox" />Buscar por cliente | </label>')
                 .appendTo($scope.wrapperElementId + ' .dataTables_filter');
             }
@@ -212,6 +212,10 @@
 
         if($scope.dateRange){
           query.dateRange = $scope.dateRange;
+        }
+
+        if($scope.clientSearchTerm){
+          query.clientSearchTerm = $scope.clientSearchTerm;
         }
 
         $scope.query = query;
@@ -451,7 +455,8 @@
           exportQuery: '=',
           exportColumns: '=',
           createdRowCb: '=',
-          clientSearch: '='
+          clientSearch: '=',
+          clientSearchTerm: '='
         },
         templateUrl : 'views/directives/table-list.html'
       };
