@@ -491,37 +491,55 @@ angular
       }
     ]);
 
+
   })
-
-
 
   .run(function(
     Analytics,
     localStorageService, 
     authService, 
     jwtHelper, 
-    userService, 
+    userService,
+    formatService,
+    siteService, 
+    orderService,
     $location, 
     $rootScope, 
     $route
   ){
 
 
-      authService.runPolicies();
-      //Configures $location.path second parameter, for no reloading
+    authService.runPolicies();
+    //Configures $location.path second parameter, for no reloading
 
-      var original = $location.path;
-      $location.path = function (path, reload) {
-          if (reload === false) {
-              var lastRoute = $route.current;
-              var un = $rootScope.$on('$locationChangeSuccess', function () {
-                  $route.current = lastRoute;
-                  un();
-              });
-          }
-          return original.apply($location, [path]);
-      };
+    var original = $location.path;
+    $location.path = function (path, reload) {
+        if (reload === false) {
+            var lastRoute = $route.current;
+            var un = $rootScope.$on('$locationChangeSuccess', function () {
+                $route.current = lastRoute;
+                un();
+            });
+        }
+        return original.apply($location, [path]);
+    };
 
-
-
+    alasql.fn.nullFormat = formatService.nullFormat;
+    alasql.fn.yesNoFormat= formatService.yesNoFormat;
+    alasql.fn.dateTimeFormat= formatService.dateTimeFormat;
+    alasql.fn.dateFormat= formatService.dateFormat;
+    alasql.fn.currencyFormat= formatService.currencyFormat;
+    alasql.fn.rateFormat= formatService.rateFormat;
+    alasql.fn.storeIdMapperFormat = function(data){
+      var mapper = siteService.getStoresIdMapper();
+      console.log('mapper', mapper);
+      console.log('data',data);
+      return mapper[data] || data;
+    };
+    alasql.fn.orderStatusMapperFormat = function(data){
+      var mapper = orderService.getOrderStatusMapper();
+      console.log('mapper', mapper);
+      console.log('data',data);
+      return mapper[data] || data;
+    };
   });

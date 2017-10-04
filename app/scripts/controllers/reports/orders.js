@@ -21,6 +21,8 @@ angular.module('dashexampleApp')
 
 	  angular.extend(vm,{
 	    user: angular.copy($rootScope.user),
+	    triggerExportName: 'triggerExport',
+	    triggerExcelExport: triggerExcelExport,
 	    searchParams: {
 	    },
 	    dateRange: {
@@ -45,10 +47,24 @@ angular.module('dashexampleApp')
 	      {key:'total', label: 'Total', currency:true},      
 	      {key:'status', label:'Estatus', mapper:orderService.getOrderStatusMapper()},
 	      {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
-	      {key:'arrayClient.E_Mail', label:'Email', defaultValue:'Sin cliente'},		      	      
+	      {key:'Client.E_Mail', label:'Email', defaultValue:'Sin cliente'},		      	      
 	      {key:'Store', label: 'Sitio', mapper: siteService.getStoresIdMapper()}      
-	    ],    
+	    ],
+
 	  });
+
+	  //Uppercase fields dont work on ALASQL, use [] instead, 
+	  //for example [Store] instead of Store
+
+    vm.exportQuery = 'SELECT folio AS Folio,';
+    vm.exportQuery += 'dateFormat(createdAt) as Fecha,';
+    vm.exportQuery += 'currencyFormat(total) as Total,';
+    vm.exportQuery += 'currencyFormat(discount) as Descuento,';
+    vm.exportQuery += 'orderStatusMapperFormat(status) as Estatus,';
+    vm.exportQuery += 'Client->CardName as Cliente,';
+    vm.exportQuery += 'Client->E_Mail as Email,';
+    vm.exportQuery += 'storeIdMapperFormat([Store]) as Sitio ';
+    vm.exportQuery += ' INTO XLS("pedidos.xls",{headers:true}) FROM ?';
 
 	  init();
 
@@ -58,8 +74,6 @@ angular.module('dashexampleApp')
 
 	  	vm.stores = addEverythingOption(convertMapperToArray(sitesMapper));
 	  	vm.orderStatuses = addEverythingOption(convertMapperToArray(orderStatusMapper));
-	  	console.log('vm.stores', vm.stores);
-	  	console.log('vm.orderStatuses', vm.orderStatuses);
 	  	loadPaymentsTypes();
 	  }
 
@@ -85,6 +99,14 @@ angular.module('dashexampleApp')
 	  		vm.searchParams.Client  = item.id;
 	  	}
 	  }
+
+	  function triggerExcelExport(){
+	  	$scope.$broadcast(vm.triggerExportName);
+	  }
+
+	  $scope.$on('isExporting', function(evt, data){
+	  	vm.isExporting = data;
+	  });
 
 	  $scope.$watch('vm.selectedClient',function(newVal, oldVal){
 	  	if(newVal !== oldVal && newVal){

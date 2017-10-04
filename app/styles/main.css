@@ -5291,8 +5291,14 @@ padding-left: 16px;
 #reports .head-reports i.icon-settings{font-size: 25px}
 #reports .head-reports a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
 
-#reports .report-filters{max-width: 760px;}
+#reports .report-filters{/*max-width: 760px;*/}
 #reports .report-filters td{padding: 2px 6px;}
+#reports .report-filters .excel-triger-wrapper{text-align: center;}
+#reports .report-filters .excel-triger-wrapper .loading-circle,
+#reports .report-filters .excel-triger-wrapper img{
+  margin-top: 10px;
+}
+#reports .report-filters .excel-triger-wrapper img{max-width: 70px;}
 
 @media screen and (max-width:1200px ){
   .user-profile-view,

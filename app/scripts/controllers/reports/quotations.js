@@ -22,6 +22,8 @@ angular.module('dashexampleApp')
 	  angular.extend(vm,{
 	    user: angular.copy($rootScope.user),
 	    queryClients: queryClients,
+	    triggerExportName: 'triggerExport',
+	    triggerExcelExport: triggerExcelExport,
 	    searchParams: {
 	    },
 	    dateRange: {
@@ -51,6 +53,15 @@ angular.module('dashexampleApp')
 	    ],    
 	  });
 
+    vm.exportQuery = 'SELECT folio AS Folio,';
+    vm.exportQuery += 'dateFormat(createdAt) as Fecha,';
+    vm.exportQuery += 'currencyFormat(total) as Total,';
+    vm.exportQuery += 'currencyFormat(discount) as Descuento,';
+    vm.exportQuery += 'Client->CardName as Cliente,';
+    vm.exportQuery += 'Client->E_Mail as Email,';
+    vm.exportQuery += 'storeIdMapperFormat([Store]) as Sitio ';
+    vm.exportQuery += ' INTO XLS("cotizaciones.xls",{headers:true}) FROM ?';
+
 	  init();
 
 	  function init(){
@@ -63,6 +74,15 @@ angular.module('dashexampleApp')
 	  	console.log('vm.orderStatuses', vm.orderStatuses);
 	  	loadPaymentsTypes();
 	  }
+
+	  function triggerExcelExport(){
+	  	$scope.$broadcast(vm.triggerExportName);
+	  }
+
+	  $scope.$on('isExporting', function(evt, data){
+	  	vm.isExporting = data;
+	  });
+
 
 	  $scope.$watch('vm.selectedClient',function(newVal, oldVal){
 	  	if(newVal !== oldVal && newVal){
