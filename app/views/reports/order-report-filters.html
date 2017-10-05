@@ -42,7 +42,25 @@
 								</select>
 							</div>										
 						</td>	
-					</tr>								
+					</tr>		
+					<tr>
+						<td><label for="">Estatus venta</label></td>
+						<td>
+							<div class="input-element">
+								<select ng-model="vm.searchParams.status" ng-options="status.value as status.label for status in vm.orderStatuses" class="select-element">
+								</select>		
+							</div>							
+						</td>	
+					</tr>		
+					<tr>
+						<td><label for="">Página web</label></td>
+						<td>
+							<div class="input-element">
+								<select ng-model="vm.searchParams.Store" ng-options="store.value as store.label for store in vm.stores" class="select-element">
+								</select>
+							</div>
+						</td>	
+					</tr>											
 				</table>																	
 			</div>
 			<div flex="50">
@@ -84,25 +102,13 @@
 					    </div>						
 						</td>						
 					</tr>	
-					<tr>
-						<td><label for="">Estatus venta</label></td>
-						<td>
-							<div class="input-element">
-								<select ng-model="vm.searchParams.status" ng-options="status.value as status.label for status in vm.orderStatuses" class="select-element">
-								</select>		
-							</div>							
-						</td>	
-					</tr>		
-					<tr>
-						<td><label for="">Página web</label></td>
-						<td>
-							<div class="input-element">
-								<select ng-model="vm.searchParams.Store" ng-options="store.value as store.label for store in vm.stores" class="select-element">
-								</select>
-							</div>
-						</td>	
-					</tr>
-				</table>																		
+
+				</table>	
+
+				<button 
+					ng-click="vm.triggerSearch()"
+					class="action-btn">Buscar</button>
+
 			</div>
 		</div>
 	</div>

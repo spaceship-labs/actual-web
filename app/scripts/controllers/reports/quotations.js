@@ -24,6 +24,8 @@ angular.module('dashexampleApp')
 	    queryClients: queryClients,
 	    triggerExportName: 'triggerExport',
 	    triggerExcelExport: triggerExcelExport,
+	    triggerSearchName: 'triggerSearch',
+	    triggerSearch: triggerSearch,	    	    
 	    searchParams: {
 	    },
 	    dateRange: {
@@ -90,6 +92,11 @@ angular.module('dashexampleApp')
 	  $scope.$on('isExporting', function(evt, data){
 	  	vm.isExporting = data;
 	  });
+
+	  function triggerSearch(){
+	  	$rootScope.scrollTo('main');
+	  	$scope.$broadcast(vm.triggerSearchName);
+	  }
 
 
 	  $scope.$watch('vm.selectedClient',function(newVal, oldVal){

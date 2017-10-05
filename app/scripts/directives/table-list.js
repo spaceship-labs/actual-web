@@ -18,6 +18,8 @@
       formatService,
       ENV
     ){
+      $scope.enableSearchField = angular.isDefined($scope.enableSearchField) ? $scope.enableSearchField : true;
+
       $scope.dtInstance = {};
       $scope.isExporting = false;
       $scope.currentOrderColumnIndex = 0;
@@ -66,18 +68,24 @@
 
             $('<button/>').text('Buscar').attr('id', 'new-search').appendTo($scope.wrapperElementId + ' .dataTables_filter');
 
-            console.log('$scope.eventEmitterName', $scope.eventEmitterName);
 
-            if($scope.exportQuery && !$scope.eventEmitterName){
+            if(!$scope.enableSearchField){
+              $($scope.wrapperElementId + ' .dataTables_filter').hide();
+            }
+
+            if($scope.exportQuery && !$scope.exportEventEmitterName){
               $('<a class="export-button" href="" ng-click="exportToExcel()">Exportar registros</a>')
                 .appendTo($scope.wrapperElementId + ' .top ');
               $compile($('.export-button'))($scope);
             }
 
-            $scope.$on($scope.eventEmitterName, function(evt, args){
-              console.log('args broadcasted');
+            $scope.$on($scope.exportEventEmitterName, function(evt, args){
               $scope.exportToExcel();
             });
+
+            $scope.$on($scope.searchEventEmitterName, function(evt, args){
+              $scope.dtInstance.DataTable.search('').draw();
+            });            
 
           }
 
@@ -91,11 +99,11 @@
           })
           $('#new-search').on('click', function() {
               $scope.dtInstance.DataTable.search($($scope.wrapperElementId + ' .dataTables_filter input').val()).draw();
-          })
+          });
 
           changePaginationLabels();
 
-        })
+        });
         /*
         .withButtons([
           {
@@ -445,7 +453,9 @@
           createdRowCb: '=',
           clientSearch: '=',
           clientSearchTerm: '=',
-          eventEmitterName: '='
+          exportEventEmitterName: '=',
+          searchEventEmitterName: '=',
+          enableSearchField: '='
         },
         templateUrl : 'views/directives/table-list.html'
       };

@@ -23,6 +23,8 @@ angular.module('dashexampleApp')
 	    user: angular.copy($rootScope.user),
 	    triggerExportName: 'triggerExport',
 	    triggerExcelExport: triggerExcelExport,
+	    triggerSearchName: 'triggerSearch',
+	    triggerSearch: triggerSearch,	    
 	    searchParams: {
 	    },
 	    dateRange: {
@@ -102,6 +104,11 @@ angular.module('dashexampleApp')
 
 	  function triggerExcelExport(){
 	  	$scope.$broadcast(vm.triggerExportName);
+	  }
+
+	  function triggerSearch(){
+	  	$rootScope.scrollTo('main');
+	  	$scope.$broadcast(vm.triggerSearchName);
 	  }
 
 	  $scope.$on('isExporting', function(evt, data){
