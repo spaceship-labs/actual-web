@@ -60,7 +60,7 @@ angular.module('dashexampleApp')
     vm.exportQuery += 'Client->CardName as Cliente,';
     vm.exportQuery += 'Client->E_Mail as Email,';
     vm.exportQuery += 'storeIdMapperFormat([Store]) as Sitio ';
-    vm.exportQuery += ' INTO XLS("cotizaciones.xls",{headers:true}) FROM ?';
+    vm.exportQuery += ' INTO XLS("Cotizaciones.xls",{headers:true}) FROM ?';
 
 	  init();
 
@@ -68,11 +68,19 @@ angular.module('dashexampleApp')
 	  	var orderStatusMapper = orderService.getOrderStatusMapper();
 	  	var sitesMapper = siteService.getStoresIdMapper();
 
-	  	vm.stores = convertMapperToArray(sitesMapper);
-	  	vm.orderStatuses = convertMapperToArray(orderStatusMapper);
+	  	vm.stores = addEverythingOption(convertMapperToArray(sitesMapper));
+	  	vm.orderStatuses = addEverythingOption(convertMapperToArray(orderStatusMapper));
 	  	console.log('vm.stores', vm.stores);
 	  	console.log('vm.orderStatuses', vm.orderStatuses);
 	  	loadPaymentsTypes();
+	  }
+
+	  function addEverythingOption(items){
+	  	items.unshift({
+	  		label: 'Cualquiera',
+	  		value: 'none'
+	  	});
+	  	return items;
 	  }
 
 	  function triggerExcelExport(){

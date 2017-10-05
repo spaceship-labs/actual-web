@@ -64,7 +64,7 @@ angular.module('dashexampleApp')
     vm.exportQuery += 'Client->CardName as Cliente,';
     vm.exportQuery += 'Client->E_Mail as Email,';
     vm.exportQuery += 'storeIdMapperFormat([Store]) as Sitio ';
-    vm.exportQuery += ' INTO XLS("pedidos.xls",{headers:true}) FROM ?';
+    vm.exportQuery += ' INTO XLS("Pedidos.xls",{headers:true}) FROM ?';
 
 	  init();
 
