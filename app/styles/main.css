@@ -1543,6 +1543,7 @@ select{
   position: relative;
   text-transform: uppercase;
   padding-bottom: 2px;
+  margin: 10px 0 0;
 }
 .listing-view-nav-wrapper > h2 a{color: #000}
 
@@ -1570,7 +1571,6 @@ select{
 }
 .listing-view-nav-wrapper > h2 > a > .products-num{font-size: 12px;}
 .listing-view-nav{
-  border-bottom: 1px solid #E7E7E7;
   margin: 0;
   list-style: none;
   padding-left: 20px;
@@ -1592,18 +1592,51 @@ select{
   vertical-align: middle;
 }
 */
-.listing-view-nav > li > ul{
+
+.listing-view-nav > li.active h3 a,
+.listing-view-nav > li h3 a.active,
+.listing-view-nav > li h3 a:hover{
+  color:  #DDA901;
+}
+
+/* FOR HOVER MENU SIDENAV */
+
+.listing-view-nav-wrapper:hover > h2 a,
+.listing-view-nav-wrapper > h2 a.active{color: #DDA901;}
+
+.listing-view-nav-wrapper .listing-view-nav{
+  -webkit-transition: all .8s;
+  -moz-transition: all .8s;
+  -o-transition: all .8s;
+  -ms-transition: all .8s;
+  transition: all .8s;
   max-height: 0;
   overflow: hidden;
-  -webkit-transition: all .4s;
-  -moz-transition: all .4s;
-  -o-transition: all .4s;
-  -ms-transition: all .4s;
-  transition: all .4s;
 }
-.listing-view-nav > li.active > ul{
-  max-height: none;
+.listing-view-nav-wrapper .listing-view-nav.active,
+.listing-view-nav-wrapper:hover .listing-view-nav{
+  display: block!important;
+  max-height: 800px; /*NOT REACHABLE HEIGHT*/
+  border-bottom: 1px solid #E7E7E7;
 }
+.listing-view-nav > li .listing-view-subnav{
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: all .8s;
+  -moz-transition: all .8s;
+  -o-transition: all .8s;
+  -ms-transition: all .8s;
+  transition: all .8s;
+
+}
+.listing-view-nav > li.active .listing-view-subnav, 
+.listing-view-nav > li:hover .listing-view-subnav{
+  display: block!important;
+  max-height: 600px; /*NOT REACHABLE HEIGHT*/
+  /*max-height: none;*/
+}
+/* END FOR HOVER MENU SIDENAV */
+
 .listing-view-nav > li.active > h3:before{
   content: '';
   width: 20px;
@@ -5228,25 +5261,6 @@ padding-left: 16px;
   padding: 0 22px;
   height: 32px;
 }
-
-.listing-view-nav > li.active h3 a,
-.listing-view-nav > li h3 a.active,
-.listing-view-nav > li h3 a:hover{
-  color:  #DDA901;
-}
-
-/* FOR HOVER MENU SIDENAV */
-
-.listing-view-nav-wrapper:hover > h2 a,
-.listing-view-nav-wrapper > h2 a.active{color: #DDA901;}
-
-.listing-view-nav-wrapper:hover .listing-view-nav{display: block!important;}
-.listing-view-nav > li:hover .listing-view-subnav{
-  display: block!important;
-  max-height: none;
-}
-/* END FOR HOVER MENU SIDENAV */
-
 
 .filters-head{
   background: #092F57;
