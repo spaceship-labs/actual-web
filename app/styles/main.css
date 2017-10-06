@@ -1622,11 +1622,11 @@ select{
 .listing-view-nav > li .listing-view-subnav{
   max-height: 0;
   overflow: hidden;
-  -webkit-transition: all 1s;
-  -moz-transition: all 1s;
-  -o-transition: all 1s;
-  -ms-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: all 1.5s;
+  -moz-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  -ms-transition: all 1.5s;
+  transition: all 1.5s;
 
 }
 .listing-view-nav > li.active .listing-view-subnav, 
