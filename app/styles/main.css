@@ -2641,26 +2641,98 @@ md-backdrop.md-sidenav-backdrop{
   padding: 5px;
 }
 
+/*
 .filters-sidenav-trigger{
   position: fixed;
   right: -55px;
   top: 50%;
   padding: 12px 30px;
-  /*background: #e7e9e7;*/
   background: #092F57!important;
   color: #fff;
   border: 0;
-  /*color: #000;*/
   border-radius: 6px;
 
   -webkit-transform: rotate(-90deg) translateY(-50%);
   -moz-transform: rotate(-90deg) translateY(-50%);
   -ms-transform: rotate(-90deg) translateY(-50%);
   transform: rotate(-90deg) translateY(-50%);
-
   margin: 0;
   z-index: 9;
 }
+*/
+
+.filters-sidenav-trigger-mobile{
+  display: none;
+  position: fixed;
+  right: -55px;
+  top: 50%;
+  padding: 12px 30px;
+  background: #f7323f!important;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+
+  -webkit-transform: rotate(-90deg) translateY(-50%);
+  -moz-transform: rotate(-90deg) translateY(-50%);
+  -ms-transform: rotate(-90deg) translateY(-50%);
+  transform: rotate(-90deg) translateY(-50%);
+  margin: 0;
+  z-index: 9;
+}
+
+.filters-sidenav-trigger{
+  cursor: pointer;
+  position: fixed;
+  display: block;
+  right: 0;
+  background: #f7323f!important;
+  color: #fff;
+  border: 0;
+  margin: 0;
+  top: auto;
+  bottom: 0;
+  z-index: 99;
+  height: 100%;
+  text-align: center;
+}
+.filters-sidenav-trigger-inner{
+  height: 100%;
+  position: relative;
+}
+.filters-sidenav-trigger .block-text{
+  height: 20%;
+  display: block;
+  padding: 4px;
+  border-bottom: 1px solid #fff;
+}
+.filters-sidenav-trigger .block-text img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.filters-sidenav-trigger .block-icon{
+  display: block;
+  height: 10%;
+  padding: 4px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #fff;
+  position: relative;
+}
+.filters-sidenav-trigger .block-icon i{
+  color: #fff;
+  font-size: 34px;
+  vertical-align: middle;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
 .filters{
   color: #000;
 }
@@ -5319,6 +5391,11 @@ padding-left: 16px;
 #reports .head-reports i.icon-settings{font-size: 25px}
 #reports .head-reports a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
 
+@media screen and (max-width: 1310px){
+  .filters-sidenav-trigger{display: none;}
+  .filters-sidenav-trigger-mobile{display: block}
+
+}
 
 @media screen and (max-width:1200px ){
   .user-profile-view,
