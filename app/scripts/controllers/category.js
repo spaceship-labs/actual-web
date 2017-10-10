@@ -31,6 +31,7 @@ function CategoryCtrl(
     showLevel2: false,
     showLevel3: false,
     enableSortOptions: false,
+    enableFiltersTrigger: false,
     discountFilters: productSearchService.DISCOUNTS_SEARCH_OPTIONS,
     stockFilters: productSearchService.STOCK_SEARCH_OPTIONS,
     societyFilters: productSearchService.SOCIETY_OPTIONS,
@@ -123,6 +124,7 @@ function CategoryCtrl(
 
       if(vm.category && vm.category.Childs.length === 0){
         vm.enableSortOptions = true;
+        vm.enableFiltersTrigger = true;
       }
 
       var hasLevel2Categories = false;

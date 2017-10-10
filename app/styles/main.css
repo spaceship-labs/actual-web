@@ -2742,10 +2742,13 @@ md-backdrop.md-sidenav-backdrop{
   font-size: 28px;
   vertical-align: middle;
 }
-.filters-sidenav-trigger .block-icon span{font-size: 14px;}
+.filters-sidenav-trigger .block-icon span{
+  display: none;
+  font-size: 14px;
+}
 
-.filters-sidenav-trigger .block-icon:hover{
-
+.filters-sidenav-trigger .block-icon:hover span{
+  display: inline;  
 }
 
 
