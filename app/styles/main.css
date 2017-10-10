@@ -2685,22 +2685,27 @@ md-backdrop.md-sidenav-backdrop{
   position: fixed;
   display: block;
   right: 0;
-  background: #f7323f!important;
+  /*background: #f7323f!important;*/
   color: #fff;
   border: 0;
   margin: 0;
-  top: auto;
   bottom: 0;
-  z-index: 99;
-  height: 100%;
+  z-index: 9;
+  top: 56%;
+  /*height: 100%;*/
   text-align: center;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 .filters-sidenav-trigger-inner{
-  height: 100%;
+  height: auto;
   position: relative;
+  width: 40px;
 }
 .filters-sidenav-trigger .block-text{
-  height: 20%;
+  background: #f7323f!important;
+  height: 40px;
   display: block;
   padding: 4px;
   border-bottom: 1px solid #fff;
@@ -2711,25 +2716,36 @@ md-backdrop.md-sidenav-backdrop{
 }
 
 .filters-sidenav-trigger .block-icon{
+  background: #f7323f!important;
   display: block;
-  height: 10%;
+  height: 36px;
   padding: 4px;
   box-sizing: border-box;
-  border-bottom: 1px solid #fff;
+  margin: 1px 0;
+  /*border-bottom: 1px solid #fff;*/
   position: relative;
+  width: 40px;
+  right: 0;
+  text-align: left;  
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  -ms-transition: all .5s;
+  transition: all .5s;  
+}
+.filters-sidenav-trigger .block-icon:hover{
+  width: 140px;
+  right: 100px;
 }
 .filters-sidenav-trigger .block-icon i{
   color: #fff;
-  font-size: 34px;
+  font-size: 28px;
   vertical-align: middle;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  transform: translateY(-50%);
+}
+.filters-sidenav-trigger .block-icon span{font-size: 14px;}
+
+.filters-sidenav-trigger .block-icon:hover{
+
 }
 
 
@@ -5392,9 +5408,10 @@ padding-left: 16px;
 #reports .head-reports a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
 
 @media screen and (max-width: 1310px){
+  /*
   .filters-sidenav-trigger{display: none;}
   .filters-sidenav-trigger-mobile{display: block}
-
+  */
 }
 
 @media screen and (max-width:1200px ){
@@ -5592,6 +5609,9 @@ padding-left: 16px;
 }
 
 @media(max-width:600px){
+  .filters-sidenav-trigger{display: none;}
+  .filters-sidenav-trigger-mobile{display: block}
+
   .schedules-modal-header{
     position: fixed;
     left: 0;
