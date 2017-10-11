@@ -8,10 +8,10 @@
 
 .actual-home .filters-sidenav-trigger-mobile,
 .actual-home .filters-sidenav-trigger .block-icon{
-	background: #DDA901!important;
-	color: #092F57!important;
+	background: #092F57!important;
+	color: #fff!important;
 }
-.actual-home .filters-sidenav-trigger .block-icon i{color: #092F57!important;}
+.actual-home .filters-sidenav-trigger .block-icon i{color: #fff!important;}
 
 .actual-home .filters-sidenav .pointer-close-btn i{color: #DDA901;}
 .actual-home .filters-head,

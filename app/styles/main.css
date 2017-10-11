@@ -2699,6 +2699,7 @@ md-backdrop.md-sidenav-backdrop{
 
 .filters-sidenav-trigger .block-icon{
   background: #f7323f!important;
+  font-weight: 700;
   display: block;
   height: 36px;
   padding: 4px;
