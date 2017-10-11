@@ -1579,19 +1579,7 @@ select{
 .listing-view-nav > li > h3{
   font-size: 12px;
   font-weight: 400;
-  /*text-transform: uppercase;*/
 }
-/*
-.listing-view-nav > li > h3:before{
-  content: '';
-  width: 20px;
-  height: 20px;
-  background: url(../images/arrow-right.png) center no-repeat;
-  background-size: 100%;
-  display: inline-block;
-  vertical-align: middle;
-}
-*/
 
 .listing-view-nav > li.active h3 a,
 .listing-view-nav > li h3 a.active,
@@ -1616,7 +1604,7 @@ select{
 .listing-view-nav-wrapper .listing-view-nav.active,
 .listing-view-nav-wrapper:hover .listing-view-nav{
   display: block!important;
-  max-height: 800px; /*NOT REACHABLE HEIGHT*/
+  max-height: 800px;/*NOT REACHEBLE HEIGHT*/
   border-bottom: 1px solid #E7E7E7;
 }
 .listing-view-nav > li .listing-view-subnav{
@@ -1627,13 +1615,12 @@ select{
   -o-transition: all 1.5s;
   -ms-transition: all 1.5s;
   transition: all 1.5s;
-
 }
+
 .listing-view-nav > li.active .listing-view-subnav, 
 .listing-view-nav > li:hover .listing-view-subnav{
   display: block!important;
-  max-height: 600px; /*NOT REACHABLE HEIGHT*/
-  /*max-height: none;*/
+  max-height: 600px; /*NOT REACHEBLE HEIGHT*/
 }
 /* END FOR HOVER MENU SIDENAV */
 
@@ -1653,14 +1640,9 @@ select{
   cursor: pointer;
 }
 
-
 .listing-view-subnav a.active{color: #DDA901;}
-
 .listing-view-subnav{list-style: none;}
 .listing-view-subnav li{margin: 5px 0;}
-.listing-view-subnav li:before{
-  /*content: '> ';*/
-}
 .listing-view-subnav li a{
   color: #000;
   font-size: 12px;
@@ -1670,7 +1652,6 @@ select{
 .listing-view .listing-view-title{
   font-size: 26px;
   font-weight: 400;
-  /*text-transform: uppercase;*/
   margin:  0 0 12px;
   line-height: 1;
 }
@@ -2804,7 +2785,7 @@ md-backdrop.md-sidenav-backdrop{
 
 .filters .filter-block h4{
   cursor: pointer;
-  margin: 10px 0;
+  margin: 4px 0;
   outline: 0;
   font-size: 14px;
   text-transform: uppercase;

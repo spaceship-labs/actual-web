@@ -193,11 +193,33 @@ function SearchCtrl(
         vm.filters = vm.filters.map(function(filter){
           filter.orderBy = filter.customOrder ? 'createdAt' : 'Name';
           return filter;
-        });        
+        });
+
+        vm.filters = sortFiltersByList(vm.filters);
+        onCloseSidenav();
       })
       .catch(function(err){
         console.log('err', err);
       });    
+  }
+
+  function onCloseSidenav(){
+    $mdSidenav('searchFilters').onClose(function () {
+      for(var i = 0; i < vm.filters.length; i++){
+        vm.filters[i].active = false;
+      }
+      vm.isBrandFilterActive = false;
+      vm.isDiscountFilterActive = false;
+      vm.isStockFilterActive = false;
+    });
+  }
+
+  function sortFiltersByList(filters){
+    var sortList = ['estilo','material','color','forma'];
+    var sorted =  filters.sort(function(a,b){
+      return sortList.indexOf(b.Handle) - sortList.indexOf(a.Handle);
+    });
+    return sorted;
   }
 
   function loadCustomBrands(){
@@ -211,8 +233,31 @@ function SearchCtrl(
       });    
   }
 
-  function toggleSearchSidenav(){
+  function toggleSearchSidenav(filterHandleToOpen){
     $mdSidenav('searchFilters').toggle();
+    
+    if(filterHandleToOpen){
+      var filterIndexToOpen = _.findIndex(vm.filters, function(filter){
+        return filter.Handle === filterHandleToOpen;
+      });
+      if(filterIndexToOpen >= 0){
+        vm.filters[filterIndexToOpen].active = true;
+      }
+      else{
+
+        switch(filterHandleToOpen){
+          case 'brand':
+            vm.isBrandFilterActive = true;
+            break;
+          case 'discount':
+            vm.isDiscountFilterActive = true;
+            break;
+          case 'stock':
+            vm.isStockFilterActive = true;
+            break;
+        }
+      }
+    }
   }
 
   function removeSearchValue(value){

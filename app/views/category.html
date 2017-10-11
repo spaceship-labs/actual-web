@@ -30,73 +30,9 @@
   </div>
 </div>
 
-<!--
-<a
-  ng-click="vm.toggleSearchSidenav()"
-  href=""
-  hide-sm
-  hide-xs
-  class="filters-sidenav-trigger">
-    Filtros
-</a>
--->
-
 <div class="content-block listing-view">
 
-  <a
-    ng-show="vm.enableFiltersTrigger"
-    ng-click="vm.toggleSearchSidenav()"
-    href=""
-    class="filters-sidenav-trigger-mobile">
-      Filtros
-  </a>
-
-  <div
-    ng-show="vm.enableFiltersTrigger"   
-    ng-click="vm.toggleSearchSidenav()" 
-    class="filters-sidenav-trigger">
-    
-    <div class="filters-sidenav-trigger-inner">
-      <div class="block-icon">
-        <i class="icon-precio"></i>
-        <span>Precio</span>
-      </div>
-      <div class="block-icon">
-        <i class="icon-marca"></i>
-        <span>Marca</span>
-      </div>
-      <div class="block-icon">
-        <i class="icon-descuento"></i>
-        <span>Descuento</span>
-      </div>
-      <div class="block-icon">
-        <i class="icon-disponibilidad"></i>
-        <span>Disponibilidad</span>
-      </div>
-      <!--
-      <div class="block-text">
-        <img src="images/filtros-label.png" alt="">
-      </div>
-      -->
-      <div class="block-icon">
-        <i class="icon-forma"></i>
-        <span>Forma</span>
-      </div>
-      <div class="block-icon">
-        <i class="icon-color"></i>
-        <span>Color</span>
-      </div>
-      <div class="block-icon">
-        <i class="icon-material"></i>
-        <span>Material</span>
-      </div>
-      <div class="block-icon">
-        <i class="icon-estilo"></i>
-        <span>Estilo</span>
-      </div>
-    </div>
-    
-  </div>
+  <ng-include ng-show="vm.enableFiltersTrigger" src="'views/partials/search-filters-trigger.html'"></ng-include>
   <ng-include src="'views/partials/search-filters.html'"></ng-include>
 
 
