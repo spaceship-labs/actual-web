@@ -11,6 +11,7 @@
       var service = {
         buildAddressStringByContact:buildAddressStringByContact,
         create: create,
+        search: search,
         getEwalletById: getEwalletById,
         getBalanceById: getBalanceById,
         getFiscalAddress: getFiscalAddress,
@@ -31,6 +32,12 @@
 
       return service;
 
+
+      function search(page, params){
+        var p = page || 1;
+        var url = '/client/find/';
+        return api.$http.post(url,params);
+      }
 
       function create(params){
         var url = '/client/create/';

@@ -111,6 +111,11 @@ function ProductCtrl(
           quantity: 1
         };
 
+        if(vm.product.U_FAMILIA !== 'SI'){
+          $location.path('/');
+          return;
+        }
+
         if(reload){
           $location.path('//' + productId, false)
             .search({variantReload:'true'});

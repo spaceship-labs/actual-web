@@ -17,11 +17,19 @@
 					class="table-list"
           default-sort="vm.defaultSort"
 					columns="vm.columnsOrders"
-					filters="vm.filtersOrders"
-					client-search="vm.clientSearch"
+					filters="vm.searchParams"
+					date-range="vm.dateRange"
+					client-search-term="vm.clientSearchTerm"
+					export-query="vm.exportQuery"
+					export-event-emitter-name="vm.triggerExportName"
+					search-event-emitter-name="vm.triggerSearchName"
+					enable-search-field="false"
 					api-resource="vm.apiResourceOrders">
 				</div>
 			</section>		
+
+			<ng-include src="'views/reports/order-report-filters.html'"></ng-include>
+
 	</div>
 
 </div>

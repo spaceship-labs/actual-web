@@ -10,17 +10,19 @@
   </div>
 </div>
 -->
+<!--
 <a 
   ng-click="vm.toggleSearchSidenav()" 
   href="" 
   class="filters-sidenav-trigger">
     Filtros
 </a>
-
+-->
 
 <div class="content-block listing-view search-view" id="search-page">
 
   <!--FILTERS-->
+  <ng-include src="'views/partials/search-filters-trigger.html'"></ng-include>
   <ng-include src="'views/partials/search-filters.html'"></ng-include>
   <!--END FILTERS-->
 
