@@ -3327,6 +3327,7 @@ md-backdrop.md-sidenav-backdrop{
   width: 100%!important;
 }
 
+.table-list .action-url{color: #66ba4a;}
 .table-list .edit-icon{
   color: #95CF81;
 }
@@ -5403,12 +5404,15 @@ padding-left: 16px;
 #reports .head-reports i.icon-settings{font-size: 25px}
 #reports .head-reports a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
 
-@media screen and (max-width: 1310px){
-  /*
-  .filters-sidenav-trigger{display: none;}
-  .filters-sidenav-trigger-mobile{display: block}
-  */
+
+#reports .report-filters{/*max-width: 760px;*/}
+#reports .report-filters td{padding: 2px 6px;}
+#reports .report-filters .excel-triger-wrapper{text-align: center;}
+#reports .report-filters .excel-triger-wrapper .loading-circle,
+#reports .report-filters .excel-triger-wrapper img{
+  margin-top: 10px;
 }
+#reports .report-filters .excel-triger-wrapper img{max-width: 70px;}
 
 @media screen and (max-width:1200px ){
   .user-profile-view,

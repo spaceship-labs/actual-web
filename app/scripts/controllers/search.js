@@ -94,13 +94,14 @@ function SearchCtrl(
 
 
     var keywords = [''];
-    var activeSortOptionKey = 'DiscountPrice';
+    var activeSortOptionKey = 'salesCount';
     vm.activeSortOption = _.findWhere(vm.sortOptions,{key: activeSortOptionKey});
 
     if($routeParams.itemcode) {
       vm.isLoading = true;
       vm.search = {};
       vm.search.itemcode = $routeParams.itemcode;
+      vm.search.sortOption = vm.activeSortOption;
 
       if(SITE.name === 'actual-kids' && $rootScope.activeQuotation){
         vm.search.zipcodeDeliveryId = $rootScope.activeQuotation.ZipcodeDelivery;
@@ -117,6 +118,7 @@ function SearchCtrl(
         items: 10,
         page: 1
       };
+      vm.search.sortOption = vm.activeSortOption;
 
       if(SITE.name === 'actual-kids' && $rootScope.activeQuotation){
         vm.search.zipcodeDeliveryId = $rootScope.activeQuotation.ZipcodeDelivery;

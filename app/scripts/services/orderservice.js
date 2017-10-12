@@ -69,7 +69,7 @@
       function getGeneralList(page, params){
         var p = page || 1;
         var url = '/order/all/find/' + p;
-        return api.$http.get(url,params);
+        return api.$http.post(url,params);
       }
 
       function createFromQuotation(quotationId, params){

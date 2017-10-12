@@ -66,6 +66,7 @@ function SidebarCategories(
 
       var mainDataListener = function(){};
       mainDataListener = $rootScope.$on('mainDataLoaded', function(e, mainData){
+        console.log('mainData',mainData);
         $scope.activeStore = mainData.activeStore;
         $scope.storeCode = $scope.activeStore.code;
       });

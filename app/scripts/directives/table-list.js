@@ -15,8 +15,11 @@
       dialogService, 
       $compile, 
       $filter,
+      formatService,
       ENV
     ){
+      $scope.enableSearchField = angular.isDefined($scope.enableSearchField) ? $scope.enableSearchField : true;
+
       $scope.dtInstance = {};
       $scope.isExporting = false;
       $scope.currentOrderColumnIndex = 0;
@@ -53,21 +56,36 @@
           $scope.wrapperElementId = '#'+options.nTableWrapper.id;
 
           if($('#new-search').length <= 0){
-            $('<p class="sorting-by-label"></p>').appendTo($scope.wrapperElementId + ' .dataTables_wrapper .top');
+            /*
+            $('<p class="sorting-by-label"></p>').appendTo($scope.wrapperElementId + ' .top');
             createOrderByLabel();
+            */
 
-            if( $scope.clientSearch ){
+            if( $scope.clientSearch && !$scope.clientSearchTerm ){
               $('<label class="populate-search-checkbox" for="'+$scope.wrapperElementId+'-checkbox"><input type="checkbox" id="'+$scope.wrapperElementId+'-checkbox" />Buscar por cliente | </label>')
                 .appendTo($scope.wrapperElementId + ' .dataTables_filter');
             }
 
             $('<button/>').text('Buscar').attr('id', 'new-search').appendTo($scope.wrapperElementId + ' .dataTables_filter');
 
-            if($scope.exportQuery){
+
+            if(!$scope.enableSearchField){
+              $($scope.wrapperElementId + ' .dataTables_filter').hide();
+            }
+
+            if($scope.exportQuery && !$scope.exportEventEmitterName){
               $('<a class="export-button" href="" ng-click="exportToExcel()">Exportar registros</a>')
-                .appendTo($scope.wrapperElementId + ' .dataTables_wrapper .top .sorting-by-label');
+                .appendTo($scope.wrapperElementId + ' .top ');
               $compile($('.export-button'))($scope);
             }
+
+            $scope.$on($scope.exportEventEmitterName, function(evt, args){
+              $scope.exportToExcel();
+            });
+
+            $scope.$on($scope.searchEventEmitterName, function(evt, args){
+              $scope.dtInstance.DataTable.search('').draw();
+            });            
 
           }
 
@@ -81,11 +99,11 @@
           })
           $('#new-search').on('click', function() {
               $scope.dtInstance.DataTable.search($($scope.wrapperElementId + ' .dataTables_filter input').val()).draw();
-          })
+          });
 
           changePaginationLabels();
 
-        })
+        });
         /*
         .withButtons([
           {
@@ -124,7 +142,7 @@
           orderColumn = $scope.columns[$scope.currentOrderColumnIndex];
           columnName = orderColumn.label;
         }
-        $($scope.wrapperElementId + ' .dataTables_wrapper .top .sorting-by-label')
+        $($scope.wrapperElementId + ' .top .sorting-by-label')
           .text('Ordenado por: '+ columnName);
       }
 
@@ -194,8 +212,8 @@
           if(query.filters[key] === true || query.filters[key] === false){
             aux[key] = query.filters[key];
           }
-          else if(query.filters[key] != 'none'){
-            if(!isNaN(query.filters[key])){
+          else if(query.filters[key] !== 'none'){
+            if( !isNaN(query.filters[key]) && key !== 'folio' ){
               aux[key] = parseFloat(query.filters[key]);
             }else{
               aux[key] = query.filters[key];
@@ -212,6 +230,10 @@
 
         if($scope.dateRange){
           query.dateRange = $scope.dateRange;
+        }
+
+        if($scope.clientSearchTerm){
+          query.clientSearchTerm = $scope.clientSearchTerm;
         }
 
         $scope.query = query;
@@ -255,32 +277,32 @@
                 //console.log('column', column);
 
                 if(column.yesNo){
-                  data = data ? 'Si' : 'No';
+                  data = formatService.yesNoFormat(data);
                 }
                 if(column.defaultValue){
                   data = data ? data : column.defaultValue;
                 }                                
-                if(!data && data != 0){
-                  data = data ? data : 'No asignado';
+                if(!data && data !== 0){
+                  data = formatService.nullFormat(data);
                 }
                 if(column.mapper){
                   var data_b = data;
                   data = column.mapper[data] || data;
                 }
                 if(column.dateTime){                  
-                  data = $filter('date')(data, 'd/MMM/yyyy h:mm a');
+                  data = data = formatService.dateTimeFormat(data);
                 }
                 if(column.date){
-                  data = $filter('date')(data, 'd/MMM/yyyy');
+                  data = data = formatService.dateFormat(data);
                 }
                 if(column.currency){
-                  data = $filter('currency')(data);
+                  data = data = formatService.currencyFormat(data);
                 }
                 if(column.isRateNormalized){
                   data = data * 100;
                 }
                 if(column.rate){
-                  data = $filter('number')(data) + '%';
+                  data = formatService.rateFormat(data);
                 }
                 if(column.destroy){
                   id = (column.propId) ? column.propId : 'id';
@@ -331,7 +353,7 @@
                     if($scope.quickEdit){
                       html = '<a href="#" ng-click="editFn($event'+ ', \'' + full[id]+ '\')">' + data + '</a>';
                     }else{
-                      html = '<a href="'+(siteDomain + column.actionUrl + full[id])+'">' + data + '</a>';
+                      html = '<a href="'+(siteDomain + column.actionUrl + full[id])+'" class="action-url">' + data + '</a>';
                     }
                   }else{
                     html = data;
@@ -381,44 +403,21 @@
       $scope.exportToExcel = function(){
         if(!$scope.isExporting){
           $scope.isExporting = true;
+          console.log('isExporting', $scope.isExporting);
+          $scope.$emit('isExporting', $scope.isExporting);
+
           $('.export-button').text('Exportando...');
           var auxQuery = angular.copy($scope.query);
           auxQuery.getAll = true;
           $scope.apiResource($scope.page, auxQuery).then(function(result){
             var items = result.data.data;
-            var itemsFormatted = items.map(function(item){
-              $scope.exportColumns.forEach(function(col){
-                var columnParts = col.split('.');
-                if(columnParts.length > 1){
-                  if( item[columnParts[0]][columnParts[1]]== false){
-                    item[columnParts[0]][columnParts[1]]= 'No';
-                  }
-                  else if( item[columnParts[0]][columnParts[1]] == true ){
-                    item[columnParts[0]][columnParts[1]]= 'Si';
-                  }
-                  else if( typeof item[columnParts[0]][columnParts[1]] == 'undefined' ){
-                    item[columnParts[0]][columnParts[1]] = 'No';
-                  }
-                }else{
-                  if( item[columnParts[0]] == false){
-                    item[columnParts[0]] = 'No';
-                  }
-                  else if( item[columnParts[0]] == true ){
-                    item[columnParts[0]] = 'Si';
-                  }
-                  else if( typeof item[columnParts[0]] == 'undefined' ){
-                    item[columnParts[0]] = 'No';
-                  }
-                }
-              });
-              return item;
-            });
-            alasql($scope.exportQuery ,[itemsFormatted]);
+            alasql($scope.exportQuery ,[items]);
             $('.export-button').text('Exportar registros');
             $scope.isExporting = false;
+            $scope.$emit('isExporting', $scope.isExporting);
           });
         }
-      }
+      };
 
     };
     controller.$inject = [
@@ -430,6 +429,7 @@
       'dialogService',
       '$compile',
       '$filter',
+      'formatService',
       'ENV'
     ];
 
@@ -451,7 +451,11 @@
           exportQuery: '=',
           exportColumns: '=',
           createdRowCb: '=',
-          clientSearch: '='
+          clientSearch: '=',
+          clientSearchTerm: '=',
+          exportEventEmitterName: '=',
+          searchEventEmitterName: '=',
+          enableSearchField: '='
         },
         templateUrl : 'views/directives/table-list.html'
       };

@@ -16,27 +16,11 @@
       getMethodAvailableBalance: getMethodAvailableBalance,
       getPaymentOptionsByMethod: getPaymentOptionsByMethod,
       getPaymentTypeString: getPaymentTypeString,
-      getRefundsOptions: getRefundsOptions,
+      getPaymentsTypesMapper: getPaymentsTypesMapper,
       updateQuotationClientBalance: updateQuotationClientBalance,
+      getPaymentsTypes: getPaymentsTypes,
       clientBalanceType: CLIENT_BALANCE_TYPE
     };
-
-    var refundsOptions = [
-      {
-        name:'Reembolso a cuenta de cliente',
-        label: 'Reembolso a cuenta de cliente',
-        description: 'Descripción',
-        type:'refund-to-account',
-        currency: 'mxn'
-      },
-      {
-        name: 'Reembolso en efectivo',
-        label: 'Reembolso en efectivo',
-        description: 'Descripción',
-        type: 'cash-refund',
-        currency: 'mxn'
-      }
-    ];
 
     var paymentsOptions = [
       {
@@ -186,8 +170,11 @@
       return api.$http.get(url);
     }
 
-    function getRefundsOptions(){
-      return refundsOptions;
+    function getPaymentsTypes(){
+      var url = '/payment/types';
+      return api.$http.get(url).then(function(res) {
+        return res.data;
+      });    
     }
 
     function addPayment(quotationId, params){
@@ -201,21 +188,27 @@
     }
 
     function getPaymentTypeString(payment){
-      var type = '1 sola exhibición';
-      if(payment.type === 'cash' || payment.type === 'cash-usd'){
-        type = 'Pago de contado';
-      }else if(payment.msi){
-        type = payment.msi + ' meses sin intereses';
-      }else if(payment.type === 'transfer'){
-        type = 'Transferencia';
-      }else if(payment.type === 'deposit'){
-        type = 'Deposito';
-      }else if(payment.type === 'ewallet'){
-        type = 'Monedero electrónico';
-      }else if(payment.type === 'client-balance'){
-        type = 'Saldo a favor cliente';
-      }
+      var type = 'Tarjeta de crédito';
+      var mapper = getPaymentsTypesMapper();
+      type = mapper[payment.type] || type;
       return type;
+    }
+
+
+    function getPaymentsTypesMapper(){
+      var mapper = {
+        'debit-card': 'Tarjeta de débito',
+        'credit-card': 'Tarjeta de crédito',
+        'ewallet': 'Monedero electrónico',
+        'client-balance': 'Saldo a favor cliente',
+        'transfer': 'Transferencia',
+        '3-msi': '3 meses sin intereses',
+        '6-msi': '6 meses sin intereses',
+        '9-msi': '9 meses sin intereses',
+        '12-msi': '12 meses sin intereses',
+        '18-msi': '18 meses sin intereses',
+      };
+      return mapper;
     }
 
     //@param quotation - Object quotation populated with Payments and Client

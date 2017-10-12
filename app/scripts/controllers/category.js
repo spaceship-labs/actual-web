@@ -79,13 +79,14 @@ function CategoryCtrl(
   }
 
   function init(){
-    var activeSortOptionKey = 'DiscountPrice';
+    var activeSortOptionKey = 'salesCount';
     vm.activeSortOption = _.findWhere(vm.sortOptions,{key: activeSortOptionKey});
         
     vm.search = {
       items: 10,
       page: 1,
-      category: $routeParams.category
+      category: $routeParams.category,
+      sortOption: vm.activeSortOption
     };
 
     if(SITE.name === 'actual-kids' && $rootScope.activeQuotation){
@@ -117,7 +118,7 @@ function CategoryCtrl(
 
       var metaTags = {
         title: $rootScope.siteConstants.publicName + ' | ' + vm.category.Name,
-        description: $rootScope.siteConstants.publicName + ' | ' + vm.category.Name + '. Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.'
+        description: $rootScope.siteConstants.publicName + ' | ' + vm.category.Name + '. ' + metaTagsService.getDescriptionBySiteTheme()
       };
       metaTagsService.setMetaTags(metaTags);
 

@@ -11,7 +11,8 @@
         var SORT_OPTIONS = [
             {
                 label:'Lo más vendido',
-                key: 'salesCount'
+                key: 'salesCount',
+                direction: 'DESC'
             },
             {
                 label:'Disponibilidad',
