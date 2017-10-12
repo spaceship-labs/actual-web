@@ -79,7 +79,7 @@ angular.module('dashexampleApp')
 
 	  function addEverythingOption(items){
 	  	items.unshift({
-	  		label: 'Cualquiera',
+	  		label: 'Todos',
 	  		value: 'none'
 	  	});
 	  	return items;

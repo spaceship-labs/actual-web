@@ -21,8 +21,8 @@
 
 		<br/>
 
-		<div layout="row">
-			<div flex="50">
+		<div layout="row" class="report-filters-search">
+			<div flex="50" class="search-column">
 				<table>
 					<tr>
 						<td><label for="">Cotización</label></td>
@@ -47,7 +47,7 @@
 					-->							
 				</table>																	
 			</div>
-			<div flex="50">
+			<div flex="50" class="search-column">
 				<table>
 					<tr>
 						<td><label for="">Fecha inicio</label></td>
@@ -111,7 +111,9 @@
 				
 				<button 
 					ng-click="vm.triggerSearch()"
-					class="action-btn">Buscar</button>																	
+					class="action-btn">Buscar</button>				
+
+				<div class="clear"></div>													
 			</div>
 		</div>
 	</div>
