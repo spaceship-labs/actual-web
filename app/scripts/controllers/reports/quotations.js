@@ -27,6 +27,7 @@ angular.module('dashexampleApp')
 	    triggerSearchName: 'triggerSearch',
 	    triggerSearch: triggerSearch,	    	    
 	    searchParams: {
+	    	Store: 'none'
 	    },
 	    dateRange: {
 	    	field: 'createdAt'

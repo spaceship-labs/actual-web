@@ -5415,8 +5415,16 @@ padding-left: 16px;
 #reports .head-reports a{color: black;margin-left: 5px;font-size: 14px;font-weight: 400px}
 
 
-#reports .report-filters{max-width: 900px;}
+#reports .report-filters{max-width: 920px;}
 #reports .report-filters td{padding: 2px 6px;}
+#reports .report-filters td:first-child{
+  min-width: 110px;
+  box-sizing: border-box;
+}
+#reports .report-filters .client-search label{
+  padding: 2px 6px;
+  max-width: 18%;
+}
 #reports .report-filters .excel-triger-wrapper{text-align: center;}
 #reports .report-filters .excel-triger-wrapper .loading-circle,
 #reports .report-filters .excel-triger-wrapper img{
