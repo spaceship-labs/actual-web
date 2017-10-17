@@ -5426,6 +5426,10 @@ padding-left: 16px;
   max-width: 18%;
 }
 #reports .report-filters .excel-triger-wrapper{text-align: center;}
+#reports .report-filters .excel-triger-wrapper .action-btn{
+  max-width: 140px;
+  margin: 10px auto;
+}
 #reports .report-filters .excel-triger-wrapper .loading-circle,
 #reports .report-filters .excel-triger-wrapper img{
   margin-top: 10px;

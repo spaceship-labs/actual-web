@@ -29,6 +29,12 @@
         dialogService.showDestroyDialog(ev, $scope.destroyFn, id);
       };
 
+      $scope.domLayout = '<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>';
+
+      if($scope.paginationPosition === 'top'){
+        $scope.domLayout = '<"pagination"p><"top"f>rt';
+      }
+
       $scope.dtOptions = DTOptionsBuilder
         .newOptions()
         .withFnServerData(serverData)
@@ -43,7 +49,7 @@
         .withOption('oLanguage',{"sEmptyTable": "No hay información"})
         //.withPaginationType('numbers')
         .withPaginationType('input')
-        .withDOM('<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>')
+        .withDOM($scope.domLayout)
         .withOption('createdRow', function(row, data, index) {
             // Recompiling so we can bind Angular directive to the DT
             $compile(angular.element(row).contents())($scope);
@@ -455,7 +461,8 @@
           clientSearchTerm: '=',
           exportEventEmitterName: '=',
           searchEventEmitterName: '=',
-          enableSearchField: '='
+          enableSearchField: '=',
+          paginationPosition: '='
         },
         templateUrl : 'views/directives/table-list.html'
       };

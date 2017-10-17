@@ -56,15 +56,7 @@
 							</div>							
 						</td>	
 					</tr>		
-					<tr>
-						<td><label for="">Página web</label></td>
-						<td>
-							<div class="input-element">
-								<select ng-model="vm.searchParams.Store" ng-options="store.value as store.label for store in vm.stores" class="select-element">
-								</select>
-							</div>
-						</td>	
-					</tr>											
+										
 				</table>																	
 			</div>
 			<div flex="50" class="search-column">
@@ -107,11 +99,17 @@
 						</td>						
 					</tr>	
 
-				</table>	
+					<tr>
+						<td><label for="">Página web</label></td>
+						<td>
+							<div class="input-element">
+								<select ng-model="vm.searchParams.Store" ng-options="store.value as store.label for store in vm.stores" class="select-element">
+								</select>
+							</div>
+						</td>	
+					</tr>						
 
-				<button 
-					ng-click="vm.triggerSearch()"
-					class="action-btn">Buscar</button>
+				</table>	
 
 				<div class="clear"></div>
 
@@ -128,5 +126,10 @@
 		<a ng-if="!vm.isExporting" href="" ng-click="vm.triggerExcelExport()">	
 			<img src="images/excel-icon.png" alt="">
 		</a>
+
+		<button 
+			ng-click="vm.triggerSearch()"
+			class="action-btn">Buscar</button>
+
 	</div>
 </section>

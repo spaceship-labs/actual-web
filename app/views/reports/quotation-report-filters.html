@@ -38,17 +38,16 @@
 					    </div>
 						</td>	
 					</tr>
-					<!--
+	
 					<tr>
-						<td><label for="">Tipo pago</label></td>
+						<td><label for="">Página web</label></td>
 						<td>
 							<div class="input-element">
-								<select ng-model="vm.searchParams.paymentType" ng-options="type.value as type.label for type in vm.paymentTypes" class="select-element">
+								<select ng-model="vm.searchParams.Store" ng-options="store.value as store.label for store in vm.stores" class="select-element">
 								</select>
-							</div>										
+							</div>
 						</td>	
-					</tr>
-					-->							
+					</tr>			
 				</table>																	
 			</div>
 			<div flex="50" class="search-column">
@@ -90,32 +89,8 @@
 					    </div>						
 						</td>						
 					</tr>	
-					<!--
-					<tr>
-						<td><label for="">Estatus venta</label></td>
-						<td>
-							<div class="input-element">
-								<select ng-model="vm.searchParams.status" ng-options="status.value as status.label for status in vm.orderStatuses" class="select-element">
-								</select>		
-							</div>							
-						</td>	
-					</tr>
-					-->		
-					<tr>
-						<td><label for="">Página web</label></td>
-						<td>
-							<div class="input-element">
-								<select ng-model="vm.searchParams.Store" ng-options="store.value as store.label for store in vm.stores" class="select-element">
-								</select>
-							</div>
-						</td>	
-					</tr>
-				</table>	
 
-				
-				<button 
-					ng-click="vm.triggerSearch()"
-					class="action-btn">Buscar</button>				
+				</table>	
 
 				<div class="clear"></div>													
 			</div>
@@ -131,5 +106,11 @@
 		<a ng-if="!vm.isExporting" href="" ng-click="vm.triggerExcelExport()">	
 			<img src="images/excel-icon.png" alt="">
 		</a>
+
+				
+		<button 
+			ng-click="vm.triggerSearch()"
+			class="action-btn">Buscar</button>				
+
 	</div>
 </section>
