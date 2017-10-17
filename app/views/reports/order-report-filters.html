@@ -1,5 +1,5 @@
-<section class="report-filters" layout="row" layout-wrap>
-	<div flex="70">
+<form ng-submit="vm.triggerSearch()" class="report-filters" layout="row" layout-wrap>
+	<div flex="70" ng-enter="vm.triggerSearch()" >
 
 		<div class="client-search" layout="row" layout-align="space-between center">
 			<label flex="20" for="">Socio negocio</label>
@@ -117,7 +117,7 @@
 		</div>
 	</div>
 
-	<div flex="30" class="excel-triger-wrapper">
+	<div ng-enter="vm.triggerSearch()" flex="30" class="excel-triger-wrapper">
 
 		<div ng-show="vm.isExporting" layout="row" layout-align="center center" class="loading-circle loading-circle-small">
 		  <md-progress-circular class="md-accent" md-diameter="60px"></md-progress-circular>
@@ -128,8 +128,8 @@
 		</a>
 
 		<button 
-			ng-click="vm.triggerSearch()"
+			type="submit"
 			class="action-btn">Buscar</button>
 
 	</div>
-</section>
+</form>

@@ -36,6 +36,8 @@
 .actual-studio .filters-sidenav .pointer-close-btn i{color: #CC262F;}
 .actual-studio .filters-head{background: #CC262F!important;}
 
+.actual-studio #reports .report-filters .excel-triger-wrapper .action-btn{background: #CC262F!important}
+
 
 @media(max-width:600px){
   .actual-studio .searcher-wrapper{

@@ -48,7 +48,8 @@ angular.module('dashexampleApp')
 	        domainColumn: 'Store'	      	
 	    	},
 	      {key:'createdAt', label:'Fecha' ,date:true},
-	      {key:'discount', label:'Descuento', currency:true},
+	      //{key:'discount', label:'Descuento', currency:true},
+	      {key:'paymentType', label:'Tipo de pago', mapper:paymentService.getPaymentsTypesMapper()},
 	      {key:'total', label: 'Total', currency:true},      
 	      {key:'status', label:'Estatus', mapper:orderService.getOrderStatusMapper()},
 	      {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},

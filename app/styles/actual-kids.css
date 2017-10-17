@@ -39,6 +39,8 @@
 .actual-kids .filters-sidenav .pointer-close-btn i{color: #34B3E7;}
 .actual-kids .filters-head{background: #34B3E7!important;}
 
+.actual-kids #reports .report-filters .excel-triger-wrapper .action-btn{background: #f7323f!important}
+
 
 @media(max-width:600px){
   .actual-kids .searcher-wrapper{
