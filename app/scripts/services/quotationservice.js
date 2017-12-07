@@ -19,7 +19,10 @@
       deliveryService
     ){
 
+      var PAYMENT_GROUPS_KEYS = ['pg1', 'pg2', 'pg3', 'pg4', 'pg5']; 
+
       var service = {
+        PAYMENT_GROUPS_KEYS: PAYMENT_GROUPS_KEYS,
         PAYMENT_ATTEMPTS_LIMIT: 3,
         addDetail: addDetail,
         addProduct: addProduct,
@@ -507,11 +510,11 @@
         detail.subtotal = detail.quantity * detail.unitPrice;
         detail.total = detail.quantity * detail.unitPriceWithDiscount;
 
-        detail.totalPg1 = detail.quantity * detail.unitPriceWithDiscountPg1;
-        detail.totalPg2 = detail.quantity * detail.unitPriceWithDiscountPg2;
-        detail.totalPg3 = detail.quantity * detail.unitPriceWithDiscountPg3;
-        detail.totalPg4 = detail.quantity * detail.unitPriceWithDiscountPg4;
-        detail.totalPg5 = detail.quantity * detail.unitPriceWithDiscountPg5; 
+        detail = PAYMENT_GROUPS_KEYS.reduce(function(d, groupKey){
+          d['total' + groupKey] = d.quantity * d['unitPriceWithDiscount'+groupKey];
+          return d;
+        }, detail);
+
         return detail;
       }
 
@@ -524,12 +527,11 @@
         detail.total                  = newDetailValues.total;
 
         detail.unitPriceWithDiscount    = newDetailValues.unitPriceWithDiscount;
-        detail.unitPriceWithDiscountPg1 = newDetailValues.unitPriceWithDiscountPg1;
-        detail.unitPriceWithDiscountPg2 = newDetailValues.unitPriceWithDiscountPg2;
-        detail.unitPriceWithDiscountPg3 = newDetailValues.unitPriceWithDiscountPg3;
-        detail.unitPriceWithDiscountPg4 = newDetailValues.unitPriceWithDiscountPg4;
-        detail.unitPriceWithDiscountPg5 = newDetailValues.unitPriceWithDiscountPg5;
-
+        
+        detail = PAYMENT_GROUPS_KEYS.reduce(function(d, groupKey){
+          d['unitPriceWithDiscount' + groupKey] = newDetailValues['unitPriceWithDiscount'+groupKey];
+          return d;
+        }, detail);
 
         detail.Promotion               = newDetailValues.Promotion;
         detail.PromotionPackageApplied = newDetailValues.PromotionPackageApplied;
@@ -550,54 +552,33 @@
           totalProducts: 0,
           subtotal: 0,
           deliveryFee: 0,
-          deliveryFeePg1: 0,
-          deliveryFeePg2: 0,
-          deliveryFeePg3: 0,
-          deliveryFeePg4: 0,
-          deliveryFeePg5: 0,
-
-
           total: 0,
-          totalPg1: 0,
-          totalPg2: 0,
-          totalPg3: 0,
-          totalPg4: 0,
-          totalPg5: 0
-
         };
+
+        //Init values on 0
+        quotationAux = PAYMENT_GROUPS_KEYS.reduce(function(q, groupKey){
+          q['total' + groupKey] = 0;
+          q['deliveryFee' + groupKey] = 0;
+          return q;
+        }, quotationAux);
 
         quotationAux = _.reduce(quotation.Details, function(quotationObj,detail){
           quotationObj.totalProducts += detail.quantity;
           quotationObj.subtotal += detail.subtotal;
           quotationObj.deliveryFee += detail.deliveryFee;
-          quotationObj.total += detail.total;
+          quotationObj.total += (detail.total);
 
-          quotationObj.totalPg1 += detail.totalPg1;
-          quotationObj.totalPg2 += detail.totalPg2;
-          quotationObj.totalPg3 += detail.totalPg3;
-          quotationObj.totalPg4 += detail.totalPg4;
-          quotationObj.totalPg5 += detail.totalPg5;
-
-          quotationObj.deliveryFeePg1 += detail.deliveryFeePg1;
-          quotationObj.deliveryFeePg2 += detail.deliveryFeePg2;
-          quotationObj.deliveryFeePg3 += detail.deliveryFeePg3;
-          quotationObj.deliveryFeePg4 += detail.deliveryFeePg4;
-          quotationObj.deliveryFeePg5 += detail.deliveryFeePg5;
-
+          quotationObj = PAYMENT_GROUPS_KEYS.reduce(function(q, groupKey){
+            q['total' + groupKey] += (detail['total'+groupKey] + detail['deliveryFee'+groupKey]);
+            q['deliveryFee' + groupKey] += detail['deliveryFee'+groupKey];
+            return q;
+          }, quotationObj);
 
           return quotationObj;
         }, quotationAux);
 
         quotation = _.extend(quotation, quotationAux);
         quotation.total +=  quotation.deliveryFee;
-
-        quotation.totalPg1 +=  quotation.deliveryFeePg1;
-        quotation.totalPg2 +=  quotation.deliveryFeePg2;
-        quotation.totalPg3 +=  quotation.deliveryFeePg3;
-        quotation.totalPg4 +=  quotation.deliveryFeePg4;
-        quotation.totalPg5 +=  quotation.deliveryFeePg5;
-
-
         quotation.discount = quotation.total - quotation.subtotal;
         return quotation;
       }
