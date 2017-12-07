@@ -15,8 +15,33 @@
 			getZipcodeDelivery: getZipcodeDelivery,
 			getZipcodeDeliveryById: getZipcodeDeliveryById,
 			setUpDetailDeliveries: setUpDetailDeliveries,
-			removeInvalidDeliveriesForPackages: removeInvalidDeliveriesForPackages
+			removeInvalidDeliveriesForPackages: removeInvalidDeliveriesForPackages,
+			calculateProductCartDeliveryFee: calculateProductCartDeliveryFee
     };
+
+    function calculateProductCartDeliveryFee(productPrice, zipcodedeliveryConfig, quantity){
+	    var fee = 0;
+	    var AMOUNT_MODE = 'amount';
+	    var PERCENTAGE_MODE = 'percentage';
+
+	    if(productPrice && zipcodedeliveryConfig && quantity){
+	      
+	      if(zipcodedeliveryConfig.ZipcodeState){
+	        var feeMode = zipcodedeliveryConfig.ZipcodeState.deliveryPriceMode;
+	        var feeValue = zipcodedeliveryConfig.ZipcodeState.deliveryPriceValue;
+
+	        if(feeMode === AMOUNT_MODE){
+	          fee = feeValue;
+	        }
+	        else if(feeMode === PERCENTAGE_MODE){
+	          fee = productPrice * (feeValue / 100);
+	        }
+	      }
+	    }
+	    
+	    return fee * (quantity || 1);
+
+    }
 
 		function getZipcodeDelivery(zipcode){
 			var params = {zipcode: zipcode};

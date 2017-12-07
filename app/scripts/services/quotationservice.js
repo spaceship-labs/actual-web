@@ -549,6 +549,7 @@
         var quotationAux = {
           totalProducts: 0,
           subtotal: 0,
+          deliveryFee: 0,
           total: 0,
           totalPg1: 0,
           totalPg2: 0,
@@ -560,6 +561,7 @@
         quotationAux = _.reduce(quotation.Details, function(quotationObj,detail){
           quotationObj.totalProducts += detail.quantity;
           quotationObj.subtotal += detail.subtotal;
+          quotationObj.deliveryFee += detail.deliveryFee;
           quotationObj.total += detail.total;
 
           quotationObj.totalPg1 += detail.totalPg1;
@@ -572,6 +574,7 @@
         }, quotationAux);
 
         quotation = _.extend(quotation, quotationAux);
+        //quotation.total = quotation.total + quotation.deliveryFee;
         quotation.discount = quotation.total - quotation.subtotal;
         return quotation;
       }
@@ -581,6 +584,7 @@
         quotation.subtotal      = newValues.subtotal;
         quotation.discount      = newValues.discount;
         quotation.totalProducts = newValues.totalProducts;   
+        quotation.deliveryFee = newValues.deliveryFee;   
 
         return quotation;
       }   

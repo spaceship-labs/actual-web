@@ -63,7 +63,8 @@ function ProductCtrl(
     zipcodeForm: {},
     isActiveBreadcrumbItem: breadcrumbService.isActiveBreadcrumbItem,
     showZipcodeDialog: showZipcodeDialog,
-    submitZipcodeForm: submitZipcodeForm
+    submitZipcodeForm: submitZipcodeForm,
+    calculateDeliveryFee: calculateDeliveryFee
   });
 
 
@@ -113,10 +114,12 @@ function ProductCtrl(
           quantity: 1
         };
 
+        /*
         if(vm.product.U_FAMILIA !== 'SI'){
           $location.path('/');
           return;
         }
+        */
 
         if(reload){
           $location.path('//' + productId, false)
@@ -181,6 +184,15 @@ function ProductCtrl(
       .then(function(res){
         vm.zipcodeDelivery = res;
       });
+  }
+
+  function calculateDeliveryFee(){
+    return deliveryService.calculateProductCartDeliveryFee(
+      vm.product.Price, 
+      vm.zipcodeDelivery, 
+      (vm.productCart || {}).quantity
+    );
+
   }
 
   function setUpDeliveries(options){

@@ -77,6 +77,7 @@
               <div flex class="order-item-features">
                 <ul>
                   <li><strong>Código: </strong> {{detail.Product.ItemCode}}</li>
+                  <li><strong>Costo de envío:</strong> MXN {{ detail.deliveryFee | currency}}</li>
                   <li
                     ng-repeat="filter in detail.Product.Filters"
                     ng-if="
@@ -223,6 +224,7 @@
         </div>
         <div class="reduction" flex="20" flex-sm="100" flex-xs="100">
           <p><strong>SUBTOTAL COMPRA:</strong></p>
+          <p><strong>COSTO DE ENVÍO:</strong></p>
           <p><strong>DESCUENTOS COMPRA:</strong></p>
           <p><strong>TOTAL COMPRA:</strong></p>
           <p><strong>TOTAL PAGADO:</strong></p>
@@ -233,6 +235,7 @@
         </div>
         <div class="price-reduction" flex="20" flex-sm="60" flex-xs="60">
           <p><strong>{{vm.order.subtotal | currency}} MXN</strong></p>
+          <p><strong>MXN {{ vm.quotation.deliveryFee | currency}}</strong></p>
 
           <p ng-if="vm.order.discount > 0"><strong>-{{vm.order.discount | currency}} MXN</strong></p>
           <p ng-if="vm.order.discount <= 0"><strong>{{vm.order.discount | currency}} MXN</strong></p>

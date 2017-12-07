@@ -53,7 +53,8 @@
 		  <h4><strong>COSTO DE ENVÍO</strong></h4>
 		 </div>
 		 <div>
-		 		<h4><strong><small>MXN</small> $0.00</strong></h4>
+		 		<!--<h4><strong><small>MXN</small> $0.00</strong></h4>-->
+		 		<h4><strong><small>MXN</small> {{ vm.calculateDeliveryFee() | currency}}</strong></h4>
 		 </div>
 	</div>
  </section>

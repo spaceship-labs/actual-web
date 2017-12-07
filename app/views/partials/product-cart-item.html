@@ -124,7 +124,6 @@
         <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
       </p>
 
-
       <p
         ng-if="vm.appliesForPackageDiscount(detail)"
         class="bottom-text"
@@ -140,7 +139,7 @@
           Beneficio monedero eléctronico: {{detail.ewallet | currency}}
         </p>                  
       </div>
-
+      <p class="bottom-text"><strong>Costo de envío: </strong> {{ detail.deliveryFee | currency}}</p>
     </div>
   </div>
 
