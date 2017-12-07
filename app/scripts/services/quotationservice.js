@@ -550,12 +550,20 @@
           totalProducts: 0,
           subtotal: 0,
           deliveryFee: 0,
+          deliveryFeePg1: 0,
+          deliveryFeePg2: 0,
+          deliveryFeePg3: 0,
+          deliveryFeePg4: 0,
+          deliveryFeePg5: 0,
+
+
           total: 0,
           totalPg1: 0,
           totalPg2: 0,
           totalPg3: 0,
           totalPg4: 0,
           totalPg5: 0
+
         };
 
         quotationAux = _.reduce(quotation.Details, function(quotationObj,detail){
@@ -570,11 +578,26 @@
           quotationObj.totalPg4 += detail.totalPg4;
           quotationObj.totalPg5 += detail.totalPg5;
 
+          quotationObj.deliveryFeePg1 += detail.deliveryFeePg1;
+          quotationObj.deliveryFeePg2 += detail.deliveryFeePg2;
+          quotationObj.deliveryFeePg3 += detail.deliveryFeePg3;
+          quotationObj.deliveryFeePg4 += detail.deliveryFeePg4;
+          quotationObj.deliveryFeePg5 += detail.deliveryFeePg5;
+
+
           return quotationObj;
         }, quotationAux);
 
         quotation = _.extend(quotation, quotationAux);
-        //quotation.total = quotation.total + quotation.deliveryFee;
+        quotation.total +=  quotation.deliveryFee;
+
+        quotation.totalPg1 +=  quotation.deliveryFeePg1;
+        quotation.totalPg2 +=  quotation.deliveryFeePg2;
+        quotation.totalPg3 +=  quotation.deliveryFeePg3;
+        quotation.totalPg4 +=  quotation.deliveryFeePg4;
+        quotation.totalPg5 +=  quotation.deliveryFeePg5;
+
+
         quotation.discount = quotation.total - quotation.subtotal;
         return quotation;
       }
