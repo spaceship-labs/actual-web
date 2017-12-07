@@ -19,7 +19,7 @@
       deliveryService
     ){
 
-      var PAYMENT_GROUPS_KEYS = ['pg1', 'pg2', 'pg3', 'pg4', 'pg5']; 
+      var PAYMENT_GROUPS_KEYS = ['Pg1', 'Pg2', 'Pg3', 'Pg4', 'Pg5']; 
 
       var service = {
         PAYMENT_GROUPS_KEYS: PAYMENT_GROUPS_KEYS,
@@ -509,12 +509,15 @@
       function localDetailUpdate(detail){
         detail.subtotal = detail.quantity * detail.unitPrice;
         detail.total = detail.quantity * detail.unitPriceWithDiscount;
+        detail.deliveryFee = deliveryService.calculateDetailDeliveryFee(detail);
 
         detail = PAYMENT_GROUPS_KEYS.reduce(function(d, groupKey){
           d['total' + groupKey] = d.quantity * d['unitPriceWithDiscount'+groupKey];
+          d['deliveryFee' + groupKey] = deliveryService.calculateDetailDeliveryFee(d, groupKey);
           return d;
         }, detail);
 
+        console.log('localDetailUpdate', detail);
         return detail;
       }
 
@@ -525,6 +528,7 @@
         detail.discount               = newDetailValues.discount;
         detail.subtotal               = newDetailValues.subtotal;
         detail.total                  = newDetailValues.total;
+        detail.deliveryFee            = newDetailValues.deliveryFee;
 
         detail.unitPriceWithDiscount    = newDetailValues.unitPriceWithDiscount;
         

@@ -331,6 +331,7 @@ function QuotationsEditCtrl(
   }
 
   function onDetailQuantityChange($ev,detail){
+    console.log('onDetailQuantityChange');
     if(detail.quantity && !vm.isCalculatingAvailability){
       vm.isCalculatingAvailability = true;
 

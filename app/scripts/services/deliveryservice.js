@@ -16,7 +16,8 @@
 			getZipcodeDeliveryById: getZipcodeDeliveryById,
 			setUpDetailDeliveries: setUpDetailDeliveries,
 			removeInvalidDeliveriesForPackages: removeInvalidDeliveriesForPackages,
-			calculateProductCartDeliveryFee: calculateProductCartDeliveryFee
+			calculateProductCartDeliveryFee: calculateProductCartDeliveryFee,
+			calculateDetailDeliveryFee: calculateDetailDeliveryFee
     };
 
     function calculateProductCartDeliveryFee(productPrice, zipcodedeliveryConfig, quantity){
@@ -24,8 +25,7 @@
 	    var AMOUNT_MODE = 'amount';
 	    var PERCENTAGE_MODE = 'percentage';
 
-	    if(productPrice && zipcodedeliveryConfig && quantity){
-	      
+	    if(productPrice && zipcodedeliveryConfig && quantity){ 
 	      if(zipcodedeliveryConfig.ZipcodeState){
 	        var feeMode = zipcodedeliveryConfig.ZipcodeState.deliveryPriceMode;
 	        var feeValue = zipcodedeliveryConfig.ZipcodeState.deliveryPriceValue;
@@ -38,10 +38,24 @@
 	        }
 	      }
 	    }
-	    
 	    return fee * (quantity || 1);
-
     }
+
+    function calculateDetailDeliveryFee(detail, groupKey){
+	    groupKey = groupKey ? groupKey : '';
+	    var fee = 0;
+	    var AMOUNT_MODE = 'amount';
+	    var PERCENTAGE_MODE = 'percentage';
+
+      if(detail.deliveryPriceMode === AMOUNT_MODE){
+        fee = detail.deliveryPriceValue;
+      }
+      else if(detail.deliveryPriceMode === PERCENTAGE_MODE){
+        fee = detail['total'+groupKey] * (detail.deliveryPriceValue / 100);
+      }
+      return fee;
+    }
+
 
 		function getZipcodeDelivery(zipcode){
 			var params = {zipcode: zipcode};
