@@ -529,11 +529,16 @@
         detail.subtotal               = newDetailValues.subtotal;
         detail.total                  = newDetailValues.total;
         detail.deliveryFee            = newDetailValues.deliveryFee;
+        detail.deliveryPriceMode      = newDetailValues.deliveryPriceMode;
+        detail.deliveryPriceValue     = newDetailValues.deliveryPriceValue;
 
         detail.unitPriceWithDiscount    = newDetailValues.unitPriceWithDiscount;
         
         detail = PAYMENT_GROUPS_KEYS.reduce(function(d, groupKey){
           d['unitPriceWithDiscount' + groupKey] = newDetailValues['unitPriceWithDiscount'+groupKey];
+          d['total' + groupKey] = newDetailValues['total'+groupKey];
+          d['deliveryFee' + groupKey] = newDetailValues['deliveryFee'+groupKey];
+
           return d;
         }, detail);
 
@@ -583,7 +588,7 @@
 
         quotation = _.extend(quotation, quotationAux);
         quotation.total +=  quotation.deliveryFee;
-        quotation.discount = quotation.total - quotation.subtotal;
+        quotation.discount = (quotation.total - quotation.subtotal) - quotation.deliveryFee;
         return quotation;
       }
 
@@ -592,7 +597,9 @@
         quotation.subtotal      = newValues.subtotal;
         quotation.discount      = newValues.discount;
         quotation.totalProducts = newValues.totalProducts;   
-        quotation.deliveryFee = newValues.deliveryFee;   
+        quotation.deliveryFee   = newValues.deliveryFee;
+        quotation.deliveryPriceMode  = newValues.deliveryPriceMode;
+        quotation.deliveryPriceValue  = newValues.deliveryPriceValue;
 
         return quotation;
       }   

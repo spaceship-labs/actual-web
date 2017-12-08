@@ -218,14 +218,14 @@
       </ng-include>
       -->
 
-      <div class="order-payment-totals" layout="row" layout-align="space-between center">
+      <div class="order-payment-totals" layout="row" layout-align="space-between start">
         <div hide-sm hide-xs flex="60">
           <p class="order-payment-totals-note">* Todos los montos incluyen impuestos.</p>
         </div>
         <div class="reduction" flex="20" flex-sm="100" flex-xs="100">
           <p><strong>SUBTOTAL COMPRA:</strong></p>
-          <p><strong>COSTO DE ENVÍO:</strong></p>
           <p><strong>DESCUENTOS COMPRA:</strong></p>
+          <p><strong>COSTO DE ENVÍO:</strong></p>
           <p><strong>TOTAL COMPRA:</strong></p>
           <p><strong>TOTAL PAGADO:</strong></p>
           <!--<p><strong>SALDO:</strong></p>-->
@@ -235,10 +235,10 @@
         </div>
         <div class="price-reduction" flex="20" flex-sm="60" flex-xs="60">
           <p><strong>{{vm.order.subtotal | currency}} MXN</strong></p>
-          <p><strong>MXN {{ vm.quotation.deliveryFee | currency}}</strong></p>
-
           <p ng-if="vm.order.discount > 0"><strong>-{{vm.order.discount | currency}} MXN</strong></p>
           <p ng-if="vm.order.discount <= 0"><strong>{{vm.order.discount | currency}} MXN</strong></p>
+
+          <p><strong>{{ vm.order.deliveryFee | currency}} MXN</strong></p>
 
           <p><strong>{{vm.order.total | currency}} MXN</strong></p>
           <p><strong>{{vm.order.total | currency}} MXN</strong></p>

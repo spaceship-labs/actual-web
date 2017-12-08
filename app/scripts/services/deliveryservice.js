@@ -48,7 +48,7 @@
 	    var PERCENTAGE_MODE = 'percentage';
 
       if(detail.deliveryPriceMode === AMOUNT_MODE){
-        fee = detail.deliveryPriceValue;
+        fee = detail.deliveryPriceValue * detail.quantity;
       }
       else if(detail.deliveryPriceMode === PERCENTAGE_MODE){
         fee = detail['total'+groupKey] * (detail.deliveryPriceValue / 100);

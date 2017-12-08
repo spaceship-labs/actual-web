@@ -253,13 +253,13 @@
               <td><strong>MXN {{ vm.quotation.subtotal | currency }}</strong></td>
             </tr>
             <tr>
-              <td><strong>Costo de envío:</strong></td>
-              <td><strong>MXN {{ vm.quotation.deliveryFee | currency}}</strong></td>
-            </tr>            
-            <tr>
               <td>Descuento:</td>
               <td><strong>MXN<span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
             </tr>
+            <tr>
+              <td><strong>Costo de envío:</strong></td>
+              <td><strong>MXN {{ vm.quotation.deliveryFee | currency}}</strong></td>
+            </tr>            
           </table>
           <hr>
 
