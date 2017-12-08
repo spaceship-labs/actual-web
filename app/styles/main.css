@@ -1210,8 +1210,15 @@ select{
   #HOME-SLIDER
 /*--------------*/
 #home-slider-wrapper{}
-.home-slider{max-height: 340px; overflow: hidden;}
-.home-slider .home-slide{position: relative;max-height: 340px;}
+.home-slider{
+  /*max-height: 340px; */
+  max-height: 450px;
+  overflow: hidden;
+}
+.home-slider .home-slide{position: relative;
+  /*max-height: 340px;*/
+  max-height: 450px;
+}
 .home-slider .home-slide img{width: 100%;}
 .home-slider .home-slide .slide-text{
   position: absolute;
