@@ -20,6 +20,8 @@
         isClientFiscalDataValid: isClientFiscalDataValid,
         setClientDefaultData: setClientDefaultData,
         updateFiscalAddress: updateFiscalAddress,
+        getCFDIUseList: getCFDIUseList,
+        mapCFDIuseCode: mapCFDIuseCode,        
         fiscalAddressConstraints:{
           LicTradNum:{min:12,max:13},
           companyName:{max:50},
@@ -140,6 +142,132 @@
         ];
         return genders;      
       }
+
+      function mapCFDIuseCode(code){
+        var cfdiUse = {};
+        var list = getCFDIUseList();
+        cfdiUse = _.findWhere(list, {code: code});
+        return cfdiUse || {};
+      }
+
+      function getCFDIUseList(){
+        var list = [
+        {
+          code: 'G01', 
+          label: 'Adquisición de mercancias',
+          isMoral: true
+        },
+        {
+          code: 'G02', 
+          label: 'Devoluciones, descuentos o bonificaciones',
+          isMoral: true
+        },
+        {
+          code: 'G03', 
+          label: 'Gastos en general',
+          isMoral: true
+        },
+        {
+          code: 'I01', 
+          label: 'Construcciones',
+          isMoral: true
+        },
+        {
+          code: 'I02', 
+          label: 'Mobilario y equipo de oficina por inversiones',
+          isMoral: true
+        },
+        {
+          code: 'I03', 
+          label: 'Equipo de transporte',
+          isMoral: true
+        },
+        {
+          code: 'I04', 
+          label: 'Equipo de computo y accesorios',
+          isMoral: true
+        },
+        {
+          code: 'I05', 
+          label: 'Dados, troqueles, moldes, matrices y herramental',
+          isMoral: true
+        },
+        {
+          code: 'I06', 
+          label:'Comunicaciones telefónicas',
+          isMoral: true
+        },
+        {
+          code: 'I07', 
+          label: 'Comunicaciones satelitales',
+          isMoral: true
+        },
+        {
+          code: 'I08', 
+          label: 'Otra maquinaria y equipo',
+          isMoral: true
+        },
+        {
+          code: 'D01', 
+          label: 'Honorarios médicos, dentales y gastos hospitalarios',
+          isMoral: true
+        },
+        {
+          code: 'D02', 
+          label: 'Gastos médicos por incapacidad o discapacidad',
+          isMoral: true
+        },
+        {
+          code: 'D03', 
+          label: 'Gastos funerales',
+          isMoral: true
+        },
+        {
+          code: 'D04', 
+          label: 'Donativos',
+          isMoral: true
+        },
+        {
+          code: 'D05', 
+          label: 'Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación)',
+          isMoral: true
+        },
+        {
+          code: 'D06', 
+          label: 'Aportaciones voluntarias al SAR',
+          isMoral: true
+        },
+        {
+          code: 'D07', 
+          label: 'Primas por seguros de gastos médicos',
+          isMoral: true
+        },
+        {
+          code: 'D08', 
+          label: 'Gastos de transportación escolar obligatoria',
+          isMoral: true
+        },
+        {
+          code: 'D09', 
+          label: 'Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones',
+          isMoral: true
+        },
+        {
+          code: 'D10', 
+          label: 'Pagos por servicios educativos (colegiaturas)',
+          isMoral: true
+        },
+        {
+          code: 'P01', 
+          label: 'Por definir',
+          isMoral: true
+        }
+        ];
+
+        return list;
+      }
+
+
 
 
     }
