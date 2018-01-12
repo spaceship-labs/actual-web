@@ -29,7 +29,7 @@
 
       function getOrderStatusMapper(){
         var statusMap = {
-          'pending': 'Pendiente',
+          //'pending': 'Pendiente',
           'completed': 'Procesado',
           'pending-sap': 'Procesado',
           //'pending-sap': 'Pagado y procesando',
@@ -69,7 +69,7 @@
       function getGeneralList(page, params){
         var p = page || 1;
         var url = '/order/all/find/' + p;
-        return api.$http.get(url,params);
+        return api.$http.post(url,params);
       }
 
       function createFromQuotation(quotationId, params){

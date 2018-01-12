@@ -84,7 +84,9 @@ function ProductCtrl(
     vm.isLoading             = true;
     vm.isLoadingDeliveries   = true;
 
-    productService.getById(productId)
+    var params = {populateFields:['CustomBrand']};
+
+    productService.getById(productId, params)
       .then(function(res){
         var productFound = res.data.data;
         if(!productFound || !productFound.ItemCode || !res.data){
@@ -110,6 +112,11 @@ function ProductCtrl(
         vm.productCart = {
           quantity: 1
         };
+
+        if(vm.product.U_FAMILIA !== 'SI'){
+          $location.path('/');
+          return;
+        }
 
         if(reload){
           $location.path('//' + productId, false)

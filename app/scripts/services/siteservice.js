@@ -18,9 +18,9 @@
 
       return service;
 
-      function findByHandle(handle){
+      function findByHandle(handle, params){
         var url = '/site/findbyhandle/' + handle;
-        return api.$http.post(url);
+        return api.$http.post(url, params);
       }
 
       function findSiteBannersByHandle(handle){

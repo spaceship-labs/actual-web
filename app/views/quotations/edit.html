@@ -103,6 +103,15 @@
         <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>
       </div>
 
+      <div flex="25" flex-xs="50">
+        <label>Télefono fijo</label>
+        <p>{{vm.quotation.Client.Phone1}}</p>
+      </div>
+      <div flex="25" flex-xs="50">
+        <label>Télefono celular</label>
+        <p>{{vm.quotation.Client.Cellular}}</p>
+      </div>      
+
       <div ng-if="vm.quotation.Address" flex="25" flex-sm="100" flex-xs="100">
         <label>Dirección</label>
         <p>{{vm.addressString}}</p>

@@ -24,6 +24,7 @@ function InvoicingCtrl(
 	angular.extend(vm, {
 		init: init,
 		fiscalAddressConstraints: clientService.fiscalAddressConstraints,
+		cfdiUseList: clientService.getCFDIUseList(),
 		form:{},
 		sendFiscalData: sendFiscalData,
 		onPikadaySelect: onPikadaySelect
@@ -33,6 +34,8 @@ function InvoicingCtrl(
 
 	function init(){
 		loadStates();
+		var lastIndexCfdiUseList = vm.cfdiUseList.length - 1;
+		vm.form.cfdiUse = vm.cfdiUseList[lastIndexCfdiUseList].code;
 	}
 
 	function onPikadaySelect(pikaday){

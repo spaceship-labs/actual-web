@@ -10,7 +10,7 @@
 </div>
 -->
 
-<div class="breadcrumb">
+<div class="breadcrumb" id="breadcrumb-category-page">
   <div class="container container-xxlg">
     <p>
       <a
@@ -30,17 +30,9 @@
   </div>
 </div>
 
-<a
-  ng-click="vm.toggleSearchSidenav()"
-  href=""
-  hide-sm
-  hide-xs
-  class="filters-sidenav-trigger">
-    Filtros
-</a>
+<div class="content-block listing-view" id="category-page">
 
-<div class="content-block listing-view">
-
+  <ng-include ng-show="vm.enableFiltersTrigger" src="'views/partials/search-filters-trigger.html'"></ng-include>
   <ng-include src="'views/partials/search-filters.html'"></ng-include>
 
 

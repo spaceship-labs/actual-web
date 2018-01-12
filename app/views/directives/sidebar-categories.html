@@ -12,7 +12,12 @@
     </a>
   </h2>
 
-  <ul class="listing-view-nav" ng-show="mainCategory.isActive">
+  <ul 
+    class="listing-view-nav" 
+    ng-class="{'active': mainCategory.isActive}"
+  >
+    <!--ng-show="mainCategory.isActive"-->
+
     <li
       ng-repeat="category in mainCategory.Childs | orderBy: 'Name' "
       ng-if="category[storeCode]"

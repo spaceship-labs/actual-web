@@ -1,0 +1,135 @@
+<form ng-submit="vm.triggerSearch()" class="report-filters" layout="row" layout-wrap>
+	<div flex="70" ng-enter="vm.triggerSearch()" >
+
+		<div class="client-search" layout="row" layout-align="space-between center">
+			<label flex="20" for="">Socio negocio</label>
+		  <md-autocomplete
+		  		flex
+		      md-no-cache="false"
+		      md-selected-item="vm.selectedClient"
+		      md-search-text="vm.searchText"
+		      md-items="item in vm.queryClients(vm.searchText)"
+		      md-item-text="item.CardName"
+		      md-min-length="0"
+		      md-dropdown-position="top"
+		      placeholder="Puedes buscar por nombre, email o cardcode">
+		    <md-item-template>
+		      <span class="client-found" md-highlight-text="vm.searchText" md-highlight-flags="^i">
+		        {{item.CardName}} | {{item.CardCode}} | {{item.E_Mail}}</span>
+		    </md-item-template>
+		    <md-not-found>
+		      No se encontro "{{vm.searchText}}".
+		    </md-not-found>
+		  </md-autocomplete>
+		 </div>
+
+		<br/>
+
+		<div layout="row" class="report-filters-search">
+			<div flex="50" class="search-column">
+				<table>
+					<tr>
+						<td><label for="">Orden venta</label></td>
+						<td>
+					    <div class="input-element">
+					      <div class="input-element-inner">
+									<input type="text" placeholder="Folio (6 digitos)" ng-model="vm.searchParams.folio">
+					      </div>
+					    </div>
+						</td>	
+					</tr>
+					<tr>
+						<td><label for="">Tipo pago</label></td>
+						<td>
+							<div class="input-element">
+								<select ng-model="vm.searchParams.paymentType" ng-options="type.value as type.label for type in vm.paymentTypes" class="select-element">
+								</select>
+							</div>										
+						</td>	
+					</tr>		
+					<tr>
+						<td><label for="">Estatus venta</label></td>
+						<td>
+							<div class="input-element">
+								<select ng-model="vm.searchParams.status" ng-options="status.value as status.label for status in vm.orderStatuses" class="select-element">
+								</select>		
+							</div>							
+						</td>	
+					</tr>		
+										
+				</table>																	
+			</div>
+			<div flex="50" class="search-column">
+				<table>
+					<tr>
+						<td><label for="">Fecha inicio</label></td>
+						<td>
+					    <div class="input-element">
+					      <div class="input-element-inner">
+				          <input
+				            pikaday="vm.dateStart"
+				            format="DD/MM/YYYY"
+				            trigger="trigger-start-date-orders"
+				            readonly
+				            type="text"
+				            set-default-date="true"
+				            default-date="{{vm.startDate}}"
+				            on-select="vm.onStartDateSelected(pikaday)">	
+					      </div>
+					    </div>						
+						</td>					
+
+					</tr>
+					<tr>
+						<td><label for="">Fecha hasta</label></td>
+						<td>
+					    <div class="input-element">
+					      <div class="input-element-inner">
+				          <input
+				            pikaday="vm.dateEnd"
+				            format="DD/MM/YYYY"
+				            trigger="trigger-start-date-orders"
+				            readonly
+				            type="text"
+				            set-default-date="true"
+				            default-date="{{vm.startDate}}"
+				            on-select="vm.onEndDateSelected(pikaday)">		
+					      </div>
+					    </div>						
+						</td>						
+					</tr>	
+
+					<tr>
+						<td><label for="">Página web</label></td>
+						<td>
+							<div class="input-element">
+								<select ng-model="vm.searchParams.Store" ng-options="store.value as store.label for store in vm.stores" class="select-element">
+								</select>
+							</div>
+						</td>	
+					</tr>						
+
+				</table>	
+
+				<div class="clear"></div>
+
+			</div>
+		</div>
+	</div>
+
+	<div ng-enter="vm.triggerSearch()" flex="30" class="excel-triger-wrapper">
+
+		<div ng-show="vm.isExporting" layout="row" layout-align="center center" class="loading-circle loading-circle-small">
+		  <md-progress-circular class="md-accent" md-diameter="60px"></md-progress-circular>
+		</div>
+
+		<a ng-if="!vm.isExporting" href="" ng-click="vm.triggerExcelExport()">	
+			<img src="images/excel-icon.png" alt="">
+		</a>
+
+		<button 
+			type="submit"
+			class="action-btn">Buscar</button>
+
+	</div>
+</form>

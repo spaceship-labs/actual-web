@@ -39,6 +39,9 @@
       property="og:site_name"
       content="<%= metaTags.title %>" >
 
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="600" />
+
     <link 
         rel="shortcut icon" 
         href="<%= metaTags.favicon %>"
@@ -101,6 +104,17 @@
     <script>
         window.prerenderReady = false;
     </script>
+
+    <!--Start of Zendesk Chat Script-->
+    <script type="text/javascript">
+    window.$zopim||(function(d,s){var z=$zopim=function(c){
+    z._.push(c)},$=z.s=
+    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+    $.src='https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ';z.t=+new Date;$.
+    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+    </script>
+    <!--End of Zendesk Chat Script-->    
 
   </head>
   <body ng-cloak ng-class="main.siteTheme">
@@ -226,6 +240,9 @@
     <script src="bower_components/ng-currency/dist/ng-currency.js"></script>
     <script src="bower_components/conekta.js/dist/conekta.min.js"></script>
     <script src="bower_components/angular-google-analytics/dist/angular-google-analytics.min.js"></script>
+    <script src="bower_components/js-xlsx/dist/xlsx.full.min.js"></script>
+    <script src="bower_components/es6-promise/promise.js"></script>
+    <script src="bower_components/alasql/dist/alasql.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
@@ -245,11 +262,13 @@
         <script src="scripts/services/api.js"></script>
         <script src="scripts/services/authservice.js"></script>
         <script src="scripts/directives/listing-product.js"></script>
+        <script src="scripts/directives/fullheight-element.js"></script>
         <script src="scripts/directives/product-gallery.js"></script>
         <script src="scripts/directives/category-item.js"></script>
         <script src="scripts/controllers/category.js"></script>
         <script src="scripts/controllers/product.js"></script>
         <script src="scripts/directives/sidebar-categories.js"></script>
+        <script src="scripts/directives/ng-enter.js"></script>        
         <script src="scripts/services/categoriesservice.js"></script>
         <script src="scripts/services/checkoutservice.js"></script>
         <script src="scripts/services/ewalletservice.js"></script>

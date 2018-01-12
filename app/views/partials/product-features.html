@@ -11,9 +11,9 @@
       <td><strong>{{vm.sas[vm.product.U_Empresa]}}</strong></td>
     </tr>
     -->
-    <tr>
+    <tr ng-if="vm.product.CustomBrand">
       <td>Marca</td>
-      <td><strong>{{vm.product.ItmsGrpNam}}</strong></td>
+      <td><strong>{{vm.product.CustomBrand.Name}}</strong></td>
     </tr>
     <tr ng-repeat="filter in vm.filters">
       <td 

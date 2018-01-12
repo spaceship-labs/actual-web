@@ -1,8 +1,7 @@
 (function (){
   //'use strict';
 
-  angular
-    .module('dashexampleApp')
+  angular.module('dashexampleApp')
     .factory('formatService', formatService);
     /*************************************************************/
     // NumeroALetras
@@ -31,7 +30,8 @@
     // @author Rodolfo Carmona
     // @contributor Jean (jpbadoino@gmail.com)
     /*************************************************************/
-  function formatService(){
+  /** @ngInject */
+  function formatService($filter){
 
       function Unidades(num){
 
@@ -59,8 +59,7 @@
           switch(decena)
           {
               case 1:
-                  switch(unidad)
-                  {
+                  switch(unidad){
                       case 0: return "DIEZ";
                       case 1: return "ONCE";
                       case 2: return "DOCE";
@@ -87,8 +86,9 @@
       }//Unidades()
 
       function DecenasY(strSin, numUnidades) {
-          if (numUnidades > 0)
-          return strSin + " Y " + Unidades(numUnidades)
+          if (numUnidades > 0){
+            return strSin + " Y " + Unidades(numUnidades);
+          }
 
           return strSin;
       }//DecenasY()
@@ -142,8 +142,9 @@
           var strMiles = Seccion(num, divisor, "UN MIL", "MIL");
           var strCentenas = Centenas(resto);
 
-          if(strMiles == "")
+          if(strMiles === ""){
               return strCentenas;
+          }
 
           return strMiles + " " + strCentenas;
       }//Miles()
@@ -177,23 +178,59 @@
 
           if (data.centavos > 0) {
               data.letrasCentavos = "CON " + (function (){
-                  if (data.centavos == 1)
-                      return Millones(data.centavos) + " " + data.letrasMonedaCentavoSingular;
-                  else
-                      return Millones(data.centavos) + " " + data.letrasMonedaCentavoPlural;
-                  })();
-          };
+                  if (data.centavos == 1){
+                    return Millones(data.centavos) + " " + data.letrasMonedaCentavoSingular;
+                  }
+                  else{
+                    return Millones(data.centavos) + " " + data.letrasMonedaCentavoPlural;
+                  }
+              })();
+          }
 
-          if(data.enteros == 0)
-              return "CERO " + data.letrasMonedaPlural + " " + data.letrasCentavos;
-          if (data.enteros == 1)
-              return Millones(data.enteros) + " " + data.letrasMonedaSingular + " " + data.letrasCentavos;
-          else
-              return Millones(data.enteros) + " " + data.letrasMonedaPlural + " " + data.letrasCentavos;
+          if(data.enteros === 0){
+            return "CERO " + data.letrasMonedaPlural + " " + data.letrasCentavos;
+          }
+          if (data.enteros == 1){
+            return Millones(data.enteros) + " " + data.letrasMonedaSingular + " " + data.letrasCentavos;
+          }
+          else{
+            return Millones(data.enteros) + " " + data.letrasMonedaPlural + " " + data.letrasCentavos;
+          }
       }//NumeroALetras()
 
+
+      function yesNoFormat(data){
+        return data ? 'Si' : 'No';
+      }
+
+      function nullFormat(data){
+        return data ? data : 'No asignado';        
+      }
+
+      function dateTimeFormat(data){
+        return $filter('date')(data, 'd/MMM/yyyy h:mm a');      
+      }
+
+      function dateFormat(data){
+        return $filter('date')(data, 'd/MMM/yyyy');  
+      }
+
+      function currencyFormat(data){
+        return $filter('currency')(data);
+      }
+
+      function rateFormat(data){
+        return $filter('number')(data) + '%';
+      }
+
       var service = {
-        numberToLetters: numberToLetters
+        numberToLetters: numberToLetters,
+        nullFormat: nullFormat,
+        yesNoFormat: yesNoFormat,
+        dateTimeFormat: dateTimeFormat,
+        dateFormat: dateFormat,
+        currencyFormat: currencyFormat,
+        rateFormat: rateFormat
       };
       return service;
 

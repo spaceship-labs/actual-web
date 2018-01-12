@@ -8,33 +8,52 @@
  * Service in the dashexampleApp.
  */
 angular.module('dashexampleApp')
-  .service('metaTagsService', function ($rootScope, $location, $filter) {
+  .service('metaTagsService', function (api,$rootScope, $location, $filter) {
 
     this.getBasePath = function(){
       this.path = $location.path();
       return this.path;
     };
 
+    this.getDescriptionBySiteTheme = function(){
+      var description = 'Mobiliario y decoración para los más exigentes. Sofisticación absoluta que recuerda a los amantes del diseño la mezcla entre el modernismo y la exclusividad.';
+      switch($rootScope.siteTheme){
+        case 'actual-home':
+          description = 'Mobiliario y decoración para los más exigentes. Sofisticación absoluta que recuerda a los amantes del diseño la mezcla entre el modernismo y la exclusividad.';
+          break;
+        case 'actual-studio':
+          description = 'Mobiliario y decoración para la persona práctica y jovial; una bienvenida al mobiliario moderno, honesto y, sobre todo, funcional.';
+          break;
+        case 'actual-kids':
+          description = 'Mobiliario y decoración para los más pequeños, la combinación perfecta de estilo, seguridad, interactividad y diversión.';          
+          break;
+      }
+      return description;
+    }
+
     this.setMetaTags = function(params){
       var domainUrl = $location.protocol() + "://" + $location.host() + ":" + $location.port();
       var defaultParams = {
-        title:'Actual | Más de 25 años de experiencia en muebles e interiorismo.',
-        description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
-        image: domainUrl+'/images/Logo-A-Home.png'
+        title:'Actual',
+        description: 'Mobiliario y decoración para los más exigentes. Sofisticación absoluta que recuerda a los amantes del diseño la mezcla entre el modernismo y la exclusividad.',
+        image: api.baseUrl+'/logos/home-og.png'
       };
 
       switch($rootScope.siteTheme){
         case 'actual-home':
-          defaultParams.title = 'Actual Home | Más de 25 años de experiencia en muebles e interiorismo.';
-          defaultParams.image = domainUrl+'/images/Logo-A-Home.png';
+          defaultParams.title = 'Actual Home';
+          defaultParams.description = this.getDescriptionBySiteTheme();
+          defaultParams.image = api.baseUrl+'/logos/home-og.png';
           break;
         case 'actual-studio':
-          defaultParams.title = 'Actual Studio | Más de 25 años de experiencia en muebles e interiorismo.';
-          defaultParams.image = domainUrl+'/images/Logo-A-Studio.png';
+          defaultParams.title = 'Actual Studio';
+          defaultParams.description = this.getDescriptionBySiteTheme();
+          defaultParams.image = api.baseUrl+'/logos/studio-og.png';
           break;
         case 'actual-kids':
-          defaultParams.title = 'Actual Kids | Más de 25 años de experiencia en muebles e interiorismo.';        
-          defaultParams.image = domainUrl+'/images/Logo-A-Kids.png';
+          defaultParams.title = 'Actual Kids';        
+          defaultParams.description = this.getDescriptionBySiteTheme();
+          defaultParams.image = api.baseUrl+'/logos/kids-og.png';
           break;
       }
 
