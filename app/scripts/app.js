@@ -68,11 +68,6 @@ angular
         controller: 'SearchCtrl',
         controllerAs: 'vm'
       })
-      .when('/addquotation', {
-        templateUrl: 'views/addquotation.html',
-        controller: 'AddquotationCtrl',
-        controllerAs: 'vm'
-      })
       .when('/user/profile', {
         templateUrl: 'views/users/profile.html',
         controller: 'UserProfileCtrl',
@@ -138,16 +133,6 @@ angular
         controller: 'UsersUserInvoicesCtrl',
         controllerAs: 'vm'
       })
-      .when('/user/payments', {
-        templateUrl: 'views/users/payments.html',
-        controller: 'UsersUserPaymentsCtrl',
-        controllerAs: 'vm'
-      })
-      .when('/user/ewallet', {
-        templateUrl: 'views/users/ewallet.html',
-        controller: 'UsersUserEwalletCtrl',
-        controllerAs: 'vm'
-      })
       .when('/user/purchases', {
         templateUrl: 'views/users/purchases.html',
         controller: 'UsersUserPurchasesCtrl',
@@ -157,11 +142,6 @@ angular
         templateUrl: 'views/users/quotations.html',
         controller: 'UsersUserQuotationsCtrl',
         controllerAs: 'vm'
-      })
-      .when('/checkout/payment-info', {
-        templateUrl: 'views/checkout/payment-info.html',
-        controller: 'CheckoutPaymentInfoCtrl',
-        controllerAs: 'checkout/paymentInfo'
       })
       .when('/envio-y-entrega', {
         templateUrl: 'views/shippinganddelivery.html',
@@ -318,7 +298,6 @@ angular
         controller: 'InvoicingCtrl',
         controllerAs: 'vm'
       })
-      //.when('/:id', {
       .when('/contactanos', {
         templateUrl: 'views/contactus.html',
         controller: 'ContactusCtrl',
@@ -485,14 +464,10 @@ angular
     alasql.fn.rateFormat = formatService.rateFormat;
     alasql.fn.storeIdMapperFormat = function(data) {
       var mapper = siteService.getStoresIdMapper();
-      console.log('mapper', mapper);
-      console.log('data', data);
       return mapper[data] || data;
     };
     alasql.fn.orderStatusMapperFormat = function(data) {
       var mapper = orderService.getOrderStatusMapper();
-      console.log('mapper', mapper);
-      console.log('data', data);
       return mapper[data] || data;
     };
   });
