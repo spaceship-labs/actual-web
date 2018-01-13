@@ -107,7 +107,7 @@
       }
 
       function getActiveStore() {
-        var url      = '/me/activeStore';
+        var url = '/me/activeStore';
         return api.$http.get(url).then(function(res){
          return res.data;
         });

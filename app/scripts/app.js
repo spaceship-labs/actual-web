@@ -51,7 +51,20 @@ angular
       .when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          activeStore: function($rootScope, $q){
+            if($rootScope.activeStore){
+              return $q.resolve($rootScope.activeStore);
+            }else{
+              var deferred = $q.defer();
+              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore){
+                deferred.resolve(_activeStore);
+              });
+              return deferred.promise;
+            }
+          }
+        }        
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -354,7 +367,6 @@ angular
         default:
           break;
       }
-      //console.log('conekta key', key);
       return key;
     }
 
@@ -373,13 +385,10 @@ angular
         default:
           break;
       }
-      //console.log('analytics code', code);
       return code;
     }
 
     Conekta.setPublicKey(getConektaKeyBySite());
-    console.log('ENV', ENV);
-    console.log('analytics', getAnalyticsCodeBySite());
     AnalyticsProvider.setAccount(getAnalyticsCodeBySite()); //UU-XXXXXXX-X should be your tracking code
 
     moment.locale('es');
@@ -390,7 +399,7 @@ angular
         weekdaysShort: moment.localeData()._weekdaysShort
       }
     };
-    console.log('locales', locales);
+
     pikadayConfigProvider.setConfig({
       i18n: locales.es,
       locales: locales,

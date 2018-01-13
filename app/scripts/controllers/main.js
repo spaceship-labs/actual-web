@@ -160,8 +160,6 @@
     }
 
     function toggleLoginModal(){
-      console.log('toggleLoginModal');
-
       if( vm.isActiveLogin ){
         vm.isActiveLogin = false;
         vm.isActiveBackdrop = false;
@@ -273,9 +271,6 @@
       var deferred = $q.defer();
       console.log('start loadActiveQuotation', new Date());
 
-      //$rootScope.activeQuotation = false;
-      //$rootScope.isActiveQuotationLoaded = false;
-
       quotationService.getActiveQuotation()
         .then(function(res){
           var quotation = res.data;
@@ -297,7 +292,7 @@
         .catch(function(err){
           $rootScope.activeQuotation = false;
           localStorageService.remove('quotation');
-        })
+        });
       return deferred.promise;
     }
 
@@ -307,7 +302,6 @@
       siteService.findByHandle(vm.siteTheme)
         .then(function(res){
           vm.site = res.data || {};
-          //vm.site.Banners = siteService.sortSiteBanners(vm.site);
           $rootScope.site = res.data || {};
           deferred.resolve(vm.site);
           console.log('loadSiteInfo end', new Date());
