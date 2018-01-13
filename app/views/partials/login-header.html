@@ -12,7 +12,7 @@
 
     <form 
       ng-if="!main.isLoadingLogin" 
-      name="logInForm" 
+      name="loginForm" 
       method="POST" 
       ng-submit="main.signIn()"
     >
@@ -21,7 +21,7 @@
           <input type="email" name="email"
             placeholder="Email"
             autocomplete="off"
-            ng-model="main.logInForm.email"
+            ng-model="main.loginForm.email"
             ng-model-options='{ debounce: 1000 }'
             required
           >
@@ -35,7 +35,7 @@
             autocomplete="off"
             placeholder="Contraseña"
             name="password"
-            ng-model="main.logInForm.password"
+            ng-model="main.loginForm.password"
             required
           >
         </div>
