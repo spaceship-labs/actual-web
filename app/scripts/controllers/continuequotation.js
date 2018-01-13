@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:ContinuequotationCtrl
+ * @name actualWebApp.controller:ContinuequotationCtrl
  * @description
  * # ContinuequotationCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('ContinuequotationCtrl', ContinuequotationCtrl);
 
 function ContinuequotationCtrl($location,$routeParams, $rootScope, $q ,productService, clientService, quotationService){

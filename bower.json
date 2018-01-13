@@ -41,7 +41,7 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "dashexampleApp",
+  "moduleName": "actualWebApp",
   "resolutions": {
     "angular": "^1.6.3",
     "angular-material": "^1.1.5",

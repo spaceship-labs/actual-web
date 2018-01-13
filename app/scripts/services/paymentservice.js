@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('dashexampleApp')
+    .module('actualWebApp')
     .factory('paymentService', paymentService);
 
   function paymentService(api, $filter, $http, commonService, clientService, ewalletService){

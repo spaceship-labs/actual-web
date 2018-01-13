@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:DeliveryPolicyCtrl
+ * @name actualWebApp.controller:DeliveryPolicyCtrl
  * @description
  * # DeliveryPolicyCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('DeliveryPolicyCtrl', function ($sce) {
 
 		var vm = this;

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:ShippinganddeliveryCtrl
+ * @name actualWebApp.controller:ShippinganddeliveryCtrl
  * @description
  * # ShippinganddeliveryCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('ShippinganddeliveryCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

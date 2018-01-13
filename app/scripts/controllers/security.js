@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:SecurityCtrl
+ * @name actualWebApp.controller:SecurityCtrl
  * @description
  * # SecurityCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('SecurityCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

@@ -3,7 +3,7 @@
 describe('Controller: ProfileUserDeliveriesCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('dashexampleApp'));
+  beforeEach(module('actualWebApp'));
 
   var ProfileUserDeliveriesCtrl,
     scope;

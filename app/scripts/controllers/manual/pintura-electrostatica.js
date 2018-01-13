@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:ManualPinturaElectrostaticaCtrl
+ * @name actualWebApp.controller:ManualPinturaElectrostaticaCtrl
  * @description
  * # ManualPinturaElectrostaticaCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('ManualPinturaElectrostaticaCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

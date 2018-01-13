@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name dashexampleApp.directive:categoryItem
+ * @name actualWebApp.directive:categoryItem
  * @description
  * # categoryItem
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .directive('categoryItem',['api','$rootScope' ,function (api,$rootScope) {
     return {
       scope:{

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:CategoryCtrl
+ * @name actualWebApp.controller:CategoryCtrl
  * @description
  * # CategoryCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('CategoryCtrl', CategoryCtrl);
 
 function CategoryCtrl(

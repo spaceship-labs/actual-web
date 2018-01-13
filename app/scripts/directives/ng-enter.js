@@ -1,5 +1,5 @@
 'use strict';
-angular.module('dashexampleApp').directive('ngEnter', function() {
+angular.module('actualWebApp').directive('ngEnter', function() {
         return function(scope, element, attrs) {
             element.bind("keydown keypress", function(event) {
                 if(event.which === 13) {

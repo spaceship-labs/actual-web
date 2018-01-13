@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:UsersUserPurchasesCtrl
+ * @name actualWebApp.controller:UsersUserPurchasesCtrl
  * @description
  * # UsersUserPurchasesCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
 angular
-  .module('dashexampleApp')
+  .module('actualWebApp')
   .controller('UsersUserPurchasesCtrl', UsersUserPurchasesCtrl);
 
 function UsersUserPurchasesCtrl($rootScope, orderService, siteService) {

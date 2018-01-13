@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:PaymentmethodsCtrl
+ * @name actualWebApp.controller:PaymentmethodsCtrl
  * @description
  * # PaymentmethodsCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('PaymentmethodsCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

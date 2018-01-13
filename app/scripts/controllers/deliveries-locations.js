@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:DeliveriesLocationsCtrl
+ * @name actualWebApp.controller:DeliveriesLocationsCtrl
  * @description
  * # DeliveriesLocationsCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('DeliveriesLocationsCtrl', function () {
   	var vm = this;
 

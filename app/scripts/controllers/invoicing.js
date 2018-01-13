@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:InvoicingCtrl
+ * @name actualWebApp.controller:InvoicingCtrl
  * @description
  * # InvoicingCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('InvoicingCtrl', InvoicingCtrl);
 
 function InvoicingCtrl(

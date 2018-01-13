@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:UsersUserPaymentsCtrl
+ * @name actualWebApp.controller:UsersUserPaymentsCtrl
  * @description
  * # UsersUserPaymentsCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('UsersUserPaymentsCtrl', UsersUserPaymentsCtrl);
 
 function UsersUserPaymentsCtrl(

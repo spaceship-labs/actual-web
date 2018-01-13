@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('dashexampleApp').directive('tableList', tableList);
+  angular.module('actualWebApp').directive('tableList', tableList);
 
   var controller = function(
     $scope,

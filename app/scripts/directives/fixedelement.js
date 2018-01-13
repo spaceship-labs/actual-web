@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name dashexampleApp.directive:fixedElement
+ * @name actualWebApp.directive:fixedElement
  * @description
  * # fixedElement
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .directive('fixedElement', function ($window) {
     return function(scope, element, attrs) {
         var top = attrs.top || 70;

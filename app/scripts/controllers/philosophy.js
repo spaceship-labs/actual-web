@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:PhilosophyCtrl
+ * @name actualWebApp.controller:PhilosophyCtrl
  * @description
  * # PhilosophyCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('PhilosophyCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

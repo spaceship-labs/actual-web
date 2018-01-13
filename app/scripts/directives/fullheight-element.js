@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name dashexampleApp.directive:fullHeightElement
+ * @name actualWebApp.directive:fullHeightElement
  * @description
  * # fullHeightElement
  */
- angular.module('dashexampleApp')
+ angular.module('actualWebApp')
  .directive('fullHeightElement', function($window){
 
 

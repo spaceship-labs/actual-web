@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:ContactusCtrl
+ * @name actualWebApp.controller:ContactusCtrl
  * @description
  * # ContactusCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('ContactusCtrl', ContactusCtrl);
 
 function ContactusCtrl(

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:HomeCtrl
+ * @name actualWebApp.controller:HomeCtrl
  * @description
  * # HomeCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('HomeCtrl', HomeCtrl);
 
 function HomeCtrl(

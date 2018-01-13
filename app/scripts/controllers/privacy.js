@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:PrivacyCtrl
+ * @name actualWebApp.controller:PrivacyCtrl
  * @description
  * # PrivacyCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('PrivacyCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

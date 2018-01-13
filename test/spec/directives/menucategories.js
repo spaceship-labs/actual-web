@@ -3,7 +3,7 @@
 describe('Directive: menuCategories', function () {
 
   // load the directive's module
-  beforeEach(module('dashexampleApp'));
+  beforeEach(module('actualWebApp'));
 
   var element,
     scope;

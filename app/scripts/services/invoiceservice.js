@@ -1,6 +1,6 @@
 (function() {
   angular
-    .module('dashexampleApp')
+    .module('actualWebApp')
     .factory('invoiceService', invoiceService);
 
   function invoiceService(api) {

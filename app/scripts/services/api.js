@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('dashexampleApp')
+        .module('actualWebApp')
         .factory('api', apiService);
 
     /** @ngInject */

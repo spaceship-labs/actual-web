@@ -4,10 +4,10 @@
 
   /**
    * @ngdoc function
-   * @name dashexampleApp.controller:MainCtrl
+   * @name actualWebApp.controller:MainCtrl
    * @description
    * # MainCtrl
-   * Controller of the dashexampleApp
+   * Controller of the actualWebApp
    */
   function MainCtrl(
     api,
@@ -657,7 +657,7 @@
 
   }
 
-  angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
+  angular.module('actualWebApp').controller('MainCtrl', MainCtrl);
   MainCtrl.$inject = [
     'api',
     '$routeParams',

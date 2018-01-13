@@ -3,7 +3,7 @@
 describe('Controller: ProfileMiPerfilCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('dashexampleApp'));
+  beforeEach(module('actualWebApp'));
 
   var ProfileMiPerfilCtrl,
     scope;

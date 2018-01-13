@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:EnsamblePolicyCtrl
+ * @name actualWebApp.controller:EnsamblePolicyCtrl
  * @description
  * # EnsamblePolicyCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('EnsamblePolicyCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

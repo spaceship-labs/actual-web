@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('dashexampleApp')
+    .module('actualWebApp')
     .factory('commonService', commonService);
 
   function commonService($q, $timeout, $filter, $mdDialog, api){

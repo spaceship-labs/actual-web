@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:UsersBrokerCtrl
+ * @name actualWebApp.controller:UsersBrokerCtrl
  * @description
  * # UsersBrokerCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('UsersBrokerCtrl', UsersBrokerCtrl);
 
 function UsersBrokerCtrl($rootScope, commonService, userService,localStorageService){

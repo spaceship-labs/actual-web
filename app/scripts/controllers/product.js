@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:ProductCtrl
+ * @name actualWebApp.controller:ProductCtrl
  * @description
  * # ProductCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('ProductCtrl', ProductCtrl);
 
 function ProductCtrl(

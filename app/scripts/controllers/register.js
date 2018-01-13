@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:RegisterCtrl
+ * @name actualWebApp.controller:RegisterCtrl
  * @description
  * # RegisterCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('RegisterCtrl', RegisterCtrl);
 
 function RegisterCtrl(

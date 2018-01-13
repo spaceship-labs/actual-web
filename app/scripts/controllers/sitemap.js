@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:SitemapCtrl
+ * @name actualWebApp.controller:SitemapCtrl
  * @description
  * # SitemapCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('SitemapCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

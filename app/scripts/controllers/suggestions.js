@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:SuggestionsCtrl
+ * @name actualWebApp.controller:SuggestionsCtrl
  * @description
  * # SuggestionsCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('SuggestionsCtrl', SuggestionsCtrl);
 
 function SuggestionsCtrl(
