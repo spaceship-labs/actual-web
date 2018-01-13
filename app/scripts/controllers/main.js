@@ -47,7 +47,6 @@
       isActiveLogin: false,
       isLoadingLogin: false,
       isActiveSchedulesModal: false,
-      isMiActual: $rootScope.isMiActual,
       logInForm: {},
       mapTerminalCode: commonService.mapTerminalCode,
       menuCategories: [],

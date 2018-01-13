@@ -1,13 +1,4 @@
 'use strict';
-
-/**
- * @ngdoc overview
- * @name actualWebApp
- * @description
- * # actualWebApp
- *
- * Main module of the application.
- */
 angular
   .module('actualWebApp', [
     'ngAnimate',
@@ -85,70 +76,32 @@ angular
       .when('/user/profile', {
         templateUrl: 'views/users/profile.html',
         controller: 'UserProfileCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope) {
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/quotations/edit/:id', {
         templateUrl: 'views/quotations/edit.html',
         controller: 'QuotationsEditCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope) {
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/checkout/client/:id', {
         templateUrl: 'views/checkout/client.html',
         controller: 'CheckoutClientCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService) {
-            authService.dennyAccessStoreManager();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/checkout/paymentmethod/:id', {
         templateUrl: 'views/checkout/payments.html',
         controller: 'CheckoutPaymentsCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService) {
-            authService.dennyAccessStoreManager();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/checkout/order/:id/COMPRA-CONFIRMADA', {
         templateUrl: 'views/checkout/order.html',
         controller: 'CheckoutOrderCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope) {
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/checkout/order/:id', {
         templateUrl: 'views/checkout/order.html',
         controller: 'CheckoutOrderCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope) {
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/ofertas', {
         templateUrl: 'views/offers.html',
