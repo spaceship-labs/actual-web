@@ -1,34 +1,17 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name actualWebApp.controller:ContactusCtrl
- * @description
- * # ContactusCtrl
- * Controller of the actualWebApp
- */
 angular.module('actualWebApp')
   .controller('ContactusCtrl', ContactusCtrl);
 
 function ContactusCtrl(
 	dialogService,
 	commonService,
-	$routeParams,
-	$rootScope,
-	$location,
-	$q
+	$rootScope
 ){
 	var vm = this;
 	angular.extend(vm, {
-		init: init,
 		form:{},
 		sendContact: sendContact
 	});
-
-	init();
-
-	function init(){
-	}
 
 	function sendContact($form){
 		if($form.$valid){
@@ -62,8 +45,5 @@ function ContactusCtrl(
 ContactusCtrl.$inject = [
 	'dialogService',
 	'commonService',
-	'$routeParams',
-	'$rootScope',
-	'$location',
-	'$q'
+	'$rootScope'
 ];

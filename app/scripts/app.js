@@ -319,7 +319,7 @@ angular
       .when('/ciudades-de-entrega', {
         templateUrl: 'views/deliveries-locations.html',
         controller: 'DeliveriesLocationsCtrl',
-        controllerAs: 'deliveriesLocations'
+        controllerAs: 'vm'
       })
       .when('/security', {
         templateUrl: 'views/security.html',
