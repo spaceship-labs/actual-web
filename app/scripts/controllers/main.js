@@ -1,14 +1,6 @@
 (function(){
-
   'use strict';
 
-  /**
-   * @ngdoc function
-   * @name actualWebApp.controller:MainCtrl
-   * @description
-   * # MainCtrl
-   * Controller of the actualWebApp
-   */
   function MainCtrl(
     api,
     $routeParams,
@@ -40,10 +32,8 @@
   ){
     var vm = this;
     angular.extend(vm, {
-      cart: {},
       activeStore: {},
       isActiveBackdrop: false,
-      isActiveCart: false,
       isActiveLogin: false,
       isLoadingLogin: false,
       isActiveSchedulesModal: false,
@@ -53,9 +43,6 @@
       menuCategoriesOn: false,
       pointersSidenav: [],
       currentYear: moment().format('YYYY'),
-      activateCartModal: activateCartModal,
-      activateLoginModal: activateLoginModal,
-      deactivateCartModal: deactivateCartModal,
       deactivateLoginModal: deactivateLoginModal,
       getActiveModule: getActiveModule,
       getCategoryBackground: getCategoryBackground,
@@ -64,7 +51,6 @@
       logOut: logOut,
       removeCurrentQuotation: removeCurrentQuotation,
       signIn: signIn,
-      toggleCartModal: toggleCartModal,
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
       toggleMenuCategory: toggleMenuCategory,
@@ -195,7 +181,6 @@
         vm.isActiveBackdrop = true;
         
         vm.isActiveProfileHeader = false;
-        vm.isActiveCart = false;
         vm.isActiveSchedulesModal = false;
       }
     }
@@ -208,7 +193,6 @@
         vm.isActiveProfileHeader = true;
         vm.isActiveBackdrop = true;
 
-        vm.isActiveCart = false;
         vm.isActiveSchedulesModal = false;
         vm.isActiveLogin = false;
       }
@@ -226,7 +210,6 @@
 
         vm.isActiveLogin = false;
         vm.isActiveProfileHeader = false;
-        vm.isActiveCart = false;
       }
     }    
 
@@ -494,27 +477,6 @@
       }
     }
 
-    function toggleCartModal(){
-      if(vm.isActiveCart){
-        vm.isActiveCart = false;
-        vm.isActiveBackdrop = false;
-      }else{
-        vm.isActiveCart = true;
-        vm.isActiveBackdrop = true;
-        vm.isActiveProfileHeader = false;
-      }
-    }
-
-    function activateCartModal(){
-      vm.isActiveCart = true;
-      vm.isActiveBackdrop = true;
-    }
-
-    function deactivateCartModal(){
-      vm.isActiveCart = false;
-      vm.isActiveBackdrop = false;
-    }
-
     function handleSignInError(err){
       vm.isLoadingLogin = false;
       if(err){
@@ -631,7 +593,6 @@
       vm.menuCategoriesOn = false;
       vm.isActiveBackdrop = false;
       vm.isActiveLogin = false;
-      vm.isActiveCart = false;
       vm.isLoadingLogin = false;
 
       if( $mdSidenav('mobileSidenav').isOpen() ){

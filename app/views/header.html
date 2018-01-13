@@ -45,7 +45,6 @@
         >
           <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
           <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-          <ng-include ng-if="main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
         </a>
       </div>
 
@@ -164,7 +163,6 @@
         >
           <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
           <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-          <ng-include ng-if="main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
         </a>
 
         <!--IF NOT ACTIVE QUOTATION-->
@@ -175,7 +173,6 @@
           class="header-top-bar-menu-item"
         >
           <i class="icon-carro"></i>
-          <ng-include ng-if="main.user && main.isActiveCart" src="'views/partials/cart-header.html'"></ng-include>
         </a>
 
         <!---end if Logged in -->
