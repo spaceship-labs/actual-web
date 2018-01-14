@@ -1,12 +1,4 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name actualWebApp.controller:InvoicingCtrl
- * @description
- * # InvoicingCtrl
- * Controller of the actualWebApp
- */
 angular.module('actualWebApp')
   .controller('InvoicingCtrl', InvoicingCtrl);
 
@@ -15,10 +7,7 @@ function InvoicingCtrl(
 	commonService,
 	clientService,
 	invoiceService,
-	$rootScope,
-	$routeParams,
-	$location,
-	$q
+	$rootScope
 ){
 	var vm = this;
 	angular.extend(vm, {
@@ -85,8 +74,5 @@ InvoicingCtrl.$inject = [
 	'commonService',
 	'clientService',
 	'invoiceService',
-	'$rootScope',
-	'$routeParams',
-	'$location',
-	'$q'
+	'$rootScope'
 ];

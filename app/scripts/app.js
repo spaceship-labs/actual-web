@@ -114,7 +114,24 @@ angular
       .when('/ofertas', {
         templateUrl: 'views/offers.html',
         controller: 'OffersCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          activeQuotation: function($rootScope, $q, quotationService){
+            if(!quotationService.getActiveQuotationId()){
+              return $q.resolve(false);
+            }
+
+            if($rootScope.activeQuotation){
+              return $q.resolve($rootScope.activeQuotation);
+            }else{
+              var deferred = $q.defer();
+              $rootScope.$on('activeQuotationAssigned', function(ev, _activeQuotation){
+                deferred.resolve(_activeQuotation);
+              });
+              return deferred.promise;
+            }
+          }
+        }                
       })
       .when('/politicas-de-entrega', {
         templateUrl: 'views/delivery-policy.html',
