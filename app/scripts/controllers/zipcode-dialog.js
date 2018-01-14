@@ -63,7 +63,7 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userS
       });
   }
 
-   function submit($form, zipcode){
+   function submit($form){
     var _isValidZipcode = isValidZipcode(ctrl.zipcode);
 
     if($form.$valid &&  _isValidZipcode){

@@ -1,12 +1,4 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name actualWebApp.controller:RegisterCtrl
- * @description
- * # RegisterCtrl
- * Controller of the actualWebApp
- */
 angular.module('actualWebApp')
   .controller('RegisterCtrl', RegisterCtrl);
 
