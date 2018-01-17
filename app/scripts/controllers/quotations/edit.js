@@ -5,27 +5,19 @@ angular.module('actualWebApp')
 
 function QuotationsEditCtrl(
   $timeout,
-  $log,
   $location,
   $routeParams,
   $q,
   $scope,
-  localStorageService,
   $rootScope,
   $mdMedia,
   $mdDialog,
-  $filter,
   quotationService,
   api,
   dialogService,
-  userService,
-  packageService,
-  paymentService,
   deliveryService,
   authService,
-  siteService,
   productService,
-  cartService,
   leadService,
   activeStore
 ){
@@ -375,7 +367,7 @@ function QuotationsEditCtrl(
       vm.warehouses = res.data;
     })
     .catch(function(err){
-      $log.error(err);
+      console.log(err);
     });
   }
 
@@ -460,7 +452,7 @@ function QuotationsEditCtrl(
         dialogService.showDialog('Email enviado al cliente');
       })
       .catch(function(err){
-        $log.error(err);
+        console.log(err);
         vm.isLoading = false;
         dialogService.showDialog('Hubo un error, intentalo de nuevo');
       });
@@ -555,7 +547,7 @@ function QuotationsEditCtrl(
         return $rootScope.loadActiveQuotation();
       })
       .catch(function(err){
-        $log.error(err);
+        console.log(err);
       });
   }
 
@@ -650,7 +642,7 @@ function QuotationsEditCtrl(
           vm.isLoading = false;        
         })
         .catch(function(err){
-          $log.error(err);
+          console.log(err);
         });
       
 
@@ -697,27 +689,19 @@ function QuotationsEditCtrl(
 
 QuotationsEditCtrl.$inject = [
   '$timeout',
-  '$log',
   '$location',
   '$routeParams',
   '$q',
   '$scope',
-  'localStorageService',
   '$rootScope',
   '$mdMedia',
   '$mdDialog',
-  '$filter',
   'quotationService',
   'api',
   'dialogService',
-  'userService',
-  'packageService',
-  'paymentService',
   'deliveryService',
   'authService',
-  'siteService',
   'productService',
-  'cartService',
   'leadService',
   'activeStore'  
 ];
