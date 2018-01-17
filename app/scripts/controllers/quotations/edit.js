@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:QuotationsEditCtrl
+ * @name actualWebApp.controller:QuotationsEditCtrl
  * @description
  * # QuotationsEditCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
 function QuotationsEditCtrl(

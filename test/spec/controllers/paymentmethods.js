@@ -3,7 +3,7 @@
 describe('Controller: PaymentmethodsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('dashexampleApp'));
+  beforeEach(module('actualWebApp'));
 
   var PaymentmethodsCtrl,
     scope;

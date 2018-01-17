@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name dashexampleApp.directive:sidebarCategories
+ * @name actualWebApp.directive:sidebarCategories
  * @description
  * # sidebarCategories
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .directive('sidebarCategories', SidebarCategories);
 
 function SidebarCategories(

@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name dashexampleApp.directive:productGallery
+ * @name actualWebApp.directive:productGallery
  * @description
  * # productGallery
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .directive('productGallery',['api','productService', '$q', '$timeout', '$rootScope' ,
   function (api, productService, $q, $timeout, $rootScope) {
     return {

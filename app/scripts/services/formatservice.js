@@ -1,7 +1,7 @@
 (function (){
   //'use strict';
 
-  angular.module('dashexampleApp')
+  angular.module('actualWebApp')
     .factory('formatService', formatService);
     /*************************************************************/
     // NumeroALetras

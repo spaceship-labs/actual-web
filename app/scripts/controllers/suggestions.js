@@ -1,22 +1,12 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:SuggestionsCtrl
- * @description
- * # SuggestionsCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('SuggestionsCtrl', SuggestionsCtrl);
 
 function SuggestionsCtrl(
 	dialogService,
 	commonService,
 	$routeParams,
-	$rootScope,
-	$location,
-	$q
+	$rootScope
 ){
 	var vm = this;
 	angular.extend(vm, {
@@ -63,7 +53,5 @@ SuggestionsCtrl.$inject = [
 	'dialogService',
 	'commonService',
 	'$routeParams',
-	'$rootScope',
-	'$location',
-	'$q'
+	'$rootScope'
 ];

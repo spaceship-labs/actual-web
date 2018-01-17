@@ -1,13 +1,5 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:OffersCtrl
- * @description
- * # OffersCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('OffersCtrl', OffersCtrl);
 
 function OffersCtrl(
@@ -19,41 +11,18 @@ function OffersCtrl(
   packageService,
   quotationService,
   api,
-  localStorageService,
   productService,
   dialogService,
-  deliveryService
+  deliveryService,
+  activeQuotation
 ){
-  var mainDataListener = function(){};
   var vm = this;
   angular.extend(vm,{
     init:init,
     addPackageToCart: addPackageToCart,
   });
 
-  if($rootScope.activeQuotation){
-    init();    
-  }else{
-
-    if($rootScope.isMainDataLoaded){
-      console.log('init isMainDataLoaded');
-      init();
-    }else{
-      mainDataListener = $rootScope.$on('mainDataLoaded', function(e){
-        init();
-      });    
-    }
-
-  }
-
-  function loadZipcodeDeliveryByActiveQuotation(){
-    var zipcodeDeliveryId =  $rootScope.activeQuotation ? $rootScope.activeQuotation.ZipcodeDelivery : false;
-    if($rootScope.activeQuotation){
-      return loadZipCodeDeliveryById(zipcodeDeliveryId);
-    }
-
-    return $q.resolve();    
-  }
+  init();
 
   function init(){
     vm.isLoading = true;
@@ -71,16 +40,22 @@ function OffersCtrl(
       .catch(function(err){
         console.log(err);
       });
+  }
 
-    //Unsuscribing  mainDataListener
-    mainDataListener();
+  function loadZipcodeDeliveryByActiveQuotation(){
+    var zipcodeDeliveryId =  activeQuotation ? activeQuotation.ZipcodeDelivery : false;
+    if(activeQuotation){
+      return loadZipCodeDeliveryById(zipcodeDeliveryId);
+    }
+
+    return $q.resolve();    
   }
 
   function loadZipCodeDeliveryById(id){
     return deliveryService.getZipcodeDeliveryById(id)
       .then(function(res){
         vm.zipcodeDelivery = res;
-        return true;
+        return vm.zipcodeDelivery;
       });
   }  
 
@@ -197,8 +172,6 @@ function OffersCtrl(
 
   function showUnavailableStockMsg(products){
     var htmlProducts = products.reduce(function(acum, p){
-      //console.log('p', p);
-      //acum+="<li>"+p.name+'</li>';
       acum += p.name + '('+ p.ItemCode +'), ';
       return acum;
     }, '');
@@ -246,7 +219,6 @@ function OffersCtrl(
       return deliveryService.getZipcodeDelivery(zipcode);
     })
     .then(function(zipcodeDelivery){
-      console.log('zipcodedelivery', zipcodeDelivery);
       if(zipcodeDelivery){
         vm.isLoadingDeliveries = true;
         vm.zipcodeDelivery = zipcodeDelivery;
@@ -264,11 +236,6 @@ function OffersCtrl(
     });
   }
 
-  $scope.$on('$destroy', function(){
-    //unsuscribing listeners
-    mainDataListener();
-  });
-
 }
 
 OffersCtrl.$inject = [
@@ -280,8 +247,8 @@ OffersCtrl.$inject = [
   'packageService',
   'quotationService',
   'api',
-  'localStorageService',
   'productService',
   'dialogService',
-  'deliveryService'
+  'deliveryService',
+  'activeQuotation'
 ];

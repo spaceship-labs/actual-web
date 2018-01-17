@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name dashexampleApp.directive:menuSubCategories
+ * @name actualWebApp.directive:menuSubCategories
  * @description
  * # menuSubCategories
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .directive('menuSubCategories', function () {
     return {
       templateUrl: 'views/directives/menu-subcategories.html',

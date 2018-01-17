@@ -1,13 +1,5 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:InvoicingCtrl
- * @description
- * # InvoicingCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('InvoicingCtrl', InvoicingCtrl);
 
 function InvoicingCtrl(
@@ -15,15 +7,13 @@ function InvoicingCtrl(
 	commonService,
 	clientService,
 	invoiceService,
-	$rootScope,
-	$routeParams,
-	$location,
-	$q
+	$rootScope
 ){
 	var vm = this;
 	angular.extend(vm, {
 		init: init,
 		fiscalAddressConstraints: clientService.fiscalAddressConstraints,
+		cfdiUseList: clientService.getCFDIUseList(),
 		form:{},
 		sendFiscalData: sendFiscalData,
 		onPikadaySelect: onPikadaySelect
@@ -33,6 +23,8 @@ function InvoicingCtrl(
 
 	function init(){
 		loadStates();
+		var lastIndexCfdiUseList = vm.cfdiUseList.length - 1;
+		vm.form.cfdiUse = vm.cfdiUseList[lastIndexCfdiUseList].code;
 	}
 
 	function onPikadaySelect(pikaday){
@@ -82,8 +74,5 @@ InvoicingCtrl.$inject = [
 	'commonService',
 	'clientService',
 	'invoiceService',
-	'$rootScope',
-	'$routeParams',
-	'$location',
-	'$q'
+	'$rootScope'
 ];

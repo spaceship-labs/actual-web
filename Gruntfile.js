@@ -346,7 +346,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'dashexampleApp',
+          module: 'actualWebApp',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
@@ -444,7 +444,8 @@ module.exports = function (grunt) {
       options: {
         commentMarker: "process",
         data: {
-          metaTags: getMetaTagsBySite( grunt.option('site') )
+          metaTags: getMetaTagsBySite( grunt.option('site') ),
+          tagManagerId: getTagManagerId(grunt)
         }
       },
       dist: {
@@ -701,6 +702,31 @@ function getSiteTask(siteOption){
       break;
   }
   return task;
+}
+
+function getTagManagerId(grunt){  
+  if(grunt.option('env') !== 'production'){
+    return '';
+  }
+
+  var tagManagerId = '';
+
+  switch(grunt.option('site')){
+    case 'kids':
+      tagManagerId = 'GTM-P833XQZ';
+      break;
+    case 'home':
+      tagManagerId = 'GTM-MT5PVDH';
+      break;
+    case 'studio':
+      tagManagerId = 'GTM-M2CFZQH';
+      break;    
+    default: 
+      break;
+  }
+
+  return tagManagerId;
+
 }
 
 function getMetaTagsBySite(siteOption){

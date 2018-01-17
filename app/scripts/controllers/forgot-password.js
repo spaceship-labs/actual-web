@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('ForgotPasswordCtrl', ForgotPasswordCtrl);
 
 function ForgotPasswordCtrl(
   $rootScope,
   $location,
-  api, 
   dialogService,
   userService
 ){
@@ -21,8 +20,9 @@ function ForgotPasswordCtrl(
 
   function sendPasswordRecovery(form){
 		if(form.$valid && vm.email){
-			vm.isLoading = true
-;	  	userService.sendPasswordRecovery(vm.email)
+			vm.isLoading = true;	  	
+
+      userService.sendPasswordRecovery(vm.email)
 	  		.then(function(res){
 	  			vm.isLoading = false;
           if(res.data.success){
@@ -50,7 +50,6 @@ function ForgotPasswordCtrl(
 ForgotPasswordCtrl.$inject = [
   '$rootScope',
   '$location',
-  'api',
   'dialogService',
   'userService'
 ];

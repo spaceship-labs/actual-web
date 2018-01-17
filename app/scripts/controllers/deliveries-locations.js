@@ -1,14 +1,18 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:DeliveriesLocationsCtrl
- * @description
- * # DeliveriesLocationsCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('DeliveriesLocationsCtrl', function () {
   	var vm = this;
-
+  	angular.extend(vm,{
+			campecheIsActive:true,
+			cdmxIsActive:false,
+			jaliscoIsActive:false,
+			stateOfMexicoIsActive:false,
+			nuevoLeonIsActive:false,
+			pueblaIsActive:false,
+			queretaroIsActive:false,
+			quintanaRooIsActive:false,
+			tabascoIsActive:false,
+			isVeracruzActive:false,
+			isYucatanActive:false
+  	});
   });

@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:HomeCtrl
- * @description
- * # HomeCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('HomeCtrl', HomeCtrl);
 
 function HomeCtrl(
@@ -15,21 +8,28 @@ function HomeCtrl(
   $scope,
   $rootScope,
   api, 
-  dialogService,
   siteService,
-  metaTagsService
+  metaTagsService,
+  activeStore
 ){
   var vm = this;
-  var mainDataListener = function(){};
   angular.extend(vm,{
     areProductsLoaded: false,
-    api: api,
-    test: test
+    api: api
   });
 
   function init(){
-    metaTagsService.setMetaTags({});
+    vm.activeStore = activeStore;
+    vm.stockProperty = 'productsNum';
+    if(activeStore){
+      vm.stockProperty = activeStore.code;
+    }
 
+    metaTagsService.setMetaTags({});
+    loadBanners();
+  }
+
+  function loadBanners(){
     siteService.findByHandle($rootScope.siteTheme, {getBanners:true})
       .then(function(res){
         console.log('res findByHandle', res);
@@ -37,41 +37,9 @@ function HomeCtrl(
         site.Banners = siteService.sortSiteBanners(site);
         vm.siteBanners = site.Banners;
       });
-
-    setCategoryStockProperty();
-    if($location.search().startQuotation){
-      //dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización');
-    }
-    if($rootScope.activeStore){
-      setCategoryStockProperty(null, {activeStore: $rootScope.activeStore});
-    }else{
-      mainDataListener = $rootScope.$on('mainDataLoaded', setCategoryStockProperty);
-    }
-  }
-
-  function setCategoryStockProperty(event, mainData){
-    var activeStore = mainData ?  mainData.activeStore : false;
-    vm.stockProperty = 'productsNum';
-    if(activeStore && activeStore.code !== 'proyectos'){
-      vm.stockProperty = activeStore.code;
-    }
-  }
-
-  function test(){
-    siteService.test()
-      .then(function(res){
-        console.log('res', res);
-      })
-      .catch(function(err){
-        console.log('err', err);
-      });
   }
 
   init();
-
-  $scope.$on('$destroy', function(){
-    mainDataListener();
-  });
 }
 
 HomeCtrl.$inject = [
@@ -79,7 +47,7 @@ HomeCtrl.$inject = [
   '$scope',
   '$rootScope',
   'api',
-  'dialogService',
   'siteService',
-  'metaTagsService'
+  'metaTagsService',
+  'activeStore'
 ];

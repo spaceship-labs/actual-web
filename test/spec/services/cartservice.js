@@ -3,7 +3,7 @@
 describe('Service: cartService', function () {
 
   // load the service's module
-  beforeEach(module('dashexampleApp'));
+  beforeEach(module('actualWebApp'));
 
   // instantiate service
   var cartService;

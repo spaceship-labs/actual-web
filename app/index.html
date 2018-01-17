@@ -1,5 +1,5 @@
 <!doctype html>
-<html  ng-app="dashexampleApp" ng-controller="MainCtrl as main">
+<html  ng-app="actualWebApp" ng-controller="MainCtrl as main">
   <head>
     <meta charset="utf-8">
     <!--SEE GRUNTFILE processhtml-->
@@ -48,6 +48,9 @@
         ng-attr-href="{{main.getFaviconUrl()}}" 
         type="image/x-icon"
     >
+
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<%= tagManagerId %>');</script>
 
     /process -->
 
@@ -121,6 +124,11 @@
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
+    <!-- process:template
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= tagManagerId %>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    /process -->
+
 
     <div ng-show="main.isActiveBackdrop" class="backdrop"></div>
 
@@ -290,7 +298,6 @@
         <script src="scripts/services/productsearchservice.js"></script>
         <script src="scripts/services/leadservice.js"></script>
         <script src="scripts/directives/fixedelement.js"></script>
-        <script src="scripts/controllers/addquotation.js"></script>
         <script src="scripts/directives/table-list.js"></script>
         <script src="scripts/services/dialogservice.js"></script>
         <script src="scripts/services/formatservice.js"></script>
@@ -303,11 +310,9 @@
         <script src="scripts/directives/menucategories.js"></script>
         <script src="scripts/directives/menusubcategories.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/home.js"></script>
         <script src="scripts/controllers/checkout/client.js"></script>
         <script src="scripts/controllers/checkout/payments.js"></script>
-        <script src="scripts/controllers/continuequotation.js"></script>
         <script src="scripts/controllers/checkout/transfer-instructions-dialog.js"></script>
         <script src="scripts/controllers/checkout/payment-dialog.js"></script>
         <script src="scripts/controllers/checkout/order.js"></script>
@@ -317,18 +322,14 @@
         <script src="scripts/controllers/offers.js"></script>
         <script src="scripts/services/packageservice.js"></script>
         <script src="scripts/services/paymentservice.js"></script>
-        <script src="scripts/controllers/refunds.js"></script>
         <script src="scripts/controllers/delivery-policy.js"></script>
         <script src="scripts/controllers/ensamble-policy.js"></script>
         <script src="scripts/controllers/storage-policy.js"></script>
         <script src="scripts/controllers/warranty-policy.js"></script>
         <script src="scripts/controllers/users/deliveries.js"></script>
-        <script src="scripts/controllers/users/payments.js"></script>
-        <script src="scripts/controllers/users/ewallet.js"></script>
         <script src="scripts/controllers/users/invoices.js"></script>
         <script src="scripts/controllers/users/quotations.js"></script>
         <script src="scripts/controllers/users/purchases.js"></script>
-        <script src="scripts/controllers/checkout/payment-info.js"></script>
         <script src="scripts/controllers/shippinganddelivery.js"></script>
         <script src="scripts/controllers/refundstext.js"></script>
         <script src="scripts/controllers/manual/pieles.js"></script>

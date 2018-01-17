@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('dashexampleApp')
+        .module('actualWebApp')
         .factory('siteService', siteService);
 
     /** @ngInject */
@@ -12,7 +12,6 @@
         findByHandle: findByHandle,
         findSiteBannersByHandle: findSiteBannersByHandle, 
         getStoresIdMapper:getStoresIdMapper,
-        test: test,
         sortSiteBanners: sortSiteBanners
       };
 
@@ -28,12 +27,6 @@
         return api.$http.get(url).then(function(res) {
           return res.data;
         });        
-        //return api.$http.get(url);
-      }
-
-      function test(){
-        var url = '/payment/test';
-        return api.$http.post(url);
       }
 
       function getStoresIdMapper(){
@@ -47,7 +40,6 @@
       }
 
       function sortSiteBanners(site){
-        console.log('sortSiteBanners site', site);
         var idsList = site.bannersOrder ? site.bannersOrder.split(',') : [];
         var unSortedImages = [];
         var orderedList = [];

@@ -72,27 +72,6 @@
 	        <hr>
 
 	        <div layout="row" layout-wrap>
-	          <div flex-gt-sm="20" flex="100" class="input-element">
-	            <label>
-	              <p><strong>RFC <span class="hl-label">*</span></strong></p>
-	            </label>
-	            <div class="input-element-inner">
-	              <input 
-	                type="text" 
-	                required
-	                ng-model="vm.form.LicTradNum" 
-	                name="LicTradNum"
-	                ng-minlength="vm.fiscalAddressConstraints.LicTradNum.min"                
-	                min="vm.fiscalAddressConstraints.LicTradNum.min" 
-	                ng-maxlength="vm.fiscalAddressConstraints.LicTradNum.max"
-	                maxlength="vm.fiscalAddressConstraints.LicTradNum.max"
-	                max="vm.fiscalAddressConstraints.LicTradNum.max" 
-	              >
-	            </div>
-	            <p class="input-note">
-	              Caracteres <strong>{{vm.fiscalDataForm.LicTradNum.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.LicTradNum.max }}</strong>        
-	            </p>            
-	          </div>
 	          <div flex-gt-sm="55" flex="100" class="input-element">
 	            <label>
 	              <p><strong>Razón Social <span class="hl-label">*</span></strong></p>
@@ -114,6 +93,47 @@
 	            
 	          </div>
 	        </div>
+
+	        <div layout="row" layout-wrap>
+	          <div flex-gt-sm="20" flex="100" class="input-element">
+	            <label>
+	              <p><strong>RFC <span class="hl-label">*</span></strong></p>
+	            </label>
+	            <div class="input-element-inner">
+	              <input 
+	                type="text" 
+	                required
+	                ng-model="vm.form.LicTradNum" 
+	                name="LicTradNum"
+	                ng-minlength="vm.fiscalAddressConstraints.LicTradNum.min"                
+	                min="vm.fiscalAddressConstraints.LicTradNum.min" 
+	                ng-maxlength="vm.fiscalAddressConstraints.LicTradNum.max"
+	                maxlength="vm.fiscalAddressConstraints.LicTradNum.max"
+	                max="vm.fiscalAddressConstraints.LicTradNum.max" 
+	              >
+	            </div>
+	            <p class="input-note">
+	              Caracteres <strong>{{vm.fiscalDataForm.LicTradNum.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.LicTradNum.max }}</strong>        
+	            </p>            
+	          </div>
+
+		        <div flex-gt-sm="40" flex="100" class="input-element select-element-wrapper">
+		          <label><strong>Uso CFDI</strong></label>
+		          <md-select 
+		            ng-model="vm.form.cfdiUse" 
+		            class="select-element"
+		            required>
+		            <md-option 
+		              ng-repeat="use in vm.cfdiUseList | orderBy:'label'"
+		              ng-value="use.code"
+		            >
+		              {{use.label}} ({{use.code}})
+		            </md-option>
+		          </md-select>
+		        </div>
+
+					
+					</div>
 
 	        <div layout="row" layout-wrap>
 	          <div flex-gt-sm="25" flex="100" class="input-element">

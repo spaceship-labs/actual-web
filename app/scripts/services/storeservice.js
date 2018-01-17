@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('dashexampleApp')
+        .module('actualWebApp')
         .factory('storeService', storeService);
 
     /** @ngInject */

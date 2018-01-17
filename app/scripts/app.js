@@ -1,15 +1,6 @@
 'use strict';
-
-/**
- * @ngdoc overview
- * @name dashexampleApp
- * @description
- * # dashexampleApp
- *
- * Main module of the application.
- */
 angular
-  .module('dashexampleApp', [
+  .module('actualWebApp', [
     'ngAnimate',
     'ngStorage',
     'ngResource',
@@ -35,10 +26,10 @@ angular
     'ng-currency',
     'angular-google-analytics',
     'envconfig',
-    'siteconfig',
+    'siteconfig'
   ])
 
-  .config(function (
+  .config(function(
     $routeProvider,
     $httpProvider,
     $locationProvider,
@@ -49,13 +40,9 @@ angular
     ENV,
     SITE
   ) {
-
-
-    $mdThemingProvider.theme('default')
-      .accentPalette('red', {
-        'default': '700' // use shade 200 for default, and keep all other shades the same
-      });
-
+    $mdThemingProvider.theme('default').accentPalette('red', {
+      default: '700' // use shade 200 for default, and keep all other shades the same
+    });
 
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
@@ -64,7 +51,20 @@ angular
       .when('/', {
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          activeStore: function($rootScope, $q){
+            if($rootScope.activeStore){
+              return $q.resolve($rootScope.activeStore);
+            }else{
+              var deferred = $q.defer();
+              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore){
+                deferred.resolve(_activeStore);
+              });
+              return deferred.promise;
+            }
+          }
+        }        
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -81,73 +81,57 @@ angular
         controller: 'SearchCtrl',
         controllerAs: 'vm'
       })
-      .when('/addquotation', {
-        templateUrl: 'views/addquotation.html',
-        controller: 'AddquotationCtrl',
-        controllerAs: 'vm',
-      })
       .when('/user/profile', {
         templateUrl: 'views/users/profile.html',
         controller: 'UserProfileCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/quotations/edit/:id', {
         templateUrl: 'views/quotations/edit.html',
         controller: 'QuotationsEditCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/checkout/client/:id', {
         templateUrl: 'views/checkout/client.html',
         controller: 'CheckoutClientCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService){
-            authService.dennyAccessStoreManager();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
-
+        controllerAs: 'vm'
       })
       .when('/checkout/paymentmethod/:id', {
         templateUrl: 'views/checkout/payments.html',
         controller: 'CheckoutPaymentsCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope, authService){
-            authService.dennyAccessStoreManager();
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
+      })
+      .when('/checkout/order/:id/COMPRA-CONFIRMADA', {
+        templateUrl: 'views/checkout/order.html',
+        controller: 'CheckoutOrderCtrl',
+        controllerAs: 'vm'
       })
       .when('/checkout/order/:id', {
         templateUrl: 'views/checkout/order.html',
         controller: 'CheckoutOrderCtrl',
-        controllerAs: 'vm',
-        resolve: {
-          isMiActual: function($rootScope){
-            $rootScope.isMiActual = true;
-            return true;
-          }
-        }
+        controllerAs: 'vm'
       })
       .when('/ofertas', {
         templateUrl: 'views/offers.html',
         controller: 'OffersCtrl',
         controllerAs: 'vm',
+        resolve: {
+          activeQuotation: function($rootScope, $q, quotationService){
+            if(!quotationService.getActiveQuotationId()){
+              return $q.resolve(false);
+            }
+
+            if($rootScope.activeQuotation){
+              return $q.resolve($rootScope.activeQuotation);
+            }else{
+              var deferred = $q.defer();
+              $rootScope.$on('activeQuotationAssigned', function(ev, _activeQuotation){
+                deferred.resolve(_activeQuotation);
+              });
+              return deferred.promise;
+            }
+          }
+        }                
       })
       .when('/politicas-de-entrega', {
         templateUrl: 'views/delivery-policy.html',
@@ -179,16 +163,6 @@ angular
         controller: 'UsersUserInvoicesCtrl',
         controllerAs: 'vm'
       })
-      .when('/user/payments', {
-        templateUrl: 'views/users/payments.html',
-        controller: 'UsersUserPaymentsCtrl',
-        controllerAs: 'vm'
-      })
-      .when('/user/ewallet', {
-        templateUrl: 'views/users/ewallet.html',
-        controller: 'UsersUserEwalletCtrl',
-        controllerAs: 'vm'
-      })
       .when('/user/purchases', {
         templateUrl: 'views/users/purchases.html',
         controller: 'UsersUserPurchasesCtrl',
@@ -198,11 +172,6 @@ angular
         templateUrl: 'views/users/quotations.html',
         controller: 'UsersUserQuotationsCtrl',
         controllerAs: 'vm'
-      })
-      .when('/checkout/payment-info', {
-        templateUrl: 'views/checkout/payment-info.html',
-        controller: 'CheckoutPaymentInfoCtrl',
-        controllerAs: 'checkout/paymentInfo'
       })
       .when('/envio-y-entrega', {
         templateUrl: 'views/shippinganddelivery.html',
@@ -273,7 +242,7 @@ angular
         templateUrl: 'views/manual/pintura-electrostatica.html',
         controller: 'ManualPinturaElectrostaticaCtrl',
         controllerAs: 'manual/pinturaElectrostatica'
-      })      
+      })
       .when('/compra-segura', {
         templateUrl: 'views/securebuy.html',
         controller: 'SecurebuyCtrl',
@@ -338,12 +307,12 @@ angular
         templateUrl: 'views/reset-password.html',
         controller: 'ResetPasswordCtrl',
         controllerAs: 'vm'
-      })      
+      })
       .when('/continuequotation', {
         templateUrl: 'views/continuequotation.html',
         controller: 'ContinuequotationCtrl',
-        controllerAs: 'vm',
-      })      
+        controllerAs: 'vm'
+      })
       .when('/sitemap', {
         templateUrl: 'views/sitemap.html',
         controller: 'SitemapCtrl',
@@ -358,8 +327,7 @@ angular
         templateUrl: 'views/invoicing.html',
         controller: 'InvoicingCtrl',
         controllerAs: 'vm'
-      })      
-      //.when('/:id', {
+      })
       .when('/contactanos', {
         templateUrl: 'views/contactus.html',
         controller: 'ContactusCtrl',
@@ -368,8 +336,8 @@ angular
       .when('/ciudades-de-entrega', {
         templateUrl: 'views/deliveries-locations.html',
         controller: 'DeliveriesLocationsCtrl',
-        controllerAs: 'deliveriesLocations'
-      })      
+        controllerAs: 'vm'
+      })
       .when('/security', {
         templateUrl: 'views/security.html',
         controller: 'SecurityCtrl',
@@ -384,26 +352,39 @@ angular
         templateUrl: 'views/reports/quotations.html',
         controller: 'ReportsQuotationsCtrl',
         controllerAs: 'vm'
-      })      
+      })
       .when('/sugerencias-y-quejas', {
         templateUrl: 'views/suggestions.html',
         controller: 'SuggestionsCtrl',
         controllerAs: 'vm'
-      })      
-      .when('/:slug/:id', {      
+      })
+      .when('/:slug/:id', {
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',
-        controllerAs: 'vm'
-      })          
+        controllerAs: 'vm',
+        resolve: {
+          activeStore: function($rootScope, $q){
+            if($rootScope.activeStore){
+              return $q.resolve($rootScope.activeStore);
+            }else{
+              var deferred = $q.defer();
+              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore){
+                deferred.resolve(_activeStore);
+              });
+              return deferred.promise;
+            }
+          }
+        }                  
+      })
       .otherwise({
         redirectTo: '/'
       });
 
     localStorageServiceProvider.setPrefix(ENV.tokenPrefix + 'actualWeb');
 
-    function getConektaKeyBySite(){
+    function getConektaKeyBySite() {
       var key;
-      switch(SITE.name){
+      switch (SITE.name) {
         case 'actual-home':
           key = ENV.conektaHomeKey;
           break;
@@ -416,13 +397,12 @@ angular
         default:
           break;
       }
-      //console.log('conekta key', key);
       return key;
     }
 
-    function getAnalyticsCodeBySite(){
+    function getAnalyticsCodeBySite() {
       var code;
-      switch(SITE.name){
+      switch (SITE.name) {
         case 'actual-home':
           code = ENV.homeAnalytics || '';
           break;
@@ -435,50 +415,45 @@ angular
         default:
           break;
       }
-      //console.log('analytics code', code);
       return code;
-    }    
+    }
 
-    Conekta.setPublicKey( getConektaKeyBySite() );
-    console.log('ENV', ENV);
-    console.log('analytics', getAnalyticsCodeBySite());
-    AnalyticsProvider.setAccount( getAnalyticsCodeBySite() );  //UU-XXXXXXX-X should be your tracking code
-
+    Conekta.setPublicKey(getConektaKeyBySite());
+    AnalyticsProvider.setAccount(getAnalyticsCodeBySite()); //UU-XXXXXXX-X should be your tracking code
 
     moment.locale('es');
     var locales = {
       es: {
-        months        : moment.localeData()._months,
-        weekdays      : moment.localeData()._weekdays,
-        weekdaysShort : moment.localeData()._weekdaysShort,
+        months: moment.localeData()._months,
+        weekdays: moment.localeData()._weekdays,
+        weekdaysShort: moment.localeData()._weekdaysShort
       }
     };
-    console.log('locales', locales);
+
     pikadayConfigProvider.setConfig({
       i18n: locales.es,
       locales: locales,
       format: 'D/MM/YYYY'
     });
 
-
-
     //JWT TOKENS CONFIG
     $httpProvider.interceptors.push([
-      '$q', 
-      '$location', 
+      '$q',
+      '$location',
       'localStorageService',
       'SITE',
-      function ($q, $location, localStorageService, SITE) {
+      function($q, $location, localStorageService, SITE) {
         return {
-          request: function (config) {
+          request: function(config) {
             config.headers = config.headers || {};
-            if ( localStorageService.get('token') ) {
-              config.headers.Authorization = 'JWT ' + localStorageService.get('token');
+            if (localStorageService.get('token')) {
+              config.headers.Authorization =
+                'JWT ' + localStorageService.get('token');
             }
             config.headers.site = SITE.name;
-            
+
             return config;
-          },
+          }
           /*
           responseError: function (response) {
             if (response.status === 401 || response.status === 403) {
@@ -490,56 +465,48 @@ angular
         };
       }
     ]);
-
-
   })
 
   .run(function(
     Analytics,
-    localStorageService, 
-    authService, 
-    jwtHelper, 
+    localStorageService,
+    authService,
+    jwtHelper,
     userService,
     formatService,
-    siteService, 
+    siteService,
     orderService,
-    $location, 
-    $rootScope, 
+    $location,
+    $rootScope,
     $route
-  ){
-
-
+  ) {
     authService.runPolicies();
     //Configures $location.path second parameter, for no reloading
 
     var original = $location.path;
-    $location.path = function (path, reload) {
-        if (reload === false) {
-            var lastRoute = $route.current;
-            var un = $rootScope.$on('$locationChangeSuccess', function () {
-                $route.current = lastRoute;
-                un();
-            });
-        }
-        return original.apply($location, [path]);
+    $location.path = function(path, reload) {
+      if (reload === false) {
+        var lastRoute = $route.current;
+        var un = $rootScope.$on('$locationChangeSuccess', function() {
+          $route.current = lastRoute;
+          un();
+        });
+      }
+      return original.apply($location, [path]);
     };
 
     alasql.fn.nullFormat = formatService.nullFormat;
-    alasql.fn.yesNoFormat= formatService.yesNoFormat;
-    alasql.fn.dateTimeFormat= formatService.dateTimeFormat;
-    alasql.fn.dateFormat= formatService.dateFormat;
-    alasql.fn.currencyFormat= formatService.currencyFormat;
-    alasql.fn.rateFormat= formatService.rateFormat;
-    alasql.fn.storeIdMapperFormat = function(data){
+    alasql.fn.yesNoFormat = formatService.yesNoFormat;
+    alasql.fn.dateTimeFormat = formatService.dateTimeFormat;
+    alasql.fn.dateFormat = formatService.dateFormat;
+    alasql.fn.currencyFormat = formatService.currencyFormat;
+    alasql.fn.rateFormat = formatService.rateFormat;
+    alasql.fn.storeIdMapperFormat = function(data) {
       var mapper = siteService.getStoresIdMapper();
-      console.log('mapper', mapper);
-      console.log('data',data);
       return mapper[data] || data;
     };
-    alasql.fn.orderStatusMapperFormat = function(data){
+    alasql.fn.orderStatusMapperFormat = function(data) {
       var mapper = orderService.getOrderStatusMapper();
-      console.log('mapper', mapper);
-      console.log('data',data);
       return mapper[data] || data;
     };
   });

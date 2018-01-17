@@ -1,14 +1,6 @@
 (function(){
-
   'use strict';
 
-  /**
-   * @ngdoc function
-   * @name dashexampleApp.controller:MainCtrl
-   * @description
-   * # MainCtrl
-   * Controller of the dashexampleApp
-   */
   function MainCtrl(
     api,
     $routeParams,
@@ -18,21 +10,15 @@
     $scope,
     $location,
     $window,
-    $route,
     $timeout,
     $mdSidenav,
     authService,
-    cartService,
-    productService,
     categoriesService,
     quotationService,
     localStorageService,
     userService,
     siteService,
-    storeService,
-    $mdDialog,
     dialogService,
-    deliveryService,
     commonService,
     metaTagsService,
     ENV,
@@ -40,23 +26,15 @@
   ){
     var vm = this;
     angular.extend(vm, {
-      cart: {},
       activeStore: {},
       isActiveBackdrop: false,
-      isActiveCart: false,
       isActiveLogin: false,
       isLoadingLogin: false,
       isActiveSchedulesModal: false,
-      isMiActual: $rootScope.isMiActual,
-      logInForm: {},
+      loginForm: {},
       mapTerminalCode: commonService.mapTerminalCode,
-      menuCategories: [],
-      menuCategoriesOn: false,
       pointersSidenav: [],
       currentYear: moment().format('YYYY'),
-      activateCartModal: activateCartModal,
-      activateLoginModal: activateLoginModal,
-      deactivateCartModal: deactivateCartModal,
       deactivateLoginModal: deactivateLoginModal,
       getActiveModule: getActiveModule,
       getCategoryBackground: getCategoryBackground,
@@ -65,10 +43,8 @@
       logOut: logOut,
       removeCurrentQuotation: removeCurrentQuotation,
       signIn: signIn,
-      toggleCartModal: toggleCartModal,
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
-      toggleMenuCategory: toggleMenuCategory,
       togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       getFaviconUrl: getFaviconUrl,
@@ -134,7 +110,6 @@
           vm.categoriesTree = res.data;
           $rootScope.categoriesTree = vm.categoriesTree;
           $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
-          vm.menuCategories = buildMenuCategories(vm.categoriesTree);
         })
         .catch(function(err){
           console.log(err);
@@ -185,8 +160,6 @@
     }
 
     function toggleLoginModal(){
-      console.log('toggleLoginModal');
-
       if( vm.isActiveLogin ){
         vm.isActiveLogin = false;
         vm.isActiveBackdrop = false;
@@ -196,7 +169,6 @@
         vm.isActiveBackdrop = true;
         
         vm.isActiveProfileHeader = false;
-        vm.isActiveCart = false;
         vm.isActiveSchedulesModal = false;
       }
     }
@@ -209,7 +181,6 @@
         vm.isActiveProfileHeader = true;
         vm.isActiveBackdrop = true;
 
-        vm.isActiveCart = false;
         vm.isActiveSchedulesModal = false;
         vm.isActiveLogin = false;
       }
@@ -227,7 +198,6 @@
 
         vm.isActiveLogin = false;
         vm.isActiveProfileHeader = false;
-        vm.isActiveCart = false;
       }
     }    
 
@@ -252,40 +222,6 @@
       for (var i = 0; i < 9; i++) {
         vm.pointersSidenav.push({selected:false});
       }
-    }
-
-    function buildMenuCategories(categoryTree){
-      var menuCategories = [];
-      menuCategories.push( _.findWhere( categoryTree, {Handle: 'muebles'} ) );
-      menuCategories.push( angular.copy(_.findWhere( menuCategories[0].Childs, {Handle:'muebles-para-oficina'} ) ) );
-      menuCategories.push( angular.copy(_.findWhere( menuCategories[0].Childs, {Handle:'muebles-de-jardin'} ) ) );
-      menuCategories.push( _.findWhere(categoryTree, {Handle: 'ninos'} ) );
-      menuCategories.push( _.findWhere(categoryTree, {Handle: 'bebes'}  ) );
-      menuCategories.push( _.findWhere(categoryTree, {Handle: 'ambientes'} ) );
-      menuCategories.push( _.findWhere(categoryTree, {Handle: 'ofertas'}  ) );
-      return menuCategories;
-    }
-
-
-    function toggleMenuCategory(index){
-      vm.menuCategories.forEach(function(category, i){
-        if(i !== index){
-          category.isActive = false;
-          category.Childs.forEach(function (subcategory){
-            subcategory.isActive = false;
-          });
-        }
-      });
-      vm.menuCategories[index].isActive = !vm.menuCategories[index].isActive;
-    }
-
-    function toggleMenuSubCategory(index, category){
-      category.Childs.forEach(function(subcategory, i){
-        if(i !== index){
-          subcategory.isActive = false;
-        }
-      });
-      category.isActive = !category.isActive;
     }
 
     function loadMainData(){
@@ -335,9 +271,6 @@
       var deferred = $q.defer();
       console.log('start loadActiveQuotation', new Date());
 
-      //$rootScope.activeQuotation = false;
-      //$rootScope.isActiveQuotationLoaded = false;
-
       quotationService.getActiveQuotation()
         .then(function(res){
           var quotation = res.data;
@@ -359,7 +292,7 @@
         .catch(function(err){
           $rootScope.activeQuotation = false;
           localStorageService.remove('quotation');
-        })
+        });
       return deferred.promise;
     }
 
@@ -369,7 +302,6 @@
       siteService.findByHandle(vm.siteTheme)
         .then(function(res){
           vm.site = res.data || {};
-          //vm.site.Banners = siteService.sortSiteBanners(vm.site);
           $rootScope.site = res.data || {};
           deferred.resolve(vm.site);
           console.log('loadSiteInfo end', new Date());
@@ -418,11 +350,6 @@
         resetSearchBox();
       }
 
-      //loadMainData();
-      vm.menuCategoriesOn = false;
-      vm.menuCategories.forEach(function(category){
-        category.isActive = false;
-      });
       vm.activeModule = vm.getActiveModule();
       if($location.search().itemcode){
         vm.searchingItemCode = true;
@@ -495,27 +422,6 @@
       }
     }
 
-    function toggleCartModal(){
-      if(vm.isActiveCart){
-        vm.isActiveCart = false;
-        vm.isActiveBackdrop = false;
-      }else{
-        vm.isActiveCart = true;
-        vm.isActiveBackdrop = true;
-        vm.isActiveProfileHeader = false;
-      }
-    }
-
-    function activateCartModal(){
-      vm.isActiveCart = true;
-      vm.isActiveBackdrop = true;
-    }
-
-    function deactivateCartModal(){
-      vm.isActiveCart = false;
-      vm.isActiveBackdrop = false;
-    }
-
     function handleSignInError(err){
       vm.isLoadingLogin = false;
       if(err){
@@ -528,8 +434,8 @@
     function signIn(){
       vm.isLoadingLogin = true;
       var formData = {
-        email: vm.logInForm.email,
-        password: vm.logInForm.password
+        email: vm.loginForm.email,
+        password: vm.loginForm.password
       };
       authService.signIn(
         formData, 
@@ -629,10 +535,8 @@
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {
-      vm.menuCategoriesOn = false;
       vm.isActiveBackdrop = false;
       vm.isActiveLogin = false;
-      vm.isActiveCart = false;
       vm.isLoadingLogin = false;
 
       if( $mdSidenav('mobileSidenav').isOpen() ){
@@ -657,7 +561,7 @@
 
   }
 
-  angular.module('dashexampleApp').controller('MainCtrl', MainCtrl);
+  angular.module('actualWebApp').controller('MainCtrl', MainCtrl);
   MainCtrl.$inject = [
     'api',
     '$routeParams',
@@ -667,21 +571,15 @@
     '$scope',
     '$location',
     '$window',
-    '$route',
     '$timeout',
     '$mdSidenav',
     'authService',
-    'cartService',
-    'productService',
     'categoriesService',
     'quotationService',
     'localStorageService',
     'userService',
     'siteService',
-    'storeService',
-    '$mdDialog',
     'dialogService',
-    'deliveryService',
     'commonService',
     'metaTagsService',
     'ENV',

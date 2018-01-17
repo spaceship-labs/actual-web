@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:UsersUserInvoicesCtrl
+ * @name actualWebApp.controller:UsersUserInvoicesCtrl
  * @description
  * # UsersUserInvoicesCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('UsersUserInvoicesCtrl', UsersUserInvoicesCtrl);
 
 function UsersUserInvoicesCtrl(
@@ -22,6 +22,7 @@ function UsersUserInvoicesCtrl(
   angular.extend(vm,{
     user: angular.copy($rootScope.user),
     apiResourceOrders: orderService.getList,
+    cfdiUseList: clientService.getCFDIUseList(),    
     fiscalAddressConstraints: clientService.fiscalAddressConstraints,
     columnsOrders: [
       {key: 'folio', label:'Pedido'},
@@ -51,6 +52,12 @@ function UsersUserInvoicesCtrl(
     userService.getUserFiscalAddress()
       .then(function(res){
         vm.fiscalAddress = res;
+  
+        if(!vm.fiscalAddress.cfdiUse){  
+          var lastIndexCfdiUseList = vm.cfdiUseList.length - 1;
+          vm.fiscalAddress.cfdiUse = vm.cfdiUseList[lastIndexCfdiUseList].code;    
+        }
+
         vm.isLoading = false;  
       })
       .catch(function(err){

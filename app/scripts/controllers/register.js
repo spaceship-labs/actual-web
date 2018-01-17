@@ -1,13 +1,5 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:RegisterCtrl
- * @description
- * # RegisterCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('RegisterCtrl', RegisterCtrl);
 
 function RegisterCtrl(

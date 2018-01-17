@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name dashexampleApp.metaTagsService
+ * @name actualWebApp.metaTagsService
  * @description
  * # metaTagsService
- * Service in the dashexampleApp.
+ * Service in the actualWebApp.
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .service('metaTagsService', function (api,$rootScope, $location, $filter) {
 
     this.getBasePath = function(){

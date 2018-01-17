@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name dashexampleApp.controller:UserProfileCtrl
+ * @name actualWebApp.controller:UserProfileCtrl
  * @description
  * # UserProfileCtrl
- * Controller of the dashexampleApp
+ * Controller of the actualWebApp
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('UserProfileCtrl', UserProfileCtrl);
 
 function UserProfileCtrl(

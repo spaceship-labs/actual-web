@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('dashexampleApp')
+    .module('actualWebApp')
     .factory('categoriesService', categoriesService);
 
   function categoriesService(api, $q){

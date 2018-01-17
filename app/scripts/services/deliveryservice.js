@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('dashexampleApp')
+    .module('actualWebApp')
     .factory('deliveryService', deliveryService);
 
   function deliveryService(api, $filter){

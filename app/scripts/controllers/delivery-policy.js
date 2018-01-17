@@ -1,15 +1,6 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:DeliveryPolicyCtrl
- * @description
- * # DeliveryPolicyCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('DeliveryPolicyCtrl', function ($sce) {
-
 		var vm = this;
 		angular.extend(vm,{
 			trustAsHtml: trustAsHtml

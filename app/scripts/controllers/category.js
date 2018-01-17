@@ -1,13 +1,5 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:CategoryCtrl
- * @description
- * # CategoryCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('CategoryCtrl', CategoryCtrl);
 
 function CategoryCtrl(

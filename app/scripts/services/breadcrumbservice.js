@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name dashexampleApp.breadcrumbService
+ * @name actualWebApp.breadcrumbService
  * @description
  * # breadcrumbService
- * Service in the dashexampleApp.
+ * Service in the actualWebApp.
  */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .service('breadcrumbService', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
 

@@ -55,6 +55,22 @@
           </div>
         </div>
 
+        <div class="input-element select-element-wrapper">
+          <label><strong>Uso CFDI</strong></label>
+          <md-select 
+            ng-model="vm.fiscalAddress.cfdiUse" 
+            class="select-element"
+            required>
+            <md-option 
+              ng-repeat="use in vm.cfdiUseList | orderBy:'label'"
+              ng-value="use.code"
+            >
+              {{use.label}} ({{use.code}})
+            </md-option>
+          </md-select>
+        </div>
+    
+
         <div layout="row" layout-wrap>
           <div flex-gt-sm="25" flex="100" class="input-element">
             <label>

@@ -1,13 +1,5 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name dashexampleApp.controller:ProductCtrl
- * @description
- * # ProductCtrl
- * Controller of the dashexampleApp
- */
-angular.module('dashexampleApp')
+angular.module('actualWebApp')
   .controller('ProductCtrl', ProductCtrl);
 
 function ProductCtrl(
@@ -34,13 +26,11 @@ function ProductCtrl(
   dialogService,
   breadcrumbService,
   userService,
-  metaTagsService
+  metaTagsService,
+  activeStore
 ) {
   var vm = this;
-  var activeStoreId = localStorageService.get('activeStore');
   var activeStoreWarehouse = false;
-  var mainDataListener = function(){};
-  var categoriesTreeListener = function(){};
   var activeQuotationListener = function(){};
 
   angular.extend(vm, {
@@ -68,13 +58,7 @@ function ProductCtrl(
   });
 
 
-  if($rootScope.activeStore){
-    init($routeParams.id);
-  }else{
-    mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
-      init($routeParams.id);
-    });
-  }
+  init($routeParams.id);
 
   function init(productId, reload){
     $rootScope.scrollTo('main');
@@ -122,15 +106,13 @@ function ProductCtrl(
         */
 
         if(reload){
-          $location.path('//' + productId, false)
+          $location.path('/' + productId, false)
             .search({variantReload:'true'});
           loadProductFilters(vm.product);
         }else{
           loadProductFilters(vm.product);
-          if($rootScope.activeStore){
-            loadWarehouses($rootScope.activeStore);
-            loadVariants(vm.product);
-          }
+          loadWarehouses(activeStore);
+          loadVariants(vm.product);
         }
 
         vm.isLoading = false;
@@ -140,7 +122,7 @@ function ProductCtrl(
           loadZipCodeDeliveryById(zipcodeDeliveryId);
           setUpDeliveries({
             productId: vm.product.ItemCode,
-            activeStoreId: activeStoreId,
+            activeStoreId: activeStore.id,
             zipcodeDeliveryId: zipcodeDeliveryId
           });
 
@@ -151,7 +133,7 @@ function ProductCtrl(
             loadZipCodeDeliveryById(zipcodeDeliveryId);
             setUpDeliveries({
               productId: vm.product.ItemCode,
-              activeStoreId: activeStoreId,
+              activeStoreId: activeStore.id,
               zipcodeDeliveryId: zipcodeDeliveryId
             });
 
@@ -175,8 +157,6 @@ function ProductCtrl(
         $log.error(err);
       });
 
-    //Unsuscribing  mainDataListener
-    mainDataListener();
   }
 
   function loadZipCodeDeliveryById(id){
@@ -255,7 +235,7 @@ function ProductCtrl(
   }
 
   function loadVariants(product){
-    productService.loadVariants(product, $rootScope.activeStore)
+    productService.loadVariants(product, activeStore)
       .then(function(variants){
         vm.variants = variants;
         vm.hasVariants = checkIfHasVariants(vm.variants);
@@ -291,12 +271,12 @@ function ProductCtrl(
     return name;
   }
 
-  function loadWarehouses(activeStore){
+  function loadWarehouses(_activeStore){
     api.$http.get('/company/find')
       .then(function(res) {
         vm.warehouses = res.data;
         activeStoreWarehouse = _.findWhere(vm.warehouses,{
-          id: activeStore.Warehouse
+          id: _activeStore.Warehouse
         });
       })
       .catch(function(err){
@@ -427,7 +407,7 @@ function ProductCtrl(
 
           return setUpDeliveries({
             productId: vm.product.ItemCode,
-            activeStoreId: activeStoreId,
+            activeStoreId: activeStore.id,
             zipcodeDeliveryId: zipcodeDelivery.id,
           });
 
@@ -497,7 +477,6 @@ function ProductCtrl(
     //unsuscribing listeners
     $mdDialog.hide();
     console.log('closing dialog');
-    mainDataListener();
     activeQuotationListener();
     $mdDialog.cancel();
   });
@@ -528,5 +507,6 @@ ProductCtrl.$inject = [
   'dialogService',
   'breadcrumbService',
   'userService',
-  'metaTagsService'
+  'metaTagsService',
+  'activeStore'
 ];
