@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name actualWebApp.controller:QuotationsEditCtrl
- * @description
- * # QuotationsEditCtrl
- * Controller of the actualWebApp
- */
 angular.module('actualWebApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
@@ -33,10 +26,10 @@ function QuotationsEditCtrl(
   siteService,
   productService,
   cartService,
-  leadService
+  leadService,
+  activeStore
 ){
   var vm = this;
-  var mainDataListener = function(){};
   angular.extend(vm, {
     newRecord: {},
     api: api,
@@ -67,8 +60,6 @@ function QuotationsEditCtrl(
     removeDetail: removeDetail,
     //removeDetailsGroup: removeDetailsGroup,
     sendByEmail: sendByEmail,
-    showDetailGroupStockAlert: showDetailGroupStockAlert,
-    showDetailStockAlert: showDetailStockAlert,
     toggleRecord: toggleRecord,
     isOrderPending: isOrderPending,
     hasSpeiOrder: hasSpeiOrder,
@@ -84,25 +75,16 @@ function QuotationsEditCtrl(
     isDetailOutOfStock: isDetailOutOfStock,
     isOrderLinkVisible: isOrderLinkVisible,
     hasDetailChangedOriginalQuantity: hasDetailChangedOriginalQuantity,
-    user: $rootScope.user
+    user: $rootScope.user,
+    activeStore: activeStore
   });
 
-  var activeQuotationListener = function(){};
-  var activeStoreId = localStorageService.get('activeStore');
-
-  if($rootScope.activeStore){
-    init($routeParams.id);
-  }else{
-    mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
-      init($routeParams.id);
-    });
-  }
+  init($routeParams.id);
 
   function init(quotationId, options){
     console.log('entered init.js', new Date());
     options = options || {};
     $rootScope.scrollTo('main');    
-    vm.activeStore       = $rootScope.activeStore;
     vm.promotionPackages = [];
     vm.isLoading = true;
     vm.isLoadingDetails = true;
@@ -204,7 +186,6 @@ function QuotationsEditCtrl(
   function loadQuotationAddress(){
     quotationService.getAddress(vm.quotation.id)
       .then(function(address){
-        console.log('address', address);
         vm.addressString = buildAddressString(address);
       });
   }
@@ -285,7 +266,7 @@ function QuotationsEditCtrl(
     var options = {
       productId: detail.Product.id,
       productItemCode: detail.Product.ItemCode,
-      activeStoreId: activeStoreId,
+      activeStoreId: activeStore.id,
       zipcodeDeliveryId: vm.quotation.ZipcodeDelivery.id
     };
 
@@ -560,11 +541,10 @@ function QuotationsEditCtrl(
         var removedDetailIndex = getRemovedDetailIndex(detailId, vm.quotation.Details);
         vm.quotation.Details.splice(removedDetailIndex,1);
 
-        vm.isLoadingDetails        = false;
+        vm.isLoadingDetails = false;
         vm.quotation = quotationService.localQuotationUpdateWithNewValues(vm.quotation, updatedQuotation);
         if(updatedQuotation.Details){
           vm.quotation.Details =  matchDetailsWithNewDetails(vm.quotation.Details, updatedQuotation.Details);
-          //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         }
 
         vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
@@ -598,7 +578,6 @@ function QuotationsEditCtrl(
     for(var i=0;i<details.length; i++){
       var newDetail = _.findWhere(newDetails, { id: details[i].id } );
       if(newDetail){
-        console.log('newDetail', newDetail);
         details[i] = quotationService.localDetailUpdateWithNewValues(details[i], newDetail);
       }
     }
@@ -633,13 +612,6 @@ function QuotationsEditCtrl(
 
 
   function continueBuying(){
-    /*
-    if( !isValidStock(vm.quotation.Details) ){
-      quotationService.showStockAlert();
-      return;
-    }
-    */
-
     if(!vm.quotation.Details || vm.quotation.Details.length === 0){
       dialogService.showDialog('No hay artículos en esta cotización');
       return;
@@ -717,72 +689,8 @@ function QuotationsEditCtrl(
       });
   }
 
-
-  function showDetailStockAlert(ev,detail){
-    var controller = StockDialogController;
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
-    $mdDialog.show({
-      controller: [
-        '$scope', 
-        '$mdDialog',
-        '$location',
-        'quotationService', 
-        'vm', 
-        'detail',
-        controller
-      ],
-      templateUrl: 'views/quotations/stock-dialog.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: useFullScreen,
-      locals:{
-        vm: vm,
-        detail: detail
-      }
-    })
-    .then(function() {
-    })
-    .catch(function() {
-      console.log('cancelled');
-    });    
-  }
-
-
-
-  function showDetailGroupStockAlert(ev,detailGroup){
-    var controller = StockDialogController;
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
-    $mdDialog.show({
-      controller: [
-        '$scope', 
-        '$mdDialog',
-        '$location',
-        'quotationService', 
-        'vm', 
-        'detailGroup',
-        controller
-      ],
-      templateUrl: 'views/quotations/stock-dialog.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: useFullScreen,
-      locals:{
-        vm: vm,
-        detailGroup: detailGroup
-      }
-    })
-    .then(function() {
-    })
-    .catch(function() {
-      console.log('cancelled');
-    });    
-  }
-
   $scope.$on('$destroy', function(){
     $mdDialog.hide();
-    mainDataListener();
   });
 
 }
@@ -810,5 +718,6 @@ QuotationsEditCtrl.$inject = [
   'siteService',
   'productService',
   'cartService',
-  'leadService'
+  'leadService',
+  'activeStore'  
 ];
