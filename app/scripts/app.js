@@ -419,7 +419,7 @@ angular
     }
 
     Conekta.setPublicKey(getConektaKeyBySite());
-    AnalyticsProvider.setAccount(getAnalyticsCodeBySite()); //UU-XXXXXXX-X should be your tracking code
+    //AnalyticsProvider.setAccount(getAnalyticsCodeBySite()); //UU-XXXXXXX-X should be your tracking code
 
     moment.locale('es');
     var locales = {
