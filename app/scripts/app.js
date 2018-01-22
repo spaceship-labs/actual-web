@@ -24,7 +24,6 @@ angular
     'leaflet-directive',
     'localytics.directives',
     'ng-currency',
-    'angular-google-analytics',
     'envconfig',
     'siteconfig'
   ])
@@ -35,7 +34,6 @@ angular
     $locationProvider,
     $mdThemingProvider,
     localStorageServiceProvider,
-    AnalyticsProvider,
     pikadayConfigProvider,
     ENV,
     SITE
@@ -468,7 +466,6 @@ angular
   })
 
   .run(function(
-    Analytics,
     localStorageService,
     authService,
     jwtHelper,
@@ -494,6 +491,16 @@ angular
       }
       return original.apply($location, [path]);
     };
+
+    $rootScope.$on('$routeChangeSuccess', function() {
+      var dataLayer = window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+        event: 'ngRouteChange',
+        attributes: {
+          route: $location.path()
+        }
+      });
+    });
 
     alasql.fn.nullFormat = formatService.nullFormat;
     alasql.fn.yesNoFormat = formatService.yesNoFormat;
