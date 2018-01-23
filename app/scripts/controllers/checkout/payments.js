@@ -1,12 +1,4 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name actualWebApp.controller:CheckoutPaymentsCtrl
- * @description
- * # CheckoutPaymentsCtrl
- * Controller of the actualWebApp
- */
 angular
   .module('actualWebApp')
   .controller('CheckoutPaymentsCtrl', CheckoutPaymentsCtrl);
@@ -35,7 +27,8 @@ function CheckoutPaymentsCtrl(
   ewalletService,
   checkoutService,
   $interval,
-  api
+  api,
+  gtmService
 ) {
   var vm = this;
 
@@ -127,6 +120,7 @@ function CheckoutPaymentsCtrl(
         }
 
         if (vm.quotation.Order) {
+          gtmService.notifyOrder('77500');
           $location.path(
             '/checkout/order/' + vm.quotation.Order.id + '/COMPRA-CONFIRMADA'
           );

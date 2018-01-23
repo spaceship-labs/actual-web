@@ -2,7 +2,8 @@
 angular.module('actualWebApp')
   .service('gtmService', function () {
     var service = {
-        notifyAddToCart: notifyAddToCart 
+        notifyAddToCart: notifyAddToCart,
+        notifyOrder: notifyOrder
     };
 
     function notifyAddToCart(sku, quantity, amount, zipcode){
@@ -15,6 +16,18 @@ angular.module('actualWebApp')
                 quantity: quantity,
                 sku: sku,
                 amount: amount,
+                zipcode: zipcode
+            }
+        });
+    }
+
+    function notifyOrder(zipcode){
+        console.log('orderEvent');
+        var dataLayer = window.dataLayer = window.dataLayer || [];
+        console.log('dataLayer', dataLayer);
+        dataLayer.push({
+            event: 'orderEvent',
+            attributes:{
                 zipcode: zipcode
             }
         });
