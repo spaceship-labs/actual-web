@@ -27,6 +27,7 @@ function ProductCtrl(
   breadcrumbService,
   userService,
   metaTagsService,
+  gtmService,
   activeStore
 ) {
   var vm = this;
@@ -325,6 +326,13 @@ function ProductCtrl(
       activeStoreWarehouse
     );
 
+    gtmService.notifyAddToCart(
+      vm.product.ItemCode,
+      vm.productCart.quantity,
+      vm.product.Price * vm.productCart.quantity,
+      vm.zipcodeDelivery.cp
+    );
+
     if(productCartItems.length === 1){
       var cartItem = productCartItems[0];
       var params = cartService.buildAddProductToCartParams(vm.product.id, cartItem);
@@ -496,5 +504,6 @@ ProductCtrl.$inject = [
   'breadcrumbService',
   'userService',
   'metaTagsService',
+  'gtmService',
   'activeStore'
 ];
