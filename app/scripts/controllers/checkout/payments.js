@@ -35,6 +35,7 @@ function CheckoutPaymentsCtrl(
   ewalletService,
   checkoutService,
   $interval,
+  gtmService,
   api
 ) {
   var vm = this;
@@ -358,6 +359,12 @@ function CheckoutPaymentsCtrl(
               $location.path('/quotations/edit/' + vm.quotation.id);
               return;
             }
+
+            gtmService.notifiyOrder(
+              vm.order.folio,
+              vm.order.total,
+              vm.order.U_CP
+            );
 
             $location
               .path('/checkout/order/' + vm.order.id + '/COMPRA-CONFIRMADA')

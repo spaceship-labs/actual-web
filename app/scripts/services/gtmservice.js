@@ -2,7 +2,8 @@
 angular.module('actualWebApp')
   .service('gtmService', function () {
     var service = {
-        notifyAddToCart: notifyAddToCart 
+        notifyAddToCart: notifyAddToCart,
+        notifiyOrder: notifiyOrder
     };
 
     function notifyAddToCart(sku, quantity, amount, zipcode){
@@ -18,6 +19,20 @@ angular.module('actualWebApp')
                 zipcode: zipcode
             }
         });
+    }
+
+    function notifiyOrder(folio, amount, zipcode){
+        console.log('notifyAddToCart', sku);
+        var dataLayer = window.dataLayer = window.dataLayer || [];
+        console.log('dataLayer', dataLayer);
+        dataLayer.push({
+            event: 'addToCartEvent',
+            attributes:{
+                folio: folio,
+                amount: amount,
+                zipcode: zipcode
+            }
+        });        
     }
 
     return service;
