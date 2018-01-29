@@ -121,6 +121,13 @@
 
   </head>
   <body ng-cloak ng-class="main.siteTheme">
+    
+    <!--SEE GRUNTFILE processhtml-->
+    <!-- process:template    
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= tagManagerId %>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    /process -->
+
+
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -272,6 +279,7 @@
         <script src="scripts/filters/roundcurrency.js"></script>
         <script src="scripts/services/api.js"></script>
         <script src="scripts/services/authservice.js"></script>
+        <script src="scripts/services/gtmservice.js"></script>
         <script src="scripts/directives/listing-product.js"></script>
         <script src="scripts/directives/fullheight-element.js"></script>
         <script src="scripts/directives/product-gallery.js"></script>

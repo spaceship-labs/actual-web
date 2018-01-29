@@ -1,16 +1,6 @@
 'use strict';
-
-/**
- * @ngdoc service
- * @name actualWebApp.breadcrumbService
- * @description
- * # breadcrumbService
- * Service in the actualWebApp.
- */
 angular.module('actualWebApp')
   .service('breadcrumbService', function () {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-
     var service = {
     	buildProductBreadcrumb: buildProductBreadcrumb,
     	buildCategoryBreadcrumb: buildCategoryBreadcrumb,
