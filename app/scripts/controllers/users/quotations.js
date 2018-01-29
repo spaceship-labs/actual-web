@@ -30,6 +30,8 @@ function UsersUserQuotationsCtrl(
         key:'Acciones',
         label:'Acciones',
         propId: 'id',
+        domainMapper: siteService.getStoresIdMapper(),
+        domainColumn: 'Store',        
         actions:[
           {url:'/quotations/edit/',type:'edit'},
         ]
