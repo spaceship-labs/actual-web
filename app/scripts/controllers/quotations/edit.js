@@ -187,7 +187,7 @@ function QuotationsEditCtrl(
         vm.isLoadingDetailsDeliveries = false;
 
         showDetailsChangedDateAlertIfNeeded();
-        return quotationService.getRecords(vm.quotation.id);
+        if (vm.isUserAdmin) return quotationService.getRecords(vm.quotation.id);
       })
       .then(function(records) {
         if (records) {
