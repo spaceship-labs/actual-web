@@ -193,7 +193,6 @@ function QuotationsEditCtrl(
         if (records) {
           vm.quotation.Records = records;
         }
-        console.log('LOL: ', vm.quotation.Records);
         vm.isLoadingRecords = false;
       })
       .catch(function(err) {
@@ -539,7 +538,6 @@ function QuotationsEditCtrl(
   }
 
   function toggleRecord(record) {
-    console.log('que raro:', record);
     vm.quotation.Records.forEach(function(rec) {
       if (rec.id != record.id) {
         rec.isActive = false;
@@ -765,7 +763,6 @@ function QuotationsEditCtrl(
     leadService
       .getQuotationLeads(vm.quotation.id)
       .then(function(leads) {
-        console.log('leads', leads);
         vm.leads = leads;
         vm.isLoadingLeads = false;
       })
@@ -862,11 +859,9 @@ function QuotationsEditCtrl(
         .addRecord(vm.quotation.id, params)
         .then(function(res) {
           var record = res;
-
           if (record) {
             vm.quotation.Records.push(record);
           }
-
           vm.newRecord = {};
           vm.isLoadingRecords = false;
           dialogService.showDialog('Evento guardado');

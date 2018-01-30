@@ -106,7 +106,7 @@
       var url = '/quotation/addrecord/' + quotationId;
       return Upload.upload({ url: api.baseUrl + url, data: params }).then(
         function(res) {
-          return res.data;
+          return res.data.data;
         }
       );
     }
