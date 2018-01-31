@@ -7,7 +7,8 @@
  * # QuotationsEditCtrl
  * Controller of the actualWebApp
  */
-angular.module('actualWebApp')
+angular
+  .module('actualWebApp')
   .controller('QuotationsEditCtrl', QuotationsEditCtrl);
 
 function QuotationsEditCtrl(
@@ -34,20 +35,21 @@ function QuotationsEditCtrl(
   productService,
   cartService,
   leadService
-){
+) {
   var vm = this;
-  var mainDataListener = function(){};
+  var mainDataListener = function() {};
   angular.extend(vm, {
     newRecord: {},
     api: api,
     paymentAttemptsLimit: quotationService.PAYMENT_ATTEMPTS_LIMIT,
     isLoadingRecords: false,
     isLoading: true,
+    recordTypes: quotationService.getRecordTypes(),
     timePickerOptions: {
-        step: 20,
-        timeFormat: 'g:ia',
-        appendTo: 'body',
-        disableTextInput:true
+      step: 20,
+      timeFormat: 'g:ia',
+      appendTo: 'body',
+      disableTextInput: true
     },
     getQtyArray: getQtyArray,
     addNewProduct: addNewProduct,
@@ -80,150 +82,181 @@ function QuotationsEditCtrl(
     isDetailEditionEnabled: isDetailEditionEnabled,
     isDetailPiecesEditionEnabled: isDetailPiecesEditionEnabled,
     isDetailRemoveOptionEnabled: isDetailRemoveOptionEnabled,
-    isDetailAlertVisible: isDetailAlertVisible, 
+    isDetailAlertVisible: isDetailAlertVisible,
     isDetailOutOfStock: isDetailOutOfStock,
     isOrderLinkVisible: isOrderLinkVisible,
     hasDetailChangedOriginalQuantity: hasDetailChangedOriginalQuantity,
+    addRecord: addRecord,
     user: $rootScope.user
   });
 
-  var activeQuotationListener = function(){};
+  var activeQuotationListener = function() {};
   var activeStoreId = localStorageService.get('activeStore');
 
-  if($rootScope.activeStore){
+  if ($rootScope.activeStore) {
     init($routeParams.id);
-  }else{
-    mainDataListener = $rootScope.$on('activeStoreAssigned', function(e){
+  } else {
+    mainDataListener = $rootScope.$on('activeStoreAssigned', function(e) {
       init($routeParams.id);
     });
   }
 
-  function init(quotationId, options){
+  function init(quotationId, options) {
     console.log('entered init.js', new Date());
     options = options || {};
-    $rootScope.scrollTo('main');    
-    vm.activeStore       = $rootScope.activeStore;
+    $rootScope.scrollTo('main');
+    vm.activeStore = $rootScope.activeStore;
     vm.promotionPackages = [];
     vm.isLoading = true;
     vm.isLoadingDetails = true;
-    vm.isLoadingDetailsDeliveries = true;    
+    vm.isLoadingDetailsDeliveries = true;
     vm.isValidatingStock = true;
 
     loadWarehouses();
     showAlerts();
 
-    quotationService.getById(quotationId)
-      .then(function(res){
+    quotationService
+      .getById(quotationId)
+      .then(function(res) {
         vm.isLoading = false;
         vm.quotation = res.data;
-        
-        if(!vm.quotation.OrderWeb && !vm.quotation.rateLimitReported){
+
+        if (!vm.quotation.OrderWeb && !vm.quotation.rateLimitReported) {
           quotationService.setActiveQuotation(vm.quotation.id);
         }
 
-        if(vm.quotation.rateLimitReported){
+        if (vm.quotation.rateLimitReported) {
           quotationService.removeCurrentQuotation();
         }
 
-        if(vm.quotation.OrderWeb){
+        if (vm.quotation.OrderWeb) {
           vm.quotation.isSpeiQuotation = vm.quotation.OrderWeb.isSpeiOrder;
         }
 
-        if(vm.quotation.Address){
+        if (vm.quotation.Address) {
           loadQuotationAddress();
         }
-        
+
         loadPaymentMethods();
-        
-        if(vm.isUserAdmin){
+
+        if (vm.isUserAdmin) {
           loadQuotationLeads();
         }
 
         var populateParams = {
           populate: ['FilterValues']
         };
-        return quotationService.populateDetailsWithProducts(vm.quotation,populateParams);
+        return quotationService.populateDetailsWithProducts(
+          vm.quotation,
+          populateParams
+        );
       })
-      .then(function(details){
+      .then(function(details) {
         vm.quotation.Details = details;
         return quotationService.loadProductsFilters(vm.quotation.Details);
       })
-      .then(function(detailsWithFilters){
+      .then(function(detailsWithFilters) {
         vm.quotation.Details = detailsWithFilters;
         //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         vm.isLoadingDetails = false;
-        return quotationService.getCurrentStock(vm.quotation.id);       
+        return quotationService.getCurrentStock(vm.quotation.id);
       })
-      .then(function(response){
+      .then(function(response) {
         var detailsStock = response.data;
-        vm.quotation.Details = quotationService.mapDetailsStock(vm.quotation.Details, detailsStock);
-        vm.quotation.Details = quotationService.mapDetailsOriginalValues(vm.quotation.Details);
+        vm.quotation.Details = quotationService.mapDetailsStock(
+          vm.quotation.Details,
+          detailsStock
+        );
+        vm.quotation.Details = quotationService.mapDetailsOriginalValues(
+          vm.quotation.Details
+        );
 
         console.log('end loading quotation', new Date());
         vm.isValidatingStock = false;
 
         return loadDetailsDeliveries(vm.quotation.Details);
       })
-      .then(function(){
-        vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(vm.quotation.Details);
-        vm.quotation.Details = quotationService.localMultipleDetailsUpdate(vm.quotation.Details);
+      .then(function() {
+        vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(
+          vm.quotation.Details
+        );
+        vm.quotation.Details = quotationService.localMultipleDetailsUpdate(
+          vm.quotation.Details
+        );
         vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
-        vm.isLoadingDetailsDeliveries = false;        
-      
-        showDetailsChangedDateAlertIfNeeded();
+        vm.isLoadingDetailsDeliveries = false;
 
+        showDetailsChangedDateAlertIfNeeded();
+        if (vm.isUserAdmin) return quotationService.getRecords(vm.quotation.id);
+        return $q.resolve();
       })
-      .catch(function(err){
+      .then(function(records) {
+        if (records) {
+          vm.quotation.Records = records;
+        }
+        vm.isLoadingRecords = false;
+      })
+      .catch(function(err) {
         var error = err.data || err;
         error = error ? error.toString() : '';
-        dialogService.showDialog( (error) );
+        dialogService.showDialog(error);
         console.log('error', err);
       });
-
   }
 
-
-  function showDetailsChangedDateAlertIfNeeded(){
-    if( someDetailShipdateHasChanged() ){
-      dialogService.showDialog('Verifique su nueva fecha de entrega y cantidad de piezas');
+  function showDetailsChangedDateAlertIfNeeded() {
+    if (someDetailShipdateHasChanged()) {
+      dialogService.showDialog(
+        'Verifique su nueva fecha de entrega y cantidad de piezas'
+      );
       console.log('alguno cambio');
     }
   }
 
-
-  function someDetailShipdateHasChanged(){
-    return _.some(vm.quotation.Details,function(detail){
+  function someDetailShipdateHasChanged() {
+    return _.some(vm.quotation.Details, function(detail) {
       return isDetailAlertVisible(detail);
     });
   }
 
-  function hasDetailChangedOriginalQuantity(detail){
+  function hasDetailChangedOriginalQuantity(detail) {
     return detail.quantity !== detail.originalQuantity;
   }
 
-  function loadQuotationAddress(){
-    quotationService.getAddress(vm.quotation.id)
-      .then(function(address){
-        console.log('address', address);
-        vm.addressString = buildAddressString(address);
-      });
+  function loadQuotationAddress() {
+    quotationService.getAddress(vm.quotation.id).then(function(address) {
+      console.log('address', address);
+      vm.addressString = buildAddressString(address);
+    });
   }
 
-  function buildAddressString(address){
-    var str = 'Número ' + address.U_Noexterior + ' Entre calle ' + 
-      address.U_Entrecalle + ' y calle ' + address.U_Ycalle + ' colonia ' + 
-      address.U_Colonia + ', ' + address.U_Mpio + ', ' + address.U_Estado + 
-      ', ' + address.U_CP;
+  function buildAddressString(address) {
+    var str =
+      'Número ' +
+      address.U_Noexterior +
+      ' Entre calle ' +
+      address.U_Entrecalle +
+      ' y calle ' +
+      address.U_Ycalle +
+      ' colonia ' +
+      address.U_Colonia +
+      ', ' +
+      address.U_Mpio +
+      ', ' +
+      address.U_Estado +
+      ', ' +
+      address.U_CP;
 
     return str;
   }
 
-  function isOrderLinkVisible(){
-    if (vm.quotation.OrderWeb){ 
-      if(
-          vm.isUserAdmin || 
-          (isQuotationOwnedByUser() && vm.quotation.OrderWeb.status !== 'pending-sap')
-        ){
+  function isOrderLinkVisible() {
+    if (vm.quotation.OrderWeb) {
+      if (
+        vm.isUserAdmin ||
+        (isQuotationOwnedByUser() &&
+          vm.quotation.OrderWeb.status !== 'pending-sap')
+      ) {
         return true;
       }
     }
@@ -231,57 +264,61 @@ function QuotationsEditCtrl(
     return false;
   }
 
-  function isQuotationOwnedByUser(){
+  function isQuotationOwnedByUser() {
     return vm.quotation.Client.id === vm.user.Client;
   }
 
-  function isDetailRemoveOptionEnabled(detail){
+  function isDetailRemoveOptionEnabled(detail) {
     return !vm.quotation.Order && !vm.quotation.isClosed;
   }
 
-  function isDetailEditionEnabled(detail){
-    return detail.productCart && 
+  function isDetailEditionEnabled(detail) {
+    return (
+      detail.productCart &&
       detail.productCart.deliveryGroup &&
-      !vm.isLoadingDetailsDeliveries;    
+      !vm.isLoadingDetailsDeliveries
+    );
   }
 
-  function isDetailPiecesEditionEnabled(detail){
-    return !detail.PromotionPackageApplied; 
+  function isDetailPiecesEditionEnabled(detail) {
+    return !detail.PromotionPackageApplied;
   }
 
-  function isDetailAlertVisible(detail){
-    return detail.availabilityChanged || 
-      (!vm.isLoadingDetailsDeliveries && !detail.productCart.deliveryGroup);
+  function isDetailAlertVisible(detail) {
+    return (
+      detail.availabilityChanged ||
+      (!vm.isLoadingDetailsDeliveries && !detail.productCart.deliveryGroup)
+    );
   }
 
-  function isDetailOutOfStock(detail){
-    if(!hasDetailDeliveries(detail) && !vm.isLoadingDetailsDeliveries){
+  function isDetailOutOfStock(detail) {
+    if (!hasDetailDeliveries(detail) && !vm.isLoadingDetailsDeliveries) {
       return true;
     }
 
     return !hasDetailDeliveries(detail) && !vm.isLoadingDetailsDeliveries;
   }
 
-  function hasDetailDeliveries(detail){
-    if(!detail.deliveries){
+  function hasDetailDeliveries(detail) {
+    if (!detail.deliveries) {
       return false;
     }
 
     return detail.deliveries && detail.deliveries.length > 0;
   }
 
-  function isValidGroupDelivery(groupDelivery){
-    return (groupDelivery.available > 0);
+  function isValidGroupDelivery(groupDelivery) {
+    return groupDelivery.available > 0;
   }
 
-  function loadDetailsDeliveries(details){
-    var promises = details.map(function(detail){
+  function loadDetailsDeliveries(details) {
+    var promises = details.map(function(detail) {
       return loadDeliveriesByDetail(detail);
     });
     return $q.all(promises);
   }
-  
-  function loadDeliveriesByDetail(detail){
+
+  function loadDeliveriesByDetail(detail) {
     var options = {
       productId: detail.Product.id,
       productItemCode: detail.Product.ItemCode,
@@ -289,239 +326,247 @@ function QuotationsEditCtrl(
       zipcodeDeliveryId: vm.quotation.ZipcodeDelivery.id
     };
 
-    return productService.delivery(options.productItemCode, options.zipcodeDeliveryId)
-      .then(function(deliveries){
-        deliveries = deliveries.map(function(delivery){
+    return productService
+      .delivery(options.productItemCode, options.zipcodeDeliveryId)
+      .then(function(deliveries) {
+        deliveries = deliveries.map(function(delivery) {
           delivery.initalAvailable = _.clone(delivery.available);
           return delivery;
         });
 
-        if(detail.PromotionPackageApplied){
-          deliveries = deliveryService.removeInvalidDeliveriesForPackages(detail,deliveries);
+        if (detail.PromotionPackageApplied) {
+          deliveries = deliveryService.removeInvalidDeliveriesForPackages(
+            detail,
+            deliveries
+          );
         }
-        
+
         return deliveryService.setUpDetailDeliveries(detail, deliveries);
       });
   }
 
-  function cloneArrayOfObjects(arr){
+  function cloneArrayOfObjects(arr) {
     return JSON.parse(JSON.stringify(arr));
   }
 
-  function onDetailShipDateChange(detail){
-    if(!vm.isCalculatingAvailability){
+  function onDetailShipDateChange(detail) {
+    if (!vm.isCalculatingAvailability) {
       vm.isCalculatingAvailability = true;
 
       var quotationDetails = cloneArrayOfObjects(vm.quotation.Details);
 
-      for(var i= 0; i<quotationDetails.length; i++){
-        if( quotationDetails[i].id === detail.id ){
+      for (var i = 0; i < quotationDetails.length; i++) {
+        if (quotationDetails[i].id === detail.id) {
           quotationDetails[i].shipDate = detail.productCart.deliveryGroup.date;
-          quotationDetails[i] = quotationService.localDetailUpdate(quotationDetails[i]);
+          quotationDetails[i] = quotationService.localDetailUpdate(
+            quotationDetails[i]
+          );
         }
       }
 
-      vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(quotationDetails);
-      vm.quotation = quotationService.localQuotationUpdate(vm.quotation);      
-      $timeout(function(){
-        vm.isCalculatingAvailability = false;      
-      },800);
-
-    }    
+      vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(
+        quotationDetails
+      );
+      vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
+      $timeout(function() {
+        vm.isCalculatingAvailability = false;
+      }, 800);
+    }
   }
 
-  function onDetailQuantityChange($ev,detail){
-    if(detail.quantity && !vm.isCalculatingAvailability){
+  function onDetailQuantityChange($ev, detail) {
+    if (detail.quantity && !vm.isCalculatingAvailability) {
       vm.isCalculatingAvailability = true;
 
       var detailQuantity = _.clone(detail.productCart.quantity);
       var quotationDetails = cloneArrayOfObjects(vm.quotation.Details);
 
-      for(var i= 0; i<quotationDetails.length; i++){
-        if( quotationDetails[i].id === detail.id ){
+      for (var i = 0; i < quotationDetails.length; i++) {
+        if (quotationDetails[i].id === detail.id) {
           quotationDetails[i].quantity = detailQuantity;
-          quotationDetails[i] = quotationService.localDetailUpdate(quotationDetails[i]);
+          quotationDetails[i] = quotationService.localDetailUpdate(
+            quotationDetails[i]
+          );
         }
       }
 
-      vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(quotationDetails);
-      vm.quotation = quotationService.localQuotationUpdate(vm.quotation);      
-      $timeout(function(){
-        vm.isCalculatingAvailability = false;      
-      },800);
-
+      vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(
+        quotationDetails
+      );
+      vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
+      $timeout(function() {
+        vm.isCalculatingAvailability = false;
+      }, 800);
     }
   }
-    
-  function getQtyArray(n){
+
+  function getQtyArray(n) {
     n = n || 0;
     var arr = [];
-    for(var i=0;i<n;i++){
-      arr.push(i+1);
+    for (var i = 0; i < n; i++) {
+      arr.push(i + 1);
     }
     return arr;
   }
 
-  function isOrderPending(order){
-    if(!order){
+  function isOrderPending(order) {
+    if (!order) {
       return false;
     }
-    return order.status === 'pending-sap'  || order.status === 'pending-payment';
+    return order.status === 'pending-sap' || order.status === 'pending-payment';
   }
 
-  function hasSpeiOrder(order){
-    if(!order){
+  function hasSpeiOrder(order) {
+    if (!order) {
       return false;
     }
     return order.isSpeiOrder;
   }
 
-  function showAlerts(){
-    if($location.search().startQuotation){
+  function showAlerts() {
+    if ($location.search().startQuotation) {
       //dialogService.showDialog('Cotizacion creada, agrega productos a tu cotización');
-    }    
-    if($location.search().createdClient){
+    }
+    if ($location.search().createdClient) {
       //dialogService.showDialog('Cliente registrado');
     }
-    if($location.search().stockAlert){
+    if ($location.search().stockAlert) {
       quotationService.showStockAlert();
     }
   }
 
-  function loadWarehouses(){
-    api.$http.get('/company/find').then(function(res){
-      vm.warehouses = res.data;
-    })
-    .catch(function(err){
-      $log.error(err);
-    });
+  function loadWarehouses() {
+    api.$http
+      .get('/company/find')
+      .then(function(res) {
+        vm.warehouses = res.data;
+      })
+      .catch(function(err) {
+        $log.error(err);
+      });
   }
 
-  function loadPaymentMethods(){
+  function loadPaymentMethods() {
     vm.isLoadingPaymentMethods = true;
-    quotationService.getPaymentOptions(vm.quotation.id)
-      .then(function(response){
+    quotationService
+      .getPaymentOptions(vm.quotation.id)
+      .then(function(response) {
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
         vm.isLoadingPaymentMethods = false;
       })
-      .catch(function(err){
+      .catch(function(err) {
         console.log('err', err);
         vm.isLoadingPaymentMethods = false;
       });
   }
- 
-  function print(){
+
+  function print() {
     window.print();
   }
 
-  function sendQuotationAndSaveLead(){
+  function sendQuotationAndSaveLead() {
     showLeadFormDialog();
   }
 
   function showLeadFormDialog(ev) {
     ev = null;
     var templateUrl = 'views/partials/lead-form-dialog.html';
-    var controller  = LeadFormDialogController;
-    $mdDialog.show({
-      controller: [
-        '$mdDialog',
-        'leadService',
-        'params',
-        controller
-      ],
-      controllerAs: 'ctrl',
-      templateUrl: templateUrl,
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: false,
-      locals:{
-        params:{
-          quotationId: vm.quotation.id
+    var controller = LeadFormDialogController;
+    $mdDialog
+      .show({
+        controller: ['$mdDialog', 'leadService', 'params', controller],
+        controllerAs: 'ctrl',
+        templateUrl: templateUrl,
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: false,
+        locals: {
+          params: {
+            quotationId: vm.quotation.id
+          }
         }
-      }
-    })
-    .then(function(res) {
-      console.log('res', res);
-      dialogService.showDialog('Cotización enviada');
-    })
-    .catch(function(err){
-      var errMsg = '';
-      if(err){
-        errMsg = err.data || err;
-        errMsg = errMsg ? errMsg.toString() : '';
-        dialogService.showDialog(errMsg);
-      }      
-    });
-  }  
+      })
+      .then(function(res) {
+        console.log('res', res);
+        dialogService.showDialog('Cotización enviada');
+      })
+      .catch(function(err) {
+        var errMsg = '';
+        if (err) {
+          errMsg = err.data || err;
+          errMsg = errMsg ? errMsg.toString() : '';
+          dialogService.showDialog(errMsg);
+        }
+      });
+  }
 
-  function sendByEmail(){
-    if(!vm.quotation.Client){
+  function sendByEmail() {
+    if (!vm.quotation.Client) {
       sendQuotationAndSaveLead();
       return;
 
-      $location.path('/register')
-        .search({
-          //addContact:true,
-          quotation: vm.quotation.id,
-          redirectTo: '/quotations/edit/' + vm.quotation.id
-        });
+      $location.path('/register').search({
+        //addContact:true,
+        quotation: vm.quotation.id,
+        redirectTo: '/quotations/edit/' + vm.quotation.id
+      });
       return;
     }
 
     vm.isLoading = true;
     $rootScope.scrollTo('main');
-    quotationService.sendByEmail(vm.quotation.id)
-      .then(function(res){
+    quotationService
+      .sendByEmail(vm.quotation.id)
+      .then(function(res) {
         vm.isLoading = false;
         dialogService.showDialog('Email enviado al cliente');
       })
-      .catch(function(err){
+      .catch(function(err) {
         $log.error(err);
         vm.isLoading = false;
         dialogService.showDialog('Hubo un error, intentalo de nuevo');
       });
   }
 
-
-  function getWarehouseById(id){
+  function getWarehouseById(id) {
     var warehouse = {};
-    if(vm.warehouses){
-      warehouse = _.findWhere(vm.warehouses, {id: id});
+    if (vm.warehouses) {
+      warehouse = _.findWhere(vm.warehouses, { id: id });
     }
     return warehouse;
   }
 
-  function toggleRecord(record){
-    vm.quotation.Records.forEach(function(rec){
-      if(rec.id != record.id){
+  function toggleRecord(record) {
+    vm.quotation.Records.forEach(function(rec) {
+      if (rec.id != record.id) {
         rec.isActive = false;
       }
     });
     record.isActive = !record.isActive;
   }
 
-  function appliesForPackageDiscount(detail){
-    if(detail.PromotionPackageApplied){
+  function appliesForPackageDiscount(detail) {
+    if (detail.PromotionPackageApplied) {
       return true;
     }
     return false;
   }
 
-  function appliesForPromotionDiscount(detail){
-    return (!detail.PromotionPackageApplied && detail.Promotion);
+  function appliesForPromotionDiscount(detail) {
+    return !detail.PromotionPackageApplied && detail.Promotion;
   }
 
-  function getPromotionPackageById(packageId){
-    return _.findWhere(vm.promotionPackages, {id:packageId}); 
+  function getPromotionPackageById(packageId) {
+    return _.findWhere(vm.promotionPackages, { id: packageId });
   }
 
-  function attachImage(file){
+  function attachImage(file) {
     vm.newRecord.file = file;
   }
 
-  function addNewProduct(){
+  function addNewProduct() {
     quotationService.setActiveQuotation(vm.quotation.id);
     $rootScope.$emit('newActiveQuotation', vm.quotation.id);
     $location.path('/');
@@ -537,101 +582,117 @@ function QuotationsEditCtrl(
       .targetEvent(ev)
       .ok('Eliminar')
       .cancel('Cancelar');
-    
-    $mdDialog.show(confirm).then(function() {
-      removeDetail(detail);
-      //removeDetailsGroup(detailsGroup);
-    }, function() {
-      console.log('Eliminado');
-    });
+
+    $mdDialog.show(confirm).then(
+      function() {
+        removeDetail(detail);
+        //removeDetailsGroup(detailsGroup);
+      },
+      function() {
+        console.log('Eliminado');
+      }
+    );
   }
 
-
-  function removeDetail(detail){
+  function removeDetail(detail) {
     var detailId = detail.id;
     vm.isLoadingDetails = true;
     $rootScope.scrollTo('main');
-    return quotationService.removeDetail(detailId, vm.quotation.id)
-      .then(function(res){
+    return quotationService
+      .removeDetail(detailId, vm.quotation.id)
+      .then(function(res) {
         var updatedQuotation = res.data;
 
         //Removing deleted detail from local variables
-        var removedDetailIndex = getRemovedDetailIndex(detailId, vm.quotation.Details);
-        vm.quotation.Details.splice(removedDetailIndex,1);
+        var removedDetailIndex = getRemovedDetailIndex(
+          detailId,
+          vm.quotation.Details
+        );
+        vm.quotation.Details.splice(removedDetailIndex, 1);
 
-        vm.isLoadingDetails        = false;
-        vm.quotation = quotationService.localQuotationUpdateWithNewValues(vm.quotation, updatedQuotation);
-        if(updatedQuotation.Details){
-          vm.quotation.Details =  matchDetailsWithNewDetails(vm.quotation.Details, updatedQuotation.Details);
+        vm.isLoadingDetails = false;
+        vm.quotation = quotationService.localQuotationUpdateWithNewValues(
+          vm.quotation,
+          updatedQuotation
+        );
+        if (updatedQuotation.Details) {
+          vm.quotation.Details = matchDetailsWithNewDetails(
+            vm.quotation.Details,
+            updatedQuotation.Details
+          );
           //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         }
 
         vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
-        vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(vm.quotation.Details);
+        vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(
+          vm.quotation.Details
+        );
 
         showDetailsChangedDateAlertIfNeeded();
         loadPaymentMethods();
         return $rootScope.loadActiveQuotation();
       })
-      .catch(function(err){
+      .catch(function(err) {
         $log.error(err);
       });
   }
 
-  function getRemovedDetailIndex(detailId, allDetails){
-    var indexes = allDetails.map(function(detail, index){
-      if(detailId === detail.id){
+  function getRemovedDetailIndex(detailId, allDetails) {
+    var indexes = allDetails.map(function(detail, index) {
+      if (detailId === detail.id) {
         return index;
-      }else{
-        return  'invalidIndex';
+      } else {
+        return 'invalidIndex';
       }
     });
-    var validIndexes = indexes.filter(function(index){
+    var validIndexes = indexes.filter(function(index) {
       return index !== 'invalidIndex';
     });
 
     return validIndexes[0];
   }
 
-  function matchDetailsWithNewDetails(details, newDetails){
-    for(var i=0;i<details.length; i++){
-      var newDetail = _.findWhere(newDetails, { id: details[i].id } );
-      if(newDetail){
+  function matchDetailsWithNewDetails(details, newDetails) {
+    for (var i = 0; i < details.length; i++) {
+      var newDetail = _.findWhere(newDetails, { id: details[i].id });
+      if (newDetail) {
         console.log('newDetail', newDetail);
-        details[i] = quotationService.localDetailUpdateWithNewValues(details[i], newDetail);
+        details[i] = quotationService.localDetailUpdateWithNewValues(
+          details[i],
+          newDetail
+        );
       }
     }
 
     //Removing all details that aren't new
-    details = details.filter(function(d){
-      return _.findWhere(newDetails, {id: d.id});
+    details = details.filter(function(d) {
+      return _.findWhere(newDetails, { id: d.id });
     });
     return quotationService.localMultipleDetailsUpdate(details);
   }
 
-  function isValidStock(details){
-    if(!details){
+  function isValidStock(details) {
+    if (!details) {
       return false;
     }
 
     var isQuotationValidStock = quotationService.isValidStock(details);
     var detailsChanged = didDetailsChanged();
 
-    if(detailsChanged){
+    if (detailsChanged) {
       return true;
     }
 
     return isQuotationValidStock;
   }
 
-  function didDetailsChanged(){
-    return _.some(vm.quotation.Details, function(detail){
+  function didDetailsChanged() {
+    return _.some(vm.quotation.Details, function(detail) {
       return detail.availabilityChanged;
     });
   }
 
-
-  function continueBuying(){
+  function continueBuying() {
     /*
     if( !isValidStock(vm.quotation.Details) ){
       quotationService.showStockAlert();
@@ -639,12 +700,12 @@ function QuotationsEditCtrl(
     }
     */
 
-    if(!vm.quotation.Details || vm.quotation.Details.length === 0){
+    if (!vm.quotation.Details || vm.quotation.Details.length === 0) {
       dialogService.showDialog('No hay artículos en esta cotización');
       return;
     }
 
-    if(!vm.quotation.Order){
+    if (!vm.quotation.Order) {
       vm.isLoading = true;
       $rootScope.scrollTo('main');
 
@@ -652,42 +713,39 @@ function QuotationsEditCtrl(
         Details: angular.copy(vm.quotation.Details)
       };
 
-      params.Details = params.Details.map(function(detail){
+      params.Details = params.Details.map(function(detail) {
         detail.originalShipDate = detail.productCart.deliveryGroup.date;
         detail.shipDate = detail.originalShipDate;
         detail.quantity = _.clone(detail.productCart.quantity);
         return detail;
       });
 
-      quotationService.updateDetails(vm.quotation.id, params)
-        .then(function(res){
+      quotationService
+        .updateDetails(vm.quotation.id, params)
+        .then(function(res) {
           console.log('res updateDetails', res);
 
-          if(vm.quotation.Client){
-            //quotationService.setActiveQuotation(vm.quotation.id);            
+          if (vm.quotation.Client) {
+            //quotationService.setActiveQuotation(vm.quotation.id);
             $location.path('/checkout/client/' + vm.quotation.id);
+          } else {
+            $location.path('/register').search({
+              addContact: true,
+              quotation: vm.quotation.id
+            });
           }
-          else{
-            $location.path('/register')
-              .search({
-                addContact:true,
-                quotation: vm.quotation.id
-              });
-          }
-          vm.isLoading = false;        
+          vm.isLoading = false;
         })
-        .catch(function(err){
+        .catch(function(err) {
           $log.error(err);
         });
-      
-
-    }else{
+    } else {
       dialogService.showDialog('Esta cotización ya tiene un pedido asignado');
     }
   }
 
-  function getUnitPriceWithDiscount(unitPrice,discountPercent){
-    var result = unitPrice - ( ( unitPrice / 100) * discountPercent );
+  function getUnitPriceWithDiscount(unitPrice, discountPercent) {
+    var result = unitPrice - unitPrice / 100 * discountPercent;
     return result;
   }
 
@@ -695,95 +753,134 @@ function QuotationsEditCtrl(
     a = (a && new Date(a)) || new Date();
     b = (b && new Date(b)) || new Date();
     var _MS_PER_DAY = 1000 * 60 * 60 * 24;
-    var utc1        = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-    var utc2        = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+    var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
     return Math.abs(Math.floor((utc2 - utc1) / _MS_PER_DAY));
   }
 
-  function loadQuotationLeads(){
+  function loadQuotationLeads() {
     vm.isLoadingLeads = true;
 
-    leadService.getQuotationLeads(vm.quotation.id)
-      .then(function(leads){
-        console.log('leads', leads);
+    leadService
+      .getQuotationLeads(vm.quotation.id)
+      .then(function(leads) {
         vm.leads = leads;
         vm.isLoadingLeads = false;
       })
-      .catch(function(err){
+      .catch(function(err) {
         console.log('err leads load', err);
         vm.isLoadingLeads = false;
-
       });
   }
 
-
-  function showDetailStockAlert(ev,detail){
+  function showDetailStockAlert(ev, detail) {
     var controller = StockDialogController;
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
-    $mdDialog.show({
-      controller: [
-        '$scope', 
-        '$mdDialog',
-        '$location',
-        'quotationService', 
-        'vm', 
-        'detail',
-        controller
-      ],
-      templateUrl: 'views/quotations/stock-dialog.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: useFullScreen,
-      locals:{
-        vm: vm,
-        detail: detail
-      }
-    })
-    .then(function() {
-    })
-    .catch(function() {
-      console.log('cancelled');
-    });    
+    var useFullScreen = $mdMedia('sm') || $mdMedia('xs');
+    $mdDialog
+      .show({
+        controller: [
+          '$scope',
+          '$mdDialog',
+          '$location',
+          'quotationService',
+          'vm',
+          'detail',
+          controller
+        ],
+        templateUrl: 'views/quotations/stock-dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: useFullScreen,
+        locals: {
+          vm: vm,
+          detail: detail
+        }
+      })
+      .then(function() {})
+      .catch(function() {
+        console.log('cancelled');
+      });
   }
 
-
-
-  function showDetailGroupStockAlert(ev,detailGroup){
+  function showDetailGroupStockAlert(ev, detailGroup) {
     var controller = StockDialogController;
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));    
-    $mdDialog.show({
-      controller: [
-        '$scope', 
-        '$mdDialog',
-        '$location',
-        'quotationService', 
-        'vm', 
-        'detailGroup',
-        controller
-      ],
-      templateUrl: 'views/quotations/stock-dialog.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: useFullScreen,
-      locals:{
-        vm: vm,
-        detailGroup: detailGroup
-      }
-    })
-    .then(function() {
-    })
-    .catch(function() {
-      console.log('cancelled');
-    });    
+    var useFullScreen = $mdMedia('sm') || $mdMedia('xs');
+    $mdDialog
+      .show({
+        controller: [
+          '$scope',
+          '$mdDialog',
+          '$location',
+          'quotationService',
+          'vm',
+          'detailGroup',
+          controller
+        ],
+        templateUrl: 'views/quotations/stock-dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: useFullScreen,
+        locals: {
+          vm: vm,
+          detailGroup: detailGroup
+        }
+      })
+      .then(function() {})
+      .catch(function() {
+        console.log('cancelled');
+      });
+  }
+  function addRecord(form) {
+    if (vm.newRecord.eventType && form.$valid) {
+      vm.isLoadingRecords = true;
+
+      //Formatting date and time
+      var date = moment(vm.newRecord.date._d);
+      var time = vm.newRecord.time;
+      var year = date.get('year');
+      var month = date.get('month');
+      var day = date.get('date');
+      var dateTime = moment(time)
+        .set('year', year)
+        .set('month', month)
+        .set('date', day)._d;
+
+      vm.newRecord.dateTime = dateTime;
+
+      var params = {
+        dateTime: vm.newRecord.dateTime,
+        eventType: vm.newRecord.eventType,
+        notes: vm.newRecord.notes,
+        file: vm.newRecord.file
+      };
+
+      quotationService
+        .addRecord(vm.quotation.id, params)
+        .then(function(res) {
+          var record = res;
+          if (record) {
+            vm.quotation.Records.push(record);
+          }
+          vm.newRecord = {};
+          vm.isLoadingRecords = false;
+          dialogService.showDialog('Evento guardado');
+        })
+        .catch(function(err) {
+          dialogService.showDialog('Hubo un error ' + (err.data || err));
+          $log.error(err);
+          vm.isLoadingRecords = false;
+        });
+    } else {
+      dialogService.showDialog('Datos incompletos, revisa los campos');
+    }
   }
 
-  $scope.$on('$destroy', function(){
+  $scope.$on('$destroy', function() {
     $mdDialog.hide();
     mainDataListener();
   });
-
 }
 
 QuotationsEditCtrl.$inject = [
