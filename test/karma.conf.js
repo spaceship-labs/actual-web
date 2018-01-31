@@ -100,6 +100,10 @@ module.exports = function(config) {
       'bower_components/js-xlsx/dist/xlsx.core.min.js',
       'bower_components/es6-promise/promise.js',
       'bower_components/alasql/dist/alasql.min.js',
+      'bower_components/SHA-1/sha1.js',
+      'bower_components/angulartics/src/angulartics.js',
+      'bower_components/angulartics-google-analytics/lib/angulartics-ga.js',
+      'bower_components/angulartics-google-tag-manager/lib/angulartics-google-tag-manager.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
