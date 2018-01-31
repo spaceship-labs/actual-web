@@ -188,6 +188,7 @@ function QuotationsEditCtrl(
 
         showDetailsChangedDateAlertIfNeeded();
         if (vm.isUserAdmin) return quotationService.getRecords(vm.quotation.id);
+        return $q.resolve();
       })
       .then(function(records) {
         if (records) {
