@@ -21,16 +21,20 @@ angular.module('actualWebApp')
         });
     }
 
-    function notifyOrder(zipcode){
+    function notifyOrder(params){
         console.log('orderEvent');
         var dataLayer = window.dataLayer = window.dataLayer || [];
         console.log('dataLayer', dataLayer);
         dataLayer.push({
             event: 'orderEvent',
             attributes:{
-                zipcode: zipcode
+                folio: params.folio,
+                total: params.total,
+                client: params.client,
+                zipcode: params.zipcode
             }
         });
+        console.log('datalayer after', dataLayer);
     }
 
     return service;

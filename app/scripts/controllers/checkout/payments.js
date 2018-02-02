@@ -120,7 +120,6 @@ function CheckoutPaymentsCtrl(
         }
 
         if (vm.quotation.Order) {
-          gtmService.notifyOrder('77500');
           $location.path(
             '/checkout/order/' + vm.quotation.Order.id + '/COMPRA-CONFIRMADA'
           );
@@ -344,6 +343,12 @@ function CheckoutPaymentsCtrl(
             $rootScope.scrollTo('main');
             quotationService.removeCurrentQuotation();
 
+            gtmService.notifyOrder({
+              folio:vm.order.folio,
+              total:vm.order.total,
+              client: vm.order.CardCode,
+              zipcode: vm.order.U_CP
+            });
             //FOR SPEI PAYMENTS
             if (vm.order.isSpeiOrder) {
               vm.hasAnSpeiOrder = true;
