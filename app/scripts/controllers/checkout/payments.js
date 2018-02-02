@@ -1,12 +1,4 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name actualWebApp.controller:CheckoutPaymentsCtrl
- * @description
- * # CheckoutPaymentsCtrl
- * Controller of the actualWebApp
- */
 angular
   .module('actualWebApp')
   .controller('CheckoutPaymentsCtrl', CheckoutPaymentsCtrl);
@@ -35,7 +27,8 @@ function CheckoutPaymentsCtrl(
   ewalletService,
   checkoutService,
   $interval,
-  api
+  api,
+  gtmService
 ) {
   var vm = this;
 
@@ -350,6 +343,12 @@ function CheckoutPaymentsCtrl(
             $rootScope.scrollTo('main');
             quotationService.removeCurrentQuotation();
 
+            gtmService.notifyOrder({
+              folio:vm.order.folio,
+              total:vm.order.total,
+              client: vm.order.CardCode,
+              zipcode: vm.order.U_CP
+            });
             //FOR SPEI PAYMENTS
             if (vm.order.isSpeiOrder) {
               vm.hasAnSpeiOrder = true;
