@@ -51,8 +51,7 @@ function PaymentDialogController(
   }
 
   function getYears(){
-    var currentDate = moment().add(1,'year').format('YYYY');
-    var years = [];
+    var years = [moment().format('YYYY')];
     for(var i=1;i<8;i++){
       years.push( moment().add(i,'year').format('YYYY') );
     }
