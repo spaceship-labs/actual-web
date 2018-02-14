@@ -445,7 +445,8 @@ module.exports = function (grunt) {
         commentMarker: "process",
         data: {
           metaTags: getMetaTagsBySite( grunt.option('site') ),
-          tagManagerId: getTagManagerId(grunt)
+          tagManagerId: getTagManagerId(grunt),
+          facebookPixelId: getFacebookPixelId(grunt.option('env'))
         }
       },
       dist: {
@@ -708,9 +709,7 @@ function getTagManagerId(grunt){
   if(grunt.option('env') !== 'production'){
     return '';
   }
-
   var tagManagerId = '';
-
   switch(grunt.option('site')){
     case 'kids':
       tagManagerId = 'GTM-P833XQZ';
@@ -724,10 +723,27 @@ function getTagManagerId(grunt){
     default: 
       break;
   }
-
   return tagManagerId;
-
 }
+
+function getFacebookPixelId(env){  
+  var facbookPixelId = '';
+  switch(env){
+    case 'production':
+      facbookPixelId = '129365994394398';
+      break;
+    case 'sandbox':
+      facbookPixelId = '129365994394398';
+      break;
+    case 'dev':
+      facbookPixelId = '';
+      break;    
+    default: 
+      break;
+  }
+  return facbookPixelId;
+}
+
 
 function getMetaTagsBySite(siteOption){
   var metaTags = {
