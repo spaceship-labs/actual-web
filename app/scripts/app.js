@@ -51,18 +51,18 @@ angular
         controller: 'HomeCtrl',
         controllerAs: 'vm',
         resolve: {
-          activeStore: function($rootScope, $q){
-            if($rootScope.activeStore){
+          activeStore: function($rootScope, $q) {
+            if ($rootScope.activeStore) {
               return $q.resolve($rootScope.activeStore);
-            }else{
+            } else {
               var deferred = $q.defer();
-              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore){
+              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore) {
                 deferred.resolve(_activeStore);
               });
               return deferred.promise;
             }
           }
-        }        
+        }
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -114,22 +114,25 @@ angular
         controller: 'OffersCtrl',
         controllerAs: 'vm',
         resolve: {
-          activeQuotation: function($rootScope, $q, quotationService){
-            if(!quotationService.getActiveQuotationId()){
+          activeQuotation: function($rootScope, $q, quotationService) {
+            if (!quotationService.getActiveQuotationId()) {
               return $q.resolve(false);
             }
 
-            if($rootScope.activeQuotation){
+            if ($rootScope.activeQuotation) {
               return $q.resolve($rootScope.activeQuotation);
-            }else{
+            } else {
               var deferred = $q.defer();
-              $rootScope.$on('activeQuotationAssigned', function(ev, _activeQuotation){
+              $rootScope.$on('activeQuotationAssigned', function(
+                ev,
+                _activeQuotation
+              ) {
                 deferred.resolve(_activeQuotation);
               });
               return deferred.promise;
             }
           }
-        }                
+        }
       })
       .when('/politicas-de-entrega', {
         templateUrl: 'views/delivery-policy.html',
@@ -316,6 +319,11 @@ angular
         controller: 'SitemapCtrl',
         controllerAs: 'vm'
       })
+      .when('/invited-purchase', {
+        templateUrl: 'views/invited-purchase.html',
+        controller: 'InvitedPurchaseCtrl',
+        controllerAs: 'vm'
+      })
       .when('/register', {
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl',
@@ -361,18 +369,18 @@ angular
         controller: 'ProductCtrl',
         controllerAs: 'vm',
         resolve: {
-          activeStore: function($rootScope, $q){
-            if($rootScope.activeStore){
+          activeStore: function($rootScope, $q) {
+            if ($rootScope.activeStore) {
               return $q.resolve($rootScope.activeStore);
-            }else{
+            } else {
               var deferred = $q.defer();
-              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore){
+              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore) {
                 deferred.resolve(_activeStore);
               });
               return deferred.promise;
             }
           }
-        }                  
+        }
       })
       .otherwise({
         redirectTo: '/'
@@ -493,7 +501,7 @@ angular
     };
 
     $rootScope.$on('$routeChangeSuccess', function() {
-      var dataLayer = window.dataLayer = window.dataLayer || [];
+      var dataLayer = (window.dataLayer = window.dataLayer || []);
       dataLayer.push({
         event: 'ngRouteChange',
         attributes: {

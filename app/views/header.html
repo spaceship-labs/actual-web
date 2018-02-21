@@ -4,12 +4,8 @@
 
 <div id="header">
   <!--START TOP BAR-->
-  <div
-    class="header-top-bar"
-    fixed-element
-    top="70"
-    ng-class="{'fixed-head': scrolled}">
-    <div class="container" layout="row"  layout-wrap layout-align="center center">
+  <div class="header-top-bar" fixed-element top="70" ng-class="{'fixed-head': scrolled}">
+    <div class="container" layout="row" layout-wrap layout-align="center center">
 
       <!--ON SCROLL-->
 
@@ -17,7 +13,7 @@
         <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-on-scroll">
           <span></span>
           <span></span>
-          <span></span>            
+          <span></span>
         </a>
       </div>
 
@@ -31,18 +27,9 @@
       </div>
 
 
-      <div
-        class="categories-btn-wrap"
-        flex-gt-xs="15"
-        layout-align="center center"
-      >
+      <div class="categories-btn-wrap" flex-gt-xs="15" layout-align="center center">
 
-        <a
-          ng-if="main.activeQuotation"
-          flex
-          ng-href="/quotations/edit/{{main.activeQuotation.id}}"
-          class="header-top-bar-menu-item cart-fixed-item"
-        >
+        <a ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{main.activeQuotation.id}}" class="header-top-bar-menu-item cart-fixed-item">
           <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
           <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
         </a>
@@ -51,42 +38,25 @@
       <!--END ONLY ON SCROLL-->
 
 
-      <form
-        ng-class="{
+      <form ng-class="{
           'searcher-wrapper-show-mobile':main.showSearchBar
-        }"
-        ng-submit="main.handleSearch()"
-        class="searcher-wrapper"
-        layout="row"
-      >
+        }" ng-submit="main.handleSearch()" class="searcher-wrapper" layout="row">
         <div class="searcher" flex flex-xs="70">
           <div class="searcher-inner">
             <i class="icon-search"></i>
-            <input
-              type="text"
-              name="term"
-              ng-model="main.searchValue"
-              >
+            <input type="text" name="term" ng-model="main.searchValue">
           </div>
         </div>
         <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn">
       </form>
 
-      <div
-        class="header-top-bar-menu"
-        layout="row"
-        layout-align="center center"
-        layout-align="center center"
-        layout-align-sm="center center"
-        layout-align-xs="start center"
-
-      >
+      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center" layout-align-sm="center center" layout-align-xs="start center">
 
         <div flex="10" hide-gt-xs>
           <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static">
             <span></span>
             <span></span>
-            <span></span>            
+            <span></span>
           </a>
         </div>
 
@@ -99,79 +69,44 @@
           </a>
         </div>
 
-        <a
-          flex
-          hide-gt-xs
-          href="#"
-          ng-click="main.showSearchBar = !main.showSearchBar"
-          class="header-top-bar-menu-item"
-        >
+        <a flex hide-gt-xs href="#" ng-click="main.showSearchBar = !main.showSearchBar" class="header-top-bar-menu-item">
           <i class="icon-search"></i>
         </a>
 
 
-        <div
-          ng-if="!main.user"
-          flex
-          id="login-header-trigger"
-          class="header-top-bar-menu-item">
+        <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <i class="icon-login" ng-click="main.toggleLoginModal()"></i>
-          <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
+          <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>
 
         <!--IF logged in-->
-        <div
-          ng-if="main.user"
-          flex
-          href="#"
-          id="profile-header-trigger"
-          ng-click="main.toggleProfileModal()"
-          class="header-top-bar-menu-item header-top-bar-menu-item-name"
-        >
-          <a href="#" >
+        <!-- {{main.user}} -->
+        <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger" ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
+          <a href="#">
             <i class="icon-login"></i>
             <span >Bienvenido <strong>{{main.user.firstName}}</strong></span>
           </a>
-          <ng-include
-            ng-if="main.isActiveProfileHeader"
-            src="'views/partials/profile-header.html'"></ng-include>
+          <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
-        <div
-          flex
-          href="#"
-          ng-click="main.toggleSchedulesModal()"
-          class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger"
-        >
+        <div flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong><i class="icon-phone"></i></strong>
             <!--<strong hide-xs>998 246 3487</strong>-->
             <strong hide-xs>(998) 884 1594</strong>
           </span>
 
-          <ng-include 
-            ng-if="main.isActiveSchedulesModal"
-            src="'views/partials/schedules-dropdown.html'"></ng-include>
+          <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
 
         <!--IF ACTIVE QUOTATION-->
-        <a
-          ng-if="main.activeQuotation"
-          flex
-          ng-href="/quotations/edit/{{main.activeQuotation.id}}"
-          class="header-top-bar-menu-item"
-        >
+        <a ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{main.activeQuotation.id}}" class="header-top-bar-menu-item">
           <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
           <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
         </a>
 
         <!--IF NOT ACTIVE QUOTATION-->
-        <a
-          ng-if="main.user && !main.activeQuotation"
-          flex
-          href="/"
-          class="header-top-bar-menu-item"
-        >
+        <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item">
           <i class="icon-carro"></i>
         </a>
 
@@ -185,17 +120,14 @@
   <!--END TOP BAR-->
 
   <!--START MENU-->
-    <ng-include ng-if="main.activeModule !== 'users'" src="'views/partials/header-menu-miactual.html'"></ng-include>
+  <ng-include ng-if="main.activeModule !== 'users'" src="'views/partials/header-menu-miactual.html'"></ng-include>
   <!--END MENU-->
 
 </div>
 
 <md-sidenav md-component-id="left" class="md-sidenav-left movil">
-<aside flex-gt-sm="20" flex="100">
-      <sidebar-categories
-        categories-tree="main.categoriesTree"
-        active-store="main.activeStore"
-      >
-      </sidebar-categories>
-    </aside>
+  <aside flex-gt-sm="20" flex="100">
+    <sidebar-categories categories-tree="main.categoriesTree" active-store="main.activeStore">
+    </sidebar-categories>
+  </aside>
 </md-sidenav>

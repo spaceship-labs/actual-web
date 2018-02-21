@@ -1,7 +1,8 @@
 'use strict';
-angular.module('actualWebApp').controller('RegisterCtrl', RegisterCtrl);
-
-function RegisterCtrl(
+angular
+  .module('actualWebApp')
+  .controller('InvitedPurchaseCtrl', InvitedPurchaseCtrl);
+function InvitedPurchaseCtrl(
   authService,
   clientService,
   dialogService,
@@ -15,26 +16,21 @@ function RegisterCtrl(
   var vm = this;
   angular.extend(vm, {
     init: init,
-    register: register,
+    preRegister: preRegister,
     copyDeliveryDataToPersonalData: copyDeliveryDataToPersonalData,
     newClient: {},
     phonePattern: '.*\\d{10}$'
   });
-
   init();
-
   function init() {
     console.log('$routeParams', $routeParams);
-    if ($routeParams.addContact) {
-      vm.isContactCreateActive = true;
-      vm.newAddress = {};
-      if ($routeParams.quotation) {
-        console.log('quotation');
-        loadStates();
-      }
+    vm.isContactCreateActive = true;
+    vm.newAddress = {};
+    if ($routeParams.quotation) {
+      console.log('quotation');
+      loadStates();
     }
   }
-
   function loadStates() {
     commonService
       .getStatesSap()
@@ -96,11 +92,11 @@ function RegisterCtrl(
     }
   }
 
-  function register(form) {
+  function preRegister(form) {
     console.log('register');
     var createdClient;
     var createdUser;
-
+    console.log('FORM: ', form);
     if (form.$valid) {
       vm.isLoading = true;
 
@@ -109,7 +105,9 @@ function RegisterCtrl(
       if (vm.newAddress && vm.newAddress.Address) {
         vm.newClient.contacts = [vm.newAddress];
       }
-
+      console.log('NEW CLIENT: ', vm.newClient);
+      vm.newClient.invited = true;
+      vm.newClient.password = generatePassword();
       clientService
         .create(vm.newClient)
         .then(function(res) {
@@ -181,9 +179,20 @@ function RegisterCtrl(
       dialogService.showDialog('Campos incompletos, revisa tus datos');
     }
   }
+
+  function generatePassword() {
+    var length = 8,
+      charset =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+      retVal = '';
+    for (var i = 0, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+  }
 }
 
-RegisterCtrl.$inject = [
+InvitedPurchaseCtrl.$inject = [
   'authService',
   'clientService',
   'dialogService',

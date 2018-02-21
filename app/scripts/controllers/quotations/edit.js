@@ -728,7 +728,7 @@ function QuotationsEditCtrl(
             //quotationService.setActiveQuotation(vm.quotation.id);
             $location.path('/checkout/client/' + vm.quotation.id);
           } else {
-            $location.path('/register').search({
+            $location.path('/invited-purchase').search({
               addContact: true,
               quotation: vm.quotation.id
             });
