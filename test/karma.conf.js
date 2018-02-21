@@ -16,9 +16,10 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     // as well as any additional frameworks (requirejs/chai/sinon/...)
     frameworks: [
-      "mocha",
-      "chai",
-      'sinon-chai'
+      "jasmine"
+      //"mocha",
+      //"chai",
+      //'sinon-chai'
     ],
     // list of files / patterns to load in the browser
     files: [
@@ -103,7 +104,10 @@ module.exports = function(config) {
       // endbower
       "app/scripts/**/*.js",
       "test/mock/**/*.js",
-      "test/spec/**/*.js"
+      "test/spec/**/*.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js",
+      "https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"
+      
     ],
 
     // list of files / patterns to exclude
@@ -137,11 +141,16 @@ module.exports = function(config) {
 
     // Which plugins to enable
     plugins: [
-      "karma-phantomjs-launcher",
+      "karma-jasmine",
+      'karma-coverage',      
+      "karma-phantomjs-launcher"
+
+      /*
       'karma-mocha',
       'karma-chai',
       'karma-coverage',
       'karma-sinon-chai'
+      */
     ],
 
     // Continuous Integration mode
