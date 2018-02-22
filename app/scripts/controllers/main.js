@@ -453,10 +453,10 @@
     }
 
     $rootScope.successAuth = function(res) {
+      console.log('setuser token on response');
       setUserTokensOnResponse(res);
-      console.log('SUCCESS AUTH');
 
-      assignCurrentUserToQuotationIfNeeded()
+      return assignCurrentUserToQuotationIfNeeded()
         .then(function(quotationUpdated) {
           console.log('quotationUpdated', quotationUpdated);
 
@@ -477,9 +477,17 @@
           var quotationPath = '/quotations/edit';
           if ($location.path().indexOf(quotationPath) > -1) {
             $window.location = '/';
-          } else {
+          } 
+          else if($routeParams.redirectTo){
+            $window.location = $routeParams.redirectTo;
+          }
+          else if($routeParams.completeRegister){
+            $window.location = '/?completeRegister';
+          }
+          else {
             $window.location.reload();
           }
+          return;
         })
         .catch(function(err) {
           console.log('err successAuth', err);

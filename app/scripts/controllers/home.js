@@ -7,9 +7,11 @@ function HomeCtrl(
   $location, 
   $scope,
   $rootScope,
+  $routeParams,
   api, 
   siteService,
   metaTagsService,
+  dialogService,
   activeStore
 ){
   var vm = this;
@@ -27,6 +29,10 @@ function HomeCtrl(
 
     metaTagsService.setMetaTags({});
     loadBanners();
+
+    if($routeParams.completeRegister){
+      dialogService.showDialog('Has completado tu registro, ahora tienes todos los beneficios de tener una cuenta en Actual');               
+    }
   }
 
   function loadBanners(){
@@ -46,8 +52,10 @@ HomeCtrl.$inject = [
   '$location',
   '$scope',
   '$rootScope',
+  '$routeParams',
   'api',
   'siteService',
   'metaTagsService',
+  'dialogService',
   'activeStore'
 ];
