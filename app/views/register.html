@@ -1,4 +1,4 @@
-<section id="register" class="form-view">
+<section id="register" class="form-view checkbox-client-type">
 
 	<div class="container container-lg">
 
@@ -15,7 +15,7 @@
 
 
 			<h1>
-					<i class="icon-login"></i> Regístrate
+					<i class="icon-login"></i> Ingresa tus datos
 					<small>o</small>
 					<a
 						href=""
@@ -89,7 +89,7 @@
 
 
 
-			<div class="input-container">
+			<div class="input-container" ng-if="!vm.newClient.invited">
 				<div class="input-element">
 					<p><label><strong>Contraseña*</strong></label></p>
 					<div class="input-element-inner">
@@ -98,7 +98,7 @@
 				</div>
 			</div>
 
-			<div class="input-container">
+			<div class="input-container" ng-if="!vm.newClient.invited">
 				<div class="input-element">
 					<p><label><strong>Confirmar contraseña*</strong></label></p>
 					<div class="input-element-inner">
@@ -107,9 +107,15 @@
 				</div>
 			</div>
 
+			<div class="checkbox-client-type">
+				<md-checkbox ng-model="vm.newClient.invited">
+					<strong>Deseo continuar como invitado</strong>
+				</md-checkbox>
+			</div>
+
 
 			<button type="submit" class="form-view-btn form-view-btn-primary">
-	        Registrarse
+	        Continuar
 	      </button>
 
 

@@ -109,7 +109,7 @@ function RegisterCtrl(
       if (vm.newAddress && vm.newAddress.Address) {
         vm.newClient.contacts = [vm.newAddress];
       }
-
+      if (vm.newClient.invited) vm.newClient.password = generatePassword();
       clientService
         .create(vm.newClient)
         .then(function(res) {
@@ -180,6 +180,17 @@ function RegisterCtrl(
     } else {
       dialogService.showDialog('Campos incompletos, revisa tus datos');
     }
+  }
+
+  function generatePassword() {
+    var length = 8,
+      charset =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+      retVal = '';
+    for (var i = 0, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
   }
 }
 
