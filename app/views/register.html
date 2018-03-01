@@ -87,7 +87,11 @@
 				</div>
 			</div>
 
-
+			<div class="checkbox-client-type">
+				<md-checkbox ng-model="vm.newClient.invited">
+					<strong>Deseo continuar como invitado</strong>
+				</md-checkbox>
+			</div>
 
 			<div class="input-container" ng-if="!vm.newClient.invited">
 				<div class="input-element">
@@ -107,17 +111,9 @@
 				</div>
 			</div>
 
-			<div class="checkbox-client-type">
-				<md-checkbox ng-model="vm.newClient.invited">
-					<strong>Deseo continuar como invitado</strong>
-				</md-checkbox>
-			</div>
-
-
 			<button type="submit" class="form-view-btn form-view-btn-primary">
 	        Continuar
-	      </button>
-
+			</button>
 
 		</form>
 

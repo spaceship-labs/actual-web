@@ -527,6 +527,7 @@ select {
   font-size: 12px;
   outline: 0;
 }
+.header-top-bar-menu .header-top-bar-menu-item .invited-label{color: #fff}
 .header-top-bar-menu .header-top-bar-menu-item-name > a {
   color: #fff;
 }
