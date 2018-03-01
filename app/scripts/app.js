@@ -319,11 +319,6 @@ angular
         controller: 'SitemapCtrl',
         controllerAs: 'vm'
       })
-      .when('/invited-purchase', {
-        templateUrl: 'views/invited-purchase.html',
-        controller: 'InvitedPurchaseCtrl',
-        controllerAs: 'vm'
-      })
       .when('/register', {
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl',

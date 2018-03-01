@@ -16,6 +16,7 @@ function RegisterCtrl(
   angular.extend(vm, {
     init: init,
     register: register,
+    isCheckoutProcessActive: false,
     copyDeliveryDataToPersonalData: copyDeliveryDataToPersonalData,
     newClient: {},
     phonePattern: '.*\\d{10}$'
@@ -24,11 +25,12 @@ function RegisterCtrl(
   init();
 
   function init() {
-    console.log('$routeParams', $routeParams);
     if ($routeParams.addContact) {
       vm.isContactCreateActive = true;
       vm.newAddress = {};
+
       if ($routeParams.quotation) {
+        vm.isCheckoutProcessActive = true;
         console.log('quotation');
         loadStates();
       }
@@ -111,7 +113,7 @@ function RegisterCtrl(
       }
       if (vm.newClient.invited) vm.newClient.password = generatePassword();
       clientService
-        .create(vm.newClient)
+        .register(vm.newClient)
         .then(function(res) {
           console.log('res', res);
           res = res || {};

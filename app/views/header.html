@@ -77,7 +77,9 @@
         <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" ng-class="{'header-top-bar-menu-item-name': main.user.invited}" class="header-top-bar-menu-item">
           <a href="">
             <i class="icon-login" ng-click="main.toggleLoginModal()"></i>
-            <span ng-if="main.user.invited"><strong>Invitado</strong></span>
+            <span ng-if="main.user.invited" ng-click="main.toggleLoginModal()">
+              <strong>Invitado</strong>
+            </span>
           </a>
           <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>

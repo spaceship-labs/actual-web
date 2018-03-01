@@ -10,7 +10,7 @@
 
       var service = {
         buildAddressStringByContact:buildAddressStringByContact,
-        create: create,
+        register: register,
         search: search,
         getEwalletById: getEwalletById,
         getBalanceById: getBalanceById,
@@ -41,8 +41,8 @@
         return api.$http.post(url,params);
       }
 
-      function create(params){
-        var url = '/client/create/';
+      function register(params){
+        var url = '/client/register/';
         return api.$http.post(url, params).then(function(res){
          return res.data;
         });
