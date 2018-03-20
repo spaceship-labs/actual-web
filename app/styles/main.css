@@ -3333,6 +3333,13 @@ md-backdrop.md-sidenav-backdrop {
   border: 0;
 }
 
+.form-section-content .generic-error-msg,
+.form-section-content .generic-ok-msg{
+  font-size: 14px!important;
+  text-transform: none!important;
+}
+
+
 .form-section-content .checkbox-client-type {
   margin: 10px 0;
   font-size: 12px;

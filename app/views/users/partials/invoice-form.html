@@ -9,44 +9,61 @@
         <div layout="row" layout-wrap>
           <div flex-gt-sm="30" flex="100" class="input-element">
             <label>
-              <p><strong>RFC <span class="hl-label">*</span></strong></p>
+              <p>
+                <strong>RFC
+                  <span class="hl-label">*</span>
+                </strong>
+              </p>
             </label>
             <div class="input-element-inner">
-              <input type="text" name="LicTradNum" rfc-input-validator required ng-model="vm.fiscalAddress.LicTradNum" ng-minlength="vm.fiscalAddressConstraints.LicTradNum.min" min="vm.fiscalAddressConstraints.LicTradNum.min" ng-maxlength="vm.fiscalAddressConstraints.LicTradNum.max"
-                maxlength="vm.fiscalAddressConstraints.LicTradNum.max" max="vm.fiscalAddressConstraints.LicTradNum.max">
+              <input type="text" name="LicTradNum" rfc-input-validator required ng-model="vm.fiscalAddress.LicTradNum">
             </div>
             </br>
-            <label ng-show="vm.updateFiscalForm.rfc.$error.rfcValidation" class="generic-error-msg">
+            <label ng-show="vm.updateFiscalForm.LicTradNum.$error.rfcValidation" class="generic-error-msg">
               <strong>
-                La estructura del RFC no es valida, puedes verificar en el sitio oficial del RFC <a target="_blank" href="https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/">https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/</a>
+                La estructura del RFC no es valida, puedes verificar en el sitio oficial del RFC
+                <a target="_blank" href="https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/">https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/</a>
               </strong>
             </label>
-            <label ng-show="!vm.updateFiscalForm.rfc.$error.rfcValidation" class="generic-ok-msg">
+            <label ng-show="!vm.updateFiscalForm.LicTradNum.$error.rfcValidation" class="generic-ok-msg">
               <strong>
-                La estructura del RFC es correcta <a target="_blank" href="https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/">https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/</a>
+                La estructura del RFC es correcta
+                <a target="_blank" href="https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/">https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/</a>
               </strong>
             </label>
             <p class="input-note">
-              Caracteres <strong>{{vm.updateFiscalForm.LicTradNum.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.LicTradNum.max }}</strong>
+              Caracteres
+              <strong>{{vm.updateFiscalForm.LicTradNum.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.LicTradNum.max
+                }}
+              </strong>
             </p>
           </div>
           <div flex-gt-sm="65" flex="100" class="input-element">
             <label>
-              <p><strong>Razón Social <span class="hl-label">*</span></strong></p>
+              <p>
+                <strong>Razón Social
+                  <span class="hl-label">*</span>
+                </strong>
+              </p>
             </label>
             <div class="input-element-inner">
-              <input type="text" ng-model="vm.fiscalAddress.companyName" ng-maxlength="vm.fiscalAddressConstraints.companyName.max" maxlength="vm.fiscalAddressConstraints.companyName.max" max="vm.fiscalAddressConstraints.companyName.max" name="companyName" required
-              />
+              <input type="text" ng-model="vm.fiscalAddress.companyName" ng-maxlength="vm.fiscalAddressConstraints.companyName.max" maxlength="vm.fiscalAddressConstraints.companyName.max"
+                max="vm.fiscalAddressConstraints.companyName.max" name="companyName" required />
             </div>
             <p class="input-note">
-              Caracteres <strong>{{vm.updateFiscalForm.companyName.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.companyName.max }}</strong>
+              Caracteres
+              <strong>{{vm.updateFiscalForm.companyName.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.companyName.max
+                }}
+              </strong>
             </p>
 
           </div>
         </div>
 
         <div class="input-element select-element-wrapper">
-          <label><strong>Uso CFDI</strong></label>
+          <label>
+            <strong>Uso CFDI</strong>
+          </label>
           <md-select ng-model="vm.fiscalAddress.cfdiUse" class="select-element" required>
             <md-option ng-repeat="use in vm.cfdiUseList | orderBy:'label'" ng-value="use.code">
               {{use.label}} ({{use.code}})
@@ -58,7 +75,9 @@
         <div layout="row" layout-wrap>
           <div flex-gt-sm="25" flex="100" class="input-element">
             <label>
-             <p> <strong>Nombre de la empresa</strong></p>
+              <p>
+                <strong>Nombre de la empresa</strong>
+              </p>
             </label>
             <div class="input-element-inner">
               <input type="text" name="companyPublicName" ng-model="vm.fiscalAddress.companyPublicName">
@@ -66,7 +85,10 @@
           </div>
           <div flex-gt-sm="40" flex="100" class="input-element">
             <label>
-              <p><strong>Teléfono</strong> <span class="hl-label">*</span></p>
+              <p>
+                <strong>Teléfono</strong>
+                <span class="hl-label">*</span>
+              </p>
             </label>
             <div flex class="input-element-inner">
               <input ng-model="vm.fiscalAddress.Phone1" name="Phone1" type="text">
@@ -74,60 +96,81 @@
           </div>
           <div flex-gt-sm="25" flex="100" class="input-element">
             <label>
-              <p><strong>Email</strong> <span class="hl-label">*</span></p>
+              <p>
+                <strong>Email</strong>
+                <span class="hl-label">*</span>
+              </p>
             </label>
             <div class="input-element-inner">
               <input type="email" ng-model="vm.fiscalAddress.U_Correos" required>
             </div>
           </div>
         </div>
-        <h3><strong>DIRECCIÓN FISCAL</strong></h3>
+        <h3>
+          <strong>DIRECCIÓN FISCAL</strong>
+        </h3>
         <div layout="row" layout-wrap>
           <div flex flex-sm="100" flex-xs="100" class="input-element">
             <label>
-              <p><strong>Calle</strong></p>
+              <p>
+                <strong>Calle</strong>
+              </p>
             </label>
             <div class="input-element-inner">
-              <input type="text" ng-model="vm.fiscalAddress.Street" maxlength="vm.fiscalAddressConstraints.Street.max" ng-maxlength="vm.fiscalAddressConstraints.Street.max" name="Street">
+              <input type="text" ng-model="vm.fiscalAddress.Street" maxlength="vm.fiscalAddressConstraints.Street.max" ng-maxlength="vm.fiscalAddressConstraints.Street.max"
+                name="Street">
             </div>
             <p class="input-note">
-              Caracteres <strong>{{vm.updateFiscalForm.Street.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.Street.max}}</strong>
+              Caracteres
+              <strong>{{vm.updateFiscalForm.Street.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.Street.max}}</strong>
             </p>
           </div>
 
           <div flex flex-sm="100" flex-xs="100" class="input-element">
             <label>
-             <p> <strong>No. Exterior</strong></p>
+              <p>
+                <strong>No. Exterior</strong>
+              </p>
             </label>
             <div class="input-element-inner">
-              <input type="text" ng-model="vm.fiscalAddress.U_NumExt" maxlength="vm.fiscalAddressConstraints.U_NumExt.max" ng-maxlength="vm.fiscalAddressConstraints.U_NumExt.max" name="U_NumExt">
+              <input type="text" ng-model="vm.fiscalAddress.U_NumExt" maxlength="vm.fiscalAddressConstraints.U_NumExt.max" ng-maxlength="vm.fiscalAddressConstraints.U_NumExt.max"
+                name="U_NumExt">
             </div>
             <p class="input-note">
-              Carac. <strong>{{vm.updateFiscalForm.U_NumExt.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.U_NumExt.max}}</strong>
+              Carac.
+              <strong>{{vm.updateFiscalForm.U_NumExt.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.U_NumExt.max}}</strong>
             </p>
 
           </div>
           <div flex flex-sm="100" flex-xs="100" class="input-element">
             <label>
-              <p>	<strong>No. Interior</strong></p>
+              <p>
+                <strong>No. Interior</strong>
+              </p>
             </label>
             <div class="input-element-inner">
-              <input type="text" ng-model="vm.fiscalAddress.U_NumInt" maxlength="vm.fiscalAddressConstraints.U_NumInt.max" ng-maxlength="vm.fiscalAddressConstraints.U_NumInt.max" name="U_NumInt">
+              <input type="text" ng-model="vm.fiscalAddress.U_NumInt" maxlength="vm.fiscalAddressConstraints.U_NumInt.max" ng-maxlength="vm.fiscalAddressConstraints.U_NumInt.max"
+                name="U_NumInt">
             </div>
             <p class="input-note">
-              Carac. <strong>{{vm.updateFiscalForm.U_NumInt.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.U_NumInt.max}}</strong>
+              Carac.
+              <strong>{{vm.updateFiscalForm.U_NumInt.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.U_NumInt.max}}</strong>
             </p>
 
           </div>
           <div flex flex-sm="100" flex-xs="100" class="input-element">
             <label>
-             <p> <strong>Colonia</strong></p>
+              <p>
+                <strong>Colonia</strong>
+              </p>
             </label>
             <div class="input-element-inner">
-              <input type="text" ng-model="vm.fiscalAddress.Block" maxlength="vm.fiscalAddressConstraints.Block.max" ng-maxlength="vm.fiscalAddressConstraints.Block.max" name="Block">
+              <input type="text" ng-model="vm.fiscalAddress.Block" maxlength="vm.fiscalAddressConstraints.Block.max" ng-maxlength="vm.fiscalAddressConstraints.Block.max"
+                name="Block">
             </div>
             <p ng-if="vm.client.FiscalAddress" class="input-note">
-              Caracteres <strong>{{vm.updateFiscalForm.Block.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.Block.max}}</strong>
+              Caracteres
+              <strong>{{vm.updateFiscalForm.Block.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.Block.max}}</strong>
             </p>
 
           </div>
@@ -135,7 +178,9 @@
         <div layout="row" layout-wrap>
           <div flex flex-sm="100" flex-xs="100" class="input-element">
             <label>
-                <p><strong>Ciudad</strong></p>
+              <p>
+                <strong>Ciudad</strong>
+              </p>
             </label>
             <div class="input-element-inner">
               <input type="text" name="City" ng-model="vm.fiscalAddress.City">
@@ -143,7 +188,8 @@
           </div>
 
           <div flex flex-sm="100" flex-xs="100" class="input-element select-element-wrapper">
-            <label><strong>Estado</strong>*</label>
+            <label>
+              <strong>Estado</strong>*</label>
             <md-select ng-model="vm.fiscalAddress.State" class="select-element" required>
               <md-option ng-repeat="state in vm.states" ng-value="state.Code">
                 {{state.Name}}
@@ -152,7 +198,12 @@
           </div>
 
           <div flex flex-sm="100" flex-xs="100" class="input-element">
-            <label><p><strong>Código postal</strong><span class="ast">*</span></p></label>
+            <label>
+              <p>
+                <strong>Código postal</strong>
+                <span class="ast">*</span>
+              </p>
+            </label>
             <div class="input-element-inner">
               <input type="text" ng-model="vm.fiscalAddress.ZipCode" required minlength="5" maxlength="5">
             </div>
@@ -160,7 +211,9 @@
           </div>
           <div flex flex-sm="100" flex-xs="100" class="input-element">
             <label>
-              <p><strong>Municipio</strong></p>
+              <p>
+                <strong>Municipio</strong>
+              </p>
             </label>
             <div class="input-element-inner">
               <input type="text" name="U_Localidad" ng-model="vm.fiscalAddress.U_Localidad">
@@ -172,8 +225,8 @@
     <div layout="row" class="form-view-btns no-margin" layout-align="center center">
       <!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
       <button type="submit" flex="50" class="form-view-btn form-view-btn-primary">
-      Guardar información
-    </button>
+        Guardar información
+      </button>
     </div>
     <!--END DATOS PERSONALES-->
   </section>
