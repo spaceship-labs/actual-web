@@ -95,7 +95,6 @@ module.exports = function(config) {
       'bower_components/chosen/chosen.jquery.js',
       'bower_components/angular-chosen-localytics/dist/angular-chosen.js',
       'bower_components/ng-currency/dist/ng-currency.js',
-      'bower_components/conekta.js/dist/conekta.min.js',
       'bower_components/js-xlsx/dist/xlsx.full.min.js',
       'bower_components/es6-promise/promise.js',
       'bower_components/alasql/dist/alasql.min.js',
