@@ -7,7 +7,7 @@
 
 	<h2 ng-if="vm.sentData">Gracias, tus datos han sido enviados</h2>
 
-	<form ng-if="!vm.isLoading && !vm.sentData" name="vm.fiscalDataForm" ng-submit="vm.sendFiscalData(vm.fiscalDataForm)" class="form-view-content">
+	<form ng-if="!vm.isLoading && !vm.sentData" name="fiscalDataForm" ng-submit="vm.sendFiscalData(fiscalDataForm)" class="form-view-content">
 
 		<section class="form-section">
 			<!--DATOS PERSONALES-->
@@ -19,10 +19,14 @@
 
 						<div flex-gt-sm="20" flex="100" class="input-element">
 							<label>
-	              <p><strong>Orden de compra<span class="hl-label">*</span></strong></p>
-	            </label>
+								<p>
+									<strong>Orden de compra
+										<span class="hl-label">*</span>
+									</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="text" required ng-model="vm.form.orderFolio">
+								<input type="text" required name="orderFolio" ng-model="vm.form.orderFolio">
 							</div>
 							<p class="input-note">
 								Ingrese los 6 digitos
@@ -30,7 +34,9 @@
 						</div>
 
 						<div flex-gt-sm="25" flex="100" class="input-element datepicker-element">
-							<label><strong>Fecha de compra</strong></label>
+							<label>
+								<strong>Fecha de compra</strong>
+							</label>
 							<div class="input-element-inner">
 								<input type="text" pikaday="vm.pikadayDate" set-default-date="true" readonly required show-month-after-year="true" on-select="vm.onPikadaySelect(pikaday)">
 							</div>
@@ -38,10 +44,14 @@
 
 						<div flex-gt-sm="30" flex="100" class="input-element">
 							<label>
-	              <p><strong>Cantidad total de su compra<span class="hl-label">*</span></strong></p>
-	            </label>
+								<p>
+									<strong>Cantidad total de su compra
+										<span class="hl-label">*</span>
+									</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="text" required ng-model="vm.form.orderAmount">
+								<input type="text" name="orderAmount" required ng-model="vm.form.orderAmount">
 							</div>
 							<p class="input-note">
 								Monto exacto
@@ -55,13 +65,19 @@
 					<div layout="row" layout-wrap>
 						<div flex-gt-sm="55" flex="100" class="input-element">
 							<label>
-	              <p><strong>Razón Social <span class="hl-label">*</span></strong></p>
-	            </label>
+								<p>
+									<strong>Razón Social
+										<span class="hl-label">*</span>
+									</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="text" ng-model="vm.form.companyName" ng-maxlength="100" maxlength="100" max="100" name="companyName" required />
+								<input type="text" ng-model="vm.form.companyName" ng-maxlength="100" maxlength="100" max="100" name="companyName" required
+								/>
 							</div>
 							<p class="input-note">
-								Caracteres <strong>{{vm.fiscalDataForm.companyName.$viewValue.length || 0}} de 100</strong>
+								Caracteres
+								<strong>{{fiscalDataForm.companyName.$viewValue.length || 0}} de 100</strong>
 							</p>
 
 						</div>
@@ -70,30 +86,38 @@
 					<div layout="row" layout-wrap>
 						<div flex-gt-sm="20" flex="100" class="input-element">
 							<label>
-	              <p><strong>RFC <span class="hl-label">*</span></strong></p>
-	            </label>
+								<p>
+									<strong>RFC
+										<span class="hl-label">*</span>
+									</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="text" rfc-input-validator required ng-model="vm.form.LicTradNum" name="LicTradNum" ng-minlength="vm.fiscalAddressConstraints.LicTradNum.min" min="vm.fiscalAddressConstraints.LicTradNum.min" ng-maxlength="vm.fiscalAddressConstraints.LicTradNum.max"
-								  maxlength="vm.fiscalAddressConstraints.LicTradNum.max" max="vm.fiscalAddressConstraints.LicTradNum.max">
+								<input type="text" required rfc-input-validator ng-model="vm.form.LicTradNum" name="LicTradNum" />
 							</div>
 							</br>
-							<label ng-show="vm.fiscalDataForm.rfc.$error.rfcValidation" class="generic-error-msg">
-				        <strong>
-				          La estructura del RFC no es valida, puedes verificar en el sitio oficial del RFC <a target="_blank" href="https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/">https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/</a>
-				        </strong>
-				      </label>
-							<label ng-show="!vm.fiscalDataForm.rfc.$error.rfcValidation" class="generic-ok-msg">
-				        <strong>
-				          La estructura del RFC es correcta <a target="_blank" href="https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/">https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/</a>
-				        </strong>
-				      </label>
+							<label ng-show="fiscalDataForm.LicTradNum.$error.rfcValidation" class="generic-error-msg">
+								<strong>
+									La estructura del RFC no es valida, puedes verificar en el sitio oficial del RFC
+									<a target="_blank" href="https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/">https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/</a>
+								</strong>
+							</label>
+							<label ng-show="!fiscalDataForm.LicTradNum.$error.rfcValidation" class="generic-ok-msg">
+								<strong>
+									La estructura del RFC es correcta
+									<a target="_blank" href="https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/">https://portalsat.plataforma.sat.gob.mx/ConsultaRFC/</a>
+								</strong>
+							</label>
 							<p class="input-note">
-								Caracteres <strong>{{vm.fiscalDataForm.LicTradNum.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.LicTradNum.max }}</strong>
+								Caracteres
+								<strong>{{fiscalDataForm.LicTradNum.$viewValue.length || 0}} de {{ vm.fiscalAddressConstraints.LicTradNum.max }}</strong>
 							</p>
 						</div>
 
 						<div flex-gt-sm="40" flex="100" class="input-element select-element-wrapper">
-							<label><strong>Uso CFDI</strong></label>
+							<label>
+								<strong>Uso CFDI</strong>
+							</label>
 							<md-select ng-model="vm.form.cfdiUse" class="select-element" required>
 								<md-option ng-repeat="use in vm.cfdiUseList | orderBy:'label'" ng-value="use.code">
 									{{use.label}} ({{use.code}})
@@ -107,76 +131,102 @@
 					<div layout="row" layout-wrap>
 						<div flex-gt-sm="25" flex="100" class="input-element">
 							<label>
-	             <p> <strong>Nombre de la empresa</strong></p>
-	            </label>
+								<p>
+									<strong>Nombre de la empresa</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
 								<input type="text" name="companyPublicName" ng-model="vm.form.companyPublicName">
 							</div>
 						</div>
 						<div flex-gt-sm="40" flex="100" class="input-element">
 							<label>
-	              <p><strong>Teléfono</strong> <span class="hl-label">*</span></p>
-	            </label>
+								<p>
+									<strong>Teléfono</strong>
+									<span class="hl-label">*</span>
+								</p>
+							</label>
 							<div flex class="input-element-inner">
 								<input ng-model="vm.form.Phone1" name="Phone1" type="text">
 							</div>
 						</div>
 						<div flex-gt-sm="25" flex="100" class="input-element">
 							<label>
-	              <p><strong>Email</strong> <span class="hl-label">*</span></p>
-	            </label>
+								<p>
+									<strong>Email</strong>
+									<span class="hl-label">*</span>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="email" ng-model="vm.form.U_Correos" required>
+								<input type="email" name="U_Correos" ng-model="vm.form.U_Correos" required>
 							</div>
 						</div>
 					</div>
-					<h3><strong>DIRECCIÓN FISCAL</strong></h3>
+					<h3>
+						<strong>DIRECCIÓN FISCAL</strong>
+					</h3>
 					<div layout="row" layout-wrap>
 						<div flex flex-sm="100" flex-xs="100" class="input-element">
 							<label>
-	              <p><strong>Calle</strong></p>
-	            </label>
+								<p>
+									<strong>Calle</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="text" ng-model="vm.form.Street" maxlength="vm.fiscalAddressConstraints.Street.max" ng-maxlength="vm.fiscalAddressConstraints.Street.max" name="Street">
+								<input type="text" ng-model="vm.form.Street" maxlength="vm.fiscalAddressConstraints.Street.max" ng-maxlength="vm.fiscalAddressConstraints.Street.max"
+								 name="Street">
 							</div>
 							<p class="input-note">
-								Caracteres <strong>{{vm.fiscalDataForm.Street.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.Street.max}}</strong>
+								Caracteres
+								<strong>{{fiscalDataForm.Street.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.Street.max}}</strong>
 							</p>
 						</div>
 
 						<div flex flex-sm="100" flex-xs="100" class="input-element">
 							<label>
-	             <p> <strong>No. Exterior</strong></p>
-	            </label>
+								<p>
+									<strong>No. Exterior</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="text" ng-model="vm.form.U_NumExt" maxlength="vm.fiscalAddressConstraints.U_NumExt.max" ng-maxlength="vm.fiscalAddressConstraints.U_NumExt.max" name="U_NumExt">
+								<input type="text" ng-model="vm.form.U_NumExt" maxlength="vm.fiscalAddressConstraints.U_NumExt.max" ng-maxlength="vm.fiscalAddressConstraints.U_NumExt.max"
+								 name="U_NumExt">
 							</div>
 							<p class="input-note">
-								Carac. <strong>{{vm.fiscalDataForm.U_NumExt.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.U_NumExt.max}}</strong>
+								Carac.
+								<strong>{{fiscalDataForm.U_NumExt.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.U_NumExt.max}}</strong>
 							</p>
 
 						</div>
 						<div flex flex-sm="100" flex-xs="100" class="input-element">
 							<label>
-	              <p>	<strong>No. Interior</strong></p>
-	            </label>
+								<p>
+									<strong>No. Interior</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="text" ng-model="vm.form.U_NumInt" maxlength="vm.fiscalAddressConstraints.U_NumInt.max" ng-maxlength="vm.fiscalAddressConstraints.U_NumInt.max" name="U_NumInt">
+								<input type="text" ng-model="vm.form.U_NumInt" maxlength="vm.fiscalAddressConstraints.U_NumInt.max" ng-maxlength="vm.fiscalAddressConstraints.U_NumInt.max"
+								 name="U_NumInt">
 							</div>
 							<p class="input-note">
-								Carac. <strong>{{vm.fiscalDataForm.U_NumInt.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.U_NumInt.max}}</strong>
+								Carac.
+								<strong>{{fiscalDataForm.U_NumInt.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.U_NumInt.max}}</strong>
 							</p>
 
 						</div>
 						<div flex flex-sm="100" flex-xs="100" class="input-element">
 							<label>
-	             <p> <strong>Colonia</strong></p>
-	            </label>
+								<p>
+									<strong>Colonia</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
-								<input type="text" ng-model="vm.form.Block" maxlength="vm.fiscalAddressConstraints.Block.max" ng-maxlength="vm.fiscalAddressConstraints.Block.max" name="Block">
+								<input type="text" ng-model="vm.form.Block" maxlength="vm.fiscalAddressConstraints.Block.max" ng-maxlength="vm.fiscalAddressConstraints.Block.max"
+								 name="Block">
 							</div>
 							<p ng-if="vm.client.FiscalAddress" class="input-note">
-								Caracteres <strong>{{vm.fiscalDataForm.Block.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.Block.max}}</strong>
+								Caracteres
+								<strong>{{fiscalDataForm.Block.$viewValue.length || 0}} de {{vm.fiscalAddressConstraints.Block.max}}</strong>
 							</p>
 
 						</div>
@@ -184,15 +234,18 @@
 					<div layout="row" layout-wrap>
 						<div flex flex-sm="100" flex-xs="100" class="input-element">
 							<label>
-	                <p><strong>Ciudad</strong></p>
-	            </label>
+								<p>
+									<strong>Ciudad</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
 								<input type="text" name="City" ng-model="vm.form.City">
 							</div>
 						</div>
 
 						<div flex flex-sm="100" flex-xs="100" class="input-element select-element-wrapper">
-							<label><strong>Estado</strong>*</label>
+							<label>
+								<strong>Estado</strong>*</label>
 							<md-select ng-model="vm.form.State" class="select-element" required>
 								<md-option ng-repeat="state in vm.states" ng-value="state.Name">
 									{{state.Name}}
@@ -201,7 +254,12 @@
 						</div>
 
 						<div flex flex-sm="100" flex-xs="100" class="input-element">
-							<label><p><strong>Código postal</strong><span class="ast">*</span></p></label>
+							<label>
+								<p>
+									<strong>Código postal</strong>
+									<span class="ast">*</span>
+								</p>
+							</label>
 							<div class="input-element-inner">
 								<input type="text" ng-model="vm.form.ZipCode" required minlength="5" maxlength="5">
 							</div>
@@ -209,8 +267,10 @@
 						</div>
 						<div flex flex-sm="100" flex-xs="100" class="input-element">
 							<label>
-	              <p><strong>Municipio</strong></p>
-	            </label>
+								<p>
+									<strong>Municipio</strong>
+								</p>
+							</label>
 							<div class="input-element-inner">
 								<input type="text" name="U_Localidad" ng-model="vm.form.U_Localidad">
 							</div>
@@ -225,16 +285,21 @@
 				<div layout="row" layout-wrap>
 					<div flex-gt-sm="25" flex="100" class="input-element">
 						<label>
-             <p> <strong>Nombre</strong></p>
-            </label>
+							<p>
+								<strong>Nombre</strong>
+							</p>
+						</label>
 						<div class="input-element-inner">
 							<input type="text" ng-model="vm.name">
 						</div>
 					</div>
 					<div flex-gt-sm="25" flex="100" class="input-element">
 						<label>
-              <p><strong>Email</strong> <span class="hl-label">*</span></p>
-            </label>
+							<p>
+								<strong>Email</strong>
+								<span class="hl-label">*</span>
+							</p>
+						</label>
 						<div class="input-element-inner">
 							<input type="email" ng-model="vm.email" required>
 						</div>
@@ -245,12 +310,13 @@
 			<div layout="row" class="form-view-btns no-margin" layout-align="center center">
 				<!--<a href="" flex class="form-view-btn">Borrar todos los campos</a>-->
 				<button type="submit" flex="50" class="form-view-btn form-view-btn-primary">
-	      Enviar información
-	    </button>
+					Enviar información
+				</button>
 			</div>
 			<!--END DATOS PERSONALES-->
 
-			<p><strong>Atenta nota: </strong>Por disposición tributaria, toda factura deberá ser solicitada en el mes que fue realizada su compra</p>
+			<p>
+				<strong>Atenta nota: </strong>Por disposición tributaria, toda factura deberá ser solicitada en el mes que fue realizada su compra</p>
 
 		</section>
 		<!--END FORM SECTION-->

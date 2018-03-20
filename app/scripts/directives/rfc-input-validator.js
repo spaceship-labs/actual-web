@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
-angular.module('actualApp').directive('rfcInputValidator', [
-  'clientService',
+angular.module("actualWebApp").directive("rfcInputValidator", [
+  "clientService",
   function(clientService) {
     return {
-      restrict: 'A',
-      require: 'ngModel',
+      restrict: "A",
+      require: "ngModel",
       link: function(scope, element, attrs, ctrl) {
         function rfcValidation(ngModelValue) {
           ctrl.$setValidity(
-            'rfcValidation',
+            "rfcValidation",
             clientService.validateRfc(ngModelValue)
           );
           return ngModelValue;
         }
 
-        scope.$watch(attrs['ngModel'], function(newVal, oldVal) {
+        scope.$watch(attrs["ngModel"], function(newVal, oldVal) {
           if (newVal !== oldVal || (!oldVal && !newVal)) {
             rfcValidation(newVal);
           }

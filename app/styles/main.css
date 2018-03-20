@@ -296,6 +296,9 @@ select {
   border: none;
 }
 
+.generic-error-msg{color:#C82828}
+.generic-ok-msg{color:#33BA2C}
+
 .input-element {
   max-width: 100%;
   border-radius: 2px;
