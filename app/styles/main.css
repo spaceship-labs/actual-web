@@ -5663,6 +5663,14 @@ md-backdrop.md-sidenav-backdrop {
 }
 .deliveries-cities ul {
   padding-left: 20px;
+  background: #092F57!important;
+  color: #fff;
+  list-style: none;
+  padding: 10px;
+  font-size: 12px;  
+}
+.deliveries-cities ul li{
+  margin: 4px 0;
 }
 
 /*---------------/
