@@ -1,4 +1,4 @@
-(function(){
+(function() {
   'use strict';
 
   function MainCtrl(
@@ -23,7 +23,7 @@
     metaTagsService,
     ENV,
     SITE
-  ){
+  ) {
     var vm = this;
     angular.extend(vm, {
       activeStore: {},
@@ -64,15 +64,15 @@
     metaTagsService.setMetaTags();
     vm.metatags = $rootScope.metatags;
 
-    $rootScope.$on('metatagsChanged',function(ev, metatags){
+    $rootScope.$on('metatagsChanged', function(ev, metatags) {
       vm.metatags = metatags;
     });
 
     init();
 
-    function getFaviconUrl(){
+    function getFaviconUrl() {
       var faviconUrl = '/images/favicon.ico';
-      switch(vm.siteTheme){
+      switch (vm.siteTheme) {
         case 'actual-home':
           faviconUrl = '/images/actual-home-favicon.png';
           break;
@@ -84,10 +84,9 @@
           break;
       }
       return faviconUrl;
-
     }
 
-    function init(){
+    function init() {
       vm.token = localStorageService.get('token');
       vm.user = localStorageService.get('user');
       vm.activeStoreId = localStorageService.get('activeStore');
@@ -98,86 +97,90 @@
         vm.searchingItemCode = true;
       }
 
-      
       loadMainData();
       loadSiteInfo();
 
       buildPointersSidenav();
       vm.isLoadingCategoriesTree = true;
-      categoriesService.createCategoriesTree()
-        .then(function(res){
+      categoriesService
+        .createCategoriesTree()
+        .then(function(res) {
           vm.isLoadingCategoriesTree = false;
           vm.categoriesTree = res.data;
           $rootScope.categoriesTree = vm.categoriesTree;
           $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
         })
-        .catch(function(err){
+        .catch(function(err) {
           console.log(err);
         });
 
-      $scope.$watch(function() {
-        return localStorageService.get('quotation');
-      }, function(quotation) {
-        vm.quotation = quotation;
-      });
+      $scope.$watch(
+        function() {
+          return localStorageService.get('quotation');
+        },
+        function(quotation) {
+          vm.quotation = quotation;
+        }
+      );
 
       moment.locale('es');
 
-      $(document).click(function(e){
+      $(document).click(function(e) {
         var $target = $(event.target);
         var profileHeader = $('#profile-header');
         var profileHeaderTrigger = $('#profile-header-trigger');
-        
+
         var loginHeader = $('#login-header');
         var loginHeaderTrigger = $('#login-header-trigger, .login-toggler');
 
         var schedulesModal = $('#schedules-modal');
         var schedulesModalTrigger = $('.schedules-modal-trigger');
 
-
-        if(
-          !$target.is(profileHeader) && !$target.is(profileHeaderTrigger) &&
-          !profileHeaderTrigger.find($target).length && vm.isActiveProfileHeader
-        ){
+        if (
+          !$target.is(profileHeader) &&
+          !$target.is(profileHeaderTrigger) &&
+          !profileHeaderTrigger.find($target).length &&
+          vm.isActiveProfileHeader
+        ) {
           toggleProfileModal();
-        }
-        else if(
-          !$target.is(loginHeader) && !$target.is(loginHeaderTrigger) &&
-          !loginHeaderTrigger.find($target).length && vm.isActiveLogin
-        ){
+        } else if (
+          !$target.is(loginHeader) &&
+          !$target.is(loginHeaderTrigger) &&
+          !loginHeaderTrigger.find($target).length &&
+          vm.isActiveLogin
+        ) {
           toggleLoginModal();
-        }
-        else if(
-          !$target.is(schedulesModal) && !$target.is(schedulesModalTrigger) &&
-          !schedulesModalTrigger.find($target).length && vm.isActiveSchedulesModal
-        ){
+        } else if (
+          !$target.is(schedulesModal) &&
+          !$target.is(schedulesModalTrigger) &&
+          !schedulesModalTrigger.find($target).length &&
+          vm.isActiveSchedulesModal
+        ) {
           toggleSchedulesModal();
         }
 
         $scope.$apply();
       });
-
     }
 
-    function toggleLoginModal(){
-      if( vm.isActiveLogin ){
+    function toggleLoginModal() {
+      if (vm.isActiveLogin) {
         vm.isActiveLogin = false;
         vm.isActiveBackdrop = false;
-      }
-      else{
+      } else {
         vm.isActiveLogin = true;
         vm.isActiveBackdrop = true;
-        
+
         vm.isActiveProfileHeader = false;
         vm.isActiveSchedulesModal = false;
       }
     }
 
-    function toggleProfileModal(){
-      if(vm.isActiveProfileHeader){
+    function toggleProfileModal() {
+      if (vm.isActiveProfileHeader) {
         vm.isActiveProfileHeader = false;
         vm.isActiveBackdrop = false;
-      }else{
+      } else {
         vm.isActiveProfileHeader = true;
         vm.isActiveBackdrop = true;
 
@@ -186,26 +189,26 @@
       }
     }
 
-    function toggleSchedulesModal(){
+    function toggleSchedulesModal() {
       console.log('toggleSchedulesModal');
 
-      if( vm.isActiveSchedulesModal ){
+      if (vm.isActiveSchedulesModal) {
         vm.isActiveSchedulesModal = false;
         vm.isActiveBackdrop = false;
-      }else{
+      } else {
         vm.isActiveSchedulesModal = true;
         vm.isActiveBackdrop = true;
 
         vm.isActiveLogin = false;
         vm.isActiveProfileHeader = false;
       }
-    }    
+    }
 
-    function toggleMobileSidenav(){
+    function toggleMobileSidenav() {
       $mdSidenav('mobileSidenav').toggle();
     }
 
-    function handleSearch(){
+    function handleSearch() {
       var params = {
         term: vm.searchValue
       };
@@ -214,42 +217,41 @@
       $location.path('/search').search(params);
     }
 
-    function resetSearchBox(){
+    function resetSearchBox() {
       vm.searchValue = '';
     }
 
-    function buildPointersSidenav(){
+    function buildPointersSidenav() {
       for (var i = 0; i < 9; i++) {
-        vm.pointersSidenav.push({selected:false});
+        vm.pointersSidenav.push({ selected: false });
       }
     }
 
-    function loadMainData(){
+    function loadMainData() {
       console.log('cargando main data', new Date());
       $rootScope.isMainDataLoaded = false;
-      $q.all([
-        loadActiveStore(),
-        loadActiveQuotation(),        
-      ])
-      .then(function(data){
-        $scope.mainData = {
-          activeStore: data[0],
-          activeQuotation: data[1]
-        };
-        console.log('$scope.mainData', $scope.mainData);
-        $rootScope.$emit('mainDataLoaded', $scope.mainData);
-        $rootScope.isMainDataLoaded = true;
-        console.log('termino main data', new Date());
-      })
-      .catch(function(err){
-        console.log('err', err);
-      });
+      $q
+        .all([loadActiveStore(), loadActiveQuotation()])
+        .then(function(data) {
+          $scope.mainData = {
+            activeStore: data[0],
+            activeQuotation: data[1]
+          };
+          console.log('$scope.mainData', $scope.mainData);
+          $rootScope.$emit('mainDataLoaded', $scope.mainData);
+          $rootScope.isMainDataLoaded = true;
+          console.log('termino main data', new Date());
+        })
+        .catch(function(err) {
+          console.log('err', err);
+        });
     }
 
     function loadActiveStore() {
       console.log('loadActiveStore start', new Date());
       var deferred = $q.defer();
-      userService.getActiveStore()
+      userService
+        .getActiveStore()
         .then(function(activeStore) {
           console.log('activestore', activeStore);
           vm.activeStore = activeStore;
@@ -257,117 +259,113 @@
           console.log('loadActiveStore end', new Date());
           $rootScope.$emit('activeStoreAssigned', activeStore);
           deferred.resolve(activeStore);
-
         })
-        .catch(function(err){
+        .catch(function(err) {
           console.log(err);
           deferred.reject(err);
         });
       return deferred.promise;
     }
 
-
-    function loadActiveQuotation(){
+    function loadActiveQuotation() {
       var deferred = $q.defer();
       console.log('start loadActiveQuotation', new Date());
 
-      quotationService.getActiveQuotation()
-        .then(function(res){
+      quotationService
+        .getActiveQuotation()
+        .then(function(res) {
           var quotation = res.data;
           console.log('quotation', quotation);
           $rootScope.isActiveQuotationLoaded = true;
-          if(quotation && quotation.id){
+          if (quotation && quotation.id) {
             vm.activeQuotation = quotation;
             $rootScope.activeQuotation = quotation;
             $rootScope.$emit('activeQuotationAssigned', vm.activeQuotation);
-            deferred.resolve(vm.activeQuotation);            
+            deferred.resolve(vm.activeQuotation);
             console.log('finish loadActiveQuotation', new Date());
-          }else{
+          } else {
             vm.activeQuotation = false;
             $rootScope.activeQuotation = false;
             $rootScope.$emit('activeQuotationAssigned', false);
             deferred.resolve(false);
           }
         })
-        .catch(function(err){
+        .catch(function(err) {
           $rootScope.activeQuotation = false;
           localStorageService.remove('quotation');
         });
       return deferred.promise;
     }
 
-    function loadSiteInfo(){
+    function loadSiteInfo() {
       var deferred = $q.defer();
       console.log('loadSiteInfo start', new Date());
-      siteService.findByHandle(vm.siteTheme)
-        .then(function(res){
+      siteService
+        .findByHandle(vm.siteTheme)
+        .then(function(res) {
           vm.site = res.data || {};
           $rootScope.site = res.data || {};
           deferred.resolve(vm.site);
           console.log('loadSiteInfo end', new Date());
         })
-        .catch(function(err){
+        .catch(function(err) {
           console.log(err);
           deferred.reject(err);
         });
       return deferred.promise;
     }
 
-    $rootScope.$on('newActiveQuotation', function(ev, newQuotationId){
+    $rootScope.$on('newActiveQuotation', function(ev, newQuotationId) {
       loadActiveQuotation();
     });
 
-    function removeCurrentQuotation(){
+    function removeCurrentQuotation() {
       quotationService.removeCurrentQuotation();
     }
 
-    function togglePointerSidenav(){
+    function togglePointerSidenav() {
       $mdSidenav('right').toggle();
     }
 
-    function getCategoryIcon(handle){
+    function getCategoryIcon(handle) {
       return categoriesService.getCategoryIcon(handle);
     }
 
     //$rootScope.$on("$locationChangeStart",function(event, next, current){
     $scope.$on('$routeChangeStart', function(event, next, current) {
-
-      if(current){
+      if (current) {
         authService.runPolicies();
-  
+
         //Only updating active quotation on every page change
         $rootScope.isActiveQuotationLoaded = false;
-        loadActiveQuotation()
-          .then(function(){
-            $scope.mainData = $scope.mainData || {};
-            $scope.mainData.activeQuotation = $rootScope.activeQuotation;
-            $rootScope.$emit('mainDataLoaded', $scope.mainData);
-            $rootScope.isMainDataLoaded = true;
+        loadActiveQuotation().then(function() {
+          $scope.mainData = $scope.mainData || {};
+          $scope.mainData.activeQuotation = $rootScope.activeQuotation;
+          $rootScope.$emit('mainDataLoaded', $scope.mainData);
+          $rootScope.isMainDataLoaded = true;
 
-            console.log('loaded activeQuotation', $rootScope.activeQuotation);
-          });
+          console.log('loaded activeQuotation', $rootScope.activeQuotation);
+        });
 
         resetSearchBox();
       }
 
       vm.activeModule = vm.getActiveModule();
-      if($location.search().itemcode){
+      if ($location.search().itemcode) {
         vm.searchingItemCode = true;
-      }else{
+      } else {
         vm.searchingItemCode = false;
       }
-
-
     });
 
-    function getActiveModule(){
+    function getActiveModule() {
       var activeModule = false;
       var path = $location.path();
       var policiesPaths = [
         '/politicas-de-entrega',
         '/politicas-de-garantia',
         '/politicas-de-almacenaje',
-        '/politicas-de-instalacion-y-ensamble',
+        '/politicas-de-instalacion-y-ensamble'
       ];
       var manualsPaths = [
         '/manual-de-cuidados-y-recomendaciones/pieles',
@@ -384,153 +382,148 @@
         '/manual-de-cuidados-y-recomendaciones/pintura-electrostatica'
       ];
 
-      if(path.indexOf('addquotation') >= 0){
+      if (path.indexOf('addquotation') >= 0) {
         activeModule = 'addquotation';
-      }
-      else if(path.indexOf('quotations') >= 0){
+      } else if (path.indexOf('quotations') >= 0) {
         activeModule = 'quotations';
-      }
-      else if(path.indexOf('orders') >= 0){
+      } else if (path.indexOf('orders') >= 0) {
         activeModule = 'orders';
-      }
-      else if(policiesPaths.indexOf(path) > -1){
+      } else if (policiesPaths.indexOf(path) > -1) {
         activeModule = 'policies';
-      }
-      else if(manualsPaths.indexOf(path) > -1){
+      } else if (manualsPaths.indexOf(path) > -1) {
         activeModule = 'manuals';
       }
       return activeModule;
     }
 
-
-    function hideProfileModal(){
+    function hideProfileModal() {
       vm.isActiveProfileHeader = false;
       vm.isActiveBackdrop = false;
     }
 
-    function activateLoginModal(){
-      if(!vm.user){
+    function activateLoginModal() {
+      if (!vm.user) {
         vm.isActiveLogin = true;
         vm.isActiveBackdrop = true;
       }
     }
 
-    function deactivateLoginModal(){
-      if(!vm.user){
+    function deactivateLoginModal() {
+      if (!vm.user) {
         vm.isActiveLogin = false;
         vm.isActiveBackdrop = false;
       }
     }
 
-    function handleSignInError(err){
+    function handleSignInError(err) {
       vm.isLoadingLogin = false;
-      if(err){
+      if (err) {
         console.log('err handleSignInError', err);
         vm.loginErr = 'Datos incorrectos';
         console.log('vm.loginErr', vm.loginErr);
       }
     }
 
-    function signIn(){
+    function signIn() {
       vm.isLoadingLogin = true;
       var formData = {
         email: vm.loginForm.email,
         password: vm.loginForm.password
       };
-      authService.signIn(
-        formData, 
-        $rootScope.successAuth, 
-        handleSignInError
-      );
+      authService.signIn(formData, $rootScope.successAuth, handleSignInError);
     }
 
-    function logOut(){
-      authService.logout(function(){
+    function logOut() {
+      authService.logout(function() {
         $location.path('/');
         $window.location.reload();
       });
     }
 
-    function setUserTokensOnResponse(res){
+    function setUserTokensOnResponse(res) {
       console.log('res setUserTokensOnResponse', res);
       vm.token = res.data.token;
       vm.user = res.data.user;
 
       localStorageService.remove('currentQuotation');
       localStorageService.set('token', vm.token);
-      localStorageService.set('user' , vm.user);
-      localStorageService.set('activeStore', vm.user.activeStore);      
-    }    
+      localStorageService.set('user', vm.user);
+      localStorageService.set('activeStore', vm.user.activeStore);
+    }
 
-    $rootScope.successAuth = function(res){
+    $rootScope.successAuth = function(res) {
       setUserTokensOnResponse(res);
       console.log('SUCCESS AUTH');
 
       assignCurrentUserToQuotationIfNeeded()
-        .then(function(quotationUpdated){
+        .then(function(quotationUpdated) {
           console.log('quotationUpdated', quotationUpdated);
 
-          if(quotationUpdated){
+          if (quotationUpdated) {
             console.log('redirecting');
 
-            if($routeParams.redirectTo){
-              $location.path($routeParams.redirectTo);              
+            if ($routeParams.redirectTo) {
+              $location.path($routeParams.redirectTo);
               return;
-            }else{
-              $location.path('/checkout/client/' + $rootScope.activeQuotation.id);
-              return;              
+            } else {
+              $location.path(
+                '/checkout/client/' + $rootScope.activeQuotation.id
+              );
+              return;
             }
-
           }
 
-          var quotationPath ='/quotations/edit';
-          if($location.path().indexOf(quotationPath) > -1){
+          var quotationPath = '/quotations/edit';
+          if ($location.path().indexOf(quotationPath) > -1) {
             $window.location = '/';
-          }else{
+          } else {
             $window.location.reload();
           }
-
         })
-        .catch(function(err){
+        .catch(function(err) {
           console.log('err successAuth', err);
         });
-
-
     };
 
-    $rootScope.successAuthInCheckout = function(res){
-      console.log('successAuthInCheckout')
+    $rootScope.successAuthInCheckout = function(res) {
+      console.log('successAuthInCheckout');
       setUserTokensOnResponse(res);
-    };    
+    };
 
-    function assignCurrentUserToQuotationIfNeeded(){
-      var activeQuotationHasClient = ($rootScope.activeQuotation || {}).Client ? true : false;
+    function assignCurrentUserToQuotationIfNeeded() {
+      var activeQuotationHasClient = ($rootScope.activeQuotation || {}).Client
+        ? true
+        : false;
 
       console.log('$rootScope.activeQuotation', $rootScope.activeQuotation);
       console.log('activeQuotationHasClient', activeQuotationHasClient);
 
-      if($rootScope.activeQuotation && !activeQuotationHasClient){
+      if (
+        vm.user &&
+        !authService.isUserAdmin(vm.user) &&
+        $rootScope.activeQuotation &&
+        !activeQuotationHasClient
+      ) {
         var quotationId = $rootScope.activeQuotation.id;
         var params = {
           Client: vm.user.Client,
           UserWeb: vm.user.id
         };
         return quotationService.update(quotationId, params);
-      }else{
-        var deferred = $q.defer();            
-        deferred.resolve();  
+      } else {
+        var deferred = $q.defer();
+        deferred.resolve();
         return deferred.promise;
       }
-
     }
 
-    function getCategoryBackground(handle){
-      var image =  '/images/mesas.jpg';
+    function getCategoryBackground(handle) {
+      var image = '/images/mesas.jpg';
       image = api.baseUrl + '/categories/' + handle + '.jpg';
-      return {'background-image' : 'url(' + image + ')'};
+      return { 'background-image': 'url(' + image + ')' };
     }
 
-    function showPhoneNumberDialog(){
+    function showPhoneNumberDialog() {
       dialogService.showDialog('Asistencia en su compra: 01 (998) 884 1594');
     }
 
@@ -539,26 +532,23 @@
       vm.isActiveLogin = false;
       vm.isLoadingLogin = false;
 
-      if( $mdSidenav('mobileSidenav').isOpen() ){
+      if ($mdSidenav('mobileSidenav').isOpen()) {
         $mdSidenav('mobileSidenav').close();
       }
-
     });
 
-    $rootScope.scrollTo = function(target, offset){
-      $timeout(
-        function(){
-          offset = offset || 100;
+    $rootScope.scrollTo = function(target, offset) {
+      $timeout(function() {
+        offset = offset || 100;
 
-          $('html, body').animate({
+        $('html, body').animate(
+          {
             scrollTop: $('#' + target).offset().top - offset
-          }, 600);
-        },
-        300
-      );
-    }    
-
-
+          },
+          600
+        );
+      }, 300);
+    };
   }
 
   angular.module('actualWebApp').controller('MainCtrl', MainCtrl);
@@ -585,7 +575,4 @@
     'ENV',
     'SITE'
   ];
-
 })();
-
-
