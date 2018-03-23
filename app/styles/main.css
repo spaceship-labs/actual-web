@@ -1626,6 +1626,12 @@ select {
   min-width: 1px;
   padding: 0 10px;
 }
+
+.products-list .product-width {
+  width: 25%;
+  min-width: 200px;
+}
+
 /*.products-list listing-product{display: block;}*/
 /*.products-list listing-product,*/
 .products-list .listing-product {
@@ -1796,6 +1802,11 @@ select {
   font-weight: 400;
   margin: 0 0 12px;
   line-height: 1;
+}
+
+.listing-view .best-seller-title {
+  font-size: 49px;
+  text-align: center;
 }
 
 .listing-view .results-block-header h3 {
