@@ -60,9 +60,9 @@ function HomeCtrl(
   function loadProducts(category, sortOption, limit) {
     return productService
       .searchCategoryByFilters({
-        category,
-        sortOption,
-        limit
+        category: category,
+        sortOption: sortOption,
+        limit: limit
       })
       .then(function(res) {
         var products = res.data.products || [];
