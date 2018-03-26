@@ -1,11 +1,5 @@
 <div class="container container-xxlg">
-  <div
-    ng-if="main.isLoadingCategoriesTree"
-    layout-fill
-    layout="row"
-    layout-align="center center"
-    class="loading-circle"
-  >
+  <div ng-if="main.isLoadingCategoriesTree" layout-fill layout="row" layout-align="center center" class="loading-circle">
     <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
   </div>
 </div>
@@ -14,10 +8,7 @@
   <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
     <!--START NAV-->
     <aside flex-gt-sm="20" flex="100" hide-sm hide-xs>
-      <sidebar-categories
-        categories-tree="main.categoriesTree"
-        active-store="main.activeStore"
-      >
+      <sidebar-categories categories-tree="main.categoriesTree" active-store="main.activeStore">
       </sidebar-categories>
     </aside>
     <!--END NAV-->
@@ -28,26 +19,15 @@
       <ng-include src="'views/partials/home-slider.html'"></ng-include>
 
       <div class="subs-container">
-        <div  class="subs-container-list" layout="row" layout-wrap>
-          <div
-            class="sub-wrapper"
-            ng-repeat="category in main.categoriesTree"
-            ng-if="category[vm.stockProperty] > 0"
-            flex-gt-sm="33"
-            flex="50"
-            flex-sm="50"
-            flex-xs="100"
-          >
+        <div class="subs-container-list" layout="row" layout-wrap>
+          <div class="sub-wrapper" ng-repeat="category in main.categoriesTree" ng-if="category[vm.stockProperty] > 0" flex-gt-sm="33"
+            flex="50" flex-sm="50" flex-xs="100">
             <category-item category="category" stock-key="{{vm.stockProperty}}" />
           </div>
 
           <!--OFERTAS-->
-          <div
-            class="sub-wrapper"
-            flex-gt-sm="33" flex="50" flex-xs="100">
-            <div
-              class="sub"
-              ng-style="main.getCategoryBackground('ofertas')">
+          <div class="sub-wrapper" flex-gt-sm="33" flex="50" flex-xs="100">
+            <div class="sub" ng-style="main.getCategoryBackground('ofertas')">
               <div class="sub-text">
                 <h4>
                   <a ng-href="/ofertas">
@@ -67,7 +47,17 @@
     <!-- END CATEGORIES-->
 
   </div>
-  <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
-  <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
-  <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
+  <div ng-if="vm.activeStore.code !== 'actual_kids'">
+    <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
+    <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
+    <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
+  </div>
+
+  <div ng-if="vm.activeStore.code === 'actual_kids'">
+    <ng-include src="'views/partials/best-sellers-kids-beds.html'"></ng-include>
+    <ng-include src="'views/partials/best-sellers-kids-bureaus.html'"></ng-include>
+    <ng-include src="'views/partials/best-sellers-kids-forniture.html'"></ng-include>
+  </div>
+
+
 </div>

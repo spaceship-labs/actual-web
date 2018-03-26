@@ -33,17 +33,31 @@ function HomeCtrl(
       direction: 'DESC'
     };
 
-    loadProducts('salas', sortOption, 8).then(function(products) {
-      vm.livingRooms = products;
-    });
+    if (activeStore.code !== 'actual_kids') {
+      loadProducts('salas', sortOption, 8).then(function(products) {
+        vm.livingRooms = products;
+      });
 
-    loadProducts('comedores', sortOption, 8).then(function(products) {
-      vm.dinningRooms = products;
-    });
+      loadProducts('comedores', sortOption, 8).then(function(products) {
+        vm.dinningRooms = products;
+      });
 
-    loadProducts('recamaras', sortOption, 8).then(function(products) {
-      vm.bedRooms = products;
-    });
+      loadProducts('recamaras', sortOption, 8).then(function(products) {
+        vm.bedRooms = products;
+      });
+    } else {
+      loadProducts('ninos', sortOption, 8).then(function(products) {
+        vm.kidsForniture = products;
+      });
+
+      loadProducts('comoda-infantil', sortOption, 8).then(function(products) {
+        vm.kidsBureaus = products;
+      });
+
+      loadProducts('camas-infantiles', sortOption, 8).then(function(products) {
+        vm.kidsBeds = products;
+      });
+    }
   }
 
   function loadBanners() {
