@@ -17,7 +17,7 @@
         <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-on-scroll">
           <span></span>
           <span></span>
-          <span></span>            
+          <span></span>
         </a>
       </div>
 
@@ -86,7 +86,7 @@
           <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static">
             <span></span>
             <span></span>
-            <span></span>            
+            <span></span>
           </a>
         </div>
 
@@ -149,10 +149,25 @@
             <strong hide-xs>(998) 884 1594</strong>
           </span>
 
-          <ng-include 
+          <ng-include
             ng-if="main.isActiveSchedulesModal"
             src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
+
+        <a href="whatsapp://send?phone=5219982463487">
+          <div
+          flex
+          href=""
+          class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger"
+          >
+          <span>
+            <strong><i class="icon-whatsapp"></i></strong>
+            <!--<strong hide-xs>998 246 3487</strong>-->
+            <strong hide-xs>(998) 246 3487</strong>
+          </span>
+
+        </div>
+        </a>
 
         <!--IF ACTIVE QUOTATION-->
         <a
