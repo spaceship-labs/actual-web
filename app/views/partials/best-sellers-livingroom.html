@@ -1,26 +1,16 @@
 <div ng-if="vm.livingRooms && main.site" id="home-slider-wrapper">
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
-      <a href="/category/salas"><span>Salas</span></a>
+      <a href="/category/salas">
+        <span>Salas</span>
+      </a>
     </h2>
   </div>
-  <div class="products-list"
-  layout="row"
-  layout-wrap
-  layout-align="start center"
-  ng-cloak
-  >
-    <div flex="25"
-    flex-sm="50"
-    flex-xs="100" ng-repeat="product in vm.livingRooms track by $index | limitTo:vm.limit" class="listing-product-wrap">
-      {{vm.livingRooms.length}}
-      {{vm.limit}}
-    	<listing-product product="product"></listing-product>
+  <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
+    <div flex="25" flex-sm="50" flex-xs="100" ng-repeat="product in vm.livingRooms | limitTo:vm.limit track by $index " class="listing-product-wrap">
+      {{vm.livingRooms.length}} {{vm.limit}}
+      <listing-product product="product"></listing-product>
     </div>
-    <button
-      flex="50"
-      style="margin: 0px auto;"
-			class="action-btn"
-      ng-if="vm.livingRooms.length > vm.limit">Ver más</button>
+    <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="vm.livingRooms.length > vm.limit">Ver más</button>
   </div>
 </div>
