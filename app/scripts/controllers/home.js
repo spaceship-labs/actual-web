@@ -20,11 +20,27 @@ function HomeCtrl(
   function init() {
     vm.activeStore = activeStore;
     vm.stockProperty = 'productsNum';
-    vm.limit = 4;
+    vm.limitLivingRooms = 4;
+    vm.limitDinningRooms = 4;
+    vm.limitBedRooms = 4;
     if (activeStore) {
       vm.stockProperty = activeStore.code;
     }
-
+    $scope.loadMore = function(type) {
+      switch (type) {
+        case 'livingRooms':
+          vm.limitLivingRooms = vm.limitLivingRooms + 4;
+          break;
+        case 'dinningRooms':
+          vm.limitDinningRooms = vm.limitDinningRooms + 4;
+          break;
+        case 'bedRooms':
+          vm.limitBedRooms = vm.limitBedRooms + 4;
+          break;
+        default:
+          console.log(type);
+      }
+    };
     metaTagsService.setMetaTags({});
     loadBanners();
 
