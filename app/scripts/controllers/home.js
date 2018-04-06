@@ -17,10 +17,10 @@ function HomeCtrl(
     areProductsLoaded: false,
     api: api
   });
-
   function init() {
     vm.activeStore = activeStore;
     vm.stockProperty = 'productsNum';
+    vm.limit = 4;
     if (activeStore) {
       vm.stockProperty = activeStore.code;
     }
