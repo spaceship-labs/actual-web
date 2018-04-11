@@ -1,9 +1,10 @@
 <!doctype html>
-<html  ng-app="actualWebApp" ng-controller="MainCtrl as main">
-  <head>
-    <meta charset="utf-8">
-    <!--SEE GRUNTFILE processhtml-->
-    <!-- process:template
+<html ng-app="actualWebApp" ng-controller="MainCtrl as main">
+
+<head>
+  <meta charset="utf-8">
+  <!--SEE GRUNTFILE processhtml-->
+  <!-- process:template
     <title ng-bind="main.metatags.title"><%= metaTags.title %></title>
     <link itemprop="url" href="https://actualstudio.com">
     <meta itemtype="logo" content="Logo-A-Home.png">
@@ -54,14 +55,14 @@
 
     /process -->
 
-    <base href="/" />
-    <meta name="fragment" content="!">
-    <meta name="viewport" content="width=device-width, user-scalable=yes">
-    <meta name="google-site-verification" content="Al9YYcB_iYqFkycbTwFq7qbbms-sH4H66zDtwyz97fU" />
-    
-    <meta name="robots" content="all, index, follow">
+  <base href="/" />
+  <meta name="fragment" content="!">
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
+  <meta name="google-site-verification" content="Al9YYcB_iYqFkycbTwFq7qbbms-sH4H66zDtwyz97fU" />
 
-    <!--
+  <meta name="robots" content="all, index, follow">
+
+  <!--
     <link 
         rel="icon" 
         href="/favicon.ico"
@@ -71,62 +72,137 @@
     -->
 
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
-    <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
-    <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
-    <link rel='stylesheet' href='bower_components/angular-material-datetimepicker/css/material-datetimepicker.css' />
-    <link rel='stylesheet' href='bower_components/angular-datatables/dist/css/angular-datatables.css' />
-    <link rel='stylesheet' href='bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css' />
-    <link rel='stylesheet' href='bower_components/ez-plus/css/jquery.ez-plus.css' />
-    <link rel='stylesheet' href='bower_components/pikaday/css/pikaday.css' />
-    <link rel='stylesheet' href='bower_components/jquery-timepicker-jt/jquery.timepicker.css' />
-    <link rel='stylesheet' href='bower_components/photoswipe/dist/photoswipe.css' />
-    <link rel='stylesheet' href='bower_components/photoswipe/dist/default-skin/default-skin.css' />
-    <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
-    <link rel='stylesheet' href='bower_components/chosen/chosen.css' />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
-    <link rel="stylesheet" href="styles/stickyFooter.css">
-    <link rel="stylesheet" href="styles/icomoon.css">
-    <link rel="stylesheet" href="styles/custom.datatables.css">
-    <link rel='stylesheet' href='styles/default-skin.css' />
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/spei-card.css">
-    <link rel="stylesheet" href="styles/actual-home.css">
-    <link rel="stylesheet" href="styles/actual-studio.css">
-    <link rel="stylesheet" href="styles/actual-kids.css">
-    <!-- endbuild -->
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
+  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
+  <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
+  <link rel='stylesheet' href='bower_components/angular-material-datetimepicker/css/material-datetimepicker.css' />
+  <link rel='stylesheet' href='bower_components/angular-datatables/dist/css/angular-datatables.css' />
+  <link rel='stylesheet' href='bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css' />
+  <link rel='stylesheet' href='bower_components/ez-plus/css/jquery.ez-plus.css' />
+  <link rel='stylesheet' href='bower_components/pikaday/css/pikaday.css' />
+  <link rel='stylesheet' href='bower_components/jquery-timepicker-jt/jquery.timepicker.css' />
+  <link rel='stylesheet' href='bower_components/photoswipe/dist/photoswipe.css' />
+  <link rel='stylesheet' href='bower_components/photoswipe/dist/default-skin/default-skin.css' />
+  <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
+  <link rel='stylesheet' href='bower_components/chosen/chosen.css' />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
+  <link rel="stylesheet" href="styles/stickyFooter.css">
+  <link rel="stylesheet" href="styles/icomoon.css">
+  <link rel="stylesheet" href="styles/custom.datatables.css">
+  <link rel='stylesheet' href='styles/default-skin.css' />
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/spei-card.css">
+  <link rel="stylesheet" href="styles/actual-home.css">
+  <link rel="stylesheet" href="styles/actual-studio.css">
+  <link rel="stylesheet" href="styles/actual-kids.css">
+  <!-- endbuild -->
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
+  <script>
+    window.prerenderReady = false;
+  </script>
+
+  <!--Start of Zendesk Chat Script-->
+  <script type="text/javascript">
+    window.$zopim || (function (d, s) {
+      var z = $zopim = function (c) {
+        z._.push(c)
+      }, $ = z.s =
+        d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+          z.set.
+            _.push(o)
+        }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute('charset', 'utf-8');
+      $.src = 'https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ'; z.t = +new Date; $.
+        type = 'text/javascript'; e.parentNode.insertBefore($, e)
+    })(document, 'script');
+  </script>
+  <!--End of Zendesk Chat Script-->
+
+  <!--SEE GRUNTFILE processhtml-->
+  <!-- process:template
     <script>
-        window.prerenderReady = false;
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      
+      //fbq.disablePushState = true; //not recommended, but can be done
+      
+      fbq('init', '<%= facebookPixelId %>');
+      fbq('track', 'PageView');
     </script>
 
-    <!--Start of Zendesk Chat Script-->
-    <script type="text/javascript">
-    window.$zopim||(function(d,s){var z=$zopim=function(c){
-    z._.push(c)},$=z.s=
-    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-    $.src='https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ';z.t=+new Date;$.
-    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-    </script>
-    <!--End of Zendesk Chat Script-->    
-
-  </head>
-  <body ng-cloak ng-class="main.siteTheme">
-    
-    <!--SEE GRUNTFILE processhtml-->
-    <!-- process:template    
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= tagManagerId %>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     /process -->
 
+</head>
+
+<body ng-cloak ng-class="main.siteTheme">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
+  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
+  <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
+  <link rel='stylesheet' href='bower_components/angular-material-datetimepicker/css/material-datetimepicker.css' />
+  <link rel='stylesheet' href='bower_components/angular-datatables/dist/css/angular-datatables.css' />
+  <link rel='stylesheet' href='bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css' />
+  <link rel='stylesheet' href='bower_components/ez-plus/css/jquery.ez-plus.css' />
+  <link rel='stylesheet' href='bower_components/pikaday/css/pikaday.css' />
+  <link rel='stylesheet' href='bower_components/jquery-timepicker-jt/jquery.timepicker.css' />
+  <link rel='stylesheet' href='bower_components/photoswipe/dist/photoswipe.css' />
+  <link rel='stylesheet' href='bower_components/photoswipe/dist/default-skin/default-skin.css' />
+  <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
+  <link rel='stylesheet' href='bower_components/chosen/chosen.css' />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
+  <link rel="stylesheet" href="styles/stickyFooter.css">
+  <link rel="stylesheet" href="styles/icomoon.css">
+  <link rel="stylesheet" href="styles/custom.datatables.css">
+  <link rel='stylesheet' href='styles/default-skin.css' />
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/spei-card.css">
+  <link rel="stylesheet" href="styles/actual-home.css">
+  <link rel="stylesheet" href="styles/actual-studio.css">
+  <link rel="stylesheet" href="styles/actual-kids.css">
+  <!-- endbuild -->
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+  <script>
+    window.prerenderReady = false;
+  </script>
+
+  <!--Start of Zendesk Chat Script-->
+  <script type="text/javascript">
+    window.$zopim || (function (d, s) {
+      var z = $zopim = function (c) {
+        z._.push(c)
+      }, $ = z.s =
+        d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+          z.set.
+            _.push(o)
+        }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute('charset', 'utf-8');
+      $.src = 'https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ'; z.t = +new Date; $.
+        type = 'text/javascript'; e.parentNode.insertBefore($, e)
+    })(document, 'script');
+  </script>
+  <!--End of Zendesk Chat Script-->
+
+  </head>
+
+  <body ng-cloak ng-class="main.siteTheme">
+
+    <!--SEE GRUNTFILE processhtml-->
 
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -145,16 +221,17 @@
         <div id="topBackRepeat">
 
           <div>
-            <ng-include
-            ng-if="main.activeModule !== 'order'"
-                src="'views/header.html'"></ng-include>
+            <ng-include ng-if="main.activeModule !== 'order'" src="'views/header.html'"></ng-include>
             <md-content ng-view autoscroll>
             </md-content>
 
           </div>
-        </div><!-- END topBackRepeat -->
-      </div><!-- END main -->
-    </div><!-- END wrap -->
+        </div>
+        <!-- END topBackRepeat -->
+      </div>
+      <!-- END main -->
+    </div>
+    <!-- END wrap -->
     <div class="clear"></div>
 
     <!--FOOTER-->
@@ -176,7 +253,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpLv18a2AvczWYaEv_HMA9T_m2ElMJgro"></script>
     -->
 
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvLCjzJKSl6XQg-k0fcpPWbg8nNbKEFZI">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvLCjzJKSl6XQg-k0fcpPWbg8nNbKEFZI">
     </script>
 
 
@@ -253,131 +330,130 @@
     <script src="bower_components/chosen/chosen.jquery.js"></script>
     <script src="bower_components/angular-chosen-localytics/dist/angular-chosen.js"></script>
     <script src="bower_components/ng-currency/dist/ng-currency.js"></script>
-    <script src="bower_components/conekta.js/dist/conekta.min.js"></script>
-    <script src="bower_components/js-xls/dist/xls.js"></script>
-    <script src="bower_components/js-xlsx/dist/xlsx.core.min.js"></script>
+    <script src="bower_components/js-xlsx/dist/xlsx.full.min.js"></script>
     <script src="bower_components/es6-promise/promise.js"></script>
     <script src="bower_components/alasql/dist/alasql.min.js"></script>
-    <script src="bower_components/SHA-1/sha1.js"></script>
-    <script src="bower_components/angulartics/src/angulartics.js"></script>
-    <script src="bower_components/angulartics-google-analytics/lib/angulartics-ga.js"></script>
-    <script src="bower_components/angulartics-google-tag-manager/lib/angulartics-google-tag-manager.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
     <script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="bower_components/ez-plus/src/jquery.ez-plus.js"></script>
-        <script src="scripts/find-polyfill.js"></script>
-        <script src="scripts/envconfig.js"></script>
-        <script src="scripts/siteconfig.js"></script>
-        <script src="scripts/app.js"></script>
-        <script src="scripts/moment-locale-es.js"></script>
-        <script src="scripts/angular-locale_es-mx.js"></script>        
-        <script src="scripts/angular-photoswipe.js"></script>
-        <script src="scripts/ng-infinite-scroll.min.js"></script>
-        <script src="scripts/filters/roundcurrency.js"></script>
-        <script src="scripts/services/api.js"></script>
-        <script src="scripts/services/authservice.js"></script>
-        <script src="scripts/services/gtmservice.js"></script>
-        <script src="scripts/directives/listing-product.js"></script>
-        <script src="scripts/directives/fullheight-element.js"></script>
-        <script src="scripts/directives/product-gallery.js"></script>
-        <script src="scripts/directives/category-item.js"></script>
-        <script src="scripts/controllers/category.js"></script>
-        <script src="scripts/controllers/product.js"></script>
-        <script src="scripts/directives/sidebar-categories.js"></script>
-        <script src="scripts/directives/ng-enter.js"></script>        
-        <script src="scripts/services/categoriesservice.js"></script>
-        <script src="scripts/services/checkoutservice.js"></script>
-        <script src="scripts/services/ewalletservice.js"></script>
-        <script src="scripts/services/cartservice.js"></script>
-        <script src="scripts/services/deliveryservice.js"></script>
-        <script src="scripts/services/commonservice.js"></script>
-        <script src="scripts/services/metatagsservice.js"></script>
-        <script src="scripts/services/htmltoplaintext.js"></script>
-        <script src="scripts/controllers/search.js"></script>
-        <script src="scripts/services/productservice.js"></script>
-        <script src="scripts/services/userservice.js"></script>
-        <script src="scripts/services/quotationservice.js"></script>
-        <script src="scripts/services/clientservice.js"></script>
-        <script src="scripts/services/saleservice.js"></script>
-        <script src="scripts/services/orderservice.js"></script>
-        <script src="scripts/services/siteservice.js"></script>
-        <script src="scripts/services/pmperiodservice.js"></script>
-        <script src="scripts/services/productsearchservice.js"></script>
-        <script src="scripts/services/leadservice.js"></script>
-        <script src="scripts/directives/fixedelement.js"></script>
-        <script src="scripts/directives/table-list.js"></script>
-        <script src="scripts/services/dialogservice.js"></script>
-        <script src="scripts/services/formatservice.js"></script>
-        <script src="scripts/controllers/users/profile.js"></script>
-        <script src="scripts/datatables.input.js"></script>
-        <script src="scripts/controllers/quotations/edit.js"></script>
-        <script src="scripts/controllers/zipcode-dialog.js"></script>
-        <script src="scripts/controllers/lead-form-dialog.js"></script>
-        <script src="scripts/controllers/quotations/stockdialog.js"></script>
-        <script src="scripts/directives/menucategories.js"></script>
-        <script src="scripts/directives/menusubcategories.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/home.js"></script>
-        <script src="scripts/controllers/checkout/client.js"></script>
-        <script src="scripts/controllers/checkout/payments.js"></script>
-        <script src="scripts/controllers/checkout/transfer-instructions-dialog.js"></script>
-        <script src="scripts/controllers/checkout/payment-dialog.js"></script>
-        <script src="scripts/controllers/checkout/order.js"></script>
-        <script src="scripts/services/companyservice.js"></script>
-        <script src="scripts/services/storeservice.js"></script>
-        <script src="scripts/services/invoiceservice.js"></script>
-        <script src="scripts/controllers/offers.js"></script>
-        <script src="scripts/services/packageservice.js"></script>
-        <script src="scripts/services/paymentservice.js"></script>
-        <script src="scripts/controllers/delivery-policy.js"></script>
-        <script src="scripts/controllers/ensamble-policy.js"></script>
-        <script src="scripts/controllers/storage-policy.js"></script>
-        <script src="scripts/controllers/warranty-policy.js"></script>
-        <script src="scripts/controllers/users/deliveries.js"></script>
-        <script src="scripts/controllers/users/invoices.js"></script>
-        <script src="scripts/controllers/users/quotations.js"></script>
-        <script src="scripts/controllers/users/purchases.js"></script>
-        <script src="scripts/controllers/shippinganddelivery.js"></script>
-        <script src="scripts/controllers/refundstext.js"></script>
-        <script src="scripts/controllers/manual/pieles.js"></script>
-        <script src="scripts/controllers/manual/aceros.js"></script>
-        <script src="scripts/controllers/manual/aluminios.js"></script>
-        <script src="scripts/controllers/manual/cristales.js"></script>
-        <script src="scripts/controllers/manual/cromados.js"></script>
-        <script src="scripts/controllers/manual.js"></script>
-        <script src="scripts/controllers/manual/maderas.js"></script>
-        <script src="scripts/controllers/manual/piezas-plasticas.js"></script>
-        <script src="scripts/controllers/manual/textiles.js"></script>
-        <script src="scripts/controllers/manual/vinilos.js"></script>
-        <script src="scripts/controllers/manual/pintura-electrostatica.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="bower_components/ez-plus/src/jquery.ez-plus.js"></script>
+    <script src="scripts/find-polyfill.js"></script>
+    <script src="scripts/envconfig.js"></script>
+    <script src="scripts/siteconfig.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/moment-locale-es.js"></script>
+    <script src="scripts/angular-locale_es-mx.js"></script>
+    <script src="scripts/angular-photoswipe.js"></script>
+    <script src="scripts/ng-infinite-scroll.min.js"></script>
+    <script src="scripts/filters/roundcurrency.js"></script>
+    <script src="scripts/services/api.js"></script>
+    <script src="scripts/services/authservice.js"></script>
+    <script src="scripts/services/gtmservice.js"></script>
+    <script src="scripts/directives/listing-product.js"></script>
+    <script src="scripts/directives/fullheight-element.js"></script>
+    <script src="scripts/directives/product-gallery.js"></script>
+    <script src="scripts/directives/category-item.js"></script>
+    <script src="scripts/controllers/category.js"></script>
+    <script src="scripts/controllers/product.js"></script>
+    <script src="scripts/directives/sidebar-categories.js"></script>
+    <script src="scripts/directives/ng-enter.js"></script>
+    <script src="scripts/services/categoriesservice.js"></script>
+    <script src="scripts/services/checkoutservice.js"></script>
+    <script src="scripts/services/ewalletservice.js"></script>
+    <script src="scripts/services/cartservice.js"></script>
+    <script src="scripts/services/deliveryservice.js"></script>
+    <script src="scripts/services/commonservice.js"></script>
+    <script src="scripts/services/metatagsservice.js"></script>
+    <script src="scripts/services/htmltoplaintext.js"></script>
+    <script src="scripts/controllers/search.js"></script>
+    <script src="scripts/services/productservice.js"></script>
+    <script src="scripts/services/userservice.js"></script>
+    <script src="scripts/services/quotationservice.js"></script>
+    <script src="scripts/services/clientservice.js"></script>
+    <script src="scripts/services/saleservice.js"></script>
+    <script src="scripts/services/orderservice.js"></script>
+    <script src="scripts/services/siteservice.js"></script>
+    <script src="scripts/services/pmperiodservice.js"></script>
+    <script src="scripts/services/productsearchservice.js"></script>
+    <script src="scripts/services/leadservice.js"></script>
+    <script src="scripts/directives/fixedelement.js"></script>
+    <script src="scripts/directives/rfc-input-validator.js"></script>
+    <script src="scripts/directives/table-list.js"></script>
+    <script src="scripts/services/dialogservice.js"></script>
+    <script src="scripts/services/formatservice.js"></script>
+    <script src="scripts/controllers/users/profile.js"></script>
+    <script src="scripts/datatables.input.js"></script>
+    <script src="scripts/controllers/quotations/edit.js"></script>
+    <script src="scripts/controllers/zipcode-dialog.js"></script>
+    <script src="scripts/controllers/lead-form-dialog.js"></script>
+    <script src="scripts/controllers/quotations/stockdialog.js"></script>
+    <script src="scripts/directives/menucategories.js"></script>
+    <script src="scripts/directives/menusubcategories.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/checkout/client.js"></script>
+    <script src="scripts/controllers/checkout/payments.js"></script>
+    <script src="scripts/controllers/checkout/transfer-instructions-dialog.js"></script>
+    <script src="scripts/controllers/checkout/payment-dialog.js"></script>
+    <script src="scripts/controllers/checkout/order.js"></script>
+    <script src="scripts/services/companyservice.js"></script>
+    <script src="scripts/services/storeservice.js"></script>
+    <script src="scripts/services/invoiceservice.js"></script>
+    <script src="scripts/controllers/offers.js"></script>
+    <script src="scripts/services/packageservice.js"></script>
+    <script src="scripts/services/paymentservice.js"></script>
+    <script src="scripts/controllers/delivery-policy.js"></script>
+    <script src="scripts/controllers/ensamble-policy.js"></script>
+    <script src="scripts/controllers/storage-policy.js"></script>
+    <script src="scripts/controllers/warranty-policy.js"></script>
+    <script src="scripts/controllers/users/deliveries.js"></script>
+    <script src="scripts/controllers/users/invoices.js"></script>
+    <script src="scripts/controllers/users/quotations.js"></script>
+    <script src="scripts/controllers/users/purchases.js"></script>
+    <script src="scripts/controllers/shippinganddelivery.js"></script>
+    <script src="scripts/controllers/refundstext.js"></script>
+    <script src="scripts/controllers/manual/pieles.js"></script>
+    <script src="scripts/controllers/manual/aceros.js"></script>
+    <script src="scripts/controllers/manual/aluminios.js"></script>
+    <script src="scripts/controllers/manual/cristales.js"></script>
+    <script src="scripts/controllers/manual/cromados.js"></script>
+    <script src="scripts/controllers/manual.js"></script>
+    <script src="scripts/controllers/manual/maderas.js"></script>
+    <script src="scripts/controllers/manual/piezas-plasticas.js"></script>
+    <script src="scripts/controllers/manual/textiles.js"></script>
+    <script src="scripts/controllers/manual/vinilos.js"></script>
+    <script src="scripts/controllers/manual/pintura-electrostatica.js"></script>
 
-        <script src="scripts/controllers/securebuy.js"></script>
-        <script src="scripts/controllers/paymentmethods.js"></script>
-        <script src="scripts/controllers/faq.js"></script>
-        <script src="scripts/controllers/aboutus.js"></script>
-        <script src="scripts/controllers/philosophy.js"></script>
-        <script src="scripts/controllers/ourbrands.js"></script>
-        <script src="scripts/controllers/ourstores.js"></script>
-        <script src="scripts/controllers/privacy.js"></script>
-        <script src="scripts/controllers/termsandconditions.js"></script>
-        <script src="scripts/controllers/security.js"></script>
-        <script src="scripts/controllers/forgot-password.js"></script>
-        <script src="scripts/controllers/reset-password.js"></script>
-        <script src="scripts/controllers/checkout/invoicedialog.js"></script>
+    <script src="scripts/controllers/securebuy.js"></script>
+    <script src="scripts/controllers/paymentmethods.js"></script>
+    <script src="scripts/controllers/faq.js"></script>
+    <script src="scripts/controllers/aboutus.js"></script>
+    <script src="scripts/controllers/philosophy.js"></script>
+    <script src="scripts/controllers/ourbrands.js"></script>
+    <script src="scripts/controllers/ourstores.js"></script>
+    <script src="scripts/controllers/privacy.js"></script>
+    <script src="scripts/controllers/termsandconditions.js"></script>
+    <script src="scripts/controllers/security.js"></script>
+    <script src="scripts/controllers/forgot-password.js"></script>
+    <script src="scripts/controllers/reset-password.js"></script>
+    <script src="scripts/controllers/checkout/invoicedialog.js"></script>
 
-        <script src="scripts/controllers/sitemap.js"></script>
-        <script src="scripts/controllers/register.js"></script>
-        <script src="scripts/services/breadcrumbservice.js"></script>
-        <script src="scripts/controllers/invoicing.js"></script>
-        <script src="scripts/controllers/contactus.js"></script>
-        <script src="scripts/controllers/deliveries-locations.js"></script>
-        <script src="scripts/controllers/reports/orders.js"></script>
-        <script src="scripts/controllers/reports/quotations.js"></script>
-        <script src="scripts/controllers/suggestions.js"></script>
-        <!-- endbuild -->
-</body>
+    <script src="scripts/controllers/sitemap.js"></script>
+    <script src="scripts/controllers/register.js"></script>
+    <script src="scripts/services/breadcrumbservice.js"></script>
+    <script src="scripts/controllers/invoicing.js"></script>
+    <script src="scripts/controllers/contactus.js"></script>
+    <script src="scripts/controllers/deliveries-locations.js"></script>
+    <script src="scripts/controllers/reports/orders.js"></script>
+    <script src="scripts/controllers/reports/quotations.js"></script>
+    <script src="scripts/controllers/suggestions.js"></script>
+    <!-- endbuild -->
+
+    <script type="text/javascript" src="https://cdn.conekta.io/js/latest/conekta.js"></script>
+
+  </body>
+
 </html>

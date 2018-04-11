@@ -1,46 +1,67 @@
-.actual-studio .searcher-wrapper .searcher-btn{
-	background: #CC262F;
-	color: #fff;
+.actual-studio .searcher-wrapper .searcher-btn {
+  background: #cc262f;
+  color: #fff;
 }
-.actual-studio .header-top-bar{background:#000000!important;}
-.actual-studio .footer-bottom{background: #CC262F!important;}
+.actual-studio .header-top-bar {
+  background: #000000 !important;
+}
+.actual-studio .footer-bottom {
+  background: #cc262f !important;
+}
 .actual-studio .nav-categories-item-active,
-.actual-studio .nav-categories-item:hover{
-  background: #CC262F;
+.actual-studio .nav-categories-item:hover {
+  background: #cc262f;
 }
 
-.actual-studio .listing-view-nav > li.active h3 a, 
-.actual-studio .listing-view-nav > li h3 a.active, 
+.actual-studio .listing-view-nav > li.active h3 a,
+.actual-studio .listing-view-nav > li h3 a.active,
 .actual-studio .listing-view-nav > li h3 a:hover,
 .actual-studio .listing-view-nav .icon-right-open.aside,
 .actual-studio .listing-view-nav-wrapper > h2 a.active,
 .actual-studio .listing-view-subnav a.active,
-.actual-studio .filters .head-filt i{
-	color: #CC262F;
+.actual-studio .filters .head-filt i {
+  color: #cc262f;
 }
 
 .actual-studio .filters .filter-block-price-btn,
 .actual-studio .filters .filters-head,
-.actual-studio .product-view .desc-head-item-on{background: #000}
+.actual-studio .product-view .desc-head-item-on {
+  background: #000;
+}
 
-
-.actual-studio .mobile-sidenav .close-btn{background: #CC262F!important;}
-.actual-studio .mobile-sidenav .nav-categories-item{border-bottom: 1px solid #CC262F}
-.actual-studio .nav-categories-item-active, .actual-studio .nav-categories-item:hover{
-	border-bottom: 2px solid #CC262F;
+.actual-studio .mobile-sidenav .close-btn {
+  background: #cc262f !important;
+}
+.actual-studio .mobile-sidenav .nav-categories-item {
+  border-bottom: 1px solid #cc262f;
+}
+.actual-studio .nav-categories-item-active,
+.actual-studio .nav-categories-item:hover {
+  border-bottom: 2px solid #cc262f;
 }
 
 .actual-studio .filters-sidenav-trigger-mobile,
-.actual-studio .filters-sidenav-trigger .block-icon{background: #CC262F!important;}
+.actual-studio .filters-sidenav-trigger .block-icon {
+  background: #cc262f !important;
+}
 
-.actual-studio .filters-sidenav .pointer-close-btn i{color: #CC262F;}
-.actual-studio .filters-head{background: #CC262F!important;}
+.actual-studio .filters-sidenav .pointer-close-btn i {
+  color: #cc262f;
+}
+.actual-studio .filters-head {
+  background: #cc262f !important;
+}
 
-.actual-studio #reports .report-filters .excel-triger-wrapper .action-btn{background: #CC262F!important}
+.actual-studio #reports .report-filters .excel-triger-wrapper .action-btn {
+  background: #cc262f !important;
+}
 
+.actual-studio .deliveries-cities ul {
+  background: #000 !important;
+}
 
-@media(max-width:600px){
-  .actual-studio .searcher-wrapper{
-    background: #000!important;
+@media (max-width: 600px) {
+  .actual-studio .searcher-wrapper {
+    background: #000 !important;
   }
 }

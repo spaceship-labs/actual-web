@@ -1,16 +1,24 @@
-.actual-kids .searcher-wrapper .searcher-btn{
-	background: #CC262F;
-	color: #fff;
+.actual-kids .searcher-wrapper .searcher-btn {
+  background: #cc262f;
+  color: #fff;
 }
 
-.actual-kids .modal-header .profile-modal-header-btn{background: #34B3E7}
+.actual-kids .modal-header .profile-modal-header-btn {
+  background: #34b3e7;
+}
 
-.actual-kids .header-top-bar{background: #34B3E7!important;}
-.actual-kids .header-top-bar-menu .cart-active{color:#fff!important;}
-.actual-kids .footer-bottom{background: #34B3E7!important;}
+.actual-kids .header-top-bar {
+  background: #34b3e7 !important;
+}
+.actual-kids .header-top-bar-menu .cart-active {
+  color: #fff !important;
+}
+.actual-kids .footer-bottom {
+  background: #34b3e7 !important;
+}
 .actual-kids .nav-categories-item-active,
-.actual-kids .nav-categories-item:hover{
-  background: #CC262F;
+.actual-kids .nav-categories-item:hover {
+  background: #cc262f;
 }
 
 .actual-kids .listing-view-nav > li.active h3 a,
@@ -19,31 +27,51 @@
 .actual-kids .listing-view-nav .icon-right-open.aside,
 .actual-kids .listing-view-nav-wrapper > h2 a.active,
 .actual-kids .listing-view-subnav a.active,
-.actual-kids .filters .head-filt i{
-	color: #34B3E7;
+.actual-kids .filters .head-filt i {
+  color: #34b3e7;
 }
 
 .actual-kids .filters .filter-block-price-btn,
 .actual-kids .filters .filters-head,
-.actual-kids .product-view .desc-head-item-on{background: #34B3E7}
+.actual-kids .product-view .desc-head-item-on {
+  background: #34b3e7;
+}
 
-.actual-kids .mobile-sidenav .close-btn{background: #34B3E7!important;}
-.actual-kids .mobile-sidenav .nav-categories-item{border-bottom: 1px solid #34B3E7}
-.actual-kids .nav-categories-item-active, .actual-kids .nav-categories-item:hover{
-	border-bottom: 2px solid #CC262F;
+.actual-kids .mobile-sidenav .close-btn {
+  background: #34b3e7 !important;
+}
+.actual-kids .mobile-sidenav .nav-categories-item {
+  border-bottom: 1px solid #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .nav-categories-item:hover {
+  border-bottom: 2px solid #cc262f;
 }
 
 .actual-kids .filters-sidenav-trigger-mobile,
-.actual-kids .filters-sidenav-trigger .block-icon{background: #f7323f!important;}
+.actual-kids .filters-sidenav-trigger .block-icon {
+  background: #f7323f !important;
+}
 
-.actual-kids .filters-sidenav .pointer-close-btn i{color: #34B3E7;}
-.actual-kids .filters-head{background: #34B3E7!important;}
+.actual-kids .filters-sidenav .pointer-close-btn i {
+  color: #34b3e7;
+}
+.actual-kids .filters-head {
+  background: #34b3e7 !important;
+}
 
-.actual-kids #reports .report-filters .excel-triger-wrapper .action-btn{background: #f7323f!important}
+.actual-kids #reports .report-filters .excel-triger-wrapper .action-btn {
+  background: #f7323f !important;
+}
 
+.actual-kids .deliveries-cities ul {
+  background: #fff !important;
+  border: 1px solid #34b3e7 !important;
+  color: #000;
+}
 
-@media(max-width:600px){
-  .actual-kids .searcher-wrapper{
-    background: #34B3E7!important;
+@media (max-width: 600px) {
+  .actual-kids .searcher-wrapper {
+    background: #34b3e7 !important;
   }
 }
