@@ -6,8 +6,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
-
+module.exports = function(grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
@@ -28,11 +27,10 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-ng-constant');
   var environmentTask = getEnvironmentTask(grunt.option('env'));
-  var siteTask        = getSiteTask(grunt.option('site')); //grunt serve --site <kids|studio|home>
+  var siteTask = getSiteTask(grunt.option('site')); //grunt serve --site (kids,studio,home)
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
     // Project settings
     yeoman: appConfig,
 
@@ -84,19 +82,18 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
-              modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg|\\.ttf|\\.woff|\\.mp4|\\.gif|\\.xml|\\.webm$ /index.html [L]']),
+              modRewrite([
+                '!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg|\\.ttf|\\.woff|\\.mp4|\\.gif|\\.xml|\\.webm$ /index.html [L]'
+              ]),
 
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
               ),
-              connect().use(
-                '/app/styles',
-                connect.static('./app/styles')
-              ),
+              connect().use('/app/styles', connect.static('./app/styles')),
               connect.static(appConfig.app)
             ];
           }
@@ -105,7 +102,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           port: 9001,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
@@ -133,10 +130,7 @@ module.exports = function (grunt) {
         reporter: require('jshint-stylish')
       },
       all: {
-        src: [
-          'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
-        ]
+        src: ['Gruntfile.js', '<%= yeoman.app %>/scripts/{,*/}*.js']
       },
       test: {
         options: {
@@ -153,10 +147,7 @@ module.exports = function (grunt) {
         verbose: true
       },
       all: {
-        src: [
-          'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
-        ]
+        src: ['Gruntfile.js', '<%= yeoman.app %>/scripts/{,*/}*.js']
       },
       test: {
         src: ['test/spec/{,*/}*.js']
@@ -166,14 +157,16 @@ module.exports = function (grunt) {
     // Empties folders to start fresh
     clean: {
       dist: {
-        files: [{
-          dot: true,
-          src: [
-            '.tmp',
-            '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git{,*/}*'
-          ]
-        }]
+        files: [
+          {
+            dot: true,
+            src: [
+              '.tmp',
+              '<%= yeoman.dist %>/{,*/}*',
+              '!<%= yeoman.dist %>/.git{,*/}*'
+            ]
+          }
+        ]
       },
       server: '.tmp'
     },
@@ -182,27 +175,31 @@ module.exports = function (grunt) {
     postcss: {
       options: {
         processors: [
-          require('autoprefixer-core')({browsers: ['last 1 version']})
+          require('autoprefixer-core')({ browsers: ['last 1 version'] })
         ]
       },
       server: {
         options: {
           map: true
         },
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '.tmp/styles/',
+            src: '{,*/}*.css',
+            dest: '.tmp/styles/'
+          }
+        ]
       },
       dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '.tmp/styles/',
+            src: '{,*/}*.css',
+            dest: '.tmp/styles/'
+          }
+        ]
       }
     },
 
@@ -210,23 +207,23 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       },
       test: {
         devDependencies: true,
         src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
+        ignorePath: /\.\.\//,
+        fileTypes: {
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: "'{{filePath}}',"
             }
           }
+        }
       }
     },
 
@@ -273,7 +270,12 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/styles'
         ],
         patterns: {
-          js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
+          js: [
+            [
+              /(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g,
+              'Replacing references to images'
+            ]
+          ]
         }
       }
     },
@@ -306,23 +308,27 @@ module.exports = function (grunt) {
 
     imagemin: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.app %>/images',
+            src: '{,*/}*.{png,jpg,jpeg,gif}',
+            dest: '<%= yeoman.dist %>/images'
+          }
+        ]
       }
     },
 
     svgmin: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.app %>/images',
+            src: '{,*/}*.svg',
+            dest: '<%= yeoman.dist %>/images'
+          }
+        ]
       }
     },
 
@@ -334,12 +340,14 @@ module.exports = function (grunt) {
           collapseBooleanAttributes: false,
           removeCommentsFromCDATA: true
         },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: ['*.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.dist %>',
+            src: ['*.html'],
+            dest: '<%= yeoman.dist %>'
+          }
+        ]
       }
     },
 
@@ -360,12 +368,14 @@ module.exports = function (grunt) {
     // by using the Angular long form for dependency injection.
     ngAnnotate: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '.tmp/concat/scripts',
+            src: '*.js',
+            dest: '.tmp/concat/scripts'
+          }
+        ]
       }
     },
 
@@ -379,34 +389,40 @@ module.exports = function (grunt) {
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            '*.{ico,png,txt}',
-            '*.html',
-            'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*',
-            'fonts/{,*/}*.*',
-            'fonts/dashboard-fonts/{,*/}*.*',
-            '.htaccess',
-            'sitemap.xml'
-          ]
-        }, {
-          expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
-          src: ['generated/*']
-        },{
-          //for custom fonts
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>/fonts',
-          src: ['*.*'],
-          dest: '<%= yeoman.dist %>/fonts'
-        }
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%= yeoman.app %>',
+            dest: '<%= yeoman.dist %>',
+            src: [
+              '*.{ico,png,txt}',
+              '*.html',
+              'images/{,*/}*.{webp}',
+              'styles/fonts/{,*/}*.*',
+              'fonts/{,*/}*.*',
+              'fonts/dashboard-fonts/{,*/}*.*',
+              '.htaccess',
+              'sitemap.xml',
+              'actual_home.xml',
+              'actual_studio.xml',
+              'actual_kids.xml'
+            ]
+          },
+          {
+            expand: true,
+            cwd: '.tmp/images',
+            dest: '<%= yeoman.dist %>/images',
+            src: ['generated/*']
+          },
+          {
+            //for custom fonts
+            expand: true,
+            dot: true,
+            cwd: '<%= yeoman.app %>/fonts',
+            src: ['*.*'],
+            dest: '<%= yeoman.dist %>/fonts'
+          }
         ]
       },
       styles: {
@@ -419,17 +435,9 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-      server: [
-        'copy:styles'
-      ],
-      test: [
-        'copy:styles'
-      ],
-      dist: [
-        'copy:styles',
-        'imagemin',
-        'svgmin'
-      ]
+      server: ['copy:styles'],
+      test: ['copy:styles'],
+      dist: ['copy:styles', 'imagemin', 'svgmin']
     },
 
     // Test settings
@@ -442,29 +450,31 @@ module.exports = function (grunt) {
 
     processhtml: {
       options: {
-        commentMarker: "process",
+        commentMarker: 'process',
         data: {
-          metaTags: getMetaTagsBySite( grunt.option('site') ),
+          metaTags: getMetaTagsBySite(grunt.option('site')),
           tagManagerId: getTagManagerId(grunt),
           facebookPixelId: getFacebookPixelId(grunt.option('env'))
         }
       },
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: ['index.html', 'index.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.dist %>',
+            src: ['index.html', 'index.html'],
+            dest: '<%= yeoman.dist %>'
+          }
+        ]
       }
-    } ,    
+    },
 
     //ENV AND CONSTANTS SETTINGS
     ngconstant: {
       // Options for all targets
       options: {
         space: '  ',
-        wrap: '"use strict";\n\n {\%= __ngModule %}',
+        wrap: '"use strict";\n\n {%= __ngModule %}'
       },
       // Environment targets
       sandbox: {
@@ -478,10 +488,9 @@ module.exports = function (grunt) {
             apiEndpoint: 'https://sandboxapi.actualstudio.com',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'sandbox',
-            conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
+            conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
             conektaKidsKey: 'key_FAVz7GZoqMy4PwugqgHNrag',
             conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
-
           }
         }
       },
@@ -496,10 +505,9 @@ module.exports = function (grunt) {
             apiEndpoint: 'https://sandboxapi.actualstudio.com',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'demo',
-            conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
+            conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
             conektaKidsKey: 'key_FAVz7GZoqMy4PwugqgHNrag',
             conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
-
           }
         }
       },
@@ -514,7 +522,7 @@ module.exports = function (grunt) {
             apiEndpoint: 'https://api.actualstudio.com',
             adminUrl: 'http://admin.miactual.com',
             tokenPrefix: 'production',
-            conektaHomeKey:'key_fTqfbsS7oxfpqZxtP9qZqdw',
+            conektaHomeKey: 'key_fTqfbsS7oxfpqZxtP9qZqdw',
             conektaKidsKey: 'key_QCgrTimPycx55HtzxStvXZw',
             conektaStudioKey: 'key_YrdmsrYuzSnqfZYryJxrjiQ',
             studioAnalytics: 'UA-54662003-1',
@@ -534,7 +542,7 @@ module.exports = function (grunt) {
             apiEndpoint: 'http://localhost:1337',
             adminUrl: 'http://localhost:3000',
             tokenPrefix: 'dev',
-            conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',
+            conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
             conektaKidsKey: 'key_FAVz7GZoqMy4PwugqgHNrag',
             conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
           }
@@ -549,9 +557,9 @@ module.exports = function (grunt) {
         constants: {
           SITE: {
             name: 'actual-home',
-            publicName:'Actual Home',
-            baseUrl: 'https://actualhome.com', 
-            domain: 'actualhome.com',           
+            publicName: 'Actual Home',
+            baseUrl: 'https://actualhome.com',
+            domain: 'actualhome.com',
             fb_url: 'https://www.facebook.com/ActualHomeMx',
             instagram_url: false,
             foursquare_url: 'https://es.foursquare.com/p/actual-home/90458136',
@@ -569,11 +577,12 @@ module.exports = function (grunt) {
           SITE: {
             name: 'actual-studio',
             publicName: 'Actual Studio',
-            baseUrl: 'https://actualstudio.com', 
-            domain: 'actualstudio.com',                                  
+            baseUrl: 'https://actualstudio.com',
+            domain: 'actualstudio.com',
             fb_url: 'https://www.facebook.com/actualstudioo',
             instagram_url: 'https://www.instagram.com/actual_studio/',
-            foursquare_url: 'https://es.foursquare.com/p/actual-studio/87584627',
+            foursquare_url:
+              'https://es.foursquare.com/p/actual-studio/87584627',
             pinterest_url: 'https://es.pinterest.com/ActualGroup/'
           }
         }
@@ -589,42 +598,50 @@ module.exports = function (grunt) {
             name: 'actual-kids',
             publicName: 'Actual Kids',
             baseUrl: 'https://actualkids.com',
-            domain: 'actualkids.com',                                              
-            fb_url:'https://www.facebook.com/ActualKids',
+            domain: 'actualkids.com',
+            fb_url: 'https://www.facebook.com/ActualKids',
             instagram_url: false,
-            foursquare_url: 'https://es.foursquare.com/p/actual-studio/87584627',
+            foursquare_url:
+              'https://es.foursquare.com/p/actual-studio/87584627',
             pinterest_url: 'https://es.pinterest.com/ActualGroup/'
           }
         }
       }
-
-    },
-
-  });
-
-
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
-
-    grunt.task.run([
-      'clean:server',
-      environmentTask,
-      siteTask,
-      'wiredep',
-      'concurrent:server',
-      'postcss:server',
-      'connect:livereload',
-      'processhtml',
-      'watch'
-    ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
+  grunt.registerTask(
+    'serve',
+    'Compile then start a connect web server',
+    function(target) {
+      if (target === 'dist') {
+        return grunt.task.run(['build', 'connect:dist:keepalive']);
+      }
+
+      grunt.task.run([
+        'clean:server',
+        environmentTask,
+        siteTask,
+        'wiredep',
+        'concurrent:server',
+        'postcss:server',
+        'connect:livereload',
+        'processhtml',
+        'watch'
+      ]);
+    }
+  );
+
+  grunt.registerTask(
+    'server',
+    'DEPRECATED TASK. Use the "serve" task instead',
+    function(target) {
+      grunt.log.warn(
+        'The `server` task has been deprecated. Use `grunt serve` to start a server.'
+      );
+      grunt.task.run(['serve:' + target]);
+    }
+  );
 
   grunt.registerTask('test', [
     'clean:server',
@@ -664,11 +681,10 @@ module.exports = function (grunt) {
   ]);
 };
 
-
-function getEnvironmentTask(envOption){
+function getEnvironmentTask(envOption) {
   console.log('envOption', envOption);
   var task;
-  switch (envOption){
+  switch (envOption) {
     case 'sandbox':
       task = 'ngconstant:sandbox';
       break;
@@ -685,10 +701,10 @@ function getEnvironmentTask(envOption){
   return task;
 }
 
-function getSiteTask(siteOption){
+function getSiteTask(siteOption) {
   console.log('siteOption', siteOption);
   var task;
-  switch (siteOption){
+  switch (siteOption) {
     case 'studio':
       task = 'ngconstant:actualStudio';
       break;
@@ -705,12 +721,12 @@ function getSiteTask(siteOption){
   return task;
 }
 
-function getTagManagerId(grunt){  
-  if(grunt.option('env') !== 'production'){
+function getTagManagerId(grunt) {
+  if (grunt.option('env') !== 'production') {
     return '';
   }
   var tagManagerId = '';
-  switch(grunt.option('site')){
+  switch (grunt.option('site')) {
     case 'kids':
       tagManagerId = 'GTM-P833XQZ';
       break;
@@ -719,16 +735,16 @@ function getTagManagerId(grunt){
       break;
     case 'studio':
       tagManagerId = 'GTM-M2CFZQH';
-      break;    
-    default: 
+      break;
+    default:
       break;
   }
   return tagManagerId;
 }
 
-function getFacebookPixelId(env){  
+function getFacebookPixelId(env) {
   var facbookPixelId = '';
-  switch(env){
+  switch (env) {
     case 'production':
       facbookPixelId = '129365994394398';
       break;
@@ -737,53 +753,54 @@ function getFacebookPixelId(env){
       break;
     case 'dev':
       facbookPixelId = '';
-      break;    
-    default: 
+      break;
+    default:
       break;
   }
   return facbookPixelId;
 }
 
-
-function getMetaTagsBySite(siteOption){
+function getMetaTagsBySite(siteOption) {
   var metaTags = {
     title: 'Actual | Más de 25 años de experiencia en muebles e interiorismo.',
-    description: 'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
+    description:
+      'Amamos el arte moderno y la arquitectura, los interiores y los objetos extraordinarios, amamos el arte transformado en muebles y piezas decorativas.',
     image: 'https://api.actualstudio.com/logos/studio-og.png',
     url: 'https://actualstudio.com',
     favicon: 'https://api.actualStudio.com/icons/actual-studio-favicon.png'
   };
 
-  switch (siteOption){
+  switch (siteOption) {
     case 'studio':
       metaTags = {
         title: 'Actual Studio',
-        description: 'Mobiliario y decoración para la persona práctica y jovial; una bienvenida al mobiliario moderno, honesto y, sobre todo, funcional.',
+        description:
+          'Mobiliario y decoración para la persona práctica y jovial; una bienvenida al mobiliario moderno, honesto y, sobre todo, funcional.',
         image: 'https://api.actualstudio.com/logos/studio-og.png',
         url: 'https://actualstudio.com',
         favicon: 'https://api.actualStudio.com/icons/actual-studio-favicon.png'
-
       };
       break;
     case 'home':
       metaTags = {
         title: 'Actual Home',
-        description: 'Mobiliario y decoración para los más exigentes. Sofisticación absoluta que recuerda a los amantes del diseño la mezcla entre el modernismo y la exclusividad.',
+        description:
+          'Mobiliario y decoración para los más exigentes. Sofisticación absoluta que recuerda a los amantes del diseño la mezcla entre el modernismo y la exclusividad.',
         image: 'https://api.actualstudio.com/logos/home-og.png',
         url: 'https://actualhome.com',
-        favicon: 'https://api.actualStudio.com/icons/actual-home-favicon.png'        
+        favicon: 'https://api.actualStudio.com/icons/actual-home-favicon.png'
       };
       break;
     case 'kids':
-        metaTags = {
-          title: 'Actual Kids',
-          description: 'Mobiliario y decoración para los más pequeños, la combinación perfecta de estilo, seguridad, interactividad y diversión.',
-          image: 'https://api.actualstudio.com/logos/kids-og.png',
-          url: 'https://actualkids.com',
-          favicon: 'https://api.actualStudio.com/icons/actual-kids-favicon.png'          
-        };
+      metaTags = {
+        title: 'Actual Kids',
+        description:
+          'Mobiliario y decoración para los más pequeños, la combinación perfecta de estilo, seguridad, interactividad y diversión.',
+        image: 'https://api.actualstudio.com/logos/kids-og.png',
+        url: 'https://actualkids.com',
+        favicon: 'https://api.actualStudio.com/icons/actual-kids-favicon.png'
+      };
       break;
-
   }
   return metaTags;
 }

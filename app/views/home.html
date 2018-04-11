@@ -14,7 +14,7 @@
   <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
     <!--START NAV-->
     <aside flex-gt-sm="20" flex="100" hide-sm hide-xs>
-      <sidebar-categories 
+      <sidebar-categories
         categories-tree="main.categoriesTree"
         active-store="main.activeStore"
       >
@@ -24,7 +24,7 @@
 
     <!--CATEGORIES-->
     <div flex-gt-sm="75" flex="100">
-      
+
       <ng-include src="'views/partials/home-slider.html'"></ng-include>
 
       <div class="subs-container">
@@ -33,9 +33,9 @@
             class="sub-wrapper"
             ng-repeat="category in main.categoriesTree"
             ng-if="category[vm.stockProperty] > 0"
-            flex-gt-sm="33" 
-            flex="50" 
-            flex-sm="50" 
+            flex-gt-sm="33"
+            flex="50"
+            flex-sm="50"
             flex-xs="100"
           >
             <category-item category="category" stock-key="{{vm.stockProperty}}" />
@@ -67,4 +67,7 @@
     <!-- END CATEGORIES-->
 
   </div>
+  <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
+  <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
+  <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
 </div>
