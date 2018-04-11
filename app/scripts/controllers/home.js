@@ -13,30 +13,48 @@ function HomeCtrl(
   activeStore
 ) {
   var vm = this;
+  var VISIBLE_PRODUCTS_LIMIT = 4;
+  var PRODUCTS_TO_LOAD = 8;
   angular.extend(vm, {
     areProductsLoaded: false,
     api: api
   });
+
   function init() {
     vm.activeStore = activeStore;
     vm.stockProperty = 'productsNum';
-    vm.limitLivingRooms = 4;
-    vm.limitDinningRooms = 4;
-    vm.limitBedRooms = 4;
+    vm.limitLivingRooms = VISIBLE_PRODUCTS_LIMIT;
+    vm.limitDinningRooms = VISIBLE_PRODUCTS_LIMIT;
+    vm.limitBedRooms = VISIBLE_PRODUCTS_LIMIT;
+    vm.limitKidsBeds = VISIBLE_PRODUCTS_LIMIT;
+    vm.limitKidsBureaus = VISIBLE_PRODUCTS_LIMIT;
+    vm.limitKidsForniture = VISIBLE_PRODUCTS_LIMIT;
+
     if (activeStore) {
       vm.stockProperty = activeStore.code;
     }
     $scope.loadMore = function(type) {
       switch (type) {
         case 'livingRooms':
-          vm.limitLivingRooms = vm.limitLivingRooms + 4;
+          vm.limitLivingRooms = vm.limitLivingRooms + VISIBLE_PRODUCTS_LIMIT;
           break;
         case 'dinningRooms':
-          vm.limitDinningRooms = vm.limitDinningRooms + 4;
+          vm.limitDinningRooms = vm.limitDinningRooms + VISIBLE_PRODUCTS_LIMIT;
           break;
         case 'bedRooms':
-          vm.limitBedRooms = vm.limitBedRooms + 4;
+          vm.limitBedRooms = vm.limitBedRooms + VISIBLE_PRODUCTS_LIMIT;
           break;
+        case 'kidsBeds':
+          vm.limitKidsBeds = vm.limitKidsBeds + VISIBLE_PRODUCTS_LIMIT;
+          break;
+        case 'kidsBureaus':
+          vm.limitKidsBureaus = vm.limitKidsBureaus + VISIBLE_PRODUCTS_LIMIT;
+          break;
+        case 'kidsForniture':
+          vm.limitKidsForniture =
+            vm.limitKidsForniture + VISIBLE_PRODUCTS_LIMIT;
+          break;
+
         default:
           console.log(type);
       }
@@ -49,17 +67,43 @@ function HomeCtrl(
       direction: 'DESC'
     };
 
-    loadProducts('salas', sortOption, 8).then(function(products) {
-      vm.livingRooms = products;
-    });
+    if (activeStore.code !== 'actual_kids') {
+      loadProducts('salas', sortOption, PRODUCTS_TO_LOAD).then(function(
+        products
+      ) {
+        vm.livingRooms = products;
+      });
 
-    loadProducts('comedores', sortOption, 8).then(function(products) {
-      vm.dinningRooms = products;
-    });
+      loadProducts('comedores', sortOption, PRODUCTS_TO_LOAD).then(function(
+        products
+      ) {
+        vm.dinningRooms = products;
+      });
 
-    loadProducts('recamaras', sortOption, 8).then(function(products) {
-      vm.bedRooms = products;
-    });
+      loadProducts('recamaras', sortOption, PRODUCTS_TO_LOAD).then(function(
+        products
+      ) {
+        vm.bedRooms = products;
+      });
+    } else {
+      loadProducts('ninos', sortOption, PRODUCTS_TO_LOAD).then(function(
+        products
+      ) {
+        vm.kidsForniture = products;
+      });
+
+      loadProducts('comoda-infantil', sortOption, PRODUCTS_TO_LOAD).then(
+        function(products) {
+          vm.kidsBureaus = products;
+        }
+      );
+
+      loadProducts('camas-infantiles', sortOption, PRODUCTS_TO_LOAD).then(
+        function(products) {
+          vm.kidsBeds = products;
+        }
+      );
+    }
   }
 
   function loadBanners() {
