@@ -1,6 +1,8 @@
 <div ng-if="vm.dinningRooms && main.site" id="home-slider-wrapper">
   <div class="listing-view">
-    <h2 class="listing-view-title best-seller-title">Comedores</h2>
+    <h2 class="listing-view-title best-seller-title">
+      <a href="/category/comedores"><span>Comedores</span></a>
+    </h2>
   </div>
   <div class="products-list"
   layout="row"
@@ -10,8 +12,13 @@
   >
     <div flex="25"
     flex-sm="50"
-    flex-xs="100" ng-repeat="product in vm.dinningRooms track by product.ItemCode" class="listing-product-wrap">
+    flex-xs="100" ng-repeat="product in vm.dinningRooms | limitTo:vm.limitDinningRooms track by $index" class="listing-product-wrap">
     	<listing-product product="product"></listing-product>
     </div>
+    <button
+      flex="50"
+      style="margin: 0px auto;"
+			class="action-btn"
+      ng-if="vm.dinningRooms.length > vm.limitDinningRooms" ng-click="loadMore('dinningRooms')">Ver más</button>
   </div>
 </div>
