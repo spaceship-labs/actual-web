@@ -54,6 +54,7 @@ function QuotationsEditCtrl(
     getQtyArray: getQtyArray,
     addNewProduct: addNewProduct,
     alertRemoveDetail: alertRemoveDetail,
+    alertRemoveAllDetails: alertRemoveAllDetails,
     appliesForPackageDiscount: appliesForPackageDiscount,
     appliesForPromotionDiscount: appliesForPromotionDiscount,
     attachImage: attachImage,
@@ -67,6 +68,7 @@ function QuotationsEditCtrl(
     print: print,
     promotionPackages: [],
     removeDetail: removeDetail,
+    removeAllDetails: removeAllDetails,
     //removeDetailsGroup: removeDetailsGroup,
     sendByEmail: sendByEmail,
     showDetailGroupStockAlert: showDetailGroupStockAlert,
@@ -594,6 +596,26 @@ function QuotationsEditCtrl(
     );
   }
 
+  function alertRemoveAllDetails(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog
+      .confirm()
+      .title('¿Desea eliminar todos los artículos de la cotizacion?')
+      .ariaLabel('')
+      .targetEvent(ev)
+      .ok('Eliminar')
+      .cancel('Cancelar');
+
+    $mdDialog.show(confirm).then(
+      function() {
+        removeAllDetails();
+      },
+      function() {
+        console.log('Eliminado');
+      }
+    );
+  }
+
   function removeDetail(detail) {
     var detailId = detail.id;
     vm.isLoadingDetails = true;
@@ -634,6 +656,37 @@ function QuotationsEditCtrl(
       })
       .catch(function(err) {
         $log.error(err);
+      });
+  }
+  // TODO:  custom
+  function removeAllDetails() {
+    vm.isLoading = true;
+    vm.isLoadingDetails = true;
+    $rootScope.scrollTo('main');
+    return quotationService
+      .removeAllDetails(vm.quotation.id)
+      .then(function(res) {
+        var updatedQuotation = res.data;
+
+        //If remove worked
+        if (updatedQuotation.id) {
+          vm.isLoadingDetails = false;
+          vm.quotation.Details = [];
+          vm.quotation = quotationService.localQuotationUpdateWithNewValues(
+            vm.quotation,
+            updatedQuotation
+          );
+
+          vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
+          loadPaymentMethods();
+          vm.isLoading = false;
+        }
+        return $rootScope.loadActiveQuotation();
+      })
+      .catch(function(err) {
+        console.log('err', err);
+        vm.isLoading = false;
+        vm.isLoadingDetails = false;
       });
   }
 
