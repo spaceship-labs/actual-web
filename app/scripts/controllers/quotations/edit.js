@@ -54,6 +54,7 @@ function QuotationsEditCtrl(
     getQtyArray: getQtyArray,
     addNewProduct: addNewProduct,
     alertRemoveDetail: alertRemoveDetail,
+    alertRemoveAllDetails: alertRemoveAllDetails,
     appliesForPackageDiscount: appliesForPackageDiscount,
     appliesForPromotionDiscount: appliesForPromotionDiscount,
     attachImage: attachImage,
@@ -67,6 +68,7 @@ function QuotationsEditCtrl(
     print: print,
     promotionPackages: [],
     removeDetail: removeDetail,
+    removeAllDetails: removeAllDetails,
     //removeDetailsGroup: removeDetailsGroup,
     sendByEmail: sendByEmail,
     showDetailGroupStockAlert: showDetailGroupStockAlert,
@@ -594,12 +596,78 @@ function QuotationsEditCtrl(
     );
   }
 
+  function alertRemoveAllDetails(ev, details) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog
+      .confirm()
+      .title('¿Desea eliminar todos los artículos de la cotizacion?')
+      .ariaLabel('')
+      .targetEvent(ev)
+      .ok('Eliminar')
+      .cancel('Cancelar');
+
+    $mdDialog.show(confirm).then(
+      function() {
+        removeAllDetails(details);
+        //removeDetailsGroup(detailsGroup);
+      },
+      function() {
+        console.log('Eliminado');
+      }
+    );
+  }
+
   function removeDetail(detail) {
     var detailId = detail.id;
     vm.isLoadingDetails = true;
     $rootScope.scrollTo('main');
     return quotationService
       .removeDetail(detailId, vm.quotation.id)
+      .then(function(res) {
+        var updatedQuotation = res.data;
+
+        //Removing deleted detail from local variables
+        var removedDetailIndex = getRemovedDetailIndex(
+          detailId,
+          vm.quotation.Details
+        );
+        vm.quotation.Details.splice(removedDetailIndex, 1);
+
+        vm.isLoadingDetails = false;
+        vm.quotation = quotationService.localQuotationUpdateWithNewValues(
+          vm.quotation,
+          updatedQuotation
+        );
+        if (updatedQuotation.Details) {
+          vm.quotation.Details = matchDetailsWithNewDetails(
+            vm.quotation.Details,
+            updatedQuotation.Details
+          );
+          //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+        }
+
+        vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
+        vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(
+          vm.quotation.Details
+        );
+
+        showDetailsChangedDateAlertIfNeeded();
+        loadPaymentMethods();
+        return $rootScope.loadActiveQuotation();
+      })
+      .catch(function(err) {
+        $log.error(err);
+      });
+  }
+  // TODO:  custom
+  function removeAllDetails(detail) {
+    console.log('DETAILS: ', detail);
+    console.log('QUOTATION: ', vm.quotation.id);
+    var detailId = detail.id;
+    vm.isLoadingDetails = true;
+    $rootScope.scrollTo('main');
+    return quotationService
+      .removeAllDetails(detailId, vm.quotation.id)
       .then(function(res) {
         var updatedQuotation = res.data;
 

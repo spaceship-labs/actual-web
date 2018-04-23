@@ -286,6 +286,22 @@ md-dialog .md-button[ng-click='dialog.abort()'] {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+.action-btn-clear {
+  background: #e2023f;
+  color: #fff !important;
+  text-transform: uppercase;
+  border: 0;
+  display: block;
+  margin: 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 .action-link {
   color: #33ba2c;
 }
@@ -3831,6 +3847,9 @@ md-backdrop.md-sidenav-backdrop {
 /*--------------/
   #QUOTATION-VIEW
 /*--------------*/
+.color-red {
+  color: #e2023f;
+}
 .quotation-view .hr {
   display: none;
 }

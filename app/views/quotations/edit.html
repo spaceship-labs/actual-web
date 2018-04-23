@@ -182,7 +182,8 @@
         <div ng-if="!vm.isLoadingDetails && vm.quotation.isSpeiQuotation" class="cart-items">
           <ng-include class="cart-item-wrapper" ng-repeat="detail in vm.quotation.Details track by $index" src="'views/partials/product-cart-item-v2.html'"></ng-include>
         </div>
-
+        {{vm.quotation.Details[0].id}}
+        {{vm.quotation.Details[1].id}}
         <hr>
         <a href="#" ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported" ng-click="vm.addNewProduct()" class="action-btn-print print-btn">
           AGREGAR NUEVO ARTÍCULO
@@ -282,6 +283,14 @@
 
             <a ng-if="vm.quotation.Details.length > 0" ng-click="vm.sendByEmail()" href="#" class="action-btn-print print-btn">
               ENVIAR POR EMAIL
+            </a>
+          </div>
+        </div>
+        <br>
+        <div layout="row" layout-align="space-between center" layout-wrap>
+          <div flex="100">
+            <a ng-if="vm.quotation.Details.length > 0" ng-click="vm.alertRemoveAllDetails($event, vm.quotation.Details[0], $index)" href="#" class="action-btn-clear print-btn ">
+              LIMPIAR CARRITO
             </a>
           </div>
         </div>
