@@ -49,13 +49,17 @@
   </div>
   <div ng-if="vm.activeStore.code !== 'actual_kids'">
     <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
+    <br><br>
     <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
+    <br><br>
     <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
   </div>
 
   <div ng-if="vm.activeStore.code === 'actual_kids'">
     <ng-include src="'views/partials/best-sellers-kids-beds.html'"></ng-include>
+    <br><br>
     <ng-include src="'views/partials/best-sellers-kids-bureaus.html'"></ng-include>
+    <br><br>
     <ng-include src="'views/partials/best-sellers-kids-forniture.html'"></ng-include>
   </div>
 
