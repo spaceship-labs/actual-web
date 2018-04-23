@@ -9,11 +9,15 @@
     <p>RFC: AAC130902PR7</p>
   </div>
 
-  <h1><i class="icon-attachment"></i> <strong>COTIZACIÓN #{{vm.quotation.folio}}</strong></h1>
+  <h1>
+    <i class="icon-attachment"></i>
+    <strong>COTIZACIÓN #{{vm.quotation.folio}}</strong>
+  </h1>
   <hr/>
 
   <div ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb) && vm.isOrderPending(vm.quotation.OrderWeb)" class="spei-msg">
-    <p>Su ORDEN DE COMPRA está CONFIRMADA y EN PROCESO, su estatus de pago es PENIDIENTE DE PAGO, le pedimos no volver a generar la misma cotización para evitar una duplicidad.</p>
+    <p>Su ORDEN DE COMPRA está CONFIRMADA y EN PROCESO, su estatus de pago es PENIDIENTE DE PAGO, le pedimos no volver a generar
+      la misma cotización para evitar una duplicidad.</p>
   </div>
 
   <div ng-if="vm.quotation.isSpeiQuotation" class="quotation-data">
@@ -67,7 +71,8 @@
 
       <div flex="30" flex-sm="100" flex-xs="100" ng-if="vm.quotation.ZipcodeDelivery">
         <label>Calculo de entrega para: </label>
-        <p>{{vm.quotation.ZipcodeDelivery.estado}}, {{vm.quotation.ZipcodeDelivery.municipio}}, {{vm.quotation.ZipcodeDelivery.asentamiento}}, C.P: {{vm.quotation.ZipcodeDelivery.cp}}</p>
+        <p>{{vm.quotation.ZipcodeDelivery.estado}}, {{vm.quotation.ZipcodeDelivery.municipio}}, {{vm.quotation.ZipcodeDelivery.asentamiento}},
+          C.P: {{vm.quotation.ZipcodeDelivery.cp}}</p>
       </div>
 
 
@@ -121,23 +126,32 @@
   </section>
 
   <div ng-if="vm.quotation.isSpeiQuotation" class="spei-note">
-    <p>Estimado {{vm.quotation.Client.CardName}}, su orden de compra estará EN PROCESO, le sugerimos no volver a generar la misma cotización para evitar una duplicidad.</p>
+    <p>Estimado {{vm.quotation.Client.CardName}}, su orden de compra estará EN PROCESO, le sugerimos no volver a generar la
+      misma cotización para evitar una duplicidad.</p>
 
     <div layout="row" layout-wrap class="main-info">
       <div flex="" flex-xs="50">
-        <p><strong>Télefono fijo</strong></p>
+        <p>
+          <strong>Télefono fijo</strong>
+        </p>
         <p>{{vm.quotation.Client.Phone1}}</p>
       </div>
       <div flex="" flex-xs="50">
-        <p><strong>Télefono celular</strong></p>
+        <p>
+          <strong>Télefono celular</strong>
+        </p>
         <p>{{vm.quotation.Client.Cellular}}</p>
       </div>
       <div flex="" flex-xs="50">
-        <p><strong>Fecha de cotización</strong></p>
+        <p>
+          <strong>Fecha de cotización</strong>
+        </p>
         <p>{{vm.quotation.createdAt | date: 'd/MMM/yyyy'}}</p>
       </div>
       <div flex flex-xs="50">
-        <p><strong>Hora</strong></p>
+        <p>
+          <strong>Hora</strong>
+        </p>
         <p>{{vm.quotation.createdAt | date: 'h:mm a'}}</p>
       </div>
 
@@ -184,7 +198,8 @@
         </div>
 
         <hr>
-        <a href="#" ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported" ng-click="vm.addNewProduct()" class="action-btn-print print-btn">
+        <a href="#" ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported" ng-click="vm.addNewProduct()"
+          class="action-btn-print print-btn">
           AGREGAR NUEVO ARTÍCULO
         </a>
         <div class="client-signature" layout="row">
@@ -195,34 +210,54 @@
       </section>
 
       <aside flex flex-sm="100" flex-xs="100" class="cart-aside" ng-show="!vm.quotation.isSpeiQuotation">
-        <h1 class="cart-title"><i class="icon-carro"><span>{{ vm.quotation.totalProducts }}</span></i> <strong>MI CARRITO</strong></h1>
+        <h1 class="cart-title">
+          <i class="icon-carro">
+            <span>{{ vm.quotation.totalProducts }}</span>
+          </i>
+          <strong>MI CARRITO</strong>
+        </h1>
 
         <div class="cart-summary">
           <table>
             <tr>
-              <td><strong>Subtotal ({{ vm.quotation.totalProducts }} productos):</strong></td>
-              <td><strong>MXN {{ vm.quotation.subtotal | currency }}</strong></td>
+              <td>
+                <strong>Subtotal ({{ vm.quotation.totalProducts }} productos):</strong>
+              </td>
+              <td>
+                <strong>MXN {{ vm.quotation.subtotal | currency }}</strong>
+              </td>
             </tr>
             <tr>
               <td>Descuento:</td>
-              <td><strong>MXN<span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
+              <td>
+                <strong>MXN
+                  <span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong>
+              </td>
             </tr>
             <tr>
-              <td><strong>Costo de envío:</strong></td>
-              <td><strong>MXN $0.00</strong></td>
+              <td>
+                <strong>Costo de envío:</strong>
+              </td>
+              <td>
+                <strong>MXN $0.00</strong>
+              </td>
             </tr>
           </table>
           <hr>
 
           <div class="cart-totals" layout="row" layout-align="space-between end">
             <div flex="30">
-              <h1><strong>TOTAL:</strong></h1>
+              <h1>
+                <strong>TOTAL:</strong>
+              </h1>
             </div>
             <div flex="70">
               <h3 class="price-crossed-block" ng-show="vm.quotation.subtotal != vm.quotation.total">
-                <span class="currency-label">MXN</span> <span class="price-crossed">{{ vm.quotation.subtotal | roundCurrency  }}</span>
+                <span class="currency-label">MXN</span>
+                <span class="price-crossed">{{ vm.quotation.subtotal | roundCurrency }}</span>
               </h3>
-              <h1 class="price-main"><span class="currency-label">MXN</span> {{ vm.quotation.total | roundCurrency  }}</h1>
+              <h1 class="price-main">
+                <span class="currency-label">MXN</span> {{ vm.quotation.total | roundCurrency }}</h1>
             </div>
           </div>
 
@@ -236,7 +271,8 @@
           >
           -->
 
-          <input type="submit" value="CONTINUAR" ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported" ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries" ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries }"
+          <input type="submit" value="CONTINUAR" ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
+            ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries" ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries }"
             class="cart-view-btn print-btn">
 
 
@@ -282,6 +318,14 @@
 
             <a ng-if="vm.quotation.Details.length > 0" ng-click="vm.sendByEmail()" href="#" class="action-btn-print print-btn">
               ENVIAR POR EMAIL
+            </a>
+          </div>
+        </div>
+        <br>
+        <div layout="row" layout-align="space-between center" layout-wrap>
+          <div flex="100">
+            <a ng-if="vm.quotation.Details.length > 0" ng-click="vm.alertRemoveAllDetails($event)" href="#" class="action-btn-clear print-btn ">
+              LIMPIAR CARRITO
             </a>
           </div>
         </div>
