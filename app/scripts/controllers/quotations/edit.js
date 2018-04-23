@@ -596,7 +596,7 @@ function QuotationsEditCtrl(
     );
   }
 
-  function alertRemoveAllDetails(ev, details) {
+  function alertRemoveAllDetails(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog
       .confirm()
@@ -608,8 +608,7 @@ function QuotationsEditCtrl(
 
     $mdDialog.show(confirm).then(
       function() {
-        removeAllDetails(details);
-        //removeDetailsGroup(detailsGroup);
+        removeAllDetails();
       },
       function() {
         console.log('Eliminado');
@@ -660,48 +659,34 @@ function QuotationsEditCtrl(
       });
   }
   // TODO:  custom
-  function removeAllDetails(detail) {
-    console.log('DETAILS: ', detail);
-    console.log('QUOTATION: ', vm.quotation.id);
-    var detailId = detail.id;
+  function removeAllDetails() {
+    vm.isLoading = true;
     vm.isLoadingDetails = true;
     $rootScope.scrollTo('main');
     return quotationService
-      .removeAllDetails(detailId, vm.quotation.id)
+      .removeAllDetails(vm.quotation.id)
       .then(function(res) {
         var updatedQuotation = res.data;
 
-        //Removing deleted detail from local variables
-        var removedDetailIndex = getRemovedDetailIndex(
-          detailId,
-          vm.quotation.Details
-        );
-        vm.quotation.Details.splice(removedDetailIndex, 1);
-
-        vm.isLoadingDetails = false;
-        vm.quotation = quotationService.localQuotationUpdateWithNewValues(
-          vm.quotation,
-          updatedQuotation
-        );
-        if (updatedQuotation.Details) {
-          vm.quotation.Details = matchDetailsWithNewDetails(
-            vm.quotation.Details,
-            updatedQuotation.Details
+        //If remove worked
+        if (updatedQuotation.id) {
+          vm.isLoadingDetails = false;
+          vm.quotation.Details = [];
+          vm.quotation = quotationService.localQuotationUpdateWithNewValues(
+            vm.quotation,
+            updatedQuotation
           );
-          //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
+
+          vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
+          loadPaymentMethods();
+          vm.isLoading = false;
         }
-
-        vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
-        vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(
-          vm.quotation.Details
-        );
-
-        showDetailsChangedDateAlertIfNeeded();
-        loadPaymentMethods();
         return $rootScope.loadActiveQuotation();
       })
       .catch(function(err) {
-        $log.error(err);
+        console.log('err', err);
+        vm.isLoading = false;
+        vm.isLoadingDetails = false;
       });
   }
 

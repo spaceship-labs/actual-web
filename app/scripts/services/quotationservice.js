@@ -156,8 +156,8 @@
       return api.$http.delete(url);
     }
     // TODO: custom
-    function removeAllDetails(id, quotationId) {
-      var url = '/quotation/' + quotationId + '/removealldetails/' + id;
+    function removeAllDetails(quotationId) {
+      var url = '/quotation/' + quotationId + '/removealldetails';
       return api.$http.delete(url);
     }
 
