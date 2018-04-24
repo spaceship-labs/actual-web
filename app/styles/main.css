@@ -286,6 +286,22 @@ md-dialog .md-button[ng-click='dialog.abort()'] {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+.action-btn-clear {
+  background: #e2023f;
+  color: #fff !important;
+  text-transform: uppercase;
+  border: 0;
+  display: block;
+  margin: 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 .action-link {
   color: #33ba2c;
 }
@@ -1684,11 +1700,11 @@ select {
   margin: 10px 0 0;
 }
 .listing-view-nav-wrapper > h2 a {
-  color: #000;
+  color: #333;
 }
 
 .listing-view-nav-wrapper > h2 i {
-  color: #000;
+  color: #333;
   font-size: 22px;
   vertical-align: middle;
   margin-right: 6px;
@@ -1827,22 +1843,25 @@ select {
   content: '';
   height: 1px;
   position: relative;
-  background: #000;
+  background: #b3b3b3;
   flex: 1 1 auto;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .listing-view .best-seller-title:after {
   content: '';
   height: 1px;
   position: relative;
-  background: #000;
+  background: #b3b3b3;
   flex: 1 1 auto;
-  margin-left: 10px;
+  margin-left: 20px;
 }
-
+.listing-view .best-seller-title .color-gray {
+  color: #808080;
+}
 .listing-view .best-seller-title span {
   flex: 0 1 auto;
+  font-size: 23px;
 }
 
 .listing-view .best-seller-title a {
@@ -3831,6 +3850,9 @@ md-backdrop.md-sidenav-backdrop {
 /*--------------/
   #QUOTATION-VIEW
 /*--------------*/
+.color-red {
+  color: #e2023f;
+}
 .quotation-view .hr {
   display: none;
 }
