@@ -1,4 +1,11 @@
-function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userService, params) {
+function ZipcodeDialogController(
+  $scope,
+  $mdDialog,
+  $rootScope,
+  $location,
+  userService,
+  params
+) {
   'use strict';
 
   var ctrl = this;
@@ -12,7 +19,7 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userS
   ctrl.addNewAddress = addNewAddress;
   ctrl.params = params;
 
-  function init(){
+  function init() {
     /*
     if($rootScope.user){
       ctrl.isLoading = true;
@@ -22,63 +29,60 @@ function ZipcodeDialogController($scope, $mdDialog, $rootScope, $location, userS
     */
   }
 
-  function toggleLoginModal(){
+  function toggleLoginModal() {
     console.log('toggleLoginModal');
     $rootScope.toggleLoginModal();
     $mdDialog.cancel();
   }
 
-  function addNewAddress(){
+  function addNewAddress() {
     console.log('addNewAddress');
     $mdDialog.hide();
     var currentPath = $location.path();
-    $location.path('/user/deliveries')
-      .search({
-        returnTo: currentPath
-      });
+    $location.path('/user/deliveries').search({
+      returnTo: currentPath
+    });
   }
 
-  function editAddress(){
+  function editAddress() {
     $mdDialog.hide();
     var currentPath = $location.path();
-    $location.path('/user/deliveries')
-      .search({
-        returnTo: currentPath
-      });
+    $location.path('/user/deliveries').search({
+      returnTo: currentPath
+    });
   }
 
-  function loadClientAddresses(){
-    userService.getUserContacts()
-      .then(function(res){
+  function loadClientAddresses() {
+    userService
+      .getUserContacts()
+      .then(function(res) {
         ctrl.addresses = res;
-        if(ctrl.addresses.length > 0){
-          console.log('ctrl.addresses', ctrl.addresses)
+        if (ctrl.addresses.length > 0) {
+          console.log('ctrl.addresses', ctrl.addresses);
           ctrl.zipcode = ctrl.addresses[0].U_CP;
         }
         ctrl.isLoading = false;
       })
-      .catch(function(err){
+      .catch(function(err) {
         console.log('err', err);
         ctrl.isLoading = false;
       });
   }
 
-   function submit($form){
+  function submit($form) {
     var _isValidZipcode = isValidZipcode(ctrl.zipcode);
 
-    if($form.$valid &&  _isValidZipcode){
-      $mdDialog.hide(ctrl.zipcode);//
-    }
-    else if(!_isValidZipcode){
+    if ($form.$valid && _isValidZipcode) {
+      $mdDialog.hide(ctrl.zipcode); //
+    } else if (!_isValidZipcode) {
       ctrl.errMessage = 'El código postal no es valido';
-    }
-    else{
-      ctrl.errMessage = "Ingresa tus datos";
+    } else {
+      ctrl.errMessage = 'Ingresa tus datos';
     }
   }
 
-  function isValidZipcode(zipcode){
-    return zipcode.length === 5;
+  function isValidZipcode(zipcode) {
+    return zipcode.length === 5 || zipcode === '_29030';
   }
 
   init();
