@@ -7,16 +7,6 @@
   <div class="header-top-bar" fixed-element top="70" ng-class="{'fixed-head': scrolled}">
     <div class="container" layout="row" layout-wrap layout-align="center center">
 
-      <!--ON SCROLL-->
-
-      <div flex="10" hide-gt-sm class="menu-mobile-icon-on-scroll-wrapper">
-        <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-on-scroll">
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
-      </div>
-
       <div flex-gt-xs="15" class="logo" layout-align="center center">
         <a href="/" ng-switch on="main.siteTheme">
           <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group">
@@ -26,25 +16,6 @@
         </a>
       </div>
 
-      <a hide-gt-xs href="whatsapp://send?phone=5219982463487">
-        <span class="header-top-bar-menu-item header-top-bar-menu-item-phone on-scroll-item schedules-modal-trigger">
-          <strong>
-            <i class="icon-whatsapp"></i>
-          </strong>
-          <!--<strong hide-xs>998 246 3487</strong>-->
-          <strong hide-xs>(998) 246 3487</strong>
-        </span>
-      </a>
-
-      <div ng-if="main.activeQuotation" class="categories-btn-wrap" flex-gt-xs="15" layout-align="center center">
-
-        <a flex ng-href="/quotations/edit/{{main.activeQuotation.id}}" class="header-top-bar-menu-item cart-fixed-item">
-          <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
-          <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-        </a>
-      </div>
-
-      <!--END ONLY ON SCROLL-->
 
       <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center" layout-align-sm="center center"
         layout-align-xs="start center" hide-sm hide-xs>
@@ -78,7 +49,7 @@
 
       <form ng-class="{
           'searcher-wrapper-show-mobile':main.showSearchBar
-        }" ng-submit="main.handleSearch()" class="searcher-wrapper" layout="row">
+        }" ng-submit="main.handleSearch()" class="searcher-wrapper" flex-order-xs="1" layout="row">
         <div class="searcher" flex flex-xs="70">
           <div class="searcher-inner">
             <i class="icon-search"></i>
