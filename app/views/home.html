@@ -7,61 +7,72 @@
 <div ng-if="!main.isLoadingCategoriesTree" class="content-block listing-view">
   <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
     <!--START NAV-->
-    <aside flex-gt-sm="20" flex="100" hide-sm hide-xs>
+    <aside flex-gt-sm="15" flex="100" hide-sm hide-xs>
       <sidebar-categories categories-tree="main.categoriesTree" active-store="main.activeStore">
       </sidebar-categories>
     </aside>
     <!--END NAV-->
 
     <!--CATEGORIES-->
-    <div flex-gt-sm="75" flex="100">
+    <div flex-gt-sm="80" flex="100">
 
       <ng-include src="'views/partials/home-slider.html'"></ng-include>
 
-      <div class="subs-container">
-        <div class="subs-container-list" layout="row" layout-wrap>
-          <div class="sub-wrapper" ng-repeat="category in main.categoriesTree" ng-if="category[vm.stockProperty] > 0" flex-gt-sm="33"
-            flex="50" flex-sm="50" flex-xs="100">
-            <category-item category="category" stock-key="{{vm.stockProperty}}" />
-          </div>
+      <div ng-if="vm.activeStore.code !== 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
+      </div>
+      <div ng-if="vm.activeStore.code === 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-kids-beds.html'"></ng-include>
+      </div>
 
-          <!--OFERTAS-->
-          <div class="sub-wrapper" flex-gt-sm="33" flex="50" flex-xs="100">
-            <div class="sub" ng-style="main.getCategoryBackground('ofertas')">
-              <div class="sub-text">
-                <h4>
-                  <a ng-href="/ofertas">
-                    <strong>Ofertas</strong>
-                  </a>
-                </h4>
-              </div>
-              <a ng-href="ofertas" class="absolute-link"></a>
+
+      <div class="subs-container">
+        <div class="subs-container-list">
+          <slick class="categories-carousel" responsive="vm.categoriesCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
+            init-onload=true data="main.categoriesTree">
+            <div class="sub-wrapper" ng-repeat="category in main.categoriesTree" ng-if="category[vm.stockProperty] > 0">
+              <category-item category="category" stock-key="{{vm.stockProperty}}" />
             </div>
-          </div>
-          <!--END OFERTAS-->
+
+            <!--OFERTAS-->
+            <div class="sub-wrapper">
+              <div class="sub" ng-style="main.getCategoryBackground('ofertas')">
+                <div class="sub-text">
+                  <h4>
+                    <a ng-href="/ofertas">
+                      <strong>Ofertas</strong>
+                    </a>
+                  </h4>
+                </div>
+                <a ng-href="ofertas" class="absolute-link"></a>
+              </div>
+            </div>
+            <!--END OFERTAS-->
+          </slick>
 
         </div>
-
       </div>
+
+
+      <div ng-if="vm.activeStore.code !== 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
+      </div>
+
+      <div ng-if="vm.activeStore.code === 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-kids-bureaus.html'"></ng-include>
+      </div>
+
+      <offers-directive></offers-directive>
+
+      <div ng-if="vm.activeStore.code !== 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
+      </div>
+      <div ng-if="vm.activeStore.code === 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-kids-forniture.html'"></ng-include>
+      </div>
+
     </div>
     <!-- END CATEGORIES-->
 
   </div>
-  <div ng-if="vm.activeStore.code !== 'actual_kids'">
-    <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
-    <br><br>
-    <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
-    <br><br>
-    <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
-  </div>
-
-  <div ng-if="vm.activeStore.code === 'actual_kids'">
-    <ng-include src="'views/partials/best-sellers-kids-beds.html'"></ng-include>
-    <br><br>
-    <ng-include src="'views/partials/best-sellers-kids-bureaus.html'"></ng-include>
-    <br><br>
-    <ng-include src="'views/partials/best-sellers-kids-forniture.html'"></ng-include>
-  </div>
-
-
 </div>

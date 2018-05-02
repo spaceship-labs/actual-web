@@ -13,11 +13,21 @@ function HomeCtrl(
   activeStore
 ) {
   var vm = this;
-  var VISIBLE_PRODUCTS_LIMIT = 4;
-  var PRODUCTS_TO_LOAD = 8;
+  var VISIBLE_PRODUCTS_LIMIT = 3;
+  var PRODUCTS_TO_LOAD = 6;
   angular.extend(vm, {
     areProductsLoaded: false,
-    api: api
+    api: api,
+    categoriesCarouselBreakpoints: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true
+        }
+      }
+    ]
   });
 
   function init() {
