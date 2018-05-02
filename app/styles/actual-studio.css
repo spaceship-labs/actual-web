@@ -60,6 +60,14 @@
   background: #000 !important;
 }
 
+.actual-studio .products-list .action-btn {
+  background: #000 !important;
+}
+
+.actual-studio .schedules-modal-header {
+  background: #000 !important;
+}
+
 @media (max-width: 600px) {
   .actual-studio .searcher-wrapper {
     background: #000 !important;

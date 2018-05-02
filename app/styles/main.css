@@ -429,6 +429,7 @@ select {
   max-width: 400px;
   */
   width: 400px;
+  margin: 0 20px;
 }
 .searcher {
   background: rgb(250, 250, 250);
@@ -500,7 +501,6 @@ select {
 
 .header-top-bar-menu {
   position: relative;
-  margin-left: 60px;
 }
 .header-top-bar-menu-item-separator {
   width: 1px;
@@ -515,6 +515,7 @@ select {
   min-width: 50px;
   cursor: pointer;
   position: relative;
+  margin: 0 4px;
 }
 
 .header-top-bar-menu .cart-n-items {
@@ -526,14 +527,15 @@ select {
   font-weight: 700;
   font-size: 12px;
 }
-.header-top-bar-menu .header-top-bar-menu-item-phone {
+
+.header-top-bar-menu-item-phone {
   text-align: center;
   color: #fff;
   font-size: 20px;
   min-width: 170px;
 }
 
-.header-top-bar-menu .header-top-bar-menu-item-phone i {
+.header-top-bar-menu-item-phone i {
   font-size: 20px !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -544,7 +546,7 @@ select {
 
 .header-top-bar-menu .header-top-bar-menu-item-name {
   text-align: left;
-  min-width: 210px;
+  min-width: 200px;
   vertical-align: middle;
   /*padding: 20px 0;*/
   font-size: 12px;
@@ -1856,9 +1858,15 @@ select {
   flex: 1 1 auto;
   margin-left: 20px;
 }
+
 .listing-view .best-seller-title .color-gray {
   color: #808080;
 }
+
+.listing-view .best-seller-title:hover .color-gray{
+  color: #000;
+}
+
 .listing-view .best-seller-title span {
   flex: 0 1 auto;
   font-size: 23px;
@@ -6246,6 +6254,56 @@ md-backdrop.md-sidenav-backdrop {
   background: #f8f8f8;
 }
 
+
+.categories-carousel .slick-prev,
+.categories-carousel .slick-next {
+  -webkit-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
+  -moz-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
+  box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
+  border-radius: 2px;
+  top: 20px;
+  z-index: 9;
+  display: block !important;
+  opacity: 0.8;
+}
+
+.categories-carousel .slick-prev:hover,
+.categories-carousel .slick-next:hover {
+  opacity: 1;
+}
+
+.categories-carousel .slick-prev {
+  background: url(../images/arrow2-left.png) center no-repeat !important;
+  background-size: 100% !important;
+  background-color: #fff !important;
+  height: 30px;
+  width: 30px;
+  top: 50%;
+  translate: transformY(-50%);
+  left: 25px;
+}
+.categories-carousel .slick-next {
+  background: url(../images/arrow2-right.png) center no-repeat !important;
+  background-size: 100% !important;
+  background-color: #fff !important;
+  height: 30px;
+  width: 30px;
+  right: 25px;
+  top: 50%;
+  translate: transformY(-50%);
+}
+
+.categories-carousel .slick-prev:before,
+.categories-carousel .slick-next:before {
+  content: '';
+}
+
+.categories-carousel .sub-wrapper {
+  padding: 10px;
+  width: 140px;
+}
+
+
 /*-------------------/
   #PROFILE
 /*------------------*/
@@ -6706,7 +6764,7 @@ md-sidenav {
   .header-top-bar-menu {
     margin-top: 10px;
     margin-left: 4px;
-    min-width: 90%;
+    min-width: 100%;
   }
   .header-top-bar-menu .menu-mobile-icon-static {
     display: none;
@@ -6855,12 +6913,12 @@ md-sidenav {
 
   .login-modal-header {
     left: 0;
-    top: 60px;
+    top: 90px;
     position: fixed;
   }
 
   .schedules-modal-header {
-    top: 45px;
+    top: 60px;
     left: -50px;
   }
 
@@ -6928,16 +6986,20 @@ md-sidenav {
   .breadcrumb a {
     font-size: 11px;
   }
+
+  .header-top-bar{padding: 0}
   .header-top-bar .categories-btn,
   .menu .categories-btn {
     margin: 5px 0;
   }
 
+  .header-top-bar-menu .header-top-bar-menu-item{min-width: 38px;margin: 0 2px}
   .header-top-bar-menu .header-top-bar-menu-item-name {
     padding: 2px 0;
   }
   .header-top-bar-menu .header-top-bar-menu-item-phone {
     min-width: 20px;
+    margin: 0 4px;
   }
   .header-top-bar-menu .header-top-bar-menu-item-phone i {
     font-size: 23px !important;
@@ -6952,12 +7014,15 @@ md-sidenav {
     position: relative;
     top: 3px;
   }
+  .header-top-bar-menu{margin-top: 4px}
   .header-top-bar {
-    max-height: 62px;
+    /*max-height: 62px;*/
   }
   .header-top-bar .logo-mobile {
     display: flex !important;
+    padding: 0  10px;
   }
+  .header-top-bar-menu .header-top-bar-menu-item i{padding: 0}
   .header-top-bar-menu .header-top-bar-menu-item-name span {
     display: none;
   }
@@ -6990,7 +7055,7 @@ md-sidenav {
   }
 
   #footer .footer-menu-col li {
-    text-align: center;
+    text-align: left;
   }
 
   .icon-menu-m,
@@ -7001,10 +7066,11 @@ md-sidenav {
   .header-top-bar .menu-mobile-icon-static {
     display: block;
     position: absolute;
-    left: -20px;
+    left: 5px;
     top: 50%;
     transform: translateY(-50%);
   }
+  .header-top-bar .on-scroll-item,
   .menu-mobile-icon-on-scroll-wrapper {
     display: none;
   }
@@ -7019,6 +7085,8 @@ md-sidenav {
   .header-top-bar.fixed-head .menu-mobile-icon-on-scroll-wrapper {
     display: flex;
   }
+  .header-top-bar.fixed-head .on-scroll-item{display: block;}
+  .header-top-bar-menu-item-phone{min-width: 40px!important;}
   .header-top-bar.fixed-head .menu-mobile-icon-on-scroll {
     margin-left: 10px;
   }
@@ -7037,17 +7105,24 @@ md-sidenav {
     position: fixed;
     left: 0;
     width: 100%;
-    top: 60px;
+    top: 90px;
   }
 
   .searcher-wrapper {
+    /*
     display: none;
     position: absolute;
     top: 100%;
+    */
     z-index: 9999999;
     background: #092f57 !important;
-    padding: 10px;
+    padding: 6px 0 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 95%;
   }
+  .header-top-bar.fixed-head .searcher{min-width: 0}
   .searcher-wrapper-show-mobile {
     display: flex;
   }
@@ -7069,8 +7144,12 @@ md-sidenav {
 
   .listing-view .best-seller-title {
     max-width: 80% !important;
-    font-size: 22px !important;
+    font-size: 18px !important;
+    display: block;
   }
+  .listing-view .best-seller-title span{font-size: 18px!important;}
+  .listing-view .best-seller-title:before,
+  .listing-view .best-seller-title:after{display: none}
   .listing-view .listing-view-title {
     font-size: 18px;
   }
@@ -7368,7 +7447,7 @@ md-sidenav {
 
   #footer .footer-menu-col h2 {
     font-size: 14px;
-    text-align: center;
+    text-align: left;
     padding: 0;
   }
   #footer .footer-menu-col h2,

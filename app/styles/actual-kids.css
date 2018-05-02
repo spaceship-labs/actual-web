@@ -70,6 +70,13 @@
   color: #000;
 }
 
+.actual-kids .products-list .action-btn {
+  background: #34b3e7 !important;
+}
+.actual-kids .schedules-modal-header {
+  background: #34b3e7 !important;
+}
+
 @media (max-width: 600px) {
   .actual-kids .searcher-wrapper {
     background: #34b3e7 !important;
