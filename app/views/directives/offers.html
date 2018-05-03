@@ -1,0 +1,19 @@
+<div ng-if="isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
+  <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
+</div>
+
+<div ng-if="!isLoading" class="subs-container">
+  <div ng-repeat="package in packages track by $index" class="package-wrapper">
+
+    <a ng-click="addPackageToCart(package.id)" href="#">
+      <img ng-src="{{package.image}}" alt="{{package.image}}">
+    </a>
+    <div class="package-text">
+      <h4>
+        <a href="#">
+          <strong>{{package.Name}}</strong>
+        </a>
+      </h4>
+    </div>
+  </div>
+</div>
