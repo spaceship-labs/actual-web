@@ -80,13 +80,14 @@
         </div>
 
 
-        <div flex class="header-top-bar-menu-item search-trigger-item">
+        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div>
+
         <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <i class="icon-login" ng-click="main.toggleLoginModal()"></i>
           <span ng-if="main.user.invited" ng-click="main.toggleLoginModal()">
-            <strong>Invitado</strong>
+            <strong class="invited-label">Invitado</strong>
           </span>
           <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>

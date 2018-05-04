@@ -517,6 +517,8 @@ select {
   position: relative;
   margin: 0 4px;
 }
+.header-top-bar-menu .header-top-bar-menu-item .invited-label{font-size: 10px;}
+.header-top-bar-menu .header-top-bar-menu-item span{color: #fff}
 
 .header-top-bar-menu .cart-n-items {
   position: absolute;
