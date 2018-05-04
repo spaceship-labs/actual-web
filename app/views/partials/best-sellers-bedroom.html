@@ -7,9 +7,9 @@
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="33" flex-sm="50" flex-xs="100" ng-repeat="product in vm.bedRooms | limitTo:vm.limitBedRooms track by $index" class="listing-product-wrap">
-      <listing-product product="product"></listing-product>
+    <div flex="33" flex-sm="50" flex-xs="100" ng-repeat="featuredRecamara in vm.featuredProducts | filter:{ categoryHandle: 'recamaras' } | limitTo:vm.limitBedRooms track by $index" class="listing-product-wrap">
+      <listing-product product="featuredRecamara.product"></listing-product>
     </div>
-    <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="vm.bedRooms.length > vm.limitBedRooms" ng-click="loadMore('bedRooms')">Ver más</button>
+    <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="(vm.featuredProducts | filter:{ categoryHandle: 'recamaras' }).length > vm.limitBedRooms" ng-click="loadMore('bedRooms')">Ver más</button>
   </div>
 </div>
