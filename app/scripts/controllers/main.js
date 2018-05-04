@@ -453,10 +453,9 @@
     }
 
     $rootScope.successAuth = function(res) {
-      console.log('setuser token on response');
       setUserTokensOnResponse(res);
 
-      return assignCurrentUserToQuotationIfNeeded()
+      assignCurrentUserToQuotationIfNeeded()
         .then(function(quotationUpdated) {
           console.log('quotationUpdated', quotationUpdated);
 
@@ -477,14 +476,11 @@
           var quotationPath = '/quotations/edit';
           if ($location.path().indexOf(quotationPath) > -1) {
             $window.location = '/';
-          } 
-          else if($routeParams.redirectTo){
+          } else if ($routeParams.redirectTo) {
             $window.location = $routeParams.redirectTo;
-          }
-          else if($routeParams.completeRegister){
+          } else if ($routeParams.completeRegister) {
             $window.location = '/?completeRegister';
-          }
-          else {
+          } else {
             $window.location.reload();
           }
           return;
@@ -507,7 +503,12 @@
       console.log('$rootScope.activeQuotation', $rootScope.activeQuotation);
       console.log('activeQuotationHasClient', activeQuotationHasClient);
 
-      if ($rootScope.activeQuotation && !activeQuotationHasClient) {
+      if (
+        vm.user &&
+        !authService.isUserAdmin(vm.user) &&
+        $rootScope.activeQuotation &&
+        !activeQuotationHasClient
+      ) {
         var quotationId = $rootScope.activeQuotation.id;
         var params = {
           Client: vm.user.Client,

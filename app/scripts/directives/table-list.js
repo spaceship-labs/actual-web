@@ -372,10 +372,9 @@
               column.actions.forEach(function(action) {
                 if (action.type === 'edit') {
                   icon = '<i class="icon-search edit-icon"></i>';
-                  console.log('SHOW: ', action);
                   html +=
                     '<a href="' +
-                    (siteDomain + action.url + full[id] + action.postUrl) +
+                    (siteDomain + action.url + full[id]) +
                     '">' +
                     icon +
                     '</a>';

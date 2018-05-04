@@ -1,0 +1,16 @@
+<div ng-if="vm.kidsBureaus && main.site" id="home-slider-wrapper">
+  <div class="listing-view">
+    <h2 class="listing-view-title best-seller-title">
+      <a href="/category/comoda-infantil">
+        <span class="color-gray">Cómodas y burós infantiles</span>
+      </a>
+    </h2>
+  </div>
+  <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
+    <div flex="33" flex-sm="50" flex-xs="100" ng-repeat="product in vm.kidsBureaus | limitTo:vm.limitKidsBureaus track by $index"
+      class="listing-product-wrap">
+      <listing-product product="product"></listing-product>
+    </div>
+    <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="vm.kidsBureaus.length > vm.limitKidsBureaus" ng-click="loadMore('kidsBureaus')">Ver más</button>
+  </div>
+</div>

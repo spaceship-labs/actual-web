@@ -1,0 +1,16 @@
+<div ng-if="vm.kidsForniture && main.site" id="home-slider-wrapper">
+  <div class="listing-view">
+    <h2 class="listing-view-title best-seller-title">
+      <a href="/category/ninos">
+        <span class="color-gray">Muebles para niños</span>
+      </a>
+    </h2>
+  </div>
+  <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
+    <div flex="33" flex-sm="50" flex-xs="100" ng-repeat="product in vm.kidsForniture | limitTo:vm.limitKidsForniture track by $index"
+      class="listing-product-wrap">
+      <listing-product product="product"></listing-product>
+    </div>
+    <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="vm.kidsForniture.length > vm.limitKidsForniture" ng-click="loadMore('kidsForniture')">Ver más</button>
+  </div>
+</div>

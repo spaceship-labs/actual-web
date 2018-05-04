@@ -24,6 +24,8 @@ angular
     'leaflet-directive',
     'localytics.directives',
     'ng-currency',
+    //'angulartics',
+    //'angulartics.google.tagmanager',
     'envconfig',
     'siteconfig'
   ])

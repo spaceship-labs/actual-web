@@ -10,79 +10,18 @@
 <div class="content-block listing-view">
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
     <!--START NAV-->
-    <aside flex="20"  hide-sm hide-xs>
-      <sidebar-categories
-        categories-tree="main.categoriesTree"
-        selected-category-id="vm.category.id"
-        active-store="main.activeStore">
+    <aside flex="20" hide-sm hide-xs>
+      <sidebar-categories categories-tree="main.categoriesTree" selected-category-id="vm.category.id" active-store="main.activeStore">
       </sidebar-categories>
 
     </aside>
     <!--END NAV-->
 
-    <!--SUBCATEGORIES-->
     <div flex="75" flex-sm="100" flex-xs="100">
 
-      <div
-        ng-if="vm.isLoading"
-        layout-fill
-        layout="row"
-        layout-align="center center"
-        class="loading-circle"
-      >
-        <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
-      </div>
-
-      <div ng-if="!vm.isLoading" class="subs-container">
+      <div class="subs-container">
         <h2 class="listing-view-title">Ofertas</h2>
-        <!--SUBCATEGORIES LIST LEVEL 2-->
-
-        <div
-          ng-repeat="package in vm.packages track by $index"
-          class="package-wrapper">
-
-          <a
-            ng-click="vm.addPackageToCart(package.id)"
-            href="#"
-          >
-          <!--<a href="#">-->
-            <img ng-src="{{package.image}}" alt="{{package.image}}">
-          </a>
-          <div class="package-text">
-            <h4>
-              <a href="#"><strong>{{package.Name}}</strong></a>
-            </h4>
-          </div>
-
-        </div>
-
-
-        <!--
-        <div ng-if="vm.packages" class="subs-container-list" layout="row" layout-wrap>
-          <div
-            class="sub-wrapper"
-            ng-repeat="package in vm.packages track by $index"
-            flex="100">
-            <div
-              class="sub sub-package"
-              ng-style="{'background-image' : 'url(' + package.image + ')'}">
-              <div class="sub-text">
-                <h4>
-                  <a>
-                    <strong>{{package.Name}}</strong>
-                  </a>
-                </h4>
-              </div>
-              <a
-                ng-click="vm.addPackageToCart(package.id)"
-                href="#"
-                class="absolute-link"></a>
-            </div>
-          </div>
-        </div>
-        -->
-        <!--END SUBCATEGORIES LIST LEVEL 2-->
-
+        <offers-directive />
       </div>
     </div>
     <!-- END SUBCATEGORIES-->

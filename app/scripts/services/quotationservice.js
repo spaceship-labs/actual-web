@@ -52,6 +52,7 @@
       newQuotation: newQuotation,
       mapDetailsStock: mapDetailsStock,
       removeDetail: removeDetail,
+      removeAllDetails: removeAllDetails,
       removeDetailsGroup: removeDetailsGroup,
       removeCurrentQuotation: removeCurrentQuotation,
       setActiveQuotation: setActiveQuotation,
@@ -152,6 +153,11 @@
 
     function removeDetail(id, quotationId) {
       var url = '/quotation/' + quotationId + '/removedetail/' + id;
+      return api.$http.delete(url);
+    }
+    // TODO: custom
+    function removeAllDetails(quotationId) {
+      var url = '/quotation/' + quotationId + '/removealldetails';
       return api.$http.delete(url);
     }
 

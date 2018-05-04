@@ -1,10 +1,10 @@
 <!doctype html>
 <html ng-app="actualWebApp" ng-controller="MainCtrl as main">
 
-  <head>
-    <meta charset="utf-8">
-    <!--SEE GRUNTFILE processhtml-->
-    <!-- process:template
+<head>
+  <meta charset="utf-8">
+  <!--SEE GRUNTFILE processhtml-->
+  <!-- process:template
     <title ng-bind="main.metatags.title"><%= metaTags.title %></title>
     <link itemprop="url" href="https://actualstudio.com">
     <meta itemtype="logo" content="Logo-A-Home.png">
@@ -55,16 +55,16 @@
 
     /process -->
 
-    <base href="/" />
-    <meta name="fragment" content="!">
-    <meta name="viewport" content="width=device-width, user-scalable=yes">
-    <meta name="google-site-verification" content="Al9YYcB_iYqFkycbTwFq7qbbms-sH4H66zDtwyz97fU" />
+  <base href="/" />
+  <meta name="fragment" content="!">
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
+  <meta name="google-site-verification" content="Al9YYcB_iYqFkycbTwFq7qbbms-sH4H66zDtwyz97fU" />
 
-    <meta name="robots" content="all, index, follow">
+  <meta name="robots" content="all, index, follow">
 
-    <!--
-    <link
-        rel="icon"
+  <!--
+    <link 
+        rel="icon" 
         href="/favicon.ico"
         ng-attr-href="main.getFaviconUrl()"
         type="image/x-icon"
@@ -72,76 +72,137 @@
     -->
 
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
-    <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
-    <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
-    <link rel='stylesheet' href='bower_components/angular-material-datetimepicker/css/material-datetimepicker.css' />
-    <link rel='stylesheet' href='bower_components/angular-datatables/dist/css/angular-datatables.css' />
-    <link rel='stylesheet' href='bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css' />
-    <link rel='stylesheet' href='bower_components/ez-plus/css/jquery.ez-plus.css' />
-    <link rel='stylesheet' href='bower_components/pikaday/css/pikaday.css' />
-    <link rel='stylesheet' href='bower_components/jquery-timepicker-jt/jquery.timepicker.css' />
-    <link rel='stylesheet' href='bower_components/photoswipe/dist/photoswipe.css' />
-    <link rel='stylesheet' href='bower_components/photoswipe/dist/default-skin/default-skin.css' />
-    <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
-    <link rel='stylesheet' href='bower_components/chosen/chosen.css' />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
-    <link rel="stylesheet" href="styles/stickyFooter.css">
-    <link rel="stylesheet" href="styles/icomoon.css">
-    <link rel="stylesheet" href="styles/custom.datatables.css">
-    <link rel='stylesheet' href='styles/default-skin.css' />
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/spei-card.css">
-    <link rel="stylesheet" href="styles/actual-home.css">
-    <link rel="stylesheet" href="styles/actual-studio.css">
-    <link rel="stylesheet" href="styles/actual-kids.css">
-    <!-- endbuild -->
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
+  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
+  <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
+  <link rel='stylesheet' href='bower_components/angular-material-datetimepicker/css/material-datetimepicker.css' />
+  <link rel='stylesheet' href='bower_components/angular-datatables/dist/css/angular-datatables.css' />
+  <link rel='stylesheet' href='bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css' />
+  <link rel='stylesheet' href='bower_components/ez-plus/css/jquery.ez-plus.css' />
+  <link rel='stylesheet' href='bower_components/pikaday/css/pikaday.css' />
+  <link rel='stylesheet' href='bower_components/jquery-timepicker-jt/jquery.timepicker.css' />
+  <link rel='stylesheet' href='bower_components/photoswipe/dist/photoswipe.css' />
+  <link rel='stylesheet' href='bower_components/photoswipe/dist/default-skin/default-skin.css' />
+  <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
+  <link rel='stylesheet' href='bower_components/chosen/chosen.css' />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
+  <link rel="stylesheet" href="styles/stickyFooter.css">
+  <link rel="stylesheet" href="styles/icomoon.css">
+  <link rel="stylesheet" href="styles/custom.datatables.css">
+  <link rel='stylesheet' href='styles/default-skin.css' />
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/spei-card.css">
+  <link rel="stylesheet" href="styles/actual-home.css">
+  <link rel="stylesheet" href="styles/actual-studio.css">
+  <link rel="stylesheet" href="styles/actual-kids.css">
+  <!-- endbuild -->
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
+  <script>
+    window.prerenderReady = false;
+  </script>
+
+  <!--Start of Zendesk Chat Script-->
+  <script type="text/javascript">
+    window.$zopim || (function (d, s) {
+      var z = $zopim = function (c) {
+        z._.push(c)
+      }, $ = z.s =
+        d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+          z.set.
+            _.push(o)
+        }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute('charset', 'utf-8');
+      $.src = 'https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ'; z.t = +new Date; $.
+        type = 'text/javascript'; e.parentNode.insertBefore($, e)
+    })(document, 'script');
+  </script>
+  <!--End of Zendesk Chat Script-->
+
+  <!--SEE GRUNTFILE processhtml-->
+  <!-- process:template
     <script>
-      window.prerenderReady = false;
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      
+      //fbq.disablePushState = true; //not recommended, but can be done
+      
+      fbq('init', '<%= facebookPixelId %>');
+      fbq('track', 'PageView');
     </script>
 
-    <!--Start of Zendesk Chat Script-->
-    <script type="text/javascript">
-      window.$zopim ||
-        (function(d, s) {
-          var z = ($zopim = function(c) {
-              z._.push(c);
-            }),
-            $ = (z.s = d.createElement(s)),
-            e = d.getElementsByTagName(s)[0];
-          z.set = function(o) {
-            z.set._.push(o);
-          };
-          z._ = [];
-          z.set._ = [];
-          $.async = !0;
-          $.setAttribute('charset', 'utf-8');
-          $.src = 'https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ';
-          z.t = +new Date();
-          $.type = 'text/javascript';
-          e.parentNode.insertBefore($, e);
-        })(document, 'script');
-    </script>
-    <!--End of Zendesk Chat Script-->
+    /process -->
+
+</head>
+
+<body ng-cloak ng-class="main.siteTheme">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
+  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
+  <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
+  <link rel='stylesheet' href='bower_components/angular-material-datetimepicker/css/material-datetimepicker.css' />
+  <link rel='stylesheet' href='bower_components/angular-datatables/dist/css/angular-datatables.css' />
+  <link rel='stylesheet' href='bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css' />
+  <link rel='stylesheet' href='bower_components/ez-plus/css/jquery.ez-plus.css' />
+  <link rel='stylesheet' href='bower_components/pikaday/css/pikaday.css' />
+  <link rel='stylesheet' href='bower_components/jquery-timepicker-jt/jquery.timepicker.css' />
+  <link rel='stylesheet' href='bower_components/photoswipe/dist/photoswipe.css' />
+  <link rel='stylesheet' href='bower_components/photoswipe/dist/default-skin/default-skin.css' />
+  <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
+  <link rel='stylesheet' href='bower_components/chosen/chosen.css' />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
+  <link rel="stylesheet" href="styles/stickyFooter.css">
+  <link rel="stylesheet" href="styles/icomoon.css">
+  <link rel="stylesheet" href="styles/custom.datatables.css">
+  <link rel='stylesheet' href='styles/default-skin.css' />
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/spei-card.css">
+  <link rel="stylesheet" href="styles/actual-home.css">
+  <link rel="stylesheet" href="styles/actual-studio.css">
+  <link rel="stylesheet" href="styles/actual-kids.css">
+  <!-- endbuild -->
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+  <script>
+    window.prerenderReady = false;
+  </script>
+
+  <!--Start of Zendesk Chat Script-->
+  <script type="text/javascript">
+    window.$zopim || (function (d, s) {
+      var z = $zopim = function (c) {
+        z._.push(c)
+      }, $ = z.s =
+        d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+          z.set.
+            _.push(o)
+        }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute('charset', 'utf-8');
+      $.src = 'https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ'; z.t = +new Date; $.
+        type = 'text/javascript'; e.parentNode.insertBefore($, e)
+    })(document, 'script');
+  </script>
+  <!--End of Zendesk Chat Script-->
 
   </head>
 
   <body ng-cloak ng-class="main.siteTheme">
 
     <!--SEE GRUNTFILE processhtml-->
-    <!-- process:template
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= tagManagerId %>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    /process -->
-
 
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -284,7 +345,6 @@ ga('send', 'pageview');
     <script src="bower_components/chosen/chosen.jquery.js"></script>
     <script src="bower_components/angular-chosen-localytics/dist/angular-chosen.js"></script>
     <script src="bower_components/ng-currency/dist/ng-currency.js"></script>
-    <script src="bower_components/conekta.js/dist/conekta.min.js"></script>
     <script src="bower_components/js-xlsx/dist/xlsx.full.min.js"></script>
     <script src="bower_components/es6-promise/promise.js"></script>
     <script src="bower_components/alasql/dist/alasql.min.js"></script>
@@ -335,6 +395,7 @@ ga('send', 'pageview');
     <script src="scripts/services/productsearchservice.js"></script>
     <script src="scripts/services/leadservice.js"></script>
     <script src="scripts/directives/fixedelement.js"></script>
+    <script src="scripts/directives/rfc-input-validator.js"></script>
     <script src="scripts/directives/table-list.js"></script>
     <script src="scripts/services/dialogservice.js"></script>
     <script src="scripts/services/formatservice.js"></script>
@@ -404,8 +465,13 @@ ga('send', 'pageview');
     <script src="scripts/controllers/reports/orders.js"></script>
     <script src="scripts/controllers/reports/quotations.js"></script>
     <script src="scripts/controllers/suggestions.js"></script>
-    <script src="scripts/controllers/complete-register.js"></script>    
+    <script src="scripts/controllers/complete-register.js"></script>
+
+    <script src="scripts/directives/offersdirective.js"></script>
     <!-- endbuild -->
+
+    <script type="text/javascript" src="https://cdn.conekta.io/js/latest/conekta.js"></script>
+
   </body>
 
 </html>
