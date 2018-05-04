@@ -42,7 +42,7 @@
     var service = {
       addSeenTime: addSeenTime,
       advancedSearch: advancedSearch,
-      //formatProduct: formatProduct,
+      formatProductSync: formatProductSync,
       formatSingleProduct: formatSingleProduct,
       formatProducts: formatProducts,
       getAllCategories: getAllCategories,
@@ -67,7 +67,8 @@
       syncProductByItemcode: syncProductByItemcode,
       substractProductStockByQuotationDetails: substractProductStockByQuotationDetails,
       delivery: delivery,
-      getProductUrl: getProductUrl
+      getProductUrl: getProductUrl,
+      getFeaturedProducts: getFeaturedProducts
     };
 
     return service;
@@ -139,7 +140,8 @@
       return url;
     }
 
-    function formatProduct(product, options) {
+    function formatProductSync(product, options) {
+      console.log('product GG', product);
       options = options || {};
       //product.Name = capitalizeFirstLetter(product.ItemName);
       product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
@@ -234,11 +236,15 @@
 
     function formatProducts(products) {
       var deferred = $q.defer();
-      var formatted = products.map(formatProduct);
+      var formatted = products.map(formatProductSync);
       deferred.resolve(formatted);
       return deferred.promise;
     }
 
+    function getFeaturedProducts(site) {
+      var url = '/featuredproduct/' + site;
+      return api.$http.get(url);
+    }
     //CATEGORIES
     function getCategories(page, params) {
       var p = page || 1;
