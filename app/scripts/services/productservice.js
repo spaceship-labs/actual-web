@@ -194,7 +194,7 @@
         .then(function(res) {
           var mainPromo = res.data;
           product.mainPromo = mainPromo;
-          product = formatProduct(product);
+          product = formatProductSync(product);
           deferred.resolve(product);
         })
         .catch(function(err) {
