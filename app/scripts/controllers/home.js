@@ -70,7 +70,7 @@ function HomeCtrl(
       }
     };
     metaTagsService.setMetaTags({});
-    loadBanners();
+    loadBannersAndFeaturedProducts();
 
     var sortOption = {
       key: 'salesCount',
@@ -116,7 +116,7 @@ function HomeCtrl(
     }
   }
 
-  function loadBanners() {
+  function loadBannersAndFeaturedProducts() {
     siteService
       .findByHandle($rootScope.siteTheme, { getBanners: true })
       .then(function(res) {
@@ -124,6 +124,17 @@ function HomeCtrl(
         var site = res.data;
         site.Banners = siteService.sortSiteBanners(site);
         vm.siteBanners = site.Banners;
+        console.log('vm.siteBanners: ', vm.siteBanners);
+        return productService.getFeaturedProducts(site.id);
+      })
+      .then(function(result) {
+        vm.featuredProducts = result.data;
+        console.log('vm.featuredProducts', vm.featuredProducts);
+        console.log('vm.featuredProducts', vm.featuredProducts.length);
+        vm.featuredProducts.map(function(featured) {
+          featured.product = productService.formatProductSync(featured.product);
+          return featured;
+        });
       });
   }
 
