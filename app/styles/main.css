@@ -657,9 +657,11 @@ select {
   display: flex;
 }
 .header-top-bar.fixed-head .modal-header {
+  /*
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   transform: translateX(-50%);
+  */
 }
 
 .header-top-bar.fixed-head .cart-fixed-item {
@@ -828,6 +830,8 @@ select {
 .login-modal-header {
   /*display: none;*/
   /*top: 90%;*/
+  right: 0;
+  left: auto;
   top: 116%;
   /*top: 100%;*/
 }
@@ -4071,7 +4075,7 @@ md-backdrop.md-sidenav-backdrop {
 }
 .cart-view .cart-title i span {
   position: absolute;
-  left: 3px;
+  left: -8px;
   right: 0;
   margin: 0 auto;
   top: 1px;
@@ -6761,6 +6765,13 @@ md-sidenav {
     font-size: 16px;
     padding: 10px;
   }
+
+  .login-modal-header {
+    left: 0;
+    top: 60px;
+    position: fixed;
+  }
+
 }
 
 @media screen and (max-width: 960px) {
@@ -6915,10 +6926,9 @@ md-sidenav {
   }
 
   .login-modal-header {
-    left: 0;
-    top: 60px;
-    position: fixed;
+    top: 90px;
   }
+
 
   .schedules-modal-header {
     top: 60px;
