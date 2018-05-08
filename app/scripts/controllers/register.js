@@ -33,8 +33,11 @@ function RegisterCtrl(
         vm.isCheckoutProcessActive = true;
         console.log('quotation');
         loadStates();
+        return;
       }
     }
+
+    vm.newClient.invited = false;
   }
 
   function loadStates() {
