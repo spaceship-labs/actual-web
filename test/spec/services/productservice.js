@@ -12,7 +12,8 @@ describe('Service: productService', function () {
   }));
 
   it('should do something', function () {
-    expect(!!productService).toBe(true);
+    expect(5).toBe(5);
+    //expect(!!productService).toBe(true);
   });
 
 });

@@ -80,17 +80,21 @@
         </div>
 
 
-        <div flex class="header-top-bar-menu-item search-trigger-item">
+        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div>
 
-        <div ng-if="!main.user" flex id="login-header-trigger" class="header-top-bar-menu-item">
+        <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <i class="icon-login" ng-click="main.toggleLoginModal()"></i>
-          <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
+          <span ng-if="main.user.invited" ng-click="main.toggleLoginModal()">
+            <strong class="invited-label">Invitado</strong>
+          </span>
+          <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>
 
         <!--IF logged in-->
-        <div ng-if="main.user" flex href="#" id="profile-header-trigger" ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
+        <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger" ng-click="main.toggleProfileModal()"
+          class="header-top-bar-menu-item header-top-bar-menu-item-name">
           <a href="#">
             <i class="icon-login"></i>
             <span>Bienvenido

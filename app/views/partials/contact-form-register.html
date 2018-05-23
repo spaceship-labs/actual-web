@@ -1,4 +1,3 @@
-
 <section class="form-section">
   <!--DATOS PERSONALES-->
   <h4>PERSONA Y DIRECCIÓN DE ENTREGA</h4>
@@ -105,7 +104,7 @@
             <strong>Municipio o delegación<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.U_Mpio" required> 
+            <input type="text" ng-model="vm.newAddress.U_Mpio" required>
           </div>
         </div>
       </div>
@@ -171,23 +170,19 @@
             <input type="text" ng-model="vm.newAddress.U_Notes1">
           </div>
         </div>
-      <div flex-gt-sm="10" flex="100" class="input-element"></div>
-      </div>                
+        <div flex-gt-sm="10" flex="100" class="input-element"></div>
+      </div>
     </div>
   </section>
   <!--END DATOS PERSONALES-->
 
-  <p>Asigna un email y contraseña para ver tus compras y envios.</p>
+  <!-- <p>Asigna un email y contraseña para ver tus compras y envios.</p> -->
   <div class="checkbox-client-type">
-    <md-checkbox
-      ng-click="vm.copyDeliveryDataToPersonalData(vm.newClient, vm.newAddress)"
-      ng-model="contact.copyingPersonalData"
-      aria-label="Persona moral">
+    <md-checkbox ng-click="vm.copyDeliveryDataToPersonalData(vm.newClient, vm.newAddress)" ng-model="contact.copyingPersonalData" aria-label="Persona moral">
       <strong>Los mismos que mis datos de envío</strong>
-    </md-checkbox>    
+    </md-checkbox>
   </div>
 
 
 </section>
-<!--END FORM SECTION--> 
-
+<!--END FORM SECTION-->

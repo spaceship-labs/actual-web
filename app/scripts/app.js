@@ -311,9 +311,9 @@ angular
         controller: 'ResetPasswordCtrl',
         controllerAs: 'vm'
       })
-      .when('/continuequotation', {
-        templateUrl: 'views/continuequotation.html',
-        controller: 'ContinuequotationCtrl',
+      .when('/complete-register', {
+        templateUrl: 'views/complete-register.html',
+        controller: 'CompleteRegisterCtrl',
         controllerAs: 'vm'
       })
       .when('/sitemap', {
