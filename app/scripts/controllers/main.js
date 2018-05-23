@@ -96,6 +96,7 @@
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
+      console.log('USER INVITED: ', $rootScope.user);
 
       loadMainData();
       loadSiteInfo();
@@ -453,7 +454,6 @@
 
     $rootScope.successAuth = function(res) {
       setUserTokensOnResponse(res);
-      console.log('SUCCESS AUTH');
 
       assignCurrentUserToQuotationIfNeeded()
         .then(function(quotationUpdated) {
@@ -476,9 +476,14 @@
           var quotationPath = '/quotations/edit';
           if ($location.path().indexOf(quotationPath) > -1) {
             $window.location = '/';
+          } else if ($routeParams.redirectTo) {
+            $window.location = $routeParams.redirectTo;
+          } else if ($routeParams.completeRegister) {
+            $window.location = '/?completeRegister';
           } else {
             $window.location.reload();
           }
+          return;
         })
         .catch(function(err) {
           console.log('err successAuth', err);

@@ -15,7 +15,7 @@
       content="<%= metaTags.description %>" >
     <meta
       name="keywords"
-      ng-attr-content="{{ main.metatags.keywords }}" 
+      ng-attr-content="{{ main.metatags.keywords }}"
       content="<%= metaTags.description %>">
     <meta
       property="fb:app_id"
@@ -43,10 +43,10 @@
     <meta property="og:image:width" content="600" />
     <meta property="og:image:height" content="600" />
 
-    <link 
-        rel="shortcut icon" 
+    <link
+        rel="shortcut icon"
         href="<%= metaTags.favicon %>"
-        ng-attr-href="{{main.getFaviconUrl()}}" 
+        ng-attr-href="{{main.getFaviconUrl()}}"
         type="image/x-icon"
     >
 
@@ -66,7 +66,7 @@
     <link 
         rel="icon" 
         href="/favicon.ico"
-        ng-attr-href="main.getFaviconUrl()" 
+        ng-attr-href="main.getFaviconUrl()"
         type="image/x-icon"
     >
     -->
@@ -240,14 +240,29 @@
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!--
      <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+     !(function(A, n, g, u, l, a, r) {
+  (A.GoogleAnalyticsObject = l),
+    (A[l] =
+      A[l] ||
+      function() {
+        (A[l].q = A[l].q || []).push(arguments);
+      }),
+    (A[l].l = +new Date()),
+    (a = n.createElement(g)),
+    (r = n.getElementsByTagName(g)[0]),
+    (a.src = u),
+    r.parentNode.insertBefore(a, r);
+})(
+  window,
+  document,
+  'script',
+  'https://www.google-analytics.com/analytics.js',
+  'ga'
+);
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+ga('create', 'UA-XXXXX-X');
+ga('send', 'pageview');
+</script>
     -->
     <!--
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpLv18a2AvczWYaEv_HMA9T_m2ElMJgro"></script>
@@ -450,6 +465,8 @@
     <script src="scripts/controllers/reports/orders.js"></script>
     <script src="scripts/controllers/reports/quotations.js"></script>
     <script src="scripts/controllers/suggestions.js"></script>
+    <script src="scripts/controllers/complete-register.js"></script>
+
     <script src="scripts/directives/offersdirective.js"></script>
     <!-- endbuild -->
 

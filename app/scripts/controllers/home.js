@@ -2,14 +2,17 @@
 
 angular.module('actualWebApp').controller('HomeCtrl', HomeCtrl);
 
+/** @ngInject **/
 function HomeCtrl(
   $location,
   $scope,
   $rootScope,
+  $routeParams,
   api,
   siteService,
   productService,
   metaTagsService,
+  dialogService,
   activeStore
 ) {
   var vm = this;
@@ -71,6 +74,12 @@ function HomeCtrl(
     };
     metaTagsService.setMetaTags({});
     loadBannersAndFeaturedProducts();
+
+    if ($routeParams.completeRegister) {
+      dialogService.showDialog(
+        'Has completado tu registro, ahora tienes todos los beneficios de tener una cuenta en Actual'
+      );
+    }
 
     var sortOption = {
       key: 'salesCount',
@@ -156,14 +165,3 @@ function HomeCtrl(
 
   init();
 }
-
-HomeCtrl.$inject = [
-  '$location',
-  '$scope',
-  '$rootScope',
-  'api',
-  'siteService',
-  'productService',
-  'metaTagsService',
-  'activeStore'
-];
