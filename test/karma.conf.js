@@ -16,9 +16,10 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     // as well as any additional frameworks (requirejs/chai/sinon/...)
     frameworks: [
-      "mocha",
-      "chai",
-      'sinon-chai'
+      'jasmine'
+      //"mocha",
+      //"chai",
+      //'sinon-chai'
     ],
     // list of files / patterns to load in the browser
     files: [
@@ -100,14 +101,15 @@ module.exports = function(config) {
       'bower_components/alasql/dist/alasql.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      "app/scripts/**/*.js",
-      "test/mock/**/*.js",
-      "test/spec/**/*.js"
+      'app/scripts/**/*.js',
+      'test/mock/**/*.js',
+      'test/spec/**/*.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js',
+      'https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js'
     ],
 
     // list of files / patterns to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // web server port
     port: 8080,
@@ -120,9 +122,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: [
-      "PhantomJS"
-    ],
+    browsers: ['PhantomJS'],
 
     // Code coverage report
     reporters: ['progress', 'coverage'],
@@ -136,11 +136,16 @@ module.exports = function(config) {
 
     // Which plugins to enable
     plugins: [
-      "karma-phantomjs-launcher",
+      'karma-jasmine',
+      'karma-coverage',
+      'karma-phantomjs-launcher'
+
+      /*
       'karma-mocha',
       'karma-chai',
       'karma-coverage',
       'karma-sinon-chai'
+      */
     ],
 
     // Continuous Integration mode
@@ -151,7 +156,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_INFO
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     // proxies: {
