@@ -633,10 +633,10 @@ select {
   height: 40px;
 }
 
-.header-top-bar .logo,
+/* .header-top-bar .logo,
 .header-top-bar .categories-btn-wrap {
   display: none;
-}
+} */
 .header-top-bar .logo-mobile {
   display: none !important;
 }
@@ -1650,6 +1650,8 @@ select {
   min-width: 33%;
   min-width: 1px;
   padding: 0 10px;
+  width: 50px;
+  height: 50px;
 }
 
 .products-list .product-width {
@@ -1662,8 +1664,28 @@ select {
 .products-list .listing-product {
   min-height: 294px;
   min-width: 33%;
+  width: 200px;
 }
-
+.products-list .view-more-category {
+  text-align: center;
+}
+.products-list .view-more-category .circle {
+  height: 250px;
+  width: 100%;
+  background-color: #030202;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 auto;
+}
+.products-list .view-more-category .circle .circle-text {
+  /* position: absolute; */
+  /* top: 50%; */
+  transform: translateY(25%);
+}
+.products-list .view-more-category .circle .circle-text p {
+  color: #fff;
+  font-size: 31px;
+}
 /*-----------/
   #BREADCRUMB
 /*----------*/
@@ -1845,7 +1867,7 @@ select {
   content: '';
   height: 1px;
   position: relative;
-  background: #b3b3b3;
+  background: #030202;
   flex: 1 1 auto;
   margin-right: 20px;
 }
@@ -1854,17 +1876,17 @@ select {
   content: '';
   height: 1px;
   position: relative;
-  background: #b3b3b3;
+  background: #030202;
   flex: 1 1 auto;
   margin-left: 20px;
 }
 
 .listing-view .best-seller-title .color-gray {
-  color: #808080;
+  color: #030202;
 }
 
-.listing-view .best-seller-title:hover .color-gray{
-  color: #000;
+.listing-view .best-seller-title:hover .color-gray {
+  color: #030202;
 }
 
 .listing-view .best-seller-title span {
@@ -1907,23 +1929,30 @@ select {
   position: relative;
   min-height: 200px;
   height: 200px;
-  -webkit-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
+  /* -webkit-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
   -moz-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
-  box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
+  box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44); */
 }
 .listing-view .sub.sub-package {
   min-height: 400px;
 }
 .listing-view .sub .sub-image {
-  width: 100%;
+  width: 85%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto;
 }
 .listing-view .sub .sub-text {
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
   position: absolute;
-  bottom: 0;
-  left: 0;
+  /* bottom: 0; */
+  top: 50%;
+  transform: translateY(-50%);
+  left: auto;
+  right: auto;
+  text-align: center;
+  margin: 0 auto;
   width: 100%;
   padding: 12px 20px;
   color: #fff;
@@ -1941,7 +1970,7 @@ select {
 .listing-view .sub .sub-text h4 a {
   color: #fff;
 }
-.listing-view .sub .sub-text h4:after {
+/* .listing-view .sub .sub-text h4:after {
   content: '';
   background: #fff;
   display: block;
@@ -1951,7 +1980,7 @@ select {
   bottom: 0;
   position: absolute;
   max-width: 100px;
-}
+} */
 
 .listing-view .sub-set {
   min-height: 300px;
@@ -6254,7 +6283,9 @@ md-backdrop.md-sidenav-backdrop {
   background: #f8f8f8;
 }
 
-.categories-carousel{margin: 20px 0}
+.categories-carousel {
+  margin: 20px 0;
+}
 .categories-carousel .slick-prev,
 .categories-carousel .slick-next {
   -webkit-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
@@ -6302,7 +6333,6 @@ md-backdrop.md-sidenav-backdrop {
   padding: 10px;
   width: 140px;
 }
-
 
 /*-------------------/
   #PROFILE
@@ -6987,13 +7017,22 @@ md-sidenav {
     font-size: 11px;
   }
 
-  .header-top-bar{padding: 0}
+  .header-top-bar {
+    padding: 0;
+  }
   .header-top-bar .categories-btn,
   .menu .categories-btn {
     margin: 5px 0;
   }
 
-  .header-top-bar-menu .header-top-bar-menu-item{min-width: 38px;margin: 0 2px; min-width: 0!important;}
+  .header-top-bar-menu .header-top-bar-menu-item {
+    min-width: 38px;
+    margin: 0 2px;
+    min-width: 0 !important;
+  }
+  .color-white {
+    color: #fff;
+  }
   .header-top-bar-menu .header-top-bar-menu-item-name {
     padding: 2px 0;
   }
@@ -7014,13 +7053,20 @@ md-sidenav {
     position: relative;
     top: 3px;
   }
-  .header-top-bar-menu{margin: 0 auto!important}
-  .header-top-bar.fixed-head .logo{display: none;}
+  .header-top-bar-menu {
+    margin: 0 auto !important;
+  }
+  /* .header-top-bar.fixed-head .logo {
+    display: none;
+  } */
   .header-top-bar .logo-mobile {
     display: flex !important;
     padding: 0px 12px 0 2px;
   }
-  .header-top-bar-menu .header-top-bar-menu-item i{padding: 0; margin: 0px;}
+  .header-top-bar-menu .header-top-bar-menu-item i {
+    padding: 0;
+    margin: 0px;
+  }
   .header-top-bar-menu .header-top-bar-menu-item-name span {
     display: none;
   }
@@ -7078,16 +7124,20 @@ md-sidenav {
   .header-top-bar.fixed-head .menu-mobile-icon-on-scroll-wrapper {
     display: flex;
   }
-  .header-top-bar.fixed-head .on-scroll-item{display: block;}
-  .header-top-bar-menu-item-phone{min-width: 40px!important;}
+  .header-top-bar.fixed-head .on-scroll-item {
+    display: block;
+  }
+  .header-top-bar-menu-item-phone {
+    min-width: 40px !important;
+  }
   .header-top-bar.fixed-head .menu-mobile-icon-on-scroll {
     margin-left: 10px;
   }
 
-  .header-top-bar .search-trigger-item{
+  .header-top-bar .search-trigger-item {
     display: none;
   }
-  .header-top-bar.fixed-head .search-trigger-item{
+  .header-top-bar.fixed-head .search-trigger-item {
     display: flex;
   }
   /*
@@ -7123,8 +7173,12 @@ md-sidenav {
     margin: 0 auto 10px;
     width: 95%;
   }
-  .header-top-bar.fixed-head .searcher{min-width: 0}
-  .header-top-bar.fixed-head .searcher-wrapper{display: none;}
+  .header-top-bar.fixed-head .searcher {
+    min-width: 0;
+  }
+  .header-top-bar.fixed-head .searcher-wrapper {
+    display: none;
+  }
   .header-top-bar.fixed-head .searcher-wrapper-show-mobile {
     display: flex;
   }
@@ -7149,9 +7203,13 @@ md-sidenav {
     font-size: 18px !important;
     display: block;
   }
-  .listing-view .best-seller-title span{font-size: 18px!important;}
+  .listing-view .best-seller-title span {
+    font-size: 18px !important;
+  }
   .listing-view .best-seller-title:before,
-  .listing-view .best-seller-title:after{display: none}
+  .listing-view .best-seller-title:after {
+    display: none;
+  }
   .listing-view .listing-view-title {
     font-size: 18px;
   }

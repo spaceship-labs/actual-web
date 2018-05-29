@@ -80,12 +80,16 @@
         </div>
 
 
-        <div flex class="header-top-bar-menu-item search-trigger-item">
+        <!-- <div flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+        </div> -->
+        <div flex class="header-top-bar-menu-item">
+          <p style="color: #fff;">REGISTRATE</p>
         </div>
 
         <div ng-if="!main.user" flex id="login-header-trigger" class="header-top-bar-menu-item">
-          <i class="icon-login" ng-click="main.toggleLoginModal()"></i>
+          <p ng-click="main.toggleLoginModal()" style="color: #fff;">| <strong>MI CUENTA</strong></p>
+          <!-- <i class="icon-login" ng-click="main.toggleLoginModal()"></i> -->
           <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>
 

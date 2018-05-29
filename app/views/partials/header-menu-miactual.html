@@ -1,20 +1,21 @@
   <div class="menu" hide-xs>
     <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between stretch">
-      <div flex-gt-sm="15" flex="100" class="logo" layout="row" layout-align="center center">
+      <!-- <div flex-gt-sm="15" flex="100" class="logo" layout="row" layout-align="center center"> -->
         <!--<i ng-click="isReplyFormOpen = !isReplyFormOpen" class="icon-paragraph-justify" hide-gt-xs></i>-->
-        <a href="/" ng-switch on="main.siteTheme">
+        <!-- TODO:  Reemplazar-->
+        <!-- <a href="/" ng-switch on="main.siteTheme">
           <img ng-switch-when="actual-home" src="images/Logo-A-Home.png" alt="Actual Group">
           <img ng-switch-when="actual-studio" src="images/Logo-A-Studio.png" alt="Actual Group">
           <img ng-switch-when="actual-kids" src="images/Logo-A-Kids.png" alt="Actual Group">
           <img ng-switch-default src="images/Logo-A-Home.png" alt="Actual Group">
-        </a>
+        </a> -->
 
-      </div>
+      <!-- </div> -->
 
       <nav
         ng-if="main.siteTheme !== 'actual-kids' "
         hide-sm
-        flex-gt-sm="80"
+        flex-gt-sm="100"
         flex="100"
         layout="row"
         layout-wrap
@@ -22,7 +23,7 @@
         class="nav-categories"
       >
         <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-ninos"></i>
+          <img src="images/header-icons/4.sgv" alt=""/>
           <span class="nav-categories-item-text" href="#">Recámaras</span>
         </a>
         <a href="/category/salas" flex flex-xs="25" class="nav-categories-item">
@@ -51,22 +52,22 @@
         </a>
 
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/orders" 
-          flex 
-          flex-xs="25" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/orders"
+          flex
+          flex-xs="25"
           class="nav-categories-item"
         >
           <i class="icon-attachment"></i>
           <span class="nav-categories-item-text" href="#">Pedidos</span>
         </a>
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/quotations" 
-          flex 
-          flex-xs="25" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/quotations"
+          flex
+          flex-xs="25"
           class="nav-categories-item"
         >
           <i class="icon-oportunidades"></i>
@@ -77,7 +78,7 @@
 
       <nav
         ng-if="main.siteTheme === 'actual-kids' "
-        hide-sm        
+        hide-sm
         flex-gt-sm="80"
         flex="100"
         layout="row"
@@ -114,27 +115,27 @@
           <span class="nav-categories-item-text" href="#">Ofertas</span>
         </a>
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/orders" 
-          flex 
-          flex-xs="25" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/orders"
+          flex
+          flex-xs="25"
           class="nav-categories-item"
         >
           <i class="icon-attachment"></i>
           <span class="nav-categories-item-text" href="#">Pedidos</span>
         </a>
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/quotations" 
-          flex 
-          flex-xs="25" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/quotations"
+          flex
+          flex-xs="25"
           class="nav-categories-item"
         >
           <i class="icon-oportunidades"></i>
           <span class="nav-categories-item-text" href="#">Cotizaciones</span>
-        </a>        
+        </a>
 
       </nav>
 
