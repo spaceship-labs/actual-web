@@ -7,11 +7,14 @@
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="80" layout="row" layout-wrap layout-align="start center">
-      <div flex="33" flex-sm="50" flex-xs="100" ng-repeat="product in vm.dinningRooms | limitTo:vm.limitDinningRooms track by $index"
+    <div flex="80" ng-show="vm.top['comedores-loaded']">
+      <slick class="categories-carousel" infinite="false" slides-to-show="3" slides-to-scroll="3"
+      init-onload=true data="vm.top['comedores-loaded']">
+        <div ng-repeat="product in vm.dinningRooms"
         class="listing-product-wrap">
-        <listing-product product="product"></listing-product>
-      </div>
+          <listing-product class="foo" product="product"></listing-product>
+        </div>
+      </slick>
     </div>
     <div flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
       <a href="/category/comedores">

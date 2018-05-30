@@ -6,10 +6,27 @@
       </a>
     </h2>
   </div>
-  <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="33" flex-sm="50" flex-xs="100" ng-repeat="product in vm.kidsBeds | limitTo:vm.limitKidsBeds track by $index" class="listing-product-wrap">
-      <listing-product product="product"></listing-product>
+  <div class="products-list" layout="row" layout-wrap layout-align="start center"  ng-cloak>
+    <div flex="80" ng-show="vm.top['camas-infantiles-loaded']">
+      <slick class="categories-carousel" infinite="false" slides-to-show="3" slides-to-scroll="3"
+      init-onload=true data="vm.top['camas-infantiles-loaded']">
+        <div ng-repeat="product in vm.kidsBeds"
+        class="listing-product-wrap">
+          <listing-product class="foo" product="product"></listing-product>
+        </div>
+      </slick>
     </div>
-    <!-- <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="vm.kidsBeds.length > vm.limitKidsBeds" ng-click="loadMore('kidsBeds')">Ver más</button> -->
+    <div flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
+      <a href="/category/salas">
+        <div class="circle">
+          <div class="circle-text">
+            <p>
+              VER CATEGORÍA <strong>COMPLETA</strong>
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="vm.livingRooms.length > vm.limitLivingRooms" ng-click="loadMore('livingRooms')">Ver más</button> -->
   </div>
 </div>

@@ -6,13 +6,13 @@
       </a>
     </h2>
   </div>
-  <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="80" layout="row" layout-wrap layout-align="start center">
+  <div class="products-list" layout="row" layout-wrap layout-align="start center"  ng-cloak>
+    <div flex="80" ng-show="vm.top['salas-loaded']">
       <slick class="categories-carousel" infinite="false" slides-to-show="3" slides-to-scroll="3"
-      init-onload=true data="vm.livingRooms">
+      init-onload=true data="vm.top['salas-loaded']">
         <div ng-repeat="product in vm.livingRooms"
         class="listing-product-wrap">
-          <listing-product product="product"></listing-product>
+          <listing-product class="foo" product="product"></listing-product>
         </div>
       </slick>
     </div>
