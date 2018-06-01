@@ -1292,7 +1292,6 @@ select {
 .smart-menu p {
   text-align: left;
   margin-left: 45px;
-  line-height: 1.4;
   cursor: pointer;
 }
 .smart-menu p:hover {

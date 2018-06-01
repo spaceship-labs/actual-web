@@ -1,15 +1,8 @@
 <div class="smart-menu" layout="row" layout-wrap layout-align="start" ng-cloak>
   <div flex="30">
-    <p><a href="#">Salas Esquineras</a></p>
-    <p><a href="#">Salas Modulares</a></p>
-    <p><a href="#">Sofás Camas</a></p>
-    <p><a href="#">Futones</a></p>
-    <p><a href="#">Sillones</a></p>
-    <p><a href="#">Sillones Reclinables</a></p>
-    <p><a href="#">Taburetes</a></p>
-    <p><a href="#">Salas de Jardín</a></p>
-    <p><a href="#">Mesas de Centro</a></p>
-    <p><a href="#">Credenzas</a></p>
+    <div ng-repeat="subcategory in subcategories">
+      <p><a href="#">{{subcategory.name}}</a></p>
+    </div>
   </div>
   <div flex="70">
     <img src="/images/header-banner.png" alt="">
