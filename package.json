@@ -47,6 +47,7 @@
   "dependencies": {
     "connect-modrewrite": "^0.9.0",
     "grunt-ng-constant": "^2.0.1",
-    "grunt-processhtml": "^0.4.1"
+    "grunt-processhtml": "^0.4.1",
+    "yo": "^2.0.2"
   }
 }

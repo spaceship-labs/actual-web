@@ -994,6 +994,7 @@ select {
 
 .menu .nav-categories {
   padding: 0 20px;
+  position: relative;
 }
 
 .header-top-bar .categories-btn,
@@ -1011,7 +1012,7 @@ select {
   padding: 12px 6px 12px;
   z-index: 9999;
   text-decoration: none;
-  position: relative;
+  position: static;
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -1276,6 +1277,44 @@ select {
   content: '> ';
 }
 
+/*---------------/
+  #SMARTMENU
+ /*-------------*/
+.smart-menu {
+  background: #f7f8f8;
+  position: absolute;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.44) 0px 7px 7px -2px;
+  left: 0;
+  top: 100%;
+  z-index: 999999;
+}
+.smart-menu p {
+  text-align: left;
+  margin-left: 45px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.smart-menu p:hover {
+  text-shadow: -0.25px -0.25px 0 black, 0.25px 0.25px black;
+}
+.smart-menu a {
+  color: #030202;
+}
+.smart-menu a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #e2023f;
+  transition: width 0.3s;
+}
+.smart-menu a:hover::after {
+  width: 15%;
+}
+.smart-menu img {
+  width: 100%;
+}
 /*---------------/
   #HOME
 /*--------------*/
