@@ -52,6 +52,8 @@
       showPhoneNumberDialog: showPhoneNumberDialog,
       siteTheme: SITE.name,
       siteConstants: SITE,
+      handleCategoryHover: handleCategoryHover,
+      handleCategoryLeave: handleCategoryLeave,
       api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
@@ -92,7 +94,375 @@
       vm.activeStoreId = localStorageService.get('activeStore');
       $rootScope.user = vm.user;
       vm.isUserSellerOrAdmin = authService.isUserSellerOrAdmin();
-
+      vm.categories = [
+        {
+          name: 'Salas',
+          sub: [
+            {
+              name: 'Salas Esquineras',
+              url: ''
+            },
+            {
+              name: 'Salas Modulares',
+              url: ''
+            },
+            {
+              name: 'Sofás Cama',
+              url: ''
+            },
+            {
+              name: 'Futones',
+              url: ''
+            },
+            {
+              name: 'Sillones',
+              url: ''
+            },
+            {
+              name: 'Sillones Reclinables',
+              url: ''
+            },
+            {
+              name: 'Salas de Cine',
+              url: ''
+            },
+            {
+              name: 'Taburetes',
+              url: ''
+            },
+            {
+              name: 'Salas para Jardín',
+              url: ''
+            },
+            {
+              name: 'Mesas de Centro',
+              url: ''
+            },
+            {
+              name: 'Credenzas',
+              url: ''
+            }
+          ]
+        },
+        {
+          name: 'Comedores',
+          sub: [
+            {
+              name: 'Mesas de Comedor',
+              url: ''
+            },
+            {
+              name: 'Sillas de Comedor',
+              url: ''
+            },
+            {
+              name: 'Bancos para Barra',
+              url: ''
+            },
+            {
+              name: 'Bufeteros',
+              url: ''
+            }
+          ]
+        },
+        {
+          name: 'Sillas y Bancos',
+          sub: [
+            {
+              name: 'Sillas de Comedor',
+              url: ''
+            },
+            {
+              name: 'Sillas para Oficina',
+              url: ''
+            },
+            {
+              name: 'Sillas para Jardín',
+              url: ''
+            },
+            {
+              name: 'Bancos para Barra',
+              url: ''
+            }
+          ]
+        },
+        {
+          name: 'Recámaras',
+          sub: [
+            {
+              name: 'Camas',
+              url: ''
+            },
+            {
+              name: 'Cabeceras',
+              url: ''
+            },
+            {
+              name: 'Bases de Cama',
+              url: ''
+            },
+            {
+              name: 'Futones',
+              url: ''
+            },
+            {
+              name: 'Sofás Cama',
+              url: ''
+            },
+            {
+              name: 'Burós',
+              url: ''
+            },
+            {
+              name: 'Colchones',
+              url: ''
+            }
+          ]
+        },
+        {
+          name: 'Muebles de Exterior',
+          sub: [
+            {
+              name: 'Salas para Jardín',
+              url: ''
+            },
+            {
+              name: 'Sillones para Exterior',
+              url: ''
+            },
+            {
+              name: 'Mesas para Jardín',
+              url: ''
+            },
+            {
+              name: 'Sillas para Jardín',
+              url: ''
+            },
+            {
+              name: 'Camastros',
+              url: ''
+            },
+            {
+              name: 'Sombrillas',
+              url: ''
+            }
+          ]
+        },
+        {
+          name: 'Muebles de Oficina',
+          sub: [
+            {
+              name: 'Escritorios',
+              url: ''
+            },
+            {
+              name: 'Sillas para Oficina',
+              url: ''
+            },
+            {
+              name: 'Libreros',
+              url: ''
+            }
+          ]
+        },
+        {
+          name: 'Muebles de TV',
+          sub: [
+            {
+              name: 'Muebles para TV',
+              url: ''
+            },
+            {
+              name: 'Centro de Entretenimiento',
+              url: ''
+            },
+            {
+              name: 'Sillones Riclinables',
+              url: ''
+            },
+            {
+              name: 'Salas de Cine',
+              url: ''
+            }
+          ]
+        }
+      ];
+      vm.accordion = {
+        current: null
+      };
+      vm.subcategories = {
+        Salas: [
+          {
+            name: 'Salas Esquineras',
+            url: ''
+          },
+          {
+            name: 'Salas Modulares',
+            url: ''
+          },
+          {
+            name: 'Sofás Cama',
+            url: ''
+          },
+          {
+            name: 'Futones',
+            url: ''
+          },
+          {
+            name: 'Sillones',
+            url: ''
+          },
+          {
+            name: 'Sillones Reclinables',
+            url: ''
+          },
+          {
+            name: 'Salas de Cine',
+            url: ''
+          },
+          {
+            name: 'Taburetes',
+            url: ''
+          },
+          {
+            name: 'Salas para Jardín',
+            url: ''
+          },
+          {
+            name: 'Mesas de Centro',
+            url: ''
+          },
+          {
+            name: 'Credenzas',
+            url: ''
+          }
+        ],
+        Comedores: [
+          {
+            name: 'Mesas de Comedor',
+            url: ''
+          },
+          {
+            name: 'Sillas de Comedor',
+            url: ''
+          },
+          {
+            name: 'Bancos para Barra',
+            url: ''
+          },
+          {
+            name: 'Bufeteros',
+            url: ''
+          }
+        ],
+        SillasBancos: [
+          {
+            name: 'Sillas de Comedor',
+            url: ''
+          },
+          {
+            name: 'Sillas para Oficina',
+            url: ''
+          },
+          {
+            name: 'Sillas para Jardín',
+            url: ''
+          },
+          {
+            name: 'Bancos para Barra',
+            url: ''
+          }
+        ],
+        Recamaras: [
+          {
+            name: 'Camas',
+            url: ''
+          },
+          {
+            name: 'Cabeceras',
+            url: ''
+          },
+          {
+            name: 'Bases de Cama',
+            url: ''
+          },
+          {
+            name: 'Futones',
+            url: ''
+          },
+          {
+            name: 'Sofás Cama',
+            url: ''
+          },
+          {
+            name: 'Burós',
+            url: ''
+          },
+          {
+            name: 'Colchones',
+            url: ''
+          }
+        ],
+        MueblesExterior: [
+          {
+            name: 'Salas para Jardín',
+            url: ''
+          },
+          {
+            name: 'Sillones para Exterior',
+            url: ''
+          },
+          {
+            name: 'Mesas para Jardín',
+            url: ''
+          },
+          {
+            name: 'Sillas para Jardín',
+            url: ''
+          },
+          {
+            name: 'Camastros',
+            url: ''
+          },
+          {
+            name: 'Sombrillas',
+            url: ''
+          }
+        ],
+        MueblesOficina: [
+          {
+            name: 'Escritorios',
+            url: ''
+          },
+          {
+            name: 'Sillas para Oficina',
+            url: ''
+          },
+          {
+            name: 'Libreros',
+            url: ''
+          }
+        ],
+        MueblesTV: [
+          {
+            name: 'Muebles para TV',
+            url: ''
+          },
+          {
+            name: 'Centro de Entretenimiento',
+            url: ''
+          },
+          {
+            name: 'Sillones Riclinables',
+            url: ''
+          },
+          {
+            name: 'Salas de Cine',
+            url: ''
+          }
+        ]
+      };
+      vm.activeCategory = [false, false, false, false, false, false, false];
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
@@ -530,6 +900,22 @@
 
     function showPhoneNumberDialog() {
       dialogService.showDialog('Asistencia en su compra: 01 (998) 884 1594');
+    }
+
+    function handleCategoryHover(id) {
+      console.log('ARRAY CAT: ', vm.activeCategory);
+      vm.activeCategory.map(function(active) {
+        return (active = false);
+      });
+      vm.activeCategory[id] = true;
+    }
+
+    function handleCategoryLeave() {
+      console.log('HOLAAAAAAAA');
+      vm.activeCategory = vm.activeCategory.map(function(active) {
+        return (active = false);
+      });
+      console.log(vm.activeCategory);
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {

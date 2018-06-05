@@ -5,30 +5,24 @@
 </div>
 
 <div ng-if="!main.isLoadingCategoriesTree" class="content-block listing-view">
-  <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
+  <div layout="row" layout-wrap layout-align="space-between start">
     <!--START NAV-->
-    <aside flex-gt-sm="15" flex="100" hide-sm hide-xs>
+    <!-- <aside flex-gt-sm="15" flex="100" hide-sm hide-xs>
       <sidebar-categories categories-tree="main.categoriesTree" active-store="main.activeStore">
       </sidebar-categories>
-    </aside>
+    </aside> -->
     <!--END NAV-->
 
     <!--CATEGORIES-->
-    <div flex-gt-sm="80" flex="100">
+    <div flex-gt-sm="100" flex="100">
 
       <ng-include src="'views/partials/home-slider.html'"></ng-include>
 
-      <div ng-if="vm.activeStore.code !== 'actual_kids'">
-        <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
-      </div>
-      <div ng-if="vm.activeStore.code === 'actual_kids'">
-        <ng-include src="'views/partials/best-sellers-kids-beds.html'"></ng-include>
-      </div>
 
-
-      <div class="subs-container">
-        <div class="subs-container-list">
-          <slick class="categories-carousel" responsive="vm.categoriesCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
+      <div class="container container-xxlg">
+        <div class="subs-container">
+          <div class="subs-container-list">
+            <slick class="categories-carousel" responsive="vm.categoriesCarouselBreakpoints" infinite="false" slides-to-show="5" slides-to-scroll="5"
             init-onload=true data="main.categoriesTree">
             <div class="sub-wrapper" ng-repeat="category in main.categoriesTree" ng-if="category[vm.stockProperty] > 0">
               <category-item category="category" stock-key="{{vm.stockProperty}}" />
@@ -40,7 +34,7 @@
                 <div class="sub-text">
                   <h4>
                     <a ng-href="/ofertas">
-                      <strong>Ofertas</strong>
+                      <!-- <strong>Ofertas</strong> -->
                     </a>
                   </h4>
                 </div>
@@ -53,6 +47,12 @@
         </div>
       </div>
 
+      <div ng-if="vm.activeStore.code !== 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
+      </div>
+      <div ng-if="vm.activeStore.code === 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-kids-beds.html'"></ng-include>
+      </div>
 
       <div ng-if="vm.activeStore.code !== 'actual_kids'">
         <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
@@ -72,6 +72,7 @@
       </div>
 
     </div>
+      </div>
     <!-- END CATEGORIES-->
 
   </div>

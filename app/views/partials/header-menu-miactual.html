@@ -1,72 +1,98 @@
   <div class="menu" hide-xs>
     <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between stretch">
-      <div flex-gt-sm="15" flex="100" class="logo" layout="row" layout-align="center center">
+      <!-- <div flex-gt-sm="15" flex="100" class="logo" layout="row" layout-align="center center"> -->
         <!--<i ng-click="isReplyFormOpen = !isReplyFormOpen" class="icon-paragraph-justify" hide-gt-xs></i>-->
-        <a href="/" ng-switch on="main.siteTheme">
+        <!-- TODO:  Reemplazar-->
+        <!-- <a href="/" ng-switch on="main.siteTheme">
           <img ng-switch-when="actual-home" src="images/Logo-A-Home.png" alt="Actual Group">
           <img ng-switch-when="actual-studio" src="images/Logo-A-Studio.png" alt="Actual Group">
           <img ng-switch-when="actual-kids" src="images/Logo-A-Kids.png" alt="Actual Group">
           <img ng-switch-default src="images/Logo-A-Home.png" alt="Actual Group">
-        </a>
+        </a> -->
 
-      </div>
+      <!-- </div> -->
 
       <nav
         ng-if="main.siteTheme !== 'actual-kids' "
         hide-sm
-        flex-gt-sm="80"
+        flex-gt-sm="100"
         flex="100"
         layout="row"
         layout-wrap
         ng-mouseover="main.menuCategoriesOn = false"
         class="nav-categories"
       >
-        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-ninos"></i>
-          <span class="nav-categories-item-text" href="#">Recámaras</span>
-        </a>
-        <a href="/category/salas" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-sofa nav-categories-item-add"></i>
+        <a href="/category/salas" flex flex-xs="25" class="nav-categories-item" ng-mouseover="main.handleCategoryHover(0)" ng-mouseleave="main.handleCategoryLeave()">
+          <i class="icon-1"></i>
           <span class="nav-categories-item-text" href="#">Salas</span>
         </a>
-        <a href="/category/comedores" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-sillas"></i>
-          <span class="nav-categories-item-text" href="#">comedores</span>
+        <smart-menu ng-show="main.activeCategory[0]" ng-mouseover="main.handleCategoryHover(0)" ng-mouseleave="main.handleCategoryLeave()" subcategories="main.subcategories.Salas"></smart-menu>
+
+        <a href="/category/comedores" flex flex-xs="25" class="nav-categories-item" ng-mouseover="main.handleCategoryHover(1)" ng-mouseleave="main.handleCategoryLeave()">
+          <i class="icon-2"></i>
+          <span class="nav-categories-item-text" href="#">Comedores</span>
         </a>
-        <a href="/category/muebles-de-jardin" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-jardin"></i>
-          <span class="nav-categories-item-text" href="#">Exteriores</span>
+        <smart-menu ng-show="main.activeCategory[1]" ng-mouseover="main.handleCategoryHover(1)" ng-mouseleave="main.handleCategoryLeave()" subcategories="main.subcategories.Comedores"></smart-menu>
+
+        <a href="/category/sillas" flex flex-xs="25" class="nav-categories-item" ng-mouseover="main.handleCategoryHover(2)" ng-mouseleave="main.handleCategoryLeave()">
+          <i class="icon-3"></i>
+          <span class="nav-categories-item-text" href="#">Sillas</span>
         </a>
-        <a href="/category/muebles-para-oficina" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-office"></i>
-          <span class="nav-categories-item-text" href="#">Oficina</span>
+        <smart-menu ng-show="main.activeCategory[2]" ng-mouseover="main.handleCategoryHover(2)" ng-mouseleave="main.handleCategoryLeave()" subcategories="main.subcategories.SillasBancos"></smart-menu>
+
+        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item" ng-mouseover="main.handleCategoryHover(3)" ng-mouseleave="main.handleCategoryLeave()">
+          <i class="icon-4"></i>
+          <span class="nav-categories-item-text" href="#">Recámaras</span>
         </a>
-        <a href="/category/lamparas" flex flex-xs="25" class="nav-categories-item" >
-          <i class="icon-decoracion"></i>
-          <span class="nav-categories-item-text" href="#">Lamparas</span>
+        <smart-menu ng-show="main.activeCategory[3]" ng-mouseover="main.handleCategoryHover(3)" ng-mouseleave="main.handleCategoryLeave()" subcategories="main.subcategories.Recamaras"></smart-menu>
+
+        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item" ng-mouseover="main.handleCategoryHover(4)" ng-mouseleave="main.handleCategoryLeave()">
+          <i class="icon-5"></i>
+          <span class="nav-categories-item-text" href="#">Muebles de exterior</span>
         </a>
-        <a href="/ofertas" flex flex-xs="25" class="nav-categories-item">
-          <i class="icon-ofertas"></i>
-          <span class="nav-categories-item-text" href="#">Ofertas</span>
+        <smart-menu ng-show="main.activeCategory[4]" ng-mouseover="main.handleCategoryHover(4)" ng-mouseleave="main.handleCategoryLeave()" subcategories="main.subcategories.MueblesExterior"></smart-menu>
+
+        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item" ng-mouseover="main.handleCategoryHover(5)" ng-mouseleave="main.handleCategoryLeave()">
+          <i class="icon-6"></i>
+          <span class="nav-categories-item-text" href="#">Muebles de televisión</span>
+        </a>
+        <smart-menu ng-show="main.activeCategory[5]" ng-mouseover="main.handleCategoryHover(5)" ng-mouseleave="main.handleCategoryLeave()" subcategories="main.subcategories.MueblesTV"></smart-menu>
+
+        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item" ng-mouseover="main.handleCategoryHover(6)" ng-mouseleave="main.handleCategoryLeave()">
+          <i class="icon-7"></i>
+          <span class="nav-categories-item-text" href="#">Muebles de Oficina</span>
+        </a>
+        <smart-menu ng-show="main.activeCategory[6]" ng-mouseover="main.handleCategoryHover(6)" ng-mouseleave="main.handleCategoryLeave()" subcategories="main.subcategories.MueblesOficina"></smart-menu>
+
+        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item">
+          <i class="icon-8"></i>
+          <span class="nav-categories-item-text" href="#">Arma tu <i>Look</i> paquetes</span>
+        </a>
+        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item">
+          <i class="icon-9"></i>
+          <span class="nav-categories-item-text" href="#">Promociones</span>
+        </a>
+        <a href="/category/recamaras" flex flex-xs="25" class="nav-categories-item">
+          <img src="images/logos/kids.png" alt="Actual Group" style="width: 80px">
         </a>
 
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/orders" 
-          flex 
-          flex-xs="25" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/orders"
+          flex
+          flex-xs="25"
           class="nav-categories-item"
         >
           <i class="icon-attachment"></i>
           <span class="nav-categories-item-text" href="#">Pedidos</span>
         </a>
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/quotations" 
-          flex 
-          flex-xs="25" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/quotations"
+          flex
+          flex-xs="25"
           class="nav-categories-item"
         >
           <i class="icon-oportunidades"></i>
@@ -77,7 +103,7 @@
 
       <nav
         ng-if="main.siteTheme === 'actual-kids' "
-        hide-sm        
+        hide-sm
         flex-gt-sm="80"
         flex="100"
         layout="row"
@@ -87,54 +113,62 @@
       >
         <a href="/category/camas-infantiles" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-ninos"></i>
-          <span class="nav-categories-item-text" href="#">Camas</span>
+          <span class="nav-categories-item-text" href="#">Niños y Niñas</span>
         </a>
         <a href="/category/cunas-para-bebes" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-bebes nav-categories-item-add"></i>
-          <span class="nav-categories-item-text" href="#">Cunas</span>
+          <span class="nav-categories-item-text" href="#">Bebés</span>
         </a>
         <a href="/category/accesorios-infantiles" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-ambientes"></i>
-          <span class="nav-categories-item-text" href="#">Accesorios</span>
+          <span class="nav-categories-item-text" href="#">Mamá y Papá</span>
         </a>
         <a href="/category/lamparas-infantiles" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-decoracion"></i>
-          <span class="nav-categories-item-text" href="#">Lamparas</span>
+          <span class="nav-categories-item-text" href="#">Organización</span>
         </a>
         <a href="/category/mesas-y-sillas-infantiles" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-mesas"></i>
-          <span class="nav-categories-item-text" href="#">Mesas</span>
+          <span class="nav-categories-item-text" href="#">Juguetes</span>
         </a>
         <a href="/category/comoda-infantil" flex flex-xs="25" class="nav-categories-item" >
           <i class="icon-comoda"></i>
-          <span class="nav-categories-item-text" href="#">Comodas</span>
+          <span class="nav-categories-item-text" href="#">Decoración y Accesorios</span>
+        </a>
+        <a href="/category/comoda-infantil" flex flex-xs="25" class="nav-categories-item" >
+          <i class="icon-comoda"></i>
+          <span class="nav-categories-item-text" href="#">Iluminación</span>
+        </a>
+        <a href="/category/comoda-infantil" flex flex-xs="25" class="nav-categories-item" >
+          <i class="icon-comoda"></i>
+          <span class="nav-categories-item-text" href="#">Tapetes</span>
         </a>
         <a href="/ofertas" flex flex-xs="25" class="nav-categories-item">
           <i class="icon-ofertas"></i>
           <span class="nav-categories-item-text" href="#">Ofertas</span>
         </a>
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/orders" 
-          flex 
-          flex-xs="25" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/orders"
+          flex
+          flex-xs="25"
           class="nav-categories-item"
         >
           <i class="icon-attachment"></i>
           <span class="nav-categories-item-text" href="#">Pedidos</span>
         </a>
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/quotations" 
-          flex 
-          flex-xs="25" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/quotations"
+          flex
+          flex-xs="25"
           class="nav-categories-item"
         >
           <i class="icon-oportunidades"></i>
           <span class="nav-categories-item-text" href="#">Cotizaciones</span>
-        </a>        
+        </a>
 
       </nav>
 
