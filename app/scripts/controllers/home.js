@@ -197,9 +197,11 @@ HomeCtrl.$inject = [
   '$scope',
   '$timeout',
   '$rootScope',
+  '$routeParams',
   'api',
   'siteService',
   'productService',
   'metaTagsService',
+  'dialogService',
   'activeStore'
 ];
