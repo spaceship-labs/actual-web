@@ -102,29 +102,26 @@
           <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
-
+        <!--
         <div hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong>
               <i class="icon-phone"></i>
             </strong>
-            <!--<strong hide-xs>998 246 3487</strong>-->
             <strong hide-xs>(998) 884 1594</strong>
           </span>
 
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
-
-        <a flex  href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+        -->
+        <a flex hide-gt-sm href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong>
               <i class="icon-whatsapp"></i>
             </strong>
-            <!--<strong hide-xs>998 246 3487</strong>-->
-            <strong hide-xs>(998) 246 3487</strong>
           </span>
         </a>
-
+        
 
         <!--IF ACTIVE QUOTATION-->
         <a ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{main.activeQuotation.id}}" class="header-top-bar-menu-item">

@@ -516,12 +516,14 @@ select {
   /*min-height: 40px;*/
   outline: none;
   text-align: center;
-  min-width: 50px;
+  /*min-width: 50px;*/
+  min-width: 90px;
   cursor: pointer;
   position: relative;
   margin: 0 4px;
 }
 
+.header-top-bar-menu-item p{font-size: 14px;}
 .header-top-bar-menu .cart-n-items {
   position: absolute;
   left: 5px;
@@ -535,7 +537,7 @@ select {
 .header-top-bar-menu-item-phone {
   text-align: center;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   min-width: 170px;
 }
 
@@ -7098,10 +7100,9 @@ md-sidenav {
     display: block;
   }
   .header-top-bar .logo img {
-    max-height: 48px;
+    max-height: 38px;
     position: relative;
-    top: 3px;
-    left: 20px;
+    margin: 3px 0 4px 5px;
   }
   .header-top-bar-menu {
     margin: 0 auto !important;
