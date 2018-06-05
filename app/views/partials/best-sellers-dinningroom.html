@@ -8,7 +8,7 @@
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
     <div flex="80" ng-show="vm.top['comedores-loaded']">
-      <slick class="categories-carousel" infinite="false" slides-to-show="3" slides-to-scroll="3"
+      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
       init-onload=true data="vm.top['comedores-loaded']">
         <div ng-repeat="product in vm.dinningRooms"
         class="listing-product-wrap">
@@ -16,7 +16,7 @@
         </div>
       </slick>
     </div>
-    <div flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
+    <div hide-xs hide-sm flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
       <a href="/category/comedores">
         <div class="circle">
           <div class="circle-text">

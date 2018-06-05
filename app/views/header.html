@@ -7,7 +7,7 @@
   <div class="header-top-bar" fixed-element top="70" ng-class="{'fixed-head': scrolled}">
     <div class="container" layout="row" layout-wrap layout-align="center center">
 
-      <div flex-gt-xs="15" class="logo" layout-align="center center">
+      <div hide-xs flex-gt-xs="15" class="logo" layout-align="center center">
         <a href="/" ng-switch on="main.siteTheme">
           <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group">
           <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group">
@@ -62,32 +62,30 @@
       <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center" layout-align-sm="center center"
         layout-align-xs="start center">
 
-        <div flex="10" hide-gt-xs>
-          <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static">
-            <span></span>
-            <span></span>
-            <span></span>
-          </a>
-        </div>
 
         <div flex-gt-xs="15" class="logo logo-mobile" layout-align="center center">
           <a href="/" ng-switch on="main.siteTheme">
-            <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group">
-            <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group">
-            <img ng-switch-when="actual-kids" src="images/actual-kids-blanco.png" alt="Actual Group">
-            <img ng-switch-default src="images/actual-home-blanco.png" alt="Actual Group">
+            <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group">
+            <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group">
+            <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group">
+            <img ng-switch-default src="images/logos/home.png" alt="Actual Group">
           </a>
         </div>
 
+        <div flex hide-gt-xs>
+          <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static" style="color: #fff;">
+            DEPARTAMENTOS
+          </a>
+        </div>
 
-        <!-- <div flex class="header-top-bar-menu-item search-trigger-item">
+        <div flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
-        </div> -->
-        <div flex class="header-top-bar-menu-item">
+        </div>
+        <div hide-xs flex class="header-top-bar-menu-item">
           <p style="color: #fff;">REGISTRATE</p>
         </div>
 
-        <div ng-if="!main.user" flex id="login-header-trigger" class="header-top-bar-menu-item">
+        <div hide-xs ng-if="!main.user" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <p ng-click="main.toggleLoginModal()" style="color: #fff;">| <strong>MI CUENTA</strong></p>
           <!-- <i class="icon-login" ng-click="main.toggleLoginModal()"></i> -->
           <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
@@ -117,7 +115,7 @@
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
 
-        <a flex hide-gt-sm href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+        <a flex  href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong>
               <i class="icon-whatsapp"></i>

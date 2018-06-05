@@ -28,6 +28,16 @@ function HomeCtrl(
           centerMode: true
         }
       }
+    ],
+    bestSellersCarouselBreakpoints: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true
+        }
+      }
     ]
   });
 

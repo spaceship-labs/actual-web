@@ -1,9 +1,10 @@
-<md-sidenav 
-  class="md-sidenav-left md-whiteframe-4dp pointers-sidenav mobile-sidenav" 
+<md-sidenav
+  fullscreen
+  class="md-sidenav-left md-whiteframe-4dp pointers-sidenav mobile-sidenav"
   md-component-id="mobileSidenav"
 >
-  <md-button 
-    ng-click="main.toggleMobileSidenav()" 
+  <md-button
+    ng-click="main.toggleMobileSidenav()"
     class="close-btn md-fab md-mini md-primary"
   >x</md-button>
 
@@ -45,18 +46,18 @@
         <span class="nav-categories-item-text" href="#">Ofertas</span>
       </a>
 
-      <a 
-        ng-if="main.isUserSellerOrAdmin" 
-        href="/reports/orders" 
+      <a
+        ng-if="main.isUserSellerOrAdmin"
+        href="/reports/orders"
         class="nav-categories-item"
       >
         <i class="icon-attachment"></i>
         <span class="nav-categories-item-text" href="#">Pedidos</span>
       </a>
 
-      <a 
-        ng-if="main.isUserSellerOrAdmin" 
-        href="/reports/quotations" 
+      <a
+        ng-if="main.isUserSellerOrAdmin"
+        href="/reports/quotations"
         class="nav-categories-item"
       >
         <i class="icon-oportunidades"></i>
@@ -96,23 +97,23 @@
           <span class="nav-categories-item-text" href="#">Ofertas</span>
         </a>
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/orders" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/orders"
           class="nav-categories-item"
         >
           <i class="icon-attachment"></i>
           <span class="nav-categories-item-text" href="#">Pedidos</span>
         </a>
 
-        <a 
-          ng-if="main.isUserSellerOrAdmin" 
-          href="/reports/quotations" 
+        <a
+          ng-if="main.isUserSellerOrAdmin"
+          href="/reports/quotations"
           class="nav-categories-item"
         >
           <i class="icon-oportunidades"></i>
           <span class="nav-categories-item-text" href="#">Cotizaciones</span>
-        </a>       
+        </a>
     </nav>
 
   </md-content>
