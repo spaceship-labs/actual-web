@@ -74,7 +74,7 @@
 
         <div flex hide-gt-xs>
           <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static" style="color: #fff;">
-            DEPARTAMENTOS
+            MENU
           </a>
         </div>
 
@@ -82,14 +82,14 @@
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div>
         <div hide-xs flex class="header-top-bar-menu-item">
-          <p style="color: #fff;">REGISTRATE</p>
+          <p style="color: #fff;">REGÍSTRATE</p>
         </div>
         <div hide-xs ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">| <strong>MI CUENTA</strong></p>
           <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
             <strong class="invited-label">Invitado</strong>
           </span>
-         
+
           <!-- <i class="icon-login" ng-click="main.toggleLoginModal()"></i> -->
           <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>
@@ -106,18 +106,17 @@
           <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
-        <!--
+
         <div hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong>
               <i class="icon-phone"></i>
             </strong>
-            <strong hide-xs>(998) 884 1594</strong>
           </span>
 
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
-        -->
+
         <a flex hide-gt-sm href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong>
@@ -125,7 +124,7 @@
             </strong>
           </span>
         </a>
-        
+
 
         <!--IF ACTIVE QUOTATION-->
         <a ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{main.activeQuotation.id}}" class="header-top-bar-menu-item">

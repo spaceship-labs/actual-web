@@ -54,6 +54,7 @@
       siteConstants: SITE,
       handleCategoryHover: handleCategoryHover,
       handleCategoryLeave: handleCategoryLeave,
+      handleAccordion: handleAccordion,
       api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
@@ -94,6 +95,9 @@
       vm.activeStoreId = localStorageService.get('activeStore');
       $rootScope.user = vm.user;
       vm.isUserSellerOrAdmin = authService.isUserSellerOrAdmin();
+      vm.accordion = {
+        current: null
+      };
       vm.categories = [
         {
           name: 'Salas',
@@ -287,9 +291,7 @@
           ]
         }
       ];
-      vm.accordion = {
-        current: null
-      };
+
       vm.subcategories = {
         Salas: [
           {
@@ -916,6 +918,12 @@
         return (active = false);
       });
       console.log(vm.activeCategory);
+    }
+
+    function handleAccordion(name) {
+      console.log('ACORDION BEFORE: ', vm.accordion.current);
+      vm.accordion.current = vm.accordion.current === name ? null : name;
+      console.log('ACORDION: ', vm.accordion.current);
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {

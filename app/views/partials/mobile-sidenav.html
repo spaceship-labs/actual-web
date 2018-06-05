@@ -17,7 +17,17 @@
   <md-content>
 
     <nav ng-if="main.siteTheme !== 'actual-kids' ">
-      <a href="/category/recamaras" class="nav-categories-item">
+      <ul>
+        <li ng-repeat="category in main.categories" ng-click="main.handleAccordion(category.name)" class="nav-categories-item-sidenav">
+          <span class="nav-categories-item-text" href="#">{{ category.name }}</span>
+          <ul ng-show="main.accordion.current === category.name">
+            <li ng-repeat="subcategory in category.sub" class="nav-categories-item">
+              <span class="nav-categories-item-text" href="#">{{ subcategory.name }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <a href="/category/recamaras" class="nav-categories-item">
         <i class="icon-ninos"></i>
         <span class="nav-categories-item-text" href="#">Recámaras</span>
       </a>
@@ -62,7 +72,7 @@
       >
         <i class="icon-oportunidades"></i>
         <span class="nav-categories-item-text" href="#">Cotizaciones</span>
-      </a>
+      </a> -->
 
     </nav>
 
