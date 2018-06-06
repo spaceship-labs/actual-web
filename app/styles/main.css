@@ -1071,6 +1071,12 @@ select {
   text-decoration: none;
   text-transform: uppercase;
 }
+.nav-categories-item-sidenav > span {
+  color: #000;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
 /*
 .nav-categories-item > span:after{
   content: '';
