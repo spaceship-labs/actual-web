@@ -26,7 +26,7 @@
   <ng-include src="'views/partials/search-filters.html'"></ng-include>
   <!--END FILTERS-->
 
-  <div class="container container-xxlg" layout="row" layout-wrap layout-align="space-between start">
+  <div class="container container-xxlg">
 
 
     <!--START NAV-->
@@ -40,7 +40,7 @@
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
-    <div flex="75" flex-sm="100" flex-xs="100">
+    <div>
 
       <div class="subs-container">
 
@@ -68,7 +68,7 @@
         <div ng-if="!vm.isLoading || vm.search.page > 1" class="results" infinite-scroll="vm.loadMore()" infinite-scroll-disabled="!(vm.totalResults > vm.products.length && !vm.isLoading && vm.products.length > 0)"
           infinite-scroll-distance="1">
           <div class="products-list" layout="row" layout-wrap layout-align="start center">
-            <div flex="33" flex-xs="100" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
+            <div flex="25" flex-xs="100" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
               <listing-product product="product"></listing-product>
             </div>
           </div>

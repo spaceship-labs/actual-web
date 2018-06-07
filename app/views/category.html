@@ -30,7 +30,7 @@
   <ng-include src="'views/partials/search-filters.html'"></ng-include>
 
 
-  <div class="container container-xxlg" layout="row" layout-align="space-between start">
+  <div class="container container-xxlg">
     <!--START NAV-->
     <!-- <aside flex="20" hide-sm hide-xs>
       <sidebar-categories
@@ -43,7 +43,7 @@
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
-    <div flex="75" flex-sm="100" flex-xs="100">
+    <div>
 
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
         <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
@@ -85,7 +85,7 @@
             </h2>
 
             <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-              <div flex="33" flex-sm="50" flex-xs="100" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
+              <div flex="25" flex-sm="50" flex-xs="100" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
                 <listing-product product="product"></listing-product>
               </div>
             </div>
