@@ -291,7 +291,16 @@
           ]
         }
       ];
-
+      vm.category = [
+        'salas',
+        'comedores',
+        'sillas',
+        'recamaras',
+        'mueblesExterior',
+        'mueblesTV',
+        'mueblesOficina',
+        'look'
+      ];
       vm.subcategories = {
         Salas: [
           {
