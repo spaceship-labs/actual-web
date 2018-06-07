@@ -1749,10 +1749,18 @@ select {
 .products-list .view-more-category .circle {
   height: 250px;
   width: 100%;
-  background-color: #030202;
   border-radius: 50%;
   display: inline-block;
   margin: 0 auto;
+}
+.products-list .view-more-category .circle-salas {
+  background: #c7227d;
+}
+.products-list .view-more-category .circle-comedores {
+  background: #5d1d7c;
+}
+.products-list .view-more-category .circle-recamaras {
+  background: #3f72af;
 }
 .products-list .view-more-category .circle .circle-text {
   /* position: absolute; */
