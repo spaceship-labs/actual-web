@@ -1,6 +1,6 @@
 <div ng-if="vm.siteBanners && main.site" id="home-slider-wrapper">
-  <slick class="home-slider" infinite="true" autoplay="true" arrows="true" autoplay-speed="4000" init-onload="true" data="vm.siteBanners">
-    <div ng-repeat="banner in vm.siteBanners | filter: {secondBanner: false}: true" class="home-slide">
+  <slick class="home-slider home-slider-panoramic" infinite="true" autoplay="true" arrows="true" autoplay-speed="4000" init-onload="true" data="vm.siteBanners">
+    <div ng-repeat="banner in vm.siteBanners " class="home-slide">
       <a ng-if="banner.newTab" class="absolute-link" ng-href="{{banner.displayUrl}}" target="_blank"></a>
       <a ng-if="!banner.newTab" class="absolute-link" ng-href="{{banner.displayUrl}}"></a>
       <img ng-src="{{main.api.baseUrl + '/uploads/sites/banners/' + banner.filename}}" alt="{{banner.displayText}}">
