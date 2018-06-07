@@ -491,7 +491,7 @@ select {
 /*----------*/
 .header-top-bar {
   background: #f8f8f8;
-  padding: 12px 0;
+  padding: 0;
   position: relative;
   /*z-index: 9999999999;*/
   /*z-index: 999999;*/
@@ -1321,13 +1321,20 @@ select {
   position: absolute;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.44) 0px 7px 7px -2px;
-  left: 0;
+  /*left: 0;*/
+  left: auto;
   top: 100%;
+  transform: translateX(-120px);
+  /*
+  right: 0;
+  margin: 0 auto;
+  */
+  max-width: 600px;
   z-index: 999999;
 }
 .smart-menu p {
   text-align: left;
-  margin-left: 45px;
+  margin: 12px 0 12px 20px;
   cursor: pointer;
 }
 .smart-menu p:hover {
@@ -1349,6 +1356,7 @@ select {
 }
 .smart-menu img {
   width: 100%;
+  display: block;
 }
 /*---------------/
   #HOME
