@@ -728,6 +728,9 @@ select {
   background: #fff;
   /*background: #000;*/
 }
+.mobile-sidenav ul {
+  padding: 0;
+}
 .mobile-sidenav .close-btn {
   background: #dda901 !important;
   position: absolute;
