@@ -30,21 +30,17 @@
 
 
     <!--START NAV-->
-    <aside flex="20" hide-sm hide-xs>
+    <!-- <aside flex="20" hide-sm hide-xs>
       <sidebar-categories 
         active-store="main.activeStore"
         categories-tree="main.categoriesTree">
       </sidebar-categories>
 
-    </aside>
+    </aside> -->
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
-    <div 
-      flex="75"
-      flex-sm="100"
-      flex-xs="100"
-    >
+    <div flex="75" flex-sm="100" flex-xs="100">
 
       <div class="subs-container">
 
@@ -56,35 +52,23 @@
             Resultados para "{{vm.search.itemcode}}"
           </h2>
           <h2 ng-if="vm.search.keywords" class="listing-view-title">
-            Resultados para "<span class="keyword" ng-repeat="keyword in vm.search.keywords">{{keyword}}</span>"
+            Resultados para "
+            <span class="keyword" ng-repeat="keyword in vm.search.keywords">{{keyword}}</span>"
           </h2>
 
           <h3 ng-if="!vm.isLoading">
-            <i class="icon-search"></i> <span class="hl-text">{{vm.totalResults}}</span> Resultados
+            <i class="icon-search"></i>
+            <span class="hl-text">{{vm.totalResults}}</span> Resultados
           </h3>
         </div>
 
         <ng-include src="'views/partials/search-options.html'"></ng-include>
 
         <!--RESULTS-->
-        <div
-          ng-if="!vm.isLoading || vm.search.page > 1"
-          class="results"
-          infinite-scroll="vm.loadMore()"
-          infinite-scroll-disabled="!(vm.totalResults > vm.products.length && !vm.isLoading && vm.products.length > 0)"
-          infinite-scroll-distance="1"
-        >
-          <div
-            class="products-list"
-            layout="row"
-            layout-wrap
-            layout-align="start center">
-            <div 
-              flex="33"
-              flex-xs="100"
-              class="listing-product-wrap" 
-              ng-repeat="product in vm.products track by product.ItemCode"
-            >
+        <div ng-if="!vm.isLoading || vm.search.page > 1" class="results" infinite-scroll="vm.loadMore()" infinite-scroll-disabled="!(vm.totalResults > vm.products.length && !vm.isLoading && vm.products.length > 0)"
+          infinite-scroll-distance="1">
+          <div class="products-list" layout="row" layout-wrap layout-align="start center">
+            <div flex="33" flex-xs="100" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
               <listing-product product="product"></listing-product>
             </div>
           </div>
@@ -96,7 +80,7 @@
           <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
         </div>
 
-<!--
+        <!--
         <a
           href="#" class="action-btn action-btn-sm"
           ng-if="vm.totalResults > vm.products.length && !vm.isLoading && vm.products.length > 0"

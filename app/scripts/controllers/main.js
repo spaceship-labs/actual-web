@@ -104,27 +104,27 @@
           sub: [
             {
               name: 'Salas Esquineras',
-              url: ''
+              url: 'salas-esquineras'
             },
             {
               name: 'Salas Modulares',
-              url: ''
+              url: 'salas-esquineras'
             },
             {
               name: 'Sofás Cama',
-              url: ''
+              url: 'sofa-cama'
             },
             {
               name: 'Futones',
-              url: ''
+              url: 'futon'
             },
             {
               name: 'Sillones',
-              url: ''
+              url: 'sillones'
             },
             {
               name: 'Sillones Reclinables',
-              url: ''
+              url: 'sillones-reclinables'
             },
             {
               name: 'Salas de Cine',
@@ -132,19 +132,19 @@
             },
             {
               name: 'Taburetes',
-              url: ''
+              url: 'taburete'
             },
             {
               name: 'Salas para Jardín',
-              url: ''
+              url: 'salas-para-jardin'
             },
             {
               name: 'Mesas de Centro',
-              url: ''
+              url: 'mesas-de-centro'
             },
             {
               name: 'Credenzas',
-              url: ''
+              url: 'credenzas'
             }
           ]
         },
@@ -153,19 +153,19 @@
           sub: [
             {
               name: 'Mesas de Comedor',
-              url: ''
+              url: 'mesas-de-comedor'
             },
             {
-              name: 'Sillas de Comedor',
-              url: ''
+              name: 'Sillas para Comedor',
+              url: 'sillas-para-comedor'
             },
             {
               name: 'Bancos para Barra',
-              url: ''
+              url: 'bancos-para-barra'
             },
             {
-              name: 'Bufeteros',
-              url: ''
+              name: 'Bufeteras',
+              url: 'bufeteras'
             }
           ]
         },
@@ -173,20 +173,20 @@
           name: 'Sillas y Bancos',
           sub: [
             {
-              name: 'Sillas de Comedor',
-              url: ''
+              name: 'Sillas para Comedor',
+              url: 'sillas-para-comedor'
             },
             {
               name: 'Sillas para Oficina',
-              url: ''
+              url: 'sillas-para-oficina'
             },
             {
               name: 'Sillas para Jardín',
-              url: ''
+              url: 'sillas-para-jardin'
             },
             {
               name: 'Bancos para Barra',
-              url: ''
+              url: 'bancos-para-barr'
             }
           ]
         },
@@ -195,31 +195,31 @@
           sub: [
             {
               name: 'Camas',
-              url: ''
+              url: 'camas'
             },
             {
               name: 'Cabeceras',
-              url: ''
+              url: 'cabeceras'
             },
             {
               name: 'Bases de Cama',
-              url: ''
+              url: 'bases-para-cama'
             },
             {
               name: 'Futones',
-              url: ''
+              url: 'futon'
             },
             {
               name: 'Sofás Cama',
-              url: ''
+              url: 'sofa-cama'
             },
             {
               name: 'Burós',
-              url: ''
+              url: 'buros'
             },
             {
               name: 'Colchones',
-              url: ''
+              url: 'colchones'
             }
           ]
         },
@@ -228,7 +228,7 @@
           sub: [
             {
               name: 'Salas para Jardín',
-              url: ''
+              url: 'salas-para-jardin'
             },
             {
               name: 'Sillones para Exterior',
@@ -236,19 +236,19 @@
             },
             {
               name: 'Mesas para Jardín',
-              url: ''
+              url: 'mesas-para-jardin'
             },
             {
               name: 'Sillas para Jardín',
-              url: ''
+              url: 'sillas-para-jardin'
             },
             {
               name: 'Camastros',
-              url: ''
+              url: 'camastro'
             },
             {
               name: 'Sombrillas',
-              url: ''
+              url: 'sombrillas'
             }
           ]
         },
@@ -257,15 +257,15 @@
           sub: [
             {
               name: 'Escritorios',
-              url: ''
+              url: 'escritorios'
             },
             {
               name: 'Sillas para Oficina',
-              url: ''
+              url: 'sillas-para-oficina'
             },
             {
               name: 'Libreros',
-              url: ''
+              url: 'libreros'
             }
           ]
         },
@@ -274,15 +274,15 @@
           sub: [
             {
               name: 'Muebles para TV',
-              url: ''
+              url: 'muebles-para-tv'
             },
             {
               name: 'Centro de Entretenimiento',
-              url: ''
+              url: 'centro-de-entretenimiento'
             },
             {
               name: 'Sillones Riclinables',
-              url: ''
+              url: 'sillones-reclinables'
             },
             {
               name: 'Salas de Cine',
@@ -305,27 +305,27 @@
         Salas: [
           {
             name: 'Salas Esquineras',
-            url: ''
+            url: 'salas-esquineras'
           },
           {
             name: 'Salas Modulares',
-            url: ''
+            url: 'salas-esquineras'
           },
           {
             name: 'Sofás Cama',
-            url: ''
+            url: 'sofa-cama'
           },
           {
             name: 'Futones',
-            url: ''
+            url: 'futon'
           },
           {
             name: 'Sillones',
-            url: ''
+            url: 'sillones'
           },
           {
             name: 'Sillones Reclinables',
-            url: ''
+            url: 'sillones-reclinables'
           },
           {
             name: 'Salas de Cine',
@@ -333,91 +333,91 @@
           },
           {
             name: 'Taburetes',
-            url: ''
+            url: 'taburete'
           },
           {
             name: 'Salas para Jardín',
-            url: ''
+            url: 'salas-para-jardin'
           },
           {
             name: 'Mesas de Centro',
-            url: ''
+            url: 'mesas-de-centro'
           },
           {
             name: 'Credenzas',
-            url: ''
+            url: 'credenzas'
           }
         ],
         Comedores: [
           {
             name: 'Mesas de Comedor',
-            url: ''
+            url: 'mesas-de-comedor'
           },
           {
-            name: 'Sillas de Comedor',
-            url: ''
+            name: 'Sillas para Comedor',
+            url: 'sillas-para-comedor'
           },
           {
             name: 'Bancos para Barra',
-            url: ''
+            url: 'bancos-para-barra'
           },
           {
-            name: 'Bufeteros',
-            url: ''
+            name: 'Bufeteras',
+            url: 'bufeteras'
           }
         ],
         SillasBancos: [
           {
-            name: 'Sillas de Comedor',
-            url: ''
+            name: 'Sillas para Comedor',
+            url: 'sillas-para-comedor'
           },
           {
             name: 'Sillas para Oficina',
-            url: ''
+            url: 'sillas-para-oficina'
           },
           {
             name: 'Sillas para Jardín',
-            url: ''
+            url: 'sillas-para-jardin'
           },
           {
             name: 'Bancos para Barra',
-            url: ''
+            url: 'bancos-para-barr'
           }
         ],
         Recamaras: [
           {
             name: 'Camas',
-            url: ''
+            url: 'camas'
           },
           {
             name: 'Cabeceras',
-            url: ''
+            url: 'cabeceras'
           },
           {
             name: 'Bases de Cama',
-            url: ''
+            url: 'bases-para-cama'
           },
           {
             name: 'Futones',
-            url: ''
+            url: 'futon'
           },
           {
             name: 'Sofás Cama',
-            url: ''
+            url: 'sofa-cama'
           },
           {
             name: 'Burós',
-            url: ''
+            url: 'buros'
           },
           {
             name: 'Colchones',
-            url: ''
+            url: 'colchones'
           }
         ],
         MueblesExterior: [
           {
             name: 'Salas para Jardín',
-            url: ''
+            url: 'salas-para-jardin'
           },
           {
             name: 'Sillones para Exterior',
@@ -425,47 +425,47 @@
           },
           {
             name: 'Mesas para Jardín',
-            url: ''
+            url: 'mesas-para-jardin'
           },
           {
             name: 'Sillas para Jardín',
-            url: ''
+            url: 'sillas-para-jardin'
           },
           {
             name: 'Camastros',
-            url: ''
+            url: 'camastro'
           },
           {
             name: 'Sombrillas',
-            url: ''
+            url: 'sombrillas'
           }
         ],
         MueblesOficina: [
           {
             name: 'Escritorios',
-            url: ''
+            url: 'escritorios'
           },
           {
             name: 'Sillas para Oficina',
-            url: ''
+            url: 'sillas-para-oficina'
           },
           {
             name: 'Libreros',
-            url: ''
+            url: 'libreros'
           }
         ],
         MueblesTV: [
           {
             name: 'Muebles para TV',
-            url: ''
+            url: 'muebles-para-tv'
           },
           {
             name: 'Centro de Entretenimiento',
-            url: ''
+            url: 'centro-de-entretenimiento'
           },
           {
             name: 'Sillones Riclinables',
-            url: ''
+            url: 'sillones-reclinables'
           },
           {
             name: 'Salas de Cine',
@@ -612,8 +612,7 @@
     function loadMainData() {
       console.log('cargando main data', new Date());
       $rootScope.isMainDataLoaded = false;
-      $q
-        .all([loadActiveStore(), loadActiveQuotation()])
+      $q.all([loadActiveStore(), loadActiveQuotation()])
         .then(function(data) {
           $scope.mainData = {
             activeStore: data[0],
@@ -930,9 +929,7 @@
     }
 
     function handleAccordion(name) {
-      console.log('ACORDION BEFORE: ', vm.accordion.current);
       vm.accordion.current = vm.accordion.current === name ? null : name;
-      console.log('ACORDION: ', vm.accordion.current);
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {

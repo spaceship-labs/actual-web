@@ -82,10 +82,14 @@
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div>
         <div hide-xs flex class="header-top-bar-menu-item">
-          <a href="/register"><p style="color: #fff;">REGÍSTRATE</p></a>
+          <a href="/register">
+            <p style="color: #fff;">REGÍSTRATE</p>
+          </a>
         </div>
         <div hide-xs ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
-          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">| <strong>MI CUENTA</strong></p>
+          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">|
+            <strong>MI CUENTA</strong>
+          </p>
           <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
             <strong class="invited-label">Invitado</strong>
           </span>
@@ -153,8 +157,8 @@
 </div>
 
 <md-sidenav md-component-id="left" class="md-sidenav-left movil">
-  <aside flex-gt-sm="20" flex="100">
+  <!-- <aside flex-gt-sm="20" flex="100">
     <sidebar-categories categories-tree="main.categoriesTree" active-store="main.activeStore">
     </sidebar-categories>
-  </aside>
+  </aside> -->
 </md-sidenav>

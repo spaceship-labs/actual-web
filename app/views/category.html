@@ -13,18 +13,12 @@
 <div class="breadcrumb" id="breadcrumb-category-page">
   <div class="container container-xxlg">
     <p>
-      <a
-        href="/">
+      <a href="/">
         Inicio
       </a>
       <span ng-repeat="itemGroup in vm.breadcrumbItems track by $index" ng-show="itemGroup.length > 0">
         >
-          <a
-            ng-repeat="item in itemGroup"
-            ng-href="/category/{{item.Handle}}"
-            class="breadcrumb-item"
-            ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}"
-          >{{item.Name}}</a>
+        <a ng-repeat="item in itemGroup" ng-href="/category/{{item.Handle}}" class="breadcrumb-item" ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}">{{item.Name}}</a>
       </span>
     </p>
   </div>
@@ -38,47 +32,29 @@
 
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
     <!--START NAV-->
-    <aside flex="20" hide-sm hide-xs>
+    <!-- <aside flex="20" hide-sm hide-xs>
       <sidebar-categories
         categories-tree="main.categoriesTree"
         selected-category-id="vm.category.id"
         active-store="main.activeStore">
       </sidebar-categories>
 
-    </aside>
+    </aside> -->
     <!--END NAV-->
 
     <!--SUBCATEGORIES-->
     <div flex="75" flex-sm="100" flex-xs="100">
 
-      <div
-        ng-if="vm.isLoading"
-        layout-fill
-        layout="row"
-        layout-align="center center"
-        class="loading-circle"
-      >
+      <div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
         <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
       </div>
 
       <div ng-if="!vm.isLoading" class="subs-container">
         <h2 class="listing-view-title">{{vm.category.Name}}</h2>
         <!--SUBCATEGORIES LIST LEVEL 2-->
-        <div
-          ng-if="vm.category.Childs.length > 0 && vm.showLevel2"
-          class="subs-container-list"
-          layout="row"
-          layout-wrap
-          hide-gt-xs
-        >
-          <div
-            class="sub-wrapper"
-            ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}"
-            ng-if="subcategory[main.activeStore.code] > 0"
-            flex="33"
-            flex-sm="50"
-            flex-xs="100"
-          >
+        <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap hide-gt-xs>
+          <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}" ng-if="subcategory[main.activeStore.code] > 0"
+            flex="33" flex-sm="50" flex-xs="100">
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
         </div>
@@ -87,15 +63,8 @@
 
         <!--SUBCATEGORIES LIST LEVEL 3-->
         <div ng-if="vm.category.Childs.length > 0 && vm.showLevel3" class="subs-container-list" layout="row" layout-wrap>
-          <div
-            class="sub-wrapper"
-            ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}"
-            ng-if="subcategory[main.activeStore.code] > 0"
-            flex="33"
-            flex-sm="50"
-            flex-xs="100"
-            hide-gt-xs
-          >
+          <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}" ng-if="subcategory[main.activeStore.code] > 0"
+            flex="33" flex-sm="50" flex-xs="100" hide-gt-xs>
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
         </div>
@@ -106,32 +75,17 @@
 
           <ng-include src="'views/partials/search-options.html'"></ng-include>
 
-          <div
-            ng-if="!vm.isLoadingProducts || vm.search.page > 1"
-            class="results"
-            infinite-scroll="vm.loadMore()"
-            infinite-scroll-disabled="!(vm.totalProducts > vm.products.length && !vm.isLoadingProducts && vm.products.length > 0)"
-            infinite-scroll-distance="1"
-          >
+          <div ng-if="!vm.isLoadingProducts || vm.search.page > 1" class="results" infinite-scroll="vm.loadMore()" infinite-scroll-disabled="!(vm.totalProducts > vm.products.length && !vm.isLoadingProducts && vm.products.length > 0)"
+            infinite-scroll-distance="1">
             <h2 class="center-content">
               <strong>
-                <i class="icon-search"></i> <span class="hl-text">{{vm.totalProducts}}</span> Resultados
+                <i class="icon-search"></i>
+                <span class="hl-text">{{vm.totalProducts}}</span> Resultados
               </strong>
             </h2>
 
-            <div
-              class="products-list"
-              layout="row"
-              layout-wrap
-              layout-align="start center"
-              ng-cloak
-            >
-              <div
-                flex="33"
-                flex-sm="50"
-                flex-xs="100"
-                class="listing-product-wrap"
-                ng-repeat="product in vm.products track by product.ItemCode">
+            <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
+              <div flex="33" flex-sm="50" flex-xs="100" class="listing-product-wrap" ng-repeat="product in vm.products track by product.ItemCode">
                 <listing-product product="product"></listing-product>
               </div>
             </div>
