@@ -473,6 +473,151 @@
           }
         ]
       };
+      vm.categoryKids = [
+        'ninos',
+        'bebes',
+        'mamaypapa',
+        'organizacion',
+        'juguetes',
+        'decoracion',
+        'iluminación'
+      ];
+      vm.subcategoriesKids = {
+        ninos: [
+          {
+            name: 'Camas Infantiles',
+            url: ''
+          },
+          {
+            name: 'Literas Infantiles',
+            url: ''
+          },
+          {
+            name: 'Cómodas y burós infantiles',
+            url: ''
+          },
+          {
+            name: 'Escritorios Infantiles',
+            url: ''
+          },
+          {
+            name: 'Mesas y Sillas Infantiles',
+            url: ''
+          },
+          {
+            name: 'Sillones infantiles y puffs',
+            url: ''
+          },
+          {
+            name: 'Colchones',
+            url: ''
+          },
+          {
+            name: 'Blancos',
+            url: ''
+          },
+          {
+            name: 'Cojines',
+            url: ''
+          }
+        ],
+        bebes: [
+          {
+            name: 'Cunas',
+            url: ''
+          },
+          {
+            name: 'Colchones para Bebé',
+            url: ''
+          },
+          {
+            name: 'Cambiador de Pañales',
+            url: ''
+          },
+          {
+            name: 'Bañeras para Bebé',
+            url: ''
+          },
+          {
+            name: 'Blancos para Bebé',
+            url: ''
+          },
+          {
+            name: 'Cojines',
+            url: ''
+          },
+          {
+            name: 'Sillas para Comer',
+            url: ''
+          }
+        ],
+        mamaypapa: [
+          {
+            name: 'Mecedoras',
+            url: ''
+          },
+          {
+            name: 'Cojines de maternidad',
+            url: ''
+          }
+        ],
+        organizacion: [
+          {
+            name: 'Baúles',
+            url: ''
+          },
+          {
+            name: 'Cestos y Canastas',
+            url: ''
+          },
+          {
+            name: 'Joyeros',
+            url: ''
+          },
+          {
+            name: 'Repisas Infantiles',
+            url: ''
+          }
+        ],
+        juguetes: [
+          {
+            name: 'Peluches',
+            url: ''
+          },
+          {
+            name: 'Estimulación temprana',
+            url: ''
+          }
+        ],
+        decoracion: [
+          {
+            name: 'Accesorios Decorativos',
+            url: ''
+          },
+          {
+            name: 'Cuadros',
+            url: ''
+          },
+          {
+            name: 'Colgantes',
+            url: ''
+          },
+          {
+            name: 'Portaretratos',
+            url: ''
+          }
+        ],
+        iluminacion: [
+          {
+            name: 'Lámparas de Mesa',
+            url: ''
+          },
+          {
+            name: 'Lámparas Colgantes',
+            url: ''
+          }
+        ]
+      };
       vm.activeCategory = [false, false, false, false, false, false, false];
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
