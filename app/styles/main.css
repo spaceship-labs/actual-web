@@ -1813,7 +1813,7 @@ select {
   #listing-view
 /*-------------*/
 .listing-view {
-  padding: 20px 20px 30px;
+  padding: 0px 20px 30px;
 }
 .listing-view-nav-wrapper > h2 {
   font-size: 16px;
@@ -7089,6 +7089,19 @@ md-sidenav {
 }
 
 @media (max-width: 600px) {
+  .listing-view .sub .sub-image{
+    width: 92%;
+  }
+  .home-slider .home-slide {
+    overflow: hidden;
+  }
+  .home-slider .home-slide img {
+    width: auto;
+    height: 110px;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+  }
   .filters-sidenav-trigger {
     display: none;
   }

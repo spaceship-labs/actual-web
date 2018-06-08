@@ -41,6 +41,15 @@ function HomeCtrl(
           centerMode: true
         }
       }
+    ],
+    secondSliderCarouselBreakpoints: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      }
     ]
   });
 
