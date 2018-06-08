@@ -2,16 +2,17 @@
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
       <a href="/category/comedores">
-        <span class="color-gray"><strong>Top Comedores</strong></span>
+        <span class="color-gray">
+          <strong>Top Comedores</strong>
+        </span>
       </a>
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="80" ng-show="vm.top['comedores-loaded']">
+    <div flex="80" flex-xs="100" ng-show="vm.top['comedores-loaded']">
       <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
-      init-onload=true data="vm.top['comedores-loaded']">
-        <div ng-repeat="product in vm.dinningRooms"
-        class="listing-product-wrap">
+        init-onload=true data="vm.top['comedores-loaded']">
+        <div ng-repeat="product in vm.dinningRooms" class="listing-product-wrap">
           <listing-product class="foo" product="product"></listing-product>
         </div>
       </slick>
@@ -21,12 +22,17 @@
         <div class="circle circle-comedores">
           <div class="circle-text">
             <p>
-              VER CATEGORÍA <strong>COMPLETA</strong>
+              VER CATEGORÍA
+              <strong>COMPLETA</strong>
             </p>
           </div>
         </div>
       </a>
     </div>
-    <!-- <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="vm.dinningRooms.length > vm.limitDinningRooms" ng-click="loadMore('dinningRooms')">Ver más</button> -->
+  </div>
+  <div class="listing-view">
+    <a href="/category/comedores" class="action-btn">
+      VER MÁS PRODUCTOS
+    </a>
   </div>
 </div>

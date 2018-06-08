@@ -1997,7 +1997,9 @@ select {
 .listing-view .best-seller-title a {
   color: #000;
 }
-
+.listing-view .view-more {
+  
+}
 .listing-view .results-block-header h3 {
   margin-top: 0;
   font-size: 16px;
