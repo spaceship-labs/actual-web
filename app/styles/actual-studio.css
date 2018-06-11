@@ -9,9 +9,58 @@
   background: #cc262f !important;
 }
 .actual-studio .nav-categories-item-active,
+.actual-studio .salas-bg:hover {
+  background: #c7227d;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .comedores-bg:hover {
+  background: #5d1d7c;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .sillas-bg:hover {
+  background: #002c80;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .recamaras-bg:hover {
+  background: #3f72af;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .muebles-exterior-bg:hover {
+  background: #3d8c3d;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .muebles-television-bg:hover {
+  background: #adc24c;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .muebles-oficina-bg:hover {
+  background: #ecb756;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .look-bg:hover {
+  background: #d7692f;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .deals-bg:hover {
+  background: #cd2c22;
+}
+
+.actual-studio .nav-categories-item-active,
+.actual-studio .kids-bg:hover {
+  background: #66b1e3;
+}
+/* .actual-studio .nav-categories-item-active,
 .actual-studio .nav-categories-item:hover {
   background: #cc262f;
-}
+} */
 
 .actual-studio .listing-view-nav > li.active h3 a,
 .actual-studio .listing-view-nav > li h3 a.active,
