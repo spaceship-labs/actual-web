@@ -7051,6 +7051,9 @@ md-sidenav {
 }
 
 @media (max-width: 800px) {
+  .header-top-bar-menu .menu-mobile-icon-static {
+    display: block;
+  }
   .header-top-bar .logo-mobile {
     display: flex !important;
     padding: 0px 12px 0 2px;
