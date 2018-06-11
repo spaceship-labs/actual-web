@@ -1769,13 +1769,13 @@ select {
   margin: 0 auto;
 }
 .products-list .view-more-category .circle-salas {
-  background: #c7227d;
+  background: #f8f8f8;
 }
 .products-list .view-more-category .circle-comedores {
-  background: #5d1d7c;
+  background: #f8f8f8;
 }
 .products-list .view-more-category .circle-recamaras {
-  background: #3f72af;
+  background: #f8f8f8;
 }
 .products-list .view-more-category .circle .circle-text {
   /* position: absolute; */
@@ -1783,7 +1783,7 @@ select {
   transform: translateY(25%);
 }
 .products-list .view-more-category .circle .circle-text p {
-  color: #fff;
+  color: #030202;
   font-size: 31px;
 }
 /*-----------/
