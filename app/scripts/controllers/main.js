@@ -486,7 +486,7 @@
         ninos: [
           {
             name: 'Camas Infantiles',
-            url: ''
+            url: 'camas-infantiles'
           },
           {
             name: 'Literas Infantiles',
@@ -494,41 +494,41 @@
           },
           {
             name: 'Cómodas y burós infantiles',
-            url: ''
+            url: 'comoda'
           },
           {
             name: 'Escritorios Infantiles',
-            url: ''
+            url: 'escritorios'
           },
           {
             name: 'Mesas y Sillas Infantiles',
-            url: ''
+            url: 'mesas-y-sillas-infantiles'
           },
           {
             name: 'Sillones infantiles y puffs',
-            url: ''
+            url: 'sillones'
           },
           {
             name: 'Colchones',
-            url: ''
+            url: 'colchones'
           },
           {
             name: 'Blancos',
-            url: ''
+            url: 'blancos-infantiles'
           },
           {
             name: 'Cojines',
-            url: ''
+            url: 'cojines'
           }
         ],
         bebes: [
           {
             name: 'Cunas',
-            url: ''
+            url: 'cunas-para-bebes'
           },
           {
             name: 'Colchones para Bebé',
-            url: ''
+            url: 'colchon-para-cuna'
           },
           {
             name: 'Cambiador de Pañales',
@@ -540,15 +540,15 @@
           },
           {
             name: 'Blancos para Bebé',
-            url: ''
+            url: 'blancos-infantiles'
           },
           {
             name: 'Cojines',
-            url: ''
+            url: 'cojines'
           },
           {
             name: 'Sillas para Comer',
-            url: ''
+            url: 'sillas-para-comedor'
           }
         ],
         mamaypapa: [
@@ -576,7 +576,7 @@
           },
           {
             name: 'Repisas Infantiles',
-            url: ''
+            url: 'repisas'
           }
         ],
         juguetes: [
@@ -592,11 +592,11 @@
         decoracion: [
           {
             name: 'Accesorios Decorativos',
-            url: ''
+            url: 'accesorios'
           },
           {
             name: 'Cuadros',
-            url: ''
+            url: 'cuadros-decorativos'
           },
           {
             name: 'Colgantes',
@@ -604,17 +604,17 @@
           },
           {
             name: 'Portaretratos',
-            url: ''
+            url: 'portarretratos'
           }
         ],
         iluminacion: [
           {
             name: 'Lámparas de Mesa',
-            url: ''
+            url: 'lamparas-de-mesa'
           },
           {
             name: 'Lámparas Colgantes',
-            url: ''
+            url: 'lamparas-de-techo'
           }
         ]
       };
