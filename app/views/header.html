@@ -7,7 +7,7 @@
   <div class="header-top-bar" fixed-element top="70" ng-class="{'fixed-head': scrolled}">
     <div class="container" layout="row" layout-wrap layout-align="center center">
 
-      <div hide-xs flex-gt-xs="15" class="logo" layout-align="center center">
+      <div hide-xs hide-sm flex-gt-sm="15" class="logo" layout-align="center center">
         <a href="/" ng-switch on="main.siteTheme">
           <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group">
           <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group">
@@ -18,7 +18,7 @@
 
 
       <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center" layout-align-sm="center center"
-        layout-align-xs="start center" hide-sm hide-xs>
+        layout-align-xs="start center" hide-xs hide-sm>
 
         <div flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
@@ -81,12 +81,12 @@
         <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div>
-        <div hide-xs flex class="header-top-bar-menu-item">
+        <div hide-xs hide-sm flex class="header-top-bar-menu-item">
           <a href="/register">
             <p style="color: #fff;">REGÍSTRATE</p>
           </a>
         </div>
-        <div hide-xs ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
+        <div hide-xs hide-sm ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">|
             <strong>MI CUENTA</strong>
           </p>
@@ -111,7 +111,7 @@
         </div>
 
 
-        <div hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+        <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong>
               <i class="icon-phone"></i>
@@ -121,12 +121,36 @@
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
 
-        <a flex hide-gt-sm href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+        <a flex hide-gt-xs href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong>
               <i class="icon-whatsapp"></i>
             </strong>
           </span>
+        </a>
+
+        <div hide-xs hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+          <span>
+            <strong>
+              <i class="icon-phone"></i>
+            </strong>
+            <!--<strong hide-xs>998 246 3487</strong>-->
+            <strong hide-xs>(998) 884 1594</strong>
+          </span>
+
+          <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
+        </div>
+
+        <a hide-xs hide-gt-sm href="whatsapp://send?phone=5219982463487">
+          <div flex href="" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+            <span>
+              <strong>
+                <i class="icon-whatsapp"></i>
+              </strong>
+              <!--<strong hide-xs>998 246 3487</strong>-->
+              <strong hide-xs>(998) 246 3487</strong>
+            </span>
+          </div>
         </a>
 
 

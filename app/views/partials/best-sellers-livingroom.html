@@ -9,7 +9,7 @@
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="80" flex-xs="100" ng-show="vm.top['salas-loaded']">
+    <div flex="80" flex-xs="100" flex-sm="100" ng-show="vm.top['salas-loaded']">
       <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
         init-onload=true data="vm.top['salas-loaded']">
         <div ng-repeat="product in vm.livingRooms" class="listing-product-wrap">
