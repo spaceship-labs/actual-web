@@ -1678,8 +1678,7 @@ select {
 }
 
 .listing-product .stock-available {
-  font-weight: 700;
-  font-size: 15px !important;
+  margin-top: 28px;
 }
 .listing-product .stock-available .small {
   font-size: 10px;
