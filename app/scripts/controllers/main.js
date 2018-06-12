@@ -616,7 +616,8 @@
             name: 'Lámparas Colgantes',
             url: 'lamparas-de-techo'
           }
-        ]
+        ],
+        tapetes: [{}]
       };
       vm.activeCategory = [false, false, false, false, false, false, false];
       if ($location.search().itemcode) {
