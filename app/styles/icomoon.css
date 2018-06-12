@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('../fonts/icomoon.eot?pek56h');
-  src: url('../fonts/icomoon.eot?pek56h#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?pek56h') format('truetype'),
-    url('../fonts/icomoon.woff?pek56h') format('woff'),
-    url('../fonts/icomoon.svg?pek56h#icomoon') format('svg');
+  src: url('../fonts/icomoon.eot?ne8inc');
+  src: url('../fonts/icomoon.eot?ne8inc#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?ne8inc') format('truetype'),
+    url('../fonts/icomoon.woff?ne8inc') format('woff'),
+    url('../fonts/icomoon.svg?ne8inc#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,6 +25,33 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-bebebs2:before {
+  content: '\e947';
+}
+.icon-decoracion2:before {
+  content: '\e948';
+}
+.icon-iluminacion2:before {
+  content: '\e949';
+}
+.icon-juguetes2:before {
+  content: '\e94a';
+}
+.icon-mamaypapa2:before {
+  content: '\e94b';
+}
+.icon-niñas-y-niños2:before {
+  content: '\e94c';
+}
+.icon-organizacion2:before {
+  content: '\e94d';
+}
+.icon-promociones2:before {
+  content: '\e94e';
+}
+.icon-tapetes2:before {
+  content: '\e94f';
+}
 .icon-1:before {
   content: '\e900';
 }
