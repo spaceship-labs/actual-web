@@ -75,7 +75,7 @@ module.exports = function(grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '192.168.1.72',
+        hostname: 'localhost',
         //hostname:'0.0.0.0',
         livereload: 35729
       },
@@ -539,7 +539,7 @@ module.exports = function(grunt) {
         constants: {
           ENV: {
             name: 'dev',
-            apiEndpoint: 'http://192.168.1.72:1337',
+            apiEndpoint: 'http://localhost:1337',
             adminUrl: 'http://localhost:3000',
             tokenPrefix: 'dev',
             conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
