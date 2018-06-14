@@ -1,10 +1,10 @@
 <div class="sub">
-  <img class="sub-image" src="{{getCategoryImage(category.Handle)}}" alt="{{category.Name}}">  
+  <img class="sub-image" src="{{getCategoryImage(category.Handle)}}" alt="{{category.Name}}">
   <div class="sub-text">
     <h4>
       <a ng-href="/category/{{category.Handle}}">
-        <strong>{{category.Name}}</strong>
-        ({{category[stockKey]}})
+        <strong ng-if="category.Handle !== 'ofertas'">{{category.Name}}</strong>
+        <!-- ({{category[stockKey]}}) -->
       </a>
     </h4>
   </div>

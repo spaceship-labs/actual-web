@@ -17,9 +17,53 @@
   background: #34b3e7 !important;
 }
 .actual-kids .nav-categories-item-active,
+.actual-kids .ninos-bg:hover {
+  background: #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .bebes-bg:hover {
+  background: #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .mama-bg:hover {
+  background: #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .organizacion-bg:hover {
+  background: #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .juguetes-bg:hover {
+  background: #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .decoracion-bg:hover {
+  background: #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .iluminacion-bg:hover {
+  background: #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .look-bg:hover {
+  background: #34b3e7;
+}
+.actual-kids .nav-categories-item-active,
+.actual-kids .deals-bg:hover {
+  background: #34b3e7;
+}
+
+.actual-kids .categories-bg i:before {
+  color: #34b3e7 !important;
+}
+
+.actual-kids .categories-bg:hover i:before {
+  color: #fff !important;
+}
+/* .actual-kids .nav-categories-item-active,
 .actual-kids .nav-categories-item:hover {
   background: #cc262f;
-}
+} */
 
 .actual-kids .listing-view-nav > li.active h3 a,
 .actual-kids .listing-view-nav > li h3 a.active,
