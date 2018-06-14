@@ -1,18 +1,12 @@
 <div class="breadcrumb">
   <div class="container container-xxlg">
     <p>
-      <a
-        href="/">
+      <a href="/">
         Inicio
       </a>
       <span ng-repeat="itemGroup in vm.breadcrumbItems track by $index" ng-show="itemGroup.length > 0">
         >
-          <a
-            ng-repeat="item in itemGroup"
-            ng-href="/category/{{item.Handle}}"
-            class="breadcrumb-item"
-            ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}"
-          >{{item.Name}}</a>
+        <a ng-repeat="item in itemGroup" ng-href="/category/{{item.Handle}}" class="breadcrumb-item" ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}">{{item.Name}}</a>
       </span>
     </p>
   </div>
@@ -23,30 +17,17 @@
   <div class="container container-xxlg" layout="row" layout-align="space-between start">
 
     <!--START NAV-->
-    <sidebar-categories
-      selected-category-id="vm.lowestCategory.id"
-      categories-tree="main.categoriesTree"
-      active-store="main.activeStore"
-      hide-sm
-      hide-xs
-      flex="20">
+    <sidebar-categories selected-category-id="vm.lowestCategory.id" categories-tree="main.categoriesTree" active-store="main.activeStore"
+      hide-sm hide-xs flex="20">
     </sidebar-categories>
     <!--END NAV-->
 
     <!--MAIN VIEW-->
-    <div
-      class="product-view"
-      flex="75"
-      flex-sm="100"
-      flex-xs="100"
-    >
+    <div class="product-view" flex="75" flex-sm="100" flex-xs="100">
       <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
 
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
-        <md-progress-circular
-          md-mode="indeterminate"
-          class="md-accent"
-          md-diameter="150">
+        <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150">
         </md-progress-circular>
       </div>
 
@@ -54,101 +35,67 @@
       <section ng-if="!vm.isLoading" class="product-view-content">
 
         <div layout="row" layout-wrap>
-          <div
-            class="product-view-gallery-wrap"
-            flex="50"
-            flex-sm="100"
-            flex-xs="100">
+          <div class="product-view-gallery-wrap" flex="50" flex-sm="100" flex-xs="100">
             <!--<ng-include src="'views/partials/product-gallery.html'"></ng-include>-->
-            <product-gallery
-              ng-if="vm.product"
-              product="vm.product">
+            <product-gallery ng-if="vm.product" product="vm.product">
             </product-gallery>
           </div>
 
           <!--PRODUCT VIEW DATA-->
-          <div
-            flex="50"
-            flex-sm="100"
-            flex-xs="100"
-            class="product-view-data"
-          >
+          <div flex="50" flex-sm="100" flex-xs="100" class="product-view-data">
 
             <ng-include src="'views/partials/product-features.html'"></ng-include>
             <ng-include src="'views/partials/product-variants.html'"></ng-include>
-            <ng-include 
-              ng-if="vm.zipcodeDelivery && !vm.isLoadingDeliveries" 
-              src="'views/partials/product-delivery.html'"></ng-include>            
+            <ng-include ng-if="vm.zipcodeDelivery && !vm.isLoadingDeliveries" src="'views/partials/product-delivery.html'"></ng-include>
             <ng-include src="'views/partials/product-stock.html'"></ng-include>
             <ng-include src="'views/partials/product-promotions.html'"></ng-include>
 
 
-            <div
-              class="product-view-prices"
-              layout="row"
-              layout-wrap
-              layout-align="space-between end"
-            >
+            <div class="product-view-prices" layout="row" layout-wrap layout-align="space-between end">
               <div flex="20" flex-sm="100" flex-xs="100" class="unit-data">
-                <p
-                  class="product-view-price-discount"
-                  ng-if="vm.product.mainPromo">
+                <p class="product-view-price-discount" ng-if="vm.product.mainPromo">
                   - {{vm.mainPromo.discountPg1}}%
                 </p>
                 <p>
-                  <span class="currency-label">MXN</span> 
+                  <span class="currency-label">MXN</span>
                   <span class="product-view-price-crossed">{{vm.product.priceBefore | currency:'$':0 }}</span>
                 </p>
                 <p class="product-view-price-hl">
-                  <span class="currency-label">MXN</span> <strong>{{vm.product.Price | currency:'$':0 }}</strong>
+                  <span class="currency-label">MXN</span>
+                  <strong>{{vm.product.Price | currency:'$':0 }}</strong>
                 </p>
               </div>
 
               <!--ONLY IF ZIPCODE IS ASSIGNED-->
-              <div  flex="10" flex-sm="50" flex-xs="50">
+              <div flex="10" flex-sm="50" flex-xs="50">
                 <div class="product-view-qty input-element">
-                  
-                  <div 
-                    ng-if="!vm.zipcodeDelivery" 
-                    ng-click="vm.showZipcodeDialog()"
-                    class="zipcode-layer">
+
+                  <div ng-if="!vm.zipcodeDelivery" ng-click="vm.showZipcodeDialog()" class="zipcode-layer">
                   </div>
-                  
+
                   <label>Piezas</label>
-                  <select
-                    class="select-element"
-                    ng-model="vm.productCart.quantity"
-                    ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)"
-                  >
+                  <select class="select-element" ng-model="vm.productCart.quantity" ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)">
                   </select>
                 </div>
               </div>
-              <div  flex="30" flex-sm="50" flex-xs="50">
+              <div flex="30" flex-sm="50" flex-xs="50">
                 <div class="delivery-selection input-element select-element-wrapper">
 
-                  <div 
-                    ng-if="!vm.zipcodeDelivery" 
-                    ng-click="vm.showZipcodeDialog()"
-                    class="zipcode-layer">
+                  <div ng-if="!vm.zipcodeDelivery" ng-click="vm.showZipcodeDialog()" class="zipcode-layer">
                   </div>
 
                   <label>Entrega aproximada{{vm.selectedDelivery}}</label>
-                  <select
-                    class="select-element"
-                    ng-model="vm.productCart.deliveryGroup"
-                    ng-change="vm.resetProductCartQuantity(deliveryGrop.available)"
-                    ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in vm.deliveriesGroups"
-                  >
+                  <select class="select-element" ng-model="vm.productCart.deliveryGroup" ng-change="vm.resetProductCartQuantity(deliveryGrop.available)"
+                    ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in vm.deliveriesGroups">
                   </select>
                 </div>
               </div>
 
-              <div
-                flex="25"
-                flex-sm="100"
-                flex-xs="100"
-                class="product-view-price-hl product-view-price-main">
-                <h3><span class="currency-label">MXN</span><strong>{{vm.product.Price * vm.productCart.quantity | currency:'$':0 }}</strong></h3>
+              <div flex="25" flex-sm="100" flex-xs="100" class="product-view-price-hl product-view-price-main">
+                <h3>
+                  <span class="currency-label">MXN</span>
+                  <strong>{{vm.product.Price * vm.productCart.quantity | currency:'$':0 }}</strong>
+                </h3>
                 <span class="taxes-included">Impuestos incluidos</span>
               </div>
 
@@ -156,16 +103,12 @@
 
             </div>
 
-            <a
-              ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#"
-              class="add-cart-btn"
-              ng-class="
+            <a ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#" class="add-cart-btn" ng-class="
               {
                 'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity,
                 'add-cart-btn-blink': vm.zipcodeDelivery
               }
-              "
-            >
+              ">
               <span class="add-cart-btn-icon">
                 <span class="add-cart-btn-icon-num">{{vm.productCart.quantity}}</span>
                 <i class="icon-carro"></i>
@@ -190,29 +133,19 @@
         </div>
 
         <section class="desc-wrapper">
-          <div class="desc-head" layout="row"
-            ng-init="hideProductDescription = vm.toggleProductDescription = !(
+          <div class="desc-head" layout="row" ng-init="hideProductDescription = vm.toggleProductDescription = !(
               vm.product.Description ||
               vm.product.PackageContent ||
               vm.product.MainFeatures ||
               vm.product.Restrictions ||
               vm.product.Conservation
             )
-            "
-          >
-            <div
-              ng-show="!hideProductDescription"
-              flex="100"
-              class="desc-head-item"
-              ng-class="{'desc-head-item-on' : !vm.toggleProductDescription }"
+            ">
+            <div ng-show="!hideProductDescription" flex="100" class="desc-head-item" ng-class="{'desc-head-item-on' : !vm.toggleProductDescription }"
               ng-click="vm.toggleProductDescription = !vm.toggleProductDescription">
               <h3>Detalles del artículo</h3>
             </div>
-            <div
-              flex="100"
-              class="desc-head-item"
-              ng-class="{'desc-head-item-on' : vm.toggleProductDescription}"
-              ng-click="!hideProductDescription && (vm.toggleProductDescription = !vm.toggleProductDescription)">
+            <div flex="100" class="desc-head-item" ng-class="{'desc-head-item-on' : vm.toggleProductDescription}" ng-click="!hideProductDescription && (vm.toggleProductDescription = !vm.toggleProductDescription)">
               <h3>Detalles de la entrega</h3>
             </div>
           </div>

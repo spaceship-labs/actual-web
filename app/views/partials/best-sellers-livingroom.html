@@ -2,15 +2,37 @@
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
       <a href="/category/salas">
-        <span class="color-gray">Top Salas</span>
+        <span class="color-gray">
+          <strong>Top Salas</strong>
+        </span>
       </a>
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="33" flex-sm="50" flex-xs="100" ng-repeat="featuredSalas in vm.featuredProducts | filter:{ categoryHandle: 'salas' } | limitTo:vm.limitLivingRooms"
-      class="listing-product-wrap">
-      <listing-product product="featuredSalas.product"></listing-product>
+   <div flex="80" flex-xs="100" flex-sm="100" ng-show="vm.top['salas-loaded']">
+      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
+        init-onload=true data="vm.top['salas-loaded']">
+        <div ng-repeat="product in vm.livingRooms" class="listing-product-wrap">
+          <listing-product class="foo" product="product"></listing-product>
+        </div>
+      </slick>
     </div>
-    <button flex="50" style="margin: 0px auto;" class="action-btn" ng-if="(vm.featuredProducts | filter:{ categoryHandle: 'salas' }).length > vm.limitLivingRooms" ng-click="loadMore('livingRooms')">Ver más</button>
+    <div hide-xs hide-sm flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
+      <a href="/category/salas">
+        <div class="circle circle-salas">
+          <div class="circle-text">
+            <p style="font-size: 32px;">
+              VER CATEGORÍA
+              <strong>COMPLETA</strong>
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div hide-gt-sm class="listing-view">
+    <a href="/category/salas" class="action-btn">
+      VER MÁS PRODUCTOS
+    </a>
   </div>
 </div>

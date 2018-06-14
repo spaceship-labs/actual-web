@@ -1,26 +1,93 @@
-.actual-home .header-top-bar{background: #092F57!important;}
-.actual-home .footer-bottom{background: #092F57!important;}
+.actual-home .header-top-bar {
+  background: #092f57 !important;
+}
+.actual-home .footer-bottom {
+  background: #092f57 !important;
+}
 .actual-home .nav-categories-item-active,
-.actual-home .nav-categories-item:hover{
-  background: #DDA901;
+.actual-home .salas-bg:hover {
+  background: #c7227d;
 }
-.actual-home .modal-header .profile-modal-header-btn{background: #092F57}
 
+.actual-home .nav-categories-item-active,
+.actual-home .comedores-bg:hover {
+  background: #5d1d7c;
+}
+
+.actual-home .nav-categories-item-active,
+.actual-home .sillas-bg:hover {
+  background: #002c80;
+}
+
+.actual-home .nav-categories-item-active,
+.actual-home .recamaras-bg:hover {
+  background: #3f72af;
+}
+
+.actual-home .nav-categories-item-active,
+.actual-home .muebles-exterior-bg:hover {
+  background: #3d8c3d;
+}
+
+.actual-home .nav-categories-item-active,
+.actual-home .muebles-television-bg:hover {
+  background: #adc24c;
+}
+
+.actual-home .nav-categories-item-active,
+.actual-home .muebles-oficina-bg:hover {
+  background: #ecb756;
+}
+
+.actual-home .nav-categories-item-active,
+.actual-home .look-bg:hover {
+  background: #d7692f;
+}
+
+.actual-home .nav-categories-item-active,
+.actual-home .deals-bg:hover {
+  background: #cd2c22;
+}
+
+.actual-home .nav-categories-item-active,
+.actual-home .kids-bg:hover {
+  background: #66b1e3;
+}
+
+/* .actual-home .nav-categories-item-active,
+.actual-home .nav-categories-item:hover {
+  background: #dda901;
+} */
+.actual-home .modal-header .profile-modal-header-btn {
+  background: #092f57;
+}
 .actual-home .filters-sidenav-trigger-mobile,
-.actual-home .filters-sidenav-trigger .block-icon{
-	background: #092F57!important;
-	color: #fff!important;
+.actual-home .filters-sidenav-trigger .block-icon {
+  background: #092f57 !important;
+  color: #fff !important;
 }
-.actual-home .filters-sidenav-trigger .block-icon i{color: #fff!important;}
+.actual-home .filters-sidenav-trigger .block-icon i {
+  color: #fff !important;
+}
 
-.actual-home .filters-sidenav .pointer-close-btn i{color: #DDA901;}
+.actual-home .filters-sidenav .pointer-close-btn i {
+  color: #dda901;
+}
 .actual-home .filters-head,
-.actual-home .filters .filter-block-price-btn{background: #DDA901!important;}
+.actual-home .filters .filter-block-price-btn {
+  background: #dda901 !important;
+}
 
-.actual-home .filters-head{color: #092F57;}
+.actual-home .filters-head {
+  color: #092f57;
+}
 
-.actual-home #reports .report-filters .excel-triger-wrapper .action-btn{background: #092F57!important}
+.actual-home #reports .report-filters .excel-triger-wrapper .action-btn {
+  background: #092f57 !important;
+}
 
-@media(max-width:600px){
-  .actual-home .header-top-bar{background: #092F57!important}
+@media (max-width: 600px) {
+  .actual-home .header-top-bar {
+    background: #092f57 !important;
+  }
 }
