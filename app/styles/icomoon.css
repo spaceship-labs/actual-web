@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('../fonts/icomoon.eot?3q7cko');
-  src: url('../fonts/icomoon.eot?3q7cko#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?3q7cko') format('truetype'),
-    url('../fonts/icomoon.woff?3q7cko') format('woff'),
-    url('../fonts/icomoon.svg?3q7cko#icomoon') format('svg');
+  src: url('../fonts/icomoon.eot?ne8inc');
+  src: url('../fonts/icomoon.eot?ne8inc#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?ne8inc') format('truetype'),
+    url('../fonts/icomoon.woff?ne8inc') format('woff'),
+    url('../fonts/icomoon.svg?ne8inc#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,168 +25,252 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-alert:before {
+.icon-bebebs2:before {
+  content: '\e947';
+}
+.icon-decoracion2:before {
+  content: '\e948';
+}
+.icon-iluminacion2:before {
+  content: '\e949';
+}
+.icon-juguetes2:before {
+  content: '\e94a';
+}
+.icon-mamaypapa2:before {
+  content: '\e94b';
+}
+.icon-niñas-y-niños2:before {
+  content: '\e94c';
+}
+.icon-organizacion2:before {
+  content: '\e94d';
+}
+.icon-promociones2:before {
+  content: '\e94e';
+}
+.icon-tapetes2:before {
+  content: '\e94f';
+}
+.icon-1:before {
   content: '\e900';
 }
-.icon-ambientes:before {
+.icon-2:before {
   content: '\e901';
 }
-.icon-arrow:before {
+.icon-3:before {
   content: '\e902';
 }
-.icon-attachment:before {
+.icon-4:before {
   content: '\e903';
 }
-.icon-attatch:before {
+.icon-5:before {
   content: '\e904';
 }
-.icon-bebes:before {
+.icon-6:before {
   content: '\e905';
 }
-.icon-blancos:before {
+.icon-7:before {
   content: '\e906';
 }
-.icon-carro:before {
+.icon-8:before {
   content: '\e907';
 }
-.icon-cash:before {
+.icon-9:before {
   content: '\e908';
 }
-.icon-checkmark:before {
+.icon-alert:before {
   content: '\e909';
 }
-.icon-checkout-ticket:before {
+.icon-ambientes:before {
   content: '\e90a';
 }
-.icon-clients:before {
+.icon-arrow:before {
   content: '\e90b';
 }
-.icon-colchones:before {
+.icon-attachment:before {
   content: '\e90c';
 }
-.icon-color:before {
+.icon-attatch:before {
   content: '\e90d';
 }
-.icon-comisiones:before {
+.icon-bebes:before {
   content: '\e90e';
+  color: #48b2e8;
 }
-.icon-comoda:before {
+.icon-blancos:before {
   content: '\e90f';
 }
-.icon-cotizar:before {
+.icon-carro:before {
   content: '\e910';
 }
-.icon-dashboard:before {
+.icon-cash:before {
   content: '\e911';
 }
-.icon-decoracion:before {
+.icon-checkmark:before {
   content: '\e912';
 }
-.icon-descuento:before {
+.icon-checkout-ticket:before {
   content: '\e913';
 }
-.icon-disponibilidad:before {
+.icon-clients:before {
   content: '\e914';
 }
-.icon-envio:before {
+.icon-colchones:before {
   content: '\e915';
 }
-.icon-estilo:before {
+.icon-color:before {
   content: '\e916';
 }
-.icon-file:before {
+.icon-comisiones:before {
   content: '\e917';
 }
-.icon-forma:before {
+.icon-comoda:before {
   content: '\e918';
 }
-.icon-home:before {
+.icon-cotizar:before {
   content: '\e919';
 }
-.icon-info:before {
+.icon-dashboard:before {
   content: '\e91a';
 }
-.icon-jardin:before {
+.icon-decoracion:before {
   content: '\e91b';
+  color: #48b2e8;
 }
-.icon-login:before {
+.icon-descuento:before {
   content: '\e91c';
 }
-.icon-mail:before {
+.icon-descuentos:before {
   content: '\e91d';
+  color: #48b2e8;
 }
-.icon-marca:before {
+.icon-disponibilidad:before {
   content: '\e91e';
 }
-.icon-material:before {
+.icon-envio:before {
   content: '\e91f';
 }
-.icon-mesas:before {
+.icon-estilo:before {
   content: '\e920';
 }
-.icon-metodo-pago:before {
+.icon-file:before {
   content: '\e921';
 }
-.icon-monedero:before {
+.icon-forma:before {
   content: '\e922';
 }
-.icon-murbles:before {
+.icon-home:before {
   content: '\e923';
 }
-.icon-ninos:before {
+.icon-iluminacion:before {
   content: '\e924';
+  color: #48b2e8;
 }
-.icon-ofertas:before {
+.icon-info:before {
   content: '\e925';
 }
-.icon-office:before {
+.icon-jardin:before {
   content: '\e926';
 }
-.icon-oportunidades:before {
+.icon-juguetes:before {
   content: '\e927';
+  color: #48b2e8;
 }
-.icon-pedidos:before {
+.icon-login:before {
   content: '\e928';
 }
-.icon-phone:before {
+.icon-mail:before {
   content: '\e929';
 }
-.icon-photo:before {
+.icon-mama-y-papa:before {
   content: '\e92a';
+  color: #48b2e8;
 }
-.icon-place:before {
+.icon-marca:before {
   content: '\e92b';
 }
-.icon-pointer:before {
+.icon-material:before {
   content: '\e92c';
 }
-.icon-precio:before {
+.icon-mesas:before {
   content: '\e92d';
 }
-.icon-scorecard:before {
+.icon-metodo-pago:before {
   content: '\e92e';
 }
-.icon-search:before {
+.icon-monedero:before {
   content: '\e92f';
 }
-.icon-settings:before {
+.icon-murbles:before {
   content: '\e930';
 }
-.icon-sillas:before {
+.icon-niñas-y-niños:before {
   content: '\e931';
+  color: #48b2e8;
 }
-.icon-sofa:before {
+.icon-ninos:before {
   content: '\e932';
 }
-.icon-terminal:before {
+.icon-ofertas:before {
   content: '\e933';
 }
-.icon-transfer:before {
+.icon-office:before {
   content: '\e934';
 }
-.icon-vendedor:before {
+.icon-oportunidades:before {
   content: '\e935';
 }
+.icon-organizacion:before {
+  content: '\e936';
+  color: #48b2e8;
+}
+.icon-pedidos:before {
+  content: '\e937';
+}
+.icon-phone:before {
+  content: '\e938';
+}
+.icon-photo:before {
+  content: '\e939';
+}
+.icon-place:before {
+  content: '\e93a';
+}
+.icon-pointer:before {
+  content: '\e93b';
+}
+.icon-precio:before {
+  content: '\e93c';
+}
+.icon-scorecard:before {
+  content: '\e93d';
+}
+.icon-search:before {
+  content: '\e93e';
+}
+.icon-settings:before {
+  content: '\e93f';
+}
+.icon-sillas:before {
+  content: '\e940';
+}
+.icon-sofa:before {
+  content: '\e941';
+}
+.icon-tapetes:before {
+  content: '\e942';
+  color: #48b2e8;
+}
+.icon-terminal:before {
+  content: '\e943';
+}
+.icon-transfer:before {
+  content: '\e944';
+}
+.icon-vendedor:before {
+  content: '\e945';
+}
 .icon-whatsapp:before {
-  content: '\ea93';
+  content: '\e946';
 }

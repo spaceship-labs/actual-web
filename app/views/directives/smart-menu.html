@@ -1,0 +1,20 @@
+<div class="smart-menu" layout="row" ng-cloak>
+  <div flex="30">
+    <div ng-repeat="subcategory in subcategories">
+      <p>
+        <a ng-href="{{'/category/' + subcategory.url}}" ng-click="leavehover()">{{subcategory.name}}</a>
+      </p>
+    </div>
+  </div>
+  <div flex="70" ng-switch on="category">
+    <img ng-switch-when="salas" src="/images/categories/categoria2.png" alt="Actual Group">
+    <img ng-switch-when="comedores" src="/images/categories/categoria1.png" alt="Actual Group">
+    <img ng-switch-when="sillas" src="/images/categories/sillas.jpg" alt="Actual Group">
+    <img ng-switch-when="recamaras" src="/images/categories/categoria3.png" alt="Actual Group">
+    <img ng-switch-when="mueblesExterior" src="/images/categories/muebles_de_exterior.jpg" alt="Actual Group">
+    <img ng-switch-when="mueblesTV" src="/images/categories/muebles_de_tv.jpg" alt="Actual Group">
+    <img ng-switch-when="mueblesOficina" src="/images/categories/mubles_de_oficina.jpg" alt="Actual Group">
+    <img ng-switch-when="look" src="/images/categories/categoria8.png" alt="Actual Group">
+    <img ng-switch-default src="/images/header-banner.png" alt="Actual Group">
+  </div>
+</div>
