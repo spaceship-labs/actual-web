@@ -1344,6 +1344,7 @@ select {
   text-shadow: -0.25px -0.25px 0 black, 0.25px 0.25px black;
 }
 .smart-menu a {
+  font-size: 14px;
   color: #030202;
 }
 .smart-menu a::after {
