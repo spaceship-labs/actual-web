@@ -619,7 +619,17 @@
         ],
         tapetes: [{}]
       };
-      vm.activeCategory = [false, false, false, false, false, false, false];
+      vm.activeCategory = [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ];
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
@@ -1059,7 +1069,6 @@
     }
 
     function handleCategoryHover(id) {
-      console.log('ARRAY CAT: ', vm.activeCategory);
       vm.activeCategory.map(function(active) {
         return (active = false);
       });
@@ -1067,11 +1076,9 @@
     }
 
     function handleCategoryLeave() {
-      console.log('HOLAAAAAAAA');
       vm.activeCategory = vm.activeCategory.map(function(active) {
         return (active = false);
       });
-      console.log(vm.activeCategory);
     }
 
     function handleAccordion(name) {
