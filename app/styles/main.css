@@ -1440,6 +1440,10 @@ select {
   max-height: 337px;
 }
 
+.home-slider-bottom .home-slide {
+  padding: 20px;
+}
+
 .home-slider .home-slide {
   position: relative;
   /*max-height: 340px;*/
