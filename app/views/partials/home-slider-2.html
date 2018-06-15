@@ -1,5 +1,5 @@
 <div ng-if="vm.siteBanners && main.site" id="home-slider-wrapper">
-  <slick class="home-slider" responsive="vm.secondSliderCarouselBreakpoints" infinite="true" autoplay="true" arrows="true"
+  <slick class="home-slider home-slider-bottom" responsive="vm.secondSliderCarouselBreakpoints" infinite="true" autoplay="true" arrows="true"
     autoplay-speed="4000" slides-to-show="4" slides-to-scroll="4" init-onload="true" data="vm.siteBanners">
     <div ng-repeat="banner in vm.siteBanners | filter: {secondBanner: true}: true" class="home-slide">
       <a ng-if="banner.newTab" class="absolute-link" ng-href="{{banner.displayUrl}}" target="_blank"></a>
