@@ -16,7 +16,8 @@
       class="nav-categories">
       <a href="/category/salas" flex flex-xs="25" class="salas-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(0)"
         ng-mouseleave="main.handleCategoryLeave()">
-        <i class="icon-1"></i>
+        <i ng-show="!main.activeCategory[0]" class="icon-1"></i>
+        <i ng-show="main.activeCategory[0]" class="icon-salas-relleno"></i>
         <span class="nav-categories-item-text" href="#">Salas</span>
       </a>
       <smart-menu ng-show="main.activeCategory[0]" ng-mouseover="main.handleCategoryHover(0)" ng-mouseleave="main.handleCategoryLeave()"
@@ -24,7 +25,8 @@
 
       <a href="/category/comedores" flex flex-xs="25" class="comedores-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(1)"
         ng-mouseleave="main.handleCategoryLeave()">
-        <i class="icon-2"></i>
+        <i ng-show="!main.activeCategory[1]" class="icon-2"></i>
+        <i ng-show="main.activeCategory[1]" class="icon-comedores-relleno"></i>
         <span class="nav-categories-item-text" href="#">Comedores</span>
       </a>
       <smart-menu ng-show="main.activeCategory[1]" ng-mouseover="main.handleCategoryHover(1)" ng-mouseleave="main.handleCategoryLeave()"
@@ -32,7 +34,8 @@
 
       <a href="/category/sillas" flex flex-xs="25" class="sillas-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(2)"
         ng-mouseleave="main.handleCategoryLeave()">
-        <i class="icon-3"></i>
+        <i ng-show="!main.activeCategory[2]" class="icon-3"></i>
+        <i ng-show="main.activeCategory[2]" class="icon-sillas-relleno"></i>
         <span class="nav-categories-item-text" href="#">Sillas</span>
       </a>
       <smart-menu ng-show="main.activeCategory[2]" ng-mouseover="main.handleCategoryHover(2)" ng-mouseleave="main.handleCategoryLeave()"
@@ -40,7 +43,8 @@
 
       <a href="/category/recamaras" flex flex-xs="25" class="recamaras-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(3)"
         ng-mouseleave="main.handleCategoryLeave()">
-        <i class="icon-4"></i>
+        <i ng-show="!main.activeCategory[3]" class="icon-4"></i>
+        <i ng-show="main.activeCategory[3]" class="icon-recamaras-relleno"></i>
         <span class="nav-categories-item-text" href="#">Recámaras</span>
       </a>
       <smart-menu ng-show="main.activeCategory[3]" ng-mouseover="main.handleCategoryHover(3)" ng-mouseleave="main.handleCategoryLeave()"
@@ -48,7 +52,8 @@
 
       <a href="/category/recamaras" flex flex-xs="25" class="muebles-exterior-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(4)"
         ng-mouseleave="main.handleCategoryLeave()">
-        <i class="icon-5"></i>
+        <i ng-show="!main.activeCategory[4]" class="icon-5"></i>
+        <i ng-show="main.activeCategory[4]" class="icon-muebles--relleno"></i>
         <span class="nav-categories-item-text" href="#">Muebles de exterior</span>
       </a>
       <smart-menu ng-show="main.activeCategory[4]" ng-mouseover="main.handleCategoryHover(4)" ng-mouseleave="main.handleCategoryLeave()"
@@ -56,7 +61,8 @@
 
       <a href="/category/recamaras" flex flex-xs="25" class="muebles-television-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(5)"
         ng-mouseleave="main.handleCategoryLeave()">
-        <i class="icon-6"></i>
+        <i ng-show="!main.activeCategory[5]" class="icon-6"></i>
+        <i ng-show="main.activeCategory[5]" class="icon-tv-relleno"></i>
         <span class="nav-categories-item-text" href="#">Muebles de televisión</span>
       </a>
       <smart-menu ng-show="main.activeCategory[5]" ng-mouseover="main.handleCategoryHover(5)" ng-mouseleave="main.handleCategoryLeave()"
@@ -64,19 +70,23 @@
 
       <a href="/category/recamaras" flex flex-xs="25" class="muebles-oficina-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(6)"
         ng-mouseleave="main.handleCategoryLeave()">
-        <i class="icon-7"></i>
+        <i ng-show="!main.activeCategory[6]" class="icon-7"></i>
+        <i ng-show="main.activeCategory[6]" class="icon-oficina-relleno"></i>
         <span class="nav-categories-item-text" href="#">Muebles de Oficina</span>
       </a>
       <smart-menu ng-show="main.activeCategory[6]" ng-mouseover="main.handleCategoryHover(6)" ng-mouseleave="main.handleCategoryLeave()"
         subcategories="main.subcategories.MueblesOficina" category="main.category[6]" leavehover="main.handleCategoryLeave"></smart-menu>
 
-      <a href="/ofertas" flex flex-xs="25" class="look-bg nav-categories-item">
-        <i class="icon-8"></i>
+      <a href="/ofertas" flex flex-xs="25" class="look-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(7)"
+        ng-mouseleave="main.handleCategoryLeave()">
+        <i ng-show="!main.activeCategory[7]" class="icon-8"></i>
+        <i ng-show="main.activeCategory[7]" class="icon-look-relleno"></i>
         <span class="nav-categories-item-text" href="#">Arma tu
           <i>Look</i> paquetes</span>
       </a>
-      <a href="/ofertas" flex flex-xs="25" class="deals-bg nav-categories-item">
-        <i class="icon-9"></i>
+      <a href="/ofertas" flex flex-xs="25" class="deals-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(8)" ng-mouseleave="main.handleCategoryLeave()">
+        <i ng-show="!main.activeCategory[8]" class="icon-9"></i>
+        <i ng-show="main.activeCategory[8]" class="icon-deals-relleno"></i>
         <span class="nav-categories-item-text" href="#">Promociones</span>
       </a>
       <a href="https//actualkids.com" flex flex-xs="25" class="kids-bg nav-categories-item">
