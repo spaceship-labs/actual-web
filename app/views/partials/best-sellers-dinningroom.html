@@ -1,4 +1,4 @@
-<div ng-if="vm.dinningRooms && main.site" id="home-slider-wrapper">
+<div ng-if="vm.featuredProducts && main.site" id="home-slider-wrapper">
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
       <a href="/category/comedores">
@@ -8,16 +8,44 @@
       </a>
     </h2>
   </div>
-  <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="80" flex-xs="100" flex-sm="100" ng-show="vm.top['comedores-loaded']">
-      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
-        init-onload=true data="vm.top['comedores-loaded']">
-        <div ng-repeat="product in vm.dinningRooms" class="listing-product-wrap">
-          <listing-product class="foo" product="product"></listing-product>
+  <div
+    class="products-list"
+    layout="row"
+    layout-wrap
+    layout-align="start center"
+    ng-cloak
+  >
+    <div
+      flex="80"
+      flex-xs="100"
+      flex-sm="100"
+    >
+      <slick
+        class="categories-carousel"
+        responsive="vm.bestSellersCarouselBreakpoints"
+        infinite="true"
+        slides-to-show="3"
+        slides-to-scroll="3"
+        init-onload="true"
+        data="vm.featuredLoaded"
+      >
+        <div
+          ng-repeat="featuredComedores in vm.featuredProducts | filter: {categoryHandle: 'comedores'} | limitTo: vm.limitDinningRooms"
+          class="listing-product-wrap"
+        >
+          <listing-product product="featuredComedores.product" />
         </div>
       </slick>
     </div>
-    <div hide-xs hide-sm flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
+    <div
+      hide-xs
+      hide-sm
+      flex="20"
+      layout="row"
+      layout-wrap
+      layout-align="start center"
+      class="view-more-category"
+    >
       <a href="/category/comedores">
         <div class="circle circle-comedores">
           <div class="circle-text">
@@ -35,4 +63,4 @@
       VER MÁS PRODUCTOS
     </a>
   </div>
-</div>
+</div>;
