@@ -1761,8 +1761,8 @@ select {
   text-align: center;
 }
 .products-list .view-more-category .circle {
-  height: 240px;
-  width: 95%;
+  height: 192px;
+  width: 80%;
   border-radius: 50%;
   display: inline-block;
   margin: 0 auto;
@@ -1783,7 +1783,7 @@ select {
 }
 .products-list .view-more-category .circle .circle-text p {
   color: #030202;
-  font-size: 31px;
+  font-size: 25px;
 }
 /*-----------/
   #BREADCRUMB
