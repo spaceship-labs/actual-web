@@ -1,4 +1,4 @@
-<div ng-if="vm.kidsBureaus && main.site" id="home-slider-wrapper">
+<div ng-if="vm.featuredProducts && main.site" id="home-slider-wrapper">
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
       <a href="/category/comoda-infantil">
@@ -7,10 +7,10 @@
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="80" flex-xs="100" flex-sm="100" ng-show="vm.top['comoda-infantil-loaded']">
-      <slick class="categories-carousel" infinite="false" slides-to-show="3" slides-to-scroll="3" init-onload=true data="vm.top['comoda-infantil-loaded']">
-        <div ng-repeat="product in vm.kidsBureaus" class="listing-product-wrap">
-          <listing-product class="foo" product="product"></listing-product>
+   <div flex="80" flex-xs="100" flex-sm="100">
+      <slick class="categories-carousel" infinite="true" slides-to-show="3" slides-to-scroll="3" init-onload="true" data="vm.featuredLoaded" responsive="vm.bestSellersCarouselBreakpoints" >
+        <div ng-repeat="featuredComoda in vm.featuredProducts | filter:{ categoryHandle: 'comoda-infantil' } | limitTo:vm.limitKidsBureaus" class="listing-product-wrap">
+          <listing-product product="featuredComoda.product"></listing-product>
         </div>
       </slick>
     </div>

@@ -1,4 +1,4 @@
-<div ng-if="vm.bedRooms && main.site" id="home-slider-wrapper">
+<div ng-if="vm.featuredProducts && main.site" id="home-slider-wrapper">
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
       <a href="/category/recamaras">
@@ -9,11 +9,11 @@
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="80" flex-xs="100" flex-sm="100" ng-show="vm.top['recamaras-loaded']">
-      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
-        init-onload=true data="vm.top['recamaras-loaded']">
-        <div ng-repeat="product in vm.bedRooms" class="listing-product-wrap">
-          <listing-product class="foo" product="product"></listing-product>
+    <div flex="80" flex-xs="100" flex-sm="100">
+      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="true" slides-to-show="3" slides-to-scroll="3"
+        init-onload=true data="vm.featuredLoaded">
+        <div ng-repeat="featuredRecamara in vm.featuredProducts | filter:{ categoryHandle: 'recamaras' } | limitTo:vm.limitBedRooms track by $index" class="listing-product-wrap">
+          <listing-product product="featuredRecamara.product"></listing-product>
         </div>
       </slick>
     </div>
