@@ -381,7 +381,7 @@
           },
           {
             name: 'Bancos para Barra',
-            url: 'bancos-para-barr'
+            url: 'bancos-para-barra'
           }
         ],
         Recamaras: [
