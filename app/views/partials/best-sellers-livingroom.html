@@ -15,7 +15,11 @@
     layout-align="start center"
     ng-cloak
   >
-    <div flex="80" flex-xs="100" flex-sm="100">
+    <div
+      flex="80"
+      flex-xs="100"
+      flex-sm="100"
+    >
       <slick
         class="categories-carousel"
         responsive="vm.bestSellersCarouselBreakpoints"
@@ -26,7 +30,7 @@
         data="vm.featuredLoaded"
       >
         <div
-          ng-repeat="featuredSalas in vm.featuredProducts | filter:{ categoryHandle: 'salas' } | limitTo:vm.limitLivingRooms"
+          ng-repeat="featuredSalas in vm.featuredProducts | filter: {categoryHandle: 'salas'} | limitTo: vm.limitLivingRooms"
           class="listing-product-wrap"
         >
           <listing-product product="featuredSalas.product" />
@@ -43,7 +47,7 @@
       class="view-more-category"
     >
       <a href="/category/salas">
-        <div class="circle circle-salas">
+        <div class="circle">
           <div class="circle-text">
             <p>
               VER CATEGORÍA
@@ -59,4 +63,6 @@
       VER MÁS PRODUCTOS
     </a>
   </div>
-</div>;
+</div>
+
+

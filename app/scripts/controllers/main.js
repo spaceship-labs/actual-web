@@ -108,7 +108,7 @@
             },
             {
               name: 'Salas Modulares',
-              url: 'salas-esquineras'
+              url: 'salas-modulares'
             },
             {
               name: 'Sofás Cama',
@@ -128,7 +128,7 @@
             },
             {
               name: 'Salas de Cine',
-              url: ''
+              url: 'salas-de-cine'
             },
             {
               name: 'Taburetes',
@@ -186,7 +186,7 @@
             },
             {
               name: 'Bancos para Barra',
-              url: 'bancos-para-barr'
+              url: 'bancos-para-barra'
             }
           ]
         },
@@ -232,7 +232,7 @@
             },
             {
               name: 'Sillones para Exterior',
-              url: ''
+              url: 'sillones-para-exterior'
             },
             {
               name: 'Mesas para Jardín',
@@ -286,7 +286,7 @@
             },
             {
               name: 'Salas de Cine',
-              url: ''
+              url: 'salas-de-cine'
             }
           ]
         }
@@ -309,7 +309,11 @@
           },
           {
             name: 'Salas Modulares',
-            url: 'salas-esquineras'
+            url: 'salas-modulares'
+          },
+          {
+            name: 'Sofas',
+            url: 'sofas'
           },
           {
             name: 'Sofás Cama',
@@ -329,7 +333,7 @@
           },
           {
             name: 'Salas de Cine',
-            url: ''
+            url: 'salas-de-cine'
           },
           {
             name: 'Taburetes',
@@ -342,6 +346,10 @@
           {
             name: 'Mesas de Centro',
             url: 'mesas-de-centro'
+          },
+          {
+            name: 'Mesas laterales',
+            url: 'mesas-laterales'
           },
           {
             name: 'Credenzas',
@@ -421,7 +429,7 @@
           },
           {
             name: 'Sillones para Exterior',
-            url: ''
+            url: 'sillones-para-exterior'
           },
           {
             name: 'Mesas para Jardín',
@@ -469,7 +477,7 @@
           },
           {
             name: 'Salas de Cine',
-            url: ''
+            url: 'salas-de-cine'
           }
         ]
       };
@@ -490,15 +498,15 @@
           },
           {
             name: 'Literas Infantiles',
-            url: ''
+            url: 'literas-infantiles'
           },
           {
             name: 'Cómodas y burós infantiles',
-            url: 'comoda'
+            url: 'comoda-infantil'
           },
           {
             name: 'Escritorios Infantiles',
-            url: 'escritorios'
+            url: 'escritorios-infantiles'
           },
           {
             name: 'Mesas y Sillas Infantiles',
@@ -506,7 +514,7 @@
           },
           {
             name: 'Sillones infantiles y puffs',
-            url: 'sillones'
+            url: 'sillones-infantiles'
           },
           {
             name: 'Colchones',
@@ -532,11 +540,11 @@
           },
           {
             name: 'Cambiador de Pañales',
-            url: ''
+            url: 'cambiador-de-panales'
           },
           {
             name: 'Bañeras para Bebé',
-            url: ''
+            url: 'baneras-para-bebe'
           },
           {
             name: 'Blancos para Bebé',
@@ -554,11 +562,11 @@
         mamaypapa: [
           {
             name: 'Mecedoras',
-            url: ''
+            url: 'mecedoras'
           },
           {
             name: 'Cojines de maternidad',
-            url: ''
+            url: 'cojines'
           }
         ],
         organizacion: [
@@ -568,7 +576,7 @@
           },
           {
             name: 'Cestos y Canastas',
-            url: ''
+            url: 'canastas'
           },
           {
             name: 'Joyeros',
@@ -592,7 +600,7 @@
         decoracion: [
           {
             name: 'Accesorios Decorativos',
-            url: 'accesorios'
+            url: 'accesorios-infantiles'
           },
           {
             name: 'Cuadros',
