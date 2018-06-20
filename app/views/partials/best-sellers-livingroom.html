@@ -1,4 +1,4 @@
-<div ng-if="vm.livingRooms && main.site" id="home-slider-wrapper">
+<div ng-if="vm.featuredProducts && main.site" id="home-slider-wrapper">
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
       <a href="/category/salas">
@@ -8,20 +8,52 @@
       </a>
     </h2>
   </div>
-  <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-    <div flex="80" flex-xs="100" flex-sm="100" ng-show="vm.top['salas-loaded']">
-      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="false" slides-to-show="3" slides-to-scroll="3"
-        init-onload=true data="vm.top['salas-loaded']">
-        <div ng-repeat="product in vm.livingRooms" class="listing-product-wrap">
-          <listing-product class="foo" product="product"></listing-product>
+  <div
+    class="products-list"
+    layout="row"
+    layout-wrap
+    layout-align="start center"
+    ng-cloak
+  >
+    <div
+      flex="80"
+      flex-xs="100"
+      flex-sm="100"
+    >
+      <slick
+        class="categories-carousel"
+        responsive="vm.bestSellersCarouselBreakpoints"
+        infinite="true"
+        slides-to-show="3"
+        slides-to-scroll="3"
+        init-onload="true"
+        data="vm.featuredLoaded"
+      >
+        <div
+          ng-repeat="featuredSalas in vm.featuredProducts | filter: {categoryHandle: 'salas'} | limitTo: vm.limitLivingRooms"
+          class="listing-product-wrap"
+        >
+          <listing-product product="featuredSalas.product" />
         </div>
       </slick>
     </div>
-    <div hide-xs hide-sm flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
+    <div
+      hide-xs
+      hide-sm
+      flex="20"
+      layout="row"
+      layout-wrap
+      layout-align="start center"
+      class="view-more-category"
+    >
       <a href="/category/salas">
-        <div class="circle circle-salas">
+        <div class="circle">
           <div class="circle-text">
+<<<<<<< HEAD
             <p style="font-size: 26px;">
+=======
+            <p>
+>>>>>>> master
               VER CATEGORÍA
               <strong>COMPLETA</strong>
             </p>
@@ -36,3 +68,5 @@
     </a>
   </div>
 </div>
+
+
