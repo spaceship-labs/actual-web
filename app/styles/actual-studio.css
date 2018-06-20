@@ -122,6 +122,22 @@
   padding: 30px 0;
 }
 
+.actual-studio #footer .footer-menu-col a {
+  color: #fff;
+}
+
+.actual-studio #footer .footer-menu-col a i {
+  color: #fff;
+}
+
+.actual-studio #footer .footer-menu-col h2 {
+  color: #ffffff;
+}
+
+.actual-studio #footer .footer-menu-col table {
+  color: #fff;
+}
+
 @media (max-width: 600px) {
   .actual-studio .searcher-wrapper {
     background: #000 !important;
