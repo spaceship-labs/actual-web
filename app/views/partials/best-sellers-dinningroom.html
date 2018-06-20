@@ -8,46 +8,19 @@
       </a>
     </h2>
   </div>
-  <div
-    class="products-list"
-    layout="row"
-    layout-wrap
-    layout-align="start center"
-    ng-cloak
-  >
-    <div
-      flex="80"
-      flex-xs="100"
-      flex-sm="100"
-    >
-      <slick
-        class="categories-carousel"
-        responsive="vm.bestSellersCarouselBreakpoints"
-        infinite="true"
-        slides-to-show="3"
-        slides-to-scroll="3"
-        init-onload="true"
-        data="vm.featuredLoaded"
-      >
-        <div
-          ng-repeat="featuredComedores in vm.featuredProducts | filter: {categoryHandle: 'comedores'} | limitTo: vm.limitDinningRooms"
-          class="listing-product-wrap"
-        >
+  <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
+    <div flex="80" flex-xs="100" flex-sm="100">
+      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="true" slides-to-show="3" slides-to-scroll="3"
+        init-onload="true" data="vm.featuredLoaded">
+        <div ng-repeat="featuredComedores in vm.featuredProducts | filter: {categoryHandle: 'comedores'} | limitTo: vm.limitDinningRooms"
+          class="listing-product-wrap">
           <listing-product product="featuredComedores.product" />
         </div>
       </slick>
     </div>
-    <div
-      hide-xs
-      hide-sm
-      flex="20"
-      layout="row"
-      layout-wrap
-      layout-align="start center"
-      class="view-more-category"
-    >
+    <div hide-xs hide-sm flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
       <a href="/category/comedores">
-        <div class="circle">
+        <div class="circle circle-recamaras">
           <div class="circle-text">
             <p>
               VER CATEGORÍA
