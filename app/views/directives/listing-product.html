@@ -37,10 +37,10 @@
         </p>
         <p flex="65" class="price">
           <span class="price-before-currency">MXN</span>
-          <span class="price-before">{{product.priceBefore | currency:'$':0}}</span>
+          <span class="price-before">{{product.priceBefore | roundCurrency:'$'}}</span>
           <span ng-if="product.priceBefore">|</span>
           <strong class="price-now-currency">MXN</strong>
-          <strong class="price-now">{{product.Price | currency:'$':0}}</strong>
+          <strong class="price-now">{{product.Price | roundCurrency:'$'}}</strong>
           <br/>
           <span class="taxes-included">Impuestos incluidos</span>
         </p>

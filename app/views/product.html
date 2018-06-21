@@ -58,11 +58,11 @@
                 </p>
                 <p>
                   <span class="currency-label">MXN</span>
-                  <span class="product-view-price-crossed">{{vm.product.priceBefore | currency:'$':0 }}</span>
+                  <span class="product-view-price-crossed">{{vm.product.priceBefore | roundCurrency:'$' }}</span>
                 </p>
                 <p class="product-view-price-hl">
                   <span class="currency-label">MXN</span>
-                  <strong>{{vm.product.Price | currency:'$':0 }}</strong>
+                  <strong>{{vm.product.Price | roundCurrency:'$' }}</strong>
                 </p>
               </div>
 
@@ -94,7 +94,7 @@
               <div flex="25" flex-sm="100" flex-xs="100" class="product-view-price-hl product-view-price-main">
                 <h3>
                   <span class="currency-label">MXN</span>
-                  <strong>{{vm.product.Price * vm.productCart.quantity | currency:'$':0 }}</strong>
+                  <strong>{{vm.product.Price * vm.productCart.quantity | roundCurrency:'$' }}</strong>
                 </h3>
                 <span class="taxes-included">Impuestos incluidos</span>
               </div>
