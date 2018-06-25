@@ -6,7 +6,7 @@
   background: #000000 !important;
 }
 .actual-studio .footer-bottom {
-  background: #cc262f !important;
+  background: #030202 !important;
 }
 .actual-studio .nav-categories-item-active,
 .actual-studio .salas-bg:hover {
@@ -115,27 +115,6 @@
 
 .actual-studio .schedules-modal-header {
   background: #000 !important;
-}
-
-.actual-studio #footer .footer-menu {
-  background: #030202;
-  padding: 30px 0;
-}
-
-.actual-studio #footer .footer-menu-col a {
-  color: #fff;
-}
-
-.actual-studio #footer .footer-menu-col a i {
-  color: #fff;
-}
-
-.actual-studio #footer .footer-menu-col h2 {
-  color: #ffffff;
-}
-
-.actual-studio #footer .footer-menu-col table {
-  color: #fff;
 }
 
 @media (max-width: 600px) {

@@ -281,7 +281,7 @@
               url: 'centro-de-entretenimiento'
             },
             {
-              name: 'Sillones Riclinables',
+              name: 'Sillones Reclinables',
               url: 'sillones-reclinables'
             },
             {
@@ -472,7 +472,7 @@
             url: 'centro-de-entretenimiento'
           },
           {
-            name: 'Sillones Riclinables',
+            name: 'Sillones Reclinables',
             url: 'sillones-reclinables'
           },
           {
