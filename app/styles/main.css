@@ -1482,7 +1482,16 @@ select {
   padding: 20px;
 }
 
+.home-slider-bottom .home-slide-2 {
+  padding: 20px;
+}
+
 .home-slider .home-slide {
+  position: relative;
+  /*max-height: 340px;*/
+  max-height: 450px;
+}
+.home-slider .home-slide-2 {
   position: relative;
   /*max-height: 340px;*/
   max-height: 450px;
@@ -1490,7 +1499,20 @@ select {
 .home-slider .home-slide img {
   width: 100%;
 }
+.home-slider .home-slide-2 img {
+  width: 100%;
+}
 .home-slider .home-slide .slide-text {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 8px 12px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  box-sizing: border-box;
+}
+.home-slider .home-slide-2 .slide-text {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -1504,7 +1526,19 @@ select {
   font-size: 24px;
   margin: 0;
 }
+.home-slider .home-slide-2 .slide-text h2 {
+  font-size: 24px;
+  margin: 0;
+}
 .home-slider .home-slide .absolute-link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+.home-slider .home-slide-2 .absolute-link {
   position: absolute;
   left: 0;
   top: 0;
@@ -7182,9 +7216,19 @@ md-sidenav {
   .home-slider .home-slide {
     overflow: hidden;
   }
+  .home-slider .home-slide-2 {
+    overflow: hidden;
+  }
   .home-slider .home-slide img {
     width: auto;
     height: 110px;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+  }
+  .home-slider .home-slide-2 img {
+    width: auto;
+    height: 180px;
     left: 50%;
     position: relative;
     transform: translateX(-50%);
