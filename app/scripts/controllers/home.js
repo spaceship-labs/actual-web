@@ -46,8 +46,9 @@ function HomeCtrl(
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true
         }
       }
     ]
@@ -66,7 +67,7 @@ function HomeCtrl(
     if (activeStore) {
       vm.stockProperty = activeStore.code;
     }
-   metaTagsService.setMetaTags({});
+    metaTagsService.setMetaTags({});
     loadBannersAndFeaturedProducts();
 
     if ($routeParams.completeRegister) {
@@ -102,7 +103,7 @@ function HomeCtrl(
           featured.product = productService.formatProductSync(featured.product);
           return featured;
         });
-        $timeout(function(){
+        $timeout(function() {
           vm.featuredLoaded = true;
         }, 600);
       });

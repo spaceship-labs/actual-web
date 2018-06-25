@@ -1,4 +1,5 @@
-<div class="smart-menu" layout="row" ng-cloak>
+<div ng-class="category === 'mueblesTV' ? 'smart-menu-left' : ( category === 'mueblesOficina' ? 'smart-menu-left' : (category === 'decoracion' ? 'smart-menu-left' : (category === 'iluminación' ? 'smart-menu-left' : 'smart-menu')))"
+  layout="row" ng-cloak>
   <div flex="30">
     <div ng-repeat="subcategory in subcategories">
       <p>
@@ -15,16 +16,16 @@
     <img ng-switch-when="mueblesTV" src="/images/categories/muebles_de_tv.jpg" alt="Actual Group">
     <img ng-switch-when="mueblesOficina" src="/images/categories/mubles_de_oficina.jpg" alt="Actual Group">
 
-   <img ng-switch-when="bebes" src="/images/categories/bebes.jpg" alt="Actual Group">
-   <img ng-switch-when="decoracion" src="/images/categories/decoracion.jpg" alt="Actual Group">
-   <img ng-switch-when="iluminación" src="/images/categories/iluminacion.jpg" alt="Actual Group">
-   <img ng-switch-when="juguetes" src="/images/categories/juguetes.jpg" alt="Actual Group">
-   <img ng-switch-when="mamaypapa" src="/images/categories/mamaypapa.jpg" alt="Actual Group">
-   <img ng-switch-when="ninos" src="/images/categories/ninos.jpg" alt="Actual Group">
-  <img ng-switch-when="organizacion" src="/images/categories/organizacion.jpg" alt="Actual Group">
- 
-    
+    <img ng-switch-when="bebes" src="/images/categories/bebes.jpg" alt="Actual Group">
+    <img ng-switch-when="decoracion" src="/images/categories/decoracion.jpg" alt="Actual Group">
+    <img ng-switch-when="iluminación" src="/images/categories/iluminacion.jpg" alt="Actual Group">
+    <img ng-switch-when="juguetes" src="/images/categories/juguetes.jpg" alt="Actual Group">
+    <img ng-switch-when="mamaypapa" src="/images/categories/mamaypapa.jpg" alt="Actual Group">
+    <img ng-switch-when="ninos" src="/images/categories/ninos.jpg" alt="Actual Group">
+    <img ng-switch-when="organizacion" src="/images/categories/organizacion.jpg" alt="Actual Group">
+
     <img ng-switch-when="look" src="/images/categories/categoria8.png" alt="Actual Group">
-    <!--<img ng-switch-default src="/images/header-banner.png" alt="Actual Group">---->
   </div>
 </div>
+<!-- right: auto
+translate -600 -->
