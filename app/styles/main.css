@@ -1335,7 +1335,23 @@ select {
   max-width: 600px;
   z-index: 999999;
 }
+.smart-menu-left {
+  background: #f7f8f8;
+  position: absolute;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.44) 0px 7px 7px -2px;
+  right: auto;
+  top: 100%;
+  transform: translateX(-600px);
+  max-width: 600px;
+  z-index: 999999;
+}
 .smart-menu p {
+  text-align: left;
+  margin: 8px 0 8px 20px;
+  cursor: pointer;
+}
+.smart-menu-left p {
   text-align: left;
   margin: 8px 0 8px 20px;
   cursor: pointer;
@@ -1343,7 +1359,14 @@ select {
 .smart-menu p:hover {
   text-shadow: -0.25px -0.25px 0 black, 0.25px 0.25px black;
 }
+.smart-menu-left p:hover {
+  text-shadow: -0.25px -0.25px 0 black, 0.25px 0.25px black;
+}
 .smart-menu a {
+  font-size: 14px;
+  color: #030202;
+}
+.smart-menu-left a {
   font-size: 14px;
   color: #030202;
 }
@@ -1355,10 +1378,25 @@ select {
   background: #e2023f;
   transition: width 0.3s;
 }
+.smart-menu-left a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #e2023f;
+  transition: width 0.3s;
+}
 .smart-menu a:hover::after {
   width: 15%;
 }
+.smart-menu-left a:hover::after {
+  width: 15%;
+}
 .smart-menu img {
+  width: 100%;
+  display: block;
+}
+.smart-menu-left img {
   width: 100%;
   display: block;
 }
@@ -7125,6 +7163,15 @@ md-sidenav {
 }
 
 @media (max-width: 600px) {
+  .listing-product .listing-product-info-main p {
+    font-size: 10px;
+  }
+  .listing-product {
+    border: 1px solid #fff;
+    padding: 2px 10px;
+    position: relative;
+    margin: 20px 0;
+  }
   .listing-view .sub .sub-image {
     width: 92%;
     height: 100%;
