@@ -17,14 +17,14 @@
     <!--CATEGORIES-->
     <div flex-gt-sm="100" flex="100">
 
-    
+
       <div class="container container-xxlg">
-        <!--
+
         <div class="subs-container">
           <div class="subs-container-list">
             <slick class="categories-carousel" responsive="vm.categoriesCarouselBreakpoints" infinite="false" slides-to-show="5" slides-to-scroll="5"
               init-onload=true data="main.categoriesTree">
-              <div class="sub-wrapper" ng-repeat="category in main.categoriesTree" ng-if="category[vm.stockProperty] > 0">
+              <div class="sub-wrapper" ng-repeat="category in main.categoriesTree | filter:{ complement: true }" ng-if="category[vm.stockProperty] > 0">
                 <category-item category="category" stock-key="{{vm.stockProperty}}" />
               </div>
 
@@ -36,14 +36,14 @@
                       </a>
                     </h4>
                   </div>
-                  <a ng-href="ofertas" class="absolute-link"></a>
+                  <a ng-href="/search?sortkey=slowmovement" class="absolute-link"></a>
                 </div>
               </div>
             </slick>
 
           </div>
         </div>
-      -->
+
         <br>
         <br>
         <div class="subs-container">
