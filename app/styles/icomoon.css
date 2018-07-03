@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('../fonts/icomoon.eot?8muoi0');
-  src: url('../fonts/icomoon.eot?8muoi0#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?8muoi0') format('truetype'),
-    url('../fonts/icomoon.woff?8muoi0') format('woff'),
-    url('../fonts/icomoon.svg?8muoi0#icomoon') format('svg');
+  src: url('../fonts/icomoon.eot?gpozo1');
+  src: url('../fonts/icomoon.eot?gpozo1#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?gpozo1') format('truetype'),
+    url('../fonts/icomoon.woff?gpozo1') format('woff'),
+    url('../fonts/icomoon.svg?gpozo1#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,6 +25,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-comedores:before {
+  content: '\e959';
+}
+.icon-recamaras:before {
+  content: '\e95a';
+}
 .icon-comedores-relleno:before {
   content: '\e950';
 }

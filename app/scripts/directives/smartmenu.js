@@ -11,7 +11,7 @@ function SmartMenu() {
   return {
     scope: {
       subcategories: '=',
-      category: '=',
+      image: '=',
       leavehover: '='
     },
     templateUrl: 'views/directives/smart-menu.html',

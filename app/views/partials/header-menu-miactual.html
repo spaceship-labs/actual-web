@@ -3,13 +3,14 @@
 
     <nav ng-if="main.siteTheme !== 'actual-kids' " hide-sm flex-gt-sm="100" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false"
       class="nav-categories">
-      <a ng-repeat-start="category in main.categoriesTree | filter: { onKidsMenu: '!' } track by $index" flex flex-xs="25" class="salas-bg nav-categories-item"
+      <a ng-repeat-start="category in main.categoriesTree | filter: { onKidsMenu: '!' } track by $index" flex flex-xs="25" class="{{main.mainCategories[category.Handle].color}} nav-categories-item"
         href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
         <i ng-class="main.activeCategory[category.Handle] === false ? 'icon-{{ main.mainCategories[category.Handle].icon }}' : 'icon-{{ main.mainCategories[category.Handle].filledIcon }}'"></i>
         <span class="nav-categories-item-text" href="#">{{category.Name}}</span>
       </a>
       <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'" ng-mouseover="main.handleCategoryHover(category.Handle)"
-        ng-mouseleave="main.handleCategoryLeave()" subcategories="category.Childs" category="main.category[$index]" leavehover="main.handleCategoryLeave"></smart-menu>
+        ng-mouseleave="main.handleCategoryLeave()" subcategories="category.Childs" image="main.mainCategories[category.Handle].image"
+        leavehover="main.handleCategoryLeave"></smart-menu>
       <a href="/search?sortkey=slowmovement" flex flex-xs="25" class="deals-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(8)"
         ng-mouseleave="main.handleCategoryLeave()">
         <i ng-show="!main.activeCategory[8]" class="icon-9"></i>
@@ -18,6 +19,38 @@
       </a>
       <a href="https://actualkids.com" target="_blank" flex flex-xs="25" class="kids-bg nav-categories-item">
         <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px">
+      </a>
+      <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" flex flex-xs="25" class="nav-categories-item">
+        <i class="icon-attachment"></i>
+        <span class="nav-categories-item-text" href="#">Pedidos</span>
+      </a>
+      <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" flex flex-xs="25" class="nav-categories-item">
+        <i class="icon-oportunidades"></i>
+        <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+      </a>
+    </nav>
+
+    <nav ng-if="main.siteTheme === 'actual-kids' " hide-sm flex-gt-sm="100" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false"
+      class="nav-categories">
+      <a ng-repeat-start="category in main.categoriesTree | filter: { onKidsMenu: true } track by $index" flex flex-xs="25" class="categories-bg nav-categories-item"
+        href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
+        <i class="icon-{{ main.mainCategoriesKids[category.Handle].icon }}"></i>
+        <span class="nav-categories-item-text" href="#">{{category.Name}}</span>
+      </a>
+      <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'" ng-mouseover="main.handleCategoryHover(category.Handle)"
+        ng-mouseleave="main.handleCategoryLeave()" subcategories="category.Childs" image="main.mainCategoriesKids[category.Handle].image"
+        leavehover="main.handleCategoryLeave"></smart-menu>
+      <a href="/search?sortkey=slowmovement" flex flex-xs="25" class="categories-bg nav-categories-item">
+        <i class="icon-promociones2"></i>
+        <span class="nav-categories-item-text" href="#">Ofertas</span>
+      </a>
+      <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" flex flex-xs="25" class="nav-categories-item">
+        <i class="icon-attachment"></i>
+        <span class="nav-categories-item-text" href="#">Pedidos</span>
+      </a>
+      <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" flex flex-xs="25" class="nav-categories-item">
+        <i class="icon-oportunidades"></i>
+        <span class="nav-categories-item-text" href="#">Cotizaciones</span>
       </a>
     </nav>
   </div>

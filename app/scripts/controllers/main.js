@@ -102,42 +102,80 @@
         salas: {
           color: 'salas-bg',
           icon: '1',
-          filledIcon: 'salas-relleno'
+          filledIcon: 'salas-relleno',
+          image: 'categoria2.png'
         },
         comedores: {
           color: 'comedores-bg',
-          icon: '2',
-          filledIcon: 'comedores-relleno'
+          icon: 'comedores',
+          filledIcon: 'comedores-relleno',
+          image: 'categoria1.png'
         },
         sillas: {
           color: 'sillas-bg',
           icon: '3',
-          filledIcon: 'sillas-relleno'
+          filledIcon: 'sillas-relleno',
+          image: 'sillas.jpg'
         },
         recamaras: {
           color: 'recamaras-bg',
-          icon: '4',
-          filledIcon: 'recamaras-relleno'
+          icon: 'recamaras',
+          filledIcon: 'recamaras-relleno',
+          image: 'categoria3.png'
         },
         'muebles-de-jardin': {
           color: 'muebles-exterior-bg',
           icon: '5',
-          filledIcon: 'muebles--relleno'
+          filledIcon: 'muebles--relleno',
+          image: 'muebles_de_exterior.jpg'
         },
         'muebles-de-tv': {
           color: 'muebles-television-bg',
           icon: '6',
-          filledIcon: 'tv-relleno'
+          filledIcon: 'tv-relleno',
+          image: 'muebles_de_tv.jpg'
         },
         'muebles-para-oficina': {
           color: 'muebles-oficina-bg',
           icon: '7',
-          filledIcon: 'oficina-relleno'
+          filledIcon: 'oficina-relleno',
+          image: 'mubles_de_oficina.jpg'
         },
         ofertas: {
           color: 'look-bg',
           icon: '8',
-          filledIcon: 'look-relleno'
+          filledIcon: 'look-relleno',
+          image: 'categoria8.png'
+        }
+      };
+      vm.mainCategoriesKids = {
+        'camas-infantiles': {
+          icon: 'niñas-y-niños2',
+          image: 'ninos.jpg'
+        },
+        'cunas-para-bebes': {
+          icon: 'bebebs2',
+          image: 'bebes.jpg'
+        },
+        'accesorios-infantiles': {
+          icon: 'mamaypapa2',
+          image: 'mamaypapa.jpg'
+        },
+        organizacion: {
+          icon: 'organizacion2',
+          image: 'organizacion.jpg'
+        },
+        juguetes: {
+          icon: 'juguetes2',
+          image: 'juguetes.jpg'
+        },
+        'comoda-infantil': {
+          icon: 'decoracion2',
+          image: 'decoracion.jpg'
+        },
+        'lamparas-infantiles': {
+          icon: 'iluminacion2',
+          image: 'iluminacion.jpg'
         }
       };
       vm.activeCategory = {
@@ -148,165 +186,14 @@
         'muebles-de-jardin': false,
         'muebles-de-tv': false,
         'muebles-para-oficina': false,
-        ofertas: false
-      };
-
-      vm.category = [
-        'salas',
-        'comedores',
-        'sillas',
-        'recamaras',
-        'mueblesExterior',
-        'mueblesTV',
-        'mueblesOficina',
-        'look'
-      ];
-
-      vm.categoryKids = [
-        'ninos',
-        'bebes',
-        'mamaypapa',
-        'organizacion',
-        'juguetes',
-        'decoracion',
-        'iluminación'
-      ];
-      vm.subcategoriesKids = {
-        ninos: [
-          {
-            name: 'Camas Infantiles',
-            url: 'camas-infantiles'
-          },
-          {
-            name: 'Literas Infantiles',
-            url: 'literas-infantiles'
-          },
-          {
-            name: 'Cómodas y burós infantiles',
-            url: 'comoda-infantil'
-          },
-          {
-            name: 'Escritorios Infantiles',
-            url: 'escritorios-infantiles'
-          },
-          {
-            name: 'Mesas y Sillas Infantiles',
-            url: 'mesas-y-sillas-infantiles'
-          },
-          {
-            name: 'Sillones infantiles y puffs',
-            url: 'sillones-infantiles'
-          },
-          {
-            name: 'Colchones',
-            url: 'colchones'
-          },
-          {
-            name: 'Blancos',
-            url: 'blancos-infantiles'
-          },
-          {
-            name: 'Cojines',
-            url: 'cojines'
-          }
-        ],
-        bebes: [
-          {
-            name: 'Cunas',
-            url: 'cunas-para-bebes'
-          },
-          {
-            name: 'Colchones para Bebé',
-            url: 'colchon-para-cuna'
-          },
-          {
-            name: 'Cambiador de Pañales',
-            url: 'cambiador-de-panales'
-          },
-          {
-            name: 'Bañeras para Bebé',
-            url: 'baneras-para-bebe'
-          },
-          {
-            name: 'Blancos para Bebé',
-            url: 'blancos-infantiles'
-          },
-          {
-            name: 'Cojines',
-            url: 'cojines'
-          },
-          {
-            name: 'Sillas para Comer',
-            url: 'sillas-para-comedor'
-          }
-        ],
-        mamaypapa: [
-          {
-            name: 'Mecedoras',
-            url: 'mecedoras'
-          },
-          {
-            name: 'Cojines de maternidad',
-            url: 'cojines'
-          }
-        ],
-        organizacion: [
-          {
-            name: 'Baúles',
-            url: ''
-          },
-          {
-            name: 'Cestos y Canastas',
-            url: 'canastas'
-          },
-          {
-            name: 'Joyeros',
-            url: ''
-          },
-          {
-            name: 'Repisas Infantiles',
-            url: 'repisas'
-          }
-        ],
-        juguetes: [
-          {
-            name: 'Peluches',
-            url: ''
-          },
-          {
-            name: 'Estimulación temprana',
-            url: ''
-          }
-        ],
-        decoracion: [
-          {
-            name: 'Accesorios Decorativos',
-            url: 'accesorios-infantiles'
-          },
-          {
-            name: 'Cuadros',
-            url: 'cuadros-decorativos'
-          },
-          {
-            name: 'Colgantes',
-            url: ''
-          },
-          {
-            name: 'Portaretratos',
-            url: 'portarretratos'
-          }
-        ],
-        iluminacion: [
-          {
-            name: 'Lámparas de Mesa',
-            url: 'lamparas-de-mesa'
-          },
-          {
-            name: 'Lámparas Colgantes',
-            url: 'lamparas-de-techo'
-          }
-        ],
-        tapetes: [{}]
+        ofertas: false,
+        'camas-infantiles': false,
+        'cunas-para-bebes': false,
+        'accesorios-infantiles': false,
+        organizacion: false,
+        juguetes: false,
+        'comoda-infantil': false,
+        'lamparas-infantiles': false
       };
 
       if ($location.search().itemcode) {
@@ -748,9 +635,6 @@
     }
 
     function handleCategoryHover(handle) {
-      // vm.activeCategory.map(function(active) {
-      //   return (active = false);
-      // });
       Object.keys(vm.activeCategory).forEach(function(key, value) {
         vm.activeCategory[key] = false;
       });
