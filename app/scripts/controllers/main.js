@@ -98,199 +98,59 @@
       vm.accordion = {
         current: null
       };
-      vm.categories = [
-        {
-          name: 'Salas',
-          sub: [
-            {
-              name: 'Salas Esquineras',
-              url: 'salas-esquineras'
-            },
-            {
-              name: 'Salas Modulares',
-              url: 'salas-modulares'
-            },
-            {
-              name: 'Sofás Cama',
-              url: 'sofa-cama'
-            },
-            {
-              name: 'Futones',
-              url: 'futon'
-            },
-            {
-              name: 'Sillones',
-              url: 'sillones'
-            },
-            {
-              name: 'Sillones Reclinables',
-              url: 'sillones-reclinables'
-            },
-            {
-              name: 'Salas de Cine',
-              url: 'salas-de-cine'
-            },
-            {
-              name: 'Taburetes',
-              url: 'taburete'
-            },
-            {
-              name: 'Salas para Jardín',
-              url: 'salas-para-jardin'
-            },
-            {
-              name: 'Mesas de Centro',
-              url: 'mesas-de-centro'
-            },
-            {
-              name: 'Credenzas',
-              url: 'credenzas'
-            }
-          ]
+      vm.mainCategories = {
+        salas: {
+          color: 'salas-bg',
+          icon: '1',
+          filledIcon: 'salas-relleno'
         },
-        {
-          name: 'Comedores',
-          sub: [
-            {
-              name: 'Mesas de Comedor',
-              url: 'mesas-de-comedor'
-            },
-            {
-              name: 'Sillas para Comedor',
-              url: 'sillas-para-comedor'
-            },
-            {
-              name: 'Bancos para Barra',
-              url: 'bancos-para-barra'
-            },
-            {
-              name: 'Bufeteras',
-              url: 'bufeteras'
-            }
-          ]
+        comedores: {
+          color: 'comedores-bg',
+          icon: '2',
+          filledIcon: 'comedores-relleno'
         },
-        {
-          name: 'Sillas y Bancos',
-          sub: [
-            {
-              name: 'Sillas para Comedor',
-              url: 'sillas-para-comedor'
-            },
-            {
-              name: 'Sillas para Oficina',
-              url: 'sillas-para-oficina'
-            },
-            {
-              name: 'Sillas para Jardín',
-              url: 'sillas-para-jardin'
-            },
-            {
-              name: 'Bancos para Barra',
-              url: 'bancos-para-barra'
-            }
-          ]
+        sillas: {
+          color: 'sillas-bg',
+          icon: '3',
+          filledIcon: 'sillas-relleno'
         },
-        {
-          name: 'Recámaras',
-          sub: [
-            {
-              name: 'Camas',
-              url: 'camas'
-            },
-            {
-              name: 'Cabeceras',
-              url: 'cabeceras'
-            },
-            {
-              name: 'Bases de Cama',
-              url: 'bases-para-cama'
-            },
-            {
-              name: 'Futones',
-              url: 'futon'
-            },
-            {
-              name: 'Sofás Cama',
-              url: 'sofa-cama'
-            },
-            {
-              name: 'Burós',
-              url: 'buros'
-            },
-            {
-              name: 'Colchones',
-              url: 'colchones'
-            }
-          ]
+        recamaras: {
+          color: 'recamaras-bg',
+          icon: '4',
+          filledIcon: 'recamaras-relleno'
         },
-        {
-          name: 'Muebles de Exterior',
-          sub: [
-            {
-              name: 'Salas para Jardín',
-              url: 'salas-para-jardin'
-            },
-            {
-              name: 'Sillones para Exterior',
-              url: 'sillones-para-exterior'
-            },
-            {
-              name: 'Mesas para Jardín',
-              url: 'mesas-para-jardin'
-            },
-            {
-              name: 'Sillas para Jardín',
-              url: 'sillas-para-jardin'
-            },
-            {
-              name: 'Camastros',
-              url: 'camastro'
-            },
-            {
-              name: 'Sombrillas',
-              url: 'sombrillas'
-            }
-          ]
+        'muebles-de-jardin': {
+          color: 'muebles-exterior-bg',
+          icon: '5',
+          filledIcon: 'muebles--relleno'
         },
-        {
-          name: 'Muebles de Oficina',
-          sub: [
-            {
-              name: 'Escritorios',
-              url: 'escritorios'
-            },
-            {
-              name: 'Sillas para Oficina',
-              url: 'sillas-para-oficina'
-            },
-            {
-              name: 'Libreros',
-              url: 'libreros'
-            }
-          ]
+        'muebles-de-tv': {
+          color: 'muebles-television-bg',
+          icon: '6',
+          filledIcon: 'tv-relleno'
         },
-        {
-          name: 'Muebles de TV',
-          sub: [
-            {
-              name: 'Muebles para TV',
-              url: 'muebles-para-tv'
-            },
-            {
-              name: 'Centro de Entretenimiento',
-              url: 'centro-de-entretenimiento'
-            },
-            {
-              name: 'Sillones Reclinables',
-              url: 'sillones-reclinables'
-            },
-            {
-              name: 'Salas de Cine',
-              url: 'salas-de-cine'
-            }
-          ]
+        'muebles-para-oficina': {
+          color: 'muebles-oficina-bg',
+          icon: '7',
+          filledIcon: 'oficina-relleno'
+        },
+        ofertas: {
+          color: 'look-bg',
+          icon: '8',
+          filledIcon: 'look-relleno'
         }
-      ];
+      };
+      vm.activeCategory = {
+        salas: false,
+        comedores: false,
+        sillas: false,
+        recamaras: false,
+        'muebles-de-jardin': false,
+        'muebles-de-tv': false,
+        'muebles-para-oficina': false,
+        ofertas: false
+      };
+
       vm.category = [
         'salas',
         'comedores',
@@ -301,186 +161,7 @@
         'mueblesOficina',
         'look'
       ];
-      vm.subcategories = {
-        Salas: [
-          {
-            name: 'Salas Esquineras',
-            url: 'salas-esquineras'
-          },
-          {
-            name: 'Salas Modulares',
-            url: 'salas-modulares'
-          },
-          {
-            name: 'Sofas',
-            url: 'sofas'
-          },
-          {
-            name: 'Sofás Cama',
-            url: 'sofa-cama'
-          },
-          {
-            name: 'Futones',
-            url: 'futon'
-          },
-          {
-            name: 'Sillones',
-            url: 'sillones'
-          },
-          {
-            name: 'Sillones Reclinables',
-            url: 'sillones-reclinables'
-          },
-          {
-            name: 'Salas de Cine',
-            url: 'salas-de-cine'
-          },
-          {
-            name: 'Taburetes',
-            url: 'taburete'
-          },
-          {
-            name: 'Salas para Jardín',
-            url: 'salas-para-jardin'
-          },
-          {
-            name: 'Mesas de Centro',
-            url: 'mesas-de-centro'
-          },
-          {
-            name: 'Mesas laterales',
-            url: 'mesas-laterales'
-          },
-          {
-            name: 'Credenzas',
-            url: 'credenzas'
-          }
-        ],
-        Comedores: [
-          {
-            name: 'Mesas de Comedor',
-            url: 'mesas-de-comedor'
-          },
-          {
-            name: 'Sillas para Comedor',
-            url: 'sillas-para-comedor'
-          },
-          {
-            name: 'Bancos para Barra',
-            url: 'bancos-para-barra'
-          },
-          {
-            name: 'Bufeteras',
-            url: 'bufeteras'
-          }
-        ],
-        SillasBancos: [
-          {
-            name: 'Sillas para Comedor',
-            url: 'sillas-para-comedor'
-          },
-          {
-            name: 'Sillas para Oficina',
-            url: 'sillas-para-oficina'
-          },
-          {
-            name: 'Sillas para Jardín',
-            url: 'sillas-para-jardin'
-          },
-          {
-            name: 'Bancos para Barra',
-            url: 'bancos-para-barra'
-          }
-        ],
-        Recamaras: [
-          {
-            name: 'Camas',
-            url: 'camas'
-          },
-          {
-            name: 'Cabeceras',
-            url: 'cabeceras'
-          },
-          {
-            name: 'Bases de Cama',
-            url: 'bases-para-cama'
-          },
-          {
-            name: 'Futones',
-            url: 'futon'
-          },
-          {
-            name: 'Sofás Cama',
-            url: 'sofa-cama'
-          },
-          {
-            name: 'Burós',
-            url: 'buros'
-          },
-          {
-            name: 'Colchones',
-            url: 'colchones'
-          }
-        ],
-        MueblesExterior: [
-          {
-            name: 'Salas para Jardín',
-            url: 'salas-para-jardin'
-          },
-          {
-            name: 'Sillones para Exterior',
-            url: 'sillones-para-exterior'
-          },
-          {
-            name: 'Mesas para Jardín',
-            url: 'mesas-para-jardin'
-          },
-          {
-            name: 'Sillas para Jardín',
-            url: 'sillas-para-jardin'
-          },
-          {
-            name: 'Camastros',
-            url: 'camastro'
-          },
-          {
-            name: 'Sombrillas',
-            url: 'sombrillas'
-          }
-        ],
-        MueblesOficina: [
-          {
-            name: 'Escritorios',
-            url: 'escritorios'
-          },
-          {
-            name: 'Sillas para Oficina',
-            url: 'sillas-para-oficina'
-          },
-          {
-            name: 'Libreros',
-            url: 'libreros'
-          }
-        ],
-        MueblesTV: [
-          {
-            name: 'Muebles para TV',
-            url: 'muebles-para-tv'
-          },
-          {
-            name: 'Centro de Entretenimiento',
-            url: 'centro-de-entretenimiento'
-          },
-          {
-            name: 'Sillones Reclinables',
-            url: 'sillones-reclinables'
-          },
-          {
-            name: 'Salas de Cine',
-            url: 'salas-de-cine'
-          }
-        ]
-      };
+
       vm.categoryKids = [
         'ninos',
         'bebes',
@@ -627,17 +308,7 @@
         ],
         tapetes: [{}]
       };
-      vm.activeCategory = [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ];
+
       if ($location.search().itemcode) {
         vm.searchingItemCode = true;
       }
@@ -1076,17 +747,22 @@
       dialogService.showDialog('Asistencia en su compra: 01 (998) 884 1594');
     }
 
-    function handleCategoryHover(id) {
-      vm.activeCategory.map(function(active) {
-        return (active = false);
+    function handleCategoryHover(handle) {
+      // vm.activeCategory.map(function(active) {
+      //   return (active = false);
+      // });
+      Object.keys(vm.activeCategory).forEach(function(key, value) {
+        vm.activeCategory[key] = false;
       });
-      vm.activeCategory[id] = true;
+      vm.activeCategory[handle] = true;
+      console.log('vm.activeCategory', vm.activeCategory);
     }
 
     function handleCategoryLeave() {
-      vm.activeCategory = vm.activeCategory.map(function(active) {
-        return (active = false);
+      Object.keys(vm.activeCategory).forEach(function(key, value) {
+        vm.activeCategory[key] = false;
       });
+      console.log('vm.activeCategory', vm.activeCategory);
     }
 
     function handleAccordion(name) {
