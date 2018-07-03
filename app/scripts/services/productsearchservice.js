@@ -10,6 +10,11 @@
 
         var SORT_OPTIONS = [
             {
+                label: 'Relevancia',
+                key: 'relevance',
+                direction: 'DESC'
+            },
+            {
                 label:'Lo más vendido',
                 key: 'salesCount',
                 direction: 'DESC'
