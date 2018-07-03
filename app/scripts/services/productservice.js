@@ -141,7 +141,7 @@
     }
 
     function formatProductSync(product, options) {
-      console.log('product GG', product);
+      //console.log('product GG', product);
       options = options || {};
       //product.Name = capitalizeFirstLetter(product.ItemName);
       product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
