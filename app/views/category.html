@@ -51,23 +51,25 @@
 
       <div ng-if="!vm.isLoading" class="subs-container">
         <h2 class="listing-view-title">{{vm.category.Name}}</h2>
+
+
         <!--SUBCATEGORIES LIST LEVEL 2-->
-        <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap hide-gt-xs>
+        <!-- <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap hide-gt-xs>
           <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}" ng-if="subcategory[main.activeStore.code] > 0"
             flex="33" flex-sm="50" flex-xs="100">
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
-        </div>
+        </div> -->
         <!--END SUBCATEGORIES LIST LEVEL 2-->
 
 
         <!--SUBCATEGORIES LIST LEVEL 3-->
-        <div ng-if="vm.category.Childs.length > 0 && vm.showLevel3" class="subs-container-list" layout="row" layout-wrap>
+        <!-- <div ng-if="vm.category.Childs.length > 0 && vm.showLevel3" class="subs-container-list" layout="row" layout-wrap>
           <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}" ng-if="subcategory[main.activeStore.code] > 0"
             flex="33" flex-sm="50" flex-xs="100" hide-gt-xs>
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
-        </div>
+        </div> -->
         <!--END SUBCATEGORIES LIST LEVEL 3-->
 
         <!--RESULTS-->
