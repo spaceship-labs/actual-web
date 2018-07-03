@@ -71,7 +71,7 @@ function CategoryCtrl(
   }
 
   function init(){
-    var activeSortOptionKey = 'salesCount';
+    var activeSortOptionKey = 'relevance';
     vm.activeSortOption = _.findWhere(vm.sortOptions,{key: activeSortOptionKey});
         
     vm.search = {

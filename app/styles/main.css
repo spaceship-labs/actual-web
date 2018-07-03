@@ -34,6 +34,11 @@ md-content.md-default-theme,
 md-content {
   background: #fff;
 }
+
+#main-content {
+  overflow: visible;
+}
+
 a {
   text-decoration: none;
 }
