@@ -24,7 +24,7 @@
           <div class="subs-container-list">
             <slick class="categories-carousel" responsive="vm.categoriesCarouselBreakpoints" infinite="false" slides-to-show="5" slides-to-scroll="5"
               init-onload=true data="main.categoriesTree">
-              <div class="sub-wrapper" ng-repeat="category in main.categoriesTree | filter:{ complement: true }" ng-if="category[vm.stockProperty] > 0">
+              <div class="sub-wrapper" ng-repeat="category in main.categoriesTree | filter: main.filterComplementsMenu" ng-if="category[vm.stockProperty] > 0">
                 <category-item category="category" stock-key="{{vm.stockProperty}}" />
               </div>
 

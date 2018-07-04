@@ -55,6 +55,9 @@
       handleCategoryHover: handleCategoryHover,
       handleCategoryLeave: handleCategoryLeave,
       handleAccordion: handleAccordion,
+      filterSmartMenu: filterSmartMenu,
+      filterKidsSmartMenu: filterKidsSmartMenu,
+      filterComplementsMenu: filterComplementsMenu,
       api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
@@ -149,18 +152,39 @@
         }
       };
       vm.mainCategoriesKids = {
+        ninos: {
+          icon: 'niñas-y-niños2',
+          image: 'ninos.jpg'
+        },
+
         'camas-infantiles': {
           icon: 'niñas-y-niños2',
           image: 'ninos.jpg'
         },
+        bebes: {
+          icon: 'bebebs2',
+          image: 'bebes.jpg'
+        },
+
         'cunas-para-bebes': {
           icon: 'bebebs2',
           image: 'bebes.jpg'
         },
+        
+        'mama-y-papa': {
+          icon: 'mamaypapa2',
+          image: 'mamaypapa.jpg'
+        },
+
         'accesorios-infantiles': {
           icon: 'mamaypapa2',
           image: 'mamaypapa.jpg'
         },
+        'organizacion-kids': {
+          icon: 'organizacion2',
+          image: 'organizacion.jpg'
+        },
+
         organizacion: {
           icon: 'organizacion2',
           image: 'organizacion.jpg'
@@ -169,6 +193,12 @@
           icon: 'juguetes2',
           image: 'juguetes.jpg'
         },
+        
+        'decoracion-infantil': {
+          icon: 'decoracion2',
+          image: 'decoracion.jpg'
+        },
+
         'comoda-infantil': {
           icon: 'decoracion2',
           image: 'decoracion.jpg'
@@ -334,7 +364,8 @@
     function loadMainData() {
       console.log('cargando main data', new Date());
       $rootScope.isMainDataLoaded = false;
-      $q.all([loadActiveStore(), loadActiveQuotation()])
+      $q
+        .all([loadActiveStore(), loadActiveQuotation()])
         .then(function(data) {
           $scope.mainData = {
             activeStore: data[0],
@@ -651,6 +682,18 @@
 
     function handleAccordion(name) {
       vm.accordion.current = vm.accordion.current === name ? null : name;
+    }
+
+    function filterSmartMenu(item) {
+      return item && !item.onKidsMenu && !item.complement && item.Childs && item.Childs.length > 0;
+    }
+
+    function filterKidsSmartMenu(item) {
+      return item && item.onKidsMenu && !item.complement && item.Childs && item.Childs.length > 0;
+    }
+
+    function filterComplementsMenu(item){
+      return item && item.complement;
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {
