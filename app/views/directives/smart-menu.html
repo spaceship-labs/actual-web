@@ -1,5 +1,4 @@
-<div ng-class="category === 'mueblesTV' ? 'smart-menu-left' : ( category === 'mueblesOficina' ? 'smart-menu-left' : (category === 'decoracion' ? 'smart-menu-left' : (category === 'iluminación' ? 'smart-menu-left' : 'smart-menu')))"
-  layout="row" ng-cloak>
+<div ng-class="index > 4 ? 'smart-menu-left' : 'smart-menu'" layout="row" ng-cloak>
   <div flex="30">
     <div ng-repeat="subcategory in subcategories">
       <p>
