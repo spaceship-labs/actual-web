@@ -1,6 +1,5 @@
 <div ng-class="index > 4 ? 'smart-menu-left' : 'smart-menu'" layout="row" ng-cloak>
   <div flex="30">
-    {{ index }}
     <div ng-repeat="subcategory in subcategories">
       <p>
         <a ng-href="{{'/category/' + subcategory.Handle}}" ng-click="leavehover()">{{subcategory.Name}}</a>
