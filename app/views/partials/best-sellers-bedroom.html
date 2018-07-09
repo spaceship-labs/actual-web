@@ -12,13 +12,14 @@
     <div flex="80" flex-xs="100" flex-sm="100">
       <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="true" slides-to-show="3" slides-to-scroll="3"
         init-onload=true data="vm.featuredLoaded">
-        <div ng-repeat="featuredRecamara in vm.featuredProducts | filter:{ categoryHandle: 'recamaras' } | limitTo:vm.limitBedRooms track by $index" class="listing-product-wrap">
+        <div ng-repeat="featuredRecamara in vm.featuredProducts | filter:{ categoryHandle: 'recamaras' } | limitTo:vm.limitBedRooms track by $index"
+          class="listing-product-wrap">
           <listing-product product="featuredRecamara.product"></listing-product>
         </div>
       </slick>
     </div>
     <div hide-xs hide-sm flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
-      <a href="/category/salas">
+      <a href="/category/recamaras">
         <div class="circle circle-recamaras">
           <div class="circle-text">
             <p>
