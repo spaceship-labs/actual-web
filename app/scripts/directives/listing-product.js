@@ -6,11 +6,15 @@
  * @description
  * # listingProduct
  */
-angular.module('actualWebApp')
-  .directive('listingProduct',['$rootScope', '$timeout','api', 'commonService' ,function ($rootScope,$timeout, api, commonService) {
+angular.module('actualWebApp').directive('listingProduct', [
+  '$rootScope',
+  '$timeout',
+  'api',
+  'commonService',
+  function($rootScope, $timeout, api, commonService) {
     return {
-      scope:{
-        product:'='
+      scope: {
+        product: '='
       },
       templateUrl: 'views/directives/listing-product.html',
       restrict: 'E',
@@ -20,53 +24,59 @@ angular.module('actualWebApp')
         scope.images = [];
         scope.activeStore = $rootScope.activeStore;
 
-        scope.setUpImages = function(){
+        scope.setUpImages = function() {
           scope.imageSizeIndexGallery = 2;
-          scope.imageSizeIndexIcon = 10;
+          scope.imageSizeThumbnailIndex = 2;
+          //console.log('scope.products.icons', scope.product.icons);
           scope.imageSize = api.imageSizes.gallery[scope.imageSizeIndexGallery];
 
-          //Adding icon as gallery first image
-          if(scope.product.icons[scope.imageSizeIndexIcon]){
-            scope.images.push(scope.product.icons[0]);
-          }else{
+          if (scope.product.icons[scope.imageSizeThumbnailIndex]) {
+            scope.images.push(
+              scope.product.icons[scope.imageSizeThumbnailIndex]
+            );
+          } else {
             scope.images.push(scope.product.icons[0]);
           }
 
-          if(scope.product.files){
+          //If populated images of product, load them in images array
+          if (scope.product.files) {
             scope.imageSize = '';
-            scope.product.files.forEach(function(img){
+            scope.product.files.forEach(function(img) {
               scope.images.push({
-                url: api.baseUrl + '/uploads/products/gallery/' + scope.imageSize + img.filename
+                url:
+                  api.baseUrl +
+                  '/uploads/products/gallery/' +
+                  scope.imageSize +
+                  img.filename
               });
             });
           }
+          //console.log('scope.images', scope.images);
 
-
-          $timeout(function(){
+          $timeout(function() {
             scope.areImagesLoaded = true;
-
-          },500);
+          }, 500);
         };
 
-        scope.init = function(){
+        scope.init = function() {
           scope.setUpImages();
         };
 
-        scope.roundCurrency = function(ammount){
+        scope.roundCurrency = function(ammount) {
           ammount = commonService.roundIntegerCurrency(ammount);
           return ammount;
-        }
+        };
 
         scope.ezOptions = {
-          constrainType: "height",
+          constrainType: 'height',
           constrainSize: 274,
-          zoomType: "lens",
+          zoomType: 'lens',
           containLensZoom: true,
-          cursor: 'pointer',
+          cursor: 'pointer'
         };
 
         scope.init();
-
       }
     };
-  }]);
+  }
+]);
