@@ -19,7 +19,7 @@
 
 
       <div class="container container-xxlg">
-
+        <!--
         <div class="subs-container">
           <div class="subs-container-list">
             <slick class="categories-carousel" responsive="vm.categoriesCarouselBreakpoints" infinite="false" slides-to-show="5" slides-to-scroll="5"
@@ -42,43 +42,44 @@
             </slick>
 
           </div>
-        </div>
+        -->
+      </div>
 
-        <br>
-        <br>
-        <div class="subs-container">
-          <div class="subs-container-list">
-            <div ng-if="vm.activeStore.code !== 'actual_kids'">
-              <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
-            </div>
+      <br>
+      <br>
+      <div class="subs-container">
+        <div class="subs-container-list">
+          <div ng-if="vm.activeStore.code !== 'actual_kids'">
+            <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
           </div>
         </div>
-        <div ng-if="vm.activeStore.code === 'actual_kids'">
-          <ng-include src="'views/partials/best-sellers-kids-beds.html'"></ng-include>
-        </div>
-
-        <div ng-if="vm.activeStore.code !== 'actual_kids'">
-          <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
-        </div>
-
-        <div ng-if="vm.activeStore.code === 'actual_kids'">
-          <ng-include src="'views/partials/best-sellers-kids-bureaus.html'"></ng-include>
-        </div>
-
-        <!-- <offers-directive></offers-directive> -->
-
-        <div ng-if="vm.activeStore.code !== 'actual_kids'">
-          <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
-        </div>
-        <div ng-if="vm.activeStore.code === 'actual_kids'">
-          <ng-include src="'views/partials/best-sellers-kids-forniture.html'"></ng-include>
-        </div>
-
       </div>
-      <br>
-      <ng-include src="'views/partials/home-slider-2.html'"></ng-include>
-    </div>
-    <!-- END CATEGORIES-->
+      <div ng-if="vm.activeStore.code === 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-kids-beds.html'"></ng-include>
+      </div>
 
+      <div ng-if="vm.activeStore.code !== 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
+      </div>
+
+      <div ng-if="vm.activeStore.code === 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-kids-bureaus.html'"></ng-include>
+      </div>
+
+      <!-- <offers-directive></offers-directive> -->
+
+      <div ng-if="vm.activeStore.code !== 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
+      </div>
+      <div ng-if="vm.activeStore.code === 'actual_kids'">
+        <ng-include src="'views/partials/best-sellers-kids-forniture.html'"></ng-include>
+      </div>
+
+    </div>
+    <br>
+    <ng-include src="'views/partials/home-slider-2.html'"></ng-include>
   </div>
+  <!-- END CATEGORIES-->
+
+</div>
 </div>

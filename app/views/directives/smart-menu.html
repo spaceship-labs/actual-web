@@ -1,12 +1,12 @@
 <div ng-class="index > 4 ? 'smart-menu-left' : 'smart-menu'" layout="row" ng-cloak>
-  <div flex="30">
+  <div flex="30" flex-order="{{(index > 4) ? 2 : 1}}">
     <div ng-repeat="subcategory in subcategories">
       <p>
         <a ng-href="{{'/category/' + subcategory.Handle}}" ng-click="leavehover()">{{subcategory.Name}}</a>
       </p>
     </div>
   </div>
-  <div flex="70" on="category">
+  <div flex="70" flex-order="{{(index > 4) ? 1 : 2}}" on="category">
     <img ng-src="{{ '/images/categories/' + image }}" alt="Actual Group">
   </div>
 </div>

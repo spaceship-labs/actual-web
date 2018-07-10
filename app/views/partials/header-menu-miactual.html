@@ -32,14 +32,15 @@
 
     <nav ng-if="main.siteTheme === 'actual-kids' " hide-sm flex-gt-sm="100" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false"
       class="nav-categories">
-      <a ng-repeat-start="category in main.categoriesTree | filter: main.filterKidsSmartMenu track by $index" flex flex-xs="25" class="categories-bg nav-categories-item"
-        href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
+      <a ng-repeat-start="category in main.categoriesTree | filter: main.filterKidsSmartMenu track by $index" flex flex-xs="25"
+        class="categories-bg nav-categories-item" href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)"
+        ng-mouseleave="main.handleCategoryLeave()">
         <i class="icon-{{ main.mainCategoriesKids[category.Handle].icon }}"></i>
         <span class="nav-categories-item-text" href="#">{{category.Name}}</span>
       </a>
       <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'" ng-mouseover="main.handleCategoryHover(category.Handle)"
         ng-mouseleave="main.handleCategoryLeave()" subcategories="category.Childs" image="main.mainCategoriesKids[category.Handle].image"
-        leavehover="main.handleCategoryLeave"></smart-menu>
+        leavehover="main.handleCategoryLeave" index="$index"></smart-menu>
       <a href="/search?sortkey=slowmovement" flex flex-xs="25" class="categories-bg nav-categories-item">
         <i class="icon-promociones2"></i>
         <span class="nav-categories-item-text" href="#">Ofertas</span>
