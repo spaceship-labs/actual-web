@@ -106,106 +106,106 @@
           color: 'salas-bg',
           icon: '1',
           filledIcon: 'salas-relleno',
-          image: 'categoria2.png'
+          image: '/images/categories/categoria2.png'
         },
         comedores: {
           color: 'comedores-bg',
           icon: 'comedores',
           filledIcon: 'comedores-relleno',
-          image: 'categoria1.png'
+          image: '/images/categories/categoria1.png'
         },
         sillas: {
           color: 'sillas-bg',
           icon: '3',
           filledIcon: 'sillas-relleno',
-          image: 'sillas.jpg'
+          image: '/images/categories/sillas.jpg'
         },
         recamaras: {
           color: 'recamaras-bg',
           icon: 'recamaras',
           filledIcon: 'recamaras-relleno',
-          image: 'categoria3.png'
+          image: '/images/categories/categoria3.png'
         },
         'muebles-de-jardin': {
           color: 'muebles-exterior-bg',
           icon: '5',
           filledIcon: 'muebles--relleno',
-          image: 'muebles_de_exterior.jpg'
+          image: '/images/categories/muebles_de_exterior.jpg'
         },
         'muebles-de-tv': {
           color: 'muebles-television-bg',
           icon: '6',
           filledIcon: 'tv-relleno',
-          image: 'muebles_de_tv.jpg'
+          image: '/images/categories/muebles_de_tv.jpg'
         },
         'muebles-para-oficina': {
           color: 'muebles-oficina-bg',
           icon: '7',
           filledIcon: 'oficina-relleno',
-          image: 'mubles_de_oficina.jpg'
+          image: '/images/categories/mubles_de_oficina.jpg'
         },
         ofertas: {
           color: 'look-bg',
           icon: '8',
           filledIcon: 'look-relleno',
-          image: 'categoria8.png'
+          image: '/images/categories/categoria8.png'
         }
       };
       vm.mainCategoriesKids = {
         ninos: {
           icon: 'niñas-y-niños2',
-          image: 'ninos.jpg'
+          image: '/images/categories/ninos.jpg'
         },
 
         'camas-infantiles': {
           icon: 'niñas-y-niños2',
-          image: 'ninos.jpg'
+          image: '/images/categories/ninos.jpg'
         },
         bebes: {
           icon: 'bebebs2',
-          image: 'bebes.jpg'
+          image: '/images/categories/bebes.jpg'
         },
 
         'cunas-para-bebes': {
           icon: 'bebebs2',
-          image: 'bebes.jpg'
+          image: '/images/categories/bebes.jpg'
         },
-        
+
         'mama-y-papa': {
           icon: 'mamaypapa2',
-          image: 'mamaypapa.jpg'
+          image: '/images/categories/mamaypapa.jpg'
         },
 
         'accesorios-infantiles': {
           icon: 'mamaypapa2',
-          image: 'mamaypapa.jpg'
+          image: '/images/categories/mamaypapa.jpg'
         },
         'organizacion-kids': {
           icon: 'organizacion2',
-          image: 'organizacion.jpg'
+          image: '/images/categories/organizacion.jpg'
         },
 
         organizacion: {
           icon: 'organizacion2',
-          image: 'organizacion.jpg'
+          image: '/images/categories/organizacion.jpg'
         },
         juguetes: {
           icon: 'juguetes2',
-          image: 'juguetes.jpg'
+          image: '/images/categories/juguetes.jpg'
         },
-        
+
         'decoracion-infantil': {
           icon: 'decoracion2',
-          image: 'decoracion.jpg'
+          image: '/images/categories/decoracion.jpg'
         },
 
         'comoda-infantil': {
           icon: 'decoracion2',
-          image: 'decoracion.jpg'
+          image: '/images/categories/decoracion.jpg'
         },
         'lamparas-infantiles': {
           icon: 'iluminacion2',
-          image: 'iluminacion.jpg'
+          image: '/images/categories/iluminacion.jpg'
         }
       };
       vm.activeCategory = {
@@ -364,8 +364,7 @@
     function loadMainData() {
       console.log('cargando main data', new Date());
       $rootScope.isMainDataLoaded = false;
-      $q
-        .all([loadActiveStore(), loadActiveQuotation()])
+      $q.all([loadActiveStore(), loadActiveQuotation()])
         .then(function(data) {
           $scope.mainData = {
             activeStore: data[0],
@@ -685,14 +684,26 @@
     }
 
     function filterSmartMenu(item) {
-      return item && !item.onKidsMenu && !item.complement && item.Childs && item.Childs.length > 0;
+      return (
+        item &&
+        !item.onKidsMenu &&
+        !item.complement &&
+        item.Childs &&
+        item.Childs.length > 0
+      );
     }
 
     function filterKidsSmartMenu(item) {
-      return item && item.onKidsMenu && !item.complement && item.Childs && item.Childs.length > 0;
+      return (
+        item &&
+        item.onKidsMenu &&
+        !item.complement &&
+        item.Childs &&
+        item.Childs.length > 0
+      );
     }
 
-    function filterComplementsMenu(item){
+    function filterComplementsMenu(item) {
       return item && item.complement;
     }
 
