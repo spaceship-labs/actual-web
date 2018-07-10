@@ -141,7 +141,6 @@
     }
 
     function formatProductSync(product, options) {
-      //console.log('product GG', product);
       options = options || {};
       //product.Name = capitalizeFirstLetter(product.ItemName);
       product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
@@ -175,7 +174,7 @@
         var maxDiscount = product.mainPromo.discountPg1;
         product.maxDiscount = maxDiscount;
         product.priceBefore = product.Price;
-        product.Price = product.Price - product.Price / 100 * maxDiscount;
+        product.Price = product.Price - (product.Price / 100) * maxDiscount;
       } else if (product.DiscountPrice && product.Discount > 0) {
         product.maxDiscount = product.Discount;
         product.priceBefore = product.Price;

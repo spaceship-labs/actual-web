@@ -11,8 +11,9 @@ function SmartMenu() {
   return {
     scope: {
       subcategories: '=',
-      category: '=',
-      leavehover: '='
+      image: '=',
+      leavehover: '=',
+      index: '='
     },
     templateUrl: 'views/directives/smart-menu.html',
     restrict: 'E'
