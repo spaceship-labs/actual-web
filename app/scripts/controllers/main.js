@@ -238,9 +238,9 @@
       vm.isLoadingCategoriesTree = true;
       categoriesService
         .createCategoriesTree()
-        .then(function(res) {
+        .then(function(tree) {
           vm.isLoadingCategoriesTree = false;
-          vm.categoriesTree = res.data;
+          vm.categoriesTree = tree;
           $rootScope.categoriesTree = vm.categoriesTree;
           $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
         })
