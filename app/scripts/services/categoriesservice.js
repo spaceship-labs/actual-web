@@ -28,22 +28,138 @@
 
     function sortCategoriesTree(originalTree) {
       var sortList = [
-        { name: 'salas' },
-        { name: 'comedores' },
-        { name: 'sillas' },
-        { name: 'recamaras' },
-        { name: 'muebles-de-jardin' },
-        { name: 'muebles-para-oficina' },
-        { name: 'muebles-de-tv' },
+        {
+          name: 'salas',
+          childs: [
+            'salas-esquineras',
+            'salas-modulares',
+            'sofas',
+            'sofa-cama',
+            'futon',
+            'sillones',
+            'sillones-reclinables',
+            'salas-de-cine',
+            'taburete',
+            'salas-para-jardin',
+            'mesas-de-centro',
+            'mesas-laterales',
+            'credenzas'
+          ]
+        },
+        {
+          name: 'comedores',
+          childs: [
+            'mesas-de-comedor',
+            'sillas-para-comedor',
+            'bancos-para-barra',
+            'bufeteras'
+          ]
+        },
+        {
+          name: 'sillas',
+          childs: [
+            'sillas-para-comedor',
+            'sillas-para-oficina',
+            'sillas-para-jardin',
+            'bancos-para-barra'
+          ]
+        },
+        {
+          name: 'recamaras',
+          childs: [
+            'camas',
+            'cabeceras',
+            'bases-para-cama',
+            'futon',
+            'sofa-cama',
+            'comoda',
+            'buros',
+            'colchones'
+          ]
+        },
+        {
+          name: 'muebles-de-jardin',
+          childs: [
+            'salas-para-jardin',
+            'sillones-para-exterior',
+            'mesas-para-jardin',
+            'sillas-para-jardin',
+            'camastro',
+            'sombrillas'
+          ]
+        },
+        {
+          name: 'muebles-para-oficina',
+          childs: ['escritorios', 'sillas-para-oficina', 'libreros']
+        },
+        {
+          name: 'muebles-de-tv',
+          childs: [
+            'muebles-para-tv',
+            'centro-de-entretenimiento',
+            'sillones-reclinables',
+            'sillones',
+            'salas-de-cine'
+          ]
+        },
         //KIDS
-        { name: 'ninos' },
-        { name: 'bebes' },
-        { name: 'mama-y-papa' },
-        { name: 'organizacion-kids' },
-        { name: 'juguetes' },
-        { name: 'decoracion-infantil' },
-        { name: 'lamparas-infantiles' },
-        { name: 'tapetes-infantiles' }
+        {
+          name: 'ninos',
+          childs: [
+            'camas-infantiles',
+            'literas-infantiles',
+            'comoda-infantil',
+            'escritorios-infantiles',
+            'mesas-y-sillas-infantiles',
+            'sillones-infantiles',
+            'colchones-para-ninos',
+            'blancos-para-ninos',
+            'cojines-infantiles'
+          ]
+        },
+        {
+          name: 'bebes',
+          childs: [
+            'cunas-para-bebes',
+            'colchon-para-cuna',
+            'cambiador-de-panales',
+            'baneras-para-bebes',
+            'blancos-infantiles',
+            'cojines-para-bebes',
+            'sillas-para-comer'
+          ]
+        },
+        {
+          name: 'mama-y-papa',
+          childs: ['mecedoras', 'cojines-de-maternidad']
+        },
+        {
+          name: 'organizacion-kids',
+          childs: [
+            'baules',
+            'cestos-y-canastas',
+            'joyeros',
+            'repisas-infantiles'
+          ]
+        },
+        { name: 'juguetes', childs: ['peluches', 'estimulacion-temprana'] },
+        {
+          name: 'decoracion-infantil',
+          childs: [
+            'accesorios-decorativos-kids',
+            'cuadros-infantiles',
+            'colgantes',
+            'portarretratos-infantiles'
+          ]
+        },
+        {
+          name: 'lamparas-infantiles',
+          childs: [
+            'lamparas-de-mesa-infantiles',
+            'lamparas-colgantes-infantiles'
+          ]
+        },
+        { name: 'tapetes-infantiles', childs: ['tapetes'] }
       ];
 
       var groups1 = _.groupBy(originalTree, 'Handle');
@@ -53,7 +169,30 @@
       var remaining = originalTree.filter(function(item) {
         return plainSortList.indexOf(item.Handle) <= -1;
       });
+
       var sortedTree = _.map(sortList, function(sortItem) {
+        if (groups1[sortItem.name][0]) {
+          var childsGroups = _.groupBy(
+            groups1[sortItem.name][0].Childs,
+            'Handle'
+          );
+          var childsRemaining = groups1[sortItem.name][0].Childs.filter(
+            function(childItem) {
+              return sortItem.childs.indexOf(childItem.Handle) <= -1;
+            }
+          );
+          console.log('childsGroups', childsGroups);
+          var childsSorted = sortItem.childs
+            .reduce(function(acum, sortChildItem) {
+              if (childsGroups[sortChildItem]) {
+                acum.push(childsGroups[sortChildItem].shift());
+              }
+              return acum;
+            }, [])
+            .concat(childsRemaining);
+
+          groups1[sortItem.name][0].Childs = childsSorted;
+        }
         return groups1[sortItem.name].shift();
       });
 
