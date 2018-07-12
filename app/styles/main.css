@@ -7202,6 +7202,12 @@ md-sidenav {
 }
 
 @media (max-width: 600px) {
+  .menu-item-login{
+    text-align: left!important;
+    min-width: 80px!important;
+    max-width: none!important;
+  }
+  .menu-item-login p{font-size: 11px;}
   .listing-product .listing-product-info-main p {
     font-size: 10px;
   }

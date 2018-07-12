@@ -11,12 +11,13 @@
 
     <nav ng-if="main.siteTheme !== 'actual-kids' ">
       <ul>
-        <li ng-repeat="category in main.categories" ng-click="main.handleAccordion(category.name)" class="nav-categories-item-sidenav">
-          <span class="nav-categories-item-text" href="#">{{ category.name }}</span>
-          <ul ng-show="main.accordion.current === category.name">
-            <li ng-repeat="subcategory in category.sub" class="">
-              <a ng-href="{{'/category/' + subcategory.url}}" class="nav-categories-item">
-                <span class="nav-categories-item-text">{{ subcategory.name }}</span>
+        <li ng-repeat="category in main.categoriesTree  | filter: main.filterSmartMenu track by $index" ng-click="main.handleAccordion(category.Handle)"
+          class="nav-categories-item-sidenav">
+          <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
+          <ul ng-show="main.accordion.current === category.Handle">
+            <li ng-repeat="subcategory in category.Childs" class="">
+              <a ng-href="{{'/category/' + subcategory.Handle}}" class="nav-categories-item">
+                <span class="nav-categories-item-text">{{ subcategory.Handle }}</span>
               </a>
             </li>
           </ul>
@@ -26,45 +27,32 @@
 
 
     <nav ng-if="main.siteTheme === 'actual-kids' ">
-      <a href="/category/camas-infantiles" class="nav-categories-item">
-        <i class="icon-ninos"></i>
-        <span class="nav-categories-item-text" href="#">Camas</span>
-      </a>
-      <a href="/category/cunas-para-bebes" class="nav-categories-item">
-        <i class="icon-bebes nav-categories-item-add"></i>
-        <span class="nav-categories-item-text" href="#">Cunas</span>
-      </a>
-      <a href="/category/accesorios" class="nav-categories-item">
-        <i class="icon-ambientes"></i>
-        <span class="nav-categories-item-text" href="#">Accesorios</span>
-      </a>
-      <a href="/category/lamparas" class="nav-categories-item">
-        <i class="icon-decoracion"></i>
-        <span class="nav-categories-item-text" href="#">Lamparas</span>
-      </a>
-      <a href="/category/mesas" class="nav-categories-item">
-        <i class="icon-mesas"></i>
-        <span class="nav-categories-item-text" href="#">Mesas</span>
-      </a>
-      <a href="/category/comoda" class="nav-categories-item">
-        <i class="icon-comoda"></i>
-        <span class="nav-categories-item-text" href="#">Comodas</span>
-      </a>
-      <a href="/ofertas" class="nav-categories-item">
-        <i class="icon-ofertas"></i>
-        <span class="nav-categories-item-text" href="#">Ofertas</span>
-      </a>
-
-      <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" class="nav-categories-item">
-        <i class="icon-attachment"></i>
-        <span class="nav-categories-item-text" href="#">Pedidos</span>
-      </a>
-
-      <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" class="nav-categories-item">
-        <i class="icon-oportunidades"></i>
-        <span class="nav-categories-item-text" href="#">Cotizaciones</span>
-      </a>
+      <ul>
+        <li ng-repeat="category in main.categoriesTree | filter: main.filterKidsSmartMenu track by $index " ng-click="main.handleAccordion(category.Handle)"
+          class="nav-categories-item-sidenav">
+          <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
+          <ul ng-show="main.accordion.current === category.Handle">
+            <li ng-repeat="subcategory in category.Childs" class="">
+              <a ng-href="{{'/category/' + subcategory.Handle}}" class="nav-categories-item">
+                <span class="nav-categories-item-text">{{ subcategory.Handle }}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </nav>
+
+
+    <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" class="nav-categories-item">
+      <i class="icon-attachment"></i>
+      <span class="nav-categories-item-text" href="#">Pedidos</span>
+    </a>
+
+    <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" class="nav-categories-item">
+      <i class="icon-oportunidades"></i>
+      <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+    </a>
+
 
   </md-content>
 </md-sidenav>
