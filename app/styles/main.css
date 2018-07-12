@@ -1550,6 +1550,7 @@ select {
   height: 100%;
   width: 100%;
   cursor: pointer;
+  z-index: 2;
 }
 .home-slider .slick-prev,
 .home-slider .slick-next {
