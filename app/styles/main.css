@@ -1542,6 +1542,7 @@ select {
   height: 100%;
   width: 100%;
   cursor: pointer;
+  z-index: 2;
 }
 .home-slider .home-slide-2 .absolute-link {
   position: absolute;
