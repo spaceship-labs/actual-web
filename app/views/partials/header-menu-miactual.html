@@ -11,16 +11,19 @@
       <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'" ng-mouseover="main.handleCategoryHover(category.Handle)"
         ng-mouseleave="main.handleCategoryLeave()" index="$index" subcategories="category.Childs" image="main.mainCategories[category.Handle].image"
         leavehover="main.handleCategoryLeave"></smart-menu>
+      <a href="/ofertas" flex flex-xs="25" class="categories-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(9)"
+        ng-mouseleave="main.handleCategoryLeave()">
+        <i ng-show="!main.activeCategory[9]" class="icon-8"></i>
+        <i ng-show="main.activeCategory[9]" class="icon-look-relleno"></i>
+        <span class="nav-categories-item-text" href="#">Arma tu look paquetes</span>
+      </a>
       <a href="/search?sortkey=slowmovement" flex flex-xs="25" class="deals-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(8)"
         ng-mouseleave="main.handleCategoryLeave()">
         <i ng-show="!main.activeCategory[8]" class="icon-9"></i>
         <i ng-show="main.activeCategory[8]" class="icon-deals-relleno"></i>
         <span class="nav-categories-item-text" href="#">Promociones</span>
       </a>
-      <a href="/ofertas" flex flex-xs="25" class="categories-bg nav-categories-item">
-        <i class="icon-ofertas"></i>
-        <span class="nav-categories-item-text" href="#">Ofertas</span>
-      </a>
+
       <a href="https://actualkids.com" target="_blank" flex flex-xs="25" class="kids-bg nav-categories-item">
         <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px">
       </a>
