@@ -9,8 +9,8 @@
 
   <md-content>
 
-    <nav ng-if="main.siteTheme !== 'actual-kids' ">
-      <ul>
+    <nav>
+      <ul ng-if="main.siteTheme !== 'actual-kids'">
         <li ng-repeat="category in main.categoriesTree  | filter: main.filterSmartMenu track by $index" ng-click="main.handleAccordion(category.Handle)"
           class="nav-categories-item-sidenav">
           <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
@@ -22,12 +22,20 @@
             </li>
           </ul>
         </li>
+        <li>
+          <a href="/search?sortkey=slowmovement" class="nav-categories-item">
+            <span class="nav-categories-item-text">Promociones</span>
+          </a>
+        </li>
+        <li>
+          <a href="/ofertas" class="nav-categories-item">
+            <span class="nav-categories-item-text">Ofertas</span>
+          </a>
+        </li>
+
       </ul>
-    </nav>
 
-
-    <nav ng-if="main.siteTheme === 'actual-kids' ">
-      <ul>
+      <ul ng-if="main.siteTheme === 'actual-kids' ">
         <li ng-repeat="category in main.categoriesTree | filter: main.filterKidsSmartMenu track by $index " ng-click="main.handleAccordion(category.Handle)"
           class="nav-categories-item-sidenav">
           <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
@@ -39,19 +47,34 @@
             </li>
           </ul>
         </li>
+        <li>
+          <a href="/search?sortkey=slowmovement" class="nav-categories-item">
+            <span class="nav-categories-item-text">Promociones</span>
+          </a>
+        </li>
+
       </ul>
+
+
+      <ul>
+        <li>
+          <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" class="nav-categories-item">
+            <i class="icon-attachment"></i>
+            <span class="nav-categories-item-text" href="#">Pedidos</span>
+          </a>
+        </li>
+        <li>
+          <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" class="nav-categories-item">
+            <i class="icon-oportunidades"></i>
+            <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+          </a>
+        </li>
+
+      </ul>
+
     </nav>
 
 
-    <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" class="nav-categories-item">
-      <i class="icon-attachment"></i>
-      <span class="nav-categories-item-text" href="#">Pedidos</span>
-    </a>
-
-    <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" class="nav-categories-item">
-      <i class="icon-oportunidades"></i>
-      <span class="nav-categories-item-text" href="#">Cotizaciones</span>
-    </a>
 
 
   </md-content>
