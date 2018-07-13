@@ -102,7 +102,7 @@ function HomeCtrl(
         });
         $timeout(function() {
           vm.featuredLoaded = true;
-        }, 600);
+        }, 1800);
       });
   }
   init();
