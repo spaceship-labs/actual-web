@@ -19,14 +19,16 @@
       return api.$http.post(url);
     }
 
-    function createCategoriesTree() {
+    function createCategoriesTree(activeStoreCode) {
+      //activeStoreCode = 'actual_studio';
+      console.log('createCategoriesTree', activeStoreCode);
       var url = '/productcategory/getcategoriestree';
       return api.$http.post(url).then(function(res) {
-        return sortCategoriesTree(res.data);
+        return formatCategoriesTree(res.data, activeStoreCode);
       });
     }
 
-    function sortCategoriesTree(originalTree) {
+    function formatCategoriesTree(originalTree, activeStoreCode) {
       var sortList = [
         {
           name: 'salas',
@@ -162,26 +164,60 @@
         { name: 'tapetes-infantiles', childs: ['tapetes'] }
       ];
 
-      var groups1 = _.groupBy(originalTree, 'Handle');
+      var tree = [];
+      if (activeStoreCode === 'actual_kids') {
+        tree = originalTree.filter(function(item) {
+          return (
+            item &&
+            item.onKidsMenu &&
+            !item.complement &&
+            item.Childs &&
+            item.Childs.length > 0 &&
+            item.Childs.some(function(child) {
+              return child[activeStoreCode] > 0;
+            })
+          );
+        });
+      } else {
+        tree = originalTree.filter(function(item) {
+          return (
+            item &&
+            !item.onKidsMenu &&
+            !item.complement &&
+            item.Childs &&
+            item.Childs.length > 0 &&
+            item.Childs.some(function(child) {
+              return child[activeStoreCode] > 0;
+            })
+          );
+        });
+      }
+
+      var groupsLevel1 = _.groupBy(tree, 'Handle');
       var plainSortList = sortList.map(function(sortItem) {
         return sortItem.name;
       });
-      var remaining = originalTree.filter(function(item) {
+      var remaining = tree.filter(function(item) {
         return plainSortList.indexOf(item.Handle) <= -1;
       });
 
+      function filterMenuSubCategories(item) {
+        //This is supposed to be activeStoreCode
+        return item && item[this] > 0;
+      }
+
+      //return;
       var sortedTree = _.map(sortList, function(sortItem) {
-        if (groups1[sortItem.name][0]) {
+        if (groupsLevel1[sortItem.name] && groupsLevel1[sortItem.name][0]) {
           var childsGroups = _.groupBy(
-            groups1[sortItem.name][0].Childs,
+            groupsLevel1[sortItem.name][0].Childs,
             'Handle'
           );
-          var childsRemaining = groups1[sortItem.name][0].Childs.filter(
+          var childsRemaining = groupsLevel1[sortItem.name][0].Childs.filter(
             function(childItem) {
               return sortItem.childs.indexOf(childItem.Handle) <= -1;
             }
           );
-          console.log('childsGroups', childsGroups);
           var childsSorted = sortItem.childs
             .reduce(function(acum, sortChildItem) {
               if (childsGroups[sortChildItem]) {
@@ -191,12 +227,20 @@
             }, [])
             .concat(childsRemaining);
 
-          groups1[sortItem.name][0].Childs = childsSorted;
+          groupsLevel1[sortItem.name][0].Childs = childsSorted.filter(
+            filterMenuSubCategories,
+            activeStoreCode
+          );
         }
-        return groups1[sortItem.name].shift();
+        if (groupsLevel1[sortItem.name]) {
+          return groupsLevel1[sortItem.name][0];
+        }
+        return null;
       });
 
-      var finalSortedTree = sortedTree.concat(remaining);
+      var finalSortedTree = sortedTree.concat(remaining).filter(function(item) {
+        return item;
+      });
       return finalSortedTree;
     }
 

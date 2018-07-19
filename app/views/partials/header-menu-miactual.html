@@ -3,14 +3,14 @@
 
     <nav ng-if="main.siteTheme !== 'actual-kids' " hide-sm flex-gt-sm="100" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false"
       class="nav-categories">
-      <a ng-repeat-start="category in main.categoriesTree | filter: main.filterSmartMenu track by $index" flex flex-xs="25" class="{{main.mainCategories[category.Handle].color}} nav-categories-item"
+      <a ng-repeat-start="category in main.categoriesTree track by $index" flex flex-xs="25" class="{{main.mainCategories[category.Handle].color}} nav-categories-item"
         href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
         <i ng-class="main.activeCategory[category.Handle] === false ? 'icon-{{ main.mainCategories[category.Handle].icon }}' : 'icon-{{ main.mainCategories[category.Handle].filledIcon }}'"></i>
         <span class="nav-categories-item-text" href="#">{{category.Name}}</span>
       </a>
       <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'" ng-mouseover="main.handleCategoryHover(category.Handle)"
         ng-mouseleave="main.handleCategoryLeave()" index="$index" subcategories="category.Childs" image="main.mainCategories[category.Handle].image"
-        leavehover="main.handleCategoryLeave"></smart-menu>
+        activeStoreCode="main.activeStore.code" leavehover="main.handleCategoryLeave"></smart-menu>
       <a href="/ofertas" flex flex-xs="25" class="categories-bg nav-categories-item" ng-mouseover="main.handleCategoryHover(9)"
         ng-mouseleave="main.handleCategoryLeave()">
         <i ng-show="!main.activeCategory[9]" class="icon-8"></i>
@@ -39,9 +39,8 @@
 
     <nav ng-if="main.siteTheme === 'actual-kids' " hide-sm flex-gt-sm="100" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false"
       class="nav-categories">
-      <a ng-repeat-start="category in main.categoriesTree | filter: main.filterKidsSmartMenu track by $index" flex flex-xs="25"
-        class="categories-bg nav-categories-item" href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)"
-        ng-mouseleave="main.handleCategoryLeave()">
+      <a ng-repeat-start="category in main.categoriesTree track by $index" flex flex-xs="25" class="categories-bg nav-categories-item"
+        href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
         <i class="icon-{{ main.mainCategoriesKids[category.Handle].icon }}"></i>
         <span class="nav-categories-item-text" href="#">{{category.Name}}</span>
       </a>

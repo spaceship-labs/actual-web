@@ -33,7 +33,6 @@
       isActiveSchedulesModal: false,
       loginForm: {},
       mapTerminalCode: commonService.mapTerminalCode,
-      pointersSidenav: [],
       currentYear: moment().format('YYYY'),
       deactivateLoginModal: deactivateLoginModal,
       getActiveModule: getActiveModule,
@@ -45,7 +44,6 @@
       signIn: signIn,
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
-      togglePointerSidenav: togglePointerSidenav,
       toggleProfileModal: toggleProfileModal,
       getFaviconUrl: getFaviconUrl,
       toggleMobileSidenav: toggleMobileSidenav,
@@ -55,8 +53,6 @@
       handleCategoryHover: handleCategoryHover,
       handleCategoryLeave: handleCategoryLeave,
       handleAccordion: handleAccordion,
-      filterSmartMenu: filterSmartMenu,
-      filterKidsSmartMenu: filterKidsSmartMenu,
       filterComplementsMenu: filterComplementsMenu,
       api: api
     });
@@ -231,22 +227,12 @@
       }
       console.log('USER INVITED: ', $rootScope.user);
 
+      $rootScope.$on('activeStoreAssigned', function(ev, activeStore) {
+        loadCategoriesTree(activeStore.code);
+      });
+
       loadMainData();
       loadSiteInfo();
-
-      buildPointersSidenav();
-      vm.isLoadingCategoriesTree = true;
-      categoriesService
-        .createCategoriesTree()
-        .then(function(tree) {
-          vm.isLoadingCategoriesTree = false;
-          vm.categoriesTree = tree;
-          $rootScope.categoriesTree = vm.categoriesTree;
-          $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
 
       $scope.$watch(
         function() {
@@ -295,6 +281,21 @@
 
         $scope.$apply();
       });
+    }
+
+    function loadCategoriesTree(activeStoreCode) {
+      vm.isLoadingCategoriesTree = true;
+      categoriesService
+        .createCategoriesTree(activeStoreCode)
+        .then(function(tree) {
+          vm.isLoadingCategoriesTree = false;
+          vm.categoriesTree = tree;
+          $rootScope.categoriesTree = vm.categoriesTree;
+          $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
 
     function toggleLoginModal() {
@@ -353,12 +354,6 @@
 
     function resetSearchBox() {
       vm.searchValue = '';
-    }
-
-    function buildPointersSidenav() {
-      for (var i = 0; i < 9; i++) {
-        vm.pointersSidenav.push({ selected: false });
-      }
     }
 
     function loadMainData() {
@@ -454,10 +449,6 @@
 
     function removeCurrentQuotation() {
       quotationService.removeCurrentQuotation();
-    }
-
-    function togglePointerSidenav() {
-      $mdSidenav('right').toggle();
     }
 
     function getCategoryIcon(handle) {
@@ -669,38 +660,16 @@
         vm.activeCategory[key] = false;
       });
       vm.activeCategory[handle] = true;
-      console.log('vm.activeCategory', vm.activeCategory);
     }
 
     function handleCategoryLeave() {
       Object.keys(vm.activeCategory).forEach(function(key, value) {
         vm.activeCategory[key] = false;
       });
-      console.log('vm.activeCategory', vm.activeCategory);
     }
 
     function handleAccordion(name) {
       vm.accordion.current = vm.accordion.current === name ? null : name;
-    }
-
-    function filterSmartMenu(item) {
-      return (
-        item &&
-        !item.onKidsMenu &&
-        !item.complement &&
-        item.Childs &&
-        item.Childs.length > 0
-      );
-    }
-
-    function filterKidsSmartMenu(item) {
-      return (
-        item &&
-        item.onKidsMenu &&
-        !item.complement &&
-        item.Childs &&
-        item.Childs.length > 0
-      );
     }
 
     function filterComplementsMenu(item) {
