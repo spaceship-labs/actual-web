@@ -11,12 +11,10 @@
 
     <nav>
       <ul ng-if="main.siteTheme !== 'actual-kids'">
-        <li ng-repeat="category in main.categoriesTree  | smartMenuFilter: main.activeStore.code track by $index" ng-click="main.handleAccordion(category.Handle)"
-          class="nav-categories-item-sidenav">
+        <li ng-repeat="category in main.categoriesTree track by $index" ng-click="main.handleAccordion(category.Handle)" class="nav-categories-item-sidenav">
           <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
           <ul ng-show="main.accordion.current === category.Handle">
-            <li ng-repeat="subcategory in category.Childs" ng-show="main.filterMenuSubCategories(subcategory, main.activeStore.code)"
-              class="">
+            <li ng-repeat="subcategory in category.Childs" class="">
               <a ng-href="{{'/category/' + subcategory.Handle}}" class="nav-categories-item">
                 <span class="nav-categories-item-text">{{ subcategory.Name }}</span>
               </a>
@@ -37,12 +35,10 @@
       </ul>
 
       <ul ng-if="main.siteTheme === 'actual-kids' ">
-        <li ng-repeat="category in main.categoriesTree | smartMenuFilter: main.activeStore.code track by $index " ng-click="main.handleAccordion(category.Handle)"
-          class="nav-categories-item-sidenav">
+        <li ng-repeat="category in main.categoriesTree track by $index " ng-click="main.handleAccordion(category.Handle)" class="nav-categories-item-sidenav">
           <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
           <ul ng-show="main.accordion.current === category.Handle">
-            <li ng-repeat="subcategory in category.Childs" ng-show="main.filterMenuSubCategories(subcategory, main.activeStore.code)"
-              class="">
+            <li ng-repeat="subcategory in category.Childs" class="">
               <a ng-href="{{'/category/' + subcategory.Handle}}" class="nav-categories-item">
                 <span class="nav-categories-item-text">{{ subcategory.Name }}</span>
               </a>
