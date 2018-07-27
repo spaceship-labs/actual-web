@@ -32,10 +32,7 @@
       </p>
 
       <div layout="row" layout-align="space-between center">
-        <p ng-href="{{product.url}}" flex="35" class="stock-available">
-          ABRIR DETALLE
-        </p>
-        <p flex="65" class="price">
+        <p class="price">
           <span class="price-before-currency">MXN</span>
           <span class="price-before">{{product.priceBefore | roundCurrency:'$'}}</span>
           <span ng-if="product.priceBefore">|</span>

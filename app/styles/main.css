@@ -1650,7 +1650,7 @@ select {
   margin: 4px 0;
 }
 .listing-product .listing-product-info-main p {
-  font-size: 13px;
+  font-size: 12px;
   /*text-transform: uppercase;*/
 }
 .listing-product .listing-product-info .price {
@@ -7383,6 +7383,7 @@ md-sidenav {
     left: 80px;
     top: 50%;
     transform: translateY(-50%);
+    border: solid 1px;
   }
   .header-top-bar .on-scroll-item,
   .menu-mobile-icon-on-scroll-wrapper {
