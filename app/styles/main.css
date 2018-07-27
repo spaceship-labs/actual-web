@@ -1823,7 +1823,7 @@ select {
   /* min-width: 1px; */
   padding: 0 10px;
   width: 200px;
-  height: 350px;
+  height: 360px;
 }
 
 .products-list .product-width {
@@ -2042,7 +2042,7 @@ select {
   display: flex;
   position: relative;
   align-items: center;
-  margin: 0px auto;
+  margin: 15px auto 0;
   max-width: 65%;
 }
 
