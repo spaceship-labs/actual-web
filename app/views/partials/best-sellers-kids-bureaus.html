@@ -2,14 +2,16 @@
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
       <a href="/category/comoda-infantil">
-        <span class="color-gray">Cómodas y burós infantiles</span>
+        <span class="color-gray">Bebés</span>
       </a>
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-   <div flex="80" flex-xs="100" flex-sm="100">
-      <slick class="categories-carousel" infinite="true" slides-to-show="3" slides-to-scroll="3" init-onload="true" data="vm.featuredLoaded" responsive="vm.bestSellersCarouselBreakpoints" >
-        <div ng-repeat="featuredComoda in vm.featuredProducts | filter:{ categoryHandle: 'comoda-infantil' } | limitTo:vm.limitKidsBureaus" class="listing-product-wrap">
+    <div flex="80" flex-xs="100" flex-sm="100">
+      <slick class="categories-carousel" infinite="true" slides-to-show="3" slides-to-scroll="3" init-onload="true" data="vm.featuredLoaded"
+        responsive="vm.bestSellersCarouselBreakpoints">
+        <div ng-repeat="featuredComoda in vm.featuredProducts | filter:{ categoryHandle: 'comoda-infantil' } | limitTo:vm.limitKidsBureaus"
+          class="listing-product-wrap">
           <listing-product product="featuredComoda.product"></listing-product>
         </div>
       </slick>
