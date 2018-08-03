@@ -95,7 +95,7 @@
           </span>
 
           <!-- <i class="icon-login" ng-click="main.toggleLoginModal()"></i> -->
-          <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
+          <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
         </div>
 
         <!--IF logged in-->
