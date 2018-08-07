@@ -775,7 +775,7 @@ function getMetaTagsBySite(siteOption) {
       metaTags = {
         title: 'Actual Studio',
         description:
-          'Mobiliario y decoración para la persona práctica y jovial; una bienvenida al mobiliario moderno, honesto y, sobre todo, funcional.',
+          'Muebles y decoración; salas, comedores, sillas, recámaras. Decora tu hogar con muebles modernos y funcionales',
         image: 'https://api.actualstudio.com/logos/studio-og.png',
         url: 'https://actualstudio.com',
         favicon: 'https://api.actualStudio.com/icons/actual-studio-favicon.png'
@@ -785,7 +785,8 @@ function getMetaTagsBySite(siteOption) {
       metaTags = {
         title: 'Actual Home',
         description:
-          'Mobiliario y decoración para los más exigentes. Sofisticación absoluta que recuerda a los amantes del diseño la mezcla entre el modernismo y la exclusividad.',
+          'Muebles y decoración para los más exigentes, lujo accesible para amantes del diseño',
+
         image: 'https://api.actualstudio.com/logos/home-og.png',
         url: 'https://actualhome.com',
         favicon: 'https://api.actualStudio.com/icons/actual-home-favicon.png'
@@ -795,7 +796,7 @@ function getMetaTagsBySite(siteOption) {
       metaTags = {
         title: 'Actual Kids',
         description:
-          'Mobiliario y decoración para los más pequeños, la combinación perfecta de estilo, seguridad, interactividad y diversión.',
+          'Muebles y decoración infantiles para niños, bebés, papás. Seguridad, estilo, interactividad y diversión',
         image: 'https://api.actualstudio.com/logos/kids-og.png',
         url: 'https://actualkids.com',
         favicon: 'https://api.actualStudio.com/icons/actual-kids-favicon.png'
