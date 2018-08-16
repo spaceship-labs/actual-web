@@ -667,6 +667,7 @@ select {
   position: fixed;
   width: 100%;
   padding: 2px 0;
+  top: 0;
 }
 .header-top-bar.fixed-head > .container-lg {
   max-width: 1300px;
@@ -7225,6 +7226,8 @@ md-sidenav {
     object-fit: cover;
     border-radius: 50%;
     margin: 0 auto;
+    width: 200px;
+    height: 200px;
   }
   .home-slider .home-slide {
     overflow: hidden;
