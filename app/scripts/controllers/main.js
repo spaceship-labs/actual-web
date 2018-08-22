@@ -55,6 +55,7 @@
       handleAccordion: handleAccordion,
       filterComplementsMenu: filterComplementsMenu,
       filterRemoveComplements: filterRemoveComplements,
+      getComplementCategoriesNumber: getComplementCategoriesNumber,
       api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
@@ -679,6 +680,10 @@
 
     function filterRemoveComplements(item) {
       return item && !item.complement;
+    }
+
+    function getComplementCategoriesNumber(categoriesTree) {
+      return (categoriesTree || []).filter(filterComplementsMenu).length;
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {
