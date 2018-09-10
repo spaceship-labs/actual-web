@@ -486,6 +486,7 @@ module.exports = function(grunt) {
           ENV: {
             name: 'sandbox',
             apiEndpoint: 'https://sandboxapi.actualstudio.com',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'sandbox',
             conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
@@ -503,6 +504,7 @@ module.exports = function(grunt) {
           ENV: {
             name: 'demo',
             apiEndpoint: 'https://sandboxapi.actualstudio.com',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'demo',
             conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
@@ -520,6 +522,7 @@ module.exports = function(grunt) {
           ENV: {
             name: 'production',
             apiEndpoint: 'https://api.actualstudio.com',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://admin.miactual.com',
             tokenPrefix: 'production',
             conektaHomeKey: 'key_fTqfbsS7oxfpqZxtP9qZqdw',

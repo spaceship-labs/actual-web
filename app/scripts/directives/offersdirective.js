@@ -51,7 +51,7 @@ angular
             .then(function(res) {
               scope.packages = res.data || [];
               scope.packages = scope.packages.map(function(p) {
-                p.image = api.baseUrl + '/uploads/groups/' + p.icon_filename;
+                p.image = api.cdnUrl + '/uploads/groups/' + p.icon_filename;
                 return p;
               });
               scope.isLoading = false;

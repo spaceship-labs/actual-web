@@ -44,10 +44,11 @@ angular.module('actualWebApp').directive('listingProduct', [
             scope.product.files.forEach(function(img) {
               scope.images.push({
                 url:
-                  api.baseUrl +
+                  api.cdnUrl +
                   '/uploads/products/gallery/' +
-                  scope.imageSize +
-                  img.filename
+                  img.filename +
+                  '?d=' +
+                  scope.imageSize
               });
             });
           }
