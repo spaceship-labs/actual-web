@@ -67,15 +67,9 @@ angular.module('actualWebApp').directive('productGallery', [
           }
           if (scope.product.files) {
             //TEMPORAL
-            imageSize = '';
             scope.product.files.forEach(function(img) {
               scope.galleryImages.push({
-                src:
-                  api.baseUrl +
-                  '/uploads/products/gallery/' +
-                  img.filename +
-                  '?d=' +
-                  imageSize,
+                src: api.baseUrl + '/uploads/products/gallery/' + img.filename,
                 w: 500,
                 h: 500
               });
