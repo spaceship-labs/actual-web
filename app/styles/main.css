@@ -527,6 +527,9 @@ select {
   position: relative;
   margin: 0 4px;
 }
+
+.header-top-bar-menu .header-top-bar-menu-item-blog{min-width: 50px;}
+
 .header-top-bar-menu .header-top-bar-menu-item .invited-label {
   font-size: 10px;
 }
@@ -7303,6 +7306,13 @@ md-sidenav {
   .color-white {
     color: #fff;
   }
+  .header-top-bar-menu .header-top-bar-menu-item-blog{
+    max-width: 45px;
+  }
+  .header-top-bar-menu .header-top-bar-menu-item-blog p{
+    font-size: 11px;
+    font-weight: 700;
+  }
   .header-top-bar-menu .header-top-bar-menu-item-name {
     padding: 2px 0;
   }
@@ -7388,6 +7398,7 @@ md-sidenav {
     left: 80px;
     top: 50%;
     transform: translateY(-50%);
+    padding: 2px;
     border: solid 1px;
   }
   .header-top-bar .on-scroll-item,

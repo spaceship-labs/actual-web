@@ -17,8 +17,8 @@
       </div>
 
 
-      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center" layout-align-sm="center center"
-        layout-align-xs="start center" hide-xs hide-sm>
+      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center"
+        layout-align-sm="center center" layout-align-xs="start center" hide-xs hide-sm>
 
         <div flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
@@ -26,30 +26,19 @@
               <i class="icon-phone"></i>
             </strong>
             <!--<strong hide-xs>998 246 3487</strong>-->
-            <strong hide-xs>(998) 884 1594</strong>
+            <strong hide-xs>(998) 195 8376</strong>
           </span>
 
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
-
-        <a href="whatsapp://send?phone=5219982463487">
-          <div flex href="" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-            <span>
-              <strong>
-                <i class="icon-whatsapp"></i>
-              </strong>
-              <!--<strong hide-xs>998 246 3487</strong>-->
-              <strong hide-xs>(998) 246 3487</strong>
-            </span>
-          </div>
-        </a>
 
       </div>
 
 
       <form ng-class="{
           'searcher-wrapper-show-mobile':main.showSearchBar
-        }" ng-submit="main.handleSearch()" class="searcher-wrapper" flex-order-xs="1" layout="row">
+        }" ng-submit="main.handleSearch()"
+        class="searcher-wrapper" flex-order-xs="1" layout="row">
         <div class="searcher" flex flex-xs="70">
           <div class="searcher-inner">
             <i class="icon-search"></i>
@@ -59,8 +48,8 @@
         <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn">
       </form>
 
-      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center" layout-align-sm="center center"
-        layout-align-xs="start center">
+      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center"
+        layout-align-sm="center center" layout-align-xs="start center">
 
 
         <div flex-gt-xs="15" class="logo logo-mobile" layout-align="center center">
@@ -110,6 +99,12 @@
           <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
+        <div flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
+          <p><a href="https://actual-studio.blogspot.com/" target="_blank">
+              <span><strong>|</strong> BLOG</span>
+            </a></p>
+        </div>
+
 
         <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
@@ -121,38 +116,17 @@
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
 
-        <a flex hide-gt-xs href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-          <span>
-            <strong>
-              <i class="icon-whatsapp"></i>
-            </strong>
-          </span>
-        </a>
-
         <div hide-xs hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong>
               <i class="icon-phone"></i>
             </strong>
             <!--<strong hide-xs>998 246 3487</strong>-->
-            <strong hide-xs>(998) 884 1594</strong>
+            <strong hide-xs>(998) 195 8376</strong>
           </span>
 
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
-
-        <a hide-xs hide-gt-sm href="whatsapp://send?phone=5219982463487">
-          <div flex href="" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-            <span>
-              <strong>
-                <i class="icon-whatsapp"></i>
-              </strong>
-              <!--<strong hide-xs>998 246 3487</strong>-->
-              <strong hide-xs>(998) 246 3487</strong>
-            </span>
-          </div>
-        </a>
-
 
         <!--IF ACTIVE QUOTATION-->
         <a ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{main.activeQuotation.id}}" class="header-top-bar-menu-item">
