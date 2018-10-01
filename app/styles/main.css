@@ -7252,7 +7252,7 @@ md-sidenav {
   }
   .home-slider .home-slide-2 img {
     width: auto;
-    height: 240px;
+    height: 180px;
     left: 50%;
     position: relative;
     transform: translateX(-50%);
