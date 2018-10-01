@@ -1073,6 +1073,25 @@ select {
   margin-bottom: 6px;
 }
 
+/*SPECIAL CASES CATEGORIES ICONS*/
+.nav-categories-item > i.icon-muebles--relleno, .nav-categories-item > i.icon-5{
+  margin-bottom: -12px;
+  font-size: 66px;
+  margin-top: -9px;
+}
+
+.nav-categories-item > i.icon-salas-relleno, .nav-categories-item > i.icon-1{
+  font-size: 61px;
+  margin-bottom: -10px;
+  margin-top: -5px;
+}
+
+.nav-categories-item > i.icon-oficina-relleno, .nav-categories-item > i.icon-7{
+  font-size: 55px;
+    margin-top: -8px;
+    margin-bottom: -2px;
+}
+
 .nav-categories-item .nav-categories-item-add {
   /*color: #50C841;*/
 }
