@@ -6908,6 +6908,9 @@ md-sidenav {
 }
 
 @media screen and (max-width: 1200px) {
+
+  .nav-categories-item-sidenav > span, .nav-categories-item > span{font-size: 11px;}
+  
   .user-profile-view,
   .terms-view,
   .checkout-view {
@@ -7249,7 +7252,7 @@ md-sidenav {
   }
   .home-slider .home-slide-2 img {
     width: auto;
-    height: 180px;
+    height: 240px;
     left: 50%;
     position: relative;
     transform: translateX(-50%);
