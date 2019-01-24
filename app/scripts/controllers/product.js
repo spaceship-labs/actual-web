@@ -100,7 +100,7 @@ function ProductCtrl(
           quantity: 1
         };
 
-        if (vm.product.U_FAMILIA !== 'SI') {
+        if (vm.product.U_FAMILIA !== 'SI' || vm.product[activeStore.code] < 1) {
           $location.path('/');
           return;
         }
@@ -286,7 +286,7 @@ function ProductCtrl(
 
   function applyDiscount(discount, price) {
     var result = price;
-    result = price - price / 100 * discount;
+    result = price - (price / 100) * discount;
     return result;
   }
 
