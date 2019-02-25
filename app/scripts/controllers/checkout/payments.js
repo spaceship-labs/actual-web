@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 angular
-  .module("actualWebApp")
-  .controller("CheckoutPaymentsCtrl", CheckoutPaymentsCtrl);
+  .module('actualWebApp')
+  .controller('CheckoutPaymentsCtrl', CheckoutPaymentsCtrl);
 
 function CheckoutPaymentsCtrl(
   $routeParams,
@@ -43,7 +43,7 @@ function CheckoutPaymentsCtrl(
     isActiveGroup: checkoutService.isActivePaymentGroup,
     isActiveMethod: checkoutService.isActiveMethod,
     isMinimumPaid: checkoutService.isMinimumPaid,
-    intervalProgress: $mdMedia("xs") || $mdMedia("sm"),
+    intervalProgress: $mdMedia('xs') || $mdMedia('sm'),
     singlePayment: true,
     multiplePayment: false,
     isLoading: true,
@@ -57,6 +57,9 @@ function CheckoutPaymentsCtrl(
     showTransferInstructionDialog: showTransferInstructionDialog
   });
 
+  var searchParams = $location.search() || {};
+  vm.invoiceDataSaved = searchParams.invoiceDataSaved;
+
   var EWALLET_TYPE = ewalletService.ewalletType;
   var CLIENT_BALANCE_TYPE = paymentService.clientBalanceType;
   var mainDataListener = function() {};
@@ -65,8 +68,36 @@ function CheckoutPaymentsCtrl(
   if ($rootScope.isMainDataLoaded) {
     init();
   } else {
-    mainDataListener = $rootScope.$on("mainDataLoaded", function(e, data) {
+    mainDataListener = $rootScope.$on('mainDataLoaded', function(e, data) {
       init();
+    });
+  }
+
+  function showInvoiceDataAlert(ev) {
+    if ($rootScope.user.invited) {
+      return $q.resolve(false);
+    }
+
+    var controller = InvoiceDialogController;
+    var useFullScreen = $mdMedia('sm') || $mdMedia('xs');
+    return $mdDialog.show({
+      controller: [
+        '$scope',
+        '$mdDialog',
+        '$location',
+        'quotation',
+        'client',
+        controller
+      ],
+      templateUrl: 'views/checkout/invoice-dialog.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: useFullScreen,
+      locals: {
+        quotation: vm.quotation,
+        client: {}
+      }
     });
   }
 
@@ -103,16 +134,16 @@ function CheckoutPaymentsCtrl(
 
         if (!isValidStock) {
           $location
-            .path("/quotations/edit/" + vm.quotation.id)
+            .path('/quotations/edit/' + vm.quotation.id)
             .search({ stockAlert: true });
         }
 
         if (!vm.quotation.Details || vm.quotation.Details.length === 0) {
-          $location.path("/quotations/edit/" + vm.quotation.id);
+          $location.path('/quotations/edit/' + vm.quotation.id);
         }
 
         if (!validateQuotationAddress(vm.quotation)) {
-          $location.path("/quotations/edit/" + vm.quotation.id);
+          $location.path('/quotations/edit/' + vm.quotation.id);
         }
 
         if (vm.quotation.rateLimitReported) {
@@ -121,17 +152,21 @@ function CheckoutPaymentsCtrl(
 
         if (vm.quotation.Order) {
           $location.path(
-            "/checkout/order/" + vm.quotation.Order.id + "/COMPRA-CONFIRMADA"
+            '/checkout/order/' + vm.quotation.Order.id + '/COMPRA-CONFIRMADA'
           );
         }
         vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
 
+        if (!vm.invoiceDataSaved) {
+          showInvoiceDataAlert();
+        }
+
         vm.isLoading = false;
       })
       .catch(function(err) {
-        console.log("err", err);
+        console.log('err', err);
         dialogService.showDialog(err.data);
-        $location.path("/quotations/edit/" + vm.quotation.id);
+        $location.path('/quotations/edit/' + vm.quotation.id);
       });
   }
 
@@ -141,18 +176,18 @@ function CheckoutPaymentsCtrl(
       .getSapOrderConnectionLogs(quotationId)
       .then(function(res) {
         vm.sapLogs = res.data;
-        console.log("sapLogs", vm.sapLogs);
+        console.log('sapLogs', vm.sapLogs);
         vm.isLoadingSapLogs = false;
       })
       .catch(function(err) {
-        console.log("err", err);
+        console.log('err', err);
         vm.isLoadingSapLogs = false;
       });
   }
 
   function validateQuotationAddress(quotation) {
-    console.log("quotation.Address.U_CP", quotation.Address.U_CP);
-    console.log("quotation.ZipcodeDelivery.cp", quotation.ZipcodeDelivery.cp);
+    console.log('quotation.Address.U_CP', quotation.Address.U_CP);
+    console.log('quotation.ZipcodeDelivery.cp', quotation.ZipcodeDelivery.cp);
     if (
       quotation.Address &&
       quotation.Address.U_CP === quotation.ZipcodeDelivery.cp
@@ -182,7 +217,7 @@ function CheckoutPaymentsCtrl(
         deferred.resolve();
       })
       .catch(function(err) {
-        console.log("err", err);
+        console.log('err', err);
         deferred.reject(err);
       });
 
@@ -211,7 +246,7 @@ function CheckoutPaymentsCtrl(
         method,
         vm.quotation
       );
-      console.log("balance", balance);
+      console.log('balance', balance);
       vm.activeMethod.maxAmmount = balance;
       if (balance <= remaining) {
         remaining = balance;
@@ -219,17 +254,17 @@ function CheckoutPaymentsCtrl(
     }
 
     if (vm.activeMethod.maxAmmount < 0.01) {
-      dialogService.showDialog("Fondos insuficientes");
+      dialogService.showDialog('Fondos insuficientes');
       return false;
     }
 
     if (vm.quotation.Client) {
       if (
-        vm.activeMethod.currency === "usd" &&
-        vm.quotation.Client.Currency === "MXP"
+        vm.activeMethod.currency === 'usd' &&
+        vm.quotation.Client.Currency === 'MXP'
       ) {
         dialogService.showDialog(
-          "Pagos en dolares no disponibles para este cliente por configuración en SAP"
+          'Pagos en dolares no disponibles para este cliente por configuración en SAP'
         );
         return false;
       }
@@ -278,22 +313,22 @@ function CheckoutPaymentsCtrl(
   function tokenizePaymentCard(payment) {
     var deferred = $q.defer();
 
-    if (payment.type === "transfer") {
+    if (payment.type === 'transfer') {
       deferred.resolve(false);
       return deferred.promise;
     }
 
     var onSuccess = function(token) {
-      console.log("token", token);
+      console.log('token', token);
       deferred.resolve(token.id);
     };
 
     var onError = function(err) {
-      console.log("err", err);
+      console.log('err', err);
       deferred.reject(err);
     };
 
-    console.log("payment", payment);
+    console.log('payment', payment);
     var tokenParams = {
       card: {
         name: payment.cardName,
@@ -313,7 +348,7 @@ function CheckoutPaymentsCtrl(
     };
 
     //delete payment.cardObject;
-    console.log("tokenParams", tokenParams);
+    console.log('tokenParams', tokenParams);
     Conekta.Token.create(tokenParams, onSuccess, onError);
 
     return deferred.promise;
@@ -324,7 +359,7 @@ function CheckoutPaymentsCtrl(
       (payment.ammount > 0 && vm.quotation.ammountPaid < vm.quotation.total) ||
       payment.ammount < 0
     ) {
-      $rootScope.scrollTo("main");
+      $rootScope.scrollTo('main');
       vm.isLoadingProgress = true;
       var cardObjectAux = _.clone(payment.cardObject);
       tokenizePaymentCard(payment)
@@ -340,7 +375,7 @@ function CheckoutPaymentsCtrl(
           vm.isLoadingProgress = false;
           vm.order = res.data;
           if (vm.order.id) {
-            $rootScope.scrollTo("main");
+            $rootScope.scrollTo('main');
             quotationService.removeCurrentQuotation();
 
             gtmService.notifyOrder({
@@ -354,39 +389,39 @@ function CheckoutPaymentsCtrl(
               vm.hasAnSpeiOrder = true;
               vm.quotation.OrderWeb = vm.order;
               //dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
-              $location.path("/quotations/edit/" + vm.quotation.id);
+              $location.path('/quotations/edit/' + vm.quotation.id);
               return;
             }
 
             $location
-              .path("/checkout/order/" + vm.order.id + "/COMPRA-CONFIRMADA")
+              .path('/checkout/order/' + vm.order.id + '/COMPRA-CONFIRMADA')
               .search({ orderCreated: true });
           }
         })
         .catch(function(err) {
-          console.log("err", err);
-          var errMsg = "";
+          console.log('err', err);
+          var errMsg = '';
           if (err) {
             errMsg = err.data || err;
 
             if (errMsg.message_to_purchaser) {
               errMsg = errMsg.message_to_purchaser;
             }
-            errMsg = errMsg ? errMsg.toString() : "";
+            errMsg = errMsg ? errMsg.toString() : '';
 
             if (err.data) {
               if (err.data.conektaLimitErrorThrown) {
-                $rootScope.scrollTo("main");
+                $rootScope.scrollTo('main');
                 quotationService.removeCurrentQuotation();
-                $location.path("/quotations/edit/" + vm.quotation.id);
+                $location.path('/quotations/edit/' + vm.quotation.id);
                 return;
               }
 
               var paymentAttempts = getQuotationPaymentAttemptsByError(err);
               vm.quotation.paymentAttempts = paymentAttempts;
               if (paymentAttempts >= quotationService.PAYMENT_ATTEMPTS_LIMIT) {
-                $rootScope.scrollTo("main");
-                $location.path("/quotations/edit/" + vm.quotation.id);
+                $rootScope.scrollTo('main');
+                $location.path('/quotations/edit/' + vm.quotation.id);
                 return;
               }
             }
@@ -398,7 +433,7 @@ function CheckoutPaymentsCtrl(
 
             var callback = function() {
               payment.cardObject = cardObjectAux;
-              console.log("payment to openTransactionDialog again", payment);
+              console.log('payment to openTransactionDialog again', payment);
               openTransactionDialog(
                 selectedMethod,
                 vm.quotation.total,
@@ -407,7 +442,7 @@ function CheckoutPaymentsCtrl(
             };
 
             dialogService.showDialog(
-              "Hubo un error, revisa los datos e intenta de nuevo \n" + errMsg,
+              'Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg,
               callback
             );
           }
@@ -422,7 +457,7 @@ function CheckoutPaymentsCtrl(
     var paymentAttempts = vm.quotation.paymentAttempts;
     errObj = errObj || {};
     if (errObj.data) {
-      if (errObj.data.type === "processing_error") {
+      if (errObj.data.type === 'processing_error') {
         paymentAttempts = paymentAttempts + 1;
       }
     }
@@ -449,8 +484,8 @@ function CheckoutPaymentsCtrl(
         vm.isLoadingPayments = false;
       })
       .catch(function(err) {
-        console.log("err", err);
-        dialogService.showDialog("Hubo un error, recarga la página");
+        console.log('err', err);
+        dialogService.showDialog('Hubo un error, recarga la página');
         vm.isLoadingPayments = false;
       });
   }
@@ -459,39 +494,39 @@ function CheckoutPaymentsCtrl(
     var ev = null;
     selectedMethod = method;
     if (method) {
-      var templateUrl = "views/checkout/payment-dialog.html";
+      var templateUrl = 'views/checkout/payment-dialog.html';
       var controller = PaymentDialogController;
-      method.currency = method.currency || "MXP";
+      method.currency = method.currency || 'MXP';
       method.ammount = ammount;
       var paymentOpts = angular.copy(method);
       paymentOpts.ammount = ammount;
 
       if (paymentDefaults) {
-        console.log("paymentOpts before", paymentOpts);
-        console.log("paymentDefaults", paymentDefaults);
+        console.log('paymentOpts before', paymentOpts);
+        console.log('paymentDefaults', paymentDefaults);
         if (paymentDefaults.cardObject) {
-          console.log("extending");
+          console.log('extending');
           paymentOpts.cardObject = paymentDefaults.cardObject;
-          console.log("paymmentops extended", paymentOpts);
+          console.log('paymmentops extended', paymentOpts);
         }
         paymentOpts = _.extend(paymentOpts, paymentDefaults);
-        console.log("paymentOpts after", paymentOpts);
+        console.log('paymentOpts after', paymentOpts);
       }
 
-      var useFullScreen = $mdMedia("sm") || $mdMedia("xs");
+      var useFullScreen = $mdMedia('sm') || $mdMedia('xs');
       $mdDialog
         .show({
           controller: [
-            "$scope",
-            "$mdDialog",
-            "$filter",
-            "$timeout",
-            "formatService",
-            "commonService",
-            "ewalletService",
-            "dialogService",
-            "payment",
-            "quotation",
+            '$scope',
+            '$mdDialog',
+            '$filter',
+            '$timeout',
+            'formatService',
+            'commonService',
+            'ewalletService',
+            'dialogService',
+            'payment',
+            'quotation',
             controller
           ],
           templateUrl: templateUrl,
@@ -505,11 +540,11 @@ function CheckoutPaymentsCtrl(
           }
         })
         .then(function(payment) {
-          console.log("Pago aplicado");
+          console.log('Pago aplicado');
           addPayment(payment);
         })
         .catch(function(err) {
-          console.log("Pago no aplicado");
+          console.log('Pago no aplicado');
           clearActiveMethod();
         });
       /*
@@ -519,7 +554,7 @@ function CheckoutPaymentsCtrl(
       });
       */
     } else {
-      commonService.showDialog("Revisa los datos, e intenta de nuevo");
+      commonService.showDialog('Revisa los datos, e intenta de nuevo');
     }
   }
 
@@ -532,7 +567,7 @@ function CheckoutPaymentsCtrl(
     mainDataListener();
 
     if (!vm.quotation.Details || vm.quotation.Details.length === 0) {
-      dialogService.showDialog("No hay artículos en esta cotización");
+      dialogService.showDialog('No hay artículos en esta cotización');
       return;
     }
 
@@ -543,7 +578,7 @@ function CheckoutPaymentsCtrl(
       payment: payment
     };
     animateProgress();
-    console.log("params", params);
+    console.log('params', params);
     return orderService.createFromQuotation(vm.quotation.id, params);
   }
 
@@ -558,16 +593,16 @@ function CheckoutPaymentsCtrl(
 
   function showCardsDialog(method) {
     var cards = method.cards || [];
-    var msg = "Bancos participantes: " + cards.join(", ");
+    var msg = 'Bancos participantes: ' + cards.join(', ');
     dialogService.showDialog(msg);
   }
 
   function showTransferInstructionDialog(ev) {
     var controller = TransferInstructionsDialogController;
-    var useFullScreen = $mdMedia("sm") || $mdMedia("xs");
+    var useFullScreen = $mdMedia('sm') || $mdMedia('xs');
     return $mdDialog.show({
-      controller: ["$scope", "$mdDialog", controller],
-      templateUrl: "views/checkout/transfer-instructions-dialog.html",
+      controller: ['$scope', '$mdDialog', controller],
+      templateUrl: 'views/checkout/transfer-instructions-dialog.html',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
@@ -575,7 +610,7 @@ function CheckoutPaymentsCtrl(
     });
   }
 
-  $scope.$on("$destroy", function() {
+  $scope.$on('$destroy', function() {
     mainDataListener();
     $mdDialog.cancel();
     if (vm.intervalProgress) {
