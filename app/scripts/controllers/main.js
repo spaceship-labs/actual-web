@@ -112,7 +112,7 @@
             color: 'comedores-bg',
             icon: 'comedores',
             filledIcon: 'comedores-relleno',
-            image: '/images/categories/categoria1.png'
+            image: '/images/categories/categoria1.jpg'
           },
           sillas: {
             color: 'sillas-bg',
