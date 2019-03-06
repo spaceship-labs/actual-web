@@ -730,7 +730,12 @@
     }
 
     function filterComplementsMenu(item) {
-      return item && item.complement;
+      return (
+        item &&
+        item.complement &&
+        item[vm.activeStore.code] > 0 &&
+        item.Handle !== 'organizacion'
+      );
     }
 
     function filterRemoveComplements(item) {
