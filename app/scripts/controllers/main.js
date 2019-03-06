@@ -163,7 +163,7 @@
             color: 'comedores-bg',
             icon: 'comedores',
             filledIcon: 'comedores-relleno',
-            image: '/images/categories/categoria1.png'
+            image: '/images/categories/comedor-home.jpg'
           },
           sillas: {
             color: 'sillas-bg',
@@ -730,7 +730,12 @@
     }
 
     function filterComplementsMenu(item) {
-      return item && item.complement;
+      return (
+        item &&
+        item.complement &&
+        item[vm.activeStore.code] > 0 &&
+        item.Handle !== 'organizacion'
+      );
     }
 
     function filterRemoveComplements(item) {
