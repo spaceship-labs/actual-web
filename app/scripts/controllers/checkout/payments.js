@@ -309,11 +309,10 @@ function CheckoutPaymentsCtrl(
   }
 
   function tokenMP(payment) {
+    var deferred = $q.defer();
     Mercadopago.setPublishableKey('TEST-a4165fe4-a739-49bd-b815-cf7f17a6db72');
-    console.log('token MP');
 
     var bin = getBin(payment);
-    console.log('bin', bin);
     var methodInfo;
     Mercadopago.getPaymentMethod(
       {
@@ -328,12 +327,10 @@ function CheckoutPaymentsCtrl(
             type: 'hidden',
             value: response[0].id
           };
-          console.log('response', methodInfo);
-        } else throw new TypeError('method error');
+          console.log('methodInfo', methodInfo);
+        } else deferred.reject(err);
       }
     );
-
-    console.log('methodInfo', methodInfo);
 
     var paramsData = {
       paymentMethodId: methodInfo,
@@ -344,25 +341,28 @@ function CheckoutPaymentsCtrl(
       cardholderName: payment.cardName,
       installments: 1
     };
+    console.log('params token', paramsData);
     var token;
     Mercadopago.createToken(paramsData, function sdkResponseHandler(
       status,
       response
     ) {
       console.log('sdkResponseHandler', response);
+      console.log('status ', status);
       if (status != 200 && status != 201) {
-        throw new TypeError('Error token MP');
+        deferred.reject(err);
       } else {
         token = {
           name: 'token',
           type: 'hidden',
           value: response.id
         };
+        console.log('token', token);
+        deferred.resolve(token, methodInfo);
       }
     });
-    console.log('token', token);
 
-    return token;
+    return deferred.promise;
   }
 
   function tokenizePaymentCard(payment) {
@@ -421,9 +421,12 @@ function CheckoutPaymentsCtrl(
       console.log('payment', payment);
 
       tokenMP(payment)
-        .then(function(token) {
+        .then(function(token, methodInfo) {
+          console.log('token api', token);
+          console.log('method api', methodInfo);
           delete payment.cardObject;
           payment.cardToken = token;
+          payment.cardMethod = methodInfo;
           //console.log("payment after tonekinze", payment);
           //console.log('token in tokenize', token);
           return createOrder(payment);
