@@ -57,9 +57,6 @@ function CheckoutPaymentsCtrl(
     showTransferInstructionDialog: showTransferInstructionDialog
   });
 
-  var searchParams = $location.search() || {};
-  vm.invoiceDataSaved = searchParams.invoiceDataSaved;
-
   var EWALLET_TYPE = ewalletService.ewalletType;
   var CLIENT_BALANCE_TYPE = paymentService.clientBalanceType;
   var mainDataListener = function() {};
@@ -70,34 +67,6 @@ function CheckoutPaymentsCtrl(
   } else {
     mainDataListener = $rootScope.$on('mainDataLoaded', function(e, data) {
       init();
-    });
-  }
-
-  function showInvoiceDataAlert(ev) {
-    if ($rootScope.user.invited) {
-      return $q.resolve(false);
-    }
-
-    var controller = InvoiceDialogController;
-    var useFullScreen = $mdMedia('sm') || $mdMedia('xs');
-    return $mdDialog.show({
-      controller: [
-        '$scope',
-        '$mdDialog',
-        '$location',
-        'quotation',
-        'client',
-        controller
-      ],
-      templateUrl: 'views/checkout/invoice-dialog.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true,
-      fullscreen: useFullScreen,
-      locals: {
-        quotation: vm.quotation,
-        client: {}
-      }
     });
   }
 
@@ -156,10 +125,6 @@ function CheckoutPaymentsCtrl(
           );
         }
         vm.quotation.ammountPaid = vm.quotation.ammountPaid || 0;
-
-        if (!vm.invoiceDataSaved) {
-          showInvoiceDataAlert();
-        }
 
         vm.isLoading = false;
       })
@@ -269,6 +234,7 @@ function CheckoutPaymentsCtrl(
         return false;
       }
     }
+    console.log('paso 1');
 
     return openTransactionDialog(vm.activeMethod, remaining);
   }
@@ -310,6 +276,95 @@ function CheckoutPaymentsCtrl(
     delete vm.activeMethod;
   }
 
+  function getBin(payment) {
+    var ccNumber = payment.cardObject.number;
+    var valur = ccNumber.replace(/[ .-]/g, '').slice(0, 6);
+    return valur;
+  }
+
+  function setPaymentMethodInfo(status, response) {
+    console.log('status', status);
+    if (status == 200) {
+      var paymentMethod = {
+        name: 'paymentMethodId',
+        type: 'hidden',
+        value: response[0].id
+      };
+      return paymentMethod;
+    } else throw new TypeError('method error');
+  }
+
+  function sdkResponseHandler(status, response) {
+    console.log('sdkResponseHandler', response);
+    if (status != 200 && status != 201) {
+      throw new TypeError('Error token MP');
+    } else {
+      var card = {
+        name: 'token',
+        type: 'hidden',
+        value: response.id
+      };
+      return card;
+    }
+  }
+
+  function tokenMP(payment) {
+    var deferred = $q.defer();
+    Mercadopago.setPublishableKey('TEST-a4165fe4-a739-49bd-b815-cf7f17a6db72');
+
+    var bin = getBin(payment);
+    var methodInfo;
+    Mercadopago.getPaymentMethod(
+      {
+        bin: bin
+      },
+      function setPaymentMethodInfo(status, response) {
+        console.log('status', status);
+
+        if (status == 200) {
+          methodInfo = {
+            name: 'paymentMethodId',
+            type: 'hidden',
+            value: response[0].id
+          };
+          console.log('methodInfo', methodInfo);
+        } else deferred.reject(err);
+      }
+    );
+
+    var paramsData = {
+      paymentMethodId: methodInfo,
+      cardNumber: payment.cardObject.number,
+      securityCode: payment.cardObject.cvc,
+      cardExpirationMonth: payment.cardObject.expMonth,
+      cardExpirationYear: payment.cardObject.expYear,
+      cardholderName: payment.cardName,
+      installments: 1
+    };
+    console.log('params token', paramsData);
+    var token;
+    Mercadopago.createToken(paramsData, function sdkResponseHandler(
+      status,
+      response
+    ) {
+      console.log('sdkResponseHandler', response);
+      console.log('status ', status);
+      if (status != 200 && status != 201) {
+        deferred.reject(err);
+      } else {
+        token = {
+          name: 'token',
+          type: 'hidden',
+          value: response.id
+        };
+        console.log('token', token);
+        deferred.resolve(token, methodInfo);
+      }
+    });
+
+    return deferred.promise;
+  }
+
   function tokenizePaymentCard(payment) {
     var deferred = $q.defer();
 
@@ -328,7 +383,8 @@ function CheckoutPaymentsCtrl(
       deferred.reject(err);
     };
 
-    console.log('payment', payment);
+    console.log('tokenParams', tokenParams);
+
     var tokenParams = {
       card: {
         name: payment.cardName,
@@ -362,13 +418,17 @@ function CheckoutPaymentsCtrl(
       $rootScope.scrollTo('main');
       vm.isLoadingProgress = true;
       var cardObjectAux = _.clone(payment.cardObject);
-      tokenizePaymentCard(payment)
-        .then(function(token) {
+      console.log('payment', payment);
+
+      tokenMP(payment)
+        .then(function(token, methodInfo) {
+          console.log('token api', token);
+          console.log('method api', methodInfo);
           delete payment.cardObject;
           payment.cardToken = token;
+          payment.cardMethod = methodInfo;
           //console.log("payment after tonekinze", payment);
           //console.log('token in tokenize', token);
-
           return createOrder(payment);
         })
         .then(function(res) {
@@ -433,6 +493,8 @@ function CheckoutPaymentsCtrl(
 
             var callback = function() {
               payment.cardObject = cardObjectAux;
+              console.log('paso 2');
+
               console.log('payment to openTransactionDialog again', payment);
               openTransactionDialog(
                 selectedMethod,
@@ -546,6 +608,7 @@ function CheckoutPaymentsCtrl(
         .catch(function(err) {
           console.log('Pago no aplicado');
           clearActiveMethod();
+          throw new TypeError('Pago no aplicado');
         });
       /*
       , function() {
