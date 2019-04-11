@@ -426,8 +426,8 @@ function CheckoutPaymentsCtrl(
           console.log('resolve', resolve);
 
           delete payment.cardObject;
-          payment.cardToken = resolve.token;
-          payment.cardMethod = resolve.method;
+          payment.cardToken = resolve.token.value;
+          payment.cardMethod = resolve.method.value;
           console.log('payment api', payment);
 
           return createOrder(payment);
