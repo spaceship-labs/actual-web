@@ -309,60 +309,63 @@ function CheckoutPaymentsCtrl(
   }
 
   function tokenMP(payment) {
-    var deferred = $q.defer();
-    Mercadopago.setPublishableKey('TEST-a4165fe4-a739-49bd-b815-cf7f17a6db72');
+    return new Promise((resolve, reject) => {
+      Mercadopago.setPublishableKey(
+        'TEST-a4165fe4-a739-49bd-b815-cf7f17a6db72'
+      );
 
-    var bin = getBin(payment);
-    var methodInfo;
-    Mercadopago.getPaymentMethod(
-      {
-        bin: bin
-      },
-      function setPaymentMethodInfo(status, response) {
-        console.log('status', status);
-
-        if (status == 200) {
-          methodInfo = {
-            name: 'paymentMethodId',
-            type: 'hidden',
-            value: response[0].id
-          };
-          console.log('methodInfo', methodInfo);
-        } else deferred.reject(err);
-      }
-    );
-
-    var paramsData = {
-      paymentMethodId: methodInfo,
-      cardNumber: payment.cardObject.number,
-      securityCode: payment.cardObject.cvc,
-      cardExpirationMonth: payment.cardObject.expMonth,
-      cardExpirationYear: payment.cardObject.expYear,
-      cardholderName: payment.cardName,
-      installments: 1
-    };
-    console.log('params token', paramsData);
-    var token;
-    Mercadopago.createToken(paramsData, function sdkResponseHandler(
-      status,
-      response
-    ) {
-      console.log('sdkResponseHandler', response);
-      console.log('status ', status);
-      if (status != 200 && status != 201) {
-        deferred.reject(err);
-      } else {
-        token = {
-          name: 'token',
-          type: 'hidden',
-          value: response.id
-        };
-        console.log('token', token);
-        deferred.resolve(token, methodInfo);
-      }
+      var bin = getBin(payment);
+      var methodInfo;
+      Mercadopago.getPaymentMethod(
+        {
+          bin: bin
+        },
+        function setPaymentMethodInfo(status, response) {
+          console.log('status method', status);
+          if (status == 200) {
+            methodInfo = {
+              name: 'paymentMethodId',
+              type: 'hidden',
+              value: response[0].id
+            };
+            var paramsData = {
+              paymentMethodId: methodInfo,
+              cardNumber: payment.cardObject.number,
+              securityCode: payment.cardObject.cvc,
+              cardExpirationMonth: payment.cardObject.expMonth,
+              cardExpirationYear: payment.cardObject.expYear,
+              cardholderName: payment.cardName,
+              installments: 1
+            };
+            var token;
+            return Mercadopago.createToken(
+              paramsData,
+              function sdkResponseHandler(status, response) {
+                console.log('status token', status);
+                if (status != 200 && status != 201) {
+                  let error = new Error('Error de ejecución token');
+                  reject(error);
+                } else {
+                  token = {
+                    name: 'token',
+                    type: 'hidden',
+                    value: response.id
+                  };
+                  var cardMp = {
+                    token: token,
+                    method: methodInfo
+                  };
+                  resolve(cardMp);
+                }
+              }
+            );
+          } else {
+            let error = new Error('Error de ejecución  en el method');
+            reject(error);
+          }
+        }
+      );
     });
-
-    return deferred.promise;
   }
 
   function tokenizePaymentCard(payment) {
@@ -418,17 +421,15 @@ function CheckoutPaymentsCtrl(
       $rootScope.scrollTo('main');
       vm.isLoadingProgress = true;
       var cardObjectAux = _.clone(payment.cardObject);
-      console.log('payment', payment);
-
       tokenMP(payment)
-        .then(function(token, methodInfo) {
-          console.log('token api', token);
-          console.log('method api', methodInfo);
+        .then(function(resolve) {
+          console.log('resolve', resolve);
+
           delete payment.cardObject;
-          payment.cardToken = token;
-          payment.cardMethod = methodInfo;
-          //console.log("payment after tonekinze", payment);
-          //console.log('token in tokenize', token);
+          payment.cardToken = resolve.token;
+          payment.cardMethod = resolve.method;
+          console.log('payment api', payment);
+
           return createOrder(payment);
         })
         .then(function(res) {
