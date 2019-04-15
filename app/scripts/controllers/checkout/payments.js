@@ -310,6 +310,67 @@ function CheckoutPaymentsCtrl(
     delete vm.activeMethod;
   }
 
+  function guessingPaymentMethod(payment) {
+    Mercadopago.setPublishableKey('TEST-b7083679-cd78-4b22-842d-9ff41b544bc2');
+    var deferred = $q.defer();
+    console.log('PAYMENT GUESS');
+    var getBin = function(payment) {
+      var cardNumber = payment.cardObject.number;
+      var value = cardNumber.replace(/[ .-]/g, '').slice(0, 6);
+      return value;
+    };
+    var bin = getBin(payment);
+    console.log('bin: ', bin);
+
+    var setPaymentMethodInfo = function(status, response) {
+      console.log('response guess: ', response);
+      console.log('sttaus guess: ', status);
+
+      if (status == 200) {
+        deferred.resolve(response[0].id);
+      }
+    };
+
+    Mercadopago.getPaymentMethod(
+      {
+        bin: bin
+      },
+      setPaymentMethodInfo
+    );
+
+    return deferred.promise;
+  }
+
+  function MPTokenizePaymentCard(payment) {
+    var deferred = $q.defer();
+
+    if (payment.type === 'transfer') {
+      deferred.resolve(false);
+      return deferred.promise;
+    }
+
+    var handleResponse = function(status, response) {
+      if (status != 200 && status != 201) {
+        alert('verify filled data');
+      } else {
+        console.log('token', response.id);
+        deferred.resolve(response.id);
+      }
+    };
+
+    console.log('payment', payment);
+    var tokenParams = {
+      cardholderName: payment.cardName,
+      cardNumber: _.clone(payment.cardObject.number),
+      cardExpirationMonth: _.clone(payment.cardObject.expMonth),
+      cardExpirationYear: _.clone(payment.cardObject.expYear),
+      securityCode: _.clone(payment.cardObject.cvc)
+    };
+
+    Mercadopago.createToken(tokenParams, handleResponse);
+    return deferred.promise;
+  }
+
   function tokenizePaymentCard(payment) {
     var deferred = $q.defer();
 
@@ -362,10 +423,21 @@ function CheckoutPaymentsCtrl(
       $rootScope.scrollTo('main');
       vm.isLoadingProgress = true;
       var cardObjectAux = _.clone(payment.cardObject);
-      tokenizePaymentCard(payment)
-        .then(function(token) {
+      guessingPaymentMethod(payment)
+        .then(function(paymentMehodId) {
+          return [MPTokenizePaymentCard(payment), paymentMehodId];
+        })
+        .spread(function(token, paymentMehodId) {
+          console.log('HEEEEY');
+
           delete payment.cardObject;
-          payment.cardToken = token;
+          payment.token = token;
+          payment.payment_method_id = paymentMehodId;
+          console.log('payment type: ', payment.type);
+
+          // if (payment.type === 'debit') {
+          payment.installments = 1;
+          // }
           //console.log("payment after tonekinze", payment);
           //console.log('token in tokenize', token);
 
