@@ -343,12 +343,10 @@ function CheckoutPaymentsCtrl(
 
   function MPTokenizePaymentCard(payment) {
     var deferred = $q.defer();
-
     if (payment.type === 'transfer') {
       deferred.resolve(false);
       return deferred.promise;
     }
-
     var handleResponse = function(status, response) {
       if (status != 200 && status != 201) {
         alert('verify filled data');
@@ -358,7 +356,6 @@ function CheckoutPaymentsCtrl(
       }
     };
 
-    console.log('payment', payment);
     var tokenParams = {
       cardholderName: payment.cardName,
       cardNumber: _.clone(payment.cardObject.number),
@@ -423,16 +420,18 @@ function CheckoutPaymentsCtrl(
       $rootScope.scrollTo('main');
       vm.isLoadingProgress = true;
       var cardObjectAux = _.clone(payment.cardObject);
+      var paymentMethodId;
       guessingPaymentMethod(payment)
-        .then(function(paymentMehodId) {
-          return [MPTokenizePaymentCard(payment), paymentMehodId];
+        .then(function(_paymentMethodId) {
+          paymentMethodId = _paymentMethodId;
+          return MPTokenizePaymentCard(payment);
         })
-        .spread(function(token, paymentMehodId) {
+        .then(function(token) {
           console.log('HEEEEY');
 
           delete payment.cardObject;
           payment.token = token;
-          payment.payment_method_id = paymentMehodId;
+          payment.payment_method_id = paymentMethodId;
           console.log('payment type: ', payment.type);
 
           // if (payment.type === 'debit') {
@@ -613,7 +612,7 @@ function CheckoutPaymentsCtrl(
         })
         .then(function(payment) {
           console.log('Pago aplicado');
-          addPayment(payment);
+          return addPayment(payment);
         })
         .catch(function(err) {
           console.log('Pago no aplicado');
