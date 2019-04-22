@@ -458,7 +458,7 @@ function CheckoutPaymentsCtrl(
           if (payment.msi) {
             getIssuer(payment).then(function(installment_id) {
               console.log('installment_id', installment_id);
-              payment.issuerid = installment_id;
+              payment.issuer_id = installment_id;
             });
           }
           paymentMethodId = _paymentMethodId;
