@@ -327,7 +327,11 @@ function CheckoutPaymentsCtrl(
       console.log('sttaus issuer guess: ', status);
 
       if (status == 200) {
-        deferred.resolve(response[0].issuer.id);
+        var installmentInfo = {
+          issuer_id: response[0].issuer.id,
+          installments: response[0].payer_costs[0].installments
+        };
+        deferred.resolve(installmentInfo);
       }
     };
     Mercadopago.getInstallments(
@@ -456,9 +460,11 @@ function CheckoutPaymentsCtrl(
       guessingPaymentMethod(payment)
         .then(function(_paymentMethodId) {
           if (payment.msi) {
-            getIssuer(payment).then(function(installment_id) {
-              console.log('installment_id', installment_id);
-              payment.issuer_id = installment_id;
+            getIssuer(payment).then(function(response) {
+              console.log('response', response);
+
+              payment.issuer_id = response.issuer_id;
+              payment.installments = response.installments;
             });
           }
           paymentMethodId = _paymentMethodId;
