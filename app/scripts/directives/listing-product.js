@@ -45,7 +45,7 @@ angular.module('actualWebApp').directive('listingProduct', [
               scope.images.push({
                 url:
                   api.cdnUrl +
-                  '/uploads/products/gallery/' +
+                  '/uploads/product/gallery/' +
                   img.filename +
                   '?d=' +
                   scope.imageSize

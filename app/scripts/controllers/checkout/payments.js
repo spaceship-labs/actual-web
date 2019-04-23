@@ -310,6 +310,40 @@ function CheckoutPaymentsCtrl(
     delete vm.activeMethod;
   }
 
+  function getIssuer(payment) {
+    console.log('getIssuer');
+
+    var deferred = $q.defer();
+
+    var getBin = function(payment) {
+      var cardNumber = payment.cardObject.number;
+      var value = cardNumber.replace(/[ .-]/g, '').slice(0, 6);
+      return value;
+    };
+    var bin = getBin(payment);
+
+    var setInstallmentInfo = function(status, response) {
+      console.log('response issuer guess: ', response);
+      console.log('sttaus issuer guess: ', status);
+
+      if (status == 200) {
+        var installmentInfo = {
+          issuer_id: response[0].issuer.id,
+          installments: response[0].payer_costs[0].installments
+        };
+        deferred.resolve(installmentInfo);
+      }
+    };
+    Mercadopago.getInstallments(
+      {
+        bin: bin,
+        amount: payment.ammount
+      },
+      setInstallmentInfo
+    );
+    return deferred.promise;
+  }
+
   function guessingPaymentMethod(payment) {
     Mercadopago.setPublishableKey('TEST-b7083679-cd78-4b22-842d-9ff41b544bc2');
     var deferred = $q.defer();
@@ -413,6 +447,8 @@ function CheckoutPaymentsCtrl(
   }
 
   function addPayment(payment) {
+    console.log('payment addpayment', payment);
+
     if (
       (payment.ammount > 0 && vm.quotation.ammountPaid < vm.quotation.total) ||
       payment.ammount < 0
@@ -423,6 +459,14 @@ function CheckoutPaymentsCtrl(
       var paymentMethodId;
       guessingPaymentMethod(payment)
         .then(function(_paymentMethodId) {
+          if (payment.msi) {
+            getIssuer(payment).then(function(response) {
+              console.log('response', response);
+
+              payment.issuer_id = response.issuer_id;
+              payment.installments = response.installments;
+            });
+          }
           paymentMethodId = _paymentMethodId;
           return MPTokenizePaymentCard(payment);
         })
