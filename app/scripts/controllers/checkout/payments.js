@@ -459,31 +459,28 @@ function CheckoutPaymentsCtrl(
       var paymentMethodId;
       guessingPaymentMethod(payment)
         .then(function(_paymentMethodId) {
-          if (payment.msi) {
-            getIssuer(payment).then(function(response) {
-              console.log('response', response);
+          //   if (payment.msi) {
+          //     getIssuer(payment).then(function(response) {
+          //       console.log('response', response);
 
-              payment.issuer_id = response.issuer_id;
-              payment.installments = response.installments;
-            });
-          }
+          //       payment.issuer_id = response.issuer_id;
+          //       payment.installments = response.installments;
+          //     });
+          //   }
           paymentMethodId = _paymentMethodId;
           return MPTokenizePaymentCard(payment);
         })
         .then(function(token) {
           console.log('HEEEEY');
-
+          if (payment.msi) {
+            payment.installments = payment.msi;
+          } else {
+            payment.installments = 1;
+          }
           delete payment.cardObject;
           payment.token = token;
           payment.payment_method_id = paymentMethodId;
           console.log('payment type: ', payment.type);
-
-          // if (payment.type === 'debit') {
-          payment.installments = 1;
-          // }
-          //console.log("payment after tonekinze", payment);
-          //console.log('token in tokenize', token);
-
           return createOrder(payment);
         })
         .then(function(res) {
