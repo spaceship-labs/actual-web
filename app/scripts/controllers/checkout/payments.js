@@ -313,15 +313,16 @@ function CheckoutPaymentsCtrl(
   function guessingPaymentMethod(payment) {
     Mercadopago.setPublishableKey('TEST-b7083679-cd78-4b22-842d-9ff41b544bc2');
     var deferred = $q.defer();
-    console.log('PAYMENT GUESS');
+    if (payment.type === 'transfer') {
+      deferred.resolve('banamex');
+      return deferred.promise;
+    }
     var getBin = function(payment) {
       var cardNumber = payment.cardObject.number;
       var value = cardNumber.replace(/[ .-]/g, '').slice(0, 6);
       return value;
     };
     var bin = getBin(payment);
-    console.log('bin: ', bin);
-
     var setPaymentMethodInfo = function(status, response) {
       console.log('response guess: ', response);
       console.log('sttaus guess: ', status);
@@ -337,14 +338,13 @@ function CheckoutPaymentsCtrl(
       },
       setPaymentMethodInfo
     );
-
     return deferred.promise;
   }
 
   function MPTokenizePaymentCard(payment) {
     var deferred = $q.defer();
     if (payment.type === 'transfer') {
-      deferred.resolve(false);
+      deferred.resolve('transfer');
       return deferred.promise;
     }
     var handleResponse = function(status, response) {
@@ -363,54 +363,52 @@ function CheckoutPaymentsCtrl(
       cardExpirationYear: _.clone(payment.cardObject.expYear),
       securityCode: _.clone(payment.cardObject.cvc)
     };
-
     Mercadopago.createToken(tokenParams, handleResponse);
     return deferred.promise;
   }
 
-  function tokenizePaymentCard(payment) {
-    var deferred = $q.defer();
+  // function tokenizePaymentCard(payment) {
+  //   var deferred = $q.defer();
 
-    if (payment.type === 'transfer') {
-      deferred.resolve(false);
-      return deferred.promise;
-    }
+  //   if (payment.type === 'transfer') {
+  //     deferred.resolve(false);
+  //     return deferred.promise;
+  //   }
 
-    var onSuccess = function(token) {
-      console.log('token', token);
-      deferred.resolve(token.id);
-    };
+  //   var onSuccess = function(token) {
+  //     console.log('token', token);
+  //     deferred.resolve(token.id);
+  //   };
 
-    var onError = function(err) {
-      console.log('err', err);
-      deferred.reject(err);
-    };
+  //   var onError = function(err) {
+  //     console.log('err', err);
+  //     deferred.reject(err);
+  //   };
 
-    console.log('payment', payment);
-    var tokenParams = {
-      card: {
-        name: payment.cardName,
-        number: _.clone(payment.cardObject.number),
-        exp_month: _.clone(payment.cardObject.expMonth),
-        exp_year: _.clone(payment.cardObject.expYear),
-        cvc: _.clone(payment.cardObject.cvc)
-      },
-      address: {
-        country: payment.cardCountry,
-        state: payment.cardState,
-        zipcode: payment.cardZip,
-        city: payment.cardCity,
-        street1: payment.cardAddress1,
-        street2: payment.cardAddress1
-      }
-    };
+  //   console.log('payment', payment);
+  //   var tokenParams = {
+  //     card: {
+  //       name: payment.cardName,
+  //       number: _.clone(payment.cardObject.number),
+  //       exp_month: _.clone(payment.cardObject.expMonth),
+  //       exp_year: _.clone(payment.cardObject.expYear),
+  //       cvc: _.clone(payment.cardObject.cvc)
+  //     },
+  //     address: {
+  //       country: payment.cardCountry,
+  //       state: payment.cardState,
+  //       zipcode: payment.cardZip,
+  //       city: payment.cardCity,
+  //       street1: payment.cardAddress1,
+  //       street2: payment.cardAddress1
+  //     }
+  //   };
 
-    //delete payment.cardObject;
-    console.log('tokenParams', tokenParams);
-    Conekta.Token.create(tokenParams, onSuccess, onError);
+  //   console.log('tokenParams', tokenParams);
+  //   Conekta.Token.create(tokenParams, onSuccess, onError);
 
-    return deferred.promise;
-  }
+  //   return deferred.promise;
+  // }
 
   function addPayment(payment) {
     console.log('payment addpayment', payment);
@@ -425,6 +423,8 @@ function CheckoutPaymentsCtrl(
       var paymentMethodId;
       guessingPaymentMethod(payment)
         .then(function(_paymentMethodId) {
+          console.log('_paymentMethodId: ', _paymentMethodId);
+
           paymentMethodId = _paymentMethodId;
           return MPTokenizePaymentCard(payment);
         })
