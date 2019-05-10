@@ -41,49 +41,42 @@
 
   <div class="checkout-view-inner">
 
-    <h3 ng-if="!vm.hasAnSpeiOrder"><strong>1. Elige tu opción de pago</strong></h3>
+    <!-- <h3 ng-if="!vm.hasAnSpeiOrder"><strong>1. Elige tu opción de pago</strong></h3> -->
 
     <section layout="row" layout-wrap>
 
-      <div flex="75" flex-sm="100" flex-xs="100">
+      <div flex="65" flex-sm="100" flex-xs="100">
 
-        <ng-include
-          ng-if="vm.hasAnSpeiOrder"
-          src="'views/checkout/spei-card-instructions.html'">
-        </ng-include>
-        
-
-        <md-radio-group
-          ng-if="!vm.isMinimumPaid(vm.quotation) && !vm.quotation.OrderWeb && !vm.hasAnSpeiOrder"
-          ng-model="vm.activeMethod"
-        >
-
-          <div class="pay-method-wrap" >
-            <ng-include
-              ng-repeat="paymentGroup in vm.paymentMethodsGroups track by $index"
-              ng-if="vm.isActiveGroup(paymentGroup, vm.quotation)"
-              src="'views/checkout/payment-group.html'">
-            </ng-include>
-
-          </div>
-
-        </md-radio-group>
-
-        <div
-          ng-if="!vm.hasAnSpeiOrder"
-          ng-show="vm.quotation.Payments && vm.quotation.Payments.length > 0"
-          class="second-step-payment"
-        >
-
-          <section>
-            <h3><strong>2. Pagos aplicados</strong></h3>
-            <hr />
-
-            <div class="pay-method-wrap pay-method-wrap-v2" >
-              <ng-include src="'views/checkout/payments-applied.html'"></ng-include>
-            </div>
-          </section>
-
+        <div class="confirmed-address">
+          <div class="delivery-option-data">
+            <h4><strong>Datos del usuario</strong></h4>
+            <ul>
+              <li><strong>Calle: </strong>{{vm.quotation.Address.Address}}</li>
+              <li><strong>No. exterior: </strong>{{vm.quotation.Address.U_Noexterior}}</li>
+              <li><strong>No. interior: </strong>{{vm.quotation.Address.U_Nointerior}}</li>
+              <li><strong>Colonia: </strong>{{vm.quotation.Address.U_Colonia}}</li>
+              <li><strong>Municipio o delegación: </strong>{{vm.quotation.Address.U_Mpio}}</li>
+              <li><strong>Ciudad: </strong>{{vm.quotation.Address.U_Ciudad}}</li>
+              <li><strong>Estado: </strong>{{vm.quotation.Address.U_Estado}}</li>
+              <li><strong>C.P.: </strong>{{vm.quotation.Address.U_CP}}</li>
+              <li><strong>Entre calle: </strong>{{vm.quotation.Address.U_Entrecalle}}</li>
+              <li><strong>Y calle: </strong>{{vm.quotation.Address.U_Ycalle}}</li>
+              <li><strong>Referencias: </strong>{{vm.quotation.Address.U_Notes1}}</li>
+              <li><strong>Destinatario </strong> {{vm.quotation.Address.FirstName + ' ' + vm.quotation.Address.LastName}}</li>
+              <li><strong>Email: </strong>{{vm.quotation.Address.E_Mail}}</li>
+              <li><strong>Télefono: </strong>{{vm.quotation.Address.Tel1}}</li>
+              <li><strong>Celular: </strong>{{vm.quotation.Address.Cellolar}}</li>
+            </ul>
+            
+            <p>
+              <a
+                class="small-link action-link"
+                href="#"
+                ng-href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}">
+                Editar
+              </a>
+            </p>
+          </div>          
         </div>
 
       </div>
@@ -166,8 +159,7 @@
               type="submit"
               value="CONTINUAR"
               class="cart-view-btn"
-              ng-disabled="!vm.isMinimumPaid(vm.quotation)"
-              ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid(vm.quotation) }">
+              ng-class="cart-view-btn">
 
             <p
               ng-if="vm.isMinimumPaid(vm.quotation)"
@@ -187,7 +179,7 @@
 
 
         </div>
-
+<!-- 
         <div class="confirmed-address">
           <div class="delivery-option-data">
             <h4><strong>Dirección de envío</strong></h4>
@@ -217,7 +209,7 @@
               </a>
             </p>
           </div>          
-        </div>
+        </div> -->
 
         <div class="secure-logos">
           <img src="/images/trust_brands_trustwave.svg" alt="Trustwave">

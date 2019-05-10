@@ -242,6 +242,23 @@ function CheckoutClientCtrl(
           });
         });
         return;
+      } else {
+        vm.isLoading = true;
+        $rootScope.scrollTo('main');
+        var params = { addressId: vm.quotation.Address };
+        quotationService
+          .updateAddress(vm.quotation.id, params)
+          .then(function(res) {
+            vm.isLoading = false;
+            $location.path('/checkout/paymentmethod/' + vm.quotation.id);
+          })
+          .catch(function(err) {
+            console.log(err);
+            var error = err.data || err;
+            error = error ? error.toString() : '';
+            dialogService.showDialog('Hubo un error: ' + error);
+            vm.isLoading = false;
+          });
       }
     }
 
