@@ -443,30 +443,36 @@ function CheckoutPaymentsCtrl(
         })
         .then(function(res) {
           vm.isLoadingProgress = false;
-          vm.order = res.data;
-          if (vm.order.id) {
-            $rootScope.scrollTo('main');
-            quotationService.removeCurrentQuotation();
+          console.log('respuesta', res);
 
-            gtmService.notifyOrder({
-              folio: vm.order.folio,
-              total: vm.order.total,
-              client: vm.order.CardCode,
-              zipcode: vm.order.U_CP
-            });
-            //FOR SPEI PAYMENTS
-            if (vm.order.isSpeiOrder) {
-              vm.hasAnSpeiOrder = true;
-              vm.quotation.OrderWeb = vm.order;
-              //dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
-              $location.path('/quotations/edit/' + vm.quotation.id);
-              return;
-            }
+          dialogService.showDialog(
+            'Su orden de compra ha sido recibida exitosamente, en un momento será contactado por el personal de Ecommerce para concretar el pago de su orden.'
+          );
+          $location.path('/quotations/edit/' + vm.quotation.id);
+          // vm.order = res.data;
+          // if (vm.order.id) {
+          //   $rootScope.scrollTo('main');
+          //   quotationService.removeCurrentQuotation();
 
-            $location
-              .path('/checkout/order/' + vm.order.id + '/COMPRA-CONFIRMADA')
-              .search({ orderCreated: true });
-          }
+          //   gtmService.notifyOrder({
+          //     folio: vm.order.folio,
+          //     total: vm.order.total,
+          //     client: vm.order.CardCode,
+          //     zipcode: vm.order.U_CP
+          //   });
+          //   //FOR SPEI PAYMENTS
+          //   if (vm.order.isSpeiOrder) {
+          //     vm.hasAnSpeiOrder = true;
+          //     vm.quotation.OrderWeb = vm.order;
+          //     //dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
+          //     $location.path('/quotations/edit/' + vm.quotation.id);
+          //     return;
+          //   }
+
+          //   $location
+          //     .path('/checkout/order/' + vm.order.id + '/COMPRA-CONFIRMADA')
+          //     .search({ orderCreated: true });
+          // }
         })
         .catch(function(err) {
           console.log('err', err);
@@ -649,7 +655,21 @@ function CheckoutPaymentsCtrl(
     };
     animateProgress();
     console.log('params', params);
-    return orderService.createFromQuotation(vm.quotation.id, params);
+    return orderService
+      .createFromQuotation(vm.quotation.id, params)
+      .then(function(res) {
+        vm.isLoadingProgress = false;
+        console.log('respuesta funcion', res);
+
+        dialogService.showDialog(
+          'Su orden de compra ha sido recibida exitosamente, en un momento será contactado por el personal de Ecommerce para concretar el pago de su orden.',
+          function() {
+            $location.path('/quotations/edit/' + vm.quotation.id);
+          }
+        );
+
+        return;
+      });
   }
 
   function animateProgress() {
