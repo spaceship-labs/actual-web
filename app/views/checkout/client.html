@@ -5,17 +5,17 @@
 <section ng-show="!vm.isLoading" class="form-view cart-view checkout-view container container-xxlg" >
 
   <div class="steps-bar" layout="row">
-    <a ng-href="/quotations/edit/{{vm.quotation.id}}" flex="25" class="steps-bar-item">
+    <a ng-href="/quotations/edit/{{vm.quotation.id}}" flex="33" class="steps-bar-item">
       <span><i class="icon-carro"></i> 1. Mi carrito</span>
     </a>
-    <div flex="25" class="steps-bar-item steps-bar-item-active">
+    <div flex="33" class="steps-bar-item steps-bar-item-active">
       <span><i class="icon-login"></i> 2. Datos personales</span>
     </div>
-    <div flex="25" class="steps-bar-item">
+    <!-- <div flex="25" class="steps-bar-item">
       <span><i class="icon-terminal"></i> 3. Método de pago</span>
-    </div>
-    <div flex="25" class="steps-bar-item">
-      <span><i class="icon-oportunidades"></i> 4. Confirmación</span>
+    </div> -->
+    <div flex="33" class="steps-bar-item">
+      <span><i class="icon-oportunidades"></i> 3. Confirmación</span>
     </div>
   </div>
 
@@ -62,12 +62,12 @@
         </div>
         <!--END PERSONAL DATA-->
 
-        <h3>
+        <!-- <h3>
           <strong>DIRECCIÓN DE ENTREGA</strong> 
           <a ng-show="vm.contacts && vm.contacts.length > 0" href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}" class="small-link action-link">Editar</a>
 
           <a ng-show="vm.contacts.length === 0" href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}" class="small-link action-link">Agregar direccíon de envío</a>
-        </h3>
+        </h3> -->
 
         <div ng-show="vm.isLoadingContacts" layout-fill layout="row" layout-align="center center" class="loading-circle">
           <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
