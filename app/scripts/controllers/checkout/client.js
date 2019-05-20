@@ -87,14 +87,14 @@ function CheckoutClientCtrl(
                 vm.quotation.ZipcodeDelivery,
                 vm.contacts
               );
-              if (!isZipcodeDeliveryIsInContacts) {
-                $location.path('/user/deliveries').search({
-                  returnTo: '/checkout/client/' + vm.quotation.id,
-                  quotationId: vm.quotation.id,
-                  addContact: true
-                });
+              // if (!isZipcodeDeliveryIsInContacts) {
+              //   $location.path('/user/deliveries').search({
+              //     returnTo: '/checkout/client/' + vm.quotation.id,
+              //     quotationId: vm.quotation.id,
+              //     addContact: true
+              //   });
 
-                /*
+              /*
                 var zipcodeMsg = 'Agrega una dirección de entrega con el código postal que seleccionaste';
                 dialogService.showDialog(zipcodeMsg, function(){
                   $location.path('/user/deliveries')
@@ -104,7 +104,7 @@ function CheckoutClientCtrl(
                     });
                 });
                 */
-              }
+              // }
 
               if (vm.contacts.length > 0) {
                 setSelectedContact(vm.contacts);
@@ -229,57 +229,98 @@ function CheckoutClientCtrl(
       return;
     }
 
-    console.log('vm.quotation.Address', vm.quotation.Address);
+    vm.isLoading = true;
+    $rootScope.scrollTo('main');
+    vm.loadingEstimate = 0;
+    var params = {
+      paymentGroup: vm.quotation.paymentGroup || 1
+    };
+    console.log('params', params);
+    return orderService
+      .createFromQuotation(vm.quotation.id, params)
+      .then(function(res) {
+        vm.isLoading = false;
+        console.log('respuesta funcion', res);
 
-    if (vm.quotation.Address && !vm.quotation.immediateDelivery) {
-      var selectedContact = findContactById(vm.quotation.Address);
-
-      console.log('vm.quotation.Address', selectedContact);
-      if (!selectedContact.Address) {
-        dialogService.showDialog('Agrega los datos de envio', function() {
-          $location.path('/user/deliveries').search({
-            returnTo: '/checkout/client/' + vm.quotation.id
-          });
-        });
-        return;
-      }
-    }
-
-    if (vm.quotation.Address || vm.quotation.immediateDelivery) {
-      showInvoiceDataAlert()
-        .then(function(goToPayments) {
-          if (!goToPayments) {
-            return $q.reject();
+        dialogService.showDialog(
+          'Su orden de compra ha sido recibida exitosamente, el personal de Ecommerce se pondrá en contacto con usted para concretar el pago de su orden. El horario de atención es de lunes a sábado de 8 a 20 horas y domingo de 8 a 15 horas.<br /><br />Gracias por su preferencia.',
+          function() {
+            $location.path('/quotations/edit/' + vm.quotation.id);
           }
+        );
 
-          vm.isLoading = true;
-          $rootScope.scrollTo('main');
-          var params = { addressId: vm.quotation.Address };
-          quotationService
-            .updateAddress(vm.quotation.id, params)
-            .then(function(res) {
-              vm.isLoading = false;
-              $location.path('/checkout/paymentmethod/' + vm.quotation.id);
-            })
-            .catch(function(err) {
-              console.log(err);
-              var error = err.data || err;
-              error = error ? error.toString() : '';
-              dialogService.showDialog('Hubo un error: ' + error);
-              vm.isLoading = false;
-            });
-        })
-        .catch(function(err) {
-          console.log('err invoice alert', err);
-        });
-    } else {
-      dialogService.showDialog('Asigna una dirección de envío', function() {
-        $location.path('/user/deliveries').search({
-          returnTo: '/checkout/client/' + vm.quotation.id
-        });
+        return;
       });
-    }
   }
+
+  // console.log('vm.quotation.Address', vm.quotation.Address);
+
+  // if (vm.quotation.Address && !vm.quotation.immediateDelivery) {
+  //   var selectedContact = findContactById(vm.quotation.Address);
+
+  //   console.log('vm.quotation.Address', selectedContact);
+  //   if (!selectedContact.Address) {
+  //     dialogService.showDialog('Agrega los datos de envio', function() {
+  //       $location.path('/user/deliveries').search({
+  //         returnTo: '/checkout/client/' + vm.quotation.id
+  //       });
+  //     });
+  //     return;
+  //   } else {
+  //     vm.isLoading = true;
+  //     $rootScope.scrollTo('main');
+  //     var params = { addressId: vm.quotation.Address };
+  //     quotationService
+  //       .updateAddress(vm.quotation.id, params)
+  //       .then(function(res) {
+  //         vm.isLoading = false;
+  //         $location.path('/checkout/paymentmethod/' + vm.quotation.id);
+  //       })
+  //       .catch(function(err) {
+  //         console.log(err);
+  //         var error = err.data || err;
+  //         error = error ? error.toString() : '';
+  //         dialogService.showDialog('Hubo un error: ' + error);
+  //         vm.isLoading = false;
+  //       });
+  //   }
+  // }
+
+  // if (vm.quotation.Address || vm.quotation.immediateDelivery) {
+  //   showInvoiceDataAlert()
+  //     .then(function(goToPayments) {
+  //       if (!goToPayments) {
+  //         return $q.reject();
+  //       }
+
+  //       vm.isLoading = true;
+  //       $rootScope.scrollTo('main');
+  //       var params = { addressId: vm.quotation.Address };
+  //       quotationService
+  //         .updateAddress(vm.quotation.id, params)
+  //         .then(function(res) {
+  //           vm.isLoading = false;
+  //           $location.path('/checkout/paymentmethod/' + vm.quotation.id);
+  //         })
+  //         .catch(function(err) {
+  //           console.log(err);
+  //           var error = err.data || err;
+  //           error = error ? error.toString() : '';
+  //           dialogService.showDialog('Hubo un error: ' + error);
+  //           vm.isLoading = false;
+  //         });
+  //     })
+  //     .catch(function(err) {
+  //       console.log('err invoice alert', err);
+  //     });
+  // } else {
+  //   dialogService.showDialog('Asigna una dirección de envío', function() {
+  //     $location.path('/user/deliveries').search({
+  //       returnTo: '/checkout/client/' + vm.quotation.id
+  //     });
+  //   });
+  // }
+  // }
 
   init();
 }

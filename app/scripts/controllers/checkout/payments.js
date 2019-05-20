@@ -310,51 +310,109 @@ function CheckoutPaymentsCtrl(
     delete vm.activeMethod;
   }
 
-  function tokenizePaymentCard(payment) {
+  function guessingPaymentMethod(payment) {
+    Mercadopago.setPublishableKey('TEST-b7083679-cd78-4b22-842d-9ff41b544bc2');
     var deferred = $q.defer();
-
     if (payment.type === 'transfer') {
-      deferred.resolve(false);
+      deferred.resolve('banamex');
       return deferred.promise;
     }
-
-    var onSuccess = function(token) {
-      console.log('token', token);
-      deferred.resolve(token.id);
+    var getBin = function(payment) {
+      var cardNumber = payment.cardObject.number;
+      var value = cardNumber.replace(/[ .-]/g, '').slice(0, 6);
+      return value;
     };
+    var bin = getBin(payment);
+    var setPaymentMethodInfo = function(status, response) {
+      console.log('response guess: ', response);
+      console.log('sttaus guess: ', status);
 
-    var onError = function(err) {
-      console.log('err', err);
-      deferred.reject(err);
-    };
-
-    console.log('payment', payment);
-    var tokenParams = {
-      card: {
-        name: payment.cardName,
-        number: _.clone(payment.cardObject.number),
-        exp_month: _.clone(payment.cardObject.expMonth),
-        exp_year: _.clone(payment.cardObject.expYear),
-        cvc: _.clone(payment.cardObject.cvc)
-      },
-      address: {
-        country: payment.cardCountry,
-        state: payment.cardState,
-        zipcode: payment.cardZip,
-        city: payment.cardCity,
-        street1: payment.cardAddress1,
-        street2: payment.cardAddress1
+      if (status == 200) {
+        deferred.resolve(response[0].id);
       }
     };
 
-    //delete payment.cardObject;
-    console.log('tokenParams', tokenParams);
-    Conekta.Token.create(tokenParams, onSuccess, onError);
-
+    Mercadopago.getPaymentMethod(
+      {
+        bin: bin
+      },
+      setPaymentMethodInfo
+    );
     return deferred.promise;
   }
 
+  function MPTokenizePaymentCard(payment) {
+    var deferred = $q.defer();
+    if (payment.type === 'transfer') {
+      deferred.resolve('transfer');
+      return deferred.promise;
+    }
+    var handleResponse = function(status, response) {
+      if (status != 200 && status != 201) {
+        alert('verify filled data');
+      } else {
+        console.log('token', response.id);
+        deferred.resolve(response.id);
+      }
+    };
+
+    var tokenParams = {
+      cardholderName: payment.cardName,
+      cardNumber: _.clone(payment.cardObject.number),
+      cardExpirationMonth: _.clone(payment.cardObject.expMonth),
+      cardExpirationYear: _.clone(payment.cardObject.expYear),
+      securityCode: _.clone(payment.cardObject.cvc)
+    };
+    Mercadopago.createToken(tokenParams, handleResponse);
+    return deferred.promise;
+  }
+
+  // function tokenizePaymentCard(payment) {
+  //   var deferred = $q.defer();
+
+  //   if (payment.type === 'transfer') {
+  //     deferred.resolve(false);
+  //     return deferred.promise;
+  //   }
+
+  //   var onSuccess = function(token) {
+  //     console.log('token', token);
+  //     deferred.resolve(token.id);
+  //   };
+
+  //   var onError = function(err) {
+  //     console.log('err', err);
+  //     deferred.reject(err);
+  //   };
+
+  //   console.log('payment', payment);
+  //   var tokenParams = {
+  //     card: {
+  //       name: payment.cardName,
+  //       number: _.clone(payment.cardObject.number),
+  //       exp_month: _.clone(payment.cardObject.expMonth),
+  //       exp_year: _.clone(payment.cardObject.expYear),
+  //       cvc: _.clone(payment.cardObject.cvc)
+  //     },
+  //     address: {
+  //       country: payment.cardCountry,
+  //       state: payment.cardState,
+  //       zipcode: payment.cardZip,
+  //       city: payment.cardCity,
+  //       street1: payment.cardAddress1,
+  //       street2: payment.cardAddress1
+  //     }
+  //   };
+
+  //   console.log('tokenParams', tokenParams);
+  //   Conekta.Token.create(tokenParams, onSuccess, onError);
+
+  //   return deferred.promise;
+  // }
+
   function addPayment(payment) {
+    console.log('payment addpayment', payment);
+
     if (
       (payment.ammount > 0 && vm.quotation.ammountPaid < vm.quotation.total) ||
       payment.ammount < 0
@@ -362,41 +420,59 @@ function CheckoutPaymentsCtrl(
       $rootScope.scrollTo('main');
       vm.isLoadingProgress = true;
       var cardObjectAux = _.clone(payment.cardObject);
-      tokenizePaymentCard(payment)
-        .then(function(token) {
-          delete payment.cardObject;
-          payment.cardToken = token;
-          //console.log("payment after tonekinze", payment);
-          //console.log('token in tokenize', token);
+      var paymentMethodId;
+      guessingPaymentMethod(payment)
+        .then(function(_paymentMethodId) {
+          console.log('_paymentMethodId: ', _paymentMethodId);
 
+          paymentMethodId = _paymentMethodId;
+          return MPTokenizePaymentCard(payment);
+        })
+        .then(function(token) {
+          console.log('HEEEEY');
+          if (payment.msi) {
+            payment.installments = payment.msi;
+          } else {
+            payment.installments = 1;
+          }
+          delete payment.cardObject;
+          payment.token = token;
+          payment.payment_method_id = paymentMethodId;
+          console.log('payment type: ', payment.type);
           return createOrder(payment);
         })
         .then(function(res) {
           vm.isLoadingProgress = false;
-          vm.order = res.data;
-          if (vm.order.id) {
-            $rootScope.scrollTo('main');
-            quotationService.removeCurrentQuotation();
+          console.log('respuesta', res);
 
-            gtmService.notifyOrder({
-              folio: vm.order.folio,
-              total: vm.order.total,
-              client: vm.order.CardCode,
-              zipcode: vm.order.U_CP
-            });
-            //FOR SPEI PAYMENTS
-            if (vm.order.isSpeiOrder) {
-              vm.hasAnSpeiOrder = true;
-              vm.quotation.OrderWeb = vm.order;
-              //dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
-              $location.path('/quotations/edit/' + vm.quotation.id);
-              return;
-            }
+          dialogService.showDialog(
+            'Su orden de compra ha sido recibida exitosamente, en un momento será contactado por el personal de Ecommerce para concretar el pago de su orden.'
+          );
+          $location.path('/quotations/edit/' + vm.quotation.id);
+          // vm.order = res.data;
+          // if (vm.order.id) {
+          //   $rootScope.scrollTo('main');
+          //   quotationService.removeCurrentQuotation();
 
-            $location
-              .path('/checkout/order/' + vm.order.id + '/COMPRA-CONFIRMADA')
-              .search({ orderCreated: true });
-          }
+          //   gtmService.notifyOrder({
+          //     folio: vm.order.folio,
+          //     total: vm.order.total,
+          //     client: vm.order.CardCode,
+          //     zipcode: vm.order.U_CP
+          //   });
+          //   //FOR SPEI PAYMENTS
+          //   if (vm.order.isSpeiOrder) {
+          //     vm.hasAnSpeiOrder = true;
+          //     vm.quotation.OrderWeb = vm.order;
+          //     //dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
+          //     $location.path('/quotations/edit/' + vm.quotation.id);
+          //     return;
+          //   }
+
+          //   $location
+          //     .path('/checkout/order/' + vm.order.id + '/COMPRA-CONFIRMADA')
+          //     .search({ orderCreated: true });
+          // }
         })
         .catch(function(err) {
           console.log('err', err);
@@ -541,7 +617,7 @@ function CheckoutPaymentsCtrl(
         })
         .then(function(payment) {
           console.log('Pago aplicado');
-          addPayment(payment);
+          return addPayment(payment);
         })
         .catch(function(err) {
           console.log('Pago no aplicado');
@@ -579,7 +655,21 @@ function CheckoutPaymentsCtrl(
     };
     animateProgress();
     console.log('params', params);
-    return orderService.createFromQuotation(vm.quotation.id, params);
+    return orderService
+      .createFromQuotation(vm.quotation.id, params)
+      .then(function(res) {
+        vm.isLoadingProgress = false;
+        console.log('respuesta funcion', res);
+
+        dialogService.showDialog(
+          'Su orden de compra ha sido recibida exitosamente, el personal de Ecommerce se pondrá en contacto con usted para concretar el pago de su orden. El horario de atención es de lunes a sábado de 8 a 20 horas y domingo de 8 a 15 horas.<br /><br />Gracias por su preferencia.',
+          function() {
+            $location.path('/quotations/edit/' + vm.quotation.id);
+          }
+        );
+
+        return;
+      });
   }
 
   function animateProgress() {
