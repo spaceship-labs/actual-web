@@ -4940,6 +4940,7 @@ md-backdrop.md-sidenav-backdrop {
 /*----------------*/
 .payments-view .delivery-option-data {
   border: none;
+  text-align: center;
 }
 .payments-view .delivery-option-data ul {
   list-style: none;
