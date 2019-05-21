@@ -245,7 +245,7 @@ function CheckoutClientCtrl(
         dialogService.showDialog(
           'Su orden de compra ha sido recibida exitosamente, el personal de Ecommerce se pondrá en contacto con usted para concretar el pago de su orden. El horario de atención es de lunes a sábado de 8 a 20 horas y domingo de 8 a 15 horas.<br /><br />Gracias por su preferencia.',
           function() {
-            $location.path('/quotations/edit/' + vm.quotation.id);
+            $location.path('/');
           }
         );
 
