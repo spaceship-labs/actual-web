@@ -223,19 +223,7 @@ function CheckoutClientCtrl(
     });
   }
 
-  function continueProcess() {
-    if (!vm.quotation.Details || vm.quotation.Details.length === 0) {
-      dialogService.showDialog('No hay artículos en esta cotización');
-      return;
-    }
-
-    vm.isLoading = true;
-    $rootScope.scrollTo('main');
-    vm.loadingEstimate = 0;
-    var params = {
-      paymentGroup: vm.quotation.paymentGroup || 1
-    };
-    console.log('params', params);
+  function continueOrder(params) {
     return orderService
       .createFromQuotation(vm.quotation.id, params)
       .then(function(res) {
@@ -251,6 +239,51 @@ function CheckoutClientCtrl(
 
         return;
       });
+  }
+
+  function continueProcess() {
+    if (!vm.quotation.Details || vm.quotation.Details.length === 0) {
+      dialogService.showDialog('No hay artículos en esta cotización');
+      return;
+    }
+    if (!vm.quotation.Client.invited) {
+      console.log('vm', vm);
+      if (vm.quotation.Address && !vm.quotation.immediateDelivery) {
+        console.log(
+          'continue',
+          vm.quotation.Address,
+          vm.quotation.immediateDelivery
+        );
+        var selectedContact = findContactById(vm.quotation.Address);
+
+        console.log('vm.quotation.Address', selectedContact);
+        if (!selectedContact.Address) {
+          dialogService.showDialog('Agrega los datos de envio', function() {
+            $location.path('/user/deliveries').search({
+              returnTo: '/checkout/client/' + vm.quotation.id
+            });
+          });
+          return;
+        } else {
+          continueOrder(params);
+        }
+      } else {
+        dialogService.showDialog('Asigna una dirección de envío', function() {
+          $location.path('/user/deliveries').search({
+            returnTo: '/checkout/client/' + vm.quotation.id
+          });
+        });
+      }
+    } else {
+      vm.isLoading = true;
+      $rootScope.scrollTo('main');
+      vm.loadingEstimate = 0;
+      var params = {
+        paymentGroup: vm.quotation.paymentGroup || 1
+      };
+      console.log('params', params);
+      continueOrder(params);
+    }
   }
 
   // console.log('vm.quotation.Address', vm.quotation.Address);
