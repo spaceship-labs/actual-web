@@ -454,7 +454,8 @@ module.exports = function(grunt) {
         data: {
           metaTags: getMetaTagsBySite(grunt.option('site')),
           tagManagerId: getTagManagerId(grunt),
-          facebookPixelId: getFacebookPixelId(grunt.option('env'))
+          facebookPixelId: getFacebookPixelId(grunt.option('env')),
+          mailchimpId: getMailchimpId(grunt)
         }
       },
       dist: {
@@ -739,6 +740,27 @@ function getTagManagerId(grunt) {
       break;
     case 'studio':
       tagManagerId = 'GTM-M2CFZQH';
+      break;
+    default:
+      break;
+  }
+  return tagManagerId;
+}
+
+function getMailchimpId(grunt) {
+  if (grunt.option('env') !== 'production') {
+    return '';
+  }
+  var tagManagerId = '';
+  switch (grunt.option('site')) {
+    case 'kids':
+      tagManagerId = '16e1cf103f04ae5477495f7c2';
+      break;
+    case 'home':
+      tagManagerId = '517b7e0e325738506afd95862';
+      break;
+    case 'studio':
+      tagManagerId = '517b7e0e325738506afd95862';
       break;
     default:
       break;
