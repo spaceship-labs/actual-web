@@ -1,122 +1,157 @@
 <section id="register" class="form-view checkbox-client-type">
+  <div class="container container-lg">
+    <div
+      ng-if="vm.isLoading"
+      layout-fill
+      layout="row"
+      layout-align="center center"
+      class="loading-circle"
+    >
+      <md-progress-circular
+        md-mode="indeterminate"
+        md-diameter="150"
+      ></md-progress-circular>
+    </div>
 
-	<div class="container container-lg">
+    <section ng-if="!vm.isLoading && vm.registerDone">
+      <h1>Usuario registrado con éxito</h1>
+      <!--<p>Haz click <a ng-click="main.toggleLoginModal()" href="" class="login-toggler">aqui</a> para iniciar sesión</p>-->
+    </section>
 
-		<div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
-			<md-progress-circular md-mode="indeterminate" md-diameter="150"></md-progress-circular>
-		</div>
+    <form
+      ng-if="!vm.isLoading && !vm.registerDone"
+      name="registerForm"
+      ng-submit="vm.register(registerForm)"
+    >
+      <h1>
+        <i class="icon-login"></i> Ingresa tus datos
+        <small>o</small>
+        <a
+          href=""
+          ng-click="main.toggleLoginModal()"
+          class="login-link login-toggler action-link"
+          >inicia sesión</a
+        >
+      </h1>
 
-		<section ng-if="!vm.isLoading && vm.registerDone">
-			<h1>Usuario registrado con éxito</h1>
-			<!--<p>Haz click <a ng-click="main.toggleLoginModal()" href="" class="login-toggler">aqui</a> para iniciar sesión</p>-->
-		</section>
+      <hr />
 
-		<form ng-if="!vm.isLoading && !vm.registerDone" name="registerForm" ng-submit="vm.register(registerForm)">
+      <div ng-if="vm.isContactCreateActive">
+        <ng-include
+          src="'views/partials/contact-form-register.html'"
+        ></ng-include>
+        <hr />
+      </div>
 
+      <h4>DATOS PERSONALES DEL USUARIO</h4>
 
-			<h1>
-					<i class="icon-login"></i> Ingresa tus datos
-					<small>o</small>
-					<a
-						href=""
-						ng-click="main.toggleLoginModal()"
-						class="login-link login-toggler action-link">inicia sesión</a>
-				</h1>
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Nombre(s)*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="text" ng-model="vm.newClient.FirstName" required />
+          </div>
+        </div>
+      </div>
 
-			<hr>
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Apellido(s)*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="text" ng-model="vm.newClient.LastName" required />
+          </div>
+        </div>
+      </div>
 
-			<!-- <div ng-if="vm.isContactCreateActive">
-				<ng-include src="'views/partials/contact-form-register.html'"></ng-include>
-				<hr/>
-			</div> -->
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Email*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="email" ng-model="vm.newClient.E_Mail" required />
+          </div>
+        </div>
+      </div>
 
-			<h4>DATOS PERSONALES DEL USUARIO</h4>
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Confirmar email*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input
+              type="email"
+              ng-model="vm.newClient._E_Mail"
+              ng-pattern="vm.newClient.E_Mail"
+              required
+            />
+          </div>
+        </div>
+      </div>
 
-			<div class="input-container">
-				<div class="input-element">
-					<p><label><strong>Nombre(s)*</strong></label></p>
-					<div class="input-element-inner">
-						<input type="text" ng-model="vm.newClient.FirstName" required>
-					</div>
-				</div>
-			</div>
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Télefono fijo*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="text" ng-model="vm.newClient.Phone1" required />
+          </div>
+        </div>
+      </div>
 
-			<div class="input-container">
-				<div class="input-element">
-					<p><label><strong>Apellido(s)*</strong></label></p>
-					<div class="input-element-inner">
-						<input type="text" ng-model="vm.newClient.LastName" required>
-					</div>
-				</div>
-			</div>
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Télefono móvil*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="text" ng-model="vm.newClient.Cellular" required />
+          </div>
+        </div>
+      </div>
 
-			<div class="input-container">
-				<div class="input-element">
-					<p><label><strong>Email*</strong></label></p>
-					<div class="input-element-inner">
-						<input type="email" ng-model="vm.newClient.E_Mail" required>
-					</div>
-				</div>
-			</div>
+      <div ng-if="vm.isCheckoutProcessActive" class="checkbox-client-type">
+        <md-checkbox ng-model="vm.newClient.invited">
+          <strong>Deseo continuar como invitado</strong>
+        </md-checkbox>
+      </div>
 
-			<div class="input-container">
-				<div class="input-element">
-					<p><label><strong>Confirmar email*</strong></label></p>
-					<div class="input-element-inner">
-						<input type="email" ng-model="vm.newClient._E_Mail" ng-pattern="vm.newClient.E_Mail" required>
-					</div>
-				</div>
-			</div>
+      <div class="input-container" ng-if="!vm.newClient.invited">
+        <div class="input-element">
+          <p>
+            <label><strong>Contraseña*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="password" ng-model="vm.newClient.password" required />
+          </div>
+        </div>
+      </div>
 
+      <div class="input-container" ng-if="!vm.newClient.invited">
+        <div class="input-element">
+          <p>
+            <label><strong>Confirmar contraseña*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input
+              type="password"
+              ng-model="vm.newClient._password"
+              ng-pattern="vm.newClient.password"
+              required
+            />
+          </div>
+        </div>
+      </div>
 
-			<div class="input-container">
-				<div class="input-element">
-					<p><label><strong>Télefono fijo*</strong></label></p>
-					<div class="input-element-inner">
-						<input type="text" ng-model="vm.newClient.Phone1" required>
-					</div>
-				</div>
-			</div>
-
-			<div class="input-container">
-				<div class="input-element">
-					<p><label><strong>Télefono móvil*</strong></label></p>
-					<div class="input-element-inner">
-						<input type="text" ng-model="vm.newClient.Cellular" required>
-					</div>
-				</div>
-			</div>
-
-			<div ng-if="vm.isCheckoutProcessActive" class="checkbox-client-type">
-				<md-checkbox ng-model="vm.newClient.invited">
-					<strong>Deseo continuar como invitado</strong>
-				</md-checkbox>
-			</div>
-
-			<div class="input-container" ng-if="!vm.newClient.invited">
-				<div class="input-element">
-					<p><label><strong>Contraseña*</strong></label></p>
-					<div class="input-element-inner">
-						<input type="password" ng-model="vm.newClient.password" required>
-					</div>
-				</div>
-			</div>
-
-			<div class="input-container" ng-if="!vm.newClient.invited">
-				<div class="input-element">
-					<p><label><strong>Confirmar contraseña*</strong></label></p>
-					<div class="input-element-inner">
-						<input type="password" ng-model="vm.newClient._password" ng-pattern="vm.newClient.password" required>
-					</div>
-				</div>
-			</div>
-
-			<button type="submit" class="form-view-btn form-view-btn-primary">
-	        Continuar
-			</button>
-
-		</form>
-
-	</div>
-
+      <button type="submit" class="form-view-btn form-view-btn-primary">
+        Continuar
+      </button>
+    </form>
+  </div>
 </section>

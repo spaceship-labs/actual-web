@@ -443,36 +443,30 @@ function CheckoutPaymentsCtrl(
         })
         .then(function(res) {
           vm.isLoadingProgress = false;
-          console.log('respuesta', res);
+          vm.order = res.data;
+          if (vm.order.id) {
+            $rootScope.scrollTo('main');
+            quotationService.removeCurrentQuotation();
 
-          dialogService.showDialog(
-            'Su orden de compra ha sido recibida exitosamente, en un momento será contactado por el personal de Ecommerce para concretar el pago de su orden.'
-          );
-          $location.path('/quotations/edit/' + vm.quotation.id);
-          // vm.order = res.data;
-          // if (vm.order.id) {
-          //   $rootScope.scrollTo('main');
-          //   quotationService.removeCurrentQuotation();
+            gtmService.notifyOrder({
+              folio: vm.order.folio,
+              total: vm.order.total,
+              client: vm.order.CardCode,
+              zipcode: vm.order.U_CP
+            });
+            //FOR SPEI PAYMENTS
+            if (vm.order.isSpeiOrder) {
+              vm.hasAnSpeiOrder = true;
+              vm.quotation.OrderWeb = vm.order;
+              //dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
+              $location.path('/quotations/edit/' + vm.quotation.id);
+              return;
+            }
 
-          //   gtmService.notifyOrder({
-          //     folio: vm.order.folio,
-          //     total: vm.order.total,
-          //     client: vm.order.CardCode,
-          //     zipcode: vm.order.U_CP
-          //   });
-          //   //FOR SPEI PAYMENTS
-          //   if (vm.order.isSpeiOrder) {
-          //     vm.hasAnSpeiOrder = true;
-          //     vm.quotation.OrderWeb = vm.order;
-          //     //dialogService.showDialog('Pedido pendiente de pago via SPEI, procesando');
-          //     $location.path('/quotations/edit/' + vm.quotation.id);
-          //     return;
-          //   }
-
-          //   $location
-          //     .path('/checkout/order/' + vm.order.id + '/COMPRA-CONFIRMADA')
-          //     .search({ orderCreated: true });
-          // }
+            $location
+              .path('/checkout/order/' + vm.order.id + '/COMPRA-CONFIRMADA')
+              .search({ orderCreated: true });
+          }
         })
         .catch(function(err) {
           console.log('err', err);
@@ -655,21 +649,7 @@ function CheckoutPaymentsCtrl(
     };
     animateProgress();
     console.log('params', params);
-    return orderService
-      .createFromQuotation(vm.quotation.id, params)
-      .then(function(res) {
-        vm.isLoadingProgress = false;
-        console.log('respuesta funcion', res);
-
-        dialogService.showDialog(
-          'Su orden de compra ha sido recibida exitosamente, el personal de Ecommerce se pondrá en contacto con usted para concretar el pago de su orden. El horario de atención es de lunes a sábado de 8 a 20 horas y domingo de 8 a 15 horas.<br /><br />Gracias por su preferencia.',
-          function() {
-            $location.path('/quotations/edit/' + vm.quotation.id);
-          }
-        );
-
-        return;
-      });
+    return orderService.createFromQuotation(vm.quotation.id, params);
   }
 
   function animateProgress() {
