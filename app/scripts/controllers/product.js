@@ -27,7 +27,8 @@ function ProductCtrl(
   userService,
   metaTagsService,
   gtmService,
-  activeStore
+  activeStore,
+  $mdExpansionPanel
 ) {
   var vm = this;
   var activeStoreWarehouse = false;

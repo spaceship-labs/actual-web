@@ -202,7 +202,7 @@
           <!--END PRODUCT VIEW DATA-->
         </div>
 
-        <section class="desc-wrapper">
+        <!-- <section class="desc-wrapper">
           <div
             class="desc-head"
             layout="row"
@@ -274,7 +274,37 @@
               <div ng-bind-html="vm.trustAsHtml(main.site.deliveryText)"></div>
             </article>
           </div>
-        </section>
+        </section> -->
+
+        <!-- New Detalles del articulo -->
+        <md-expansion-panel md-component-id="panelOne">
+          <md-expansion-panel-collapsed>
+            <div class="md-title">Title</div>
+            <div class="md-summary">Summary</div>
+            <md-expansion-panel-icon></md-expansion-panel-icon>
+          </md-expansion-panel-collapsed>
+
+          <md-expansion-panel-expanded>
+            <md-expansion-panel-header>
+              <div class="md-title">Expanded Title</div>
+              <div class="md-summary">Expanded Summary</div>
+              <md-expansion-panel-icon></md-expansion-panel-icon>
+            </md-expansion-panel-header>
+
+            <md-expansion-panel-content>
+              <h4>Content</h4>
+              <p>Put content in here</p>
+            </md-expansion-panel-content>
+
+            <md-expansion-panel-footer>
+              <div flex></div>
+              <md-button class="md-warn" ng-click="$panel.collapse()"
+                >Collapse</md-button
+              >
+            </md-expansion-panel-footer>
+          </md-expansion-panel-expanded>
+        </md-expansion-panel>
+        <!-- END New Detalles del articulo -->
       </section>
       <!--END PRODUCT VIEW CONTENT-->
     </div>
