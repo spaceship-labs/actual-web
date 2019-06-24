@@ -296,10 +296,11 @@ md-sidenav {
   box-sizing: border-box;
 }
 .action-btn-clear {
-  background: #e2023f;
-  color: #fff !important;
+  /* background: #e2023f; */
+  color: #111 !important;
   text-transform: uppercase;
-  border: 0;
+  /* border: 0; */
+  border-style: solid;
   display: block;
   margin: 0;
   width: 100%;
@@ -4512,12 +4513,12 @@ md-backdrop.md-sidenav-backdrop {
 .cart-view .cart-view-btn {
   display: block;
   text-align: center;
-  color: #fff;
+  color: #111;
   font-weight: 700;
   font-size: 20px;
   padding: 14px 20px;
   border: 0;
-  background: #33ba2c;
+  background: #f0c14b;
   width: 100%;
   margin: 14px 0 4px;
   outline: 0;
