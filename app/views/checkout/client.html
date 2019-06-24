@@ -63,7 +63,7 @@
         <!--END PERSONAL DATA-->
 
         <h3>
-          <strong>DIRECCIÓN DE ENTREGA</strong> 
+          <strong>DIRECCIÓN DE ENTREGA</strong>
           <a ng-show="vm.contacts && vm.contacts.length > 0" href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}" class="small-link action-link">Editar</a>
 
           <a ng-show="vm.contacts.length === 0" href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}" class="small-link action-link">Agregar direccíon de envío</a>
@@ -93,7 +93,7 @@
                   <strong>{{contact.FirstName + ' ' + contact.LastName}}</strong>
                 </h4>
                 <ul>
-                  <li><strong>Calle: </strong>{{contact.Address}}</li>                  
+                  <li><strong>Calle: </strong>{{contact.Address}}</li>
                   <li><strong>No. exterior: </strong>{{contact.U_Noexterior}}</li>
                   <li><strong>No. interior: </strong>{{contact.U_Nointerior}}</li>
                   <li><strong>Colonia: </strong>{{contact.U_Colonia}}</li>

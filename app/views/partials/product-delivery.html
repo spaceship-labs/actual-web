@@ -1,4 +1,4 @@
-<section class="product-delivery product-view-data-block">
+<!-- <section class="product-delivery product-view-data-block">
   <div>
 	  <h4  ng-click="vm.cpFormToggle = !vm.cpFormToggle">
     	<strong>DESTINO: </strong>{{vm.zipcodeDelivery.estado}}, {{vm.zipcodeDelivery.municipio}}, {{vm.zipcodeDelivery.asentamiento}}, Código postal: {{vm.zipcodeDelivery.cp}}. | <a href="#" class="action-link">Editar código postal</a>
@@ -6,54 +6,62 @@
   </div>
 
   <section ng-show="vm.cpFormToggle" class="product-delivery-form-wrapper">
-
-    <div ng-show="vm.isLoadingDeliveries" layout="row" layout-align="center center" class="loading-circle">
-      <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+    <div
+      ng-show="vm.isLoadingDeliveries"
+      layout="row"
+      layout-align="center center"
+      class="loading-circle"
+    >
+      <md-progress-circular
+        class="md-accent"
+        md-diameter="100px"
+      ></md-progress-circular>
     </div>
 
-		<form 
-			name="zipcodeFormWrapper"
-			ng-submit="vm.submitZipcodeForm(zipcodeFormWrapper, vm.zipcodeForm.zipcode)"
-			ng-show="!vm.isLoadingDeliveries"
-		>
-	    <h2><strong>Ingrese su código postal</strong></h2>
+    <form
+      name="zipcodeFormWrapper"
+      ng-submit="vm.submitZipcodeForm(zipcodeFormWrapper, vm.zipcodeForm.zipcode)"
+      ng-show="!vm.isLoadingDeliveries"
+    >
+      <h2><strong>Ingrese su código postal</strong></h2>
 
-	    <div class="input-element">
-	      <p>Calcule la fecha de entrega aproximada de sus artículos</p>
-	      <p><a href="/ciudades-de-entrega" target="_blank">Ver ciudades de entrega</a></p>
-	      <p ng-if="vm.zipcodeForm.errMessage">
-	        <strong>{{ctrl.errMessage}}</strong>
-	      </p>
-	      <div class="input-element-inner">
-	        <input
-	          type="text"
-	          autofocus
-	          md-autofocus
-	          ng-model="vm.zipcodeForm.zipcode"
-	          required
-	        />
-	      </div>
-	    </div>
+      <div class="input-element">
+        <p>Calcule la fecha de entrega aproximada de sus artículos</p>
+        <p>
+          <a href="/ciudades-de-entrega" target="_blank"
+            >Ver ciudades de entrega</a
+          >
+        </p>
+        <p ng-if="vm.zipcodeForm.errMessage">
+          <strong>{{ ctrl.errMessage }}</strong>
+        </p>
+        <div class="input-element-inner">
+          <input
+            type="text"
+            autofocus
+            md-autofocus
+            ng-model="vm.zipcodeForm.zipcode"
+            required
+          />
+        </div>
+      </div>
 
       <button type="submit" class="action-btn action-btn-save">
         Ingresar
       </button>
-
-		</form>
-
+    </form>
   </section>
-
-
-</section>
-
+</section> -->
 
 <section class="product-delivery product-view-data-block">
-	<div layout="row" layout-align="space-between center">
-		<div>
-		  <h4><strong>COSTO DE ENVÍO</strong></h4>
-		 </div>
-		 <div>
-		 		<h4><strong><small>MXN</small> $0.00</strong></h4>
-		 </div>
-	</div>
- </section>
+  <div layout="row" layout-align="space-between center">
+    <div>
+      <h4><strong>COSTO DE ENVÍO</strong></h4>
+    </div>
+    <div>
+      <h4>
+        <strong><small>MXN</small> $0.00</strong>
+      </h4>
+    </div>
+  </div>
+</section>

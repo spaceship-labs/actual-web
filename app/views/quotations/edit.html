@@ -9,11 +9,11 @@
     <p>RFC: AAC130902PR7</p>
   </div>
 
-  <h1>
+  <!-- <h1>
     <i class="icon-attachment"></i>
     <strong>COTIZACIÓN #{{vm.quotation.folio}}</strong>
   </h1>
-  <hr/>
+  <hr/> -->
 
   <div ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb) && vm.isOrderPending(vm.quotation.OrderWeb)" class="spei-msg">
     <p>Su ORDEN DE COMPRA está CONFIRMADA y EN PROCESO, su estatus de pago es PENIDIENTE DE PAGO, le pedimos no volver a generar
@@ -60,7 +60,7 @@
         </p>
 
       </div>
-      <div flex="25" hide-sm hide-xs>
+      <!-- <div flex="25" hide-sm hide-xs>
         <label for="">Nombre del cliente</label>
         <p>{{vm.quotation.Client.CardName || 'No asignado'}}</p>
       </div>
@@ -101,7 +101,7 @@
         <label>Dirección</label>
         <p>{{vm.addressString}}</p>
       </div>
-    </div>
+    </div> -->
 
 
     <div layout="row" layout-align="start center" class="quotation-data-row">

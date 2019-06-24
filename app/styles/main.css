@@ -2598,8 +2598,8 @@ select {
 }
 
 .product-view .add-cart-btn {
-  background: #2abc1c;
-  color: #fff;
+  background: #f0c14b;
+  color: #111;
   font-weight: 700;
   text-align: center;
   margin: 10px 0;
