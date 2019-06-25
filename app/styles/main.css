@@ -280,10 +280,11 @@ md-sidenav {
   background: gray !important;
 }
 .action-btn-print {
-  background: #33ba2c;
-  color: #fff !important;
+  /* background: #33ba2c; */
+  color: #111 !important;
   text-transform: uppercase;
-  border: 0;
+  /* border: 0; */
+  border-style: solid;
   display: block;
   margin: 0;
   width: 100%;
@@ -4150,7 +4151,7 @@ md-backdrop.md-sidenav-backdrop {
   font-size: 12px;
 }
 .quotation-view .print-btn {
-  font-size: 12px;
+  font-size: 11px;
 }
 .quotation-view .quotation-data p {
   font-size: 16px;
