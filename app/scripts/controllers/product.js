@@ -319,48 +319,65 @@ function ProductCtrl(
   }
 
   function addToCart($event) {
-    if (!vm.zipcodeDelivery) {
-      showZipcodeDialog(null);
-      return;
-    }
+    var deferred = $q.defer();
+    var zipcode = '77500';
+    return setUpDeliveriesByZipcode(zipcode)
+      .then(function(res) {
+        $rootScope.scrollTo('main');
+        vm.isLoading = true;
+        var productCartItems = cartService.getProductCartItems(
+          vm.productCart.deliveryGroup,
+          vm.productCart.quantity,
+          vm.warehouses,
+          activeStoreWarehouse
+        );
 
-    if (vm.isLoadingDeliveries) {
-      return;
-    }
+        gtmService.notifyAddToCart(
+          vm.product.ItemCode,
+          vm.productCart.quantity,
+          vm.product.Price * vm.productCart.quantity,
+          vm.zipcodeDelivery.cp
+        );
 
-    $rootScope.scrollTo('main');
-    vm.isLoading = true;
-    var productCartItems = cartService.getProductCartItems(
-      vm.productCart.deliveryGroup,
-      vm.productCart.quantity,
-      vm.warehouses,
-      activeStoreWarehouse
-    );
-
-    gtmService.notifyAddToCart(
-      vm.product.ItemCode,
-      vm.productCart.quantity,
-      vm.product.Price * vm.productCart.quantity,
-      vm.zipcodeDelivery.cp
-    );
-
-    if (productCartItems.length === 1) {
-      var cartItem = productCartItems[0];
-      var params = cartService.buildAddProductToCartParams(
-        vm.product.id,
-        cartItem
-      );
-      params.zipcodeDeliveryId = vm.zipcodeDelivery.id;
-      quotationService.addProduct(vm.product.id, params);
-    } else if (productCartItems.length > 1) {
-      var multiParams = productCartItems.map(function(cartItem) {
-        return cartService.buildAddProductToCartParams(vm.product.id, cartItem);
+        if (productCartItems.length === 1) {
+          var cartItem = productCartItems[0];
+          var params = cartService.buildAddProductToCartParams(
+            vm.product.id,
+            cartItem
+          );
+          params.zipcodeDeliveryId = vm.zipcodeDelivery.id;
+          quotationService.addProduct(vm.product.id, params);
+        } else if (productCartItems.length > 1) {
+          var multiParams = productCartItems.map(function(cartItem) {
+            return cartService.buildAddProductToCartParams(
+              vm.product.id,
+              cartItem
+            );
+          });
+          var options = {
+            zipcodeDeliveryId: vm.zipcodeDelivery.id
+          };
+          quotationService.addMultipleProducts(multiParams, options);
+        }
+      })
+      .catch(function(err) {
+        vm.isLoadingDeliveries = false;
+        console.log('err', err);
+        var errMsg = '';
+        if (err) {
+          errMsg = err.data || err;
+          errMsg = errMsg ? errMsg.toString() : '';
+          dialogService.showDialog(errMsg);
+        }
       });
-      var options = {
-        zipcodeDeliveryId: vm.zipcodeDelivery.id
-      };
-      quotationService.addMultipleProducts(multiParams, options);
-    }
+    // if (!vm.zipcodeDelivery) {
+    //   showZipcodeDialog(null);
+    //   return;
+    // }
+
+    // if (vm.isLoadingDeliveries) {
+    //   return;
+    // }
   }
 
   function showZipcodeDialog(ev) {
