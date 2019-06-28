@@ -202,7 +202,7 @@
           <!--END PRODUCT VIEW DATA-->
         </div>
 
-        <section class="desc-wrapper">
+        <!-- <section class="desc-wrapper">
           <div
             class="desc-head"
             layout="row"
@@ -274,6 +274,86 @@
               <div ng-bind-html="vm.trustAsHtml(main.site.deliveryText)"></div>
             </article>
           </div>
+        </section> -->
+
+        <!-- New product description section -->
+
+        <section class="desc-wrapper">
+          <md-expansion-panel-group md-component-id="panelGroup" multiple>
+            <md-expansion-panel md-component-id="panelOne">
+              <md-expansion-panel-collapsed>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+                <div>DETALLES DEL ARTÍCULO</div>
+                <div class="md-summary"></div>
+              </md-expansion-panel-collapsed>
+
+              <md-expansion-panel-expanded>
+                <md-expansion-panel-header ng-click="$panel.collapse()">
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                  <div>DETALLES DEL ARTÍCULO</div>
+                  <div class="md-summary"></div>
+                </md-expansion-panel-header>
+
+                <md-expansion-panel-content>
+                  <div ng-if="vm.product.Description">
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.Description)"
+                    ></div>
+                  </div>
+
+                  <div ng-if="vm.product.PackageContent">
+                    <h3>Contenido del paquete</h3>
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"
+                    ></div>
+                  </div>
+
+                  <div ng-if="vm.product.MainFeatures">
+                    <h3>Caracteristicas principales</h3>
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"
+                    ></div>
+                  </div>
+
+                  <div ng-if="vm.product.Restrictions">
+                    <h3>Restricciones</h3>
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"
+                    ></div>
+                  </div>
+
+                  <div ng-if="vm.product.Conservation">
+                    <h3>Conservación</h3>
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"
+                    ></div>
+                  </div>
+                </md-expansion-panel-content>
+              </md-expansion-panel-expanded>
+            </md-expansion-panel>
+
+            <md-expansion-panel md-component-id="panelTwo">
+              <md-expansion-panel-collapsed>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+                <div>DETALLES DE LA ENTREGA</div>
+                <div class="md-summary"></div>
+              </md-expansion-panel-collapsed>
+
+              <md-expansion-panel-expanded>
+                <md-expansion-panel-header ng-click="$panel.collapse()">
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                  <div>DETALLES DE LA ENTREGA</div>
+                  <div class="md-summary"></div>
+                </md-expansion-panel-header>
+
+                <md-expansion-panel-content>
+                  <div
+                    ng-bind-html="vm.trustAsHtml(main.site.deliveryText)"
+                  ></div>
+                </md-expansion-panel-content>
+              </md-expansion-panel-expanded>
+            </md-expansion-panel>
+          </md-expansion-panel-group>
         </section>
       </section>
       <!--END PRODUCT VIEW CONTENT-->

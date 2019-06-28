@@ -1,4 +1,4 @@
-<section class="product-delivery product-view-data-block">
+<!-- <section class="product-delivery product-view-data-block">
   <div>
 	  <h4  ng-click="vm.cpFormToggle = !vm.cpFormToggle">
     	<strong>DESTINO: </strong>{{vm.zipcodeDelivery.estado}}, {{vm.zipcodeDelivery.municipio}}, {{vm.zipcodeDelivery.asentamiento}}, Código postal: {{vm.zipcodeDelivery.cp}}. | <a href="#" class="action-link">Editar código postal</a>
@@ -11,7 +11,7 @@
       <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
     </div>
 
-		<form 
+		<form
 			name="zipcodeFormWrapper"
 			ng-submit="vm.submitZipcodeForm(zipcodeFormWrapper, vm.zipcodeForm.zipcode)"
 			ng-show="!vm.isLoadingDeliveries"
@@ -44,16 +44,17 @@
   </section>
 
 
-</section>
-
+</section> -->
 
 <section class="product-delivery product-view-data-block">
-	<div layout="row" layout-align="space-between center">
-		<div>
-		  <h4><strong>COSTO DE ENVÍO</strong></h4>
-		 </div>
-		 <div>
-		 		<h4><strong><small>MXN</small> $0.00</strong></h4>
-		 </div>
-	</div>
- </section>
+  <div layout="row" layout-align="space-between center">
+    <div>
+      <h4><strong>COSTO DE ENVÍO</strong></h4>
+    </div>
+    <div>
+      <h4>
+        <strong><small>MXN</small> $0.00</strong>
+      </h4>
+    </div>
+  </div>
+</section>

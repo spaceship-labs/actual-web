@@ -64,6 +64,7 @@ module.exports = function(config) {
       'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'bower_components/ng-currency/dist/ng-currency.js',
       'bower_components/moment/moment.js',
+      'bower_components/angular-material-expansion-panel/dist/md-expansion-panel.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -21,7 +21,8 @@ angular
     //'angulartics',
     //'angulartics.google.tagmanager',
     'envconfig',
-    'siteconfig'
+    'siteconfig',
+    'material.components.expansionPanels'
   ])
 
   .config(function(
