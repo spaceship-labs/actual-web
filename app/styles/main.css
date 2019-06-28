@@ -2231,7 +2231,8 @@ select {
   top: 5px;
 }
 .product-view-gallery-discount {
-  background: #fde932;
+  background: #2965b9;
+  color: #fff;
   border-radius: 50%;
   height: 65px;
   width: 65px;
@@ -2598,8 +2599,10 @@ select {
 }
 
 .product-view .add-cart-btn {
-  background: #2abc1c;
-  color: #fff;
+  background: #e9c15f;
+  color: #111;
+  border-style: solid;
+  border-width: 1px;
   font-weight: 700;
   text-align: center;
   margin: 10px 0;
