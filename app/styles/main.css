@@ -280,10 +280,11 @@ md-sidenav {
   background: gray !important;
 }
 .action-btn-print {
-  background: #33ba2c;
-  color: #fff !important;
+  /* background: #33ba2c; */
+  color: #111 !important;
   text-transform: uppercase;
-  border: 0;
+  border-style: solid;
+  border-width: 1px;
   display: block;
   margin: 0;
   width: 100%;
@@ -295,11 +296,17 @@ md-sidenav {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-.action-btn-clear {
-  background: #e2023f;
+.add-to-card-quotation{
+  background: #111;
   color: #fff !important;
+}
+.action-btn-clear {
+  /* background: #e2023f; */
+  color: #111 !important;
   text-transform: uppercase;
-  border: 0;
+  /* border: 0; */
+  border-style: solid;
+  border-width: 1px;
   display: block;
   margin: 0;
   width: 100%;
@@ -527,6 +534,9 @@ select {
   position: relative;
   margin: 0 4px;
 }
+
+.header-top-bar-menu .header-top-bar-menu-item-blog{min-width: 50px;}
+
 .header-top-bar-menu .header-top-bar-menu-item .invited-label {
   font-size: 10px;
 }
@@ -667,6 +677,7 @@ select {
   position: fixed;
   width: 100%;
   padding: 2px 0;
+  top: 0;
 }
 .header-top-bar.fixed-head > .container-lg {
   max-width: 1300px;
@@ -1067,6 +1078,25 @@ select {
   font-size: 40px;
   color: #000;
   margin-bottom: 6px;
+}
+
+/*SPECIAL CASES CATEGORIES ICONS*/
+.nav-categories-item > i.icon-muebles--relleno, .nav-categories-item > i.icon-5{
+  margin-bottom: -12px;
+  font-size: 66px;
+  margin-top: -9px;
+}
+
+.nav-categories-item > i.icon-salas-relleno, .nav-categories-item > i.icon-1{
+  font-size: 61px;
+  margin-bottom: -10px;
+  margin-top: -5px;
+}
+
+.nav-categories-item > i.icon-oficina-relleno, .nav-categories-item > i.icon-7{
+  font-size: 55px;
+    margin-top: -8px;
+    margin-bottom: -2px;
 }
 
 .nav-categories-item .nav-categories-item-add {
@@ -1650,7 +1680,7 @@ select {
   margin: 4px 0;
 }
 .listing-product .listing-product-info-main p {
-  font-size: 13px;
+  font-size: 12px;
   /*text-transform: uppercase;*/
 }
 .listing-product .listing-product-info .price {
@@ -1823,7 +1853,7 @@ select {
   /* min-width: 1px; */
   padding: 0 10px;
   width: 200px;
-  height: 350px;
+  height: 360px;
 }
 
 .products-list .product-width {
@@ -2042,7 +2072,7 @@ select {
   display: flex;
   position: relative;
   align-items: center;
-  margin: 0px auto;
+  margin: 15px auto 0;
   max-width: 65%;
 }
 
@@ -2111,8 +2141,8 @@ select {
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
-  min-height: 200px;
-  height: 200px;
+  min-height: 185px;
+  height: 185px;
   /* -webkit-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
   -moz-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
   box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44); */
@@ -2121,7 +2151,7 @@ select {
   min-height: 400px;
 }
 .listing-view .sub .sub-image {
-  width: 85%;
+  width: 78%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
@@ -2150,6 +2180,8 @@ select {
   text-transform: uppercase;
   position: relative;
   padding-bottom: 8px;
+  font-size: 18px;
+  text-shadow: 5px 2px 4px rgba(0, 0, 0, 1);
 }
 .listing-view .sub .sub-text h4 a {
   color: #fff;
@@ -2206,7 +2238,8 @@ select {
   top: 5px;
 }
 .product-view-gallery-discount {
-  background: #fde932;
+  background: #2965b9;
+  color: #fff;
   border-radius: 50%;
   height: 65px;
   width: 65px;
@@ -2573,8 +2606,10 @@ select {
 }
 
 .product-view .add-cart-btn {
-  background: #2abc1c;
-  color: #fff;
+  background: #e9c15f;
+  color: #111;
+  border-style: solid;
+  border-width: 1px;
   font-weight: 700;
   text-align: center;
   margin: 10px 0;
@@ -4487,12 +4522,14 @@ md-backdrop.md-sidenav-backdrop {
 .cart-view .cart-view-btn {
   display: block;
   text-align: center;
-  color: #fff;
+  color: #111;
   font-weight: 700;
   font-size: 20px;
   padding: 14px 20px;
-  border: 0;
-  background: #33ba2c;
+  /* border: 0; */
+  border-style: solid;
+  border-width: 1px;
+  background: #e9c15f;
   width: 100%;
   margin: 14px 0 4px;
   outline: 0;
@@ -4915,6 +4952,7 @@ md-backdrop.md-sidenav-backdrop {
 /*----------------*/
 .payments-view .delivery-option-data {
   border: none;
+  text-align: center;
 }
 .payments-view .delivery-option-data ul {
   list-style: none;
@@ -6902,6 +6940,9 @@ md-sidenav {
 }
 
 @media screen and (max-width: 1200px) {
+
+  .nav-categories-item-sidenav > span, .nav-categories-item > span{font-size: 11px;}
+  
   .user-profile-view,
   .terms-view,
   .checkout-view {
@@ -7225,6 +7266,8 @@ md-sidenav {
     object-fit: cover;
     border-radius: 50%;
     margin: 0 auto;
+    width: 200px;
+    height: 200px;
   }
   .home-slider .home-slide {
     overflow: hidden;
@@ -7297,6 +7340,13 @@ md-sidenav {
   }
   .color-white {
     color: #fff;
+  }
+  .header-top-bar-menu .header-top-bar-menu-item-blog{
+    max-width: 45px;
+  }
+  .header-top-bar-menu .header-top-bar-menu-item-blog p{
+    font-size: 11px;
+    font-weight: 700;
   }
   .header-top-bar-menu .header-top-bar-menu-item-name {
     padding: 2px 0;
@@ -7383,6 +7433,8 @@ md-sidenav {
     left: 80px;
     top: 50%;
     transform: translateY(-50%);
+    padding: 2px;
+    border: solid 1px;
   }
   .header-top-bar .on-scroll-item,
   .menu-mobile-icon-on-scroll-wrapper {

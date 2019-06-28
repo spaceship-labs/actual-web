@@ -3,8 +3,9 @@
 
     <nav ng-if="main.siteTheme !== 'actual-kids' " hide-sm flex-gt-sm="100" flex="100" layout="row" layout-wrap ng-mouseover="main.menuCategoriesOn = false"
       class="nav-categories">
-      <a ng-repeat-start="category in main.categoriesTree track by $index" flex flex-xs="25" class="{{main.mainCategories[category.Handle].color}} nav-categories-item"
-        href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
+      <a ng-repeat-start="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index" flex flex-xs="25"
+        class="{{main.mainCategories[category.Handle].color}} nav-categories-item" href="/category/{{category.Handle}}" ng-mouseover="main.handleCategoryHover(category.Handle)"
+        ng-mouseleave="main.handleCategoryLeave()">
         <i ng-class="main.activeCategory[category.Handle] === false ? 'icon-{{ main.mainCategories[category.Handle].icon }}' : 'icon-{{ main.mainCategories[category.Handle].filledIcon }}'"></i>
         <span class="nav-categories-item-text" href="#">{{category.Name}}</span>
       </a>

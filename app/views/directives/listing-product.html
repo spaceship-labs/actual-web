@@ -16,7 +16,7 @@
       <strong>- {{product.Discount}}%</strong>
     </div>
 
-    <img ng-if="images.length === 1" ng-src="{{images[0].url}}" alt="">
+    <img ng-if="images.length === 1" ng-src="{{images[0].url}}?d=600x600" alt="">
     <slick ng-if="areImagesLoaded && images.length > 1" arrows="true">
       <div ng-repeat="image in images track by $index">
         <img ng-src="{{image.url}}" alt="">
@@ -31,11 +31,8 @@
         <strong>{{product.Name}}</strong>
       </p>
 
-      <div layout="row" layout-align="space-between center">
-        <p ng-href="{{product.url}}" flex="35" class="stock-available">
-          ABRIR DETALLE
-        </p>
-        <p flex="65" class="price">
+      <div layout="row" layout-align="end center">
+        <p class="price">
           <span class="price-before-currency">MXN</span>
           <span class="price-before">{{product.priceBefore | roundCurrency:'$'}}</span>
           <span ng-if="product.priceBefore">|</span>

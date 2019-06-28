@@ -1,42 +1,45 @@
-<div ng-if="vm.isLoading" layout-fill layout="row"  layout-align="center center" class="loading-circle">
+<div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
-<section ng-show="!vm.isLoading" class="form-view cart-view checkout-view order-view container container-xxlg" >
+<section ng-show="!vm.isLoading" class="form-view cart-view checkout-view order-view container container-xxlg">
 
   <div class="checkout-view-inner">
 
-    <div 
-      class="checkout-title order-title" 
-      layout="row"
-      layout-wrap
-      layout-align="space-between center"
-    >
-        <h1 flex="40" flex-sm="100" flex-xs="100">
-          <strong>
-            <span><i class="icon-checkmark"></i> NÚMERO DE ORDEN: <span class="order-folio">#{{vm.order.folio}}</span>
-          </strong>
-        </h1>
-        <div flex="50" flex-sm="100" flex-xs="100" class="order-title-extra">
-          <span class="order-date">{{vm.order.createdAt | date:'d/MMM/yyyy h:mm a' }}</span>
-          <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
-            <strong>IMPRIMIR RECIBO</strong>
-          </a>
+    <div class="checkout-title order-title" layout="row" layout-wrap layout-align="space-between center">
+      <h1 flex="40" flex-sm="100" flex-xs="100">
+        <strong>
+          <span>
+            <i class="icon-checkmark"></i> NÚMERO DE ORDEN:
+            <span class="order-folio">#{{vm.order.folio}}</span>
+        </strong>
+      </h1>
+      <div flex="50" flex-sm="100" flex-xs="100" class="order-title-extra">
+        <span class="order-date">{{vm.order.createdAt | date:'d/MMM/yyyy h:mm a' }}</span>
+        <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
+          <strong>IMPRIMIR RECIBO</strong>
+        </a>
 
-          <p ng-if="!vm.invoiceExists && !vm.showInvoiceErrorIfNeeded(vm.alegraLogs)">
-            <strong>Generación/Lectura de factura en proceso</strong>
-          </p>
+        <p ng-if="!vm.invoiceExists && !vm.showInvoiceErrorIfNeeded(vm.alegraLogs)">
+          <strong>Generación/Lectura de factura en proceso</strong>
+        </p>
 
-          <a href="#" ng-if="vm.invoiceExists" ng-click="vm.sendInvoice()" class="action-btn action-btn-save print-btn">
-            <strong>ENVIAR FACTURA</strong>
-          </a>
-        </div>
+        <a href="#" ng-if="vm.invoiceExists" ng-click="vm.sendInvoice()" class="action-btn action-btn-save print-btn">
+          <strong>ENVIAR FACTURA</strong>
+        </a>
+      </div>
     </div>
     <div class="order-text-block">
-      <h3><strong>¡GRACIAS POR SU COMPRA!</strong></h3>
-      <p>Estimado <strong>{{vm.order.Client.CardName}}</strong></p>
-      <p>Su compra ha sido procesada y en breve estará recibiendo su confirmación al correo electrónico <strong>{{vm.order.Client.E_Mail}}</strong>.</p>
-      <p><strong>Estatus</strong>: {{vm.status}}</p>
+      <h3>
+        <strong>¡GRACIAS POR SU COMPRA!</strong>
+      </h3>
+      <p>Estimado
+        <strong>{{vm.order.Client.CardName}}</strong>
+      </p>
+      <p>Su compra ha sido procesada y en breve estará recibiendo su confirmación al correo electrónico
+        <strong>{{vm.order.Client.E_Mail}}</strong>.</p>
+      <p>
+        <strong>Estatus</strong>: {{vm.status}}</p>
       <br/>
 
       <!--
@@ -49,42 +52,44 @@
 
     <!--ORDER ITEMS-->
     <div class="order-block">
-      <h3><strong><i class="icon-checkout-ticket"></i> ARTÍCULOS ADQUIRIDOS</strong></h3>
+      <h3>
+        <strong>
+          <i class="icon-checkout-ticket"></i> ARTÍCULOS ADQUIRIDOS</strong>
+      </h3>
       <div class="order-items order-block-inner">
 
         <div hide-sm hide-xs class="order-table-header" layout="row" layout-align="space-between start">
           <div flex="35"></div>
-          <div flex="20"><strong>CANTIDAD</strong></div>
-          <div flex="20"><strong>ENTREGA APROXIMADA</strong></div>
-          <div flex="20"><strong>PRECIO</strong></div>
+          <div flex="20">
+            <strong>CANTIDAD</strong>
+          </div>
+          <div flex="20">
+            <strong>ENTREGA APROXIMADA</strong>
+          </div>
+          <div flex="20">
+            <strong>PRECIO</strong>
+          </div>
         </div>
 
-        <div
-          class="order-item"
-          ng-repeat="detail in vm.order.Details track by $index"
-        >
-          <h3><strong>{{detail.Product.Name}}</strong></h3>
+        <div class="order-item" ng-repeat="detail in vm.order.Details track by $index">
+          <h3>
+            <strong>{{detail.Product.Name}}</strong>
+          </h3>
 
-          <div 
-            layout="row" 
-            layout-align="space-between start"
-            layout-wrap
-          >
+          <div layout="row" layout-align="space-between start" layout-wrap>
             <div flex="35" flex-sm="100" flex-xs="100" layout="row">
               <div class="order-item-img">
-                <img src="{{detail.Product.icons[0].url}}" alt="">
+                <img src="{{detail.Product.icons[0].url}}?d=300x300" alt="">
               </div>
               <div flex class="order-item-features">
                 <ul>
-                  <li><strong>Código: </strong> {{detail.Product.ItemCode}}</li>
-                  <li
-                    ng-repeat="filter in detail.Product.Filters"
-                    ng-if="
+                  <li>
+                    <strong>Código: </strong> {{detail.Product.ItemCode}}</li>
+                  <li ng-repeat="filter in detail.Product.Filters" ng-if="
                       filter.Handle == 'codigo' ||
                       filter.Handle == 'material' ||
                       filter.Handle == 'garantia'
-                    "
-                  >
+                    ">
                     <strong>{{filter.Name}}: </strong>
                     <span ng-repeat="value in filter.Values track by $index">
                       <span ng-if="value.Handle != 'color-paleta'">{{value.Name}}</span>
@@ -107,33 +112,27 @@
               </div>
             </div>
 
-            <div 
-              flex-sm="100"
-              flex-xs="100"
-              hide-gt-sm 
-              class="order-table-header" 
-              layout="row" 
-              layout-align="space-between start">
-              <div flex="20"><strong>CANTIDAD</strong></div>
-              <div flex="40"><strong>ENTREGA APROXIMADA</strong></div>
-              <div flex="40"><strong>PRECIO</strong></div>
+            <div flex-sm="100" flex-xs="100" hide-gt-sm class="order-table-header" layout="row" layout-align="space-between start">
+              <div flex="20">
+                <strong>CANTIDAD</strong>
+              </div>
+              <div flex="40">
+                <strong>ENTREGA APROXIMADA</strong>
+              </div>
+              <div flex="40">
+                <strong>PRECIO</strong>
+              </div>
             </div>
 
-            <div 
-              flex="20" 
-              flex-sm="20" 
-              flex-xs="20" 
-              class="order-item-data order-item-data-qty">
+            <div flex="20" flex-sm="20" flex-xs="20" class="order-item-data order-item-data-qty">
               <span>{{detail.quantity}}</span>
             </div>
             <div flex="20" flex-sm="40" flex-xs="40" class="order-item-data">
               <span>
                 {{detail.shipDate | date:'d/MMM/yyyy'}}</span>
-                <span
-                  class="immediate-delivery-tag"
-                  ng-if="detail.immediateDelivery && !detail.isSRService">
-                  Entrega en tienda
-                </span>
+              <span class="immediate-delivery-tag" ng-if="detail.immediateDelivery && !detail.isSRService">
+                Entrega en tienda
+              </span>
             </div>
             <div flex="20" flex-sm="40" flex-xs="40" class="order-item-data">
               <span>{{detail.total | currency}} MXN</span>
@@ -153,50 +152,61 @@
 
     <!--ORDER PAYMENTS-->
     <div class="order-block">
-      <h3><strong><i class="icon-metodo-pago"></i> PAGOS</strong></h3>
+      <h3>
+        <strong>
+          <i class="icon-metodo-pago"></i> PAGOS</strong>
+      </h3>
       <div class="order-block-inner order-payments">
-        <div 
-          class="order-table-header" 
-          layout="row" 
-          layout-wrap
-          layout-align="space-between start"
-        >
-          <div flex  class="pull-left"><strong>FORMA DE PAGO</strong></div>
-          <div flex ><strong>FECHA</strong></div>
-          <div flex ><strong>FOLIO</strong></div>
-          <div flex ><strong>TIPO DE PAGO</strong></div>
-          <div flex ><strong>BANCO</strong></div>
+        <div class="order-table-header" layout="row" layout-wrap layout-align="space-between start">
+          <div flex class="pull-left">
+            <strong>FORMA DE PAGO</strong>
+          </div>
+          <div flex>
+            <strong>FECHA</strong>
+          </div>
+          <div flex>
+            <strong>FOLIO</strong>
+          </div>
+          <div flex>
+            <strong>TIPO DE PAGO</strong>
+          </div>
+          <div flex>
+            <strong>BANCO</strong>
+          </div>
           <!--<div flex ><strong>MONTO COBRADO</strong></div>-->
         </div>
 
-        <div
-          class="order-payment-item"
-          layout="row"
-          layout-wrap
-          layout-align="space-between center"
-          ng-repeat="payment in vm.order.Payments"
-        >
-          <div ng-if="payment.type == 'cash'" flex  class="order-payment-item-data">
-            <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (MXN)</strong>
+        <div class="order-payment-item" layout="row" layout-wrap layout-align="space-between center" ng-repeat="payment in vm.order.Payments">
+          <div ng-if="payment.type == 'cash'" flex class="order-payment-item-data">
+            <span>
+              <i class="icon-cash"></i>
+            </span>
+            <strong>Pago en efectivo (MXN)</strong>
           </div>
-          <div ng-if="payment.type == 'cash-usd'" flex  class="order-payment-item-data">
-            <span><i class="icon-cash"></i></span> <strong>Pago en efectivo (USD)</strong>
+          <div ng-if="payment.type == 'cash-usd'" flex class="order-payment-item-data">
+            <span>
+              <i class="icon-cash"></i>
+            </span>
+            <strong>Pago en efectivo (USD)</strong>
             <p class="small-note">Tipo de cambio: {{payment.exchangeRate | currency}} MXN</p>
           </div>
-          <div ng-if="payment.type !== 'cash' && payment.type !== 'cash-usd' " flex  class="order-payment-item-data">
-            <span><i class="icon-terminal"></i></span> <strong>{{payment.name}}</strong>
+          <div ng-if="payment.type !== 'cash' && payment.type !== 'cash-usd' " flex class="order-payment-item-data">
+            <span>
+              <i class="icon-terminal"></i>
+            </span>
+            <strong>{{payment.name}}</strong>
           </div>
 
-          <div flex  class="order-payment-item-data">
+          <div flex class="order-payment-item-data">
             <span>{{payment.createdAt | date:'d/MMM/yyyy'}}</span>
           </div>
-          <div flex  class="order-payment-item-data">
+          <div flex class="order-payment-item-data">
             <span>#{{payment.folio}}</span>
           </div>
-          <div flex  class="order-payment-item-data">
+          <div flex class="order-payment-item-data">
             <span>{{vm.getPaymentTypeString(payment)}}</span>
           </div>
-          <div flex  class="order-payment-item-data">
+          <div flex class="order-payment-item-data">
             <!--<span>{{ main.mapTerminalCode(payment.terminal) }}</span>-->
             <span ng-if="payment.type !== 'transfer' ">{{payment.card}}</span>
             <span ng-if="payment.type === 'transfer' ">STP</span>
@@ -222,28 +232,50 @@
           <p class="order-payment-totals-note">* Todos los montos incluyen impuestos.</p>
         </div>
         <div class="reduction" flex="20" flex-sm="100" flex-xs="100">
-          <p><strong>SUBTOTAL COMPRA:</strong></p>
-          <p><strong>DESCUENTOS COMPRA:</strong></p>
-          <p><strong>TOTAL COMPRA:</strong></p>
-          <p><strong>TOTAL PAGADO:</strong></p>
+          <p>
+            <strong>SUBTOTAL COMPRA:</strong>
+          </p>
+          <p>
+            <strong>DESCUENTOS COMPRA:</strong>
+          </p>
+          <p>
+            <strong>TOTAL COMPRA:</strong>
+          </p>
+          <p>
+            <strong>TOTAL PAGADO:</strong>
+          </p>
           <!--<p><strong>SALDO:</strong></p>-->
 
           <br/>
-          <p><strong>SALDO CLIENTE:</strong></p>
+          <p>
+            <strong>SALDO CLIENTE:</strong>
+          </p>
         </div>
         <div class="price-reduction" flex="20" flex-sm="60" flex-xs="60">
-          <p><strong>{{vm.order.subtotal | currency}} MXN</strong></p>
+          <p>
+            <strong>{{vm.order.subtotal | currency}} MXN</strong>
+          </p>
 
-          <p ng-if="vm.order.discount > 0"><strong>-{{vm.order.discount | currency}} MXN</strong></p>
-          <p ng-if="vm.order.discount <= 0"><strong>{{vm.order.discount | currency}} MXN</strong></p>
+          <p ng-if="vm.order.discount > 0">
+            <strong>-{{vm.order.discount | currency}} MXN</strong>
+          </p>
+          <p ng-if="vm.order.discount <= 0">
+            <strong>{{vm.order.discount | currency}} MXN</strong>
+          </p>
 
-          <p><strong>{{vm.order.total | currency}} MXN</strong></p>
-          <p><strong>{{vm.order.total | currency}} MXN</strong></p>
+          <p>
+            <strong>{{vm.order.total | currency}} MXN</strong>
+          </p>
+          <p>
+            <strong>{{vm.order.total | currency}} MXN</strong>
+          </p>
           <!--<p><strong>{{vm.order.ammountPaid | roundCurrency}} MXN</strong></p>-->
           <!--<p><strong>{{vm.calculateBalance( vm.order.ammountPaid, vm.order.total ) | currency }} MXN</strong></p>-->
 
           <br/>
-          <p><strong>{{(vm.order.Client.Balance) | currency}}</strong></p>
+          <p>
+            <strong>{{(vm.order.Client.Balance) | currency}}</strong>
+          </p>
 
         </div>
       </div>
@@ -277,73 +309,77 @@
 
     <!--ENVIO-->
     <div class="order-block delivery-block order-block-info">
-      <h3><strong><i class="icon-envio"></i> ENVÍO</strong></h3>
+      <h3>
+        <strong>
+          <i class="icon-envio"></i> ENVÍO</strong>
+      </h3>
       <div class="order-block-inner">
         <div class="resp-delivery" layout="row" layout-wrap>
           <div flex flex-sm="100">
-            <p><strong>Email: </strong>{{vm.order.E_Mail}}</p>
-            <p><strong>Télefono: </strong>{{vm.order.Tel1}}</p>
-            <p><strong>Celular: </strong>{{vm.order.Cellolar}}</p>
-            <p><strong>Calle:</strong>{{vm.order.address}}</p>
-            <p><strong>No. exterior: </strong>{{vm.order.U_Noexterior}}</p>
-            <p><strong>No. interior: </strong>{{vm.order.U_Nointerior}}</p>
-            <p><strong>Colonia: </strong>{{vm.order.U_Colonia}}</p>
+            <p>
+              <strong>Email: </strong>{{vm.order.E_Mail}}</p>
+            <p>
+              <strong>Télefono: </strong>{{vm.order.Tel1}}</p>
+            <p>
+              <strong>Celular: </strong>{{vm.order.Cellolar}}</p>
+            <p>
+              <strong>Calle:</strong>{{vm.order.address}}</p>
+            <p>
+              <strong>No. exterior: </strong>{{vm.order.U_Noexterior}}</p>
+            <p>
+              <strong>No. interior: </strong>{{vm.order.U_Nointerior}}</p>
+            <p>
+              <strong>Colonia: </strong>{{vm.order.U_Colonia}}</p>
           </div>
           <div flex flex-sm="100">
-            <p><strong>Municipio: </strong>{{vm.order.U_Mpio}}</p>
-            <p><strong>Ciudad: </strong>{{vm.order.U_Ciudad}}</p>
-            <p><strong>Estado: </strong>{{vm.order.U_Estado}}</p>
-            <p><strong>C.P.: </strong>{{vm.order.U_CP}}</p>
-            <p><strong>Entre calle: </strong>{{vm.order.U_Entrecalle}}</p>
-            <p><strong>Y calle: </strong>{{vm.order.U_Ycalle}}</p>
-            <p><strong>Referencias: </strong>{{vm.order.U_Notes1}}</p>
-            </div>
+            <p>
+              <strong>Municipio: </strong>{{vm.order.U_Mpio}}</p>
+            <p>
+              <strong>Ciudad: </strong>{{vm.order.U_Ciudad}}</p>
+            <p>
+              <strong>Estado: </strong>{{vm.order.U_Estado}}</p>
+            <p>
+              <strong>C.P.: </strong>{{vm.order.U_CP}}</p>
+            <p>
+              <strong>Entre calle: </strong>{{vm.order.U_Entrecalle}}</p>
+            <p>
+              <strong>Y calle: </strong>{{vm.order.U_Ycalle}}</p>
+            <p>
+              <strong>Referencias: </strong>{{vm.order.U_Notes1}}</p>
           </div>
-            <br>
+        </div>
+        <br>
       </div>
     </div>
     <!--END ENVIO-->
 
     <!--ATENCION A CLIENTES-->
     <div class="order-block seller-block order-block-info">
-      <h3><strong><i class="icon-vendedor"></i> ATENCIÓN A CLIENTES</strong></h3>
+      <h3>
+        <strong>
+          <i class="icon-vendedor"></i> ATENCIÓN A CLIENTES</strong>
+      </h3>
       <div class="order-block-inner" layout="row" layout-wrap layout-align="space-between center">
         <div flex="40" flex-sm="100" flex-xs="100">
-          <p><strong>Celular: </strong>(998) 195 8376</p>
-          <p><strong>Celular: </strong>(998) 195 6839</p>
-          <p><strong>Email:</strong> clientes@actualg.com</p>
+          <p>
+            <strong>Celular: </strong>(998) 195 8376</p>
+          <p>
+            <strong>Celular: </strong>(998) 195 6839</p>
+          <p>
+            <strong>Email:</strong> clientes@actualg.com</p>
         </div>
         <div flex="20" flex-sm="100" flex-xs="100">
-          <a 
-            href="#"  
-            ng-click="vm.print()" 
-            class="action-btn action-btn-save print-btn"
-          >
+          <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
             <strong>IMPRIMIR RECIBO</strong>
           </a>
-          <a 
-            href="#" 
-            ng-if="!vm.invoiceExists && vm.isUserAdmin" 
-            ng-click="vm.generateInvoice()" 
-            class="action-btn action-btn-save print-btn"
-          >
+          <a href="#" ng-if="!vm.invoiceExists && vm.isUserAdmin" ng-click="vm.generateInvoice()" class="action-btn action-btn-save print-btn">
             <strong>GENERAR FACTURA</strong>
           </a>
-          <a 
-            href="#" 
-            ng-if="vm.invoiceExists && vm.isUserAdmin"
-            ng-click="vm.sendInvoice()" 
-            class="action-btn action-btn-save print-btn"
-          >
+          <a href="#" ng-if="vm.invoiceExists && vm.isUserAdmin" ng-click="vm.sendInvoice()" class="action-btn action-btn-save print-btn">
             <strong>ENVIAR FACTURA</strong>
           </a>
 
-          <a
-            href="#"
-            ng-if="vm.orderSapPending && vm.isUserAdmin"
-            ng-click="vm.generateSapOrder()"
-            class="action-btn action-btn-save print-btn"
-          >
+          <a href="#" ng-if="vm.orderSapPending && vm.isUserAdmin" ng-click="vm.generateSapOrder()" class="action-btn action-btn-save print-btn">
             <strong>GENERAR PEDIDO EN SAP</strong>
           </a>
         </div>
@@ -359,11 +395,10 @@
 
   <hr/>
 
-  <section
-    ng-show="vm.order.OrdersSapWeb && vm.order.OrdersSapWeb.length > 0"
-    class="sap-docs only-hide-print"
-  >
-    <h3><strong>Documentos SAP</strong></h3>
+  <section ng-show="vm.order.OrdersSapWeb && vm.order.OrdersSapWeb.length > 0" class="sap-docs only-hide-print">
+    <h3>
+      <strong>Documentos SAP</strong>
+    </h3>
     <ul>
       <li ng-repeat="orderSap in vm.order.OrdersSapWeb">
         <p ng-show="orderSap.document">
@@ -372,7 +407,8 @@
         <p ng-show="orderSap.invoiceSap">
           <strong>Factura de deudores SAP</strong>: {{orderSap.invoiceSap}}
         </p>
-        <p><strong>Pagos</strong>:</p>
+        <p>
+          <strong>Pagos</strong>:</p>
         <ul>
           <li ng-repeat="paymentSap in orderSap.PaymentsSapWeb">{{paymentSap.document}}</li>
         </ul>
@@ -380,11 +416,7 @@
     </ul>
   </section>
 
-  <ng-include 
-    ng-show="vm.isUserAdmin"
-    class="only-hide-print" src="'views/checkout/sap-connection-logs.html'"></ng-include>
-  <ng-include 
-    ng-show="vm.isUserAdmin"
-    class="only-hide-print" src="'views/checkout/alegra-connection-logs.html'"></ng-include>
+  <ng-include ng-show="vm.isUserAdmin" class="only-hide-print" src="'views/checkout/sap-connection-logs.html'"></ng-include>
+  <ng-include ng-show="vm.isUserAdmin" class="only-hide-print" src="'views/checkout/alegra-connection-logs.html'"></ng-include>
 
 </section>

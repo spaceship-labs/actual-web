@@ -11,7 +11,8 @@
 
     <nav>
       <ul ng-if="main.siteTheme !== 'actual-kids'">
-        <li ng-repeat="category in main.categoriesTree track by $index" ng-click="main.handleAccordion(category.Handle)" class="nav-categories-item-sidenav">
+        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index" ng-click="main.handleAccordion(category.Handle)"
+          class="nav-categories-item-sidenav">
           <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
           <ul ng-show="main.accordion.current === category.Handle">
             <li ng-repeat="subcategory in category.Childs" class="">
@@ -35,7 +36,8 @@
       </ul>
 
       <ul ng-if="main.siteTheme === 'actual-kids' ">
-        <li ng-repeat="category in main.categoriesTree track by $index " ng-click="main.handleAccordion(category.Handle)" class="nav-categories-item-sidenav">
+        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index " ng-click="main.handleAccordion(category.Handle)"
+          class="nav-categories-item-sidenav">
           <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
           <ul ng-show="main.accordion.current === category.Handle">
             <li ng-repeat="subcategory in category.Childs" class="">

@@ -454,7 +454,8 @@ module.exports = function(grunt) {
         data: {
           metaTags: getMetaTagsBySite(grunt.option('site')),
           tagManagerId: getTagManagerId(grunt),
-          facebookPixelId: getFacebookPixelId(grunt.option('env'))
+          facebookPixelId: getFacebookPixelId(grunt.option('env')),
+          mailchimpId: getMailchimpId(grunt)
         }
       },
       dist: {
@@ -486,6 +487,7 @@ module.exports = function(grunt) {
           ENV: {
             name: 'sandbox',
             apiEndpoint: 'https://sandboxapi.actualstudio.com',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'sandbox',
             conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
@@ -503,6 +505,7 @@ module.exports = function(grunt) {
           ENV: {
             name: 'demo',
             apiEndpoint: 'https://sandboxapi.actualstudio.com',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://sandboxadmin.miactual.com',
             tokenPrefix: 'demo',
             conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
@@ -520,6 +523,7 @@ module.exports = function(grunt) {
           ENV: {
             name: 'production',
             apiEndpoint: 'https://api.actualstudio.com',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://admin.miactual.com',
             tokenPrefix: 'production',
             conektaHomeKey: 'key_fTqfbsS7oxfpqZxtP9qZqdw',
@@ -540,6 +544,7 @@ module.exports = function(grunt) {
           ENV: {
             name: 'dev',
             apiEndpoint: 'http://localhost:1337',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://localhost:3000',
             tokenPrefix: 'dev',
             conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
@@ -561,7 +566,7 @@ module.exports = function(grunt) {
             baseUrl: 'https://actualhome.com',
             domain: 'actualhome.com',
             fb_url: 'https://www.facebook.com/ActualHomeMx',
-            instagram_url: false,
+            instagram_url: 'https://www.instagram.com/actualhome_mx/',
             foursquare_url: 'https://es.foursquare.com/p/actual-home/90458136',
             pinterest_url: 'https://es.pinterest.com/ActualGroup/'
           }
@@ -600,7 +605,7 @@ module.exports = function(grunt) {
             baseUrl: 'https://actualkids.com',
             domain: 'actualkids.com',
             fb_url: 'https://www.facebook.com/ActualKids',
-            instagram_url: false,
+            instagram_url: 'https://www.instagram.com/actualkids_mx/',
             foursquare_url:
               'https://es.foursquare.com/p/actual-studio/87584627',
             pinterest_url: 'https://es.pinterest.com/ActualGroup/'
@@ -742,6 +747,27 @@ function getTagManagerId(grunt) {
   return tagManagerId;
 }
 
+function getMailchimpId(grunt) {
+  if (grunt.option('env') !== 'production') {
+    return '';
+  }
+  var tagManagerId = '';
+  switch (grunt.option('site')) {
+    case 'kids':
+      tagManagerId = '16e1cf103f04ae5477495f7c2';
+      break;
+    case 'home':
+      tagManagerId = '517b7e0e325738506afd95862';
+      break;
+    case 'studio':
+      tagManagerId = '517b7e0e325738506afd95862';
+      break;
+    default:
+      break;
+  }
+  return tagManagerId;
+}
+
 function getFacebookPixelId(env) {
   var facbookPixelId = '';
   switch (env) {
@@ -775,7 +801,7 @@ function getMetaTagsBySite(siteOption) {
       metaTags = {
         title: 'Actual Studio',
         description:
-          'Mobiliario y decoración para la persona práctica y jovial; una bienvenida al mobiliario moderno, honesto y, sobre todo, funcional.',
+          'Muebles y decoración; salas, comedores, sillas, recámaras. Decora tu hogar con muebles modernos y funcionales',
         image: 'https://api.actualstudio.com/logos/studio-og.png',
         url: 'https://actualstudio.com',
         favicon: 'https://api.actualStudio.com/icons/actual-studio-favicon.png'
@@ -785,7 +811,8 @@ function getMetaTagsBySite(siteOption) {
       metaTags = {
         title: 'Actual Home',
         description:
-          'Mobiliario y decoración para los más exigentes. Sofisticación absoluta que recuerda a los amantes del diseño la mezcla entre el modernismo y la exclusividad.',
+          'Muebles y decoración para los más exigentes, lujo accesible para amantes del diseño',
+
         image: 'https://api.actualstudio.com/logos/home-og.png',
         url: 'https://actualhome.com',
         favicon: 'https://api.actualStudio.com/icons/actual-home-favicon.png'
@@ -795,7 +822,7 @@ function getMetaTagsBySite(siteOption) {
       metaTags = {
         title: 'Actual Kids',
         description:
-          'Mobiliario y decoración para los más pequeños, la combinación perfecta de estilo, seguridad, interactividad y diversión.',
+          'Muebles y decoración infantiles para niños, bebés, papás. Seguridad, estilo, interactividad y diversión',
         image: 'https://api.actualstudio.com/logos/kids-og.png',
         url: 'https://actualkids.com',
         favicon: 'https://api.actualStudio.com/icons/actual-kids-favicon.png'

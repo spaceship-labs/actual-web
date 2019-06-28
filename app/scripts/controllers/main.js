@@ -54,6 +54,8 @@
       handleCategoryLeave: handleCategoryLeave,
       handleAccordion: handleAccordion,
       filterComplementsMenu: filterComplementsMenu,
+      filterRemoveComplements: filterRemoveComplements,
+      getComplementCategoriesNumber: getComplementCategoriesNumber,
       api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
@@ -97,56 +99,111 @@
       vm.accordion = {
         current: null
       };
-      vm.mainCategories = {
-        salas: {
-          color: 'salas-bg',
-          icon: '1',
-          filledIcon: 'salas-relleno',
-          image: '/images/categories/categoria2.png'
-        },
-        comedores: {
-          color: 'comedores-bg',
-          icon: 'comedores',
-          filledIcon: 'comedores-relleno',
-          image: '/images/categories/categoria1.png'
-        },
-        sillas: {
-          color: 'sillas-bg',
-          icon: '3',
-          filledIcon: 'sillas-relleno',
-          image: '/images/categories/sillas.jpg'
-        },
-        recamaras: {
-          color: 'recamaras-bg',
-          icon: 'recamaras',
-          filledIcon: 'recamaras-relleno',
-          image: '/images/categories/categoria3.png'
-        },
-        'muebles-de-jardin': {
-          color: 'muebles-exterior-bg',
-          icon: '5',
-          filledIcon: 'muebles--relleno',
-          image: '/images/categories/muebles_de_exterior.jpg'
-        },
-        'muebles-de-tv': {
-          color: 'muebles-television-bg',
-          icon: '6',
-          filledIcon: 'tv-relleno',
-          image: '/images/categories/muebles_de_tv.jpg'
-        },
-        'muebles-para-oficina': {
-          color: 'muebles-oficina-bg',
-          icon: '7',
-          filledIcon: 'oficina-relleno',
-          image: '/images/categories/mubles_de_oficina.jpg'
-        },
-        ofertas: {
-          color: 'look-bg',
-          icon: '8',
-          filledIcon: 'look-relleno',
-          image: '/images/categories/categoria8.png'
-        }
-      };
+
+      if (SITE.name === 'actual-studio') {
+        vm.mainCategories = {
+          salas: {
+            color: 'salas-bg',
+            icon: '1',
+            filledIcon: 'salas-relleno',
+            image: '/images/categories/categoria2.png'
+          },
+          comedores: {
+            color: 'comedores-bg',
+            icon: 'comedores',
+            filledIcon: 'comedores-relleno',
+            image: '/images/categories/categoria1.jpg'
+          },
+          sillas: {
+            color: 'sillas-bg',
+            icon: '3',
+            filledIcon: 'sillas-relleno',
+            image: '/images/categories/sillas.jpg'
+          },
+          recamaras: {
+            color: 'recamaras-bg',
+            icon: 'recamaras',
+            filledIcon: 'recamaras-relleno',
+            image: '/images/categories/categoria3.png'
+          },
+          'muebles-de-jardin': {
+            color: 'muebles-exterior-bg',
+            icon: '5',
+            filledIcon: 'muebles--relleno',
+            image: '/images/categories/muebles_de_exterior.jpg'
+          },
+          'muebles-de-tv': {
+            color: 'muebles-television-bg',
+            icon: '6',
+            filledIcon: 'tv-relleno',
+            image: '/images/categories/muebles_de_tv.jpg'
+          },
+          'muebles-para-oficina': {
+            color: 'muebles-oficina-bg',
+            icon: '7',
+            filledIcon: 'oficina-relleno',
+            image: '/images/categories/mubles_de_oficina.jpg'
+          },
+          ofertas: {
+            color: 'look-bg',
+            icon: '8',
+            filledIcon: 'look-relleno',
+            image: '/images/categories/categoria8.png'
+          }
+        };
+      } else {
+        vm.mainCategories = {
+          salas: {
+            color: 'salas-bg',
+            icon: '1',
+            filledIcon: 'salas-relleno',
+            image: '/images/categories/salas-home.jpg'
+          },
+          comedores: {
+            color: 'comedores-bg',
+            icon: 'comedores',
+            filledIcon: 'comedores-relleno',
+            image: '/images/categories/comedor-home.jpg'
+          },
+          sillas: {
+            color: 'sillas-bg',
+            icon: '3',
+            filledIcon: 'sillas-relleno',
+            image: '/images/categories/sillas-home.jpg'
+          },
+          recamaras: {
+            color: 'recamaras-bg',
+            icon: 'recamaras',
+            filledIcon: 'recamaras-relleno',
+            image: '/images/categories/recamaras-home.png'
+          },
+          'muebles-de-jardin': {
+            color: 'muebles-exterior-bg',
+            icon: '5',
+            filledIcon: 'muebles--relleno',
+            image: '/images/categories/exteriores-home.jpg'
+          },
+          'muebles-de-tv': {
+            color: 'muebles-television-bg',
+            icon: '6',
+            filledIcon: 'tv-relleno',
+            image: '/images/categories/muebles-tv-home.jpg'
+          },
+          'muebles-para-oficina': {
+            color: 'muebles-oficina-bg',
+            icon: '7',
+            filledIcon: 'oficina-relleno',
+            image: '/images/categories/mubles_de_oficina.jpg'
+          },
+          ofertas: {
+            color: 'look-bg',
+            icon: '8',
+            filledIcon: 'look-relleno',
+            image: '/images/categories/categoria8.png'
+          }
+        };
+      }
+
       vm.mainCategoriesKids = {
         ninos: {
           icon: 'niñas-y-niños2',
@@ -673,7 +730,20 @@
     }
 
     function filterComplementsMenu(item) {
-      return item && item.complement;
+      return (
+        item &&
+        item.complement &&
+        item[vm.activeStore.code] > 0 &&
+        item.Handle !== 'organizacion'
+      );
+    }
+
+    function filterRemoveComplements(item) {
+      return item && !item.complement;
+    }
+
+    function getComplementCategoriesNumber(categoriesTree) {
+      return (categoriesTree || []).filter(filterComplementsMenu).length;
     }
 
     $scope.$on('$routeChangeStart', function(next, current) {

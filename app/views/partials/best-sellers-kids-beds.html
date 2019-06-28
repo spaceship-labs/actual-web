@@ -2,15 +2,17 @@
   <div class="listing-view">
     <h2 class="listing-view-title best-seller-title">
       <a href="/category/camas-infantiles">
-        <span class="color-gray">Camas infantiles</span>
+        <span class="color-gray">Niños y niñas</span>
       </a>
     </h2>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
     <div flex="80" flex-xs="100" flex-sm="100">
-      <slick class="categories-carousel" infinite="true" slides-to-show="3" slides-to-scroll="3" init-onload=true data="vm.featuredLoaded" responsive="vm.bestSellersCarouselBreakpoints" >
-        <div ng-repeat="featuredCamas in vm.featuredProducts | filter:{ categoryHandle: 'camas-infantiles' } | limitTo:vm.limitKidsBeds" class="listing-product-wrap">
-          <listing-product  product="featuredCamas.product"></listing-product>
+      <slick class="categories-carousel" infinite="true" slides-to-show="3" slides-to-scroll="3" init-onload=true data="vm.featuredLoaded"
+        responsive="vm.bestSellersCarouselBreakpoints">
+        <div ng-repeat="featuredCamas in vm.featuredProducts | filter:{ categoryHandle: 'camas-infantiles' } | limitTo:vm.limitKidsBeds"
+          class="listing-product-wrap">
+          <listing-product product="featuredCamas.product"></listing-product>
         </div>
       </slick>
     </div>

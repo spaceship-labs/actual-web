@@ -1,42 +1,39 @@
-<md-dialog class="options-alert-dialog" aria-label="Invoice dialog"  ng-cloak>
+<md-dialog class="options-alert-dialog" aria-label="Invoice dialog" ng-cloak>
   <div class="options-alert-inner">
+    <a href="#" ng-click="cancel()" class="options-alert-cancel">
+      x
+    </a>
 
-		<a
-			href="#"
-			ng-click="cancel()"
-			class="options-alert-cancel">
-			x
-		</a>
+    <h3>Dar click en REGISTRAR DATOS FISCALES si requiere FACTURA</h3>
 
-		<h3>Dar click en registrar datos fiscales si require FACTURA</h3>
-
-		<div
-			class="btns-section"
-			layout="row"
+    <div
+      class="btns-section"
+      layout="row"
       layout-wrap
-			layout-align="space-between start"
+      layout-align="space-between start"
       layout-align-sm="start start"
-      layout-align-xs="start start"      
+      layout-align-xs="start start"
     >
-			<div flex flex-sm="100" flex-xs="100" class="btns-section-block">
-				<a
-					href="#"
-					ng-click="continue()"
-					class="action-btn action-btn-wide action-btn-inline action-btn-save ">
-						Continuar a pago
-				</a>
-				<!--<p class="center-content">Continuar a pago</p>-->
-			</div>
-			<div flex flex-sm="100" flex-xs="100" class="btns-section-block">
-				<a
-					href="#"
-					ng-click="modify()"
-					class="action-btn action-btn-wide action-btn-save action-btn-inline">
-						Registrar datos fiscales
-				</a>
-				<!--<p class="center-content">Crear factura</p>-->
-			</div>
-		</div>
-
-	</div>
+      <div flex flex-sm="100" flex-xs="100" class="btns-section-block">
+        <a
+          href="#"
+          ng-click="continue()"
+          class="action-btn action-btn-wide action-btn-inline action-btn-save "
+        >
+          Continuar a pago
+        </a>
+        <!--<p class="center-content">Continuar a pago</p>-->
+      </div>
+      <div flex flex-sm="100" flex-xs="100" class="btns-section-block">
+        <a
+          href="#"
+          ng-click="modify()"
+          class="action-btn action-btn-wide action-btn-save action-btn-inline"
+        >
+          Registrar datos fiscales
+        </a>
+        <!--<p class="center-content">Crear factura</p>-->
+      </div>
+    </div>
+  </div>
 </md-dialog>

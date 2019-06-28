@@ -10,7 +10,6 @@
     $q,
     $rootScope,
     api,
-    Upload,
     productService,
     localStorageService,
     dialogService,
@@ -105,11 +104,9 @@
 
     function addRecord(quotationId, params) {
       var url = '/quotation/addrecord/' + quotationId;
-      return Upload.upload({ url: api.baseUrl + url, data: params }).then(
-        function(res) {
-          return res.data.data;
-        }
-      );
+      return api.$http.post(url, params).then(function(res) {
+        return res.data;
+      });
     }
 
     function getRecords(quotationId) {
@@ -199,7 +196,8 @@
             var product = detail.Product;
             var discountPercent = product.mainPromo[paymentDiscountKey];
             var price =
-              product.priceBefore - product.priceBefore / 100 * discountPercent;
+              product.priceBefore -
+              (product.priceBefore / 100) * discountPercent;
             total += price * detail.quantity;
             //total+= detail.Product.Price * detail.quantity;
           }

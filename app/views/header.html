@@ -1,188 +1,315 @@
-<!--MOBILE-MENU -->
+<!-- MOBILE-MENU -->
 <ng-include src="'views/partials/mobile-sidenav.html'"></ng-include>
-<!--END MOBILE-MENU -->
+<!-- END MOBILE-MENU -->
 
 <div id="header">
-  <!--START TOP BAR-->
-  <div class="header-top-bar" fixed-element top="70" ng-class="{'fixed-head': scrolled}">
-    <div class="container" layout="row" layout-wrap layout-align="center center">
-
-      <div hide-xs hide-sm flex-gt-sm="15" class="logo" layout-align="center center">
+  <!-- START TOP BAR -->
+  <div
+    class="header-top-bar"
+    fixed-element
+    top="70"
+    ng-class="{'fixed-head': scrolled}"
+  >
+    <div
+      class="container"
+      layout="row"
+      layout-wrap
+      layout-align="center center"
+    >
+      <div
+        hide-xs
+        hide-sm
+        flex-gt-sm="15"
+        class="logo"
+        layout-align="center center"
+      >
         <a href="/" ng-switch on="main.siteTheme">
-          <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group">
-          <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group">
-          <img ng-switch-when="actual-kids" src="images/actual-kids-blanco.png" alt="Actual Group">
-          <img ng-switch-default src="images/actual-home-blanco.png" alt="Actual Group">
+          <img
+            ng-switch-when="actual-home"
+            src="images/actual-home-blanco.png"
+            alt="Actual Group"
+          />
+          <img
+            ng-switch-when="actual-studio"
+            src="images/actual-studio-blanco.png"
+            alt="Actual Group"
+          />
+          <img
+            ng-switch-when="actual-kids"
+            src="images/actual-kids-blanco.png"
+            alt="Actual Group"
+          />
+          <img
+            ng-switch-default
+            src="images/actual-home-blanco.png"
+            alt="Actual Group"
+          />
         </a>
       </div>
 
-
-      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center" layout-align-sm="center center"
-        layout-align-xs="start center" hide-xs hide-sm>
-
-        <div flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+      <div
+        class="header-top-bar-menu"
+        layout="row"
+        layout-align="center center"
+        layout-align="center center"
+        layout-align-sm="center center"
+        layout-align-xs="start center"
+        hide-xs
+        hide-sm
+      >
+        <div
+          flex
+          href="#"
+          ng-click="main.toggleSchedulesModal()"
+          class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger"
+        >
           <span>
-            <strong>
-              <i class="icon-phone"></i>
-            </strong>
-            <!--<strong hide-xs>998 246 3487</strong>-->
-            <strong hide-xs>(998) 884 1594</strong>
+            <strong> <i class="icon-phone"></i> </strong>
+            <!-- <strong hide-xs>998 246 3487</strong> -->
+            <strong hide-xs>(998) 195 8376</strong>
           </span>
 
-          <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
+          <ng-include
+            ng-if="main.isActiveSchedulesModal"
+            src="'views/partials/schedules-dropdown.html'"
+          ></ng-include>
         </div>
-
-        <a href="whatsapp://send?phone=5219982463487">
-          <div flex href="" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-            <span>
-              <strong>
-                <i class="icon-whatsapp"></i>
-              </strong>
-              <!--<strong hide-xs>998 246 3487</strong>-->
-              <strong hide-xs>(998) 246 3487</strong>
-            </span>
-          </div>
-        </a>
-
       </div>
 
-
-      <form ng-class="{
+      <form
+        ng-class="{
           'searcher-wrapper-show-mobile':main.showSearchBar
-        }" ng-submit="main.handleSearch()" class="searcher-wrapper" flex-order-xs="1" layout="row">
+        }"
+        ng-submit="main.handleSearch()"
+        class="searcher-wrapper"
+        flex-order-xs="1"
+        layout="row"
+      >
         <div class="searcher" flex flex-xs="70">
           <div class="searcher-inner">
             <i class="icon-search"></i>
-            <input type="text" name="term" ng-model="main.searchValue">
+            <input type="text" name="term" ng-model="main.searchValue" />
           </div>
         </div>
-        <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn">
+        <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn" />
       </form>
 
-      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center" layout-align-sm="center center"
-        layout-align-xs="start center">
-
-
-        <div flex-gt-xs="15" class="logo logo-mobile" layout-align="center center">
+      <div
+        class="header-top-bar-menu"
+        layout="row"
+        layout-align="center center"
+        layout-align="center center"
+        layout-align-sm="center center"
+        layout-align-xs="start center"
+      >
+        <div
+          flex-gt-xs="15"
+          class="logo logo-mobile"
+          layout-align="center center"
+        >
           <a href="/" ng-switch on="main.siteTheme">
-            <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group">
-            <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group">
-            <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group">
-            <img ng-switch-default src="images/logos/home.png" alt="Actual Group">
+            <img
+              ng-switch-when="actual-home"
+              src="images/logos/home.png"
+              alt="Actual Group"
+            />
+            <img
+              ng-switch-when="actual-studio"
+              src="images/logos/studio.png"
+              alt="Actual Group"
+            />
+            <img
+              ng-switch-when="actual-kids"
+              src="images/logos/kids.png"
+              alt="Actual Group"
+            />
+            <img
+              ng-switch-default
+              src="images/logos/home.png"
+              alt="Actual Group"
+            />
           </a>
         </div>
 
         <div flex hide-gt-sm>
-          <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static" style="color: #fff;">
+          <a
+            ng-click="main.toggleMobileSidenav()"
+            class="menu-mobile-icon menu-mobile-icon-static"
+            style="color: #fff;"
+          >
             MENU
           </a>
         </div>
 
-        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
-          <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+        <div
+          hide-gt-xs
+          flex
+          class="header-top-bar-menu-item search-trigger-item"
+        >
+          <i
+            class="icon-search"
+            ng-click="main.showSearchBar = !main.showSearchBar"
+          ></i>
         </div>
         <div hide-xs hide-sm flex class="header-top-bar-menu-item">
-          <a href="/register">
-            <p style="color: #fff;">REGÍSTRATE</p>
-          </a>
+          <a href="/register"> <p style="color: #fff;">REGÍSTRATE</p> </a>
         </div>
-        <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="menu-item-login  header-top-bar-menu-item">
-          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">|
-            <strong>MI CUENTA</strong>
+        <div
+          ng-if="!main.user || main.user.invited"
+          flex
+          id="login-header-trigger"
+          class="menu-item-login  header-top-bar-menu-item"
+        >
+          <p
+            ng-if="!main.user || main.user.invited"
+            ng-click="main.toggleLoginModal()"
+            style="color: #fff;"
+          >
+            | <strong>MI CUENTA</strong>
           </p>
-          <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
+          <span
+            ng-if="main.user && main.user.invited"
+            ng-click="main.toggleLoginModal()"
+          >
             <strong class="invited-label">Invitado</strong>
           </span>
 
           <!-- <i class="icon-login" ng-click="main.toggleLoginModal()"></i> -->
-          <ng-include ng-if="!main.user && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
+          <ng-include
+            ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
+            src="'views/partials/login-header.html'"
+          ></ng-include>
         </div>
 
-        <!--IF logged in-->
-        <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger" ng-click="main.toggleProfileModal()"
-          class="header-top-bar-menu-item header-top-bar-menu-item-name">
+        <!-- IF logged in -->
+        <div
+          ng-if="main.user && !main.user.invited"
+          flex
+          href="#"
+          id="profile-header-trigger"
+          ng-click="main.toggleProfileModal()"
+          class="header-top-bar-menu-item header-top-bar-menu-item-name"
+        >
           <a href="#">
             <i class="icon-login"></i>
-            <span>Bienvenido
-              <strong>{{main.user.firstName}}</strong>
+            <span
+              >Bienvenido <strong>{{ main.user.firstName }}</strong>
             </span>
           </a>
-          <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
+          <ng-include
+            ng-if="main.isActiveProfileHeader"
+            src="'views/partials/profile-header.html'"
+          ></ng-include>
         </div>
 
+        <div
+          flex
+          href="#"
+          class="header-top-bar-menu-item header-top-bar-menu-item-blog"
+        >
+          <p>
+            <a
+              ng-if="main.siteTheme === 'actual-home'"
+              href="https://actualproyectos.blog/"
+              target="_blank"
+            >
+              <span><strong>|</strong> BLOG</span>
+            </a>
 
-        <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-          <span>
-            <strong>
-              <i class="icon-phone"></i>
-            </strong>
-          </span>
-
-          <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
+            <a
+              ng-if="main.siteTheme !== 'actual-home'"
+              href="https://welove.design.blog/tag/notas/"
+              target="_blank"
+            >
+              <span><strong>|</strong> BLOG</span>
+            </a>
+          </p>
         </div>
 
-        <a flex hide-gt-xs href="whatsapp://send?phone=5219982463487" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+        <div
+          hide-gt-xs
+          flex
+          href="#"
+          ng-click="main.toggleSchedulesModal()"
+          class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger"
+        >
           <span>
-            <strong>
-              <i class="icon-whatsapp"></i>
-            </strong>
-          </span>
-        </a>
-
-        <div hide-xs hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-          <span>
-            <strong>
-              <i class="icon-phone"></i>
-            </strong>
-            <!--<strong hide-xs>998 246 3487</strong>-->
-            <strong hide-xs>(998) 884 1594</strong>
+            <strong> <i class="icon-phone"></i> </strong>
           </span>
 
-          <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
+          <ng-include
+            ng-if="main.isActiveSchedulesModal"
+            src="'views/partials/schedules-dropdown.html'"
+          ></ng-include>
         </div>
 
-        <a hide-xs hide-gt-sm href="whatsapp://send?phone=5219982463487">
-          <div flex href="" class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-            <span>
-              <strong>
-                <i class="icon-whatsapp"></i>
-              </strong>
-              <!--<strong hide-xs>998 246 3487</strong>-->
-              <strong hide-xs>(998) 246 3487</strong>
-            </span>
-          </div>
+        <div
+          hide-xs
+          hide-gt-sm
+          flex
+          href="#"
+          ng-click="main.toggleSchedulesModal()"
+          class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger"
+        >
+          <span>
+            <strong> <i class="icon-phone"></i> </strong>
+            <!-- <strong hide-xs>998 246 3487</strong> -->
+            <strong hide-xs>(998) 195 8376</strong>
+          </span>
+
+          <ng-include
+            ng-if="main.isActiveSchedulesModal"
+            src="'views/partials/schedules-dropdown.html'"
+          ></ng-include>
+        </div>
+
+        <!-- IF ACTIVE QUOTATION -->
+        <a
+          ng-if="main.activeQuotation"
+          flex
+          ng-href="/quotations/edit/{{ main.activeQuotation.id }}"
+          class="header-top-bar-menu-item"
+        >
+          <span
+            class="cart-n-items"
+            ng-class="{'cart-active' : main.activeQuotation}"
+            >{{ main.activeQuotation.totalProducts }}</span
+          >
+          <i
+            class="icon-carro"
+            ng-class="{'cart-active' : main.activeQuotation}"
+          ></i>
         </a>
 
-
-        <!--IF ACTIVE QUOTATION-->
-        <a ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{main.activeQuotation.id}}" class="header-top-bar-menu-item">
-          <span class="cart-n-items" ng-class="{'cart-active' : main.activeQuotation}">{{main.activeQuotation.totalProducts}}</span>
-          <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-        </a>
-
-        <!--IF NOT ACTIVE QUOTATION-->
-        <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item">
+        <!-- IF NOT ACTIVE QUOTATION -->
+        <a
+          ng-if="main.user && !main.activeQuotation"
+          flex
+          href="/"
+          class="header-top-bar-menu-item"
+        >
           <i class="icon-carro"></i>
         </a>
 
-        <!---end if Logged in -->
-
+        <!-- -end if Logged in -->
       </div>
-
     </div>
-
   </div>
-  <!--END TOP BAR-->
+  <!-- END TOP BAR -->
 
-  <!--START MENU-->
-  <ng-include ng-if="main.activeModule !== 'users'" src="'views/partials/header-menu-miactual.html'"></ng-include>
-  <!--END MENU-->
-
+  <!-- START MENU -->
+  <ng-include
+    ng-if="main.activeModule !== 'users'"
+    src="'views/partials/header-menu-miactual.html'"
+  ></ng-include>
+  <!-- END MENU -->
 </div>
 
 <md-sidenav md-component-id="left" class="md-sidenav-left movil">
-  <!-- <aside flex-gt-sm="20" flex="100">
-    <sidebar-categories categories-tree="main.categoriesTree" active-store="main.activeStore">
-    </sidebar-categories>
-  </aside> -->
+  <!--
+    <aside flex-gt-sm="20" flex="100">
+      <sidebar-categories categories-tree="main.categoriesTree" active-store="main.activeStore">
+      </sidebar-categories>
+    </aside>
+  -->
 </md-sidenav>

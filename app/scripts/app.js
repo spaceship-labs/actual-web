@@ -2,7 +2,6 @@
 angular
   .module('actualWebApp', [
     'ngAnimate',
-    'ngStorage',
     'ngResource',
     'ngRoute',
     'ngSanitize',
@@ -12,22 +11,18 @@ angular
     'LocalStorageModule',
     'angular-jwt',
     'datatables',
-    'chart.js',
-    'ezplus',
     'pikaday',
     'ui.timepicker',
-    'ngFileUpload',
-    'sly',
+    //'ngFileUpload',
     'infinite-scroll',
     'ngPhotoswipe',
     'ui.utils.masks',
-    'leaflet-directive',
-    'localytics.directives',
     'ng-currency',
     //'angulartics',
     //'angulartics.google.tagmanager',
     'envconfig',
-    'siteconfig'
+    'siteconfig',
+    'material.components.expansionPanels'
   ])
 
   .config(function(
@@ -507,6 +502,8 @@ angular
       });
     });
 
+    //TODO: Reactivate ALASQL for export to excel function
+    /*
     alasql.fn.nullFormat = formatService.nullFormat;
     alasql.fn.yesNoFormat = formatService.yesNoFormat;
     alasql.fn.dateTimeFormat = formatService.dateTimeFormat;
@@ -521,4 +518,5 @@ angular
       var mapper = orderService.getOrderStatusMapper();
       return mapper[data] || data;
     };
+    */
   });

@@ -1,10 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html ng-app="actualWebApp" ng-controller="MainCtrl as main">
-
-<head>
-  <meta charset="utf-8">
-  <!--SEE GRUNTFILE processhtml-->
-  <!-- process:template
+  <head>
+    <meta charset="utf-8" />
+    <!--SEE GRUNTFILE processhtml-->
+    <!-- process:template
     <title ng-bind="main.metatags.title"><%= metaTags.title %></title>
     <link itemprop="url" href="https://actualstudio.com">
     <meta itemtype="logo" content="Logo-A-Home.png">
@@ -55,14 +54,17 @@
 
     /process -->
 
-  <base href="/" />
-  <meta name="fragment" content="!">
-  <meta name="viewport" content="width=device-width, user-scalable=yes">
-  <meta name="google-site-verification" content="Al9YYcB_iYqFkycbTwFq7qbbms-sH4H66zDtwyz97fU" />
+    <base href="/" />
+    <meta name="fragment" content="!" />
+    <meta name="viewport" content="width=device-width, user-scalable=yes" />
+    <meta
+      name="google-site-verification"
+      content="Al9YYcB_iYqFkycbTwFq7qbbms-sH4H66zDtwyz97fU"
+    />
 
-  <meta name="robots" content="all, index, follow">
+    <meta name="robots" content="all, index, follow" />
 
-  <!--
+    <!--
     <link 
         rel="icon" 
         href="/favicon.ico"
@@ -71,62 +73,72 @@
     >
     -->
 
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
+    <link rel="stylesheet" href="bower_components/angular-datatables/dist/css/angular-datatables.css" />
+    <link rel="stylesheet" href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
+    <link rel="stylesheet" href="bower_components/jquery-timepicker-jt/jquery.timepicker.css" />
+    <link rel="stylesheet" href="bower_components/photoswipe/dist/photoswipe.css" />
+    <link rel="stylesheet" href="bower_components/photoswipe/dist/default-skin/default-skin.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/angular-material-expansion-panel/dist/md-expansion-panel.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/angular-material-ios-fix.css" />
+    <link rel="stylesheet" href="styles/stickyFooter.css" />
+    <link rel="stylesheet" href="styles/icomoon.css" />
+    <link rel="stylesheet" href="styles/custom.datatables.css" />
+    <link rel="stylesheet" href="styles/default-skin.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/spei-card.css" />
+    <link rel="stylesheet" href="styles/actual-home.css" />
+    <link rel="stylesheet" href="styles/actual-studio.css" />
+    <link rel="stylesheet" href="styles/actual-kids.css" />
+    <!-- endbuild -->
 
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
-  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
-  <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
-  <link rel='stylesheet' href='bower_components/angular-material-datetimepicker/css/material-datetimepicker.css' />
-  <link rel='stylesheet' href='bower_components/angular-datatables/dist/css/angular-datatables.css' />
-  <link rel='stylesheet' href='bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css' />
-  <link rel='stylesheet' href='bower_components/ez-plus/css/jquery.ez-plus.css' />
-  <link rel='stylesheet' href='bower_components/pikaday/css/pikaday.css' />
-  <link rel='stylesheet' href='bower_components/jquery-timepicker-jt/jquery.timepicker.css' />
-  <link rel='stylesheet' href='bower_components/photoswipe/dist/photoswipe.css' />
-  <link rel='stylesheet' href='bower_components/photoswipe/dist/default-skin/default-skin.css' />
-  <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
-  <link rel='stylesheet' href='bower_components/chosen/chosen.css' />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
-  <link rel="stylesheet" href="styles/stickyFooter.css">
-  <link rel="stylesheet" href="styles/icomoon.css">
-  <link rel="stylesheet" href="styles/custom.datatables.css">
-  <link rel='stylesheet' href='styles/default-skin.css' />
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/spei-card.css">
-  <link rel="stylesheet" href="styles/actual-home.css">
-  <link rel="stylesheet" href="styles/actual-studio.css">
-  <link rel="stylesheet" href="styles/actual-kids.css">
-  <!-- endbuild -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <script>
+      window.prerenderReady = false;
+    </script>
 
-  <script>
-    window.prerenderReady = false;
-  </script>
+    <!--Start of Zendesk Chat Script-->
+    <!--Start of Zendesk Chat Script-->
+    <script type="text/javascript">
+      window.$zopim ||
+        (function(d, s) {
+          var z = ($zopim = function(c) {
+              z._.push(c);
+            }),
+            $ = (z.s = d.createElement(s)),
+            e = d.getElementsByTagName(s)[0];
+          z.set = function(o) {
+            z.set._.push(o);
+          };
+          z._ = [];
+          z.set._ = [];
+          $.async = !0;
+          $.setAttribute('charset', 'utf-8');
+          $.src = 'https://v2.zopim.com/?66tgvnw5RC3LSmB2MDCEcvhmc0QHuZkl';
+          z.t = +new Date();
+          $.type = 'text/javascript';
+          e.parentNode.insertBefore($, e);
+        })(document, 'script');
+    </script>
+    <!--End of Zendesk Chat Script-->
+    <!--End of Zendesk Chat Script-->
 
-  <!--Start of Zendesk Chat Script-->
-  <script type="text/javascript">
-    window.$zopim || (function (d, s) {
-      var z = $zopim = function (c) {
-        z._.push(c)
-      }, $ = z.s =
-        d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
-          z.set.
-            _.push(o)
-        }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute('charset', 'utf-8');
-      $.src = 'https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ'; z.t = +new Date; $.
-        type = 'text/javascript'; e.parentNode.insertBefore($, e)
-    })(document, 'script');
-  </script>
-  <!--End of Zendesk Chat Script-->
-
-  <!--SEE GRUNTFILE processhtml-->
-  <!-- process:template
+    <!--SEE GRUNTFILE processhtml-->
+    <!-- process:template
     <script>
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -141,90 +153,32 @@
     </script>
 
     /process -->
-
-</head>
-
-<body ng-cloak ng-class="main.siteTheme">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
-  <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
-  <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
-  <link rel='stylesheet' href='bower_components/angular-material-datetimepicker/css/material-datetimepicker.css' />
-  <link rel='stylesheet' href='bower_components/angular-datatables/dist/css/angular-datatables.css' />
-  <link rel='stylesheet' href='bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css' />
-  <link rel='stylesheet' href='bower_components/ez-plus/css/jquery.ez-plus.css' />
-  <link rel='stylesheet' href='bower_components/pikaday/css/pikaday.css' />
-  <link rel='stylesheet' href='bower_components/jquery-timepicker-jt/jquery.timepicker.css' />
-  <link rel='stylesheet' href='bower_components/photoswipe/dist/photoswipe.css' />
-  <link rel='stylesheet' href='bower_components/photoswipe/dist/default-skin/default-skin.css' />
-  <link rel='stylesheet' href='bower_components/leaflet/dist/leaflet.css' />
-  <link rel='stylesheet' href='bower_components/chosen/chosen.css' />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/angular-material-ios-fix.css">
-  <link rel="stylesheet" href="styles/stickyFooter.css">
-  <link rel="stylesheet" href="styles/icomoon.css">
-  <link rel="stylesheet" href="styles/custom.datatables.css">
-  <link rel='stylesheet' href='styles/default-skin.css' />
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/spei-card.css">
-  <link rel="stylesheet" href="styles/actual-home.css">
-  <link rel="stylesheet" href="styles/actual-studio.css">
-  <link rel="stylesheet" href="styles/actual-kids.css">
-  <!-- endbuild -->
-
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-
-  <script>
-    window.prerenderReady = false;
-  </script>
-
-  <!--Start of Zendesk Chat Script-->
-  <script type="text/javascript">
-    window.$zopim || (function (d, s) {
-      var z = $zopim = function (c) {
-        z._.push(c)
-      }, $ = z.s =
-        d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
-          z.set.
-            _.push(o)
-        }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute('charset', 'utf-8');
-      $.src = 'https://v2.zopim.com/?5AI6QiqLf6PDU85Ihw5ezvrAXiE4FprZ'; z.t = +new Date; $.
-        type = 'text/javascript'; e.parentNode.insertBefore($, e)
-    })(document, 'script');
-  </script>
-  <!--End of Zendesk Chat Script-->
-
   </head>
 
   <body ng-cloak ng-class="main.siteTheme">
-
-    <!--SEE GRUNTFILE processhtml-->
-
     <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+        your experience.
+      </p>
     <![endif]-->
 
     <!-- process:template
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= tagManagerId %>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     /process -->
 
-
     <div ng-show="main.isActiveBackdrop" class="backdrop"></div>
-
 
     <div id="wrap">
       <div id="main" class="clearfix">
         <div id="topBackRepeat">
-
           <div>
-            <ng-include ng-if="main.activeModule !== 'order'" src="'views/header.html'"></ng-include>
-            <md-content id="main-content" ng-view autoscroll>
-            </md-content>
-
+            <ng-include
+              ng-if="main.activeModule !== 'order'"
+              src="'views/header.html'"
+            ></ng-include>
+            <md-content id="main-content" ng-view autoscroll> </md-content>
           </div>
         </div>
         <!-- END topBackRepeat -->
@@ -235,7 +189,10 @@
     <div class="clear"></div>
 
     <!--FOOTER-->
-    <ng-include ng-if=" main.activeModule !== 'users'" src="'views/footer.html'"></ng-include>
+    <ng-include
+      ng-if=" main.activeModule !== 'users'"
+      src="'views/footer.html'"
+    ></ng-include>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!--
@@ -268,9 +225,10 @@ ga('send', 'pageview');
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpLv18a2AvczWYaEv_HMA9T_m2ElMJgro"></script>
     -->
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvLCjzJKSl6XQg-k0fcpPWbg8nNbKEFZI">
-    </script>
-
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvLCjzJKSl6XQg-k0fcpPWbg8nNbKEFZI"
+    ></script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -282,18 +240,11 @@ ga('send', 'pageview');
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angularLocalStorage/dist/angularLocalStorage.min.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
     <script src="bower_components/angular-slick/dist/slick.js"></script>
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="bower_components/angular-material-datetimepicker/js/angular-material-datetimepicker.js"></script>
     <script src="bower_components/datatables.net/js/jquery.dataTables.js"></script>
     <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
     <script src="bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
@@ -307,54 +258,25 @@ ga('send', 'pageview');
     <script src="bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
     <script src="bower_components/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js"></script>
     <script src="bower_components/angular-datatables/dist/plugins/select/angular-datatables.select.js"></script>
-    <script src="bower_components/angular-ez-plus/js/angular-ezplus.js"></script>
     <script src="bower_components/pikaday/pikaday.js"></script>
     <script src="bower_components/pikaday-angular/pikaday-angular.js"></script>
     <script src="bower_components/jquery-timepicker-jt/jquery.timepicker.js"></script>
     <script src="bower_components/angular-jquery-timepicker/src/timepickerdirective.js"></script>
-    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
-    <script src="bower_components/scalyr/scalyr.js"></script>
     <script src="bower_components/photoswipe/dist/photoswipe.js"></script>
     <script src="bower_components/photoswipe/dist/photoswipe-ui-default.js"></script>
     <script src="bower_components/ng-photoswipe/angular-photoswipe.min.js"></script>
     <script src="bower_components/angular-input-masks/angular-input-masks-standalone.js"></script>
-    <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
-    <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
-    <script src="bower_components/leaflet-plugins/control/Distance.js"></script>
-    <script src="bower_components/leaflet-plugins/control/Layers.Load.js"></script>
-    <script src="bower_components/leaflet-plugins/control/Permalink.js"></script>
-    <script src="bower_components/leaflet-plugins/control/Permalink.Layer.js"></script>
-    <script src="bower_components/leaflet-plugins/control/Permalink.Line.js"></script>
-    <script src="bower_components/leaflet-plugins/control/Permalink.Marker.js"></script>
-    <script src="bower_components/leaflet-plugins/control/Permalink.Overlay.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/Icon.Canvas.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/Layer.Deferred.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/Marker.Rotate.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/Marker.Text.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/OpenStreetBugs.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/vector/GPX.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/vector/GPX.Speed.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/vector/KML.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/vector/OSM.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/vector/TOPOJSON.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/tile/Bing.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/tile/Google.js"></script>
-    <script src="bower_components/leaflet-plugins/layer/tile/Yandex.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
-    <script src="bower_components/object-hash/dist/object_hash.js"></script>
-    <script src="bower_components/chosen/chosen.jquery.js"></script>
-    <script src="bower_components/angular-chosen-localytics/dist/angular-chosen.js"></script>
     <script src="bower_components/ng-currency/dist/ng-currency.js"></script>
-    <script src="bower_components/js-xlsx/dist/xlsx.full.min.js"></script>
-    <script src="bower_components/es6-promise/promise.js"></script>
-    <script src="bower_components/alasql/dist/alasql.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-material-expansion-panel/dist/md-expansion-panel.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
-    <script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="bower_components/ez-plus/src/jquery.ez-plus.js"></script>
     <script src="scripts/find-polyfill.js"></script>
     <script src="scripts/envconfig.js"></script>
     <script src="scripts/siteconfig.js"></script>
@@ -469,11 +391,19 @@ ga('send', 'pageview');
 
     <script src="scripts/directives/offersdirective.js"></script>
     <script src="scripts/directives/smartmenu.js"></script>
-    <script src="scripts/directives/mainmenu.js"></script>
     <!-- endbuild -->
 
-    <script type="text/javascript" src="https://cdn.conekta.io/js/latest/conekta.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.conekta.io/js/latest/conekta.js"
+    ></script>
+    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
+
+    <!--SEE GRUNTFILE processhtml-->
+    <!-- process:template
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/25c04b33be0ab7f4c91305d5f/<%= mailchimpId %>.js");</script>
+    /process -->
   </body>
-
 </html>

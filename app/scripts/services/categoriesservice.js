@@ -170,7 +170,6 @@
           return (
             item &&
             item.onKidsMenu &&
-            !item.complement &&
             item.Childs &&
             item.Childs.length > 0 &&
             item.Childs.some(function(child) {
@@ -183,7 +182,6 @@
           return (
             item &&
             !item.onKidsMenu &&
-            !item.complement &&
             item.Childs &&
             item.Childs.length > 0 &&
             item.Childs.some(function(child) {

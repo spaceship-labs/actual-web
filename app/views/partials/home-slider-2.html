@@ -4,7 +4,7 @@
     <div ng-repeat="banner in vm.siteBanners | filter: {secondBanner: true}: true" class="home-slide-2">
       <a ng-if="banner.newTab" class="absolute-link" ng-href="{{banner.displayUrl}}" target="_blank"></a>
       <a ng-if="!banner.newTab" class="absolute-link" ng-href="{{banner.displayUrl}}"></a>
-      <img ng-src="{{main.api.baseUrl + '/uploads/sites/banners/' + banner.filename}}" alt="{{banner.displayText}}">
+      <img ng-src="{{main.api.cdnUrl + '/uploads/sites/banners/' + banner.filename}}" alt="{{banner.displayText}}">
     </div>
   </slick>
 </div>

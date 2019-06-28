@@ -1,19 +1,24 @@
-function InvoiceDialogController($scope, $mdDialog, $location, quotation, client){
-
-  $scope.continue = function(){
+function InvoiceDialogController(
+  $scope,
+  $mdDialog,
+  $location,
+  quotation,
+  client
+) {
+  $scope.continue = function() {
     $mdDialog.hide(true);
   };
 
-  $scope.cancel = function(){
+  $scope.cancel = function() {
     $mdDialog.cancel();
-  }
+  };
 
-  $scope.modify = function(){
+  $scope.modify = function() {
     console.log('modify');
-    $location.path('/user/invoices/')
-      .search({
-        checkoutProcess: quotation.id
-      });
+    $location.path('/user/invoices/').search({
+      checkoutProcess: quotation.id,
+      returnTo: '/checkout/paymentmethod/' + quotation.id
+    });
     $mdDialog.hide(false);
   };
 }

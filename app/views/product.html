@@ -4,38 +4,71 @@
       <a href="/">
         Inicio
       </a>
-      <span ng-repeat="itemGroup in vm.breadcrumbItems track by $index" ng-show="itemGroup.length > 0">
+      <span
+        ng-repeat="itemGroup in vm.breadcrumbItems track by $index"
+        ng-show="itemGroup.length > 0"
+      >
         >
-        <a ng-repeat="item in itemGroup" ng-href="/category/{{item.Handle}}" class="breadcrumb-item" ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}">{{item.Name}}</a>
+        <a
+          ng-repeat="item in itemGroup"
+          ng-href="/category/{{ item.Handle }}"
+          class="breadcrumb-item"
+          ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}"
+          >{{ item.Name }}</a
+        >
       </span>
     </p>
   </div>
 </div>
 
-
 <div class="content-block listing-view">
-  <div class="container container-xxlg" layout="row" layout-align="space-between start">
-
+  <div
+    class="container container-xxlg"
+    layout="row"
+    layout-align="space-between start"
+  >
     <!--START NAV-->
-    <sidebar-categories selected-category-id="vm.lowestCategory.id" categories-tree="main.categoriesTree" active-store="main.activeStore"
-      hide-sm hide-xs flex="20">
+    <sidebar-categories
+      selected-category-id="vm.lowestCategory.id"
+      categories-tree="main.categoriesTree"
+      active-store="main.activeStore"
+      hide-sm
+      hide-xs
+      flex="20"
+    >
     </sidebar-categories>
     <!--END NAV-->
 
     <!--MAIN VIEW-->
     <div class="product-view" flex="75" flex-sm="100" flex-xs="100">
-      <h2 class="listing-view-title">{{vm.product.Name || vm.product.ItemName}}</h2>
+      <h2 class="listing-view-title">
+        {{ vm.product.Name || vm.product.ItemName }}
+      </h2>
 
-      <div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
-        <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150">
+      <div
+        ng-if="vm.isLoading"
+        layout-fill
+        layout="row"
+        layout-align="center center"
+        class="loading-circle"
+      >
+        <md-progress-circular
+          md-mode="indeterminate"
+          class="md-accent"
+          md-diameter="150"
+        >
         </md-progress-circular>
       </div>
 
       <!--PRODUCT VIEW CONTENT-->
       <section ng-if="!vm.isLoading" class="product-view-content">
-
         <div layout="row" layout-wrap>
-          <div class="product-view-gallery-wrap" flex="50" flex-sm="100" flex-xs="100">
+          <div
+            class="product-view-gallery-wrap"
+            flex="50"
+            flex-sm="100"
+            flex-xs="100"
+          >
             <!--<ng-include src="'views/partials/product-gallery.html'"></ng-include>-->
             <product-gallery ng-if="vm.product" product="vm.product">
             </product-gallery>
@@ -43,81 +76,120 @@
 
           <!--PRODUCT VIEW DATA-->
           <div flex="50" flex-sm="100" flex-xs="100" class="product-view-data">
-
-            <ng-include src="'views/partials/product-features.html'"></ng-include>
-            <ng-include src="'views/partials/product-variants.html'"></ng-include>
-            <ng-include ng-if="vm.zipcodeDelivery && !vm.isLoadingDeliveries" src="'views/partials/product-delivery.html'"></ng-include>
+            <a
+              ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)"
+              href="#"
+              class="add-cart-btn"
+              ng-class="
+              {
+                'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity,
+                'add-cart-btn-blink': vm.zipcodeDelivery
+              }
+              "
+            >
+              <span class="add-cart-btn-icon">
+                <span class="add-cart-btn-icon-num">{{
+                  vm.productCart.quantity
+                }}</span>
+                <i class="icon-carro"></i>
+              </span>
+              <strong>Agregar al carrito</strong>
+            </a>
+            <ng-include
+              src="'views/partials/product-features.html'"
+            ></ng-include>
+            <ng-include
+              src="'views/partials/product-variants.html'"
+            ></ng-include>
+            <ng-include
+              ng-if="vm.zipcodeDelivery && !vm.isLoadingDeliveries"
+              src="'views/partials/product-delivery.html'"
+            ></ng-include>
             <ng-include src="'views/partials/product-stock.html'"></ng-include>
-            <ng-include src="'views/partials/product-promotions.html'"></ng-include>
+            <!-- <ng-include src="'views/partials/product-promotions.html'"></ng-include> -->
 
-
-            <div class="product-view-prices" layout="row" layout-wrap layout-align="space-between end">
+            <div
+              class="product-view-prices"
+              layout="row"
+              layout-wrap
+              layout-align="space-between end"
+            >
               <div flex="20" flex-sm="100" flex-xs="100" class="unit-data">
-                <p class="product-view-price-discount" ng-if="vm.product.mainPromo">
-                  - {{vm.mainPromo.discountPg1}}%
+                <p
+                  class="product-view-price-discount"
+                  ng-if="vm.product.mainPromo"
+                >
+                  - {{ vm.mainPromo.discountPg1 }}%
                 </p>
                 <p>
                   <span class="currency-label">MXN</span>
-                  <span class="product-view-price-crossed">{{vm.product.priceBefore | roundCurrency:'$' }}</span>
+                  <span class="product-view-price-crossed">{{
+                    vm.product.priceBefore | roundCurrency: '$'
+                  }}</span>
                 </p>
                 <p class="product-view-price-hl">
                   <span class="currency-label">MXN</span>
-                  <strong>{{vm.product.Price | roundCurrency:'$' }}</strong>
+                  <strong>{{ vm.product.Price | roundCurrency: '$' }}</strong>
                 </p>
               </div>
 
               <!--ONLY IF ZIPCODE IS ASSIGNED-->
               <div flex="10" flex-sm="50" flex-xs="50">
                 <div class="product-view-qty input-element">
-
-                  <div ng-if="!vm.zipcodeDelivery" ng-click="vm.showZipcodeDialog()" class="zipcode-layer">
-                  </div>
+                  <div
+                    ng-if="!vm.zipcodeDelivery"
+                    ng-click="vm.showZipcodeDialog()"
+                    class="zipcode-layer"
+                  ></div>
 
                   <label>Piezas</label>
-                  <select class="select-element" ng-model="vm.productCart.quantity" ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)">
+                  <select
+                    class="select-element"
+                    ng-model="vm.productCart.quantity"
+                    ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)"
+                  >
                   </select>
                 </div>
               </div>
               <div flex="30" flex-sm="50" flex-xs="50">
-                <div class="delivery-selection input-element select-element-wrapper">
+                <div
+                  class="delivery-selection input-element select-element-wrapper"
+                >
+                  <div
+                    ng-if="!vm.zipcodeDelivery"
+                    ng-click="vm.showZipcodeDialog()"
+                    class="zipcode-layer"
+                  ></div>
 
-                  <div ng-if="!vm.zipcodeDelivery" ng-click="vm.showZipcodeDialog()" class="zipcode-layer">
-                  </div>
-
-                  <label>Entrega aproximada{{vm.selectedDelivery}}</label>
-                  <select class="select-element" ng-model="vm.productCart.deliveryGroup" ng-change="vm.resetProductCartQuantity(deliveryGrop.available)"
-                    ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in vm.deliveriesGroups">
+                  <label>Entrega aproximada{{ vm.selectedDelivery }}</label>
+                  <select
+                    class="select-element"
+                    ng-model="vm.productCart.deliveryGroup"
+                    ng-change="vm.resetProductCartQuantity(deliveryGrop.available)"
+                    ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in vm.deliveriesGroups"
+                  >
                   </select>
                 </div>
               </div>
 
-              <div flex="25" flex-sm="100" flex-xs="100" class="product-view-price-hl product-view-price-main">
+              <div
+                flex="25"
+                flex-sm="100"
+                flex-xs="100"
+                class="product-view-price-hl product-view-price-main"
+              >
                 <h3>
                   <span class="currency-label">MXN</span>
-                  <strong>{{vm.product.Price * vm.productCart.quantity | roundCurrency:'$' }}</strong>
+                  <strong>{{
+                    vm.product.Price * vm.productCart.quantity
+                      | roundCurrency: '$'
+                  }}</strong>
                 </h3>
                 <span class="taxes-included">Impuestos incluidos</span>
               </div>
 
               <!--END CONDITION-->
-
             </div>
-
-            <a ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#" class="add-cart-btn" ng-class="
-              {
-                'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity,
-                'add-cart-btn-blink': vm.zipcodeDelivery
-              }
-              ">
-              <span class="add-cart-btn-icon">
-                <span class="add-cart-btn-icon-num">{{vm.productCart.quantity}}</span>
-                <i class="icon-carro"></i>
-              </span>
-              <strong>Agregar al carrito</strong>
-            </a>
-
-
-
 
             <!--<p class="seen-number">
               <strong class="small">visto {{vm.product.seenTimes}}
@@ -126,67 +198,166 @@
                hoy</strong>
             </p>
             -->
-
           </div>
           <!--END PRODUCT VIEW DATA-->
-
         </div>
 
-        <section class="desc-wrapper">
-          <div class="desc-head" layout="row" ng-init="hideProductDescription = vm.toggleProductDescription = !(
+        <!-- <section class="desc-wrapper">
+          <div
+            class="desc-head"
+            layout="row"
+            ng-init="hideProductDescription = vm.toggleProductDescription = !(
               vm.product.Description ||
               vm.product.PackageContent ||
               vm.product.MainFeatures ||
               vm.product.Restrictions ||
               vm.product.Conservation
             )
-            ">
-            <div ng-show="!hideProductDescription" flex="100" class="desc-head-item" ng-class="{'desc-head-item-on' : !vm.toggleProductDescription }"
-              ng-click="vm.toggleProductDescription = !vm.toggleProductDescription">
+            "
+          >
+            <div
+              ng-show="!hideProductDescription"
+              flex="100"
+              class="desc-head-item"
+              ng-class="{'desc-head-item-on' : !vm.toggleProductDescription }"
+              ng-click="vm.toggleProductDescription = !vm.toggleProductDescription"
+            >
               <h3>Detalles del artículo</h3>
             </div>
-            <div flex="100" class="desc-head-item" ng-class="{'desc-head-item-on' : vm.toggleProductDescription}" ng-click="!hideProductDescription && (vm.toggleProductDescription = !vm.toggleProductDescription)">
+            <div
+              flex="100"
+              class="desc-head-item"
+              ng-class="{'desc-head-item-on' : vm.toggleProductDescription}"
+              ng-click="!hideProductDescription && (vm.toggleProductDescription = !vm.toggleProductDescription)"
+            >
               <h3>Detalles de la entrega</h3>
             </div>
           </div>
           <div class="desc-cont">
             <article ng-show="!vm.toggleProductDescription">
               <div ng-if="vm.product.Description">
-                <div ng-bind-html="vm.trustAsHtml(vm.product.Description)"></div>
+                <div
+                  ng-bind-html="vm.trustAsHtml(vm.product.Description)"
+                ></div>
               </div>
 
               <div ng-if="vm.product.PackageContent">
                 <h3>Contenido del paquete</h3>
-                <div ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"></div>
+                <div
+                  ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"
+                ></div>
               </div>
 
               <div ng-if="vm.product.MainFeatures">
                 <h3>Caracteristicas principales</h3>
-                <div ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"></div>
+                <div
+                  ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"
+                ></div>
               </div>
 
               <div ng-if="vm.product.Restrictions">
                 <h3>Restricciones</h3>
-                <div ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"></div>
+                <div
+                  ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"
+                ></div>
               </div>
 
               <div ng-if="vm.product.Conservation">
                 <h3>Conservación</h3>
-                <div ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"></div>
+                <div
+                  ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"
+                ></div>
               </div>
             </article>
 
             <article ng-if="vm.toggleProductDescription">
               <div ng-bind-html="vm.trustAsHtml(main.site.deliveryText)"></div>
             </article>
-
           </div>
-        </section>
+        </section> -->
 
+        <!-- New product description section -->
+
+        <section class="desc-wrapper">
+          <md-expansion-panel-group md-component-id="panelGroup" multiple>
+            <md-expansion-panel md-component-id="panelOne">
+              <md-expansion-panel-collapsed>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+                <div>DETALLES DEL ARTÍCULO</div>
+                <div class="md-summary"></div>
+              </md-expansion-panel-collapsed>
+
+              <md-expansion-panel-expanded>
+                <md-expansion-panel-header ng-click="$panel.collapse()">
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                  <div>DETALLES DEL ARTÍCULO</div>
+                  <div class="md-summary"></div>
+                </md-expansion-panel-header>
+
+                <md-expansion-panel-content>
+                  <div ng-if="vm.product.Description">
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.Description)"
+                    ></div>
+                  </div>
+
+                  <div ng-if="vm.product.PackageContent">
+                    <h3>Contenido del paquete</h3>
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"
+                    ></div>
+                  </div>
+
+                  <div ng-if="vm.product.MainFeatures">
+                    <h3>Caracteristicas principales</h3>
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"
+                    ></div>
+                  </div>
+
+                  <div ng-if="vm.product.Restrictions">
+                    <h3>Restricciones</h3>
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"
+                    ></div>
+                  </div>
+
+                  <div ng-if="vm.product.Conservation">
+                    <h3>Conservación</h3>
+                    <div
+                      ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"
+                    ></div>
+                  </div>
+                </md-expansion-panel-content>
+              </md-expansion-panel-expanded>
+            </md-expansion-panel>
+
+            <md-expansion-panel md-component-id="panelTwo">
+              <md-expansion-panel-collapsed>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+                <div>DETALLES DE LA ENTREGA</div>
+                <div class="md-summary"></div>
+              </md-expansion-panel-collapsed>
+
+              <md-expansion-panel-expanded>
+                <md-expansion-panel-header ng-click="$panel.collapse()">
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                  <div>DETALLES DE LA ENTREGA</div>
+                  <div class="md-summary"></div>
+                </md-expansion-panel-header>
+
+                <md-expansion-panel-content>
+                  <div
+                    ng-bind-html="vm.trustAsHtml(main.site.deliveryText)"
+                  ></div>
+                </md-expansion-panel-content>
+              </md-expansion-panel-expanded>
+            </md-expansion-panel>
+          </md-expansion-panel-group>
+        </section>
       </section>
       <!--END PRODUCT VIEW CONTENT-->
     </div>
     <!-- MAIN VIEW -->
-
   </div>
 </div>

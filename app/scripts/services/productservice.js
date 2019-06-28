@@ -155,14 +155,18 @@
       if (product.icon_filename && product.icon_filename !== 'null') {
         product.icons = [
           {
-            url: api.baseUrl + '/uploads/products/' + product.icon_filename,
+            url: api.cdnUrl + '/uploads/products/' + product.icon_filename,
             size: 'default'
           }
         ];
         api.imageSizes.avatar.forEach(function(size) {
           product.icons.push({
             url:
-              api.baseUrl + '/uploads/products/' + size + product.icon_filename,
+              api.cdnUrl +
+              '/uploads/products/' +
+              product.icon_filename +
+              '?d=' +
+              size,
             size: size
           });
         });
