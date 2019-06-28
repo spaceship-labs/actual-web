@@ -280,10 +280,11 @@ md-sidenav {
   background: gray !important;
 }
 .action-btn-print {
-  background: #33ba2c;
-  color: #fff !important;
+  /* background: #33ba2c; */
+  color: #111 !important;
   text-transform: uppercase;
-  border: 0;
+  border-style: solid;
+  border-width: 1px;
   display: block;
   margin: 0;
   width: 100%;
@@ -295,11 +296,17 @@ md-sidenav {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-.action-btn-clear {
-  background: #e2023f;
+.add-to-card-quotation{
+  background: #111;
   color: #fff !important;
+}
+.action-btn-clear {
+  /* background: #e2023f; */
+  color: #111 !important;
   text-transform: uppercase;
-  border: 0;
+  /* border: 0; */
+  border-style: solid;
+  border-width: 1px;
   display: block;
   margin: 0;
   width: 100%;
@@ -4515,12 +4522,14 @@ md-backdrop.md-sidenav-backdrop {
 .cart-view .cart-view-btn {
   display: block;
   text-align: center;
-  color: #fff;
+  color: #111;
   font-weight: 700;
   font-size: 20px;
   padding: 14px 20px;
-  border: 0;
-  background: #33ba2c;
+  /* border: 0; */
+  border-style: solid;
+  border-width: 1px;
+  background: #e9c15f;
   width: 100%;
   margin: 14px 0 4px;
   outline: 0;
