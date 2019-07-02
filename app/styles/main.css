@@ -624,7 +624,11 @@ select {
   font-size: 24px;
 }
 .header-top-bar-menu .cart-active {
-  color: #50c841 !important;
+  color: #fff !important;
+  /*color: #fff!important;*/
+}
+.header-top-bar-menu .cart-active-items {
+  color: #e9c15f !important;
   /*color: #fff!important;*/
 }
 
