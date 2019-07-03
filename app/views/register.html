@@ -18,30 +18,31 @@
       <!--<p>Haz click <a ng-click="main.toggleLoginModal()" href="" class="login-toggler">aqui</a> para iniciar sesión</p>-->
     </section>
 
-    <h1>
-      <i class="icon-login"></i> Ingresa tus datos
-      <!-- <small>o</small>
-        <a
-          href=""
-          ng-click="main.toggleLoginModal()"
-          class="login-link login-toggler action-link"
-          >inicia sesión</a
-        > -->
-    </h1>
-
-    <hr />
-    <div>
-      <div></div>
-    </div>
-    <!-- <div ng-if="vm.isContactCreateActive">
-				<ng-include src="'views/partials/contact-form-register.html'"></ng-include>
-				<hr/>
-			</div> -->
     <form
       ng-if="!vm.isLoading && !vm.registerDone"
       name="registerForm"
       ng-submit="vm.register(registerForm)"
     >
+      <h1>
+        <i class="icon-login"></i> Ingresa tus datos
+        <small>o</small>
+        <a
+          href=""
+          ng-click="main.toggleLoginModal()"
+          class="login-link login-toggler action-link"
+          >inicia sesión</a
+        >
+      </h1>
+
+      <hr />
+
+      <!-- <div ng-if="vm.isContactCreateActive">
+        <ng-include
+          src="'views/partials/contact-form-register.html'"
+        ></ng-include>
+        <hr />
+      </div> -->
+
       <h4>DATOS PERSONALES DEL USUARIO</h4>
 
       <div class="input-container">
@@ -93,7 +94,7 @@
         </div>
       </div>
 
-      <div class="input-container">
+      <!-- <div class="input-container">
         <div class="input-element">
           <p>
             <label><strong>Télefono fijo*</strong></label>
@@ -102,7 +103,7 @@
             <input type="text" ng-model="vm.newClient.Phone1" required />
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="input-container">
         <div class="input-element">
@@ -146,6 +147,14 @@
             />
           </div>
         </div>
+      </div>
+
+      <hr />
+
+      <div ng-if="vm.isContactCreateActive">
+        <ng-include
+          src="'views/partials/contact-form-register.html'"
+        ></ng-include>
       </div>
 
       <button type="submit" class="form-view-btn form-view-btn-primary">
