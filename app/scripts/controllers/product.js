@@ -205,11 +205,57 @@ function ProductCtrl(
         } else {
           vm.productCart.quantity = 0;
         }
-
+        // NO TOCAR
         vm.isLoadingDeliveries = false;
-        if (options.callback && _.isFunction(options.callback)) {
-          options.callback();
+        if (!vm.zipcodeDelivery) {
+          return;
         }
+
+        if (vm.isLoadingDeliveries) {
+          return;
+        }
+
+        $rootScope.scrollTo('main');
+        vm.isLoading = true;
+        var productCartItems = cartService.getProductCartItems(
+          vm.productCart.deliveryGroup,
+          vm.productCart.quantity,
+          vm.warehouses,
+          activeStoreWarehouse
+        );
+
+        gtmService.notifyAddToCart(
+          vm.product.ItemCode,
+          vm.productCart.quantity,
+          vm.product.Price * vm.productCart.quantity,
+          vm.zipcodeDelivery.cp
+        );
+
+        if (productCartItems.length === 1) {
+          var cartItem = productCartItems[0];
+          var params = cartService.buildAddProductToCartParams(
+            vm.product.id,
+            cartItem
+          );
+          params.zipcodeDeliveryId = vm.zipcodeDelivery.id;
+          quotationService.addProduct(vm.product.id, params);
+        } else if (productCartItems.length > 1) {
+          var multiParams = productCartItems.map(function(cartItem) {
+            return cartService.buildAddProductToCartParams(
+              vm.product.id,
+              cartItem
+            );
+          });
+          // END NO TOCAR
+          var options = {
+            zipcodeDeliveryId: vm.zipcodeDelivery.id
+          };
+          quotationService.addMultipleProducts(multiParams, options);
+        }
+        // if (options.callback && _.isFunction(options.callback)) {
+        //   options.callback();
+        // }
+
         activeQuotationListener();
       })
       .catch(function(err) {
@@ -318,6 +364,42 @@ function ProductCtrl(
   }
 
   function addToCart($event) {
+    // ZipCode 1st try
+    return deliveryService
+      .getZipcodeDelivery('77500')
+      .then(function(zipcodeDelivery) {
+        console.log('zipcodedelivery', zipcodeDelivery);
+        if (zipcodeDelivery) {
+          vm.isLoadingDeliveries = true;
+          vm.zipcodeDelivery = zipcodeDelivery;
+
+          return setUpDeliveries({
+            productId: vm.product.ItemCode,
+            activeStoreId: activeStore.id,
+            zipcodeDeliveryId: zipcodeDelivery.id
+          });
+        } else {
+          if (zipcode) {
+            vm.isLoadingDeliveries = false;
+            dialogService.showDialog(
+              'Por el momento, su código postal esta fuera de nuestra área de cobertura'
+            );
+          }
+          return $q.resolve();
+        }
+      })
+      .catch(err => {
+        vm.isLoadingDeliveries = false;
+        console.log('err', err);
+        var errMsg = '';
+        if (err) {
+          errMsg = err.data || err;
+          errMsg = errMsg ? errMsg.toString() : '';
+          dialogService.showDialog(errMsg);
+        }
+      });
+
+    // Original function
     if (!vm.zipcodeDelivery) {
       showZipcodeDialog(null);
       return;
