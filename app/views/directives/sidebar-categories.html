@@ -11,7 +11,7 @@
       <span class="products-num">({{mainCategory[storeCode]}})</span>
     </a>
   </h2>
-
+  <img class="listing-maincategory-icon" src="/images/rectangle.png">
   <ul
     class="listing-view-nav"
     ng-class="{'active': mainCategory.isActive}"
@@ -30,18 +30,20 @@
           ng-href="/category/{{category.Handle}}"
         >
           <strong>{{category.Name}}</strong>
+          
           <span class="products-num">({{category[storeCode]}})</span>
         </a>
+        
         <a
           ng-if="!category.Childs"
           ng-href="/category/{{category.Handle}}"
-        >
+        > 
+        <img class="listing-view-nav-icon" src="/images/arrow-right.png">
+
           <strong>{{category.Name}}</strong>
           <span class="products-num">({{category[storeCode]}})</span>
         </a>
       </h3>
-
-
 
       <ul class="listing-view-subnav">
         <li
@@ -52,8 +54,6 @@
             {{subcategory.Name}} ({{subcategory[storeCode]}})
           </a>
         </li>
-
-
       </ul>
     </li>
   </ul>
