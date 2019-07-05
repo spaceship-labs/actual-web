@@ -109,16 +109,35 @@
             <ng-include src="'views/partials/product-stock.html'"></ng-include>
             <!-- <ng-include src="'views/partials/product-promotions.html'"></ng-include> -->
 
+            <!-- PRODUCT PRICE CURRENCY -->
             <div
               class="product-view-prices"
               layout="row"
               layout-wrap
               layout-align="space-between end"
             >
+              <div flex="20" flex-sm="100" flex-xs="100" class="unit-data">
+                <p
+                  class="product-view-price-discount"
+                  ng-if="vm.product.mainPromo"
+                >
+                  - {{ vm.mainPromo.discountPg1 }}%
+                </p>
+                <p>
+                  <span class="currency-label">MXN</span>
+                  <span class="product-view-price-crossed">{{
+                    vm.product.priceBefore | roundCurrency: '$'
+                  }}</span>
+                </p>
+                <p class="product-view-price-hl">
+                  <span class="currency-label">MXN</span>
+                  <strong>{{ vm.product.Price | roundCurrency: '$' }}</strong>
+                </p>
+              </div>
 
               <!--ONLY IF ZIPCODE IS ASSIGNED-->
               <div flex="10" flex-sm="50" flex-xs="50">
-                <!-- <div class="product-view-qty input-element">
+                <div class="product-view-qty input-element">
                   <div
                     ng-if="!vm.zipcodeDelivery"
                     ng-click="vm.showZipcodeDialog()"
@@ -132,46 +151,11 @@
                     ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)"
                   >
                   </select>
-                </div> -->
+                </div>
               </div>
-
-              <!-- Product prices -->
-              <div flex="25" flex-sm="100" flex-xs="100" class="unit-data">
-                  <p
-                    class="product-view-price-discount"
-                    ng-if="vm.product.mainPromo"
-                  >
-                    - {{ vm.mainPromo.discountPg1 }}%
-                  </p>
-                  <p>
-                    <span class="currency-label">MXN</span>
-                    <span class="product-view-price-crossed">{{
-                      vm.product.priceBefore | roundCurrency: '$'
-                    }}</span>
-                  </p>
-                  <p class="product-view-price-hl">
-                    <span class="currency-label">MXN</span>
-                    <strong>{{ vm.product.Price | roundCurrency: '$' }}</strong>
-                  </p>
-                </div>  
-              <!-- product taxes include -->
-              <!-- <div
-                flex="25"
-                flex-sm="100"
-                flex-xs="100"
-                class="product-view-price-hl product-view-price-main">
-                <h3>
-                  <span class="currency-label">MXN</span>
-                  <strong>{{
-                    vm.product.Price * vm.productCart.quantity
-                      | roundCurrency: '$'
-                  }}</strong>
-                </h3>
-                <span class="taxes-included">Impuestos incluidos</span>
-              </div> -->
-              <!--  Product delivery zipcode -->          
+              <!-- PRODUCT DELIVERY DATE -->
               <div flex="30" flex-sm="50" flex-xs="50">
-                <!-- <div
+                <div
                   class="delivery-selection input-element select-element-wrapper"
                 >
                   <div
@@ -188,19 +172,35 @@
                     ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in vm.deliveriesGroups"
                   >
                   </select>
-                </div> -->
+                </div>
+              </div>
+              <!-- PRODUCT PRICE TAXES INCLUDE -->
+              <div
+                flex="25"
+                flex-sm="100"
+                flex-xs="100"
+                class="product-view-price-hl product-view-price-main"
+              >
+                <h3>
+                  <span class="currency-label">MXN</span>
+                  <strong>{{
+                    vm.product.Price * vm.productCart.quantity
+                      | roundCurrency: '$'
+                  }}</strong>
+                </h3>
+                <span class="taxes-included">Impuestos incluidos</span>
               </div>
 
               <!--END CONDITION-->
             </div>
 
-            <!--<p class="seen-number">
+            <p class="seen-number">
               <strong class="small">visto {{vm.product.seenTimes}}
                 <span ng-if="vm.product.seenTimes > 1">veces</span>
                 <span ng-if="vm.product.seenTimes <= 1">veces</span>
                hoy</strong>
             </p>
-            -->
+           
           </div>
           <!--END PRODUCT VIEW DATA-->
         </div>
