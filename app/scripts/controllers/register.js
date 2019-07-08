@@ -18,6 +18,7 @@ function RegisterCtrl(
     register: register,
     isCheckoutProcessActive: false,
     copyDeliveryDataToPersonalData: copyDeliveryDataToPersonalData,
+    copyPersonalDataToDeliveryData: copyPersonalDataToDeliveryData,
     newClient: {},
     phonePattern: '.*\\d{10}$'
   });
@@ -84,7 +85,7 @@ function RegisterCtrl(
   }
 
   function copyDeliveryDataToPersonalData(client, contact) {
-    if (!contact.copyingPersonalData) {
+    if (!client.copyingPersonalData) {
       client.FirstName = _.clone(contact.FirstName);
       client.LastName = _.clone(contact.LastName);
       client.Phone1 = _.clone(contact.Tel1);
@@ -98,6 +99,24 @@ function RegisterCtrl(
       delete client.Cellolar;
       delete client.E_Mail;
       delete client._email;
+    }
+  }
+
+  function copyPersonalDataToDeliveryData(client, contact) {
+    if (!contact.copyingPersonalData) {
+      contact.FirstName = _.clone(client.FirstName);
+      contact.LastName = _.clone(client.LastName);
+      contact.Phone1 = _.clone(client.Tel1);
+      contact.Cellolar = _.clone(client.Cellular);
+      contact.E_Mail = _.clone(client.E_Mail);
+      contact._email = _.clone(contact._email);
+    } else {
+      delete contact.FirstName;
+      delete contact.LastName;
+      delete contact.Tel1;
+      delete contact.Cellolar;
+      delete contact.E_Mail;
+      delete contact._email;
     }
   }
 
