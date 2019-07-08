@@ -53,7 +53,8 @@ function ProductCtrl(
     zipcodeForm: {},
     isActiveBreadcrumbItem: breadcrumbService.isActiveBreadcrumbItem,
     showZipcodeDialog: showZipcodeDialog,
-    submitZipcodeForm: submitZipcodeForm
+    submitZipcodeForm: submitZipcodeForm,
+    setDeliveriesByStaticZipCode: setDeliveriesByStaticZipCode
   });
 
   init($routeParams.id);
@@ -365,6 +366,42 @@ function ProductCtrl(
       })
       .catch(function(err) {
         $log.error(err);
+      });
+  }
+
+  function setDeliveriesByStaticZipCode() {
+    return deliveryService
+      .getZipcodeDelivery('77500')
+      .then(function(zipcodeDelivery) {
+        console.log('zipcodedelivery', zipcodeDelivery);
+        if (zipcodeDelivery) {
+          vm.isLoadingDeliveries = true;
+          vm.zipcodeDelivery = zipcodeDelivery;
+
+          return setUpDeliveries({
+            productId: vm.product.ItemCode,
+            activeStoreId: activeStore.id,
+            zipcodeDeliveryId: zipcodeDelivery.id
+          });
+        } else {
+          if (zipcode) {
+            vm.isLoadingDeliveries = false;
+            dialogService.showDialog(
+              'Por el momento, su código postal esta fuera de nuestra área de cobertura'
+            );
+          }
+          return $q.resolve();
+        }
+      })
+      .catch(function(err) {
+        vm.isLoadingDeliveries = false;
+        console.log('err', err);
+        var errMsg = '';
+        if (err) {
+          errMsg = err.data || err;
+          errMsg = errMsg ? errMsg.toString() : '';
+          dialogService.showDialog(errMsg);
+        }
       });
   }
 
