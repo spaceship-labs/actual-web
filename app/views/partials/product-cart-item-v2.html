@@ -1,29 +1,22 @@
-<div 
-  class="cart-item" 
->
+<div class="cart-item">
   <h3>
-    <a ng-href="{{detail.Product.url}}">
-      <strong>{{detail.Product.Name || detail.Product.ItemCode}}</strong>
+    <a ng-href="{{ detail.Product.url }}">
+      <strong>{{ detail.Product.Name || detail.Product.ItemCode }}</strong>
     </a>
   </h3>
 
   <div layout="row" layout-wrap>
-
     <!--ITEM PROD IMG-->
-    <div 
-      flex="25" 
-      flex-xs="100"
-      class="cart-item-prod"
-    >
+    <div flex="25" flex-xs="100" class="cart-item-prod">
       <div layout="row">
         <div class="cart-item-prod-img">
-          <a ng-href="{{detail.Product.url}}">
-            <img ng-src="{{detail.Product.icons[0].url}}" alt="">
+          <a ng-href="{{ detail.Product.url }}">
+            <img ng-src="{{ detail.Product.icons[0].url }}" alt="" />
           </a>
         </div>
         <div>
           <ul>
-            <li><strong>Código: </strong> {{detail.Product.ItemCode}}</li>
+            <li><strong>Código: </strong> {{ detail.Product.ItemCode }}</li>
             <li
               ng-repeat="filter in detail.Product.Filters"
               ng-if="
@@ -36,15 +29,17 @@
                 filter.Values.length > 0
               "
             >
-              <strong>{{filter.Name}}: </strong>
+              <strong>{{ filter.Name }}: </strong>
               <span ng-repeat="value in filter.Values track by $index">
-                <span ng-if="value.Handle != 'color-paleta'">{{value.Name}}</span>
+                <span ng-if="value.Handle != 'color-paleta'">{{
+                  value.Name
+                }}</span>
                 <span ng-if="$index < (filter.Values.length-1)">,</span>
               </span>
             </li>
             <li ng-if="detail.Product.DetailedColor">
               <strong>Color</strong>
-              <span>{{detail.Product.DetailedColor}}</span>
+              <span>{{ detail.Product.DetailedColor }}</span>
             </li>
           </ul>
         </div>
@@ -53,41 +48,48 @@
     <!--END ITEM PROD IMG-->
 
     <!--ITEM DATA-->
-    <div 
-      class="cart-item-data" 
-      flex="75"
-      flex-xs="100"
-    >
+    <div class="cart-item-data" flex="75" flex-xs="100">
       <div class="cart-item-data-inner">
-
-        <div class="cart-item-data-prices" layout="row" layout-wrap layout-align="space-between center">
-          <div class="cart-item-data-column" flex="35" flex-xs="50">
+        <div
+          class="cart-item-data-prices"
+          layout="row"
+          layout-wrap
+          layout-align="space-between center"
+        >
+          <!-- <div class="cart-item-data-column" flex="35" flex-xs="50">
             <p><strong>Fecha entrega estimada</strong></p>
             <p>{{detail.shipDate | date: "d/MMM/yyyy"}}</p>
-          </div>
+          </div> -->
           <div class="cart-item-data-column" flex="20" flex-xs="50">
             <p><strong>Precio Lista</strong></p>
-            <p><small>MXN</small> {{detail.unitPrice | roundCurrency}}</p>
+            <p><small>MXN</small> {{ detail.unitPrice | roundCurrency }}</p>
           </div>
-          <div class="cart-item-data-column" flex="10" flex-xs="50" class="cart-item-data-qty">
+          <div
+            class="cart-item-data-column"
+            flex="10"
+            flex-xs="50"
+            class="cart-item-data-qty"
+          >
             <p><strong>Pieza(s)</strong></p>
-            <p>{{detail.quantity}}</p>
+            <p>{{ detail.quantity }}</p>
           </div>
           <div class="cart-item-data-column" flex="15" flex-xs="50">
             <p><strong>Promoción</strong></p>
-            <p>{{detail.discountPercent}}%</p>
+            <p>{{ detail.discountPercent }}%</p>
           </div>
           <div class="cart-item-data-column" flex="20" flex-xs="50">
             <p><strong>Total</strong></p>
-            <p class="detail-total"><small>MXN</small> {{detail.total | roundCurrency}}</p>
+            <p class="detail-total">
+              <small>MXN</small> {{ detail.total | roundCurrency }}
+            </p>
           </div>
         </div>
       </div>
-
     </div>
     <!--END ITEM DATA-->
 
-    <a href="#"
+    <a
+      href="#"
       ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
       ng-click="vm.alertRemoveDetail($event,detail, $index)"
       class="cart-item-remove"
@@ -96,14 +98,13 @@
       <md-tooltip md-direction="bottom">Eliminar</md-tooltip>
     </a>
 
-    
-    <div 
-      ng-show="!detail.validStock && !vm.quotation.OrderWeb && !vm.isValidatingStock" 
+    <div
+      ng-show="!detail.validStock && !vm.quotation.OrderWeb && !vm.isValidatingStock"
       layout="row"
       layout-align="center center"
       class="stock-alert-layer"
       ng-click="vm.showDetailGroupStockAlert($event, detail)"
-    > 
+    >
       <div class="stock-alert-content">
         <p>
           <a><i class="icon-alert"></i></a>
@@ -113,13 +114,11 @@
         </p>
       </div>
     </div>
-    
-
   </div>
 
   <!--
-  <p 
-    class="bottom-text bottom-text-alert" 
+  <p
+    class="bottom-text bottom-text-alert"
     ng-if="!detail.validStock && !vm.isValidatingStock">
     <strong>ALERTA: La disponibilidad y/o fecha de entrega de este artículo ha cambiado</strong>
   </p>
@@ -130,14 +129,13 @@
     <strong>Entrega aproximada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
   </p>
   -->
-  
 
   <!--
   <p class="bottom-text" ng-repeat="detail in detail.details">
     <strong>Entrega aproximada:</strong>
     {{detail.shipDate | date: "d/MMM/yyyy"}}
-    (en {{vm.daysDiff(detail.shipDate)}} días)  
-    <span 
+    (en {{vm.daysDiff(detail.shipDate)}} días)
+    <span
       ng-if="detail.immediateDelivery"
       class="immediate-delivery-label"
     >
@@ -153,21 +151,21 @@
     "
     class="bottom-text"
   >
-    Paquete: {{detail.discountName}}
+    Paquete: {{ detail.discountName }}
   </p>
-  <div 
+  <div
     ng-if="vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'"
   >
     <p class="bottom-text">
-      <strong>Promoción:</strong> {{detail.discountName}}
+      <strong>Promoción:</strong> {{ detail.discountName }}
     </p>
     <p class="bottom-text" ng-if="detail.ewallet > 0">
-      Beneficio monedero eléctronico: {{detail.ewallet | currency}}
-    </p>                  
+      Beneficio monedero eléctronico: {{ detail.ewallet | currency }}
+    </p>
   </div>
   <div ng-if="detail.bigticketDiscountPercentage > 0">
     <p class="bottom-text">
-      Descuento Big Ticket: -{{detail.bigticketDiscountPercentage}}% adicional
+      Descuento Big Ticket: -{{ detail.bigticketDiscountPercentage }}% adicional
     </p>
   </div>
 

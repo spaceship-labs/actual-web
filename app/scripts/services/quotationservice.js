@@ -343,6 +343,8 @@
 
     //@params: Object products, containing id, quantity
     function addMultipleProducts(products, options) {
+      console.log('multiParams: ', products);
+
       options = options || {};
       var quotationId = localStorageService.get('quotation');
       if (quotationId) {
