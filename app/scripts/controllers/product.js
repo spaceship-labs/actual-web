@@ -171,7 +171,7 @@ function ProductCtrl(
     });
   }
 
-  function setUpDeliveries(options) {
+  function setUpDeliveries(options, addToCart) {
     options = options || {};
 
     /*
@@ -206,57 +206,62 @@ function ProductCtrl(
           vm.productCart.quantity = 0;
         }
         // NO TOCAR
-        vm.isLoadingDeliveries = false;
-        if (!vm.zipcodeDelivery) {
-          return;
-        }
+        if (addToCart) {
+          vm.isLoadingDeliveries = false;
+          if (!vm.zipcodeDelivery) {
+            return;
+          }
 
-        if (vm.isLoadingDeliveries) {
-          return;
-        }
+          if (vm.isLoadingDeliveries) {
+            return;
+          }
 
-        $rootScope.scrollTo('main');
-        vm.isLoading = true;
-        var productCartItems = cartService.getProductCartItems(
-          vm.productCart.deliveryGroup,
-          vm.productCart.quantity,
-          vm.warehouses,
-          activeStoreWarehouse
-        );
-
-        gtmService.notifyAddToCart(
-          vm.product.ItemCode,
-          vm.productCart.quantity,
-          vm.product.Price * vm.productCart.quantity,
-          vm.zipcodeDelivery.cp
-        );
-
-        if (productCartItems.length === 1) {
-          var cartItem = productCartItems[0];
-          var params = cartService.buildAddProductToCartParams(
-            vm.product.id,
-            cartItem
+          $rootScope.scrollTo('main');
+          vm.isLoading = true;
+          var productCartItems = cartService.getProductCartItems(
+            vm.productCart.deliveryGroup,
+            vm.productCart.quantity,
+            vm.warehouses,
+            activeStoreWarehouse
           );
-          params.zipcodeDeliveryId = vm.zipcodeDelivery.id;
-          quotationService.addProduct(vm.product.id, params);
-        } else if (productCartItems.length > 1) {
-          var multiParams = productCartItems.map(function(cartItem) {
-            return cartService.buildAddProductToCartParams(
+
+          gtmService.notifyAddToCart(
+            vm.product.ItemCode,
+            vm.productCart.quantity,
+            vm.product.Price * vm.productCart.quantity,
+            vm.zipcodeDelivery.cp
+          );
+
+          if (productCartItems.length === 1) {
+            console.log('Entra al primer if');
+
+            var cartItem = productCartItems[0];
+            var params = cartService.buildAddProductToCartParams(
               vm.product.id,
               cartItem
             );
-          });
-          // END NO TOCAR
-          var options = {
-            zipcodeDeliveryId: vm.zipcodeDelivery.id
-          };
-          quotationService.addMultipleProducts(multiParams, options);
+            params.zipcodeDeliveryId = vm.zipcodeDelivery.id;
+            quotationService.addProduct(vm.product.id, params);
+          } else if (productCartItems.length > 1) {
+            console.log('Entra al segundo if');
+
+            var multiParams = productCartItems.map(function(cartItem) {
+              return cartService.buildAddProductToCartParams(
+                vm.product.id,
+                cartItem
+              );
+            });
+            var options = {
+              zipcodeDeliveryId: vm.zipcodeDelivery.id
+            };
+            quotationService.addMultipleProducts(multiParams, options);
+          }
+          activeQuotationListener();
         }
+        // END NO TOCAR
         // if (options.callback && _.isFunction(options.callback)) {
         //   options.callback();
         // }
-
-        activeQuotationListener();
       })
       .catch(function(err) {
         console.log('err', err);
@@ -364,6 +369,7 @@ function ProductCtrl(
   }
 
   function addToCart($event) {
+    var addToCart = true;
     // ZipCode 1st try
     return deliveryService
       .getZipcodeDelivery('77500')
@@ -373,11 +379,14 @@ function ProductCtrl(
           vm.isLoadingDeliveries = true;
           vm.zipcodeDelivery = zipcodeDelivery;
 
-          return setUpDeliveries({
-            productId: vm.product.ItemCode,
-            activeStoreId: activeStore.id,
-            zipcodeDeliveryId: zipcodeDelivery.id
-          });
+          return setUpDeliveries(
+            {
+              productId: vm.product.ItemCode,
+              activeStoreId: activeStore.id,
+              zipcodeDeliveryId: zipcodeDelivery.id
+            },
+            addToCart
+          );
         } else {
           if (zipcode) {
             vm.isLoadingDeliveries = false;
