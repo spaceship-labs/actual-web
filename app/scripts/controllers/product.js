@@ -397,7 +397,7 @@ function ProductCtrl(
           return $q.resolve();
         }
       })
-      .catch(err => {
+      .catch(function(err) {
         vm.isLoadingDeliveries = false;
         console.log('err', err);
         var errMsg = '';
