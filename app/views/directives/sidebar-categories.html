@@ -7,11 +7,13 @@
       ng-href="/category/{{mainCategory.Handle}}"
       ng-class="{'active': mainCategory.isActive}">
       <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i>
+      <!-- MENU HOVER -->
       <strong>{{mainCategory.Name}}</strong>
       <span class="products-num">({{mainCategory[storeCode]}})</span>
     </a>
   </h2>
   <img class="listing-maincategory-icon" src="/images/rectangle.png">
+
   <ul
     class="listing-view-nav"
     ng-class="{'active': mainCategory.isActive}"
@@ -29,8 +31,8 @@
           ng-if="category.Childs"
           ng-href="/category/{{category.Handle}}"
         >
+        <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
           <strong>{{category.Name}}</strong>
-          
           <span class="products-num">({{category[storeCode]}})</span>
         </a>
         
@@ -38,7 +40,7 @@
           ng-if="!category.Childs"
           ng-href="/category/{{category.Handle}}"
         > 
-        <img class="listing-view-nav-icon" src="/images/arrow-right.png">
+        <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
 
           <strong>{{category.Name}}</strong>
           <span class="products-num">({{category[storeCode]}})</span>
@@ -50,6 +52,8 @@
           ng-repeat="subcategory in category.Childs | orderBy: 'Name' "
           ng-if="subcategory[storeCode]"
         >
+        <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
+
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
             {{subcategory.Name}} ({{subcategory[storeCode]}})
           </a>

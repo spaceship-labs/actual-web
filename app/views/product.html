@@ -20,13 +20,14 @@
     </p>
   </div>
 </div>
-<div class="content-block listing-view">
+<div class="content-block listing-view"
+>
   <div
     class="container container-xxlg"
     layout="row"
   >
     <!--START NAV-->
-    <div class="product-nav-viewcategory">
+    <div class="product-nav-viewcategory"  >
         <sidebar-categories
           selected-category-id="vm.lowestCategory.id"
           categories-tree="main.categoriesTree"
@@ -35,6 +36,8 @@
           hide-xs
           flex="20"
         >
+
+        <!-- ng-mouseover="main.handleCategoryHover(category.Handle)" -->
         </sidebar-categories>
       </div>
     </sidebar-categories>
@@ -366,3 +369,5 @@
   </div>
  </div>
 
+
+ <!-- ng-mouseleave="main.handleCategoryLeave()"  ng-mouseover="main.menuCategoriesOn = false" ng-mouseover="main.handleCategoryHover(category.Handle)" -->                

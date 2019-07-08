@@ -343,6 +343,11 @@ select {
   overflow: visible;
 }
 
+.input-element-header{
+  padding-top: 16px;
+  padding-bottom:16px;
+}
+
 .select-element,
 .input-element .input-element-inner {
   background: rgb(250, 250, 250);
@@ -2245,7 +2250,7 @@ select {
 .product-nav-viewcategory{
   margin-left: 30px;
   margin-right: 30px;
-  width: 210px;
+  width: 240px;
   height: auto;
 }
 .product-gallery {
@@ -3584,9 +3589,9 @@ md-backdrop.md-sidenav-backdrop {
   background: #33ba2c;
 }
 
-.form-view-btns {
+/* .form-view-btns {
   margin-top: 20px;
-}
+} */
 .form-view-btns .form-view-btn + .form-view-btn {
   margin-left: 16px;
 }
@@ -6207,13 +6212,110 @@ md-backdrop.md-sidenav-backdrop {
 /*-------------------/
   #REGISTER
 /*------------------*/
+
+.register-accordion-form{
+  margin-top: 50px;
+}
+
+.container-accordion{
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+button.accordion{
+  width: 100%;
+  background-color: #f7de9e;
+  display:flex;
+  border: none;
+  outline: none;
+  padding: 15px 20px;
+  display: inline-flex;
+  transition: background-color 0.3s linear;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+/* Pendiente por recibir confirmación de gradient
+  background-image: linear-gradient(to top, #f1be3e 0%,#f1be3e 51%, #f7de9e 100%);
+    transition: background-img 0.3s linear;
+*/
+
+.accordion-content{
+  padding-right:16px;
+  padding-left: 16px;
+  border-left: 1px solid whitesmoke;
+  border-right: 1px solid whitesmoke;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26); 
+  margin-bottom: 16px;
+
+}
+/* To make the height scroll
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+ */
+
+button.accordion:hover{
+  background: #ddd;
+  background-color: #f1be3e;
+  cursor: pointer;
+}
+
+/* button.accordion::before {
+} */
+
+ .icon-accordion{
+  float: left;
+  color: gray;
+  width: 30px;
+  margin-left: 25px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display:flex;
+
+
+}
+
+.strong-accordion{
+  float: left;
+  margin-left: 16px;
+  margin-top: 18px;
+  font-size: 20px;
+  font-family: "Helvetica Neue";
+  display:flex;
+
+}
+
+.span-accordion{
+  padding-top: 19px;
+  padding-left: 20%;
+  display:flex;
+  font-family: "Helvetica Neue";  
+}
+.content-accordion-list{
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+}
+
+.action-btn-delete
+
 #register .input-container {
   margin: 20px 0;
 }
 #register .form-view-btn {
   display: block;
   width: 100%;
+  border-radius: 3px;
+  font-size: 15px;
+  margin-top: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26); 
+
 }
+/*  botton register button
+ box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); 
+ */
 
 /*ICON LINK*/
 .icon-link.gray {
@@ -6813,7 +6915,11 @@ md-backdrop.md-sidenav-backdrop {
 /*.listing-view-nav-wrapper:hover > h2 a,*/
 .listing-view-nav-wrapper > h2 a.active {
   color: #dda901;
+  cursor: pointer;
 }
+/* background: #ddd;
+background-color: #f1be3e;
+cursor: pointer; */
 /*
 .listing-view-nav-wrapper:hover .listing-view-nav{display: block!important;}
 .listing-view-nav > li:hover .listing-view-subnav{
