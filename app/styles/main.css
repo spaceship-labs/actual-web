@@ -6219,8 +6219,7 @@ md-backdrop.md-sidenav-backdrop {
 
 .container-accordion{
   width: 100%;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 30px;
 }
 
 button.accordion{
@@ -6263,7 +6262,6 @@ button.accordion:hover{
 
 .strong-accordion{
   float: left;
-  margin-left: 16px;
   margin-top: 18px;
   font-size: 20px;
   font-family: "Helvetica Neue";
@@ -6272,11 +6270,12 @@ button.accordion:hover{
 }
 
 .span-accordion{
+  position: absolute;
   padding-top: 19px;
-  padding-left: 20%;
-  display:flex;
+  padding-left: 250px;
   font-family: "Helvetica Neue";  
 }
+
 .content-accordion-list{
   margin-top: 50px;
   margin-bottom: 50px;
@@ -6298,9 +6297,6 @@ button.accordion:hover{
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26); 
 
 }
-/*  botton register button
- box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); 
- */
 
 /*ICON LINK*/
 .icon-link.gray {
