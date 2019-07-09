@@ -1,10 +1,11 @@
-<section id="register" class="form-view checkbox-client-type">
-  <div class="container container-lg">
+<div layout="row" layout-wrap>
+<section id="register" class="form-view checkbox-client-type container-xlg " >
+  <div class="container container-lg ">
     <div
       ng-if="vm.isLoading"
       layout-fill
       layout="row"
-      layout-align="center center"
+      fxLayoutAlign="center center"
       class="loading-circle"
     >
       <md-progress-circular
@@ -34,7 +35,7 @@
           >inicia sesión</a
         >
       </h1>
-      <hr />
+      <hr/>
       <!-- ACCORDION LIST -->
       <div class="container-accordion">
         <!-- ACCORDION CONTENT FOR INVITED USER -->
@@ -142,6 +143,17 @@
         <div class="accordion-content" ng-show="vm.accordionsession" >
         <div class="input-element-header">
 
+            <div class="input-container">
+                <div class="input-element">
+                  <p>
+                    <label><strong>Email*</strong></label>
+                  </p>
+                  <div class="input-element-inner">
+                    <input type="email" ng-model="vm.newClient.E_Mail" required />
+                  </div>
+                </div>
+              </div>
+
           <div class="input-container" ng-if="!vm.newClient.invited">
             <div class="input-element">
               <p>
@@ -151,21 +163,6 @@
                 <input
                   type="password"
                   ng-model="vm.newClient.password"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div class="input-container" ng-if="!vm.newClient.invited">
-            <div class="input-element">
-              <p>
-                <label><strong>Confirmar contraseña*</strong></label>
-              </p>
-              <div class="input-element-inner">
-                <input
-                  type="password"
-                  ng-model="vm.newClient._password"
-                  ng-pattern="vm.newClient.password"
                   required
                 />
               </div>
@@ -183,7 +180,7 @@
           <!-- <md-expansion-panel-icon></md-expansion-panel-icon> -->
           <img class="icon-accordion" src="images/arrow2-right.png" alt="" />
           <strong class="strong-accordion">REGÍSTRATE</strong>
-          <span class="span-accordion">¿Eres un nuevo cliente?<strong> Empieza aquí</strong></span>
+          <span class="span-accordion">¿Eres un nuevo cliente?<strong > Empieza aquí</strong></span>
         </button>
         <div class="accordion-content" ng-show="vm.accordionregister">
           <div class="input-element-header">
@@ -239,17 +236,6 @@
             </div>
           </div>
 
-          <!-- <div class="input-container">
-                <div class="input-element">
-                  <p>
-                    <label><strong>Télefono fijo*</strong></label>
-                  </p>
-                  <div class="input-element-inner">
-                    <input type="text" ng-model="vm.newClient.Phone1" required />
-                  </div>
-                </div>
-              </div> -->
-
           <div class="input-container">
             <div class="input-element">
               <p>
@@ -266,6 +252,36 @@
               src="'views/partials/contact-form-register.html'"
             ></ng-include>
           </div>
+          <hr>
+          <div class="input-container" ng-if="!vm.newClient.invited">
+              <div class="input-element">
+                <p>
+                  <label><strong>Contraseña*</strong></label>
+                </p>
+                <div class="input-element-inner">
+                  <input
+                    type="password"
+                    ng-model="vm.newClient.password"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="input-container" ng-if="!vm.newClient.invited">
+              <div class="input-element">
+                <p>
+                  <label><strong>Confirmar contraseña*</strong></label>
+                </p>
+                <div class="input-element-inner">
+                  <input
+                    type="password"
+                    ng-model="vm.newClient._password"
+                    ng-pattern="vm.newClient.password"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
           <button type="submit" class="form-view-btn form-view-btn-primary">
             Continuar
           </button>
@@ -276,3 +292,156 @@
     </form>
   </div>
 </section>
+
+
+<div layout="row" layout-wrap >
+<section>
+  <form
+  ng-submit="vm.continueBuying()"
+  class="cart-view container container-lg"
+  >
+    <aside
+      flex
+      flex-sm="100"
+      flex-xs="100"
+      class="cart-aside"
+      ng-show="!vm.quotation.isSpeiQuotation"
+    >
+      <h1 class="cart-title">
+        <i class="icon-carro">
+          <span>{{ vm.quotation.totalProducts }}</span>
+        </i>
+        <strong>MI CARRITO</strong>
+      </h1>
+  
+      <div class="cart-summary">
+        <table>
+          <tr>
+            <td>
+              <strong
+                >Subtotal ({{
+                  vm.quotation.totalProducts
+                }}
+                productos):</strong
+              >
+            </td>
+            <td>
+              <strong>MXN {{ vm.quotation.subtotal | currency }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Descuento:</td>
+            <td>
+              <strong
+                >MXN <span ng-show="vm.quotation.discount > 0">-</span
+                >{{ vm.quotation.discount | currency }}</strong
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Costo de envío:</strong>
+            </td>
+            <td>
+              <strong>MXN $0.00</strong>
+            </td>
+          </tr>
+        </table>
+        <hr/>
+        <div
+          class="cart-totals"
+          layout="row"
+          layout-align="space-between end"
+        >
+          <div flex="30">
+            <h1>
+              <strong>TOTAL:</strong>
+            </h1>
+          </div>
+          <div flex="70">
+            <h3
+              class="price-crossed-block"
+              ng-show="vm.quotation.subtotal != vm.quotation.total"
+            >
+              <span class="currency-label">MXN</span>
+              <span class="price-crossed">{{
+                vm.quotation.subtotal | roundCurrency
+              }}</span>
+            </h3>
+            <h1 class="price-main">
+              <span class="currency-label">MXN</span>
+              {{ vm.quotation.total | roundCurrency }}
+            </h1>
+          </div>
+        </div>
+        <input
+          type="submit"
+          value="CONTINUAR"
+          ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
+          ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries"
+          ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries }"
+          class="cart-view-btn print-btn"
+        />
+  
+        <div
+          class="alert-btn-wrap"
+          ng-if="vm.quotation.bigticketMaxPercentage > 0 && false"
+        >
+          <a href="#" ng-click="vm.showBigTicketDialog()">
+            <i class="icon-alert"></i>
+          </a>
+        </div>
+        <p
+          class="cart-summary-note"
+          ng-show="vm.isValidatingStock && vm.quotation.Details"
+        >
+          Validando disponibilidad...
+        </p>
+  
+        <p class="cart-summary-note">
+          Precios con impuestos incluidos.
+        </p>
+      </div>
+      <div layout="row" layout-align="space-between center" layout-wrap>
+        <div flex="45">
+          <a
+            ng-if="vm.quotation.Details.length > 0"
+            href="#"
+            ng-click="vm.print()"
+            class="action-btn-print print-btn"
+          >
+            IMPRIMIR
+          </a>
+        </div>
+        <div flex="50">
+          <a
+            ng-if="vm.quotation.Details.length > 0"
+            ng-click="vm.sendByEmail()"
+            href="#"
+            class="action-btn-print print-btn"
+          >
+            ENVIAR POR EMAIL
+          </a>
+        </div>
+      </div>
+      <br />
+      <div layout="row" layout-align="space-between center" layout-wrap>
+        <div flex="100">
+          <a
+            ng-if="vm.quotation.Details.length > 0"
+            ng-click="vm.alertRemoveAllDetails($event)"
+            href="#"
+            class="action-btn-clear print-btn "
+          >
+            LIMPIAR CARRITO
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+  </form>
+  </section>
+</div>
+
+
+</div>

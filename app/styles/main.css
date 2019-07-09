@@ -6235,11 +6235,6 @@ button.accordion{
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
-/* Pendiente por recibir confirmación de gradient
-  background-image: linear-gradient(to top, #f1be3e 0%,#f1be3e 51%, #f7de9e 100%);
-    transition: background-img 0.3s linear;
-*/
-
 .accordion-content{
   padding-right:16px;
   padding-left: 16px;
@@ -6249,11 +6244,6 @@ button.accordion{
   margin-bottom: 16px;
 
 }
-/* To make the height scroll
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-in-out;
- */
 
 button.accordion:hover{
   background: #ddd;
@@ -6261,10 +6251,7 @@ button.accordion:hover{
   cursor: pointer;
 }
 
-/* button.accordion::before {
-} */
-
- .icon-accordion{
+.icon-accordion{
   float: left;
   color: gray;
   width: 30px;
@@ -6272,8 +6259,6 @@ button.accordion:hover{
   margin-top: 16px;
   margin-bottom: 16px;
   display:flex;
-
-
 }
 
 .strong-accordion{
