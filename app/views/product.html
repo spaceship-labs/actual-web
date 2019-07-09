@@ -109,7 +109,7 @@
               ng-if="vm.zipcodeDelivery && !vm.isLoadingDeliveries"
               src="'views/partials/product-delivery.html'"
             ></ng-include>
-            <ng-include src="'views/partials/product-stock.html'"></ng-include>
+            <!-- <ng-include src="'views/partials/product-stock.html'"></ng-include> -->
             <!-- <ng-include src="'views/partials/product-promotions.html'"></ng-include> -->
 
             <!-- PRODUCT PRICE CURRENCY -->
@@ -143,7 +143,7 @@
                 <div class="product-view-qty input-element">
                   <div
                     ng-if="!vm.zipcodeDelivery"
-                    ng-click="vm.showZipcodeDialog()"
+                    ng-click="vm.setDeliveriesByStaticZipCode()"
                     class="zipcode-layer"
                   ></div>
 
@@ -163,7 +163,7 @@
                 >
                   <div
                     ng-if="!vm.zipcodeDelivery"
-                    ng-click="vm.showZipcodeDialog()"
+                    ng-click="vm.setDeliveriesByStaticZipCode()"
                     class="zipcode-layer"
                   ></div>
 

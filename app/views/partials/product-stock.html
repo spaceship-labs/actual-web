@@ -26,10 +26,10 @@
   </div>
 
   <div ng-if="vm.available && !vm.isLoadingDeliveries">
-    <table class="bodyTable_margin">
+    <table class="delivery-table">
       <tr ng-repeat="deliveryGroup in vm.deliveriesGroups">
-        <td>
-          {{ deliveryGroup.date | date: 'd/MMM/yyyy' }}
+        <!-- <td>
+          {{deliveryGroup.date | date: "d/MMM/yyyy"}}
           <span ng-show="!vm.isImmediateDelivery(deliveryGroup.date)">
             (en {{ deliveryGroup.days }} días)
             <span class="delivery-date-stock"
@@ -37,10 +37,13 @@
               {{ vm.getPiecesString(deliveryGroup.available) }}
             </span>
           </span>
-          <tr>
-            <!--
-          <p>Debug</p>                       
-          <span 
+          <span ng-show="vm.isImmediateDelivery(deliveryGroup.date)" class="immediate-delivery">
+            Entrega en tienda
+          </span>  -->
+
+        <!--
+          <p>Debug</p>
+          <span
               class="comma-separated"
               ng-repeat="d in deliveryGroup.deliveries track by $index"
             >
@@ -48,19 +51,11 @@
           </span>
           -->
 
-            <!-- <td class="delivery-date-stock">
-          </td> -->
-
-            <td>
-              <span
-                ng-show="vm.isImmediateDelivery(deliveryGroup.date)"
-                class="immediate-delivery"
-              >
-                Entrega en tienda
-              </span>
-            </td>
-          </tr>
-        </td>
+        <!-- </td> -->
+        <!-- <td class="delivery-date-stock">
+          {{ deliveryGroup.available | number: 0 }}
+          {{ vm.getPiecesString(deliveryGroup.available) }}
+        </td> -->
       </tr>
     </table>
   </div>
