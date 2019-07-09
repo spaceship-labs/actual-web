@@ -606,6 +606,8 @@
     }
 
     function signIn() {
+      console.log('signIn function');
+
       vm.isLoadingLogin = true;
       var formData = {
         email: vm.loginForm.email,

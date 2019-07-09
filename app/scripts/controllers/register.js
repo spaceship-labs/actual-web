@@ -19,6 +19,7 @@ function RegisterCtrl(
     isCheckoutProcessActive: false,
     copyDeliveryDataToPersonalData: copyDeliveryDataToPersonalData,
     copyPersonalDataToDeliveryData: copyPersonalDataToDeliveryData,
+    signIn: signIn,
     newClient: {},
     phonePattern: '.*\\d{10}$'
   });
@@ -120,7 +121,14 @@ function RegisterCtrl(
     }
   }
 
-  function register(form) {
+  function signIn(form) {
+    var handleSignInError = function(err) {
+      console.log('err', err);
+      dialogService.showDialog('Error al iniciar sesión');
+    };
+  }
+
+  function register(form, invited) {
     console.log('register');
     var createdClient;
     var createdUser;
@@ -133,7 +141,7 @@ function RegisterCtrl(
       if (vm.newAddress && vm.newAddress.Address) {
         vm.newClient.contacts = [vm.newAddress];
       }
-      if (vm.newClient.invited) vm.newClient.password = generatePassword();
+      if (invited) vm.newClient.password = generatePassword();
       clientService
         .register(vm.newClient)
         .then(function(res) {
