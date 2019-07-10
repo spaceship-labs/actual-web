@@ -12,9 +12,9 @@
 
 <!--- ACTIVATE VIEW IF ADD TO CARD IS TRUE -->
 <section
-  ng-if="!vm.isLoading"
+  ng-if="!vm.isLoading && vm.isContactCreateActive "
   class="form-view container container-xlg quotation-view"
-  ng-if="“vm.isContactCreateActive”"
+
 >
   <div
     ng-submit="vm.continueBuying()"
@@ -481,20 +481,8 @@
 
 <!--- ACTIVATE VIEW IF ADD TO CARD IS FALSE -->
 
-<section id="register" class="form-view checkbox-client-type">
+<section  ng-if="!vm.isLoading && !vm.isContactCreateActive " id="register" class="form-view checkbox-client-type">
   <div class="container container-lg">
-    <div
-      ng-if="vm.isLoading"
-      layout-fill
-      layout="row"
-      layout-align="center center"
-      class="loading-circle">
-
-      <md-progress-circular
-        md-mode="indeterminate"
-        md-diameter="150">
-      </md-progress-circular>
-    </div>
 
     <section ng-if="!vm.isLoading && vm.registerDone">
       <h1>Usuario registrado con éxito</h1>
