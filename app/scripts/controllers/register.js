@@ -43,12 +43,20 @@ function RegisterCtrl(
   }
 
   function loadStates() {
-    commonService
-      .getStatesSap()
+    quotationService
+      .getById($routeParams.quotation)
       .then(function(res) {
-        console.log(res);
-        vm.states = res.data;
-        loadZipcodeDelivery($routeParams.quotation);
+        vm.quotation = res.data;
+        if (vm.quotation && vm.quotation.OrderWeb) {
+          if (vm.quotation.OrderWeb) {
+            vm.hasAnSpeiOrder = true;
+          }
+        }
+        return commonService.getStatesSap().then(function(res) {
+          console.log(res);
+          vm.states = res.data;
+          loadZipcodeDelivery($routeParams.quotation);
+        });
       })
       .catch(function(err) {
         console.log(err);
