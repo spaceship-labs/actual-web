@@ -4258,12 +4258,14 @@ md-backdrop.md-sidenav-backdrop {
   color: #6b6b6b;
   margin: 4px 0;
   font-size: 13px;
+
 }
 .quotation-view .quotation-block-info ul {
   padding-left: 20px;
   font-size: 13px;
   margin: 0;
   color: #6b6b6b;
+  
 }
 .quotation-view .quotation-block-info ul strong {
   color: #6b6b6b;
@@ -4381,12 +4383,19 @@ md-backdrop.md-sidenav-backdrop {
 .cart-view .cart-aside.cart-aside-fixed {
   position: fixed;
   top: 100px;
+  
 }
 
 .cart-view .cart-aside .cart-title {
   padding: 14px 10px;
   text-align: center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26); 
+
 }
+/* propuesta card view:
+box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26); 
+*/
+
 
 .cart-item {
   border-bottom: 1px solid #000;
@@ -4466,8 +4475,12 @@ md-backdrop.md-sidenav-backdrop {
   background: #f8f8f8;
   margin-bottom: 8px;
   padding: 16px;
-}
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26); 
 
+}
+/* propuesta card view:
+box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26); 
+*/
 .cart-view .cart-summary .secure-note {
   font-size: 11px;
 }
@@ -6213,13 +6226,13 @@ md-backdrop.md-sidenav-backdrop {
   #REGISTER
 /*------------------*/
 
-.register-accordion-form{
-  margin-top: 50px;
+.register-aside-card{
+  margin-top: 21px;
 }
 
 .container-accordion{
   width: 100%;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 button.accordion{
