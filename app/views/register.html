@@ -157,7 +157,11 @@
                         </div>
                       </div>
                     </div>
-
+                    <div ng-if="vm.isContactCreateActive">
+                      <ng-include
+                        src="'views/partials/contact-form-register.html'">
+                      </ng-include>
+                    </div>
                     <div
                       ng-if="vm.isCheckoutProcessActive"
                       class="checkbox-client-type"
