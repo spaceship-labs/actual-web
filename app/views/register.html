@@ -18,10 +18,10 @@
 >
   <div
     ng-submit="vm.continueBuying()"
-    class="cart-view container container-xxlg"
+    class="cart-view container container-xlg"
   >
-    <div layout="row" layout-wrap layout-align="space-between start">
-      <section flex="70" flex-sm="100" flex-xs="100" class="cart-list">
+    <div layout="row" layout-wrap >
+      <section flex="70" flex-sm="100" flex-xs="100" class="accordion-register-section">
         <section
           id="register"
           class="form-view checkbox-client-type container-xlg "
@@ -50,6 +50,7 @@
               name="registerForm"
               ng-submit="vm.register(registerForm)"
             >
+            <div flex="95">
               <h1>
                 <i class="icon-login"></i> Ingresa tus datos
                 <small>o</small>
@@ -58,9 +59,11 @@
                   ng-click="main.toggleLoginModal()"
                   class="login-link login-toggler action-link"
                   >inicia sesión</a
-                >
+                > 
               </h1>
-              <hr />
+              <hr/> 
+            </div>
+
               <!-- ACCORDION LIST -->
               <!-- modificar main.cssclass="container-accordion" -->
               <div class="container-accordion">
@@ -478,6 +481,7 @@
     </div>
   </div>
 </section>
+</div>
 
 <!--- ACTIVATE VIEW IF ADD TO CARD IS FALSE -->
 
