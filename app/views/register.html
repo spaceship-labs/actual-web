@@ -45,20 +45,12 @@
               <!--<p>Haz click <a ng-click="main.toggleLoginModal()" href="" class="login-toggler">aqui</a> para iniciar sesión</p>-->
             </section>
 
-            <form
+            <div
               ng-if="!vm.isLoading && !vm.registerDone"
-              name="registerForm"
-              ng-submit="vm.register(registerForm)"
+              
             >
               <h1>
                 <i class="icon-login"></i> Ingresa tus datos
-                <small>o</small>
-                <a
-                  href=""
-                  ng-click="main.toggleLoginModal()"
-                  class="login-link login-toggler action-link"
-                  >inicia sesión</a
-                >
               </h1>
               <hr />
               <!-- ACCORDION LIST -->
@@ -79,7 +71,12 @@
                     >Continuar como invitado para agilizar la compra</span
                   >
                 </button>
-                <div class="accordion-content" ng-show="vm.accordioninvited">
+                <form 
+                class="accordion-content" 
+                ng-show="vm.accordioninvited"
+                name="registerForm"
+                ng-submit="vm.register(registerForm, true)"
+                >
                   <div class="input-element-header">
                     <h4>DATOS PERSONALES DEL USUARIO</h4>
                     <div class="input-container">
@@ -173,7 +170,7 @@
                       Continuar
                     </button>
                   </div>
-                </div>
+                </form>
 
                 <!-- ACCORDION CONTENT FOR SESSION -->
                 <button
@@ -190,7 +187,12 @@
                     >Si ya tienes una cuenta con nosotros</span
                   >
                 </button>
-                <div class="accordion-content" ng-show="vm.accordionsession">
+                <form 
+                class="accordion-content" 
+                ng-show="vm.accordionsession"
+                name="signInForm"
+                ng-submit="vm.signIn(signInForm)"
+                >
                   <div class="input-element-header">
                     <div class="input-container">
                       <div class="input-element">
@@ -200,7 +202,7 @@
                         <div class="input-element-inner">
                           <input
                             type="email"
-                            ng-model="vm.newClient.E_Mail"
+                            ng-model="vm.existingClient.email"
                             required
                           />
                         </div>
@@ -215,7 +217,7 @@
                         <div class="input-element-inner">
                           <input
                             type="password"
-                            ng-model="vm.newClient.password"
+                            ng-model="vm.existingClient.password"
                             required
                           />
                         </div>
@@ -228,7 +230,7 @@
                       Continuar
                     </button>
                   </div>
-                </div>
+                </form>
 
                 <!-- ACCORDION CONTENT FOR REGISTER -->
                 <button
@@ -245,7 +247,12 @@
                     >¿Eres un nuevo cliente?<strong> Empieza aquí</strong></span
                   >
                 </button>
-                <div class="accordion-content" ng-show="vm.accordionregister">
+                <form 
+                class="accordion-content" 
+                ng-show="vm.accordionregister"
+                name="registerForm"
+                ng-submit="vm.register(registerForm)"
+                >
                   <div class="input-element-header">
                     <h4>DATOS PERSONALES DEL USUARIO</h4>
 
@@ -367,10 +374,10 @@
                       Continuar
                     </button>
                   </div>
-                </div>
+                </form>
               </div>
               <!--ACCORDION LIST END-->
-            </form>
+            </div>
           </div>
         </section>
       </section>

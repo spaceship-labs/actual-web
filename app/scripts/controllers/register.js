@@ -43,6 +43,7 @@ function RegisterCtrl(
   }
 
   function loadStates() {
+    vm.isLoading = true;
     quotationService
       .getById($routeParams.quotation)
       .then(function(res) {
@@ -52,6 +53,7 @@ function RegisterCtrl(
             vm.hasAnSpeiOrder = true;
           }
         }
+        vm.isLoading = false;
         return commonService.getStatesSap().then(function(res) {
           console.log(res);
           vm.states = res.data;
@@ -130,10 +132,25 @@ function RegisterCtrl(
   }
 
   function signIn(form) {
-    var handleSignInError = function(err) {
-      console.log('err', err);
-      dialogService.showDialog('Error al iniciar sesión');
-    };
+    console.log('signIn function');
+    if (form.$valid) {
+      vm.isLoading = true;
+      var formData = {
+        email: vm.existingClient.email,
+        password: vm.existingClient.password
+      };
+      var handleSignInError = function(err) {
+        console.log('err', err);
+        dialogService.showDialog('Error al iniciar sesión');
+      };
+      authService.signIn(
+        formData,
+        $rootScope.successAuthInCheckout,
+        handleSignInError
+      );
+    } else {
+      dialogService.showDialog('Campos incompletos, revisa tus datos');
+    }
   }
 
   function register(form, invited) {
