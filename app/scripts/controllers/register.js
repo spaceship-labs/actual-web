@@ -7,6 +7,8 @@ function RegisterCtrl(
   dialogService,
   quotationService,
   commonService,
+  userService,
+  localStorageService,
   $rootScope,
   $routeParams,
   $location,
@@ -19,6 +21,7 @@ function RegisterCtrl(
     isCheckoutProcessActive: false,
     copyDeliveryDataToPersonalData: copyDeliveryDataToPersonalData,
     copyPersonalDataToDeliveryData: copyPersonalDataToDeliveryData,
+    signIn: signIn,
     newClient: {},
     phonePattern: '.*\\d{10}$'
   });
@@ -42,12 +45,22 @@ function RegisterCtrl(
   }
 
   function loadStates() {
-    commonService
-      .getStatesSap()
+    vm.isLoading = true;
+    quotationService
+      .getById($routeParams.quotation)
       .then(function(res) {
-        console.log(res);
-        vm.states = res.data;
-        loadZipcodeDelivery($routeParams.quotation);
+        vm.quotation = res.data;
+        if (vm.quotation && vm.quotation.OrderWeb) {
+          if (vm.quotation.OrderWeb) {
+            vm.hasAnSpeiOrder = true;
+          }
+        }
+        vm.isLoading = false;
+        return commonService.getStatesSap().then(function(res) {
+          console.log(res);
+          vm.states = res.data;
+          loadZipcodeDelivery($routeParams.quotation);
+        });
       })
       .catch(function(err) {
         console.log(err);
@@ -120,7 +133,53 @@ function RegisterCtrl(
     }
   }
 
-  function register(form) {
+  function signIn(form) {
+    console.log('signIn function');
+    if (form.$valid) {
+      vm.isLoading = true;
+      var formData = {
+        email: vm.existingClient.email,
+        password: vm.existingClient.password
+      };
+      var handleSignInError = function(err) {
+        console.log('err', err);
+        dialogService.showDialog('Error al iniciar sesión');
+      };
+      authService
+        .signIn(formData, $rootScope.successAuthInCheckout, handleSignInError)
+        .then(function() {
+          var user = localStorageService.get('user');
+          var userId = user.id;
+          var clientId = user.Client;
+          if ($routeParams.quotation) {
+            var quotationId = $routeParams.quotation;
+            var params = {
+              Client: clientId,
+              UserWeb: userId
+            };
+            if (user.Contacts && user.Contacts.length > 0) {
+              params.Address = createdClient.Contacts[0].id;
+            }
+            return quotationService.update(quotationId, params);
+          } else {
+            var deferred = $q.defer();
+            return deferred.resolve();
+          }
+        })
+        .then(function(updated) {
+          if (updated) {
+            //dialogService.showDialog('Registrado con exito');
+            $location.path('/checkout/client/' + $routeParams.quotation);
+          } else {
+            $location.path('/');
+          }
+        });
+    } else {
+      dialogService.showDialog('Campos incompletos, revisa tus datos');
+    }
+  }
+
+  function register(form, invited) {
     console.log('register');
     var createdClient;
     var createdUser;
@@ -133,7 +192,7 @@ function RegisterCtrl(
       if (vm.newAddress && vm.newAddress.Address) {
         vm.newClient.contacts = [vm.newAddress];
       }
-      if (vm.newClient.invited) vm.newClient.password = generatePassword();
+      if (invited) vm.newClient.password = generatePassword();
       clientService
         .register(vm.newClient)
         .then(function(res) {
@@ -224,6 +283,8 @@ RegisterCtrl.$inject = [
   'dialogService',
   'quotationService',
   'commonService',
+  'userService',
+  'localStorageService',
   '$rootScope',
   '$routeParams',
   '$location',
