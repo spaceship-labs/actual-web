@@ -12,16 +12,16 @@
 
 <!--- ACTIVATE VIEW IF ADD TO CARD IS TRUE -->
 <section
-  ng-if="!vm.isLoading"
+  ng-if="!vm.isLoading && vm.isContactCreateActive "
   class="form-view container container-xlg quotation-view"
-  ng-if="“vm.isContactCreateActive”"
+
 >
   <div
     ng-submit="vm.continueBuying()"
-    class="cart-view container container-xxlg"
+    class="cart-view container container-xlg"
   >
-    <div layout="row" layout-wrap layout-align="space-between start">
-      <section flex="70" flex-sm="100" flex-xs="100" class="cart-list">
+    <div layout="row" layout-wrap >
+      <section flex="70" flex-sm="100" flex-xs="100" class="accordion-register-section">
         <section
           id="register"
           class="form-view checkbox-client-type container-xlg "
@@ -47,12 +47,15 @@
 
             <div
               ng-if="!vm.isLoading && !vm.registerDone"
-              
+
             >
+            <div flex="95">
               <h1>
                 <i class="icon-login"></i> Ingresa tus datos
               </h1>
-              <hr />
+              <hr/>
+            </div>
+
               <!-- ACCORDION LIST -->
               <!-- modificar main.cssclass="container-accordion" -->
               <div class="container-accordion">
@@ -71,8 +74,8 @@
                     >Continuar como invitado para agilizar la compra</span
                   >
                 </button>
-                <form 
-                class="accordion-content" 
+                <form
+                class="accordion-content"
                 ng-show="vm.accordioninvited"
                 name="registerForm"
                 ng-submit="vm.register(registerForm, true)"
@@ -187,8 +190,8 @@
                     >Si ya tienes una cuenta con nosotros</span
                   >
                 </button>
-                <form 
-                class="accordion-content" 
+                <form
+                class="accordion-content"
                 ng-show="vm.accordionsession"
                 name="signInForm"
                 ng-submit="vm.signIn(signInForm)"
@@ -247,8 +250,8 @@
                     >¿Eres un nuevo cliente?<strong> Empieza aquí</strong></span
                   >
                 </button>
-                <form 
-                class="accordion-content" 
+                <form
+                class="accordion-content"
                 ng-show="vm.accordionregister"
                 name="registerForm"
                 ng-submit="vm.register(registerForm)"
@@ -485,23 +488,12 @@
     </div>
   </div>
 </section>
+</div>
 
 <!--- ACTIVATE VIEW IF ADD TO CARD IS FALSE -->
 
-<section id="register" class="form-view checkbox-client-type">
+<section  ng-if="!vm.isLoading && !vm.isContactCreateActive " id="register" class="form-view checkbox-client-type">
   <div class="container container-lg">
-    <div
-      ng-if="vm.isLoading"
-      layout-fill
-      layout="row"
-      layout-align="center center"
-      class="loading-circle">
-
-      <md-progress-circular
-        md-mode="indeterminate"
-        md-diameter="150">
-      </md-progress-circular>
-    </div>
 
     <section ng-if="!vm.isLoading && vm.registerDone">
       <h1>Usuario registrado con éxito</h1>
