@@ -7,6 +7,8 @@ function RegisterCtrl(
   dialogService,
   quotationService,
   commonService,
+  userService,
+  localStorageService,
   $rootScope,
   $routeParams,
   $location,
@@ -143,11 +145,35 @@ function RegisterCtrl(
         console.log('err', err);
         dialogService.showDialog('Error al iniciar sesión');
       };
-      authService.signIn(
-        formData,
-        $rootScope.successAuthInCheckout,
-        handleSignInError
-      );
+      authService
+        .signIn(formData, $rootScope.successAuthInCheckout, handleSignInError)
+        .then(function() {
+          var user = localStorageService.get('user');
+          var userId = user.id;
+          var clientId = user.Client;
+          if ($routeParams.quotation) {
+            var quotationId = $routeParams.quotation;
+            var params = {
+              Client: clientId,
+              UserWeb: userId
+            };
+            if (user.Contacts && user.Contacts.length > 0) {
+              params.Address = createdClient.Contacts[0].id;
+            }
+            return quotationService.update(quotationId, params);
+          } else {
+            var deferred = $q.defer();
+            return deferred.resolve();
+          }
+        })
+        .then(function(updated) {
+          if (updated) {
+            //dialogService.showDialog('Registrado con exito');
+            $location.path('/checkout/client/' + $routeParams.quotation);
+          } else {
+            $location.path('/');
+          }
+        });
     } else {
       dialogService.showDialog('Campos incompletos, revisa tus datos');
     }
@@ -257,6 +283,8 @@ RegisterCtrl.$inject = [
   'dialogService',
   'quotationService',
   'commonService',
+  'userService',
+  'localStorageService',
   '$rootScope',
   '$routeParams',
   '$location',
