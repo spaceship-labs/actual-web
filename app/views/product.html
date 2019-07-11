@@ -20,22 +20,26 @@
     </p>
   </div>
 </div>
-
-<div class="content-block listing-view">
+<div class="content-block listing-view"
+>
   <div
     class="container container-xxlg"
     layout="row"
-    layout-align="space-between start"
   >
     <!--START NAV-->
-    <sidebar-categories
-      selected-category-id="vm.lowestCategory.id"
-      categories-tree="main.categoriesTree"
-      active-store="main.activeStore"
-      hide-sm
-      hide-xs
-      flex="20"
-    >
+    <div class="product-nav-viewcategory"   >
+        <sidebar-categories
+          selected-category-id="vm.lowestCategory.id"
+          categories-tree="main.categoriesTree"
+          active-store="main.activeStore"
+          hide-sm
+          hide-xs
+          flex="20"
+        >
+
+        <!-- ng-mouseover="main.handleCategoryHover(category.Handle)" -->
+        </sidebar-categories>
+      </div>
     </sidebar-categories>
     <!--END NAV-->
 
@@ -108,6 +112,7 @@
             <!-- <ng-include src="'views/partials/product-stock.html'"></ng-include> -->
             <!-- <ng-include src="'views/partials/product-promotions.html'"></ng-include> -->
 
+            <!-- PRODUCT PRICE CURRENCY -->
             <div
               class="product-view-prices"
               layout="row"
@@ -151,6 +156,7 @@
                   </select>
                 </div>
               </div>
+              <!-- PRODUCT DELIVERY DATE -->
               <div flex="30" flex-sm="50" flex-xs="50">
                 <div
                   class="delivery-selection input-element select-element-wrapper"
@@ -171,7 +177,7 @@
                   </select>
                 </div>
               </div>
-
+              <!-- PRODUCT PRICE TAXES INCLUDE -->
               <div
                 flex="25"
                 flex-sm="100"
@@ -191,13 +197,13 @@
               <!--END CONDITION-->
             </div>
 
-            <!--<p class="seen-number">
+            <p class="seen-number">
               <strong class="small">visto {{vm.product.seenTimes}}
                 <span ng-if="vm.product.seenTimes > 1">veces</span>
                 <span ng-if="vm.product.seenTimes <= 1">veces</span>
                hoy</strong>
             </p>
-            -->
+           
           </div>
           <!--END PRODUCT VIEW DATA-->
         </div>
@@ -359,5 +365,9 @@
       <!--END PRODUCT VIEW CONTENT-->
     </div>
     <!-- MAIN VIEW -->
+   </div>
   </div>
-</div>
+ </div>
+
+
+ <!-- ng-mouseleave="main.handleCategoryLeave()"  ng-mouseover="main.menuCategoriesOn = false" ng-mouseover="main.handleCategoryHover(category.Handle)" -->                

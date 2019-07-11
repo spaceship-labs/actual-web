@@ -10,7 +10,6 @@
     >
     disponibles
   </h4>
-
   <div
     ng-if="vm.isLoadingDeliveries"
     layout-fill
@@ -32,7 +31,11 @@
         <!-- <td>
           {{deliveryGroup.date | date: "d/MMM/yyyy"}}
           <span ng-show="!vm.isImmediateDelivery(deliveryGroup.date)">
-            (en {{deliveryGroup.days}} días)
+            (en {{ deliveryGroup.days }} días)
+            <span class="delivery-date-stock"
+              >{{ deliveryGroup.available | number: 0 }}
+              {{ vm.getPiecesString(deliveryGroup.available) }}
+            </span>
           </span>
           <span ng-show="vm.isImmediateDelivery(deliveryGroup.date)" class="immediate-delivery">
             Entrega en tienda
