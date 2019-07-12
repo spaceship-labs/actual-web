@@ -12,7 +12,7 @@
 
 <!--- ACTIVATE VIEW IF ADD TO CARD IS TRUE -->
 <section
-  ng-if="!vm.isLoading && vm.isContactCreateActive "
+  ng-if="!vm.isLoading && vm.isContactCreateActive"
   class="form-view container container-xlg quotation-view"
 
 >
@@ -47,7 +47,6 @@
 
             <div
               ng-if="!vm.isLoading && !vm.registerDone"
-
             >
             <div flex="95">
               <h1>
@@ -62,7 +61,7 @@
                 <!-- ACCORDION CONTENT FOR INVITED USER -->
                 <button
                   class="accordion"
-                  ng-click="vm.accordioninvited = !vm.accordioninvited"
+                  ng-click="vm.toggleSession('lstinvited')"
                 >
                   <img
                     class="icon-accordion"
@@ -76,7 +75,7 @@
                 </button>
                 <form
                 class="accordion-content"
-                ng-show="vm.accordioninvited"
+                ng-show="vm.lstinvited"
                 name="registerForm"
                 ng-submit="vm.register(registerForm, true)"
                 >
@@ -182,7 +181,7 @@
                 <!-- ACCORDION CONTENT FOR SESSION -->
                 <button
                   class="accordion"
-                  ng-click="vm.accordionsession = !vm.accordionsession"
+                  ng-click="vm.toggleSession('lstsession')"
                 >
                   <img
                     class="icon-accordion"
@@ -196,7 +195,7 @@
                 </button>
                 <form
                 class="accordion-content"
-                ng-show="vm.accordionsession"
+                ng-show="vm.lstsession"
                 name="signInForm"
                 ng-submit="vm.signIn(signInForm)"
                 >
@@ -242,7 +241,7 @@
                 <!-- ACCORDION CONTENT FOR REGISTER -->
                 <button
                   class="accordion"
-                  ng-click="vm.accordionregister = !vm.accordionregister"
+                  ng-click="vm.toggleSession('lstregister')"
                 >
                   <img
                     class="icon-accordion"
@@ -256,7 +255,7 @@
                 </button>
                 <form
                 class="accordion-content"
-                ng-show="vm.accordionregister"
+                ng-show="vm.lstregister"
                 name="registerForm"
                 ng-submit="vm.register(registerForm)"
                 >

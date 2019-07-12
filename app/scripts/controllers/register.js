@@ -23,7 +23,8 @@ function RegisterCtrl(
     copyPersonalDataToDeliveryData: copyPersonalDataToDeliveryData,
     signIn: signIn,
     newClient: {},
-    phonePattern: '.*\\d{10}$'
+    phonePattern: '.*\\d{10}$',
+    toggleSession: toggleSession
   });
 
   init();
@@ -36,12 +37,18 @@ function RegisterCtrl(
       if ($routeParams.quotation) {
         vm.isCheckoutProcessActive = true;
         console.log('quotation');
+        vm.lstinvited = false;
+        vm.lstregister = false;
+        vm.lstsession = false;
         loadStates();
         return;
       }
     }
 
     vm.newClient.invited = false;
+    vm.lstinvited = false;
+    vm.lstregister = false;
+    vm.lstsession = false;
   }
 
   function loadStates() {
@@ -275,6 +282,17 @@ function RegisterCtrl(
     }
     return retVal;
   }
+
+  function toggleSession(type){
+    console.log('toggleSession');
+    console.log('vm.lstinvited: ', vm.lstinvited);
+    
+    var sessions = ['lstinvited', 'lstsession', 'lstregister' ];
+    sessions.map(function (session) {
+      session === type ? vm[session] = !vm[session] : vm[session] = false 
+    });
+
+  }
 }
 
 RegisterCtrl.$inject = [
@@ -290,3 +308,7 @@ RegisterCtrl.$inject = [
   '$location',
   '$q'
 ];
+
+
+
+
