@@ -1637,7 +1637,8 @@ select {
   border: 1px solid #fff;
   padding: 10px 10px;
   position: relative;
-  margin: 20px 0;
+  margin: 0px 0;
+  background:  #fff;
 }
 .listing-product:hover {
   border: 1px solid #000;
@@ -1715,6 +1716,7 @@ select {
 }
 .listing-product .listing-product-gallery {
   min-height: 230px;
+  background-color: white;
   text-align: center;
 }
 .listing-product .listing-product-gallery .slick-slider {
