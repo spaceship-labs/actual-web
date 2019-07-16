@@ -6237,7 +6237,7 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 
 button.accordion{
   width: 100%;
-  background: linear-gradient(0deg, rgba(241,190,62,1) 0%, rgba(241,190,62,1) 32%, rgba(247,222,158,1) 100%);
+  background: linear-gradient(0deg, rgba(241,190,62,1) 0%, rgba(241,190,62,1) 59%, rgba(247,222,158,1) 100%);
   border: none;
   outline: none;
   padding: 15px 20px;
@@ -6247,6 +6247,7 @@ button.accordion{
   border-color: #f1be3e;
   transition: background-color 0.3s linear-gradient;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  margin-bottom: 5px;
 }
 /*--
   transition: background-color 0.3s linear;
