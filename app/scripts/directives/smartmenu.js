@@ -19,3 +19,24 @@ function SmartMenu() {
     restrict: 'E'
   };
 }
+
+  // getCategoriesGroups(): function(req, res) {
+  //   Promise.join(
+  //     ProductCategory.find({ CategoryLevel: 1 })
+  //       .populate('Childs')
+  //       .populate('FeaturedProducts'),
+  //     ProductCategory.find({ CategoryLevel: 2 })
+  //       .populate('Childs')
+  //       .populate('FeaturedProducts'),
+  //     ProductCategory.find({ CategoryLevel: 3 })
+  //       .populate('Parents')
+  //       .populate('FeaturedProducts')
+  //   )
+  //     .then(function(categoriesGroups) {
+  //       res.json(categoriesGroups);
+  //     })
+  //     .catch(function(err) {
+  //       console.log(err);
+  //       res.negotiate(err);
+  //     });
+  // },

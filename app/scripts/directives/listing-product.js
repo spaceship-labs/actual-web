@@ -21,8 +21,8 @@ angular.module('actualWebApp').directive('listingProduct', [
       link: function postLink(scope) {
         scope.siteTheme = $rootScope.siteTheme;
         scope.areImagesLoaded = false;
-        scope.images = [];
-        scope.activeStore = $rootScope.activeStore;
+        scope.images = [];    //getImagesFeatured
+        scope.activeStore = $rootScope.activeStore;  
 
         scope.setUpImages = function() {
           scope.imageSizeIndexGallery = 2;

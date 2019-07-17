@@ -1715,7 +1715,10 @@ select {
   text-align: right;
 }
 .listing-product .listing-product-gallery {
-  min-height: 230px;
+  min-height: 250px;
+  min-width: 150px;
+  margin-left: 16px;
+  margin-top: 16px;
   background-color: white;
   text-align: center;
 }
@@ -1740,7 +1743,7 @@ select {
 .listing-product .listing-product-gallery img {
   display: inline;
   max-width: 100%;
-  max-height: 200px;
+  max-height: 600px;
   /*height: 100%;*/
   /*max-width: 200px;*/
 }
