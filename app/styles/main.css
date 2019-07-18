@@ -1259,6 +1259,21 @@ select {
 /*------------/
   #MENU-CATEGORIES
 /*-----------*/
+.mouseover-link::after{
+  margin-left: 32px;
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #e2023f;
+  transition: width .3s;
+}
+.mouseover-link:hover::after{
+  width: 20%;
+  transition: .3s;
+}
+
+
 .menu-categories.menu-categories-fixed {
   position: fixed;
   top: 76px;
@@ -1991,6 +2006,12 @@ select {
   height: 14px;
   margin-right: 5px;
 }
+.listing-view-nav-icon-sub{
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  filter: opacity(0.6) drop-shadow(0 0 0 rgb(216, 123, 123));
+}
 .listing-view-nav > li {
   margin: 14px 0;
 }
@@ -2425,12 +2446,13 @@ select {
   margin: 0;
   font-weight: 400;
   position: relative;
-  margin-left: 10px;
+  margin-left: 8px;
 }
 .product-view-data-block .bodyTable_margin{
   margin-top: 4px;
-  margin-left: 22px;
+  margin-left: 20px;
 }
+
 .product-view-data-block:first-child {
   /*padding-top: 0;*/
 }
