@@ -249,20 +249,33 @@
 
     function getCategoryIcon(handle) {
       var icons = {
-        ambientes: 'ambientes',
+        salas: '1' ,
+        comedores: 'comedores',
+        sillas: '3',
+        recamaras: 'recamaras',
+        ambientes: 'decoracion',
         colchones: 'colchones',
         mesas: 'mesas',
-        sillas: 'sillas',
         bebes: 'bebes',
         ninos: 'ninos',
         blancos: 'blancos',
-        decoracion: 'decoracion'
+        decoracion: 'decoracion',
+        'muebles-de-jardin': 'jardin',
+        'muebles-para-oficina': '7', 
+        'muebles-de-tv': '2',
+        tapetes: 'tapetes2',
+        'decoracion-de-paredes': 'decoracion2',
+        iluminacion: 'iluminacion2',
+        organizacion: 'comoda'
       };
+       console.log('Test getCategoryIcon handle', handle);
+
       if (icons[handle]) {
         return icons[handle];
       }
       return 'murbles';
     }
+
 
     function getLowestCategory(categories) {
       var lowestCategoryLevel = 0;
