@@ -1,32 +1,86 @@
 <section class="quotation-texts">
-	<div class="quotation-text-block">
-		<h3>⁠Políticas de Cotizaciones:﻿⁠⁠⁠</h3>
-		<p>﻿⁠⁠Esta cotización es válida solo el día de su creación. Favor de rectificar los precios de los artículos el día de la compra. Los precios mostrados reflejan el máximo descuento posible, pagando de contado. Al elegir otra forma de pago, los precios pueden variar. Cualquier cotización en Dólares mencionada en esta cotización es solo una referencia. Favor de rectificar el tipo de cambio vigente el día del pago. Este documento no es un comprobante de pago y no tiene validez fiscal. Favor de exigir su comprobante de pago al realizar la compra.</p>
-	</div>
-	<div class="quotation-text-block">
-		<ul>
-			<li><strong>﻿⁠⁠⁠Políticas de entrega:</strong>﻿⁠⁠⁠ <a href="/politicas-de-entrega" target="_blank">{{main.siteConstants.baseUrl}}/politicas-de-entrega</a></li>
-			<li>﻿⁠⁠⁠<strong>Políticas de instalación y ensamble:</strong>﻿⁠⁠⁠ <a href="/politicas-de-instalacion-y-ensamble" target="_blank">{{main.siteConstants.baseUrl}}/politicas-de-instalacion-y-ensamble</a></li>
-			<li>﻿⁠⁠⁠<strong>Políticas de almacenaje:</strong>﻿⁠⁠⁠ <a href="/politicas-de-almacenaje" target="_blank">{{main.siteConstants.baseUrl}}/politicas-de-almacenaje</a>
-			</li>
-			<li>﻿⁠⁠⁠<strong>Políticas de garantía:</strong>﻿⁠⁠⁠ <a href="/politicas-de-garantia" target="_blank">{{main.siteConstants.baseUrl}}/politicas-de-garantia</a>
-			</li>
-			<li>﻿⁠⁠⁠<strong>Manual de cuidados y recomendaciones:</strong>﻿⁠⁠⁠ <a href="/manual-de-cuidados-y-recomendaciones" target="_blank">{{main.siteConstants.baseUrl}}/manual-de-cuidados-y-recomendaciones</a>
-			</li>
+  <md-expansion-panel md-component-id="panelOne">
+    <md-expansion-panel-collapsed>
+      <md-expansion-panel-icon></md-expansion-panel-icon>
+      <div class="quotation-text-block">Políticas de Cotizaciones:﻿⁠⁠⁠</div>
+      <div class="md-summary"></div>
+    </md-expansion-panel-collapsed>
 
-		</ul>
-	</div>
+    <md-expansion-panel-expanded>
+      <md-expansion-panel-header ng-click="$panel.collapse()">
+        <md-expansion-panel-icon></md-expansion-panel-icon>
+        <div>Políticas de Cotizaciones:﻿⁠⁠⁠</div>
+        <div class="md-summary"></div>
+      </md-expansion-panel-header>
+
+      <md-expansion-panel-content>
+        <p>
+          ⁠⁠Esta cotización es válida solo el día de su creación. Favor de
+          rectificar los precios de los artículos el día de la compra. Los
+          precios mostrados reflejan el máximo descuento posible, pagando de
+          contado. Al elegir otra forma de pago, los precios pueden variar.
+          Cualquier cotización en Dólares mencionada en esta cotización es solo
+          una referencia. Favor de rectificar el tipo de cambio vigente el día
+          del pago. Este documento no es un comprobante de pago y no tiene
+          validez fiscal. Favor de exigir su comprobante de pago al realizar la
+          compra.
+        </p>
+
+        <div class="quotation-text-block">
+          <ul>
+            <li>
+              <strong> ⁠⁠⁠Políticas de entrega:</strong> ⁠⁠⁠
+              <a href="/politicas-de-entrega" target="_blank"
+                >{{ main.siteConstants.baseUrl }}/politicas-de-entrega</a
+              >
+            </li>
+            <li>
+              ⁠⁠⁠<strong>Políticas de instalación y ensamble:</strong> ⁠⁠⁠
+              <a href="/politicas-de-instalacion-y-ensamble" target="_blank"
+                >{{
+                  main.siteConstants.baseUrl
+                }}/politicas-de-instalacion-y-ensamble</a
+              >
+            </li>
+            <li>
+              ⁠⁠⁠<strong>Políticas de almacenaje:</strong> ⁠⁠⁠
+              <a href="/politicas-de-almacenaje" target="_blank"
+                >{{ main.siteConstants.baseUrl }}/politicas-de-almacenaje</a
+              >
+            </li>
+            <li>
+              ⁠⁠⁠<strong>Políticas de garantía:</strong> ⁠⁠⁠
+              <a href="/politicas-de-garantia" target="_blank"
+                >{{ main.siteConstants.baseUrl }}/politicas-de-garantia</a
+              >
+            </li>
+            <li>
+              ⁠⁠⁠<strong>Manual de cuidados y recomendaciones:</strong> ⁠⁠⁠
+              <a href="/manual-de-cuidados-y-recomendaciones" target="_blank"
+                >{{
+                  main.siteConstants.baseUrl
+                }}/manual-de-cuidados-y-recomendaciones</a
+              >
+            </li>
+          </ul>
+        </div>
+      </md-expansion-panel-content>
+    </md-expansion-panel-expanded>
+  </md-expansion-panel>
 
   <!--VENDEDOR-->
   <div class="quotation-text-block seller-data only-show-print">
-    <h3><strong><i class="icon-vendedor"></i> VENDEDOR</strong></h3>
+    <h3>
+      <strong><i class="icon-vendedor"></i> VENDEDOR</strong>
+    </h3>
     <div class="order-block-inner">
-    	<p>{{vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName}}</p>
-      <p><strong>E-mail: </strong>{{vm.quotation.User.email}}</p>
-      <p><strong>Telefono: </strong>{{vm.quotation.User.phone}}</p>
-      <p><strong>Celular:</strong> {{vm.quotation.User.mobilePhone}}</p>
+      <p>
+        {{ vm.quotation.User.firstName + ' ' + vm.quotation.User.lastName }}
+      </p>
+      <p><strong>E-mail: </strong>{{ vm.quotation.User.email }}</p>
+      <p><strong>Telefono: </strong>{{ vm.quotation.User.phone }}</p>
+      <p><strong>Celular:</strong> {{ vm.quotation.User.mobilePhone }}</p>
     </div>
   </div>
   <!--END VENDEDOR-->
-
 </section>
