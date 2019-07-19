@@ -3,7 +3,7 @@
   ng-if="mainCategory[storeCode]"
   class="listing-view-nav-wrapper">
   <h2>
-    <a
+    <a class="mouseover-link"
       ng-href="/category/{{mainCategory.Handle}}"
       ng-class="{'active': mainCategory.isActive}">
       <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i>
@@ -12,7 +12,6 @@
       <span class="products-num">({{mainCategory[storeCode]}})</span>
     </a>
   </h2>
-  <img class="listing-maincategory-icon" src="/images/rectangle.png">
 
   <ul
     class="listing-view-nav"
@@ -52,7 +51,7 @@
           ng-repeat="subcategory in category.Childs | orderBy: 'Name' "
           ng-if="subcategory[storeCode]"
         >
-        <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
+        <img class="listing-view-nav-icon-sub" src="images/arrow-right.png " alt="">
 
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
             {{subcategory.Name}} ({{subcategory[storeCode]}})
@@ -67,7 +66,7 @@
 <div
   class="listing-view-nav-wrapper">
   <h2>
-    <a
+    <a class="mouseover-link"
       ng-href="/ofertas"
       ng-class="{'active': isActiveOffers}">
       <i class="icon-ofertas"></i>
