@@ -4597,12 +4597,20 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   /* border: 0; */
   border-style: solid;
   border-width: 1px;
-  background: #e9c15f;
+  background: linear-gradient(0deg, rgba(241,190,62,1) 0%, rgba(241,190,62,1) 59%, rgba(247,222,158,1) 100%);
   width: 100%;
   margin: 14px 0 4px;
   outline: 0;
   letter-spacing: 2px;
+  transition: background-color 0.3s linear-gradient;
 }
+
+.cart-view .cart-view-btn:hover{
+  background: #ddd;
+  background-color: #f1be3e;
+  cursor: pointer;
+}
+
 .cart-view .cart-view-btn-disabled {
   background: gray;
 }
