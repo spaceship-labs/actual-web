@@ -110,7 +110,7 @@
           },
           comedores: {
             color: 'comedores-bg',
-            icon: 'comedores',
+            icon: '2',
             filledIcon: 'comedores-relleno',
             image: '/images/categories/categoria1.jpg'
           },
@@ -122,7 +122,7 @@
           },
           recamaras: {
             color: 'recamaras-bg',
-            icon: 'recamaras',
+            icon: '4',
             filledIcon: 'recamaras-relleno',
             image: '/images/categories/categoria3.png'
           },
@@ -161,7 +161,7 @@
           },
           comedores: {
             color: 'comedores-bg',
-            icon: 'comedores',
+            icon: '2',
             filledIcon: 'comedores-relleno',
             image: '/images/categories/comedor-home.jpg'
           },
@@ -173,7 +173,7 @@
           },
           recamaras: {
             color: 'recamaras-bg',
-            icon: 'recamaras',
+            icon: '4',
             filledIcon: 'recamaras-relleno',
             image: '/images/categories/recamaras-home.png'
           },
@@ -206,12 +206,12 @@
 
       vm.mainCategoriesKids = {
         ninos: {
-          icon: 'niñas-y-niños2',
+          icon: 'ninas-y-ninos2',
           image: '/images/categories/ninos.jpg'
         },
 
         'camas-infantiles': {
-          icon: 'niñas-y-niños2',
+          icon: 'ninas-y-ninos2',
           image: '/images/categories/ninos.jpg'
         },
         bebes: {
@@ -248,12 +248,12 @@
         },
 
         'decoracion-infantil': {
-          icon: 'decoracion2',
+          icon: 'decoracion-relleno',
           image: '/images/categories/decoracion.jpg'
         },
 
         'comoda-infantil': {
-          icon: 'decoracion2',
+          icon: 'decoracion-relleno',
           image: '/images/categories/decoracion.jpg'
         },
         'lamparas-infantiles': {
