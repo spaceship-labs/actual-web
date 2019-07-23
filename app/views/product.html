@@ -359,6 +359,49 @@
                 </md-expansion-panel-content>
               </md-expansion-panel-expanded>
             </md-expansion-panel>
+
+            <md-expansion-panel md-component-id="panelTwo">
+              <md-expansion-panel-collapsed>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+                <div>FORMAS DE PAGO</div>
+                <div class="md-summary"></div>
+              </md-expansion-panel-collapsed>
+
+              <md-expansion-panel-expanded>
+                <md-expansion-panel-header ng-click="$panel.collapse()">
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                  <div>FORMAS DE PAGO</div>
+                  <div class="md-summary"></div>
+                </md-expansion-panel-header>
+
+                <md-expansion-panel-content>
+                  <div
+                  >
+                  <table>
+                    <thead  class="payments-table">
+                      <tr>
+                        <th >Formas de pago</th>
+                        <th >Plan de pago</th>
+                        <th >Grupos financieros participantes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Tarjeta de crédito</td>
+                        <td>Un solo pago</td>
+                        <td>Visa,MasterCard,American Express</td>
+                      </tr>
+                      <tr>
+                        <td>Tarjeta de débito</td>
+                        <td>Un solo pago</td>
+                        <td>Banamex,HSBC,Inbursa,Santander</td>
+                      </tr>
+                    </tbody>
+                  </table>                 
+                  </div>
+                </md-expansion-panel-content>
+              </md-expansion-panel-expanded>
+            </md-expansion-panel>
           </md-expansion-panel-group>
         </section>
       </section>
