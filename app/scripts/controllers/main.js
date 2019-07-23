@@ -149,6 +149,12 @@
             icon: '8',
             filledIcon: 'look-relleno',
             image: '/images/categories/categoria8.png'
+          },
+          decoracion: {
+            color: 'look-bg',
+            icon: '10',
+            filledIcon: 'decoracion-relleno',
+            image: '/images/categories/decoracion.jpg'
           }
         };
       } else {
@@ -200,6 +206,12 @@
             icon: '8',
             filledIcon: 'look-relleno',
             image: '/images/categories/categoria8.png'
+          },
+          decoracion: {
+            color: 'look-bg',
+            icon: '10',
+            filledIcon: 'decoracion-relleno',
+            image: '/images/categories/decoracion.jpg'
           }
         };
       }
@@ -276,7 +288,8 @@
         organizacion: false,
         juguetes: false,
         'comoda-infantil': false,
-        'lamparas-infantiles': false
+        'lamparas-infantiles': false,
+        decoracion: false
       };
 
       if ($location.search().itemcode) {
