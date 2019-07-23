@@ -90,13 +90,22 @@ angular
           //$rootScope.scrollTo('main');
           var products = [];
 
-          showZipcodeDialogIfNeeded(null)
-            .then(function(hasValidZipcode) {
-              if (!hasValidZipcode) {
-                return $q.reject('Código postal no valido');
+          return deliveryService
+            .getZipcodeDelivery('77500')
+            .then(function(zipcodeDelivery) {
+              if (zipcodeDelivery) {
+                scope.isLoading = true;
+                scope.zipcodeDelivery = zipcodeDelivery;
+              } else {
+                if (zipcode) {
+                  scope.isLoadingDeliveries = false;
+                  dialogService.showDialog(
+                    '"Por el momento, su código postal esta fuera de nuestra área de cobertura'
+                  );
+                }
+                return $q.resolve();
               }
-
-              scope.isLoading = true;
+              // scope.isLoading = true;
               //$rootScope.scrollTo('main');
               return packageService.getProductsByPackage(packageId);
             })
