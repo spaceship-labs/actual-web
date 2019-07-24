@@ -375,29 +375,26 @@
                 </md-expansion-panel-header>
 
                 <md-expansion-panel-content>
-                  <div
+                  <div style="overflow-x:auto;"
                   >
-                  <table>
-                    <thead  class="payments-table">
-                      <tr>
-                        <th >Formas de pago</th>
-                        <th >Plan de pago</th>
-                        <th >Grupos financieros participantes</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Tarjeta de crédito</td>
-                        <td>Un solo pago</td>
-                        <td>Visa,MasterCard,American Express</td>
-                      </tr>
-                      <tr>
-                        <td>Tarjeta de débito</td>
-                        <td>Un solo pago</td>
-                        <td>Banamex,HSBC,Inbursa,Santander</td>
-                      </tr>
-                    </tbody>
-                  </table>                 
+                  <table class="payments-type-table" summary="This table shows the payments types">
+                    <caption>Válidos, 2019</caption>
+                    <tr>
+                      <th scope="col">Formas de pago</th>
+                      <th scope="col">Planes de pago</th>
+                      <th scope="col">Grupos financieros participantes</th>
+                    </tr>
+                    <tr>
+                      <th scope="row">Tarjeta de Crédito</th>
+                      <td>Un solo pago</td>
+                      <td>Visa,MasterCard,American Express</td>
+                    </tr>
+                    <tr class="alt">
+                      <th scope="row">Tarjeta de débito</th>
+                      <td>Un solo pago</td>
+                      <td>Banamex,HSBC,Inbursa,Santander</td>
+                    </tr>
+                  </table>
                   </div>
                 </md-expansion-panel-content>
               </md-expansion-panel-expanded>

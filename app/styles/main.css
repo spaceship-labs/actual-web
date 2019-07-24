@@ -1654,21 +1654,76 @@ select {
   #LISTING-PRODUCT
 /*-------------*/
 
-.payments-table {
-  border: 2px solid grey;
-  border-collapse: collapse;
-  padding: 10px;
-  font-size: 16px;
-  width: 10px;
-}
-/* .payments-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
-  width: 10;
-}
-.payments-table tr:nth-child(even) {
-  background-color: #ffffff;
-} */
+/* Table payments type start */
 
+
+
+.payments-type-table
+{
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
+  padding: 0;
+  margin: 0;
+  margin-left: 30px;
+  margin-right: 30px;
+  border: 1px solid #333;
+  border-collapse: collapse;
+  font-family: "Helvetica Neue";
+  font-size: 0.9em;
+  color:  rgb(44, 42, 42);
+  background: #ffffff url("widget-table-bg.jpg") top left repeat-x;
+}
+
+.payments-type-table caption
+{
+  caption-side: bottom;
+  font-size: 0.9em;
+  text-align: right;
+  padding: 0.5em 0;
+}
+
+.payments-type-table th, .payments-type-table td
+{
+  border: 1px dotted #666;
+  padding: 0.5em;
+  text-align: left;
+  color: rgb(68, 67, 67);
+}
+
+.payments-type-table th[scope=col]
+{
+  color: rgb(68, 67, 67);
+  background-color: #ecce81;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  border-bottom: 2px solid #333;
+  border-right: 2px solid #333;
+}
+
+.payments-type-table th+th[scope=col]
+{
+  color: rgb(68, 67, 67);
+  background-color: #ecce81;
+  border-right: 1px dotted #666;
+}
+
+.payments-type-table th[scope=row]
+{
+  background-color:#ffffff;
+  border-right: 2px solid #333;
+}
+
+.payments-type-table tr.alt th, .payments-type-table tr.alt td
+{
+  color:rgb(68, 67, 67);
+}
+
+.payments-type-table tr:hover th[scope=row], .payments-type-table tr:hover td
+{
+  background-color: #faf5e9;
+  color: rgb(17, 16, 16);
+}
+
+/* Table payments type  end */
 
 .listing-product {
   border: 1px solid #fff;
