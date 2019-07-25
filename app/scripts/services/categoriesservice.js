@@ -249,9 +249,9 @@
 
     function getCategoryIcon(handle) {
       var icons = {
-        salas: '1' ,
+        salas: 'salas' ,
         comedores: 'comedores',
-        sillas: '3',
+        sillas: 'sillas',
         recamaras: 'recamaras',
         ambientes: 'decoracion',
         colchones: 'colchones',
@@ -260,13 +260,13 @@
         ninos: 'ninos',
         blancos: 'blancos',
         decoracion: 'decoracion',
-        'muebles-de-jardin': 'jardin',
-        'muebles-para-oficina': '7', 
-        'muebles-de-tv': '2',
+        'muebles-de-jardin': 'exterior',
+        'muebles-para-oficina': 'paraoficina', 
+        'muebles-de-tv': 'mueblestv',
         tapetes: 'tapetes2',
-        'decoracion-de-paredes': 'decoracion2',
-        iluminacion: 'iluminacion2',
-        organizacion: 'comoda'
+        'decoracion-de-paredes': 'decoracionpared',
+        iluminacion: 'iluminacion',
+        organizacion: 'murbles'
       };
        console.log('Test getCategoryIcon handle', handle);
 
