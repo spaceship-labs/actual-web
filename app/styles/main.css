@@ -1876,7 +1876,7 @@ select {
   content: '';
 }
 .listing-product .discount-batch {
-  background: #fde932;
+  background: #2965b9;
   border-radius: 50%;
   height: 45px;
   width: 45px;
@@ -1888,6 +1888,10 @@ select {
   -webkit-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
   -moz-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
   box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
+}
+
+.listing-product .discount-batch strong{
+  color: #fff;
 }
 
 .listing-product .stock-available {
