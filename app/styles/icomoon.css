@@ -1,16 +1,15 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('../fonts/icomoon.eot?gpozo1');
-  src: url('../fonts/icomoon.eot?gpozo1#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?gpozo1') format('truetype'),
-    url('../fonts/icomoon.woff?gpozo1') format('woff'),
-    url('../fonts/icomoon.svg?gpozo1#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?h80ij7');
+  src:  url('../fonts/icomoon.eot?h80ij7#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?h80ij7') format('truetype'),
+    url('../fonts/icomoon.woff?h80ij7') format('woff'),
+    url('../fonts/icomoon.svg?h80ij7#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^='icon-'],
-[class*=' icon-'] {
+[class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -25,285 +24,301 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-comedores:before {
-  content: '\e959';
-}
-.icon-recamaras:before {
-  content: '\e95a';
-}
-.icon-comedores-relleno:before {
-  content: '\e950';
-}
-.icon-deals-relleno:before {
-  content: '\e951';
-}
-.icon-look-relleno:before {
-  content: '\e952';
-}
-.icon-muebles--relleno:before {
-  content: '\e953';
-}
-.icon-oficina-relleno:before {
-  content: '\e954';
-}
-.icon-recamaras-relleno:before {
-  content: '\e955';
-}
-.icon-salas-relleno:before {
-  content: '\e956';
-}
-.icon-sillas-relleno:before {
-  content: '\e957';
-}
-.icon-tv-relleno:before {
-  content: '\e958';
-}
-.icon-bebebs2:before {
-  content: '\e947';
-}
-.icon-decoracion2:before {
-  content: '\e948';
-}
-.icon-iluminacion2:before {
-  content: '\e949';
-}
-.icon-juguetes2:before {
-  content: '\e94a';
-}
-.icon-mamaypapa2:before {
-  content: '\e94b';
-}
-.icon-niñas-y-niños2:before {
-  content: '\e94c';
-}
-.icon-organizacion2:before {
-  content: '\e94d';
-}
-.icon-promociones2:before {
-  content: '\e94e';
-}
-.icon-tapetes2:before {
-  content: '\e94f';
-}
 .icon-1:before {
-  content: '\e900';
+  content: "\e900";
 }
 .icon-2:before {
-  content: '\e901';
+  content: "\e901";
 }
 .icon-3:before {
-  content: '\e902';
+  content: "\e902";
 }
 .icon-4:before {
-  content: '\e903';
+  content: "\e903";
 }
 .icon-5:before {
-  content: '\e904';
+  content: "\e904";
 }
 .icon-6:before {
-  content: '\e905';
+  content: "\e905";
 }
 .icon-7:before {
-  content: '\e906';
+  content: "\e906";
 }
 .icon-8:before {
-  content: '\e907';
+  content: "\e907";
 }
 .icon-9:before {
-  content: '\e908';
+  content: "\e908";
+}
+.icon-accesorios-y-organizacion:before {
+  content: "\e909";
 }
 .icon-alert:before {
-  content: '\e909';
+  content: "\e90a";
 }
 .icon-ambientes:before {
-  content: '\e90a';
+  content: "\e90b";
 }
 .icon-arrow:before {
-  content: '\e90b';
+  content: "\e90c";
 }
 .icon-attachment:before {
-  content: '\e90c';
+  content: "\e90d";
 }
 .icon-attatch:before {
-  content: '\e90d';
+  content: "\e90e";
+}
+.icon-bebebs2:before {
+  content: "\e90f";
 }
 .icon-bebes:before {
-  content: '\e90e';
+  content: "\e910";
   color: #48b2e8;
 }
 .icon-blancos:before {
-  content: '\e90f';
+  content: "\e911";
 }
 .icon-carro:before {
-  content: '\e910';
+  content: "\e912";
 }
 .icon-cash:before {
-  content: '\e911';
+  content: "\e913";
 }
 .icon-checkmark:before {
-  content: '\e912';
+  content: "\e914";
 }
 .icon-checkout-ticket:before {
-  content: '\e913';
+  content: "\e915";
 }
 .icon-clients:before {
-  content: '\e914';
+  content: "\e916";
 }
 .icon-colchones:before {
-  content: '\e915';
+  content: "\e917";
 }
 .icon-color:before {
-  content: '\e916';
+  content: "\e918";
+}
+.icon-comedores-relleno:before {
+  content: "\e919";
+}
+.icon-comedores:before {
+  content: "\e91a";
 }
 .icon-comisiones:before {
-  content: '\e917';
+  content: "\e91b";
 }
 .icon-comoda:before {
-  content: '\e918';
+  content: "\e91c";
 }
 .icon-cotizar:before {
-  content: '\e919';
+  content: "\e91d";
 }
 .icon-dashboard:before {
-  content: '\e91a';
+  content: "\e91e";
+}
+.icon-deals-relleno:before {
+  content: "\e91f";
 }
 .icon-decoracion:before {
-  content: '\e91b';
-  color: #48b2e8;
+  content: "\e920";
+}
+.icon-decoracion2:before {
+  content: "\e921";
+}
+.icon-decoracionpared:before {
+  content: "\e922";
 }
 .icon-descuento:before {
-  content: '\e91c';
+  content: "\e923";
 }
 .icon-descuentos:before {
-  content: '\e91d';
+  content: "\e924";
   color: #48b2e8;
 }
 .icon-disponibilidad:before {
-  content: '\e91e';
+  content: "\e925";
 }
 .icon-envio:before {
-  content: '\e91f';
+  content: "\e926";
 }
 .icon-estilo:before {
-  content: '\e920';
+  content: "\e927";
+}
+.icon-exterior:before {
+  content: "\e928";
 }
 .icon-file:before {
-  content: '\e921';
+  content: "\e929";
 }
 .icon-forma:before {
-  content: '\e922';
+  content: "\e92a";
 }
 .icon-home:before {
-  content: '\e923';
+  content: "\e92b";
 }
 .icon-iluminacion:before {
-  content: '\e924';
-  color: #48b2e8;
+  content: "\e92c";
+}
+.icon-iluminacion2:before {
+  content: "\e92d";
 }
 .icon-info:before {
-  content: '\e925';
+  content: "\e92e";
 }
 .icon-jardin:before {
-  content: '\e926';
+  content: "\e92f";
 }
 .icon-juguetes:before {
-  content: '\e927';
+  content: "\e930";
   color: #48b2e8;
+}
+.icon-juguetes2:before {
+  content: "\e931";
 }
 .icon-login:before {
-  content: '\e928';
+  content: "\e932";
+}
+.icon-look-relleno:before {
+  content: "\e933";
 }
 .icon-mail:before {
-  content: '\e929';
+  content: "\e934";
 }
 .icon-mama-y-papa:before {
-  content: '\e92a';
+  content: "\e935";
   color: #48b2e8;
+}
+.icon-mamaypapa2:before {
+  content: "\e936";
 }
 .icon-marca:before {
-  content: '\e92b';
+  content: "\e937";
 }
 .icon-material:before {
-  content: '\e92c';
+  content: "\e938";
 }
 .icon-mesas:before {
-  content: '\e92d';
+  content: "\e939";
 }
 .icon-metodo-pago:before {
-  content: '\e92e';
+  content: "\e93a";
 }
 .icon-monedero:before {
-  content: '\e92f';
+  content: "\e93b";
+}
+.icon-muebles--relleno:before {
+  content: "\e93c";
+}
+.icon-mueblestv:before {
+  content: "\e93d";
 }
 .icon-murbles:before {
-  content: '\e930';
+  content: "\e93e";
 }
-.icon-niñas-y-niños:before {
-  content: '\e931';
+.icon-ninas-y-ninos:before {
+  content: "\e93f";
   color: #48b2e8;
+}
+.icon-ninas-y-ninos2:before {
+  content: "\e940";
 }
 .icon-ninos:before {
-  content: '\e932';
+  content: "\e941";
 }
 .icon-ofertas:before {
-  content: '\e933';
+  content: "\e942";
 }
 .icon-office:before {
-  content: '\e934';
+  content: "\e943";
+}
+.icon-oficina-relleno:before {
+  content: "\e944";
 }
 .icon-oportunidades:before {
-  content: '\e935';
+  content: "\e945";
 }
 .icon-organizacion:before {
-  content: '\e936';
+  content: "\e946";
   color: #48b2e8;
+}
+.icon-organizacion2:before {
+  content: "\e947";
+}
+.icon-paraoficina:before {
+  content: "\e948";
 }
 .icon-pedidos:before {
-  content: '\e937';
+  content: "\e949";
 }
 .icon-phone:before {
-  content: '\e938';
+  content: "\e94a";
 }
 .icon-photo:before {
-  content: '\e939';
+  content: "\e94b";
 }
 .icon-place:before {
-  content: '\e93a';
+  content: "\e94c";
 }
 .icon-pointer:before {
-  content: '\e93b';
+  content: "\e94d";
 }
 .icon-precio:before {
-  content: '\e93c';
+  content: "\e94e";
+}
+.icon-promociones2:before {
+  content: "\e94f";
+}
+.icon-recamaras-relleno:before {
+  content: "\e950";
+}
+.icon-recamaras:before {
+  content: "\e951";
+}
+.icon-salas-relleno:before {
+  content: "\e952";
+}
+.icon-salas:before {
+  content: "\e953";
 }
 .icon-scorecard:before {
-  content: '\e93d';
+  content: "\e954";
 }
 .icon-search:before {
-  content: '\e93e';
+  content: "\e955";
 }
 .icon-settings:before {
-  content: '\e93f';
+  content: "\e956";
+}
+.icon-sillas-relleno:before {
+  content: "\e957";
 }
 .icon-sillas:before {
-  content: '\e940';
+  content: "\e958";
 }
 .icon-sofa:before {
-  content: '\e941';
+  content: "\e959";
 }
 .icon-tapetes:before {
-  content: '\e942';
+  content: "\e95a";
   color: #48b2e8;
 }
+.icon-tapetes2:before {
+  content: "\e95b";
+}
 .icon-terminal:before {
-  content: '\e943';
+  content: "\e95c";
 }
 .icon-transfer:before {
-  content: '\e944';
+  content: "\e95d";
+}
+.icon-tv-relleno:before {
+  content: "\e95e";
 }
 .icon-vendedor:before {
-  content: '\e945';
+  content: "\e95f";
 }
 .icon-whatsapp:before {
-  content: '\e946';
+  content: "\e960";
 }

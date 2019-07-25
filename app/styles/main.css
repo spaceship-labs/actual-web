@@ -1611,7 +1611,8 @@ select {
 .home-slider .slick-next {
   -webkit-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
   -moz-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
-  box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);  
   border-radius: 2px;
   top: 20px;
   z-index: 9;
@@ -1626,20 +1627,24 @@ select {
 
 .home-slider .slick-prev {
   background: url(../images/arrow2-left.png) center no-repeat !important;
-  background-size: 100% !important;
+  background-size: 60% !important;
+  transition: 0.3s;
   background-color: #fff !important;
-  height: 30px;
-  width: 30px;
+  border-radius: 100px;
+  height: 40px;
+  width: 40px;
   top: 50%;
   translate: transformY(-50%);
   left: 25px;
 }
 .home-slider .slick-next {
   background: url(../images/arrow2-right.png) center no-repeat !important;
-  background-size: 100% !important;
+  background-size: 60% !important;
+  transition: 0.3s;
   background-color: #fff !important;
-  height: 30px;
-  width: 30px;
+  border-radius: 100px;
+  height: 40px;
+  width: 40px;
   right: 25px;
   top: 50%;
   translate: transformY(-50%);
@@ -2419,7 +2424,6 @@ select {
 .product-view-gallery .slick-next {
   display: block !important;
 }
-
 .product-view-gallery .slick-prev,
 .product-view-gallery .slick-next {
   -webkit-box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.64);
@@ -2432,12 +2436,10 @@ select {
   bottom: 20px;
   z-index: 9;
 }
-
 .product-view-gallery .slick-prev:hover,
 .product-view-gallery .slick-next:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
-
 .product-view-gallery .slick-prev {
   background: #fff url(../images/arrow2-left.png) center no-repeat !important;
   background-color: #fff;
@@ -2664,14 +2666,15 @@ select {
   padding: 14px 0;
 }
 .product-view-prices .product-view-price-discount {
-  background: #fde932;
-  color: #000;
+  background: #2965b9;
+  color: #fff;
   margin: 0;
   margin-bottom: 10px;
   text-align: center;
-  padding: 2px 10px;
+  padding: 5px 10px;
   font-weight: 700;
   font-size: 14px;
+  border-radius: 20px;
 }
 .product-view p {
   margin: 0;
@@ -6779,7 +6782,8 @@ button.accordion:hover{
 .categories-carousel .slick-next {
   -webkit-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
   -moz-box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
-  box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.64);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);  
   border-radius: 2px;
   top: 20px;
   z-index: 9;
@@ -6794,20 +6798,22 @@ button.accordion:hover{
 
 .categories-carousel .slick-prev {
   background: url(../images/arrow2-left.png) center no-repeat !important;
-  background-size: 100% !important;
+  background-size: 60% !important;
   background-color: #fff !important;
-  height: 30px;
-  width: 30px;
+  border-radius: 100px;
+  height: 40px;
+  width: 40px;
   top: 50%;
   translate: transformY(-50%);
   left: 25px;
 }
 .categories-carousel .slick-next {
   background: url(../images/arrow2-right.png) center no-repeat !important;
-  background-size: 100% !important;
+  background-size: 60% !important;
   background-color: #fff !important;
-  height: 30px;
-  width: 30px;
+  border-radius: 100px;
+  height: 40px;
+  width: 40px;
   right: 25px;
   top: 50%;
   translate: transformY(-50%);
