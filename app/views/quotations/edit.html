@@ -272,7 +272,7 @@
           href="#"
           ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
           ng-click="vm.addNewProduct()"
-          class="action-btn-print print-btn add-to-card-quotation"
+          class="print-btn add-to-card-quotation"
         >
           AGREGAR NUEVO ARTÍCULO
         </a>
@@ -414,7 +414,7 @@
               ng-if="vm.quotation.Details.length > 0"
               href="#"
               ng-click="vm.print()"
-              class="action-btn-print print-btn"
+              class="print-btn add-to-card-quotation"
             >
               IMPRIMIR
             </a>
@@ -430,7 +430,7 @@
               ng-if="vm.quotation.Details.length > 0"
               ng-click="vm.sendByEmail()"
               href="#"
-              class="action-btn-print print-btn"
+              class="print-btn add-to-card-quotation"
             >
               ENVIAR POR EMAIL
             </a>
@@ -443,7 +443,7 @@
               ng-if="vm.quotation.Details.length > 0"
               ng-click="vm.alertRemoveAllDetails($event)"
               href="#"
-              class="action-btn-clear print-btn "
+              class="print-btn add-to-card-quotation "
             >
               LIMPIAR CARRITO
             </a>

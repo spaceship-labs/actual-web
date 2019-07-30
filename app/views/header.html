@@ -262,7 +262,14 @@
           class="header-top-bar-menu-item"
         >
           <span
+            hide-xs
             class="cart-n-items"
+            ng-class="{'cart-active-items' : main.activeQuotation}"
+            >{{ main.activeQuotation.totalProducts }}</span
+          >
+          <span
+            hide-gt-sm
+            class="cart-n-itemss"
             ng-class="{'cart-active-items' : main.activeQuotation}"
             >{{ main.activeQuotation.totalProducts }}</span
           >
