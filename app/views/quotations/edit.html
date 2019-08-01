@@ -452,10 +452,25 @@
       </aside>
     </div>
   </form>
+  <br/>
+  <div style="overflow-x:auto;">
+  <ng-include ng-if="vm.isUserAdmin" src="'views/quotations/quotation-records.html'"></ng-include>
+  <section ng-if="vm.isUserAdmin">
+  <hr />
+  <ng-include src="'views/quotations/leads-table.html'"> </ng-include>
+  <hr />
+  </section>
+  <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation">
+  <div class="hr">
+  <hr />
+  </div>
+  <ng-include src="'views/quotations/payments-options.html'"> </ng-include>
+  </div>
+  <br/>
 
   <!-- LISTING POLITICAS Y FORMAS DE PAGO  -->
           <section class="desc-wrapper">
-            <md-expansion-panel md-component-id="panelTwo">
+            <!-- <md-expansion-panel md-component-id="panelTwo">
               <md-expansion-panel-collapsed>
                 <md-expansion-panel-icon></md-expansion-panel-icon>
                 <div>FORMAS DE PAGO</div>
@@ -486,7 +501,7 @@
                   </div>
                 </md-expansion-panel-content>
               </md-expansion-panel-expanded>
-            </md-expansion-panel>
+            </md-expansion-panel> -->
 
             <md-expansion-panel md-component-id="panelTwo">
               <md-expansion-panel-collapsed>
