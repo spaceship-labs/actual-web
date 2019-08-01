@@ -192,7 +192,10 @@ function RegisterCtrl(
       if (vm.newAddress && vm.newAddress.Address) {
         vm.newClient.contacts = [vm.newAddress];
       }
-      if (invited) vm.newClient.password = generatePassword();
+      if (invited) {
+        vm.newClient.password = generatePassword();
+        vm.newClient.invited = true;
+      }
       clientService
         .register(vm.newClient)
         .then(function(res) {

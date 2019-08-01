@@ -5145,7 +5145,7 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 /*----------------*/
 .payments-view .delivery-option-data {
   border: none;
-  text-align: center;
+  text-align: justify;
 }
 .payments-view .delivery-option-data ul {
   list-style: none;
@@ -5154,6 +5154,12 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 .payments-view .delivery-option-data li {
   font-size: 13px;
   margin: 4px 0;
+}
+.payments-view .delivery-option-data .delivery-titles {
+  text-transform: uppercase;
+}
+.payments-view .delivery-option-data .delivery-titles .delivery-mail {
+  text-transform: lowercase;
 }
 .pay-method-tab {
   padding: 20px;
