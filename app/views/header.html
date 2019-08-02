@@ -160,10 +160,10 @@
           flex
           class="header-top-bar-menu-item search-trigger-item"
         >
-          <button
-            class="icon-search"
+          <i
+            class="icon-search" 
             ng-click="main.showSearchBar = !main.showSearchBar"
-          ></button>
+          ></i>
         </div>
         <div ng-if="!main.user || main.user.invited" hide-xs hide-sm flex class="header-top-bar-menu-item">
           <a href="/register"> <p style="color: #fff;"> REGÍSTRATE</p> </a>
@@ -257,7 +257,6 @@
           <span>
             <strong> <i class="icon-phone"></i> </strong>
           </span>
-
           <ng-include
             ng-if="main.isActiveSchedulesModal"
             src="'views/partials/schedules-dropdown.html'"

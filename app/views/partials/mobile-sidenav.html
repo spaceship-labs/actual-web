@@ -38,7 +38,7 @@
     <nav>
       <ul ng-if="main.siteTheme !== 'actual-kids'">
         <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index" ng-click="main.handleAccordion(category.Handle)"
-        class="sidebar-info-main-items">
+        class="sidebar-info-main-items" >
           <!-- <i class="icon-{{getCategoryIcon(category.Handle)}}"></i> -->
           <a class= "mouseover-link-mobile active">
             <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
@@ -47,6 +47,8 @@
             <li ng-repeat="subcategory in category.Childs" >
               <br/>
               <a ng-href="{{'/category/' + subcategory.Handle}}" class="sidebar-info-main-items">
+                <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
+
                 <span class="nav-categories-item-text">{{ subcategory.Name }}</span>
               </a>
             </li>
@@ -80,7 +82,7 @@
         </li>
         <li>
           <a href="/search?sortkey=slowmovement" class="nav-categories-item , mouseover-link-mobile active">
-            <span class="nav-categories-item-text">Promociones</span>
+            <span class="nav-categories-item-text" >Promociones</span>
           </a>
         </li>
       </ul>
@@ -109,18 +111,8 @@
                 <p>
                   <strong class="nav-categories-item-text">Asistencia en su compra</strong>
                 </p>
-                <!-- <table>
-                  <tr>
-                    <td>Teléfono:</td>
-                    <td>(998) 884 1594</td>
-                  </tr>
-                  <tr>
-                    <td>Celular:</td>
-                    <td>(998) 246 3487</td>
-                  </tr>
-                </table> -->
-                <th>(998) 246 3487 o (998) 884 1594</th>
-                <!-- <p>01 (998) 884 1594</p> -->
+                <th> <a href="tel:+998-246-3487">(998) 246 3487</a> ó <a href="tel:+998-884-1594">(998) 884 1594</a></th>
+                <!-- <th>(998) 246 3487 o (998) 884 1594</th> -->
               </li>
               <br/>
               <li>

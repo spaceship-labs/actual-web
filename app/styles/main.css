@@ -808,13 +808,13 @@ select {
 }
 .mobile-sidenav ul {
   padding: 0;
+  margin-bottom: 10px;
 }
 .mobile-sidenav .close-btn {
   background: #dda901 !important;
   position: absolute;
   top: 6px;
   right: 0;
-  color: #dda901;
   margin: 0px;
   margin-right: 16px;
   font-size: 18px;
@@ -848,6 +848,8 @@ select {
 }
 .nav-categories-item-text:active {
   color: #dda901;
+  pointer-events: none;
+
 }
 
 .mobile-sidenav .sidebar-info-items  {
@@ -1103,12 +1105,14 @@ select {
   #SCHEDULES-MODAL
 /*--------------*/
 .schedules-modal-header {
-  top: 25px;
+  top: 49px;
   background: #092f57 !important;
   min-width: 260px;
 }
 .schedules-modal-header .phone-assitance {
   display: none;
+  
+  
 }
 .schedules-modal-header .schedules-modal-header-content {
   padding: 10px;
@@ -3139,7 +3143,7 @@ md-radio-button.md-checked .md-off {
   text-align: center;
 }
 .cart-view .cart-item-data .select-element {
-  height: 26px;
+  height: 36px;
 }
 
 .cart-view .cart-item-data .select-element[disabled],
@@ -3192,13 +3196,11 @@ md-radio-button.md-checked .md-off {
 .cart-view .cart-item-data md-progress-circular {
   left: 15%;
 }
-/* .cart-view .cart-item-data .stock-selection .product-view-qty {
-  max-width: 100px;
-  margin-left: 40px;
-} */
 .cart-view .cart-item-data .stock-selection .product-view-qty {
-  /* max-width: 100%;    */
+  /* max-width: 100px; */
+  margin-left: 40px;
 }
+
 .cart-view .cart-item-data .stock-selection label {
   font-size: 10px;
   font-weight: 700;
@@ -7477,7 +7479,7 @@ md-sidenav {
 
   .login-modal-header {
     left: 0;
-    top: 60px;
+    top: 50px;
     position: fixed;
   }
 }
@@ -7653,7 +7655,7 @@ md-sidenav {
     display: none;
   }
   .login-modal-header {
-    top: 90px;
+    /* top: 90px; */
   }
   .schedules-modal-header {
     top: 60px;
@@ -7744,7 +7746,7 @@ md-sidenav {
     position: fixed;
     left: 0;
     width: 100%;
-    top: 60px;
+    top: 50px;
     /*top: 60px;*/
   }
   .schedules-modal-header .phone-assitance {
@@ -7800,7 +7802,7 @@ md-sidenav {
   }
   .header-top-bar-menu .header-top-bar-menu-item-phone {
     min-width: 20px;
-    margin: 0 0px;
+    margin: 0 3px;
   }
   .header-top-bar-menu .header-top-bar-menu-item-phone i {
     font-size: 23px !important;
@@ -7945,7 +7947,7 @@ md-sidenav {
     padding: 0;
     left: 0;
     right: 0;
-    margin: 0 auto 10px;
+    margin: 8px 9px 9px 9px;
     width: 95%;
   }
   .header-top-bar.fixed-head .searcher {
