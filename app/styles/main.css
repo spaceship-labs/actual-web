@@ -715,11 +715,6 @@ select {
   margin: 0 0 0 -2px;
 }
 
-/*.header-top-bar-menu .header-top-bar-menu-item + .header-top-bar-menu-item{
-  border-left: 1px solid #000;
-}
-*/
-
 .header-top-bar .md-chips-wrapper {
   padding: 10px;
   overflow: hidden;
@@ -736,10 +731,6 @@ select {
   height: 40px;
 }
 
-/* .header-top-bar .logo,
-.header-top-bar .categories-btn-wrap {
-  display: none;
-} */
 .header-top-bar .logo-mobile {
   display: none !important;
 }
@@ -820,58 +811,59 @@ select {
 }
 .mobile-sidenav .close-btn {
   background: #dda901 !important;
-  /* background: #092f57!important; */
   position: absolute;
   top: 6px;
   right: 0;
-  /* transform: rotate(45deg); */
   color: #dda901;
   margin: 0px;
-  margin-right: 6px;
+  margin-right: 16px;
   font-size: 18px;
 }
 
-/* .close-btn:hover {
-  color: #ffffff !important;
-  background: #dda901;
-  border-color: #f1be3e !important;
-  transition: all 0.3s ease 0s;
-  
-} */
-
-
 .mobile-sidenav md-content {
-  margin-top: 25px;
   overflow: visible;
 }
 
 .mobile-sidenav .nav-categories-item-sidenav {
   min-height: 30px;
   padding: 6px;
-  padding-left: 16px;
+  padding-left: 20px;
   text-align: left;
   align-content: center;
   display: block;
   font-size: 13px;
   text-transform: uppercase;
+  color: #000 !important;
 
-  /* border-bottom: 1px solid #dda901; */
+}
+.mobile-sidenav .sidebar-info-main-items  {
+  color: #000 !important;
+  min-height: 30px;
+  padding: 6px;
+  padding-left: 20px;
+  text-align: left;
+  align-content: center;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.nav-categories-item-text:active {
+  color: #dda901;
 }
 
 .mobile-sidenav .sidebar-info-items  {
     min-height: 30px;
     padding: 6px;
-    padding-left: 16px;
+    padding-left: 20px;
     text-align: left;
     align-content: center;
     display: block;
     font-size: 12px;
     font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-
 }
+
 .mouseover-link-mobile:active {
   color: #dda901;
-  cursor: pointer;
+  pointer-events: none;
 }
 .mouseover-link-mobile::after{
   content: '';
@@ -3200,8 +3192,12 @@ md-radio-button.md-checked .md-off {
 .cart-view .cart-item-data md-progress-circular {
   left: 15%;
 }
-.cart-view .cart-item-data .stock-selection .product-view-qty {
+/* .cart-view .cart-item-data .stock-selection .product-view-qty {
   max-width: 100px;
+  margin-left: 40px;
+} */
+.cart-view .cart-item-data .stock-selection .product-view-qty {
+  /* max-width: 100%;    */
 }
 .cart-view .cart-item-data .stock-selection label {
   font-size: 10px;
@@ -3398,7 +3394,7 @@ md-toolbar.md-toolbar-header{
     max-height: 52px;
     padding: 6px;
     left: 10px;
-    /* margin-left: 16px; */
+    margin-left: 8px;
     position: absolute;
     background: #092f57;
 }

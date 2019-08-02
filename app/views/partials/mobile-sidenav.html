@@ -38,15 +38,15 @@
     <nav>
       <ul ng-if="main.siteTheme !== 'actual-kids'">
         <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index" ng-click="main.handleAccordion(category.Handle)"
-          class="nav-categories-item-sidenav">
+        class="sidebar-info-main-items">
           <!-- <i class="icon-{{getCategoryIcon(category.Handle)}}"></i> -->
           <a class= "mouseover-link-mobile active">
             <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
           </a>
           <ul ng-show="main.accordion.current === category.Handle">
-            <li ng-repeat="subcategory in category.Childs" class="">
+            <li ng-repeat="subcategory in category.Childs" >
               <br/>
-              <a ng-href="{{'/category/' + subcategory.Handle}}" class="nav-categories-item">
+              <a ng-href="{{'/category/' + subcategory.Handle}}" class="sidebar-info-main-items">
                 <span class="nav-categories-item-text">{{ subcategory.Name }}</span>
               </a>
             </li>
@@ -65,7 +65,6 @@
           </a>
         </li>
       </ul>
-
       <ul ng-if="main.siteTheme === 'actual-kids' ">
         <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index " ng-click="main.handleAccordion(category.Handle)"
           class="nav-categories-item-sidenav">
@@ -100,7 +99,7 @@
         </li>
       </ul>
     </nav>
-    <hr width="95%">
+    <hr width="90%">
     <div class="sidebar-info-items">
       <div >
         <div class="container container-xxlg" layout="row" layout-wrap layout-align-sm="space-between center">
@@ -148,7 +147,6 @@
                     <td>10:00am - 13:00pm</td>
                   </tr>
                 </table>
-
               </li>
             </ul>
           </div>
@@ -165,15 +163,15 @@
           </div>
       </div>
     </div>
-          <div flex="40" flex-xs="100">
-            <p layout="row" layout-align="center center" class="verified-logos">
-              <img class="nav-categories-content-bs" src="/images/trust_brands_trustwave.svg" alt="Trustwave">
-              <img class="nav-categories-content-bs" src="/images/trust_brands_prosa.svg" alt="Prosa">
-              <img class="nav-categories-content-bs" src="/images/trust_brands_kount.svg" alt="Kount">
-              <img class="nav-categories-content-bs" src="/images/trust_brands_mcafee.svg" alt="Mcafee">
-              <img class="nav-categories-content-bs" src="/images/trust_brands_digicert.svg" alt="Digicert">
-            </p>
-          </div>
+    <div flex="40" flex-xs="100">
+      <p layout="row" layout-align="center center" class="verified-logos">
+        <img class="nav-categories-content-bs" src="/images/trust_brands_trustwave.svg" alt="Trustwave">
+        <img class="nav-categories-content-bs" src="/images/trust_brands_prosa.svg" alt="Prosa">
+        <img class="nav-categories-content-bs" src="/images/trust_brands_kount.svg" alt="Kount">
+        <img class="nav-categories-content-bs" src="/images/trust_brands_mcafee.svg" alt="Mcafee">
+        <img class="nav-categories-content-bs" src="/images/trust_brands_digicert.svg" alt="Digicert">
+      </p>
+    </div>
   </md-content>
   <!-- <div>
     <md-button ng-click="main.toggleMobileSidenav()" class="close-btn md-fab md-mini md-primary">x</md-button>
