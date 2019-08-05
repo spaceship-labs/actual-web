@@ -40,7 +40,7 @@
         <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index" ng-click="main.handleAccordion(category.Handle)"
         class="sidebar-info-main-items" >
           <!-- <i class="icon-{{getCategoryIcon(category.Handle)}}"></i> -->
-          <a class= "mouseover-link-mobile active">
+          <a class= "mouseover-link-mobile">
             <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
           </a>
           <ul ng-show="main.accordion.current === category.Handle">

@@ -594,6 +594,7 @@ select {
 
 .header-top-bar-menu-item p {
   font-size: 14px;
+  outline: 0px;
 }
 .header-top-bar-menu .cart-n-items {
   position: absolute;
@@ -677,6 +678,7 @@ select {
   color: white;
   font-size: 18px;
   vertical-align: center;
+  outline: 0px;
 }
 
 .header-top-bar-menu .icon-login {
@@ -845,6 +847,7 @@ select {
   align-content: center;
   font-size: 13px;
   text-transform: uppercase;
+  outline: 0px;
 }
 .nav-categories-item-text:active {
   color: #dda901;
