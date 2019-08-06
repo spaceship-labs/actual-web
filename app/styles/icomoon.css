@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?h80ij7');
-  src:  url('../fonts/icomoon.eot?h80ij7#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?h80ij7') format('truetype'),
-    url('../fonts/icomoon.woff?h80ij7') format('woff'),
-    url('../fonts/icomoon.svg?h80ij7#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?fe39yo');
+  src:  url('../fonts/icomoon.eot?fe39yo#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?fe39yo') format('truetype'),
+    url('../fonts/icomoon.woff?fe39yo') format('woff'),
+    url('../fonts/icomoon.svg?fe39yo#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -51,7 +51,7 @@
 .icon-9:before {
   content: "\e908";
 }
-.icon-accesorios-y-organizacion:before {
+.icon-accesoriosyorganizacion:before {
   content: "\e909";
 }
 .icon-alert:before {
@@ -310,15 +310,18 @@
 .icon-terminal:before {
   content: "\e95c";
 }
-.icon-transfer:before {
+.icon-time:before {
   content: "\e95d";
 }
-.icon-tv-relleno:before {
+.icon-transfer:before {
   content: "\e95e";
 }
-.icon-vendedor:before {
+.icon-tv-relleno:before {
   content: "\e95f";
 }
-.icon-whatsapp:before {
+.icon-vendedor:before {
   content: "\e960";
+}
+.icon-whatsapp:before {
+  content: "\e961";
 }
