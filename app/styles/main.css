@@ -2859,7 +2859,7 @@ select {
   #PRODUCT-VIEW-DESCRIPTION
 /*-----------*/
 .product-view .desc-wrapper {
-  margin-top: 10px;
+  margin-top: 16px;
 }
 .product-view .desc-head-item {
   border: 1px solid #000;
