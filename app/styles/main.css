@@ -5410,7 +5410,7 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 }
 
 .deposit-dialog .expiration-inner {
-  margin-right: 10px;
+  margin-right: 14px;
 }
 
 .deposit-dialog .deposit-type {
@@ -5428,14 +5428,15 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 }
 .deposit-dialog .payment-cardtype-chooser {
   background: #f4f7f9;
-  padding: 5px 10px;
+  padding: 6px 20px;
+  margin: 12px 18px 0px 0px;
   max-width: 400px;
 }
 .deposit-dialog .payment-cardtype-chooser md-radio-button {
   margin-right: 60px;
 }
 .deposit-dialog .payment-cardtype-chooser img {
-  max-width: 46px;
+  max-width: 44px;
   position: relative;
   top: 6px;
 }
@@ -5462,7 +5463,7 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   margin: 0;
 }
 .deposit-dialog .state-selector {
-  max-width: 85%;
+  /* max-width: 85%; */
   min-width: 0px;
 }
 .deposit-dialog .dialog-block .error-msg {
@@ -8000,7 +8001,7 @@ md-sidenav {
   }
   .deposit-dialog .cvc-input {
     position: relative;
-    top: 6px;
+    top: 5.5px;
   }
   .deposit-dialog .deposit-dialog-footer {
     min-width: 0;
