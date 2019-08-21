@@ -5499,8 +5499,9 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 
 .deposit-dialog .deposit-dialog-footer {
   background: #f8f8f8;
-  padding: 15px 40px;
-  min-width: 800px;
+  margin-top: 16px;
+  padding: 15px 20px;
+  /* min-width: 800px; */
 }
 .deposit-dialog .ammount-input .input-element {
   margin-right: 8px;
