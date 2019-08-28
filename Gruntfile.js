@@ -522,9 +522,9 @@ module.exports = function(grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'https://api.actualstudio.com',
+            apiEndpoint: 'https://apikids.actualkids.com',
             cdnUrl: 'https://d116li125og699.cloudfront.net',
-            adminUrl: 'http://admin.miactual.com',
+            adminUrl: 'http://adminkids.miactual.com',
             tokenPrefix: 'production',
             conektaHomeKey: 'key_fTqfbsS7oxfpqZxtP9qZqdw',
             conektaKidsKey: 'key_QCgrTimPycx55HtzxStvXZw',
