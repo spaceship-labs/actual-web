@@ -53,7 +53,8 @@ function ProductCtrl(
     zipcodeForm: {},
     isActiveBreadcrumbItem: breadcrumbService.isActiveBreadcrumbItem,
     showZipcodeDialog: showZipcodeDialog,
-    submitZipcodeForm: submitZipcodeForm
+    submitZipcodeForm: submitZipcodeForm,
+    setDeliveriesByStaticZipCode: setDeliveriesByStaticZipCode
   });
 
   init($routeParams.id);
@@ -171,7 +172,7 @@ function ProductCtrl(
     });
   }
 
-  function setUpDeliveries(options) {
+  function setUpDeliveries(options, addToCart) {
     options = options || {};
 
     /*
@@ -205,12 +206,63 @@ function ProductCtrl(
         } else {
           vm.productCart.quantity = 0;
         }
+        // NO TOCAR
+        if (addToCart) {
+          vm.isLoadingDeliveries = false;
+          if (!vm.zipcodeDelivery) {
+            return;
+          }
 
-        vm.isLoadingDeliveries = false;
-        if (options.callback && _.isFunction(options.callback)) {
-          options.callback();
+          if (vm.isLoadingDeliveries) {
+            return;
+          }
+
+          $rootScope.scrollTo('main');
+          vm.isLoading = true;
+          var productCartItems = cartService.getProductCartItems(
+            vm.productCart.deliveryGroup,
+            vm.productCart.quantity,
+            vm.warehouses,
+            activeStoreWarehouse
+          );
+
+          gtmService.notifyAddToCart(
+            vm.product.ItemCode,
+            vm.productCart.quantity,
+            vm.product.Price * vm.productCart.quantity,
+            vm.zipcodeDelivery.cp
+          );
+
+          if (productCartItems.length === 1) {
+            console.log('Entra al primer if');
+
+            var cartItem = productCartItems[0];
+            var params = cartService.buildAddProductToCartParams(
+              vm.product.id,
+              cartItem
+            );
+            params.zipcodeDeliveryId = vm.zipcodeDelivery.id;
+            quotationService.addProduct(vm.product.id, params);
+          } else if (productCartItems.length > 1) {
+            console.log('Entra al segundo if');
+
+            var multiParams = productCartItems.map(function(cartItem) {
+              return cartService.buildAddProductToCartParams(
+                vm.product.id,
+                cartItem
+              );
+            });
+            var options = {
+              zipcodeDeliveryId: vm.zipcodeDelivery.id
+            };
+            quotationService.addMultipleProducts(multiParams, options);
+          }
+          activeQuotationListener();
         }
-        activeQuotationListener();
+        // END NO TOCAR
+        // if (options.callback && _.isFunction(options.callback)) {
+        //   options.callback();
+        // }
       })
       .catch(function(err) {
         console.log('err', err);
@@ -317,7 +369,83 @@ function ProductCtrl(
       });
   }
 
+  function setDeliveriesByStaticZipCode() {
+    return deliveryService
+      .getZipcodeDelivery('77500')
+      .then(function(zipcodeDelivery) {
+        console.log('zipcodedelivery', zipcodeDelivery);
+        if (zipcodeDelivery) {
+          vm.isLoadingDeliveries = true;
+          vm.zipcodeDelivery = zipcodeDelivery;
+
+          return setUpDeliveries({
+            productId: vm.product.ItemCode,
+            activeStoreId: activeStore.id,
+            zipcodeDeliveryId: zipcodeDelivery.id
+          });
+        } else {
+          if (zipcode) {
+            vm.isLoadingDeliveries = false;
+            dialogService.showDialog(
+              'Por el momento, su código postal esta fuera de nuestra área de cobertura'
+            );
+          }
+          return $q.resolve();
+        }
+      })
+      .catch(function(err) {
+        vm.isLoadingDeliveries = false;
+        console.log('err', err);
+        var errMsg = '';
+        if (err) {
+          errMsg = err.data || err;
+          errMsg = errMsg ? errMsg.toString() : '';
+          dialogService.showDialog(errMsg);
+        }
+      });
+  }
+
   function addToCart($event) {
+    var addToCart = true;
+    // ZipCode 1st try
+    return deliveryService
+      .getZipcodeDelivery('77500')
+      .then(function(zipcodeDelivery) {
+        console.log('zipcodedelivery', zipcodeDelivery);
+        if (zipcodeDelivery) {
+          vm.isLoadingDeliveries = true;
+          vm.zipcodeDelivery = zipcodeDelivery;
+
+          return setUpDeliveries(
+            {
+              productId: vm.product.ItemCode,
+              activeStoreId: activeStore.id,
+              zipcodeDeliveryId: zipcodeDelivery.id
+            },
+            addToCart
+          );
+        } else {
+          if (zipcode) {
+            vm.isLoadingDeliveries = false;
+            dialogService.showDialog(
+              'Por el momento, su código postal esta fuera de nuestra área de cobertura'
+            );
+          }
+          return $q.resolve();
+        }
+      })
+      .catch(function(err) {
+        vm.isLoadingDeliveries = false;
+        console.log('err', err);
+        var errMsg = '';
+        if (err) {
+          errMsg = err.data || err;
+          errMsg = errMsg ? errMsg.toString() : '';
+          dialogService.showDialog(errMsg);
+        }
+      });
+
+    // Original function
     if (!vm.zipcodeDelivery) {
       showZipcodeDialog(null);
       return;

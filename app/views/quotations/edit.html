@@ -241,9 +241,9 @@
           <ng-include
             class="cart-item-wrapper"
             ng-repeat="detailGroup in vm.quotation.DetailsGroups track by $index"
-            src="'views/partials/product-cart-item.html'"></ng-include>
-        </div>
-        -->
+            src="'views/partials/product-cart-item.html'"
+          ></ng-include>
+        </div> -->
 
         <div
           ng-if="!vm.isLoadingDetails && !vm.quotation.isSpeiQuotation"
@@ -453,29 +453,65 @@
     </div>
   </form>
 
-  <ng-include
-    ng-if="vm.isUserAdmin"
-    src="'views/quotations/quotation-records.html'"
-  ></ng-include>
+  <!-- LISTING POLITICAS Y FORMAS DE PAGO  -->
+          <section class="desc-wrapper">
+            <md-expansion-panel md-component-id="panelTwo">
+              <md-expansion-panel-collapsed>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+                <div>FORMAS DE PAGO</div>
+                <div class="md-summary"></div>
+              </md-expansion-panel-collapsed>
 
-  <section ng-if="vm.isUserAdmin">
-    <hr />
-    <ng-include src="'views/quotations/leads-table.html'"> </ng-include>
-    <hr />
-  </section>
+              <md-expansion-panel-expanded>
+                <md-expansion-panel-header ng-click="$panel.collapse()">
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                  <div>FORMAS DE PAGO</div>
+                  <div class="md-summary"></div>
+                </md-expansion-panel-header>
 
-  <section
-    ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation"
-  >
-    <div class="hr">
-      <hr />
-    </div>
-    <ng-include src="'views/quotations/payments-options.html'"> </ng-include>
-  </section>
+                <md-expansion-panel-content>
+                  <div style="overflow-x:auto;"
+                  >
+                  <ng-include ng-if="vm.isUserAdmin" src="'views/quotations/quotation-records.html'"></ng-include>
+                  <section ng-if="vm.isUserAdmin">
+                  <hr />
+                  <ng-include src="'views/quotations/leads-table.html'"> </ng-include>
+                  <hr />
+                  </section>
+                  <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation">
+                  <div class="hr">
+                  <hr />
+                  </div>
+                  <ng-include src="'views/quotations/payments-options.html'"> </ng-include>
+                  </div>
+                </md-expansion-panel-content>
+              </md-expansion-panel-expanded>
+            </md-expansion-panel>
 
-  <div class="hr">
-    <hr />
-  </div>
+            <md-expansion-panel md-component-id="panelTwo">
+              <md-expansion-panel-collapsed>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+                <div>POLÍTICAS DE COTIZACIONES</div>
+                <div class="md-summary"></div>
+              </md-expansion-panel-collapsed>
 
-  <ng-include src="'views/quotations/quotation-texts.html'"></ng-include>
+              <md-expansion-panel-expanded>
+                <md-expansion-panel-header ng-click="$panel.collapse()">
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                  <div>POLÍTICAS DE COTIZACIONES</div>
+                  <div class="md-summary"></div>
+                </md-expansion-panel-header>
+
+                <md-expansion-panel-content>
+                  <div>
+                  <ng-include src="'views/quotations/quotation-texts.html'"></ng-include>
+                  </div>
+                </md-expansion-panel-content>
+              </md-expansion-panel-expanded>
+            </md-expansion-panel>
+
+          </md-expansion-panel-group>
+        </section>
+
 </section>
+

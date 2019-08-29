@@ -20,22 +20,26 @@
     </p>
   </div>
 </div>
-
-<div class="content-block listing-view">
+<div class="content-block listing-view"
+>
   <div
     class="container container-xxlg"
     layout="row"
-    layout-align="space-between start"
   >
     <!--START NAV-->
-    <sidebar-categories
-      selected-category-id="vm.lowestCategory.id"
-      categories-tree="main.categoriesTree"
-      active-store="main.activeStore"
-      hide-sm
-      hide-xs
-      flex="20"
-    >
+    <div class="product-nav-viewcategory"   >
+        <sidebar-categories
+          selected-category-id="vm.lowestCategory.id"
+          categories-tree="main.categoriesTree"
+          active-store="main.activeStore"
+          hide-sm
+          hide-xs
+          flex="20"
+        >
+
+        <!-- ng-mouseover="main.handleCategoryHover(category.Handle)" -->
+        </sidebar-categories>
+      </div>
     </sidebar-categories>
     <!--END NAV-->
 
@@ -105,9 +109,10 @@
               ng-if="vm.zipcodeDelivery && !vm.isLoadingDeliveries"
               src="'views/partials/product-delivery.html'"
             ></ng-include>
-            <ng-include src="'views/partials/product-stock.html'"></ng-include>
+            <!-- <ng-include src="'views/partials/product-stock.html'"></ng-include> -->
             <!-- <ng-include src="'views/partials/product-promotions.html'"></ng-include> -->
 
+            <!-- PRODUCT PRICE CURRENCY -->
             <div
               class="product-view-prices"
               layout="row"
@@ -138,7 +143,7 @@
                 <div class="product-view-qty input-element">
                   <div
                     ng-if="!vm.zipcodeDelivery"
-                    ng-click="vm.showZipcodeDialog()"
+                    ng-click="vm.setDeliveriesByStaticZipCode()"
                     class="zipcode-layer"
                   ></div>
 
@@ -151,13 +156,14 @@
                   </select>
                 </div>
               </div>
+              <!-- PRODUCT DELIVERY DATE -->
               <div flex="30" flex-sm="50" flex-xs="50">
                 <div
                   class="delivery-selection input-element select-element-wrapper"
                 >
                   <div
                     ng-if="!vm.zipcodeDelivery"
-                    ng-click="vm.showZipcodeDialog()"
+                    ng-click="vm.setDeliveriesByStaticZipCode()"
                     class="zipcode-layer"
                   ></div>
 
@@ -171,7 +177,7 @@
                   </select>
                 </div>
               </div>
-
+              <!-- PRODUCT PRICE TAXES INCLUDE -->
               <div
                 flex="25"
                 flex-sm="100"
@@ -191,13 +197,13 @@
               <!--END CONDITION-->
             </div>
 
-            <!--<p class="seen-number">
+            <p class="seen-number">
               <strong class="small">visto {{vm.product.seenTimes}}
                 <span ng-if="vm.product.seenTimes > 1">veces</span>
                 <span ng-if="vm.product.seenTimes <= 1">veces</span>
                hoy</strong>
             </p>
-            -->
+           
           </div>
           <!--END PRODUCT VIEW DATA-->
         </div>
@@ -353,11 +359,55 @@
                 </md-expansion-panel-content>
               </md-expansion-panel-expanded>
             </md-expansion-panel>
+
+            <md-expansion-panel md-component-id="panelTwo">
+              <md-expansion-panel-collapsed>
+                <md-expansion-panel-icon></md-expansion-panel-icon>
+                <div>FORMAS DE PAGO</div>
+                <div class="md-summary"></div>
+              </md-expansion-panel-collapsed>
+
+              <md-expansion-panel-expanded>
+                <md-expansion-panel-header ng-click="$panel.collapse()">
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                  <div>FORMAS DE PAGO</div>
+                  <div class="md-summary"></div>
+                </md-expansion-panel-header>
+
+                <md-expansion-panel-content>
+                  <div style="overflow-x:auto;"
+                  >
+                  <table class="payments-type-table" summary="This table shows the payments types">
+                    <caption>Válidos, 2019</caption>
+                    <tr>
+                      <th scope="col">Formas de pago</th>
+                      <th scope="col">Planes de pago</th>
+                      <th scope="col">Grupos financieros participantes</th>
+                    </tr>
+                    <tr>
+                      <th scope="row">Tarjeta de Crédito</th>
+                      <td>Un solo pago</td>
+                      <td>Visa,MasterCard,American Express</td>
+                    </tr>
+                    <tr class="alt">
+                      <th scope="row">Tarjeta de débito</th>
+                      <td>Un solo pago</td>
+                      <td>Banamex,HSBC,Inbursa,Santander</td>
+                    </tr>
+                  </table>
+                  </div>
+                </md-expansion-panel-content>
+              </md-expansion-panel-expanded>
+            </md-expansion-panel>
           </md-expansion-panel-group>
         </section>
       </section>
       <!--END PRODUCT VIEW CONTENT-->
     </div>
     <!-- MAIN VIEW -->
+   </div>
   </div>
-</div>
+ </div>
+
+
+ <!-- ng-mouseleave="main.handleCategoryLeave()"  ng-mouseover="main.menuCategoriesOn = false" ng-mouseover="main.handleCategoryHover(category.Handle)" -->                
