@@ -587,6 +587,8 @@ select {
 
 .header-top-bar-menu .header-top-bar-menu-item .invited-label {
   font-size: 10px;
+  position: absolute;
+  bottom: 1px;
 }
 .header-top-bar-menu .header-top-bar-menu-item span {
   color: #fff;
