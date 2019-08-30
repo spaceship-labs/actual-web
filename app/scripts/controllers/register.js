@@ -264,7 +264,7 @@ function RegisterCtrl(
           dialogService.showDialog('Hubo un error, revisa tus datos ' + errMsg);
         });
     } else {
-      dialogService.showDialog('Campos incompletos, revisa tus datos');
+      dialogService.showDialog('Campo incompleto, revisa el dato telefónico (10 dígitos)');
     }
   }
 
