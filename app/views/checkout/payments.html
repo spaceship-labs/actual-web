@@ -99,6 +99,143 @@
             </div>
           </section>
         </div>
+        <div layout="row" layout-wrap>
+          <div flex="65" flex-sm="100" flex-xs="100" class="confirmed-address">
+            <div class="delivery-option-data">
+              <div layout="row" layout-wrap>
+                <div flex="95" flex-sm="100" flex-xs="100">
+                    <h4><strong>DIRECCIÓN DE ENVÍO</strong></h4>
+                </div>
+                <div flex flex-sm="100" flex-xs="100">
+                  <p>
+                      <a
+                        class="small-link action-link"
+                        href="#"
+                        ng-href="/user/deliveries?returnTo=/checkout/client/{{
+                          vm.quotation.id
+                        }}"
+                      >
+                        Editar
+                      </a>
+                    </p>
+                </div>
+              </div>
+              <div  layout="row" layout-wrap class="delivery-titles">
+                <div flex="40" flex-sm="40" flex-xs="50">
+                  <ul>
+                    <li>
+                      <strong>Calle:</strong>
+                    </li>
+                    <li>
+                      <strong>No. exterior:</strong>
+                    </li>
+                    <li>
+                      <strong>No. interior:</strong>
+                    </li>
+                    <li>
+                      <strong>Colonia:</strong>
+                    </li>
+                    <li>
+                      <strong>Municipio o delegación:</strong>
+                    </li>
+                    <li>
+                      <strong>Ciudad:</strong>
+                    </li>
+                    <li>
+                      <strong>Estado:</strong>
+                    </li>
+                    <li><strong>C.P.:</strong></li>
+                    <li>
+                      <strong>Entre calle:</strong>
+                    </li>
+                    <li>
+                      <strong>Y calle:</strong>
+                    </li>
+                    <li>
+                      <strong>Referencias:</strong>
+                    </li>
+                    <li>
+                      <strong>Destinatario:</strong>
+                    </li>
+                    <li>
+                      <strong>Email:</strong>
+                    </li>
+                    <li>
+                      <strong>Télefono:</strong>
+                    </li>
+                    <li>
+                      <strong>Celular:</strong>
+                    </li>
+                  </ul>
+                </div>
+                <div flex flex-sm flex-xs>
+                  <ul>
+                    <li>
+                      {{ vm.quotation.Address.Address ? vm.quotation.Address.Address : '-' }}
+                    </li>
+                    <li>
+
+                      {{ vm.quotation.Address.U_Noexterior ? vm.quotation.Address.U_Noexterior : '-' }}
+                    </li>
+                    <li>
+
+                      {{ vm.quotation.Address.U_Nointerior ? vm.quotation.Address.U_Nointerior : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Colonia ? vm.quotation.Address.U_Colonia : '-' }}
+                    </li>
+                    <li>
+
+                      {{ vm.quotation.Address.U_Mpio ? vm.quotation.Address.U_Mpio : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Ciudad ? vm.quotation.Address.U_Ciudad : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Estado ? vm.quotation.Address.U_Estado : '-' }}
+                    </li>
+                    {{ vm.quotation.Address.U_CP ? vm.quotation.Address.U_CP : '-' }}</li>
+                    <li>
+
+                      {{ vm.quotation.Address.U_Entrecalle ? vm.quotation.Address.U_Entrecalle : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Ycalle ? vm.quotation.Address.U_Ycalle : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Notes1 ? vm.quotation.Address.U_Notes1 : '-' }}
+                    </li>
+                    <li>
+                      {{
+                        vm.quotation.Address.FirstName ?
+                        vm.quotation.Address.FirstName +
+                          ' ' +
+                          vm.quotation.Address.LastName :
+                          '-'
+                      }}
+                    </li>
+                    <li class="delivery-mail">
+                      {{ vm.quotation.Address.E_Mail ? vm.quotation.Address.E_Mail : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.Tel1 ? vm.quotation.Address.Tel1 : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.Cellolar ? vm.quotation.Address.Cellolar : '-' }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="30" flex-sm="100" flex-xs="100" class="secure-logos">
+            <img src="/images/trust_brands_trustwave.svg" alt="Trustwave" />
+            <img src="/images/trust_brands_prosa.svg" alt="Prosa" />
+            <img src="/images/trust_brands_kount.svg" alt="Kount" />
+            <img src="/images/trust_brands_digicert.svg" alt="Digicert" />
+            <img src="/images/comodo-secure.png" alt="" />
+          </div>
+        </div>
       </div>
       <aside flex flex-sm="100" flex-xs="100" class="cart-aside">
         <h1 class="cart-title">
@@ -215,84 +352,6 @@
               *Se necesita saldar el monto total para poder procesar la venta
             </p>
           </div>
-        </div>
-
-        <div class="confirmed-address">
-          <div class="delivery-option-data">
-            <h4><strong>Dirección de envío</strong></h4>
-            <ul>
-              <li>
-                <strong>Calle: </strong>{{ vm.quotation.Address.Address }}
-              </li>
-              <li>
-                <strong>No. exterior: </strong
-                >{{ vm.quotation.Address.U_Noexterior }}
-              </li>
-              <li>
-                <strong>No. interior: </strong
-                >{{ vm.quotation.Address.U_Nointerior }}
-              </li>
-              <li>
-                <strong>Colonia: </strong>{{ vm.quotation.Address.U_Colonia }}
-              </li>
-              <li>
-                <strong>Municipio o delegación: </strong
-                >{{ vm.quotation.Address.U_Mpio }}
-              </li>
-              <li>
-                <strong>Ciudad: </strong>{{ vm.quotation.Address.U_Ciudad }}
-              </li>
-              <li>
-                <strong>Estado: </strong>{{ vm.quotation.Address.U_Estado }}
-              </li>
-              <li><strong>C.P.: </strong>{{ vm.quotation.Address.U_CP }}</li>
-              <li>
-                <strong>Entre calle: </strong
-                >{{ vm.quotation.Address.U_Entrecalle }}
-              </li>
-              <li>
-                <strong>Y calle: </strong>{{ vm.quotation.Address.U_Ycalle }}
-              </li>
-              <li>
-                <strong>Referencias: </strong
-                >{{ vm.quotation.Address.U_Notes1 }}
-              </li>
-              <li>
-                <strong>Destinatario </strong>
-                {{
-                  vm.quotation.Address.FirstName +
-                    ' ' +
-                    vm.quotation.Address.LastName
-                }}
-              </li>
-              <li><strong>Email: </strong>{{ vm.quotation.Address.E_Mail }}</li>
-              <li>
-                <strong>Télefono: </strong>{{ vm.quotation.Address.Tel1 }}
-              </li>
-              <li>
-                <strong>Celular: </strong>{{ vm.quotation.Address.Cellolar }}
-              </li>
-            </ul>
-            <p>
-              <a
-                class="small-link action-link"
-                href="#"
-                ng-href="/user/deliveries?returnTo=/checkout/client/{{
-                  vm.quotation.id
-                }}"
-              >
-                Editar
-              </a>
-            </p>
-          </div>
-        </div>
-
-        <div class="secure-logos">
-          <img src="/images/trust_brands_trustwave.svg" alt="Trustwave" />
-          <img src="/images/trust_brands_prosa.svg" alt="Prosa" />
-          <img src="/images/trust_brands_kount.svg" alt="Kount" />
-          <img src="/images/trust_brands_digicert.svg" alt="Digicert" />
-          <img src="/images/comodo-secure.png" alt="" />
         </div>
       </aside>
     </section>
