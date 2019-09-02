@@ -112,10 +112,10 @@
         </div>
         <div flex="15" flex-xs="45" class="input-element">
           <label>
-            <strong>No. Interior <span class="hl-label">*</span></strong>
+            <strong>No. Interior </strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.U_Nointerior" required />
+            <input type="text" ng-model="vm.newAddress.U_Nointerior" />
           </div>
         </div>
         <div flex flex-xs="45" class="input-element">
@@ -126,6 +126,8 @@
             <input type="text" ng-model="vm.newAddress.U_Colonia" required />
           </div>
         </div>
+      </div>
+      <div layout="row" layout-wrap>
         <div flex flex-xs="45" class="input-element">
           <label>
             <strong
@@ -136,9 +138,7 @@
             <input type="text" ng-model="vm.newAddress.U_Mpio" required />
           </div>
         </div>
-      </div>
-      <div layout="row" layout-wrap>
-        <div flex="25" flex-xs="45" class="input-element">
+        <div flex="20" flex-xs="45" class="input-element">
           <label>
             <strong>Ciudad<span class="hl-label">*</span></strong>
           </label>
@@ -146,7 +146,7 @@
             <input type="text" ng-model="vm.newAddress.U_Ciudad" required />
           </div>
         </div>
-        <div flex="25" flex-xs="45" class="input-element">
+        <div flex="20" flex-xs="45" class="input-element">
           <label>
             <strong>Estado<span class="hl-label">*</span></strong>
           </label>
@@ -170,7 +170,7 @@
             <input type="text" ng-model="vm.newAddress.U_CP" required />
           </div>
         </div>
-        <div flex-gt-sm="25" flex="100" class="input-element"></div>
+        <!-- <div flex-gt-sm="25" flex="100" class="input-element"></div> -->
       </div>
       <div layout="row" layout-wrap>
         <div flex="25" flex-xs="40" class="input-element">
@@ -186,7 +186,7 @@
             <strong>Y</strong>
           </label>
         </div>
-        <div flex="25" flex-xs="40" class="input-element">
+        <div flex="25" flex-xs="45" class="input-element">
           <label>
             <strong>Calle</strong>
           </label>
@@ -202,7 +202,7 @@
             <input type="text" ng-model="vm.newAddress.U_Notes1" />
           </div>
         </div>
-        <div flex-gt-sm="10" flex="100" class="input-element"></div>
+        <!-- <div flex-gt-sm="10" flex="100" class="input-element"></div> -->
       </div>
     </div>
   </section>
