@@ -183,15 +183,12 @@
           <span class="header-top-bar-menu-item" hide-xs><strong>| </strong> <b>MI CUENTA</b></span>
           <i hide-gt-xs class="icon-login"></i>
           </p>
-          <span
-            ng-if="main.user && main.user.invited"
-            ng-click="main.toggleLoginModal()"
-          >
-            <!-- <strong class="invited-label">Invitado</strong> -->
-          <i  hide-sm class="icon-login" ng-click="main.toggleLoginModal()"></i>
-
-
-          </span>
+            <span
+              ng-if="main.user && main.user.invited"
+              ng-click="main.toggleLoginModal()"
+              >
+                <strong class="invited-label">Invitado</strong>
+            </span>
 
 
           <!-- <i class="icon-login" ng-click="main.toggleLoginModal()"></i> -->
