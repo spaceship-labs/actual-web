@@ -272,7 +272,7 @@
           href="#"
           ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
           ng-click="vm.addNewProduct()"
-          class="action-btn-print print-btn add-to-card-quotation"
+          class="print-btn add-to-card-quotation"
         >
           AGREGAR NUEVO ARTÍCULO
         </a>
@@ -414,7 +414,7 @@
               ng-if="vm.quotation.Details.length > 0"
               href="#"
               ng-click="vm.print()"
-              class="action-btn-print print-btn"
+              class="print-btn add-to-card-quotation"
             >
               IMPRIMIR
             </a>
@@ -430,7 +430,7 @@
               ng-if="vm.quotation.Details.length > 0"
               ng-click="vm.sendByEmail()"
               href="#"
-              class="action-btn-print print-btn"
+              class="print-btn add-to-card-quotation"
             >
               ENVIAR POR EMAIL
             </a>
@@ -443,7 +443,7 @@
               ng-if="vm.quotation.Details.length > 0"
               ng-click="vm.alertRemoveAllDetails($event)"
               href="#"
-              class="action-btn-clear print-btn "
+              class="print-btn add-to-card-quotation "
             >
               LIMPIAR CARRITO
             </a>
@@ -452,10 +452,25 @@
       </aside>
     </div>
   </form>
+  <br/>
+  <div style="overflow-x:auto;">
+  <ng-include ng-if="vm.isUserAdmin" src="'views/quotations/quotation-records.html'"></ng-include>
+  <section ng-if="vm.isUserAdmin">
+  <hr />
+  <ng-include src="'views/quotations/leads-table.html'"> </ng-include>
+  <hr />
+  </section>
+  <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation">
+  <div class="hr">
+  <hr />
+  </div>
+  <ng-include src="'views/quotations/payments-options.html'"> </ng-include>
+  </div>
+  <br/>
 
   <!-- LISTING POLITICAS Y FORMAS DE PAGO  -->
           <section class="desc-wrapper">
-            <md-expansion-panel md-component-id="panelTwo">
+            <!-- <md-expansion-panel md-component-id="panelTwo">
               <md-expansion-panel-collapsed>
                 <md-expansion-panel-icon></md-expansion-panel-icon>
                 <div>FORMAS DE PAGO</div>
@@ -486,7 +501,7 @@
                   </div>
                 </md-expansion-panel-content>
               </md-expansion-panel-expanded>
-            </md-expansion-panel>
+            </md-expansion-panel> -->
 
             <md-expansion-panel md-component-id="panelTwo">
               <md-expansion-panel-collapsed>

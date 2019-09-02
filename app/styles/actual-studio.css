@@ -78,11 +78,15 @@
   background: #000;
 }
 
+.actual-studio .md-toolbar-header .logo img {
+  background: #000 !important;
+}
+
 .actual-studio .mobile-sidenav .close-btn {
   background: #cc262f !important;
 }
 .actual-studio .mobile-sidenav .nav-categories-item {
-  border-bottom: 1px solid #cc262f;
+  /* border-bottom: 1px solid #cc262f; */
 }
 .actual-studio .nav-categories-item-active,
 .actual-studio .nav-categories-item:hover {
