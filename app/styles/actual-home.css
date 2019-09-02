@@ -70,6 +70,10 @@
   color: #fff !important;
 }
 
+.actual-home md-toolbar-header .logo img {
+  background: #092f57 !important;
+}
+
 .actual-home .filters-sidenav .pointer-close-btn i {
   color: #dda901;
 }

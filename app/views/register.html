@@ -77,8 +77,8 @@
                 <form
                 class="accordion-content"
                 ng-show="vm.accordioninvited"
-                name="registerForm"
-                ng-submit="vm.register(registerForm, true)"
+                name="invitedForm"
+                ng-submit="vm.register(invitedForm, true)"
                 >
                   <div class="input-element-header">
                     <h4>DATOS PERSONALES DEL USUARIO</h4>
@@ -162,14 +162,14 @@
                         src="'views/partials/contact-form-register.html'">
                       </ng-include>
                     </div>
-                    <div
+                    <!-- <div
                       ng-if="vm.isCheckoutProcessActive"
                       class="checkbox-client-type"
                     >
                       <md-checkbox ng-model="vm.newClient.invited">
                         <strong>Deseo continuar como invitado</strong>
                       </md-checkbox>
-                    </div>
+                    </div> -->
                     <button
                       type="submit"
                       class="form-view-btn form-view-btn-primary"
