@@ -4,7 +4,7 @@
   </div>
   <div class="modal-header-inner">
     <h3><strong>INICIO DE SESIÓN</strong></h3>
-    <hr/>
+    <!-- <hr/> -->
 
     <div ng-if="main.isLoadingLogin" layout="row"  layout-align="space-around">
       <md-progress-circular md-mode="indeterminate"></md-progress-circular>
@@ -51,10 +51,18 @@
 
     <p><a ng-href="/forgot-password">Olvide mi contraseña</a></p>
     
-    
+    <div class="login-session" layout="row"> <hr flex="30"> <p class="login-session" flex="40"> Iniciar sesión con </p><hr width="90" flex="30"></div>
+    <button class="loginBtn loginBtn--facebook">
+        Login with Facebook
+      </button>
+      
+      <button class="loginBtn loginBtn--google">
+        Login with Google   
+      </button>
+
     <hr/>
     <h3>¿Nuevo en <strong>Mi actual?</strong></h3>
-    <p>Registrate ahora mismo para tener acceso detallado para tus compras, puntos, pedidos, envios, ofertas y más.</p>
+    <!-- <p>Registrate ahora mismo para tener acceso detallado para tus compras, puntos, pedidos, envios, ofertas y más.</p> -->
     <a href="/register" class="action-btn">Régistrate ahora</a>
     
 
