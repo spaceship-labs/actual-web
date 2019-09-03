@@ -1,5 +1,5 @@
 'use strict';
-angular.module('actualWebApp', ).controller('ProductCtrl', ProductCtrl);
+angular.module('actualWebApp').controller('ProductCtrl', ProductCtrl);
 
 function ProductCtrl(
   productService,
@@ -27,7 +27,7 @@ function ProductCtrl(
   userService,
   metaTagsService,
   gtmService,
-  activeStore,
+  activeStore
 ) {
   var vm = this;
   var activeStoreWarehouse = false;
@@ -54,8 +54,7 @@ function ProductCtrl(
     isActiveBreadcrumbItem: breadcrumbService.isActiveBreadcrumbItem,
     showZipcodeDialog: showZipcodeDialog,
     submitZipcodeForm: submitZipcodeForm,
-    setDeliveriesByStaticZipCode: setDeliveriesByStaticZipCode,
-    
+    setDeliveriesByStaticZipCode: setDeliveriesByStaticZipCode
   });
 
   init($routeParams.id);
@@ -168,7 +167,7 @@ function ProductCtrl(
   }
 
   function ExpansionPanel($mdExpansionPanelGroup) {
-    $mdExpansionPanelGroup('panelOne').removeAll({animation: false});
+    $mdExpansionPanelGroup('panelOne').removeAll({ animation: false });
   }
 
   function loadZipCodeDeliveryById(id) {
