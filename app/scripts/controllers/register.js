@@ -278,6 +278,22 @@ function RegisterCtrl(
     }
     return retVal;
   }
+
+  function onSignIn(googleUser){
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: '+ profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('NAME: '+ profile.getName());
+    console.log('IMAGE URL: '+ profile.getImageUrl());
+    console.log('EMAIL: '+ profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
+
+  function singOut(){
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.singOut().then(function(){
+      console.log('User signed out.');
+    })
+  }
+
 }
 
 RegisterCtrl.$inject = [
