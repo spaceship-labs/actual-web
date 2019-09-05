@@ -2243,6 +2243,7 @@ select {
   display: block !important;
   max-height: 800px; /*NOT REACHEBLE HEIGHT*/
   border-bottom: 1px solid #e7e7e7;
+  margin-right: 20px;
 }
 .listing-view-nav > li .listing-view-subnav {
   max-height: 0;
@@ -2464,7 +2465,7 @@ select {
   margin-bottom: 0;
 }
 .product-nav-viewcategory{
-  margin:auto;
+  /* margin:auto; */
   /* width: 240px; */
   height: auto;
 }
