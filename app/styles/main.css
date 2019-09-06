@@ -609,9 +609,9 @@ select {
 .header-top-bar-menu .cart-n-itemss {
   position: absolute;
   /* left: 260px; */
-  top: 14px;
+  top: 11px;
   margin: 0 auto;
-  right: 17px;
+  right: 13px;
   font-weight: 700;
   font-size: 12px;
 }
