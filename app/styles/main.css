@@ -598,7 +598,7 @@ select {
 }
 .header-top-bar-menu .cart-n-items {
   position: absolute;
-  left: 261px;
+  left: 269px;
   top: 6px;
   margin: 0 auto;
   right: 0px;
@@ -691,6 +691,7 @@ select {
   color: white;
   font-size: 24px;
   vertical-align: center;
+  margin-left: 9px;
 }
 .header-top-bar-menu .cart-active {
   color: #fff !important;
