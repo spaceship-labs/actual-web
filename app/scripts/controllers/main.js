@@ -56,6 +56,8 @@
       filterComplementsMenu: filterComplementsMenu,
       filterRemoveComplements: filterRemoveComplements,
       getComplementCategoriesNumber: getComplementCategoriesNumber,
+      onSignIn: onSignIn,
+      gapi: gapi,
       api: api
     });
     $rootScope.loadActiveQuotation = loadActiveQuotation;
@@ -73,6 +75,31 @@
     });
 
     init();
+
+    function onSignIn(googleUser){
+      // console.log('test signIn with google')
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: '+ profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('NAME: '+ profile.getName());
+      console.log('IMAGE URL: '+ profile.getImageUrl());
+      console.log('EMAIL: '+ profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+
+    function init() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init({
+            client_id: "170369807661-fgg3vb5rsdtknjoje5bh1gjiulfv6f9m.apps.googleusercontent.com",
+            // scope: "profile email" 
+        }).then(function(auth2) {
+            console.log( "signed in: " + auth2.isSignedIn.get() );  
+            auth2.isSignedIn.listen(onSignIn);
+            var button = document.querySelector('#signInButton');
+            button.addEventListener('click', function() {
+              auth2.onSignIn();
+            });
+          });
+      });
+    }
 
     function getFaviconUrl() {
       var faviconUrl = '/images/favicon.ico';

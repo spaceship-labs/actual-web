@@ -55,15 +55,15 @@
     <button class="loginBtn loginBtn--facebook">
       Login with Facebook
     </button>
-    <!-- <button class="loginBtn loginBtn--google">
-      Login with Google   
-    </button> -->
-    <div class="g-signin2" data-onsuccess="onSignIn">
+
+    <div class="g-signin2" ng-click="main.onSignIn(googleUser)">
       <button class="loginBtn loginBtn--google">
         Login with Google   
       </button>
-      <!-- <div class="data"><p>Login test</p> </div> -->
+      <div class="data"><p>Login test</p> </div>
     </div>
+
+    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 
 
     <hr/>
