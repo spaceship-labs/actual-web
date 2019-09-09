@@ -636,7 +636,7 @@ select {
 
 .header-top-bar-menu .header-top-bar-menu-item-name {
   text-align: left;
-  min-width: 200px;
+  min-width: 145px;
   vertical-align: middle;
   /*padding: 20px 0;*/
   font-size: 12px;
@@ -4659,7 +4659,7 @@ md-backdrop.md-sidenav-backdrop {
 /*--------------*/
 .options-alert-inner {
   position: relative;
-  padding: 20px 20px;
+  padding: 45px 45px;
   max-width: 600px;
 }
 .options-alert-dialog h2 {
@@ -4701,6 +4701,7 @@ md-backdrop.md-sidenav-backdrop {
   top: 20px;
   vertical-align: middle;
   width: 25px;
+  margin-left: 16px;
 }
 
 .options-alert-dialog .btns-section .action-btn-wide {
