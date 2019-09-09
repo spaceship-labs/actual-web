@@ -60,6 +60,7 @@ angular
           mapper: siteService.getStoresIdMapper()
         },
         { key: 'fromOffers', label: 'Paquetes', defaultValue: 'No' },
+        { key: 'clientIp', label: 'IP', defaultValue: 'N/A' },
         { key: 'paymentType', label: 'Tipo pago' },
         { key: 'OrderWeb', label: 'OrderWeb' }
       ]
