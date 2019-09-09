@@ -123,7 +123,8 @@ angular
               );
               if (packageProducts.length > 0) {
                 var params = {
-                  zipcodeDeliveryId: scope.zipcodeDelivery.id
+                  zipcodeDeliveryId: scope.zipcodeDelivery.id,
+                  fromOffers: true
                 };
                 quotationService.addMultipleProducts(packageProducts, params);
               }
