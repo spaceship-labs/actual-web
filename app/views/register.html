@@ -494,7 +494,7 @@ ng-submit="vm.register(invitedForm, true)"
 
 <!--- ACTIVATE VIEW IF ADD TO CARD IS FALSE -->
 
-<section  ng-if="!vm.isLoading && main.activeQuotation " id="register" class="form-view checkbox-client-type">
+<section  ng-if="(!vm.isLoading && main.activeQuotation) || (!vm.isLoading && !vm.isContactCreateActive)" id="register" class="form-view checkbox-client-type">
   <div class="container container-lg">
     <section ng-if="!vm.isLoading && vm.registerDone">
       <h1>Usuario registrado con éxito</h1>
