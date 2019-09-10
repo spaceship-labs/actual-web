@@ -15,7 +15,7 @@
       layout="row"
       layout-wrap
       layout-align="center center"
-    >    
+    >
 
     <div
       hide-xs
@@ -162,12 +162,12 @@
           class="header-top-bar-menu-item search-trigger-item"
         >
           <i
-            class="icon-search" 
+            class="icon-search"
             ng-click="main.showSearchBar = !main.showSearchBar"
           ></i>
         </div>
-        <div ng-if="!main.user || main.user.invited" hide-xs hide-sm flex class="header-top-bar-menu-item">
-          <a href="/register"> <p style="color: #fff;"> REGÍSTRATE</p> </a>
+        <div ng-if="!main.user || main.user.invited" hide-xs hide-sm flex class="header-top-bar-menu-item" >
+          <p ng-click="main.redirectToRegister()" style="color: #fff;"> REGÍSTRATE</p>
         </div>
         <div
           ng-if="!main.user || main.user.invited"

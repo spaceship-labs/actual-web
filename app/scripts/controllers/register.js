@@ -31,31 +31,19 @@ function RegisterCtrl(
   function init() {
     vm.accordionsession = true;
     vm.newAddress = {};
-
+    if ($routeParams.quotation) {
+      loadStates();
+    }
     if ($routeParams.addContact) {
       vm.isContactCreateActive = true;
 
       if ($routeParams.quotation) {
         vm.isCheckoutProcessActive = true;
         console.log('quotation');
-        loadStates();
         return;
       }
     }
     vm.newClient.invited = false;
-  }
-
-  function loadStatedWithoutRouteParams() {
-    commonService
-      .getStatesSap()
-      .then(function(res) {
-        console.log(res);
-        vm.states = res.data;
-        loadZipcodeDelivery(main.activeQuotation.id);
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
   }
 
   function loadStates() {
@@ -130,7 +118,6 @@ function RegisterCtrl(
   }
 
   function copyPersonalDataToDeliveryData(client, contact) {
-    loadStatedWithoutRouteParams();
     if (!contact.copyingPersonalData) {
       contact.FirstName = _.clone(client.FirstName);
       contact.LastName = _.clone(client.LastName);
@@ -244,8 +231,8 @@ function RegisterCtrl(
         .then(function() {
           console.log('termino authService');
 
-          if ($routeParams.quotation || main.activeQuotation.id) {
-            var quotationId = $routeParams.quotation || main.activeQuotation.id;
+          if ($routeParams.quotation) {
+            var quotationId = $routeParams.quotation;
             var params = {
               Client: createdClient.id,
               UserWeb: createdUser.id
@@ -262,11 +249,7 @@ function RegisterCtrl(
         .then(function(updated) {
           if (updated) {
             //dialogService.showDialog('Registrado con exito');
-            $location.path(
-              '/checkout/client/' + $routeParams.quotation
-                ? $routeParams.quotation
-                : main.activeQuotation.id
-            );
+            $location.path('/checkout/client/' + $routeParams.quotation);
           } else {
             $location.path('/');
           }
