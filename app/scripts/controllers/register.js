@@ -29,9 +29,11 @@ function RegisterCtrl(
   init();
 
   function init() {
+    vm.accordionsession = true;
+    vm.newAddress = {};
+
     if ($routeParams.addContact) {
       vm.isContactCreateActive = true;
-      vm.newAddress = {};
 
       if ($routeParams.quotation) {
         vm.isCheckoutProcessActive = true;
@@ -40,8 +42,20 @@ function RegisterCtrl(
         return;
       }
     }
-
     vm.newClient.invited = false;
+  }
+
+  function loadStatedWithoutRouteParams() {
+    commonService
+      .getStatesSap()
+      .then(function(res) {
+        console.log(res);
+        vm.states = res.data;
+        loadZipcodeDelivery(main.activeQuotation.id);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 
   function loadStates() {
@@ -116,6 +130,7 @@ function RegisterCtrl(
   }
 
   function copyPersonalDataToDeliveryData(client, contact) {
+    loadStatedWithoutRouteParams();
     if (!contact.copyingPersonalData) {
       contact.FirstName = _.clone(client.FirstName);
       contact.LastName = _.clone(client.LastName);
@@ -229,8 +244,8 @@ function RegisterCtrl(
         .then(function() {
           console.log('termino authService');
 
-          if ($routeParams.quotation) {
-            var quotationId = $routeParams.quotation;
+          if ($routeParams.quotation || main.activeQuotation.id) {
+            var quotationId = $routeParams.quotation || main.activeQuotation.id;
             var params = {
               Client: createdClient.id,
               UserWeb: createdUser.id
@@ -247,7 +262,11 @@ function RegisterCtrl(
         .then(function(updated) {
           if (updated) {
             //dialogService.showDialog('Registrado con exito');
-            $location.path('/checkout/client/' + $routeParams.quotation);
+            $location.path(
+              '/checkout/client/' + $routeParams.quotation
+                ? $routeParams.quotation
+                : main.activeQuotation.id
+            );
           } else {
             $location.path('/');
           }
@@ -264,7 +283,9 @@ function RegisterCtrl(
           dialogService.showDialog('Hubo un error, revisa tus datos ' + errMsg);
         });
     } else {
-      dialogService.showDialog('Campo incompleto, revisa el dato telefónico (10 dígitos)');
+      dialogService.showDialog(
+        'Campo incompleto, revisa el dato telefónico (10 dígitos)'
+      );
     }
   }
 
