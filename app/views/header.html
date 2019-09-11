@@ -201,6 +201,7 @@
 
 
         <!-- IF logged in -->
+        <div class="header-top-bar-menu-item-user">
         <div
           ng-if="main.user && !main.user.invited"
           flex
@@ -209,19 +210,21 @@
           ng-click="main.toggleProfileModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-name"
         >
-          <a href="#" layout="row">
-            <i class="icon-login"></i>
+        <a href="#" layout="row">
+          <i class="icon-login"></i>
             <div class="header-top-bar-menu-item-user">
               <span
                 >Bienvenido <strong>{{ main.user.firstName }}</strong>
+              </div>
               </span>
-            </div>
-          </a>
+            </a>
+
           <ng-include
             ng-if="main.isActiveProfileHeader"
             src="'views/partials/profile-header.html'"
           ></ng-include>
         </div>
+      </div>
 
         <div
           flex
