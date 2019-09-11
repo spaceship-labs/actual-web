@@ -583,7 +583,10 @@ select {
   cursor: pointer;
 }
 
-.header-top-bar-menu .header-top-bar-menu-item-blog{min-width: 50px;}
+.header-top-bar-menu .header-top-bar-menu-item-blog{
+  min-width: 50px;
+  margin-right: 10px;
+}
 
 .header-top-bar-menu .header-top-bar-menu-item .invited-label {
   font-size: 10px;
@@ -599,21 +602,11 @@ select {
   outline: 0px;
 }
 .header-top-bar-menu .cart-n-items {
-  position: absolute;
-  left: 261px;
-  top: 6px;
+  position: relative;
+  left: 10px;
+  top: 12px;
   margin: 0 auto;
   right: 0px;
-  font-weight: 700;
-  font-size: 12px;
-}
-
-.header-top-bar-menu .cart-n-itemss {
-  position: absolute;
-  /* left: 260px; */
-  top: 14px;
-  margin: 0 auto;
-  right: 17px;
   font-weight: 700;
   font-size: 12px;
 }
@@ -623,6 +616,11 @@ select {
   color: #fff;
   font-size: 16px;
   min-width: 170px;
+}
+
+.header-top-bar-menu-item-user {
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
 .header-top-bar-menu-item-phone i {
@@ -636,8 +634,8 @@ select {
 
 .header-top-bar-menu .header-top-bar-menu-item-name {
   text-align: left;
-  min-width: 200px;
-  vertical-align: middle;
+  min-width: 150px;
+  /* vertical-align: middle; */
   /*padding: 20px 0;*/
   font-size: 12px;
   outline: 0;
@@ -694,6 +692,11 @@ select {
   font-size: 24px;
   vertical-align: center;
 }
+
+.mobile-item-addCar {
+  margin-bottom: 15px;
+}
+
 .header-top-bar-menu .cart-active {
   color: #fff !important;
   /*color: #fff!important;*/

@@ -209,11 +209,13 @@
           ng-click="main.toggleProfileModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-name"
         >
-          <a href="#">
+          <a href="#" layout="row">
             <i class="icon-login"></i>
-            <span
-              >Bienvenido <strong>{{ main.user.firstName }}</strong>
-            </span>
+            <div class="header-top-bar-menu-item-user">
+              <span
+                >Bienvenido <strong>{{ main.user.firstName }}</strong>
+              </span>
+            </div>
           </a>
           <ng-include
             ng-if="main.isActiveProfileHeader"
@@ -294,16 +296,30 @@
             ng-class="{'cart-active-items' : main.activeQuotation}"
             >{{ main.activeQuotation.totalProducts }}</span
           >
-          <span
-            hide-gt-sm
-            class="cart-n-itemss"
-            ng-class="{'cart-active-items' : main.activeQuotation}"
-            >{{ main.activeQuotation.totalProducts }}</span
-          >
-          <i
-            class="icon-carro"
-            ng-class="{'cart-active' : main.activeQuotation}"
-          ></i>
+          <div class="mobile-item-addCar" hide-xs>
+              <span
+              hide-gt-sm
+              class="cart-n-items"
+              ng-class="{'cart-active-items' : main.activeQuotation}"
+              >{{ main.activeQuotation.totalProducts }}</span
+            >
+              <i 
+              class="icon-carro"
+              ng-class="{'cart-active' : main.activeQuotation}"
+              ></i>
+          </div>
+          <div class="mobile-item-addCar" hide-gt-sm>
+              <span
+              hide-gt-sm
+              class="cart-n-items"
+              ng-class="{'cart-active-items' : main.activeQuotation}"
+              >{{ main.activeQuotation.totalProducts }}</span
+            >
+            <i 
+              class="icon-carro"
+              ng-class="{'cart-active' : main.activeQuotation}"
+            ></i>
+          </div>
         </a>
 
         <!-- IF NOT ACTIVE QUOTATION -->
