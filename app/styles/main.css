@@ -2108,7 +2108,7 @@ select {
   background: #f8f8f8;
 }
 .products-list .view-more-category .circle-recamaras {
-  background: #f8f8f8;
+  background: #000;  /*#f8f8f8*/
 }
 .products-list .view-more-category .circle .circle-text {
   /* position: absolute; */
@@ -2116,8 +2116,15 @@ select {
   transform: translateY(25%);
 }
 .products-list .view-more-category .circle .circle-text p {
-  color: #030202;
+  color: #f7de9e; /* #f1be3e*/
   font-size: 25px;
+  font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
+}
+
+.products-list .view-more-category .circle .circle-text strong {
+  color: #f8f8f8; /* #030202; */
+  font-size: 25px;
+  font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
 }
 /*-----------/
   #BREADCRUMB
