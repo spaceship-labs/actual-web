@@ -2122,6 +2122,20 @@ select {
   transition: all 0.3s ease 0s;
 }
 
+.products-list .view-more-category .circle-salas:hover {
+  background:  #66b1e3;  /*#f8f8f8 */
+  transition: all 0.3s ease 0s;
+}
+.products-list .view-more-category .circle-salas:hover p{
+  color: #f7de9e !important;
+  transition: all 0.3s ease 0s;
+}
+
+.products-list .view-more-category .circle-salas:hover strong{
+  color: #f8f8f8 !important;
+  transition: all 0.3s ease 0s;
+}
+
 
 .products-list .view-more-category .circle .circle-text {
   /* position: absolute; */
