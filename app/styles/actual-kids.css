@@ -95,10 +95,10 @@
   background: #34b3e7 !important;
 }
 
-.actual-kids .products-list .view-more-category .circle-recamaras {
-  background: #34b3e7 !important;
+.actual-kids .products-list .view-more-category .circle-recamaras:hover {
+  background:  #34b3e7 !important;
+  transition: all 0.3s ease 0s;
 }
-
 
 @media (max-width: 600px) {
   .actual-kids .searcher-wrapper {

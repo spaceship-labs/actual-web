@@ -361,7 +361,6 @@ md-sidenav {
     background: transparent;
     color: #1f1f1f !important;
     transition: all 0.3s ease 0s;
-
 }
 
 .action-link {
@@ -2108,24 +2107,37 @@ select {
   background: #f8f8f8;
 }
 .products-list .view-more-category .circle-recamaras {
-  background: #000;  /*#f8f8f8*/
+  background:#f8f8f8;
 }
+.products-list .view-more-category .circle-recamaras:hover {
+  background: #000;  /*#f8f8f8 */
+  transition: all 0.3s ease 0s;
+}
+.products-list .view-more-category .circle-recamaras:hover p{
+  color: #f7de9e !important;
+  transition: all 0.3s ease 0s;
+}
+.products-list .view-more-category .circle-recamaras:hover strong{
+  color: #f8f8f8 !important;
+  transition: all 0.3s ease 0s;
+}
+
+
 .products-list .view-more-category .circle .circle-text {
   /* position: absolute; */
   /* top: 50%; */
   transform: translateY(25%);
+  font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
 }
 .products-list .view-more-category .circle .circle-text p {
-  color: #f7de9e; /* #f1be3e*/
+  color: #000;
   font-size: 25px;
-  font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
 }
 
 .products-list .view-more-category .circle .circle-text strong {
-  color: #f8f8f8; /* #030202; */
-  font-size: 25px;
-  font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
+  color: #030202; 
 }
+
 /*-----------/
   #BREADCRUMB
 /*----------*/
