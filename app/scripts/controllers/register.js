@@ -34,6 +34,9 @@ function RegisterCtrl(
     if ($routeParams.quotation) {
       loadStates();
     }
+    if ($routeParams.fromQuotation) {
+      vm.fromQuotation = true;
+    }
     if ($routeParams.addContact) {
       vm.isContactCreateActive = true;
 
