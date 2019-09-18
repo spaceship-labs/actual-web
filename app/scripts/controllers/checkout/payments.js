@@ -446,6 +446,7 @@ function CheckoutPaymentsCtrl(
         })
         .then(function(res) {
           vm.isLoadingProgress = false;
+          console.log('vm.order: ', vm.order);
           vm.order = res.data;
           if (vm.order.id) {
             $rootScope.scrollTo('main');
