@@ -26,6 +26,7 @@ function PaymentDialogController(
   $scope.months = getMonths();
   $scope.years = getYears();
   $scope.phonePattern = '.*\\d{10}$';
+  $scope.acceptTerms = true;
 
   if ($scope.payment.options) {
     $scope.paymentOptionsOriginal = _.clone($scope.payment.options);
@@ -227,8 +228,6 @@ function PaymentDialogController(
   }
 
   $scope.save = function($form) {
-    console.log('!$scope.acceptTerms: ', $scope.acceptTerms);
-
     if (!$scope.acceptTerms) {
       alert('Acepta los terminos y condiciones');
       return;

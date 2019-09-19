@@ -351,7 +351,10 @@ function CheckoutPaymentsCtrl(
       return deferred.promise;
     }
     var handleResponse = function(status, response) {
+      console.log('status: ', status);
+
       if (status != 200 && status != 201) {
+        vm.isLoading = false;
         alert('verify filled data');
       } else {
         console.log('token', response.id);
@@ -446,8 +449,8 @@ function CheckoutPaymentsCtrl(
         })
         .then(function(res) {
           vm.isLoadingProgress = false;
-          console.log('vm.order: ', vm.order);
           vm.order = res.data;
+          console.log('vm.order: ', vm.order);
           if (vm.order.id) {
             $rootScope.scrollTo('main');
             quotationService.removeCurrentQuotation();
