@@ -355,7 +355,10 @@ function CheckoutPaymentsCtrl(
 
       if (status != 200 && status != 201) {
         vm.isLoading = false;
-        alert('verify filled data');
+        dialogService.showDialog(
+          'Error en los datos introducidos, por favor, verifique sus datos'
+        );
+        deferred.resolve();
       } else {
         console.log('token', response.id);
         deferred.resolve(response.id);
