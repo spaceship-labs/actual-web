@@ -45,6 +45,7 @@
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
       toggleProfileModal: toggleProfileModal,
+      redirectToRegister: redirectToRegister,
       getFaviconUrl: getFaviconUrl,
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
@@ -73,6 +74,15 @@
     });
 
     init();
+
+    function redirectToRegister() {
+      if (!vm.activeQuotation.id) {
+        $location.path('/register');
+      }
+      $location.path('/register').search({
+        quotation: vm.activeQuotation.id
+      });
+    }
 
     function getFaviconUrl() {
       var faviconUrl = '/images/favicon.ico';

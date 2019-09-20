@@ -29,18 +29,23 @@ function RegisterCtrl(
   init();
 
   function init() {
+    vm.accordionsession = true;
+    vm.newAddress = {};
+    if ($routeParams.quotation) {
+      loadStates();
+    }
+    if ($routeParams.fromQuotation) {
+      vm.fromQuotation = true;
+    }
     if ($routeParams.addContact) {
       vm.isContactCreateActive = true;
-      vm.newAddress = {};
 
       if ($routeParams.quotation) {
         vm.isCheckoutProcessActive = true;
         console.log('quotation');
-        loadStates();
         return;
       }
     }
-
     vm.newClient.invited = false;
   }
 
@@ -264,7 +269,9 @@ function RegisterCtrl(
           dialogService.showDialog('Hubo un error, revisa tus datos ' + errMsg);
         });
     } else {
-      dialogService.showDialog('Campo incompleto, revisa el dato telefónico (10 dígitos)');
+      dialogService.showDialog(
+        'Campo incompleto, revisa el dato telefónico (10 dígitos)'
+      );
     }
   }
 
