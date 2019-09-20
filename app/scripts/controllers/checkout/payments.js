@@ -351,8 +351,14 @@ function CheckoutPaymentsCtrl(
       return deferred.promise;
     }
     var handleResponse = function(status, response) {
+      console.log('status: ', status);
+
       if (status != 200 && status != 201) {
-        alert('verify filled data');
+        vm.isLoading = false;
+        dialogService.showDialog(
+          'Error en los datos introducidos, por favor, verifique sus datos'
+        );
+        deferred.resolve();
       } else {
         console.log('token', response.id);
         deferred.resolve(response.id);
@@ -447,6 +453,7 @@ function CheckoutPaymentsCtrl(
         .then(function(res) {
           vm.isLoadingProgress = false;
           vm.order = res.data;
+          console.log('vm.order: ', vm.order);
           if (vm.order.id) {
             $rootScope.scrollTo('main');
             quotationService.removeCurrentQuotation();

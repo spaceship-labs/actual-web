@@ -113,7 +113,7 @@
           </div>
         </div>
 
-        <div class="input-element" ng-if="payment.cardCountry !== 'Mexico' && payment.cardCountry !== 'México'" 
+        <div class="input-element" ng-if="payment.cardCountry !== 'Mexico' && payment.cardCountry !== 'México'"
           flex="35" flex-sm="65" flex-xs="65">
           <p>
             <label><strong>ESTADO</strong>*</label>
@@ -123,7 +123,7 @@
           </div>
         </div>
 
-        <div class="input-element" ng-if="payment.cardCountry === 'Mexico' || payment.cardCountry === 'México'" 
+        <div class="input-element" ng-if="payment.cardCountry === 'Mexico' || payment.cardCountry === 'México'"
           flex="35" flex-sm="65" flex-xs="65">
           <p>
             <label><strong>ESTADO</strong>*</label>
@@ -159,7 +159,7 @@
         </div>
 
         <div class="input-container" layout="row" layout-wrap flex="60">
-  
+
           <div class="input-element" flex="70" flex-sm="100" flex-xs="100">
             <p>
               <label><strong>CALLE Y NÚMERO</strong>*</label>
@@ -168,7 +168,7 @@
               <input type="text" ng-model="payment.cardAddress2" required>
             </div>
           </div>
-  
+
           <div class="input-element" flex="30" flex-sm="35" flex-xs="35">
             <p>
               <label><strong>CÓDIGO POSTAL</strong>*</label>
@@ -268,8 +268,7 @@
       <div>
         <p class="terms-checkbox-block">
           <md-checkbox ng-model="acceptTerms" aria-label="Acepta terminos" required>
-            He leído y estoy de acuerdo con los <a href="/terminos-y-condiciones" target="_blank">términos, politicas y
-              condiciones</a>
+            He leído  y estoy de acuerdo con los <a href="/terminos-y-condiciones" target="_blank">términos, politicas y condiciones</a>
           </md-checkbox>
         </p>
       </div>
