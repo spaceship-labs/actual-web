@@ -312,8 +312,8 @@ function CheckoutPaymentsCtrl(
 
   function guessingPaymentMethod(payment) {
     Mercadopago.setPublishableKey(
-      // 'APP_USR-715cc117-cd35-41ae-a920-2f3a993e6927'
-      'TEST-b7083679-cd78-4b22-842d-9ff41b544bc2'
+      'APP_USR-715cc117-cd35-41ae-a920-2f3a993e6927'
+      // 'TEST-b7083679-cd78-4b22-842d-9ff41b544bc2'
     );
     var deferred = $q.defer();
     if (payment.type === 'transfer') {
