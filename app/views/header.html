@@ -5,17 +5,23 @@
 <div id="header">
   <!-- START TOP BAR -->
   <div class="header-top-bar" fixed-element top="50" ng-class="{'fixed-head': scrolled}">
-    <!-- <section class="header-section-top" hide-xs hide-sm layout="row">
+    <section class="header-section-top" hide-xs hide-sm layout="row" layout-align="center center">
+      <div layout-align="center center">
+          <p>
+            <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
+              <span>BLOG<strong>|</strong></span>
+            </a>
+            <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
+              <span>BLOG<strong>|</strong></span>
+            </a>
+          </p>
+      </div>
       <div layout-align="center center">
         <a href="/" ng-switch on="main.siteTheme">
           <div flex href="#" class="header-top-bar">
             <p>
-              <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-                <span><strong>|</strong> BLOG</span>
-              </a>
-
-              <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-                <span><strong>|</strong> BLOG</span>
+              <a href="/nuestras-marcas">
+                <span>NUESTRAS MARCAS</span>
               </a>
             </p>
           </div>
@@ -25,35 +31,15 @@
         <a href="/" ng-switch on="main.siteTheme">
           <div flex href="#" class="header-top-bar">
             <p>
-              <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-                <span><strong>|</strong> NUESTRAS MARCAS</span>
-              </a>
-
-              <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-                <span><strong>|</strong> NUESTRAS MARCAS</span>
-              </a>
-            </p>
-          </div>
-        </a>
-      </div>
-      <div layout-align="center center">
-        <a href="/" ng-switch on="main.siteTheme">
-          <div flex href="#" class="header-top-bar">
-            <p>
-              <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
+              <a href="/contactanos">
                 <span><strong>|</strong>CONTACTO</span>
               </a>
-
-              <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-                <span><strong>|</strong> CONTACTO</span>
-              </a>
             </p>
           </div>
         </a>
       </div>
-    </section> -->
+    </section>
     <div class="container" layout="row" layout-wrap layout-align="center center">
-
 
       <div hide-xs hide-sm flex-gt-sm="15" class="logo" layout-align="center center">
         <a href="/" ng-switch on="main.siteTheme">
