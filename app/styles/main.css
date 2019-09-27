@@ -4692,8 +4692,7 @@ md-backdrop.md-sidenav-backdrop {
 }
 .cart-view .cart-title i span {
   position: absolute;
-  left: 1px;
-  right: 0;
+  left: 11px;
   margin: 0 auto;
   top: 1px;
   font-size: 12px;
