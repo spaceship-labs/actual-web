@@ -2577,7 +2577,7 @@ select {
   transform: translateY(-50%);
   left: 0;
   right: 0;
-  margin: 0 auto;
+  outline:none;
 }
 .product-view-gallery .slick-prev,
 .product-view-gallery .slick-next {
@@ -3267,7 +3267,7 @@ md-radio-button.md-checked .md-off {
   font-size: 19px;
   margin-top: 0px;
   text-align: center;
-  top: 25px;
+  top: 0px;
   right: 10px;
   position: absolute;
 }
@@ -8108,6 +8108,7 @@ md-sidenav {
   }
   .cart-item h3 {
     margin: 6px 0;
+    max-width: 300px;
   }
   .quotation-view .print-btn {
     margin-bottom: 4px;
