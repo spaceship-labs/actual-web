@@ -625,7 +625,7 @@ select {
 .header-top-bar-menu-item-user {
   margin-top: 4px;
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 2px;
   font-size: 14px;
 }
 
@@ -679,7 +679,7 @@ select {
 .header-top-bar-menu .header-top-bar-menu-item .icon-search {
   font-size: 28px;
   color: white;
-  font-size: 18px;
+  font-size: 22px;
   vertical-align: center;
   outline: 0px;
 }
@@ -694,6 +694,16 @@ select {
   color: white;
   font-size: 26px;
   vertical-align: center;
+}
+
+.header-car-item-number{
+  position: relative;
+  left: 23px;
+  bottom: 16px;
+  margin: 0 auto;
+  right: 0px;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .mobile-item-addCar {
@@ -7900,9 +7910,12 @@ md-sidenav {
     display: flex !important;
     padding: 0px 12px 0 2px;
   }
+
   .header-top-bar-menu .header-top-bar-menu-item i {
     padding: 0;
     margin: 0px;
+    bottom: 3px;
+    /* margin-left: 10px; */
   }
   .header-top-bar-menu .header-top-bar-menu-item-name span {
     display: none;
