@@ -6,29 +6,15 @@
         <h1>COTIZACIONES</h1>
       </div>
     </div>
-
     <hr />
-
+    <br />
+    <ng-include src="'views/reports/quotation-report-filters.html'"></ng-include>
     <section class="table-list-wrap">
-      <div
-        table-list
-        class="table-list"
-        default-sort="vm.defaultSort"
-        columns="vm.columnsQuotations"
-        filters="vm.searchParams"
-        date-range="vm.dateRange"
-        client-search-term="vm.clientSearchTerm"
-        export-query="vm.exportQuery"
-        export-event-emitter-name="vm.triggerExportName"
-        search-event-emitter-name="vm.triggerSearchName"
-        enable-search-field="false"
-        pagination-position="'top'"
-        api-resource="vm.apiResourceQuotations"
-      ></div>
+      <div table-list class="table-list" default-sort="vm.defaultSort" columns="vm.columnsQuotations"
+        filters="vm.searchParams" date-range="vm.dateRange" client-search-term="vm.clientSearchTerm"
+        export-query="vm.exportQuery" export-event-emitter-name="vm.triggerExportName"
+        search-event-emitter-name="vm.triggerSearchName" enable-search-field="false" pagination-position="'top'"
+        api-resource="vm.apiResourceQuotations"></div>
     </section>
-
-    <ng-include
-      src="'views/reports/quotation-report-filters.html'"
-    ></ng-include>
   </div>
 </div>
