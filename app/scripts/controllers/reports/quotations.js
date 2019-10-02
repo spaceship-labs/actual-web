@@ -22,7 +22,7 @@ angular
     angular.extend(vm, {
       user: angular.copy($rootScope.user),
       queryClients: queryClients,
-      triggerExportName: 'triggerExport',
+      triggerExportName: 'triggerExcelExport',
       triggerExcelExport: triggerExcelExport,
       triggerSearchName: 'triggerSearch',
       triggerSearch: triggerSearch,
@@ -99,8 +99,12 @@ angular
     }
 
     function triggerExcelExport() {
+      console.log(vm.triggerExportName)
       $scope.$broadcast(vm.triggerExportName);
+      console.log("hola aqui se exporta")
     }
+
+
 
     $scope.$on('isExporting', function(evt, data) {
       vm.isExporting = data;

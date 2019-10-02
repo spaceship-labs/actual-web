@@ -3256,24 +3256,18 @@ md-radio-button.md-checked .md-off {
   text-align: center;
 }
 .cart-view .cart-item-remove {
-  border: 2px solid #bababa;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  color: #bababa;
-  /* font-weight: 700; */
+  color: black;
   display: inline-block;
   vertical-align: middle;
-  font-size: 19px;
+  font-size: 37px;
   margin-top: 0px;
   text-align: center;
-  top: 0px;
+  top: 15px;
   right: 10px;
   position: absolute;
 }
 .cart-view .cart-item-remove:hover {
-  background: #bababa;
-  color: #fff;
+  color: #bababa;
 }
 
 .cart-view .cart-item .stock-alert-layer {
@@ -7747,6 +7741,10 @@ md-sidenav {
 }
 
 @media (max-width: 600px) {
+  .cart-view .cart-item-remove{
+    top: 9.5px;
+    right: 10px;
+  }
   .menu-item-login{
     min-width: 80px!important;
     max-width: 80px!important;
@@ -8104,7 +8102,7 @@ md-sidenav {
     font-size: 12px;
   }
   .cart-view .cart-item {
-    padding: 0 0 10px;
+    padding: 10px 0;
   }
   .cart-item h3 {
     margin: 6px 0;

@@ -114,55 +114,55 @@
         vm.mainCategories = {
           salas: {
             color: 'salas-bg',
-            icon: '1',
+            icon: 'salas-01',
             filledIcon: 'salas-relleno',
             image: '/images/categories/categoria2.png'
           },
           comedores: {
             color: 'comedores-bg',
-            icon: '2',
+            icon: 'comedor',
             filledIcon: 'comedores-relleno',
             image: '/images/categories/categoria1.jpg'
           },
           sillas: {
             color: 'sillas-bg',
-            icon: '3',
+            icon: 'sillas',
             filledIcon: 'sillas-relleno',
             image: '/images/categories/sillas.jpg'
           },
           recamaras: {
             color: 'recamaras-bg',
-            icon: '4',
+            icon: 'recamaras',
             filledIcon: 'recamaras-relleno',
             image: '/images/categories/categoria3.png'
           },
           'muebles-de-jardin': {
             color: 'muebles-exterior-bg',
-            icon: '5',
+            icon: 'exterior',
             filledIcon: 'muebles--relleno',
             image: '/images/categories/muebles_de_exterior.jpg'
           },
           'muebles-de-tv': {
             color: 'muebles-television-bg',
-            icon: '6',
+            icon: 'tv',
             filledIcon: 'tv-relleno',
             image: '/images/categories/muebles_de_tv.jpg'
           },
           'muebles-para-oficina': {
             color: 'muebles-oficina-bg',
-            icon: '7',
+            icon: 'oficina',
             filledIcon: 'oficina-relleno',
             image: '/images/categories/mubles_de_oficina.jpg'
           },
           ofertas: {
             color: 'look-bg',
-            icon: '8',
+            icon: 'paquete',
             filledIcon: 'look-relleno',
             image: '/images/categories/categoria8.png'
           },
           decoracion: {
             color: 'look-bg',
-            icon: '10',
+            icon: 'deco',
             filledIcon: 'decoracion-relleno',
             image: '/images/categories/decoracion.jpg'
           }
