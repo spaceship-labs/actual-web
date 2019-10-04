@@ -8,7 +8,7 @@
 
     <div class="container" layout="row" layout-wrap layout-align="center center">
 
-      <div hide-xs hide-sm flex-gt-sm="10" class="logo" layout-align="center center">
+      <div hide-xs hide-sm flex-gt-sm="15" class="logo" layout-align="center center">
         <a href="/" ng-switch on="main.siteTheme">
           <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group" />
           <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group" />
@@ -163,7 +163,7 @@
         <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
-            <strong> <i class="icon-phone"></i> </strong>
+            <strong> <i class="icon-phone"></i></strong>
           </span>
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
@@ -189,10 +189,10 @@
                 ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
               <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
             </div>
-            <div hide-gt-xs class="mobile-item-addCar">
-              <span class="cart-n-items"
+            <div hide-gt-xs >
+              <span class="header-car-item-number-mobile"
                 ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-              <i class="icon-carro"></i>
+              <i style="margin-right:11px;" class="icon-carro"></i>
             </div>
           </a>
         </div>

@@ -607,7 +607,6 @@ select {
 
 .header-top-bar-menu .cart-n-items {
   position: relative;
-  left: 11px;
   top: 12px;
   margin: 0 auto;
   right: 0px;
@@ -706,8 +705,13 @@ select {
   font-size: 14px;
 }
 
-.mobile-item-addCar {
-  margin-bottom: 15px;
+.header-car-item-number-mobile{
+  position: absolute;
+  bottom: 34px;
+  margin: 0 auto;
+  padding-left: 11px;
+  font-weight: 700;
+  font-size: 12px;
 }
 
 .header-top-bar-menu .cart-active {
