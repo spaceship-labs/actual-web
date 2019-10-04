@@ -707,7 +707,7 @@ select {
 
 .header-car-item-number-mobile{
   position: absolute;
-  bottom: 34px;
+  top: 6px;
   margin: 0 auto;
   padding-left: 11px;
   font-weight: 700;
@@ -715,7 +715,7 @@ select {
 }
 
 .header-item-addcar{
-  margin-top: 10px;
+  margin-right: 5px;
 }
 
 .header-top-bar-menu .cart-active {
@@ -7893,7 +7893,7 @@ md-sidenav {
   }
   .header-top-bar-menu .header-top-bar-menu-item-phone {
     min-width: 20px;
-    margin: 0 8px;
+    margin: 0 4px;
   }
   .header-top-bar-menu .header-top-bar-menu-item-phone i {
     font-size: 23px !important;
