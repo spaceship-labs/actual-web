@@ -99,9 +99,7 @@ angular
     }
 
     function triggerExcelExport() {
-      console.log(vm.triggerExportName)
       $scope.$broadcast(vm.triggerExportName);
-      console.log("hola aqui se exporta")
     }
 
 

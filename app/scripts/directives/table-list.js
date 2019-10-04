@@ -458,7 +458,6 @@
     });
 
     //$rootScope.$on('exportData', function(event, data){
-    //$scope.exportToExcel = function() {};
      $scope.exportToExcel = function() {
       if (!$scope.isExporting) {
         $scope.isExporting = true;
