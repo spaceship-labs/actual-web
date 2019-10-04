@@ -1,8 +1,7 @@
 (function() {
   'use strict';
-
+  
   angular.module('actualWebApp').directive('tableList', tableList);
-
   var controller = function(
     $scope,
     $rootScope,
@@ -17,7 +16,7 @@
   ) {
     $scope.enableSearchField = angular.isDefined($scope.enableSearchField)
       ? $scope.enableSearchField
-      : true;
+      : true;  
 
     $scope.dtInstance = {};
     $scope.isExporting = false;
@@ -27,6 +26,7 @@
     $scope.showDestroyDialog = function(ev, id) {
       dialogService.showDestroyDialog(ev, $scope.destroyFn, id);
     };
+
 
     $scope.domLayout =
       '<"top"f>rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>';
@@ -53,6 +53,7 @@
         // Recompiling so we can bind Angular directive to the DT
         $compile(angular.element(row).contents())($scope);
         if ($scope.createdRowCb) {
+          console.log("Row",data)
           $scope.createdRowCb(row, data, index);
         }
       })
@@ -457,9 +458,8 @@
     });
 
     //$rootScope.$on('exportData', function(event, data){
-    $scope.exportToExcel = function() {};
-    /*
-    $scope.exportToExcel = function() {
+    //$scope.exportToExcel = function() {};
+     $scope.exportToExcel = function() {
       if (!$scope.isExporting) {
         $scope.isExporting = true;
         console.log('isExporting', $scope.isExporting);
@@ -476,8 +476,7 @@
           $scope.$emit('isExporting', $scope.isExporting);
         });
       }
-    };
-    */
+    }; 
   };
   controller.$inject = [
     '$scope',

@@ -503,7 +503,7 @@ angular
     });
 
     //TODO: Reactivate ALASQL for export to excel function
-    /*
+    
     alasql.fn.nullFormat = formatService.nullFormat;
     alasql.fn.yesNoFormat = formatService.yesNoFormat;
     alasql.fn.dateTimeFormat = formatService.dateTimeFormat;
@@ -518,5 +518,5 @@ angular
       var mapper = orderService.getOrderStatusMapper();
       return mapper[data] || data;
     };
-    */
+    
   });
