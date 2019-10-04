@@ -181,7 +181,6 @@
 
         <!-- IF ACTIVE QUOTATION -->
         <div>
-
           <a ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{ main.activeQuotation.id }}"
             class="header-top-bar-menu-item">
             <div hide-xs>
@@ -189,7 +188,7 @@
                 ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
               <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
             </div>
-            <div hide-gt-xs >
+            <div hide-gt-xs class="header-item-addcar">
               <span class="header-car-item-number-mobile"
                 ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
               <i style="margin-right:11px;" class="icon-carro"></i>
