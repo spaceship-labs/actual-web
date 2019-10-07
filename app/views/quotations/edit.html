@@ -1,19 +1,8 @@
-<div
-  ng-if="vm.isLoading"
-  layout="row"
-  layout-align="center center"
-  class="loading-circle"
->
-  <md-progress-circular
-    class="md-accent"
-    md-diameter="100px"
-  ></md-progress-circular>
+<div ng-if="vm.isLoading" layout="row" layout-align="center center" class="loading-circle">
+  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
 
-<section
-  ng-if="!vm.isLoading"
-  class="form-view container container-xlg quotation-view"
->
+<section ng-if="!vm.isLoading" class="form-view container container-xlg quotation-view">
   <div class="center-content company-data">
     <h1>AH ACTUAL SA DE CV</h1>
     <p>AV. XCARET MZA. 2 LOTE 3 04 B SM 36 CANCUN, BENITO JUAREZ Q.R</p>
@@ -26,10 +15,7 @@
   </h1>
   <hr/> -->
 
-  <div
-    ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb) && vm.isOrderPending(vm.quotation.OrderWeb)"
-    class="spei-msg"
-  >
+  <div ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb) && vm.isOrderPending(vm.quotation.OrderWeb)" class="spei-msg">
     <p>
       Su ORDEN DE COMPRA está CONFIRMADA y EN PROCESO, su estatus de pago es
       PENIDIENTE DE PAGO, le pedimos no volver a generar la misma cotización
@@ -38,19 +24,10 @@
   </div>
 
   <div ng-if="vm.quotation.isSpeiQuotation" class="quotation-data">
-    <div
-      ng-if="vm.quotation.OrderWeb"
-      flex
-      flex-sm="100"
-      class="only-hide-print"
-    >
+    <div ng-if="vm.quotation.OrderWeb" flex flex-sm="100" class="only-hide-print">
       <label>Estatus</label>
       <p>
-        <a
-          class="order-link"
-          ng-href="/checkout/order/{{ vm.quotation.OrderWeb.id }}"
-          ng-if="vm.isOrderLinkVisible()"
-        >
+        <a class="order-link" ng-href="/checkout/order/{{ vm.quotation.OrderWeb.id }}" ng-if="vm.isOrderLinkVisible()">
           Haz click aqui para ver el pedido
         </a>
       </p>
@@ -58,46 +35,26 @@
   </div>
 
   <div>
-    <ng-include
-      ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb)"
-      src="'views/checkout/spei-card-instructions.html'"
-    >
+    <ng-include ng-if="vm.hasSpeiOrder(vm.quotation.OrderWeb)" src="'views/checkout/spei-card-instructions.html'">
     </ng-include>
 
-    <ng-include
-      ng-if="vm.quotation.rateLimitReported || vm.quotation.paymentAttempts >= vm.paymentAttemptsLimit"
-      src="'views/quotations/rate-limit-message.html'"
-    >
+    <ng-include ng-if="vm.quotation.rateLimitReported || vm.quotation.paymentAttempts >= vm.paymentAttemptsLimit"
+      src="'views/quotations/rate-limit-message.html'">
     </ng-include>
   </div>
 
   <section class="quotation-data">
-    <div
-      ng-if="!vm.quotation.isSpeiQuotation"
-      layout="row"
-      layout-wrap
-      class="quotation-data-row"
-    >
-      <div
-        ng-if="vm.quotation.OrderWeb"
-        flex="20"
-        flex-sm="100"
-        class="only-hide-print"
-      >
+    <div ng-if="!vm.quotation.isSpeiQuotation" layout="row" layout-wrap class="quotation-data-row">
+      <div ng-if="vm.quotation.OrderWeb" flex="20" flex-sm="100" class="only-hide-print">
         <label>Estatus</label>
         <p>
-          <a
-            class="order-link"
-            ng-href="/checkout/order/{{ vm.quotation.OrderWeb.id }}"
-            ng-if="vm.isOrderLinkVisible()"
-          >
+          <a class="order-link" ng-href="/checkout/order/{{ vm.quotation.OrderWeb.id }}"
+            ng-if="vm.isOrderLinkVisible()">
             Haz click aqui para ver el pedido
           </a>
         </p>
 
-        <p
-          ng-if="vm.quotation.OrderWeb && vm.isOrderPending(vm.quotation.OrderWeb)"
-        >
+        <p ng-if="vm.quotation.OrderWeb && vm.isOrderPending(vm.quotation.OrderWeb)">
           Procesando
         </p>
       </div>
@@ -198,126 +155,35 @@
     <hr />
   </div>
 
-  <form
-    ng-submit="vm.continueBuying()"
-    class="cart-view container container-xxlg"
-  >
-    <div layout="row" layout-wrap layout-align="space-between start">
-      <section
-        flex="70"
-        flex-sm="100"
-        flex-xs="100"
-        class="cart-list"
-        ng-class="{
-          'cart-list-full': vm.quotation.isSpeiQuotation
-        }"
-      >
-        <h1 class="cart-title" hide-sm hide-xs>
-          <i ng-show="vm.quotation.isSpeiQuotation" class="icon-carro"></i>
-          <strong ng-show="vm.quotation.isSpeiQuotation">ARTICULOS</strong>
-          <strong ng-show="!vm.quotation.isSpeiQuotation"
-            >ARTICULOS AGREGADOS</strong
-          >
-          <span ng-show="vm.quotation.isSpeiQuotation"
-            >Previa elección y presupuesto aceptado</span
-          >
-        </h1>
+  <!-- START INFORMATION CARD -->
+  <form hide-gt-sm ng-submit="vm.continueBuying()" class="cart-view container container-xxlg">
 
-        <div
-          ng-if="vm.isLoadingDetails"
-          layout="row"
-          layout-align="center center"
-          class="loading-circle"
-        >
-          <md-progress-circular
-            class="md-accent"
-            md-diameter="100px"
-          ></md-progress-circular>
-        </div>
-
-        <!--<hr class="style1">-->
-        <!--
-        <div ng-if="!vm.isLoadingDetails" class="cart-items">
-          <ng-include
-            class="cart-item-wrapper"
-            ng-repeat="detailGroup in vm.quotation.DetailsGroups track by $index"
-            src="'views/partials/product-cart-item.html'"
-          ></ng-include>
-        </div> -->
-
-        <div
-          ng-if="!vm.isLoadingDetails && !vm.quotation.isSpeiQuotation"
-          class="cart-items"
-        >
-          <ng-include
-            class="cart-item-wrapper"
-            ng-repeat="detail in vm.quotation.Details track by $index"
-            src="'views/partials/product-cart-item.html'"
-          ></ng-include>
-        </div>
-
-        <div
-          ng-if="!vm.isLoadingDetails && vm.quotation.isSpeiQuotation"
-          class="cart-items"
-        >
-          <ng-include
-            class="cart-item-wrapper"
-            ng-repeat="detail in vm.quotation.Details track by $index"
-            src="'views/partials/product-cart-item-v2.html'"
-          ></ng-include>
-        </div>
-
-        <hr />
-        <a
-          href="#"
-          ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
-          ng-click="vm.addNewProduct()"
-          class="print-btn add-to-card-quotation"
-        >
-          AGREGAR NUEVO ARTÍCULO
-        </a>
-        <div class="client-signature" layout="row">
-          <span flex="25">Firma cliente:</span>
-          <span flex class="signature-line"></span>
-        </div>
-      </section>
-
-      <aside
-        flex
-        flex-sm="100"
-        flex-xs="100"
-        class="cart-aside"
-        ng-show="!vm.quotation.isSpeiQuotation"
-      >
-        <h1 class="cart-title">
+      <aside flex="100"  ng-show="!vm.quotation.isSpeiQuotation">
+        <!-- <h1 class="cart-title">
           <i class="icon-carro">
             <span>{{ vm.quotation.totalProducts }}</span>
-          </i>
+          </i>s
           <strong>MI CARRITO</strong>
-        </h1>
+        </h1> -->
 
-        <div class="cart-summary">
+        <div class="cart-summary-mobile">
           <table>
             <tr>
               <td>
-                <strong
-                  >Subtotal ({{
+                <strong>Subtotal ({{
                     vm.quotation.totalProducts
                   }}
-                  productos):</strong
-                >
+                  productos):</strong>
               </td>
               <td>
                 <strong>MXN {{ vm.quotation.subtotal | currency }}</strong>
               </td>
             </tr>
             <tr>
-              <td>Descuento:</td>
-              <td>
-                <strong
-                  >MXN <span ng-show="vm.quotation.discount > 0">-</span
-                  >{{ vm.quotation.discount | currency }}</strong
-                >
+              <td style="color:#e2023f;">Descuento:</td>
+              <td style="color:#e2023f;">
+                <strong>MXN <span
+                    ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong>
               </td>
             </tr>
             <tr>
@@ -332,21 +198,142 @@
 
           <hr />
 
-          <div
-            class="cart-totals"
-            layout="row"
-            layout-align="space-between end"
-          >
+          <div class="cart-total" layout="row" layout-align="space-between end">
             <div flex="30">
               <h1>
                 <strong>TOTAL:</strong>
               </h1>
             </div>
             <div flex="70">
-              <h3
-                class="price-crossed-block"
-                ng-show="vm.quotation.subtotal != vm.quotation.total"
-              >
+              <h3 class="price-crossed-block" ng-show="vm.quotation.subtotal != vm.quotation.total">
+                <span class="currency-label">MXN</span>
+                <span >{{
+                  vm.quotation.subtotal | roundCurrency
+                }}</span>
+              </h3>
+              <h1 class="price-main">
+                <span class="currency-label">MXN</span>
+                {{ vm.quotation.total | roundCurrency }}
+              </h1>
+            </div>
+          </div>
+
+          <input type="submit" value="CONTINUAR"
+            ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
+            ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries"
+            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries }"
+            class="cart-view-btn print-btn" />
+
+          <div class="alert-btn-wrap" ng-if="vm.quotation.bigticketMaxPercentage > 0 && false">
+            <a href="#" ng-click="vm.showBigTicketDialog()">
+              <i class="icon-alert"></i>
+            </a>
+          </div>
+
+          <p class="cart-summary-note" ng-show="vm.isValidatingStock && vm.quotation.Details">
+            Validando disponibilidad...
+          </p>
+        </div>
+      </aside>
+  </form>
+
+  <!-- END INFORMATION CARD -->
+
+  <form ng-submit="vm.continueBuying()" class="cart-view container container-xxlg">
+    <div layout="row" layout-wrap layout-align="space-between start">
+      <section flex="70" flex-sm="100" flex-xs="100" class="cart-list" ng-class="{
+          'cart-list-full': vm.quotation.isSpeiQuotation
+        }">
+        <h1 class="cart-title" hide-sm hide-xs>
+          <i ng-show="vm.quotation.isSpeiQuotation" class="icon-carro"></i>
+          <strong ng-show="vm.quotation.isSpeiQuotation">ARTICULOS</strong>
+          <strong ng-show="!vm.quotation.isSpeiQuotation">ARTICULOS AGREGADOS</strong>
+          <span ng-show="vm.quotation.isSpeiQuotation">Previa elección y presupuesto aceptado</span>
+        </h1>
+
+        <div ng-if="vm.isLoadingDetails" layout="row" layout-align="center center" class="loading-circle">
+          <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+        </div>
+
+        <!--<hr class="style1">-->
+        <!--
+        <div ng-if="!vm.isLoadingDetails" class="cart-items">
+          <ng-include
+            class="cart-item-wrapper"
+            ng-repeat="detailGroup in vm.quotation.DetailsGroups track by $index"
+            src="'views/partials/product-cart-item.html'"
+          ></ng-include>
+        </div> -->
+
+        <div ng-if="!vm.isLoadingDetails && !vm.quotation.isSpeiQuotation" class="cart-items">
+          <ng-include class="cart-item-wrapper" ng-repeat="detail in vm.quotation.Details track by $index"
+            src="'views/partials/product-cart-item.html'"></ng-include>
+        </div>
+
+        <div ng-if="!vm.isLoadingDetails && vm.quotation.isSpeiQuotation" class="cart-items">
+          <ng-include class="cart-item-wrapper" ng-repeat="detail in vm.quotation.Details track by $index"
+            src="'views/partials/product-cart-item-v2.html'"></ng-include>
+        </div>
+
+        <hr />
+        <a href="#" ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
+          ng-click="vm.addNewProduct()" class="print-btn add-to-card-quotation">
+          AGREGAR NUEVO ARTÍCULO
+        </a>
+        <div class="client-signature" layout="row">
+          <span flex="25">Firma cliente:</span>
+          <span flex class="signature-line"></span>
+        </div>
+      </section>
+
+      <aside hide-xs flex flex-sm="100" flex-xs="100" class="cart-aside" ng-show="!vm.quotation.isSpeiQuotation">
+        <h1 class="cart-title">
+          <i class="icon-carro">
+            <span>{{ vm.quotation.totalProducts }}</span>
+          </i>
+          <strong>MI CARRITO</strong>
+        </h1>
+
+        <div class="cart-summary">
+          <table>
+            <tr>
+              <td>
+                <strong>Subtotal ({{
+                    vm.quotation.totalProducts
+                  }}
+                  productos):</strong>
+              </td>
+              <td>
+                <strong>MXN {{ vm.quotation.subtotal | currency }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Descuento:</td>
+              <td>
+                <strong>MXN <span
+                    ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Costo de envío:</strong>
+              </td>
+              <td>
+                <strong>MXN $0.00</strong>
+              </td>
+            </tr>
+          </table>
+
+          <hr />
+
+          <div class="cart-totals" layout="row" layout-align="space-between end">
+            <div flex="30">
+              <h1>
+                <strong>TOTAL:</strong>
+              </h1>
+            </div>
+            <div flex="70">
+              <h3 class="price-crossed-block" ng-show="vm.quotation.subtotal != vm.quotation.total">
                 <span class="currency-label">MXN</span>
                 <span class="price-crossed">{{
                   vm.quotation.subtotal | roundCurrency
@@ -369,19 +356,13 @@
           >
           -->
 
-          <input
-            type="submit"
-            value="CONTINUAR"
+          <input type="submit" value="CONTINUAR"
             ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
             ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries"
             ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries }"
-            class="cart-view-btn print-btn"
-          />
+            class="cart-view-btn print-btn" />
 
-          <div
-            class="alert-btn-wrap"
-            ng-if="vm.quotation.bigticketMaxPercentage > 0 && false"
-          >
+          <div class="alert-btn-wrap" ng-if="vm.quotation.bigticketMaxPercentage > 0 && false">
             <a href="#" ng-click="vm.showBigTicketDialog()">
               <i class="icon-alert"></i>
             </a>
@@ -396,10 +377,7 @@
           </p>
           -->
 
-          <p
-            class="cart-summary-note"
-            ng-show="vm.isValidatingStock && vm.quotation.Details"
-          >
+          <p class="cart-summary-note" ng-show="vm.isValidatingStock && vm.quotation.Details">
             Validando disponibilidad...
           </p>
 
@@ -408,69 +386,92 @@
           </p>
         </div>
 
-        <div layout="row" layout-align="space-between center" layout-wrap>
-          <div flex="45">
-            <a
-              ng-if="vm.quotation.Details.length > 0"
-              href="#"
-              ng-click="vm.print()"
-              class="print-btn add-to-card-quotation"
-            >
-              IMPRIMIR
-            </a>
-          </div>
-          <div flex="50">
-            <!--
+        <div hide-xs>
+          <div layout="row" layout-align="space-between center" layout-wrap>
+            <div flex="45">
+              <a ng-if="vm.quotation.Details.length > 0" href="#" ng-click="vm.print()"
+                class="print-btn add-to-card-quotation">
+                IMPRIMIR
+              </a>
+            </div>
+            <div flex="50">
+              <!--
               ng-class="{
                 'action-btn-disabled': !vm.quotation.Client
               }"
             -->
 
-            <a
-              ng-if="vm.quotation.Details.length > 0"
-              ng-click="vm.sendByEmail()"
-              href="#"
-              class="print-btn add-to-card-quotation"
-            >
-              ENVIAR POR EMAIL
-            </a>
+              <a ng-if="vm.quotation.Details.length > 0" ng-click="vm.sendByEmail()" href="#"
+                class="print-btn add-to-card-quotation">
+                ENVIAR POR EMAIL
+              </a>
+            </div>
           </div>
-        </div>
-        <br />
-        <div layout="row" layout-align="space-between center" layout-wrap>
-          <div flex="100">
-            <a
-              ng-if="vm.quotation.Details.length > 0"
-              ng-click="vm.alertRemoveAllDetails($event)"
-              href="#"
-              class="print-btn add-to-card-quotation "
-            >
-              LIMPIAR CARRITO
-            </a>
+          <br />
+          <div layout="row" layout-align="space-between center" layout-wrap>
+            <div flex="100">
+              <a ng-if="vm.quotation.Details.length > 0" ng-click="vm.alertRemoveAllDetails($event)" href="#"
+                class="print-btn add-to-card-quotation ">
+                LIMPIAR CARRITO
+              </a>
+            </div>
           </div>
         </div>
       </aside>
     </div>
   </form>
-  <br/>
+
+  <!-- INFORMATION BUTTONS -->
+  <div hide-gt-xs>
+    <div layout="row" layout-align="space-between center" layout-wrap>
+      <div flex="45">
+        <a ng-if="vm.quotation.Details.length > 0" href="#" ng-click="vm.print()"
+          class="print-btn add-to-card-quotation">
+          IMPRIMIR
+        </a>
+      </div>
+      <div flex="50">
+        <!--
+          ng-class="{
+            'action-btn-disabled': !vm.quotation.Client
+          }"
+        -->
+
+        <a ng-if="vm.quotation.Details.length > 0" ng-click="vm.sendByEmail()" href="#"
+          class="print-btn add-to-card-quotation">
+          ENVIAR POR EMAIL
+        </a>
+      </div>
+    </div>
+    <br />
+    <div layout="row" layout-align="space-between center" layout-wrap>
+      <div flex="100">
+        <a ng-if="vm.quotation.Details.length > 0" ng-click="vm.alertRemoveAllDetails($event)" href="#"
+          class="print-btn add-to-card-quotation ">
+          LIMPIAR CARRITO
+        </a>
+      </div>
+    </div>
+  </div>
+  <br />
   <div style="overflow-x:auto;">
-  <ng-include ng-if="vm.isUserAdmin" src="'views/quotations/quotation-records.html'"></ng-include>
-  <section ng-if="vm.isUserAdmin">
-  <hr />
-  <ng-include src="'views/quotations/leads-table.html'"> </ng-include>
-  <hr />
-  </section>
-  <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation">
-  <div class="hr">
-  <hr />
+    <ng-include ng-if="vm.isUserAdmin" src="'views/quotations/quotation-records.html'"></ng-include>
+    <section ng-if="vm.isUserAdmin">
+      <hr />
+      <ng-include src="'views/quotations/leads-table.html'"> </ng-include>
+      <hr />
+    </section>
+    <section ng-if="!vm.hasSpeiOrder(vm.quotation.OrderWeb) || vm.quotation.isSpeiQuotation">
+      <div class="hr">
+        <hr />
+      </div>
+      <ng-include src="'views/quotations/payments-options.html'"> </ng-include>
   </div>
-  <ng-include src="'views/quotations/payments-options.html'"> </ng-include>
-  </div>
-  <br/>
+  <br />
 
   <!-- LISTING POLITICAS Y FORMAS DE PAGO  -->
-          <section class="desc-wrapper">
-            <!-- <md-expansion-panel md-component-id="panelTwo">
+  <section class="desc-wrapper">
+    <!-- <md-expansion-panel md-component-id="panelTwo">
               <md-expansion-panel-collapsed>
                 <md-expansion-panel-icon></md-expansion-panel-icon>
                 <div>FORMAS DE PAGO</div>
@@ -503,30 +504,29 @@
               </md-expansion-panel-expanded>
             </md-expansion-panel> -->
 
-            <md-expansion-panel md-component-id="panelTwo">
-              <md-expansion-panel-collapsed>
-                <md-expansion-panel-icon></md-expansion-panel-icon>
-                <div>POLÍTICAS DE COTIZACIONES</div>
-                <div class="md-summary"></div>
-              </md-expansion-panel-collapsed>
+    <md-expansion-panel md-component-id="panelTwo">
+      <md-expansion-panel-collapsed>
+        <md-expansion-panel-icon></md-expansion-panel-icon>
+        <div>POLÍTICAS DE COTIZACIONES</div>
+        <div class="md-summary"></div>
+      </md-expansion-panel-collapsed>
 
-              <md-expansion-panel-expanded>
-                <md-expansion-panel-header ng-click="$panel.collapse()">
-                  <md-expansion-panel-icon></md-expansion-panel-icon>
-                  <div>POLÍTICAS DE COTIZACIONES</div>
-                  <div class="md-summary"></div>
-                </md-expansion-panel-header>
+      <md-expansion-panel-expanded>
+        <md-expansion-panel-header ng-click="$panel.collapse()">
+          <md-expansion-panel-icon></md-expansion-panel-icon>
+          <div>POLÍTICAS DE COTIZACIONES</div>
+          <div class="md-summary"></div>
+        </md-expansion-panel-header>
 
-                <md-expansion-panel-content>
-                  <div>
-                  <ng-include src="'views/quotations/quotation-texts.html'"></ng-include>
-                  </div>
-                </md-expansion-panel-content>
-              </md-expansion-panel-expanded>
-            </md-expansion-panel>
+        <md-expansion-panel-content>
+          <div>
+            <ng-include src="'views/quotations/quotation-texts.html'"></ng-include>
+          </div>
+        </md-expansion-panel-content>
+      </md-expansion-panel-expanded>
+    </md-expansion-panel>
 
-          </md-expansion-panel-group>
-        </section>
+    </md-expansion-panel-group>
+  </section>
 
 </section>
-

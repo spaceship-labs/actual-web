@@ -4516,6 +4516,16 @@ md-backdrop.md-sidenav-backdrop {
 /*--------------/
   #QUOTATION-VIEW
 /*--------------*/
+/* Information card  */
+
+.cart-summary-mobile {
+  max-width: 1200px;
+  background: #f8f8f8; 
+  margin-bottom: 0px;
+  padding: 16px;
+  /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);  */
+}
+
 .color-red {
   color: #e2023f;
 }
@@ -4941,6 +4951,12 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 .cart-view .cart-summary .cart-totals .price-main {
   color: #e2023f;
   font-weight: 700;
+}
+.cart-view .cart-summary-mobile .cart-total .price-main {
+  color: #4FA379;
+  font-weight: 700;
+  text-align: right;
+
 }
 
 .cart-view .cart-summary .cart-totals .price-main-v2 {
