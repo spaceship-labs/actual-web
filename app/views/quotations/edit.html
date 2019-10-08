@@ -1,3 +1,85 @@
+<!-- START INFORMATION CARD -->
+<div class="summary-mobile-static">
+  <form hide-gt-sm ng-submit="vm.continueBuying()" class="cart-view container container-xxlg">
+    <aside flex="100" ng-show="!vm.quotation.isSpeiQuotation">
+      <!-- <h1 class="cart-title">
+          <i class="icon-carro">
+            <span>{{ vm.quotation.totalProducts }}</span>
+          </i>s
+          <strong>MI CARRITO</strong>
+        </h1> -->
+
+      <div class="cart-summary-mobile">
+        <table>
+          <tr>
+            <td>
+              <strong>Subtotal ({{
+                    vm.quotation.totalProducts
+                  }}
+                productos):</strong>
+            </td>
+            <td>
+              <strong>MXN {{ vm.quotation.subtotal | currency }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td style="color:#e2023f;">Descuento:</td>
+            <td style="color:#e2023f;">
+              <strong>MXN <span
+                  ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Costo de envío:</strong>
+            </td>
+            <td>
+              <strong>MXN $0.00</strong>
+            </td>
+          </tr>
+        </table>
+
+        <hr />
+
+        <div class="cart-total" layout="row" layout-align="space-between end">
+          <div flex="30">
+            <strong>TOTAL:</strong>
+          </div>
+          <div flex="70">
+            <h3 class="price-crossed-block" ng-show="vm.quotation.subtotal != vm.quotation.total">
+              <span class="currency-label">MXN</span>
+              <span>{{
+                  vm.quotation.subtotal | roundCurrency
+                }}</span>
+            </h3>
+            <div class="price-main">
+              <span class="currency-label">MXN</span>
+              {{ vm.quotation.total | roundCurrency }}
+            </div>
+          </div>
+        </div>
+
+        <input type="submit" value="CONTINUAR"
+          ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
+          ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries"
+          ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries }"
+          class="cart-view-btn print-btn" />
+
+        <div class="alert-btn-wrap" ng-if="vm.quotation.bigticketMaxPercentage > 0 && false">
+          <a href="#" ng-click="vm.showBigTicketDialog()">
+            <i class="icon-alert"></i>
+          </a>
+        </div>
+
+        <p class="cart-summary-note" ng-show="vm.isValidatingStock && vm.quotation.Details">
+          Validando disponibilidad...
+        </p>
+      </div>
+    </aside>
+  </form>
+</div>
+<!-- END INFORMATION CARD -->
+
 <div ng-if="vm.isLoading" layout="row" layout-align="center center" class="loading-circle">
   <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
 </div>
@@ -155,89 +237,7 @@
     <hr />
   </div>
 
-  <!-- START INFORMATION CARD -->
-  <form hide-gt-sm ng-submit="vm.continueBuying()" class="cart-view container container-xxlg">
 
-      <aside flex="100"  ng-show="!vm.quotation.isSpeiQuotation">
-        <!-- <h1 class="cart-title">
-          <i class="icon-carro">
-            <span>{{ vm.quotation.totalProducts }}</span>
-          </i>s
-          <strong>MI CARRITO</strong>
-        </h1> -->
-
-        <div class="cart-summary-mobile">
-          <table>
-            <tr>
-              <td>
-                <strong>Subtotal ({{
-                    vm.quotation.totalProducts
-                  }}
-                  productos):</strong>
-              </td>
-              <td>
-                <strong>MXN {{ vm.quotation.subtotal | currency }}</strong>
-              </td>
-            </tr>
-            <tr>
-              <td style="color:#e2023f;">Descuento:</td>
-              <td style="color:#e2023f;">
-                <strong>MXN <span
-                    ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Costo de envío:</strong>
-              </td>
-              <td>
-                <strong>MXN $0.00</strong>
-              </td>
-            </tr>
-          </table>
-
-          <hr />
-
-          <div class="cart-total" layout="row" layout-align="space-between end">
-            <div flex="30">
-              <h1>
-                <strong>TOTAL:</strong>
-              </h1>
-            </div>
-            <div flex="70">
-              <h3 class="price-crossed-block" ng-show="vm.quotation.subtotal != vm.quotation.total">
-                <span class="currency-label">MXN</span>
-                <span >{{
-                  vm.quotation.subtotal | roundCurrency
-                }}</span>
-              </h3>
-              <h1 class="price-main">
-                <span class="currency-label">MXN</span>
-                {{ vm.quotation.total | roundCurrency }}
-              </h1>
-            </div>
-          </div>
-
-          <input type="submit" value="CONTINUAR"
-            ng-if="!vm.quotation.OrderWeb && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
-            ng-disabled="!vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries"
-            ng-class="{'cart-view-btn-disabled' : !vm.isValidStock(vm.quotation.Details) || vm.isValidatingStock || vm.isLoadingDetailsDeliveries }"
-            class="cart-view-btn print-btn" />
-
-          <div class="alert-btn-wrap" ng-if="vm.quotation.bigticketMaxPercentage > 0 && false">
-            <a href="#" ng-click="vm.showBigTicketDialog()">
-              <i class="icon-alert"></i>
-            </a>
-          </div>
-
-          <p class="cart-summary-note" ng-show="vm.isValidatingStock && vm.quotation.Details">
-            Validando disponibilidad...
-          </p>
-        </div>
-      </aside>
-  </form>
-
-  <!-- END INFORMATION CARD -->
 
   <form ng-submit="vm.continueBuying()" class="cart-view container container-xxlg">
     <div layout="row" layout-wrap layout-align="space-between start">
