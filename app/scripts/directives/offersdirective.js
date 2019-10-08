@@ -130,6 +130,7 @@ angular
               }
             })
             .catch(function(err) {
+              vm.isLoadingDeliveries = false;
               console.log(err);
             });
         }
