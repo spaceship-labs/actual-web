@@ -206,7 +206,7 @@ function ProductCtrl(
 
         if (vm.deliveries && vm.deliveries.length > 0) {
           vm.productCart.deliveryGroup = vm.deliveriesGroups[0];
-          vm.productCart.quantity = 1;
+          // vm.productCart.quantity = 1;
         } else {
           vm.productCart.quantity = 0;
         }
