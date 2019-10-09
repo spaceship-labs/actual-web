@@ -7672,6 +7672,10 @@ md-sidenav {
   #footer .footer-menu-col li p {
     font-size: 12px;
   }
+  .options-alert-dialog{
+    min-height:0;
+  }
+
 }
 
 @media (max-width: 800px) {
