@@ -6281,6 +6281,10 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   display: inline-block;
 }
 
+.terms-view p {
+  text-align: justify;
+}
+
 /*-------------------/
   #PAYMENT-METHODS-TABLES
 /*------------------*/
