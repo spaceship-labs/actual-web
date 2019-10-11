@@ -4525,12 +4525,6 @@ md-backdrop.md-sidenav-backdrop {
   /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);  */
 }
 
-
-
-/* .cart-summmary-prices{
-  text-align: right;
-} */
-
 .color-red {
   color: #e2023f;
 }
@@ -4916,7 +4910,7 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   clear: both;
   display: block;
 }
-.cart-view .cart-summary .cart-summary-mobile table {
+.cart-view .cart-summary table {
   font-size: 12px;
   width: 100%;
 }
