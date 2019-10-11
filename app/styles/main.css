@@ -600,9 +600,13 @@ select {
   font-size: 14px;
   outline: 0px;
 }
+
+.header-top-bar-menu-item strong{
+  margin: 0px 5px 0px 5px;
+}
+
 .header-top-bar-menu .cart-n-items {
   position: relative;
-  left: 10px;
   top: 12px;
   margin: 0 auto;
   right: 0px;
@@ -620,7 +624,8 @@ select {
 .header-top-bar-menu-item-user {
   margin-top: 4px;
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 2px;
+  font-size: 14px;
 }
 
 .header-top-bar-menu-item-phone i {
@@ -673,25 +678,44 @@ select {
 .header-top-bar-menu .header-top-bar-menu-item .icon-search {
   font-size: 28px;
   color: white;
-  font-size: 18px;
+  font-size: 22px;
   vertical-align: center;
   outline: 0px;
 }
 
 .header-top-bar-menu .icon-login {
   color: white;
-  font-size: 24px;
+  font-size: 27px;
   vertical-align: center;
   position:relative; 
 }
 .header-top-bar-menu .header-top-bar-menu-item .icon-carro {
   color: white;
-  font-size: 24px;
+  font-size: 26px;
   vertical-align: center;
 }
 
-.mobile-item-addCar {
-  margin-bottom: 15px;
+.header-car-item-number{
+  position: relative;
+  left: 23px;
+  bottom: 16px;
+  margin: 0 auto;
+  right: 0px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.header-car-item-number-mobile{
+  position: absolute;
+  top: 6px;
+  margin: 0 auto;
+  padding-left: 11px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.header-item-addcar{
+  margin-right: 5px;
 }
 
 .header-top-bar-menu .cart-active {
@@ -1150,9 +1174,21 @@ select {
   box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
 }
 
+
+.header-section-top{
+  height: 18px;
+  /* position: relative; */
+}
+
 .header-section-top span{
   color: white;
-  font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
+  font-size: 14px;
+  font-family: 'Helvetica','sans-serif','Helvetica Neue';
+}
+
+.header-section-top strong{
+  color: #e9c15f;
+  margin: 0px 5px 0px 5px;
 }
 
 .header-top-bar .logo,
@@ -4480,6 +4516,21 @@ md-backdrop.md-sidenav-backdrop {
 /*--------------/
   #QUOTATION-VIEW
 /*--------------*/
+.cart-summary-mobile {
+  max-width: 1200px;
+  background: #f8f8f8; 
+  margin-bottom: 0px;
+  
+  /* font-size: 12px; */
+  /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);  */
+}
+
+
+
+/* .cart-summmary-prices{
+  text-align: right;
+} */
+
 .color-red {
   color: #e2023f;
 }
@@ -4865,7 +4916,11 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   clear: both;
   display: block;
 }
-.cart-view .cart-summary table {
+.cart-view .cart-summary .cart-summary-mobile table {
+  font-size: 12px;
+  width: 100%;
+}
+.cart-view .cart-summary-mobile table {
   font-size: 12px;
   width: 100%;
 }
@@ -4875,6 +4930,10 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 .cart-view .cart-summary table td + td {
   text-align: right;
 }
+.cart-view .cart-summary-mobile table td + td {
+  text-align: right;
+}
+
 .cart-view .cart-summary .cart-totals h1 {
   font-size: 24px;
   margin: 0;
@@ -4905,6 +4964,12 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 .cart-view .cart-summary .cart-totals .price-main {
   color: #e2023f;
   font-weight: 700;
+}
+.cart-view .cart-summary-mobile .cart-total .price-main {
+  color: #4FA379;
+  font-weight: 700;
+  text-align: right;
+
 }
 
 .cart-view .cart-summary .cart-totals .price-main-v2 {
@@ -7491,6 +7556,15 @@ md-sidenav {
   #footer .footer-bottom {
     padding: 10px;
   }
+
+  .summary-mobile-static{
+  position: sticky;
+  top: -61px;
+  z-index: 1;
+  background-attachment: fixed;
+  background-color: #f8f8f8 !important; 
+  border-bottom: 1px solid #DDD;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -7857,7 +7931,7 @@ md-sidenav {
   }
   .header-top-bar-menu .header-top-bar-menu-item-phone {
     min-width: 20px;
-    margin: 0 3px;
+    margin: 0 4px;
   }
   .header-top-bar-menu .header-top-bar-menu-item-phone i {
     font-size: 23px !important;
@@ -7882,9 +7956,12 @@ md-sidenav {
     display: flex !important;
     padding: 0px 12px 0 2px;
   }
+
   .header-top-bar-menu .header-top-bar-menu-item i {
     padding: 0;
     margin: 0px;
+    bottom: 3px;
+    /* margin-left: 10px; */
   }
   .header-top-bar-menu .header-top-bar-menu-item-name span {
     display: none;

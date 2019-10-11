@@ -5,55 +5,8 @@
 <div id="header">
   <!-- START TOP BAR -->
   <div class="header-top-bar" fixed-element top="50" ng-class="{'fixed-head': scrolled}">
-    <!-- <section class="header-section-top" hide-xs hide-sm layout="row">
-      <div layout-align="center center">
-        <a href="/" ng-switch on="main.siteTheme">
-          <div flex href="#" class="header-top-bar">
-            <p>
-              <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-                <span><strong>|</strong> BLOG</span>
-              </a>
 
-              <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-                <span><strong>|</strong> BLOG</span>
-              </a>
-            </p>
-          </div>
-        </a>
-      </div>
-      <div layout-align="center center">
-        <a href="/" ng-switch on="main.siteTheme">
-          <div flex href="#" class="header-top-bar">
-            <p>
-              <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-                <span><strong>|</strong> NUESTRAS MARCAS</span>
-              </a>
-
-              <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-                <span><strong>|</strong> NUESTRAS MARCAS</span>
-              </a>
-            </p>
-          </div>
-        </a>
-      </div>
-      <div layout-align="center center">
-        <a href="/" ng-switch on="main.siteTheme">
-          <div flex href="#" class="header-top-bar">
-            <p>
-              <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-                <span><strong>|</strong>CONTACTO</span>
-              </a>
-
-              <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-                <span><strong>|</strong> CONTACTO</span>
-              </a>
-            </p>
-          </div>
-        </a>
-      </div>
-    </section> -->
     <div class="container" layout="row" layout-wrap layout-align="center center">
-
 
       <div hide-xs hide-sm flex-gt-sm="15" class="logo" layout-align="center center">
         <a href="/" ng-switch on="main.siteTheme">
@@ -64,20 +17,55 @@
         </a>
       </div>
 
-      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center"
+      <section class="header-section-top" hide-xs hide-sm layout="row" layout-align="center center">
+        <div layout-align="center center">
+          <p>
+            <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
+              <span>BLOG<strong>|</strong></span>
+            </a>
+            <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
+              <span>BLOG<strong>|</strong></span>
+            </a>
+          </p>
+        </div>
+        <div layout-align="center center">
+          <a href="/" ng-switch on="main.siteTheme">
+            <div flex href="#" class="header-top-bar">
+              <p>
+                <a href="/nuestras-marcas">
+                  <span>NUESTRAS MARCAS</span>
+                </a>
+              </p>
+            </div>
+          </a>
+        </div>
+        <div layout-align="center center">
+          <a href="/" ng-switch on="main.siteTheme">
+            <div flex href="#" class="header-top-bar">
+              <p>
+                <a href="/contactanos">
+                  <span><strong>|</strong>CONTACTO</span>
+                </a>
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center"
         layout-align-sm="center center" layout-align-xs="start center" hide-xs hide-sm>
         <div flex href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
-            <!-- <strong> <i class="icon-time"></i> </strong>  -->
-            <!-- <strong hide-xs>998 246 3487</strong> -->
+          <strong> <i class="icon-time"></i> </strong>  
+           <strong hide-xs>998 246 3487</strong> 
             <span hide-xs>Tel: (998) 246 3487</a></span>
             <strong> <i class="icon-time"></i> </strong>
           </span>
 
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
-      </div>
+      </div> -->
 
       <!-- MENU SEARCH BAR -->
       <form ng-class="{
@@ -119,29 +107,31 @@
             </a>
           </div>
         </div>
-
-        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+        <!-- <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
-        </div>
-        <div ng-if="!main.user || main.user.invited" hide-xs hide-sm flex class="header-top-bar-menu-item">
+        </div> -->
+        <div ng-if="!main.user || main.user.invited" hide-xs flex class="header-top-bar-menu-item">
           <p ng-click="main.redirectToRegister()" style="color: #fff;"> REGÍSTRATE</p>
         </div>
+
+        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+          <i class="icon-search" style="margin-left:8px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+        </div>
+
         <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">
-            <span class="header-top-bar-menu-item" hide-xs><strong>| </strong> <b>MI CUENTA</b></span>
-            <i hide-gt-xs class="icon-login"></i>
+            <span class="header-top-bar-menu-item" hide-xs><strong style="color: #e9c15f;">| </strong> <span>MI
+                CUENTA</span>
+              <i hide-gt-xs class="icon-login"></i>
           </p>
           <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
             <strong class="invited-label">Invitado</strong>
           </span>
 
-
-          <!-- <i class="icon-login" ng-click="main.toggleLoginModal()"></i> -->
+          <i hide-gt-sm style="margin-left:10px;" class="icon-login" ng-click="main.toggleLoginModal()"></i>
           <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
             src="'views/partials/login-header.html'"></ng-include>
         </div>
-
-
 
         <!-- IF logged in -->
         <div class="header-top-bar-menu-item-user">
@@ -159,14 +149,13 @@
           </div>
         </div>
 
-        <div flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
+        <div hide-gt-xs flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
           <p>
             <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-              <span><strong>|</strong> BLOG</span>
+              <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
             </a>
-
             <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-              <span><strong>|</strong> BLOG</span>
+              <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
             </a>
           </p>
         </div>
@@ -174,38 +163,34 @@
         <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
-            <strong> <i class="icon-phone"></i> </strong>
+            <strong> <i class="icon-phone"></i></strong>
           </span>
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
-        <div hide-xs hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()"
+        <!-- <div hide-xs hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong> <i class="icon-phone"></i> </strong>
-            <!-- <strong hide-xs>998 246 3487</strong> -->
+            <strong hide-xs>998 246 3487</strong>
             <strong hide-xs>(998) 195 8376</strong>
           </span>
 
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
-        </div>
+        </div> -->
         <!-- END ADD TO CART INFORMACION -->
 
         <!-- IF ACTIVE QUOTATION -->
-        <a ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{ main.activeQuotation.id }}"
-          class="header-top-bar-menu-item">
-          <span hide-xs class="cart-n-items"
-            ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-          <div class="mobile-item-addCar" hide-xs>
-            <span hide-gt-sm class="cart-n-items"
-              ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-            <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-          </div>
-          <div class="mobile-item-addCar" hide-gt-sm>
-            <span hide-gt-sm class="cart-n-items"
-              ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-            <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-          </div>
-        </a>
+        <div>
+          <a style="display:block;" ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{ main.activeQuotation.id }}"
+            class="header-top-bar-menu-item">
+              <span hide-xs class="header-car-item-number"
+                ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+              <i hide-xs class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
+              <span hide-gt-xs class="header-car-item-number-mobile"
+                ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+              <i hide-gt-xs style="margin-right:5px;" class="icon-carro"></i>
+          </a>
+        </div>
 
         <!-- IF NOT ACTIVE QUOTATION -->
         <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item">
