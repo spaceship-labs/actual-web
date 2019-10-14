@@ -2193,6 +2193,17 @@ select {
 .products-list .view-more-category .circle .circle-text strong {
   color: #030202; 
 }
+.section-free-delivery {
+  font-size:14px;
+}
+.section-free-delivery strong{
+  color: #e2023f;
+}
+.section-free-delivery .icon-delivery{
+  font-size: 50px;
+  position: relative;
+  top: 20px;
+}
 
 /*-----------/
   #BREADCRUMB
@@ -4525,12 +4536,6 @@ md-backdrop.md-sidenav-backdrop {
   /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);  */
 }
 
-
-
-/* .cart-summmary-prices{
-  text-align: right;
-} */
-
 .color-red {
   color: #e2023f;
 }
@@ -4916,7 +4921,7 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   clear: both;
   display: block;
 }
-.cart-view .cart-summary .cart-summary-mobile table {
+.cart-view .cart-summary table {
   font-size: 12px;
   width: 100%;
 }
@@ -6281,6 +6286,10 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   display: inline-block;
 }
 
+.terms-view p {
+  text-align: justify;
+}
+
 /*-------------------/
   #PAYMENT-METHODS-TABLES
 /*------------------*/
@@ -7115,7 +7124,14 @@ button.accordion:hover{
   padding: 10px;
   width: 140px;
 }
+.home-free-delivery{
+  padding: 0px;
+  height: 50px;
+}
 
+.free-delivery-image{
+  width: 400px;
+}
 /*-------------------/
   #PROFILE
 /*------------------*/
@@ -7850,6 +7866,19 @@ md-sidenav {
   .home-slider .home-slide-2 {
     overflow: hidden;
   }
+
+  .free-delivery-image{
+    width: auto;
+    height: 35px;
+    margin-top: -20px;
+  }
+
+  .section-free-delivery{
+    width: auto;
+    font-size: 10px;
+    margin-left: 8px;
+  }
+
   .home-slider .home-slide img {
     width: auto;
     height: 110px;
