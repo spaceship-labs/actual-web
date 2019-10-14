@@ -2193,6 +2193,17 @@ select {
 .products-list .view-more-category .circle .circle-text strong {
   color: #030202; 
 }
+.section-free-delivery {
+  font-size:14px;
+}
+.section-free-delivery strong{
+  color: #e2023f;
+}
+.section-free-delivery .icon-delivery{
+  font-size: 50px;
+  position: relative;
+  top: 20px;
+}
 
 /*-----------/
   #BREADCRUMB
@@ -7113,7 +7124,14 @@ button.accordion:hover{
   padding: 10px;
   width: 140px;
 }
+.home-free-delivery{
+  padding: 0px;
+  height: 50px;
+}
 
+.free-delivery-image{
+  width: 400px;
+}
 /*-------------------/
   #PROFILE
 /*------------------*/
@@ -7848,6 +7866,19 @@ md-sidenav {
   .home-slider .home-slide-2 {
     overflow: hidden;
   }
+
+  .free-delivery-image{
+    width: auto;
+    height: 35px;
+    margin-top: -20px;
+  }
+
+  .section-free-delivery{
+    width: auto;
+    font-size: 10px;
+    margin-left: 8px;
+  }
+
   .home-slider .home-slide img {
     width: auto;
     height: 110px;
