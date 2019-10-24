@@ -114,56 +114,56 @@
         vm.mainCategories = {
           salas: {
             color: 'salas-bg',
-            icon: '1',
-            filledIcon: 'salas-relleno',
+            icon: 'sala-01',
+            filledIcon: 'sala-01',
             image: '/images/categories/categoria2.png'
           },
           comedores: {
             color: 'comedores-bg',
-            icon: '2',
-            filledIcon: 'comedores-relleno',
+            icon: 'comedor',
+            filledIcon: 'comedor',
             image: '/images/categories/categoria1.jpg'
           },
           sillas: {
             color: 'sillas-bg',
-            icon: '3',
-            filledIcon: 'sillas-relleno',
+            icon: 'sillas',
+            filledIcon: 'sillas',
             image: '/images/categories/sillas.jpg'
           },
           recamaras: {
             color: 'recamaras-bg',
-            icon: '4',
-            filledIcon: 'recamaras-relleno',
+            icon: 'recamaras',
+            filledIcon: 'recamaras',
             image: '/images/categories/categoria3.png'
           },
           'muebles-de-jardin': {
             color: 'muebles-exterior-bg',
-            icon: '5',
-            filledIcon: 'muebles--relleno',
+            icon: 'exterior',
+            filledIcon: 'exterior',
             image: '/images/categories/muebles_de_exterior.jpg'
           },
           'muebles-de-tv': {
             color: 'muebles-television-bg',
-            icon: '6',
-            filledIcon: 'tv-relleno',
+            icon: 'tv',
+            filledIcon: 'tv',
             image: '/images/categories/muebles_de_tv.jpg'
           },
           'muebles-para-oficina': {
             color: 'muebles-oficina-bg',
-            icon: '7',
-            filledIcon: 'oficina-relleno',
+            icon: 'oficina',
+            filledIcon: 'oficina',
             image: '/images/categories/mubles_de_oficina.jpg'
           },
           ofertas: {
             color: 'look-bg',
-            icon: '8',
-            filledIcon: 'look-relleno',
+            icon: 'paquete',
+            filledIcon: 'paquete',
             image: '/images/categories/categoria8.png'
           },
           decoracion: {
             color: 'look-bg',
-            icon: '10',
-            filledIcon: 'decoracion-relleno',
+            icon: 'deco',
+            filledIcon: 'deco',
             image: '/images/categories/decoracion.jpg'
           }
         };
@@ -171,56 +171,56 @@
         vm.mainCategories = {
           salas: {
             color: 'salas-bg',
-            icon: '1',
-            filledIcon: 'salas-relleno',
-            image: '/images/categories/salas-home.jpg'
+            icon: 'sala-01',
+            filledIcon: 'sala-01',
+            image: '/images/categories/categoria2.png'
           },
           comedores: {
             color: 'comedores-bg',
-            icon: '2',
-            filledIcon: 'comedores-relleno',
-            image: '/images/categories/comedor-home.jpg'
+            icon: 'comedor',
+            filledIcon: 'comedor',
+            image: '/images/categories/categoria1.jpg'
           },
           sillas: {
             color: 'sillas-bg',
-            icon: '3',
-            filledIcon: 'sillas-relleno',
-            image: '/images/categories/sillas-home.jpg'
+            icon: 'sillas',
+            filledIcon: 'sillas',
+            image: '/images/categories/sillas.jpg'
           },
           recamaras: {
             color: 'recamaras-bg',
-            icon: '4',
-            filledIcon: 'recamaras-relleno',
-            image: '/images/categories/recamaras-home.png'
+            icon: 'recamaras',
+            filledIcon: 'recamaras',
+            image: '/images/categories/categoria3.png'
           },
           'muebles-de-jardin': {
             color: 'muebles-exterior-bg',
-            icon: '5',
-            filledIcon: 'muebles--relleno',
-            image: '/images/categories/exteriores-home.jpg'
+            icon: 'exterior',
+            filledIcon: 'exterior',
+            image: '/images/categories/muebles_de_exterior.jpg'
           },
           'muebles-de-tv': {
             color: 'muebles-television-bg',
-            icon: '6',
-            filledIcon: 'tv-relleno',
-            image: '/images/categories/muebles-tv-home.jpg'
+            icon: 'tv',
+            filledIcon: 'tv',
+            image: '/images/categories/muebles_de_tv.jpg'
           },
           'muebles-para-oficina': {
             color: 'muebles-oficina-bg',
-            icon: '7',
-            filledIcon: 'oficina-relleno',
+            icon: 'oficina',
+            filledIcon: 'oficina',
             image: '/images/categories/mubles_de_oficina.jpg'
           },
           ofertas: {
             color: 'look-bg',
-            icon: '8',
-            filledIcon: 'look-relleno',
+            icon: 'paquete',
+            filledIcon: 'paquete',
             image: '/images/categories/categoria8.png'
           },
           decoracion: {
             color: 'look-bg',
-            icon: '10',
-            filledIcon: 'decoracion-relleno',
+            icon: 'deco',
+            filledIcon: 'ddeco',
             image: '/images/categories/decoracion.jpg'
           }
         };
