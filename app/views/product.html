@@ -294,98 +294,98 @@
         <!-- New product description section -->
         <section class="desc-wrapper">
           <md-expansion-panel-group md-component-id="panelGroup"  auto-expand="" >
-              <md-expansion-panel md-component-id="PaymentInfoPanel" >
-                <md-expansion-panel-collapsed>
-                  <md-expansion-panel-icon ></md-expansion-panel-icon>
-                  <div>FORMAS DE PAGO</div>
-                  <div class="md-summary collapse"></div>
-                </md-expansion-panel-collapsed>
-  
-                <md-expansion-panel-expanded >
-                  <md-expansion-panel-header ng-click="$panel.collapse()">
+              <md-expansion-panel md-component-id="ProductDetailsPanel">
+                  <md-expansion-panel-collapsed>
                     <md-expansion-panel-icon></md-expansion-panel-icon>
-                    <div>FORMAS DE PAGO</div>
+                    <div>DETALLES DEL ARTÍCULO</div>
                     <div class="md-summary"></div>
-                  </md-expansion-panel-header>
-  
-                  <md-expansion-panel-content>
-                    <div style="overflow-x:auto;"
-                    >
-                    <table class="payments-type-table" summary="This table shows the payments types">
-                      <!-- <caption>Válidos, 2019</caption> -->
-                      <tr>
-                        <th scope="col">Formas de pago</th>
-                        <th scope="col">Planes de pago</th>
-                        <th scope="col">Grupos financieros participantes</th>
-                      </tr>
-                      <tr>
-                        <th scope="row">Tarjeta de Crédito</th>
-                        <td>Un solo pago</td>
-                        <td>Visa,MasterCard,American Express</td>
-                      </tr>
-                      <tr class="alt">
-                        <th scope="row">Tarjeta de débito</th>
-                        <td>Un solo pago</td>
-                        <td>Banamex,HSBC,Inbursa,Santander</td>
-                      </tr>
-                    </table>
-                    </div>
-                  </md-expansion-panel-content>
-                </md-expansion-panel-expanded>
-              </md-expansion-panel>
+                  </md-expansion-panel-collapsed>
+
+                  <md-expansion-panel-expanded>
+                    <md-expansion-panel-header ng-click="$panel.collapse()">
+                      <md-expansion-panel-icon></md-expansion-panel-icon>
+                      <div>DETALLES DEL ARTÍCULO</div>
+                      <div class="md-summary"></div>
+                    </md-expansion-panel-header>
+
+                    <md-expansion-panel-content>
+                      <div ng-if="vm.product.Description">
+                        <div
+                          ng-bind-html="vm.trustAsHtml(vm.product.Description)"
+                        ></div>
+                      </div>
+
+                      <div ng-if="vm.product.PackageContent">
+                        <h3>Contenido del paquete</h3>
+                        <div
+                          ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"
+                        ></div>
+                      </div>
+
+                      <div ng-if="vm.product.MainFeatures">
+                        <h3>Caracteristicas principales</h3>
+                        <div
+                          ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"
+                        ></div>
+                      </div>
+
+                      <div ng-if="vm.product.Restrictions">
+                        <h3>Restricciones</h3>
+                        <div
+                          ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"
+                        ></div>
+                      </div>
+
+                      <div ng-if="vm.product.Conservation">
+                        <h3>Conservación</h3>
+                        <div
+                          ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"
+                        ></div>
+                      </div>
+                    </md-expansion-panel-content>
+                  </md-expansion-panel-expanded>
+                </md-expansion-panel>
             </md-expansion-panel-group>
           <md-expansion-panel-group md-component-id="panelGroup"  >
-            <md-expansion-panel md-component-id="ProductDetailsPanel">
-              <md-expansion-panel-collapsed>
-                <md-expansion-panel-icon></md-expansion-panel-icon>
-                <div>DETALLES DEL ARTÍCULO</div>
-                <div class="md-summary"></div>
-              </md-expansion-panel-collapsed>
+              <md-expansion-panel md-component-id="PaymentInfoPanel" >
+                  <md-expansion-panel-collapsed>
+                    <md-expansion-panel-icon ></md-expansion-panel-icon>
+                    <div>FORMAS DE PAGO</div>
+                    <div class="md-summary collapse"></div>
+                  </md-expansion-panel-collapsed>
 
-              <md-expansion-panel-expanded>
-                <md-expansion-panel-header ng-click="$panel.collapse()">
-                  <md-expansion-panel-icon></md-expansion-panel-icon>
-                  <div>DETALLES DEL ARTÍCULO</div>
-                  <div class="md-summary"></div>
-                </md-expansion-panel-header>
+                  <md-expansion-panel-expanded >
+                    <md-expansion-panel-header ng-click="$panel.collapse()">
+                      <md-expansion-panel-icon></md-expansion-panel-icon>
+                      <div>FORMAS DE PAGO</div>
+                      <div class="md-summary"></div>
+                    </md-expansion-panel-header>
 
-                <md-expansion-panel-content>
-                  <div ng-if="vm.product.Description">
-                    <div
-                      ng-bind-html="vm.trustAsHtml(vm.product.Description)"
-                    ></div>
-                  </div>
-
-                  <div ng-if="vm.product.PackageContent">
-                    <h3>Contenido del paquete</h3>
-                    <div
-                      ng-bind-html="vm.trustAsHtml(vm.product.PackageContent)"
-                    ></div>
-                  </div>
-
-                  <div ng-if="vm.product.MainFeatures">
-                    <h3>Caracteristicas principales</h3>
-                    <div
-                      ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"
-                    ></div>
-                  </div>
-
-                  <div ng-if="vm.product.Restrictions">
-                    <h3>Restricciones</h3>
-                    <div
-                      ng-bind-html="vm.trustAsHtml(vm.product.Restrictions)"
-                    ></div>
-                  </div>
-
-                  <div ng-if="vm.product.Conservation">
-                    <h3>Conservación</h3>
-                    <div
-                      ng-bind-html="vm.trustAsHtml(vm.product.Conservation)"
-                    ></div>
-                  </div>
-                </md-expansion-panel-content>
-              </md-expansion-panel-expanded>
-            </md-expansion-panel>
+                    <md-expansion-panel-content>
+                      <div style="overflow-x:auto;"
+                      >
+                      <table class="payments-type-table" summary="This table shows the payments types">
+                        <!-- <caption>Válidos, 2019</caption> -->
+                        <tr>
+                          <th scope="col">Formas de pago</th>
+                          <th scope="col">Planes de pago</th>
+                          <th scope="col">Grupos financieros participantes</th>
+                        </tr>
+                        <tr>
+                          <th scope="row">Tarjeta de Crédito</th>
+                          <td>Un solo pago</td>
+                          <td>Visa,MasterCard,American Express</td>
+                        </tr>
+                        <tr class="alt">
+                          <th scope="row">Tarjeta de débito</th>
+                          <td>Un solo pago</td>
+                          <td>Banamex,HSBC,Inbursa,Santander</td>
+                        </tr>
+                      </table>
+                      </div>
+                    </md-expansion-panel-content>
+                  </md-expansion-panel-expanded>
+                </md-expansion-panel>
             <md-expansion-panel md-component-id="DelivaryDetailsPanel">
               <md-expansion-panel-collapsed>
                 <md-expansion-panel-icon></md-expansion-panel-icon>
@@ -411,7 +411,7 @@
           </md-expansion-panel-group>
         </section>
         <section>
-          
+
         </section>
       </section>
       <!--END PRODUCT VIEW CONTENT-->
