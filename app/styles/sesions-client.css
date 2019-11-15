@@ -1,0 +1,83 @@
+
+.sesion-client-flex-container{
+    display: flex;
+    align-items: stretch;
+    background-color: #ffffff; 
+    margin: 20px 0 20px 0px;
+}
+
+.sesion-client-flex-container .register-flexbox{
+    color: white;
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+    flex-basis: 50%;
+}
+
+.register-options-sesion {
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+    margin: auto;
+    color: #626262;
+}
+.sesion-client-title{
+    font-size: 25px;
+    
+}
+
+.sesion-client-div-content{
+    max-width: 600px; 
+    margin:auto; 
+    line-height: 75px;
+}
+
+.sesion-client-content{
+    font-size: 14px;
+    color: #626262;
+    text-align: left;
+    line-height: 50px;
+}
+
+.sesion-client-socialmedia{
+    font-size: 20px;
+    color:#ffffff;
+    border-radius: 0.2em;
+    margin: 0.2em;
+    padding: 2px 15px 2px 15px;
+    border: none;
+    line-height: 34px;
+    white-space: nowrap;
+    width: 250px;
+    height: 34px;
+}
+
+/* .flex-container-form > div {
+    text-align: center;
+    line-height: 75px;
+    max-width: 600px;
+    font-size: 30px;
+    margin: auto;
+    color: #626262;
+  } */
+
+ 
+.vl {
+    border-left: 1px solid rgb(146, 146, 146);
+}
+
+
+.sesion-client-content > hr{
+    border-top: 0px solid rgb(146, 146, 146);
+    /* border-left: 1px solid rgb(146, 146, 146); */
+}
+
+.sesion-client-content > div {
+    height: 50px;
+}  
+
+/* Shared */
+.loginBtn {
+ box-sizing: border-box;
