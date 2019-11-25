@@ -1,0 +1,635 @@
+<div
+  ng-if="vm.isLoading"
+  layout="row"
+  layout-align="center center"
+  class="loading-circle"
+>
+  <md-progress-circular
+    class="md-accent"
+    md-diameter="100px"
+  ></md-progress-circular>
+</div>
+
+<!--- ACTIVATE VIEW IF ADD TO CARD IS TRUE -->
+<section
+  ng-if="!vm.isLoading && vm.isContactCreateActive "
+  class="form-view container container-xlg quotation-view"
+
+>
+  <div
+    ng-submit="vm.continueBuying()"
+    class="cart-view container container-xlg"
+  >
+    <div layout="row" layout-wrap >
+      <section flex="70" flex-sm="100" flex-xs="100" class="accordion-register-section">
+        <section
+          id="register"
+          class="form-view checkbox-client-type container-xlg "
+        >
+          <div class="container container-xlg ">
+            <div
+              ng-if="vm.isLoading"
+              layout-fill
+              layout="row"
+              fxLayoutAlign="center center"
+              class="loading-circle"
+            >
+              <md-progress-circular
+                md-mode="indeterminate"
+                md-diameter="150"
+              ></md-progress-circular>
+            </div>
+
+            <section ng-if="!vm.isLoading && vm.registerDone">
+              <h1>Usuario registrado con éxito</h1>
+              <!--<p>Haz click <a ng-click="main.toggleLoginModal()" href="" class="login-toggler">aqui</a> para iniciar sesión</p>-->
+            </section>
+
+            <div
+              ng-if="!vm.isLoading && !vm.registerDone"
+
+            >
+            <div flex="95">
+              <h1>
+                <i class="icon-login"></i> Ingresa tus datos
+              </h1>
+              <hr/>
+            </div>
+
+              <!-- ACCORDION LIST -->
+              <!-- modificar main.cssclass="container-accordion" -->
+              <div class="container-accordion">
+                <!-- ACCORDION CONTENT FOR SESSION -->
+                <button
+                  class="accordion"
+                  ng-click="vm.accordionsession = !vm.accordionsession"
+                >
+                  <img
+                    class="icon-accordion"
+                    src="images/arrow2-right.png"
+                    alt=""
+                  />
+                  <strong class="strong-accordion">INICIAR SESIÓN</strong>
+                  <span class="span-accordion" hide-xs hide-sm
+                    >Si ya tienes una cuenta con nosotros</span
+                  >
+                </button>
+                <form
+                class="accordion-content"
+                ng-show="vm.accordionsession"
+                name="signInForm"
+                ng-submit="vm.signIn(signInForm)"
+                >
+                  <div class="input-element-header">
+                    <div class="input-container">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Email*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="email"
+                            ng-model="vm.existingClient.email"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-container" ng-if="!vm.newClient.invited">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Contraseña*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="password"
+                            ng-model="vm.existingClient.password"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      class="form-view-btn form-view-btn-primary"
+                    >
+                      Continuar
+                    </button>
+                  </div>
+                </form>
+<!-- ACCORDION CONTENT FOR INVITED USER -->
+<button
+class="accordion"
+ng-click="vm.accordioninvited = !vm.accordioninvited"
+>
+<img
+  class="icon-accordion"
+  src="images/arrow2-right.png"
+  alt=""
+/>
+<strong class="strong-accordion">INVITADO</strong>
+<span class="span-accordion" hide-xs hide-sm
+  >Continuar como invitado para agilizar la compra</span
+>
+</button>
+<form
+class="accordion-content"
+ng-show="vm.accordioninvited"
+name="invitedForm"
+ng-submit="vm.register(invitedForm, true)"
+>
+<div class="input-element-header">
+  <h4>DATOS PERSONALES DEL USUARIO</h4>
+  <div class="input-container">
+    <div class="input-element">
+      <p>
+        <label><strong>Nombre(s)*</strong></label>
+      </p>
+      <div class="input-element-inner">
+        <input
+          type="text"
+          ng-model="vm.newClient.FirstName"
+          required
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <div class="input-element">
+      <p>
+        <label><strong>Apellido(s)*</strong></label>
+      </p>
+      <div class="input-element-inner">
+        <input
+          type="text"
+          ng-model="vm.newClient.LastName"
+          required
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <div class="input-element">
+      <p>
+        <label><strong>Email*</strong></label>
+      </p>
+      <div class="input-element-inner">
+        <input
+          type="email"
+          ng-model="vm.newClient.E_Mail"
+          required
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <div class="input-element">
+      <p>
+        <label><strong>Confirmar email*</strong></label>
+      </p>
+      <div class="input-element-inner">
+        <input
+          type="email"
+          ng-model="vm.newClient._E_Mail"
+          ng-pattern="vm.newClient.E_Mail"
+          required
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <div class="input-element">
+      <p>
+        <label><strong>Télefono móvil*</strong></label>
+      </p>
+      <div class="input-element-inner">
+        <input
+          type="text"
+          ng-model="vm.newClient.Cellular"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div ng-if="vm.isContactCreateActive">
+    <ng-include
+      src="'views/partials/contact-form-register.html'">
+    </ng-include>
+  </div>
+  <!-- <div
+    ng-if="vm.isCheckoutProcessActive"
+    class="checkbox-client-type"
+  >
+    <md-checkbox ng-model="vm.newClient.invited">
+      <strong>Deseo continuar como invitado</strong>
+    </md-checkbox>
+  </div> -->
+  <button
+    type="submit"
+    class="form-view-btn form-view-btn-primary"
+  >
+    Continuar
+  </button>
+</div>
+</form>
+                <!-- ACCORDION CONTENT FOR REGISTER -->
+                <button
+                  class="accordion"
+                  ng-click="vm.accordionregister = !vm.accordionregister"
+                >
+                  <img
+                    class="icon-accordion"
+                    src="images/arrow2-right.png"
+                    alt=""
+                  />
+                  <strong class="strong-accordion">REGÍSTRATE</strong>
+                  <span class="span-accordion" hide-xs hide-sm
+                    >¿Eres un nuevo cliente?<strong> Empieza aquí</strong></span
+                  >
+                </button>
+                <form
+                class="accordion-content"
+                ng-show="vm.accordionregister"
+                name="registerForm"
+                ng-submit="vm.register(registerForm)"
+                >
+                  <div class="input-element-header">
+                    <h4>DATOS PERSONALES DEL USUARIO</h4>
+
+                    <div class="input-container">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Nombre(s)*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="text"
+                            ng-model="vm.newClient.FirstName"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-container">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Apellido(s)*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="text"
+                            ng-model="vm.newClient.LastName"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-container">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Email*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="email"
+                            ng-model="vm.newClient.E_Mail"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-container">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Confirmar email*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="email"
+                            ng-model="vm.newClient._E_Mail"
+                            ng-pattern="vm.newClient.E_Mail"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-container">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Télefono móvil*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="text"
+                            ng-model="vm.newClient.Cellular"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div ng-if="vm.isContactCreateActive">
+                      <ng-include
+                        src="'views/partials/contact-form-register.html'"
+                      ></ng-include>
+                    </div>
+                    <hr />
+                    <div class="input-container" ng-if="!vm.newClient.invited">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Contraseña*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="password"
+                            ng-model="vm.newClient.password"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="input-container" ng-if="!vm.newClient.invited">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Confirmar contraseña*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input
+                            type="password"
+                            ng-model="vm.newClient._password"
+                            ng-pattern="vm.newClient.password"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      class="form-view-btn form-view-btn-primary"
+                    >
+                      Continuar
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <!--ACCORDION LIST END-->
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ADD TO MY CARD INFORMATION -->
+      <aside
+        flex
+        flex-sm="100"
+        flex-xs="100"
+        class="cart-aside"
+        ng-show="!vm.quotation.isSpeiQuotation"
+        hide-xs hide-sm
+      >
+        <div class="register-aside-card">
+          <h1 class="cart-title">
+            <i class="icon-carro">
+              <span>{{ vm.quotation.totalProducts }}</span>
+            </i>
+            <strong>MI CARRITO</strong>
+          </h1>
+        </div>
+        <div class="cart-summary">
+          <table>
+            <tr>
+              <td>
+                <strong
+                  >Subtotal ({{
+                    vm.quotation.totalProducts
+                  }}
+                  productos):</strong
+                >
+              </td>
+              <td>
+                <strong>MXN {{ vm.quotation.subtotal | currency }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Descuento:</td>
+              <td>
+                <strong
+                  >MXN <span ng-show="vm.quotation.discount > 0">-</span
+                  >{{ vm.quotation.discount | currency }}</strong
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Costo de envío:</strong>
+              </td>
+              <td>
+                <strong>MXN $0.00</strong>
+              </td>
+            </tr>
+          </table>
+
+          <hr />
+
+          <div
+            class="cart-totals"
+            layout="row"
+            layout-align="space-between end"
+          >
+            <div flex="30">
+              <h1>
+                <strong>TOTAL:</strong>
+              </h1>
+            </div>
+            <div flex="70">
+              <h3
+                class="price-crossed-block"
+                ng-show="vm.quotation.subtotal != vm.quotation.total"
+              >
+                <span class="currency-label">MXN</span>
+                <span class="price-crossed">{{
+                  vm.quotation.subtotal | roundCurrency
+                }}</span>
+              </h3>
+              <h1 class="price-main">
+                <span class="currency-label">MXN</span>
+                {{ vm.quotation.total | roundCurrency }}
+              </h1>
+            </div>
+          </div>
+
+          <div
+            class="alert-btn-wrap"
+            ng-if="vm.quotation.bigticketMaxPercentage > 0 && false"
+          >
+            <a href="#" ng-click="vm.showBigTicketDialog()">
+              <i class="icon-alert"></i>
+            </a>
+          </div>
+          <p
+            class="cart-summary-note"
+            ng-show="vm.isValidatingStock && vm.quotation.Details"
+          >
+            Validando disponibilidad...
+          </p>
+
+          <p class="cart-summary-note">
+            Precios con impuestos incluidos.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+</div>
+
+<!--- ACTIVATE VIEW IF ADD TO CARD IS FALSE -->
+
+<section  ng-if="(!vm.isLoading && !vm.fromQuotation)" id="register" class="form-view checkbox-client-type">
+  <div class="container container-lg">
+    <section ng-if="!vm.isLoading && vm.registerDone">
+      <h1>Usuario registrado con éxito</h1>
+    </section>
+
+    <form
+      ng-if="!vm.isLoading && !vm.registerDone"
+      name="registerForm"
+      ng-submit="vm.register(registerForm)">
+
+      <h1>
+        <i class="icon-login"></i> Ingresa tus datos
+        <small>o</small>
+        <a
+          href=""
+          ng-click="main.toggleLoginModal()"
+          class="login-link login-toggler action-link"
+          >inicia sesión</a>
+      </h1>
+
+      <hr/>
+
+      <h4>DATOS PERSONALES DEL USUARIO</h4>
+
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Nombre(s)*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="text" ng-model="vm.newClient.FirstName" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Apellido(s)*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="text" ng-model="vm.newClient.LastName" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Email*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="email" ng-model="vm.newClient.E_Mail" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Confirmar email*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input
+              type="email"
+              ng-model="vm.newClient._E_Mail"
+              ng-pattern="vm.newClient.E_Mail"
+              required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Télefono fijo</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="text" ng-model="vm.newClient.Phone1" />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="input-element">
+          <p>
+            <label><strong>Télefono móvil*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="text" ng-model="vm.newClient.Cellular" required />
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="vm.isCheckoutProcessActive" class="checkbox-client-type">
+        <md-checkbox ng-model="vm.newClient.invited">
+          <strong>Deseo continuar como invitado</strong>
+        </md-checkbox>
+      </div>
+
+      <div class="input-container" ng-if="!vm.newClient.invited">
+        <div class="input-element">
+          <p>
+            <label><strong>Contraseña*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input type="password" ng-model="vm.newClient.password" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container" ng-if="!vm.newClient.invited">
+        <div class="input-element">
+          <p>
+            <label><strong>Confirmar contraseña*</strong></label>
+          </p>
+          <div class="input-element-inner">
+            <input
+              type="password"
+              ng-model="vm.newClient._password"
+              ng-pattern="vm.newClient.password"
+              required/>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="vm.isContactCreateActive || main.activeQuotation">
+        <ng-include
+          src="'views/partials/contact-form-register.html'">
+        </ng-include>
+      </div>
+
+      <button type="submit" class="form-view-btn form-view-btn-primary">
+        Continuar
+      </button>
+    </form>
+  </div>
+</section>

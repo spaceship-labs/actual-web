@@ -5,7 +5,7 @@
 <div class="sesion-client-flex-container">
   <div class="register-flexbox">
     <div class="register-options-sesion">
-      <div class="sesion-client-title">
+      <div class="flexbox-header-title">
         <i class="icon-login"></i>
         <span>Ingresa tus datos o Inicia sesión</span>
       </div>
@@ -13,12 +13,12 @@
         <form class="sesion-client-content">
           <div>
             <input name="gender" type="radio" value="login">
-            Iniciar sesión
+            Continuar como invitado
           </div>
           <hr>
           <div>
             <input name="gender" type="radio" value="invited">
-            Continuar como invitado
+            Iniciar sesión
           </div>
           <hr>
           <div>
@@ -27,8 +27,9 @@
           </div>
         </form>
       </div>
-      <div>
-        <div class="sesion-client-content" layout="row" layout-align="center center" >
+      <!-- START LOGIN WITH SOCIAL MEDIA -->
+      <!-- <div>
+        <div class="sesion-client-content" layout="row" layout-align="center center">
           <hr width="25%" /><span style="font-size: 20px;">O Iniciar sesión con:</span>
           <hr width="25%" />
         </div>
@@ -39,18 +40,115 @@
         </button>
         </button>
         <div class="g-signin2" data-onsuccess="onSignIn">
-          <button class="sesion-client-socialmedia" style="background-color:#E74B37" >
+          <button class="sesion-client-socialmedia" style="background-color:#E74B37">
             Login with Google
           </button>
         </div>
-      </div>
+      </div> -->
+      <!-- END LOGIN WITH SOCIAL MEDIA -->
       <div>
         <div class="sesion-client-content" layout="row" layout-align="center center">
-          <hr width="25%" /><span style="font-size: 20px;">Opciones de envío</span>
-          <hr width="25%" />
+          <hr width="30%" /><span style="font-size: 20px;">1. Dirección de envío</span>
+          <hr width="30%" />
+        </div>
+        <div align="right" class="div-link-info-event"><button class="link-info-event actual-blue">Cambiar</button>
+        </div>
+        <div>
+          <div class="sesion-client-div-content" layout="row">
+            <input name="radiobtn" type="radio" value="select" style="margin-left:16px;">
+            <div class="card">
+              <div>
+                <div class="container">
+                  <p>
+                    <strong>Calle:</strong><span> 32</span><br>
+                    <strong>Colonia:</strong><span> Alamos</span> <br>
+                    <strong>Municipio:</strong><span> Benito Juárez</span><br>
+                    <strong>Ciudad:</strong><span> Cancún</span><br>
+                    <strong>Estado:</strong><span> Quintana Roo</span><br>
+                    <strong>Códio postal:</strong><span> 77500</span><br>
+                    <strong>Teléfono:</strong><span> 9981066546</span><br>
+                  </p>
+                </div>
+                <div><i class="paquetes"></i></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>2</div>
+      <div class="card-row">
+        <input name="radiobtn" type="radio" value="select" style="margin-left:16px;">
+        <div class="flex-container-row-content">
+          <div class="container">
+            <p>
+              <strong>Calle:</strong><span> 32</span><br>
+              <strong>Colonia:</strong><span> Alamos</span> <br>
+              <strong>Municipio:</strong><span> Benito Juárez</span><br>
+              <strong>Ciudad:</strong><span> Cancún</span><br>
+              <strong>Estado:</strong><span> Quintana Roo</span><br>
+              <strong>Códio postal:</strong><span> 77500</span><br>
+              <strong>Teléfono:</strong><span> 9981066546</span><br>
+              <!-- <div align="right">
+                            <input type="submit" value="Cambiar">
+                          </div> -->
+            </p>
+          </div>
+        </div>
+        <div class="flex-container-row-img">
+          <i class="icon-paquete"></i>
+        </div>
+      </div>
+      <div class="card-row">
+        <input name="radiobtn" type="radio" value="select" style="margin-left:16px;">
+        <div class="flex-container-row-content">
+          <div class="container">
+            <p>
+              <strong>Calle:</strong><span> 32</span><br>
+              <strong>Colonia:</strong><span> Alamos</span> <br>
+              <strong>Municipio:</strong><span> Benito Juárez</span><br>
+              <strong>Ciudad:</strong><span> Cancún</span><br>
+              <strong>Estado:</strong><span> Quintana Roo</span><br>
+              <strong>Códio postal:</strong><span> 77500</span><br>
+              <strong>Teléfono:</strong><span> 9981066546</span><br>
+              <!-- <div align="right">
+                              <input type="submit" value="Cambiar">
+                            </div> -->
+            </p>
+          </div>
+        </div>
+        <div class="flex-container-row-img">
+          <i class="icon-paquete"></i>
+        </div>
+      </div>
+
+
+      <!-- </div> -->
+
+      <!-- <div>
+        <div class="sesion-client-content" layout="row" layout-align="center center">
+          <hr width="15%" /><span style="font-size: 20px;">1. Dirección de envío</span>
+          <hr width="15%" />
+        </div>
+        <div class="sesion-client-div-content">
+          <div class="card">
+            <div class="container">
+              <div class="sesion-client-div-content">
+                <form class="sesion-client-content">
+                  Calle: <input type="texto" name="FirstName" value="32"><br>
+                  Colonia: <input type="text" name="LastName" value="Alamos"><br>
+                  Municipio: <input type="text" name="LastName" value="Benito Juárez"><br>
+                  Ciudad: <input type="text" name="LastName" value="Cancún"><br>
+                  Estado: <input type="text" name="LastName" value="Quintana Roo"><br>
+                  Códio postal: <input type="text" name="LastName" value="77500"><br>
+                  Teléfono: <input type="text" name="LastName" value="9981066546"><br>
+                  <div align="right">
+                    <input type="submit" value="Editar">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
   </div>
 
@@ -58,13 +156,10 @@
 
   <div class="register-flexbox">
     <div class="register-options-sesion">
-      <div class="sesion-client-title">
-        <span>Información de carrito</span>
-      </div>
-      <div>1</div>
+
+      <div>Mi carrito</div>
       <div>2</div>
       <div>3</div>
-
     </div>
   </div>
 
