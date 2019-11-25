@@ -105,9 +105,11 @@
 .icon-color:before {
   content: '\e919';
 }
+
 .icon-comedor:before {
   content: '\e91a';
 }
+
 .icon-comedores-relleno:before {
   content: '\e91b';
 }

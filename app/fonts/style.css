@@ -107,6 +107,8 @@
 }
 .icon-comedor:before {
   content: '\e91a';
+  font-size: 65px;
+  margin-top: -10px;
 }
 .icon-comedores-relleno:before {
   content: '\e91b';

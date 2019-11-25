@@ -565,6 +565,12 @@ select {
   font-size: 30px;
 }
 
+.icon-comedor{
+  font-size: 65px !important;
+  line-height: 47px;
+
+}
+
 .header-top-bar-menu {
   position: relative;
 }
@@ -667,13 +673,6 @@ select {
 .header-top-bar-menu .header-top-bar-menu-item-logout {
   padding: 20px 10px;
 }
-
-/*
-.header-top-bar-menu .header-top-bar-menu-item:hover .modal-header{
-  display: block;
-}
-*/
-
 
 .header-top-bar-menu .header-top-bar-menu-item .icon-search {
   font-size: 28px;
@@ -1241,8 +1240,9 @@ select {
 .nav-categories-item > i {
   display: block;
   font-size: 40px;
-  color: #000;
+  color: rgb(117, 117, 117);
   margin-bottom: 6px;
+  font-weight: normal;
 }
 
 /*SPECIAL CASES CATEGORIES ICONS*/
