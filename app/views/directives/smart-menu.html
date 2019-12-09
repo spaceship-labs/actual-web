@@ -1,12 +1,1 @@
-<div ng-class="index > 3 ? 'smart-menu-left' : 'smart-menu'" layout="row" ng-cloak>
-  <div flex="30" flex-order="{{(index > 3) ? 2 : 1}}">
-    <div ng-repeat="subcategory in subcategories track by $index">
-      <p>
-        <a ng-href="{{'/category/' + subcategory.Handle}}" ng-click="leavehover()">{{subcategory.Name}}</a>
-      </p>
-    </div>
-  </div>
-  <div flex="70" flex-order="{{(index > 3) ? 1 : 2}}" on="category">
-    <img ng-src="{{  image }}" alt="Actual Group">
-  </div>
-</div>
+<div class="test-smart-menu">Hola mundo</div>
