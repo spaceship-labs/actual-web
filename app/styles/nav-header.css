@@ -88,17 +88,18 @@
 .smartmenu-menu-feature > div {
   font-size: 14px;
   text-align: left;
+  margin-top: 5px;
   margin-bottom: 16px;
 }
 
 /**
 * SMART MENU ALL INFO
 **/
-.smarmenu-feature-info {
+.smartmenu-feature-info {
   display: flex;
 }
 
-.smarmenu-feature-info > div{
+.smartmenu-feature-info > div{
   width: 220px;
   margin: 10px 0px 10px 0px;
 }
@@ -106,22 +107,38 @@
 /**
 * SMART MENU IMG 
 **/
-.smarmenu-feature-description {
+.smartmenu-feature-description {
   display: flex;
   flex-direction: column;
 } 
 
-.smarmenu-feature-description > div{
- font-size: 18px;
- background-color: DodgerBlue;
+.smartmenu-feature-description > div{
  height: 300px;
 } 
+
+.smart-menu-img > img{
+  width: 220px;
+  height: 300px;
+}
 
 /**
 * SMART MENU DESCRIPTION 
 **/
-.smarmenu-feature-description > span{
+.smartmenu-feature-description > span{
 	text-align: center;
-  background: Violet;
+  background: DodgerBlue;
   height: 100px;
+}
+
+.mouseover-menu-list::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #e2023f;
+  transition: width .3s;
+}
+.mouseover-menu-list:hover::after{
+  width: 20%;
+  transition: .3s;
 }
