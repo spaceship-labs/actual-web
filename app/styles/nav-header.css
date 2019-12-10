@@ -1,3 +1,8 @@
+/**
+* --------------
+* HEADER MENU  |
+*---------------
+**/
 .nav-menu-miactual{
   position: relative;
   z-index: 9;
@@ -10,13 +15,14 @@
   justify-content: center;
   background-color: #fff;
   height: 108px;
+  font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
 }
 
 .main-menu-container > div {
   background-color: #fff;
   width: 108px;
   text-align: center;  
-  font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
+  
 }
 
 .list-menu-miactual{
@@ -57,13 +63,65 @@
   background:#dda901 ;
 }
 
-/*
+/**
 * -------------
 * SMART MENU  |
 *--------------
-*/
+**/
 
-.test-smart-menu{
-  position: relative;
-  background-color: #dda901;
+.smart-menu-container {
+  display: flex;
+  height: 420px;
+  width: 600px;
+  background: #f7f8f8;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
+}
+
+.smartmenu-menu-feature {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 130px;
+}
+
+.smartmenu-menu-feature > div {
+  font-size: 14px;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+/**
+* SMART MENU ALL INFO
+**/
+.smarmenu-feature-info {
+  display: flex;
+}
+
+.smarmenu-feature-info > div{
+  width: 220px;
+  margin: 10px 0px 10px 0px;
+}
+
+/**
+* SMART MENU IMG 
+**/
+.smarmenu-feature-description {
+  display: flex;
+  flex-direction: column;
+} 
+
+.smarmenu-feature-description > div{
+ font-size: 18px;
+ background-color: DodgerBlue;
+ height: 300px;
+} 
+
+/**
+* SMART MENU DESCRIPTION 
+**/
+.smarmenu-feature-description > span{
+	text-align: center;
+  background: Violet;
+  height: 100px;
 }
