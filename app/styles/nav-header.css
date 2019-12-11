@@ -152,7 +152,7 @@
 hr{ 
   border: none;
   border-left: 0.5px solid hsl(240, 5%, 89%);
-  height: 45.5vh;
+  height: 300px;
   width: 0.5px;    
   margin-top: 0% ;   
 }
