@@ -7,7 +7,7 @@
     <div class="register-options-sesion">
       <div class="flexbox-header-title">
         <i class="icon-login"></i>
-        <span>Ingresa tus datos o Inicia sesión</span>
+        <span>1.- Ingresa tus datos o Inicia sesión</span>
       </div>
       <div class="sesion-client-div-content">
         <form class="sesion-client-content">
@@ -15,7 +15,7 @@
             <input name="gender" type="radio" value="login">
             Continuar como invitado
           </div>
-          <hr>
+          <hr width="100%">
           <div>
             <input name="gender" type="radio" value="invited">
             Iniciar sesión
@@ -48,32 +48,11 @@
       <!-- END LOGIN WITH SOCIAL MEDIA -->
       <div>
         <div class="sesion-client-content" layout="row" layout-align="center center">
-          <hr width="30%" /><span style="font-size: 20px;">1. Dirección de envío</span>
+          <hr width="30%" /><span style="font-size: 25px;">2. Dirección de envío</span>
           <hr width="30%" />
         </div>
         <div align="right" class="div-link-info-event"><button class="link-info-event actual-blue">Cambiar</button>
         </div>
-        <div>
-          <div class="sesion-client-div-content" layout="row">
-            <input name="radiobtn" type="radio" value="select" style="margin-left:16px;">
-            <div class="card">
-              <div>
-                <div class="container">
-                  <p>
-                    <strong>Calle:</strong><span> 32</span><br>
-                    <strong>Colonia:</strong><span> Alamos</span> <br>
-                    <strong>Municipio:</strong><span> Benito Juárez</span><br>
-                    <strong>Ciudad:</strong><span> Cancún</span><br>
-                    <strong>Estado:</strong><span> Quintana Roo</span><br>
-                    <strong>Códio postal:</strong><span> 77500</span><br>
-                    <strong>Teléfono:</strong><span> 9981066546</span><br>
-                  </p>
-                </div>
-                <div><i class="paquetes"></i></div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="card-row">
         <input name="radiobtn" type="radio" value="select" style="margin-left:16px;">
@@ -87,9 +66,7 @@
               <strong>Estado:</strong><span> Quintana Roo</span><br>
               <strong>Códio postal:</strong><span> 77500</span><br>
               <strong>Teléfono:</strong><span> 9981066546</span><br>
-              <!-- <div align="right">
-                            <input type="submit" value="Cambiar">
-                          </div> -->
+              <!-- <div align="right"> <input type="submit" value="Cambiar"> </div> -->
             </p>
           </div>
         </div>
@@ -97,30 +74,7 @@
           <i class="icon-paquete"></i>
         </div>
       </div>
-      <div class="card-row">
-        <input name="radiobtn" type="radio" value="select" style="margin-left:16px;">
-        <div class="flex-container-row-content">
-          <div class="container">
-            <p>
-              <strong>Calle:</strong><span> 32</span><br>
-              <strong>Colonia:</strong><span> Alamos</span> <br>
-              <strong>Municipio:</strong><span> Benito Juárez</span><br>
-              <strong>Ciudad:</strong><span> Cancún</span><br>
-              <strong>Estado:</strong><span> Quintana Roo</span><br>
-              <strong>Códio postal:</strong><span> 77500</span><br>
-              <strong>Teléfono:</strong><span> 9981066546</span><br>
-              <!-- <div align="right">
-                              <input type="submit" value="Cambiar">
-                            </div> -->
-            </p>
-          </div>
-        </div>
-        <div class="flex-container-row-img">
-          <i class="icon-paquete"></i>
-        </div>
-      </div>
-
-
+      
       <!-- </div> -->
 
       <!-- <div>
@@ -154,11 +108,13 @@
 
   <div class="vl"></div>
 
-  <div class="register-flexbox">
+  <div class="register-flexbox-purchase">
     <div class="register-options-sesion">
 
-      <div>Mi carrito</div>
-      <div>2</div>
+      <div><span style="font-size: 25px">3. Realizar compra</span></div>
+      <div>
+        <cart-information></cart-information>
+      </div>
       <div>3</div>
     </div>
   </div>

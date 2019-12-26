@@ -16,20 +16,24 @@
     flex-basis: 50%;
 }
 
+.sesion-client-flex-container .register-flexbox-purchase{
+  text-align: center;
+  flex-basis: 50%;
+}
+
 .register-options-sesion {
     text-align: center;
-    line-height: 75px;
-    font-size: 30px;
+    /*font-size: 30px;*/
     margin: auto;
     color: #626262;
 }
 .flexbox-header-title{
-    font-size: 25px;
+    font-size: 25px; 
     
 }
 
 .sesion-client-div-content{
-    max-width: 600px; 
+    max-width: 500px; 
     margin:auto; 
     line-height: 75px;
     margin-bottom: 10px;
@@ -125,7 +129,7 @@
 
   .flex-container-row-content {
     font-size: 30px;
-    width: 60%;
+    width: 250px;
     margin:5px;
     display: flex;
   }
@@ -133,13 +137,14 @@
   .flex-container-row-img {
     padding: 20px;
     font-size: 30px;
-    width: 40%;
+    margin: auto;
+
   }
   
     .card-row {
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
       transition: 0.3s;
-      max-width: 500px;
+      max-width: 400px;
       border-radius: 5px;
       margin: auto;
       display: flex;
@@ -149,5 +154,5 @@
     } 
 
     .icon-paquete {
-        font-size: 140px;
+        font-size: 50px;
     }
