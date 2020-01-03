@@ -118,7 +118,7 @@
             filledIcon: 'sala-01',
             image: '/images/categories/categoria2.png'
           },
-          comedores: {
+          mesas: {
             color: 'comedores-bg',
             icon: 'comedor',
             filledIcon: 'comedor',
@@ -142,7 +142,7 @@
             filledIcon: 'exterior',
             image: '/images/categories/muebles_de_exterior.jpg'
           },
-          'muebles-de-tv': {
+          almacenaje: {
             color: 'muebles-television-bg',
             icon: 'tv',
             filledIcon: 'tv',
@@ -175,7 +175,7 @@
             filledIcon: 'sala-01',
             image: '/images/categories/categoria2.png'
           },
-          comedores: {
+          mesas: {
             color: 'comedores-bg',
             icon: 'comedor',
             filledIcon: 'comedor',
@@ -199,7 +199,7 @@
             filledIcon: 'exterior',
             image: '/images/categories/muebles_de_exterior.jpg'
           },
-          'muebles-de-tv': {
+          almacenaje: {
             color: 'muebles-television-bg',
             icon: 'tv',
             filledIcon: 'tv',
@@ -285,11 +285,11 @@
       };
       vm.activeCategory = {
         salas: false,
-        comedores: false,
+        mesas: false,
         sillas: false,
         recamaras: false,
         'muebles-de-jardin': false,
-        'muebles-de-tv': false,
+        almacenaje: false,
         'muebles-para-oficina': false,
         ofertas: false,
         'camas-infantiles': false,
