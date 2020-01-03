@@ -1,66 +1,17 @@
-<div class="nav-menu-miactual">
-  <nav class="main-menu-container">
-    <div>
-        <a class="list-menu-miactual">
-          <i class="icon-sala-01"> </i>
-          <span>Salas</span>
-        </a>
-        <smart-menu></smart>
+<div class="nav-menu-miactual" hide-xs>
+  <nav class="main-menu-container" hide-sm >
+    <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index">
+      <a class="list-menu-miactual"
+         href="/category/{{ category.Handle }}">
+        <i ng-class="'icon-{{main.mainCategories[category.Handle].icon}}'"> </i>
+        <span >{{ category.Name }}</span>
+      </a>
+      <smart-menu></smart-menu> 
     </div>
     <div>
-        <a class="list-menu-miactual">
-          <i class="icon-comedor"> </i>
-          <span>Comedores</span>
-        </a>
-    </div>
-    <div>
-        <a class="list-menu-miactual">
-          <i class="icon-sillas"> </i>
-          <span>Sillas y bancos</span>
-        </a>
-    </div>
-    <div>
-        <a class="list-menu-miactual">
-          <i class="icon-recamaras"> </i>
-          <span>Recámaras</span>
-        </a>
-        
-    </div>
-    <div>
-        <a class="list-menu-miactual">
-          <i class="icon-exterior"> </i>
-          <span>Exteriores</span>
-        </a>
-    </div>
-    <div>
-        <a class="list-menu-miactual">
-          <i class="icon-oficina"> </i>
-          <span>Oficinas</span>
-        </a>
-    </div>
-    <div>
-        <a class="list-menu-miactual">
-          <i class="icon-tv"> </i>
-          <span>Muebles de TV</span>
-        </a>
-    </div>
-    <div>
-        <a class="list-menu-miactual">
-          <i class="icon-deco"> </i>
-          <span>Decoración</span>
-        </a>
-    </div>
-    <div>
-        <a class="list-menu-miactual">
-          <i class="icon-paquete"> </i>
-          <span>Paquetes</span>
-        </a>
-    </div>
-    <div>
-        <a  href="https://actualkids.com" target="_blank" flex flex-xs="25" class="list-menu-miactual">
-              <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px" />
-        </a>
-    </div>  
-  </nav>
+      <a href="https://actualkids.com" target="_blank" flex flex-xs="25" class="list-menu-miactual">
+        <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px" />
+      </a>
   </div>
-
+  </nav>
+</div> 

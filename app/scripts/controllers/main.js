@@ -370,6 +370,7 @@
         .then(function(tree) {
           vm.isLoadingCategoriesTree = false;
           vm.categoriesTree = tree;
+          console.log("MAIN CATEGORIES TREE TEST: ",vm.categoriesTree);
           $rootScope.categoriesTree = vm.categoriesTree;
           $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
         })

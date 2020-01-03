@@ -33,6 +33,7 @@
   width: 108px;
   height: 108px;
   transition: 0.4s;
+  color: #404040;
 }
 
 
@@ -41,6 +42,7 @@
   width: 98px;
   height: 40px;
   margin: 10px 5px 10px 5px;
+  
 }
 
 .list-menu-miactual > span {
