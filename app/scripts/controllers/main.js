@@ -100,124 +100,8 @@
         current: null
       };
 
-      if (SITE.name === 'actual-studio') {
-        vm.mainCategories = {
-          salas: {
-            color: 'salas-bg',
-            icon: '1',
-            filledIcon: 'salas-relleno',
-            image: '/images/categories/categoria2.png'
-          },
-          comedores: {
-            color: 'comedores-bg',
-            icon: '2',
-            filledIcon: 'comedores-relleno',
-            image: '/images/categories/categoria1.jpg'
-          },
-          sillas: {
-            color: 'sillas-bg',
-            icon: '3',
-            filledIcon: 'sillas-relleno',
-            image: '/images/categories/sillas.jpg'
-          },
-          recamaras: {
-            color: 'recamaras-bg',
-            icon: '4',
-            filledIcon: 'recamaras-relleno',
-            image: '/images/categories/categoria3.png'
-          },
-          'muebles-de-jardin': {
-            color: 'muebles-exterior-bg',
-            icon: '5',
-            filledIcon: 'muebles--relleno',
-            image: '/images/categories/muebles_de_exterior.jpg'
-          },
-          'muebles-de-tv': {
-            color: 'muebles-television-bg',
-            icon: '6',
-            filledIcon: 'tv-relleno',
-            image: '/images/categories/muebles_de_tv.jpg'
-          },
-          'muebles-para-oficina': {
-            color: 'muebles-oficina-bg',
-            icon: '7',
-            filledIcon: 'oficina-relleno',
-            image: '/images/categories/mubles_de_oficina.jpg'
-          },
-          ofertas: {
-            color: 'look-bg',
-            icon: '8',
-            filledIcon: 'look-relleno',
-            image: '/images/categories/categoria8.png'
-          },
-          decoracion: {
-            color: 'look-bg',
-            icon: '10',
-            filledIcon: 'decoracion-relleno',
-            image: '/images/categories/decoracion.jpg'
-          }
-        };
-      } else {
-        vm.mainCategories = {
-          salas: {
-            color: 'salas-bg',
-            icon: '1',
-            filledIcon: 'salas-relleno',
-            image: '/images/categories/salas-home.jpg'
-          },
-          comedores: {
-            color: 'comedores-bg',
-            icon: '2',
-            filledIcon: 'comedores-relleno',
-            image: '/images/categories/comedor-home.jpg'
-          },
-          sillas: {
-            color: 'sillas-bg',
-            icon: '3',
-            filledIcon: 'sillas-relleno',
-            image: '/images/categories/sillas-home.jpg'
-          },
-          recamaras: {
-            color: 'recamaras-bg',
-            icon: '4',
-            filledIcon: 'recamaras-relleno',
-            image: '/images/categories/recamaras-home.png'
-          },
-          'muebles-de-jardin': {
-            color: 'muebles-exterior-bg',
-            icon: '5',
-            filledIcon: 'muebles--relleno',
-            image: '/images/categories/exteriores-home.jpg'
-          },
-          'muebles-de-tv': {
-            color: 'muebles-television-bg',
-            icon: '6',
-            filledIcon: 'tv-relleno',
-            image: '/images/categories/muebles-tv-home.jpg'
-          },
-          'muebles-para-oficina': {
-            color: 'muebles-oficina-bg',
-            icon: '7',
-            filledIcon: 'oficina-relleno',
-            image: '/images/categories/mubles_de_oficina.jpg'
-          },
-          ofertas: {
-            color: 'look-bg',
-            icon: '8',
-            filledIcon: 'look-relleno',
-            image: '/images/categories/categoria8.png'
-          },
-          decoracion: {
-            color: 'look-bg',
-            icon: '10',
-            filledIcon: 'decoracion-relleno',
-            image: '/images/categories/decoracion.jpg'
-          }
-        };
-      }
-
       vm.mainCategoriesKids = {
-        ninos: {
+        'camas-literas': {
           icon: 'ninas-y-ninos2',
           image: '/images/categories/ninos.jpg'
         },
@@ -226,7 +110,7 @@
           icon: 'ninas-y-ninos2',
           image: '/images/categories/ninos.jpg'
         },
-        bebes: {
+        cunas: {
           icon: 'bebebs2',
           image: '/images/categories/bebes.jpg'
         },
@@ -236,7 +120,7 @@
           image: '/images/categories/bebes.jpg'
         },
 
-        'mama-y-papa': {
+        habitacion: {
           icon: 'mamaypapa2',
           image: '/images/categories/mamaypapa.jpg'
         },
@@ -245,7 +129,7 @@
           icon: 'mamaypapa2',
           image: '/images/categories/mamaypapa.jpg'
         },
-        'organizacion-kids': {
+        almacenar: {
           icon: 'organizacion2',
           image: '/images/categories/organizacion.jpg'
         },
@@ -259,7 +143,7 @@
           image: '/images/categories/juguetes.jpg'
         },
 
-        'decoracion-infantil': {
+        decorativos: {
           icon: 'decoracion-relleno',
           image: '/images/categories/decoracion.jpg'
         },

@@ -29,6 +29,9 @@
     }
 
     function formatCategoriesTree(originalTree, activeStoreCode) {
+      console.log('====================================');
+      console.log('originalTree: ', originalTree);
+      console.log('====================================');
       var sortList = [
         {
           name: 'salas',
@@ -177,18 +180,6 @@
             })
           );
         });
-      } else {
-        tree = originalTree.filter(function(item) {
-          return (
-            item &&
-            !item.onKidsMenu &&
-            item.Childs &&
-            item.Childs.length > 0 &&
-            item.Childs.some(function(child) {
-              return child[activeStoreCode] > 0;
-            })
-          );
-        });
       }
 
       var groupsLevel1 = _.groupBy(tree, 'Handle');
@@ -249,7 +240,7 @@
 
     function getCategoryIcon(handle) {
       var icons = {
-        salas: 'salas' ,
+        salas: 'salas',
         comedores: 'comedores',
         sillas: 'sillas',
         recamaras: 'recamaras',
@@ -261,21 +252,20 @@
         blancos: 'blancos',
         decoracion: 'decoracion',
         'muebles-de-jardin': 'exterior',
-        'muebles-para-oficina': 'paraoficina', 
+        'muebles-para-oficina': 'paraoficina',
         'muebles-de-tv': 'mueblestv',
         tapetes: 'tapetes2',
         'decoracion-de-paredes': 'decoracionpared',
         iluminacion: 'iluminacion',
         organizacion: 'murbles'
       };
-       console.log('Test getCategoryIcon handle', handle);
+      console.log('Test getCategoryIcon handle', handle);
 
       if (icons[handle]) {
         return icons[handle];
       }
       return 'murbles';
     }
-
 
     function getLowestCategory(categories) {
       var lowestCategoryLevel = 0;
@@ -288,19 +278,6 @@
       });
       return lowestCategory;
     }
-
-    var backgrounds = [
-      { key: 'muebles', src: '/images/categories/muebles.jpg' },
-      { key: 'mesas', src: '/images/categories/mesas.jpg' },
-      { key: 'colchones', src: '/images/categories/colchones.jpg' },
-      { key: 'ninos', src: '/images/categories/ninos.jpg' },
-      { key: 'bebes', src: '/images/categories/bebes.jpg' },
-      { key: 'ambientes', src: '/images/categories/ambientes.jpg' },
-      { key: 'sillas', src: '/images/categories/sillas.jpg' },
-      { key: 'decoracion', src: '/images/categories/decoracion.jpg' },
-      { key: 'blancos', src: '/images/categories/blancos.jpg' },
-      { key: 'ofertas', src: '/images/categories/ofertas.jpg' }
-    ];
 
     return service;
   }
