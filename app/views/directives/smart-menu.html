@@ -1,11 +1,13 @@
-<div class="smart-menu-container">
-  <div class="smartmenu-menu-feature">
-    <div>
-      <strong class="mouseover-menu-list">Salas y comedores</strong>
+<div class="smart-menu-container" ng-class="index > 3 ? 'smart-menu-left' : 'smart-menu-right'" layout="row" ng-cloak>
+  <div class="smartmenu-menu-feature" flex-order="{{(index > 3) ? 2 : 1}}">
+    <div ng-repeat="subcategory in subcategories track by $index">
+      <strong class="mouseover-menu-list">
+        <a ng-href="{{'/category/' + subcategory.Handle}}" ng-click="leavehover()">{{subcategory.Name}}</a>
+      </strong>
     </div>
   </div>
   <hr>
-  <div class="smartmenu-feature-info">
+  <div class="smartmenu-feature-info" flex-order="{{(index > 3) ? 1 : 2}}" on="category">
     <div class="smartmenu-feature-description">
       <div class="smart-menu-img"><img src="/images/categories/bebes.jpg" alt="feature"></div>
       <span>Silla de comedor tapizada en tela gris con pata de madera nogal oscuro y tacón color dorado</span>

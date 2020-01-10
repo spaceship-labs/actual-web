@@ -1,17 +1,19 @@
 <div class="nav-menu-miactual" hide-xs>
-  <nav class="main-menu-container" hide-sm >
-    <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index">
-      <a class="list-menu-miactual"
-         href="/category/{{ category.Handle }}">
+  <nav class="main-menu-container"  hide-sm>
+
+    <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index" ng-mouseover="main.handleCategoryHover(category.Handle)">
+      <a class="list-menu-miactual" href="/category/{{ category.Handle }}" >
         <i ng-class="'icon-{{main.mainCategories[category.Handle].icon}}'"> </i>
-        <span >{{ category.Name }}</span>
+        <span>{{ category.Name }}</span>
       </a>
-      <smart-menu></smart-menu> 
+      <smart-menu ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
+        index="$index" subcategories="category.Childs" ng-mouseleave="main.handleCategoryLeave()"></smart-menu>
     </div>
     <div>
       <a href="https://actualkids.com" target="_blank" flex flex-xs="25" class="list-menu-miactual">
         <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px" />
       </a>
-  </div>
+    </div>
+    
   </nav>
-</div> 
+</div>
