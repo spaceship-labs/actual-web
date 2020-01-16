@@ -13,7 +13,8 @@ function SmartMenu() {
       subcategories: '=',
       image: '=',
       leavehover: '=',
-      index: '='
+      index: '=',
+      featured: '='
     },
     templateUrl: 'views/directives/smart-menu.html',
     restrict: 'E'

@@ -7,13 +7,12 @@
         <span>{{ category.Name }}</span>
       </a>
       <smart-menu ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
-        index="$index" subcategories="category.Childs" ng-mouseleave="main.handleCategoryLeave()"></smart-menu>
+        index="$index" subcategories="category.Childs" featured="category.FeatureProductos" ng-mouseleave="main.handleCategoryLeave()" image="main.mainCategories[category.Handle].image"></smart-menu>
     </div>
     <div>
       <a href="https://actualkids.com" target="_blank" flex flex-xs="25" class="list-menu-miactual">
         <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px" />
       </a>
     </div>
-    
   </nav>
 </div>

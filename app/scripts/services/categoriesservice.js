@@ -29,6 +29,7 @@
     }
 
     function formatCategoriesTree(originalTree, activeStoreCode) {
+      console.log("TEST: Original Tree",originalTree);
       var sortList = [
         {
           name: 'salas',

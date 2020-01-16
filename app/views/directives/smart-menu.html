@@ -9,12 +9,14 @@
   <hr>
   <div class="smartmenu-feature-info" flex-order="{{(index > 3) ? 1 : 2}}" on="category">
     <div class="smartmenu-feature-description">
-      <div class="smart-menu-img"><img src="/images/categories/bebes.jpg" alt="feature"></div>
-      <span>Silla de comedor tapizada en tela gris con pata de madera nogal oscuro y tacón color dorado</span>
+      <div class="smart-menu-img"><img ng-src="{{ image }}"></div>
+      <span ng-repeat="category.FeaturedProducts">Produt </span>
     </div>
-    <div class="smartmenu-feature-description">
+    <!-- -->
+    <div class="smartmenu-feature-description" on="category">
       <div class="smart-menu-img"><img src="/images/categories/categoria1.jpg" alt="feature" ></div>
       <strong>Silla de comedor tapizada</strong>
     </div>
+    
   </div>
 </div>
