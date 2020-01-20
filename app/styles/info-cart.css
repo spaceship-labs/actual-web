@@ -4,7 +4,6 @@
   width: 500px;
   margin: auto;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  margin-top: 20px;
 }
 
 .Actual-table-info > td{
@@ -15,7 +14,7 @@
   display: flex;
   position: relative;
   width: 480px;
-  margin: 10px;
+  margin: 5px;
 }
 
 .ActualHeader-product-title > div{
@@ -36,7 +35,7 @@
   display: flex;
   width: 480px;
   height: 200px;
-  margin: 10px;
+  margin: 5px;
 }
 
 .ActualBody-product-imginfo{
@@ -53,10 +52,11 @@
 }
 
 .ActualBody-product-data{
-	width: 240px;
+	width: 270px;
   position: relative;
   display: flex;
   flex-direction: column;
+
 }
 
 .ActualBody-discount-div{
@@ -165,4 +165,8 @@
   border-top: 6px solid #fff;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
+}
+
+.test{
+  right: 0;
 }

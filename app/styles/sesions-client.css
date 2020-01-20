@@ -11,8 +11,6 @@
     width: 100px;
     margin: 10px;
     text-align: center;
-    line-height: 75px;
-    font-size: 30px;
     flex-basis: 50%;
 }
 
@@ -29,14 +27,15 @@
 }
 .flexbox-header-title{
     font-size: 25px; 
+    line-height: 75px;
     
 }
 
 .sesion-client-div-content{
     max-width: 500px; 
+    min-height: 265px;
     margin:auto; 
     line-height: 75px;
-    margin-bottom: 10px;
 }
 
 .sesion-client-content{
