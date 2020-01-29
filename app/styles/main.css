@@ -7125,6 +7125,8 @@ button.accordion:hover{
 
 .free-delivery-image{
   width: 400px;
+  margin-top: -20px;
+
 }
 /*-------------------/
   #PROFILE
@@ -7868,7 +7870,7 @@ md-sidenav {
   .free-delivery-image{
     width: auto;
     height: 35px;
-    margin-top: -20px;
+    margin-top: -25px;
   }
 
   .section-free-delivery{
