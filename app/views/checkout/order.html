@@ -53,7 +53,7 @@
           {{vm.order.Client.E_Mail}}
         </p>
         <p>
-          {{detail.shipDate | date:'yyyy-MM-dd'}}
+          {{vm.order.Details[0].shipDate | date:'yyyy-MM-dd'}}
         </p>
       </div>
       <script>
