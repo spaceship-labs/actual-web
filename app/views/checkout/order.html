@@ -41,7 +41,36 @@
       <p>
         <strong>Estatus</strong>: {{vm.status}}</p>
       <br/>
-
+      <!-- Customer review -->
+      <script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+      <div style="visibility:hidden;" id="scriptData">
+       <p>
+         {{vm.order.folio}}
+       </p>
+       <p>
+         {{vm.order.Client.E_Mail}}
+       </p>
+       <p>
+         {{vm.order.Details[0].shipDate | date:'yyyy-MM-dd'}}
+       </p>
+     </div>
+      <script>
+        window.renderOptIn = function() {
+          window.gapi.load('surveyoptin', function() {
+            let dataContainer = document.getElementById("scriptData");
+            let Ps = dataContainer.getElementsByTagName("p");
+            window.gapi.surveyoptin.render(
+              {
+                // REQUIRED FIELDS
+                "merchant_id": 117300745,
+                "order_id": Ps[0].textContent,
+                "email": Ps[1].textContent,
+                "delivery_country": "MX",
+                "estimated_delivery_date": Ps[2].textContent, 
+              });
+          });
+        }
+      </script>
       <!--
       <p>
         <a class="refunds-link" ng-href="/refunds/payments/{{vm.order.id}}">Generar reembolsos</a>
