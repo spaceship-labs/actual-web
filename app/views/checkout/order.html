@@ -29,6 +29,7 @@
         </a>
       </div>
     </div>
+    
     <div class="order-text-block">
       <h3>
         <strong>¡GRACIAS POR SU COMPRA!</strong>
@@ -42,6 +43,24 @@
         <strong>Estatus</strong>: {{vm.status}}</p>
       <br/>
 
+      <!-- Customer review -->
+      <script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+        
+      <script>
+        window.renderOptIn = function() {
+          window.gapi.load('surveyoptin', function() {
+            window.gapi.surveyoptin.render(
+              {
+                // REQUIRED FIELDS
+                "merchant_id": 117300745,
+                "order_id": "{{vm.order.folio}}",
+                "email": "{{vm.order.Client.E_Mail}}",
+                "delivery_country": "MX",
+                "estimated_delivery_date": "{{detail.shipDate | date:'yyyy-MM-dd'}}", 
+              });
+          });
+        }
+      </script>
       <!--
       <p>
         <a class="refunds-link" ng-href="/refunds/payments/{{vm.order.id}}">Generar reembolsos</a>
