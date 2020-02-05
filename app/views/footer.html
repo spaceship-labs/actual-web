@@ -194,7 +194,7 @@
     <div class="container container-xxlg footer-menu-bottom" layout="row" layout-wrap layout-align="center center">
       <div class="box-bottom" flex="40" flex-xs="100">
 
-        <p class="verified-logos">
+        <p class="verified-logos" id="verified-logos-footer">
           <img src="/images/trust_brands_trustwave.svg" alt="Trustwave">
           <img src="/images/trust_brands_prosa.svg" alt="Prosa">
           <img src="/images/trust_brands_kount.svg" alt="Kount">
@@ -264,3 +264,13 @@
   </div>
 
 </div>
+<script src="https://apis.google.com/js/platform.js?onload=renderBadge" async defer></script>
+<script>
+  window.renderBadge = function() {
+    var ratingBadgeContainer = document.createElement("div");
+    document.getElementById("verified-logos-footer").appendChild(ratingBadgeContainer);
+    window.gapi.load('ratingbadge', function() {
+      window.gapi.ratingbadge.render(ratingBadgeContainer, {"merchant_id": 117300745});
+    });
+  }
+</script> 
