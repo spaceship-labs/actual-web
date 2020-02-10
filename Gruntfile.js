@@ -522,7 +522,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://api.actualstudio.com',
+            apiEndpoint: 'https://api.actualstudio.com',
             cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://admin.miactual.com',
             tokenPrefix: 'production',
