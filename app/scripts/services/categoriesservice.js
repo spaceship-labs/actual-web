@@ -107,64 +107,68 @@
             'salas-de-cine'
           ]
         },
+
         //KIDS
         {
-          name: 'ninos',
+          name: 'camas-literas',
           childs: [
-            'camas-infantiles',
-            'literas-infantiles',
-            'comoda-infantil',
-            'escritorios-infantiles',
-            'mesas-y-sillas-infantiles',
-            'sillones-infantiles',
-            'colchones-para-ninos',
-            'blancos-para-ninos',
-            'cojines-infantiles'
+            'camas',
+            'literas',
+            'cabeceras',
+            'bases-de-cama',
+            'colchones'
           ]
         },
         {
-          name: 'bebes',
+          name: 'cunas',
           childs: [
-            'cunas-para-bebes',
-            'colchon-para-cuna',
-            'cambiador-de-panales',
-            'baneras-para-bebes',
-            'blancos-infantiles',
-            'cojines-para-bebes',
-            'sillas-para-comer'
+            'cunas',
+            'colchones-cuna',
+            'cojines-cunas',
+            'blancos'
           ]
         },
         {
-          name: 'mama-y-papa',
-          childs: ['mecedoras', 'cojines-de-maternidad']
-        },
-        {
-          name: 'organizacion-kids',
+          name: 'habitacion',
           childs: [
-            'baules',
-            'cestos-y-canastas',
-            'joyeros',
-            'repisas-infantiles'
-          ]
-        },
-        { name: 'juguetes', childs: ['peluches', 'estimulacion-temprana'] },
-        {
-          name: 'decoracion-infantil',
-          childs: [
-            'accesorios-decorativos-kids',
-            'cuadros-infantiles',
-            'colgantes',
-            'portarretratos-infantiles'
+            'cambiador',
+            'escritorio',
+            'mecedoras',
+            'bancos',
+            'tocador',
+            'espejos',
           ]
         },
         {
-          name: 'lamparas-infantiles',
-          childs: [
-            'lamparas-de-mesa-infantiles',
-            'lamparas-colgantes-infantiles'
+          name: 'almacenar',
+          childs:[
+            'buros',
+            'comodas',
+            'repisas',
+            'libreros'
           ]
         },
-        { name: 'tapetes-infantiles', childs: ['tapetes'] }
+        {
+          name: 'mesas-y-sillas',
+          childs: [
+            'mesitas',
+            'sillas',
+            'mesas-laterales'
+          ]
+        },
+        {
+          name: 'decorativos',
+          childs:[
+            'tapetes',
+            'espejos',
+            'decoracion-pared',
+            'cuadros',
+            'cojines',
+            'iluminacion',
+            'accesorios'
+          ]
+        }
+
       ];
 
       var tree = [];

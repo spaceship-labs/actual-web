@@ -102,16 +102,18 @@
 
       vm.mainCategoriesKids = {
         'camas-literas': {
-          icon: 'ninas-y-ninos2',
+          icon: '/design/png/camasyliteras.png',
           image: '/images/categories/ninos.jpg'
         },
 
         'camas-infantiles': {
+          
           icon: 'ninas-y-ninos2',
           image: '/images/categories/ninos.jpg'
         },
+
         cunas: {
-          icon: 'bebebs2',
+          icon: '/design/png/cunas.png',
           image: '/images/categories/bebes.jpg'
         },
 
@@ -121,7 +123,7 @@
         },
 
         habitacion: {
-          icon: 'mamaypapa2',
+          icon: '/design/png/habitacion.png',
           image: '/images/categories/mamaypapa.jpg'
         },
 
@@ -130,7 +132,7 @@
           image: '/images/categories/mamaypapa.jpg'
         },
         almacenar: {
-          icon: 'organizacion2',
+          icon: 'design/png/almacenaje.png',
           image: '/images/categories/organizacion.jpg'
         },
 
@@ -144,7 +146,7 @@
         },
 
         decorativos: {
-          icon: 'decoracion-relleno',
+          icon: '/design/png/decorativos.png',
           image: '/images/categories/decoracion.jpg'
         },
 
@@ -152,10 +154,14 @@
           icon: 'decoracion-relleno',
           image: '/images/categories/decoracion.jpg'
         },
-        'lamparas-infantiles': {
+        'mesas-infantiles': {
           icon: 'iluminacion2',
           image: '/images/categories/iluminacion.jpg'
-        }
+        },
+        'mesas-y-sillas': {
+          icon: '/design/png/mesasysillas.png',
+          image: '/images/categories/categoria1.png'
+        },
       };
       vm.activeCategory = {
         salas: false,
