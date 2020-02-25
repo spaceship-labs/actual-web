@@ -24,7 +24,8 @@
         ng-mouseover="main.handleCategoryHover(category.Handle)"
         ng-mouseleave="main.handleCategoryLeave()"
       >
-        <i class="icon-{{ main.mainCategoriesKids[category.Handle].icon }}"></i>
+        <img src="{{ main.mainCategoriesKids[category.Handle].icon }}"></img>
+        <br>
         <span class="nav-categories-item-text" href="#"
           >{{ category.Name }}</span
         >
