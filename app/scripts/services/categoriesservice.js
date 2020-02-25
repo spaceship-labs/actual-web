@@ -147,26 +147,6 @@
             'repisas',
             'libreros'
           ]
-        },
-        {
-          name: 'mesas-y-sillas',
-          childs: [
-            'mesitas',
-            'sillas',
-            'mesas-laterales'
-          ]
-        },
-        {
-          name: 'decorativos',
-          childs:[
-            'tapetes',
-            'espejos',
-            'decoracion-pared',
-            'cuadros',
-            'cojines',
-            'iluminacion',
-            'accesorios'
-          ]
         }
 
       ];
