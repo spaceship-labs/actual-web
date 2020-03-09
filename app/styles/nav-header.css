@@ -71,6 +71,22 @@
 * SMART MENU  |
 *--------------
 **/
+
+.smart-menu-left {
+  right: auto;
+  transform: translateX(-600px);
+}
+
+.smart-menu-container, .smart-menu-left {
+  background: #f7f8f8;
+  position: absolute;
+  width: 100%;
+  box-shadow:rgba(0,0,0,.44) 0 7px 7px -2px;
+  top: 100%;
+  max-width: 600px;
+  z-index: 999999;
+}
+
 .smart-menu-container {
   display: flex;
   width: 560px;
