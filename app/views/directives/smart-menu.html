@@ -6,20 +6,17 @@
       </strong>
     </div>
   </div>
-  <hr>
+
+  <!---->
   <div class="smartmenu-feature-info" flex-order="{{(index > 3) ? 1 : 2}}" on="category">
-    <div class="smartmenu-feature-description">
-      <div class="smart-menu-img"><img ng-src="{{ image }}"></div>
-      <!-- TEST NAME PRODUCT -->
-      <!-- <span ng-repeat="featuredProducts in category.FeaturedProducts">Produt </span> -->
-      <span>Name product</span>
-      <a>Ver más información...</a>
+    <hr style="margin: 0;">
+
+    <div class="smartmenu-feature-description" ng-repeat="featuredProduct in featured">
+      <div class="smart-menu-img">
+        <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
+      </div>
+      <h3>{{featuredProduct.Name}}</h3>
+      <!-- <a>{{featuredProduct.Conservation}}</a> -->
     </div>
-    <!-- -->
-    <div class="smartmenu-feature-description" on="category">
-      <div class="smart-menu-img"><img src="/images/categories/categoria1.jpg" alt="feature" ></div>
-      <strong>Silla de comedor tapizada</strong>
-    </div>
-    
   </div>
 </div>
