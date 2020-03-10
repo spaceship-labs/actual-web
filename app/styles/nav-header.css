@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   background-color: #fff;
-  height: 108px;  
+  height: 90px;  
 }
 
 .main-menu-container > div {
@@ -32,7 +32,7 @@
   -webkit-align-content: center;
   align-content: center;
   width: 108px;
-  height: 108px;
+  height: 90px;
   transition: 0.4s;
   color: #404040;
 }

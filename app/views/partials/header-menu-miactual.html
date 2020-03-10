@@ -19,18 +19,22 @@
       </a>
     </div>
     <div>
-      <a href="https://actualkids.com" target="_blank" flex flex-xs="25" class="list-menu-miactual">
-        <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px" />
+      <a href="https://actualkids.com" target="_blank" class="kids-bg list-menu-miactual">
+        <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 70px; margin-top: 6px;" />
       </a>
     </div>
-    <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" flex flex-xs="25" class="nav-categories-item">
-      <i class="icon-attachment"></i>
-      <span class="nav-categories-item-text" href="#">Pedidos</span>
-    </a>
-    <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" flex flex-xs="25" class="nav-categories-item">
-      <i class="icon-oportunidades"></i>
-      <span class="nav-categories-item-text" href="#">Cotizaciones</span>
-    </a>
+    <div ng-if="main.isUserSellerOrAdmin">
+      <a href="/reports/orders" class="list-menu-miactual">
+        <i class="icon-attachment"></i>
+        <span href="#">Pedidos</span>
+      </a>
+    </div>
+    <div ng-if="main.isUserSellerOrAdmin">
+      <a href="/reports/quotations" class="list-menu-miactual">
+        <i class="icon-oportunidades"></i>
+        <span href="#">Cotizaciones</span>
+      </a>
+    </div>
   </nav>
 
   <nav ng-if="main.siteTheme === 'actual-kids' " hide-sm flex-gt-sm="100" flex="100" layout="row" layout-wrap
