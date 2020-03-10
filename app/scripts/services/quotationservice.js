@@ -343,6 +343,8 @@
 
     //@params: Object products, containing id, quantity
     function addMultipleProducts(products, options) {
+      console.log('multiParams: ', products);
+
       options = options || {};
       var quotationId = localStorageService.get('quotation');
       if (quotationId) {
@@ -365,13 +367,22 @@
           });
       } else {
         //Crear cotizacion con producto agregado
-        var quotationParams = {
-          ZipcodeDelivery: options.zipcodeDeliveryId,
-          Details: products.map(function(product) {
-            var detail = createDetailFromParams(product.id, product);
-            return detail;
-          })
-        };
+        var quotationParams = options.fromOffers
+          ? {
+              ZipcodeDelivery: options.zipcodeDeliveryId,
+              Details: products.map(function(product) {
+                var detail = createDetailFromParams(product.id, product);
+                return detail;
+              }),
+              fromOffers: options.fromOffers
+            }
+          : {
+              ZipcodeDelivery: options.zipcodeDeliveryId,
+              Details: products.map(function(product) {
+                var detail = createDetailFromParams(product.id, product);
+                return detail;
+              })
+            };
 
         create(quotationParams)
           .then(function(res) {

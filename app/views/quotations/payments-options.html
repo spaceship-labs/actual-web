@@ -12,17 +12,17 @@
 <section ng-if="!vm.isLoadingPaymentMethods" class="payments-options-totals">
 
 	<div layout="row" class="data-header">
-		<div flex="15" class="data-head"><p><strong>Formas de pago</strong></p></div>
+		<div flex="20" class="data-head"><p><strong>Formas de pago</strong></p></div>
 		<div flex="20" class="data-head"><p><strong>Plan de pago</strong></p></div>
-		<div flex="50" class="data-head"><p><strong>Grupos financieros participantes</strong></p></div>
-		<div flex="15" class="data-head"><p><strong>Totales</strong></p></div>
+		<div flex="40" class="data-head"><p><strong>Grupos financieros participantes</strong></p></div>
+		<div flex="30" class="data-head"><p><strong>Totales</strong></p></div>
 	</div>
 
 	<div
 		ng-repeat="paymentGroup in vm.paymentMethodsGroups"
 	>
 		<div layout="row" class="method-row" ng-repeat="method in paymentGroup.methods">
-			<div flex="15" class="data-cell">
+			<div flex="20" class="data-cell">
 				<p ng-show="paymentGroup.group === 1">{{method.name}}</p>
 				<p ng-show="paymentGroup.group !== 1">Tarjeta de crédito</p>				
 			</div>
@@ -30,12 +30,12 @@
 				<p ng-show="paymentGroup.group === 1">Un solo pago</p>
 				<p ng-show="paymentGroup.group !== 1">{{method.name}}</p>
 			</div>
-      <div flex="50" class="data-cell">
+      <div flex="40" class="data-cell">
 				<p>
 					<span class="comma-separated" ng-repeat="card in method.cards">{{card}}</span>
 				</p>
 			</div>
-			<div flex="15" class="totals data-cell">
+			<div flex="30" class="totals data-cell">
 				<p><strong>MXN {{ vm.quotation['totalPg' + paymentGroup.group] | roundCurrency  }}</strong></p>
 				<!--<p><strong>MXN {{ method.total | roundCurrency  }}</strong></p>-->
 			</div>

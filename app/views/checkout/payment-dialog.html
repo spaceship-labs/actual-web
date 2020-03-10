@@ -1,333 +1,187 @@
-<md-dialog class="deposit-dialog" aria-label="Payment dialog"  ng-cloak>
-  
+<md-dialog class="deposit-dialog" aria-label="Payment dialog" ng-cloak>
+
   <button class="close-btn" ng-click="hide()">
     <i class="icon-cotizar"></i>
   </button>
 
-  <form
-    name="paymentForm"
-    ng-submit="save(paymentForm)"
-    class="form-section"
-    ng-class="{
+  <form name="paymentForm" ng-submit="save(paymentForm)" class="form-section" ng-class="{
       'form-section-transfer': payment.type === 'transfer'
-    }"
-    id="paymentForm"
-  >
-
+    }" id="paymentForm">
     <div ng-if="payment.type !== 'transfer'" class="deposit-dialog-inner">
-
       <h2 ng-show="payment.type === 'debit-card'">
         <strong>INGRESE LOS DATOS DE SU TARJETA DE DÉBITO</strong>
       </h2>
       <h2 ng-show="payment.type !== 'debit-card'">
         <strong>INGRESE LOS DATOS DE SU TARJETA DE CRÉDITO</strong>
       </h2>
-
-
       <hr>
-
-      <md-radio-group 
-        ng-if="payment.type === 'credit-card' || payment.type === 'debit-card' || payment.msi " 
-        ng-init="payment.cardType = 'master-card' "
-        ng-model="payment.cardType"
-        class="payment-cardtype-chooser"
-        layout="row"
-      >
-        <md-radio-button value="master-card" class="md-primary">
-          <img src="/images/mastercard.png" alt="">
-        </md-radio-button>
-        <md-radio-button value="visa" class="md-primary">
-          <img src="/images/visa.png" alt="">          
-        </md-radio-button>
-
-
-        <md-radio-button 
-          ng-if="payment.type !== 'debit-card' "
-          value="american-express" 
-          class="md-primary"
-        >
-          <img src="/images/american.png" alt="">          
-        </md-radio-button>
-
-      </md-radio-group>
-
-      <div 
-        class="input-container" 
-        layout="row" 
-        layout-wrap 
-        layout-align="space-between center"
-        flex="100"
-      >
-
-        <div class="input-element select-element-wrapper" flex="35" flex-sm="100" flex-xs="100">
-          <p>
-            <label><strong>PAÍS</strong>*</label>
-          </p>
-          <md-select
-            ng-model="payment.cardCountry"
-            class="select-element"
-          >
-            <md-option
-              ng-repeat="country in countries track by $index"
-              ng-value="country.name">
-              {{country.name}}
-            </md-option>
-          </md-select>          
-          <!--
-          <div flex="85" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardCountry"
-              required>
-          </div>
-          -->
-
-        </div>
-
-        <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
-          <p>
-            <label><strong>SELECCIONA UN BANCO</strong>*</label>
-          </p>
-          <div flex="70" ng-if="payment.options.length > 0 && !changingOptions">
-            <div class="input-element select-element-wrapper">
-              <md-select
-                ng-model="payment.card"
-                class="select-element"
-                required
-              >
-                <md-option
-                  ng-repeat="option in payment.options track by $index"
-                  ng-value="option.card.value">
-                  {{option.card.label}}
-                </md-option>
-              </md-select>
-            </div>
-            <input type="hidden" name="card" ng-model="payment.card">
-          </div>
-        </div>
-
-      </div>
-
       <div class="input-container" layout="row" layout-wrap flex="100">
-
-        <div  flex="50" flex-sm="100" flex-xs="100" class="input-element">
+        <div flex="50" flex-xs="100" class="input-element">
           <p>
             <label><strong>NÚMERO DE TARJETA</strong>*
-            <!--<small>(Ingresar sin espacios y sin guiones)</small>-->
+              <!--<small>(Ingresar sin espacios y sin guiones)</small>-->
             </label>
           </p>
-          <div flex="95" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardObject.number"
-              minlength="14"
-              ng-minlength="14"
-              maxlength="19"
-              ng-maxlength="19"
-              required
-            />
+          <div flex="95" flex-sm="100" flex-xs="100" class="input-element-inner">
+            <input type="text" ng-model="payment.cardObject.number" minlength="14" ng-minlength="14" maxlength="19"
+              ng-maxlength="19" required />
           </div>
         </div>
-
-        <div class="input-element" flex="20" flex-sm="70" flex-xs="70">
-          <p>
-            <label><strong>FECHA DE EXPIRACIÓN</strong>*</label>
-          </p>
-          <div
-            layout="row"
-            layout-align="space-between center"
-            layout-wrap
-            class="expiration-inner"
-          >
-
-            <div flex="35" class="input-element select-element-wrapper">
-              <md-select
-                ng-model="payment.cardObject.expMonth"
-                class="select-element"
-                required
-              >
-                <md-option
-                  ng-repeat="month in months track by $index"
-                  ng-value="month">
-                  {{month}}
-                </md-option>
-              </md-select>
-            </div>
-
-            <div flex="60" class="input-element select-element-wrapper">
-              <md-select
-                ng-model="payment.cardObject.expYear"
-                class="select-element"
-                required
-              >
-                <md-option
-                  ng-repeat="year in years track by $index"
-                  ng-selected="$index==0"
-                  ng-value="year">
-                  {{year}}
-                </md-option>
-              </md-select>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <!--
-      <div class="copy-data-wrapper">
-        <md-checkbox
-          ng-model="copyingClientDataToPayment"
-          ng-change="copyClientDataToPayment()">
-          <strong>Los mismos que mis datos personales y de envio</strong>
-        </md-checkbox>    
-      </div>        
-      -->
-
-      <div class="input-container" layout="row" layout-wrap flex="100">
-        
         <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
           <p>
             <label><strong>NOMBRE DEL TITULAR QUE APARECE EN LA TARJETA</strong>*
             </label>
           </p>
-          <div flex="95" class="input-element-inner">
+          <div class="input-element-inner">
             <input type="text" ng-model="payment.cardName" required>
           </div>
         </div>
 
-        <div class="input-element cvc-input" flex flex-sm="30" flex-xs="30">
+        <md-radio-group ng-if="payment.type === 'credit-card' || payment.type === 'debit-card' || payment.msi "
+          ng-init="payment.cardType = 'master-card' " ng-model="payment.cardType" class="payment-cardtype-chooser"
+          layout="row">
+          <md-radio-button value="master-card" class="md-primary">
+            <img src="/images/mastercard.png" alt="">
+          </md-radio-button>
+          <md-radio-button value="visa" class="md-primary">
+            <img src="/images/visa.png" alt="">
+          </md-radio-button>
+          <md-radio-button ng-if="payment.type !== 'debit-card' " value="american-express" class="md-primary">
+            <img src="/images/american.png" alt="">
+          </md-radio-button>
+        </md-radio-group>
+
+        <div class="input-element" flex="35" layout="row" flex-sm="70" flex-xs="70">
+          <p>
+            <label><strong>FECHA DE EXPIRACIÓN</strong>*</label>
+          </p>
+          <div layout="row" layout-align="space-between center" layout-wrap class="expiration-inner">
+            <div flex="40" class="input-element select-element-wrapper">
+              <md-select ng-model="payment.cardObject.expMonth" class="select-element" required>
+                <md-option ng-repeat="month in months track by $index" ng-value="month">
+                  {{month}}
+                </md-option>
+              </md-select>
+            </div>
+            <div flex="55" class="input-element select-element-wrapper">
+              <md-select ng-model="payment.cardObject.expYear" class="select-element" required>
+                <md-option ng-repeat="year in years track by $index" ng-selected="$index==0" ng-value="year">
+                  {{year}}
+                </md-option>
+              </md-select>
+            </div>
+          </div>
+        </div>
+        <div class="input-element cvc-input" layout="row" flex flex-sm="30" flex-xs="30">
           <p>
             <label><strong>CÓDIGO CVC</strong>*</label>
           </p>
-          <div flex="50" flex-sm="100" flex-xs="100" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardObject.cvc"
-              minlength="3"
-              ng-minlength="3"
-              maxlength="4"
-              ng-maxlength="4"
-              required
-            />
+          <div flex-sm="100" flex-xs="100" class="input-element-inner">
+            <input type="text" ng-model="payment.cardObject.cvc" minlength="3" ng-minlength="3" maxlength="4"
+              ng-maxlength="4" required />
           </div>
         </div>
-
-
-        <div>
-          <!--<img src="/images/banamex.png" alt="">-->
+        <div class="input-container" layout="row" layout-wrap layout-align="space-between center" flex="100">
+          <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
+            <p>
+              <label><strong>SELECCIONA UN BANCO</strong>*</label>
+            </p>
+            <div flex="95" ng-if="payment.options.length > 0 && !changingOptions">
+              <div class="input-element select-element-wrapper">
+                <md-select ng-model="payment.card" class="select-element" required>
+                  <md-option ng-repeat="option in payment.options track by $index" ng-value="option.card.value">
+                    {{option.card.label}}
+                  </md-option>
+                </md-select>
+              </div>
+              <input type="hidden" name="card" ng-model="payment.card">
+            </div>
+          </div>
         </div>
-
       </div>
       <div class="input-container" layout="row" layout-wrap flex="100">
-
-        <div 
-          ng-if="payment.cardCountry !== 'Mexico' && payment.cardCountry !== 'México'" 
-          class="input-element" 
-          flex="35" 
-          flex-sm="65" 
-          flex-xs="65"
-        >
+        <div class="input-element" flex="35" flex-sm="100" flex-xs="100">
           <p>
-            <label><strong>ESTADO</strong>*</label> 
+            <label><strong>PAÍS</strong>*</label>
           </p>
-          <div flex="85" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardState"
-              required>
+          <div flex="95">
+          <md-select ng-model="payment.cardCountry" class="select-element">
+            <md-option ng-repeat="country in countries track by $index" ng-value="country.name">
+              {{country.name}}
+            </md-option>
+          </md-select>
           </div>
         </div>
 
-        <div 
-          ng-if="payment.cardCountry === 'Mexico' || payment.cardCountry === 'México'" 
-          class="input-element" 
-          flex="30" 
-          flex-sm="65" 
-          flex-xs="65"
-        >
+        <div class="input-element" ng-if="payment.cardCountry !== 'Mexico' && payment.cardCountry !== 'México'"
+          flex="35" flex-sm="65" flex-xs="65">
           <p>
             <label><strong>ESTADO</strong>*</label>
           </p>
-          <md-select
-            flex="85"
-            ng-model="payment.cardState"
-            class="select-element state-selector"
-            required
-          >
-            <md-option
-              ng-repeat="state in states track by $index"
-              ng-value="state.name">
-              {{state.name}}
-            </md-option>
-          </md-select>          
-
+          <div flex="95" class="input-element-inner">
+            <input type="text" ng-model="payment.cardState" required>
+          </div>
         </div>
 
-
-        <div class="input-element" flex-sm="100" flex-xs="100">
+        <div class="input-element" ng-if="payment.cardCountry === 'Mexico' || payment.cardCountry === 'México'"
+          flex="35" flex-sm="65" flex-xs="65">
           <p>
-            <label><strong>CIUDAD</strong>*</label>
+            <label><strong>ESTADO</strong>*</label>
           </p>
-          <div flex="95" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardCity"
-              required>
+          <div flex="95" >
+          <md-select ng-model="payment.cardState" class="select-element state-selector" required>
+            <md-option ng-repeat="state in states track by $index" ng-value="state.name">
+              {{state.name}}
+            </md-option>
+          </md-select>
           </div>
         </div>
 
         <div flex="30" class="input-element" flex-sm="100" flex-xs="100">
           <p>
+            <label><strong>CIUDAD</strong>*</label>
+          </p>
+          <div flex="95" class="input-element-inner">
+            <input type="text" ng-model="payment.cardCity" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container" layout="row" layout-wrap flex="100">
+
+        <div flex="40" class="input-element" flex-sm="100" flex-xs="100">
+          <p>
             <label><strong>COLONIA</strong>*</label>
           </p>
           <div flex="95" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardAddress1"
-              required>
+            <input type="text" ng-model="payment.cardAddress1" required>
           </div>
         </div>
 
+        <div class="input-container" layout="row" layout-wrap flex="60">
 
-
-      </div>
-      
-      <div class="input-container" layout="row" layout-wrap flex="70">
-
-        <div flex class="input-element" flex-sm="100" flex-xs="100" >
-          <p>
-            <label><strong>CALLE Y NÚMERO</strong>*</label>
-          </p>
-          <div flex="70" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardAddress2"
-              required
-            >
+          <div class="input-element" flex="70" flex-sm="100" flex-xs="100">
+            <p>
+              <label><strong>CALLE Y NÚMERO</strong>*</label>
+            </p>
+            <div flex="95" class="input-element-inner">
+              <input type="text" ng-model="payment.cardAddress2" required>
+            </div>
           </div>
-        </div>
 
-        <div class="input-element" flex="20" flex-sm="35" flex-xs="35">
-          <p>
-            <label><strong>CÓDIGO POSTAL</strong>*</label>
-          </p>
-          <div flex="75" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.cardZip"
-              required
-              minlength="5"
-              ng-minlength="5"
-              maxlength="5"
-              ng-maxlength="5"
-            >
+          <div class="input-element" flex="30" flex-sm="35" flex-xs="35">
+            <p>
+              <label><strong>CÓDIGO POSTAL</strong>*</label>
+            </p>
+            <div flex="95" class="input-element-inner">
+              <input type="text" ng-model="payment.cardZip" required minlength="5" ng-minlength="5" maxlength="5"
+                ng-maxlength="5">
+            </div>
           </div>
-        </div>        
-
       </div>
 
-      <p class="bottom-note">Los datos de la dirección deben ser exactamente iguales al estado de cuenta de la tarjeta proporcionada</p>      
+      <p class="bottom-note">Los datos de la dirección deben ser exactamente iguales al estado de cuenta de la tarjeta
+        proporcionada</p>
 
       <div class="input-container" layout="row" layout-wrap flex="100">
 
@@ -336,13 +190,7 @@
             <label><strong>TÉLEFONO FIJO</strong>*</label>
           </p>
           <div flex="95" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.phone"
-              required
-              placeholder="10 dígitos" 
-              ng-pattern="phonePattern"
-            >
+            <input type="text" ng-model="payment.phone" required placeholder="10 dígitos" ng-pattern="phonePattern">
           </div>
         </div>
 
@@ -351,23 +199,17 @@
             <label><strong>TÉLEFONO MOVIL</strong>*</label>
           </p>
           <div flex="95" class="input-element-inner">
-            <input
-              type="text"
-              ng-model="payment.mobilePhone"
-              placeholder="10 dígitos" ng-pattern="phonePattern"
+            <input type="text" ng-model="payment.mobilePhone" placeholder="10 dígitos" ng-pattern="phonePattern"
               required>
           </div>
-        </div>        
+        </div>
 
         <div class="input-element" flex="25" flex-sm="100" flex-xs="100">
           <p>
             <label><strong>EMAIL</strong>*</label>
           </p>
           <div flex="95" class="input-element-inner">
-            <input
-              type="email"
-              ng-model="payment.email"
-              required>
+            <input type="email" ng-model="payment.email" required>
           </div>
         </div>
 
@@ -376,56 +218,48 @@
             <label><strong>CONFIRMAR EMAIL</strong>*</label>
           </p>
           <div flex="95" class="input-element-inner">
-            <input
-              type="email"
-              ng-model="payment._email"
-              ng-pattern="payment.email"
-              required>
+            <input type="email" ng-model="payment._email" ng-pattern="payment.email" required>
           </div>
-        </div>        
+        </div>
 
-      </div>      
+      </div>
 
-      
+
     </div>
 
     <div class="deposit-dialog-footer">
 
       <div ng-if="payment.type === 'transfer' ">
         <h2><strong>PAGO CON TRANSFERENCIA SPEI</strong></h2>
-        <br/>
+        <br />
       </div>
 
       <div class="input-container" layout="row" layout-wrap layout-align="center center">
-        <div flex="30" flex-sm="100" flex-xs="100" class="input-element " >
+        <div flex="30" flex-sm="100" flex-xs="100" class="input-element ">
 
-          <div
-            class="ammount-block"
-            layout="row"
-            layout-align="start center"
-          >
-            <h2 class="payment-amount"><span class="currency-label">MXN</span> <strong>{{payment.ammount | currency}}</strong></h2>
+          <div class="ammount-block" layout="row" layout-align="start center">
+            <h2 class="payment-amount"><span class="currency-label">MXN</span>
+              <strong>{{payment.ammount | currency}}</strong></h2>
           </div>
         </div>
         <div flex="40" flex-sm="100" flex-xs="100" class="input-element ammount-description">
-          <p ng-show="payment.type === 'transfer'" ><strong>Transferencia de </strong>{{payment.ammount | roundCurrency}} MXN</p>
+          <p ng-show="payment.type === 'transfer'"><strong>Transferencia de </strong>{{payment.ammount | roundCurrency}}
+            MXN</p>
 
-          <p ng-show="!payment.msi && payment.type !== 'transfer'" ><strong>1 Pago de </strong> MXN {{payment.ammount | roundCurrency}}</p>
+          <p ng-show="!payment.msi && payment.type !== 'transfer'"><strong>1 Pago de </strong> MXN
+            {{payment.ammount | roundCurrency}}</p>
 
 
           <p ng-show="payment.msi"><strong>Plan de pago:</strong> {{payment.msi}} Meses SIN INTERESES</p>
-          <p ng-show="payment.msi"><strong>{{payment.msi}} pagos de </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
+          <p ng-show="payment.msi"><strong>{{payment.msi}} pagos de
+            </strong>{{payment.ammount / payment.msi | roundCurrency}} MXN</p>
           <small>Impuesto incluido</small>
 
         </div>
 
         <div flex="30" flex-sm="100" flex-xs="100" class="input-element">
-          <button
-            type="submit"
-            ng-class="{'action-btn-disabled': isValidPayment(paymentForm) }"
-            class="action-btn action-btn-save"
-            href="#"
-            flex="80">
+          <button type="submit" ng-class="{'action-btn-disabled': isValidPayment(paymentForm) }"
+            class="action-btn action-btn-save" href="#" flex="80">
             <strong>PAGAR</strong>
           </button>
         </div>
@@ -435,10 +269,10 @@
         <p class="terms-checkbox-block">
           <md-checkbox ng-model="acceptTerms" aria-label="Acepta terminos" required>
             He leído  y estoy de acuerdo con los <a href="/terminos-y-condiciones" target="_blank">términos, politicas y condiciones</a>
-          </md-checkbox>        
-        </p>      
+          </md-checkbox>
+        </p>
       </div>
-      
+
     </div>
   </form>
 </md-dialog>

@@ -25,7 +25,6 @@
     var length = oSettings._iDisplayLength;
     var visibleRecords = oSettings.fnRecordsDisplay();
     var all = length === -1;
-
     // Gordey Doronin: Re-used this code from main jQuery.dataTables source code. To be consistent.
     var page = all ? 0 : Math.ceil(start / length);
     var pages = all ? 1 : Math.ceil(visibleRecords / length);

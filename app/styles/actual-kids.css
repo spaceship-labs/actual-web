@@ -51,11 +51,15 @@
   background: #34b3e7;
 }
 
+.actual-kids .md-toolbar-header .logo img {
+  background: #34b3e7 !important;
+}
+
 .actual-kids .mobile-sidenav .close-btn {
   background: #34b3e7 !important;
 }
 .actual-kids .mobile-sidenav .nav-categories-item {
-  border-bottom: 1px solid #34b3e7;
+  /* border-bottom: 1px solid #34b3e7; */
 }
 .actual-kids .nav-categories-item-active,
 .actual-kids .nav-categories-item:hover {
@@ -89,6 +93,11 @@
 }
 .actual-kids .schedules-modal-header {
   background: #34b3e7 !important;
+}
+
+.actual-kids .products-list .view-more-category .circle-recamaras:hover {
+  background:  #34b3e7 !important;
+  transition: all 0.3s ease 0s;
 }
 
 @media (max-width: 600px) {

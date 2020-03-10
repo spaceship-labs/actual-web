@@ -7,54 +7,79 @@
  * # ReportsQuotationsCtrl
  * Controller of the actualWebApp
  */
-angular.module('actualWebApp')
-  .controller('ReportsQuotationsCtrl', function (
-  	$scope,
-	  $rootScope,
-	  quotationService,
-	  siteService,
-	  orderService,
-	  paymentService,
-	  clientService
+angular
+  .module('actualWebApp')
+  .controller('ReportsQuotationsCtrl', function(
+    $scope,
+    $rootScope,
+    quotationService,
+    siteService,
+    orderService,
+    paymentService,
+    clientService
   ) {
-
-	  var vm = this;
-	  angular.extend(vm,{
-	    user: angular.copy($rootScope.user),
-	    queryClients: queryClients,
-	    triggerExportName: 'triggerExport',
-	    triggerExcelExport: triggerExcelExport,
-	    triggerSearchName: 'triggerSearch',
-	    triggerSearch: triggerSearch,	    	    
-	    searchParams: {
-	    	Store: 'none'
-	    },
-	    dateRange: {
-	    	field: 'createdAt'
-	    },	    
-	    apiResourceQuotations: quotationService.getGeneralList,
-	    onStartDateSelected: onStartDateSelected,    
-	    onEndDateSelected: onEndDateSelected,  	    
-	    clientSearch: true, 
-	    defaultSort: [1, "desc"], //created at    
-	    columnsQuotations: [
-	      {
-	      	key: 'folio', 
-	      	label:'Folio',
-	      	actionUrl:'/quotations/edit/',
-	        domainMapper:siteService.getStoresIdMapper(),
-	        domainColumn: 'Store'	      	
-	    	},
-	      {key:'createdAt', label:'Fecha' ,date:true},
-	      {key:'discount', label:'Descuento', currency:true},
-	      {key:'total', label: 'Total', currency:true},    
-	      {key:'Client.CardName', label:'Cliente', defaultValue:'Sin cliente'},
-	      {key:'Client.E_Mail', label:'Email', defaultValue:'Sin cliente'},		      
-	      {key:'Store', label: 'Sitio', mapper: siteService.getStoresIdMapper()},
-	      {key:'paymentType', label:'Tipo pago'},
-	      {key:'OrderWeb', label: 'OrderWeb'}  
-	    ],    
-	  });
+    var vm = this;
+    angular.extend(vm, {
+      user: angular.copy($rootScope.user),
+      queryClients: queryClients,
+      triggerExportName: 'triggerExcelExport',
+      triggerExcelExport: triggerExcelExport,
+      triggerSearchName: 'triggerSearch',
+      triggerSearch: triggerSearch,
+      searchParams: {
+        Store: 'none'
+      },
+      dateRange: {
+        field: 'createdAt'
+      },
+      apiResourceQuotations: quotationService.getGeneralList,
+      onStartDateSelected: onStartDateSelected,
+      onEndDateSelected: onEndDateSelected,
+      clientSearch: true,
+      defaultSort: [1, 'desc'], //created at
+      columnsQuotations: [
+        {
+          key: 'folio',
+          label: 'Folio',
+          actionUrl: '/quotations/edit/',
+          domainMapper: siteService.getStoresIdMapper(),
+          domainColumn: 'Store'
+        },
+        { key: 'createdAt', label: 'Fecha', dateTime: true },
+        { key: 'discount', label: 'Descuento', currency: true },
+        { key: 'total', label: 'Total', currency: true },
+        {
+          key: 'Client.CardName',
+          label: 'Cliente',
+          defaultValue: 'Sin cliente'
+        },
+        { key: 'Client.E_Mail', label: 'Email', defaultValue: 'Sin cliente' },
+        {
+          key: 'Store',
+          label: 'Sitio',
+          mapper: siteService.getStoresIdMapper()
+        },
+        {
+          key: 'UnregisteredClient.email',
+          label: 'N/R',
+          defaultValue: 'S/E'
+        },
+        {
+          key: 'UnregisteredClient.name',
+          label: 'N/R',
+          defaultValue: 'S/N'
+        },
+        {
+          key: 'UnregisteredClient.phone',
+          label: 'N/R',
+          defaultValue: 'S/T'
+        },
+        { key: 'fromOffers', label: 'Paquetes', defaultValue: 'No' },
+        { key: 'clientIp', label: 'IP', defaultValue: 'N/A' },
+        { key: 'paymentType', label: 'Tipo pago' },
+        { key: 'OrderWeb', label: 'OrderWeb' }
+      ]
+    });
 
     vm.exportQuery = 'SELECT folio AS Folio,';
     vm.exportQuery += 'dateFormat(createdAt) as Fecha,';
@@ -65,94 +90,92 @@ angular.module('actualWebApp')
     vm.exportQuery += 'storeIdMapperFormat([Store]) as Sitio ';
     vm.exportQuery += ' INTO XLS("Cotizaciones.xls",{headers:true}) FROM ?';
 
-	  init();
+    init();
 
-	  function init(){
-	  	var orderStatusMapper = orderService.getOrderStatusMapper();
-	  	var sitesMapper = siteService.getStoresIdMapper();
+    function init() {
+      var orderStatusMapper = orderService.getOrderStatusMapper();
+      var sitesMapper = siteService.getStoresIdMapper();
 
-	  	vm.stores = addEverythingOption(convertMapperToArray(sitesMapper));
-	  	vm.orderStatuses = addEverythingOption(convertMapperToArray(orderStatusMapper));
-	  	console.log('vm.stores', vm.stores);
-	  	console.log('vm.orderStatuses', vm.orderStatuses);
-	  	loadPaymentsTypes();
-	  }
+      vm.stores = addEverythingOption(convertMapperToArray(sitesMapper));
+      vm.orderStatuses = addEverythingOption(
+        convertMapperToArray(orderStatusMapper)
+      );
+      console.log('vm.stores', vm.stores);
+      console.log('vm.orderStatuses', vm.orderStatuses);
+      loadPaymentsTypes();
+    }
 
-	  function addEverythingOption(items){
-	  	items.unshift({
-	  		label: 'Todos',
-	  		value: 'none'
-	  	});
-	  	return items;
-	  }
+    function addEverythingOption(items) {
+      items.unshift({
+        label: 'Todos',
+        value: 'none'
+      });
+      return items;
+    }
 
-	  function triggerExcelExport(){
-	  	$scope.$broadcast(vm.triggerExportName);
-	  }
-
-	  $scope.$on('isExporting', function(evt, data){
-	  	vm.isExporting = data;
-	  });
-
-	  function triggerSearch(){
-	  	$rootScope.scrollTo('main');
-	  	$scope.$broadcast(vm.triggerSearchName);
-	  }
+    function triggerExcelExport() {
+      $scope.$broadcast(vm.triggerExportName);
+    }
 
 
-	  $scope.$watch('vm.selectedClient',function(newVal, oldVal){
-	  	if(newVal !== oldVal && newVal){
-	  		console.log('newVal', newVal);
-	  		vm.searchParams.Client = newVal.id;
-	  	}
 
-	  	if(!newVal){
-	  		vm.searchParams.Client = 'none';
-	  	}
-	  });
+    $scope.$on('isExporting', function(evt, data) {
+      vm.isExporting = data;
+    });
 
-	  function queryClients(term){
-	    if(term !== '' && term){
-	      var params = {term: term, autocomplete: true};
-	      return clientService.search(1,params).then(function(res){
-	        return res.data.data;
-	      });
-	    }
-	    else{
-	      return $q.resolve([]);
-	    }
-	    
-	  }	  
+    function triggerSearch() {
+      $rootScope.scrollTo('main');
+      $scope.$broadcast(vm.triggerSearchName);
+    }
 
-	  function onStartDateSelected(pikaday){
-	  	vm.dateRange.start = pikaday._d;
-	  }
+    $scope.$watch('vm.selectedClient', function(newVal, oldVal) {
+      if (newVal !== oldVal && newVal) {
+        console.log('newVal', newVal);
+        vm.searchParams.Client = newVal.id;
+      }
 
-	  function onEndDateSelected(pikaday){
-	  	vm.dateRange.end = pikaday._d;
-	  }
+      if (!newVal) {
+        vm.searchParams.Client = 'none';
+      }
+    });
 
-	  function loadPaymentsTypes(){
-	  	paymentService.getPaymentsTypes()
-	  		.then(function(types){
-	  			var mapper = paymentService.getPaymentsTypesMapper();
-	  			vm.paymentTypes = convertMapperToArray(mapper)
-	  				.filter(function(type){
-	  					return types.indexOf(type.value) > -1;
-	  				});
-	  			console.log('paymentTypes',vm.paymentTypes);
-	  		});
-	  }
+    function queryClients(term) {
+      if (term !== '' && term) {
+        var params = { term: term, autocomplete: true };
+        return clientService.search(1, params).then(function(res) {
+          return res.data.data;
+        });
+      } else {
+        return $q.resolve([]);
+      }
+    }
 
-	  function convertMapperToArray(mapper){
-	  	var storesArray = [];
-	  	for(var key in mapper){
-	  		storesArray.push({
-	  			label: mapper[key],
-	  			value: key
-	  		});
-	  	}
-	  	return storesArray;
-	  }
+    function onStartDateSelected(pikaday) {
+      vm.dateRange.start = pikaday._d;
+    }
 
+    function onEndDateSelected(pikaday) {
+      vm.dateRange.end = pikaday._d;
+    }
+
+    function loadPaymentsTypes() {
+      paymentService.getPaymentsTypes().then(function(types) {
+        var mapper = paymentService.getPaymentsTypesMapper();
+        vm.paymentTypes = convertMapperToArray(mapper).filter(function(type) {
+          return types.indexOf(type.value) > -1;
+        });
+        console.log('paymentTypes', vm.paymentTypes);
+      });
+    }
+
+    function convertMapperToArray(mapper) {
+      var storesArray = [];
+      for (var key in mapper) {
+        storesArray.push({
+          label: mapper[key],
+          value: key
+        });
+      }
+      return storesArray;
+    }
   });

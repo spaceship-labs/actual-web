@@ -1,18 +1,28 @@
-<div ng-if="vm.isLoading" layout="row" layout-align="center center" class="loading-circle">
-  <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+<div
+  ng-if="vm.isLoading"
+  layout="row"
+  layout-align="center center"
+  class="loading-circle"
+>
+  <md-progress-circular
+    class="md-accent"
+    md-diameter="100px"
+  ></md-progress-circular>
 </div>
 
 <div
   ng-show="vm.isLoadingProgress"
   class="container container-xxlg loading-circle"
   layout="row"
-  layout-align="center center">
+  layout-align="center center"
+>
   <div class="progress-bar">
     <p><strong>Procesando orden</strong></p>
     <md-progress-linear
       class="md-accent"
       md-mode="determinate"
-      value="{{vm.loadingEstimate}}">
+      value="{{ vm.loadingEstimate }}"
+    >
     </md-progress-linear>
   </div>
 </div>
@@ -23,89 +33,252 @@
   ng-show="!vm.isLoading && !vm.isLoadingProgress"
   class="form-view cart-view checkout-view payments-view container container-xxlg"
 >
-
   <div class="steps-bar" layout="row" hide-sm hide-xs>
-    <a ng-href="/quotations/edit/{{vm.quotation.id}}" flex="33" class="steps-bar-item">
+    <a
+      ng-href="/quotations/edit/{{ vm.quotation.id }}"
+      flex="25"
+      class="steps-bar-item"
+    >
       <span><i class="icon-carro"></i> 1. Mi carrito</span>
     </a>
-    <a ng-href="/checkout/client/{{vm.quotation.id}}" flex="33" class="steps-bar-item">
+    <a
+      ng-href="/checkout/client/{{ vm.quotation.id }}"
+      flex="25"
+      class="steps-bar-item"
+    >
       <span><i class="icon-login"></i> 2. Datos personales</span>
     </a>
-    <!-- <div flex="25" class="steps-bar-item steps-bar-item-active">
+    <div flex="25" class="steps-bar-item steps-bar-item-active">
       <span><i class="icon-terminal"></i> 3. Método de pago</span>
-    </div> -->
-    <div flex="33" class="steps-bar-item">
-      <span><i class="icon-oportunidades"></i> 3. Confirmación</span>
+    </div>
+    <div flex="25" class="steps-bar-item">
+      <span><i class="icon-oportunidades"></i> 4. Confirmación</span>
     </div>
   </div>
 
   <div class="checkout-view-inner">
-
-    <!-- <h3 ng-if="!vm.hasAnSpeiOrder"><strong>1. Elige tu opción de pago</strong></h3> -->
+    <h3 ng-if="!vm.hasAnSpeiOrder">
+      <strong>1. Elige tu opción de pago</strong>
+    </h3>
 
     <section layout="row" layout-wrap>
-
       <div flex="75" flex-sm="100" flex-xs="100">
+        <ng-include
+          ng-if="vm.hasAnSpeiOrder"
+          src="'views/checkout/spei-card-instructions.html'"
+        >
+        </ng-include>
 
-        <div class="confirmed-address">
-          <div class="delivery-option-data">
-            <h4><strong>Datos del usuario</strong></h4>
-            <ul>
-              <li><strong>Calle: </strong>{{vm.quotation.Address.Address}}</li>
-              <li><strong>No. exterior: </strong>{{vm.quotation.Address.U_Noexterior}}</li>
-              <li><strong>No. interior: </strong>{{vm.quotation.Address.U_Nointerior}}</li>
-              <li><strong>Colonia: </strong>{{vm.quotation.Address.U_Colonia}}</li>
-              <li><strong>Municipio o delegación: </strong>{{vm.quotation.Address.U_Mpio}}</li>
-              <li><strong>Ciudad: </strong>{{vm.quotation.Address.U_Ciudad}}</li>
-              <li><strong>Estado: </strong>{{vm.quotation.Address.U_Estado}}</li>
-              <li><strong>C.P.: </strong>{{vm.quotation.Address.U_CP}}</li>
-              <li><strong>Entre calle: </strong>{{vm.quotation.Address.U_Entrecalle}}</li>
-              <li><strong>Y calle: </strong>{{vm.quotation.Address.U_Ycalle}}</li>
-              <li><strong>Referencias: </strong>{{vm.quotation.Address.U_Notes1}}</li>
-              <li><strong>Destinatario </strong> {{vm.quotation.Address.FirstName + ' ' + vm.quotation.Address.LastName}}</li>
-              <li><strong>Email: </strong>{{vm.quotation.Address.E_Mail}}</li>
-              <li><strong>Télefono: </strong>{{vm.quotation.Address.Tel1}}</li>
-              <li><strong>Celular: </strong>{{vm.quotation.Address.Cellolar}}</li>
-            </ul>
-            
-            <p>
-              <a
-                class="small-link action-link"
-                href="#"
-                ng-href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}">
-                Editar
-              </a>
-            </p>
-          </div>          
+        <md-radio-group
+          ng-if="!vm.isMinimumPaid(vm.quotation) && !vm.quotation.OrderWeb && !vm.hasAnSpeiOrder"
+          ng-model="vm.activeMethod"
+        >
+          <div class="pay-method-wrap">
+            <ng-include
+              ng-repeat="paymentGroup in vm.paymentMethodsGroups track by $index"
+              ng-if="vm.isActiveGroup(paymentGroup, vm.quotation)"
+              src="'views/checkout/payment-group.html'"
+            >
+            </ng-include>
+          </div>
+        </md-radio-group>
+
+        <div
+          ng-if="!vm.hasAnSpeiOrder"
+          ng-show="vm.quotation.Payments && vm.quotation.Payments.length > 0"
+          class="second-step-payment"
+        >
+          <section>
+            <h3><strong>2. Pagos aplicados</strong></h3>
+            <hr />
+
+            <div class="pay-method-wrap pay-method-wrap-v2">
+              <ng-include
+                src="'views/checkout/payments-applied.html'"
+              ></ng-include>
+            </div>
+          </section>
         </div>
+        <div layout="row" layout-wrap>
+          <div flex="65" flex-sm="100" flex-xs="100" class="confirmed-address">
+            <div class="delivery-option-data">
+              <div layout="row" layout-wrap>
+                <div flex="95" flex-sm="100" flex-xs="100">
+                    <h4><strong>DIRECCIÓN DE ENVÍO</strong></h4>
+                </div>
+                <div flex flex-sm="100" flex-xs="100">
+                  <p>
+                      <a
+                        class="small-link action-link"
+                        href="#"
+                        ng-href="/user/deliveries?returnTo=/checkout/client/{{
+                          vm.quotation.id
+                        }}"
+                      >
+                        Editar
+                      </a>
+                    </p>
+                </div>
+              </div>
+              <div  layout="row" layout-wrap class="delivery-titles">
+                <div flex="40" flex-sm="40" flex-xs="50">
+                  <ul>
+                    <li>
+                      <strong>Calle:</strong>
+                    </li>
+                    <li>
+                      <strong>No. exterior:</strong>
+                    </li>
+                    <li>
+                      <strong>No. interior:</strong>
+                    </li>
+                    <li>
+                      <strong>Colonia:</strong>
+                    </li>
+                    <li>
+                      <strong>Municipio o delegación:</strong>
+                    </li>
+                    <li>
+                      <strong>Ciudad:</strong>
+                    </li>
+                    <li>
+                      <strong>Estado:</strong>
+                    </li>
+                    <li><strong>C.P.:</strong></li>
+                    <li>
+                      <strong>Entre calle:</strong>
+                    </li>
+                    <li>
+                      <strong>Y calle:</strong>
+                    </li>
+                    <li>
+                      <strong>Referencias:</strong>
+                    </li>
+                    <li>
+                      <strong>Destinatario:</strong>
+                    </li>
+                    <li>
+                      <strong>Email:</strong>
+                    </li>
+                    <li>
+                      <strong>Télefono:</strong>
+                    </li>
+                    <li>
+                      <strong>Celular:</strong>
+                    </li>
+                  </ul>
+                </div>
+                <div flex flex-sm flex-xs>
+                  <ul>
+                    <li>
+                      {{ vm.quotation.Address.Address ? vm.quotation.Address.Address : '-' }}
+                    </li>
+                    <li>
 
+                      {{ vm.quotation.Address.U_Noexterior ? vm.quotation.Address.U_Noexterior : '-' }}
+                    </li>
+                    <li>
+
+                      {{ vm.quotation.Address.U_Nointerior ? vm.quotation.Address.U_Nointerior : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Colonia ? vm.quotation.Address.U_Colonia : '-' }}
+                    </li>
+                    <li>
+
+                      {{ vm.quotation.Address.U_Mpio ? vm.quotation.Address.U_Mpio : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Ciudad ? vm.quotation.Address.U_Ciudad : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Estado ? vm.quotation.Address.U_Estado : '-' }}
+                    </li>
+                    {{ vm.quotation.Address.U_CP ? vm.quotation.Address.U_CP : '-' }}</li>
+                    <li>
+
+                      {{ vm.quotation.Address.U_Entrecalle ? vm.quotation.Address.U_Entrecalle : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Ycalle ? vm.quotation.Address.U_Ycalle : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.U_Notes1 ? vm.quotation.Address.U_Notes1 : '-' }}
+                    </li>
+                    <li>
+                      {{
+                        vm.quotation.Address.FirstName ?
+                        vm.quotation.Address.FirstName +
+                          ' ' +
+                          vm.quotation.Address.LastName :
+                          '-'
+                      }}
+                    </li>
+                    <li class="delivery-mail">
+                      {{ vm.quotation.Address.E_Mail ? vm.quotation.Address.E_Mail : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.Tel1 ? vm.quotation.Address.Tel1 : '-' }}
+                    </li>
+                    <li>
+                      {{ vm.quotation.Address.Cellolar ? vm.quotation.Address.Cellolar : '-' }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div flex="30" flex-sm="100" flex-xs="100" class="secure-logos">
+            <img src="/images/trust_brands_trustwave.svg" alt="Trustwave" />
+            <img src="/images/trust_brands_prosa.svg" alt="Prosa" />
+            <img src="/images/trust_brands_kount.svg" alt="Kount" />
+            <img src="/images/trust_brands_digicert.svg" alt="Digicert" />
+            <img src="/images/comodo-secure.png" alt="" />
+          </div>
+        </div>
       </div>
-
-      <aside
-        flex
-        flex-sm="100"
-        flex-xs="100"
-        class="cart-aside"
-      >
-        <h1 class="cart-title"><i class="icon-carro"><span>{{vm.quotation.totalProducts}}</span></i> <strong>RESUMEN</strong></h1>
+      <aside flex flex-sm="100" flex-xs="100" class="cart-aside">
+        <h1 class="cart-title">
+          <i class="icon-carro"
+            ><span>{{ vm.quotation.totalProducts }}</span></i
+          >
+          <strong>RESUMEN</strong>
+        </h1>
 
         <div class="cart-summary">
           <table>
             <tr>
-              <td><strong>Subtotal ({{vm.quotation.totalProducts}}) productos:</strong></td>
-              <td><strong>MXN {{ vm.quotation.subtotal | roundCurrency }}</strong></td>
+              <td>
+                <strong
+                  >Subtotal ({{ vm.quotation.totalProducts }})
+                  productos:</strong
+                >
+              </td>
+              <td>
+                <strong>MXN {{ vm.quotation.subtotal | roundCurrency }}</strong>
+              </td>
             </tr>
             <tr>
               <td><strong>Descuento:</strong></td>
-              <td><strong>MXN <span ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong></td>
+              <td>
+                <strong
+                  >MXN <span ng-show="vm.quotation.discount > 0">-</span
+                  >{{ vm.quotation.discount | currency }}</strong
+                >
+              </td>
             </tr>
             <tr>
               <td><strong>Costo de envío:</strong></td>
               <td><strong>MXN $0.00</strong></td>
             </tr>
           </table>
-          <hr>
-          <div class="cart-totals" layout="row" layout-align="space-between start">
+
+          <hr />
+          <div
+            class="cart-totals"
+            layout="row"
+            layout-align="space-between start"
+          >
             <div flex="30">
               <h1><strong>TOTAL:</strong></h1>
             </div>
@@ -117,9 +290,9 @@
               <p class="taxes-included">Impuestos incluidos</p>
             </div>
           </div>
-          <hr>
+          <hr />
 
-          <table  ng-if="!vm.hasAnSpeiOrder">
+          <table ng-if="!vm.hasAnSpeiOrder">
             <tr>
               <td><strong>Pagado:</strong></td>
               <td>
@@ -132,7 +305,7 @@
               <td><strong>Porcentaje pagado:</strong></td>
               <td>
                 <strong>
-                  {{ vm.getPaidPercentage(vm.quotation) | number:2 }}%
+                  {{ vm.getPaidPercentage(vm.quotation) | number: 2 }}%
                 </strong>
               </td>
             </tr>
@@ -146,25 +319,29 @@
                       'hl-text' : (vm.quotation.total - vm.quotation.ammountPaid) > 0,
                       'hl-text-v2' : (vm.quotation.total - vm.quotation.ammountPaid) <= 0
                     }
-                  ">
-                  MXN {{ (vm.quotation.total - vm.quotation.ammountPaid) | roundCurrency }}
+                  "
+                >
+                  MXN
+                  {{
+                    vm.quotation.total - vm.quotation.ammountPaid
+                      | roundCurrency
+                  }}
                 </strong>
               </td>
             </tr>
           </table>
 
           <div ng-if="!vm.hasAnSpeiOrder">
-            <hr>
+            <hr />
             <input
               type="submit"
               value="CONTINUAR"
               class="cart-view-btn"
-              ng-class="cart-view-btn">
+              ng-disabled="!vm.isMinimumPaid(vm.quotation)"
+              ng-class="{'cart-view-btn-disabled' : !vm.isMinimumPaid(vm.quotation) }"
+            />
 
-            <p
-              ng-if="vm.isMinimumPaid(vm.quotation)"
-              class="cart-summary-note"
-            >
+            <p ng-if="vm.isMinimumPaid(vm.quotation)" class="cart-summary-note">
               *Hacer click para generar el folio de la venta.
             </p>
 
@@ -174,55 +351,9 @@
             >
               *Se necesita saldar el monto total para poder procesar la venta
             </p>
-
           </div>
-
-
         </div>
-<!-- 
-        <div class="confirmed-address">
-          <div class="delivery-option-data">
-            <h4><strong>Dirección de envío</strong></h4>
-            <ul>
-              <li><strong>Calle: </strong>{{vm.quotation.Address.Address}}</li>
-              <li><strong>No. exterior: </strong>{{vm.quotation.Address.U_Noexterior}}</li>
-              <li><strong>No. interior: </strong>{{vm.quotation.Address.U_Nointerior}}</li>
-              <li><strong>Colonia: </strong>{{vm.quotation.Address.U_Colonia}}</li>
-              <li><strong>Municipio o delegación: </strong>{{vm.quotation.Address.U_Mpio}}</li>
-              <li><strong>Ciudad: </strong>{{vm.quotation.Address.U_Ciudad}}</li>
-              <li><strong>Estado: </strong>{{vm.quotation.Address.U_Estado}}</li>
-              <li><strong>C.P.: </strong>{{vm.quotation.Address.U_CP}}</li>
-              <li><strong>Entre calle: </strong>{{vm.quotation.Address.U_Entrecalle}}</li>
-              <li><strong>Y calle: </strong>{{vm.quotation.Address.U_Ycalle}}</li>
-              <li><strong>Referencias: </strong>{{vm.quotation.Address.U_Notes1}}</li>
-              <li><strong>Destinatario </strong> {{vm.quotation.Address.FirstName + ' ' + vm.quotation.Address.LastName}}</li>
-              <li><strong>Email: </strong>{{vm.quotation.Address.E_Mail}}</li>
-              <li><strong>Télefono: </strong>{{vm.quotation.Address.Tel1}}</li>
-              <li><strong>Celular: </strong>{{vm.quotation.Address.Cellolar}}</li>
-            </ul>
-            <p>
-              <a
-                class="small-link action-link"
-                href="#"
-                ng-href="/user/deliveries?returnTo=/checkout/client/{{vm.quotation.id}}">
-                Editar
-              </a>
-            </p>
-          </div>          
-        </div> -->
-
-        <div class="secure-logos">
-          <img src="/images/trust_brands_trustwave.svg" alt="Trustwave">
-          <img src="/images/trust_brands_prosa.svg" alt="Prosa">
-          <img src="/images/trust_brands_kount.svg" alt="Kount">
-          <img src="/images/trust_brands_digicert.svg" alt="Digicert">
-          <img src="/images/comodo-secure.png" alt="">
-        </div>
-        
-
       </aside>
-
     </section>
-
   </div>
 </form>
