@@ -2,10 +2,9 @@
 
   <div flex="30" flex-order="{{ index > 3 ? 2 : 1 }}" class="smartmenu-menu-feature">
     <div ng-repeat="subcategory in subcategories track by $index">
-
-      <b class="mouseover-menu-list">
+      <span class="mouseover-menu-list">
         <a ng-href="{{'/category/' + subcategory.Handle}}" ng-click="leavehover()">{{subcategory.Name}}</a>
-      </b>
+      </span>
     </div>
   </div>
 
