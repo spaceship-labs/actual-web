@@ -1550,14 +1550,14 @@ select {
   max-width: 600px;
   z-index: 999999;
 }
-.smart-menu-left {
+.smart-menu-left {   /**/
   background: #f7f8f8;
   position: absolute;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.44) 0px 7px 7px -2px;
   right: auto;
   top: 100%;
-  transform: translateX(-600px);
+  transform: translateX(-450px);
   max-width: 600px;
   z-index: 999999;
 }
@@ -1566,7 +1566,7 @@ select {
   margin: 8px 0 8px 20px;
   cursor: pointer;
 }
-.smart-menu-left p {
+.smart-menu-left p {  /**/
   text-align: left;
   margin: 8px 0 8px 20px;
   cursor: pointer;
@@ -1574,17 +1574,11 @@ select {
 .smart-menu p:hover {
   text-shadow: -0.25px -0.25px 0 black, 0.25px 0.25px black;
 }
-.smart-menu-left p:hover {
+.smart-menu-left p:hover {  /**/
   text-shadow: -0.25px -0.25px 0 black, 0.25px 0.25px black;
 }
-.smart-menu a {
-  font-size: 14px;
-  color: #030202;
-}
-.smart-menu-left a {
-  font-size: 14px;
-  color: #030202;
-}
+
+/*
 .smart-menu a::after {
   content: '';
   display: block;
@@ -1593,7 +1587,7 @@ select {
   background: #e2023f;
   transition: width 0.3s;
 }
-.smart-menu-left a::after {
+.smart-menu-left a::after {  
   content: '';
   display: block;
   width: 0;
@@ -1604,17 +1598,19 @@ select {
 .smart-menu a:hover::after {
   width: 15%;
 }
-.smart-menu-left a:hover::after {
+.smart-menu-left a:hover::after { 
   width: 15%;
 }
 .smart-menu img {
   width: 100%;
   display: block;
 }
-.smart-menu-left img {
+.smart-menu-left img {  
   width: 100%;
   display: block;
 }
+*/
+
 /*---------------/
   #HOME
 /*--------------*/
@@ -1952,6 +1948,7 @@ select {
 .listing-product .listing-product-info .price-now {
   color: #e2023f;
   font-size: 16px;
+  margin-right: 6px;
 }
 .listing-product .listing-product-info .price-now-currency {
   color: #e2023f;

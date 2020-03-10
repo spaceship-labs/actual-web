@@ -6,7 +6,7 @@
         <i ng-class="'icon-{{main.mainCategories[category.Handle].icon}}'"> </i>
         <span>{{ category.Name }}</span>
       </a>
-      <smart-menu ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
+      <smart-menu ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"  
         index="$index" subcategories="category.Childs" featured="category.FeaturedProducts"   image="main.mainCategories[category.Handle].image">
       </smart-menu>
       <!--
