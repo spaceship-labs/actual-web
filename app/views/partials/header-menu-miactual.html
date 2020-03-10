@@ -2,7 +2,7 @@
   <nav class="main-menu-container" ng-if="main.siteTheme !== 'actual-kids' " hide-sm>
 
     <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index"
-      ng-mouseover="main.handleCategoryHover(category.Handle)">
+      ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
       <a class="list-menu-miactual" href="/category/{{ category.Handle }}">
         <i ng-class="'icon-{{main.mainCategories[category.Handle].icon}}'"> </i>
         <span>{{ category.Name }}</span>
