@@ -1,19 +1,68 @@
 <div class="nav-menu-miactual" hide-xs>
-  <nav class="main-menu-container"  hide-sm>
+  <nav class="main-menu-container" ng-if="main.siteTheme !== 'actual-kids' " hide-sm>
 
-    <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index" ng-mouseover="main.handleCategoryHover(category.Handle)">
-      <a class="list-menu-miactual" href="/category/{{ category.Handle }}" >
+    <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index"
+      ng-mouseover="main.handleCategoryHover(category.Handle)">
+      <a class="list-menu-miactual" href="/category/{{ category.Handle }}">
         <i ng-class="'icon-{{main.mainCategories[category.Handle].icon}}'"> </i>
         <span>{{ category.Name }}</span>
       </a>
-        <smart-menu ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
-        index="$index" subcategories="category.Childs" featured="category.FeaturedProducts"  ng-mouseleave="main.handleCategoryLeave()" image="main.mainCategories[category.Handle].image">
-        </smart-menu>
+      <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
+        ng-mouseleave="main.handleCategoryLeave()" index="$index" subcategories="category.Childs"
+        image="main.mainCategories[category.Handle].image" featured="category.FeaturedProducts"
+        activeStoreCode="main.activeStore.code" leavehover="main.handleCategoryLeave"></smart-menu>
+    </div>
+    <div ng-mouseleave="main.handleCategoryLeave()">
+      <a href="/ofertas" class="list-menu-miactual">
+        <i class="icon-paquete"> </i>
+        <span class="test" href="#">paquetes</span>
+      </a>
     </div>
     <div>
       <a href="https://actualkids.com" target="_blank" flex flex-xs="25" class="list-menu-miactual">
         <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px" />
       </a>
     </div>
+    <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" flex flex-xs="25" class="nav-categories-item">
+      <i class="icon-attachment"></i>
+      <span class="nav-categories-item-text" href="#">Pedidos</span>
+    </a>
+    <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" flex flex-xs="25" class="nav-categories-item">
+      <i class="icon-oportunidades"></i>
+      <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+    </a>
   </nav>
+
+  <nav ng-if="main.siteTheme === 'actual-kids' " hide-sm flex-gt-sm="100" flex="100" layout="row" layout-wrap
+  ng-mouseover="main.menuCategoriesOn = false" class="nav-categories">
+  <a ng-repeat-start="category in main.categoriesTree track by $index" flex flex-xs="25"
+    class="categories-bg nav-categories-item" href="/category/{{ category.Handle }}"
+    ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
+    <i class="icon-{{ main.mainCategoriesKids[category.Handle].icon }}"></i>
+    <span class="nav-categories-item-text" href="#">{{
+      category.Name
+    }}</span>
+  </a>
+  <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
+  ng-mouseleave="main.handleCategoryLeave()" index="$index" subcategories="category.Childs"
+  image="main.mainCategories[category.Handle].image" featured="category.FeaturedProducts"
+  activeStoreCode="main.activeStore.code" leavehover="main.handleCategoryLeave"></smart-menu>
+  <!-- <a
+    href="/search?sortkey=slowmovement"
+    flex
+    flex-xs="25"
+    class="categories-bg nav-categories-item"
+  >
+    <i class="icon-promociones2"></i>
+    <span class="nav-categories-item-text" href="#">Ofertas</span>
+  </a> -->
+  <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" flex flex-xs="25" class="nav-categories-item">
+    <i class="icon-attachment"></i>
+    <span class="nav-categories-item-text" href="#">Pedidos</span>
+  </a>
+  <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" flex flex-xs="25" class="nav-categories-item">
+    <i class="icon-oportunidades"></i>
+    <span class="nav-categories-item-text" href="#">Cotizaciones</span>
+  </a>
+</nav>
 </div>
