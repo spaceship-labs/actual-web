@@ -1,7 +1,6 @@
-
 <div class="smart-menu-container" ng-class="index > 3 ? 'smart-menu-left' : 'smart-menu-right'" layout="row" ng-cloak>
 
-  <div flex="30" flex-order="{{ index > 3 ? 2 : 1 }}" class="smartmenu-menu-feature" >
+  <div flex="30" flex-order="{{ index > 3 ? 2 : 1 }}" class="smartmenu-menu-feature">
     <div ng-repeat="subcategory in subcategories track by $index">
       <span class="mouseover-menu-list">
         <a ng-href="{{'/category/' + subcategory.Handle}}" ng-click="leavehover()">{{subcategory.Name}}</a>
@@ -11,15 +10,15 @@
 
   <div flex="70" flex-order="{{ index > 3 ? 1 : 2 }}" on="category" class="smartmenu-feature-info">
     <!-- GENERAL IMG IF FEATURED PRODUCT DOSN´T EXSIST -->
-    <!-- <img ng-src="{{  image }}" alt="Actual Group"> -->
-    <b class="Featured-title">Productos Destacados</b>
+    <img ng-if="featured.length==0" ng-src="{{ image }}" alt="Actual Group" />
+    <b ng-if="featured.length>0" class="Featured-title">Productos Destacados</b>
     <div class="smartmenu-feature-description" ng-repeat="featuredProduct in featured">
       <div class="smart-menu-img">
         <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
       </div>
-        <a ng-href="{{featuredProduct.url}}" class="featured-product-link">
-          <span>VER</span>
-        </a>
+      <a ng-href="/{{featuredProduct.Name}}/{{featuredProduct.ItemCode}}" class="featured-product-link">
+        <span>VER</span>
+      </a>
       <h3>{{featuredProduct.Name}}</h3>
     </div>
   </div>
@@ -55,4 +54,4 @@
     </div>
   </div>
   -->
-</div> 
+</div>
