@@ -6212,6 +6212,14 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 }
 .our-brands .brand-logo img {
   width: 185px;
+  -webkit-filter: drop-shadow(0 0 1px rgb(198, 198, 198))
+                  drop-shadow(0 0 1px rgb(198, 198, 198))
+                  drop-shadow(0 0 1px rgb(198, 198, 198))
+                  drop-shadow(0 0 1px rgb(198, 198, 198));
+  filter:         drop-shadow(0 0 1px rgb(198, 198, 198))
+                  drop-shadow(0 0 1px rgb(198, 198, 198))
+                  drop-shadow(0 0 1px rgb(198, 198, 198))
+                  drop-shadow(0 0 1px rgb(198, 198, 198));
 }
 .our-brands .brand {
   padding: 0 12px;
