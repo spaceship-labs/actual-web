@@ -243,10 +243,9 @@
 
       console.log("FINALSORTEDTREE", finalSortedTree);
 
-      var filteredFeaturedProducts = finalSortedTree.reduce((acum, category) => {
+      var filteredFeaturedProducts = finalSortedTree.reduce(function (acum, category) {
         if (category.FeaturedProducts) {
-          category.FeaturedProducts = category.FeaturedProducts.filter(FeaturedProduct => {
-            console.log("Reducer", FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0)
+          category.FeaturedProducts = category.FeaturedProducts.filter(function (FeaturedProduct) {
             return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0
           })
         }
