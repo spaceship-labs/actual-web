@@ -244,10 +244,12 @@
       console.log("FINALSORTEDTREE", finalSortedTree);
 
       var filteredFeaturedProducts = finalSortedTree.reduce((acum, category) => {
-        category.FeaturedProducts = category.FeaturedProducts.filter(FeaturedProduct => {
-          console.log("Reducer", FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0)
-          return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0
-        })
+        if (category.FeaturedProducts) {
+          category.FeaturedProducts = category.FeaturedProducts.filter(FeaturedProduct => {
+            console.log("Reducer", FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0)
+            return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0
+          })
+        }
         acum.push(category)
         return acum;
       }, [])
