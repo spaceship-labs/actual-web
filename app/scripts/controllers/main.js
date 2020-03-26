@@ -370,6 +370,7 @@
         .then(function(tree) {
           vm.isLoadingCategoriesTree = false;
           vm.categoriesTree = tree;
+          console.log("MAIN CATEGORIES TREE TEST: ",vm.categoriesTree);
           $rootScope.categoriesTree = vm.categoriesTree;
           $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
         })
@@ -742,11 +743,14 @@
         vm.activeCategory[key] = false;
       });
       vm.activeCategory[handle] = true;
+      console.log("TEST HANDLECATEGORYHOVER TRUE", vm.activeCategory[handle] )
     }
 
     function handleCategoryLeave() {
       Object.keys(vm.activeCategory).forEach(function(key, value) {
         vm.activeCategory[key] = false;
+        console.log("TEST HANDLECATEGORYHOVER FALSE", vm.activeCategory[key] )
+
       });
     }
 
