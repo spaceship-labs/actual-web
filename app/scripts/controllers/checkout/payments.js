@@ -62,13 +62,13 @@ function CheckoutPaymentsCtrl(
 
   var EWALLET_TYPE = ewalletService.ewalletType;
   var CLIENT_BALANCE_TYPE = paymentService.clientBalanceType;
-  var mainDataListener = function() {};
+  var mainDataListener = function () { };
   var selectedMethod;
 
   if ($rootScope.isMainDataLoaded) {
     init();
   } else {
-    mainDataListener = $rootScope.$on('mainDataLoaded', function(e, data) {
+    mainDataListener = $rootScope.$on('mainDataLoaded', function (e, data) {
       init();
     });
   }
@@ -112,7 +112,7 @@ function CheckoutPaymentsCtrl(
 
     quotationService
       .getById($routeParams.id, getParams)
-      .then(function(res) {
+      .then(function (res) {
         vm.quotation = res.data;
 
         if (vm.quotation && vm.quotation.OrderWeb) {
@@ -129,7 +129,7 @@ function CheckoutPaymentsCtrl(
           loadPaymentMethods()
         ]);
       })
-      .then(function(result) {
+      .then(function (result) {
         var isValidStock = result[0];
 
         if (!isValidStock) {
@@ -163,7 +163,7 @@ function CheckoutPaymentsCtrl(
 
         vm.isLoading = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         dialogService.showDialog(err.data);
         $location.path('/quotations/edit/' + vm.quotation.id);
@@ -174,12 +174,12 @@ function CheckoutPaymentsCtrl(
     vm.isLoadingSapLogs = true;
     quotationService
       .getSapOrderConnectionLogs(quotationId)
-      .then(function(res) {
+      .then(function (res) {
         vm.sapLogs = res.data;
         console.log('sapLogs', vm.sapLogs);
         vm.isLoadingSapLogs = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         vm.isLoadingSapLogs = false;
       });
@@ -205,7 +205,7 @@ function CheckoutPaymentsCtrl(
     };
     quotationService
       .getPaymentOptions(vm.quotation.id, params)
-      .then(function(response) {
+      .then(function (response) {
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
 
@@ -216,7 +216,7 @@ function CheckoutPaymentsCtrl(
         }
         deferred.resolve();
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         deferred.reject(err);
       });
@@ -319,13 +319,13 @@ function CheckoutPaymentsCtrl(
       deferred.resolve('banamex');
       return deferred.promise;
     }
-    var getBin = function(payment) {
+    var getBin = function (payment) {
       var cardNumber = payment.cardObject.number;
       var value = cardNumber.replace(/[ .-]/g, '').slice(0, 6);
       return value;
     };
     var bin = getBin(payment);
-    var setPaymentMethodInfo = function(status, response) {
+    var setPaymentMethodInfo = function (status, response) {
       console.log('response guess: ', response);
       console.log('sttaus guess: ', status);
 
@@ -349,9 +349,15 @@ function CheckoutPaymentsCtrl(
       deferred.resolve('transfer');
       return deferred.promise;
     }
-    var handleResponse = function(status, response) {
+    var handleResponse = function (status, response) {
+      console.log('status: ', status);
+
       if (status != 200 && status != 201) {
-        alert('verify filled data');
+        vm.isLoading = false;
+        dialogService.showDialog(
+          'Error en los datos introducidos, por favor, verifique sus datos'
+        );
+        deferred.resolve();
       } else {
         console.log('token', response.id);
         deferred.resolve(response.id);
@@ -424,13 +430,13 @@ function CheckoutPaymentsCtrl(
       var cardObjectAux = _.clone(payment.cardObject);
       var paymentMethodId;
       guessingPaymentMethod(payment)
-        .then(function(_paymentMethodId) {
+        .then(function (_paymentMethodId) {
           console.log('_paymentMethodId: ', _paymentMethodId);
 
           paymentMethodId = _paymentMethodId;
           return MPTokenizePaymentCard(payment);
         })
-        .then(function(token) {
+        .then(function (token) {
           console.log('HEEEEY');
           if (payment.msi) {
             payment.installments = payment.msi;
@@ -443,9 +449,10 @@ function CheckoutPaymentsCtrl(
           console.log('payment type: ', payment.type);
           return createOrder(payment);
         })
-        .then(function(res) {
+        .then(function (res) {
           vm.isLoadingProgress = false;
           vm.order = res.data;
+          console.log('vm.order: ', vm.order);
           if (vm.order.id) {
             $rootScope.scrollTo('main');
             quotationService.removeCurrentQuotation();
@@ -470,7 +477,7 @@ function CheckoutPaymentsCtrl(
               .search({ orderCreated: true });
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log('err', err);
           var errMsg = '';
           if (err) {
@@ -503,7 +510,7 @@ function CheckoutPaymentsCtrl(
               errMsg = conektaOrderMsg;
             }
 
-            var callback = function() {
+            var callback = function () {
               payment.cardObject = cardObjectAux;
               console.log('payment to openTransactionDialog again', payment);
               openTransactionDialog(
@@ -550,12 +557,12 @@ function CheckoutPaymentsCtrl(
   function loadPayments() {
     quotationService
       .getPayments(vm.quotation.id)
-      .then(function(res) {
+      .then(function (res) {
         var payments = res.data;
         vm.quotation.Payments = payments;
         vm.isLoadingPayments = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         dialogService.showDialog('Hubo un error, recarga la página');
         vm.isLoadingPayments = false;
@@ -611,11 +618,11 @@ function CheckoutPaymentsCtrl(
             quotation: vm.quotation
           }
         })
-        .then(function(payment) {
+        .then(function (payment) {
           console.log('Pago aplicado');
           return addPayment(payment);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log('Pago no aplicado');
           clearActiveMethod();
         });
@@ -655,7 +662,7 @@ function CheckoutPaymentsCtrl(
   }
 
   function animateProgress() {
-    vm.intervalProgress = $interval(function() {
+    vm.intervalProgress = $interval(function () {
       vm.loadingEstimate += 5;
       if (vm.loadingEstimate >= 100) {
         vm.loadingEstimate = 0;
@@ -682,7 +689,7 @@ function CheckoutPaymentsCtrl(
     });
   }
 
-  $scope.$on('$destroy', function() {
+  $scope.$on('$destroy', function () {
     mainDataListener();
     $mdDialog.cancel();
     if (vm.intervalProgress) {

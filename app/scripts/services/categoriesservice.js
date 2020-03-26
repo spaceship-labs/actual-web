@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -23,15 +23,13 @@
       //activeStoreCode = 'actual_studio';
       console.log('createCategoriesTree', activeStoreCode);
       var url = '/productcategory/getcategoriestree';
-      return api.$http.post(url).then(function(res) {
+      return api.$http.post(url).then(function (res) {
         return formatCategoriesTree(res.data, activeStoreCode);
       });
     }
 
     function formatCategoriesTree(originalTree, activeStoreCode) {
-      console.log('====================================');
-      console.log('originalTree: ', originalTree);
-      console.log('====================================');
+      console.log("TEST: Original Tree", originalTree);
       var sortList = [
         {
           name: 'salas',
@@ -141,7 +139,7 @@
         },
         {
           name: 'almacenar',
-          childs:[
+          childs: [
             'buros',
             'comodas',
             'repisas',
@@ -153,13 +151,25 @@
 
       var tree = [];
       if (activeStoreCode === 'actual_kids') {
-        tree = originalTree.filter(function(item) {
+        tree = originalTree.filter(function (item) {
           return (
             item &&
             item.onKidsMenu &&
             item.Childs &&
             item.Childs.length > 0 &&
-            item.Childs.some(function(child) {
+            item.Childs.some(function (child) {
+              return child[activeStoreCode] > 0;
+            })
+          );
+        });
+      } else {
+        tree = originalTree.filter(function (item) {
+          return (
+            item &&
+            !item.onKidsMenu &&
+            item.Childs &&
+            item.Childs.length > 0 &&
+            item.Childs.some(function (child) {
               return child[activeStoreCode] > 0;
             })
           );
@@ -167,10 +177,10 @@
       }
 
       var groupsLevel1 = _.groupBy(tree, 'Handle');
-      var plainSortList = sortList.map(function(sortItem) {
+      var plainSortList = sortList.map(function (sortItem) {
         return sortItem.name;
       });
-      var remaining = tree.filter(function(item) {
+      var remaining = tree.filter(function (item) {
         return plainSortList.indexOf(item.Handle) <= -1;
       });
 
@@ -180,19 +190,19 @@
       }
 
       //return;
-      var sortedTree = _.map(sortList, function(sortItem) {
+      var sortedTree = _.map(sortList, function (sortItem) {
         if (groupsLevel1[sortItem.name] && groupsLevel1[sortItem.name][0]) {
           var childsGroups = _.groupBy(
             groupsLevel1[sortItem.name][0].Childs,
             'Handle'
           );
           var childsRemaining = groupsLevel1[sortItem.name][0].Childs.filter(
-            function(childItem) {
+            function (childItem) {
               return sortItem.childs.indexOf(childItem.Handle) <= -1;
             }
           );
           var childsSorted = sortItem.childs
-            .reduce(function(acum, sortChildItem) {
+            .reduce(function (acum, sortChildItem) {
               if (childsGroups[sortChildItem]) {
                 acum.push(childsGroups[sortChildItem].shift());
               }
@@ -211,10 +221,22 @@
         return null;
       });
 
-      var finalSortedTree = sortedTree.concat(remaining).filter(function(item) {
+      var finalSortedTree = sortedTree.concat(remaining).filter(function (item) {
         return item;
       });
-      return finalSortedTree;
+
+      console.log("FINALSORTEDTREE", finalSortedTree);
+
+      var filteredFeaturedProducts = finalSortedTree.reduce((acum, category) => {
+        category.FeaturedProducts = category.FeaturedProducts.filter(FeaturedProduct => {
+          console.log("Reducer", FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0)
+          return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0
+        })
+        acum.push(category)
+        return acum;
+      }, [])
+      console.log("FINALFEATUREDFILTER", filteredFeaturedProducts)
+      return filteredFeaturedProducts;
     }
 
     function getCategoryByHandle(handle) {
@@ -254,7 +276,7 @@
     function getLowestCategory(categories) {
       var lowestCategoryLevel = 0;
       var lowestCategory = false;
-      categories.forEach(function(category) {
+      categories.forEach(function (category) {
         if (category.CategoryLevel > lowestCategoryLevel) {
           lowestCategory = category;
           lowestCategoryLevel = category.CategoryLevel;
