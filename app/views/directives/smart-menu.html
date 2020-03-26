@@ -1,12 +1,57 @@
-<div ng-class="index > 3 ? 'smart-menu-left' : 'smart-menu'" layout="row" ng-cloak>
-  <div flex="30" flex-order="{{(index > 3) ? 2 : 1}}">
+<div class="smart-menu-container" ng-class="index > 3 ? 'smart-menu-left' : 'smart-menu-right'" layout="row" ng-cloak>
+
+  <div flex="30" flex-order="{{ index > 3 ? 2 : 1 }}" class="smartmenu-menu-feature">
     <div ng-repeat="subcategory in subcategories track by $index">
-      <p>
+      <span class="mouseover-menu-list">
         <a ng-href="{{'/category/' + subcategory.Handle}}" ng-click="leavehover()">{{subcategory.Name}}</a>
-      </p>
+      </span>
     </div>
   </div>
-  <div flex="70" flex-order="{{(index > 3) ? 1 : 2}}" on="category">
-    <img ng-src="{{  image }}" alt="Actual Group">
+
+  <div flex="70" flex-order="{{ index > 3 ? 1 : 2 }}" on="category" class="smartmenu-feature-info">
+    <!-- GENERAL IMG IF FEATURED PRODUCT DOSN´T EXSIST -->
+    <img ng-if="featured.length==0" ng-src="{{ image }}" alt="Actual Group" />
+    <b ng-if="featured.length>0" class="Featured-title">Productos Destacados</b>
+    <div class="smartmenu-feature-description" ng-repeat="featuredProduct in featured">
+      <div class="smart-menu-img">
+        <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
+      </div>
+      <a ng-href="/{{featuredProduct.Name}}/{{featuredProduct.ItemCode}}" class="featured-product-link">
+        <span>VER</span>
+      </a>
+      <h3>{{featuredProduct.Name}}</h3>
+    </div>
   </div>
+  <!--
+  <div  flex="70" flex-order="{{ index > 3 ? 1 : 2 }}" on="category" class="smartmenu-feature-info">
+    <strong class="Featured-title">Productos Destacados</strong>
+    <div class="smartmenu-feature-description" ng-repeat="featuredProduct in featured">
+      <div class="smart-menu-img">
+        <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
+      </div>
+        <a ng-href="{{product.url}}" class="featured-product-link">
+          <span>VER</span>
+        </a>
+        <div class="listing-product-info">
+          <div class="listing-product-info-main">
+            <p>
+              <strong>{{featuredProduct.Name}}</strong>
+            </p>
+      
+            <div layout="row" layout-align="end center">
+              <p class="price">
+                <span class="price-before-currency">MXN</span>
+                <span class="price-before">{{featuredProduct.priceBefore | roundCurrency:'$'}}</span>
+                <span ng-if="product.priceBefore">|</span>
+                <strong class="price-now-currency">MXN</strong>
+                <strong class="price-now">{{featuredProduct.Price | roundCurrency:'$'}}</strong>
+                <br/>
+              </p>
+            </div>
+      
+          </div>
+        </div>
+    </div>
+  </div>
+  -->
 </div>

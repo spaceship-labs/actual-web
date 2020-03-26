@@ -13,7 +13,9 @@ function SmartMenu() {
       subcategories: '=',
       image: '=',
       leavehover: '=',
-      index: '='
+      index: '=',
+      featured: '=',
+      //url: api.cdnUrl + '/uploads/products/' + product.icon_filename
     },
     templateUrl: 'views/directives/smart-menu.html',
     restrict: 'E'
