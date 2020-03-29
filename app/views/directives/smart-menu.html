@@ -10,9 +10,11 @@
 
   <div flex="70" flex-order="{{ index > 3 ? 1 : 2 }}" on="category" class="smartmenu-feature-info">
     <!-- GENERAL IMG IF FEATURED PRODUCT DOSN´T EXSIST -->
-    <img ng-if="featured.length==0" ng-src="{{ image }}" alt="Actual Group" />
-    <b ng-if="featured.length>0" class="Featured-title">Productos Destacados</b>
+    <div class="smartmenu-default-img" ng-if="featured.length==0">
+      <img ng-src="{{ image }}" alt="Actual Group" />
+    </div>
     <div class="smartmenu-feature-description" ng-repeat="featuredProduct in featured">
+      <b ng-if="featured.length>0" class="Featured-title">Productos Destacados</b><br />
       <div class="smart-menu-img">
         <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
       </div>
