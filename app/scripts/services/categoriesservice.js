@@ -11,7 +11,8 @@
       createCategoriesTree: createCategoriesTree,
       getCategoryByHandle: getCategoryByHandle,
       getCategoryIcon: getCategoryIcon,
-      getLowestCategory: getLowestCategory
+      getLowestCategory: getLowestCategory,
+      getCategoryChildsRelations: getCategoryChildsRelations,
     };
 
     function getCategoriesGroups() {
@@ -28,6 +29,17 @@
       });
     }
 
+    function getCategoryChildsRelations(handle) {
+      var url = '/productcategory/childsrelations/' + handle;
+      return api.$http.post(url).then(function (res) {
+        const relations = (res.data || []).filter(function (relation) {
+          return relation.position ? relation : false;
+        })
+        return relations.sort(function (relationA, relationB) {
+          return relationA.position - relationB.position;
+        });;
+      });
+    }
     function formatCategoriesTree(originalTree, activeStoreCode) {
       console.log("TEST: Original Tree", originalTree);
       var sortList = [
@@ -241,18 +253,26 @@
         return item;
       });
 
-      console.log("FINALSORTEDTREE", finalSortedTree);
 
       var filteredFeaturedProducts = finalSortedTree.reduce(function (acum, category) {
+        getCategoryChildsRelations(category.Handle).then(function (values) {
+          if (values.length > 0) {
+            category.Childs = values.filter(function (category) {
+              return category.child !== undefined && category.child[activeStoreCode] > 0;
+            }).map(function (category) {
+              return category.child; // return child attribute
+            })
+          }
+        });
+
         if (category.FeaturedProducts) {
           category.FeaturedProducts = category.FeaturedProducts.filter(function (FeaturedProduct) {
             return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0
-          })
+          }).slice(0, 2)
         }
         acum.push(category)
         return acum;
       }, [])
-      console.log("FINALFEATUREDFILTER", filteredFeaturedProducts)
       return filteredFeaturedProducts;
     }
 
