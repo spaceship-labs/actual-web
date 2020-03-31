@@ -238,7 +238,7 @@
         return item;
       });
 
-      var filteredFeaturedProducts = finalSortedTree.reduce((acum, category) => {
+      var filteredFeaturedProducts = finalSortedTree.reduce(function (acum, category) {
         getCategoryChildsRelations(category.Handle).then(function (values) {
           if (values.length > 0) {
             category.Childs = values.filter(function (category) {
@@ -249,7 +249,7 @@
           }
         });
         if (category.FeaturedProducts) {
-          category.FeaturedProducts = category.FeaturedProducts.filter(FeaturedProduct => {
+          category.FeaturedProducts = category.FeaturedProducts.filter(function (FeaturedProduct) {
             return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0
           }).slice(0, 2);
         }
