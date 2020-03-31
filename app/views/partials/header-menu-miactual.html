@@ -51,9 +51,8 @@
 
       <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
         ng-mouseleave="main.handleCategoryLeave()" index="$index" subcategories="category.Childs"
-        image="main.mainCategories[category.Handle].image" featured="category.FeaturedProducts"
-        activeStoreCode="main.activeStore.code" image="main.mainCategoriesKids[category.Handle].image"
-        leavehover="main.handleCategoryLeave"></smart-menu>
+        image="main.mainCategoriesKids[category.Handle].image" featured="category.FeaturedProducts"
+        activeStoreCode="main.activeStore.code" leavehover="main.handleCategoryLeave"></smart-menu>
     </div>
     <div ng-if="main.isUserSellerOrAdmin">
       <a href="/reports/orders" class="list-menu-miactual">

@@ -88,6 +88,7 @@
   width: 130px;
   background: #f7f8f8; /* #f7f8f8; */
   border: 0.5px solid hsl(240, 5%, 89%);
+  z-index:10;
 }
 
 .smartmenu-menu-feature > div {
@@ -104,11 +105,17 @@
 .smartmenu-feature-info {
   display: flex;
   background-color: #fff;
+  flex-direction:column;
 }
-
+.smartmenu-feature-description {
+  display: flex;
+}
+.smart-menu-row {
+  display:flex;
+  flex-direction:row;
+}
 .smartmenu-feature-info > div{
   width: 200px;
-  
 }
 
 /**
@@ -126,6 +133,13 @@
 .smart-menu-img > img{
   width: 160px;
   height: 160px;
+  margin-top:20px;
+  margin-left:20px;
+}
+.smartmenu-default-img > img {
+  display:flex;
+  flex:1;
+  max-height: 350px;
 }
 
 /**
