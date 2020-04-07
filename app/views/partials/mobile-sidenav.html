@@ -1,51 +1,33 @@
-<md-sidenav fullscreen class="md-sidenav-left md-whiteframe-4dp pointers-sidenav mobile-sidenav" md-component-id="mobileSidenav">
+<md-sidenav fullscreen class="md-sidenav-left md-whiteframe-4dp pointers-sidenav mobile-sidenav"
+  md-component-id="mobileSidenav">
 
   <md-toolbar class="md-toolbar-header">
-    <div
-      layout="row"
-      layout-align="center center"
-    >
+    <div layout="row" layout-align="center center">
       <div flex-gt-xs="15" class="logo logo-mobile">
         <a href="/" ng-switch on="main.siteTheme">
-          <img
-            ng-switch-when="actual-home"
-            src="images/logos/home.png"
-            alt="Actual Group"
-          />
-          <img
-            ng-switch-when="actual-studio"
-            src="images/logos/studio.png"
-            alt="Actual Group"
-          />
-          <img
-            ng-switch-when="actual-kids"
-            src="images/logos/kids.png"
-            alt="Actual Group"
-          />
-          <img
-            ng-switch-default
-            src="images/logos/home.png"
-            alt="Actual Group"
-          />
+          <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group" />
+          <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group" />
+          <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group" />
+          <img ng-switch-default src="images/logos/home.png" alt="Actual Group" />
         </a>
       </div>
     </div>
     <div>
-    <md-button ng-click="main.toggleMobileSidenav()" class="close-btn md-fab md-mini md-primary">x</md-button>
-  </div>
+      <md-button ng-click="main.toggleMobileSidenav()" class="close-btn md-fab md-mini md-primary">x</md-button>
+    </div>
   </md-toolbar>
   <md-content>
     <nav>
       <ul ng-if="main.siteTheme !== 'actual-kids'">
-        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index" ng-click="main.handleAccordion(category.Handle)"
-        class="sidebar-info-main-items" >
+        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index"
+          ng-click="main.handleAccordion(category.Handle)" class="sidebar-info-main-items">
           <!-- <i class="icon-{{getCategoryIcon(category.Handle)}}"></i> -->
-          <a class= "mouseover-link-mobile">
+          <a class="mouseover-link-mobile">
             <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
           </a>
           <ul ng-show="main.accordion.current === category.Handle">
-            <li ng-repeat="subcategory in category.Childs" >
-              <br/>
+            <li ng-repeat="subcategory in category.Childs">
+              <br />
               <a ng-href="{{'/category/' + subcategory.Handle}}" class="sidebar-info-main-items">
                 <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
 
@@ -68,9 +50,9 @@
         </li>
       </ul>
       <ul ng-if="main.siteTheme === 'actual-kids' ">
-        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index " ng-click="main.handleAccordion(category.Handle)"
-          class="nav-categories-item-sidenav">
-          <a class= "mouseover-link-mobile active">
+        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index "
+          ng-click="main.handleAccordion(category.Handle)" class="nav-categories-item-sidenav">
+          <a class="mouseover-link-mobile active">
             <span class="nav-categories-item-text" href="#">{{ category.Name }}</span></a>
           <ul ng-show="main.accordion.current === category.Handle">
             <li ng-repeat="subcategory in category.Childs" class="">
@@ -82,19 +64,21 @@
         </li>
         <li>
           <a href="/search?sortkey=slowmovement" class="nav-categories-item , mouseover-link-mobile active">
-            <span class="nav-categories-item-text" >Promociones</span>
+            <span class="nav-categories-item-text">Promociones</span>
           </a>
         </li>
       </ul>
       <ul>
         <li>
-          <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" class="nav-categories-item , mouseover-link-mobile active">
+          <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders"
+            class="nav-categories-item , mouseover-link-mobile active">
             <i class="icon-attachment"></i>
             <span class="nav-categories-item-text" href="#">Pedidos</span>
           </a>
         </li>
         <li>
-          <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations" class="nav-categories-item , mouseover-link-mobile active">
+          <a ng-if="main.isUserSellerOrAdmin" href="/reports/quotations"
+            class="nav-categories-item , mouseover-link-mobile active">
             <i class="icon-oportunidades"></i>
             <span class="nav-categories-item-text" href="#">Cotizaciones</span>
           </a>
@@ -103,18 +87,19 @@
     </nav>
     <hr width="90%">
     <div class="sidebar-info-items">
-      <div >
+      <div>
         <div class="container container-xxlg" layout="row" layout-wrap layout-align-sm="space-between center">
           <div class="footer-menu-col" flex="25" flex-sm="50" flex-xs="100">
             <ul>
-              <li >
+              <li>
                 <p>
                   <strong class="nav-categories-item-text">Asistencia en su compra</strong>
                 </p>
-                <th> <a href="tel:+998-246-3487">(998) 246 3487</a> ó <a href="tel:+998-884-1594">(998) 884 1594</a></th>
+                <th> <a href="tel:+998-246-3487">(998) 246 3487</a> ó <a href="tel:+998-884-1594">(998) 884 1594</a>
+                </th>
                 <!-- <th>(998) 246 3487 o (998) 884 1594</th> -->
               </li>
-              <br/>
+              <br />
               <li>
                 <p>
                   <strong>Horario de servicio</strong>
@@ -130,7 +115,7 @@
                     <td>15:00pm - 19:00pm</td>
                   </tr>
                 </table>
-                <br/>
+                <br />
                 <table>
                   <tr>
                     <th>Sábado</th>
@@ -142,33 +127,35 @@
               </li>
             </ul>
           </div>
-          <br/>
+          <br />
           <div layout="row" layout-wrap layout-align="center center">
             <div class="" layout="row" layout-align="center center" flex="30" flex-xs="100">
               <a ng-href="{{main.siteConstants.fb_url}}" target="_blank">
                 <img class="nav-categories-content-sn" src="images/fb.png" alt="Facebook {{main.siteName}}">
               </a>
-              <a ng-show="main.siteConstants.instagram_url" ng-href="{{main.siteConstants.instagram_url}}" target="_blank">
+              <a ng-show="main.siteConstants.instagram_url" ng-href="{{main.siteConstants.instagram_url}}"
+                target="_blank">
                 <img class="nav-categories-content-sn" src="images/instagram.png" alt="Instagram {{main.siteName}}">
+              </a>
+              <a ng-show="main.siteConstants.pinterest_url" ng-href="{{main.siteConstants.pinterest_url}}"
+                target="_blank">
+                <img class="nav-categories-content-sn" src="images/pinterest.png" alt="Pinterest {{main.siteName}}">
               </a>
             </div>
           </div>
+        </div>
       </div>
-    </div>
-    <div flex="40" flex-xs="100">
-      <p layout="row" layout-align="center center" class="verified-logos">
-        <img class="nav-categories-content-bs" src="/images/trust_brands_trustwave.svg" alt="Trustwave">
-        <img class="nav-categories-content-bs" src="/images/trust_brands_prosa.svg" alt="Prosa">
-        <img class="nav-categories-content-bs" src="/images/trust_brands_kount.svg" alt="Kount">
-        <img class="nav-categories-content-bs" src="/images/trust_brands_mcafee.svg" alt="Mcafee">
-        <img class="nav-categories-content-bs" src="/images/trust_brands_digicert.svg" alt="Digicert">
-      </p>
-    </div>
+      <div flex="40" flex-xs="100">
+        <p layout="row" layout-align="center center" class="verified-logos">
+          <img class="nav-categories-content-bs" src="/images/trust_brands_trustwave.svg" alt="Trustwave">
+          <img class="nav-categories-content-bs" src="/images/trust_brands_prosa.svg" alt="Prosa">
+          <img class="nav-categories-content-bs" src="/images/trust_brands_kount.svg" alt="Kount">
+          <img class="nav-categories-content-bs" src="/images/trust_brands_mcafee.svg" alt="Mcafee">
+          <img class="nav-categories-content-bs" src="/images/trust_brands_digicert.svg" alt="Digicert">
+        </p>
+      </div>
   </md-content>
   <!-- <div>
     <md-button ng-click="main.toggleMobileSidenav()" class="close-btn md-fab md-mini md-primary">x</md-button>
   </div> -->
 </md-sidenav>
-
-
-
