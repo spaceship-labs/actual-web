@@ -6,7 +6,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function(connect) {
+          middleware: function (connect) {
             return [
               modRewrite([
                 '!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg|\\.ttf|\\.woff|\\.mp4|\\.gif|\\.xml|\\.webm$ /index.html [L]'
@@ -102,7 +102,7 @@ module.exports = function(grunt) {
       test: {
         options: {
           port: 9001,
-          middleware: function(connect) {
+          middleware: function (connect) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
@@ -568,7 +568,7 @@ module.exports = function(grunt) {
             fb_url: 'https://www.facebook.com/ActualHomeMx',
             instagram_url: 'https://www.instagram.com/actualhome_mx/',
             foursquare_url: 'https://es.foursquare.com/p/actual-home/90458136',
-            pinterest_url: 'https://es.pinterest.com/ActualGroup/'
+            pinterest_url: 'https://www.pinterest.com.mx/ActualGroup/'
           }
         }
       },
@@ -588,7 +588,7 @@ module.exports = function(grunt) {
             instagram_url: 'https://www.instagram.com/actual_studio/',
             foursquare_url:
               'https://es.foursquare.com/p/actual-studio/87584627',
-            pinterest_url: 'https://es.pinterest.com/ActualGroup/'
+            pinterest_url: 'https://www.pinterest.com.mx/ActualGroup/'
           }
         }
       },
@@ -608,7 +608,7 @@ module.exports = function(grunt) {
             instagram_url: 'https://www.instagram.com/actualkids_mx/',
             foursquare_url:
               'https://es.foursquare.com/p/actual-studio/87584627',
-            pinterest_url: 'https://es.pinterest.com/ActualGroup/'
+            pinterest_url: 'https://www.pinterest.com.mx/ActualGroup/'
           }
         }
       }
@@ -618,7 +618,7 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'serve',
     'Compile then start a connect web server',
-    function(target) {
+    function (target) {
       if (target === 'dist') {
         return grunt.task.run(['build', 'connect:dist:keepalive']);
       }
@@ -640,7 +640,7 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'server',
     'DEPRECATED TASK. Use the "serve" task instead',
-    function(target) {
+    function (target) {
       grunt.log.warn(
         'The `server` task has been deprecated. Use `grunt serve` to start a server.'
       );
