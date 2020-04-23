@@ -25,8 +25,9 @@ function PaymentDialogController(
   $scope.states = commonService.getStates();
   $scope.months = getMonths();
   $scope.years = getYears();
-  $scope.phonePattern = '.*\\d{10}$';
+  $scope.phonePattern = ".*\\d{10}$";
   $scope.acceptTerms = true;
+
 
   if ($scope.payment.options) {
     $scope.paymentOptionsOriginal = _.clone($scope.payment.options);
@@ -78,29 +79,33 @@ function PaymentDialogController(
     return months;
   }
 
-  $scope.numToLetters = function(num) {
+  $scope.numToLetters = function (num) {
     return formatService.numberToLetters(num);
   };
 
-  $scope.hide = function() {
+  $scope.hide = function () {
     $mdDialog.hide();
   };
-  $scope.cancel = function() {
+  $scope.cancel = function () {
     $mdDialog.cancel();
   };
 
-  $scope.isvalidPayment = function($form) {
+
+
+  $scope.isvalidPayment = function ($form) {
     console.log('$form', $form);
-    return $form.$valid;
+    return ($form.$valid);
   };
 
-  $scope.onChangeCard = function(card) {
+  $scope.onChangeCard = function (card) {
     $scope.terminal = getSelectedTerminal(card);
   };
 
-  $scope.$watch('payment.cardType', function(newVal, oldVal) {
+
+  $scope.$watch('payment.cardType', function (newVal, oldVal) {
     //console.log('new val', newVal);
     if (newVal !== oldVal && oldVal) {
+
       console.log('oldVal', oldVal);
       console.log('newVal', newVal);
 
@@ -109,9 +114,11 @@ function PaymentDialogController(
     }
   });
 
-  $scope.$watch('payment.cardCountry', function(newVal, oldVal) {
+
+  $scope.$watch('payment.cardCountry', function (newVal, oldVal) {
     //console.log('new val', newVal);
     if (newVal !== oldVal && oldVal) {
+
       console.log('oldVal', oldVal);
       console.log('newVal', newVal);
 
@@ -124,27 +131,25 @@ function PaymentDialogController(
     if (cardType === 'american-express') {
       $scope.changingOptions = true;
       $scope.payment.options = [];
-      $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(
-        option
-      ) {
+      $scope.payment.options = $scope.paymentOptionsOriginal.filter(function (option) {
         return option.card.value === 'american-express';
       });
-      $timeout(function() {
+      $timeout(function () {
         $scope.changingOptions = false;
       }, 200);
     } else {
       $scope.changingOptions = true;
       $scope.payment.options = [];
-      $scope.payment.options = $scope.paymentOptionsOriginal.filter(function(
-        option
-      ) {
+      $scope.payment.options = $scope.paymentOptionsOriginal.filter(function (option) {
         return option.card.value !== 'american-express';
       });
-      $timeout(function() {
+      $timeout(function () {
         $scope.changingOptions = false;
       }, 200);
+
     }
   }
+
 
   function setPaymentOptionsBasedOnCardCountry(cardCountry, cardType) {
     if (cardCountry !== 'Mexico') {
@@ -157,14 +162,15 @@ function PaymentDialogController(
       ];
 
       console.log('new options', $scope.payment.options);
-      $timeout(function() {
+      $timeout(function () {
         $scope.changingOptions = false;
       }, 200);
     }
   }
 
+
   function getSelectedTerminal(card) {
-    var option = _.find($scope.payment.options, function(option) {
+    var option = _.find($scope.payment.options, function (option) {
       return option.card.value === card;
     });
     if (option) {
@@ -183,11 +189,8 @@ function PaymentDialogController(
   })
   */
 
-  $scope.copyClientDataToPayment = function() {
-    console.log(
-      '$scope.copyingClientDataToPayment',
-      $scope.copyingClientDataToPayment
-    );
+  $scope.copyClientDataToPayment = function () {
+    console.log('$scope.copyingClientDataToPayment', $scope.copyingClientDataToPayment);
     if (!$scope.copyingClientDataToPayment) {
       console.log('llenando a vacio');
       $scope.payment.cardName = _.clone($scope.quotation.Client.CardName);
@@ -227,17 +230,15 @@ function PaymentDialogController(
     return name;
   }
 
-  $scope.save = function($form) {
+  $scope.save = function ($form) {
     if (!$scope.acceptTerms) {
       alert('Acepta los terminos y condiciones');
       return;
     }
 
     if ($form.$valid) {
-      if (
-        $scope.payment.options.length > 0 &&
-        $scope.payment.type !== 'transfer'
-      ) {
+
+      if ($scope.payment.options.length > 0 && $scope.payment.type !== 'transfer') {
         $scope.terminal = getSelectedTerminal($scope.payment.card);
         $scope.payment.terminal = $scope.terminal.value;
       }
