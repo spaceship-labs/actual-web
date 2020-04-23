@@ -172,7 +172,7 @@
           <span>
             <strong> <i class="icon-phone"></i> </strong>
             <strong hide-xs>998 246 3487</strong>
-            <strong hide-xs>(998) 195 8376</strong>
+            <strong hide-xs>(998) 200 5664</strong>
           </span>
 
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
@@ -181,14 +181,14 @@
 
         <!-- IF ACTIVE QUOTATION -->
         <div>
-          <a style="display:block;" ng-if="main.activeQuotation" flex ng-href="/quotations/edit/{{ main.activeQuotation.id }}"
-            class="header-top-bar-menu-item">
-              <span hide-xs class="header-car-item-number"
-                ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-              <i hide-xs class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-              <span hide-gt-xs class="header-car-item-number-mobile"
-                ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-              <i hide-gt-xs style="margin-right:5px;" class="icon-carro"></i>
+          <a style="display:block;" ng-if="main.activeQuotation" flex
+            ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="header-top-bar-menu-item">
+            <span hide-xs class="header-car-item-number"
+              ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+            <i hide-xs class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
+            <span hide-gt-xs class="header-car-item-number-mobile"
+              ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+            <i hide-gt-xs style="margin-right:5px;" class="icon-carro"></i>
           </a>
         </div>
 
