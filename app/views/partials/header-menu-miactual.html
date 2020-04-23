@@ -40,7 +40,7 @@
   <!-- ACTUALKIDS NAVBAR -->
 
   <nav ng-if="main.siteTheme === 'actual-kids' " class="main-menu-container" hide-sm>
-    <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index"
+    <div ng-repeat="category in main.categoriesTree track by $index"
       ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
 
       <a class="list-menu-miactual" href="/category/{{ category.Handle }}">
