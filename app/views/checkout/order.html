@@ -40,23 +40,23 @@
         <strong>{{vm.order.Client.E_Mail}}</strong>.</p>
       <p>
         <strong>Estatus</strong>: {{vm.status}}</p>
-      <br/>
+      <br />
       <!-- Customer review -->
       <script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
       <div style="visibility:hidden;" id="scriptData">
-       <p>
-         {{vm.order.folio}}
-       </p>
-       <p>
-         {{vm.order.Client.E_Mail}}
-       </p>
-       <p>
-         {{vm.order.Details[0].shipDate | date:'yyyy-MM-dd'}}
-       </p>
-     </div>
+        <p>
+          {{vm.order.folio}}
+        </p>
+        <p>
+          {{vm.order.Client.E_Mail}}
+        </p>
+        <p>
+          {{vm.order.Details[0].shipDate | date:'yyyy-MM-dd'}}
+        </p>
+      </div>
       <script>
-        window.renderOptIn = function() {
-          window.gapi.load('surveyoptin', function() {
+        window.renderOptIn = function () {
+          window.gapi.load('surveyoptin', function () {
             let dataContainer = document.getElementById("scriptData");
             let Ps = dataContainer.getElementsByTagName("p");
             window.gapi.surveyoptin.render(
@@ -66,7 +66,7 @@
                 "order_id": Ps[0].textContent,
                 "email": Ps[1].textContent,
                 "delivery_country": "MX",
-                "estimated_delivery_date": Ps[2].textContent, 
+                "estimated_delivery_date": Ps[2].textContent,
               });
           });
         }
@@ -141,7 +141,8 @@
               </div>
             </div>
 
-            <div flex-sm="100" flex-xs="100" hide-gt-sm class="order-table-header" layout="row" layout-align="space-between start">
+            <div flex-sm="100" flex-xs="100" hide-gt-sm class="order-table-header" layout="row"
+              layout-align="space-between start">
               <div flex="20">
                 <strong>CANTIDAD</strong>
               </div>
@@ -205,7 +206,8 @@
           <!--<div flex ><strong>MONTO COBRADO</strong></div>-->
         </div>
 
-        <div class="order-payment-item" layout="row" layout-wrap layout-align="space-between center" ng-repeat="payment in vm.order.Payments">
+        <div class="order-payment-item" layout="row" layout-wrap layout-align="space-between center"
+          ng-repeat="payment in vm.order.Payments">
           <div ng-if="payment.type == 'cash'" flex class="order-payment-item-data">
             <span>
               <i class="icon-cash"></i>
@@ -275,7 +277,7 @@
           </p>
           <!--<p><strong>SALDO:</strong></p>-->
 
-          <br/>
+          <br />
           <p>
             <strong>SALDO CLIENTE:</strong>
           </p>
@@ -301,7 +303,7 @@
           <!--<p><strong>{{vm.order.ammountPaid | roundCurrency}} MXN</strong></p>-->
           <!--<p><strong>{{vm.calculateBalance( vm.order.ammountPaid, vm.order.total ) | currency }} MXN</strong></p>-->
 
-          <br/>
+          <br />
           <p>
             <strong>{{(vm.order.Client.Balance) | currency}}</strong>
           </p>
@@ -391,9 +393,9 @@
       <div class="order-block-inner" layout="row" layout-wrap layout-align="space-between center">
         <div flex="40" flex-sm="100" flex-xs="100">
           <p>
-            <strong>Celular: </strong>(998) 195 8376</p>
+            <strong>Celular: </strong>(998) 200 5664</p>
           <p>
-            <strong>Celular: </strong>(998) 195 6839</p>
+            <strong>Celular: </strong>(998) 246 0845</p>
           <p>
             <strong>Email:</strong> clientes@actualg.com</p>
         </div>
@@ -401,14 +403,17 @@
           <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
             <strong>IMPRIMIR RECIBO</strong>
           </a>
-          <a href="#" ng-if="!vm.invoiceExists && vm.isUserAdmin" ng-click="vm.generateInvoice()" class="action-btn action-btn-save print-btn">
+          <a href="#" ng-if="!vm.invoiceExists && vm.isUserAdmin" ng-click="vm.generateInvoice()"
+            class="action-btn action-btn-save print-btn">
             <strong>GENERAR FACTURA</strong>
           </a>
-          <a href="#" ng-if="vm.invoiceExists && vm.isUserAdmin" ng-click="vm.sendInvoice()" class="action-btn action-btn-save print-btn">
+          <a href="#" ng-if="vm.invoiceExists && vm.isUserAdmin" ng-click="vm.sendInvoice()"
+            class="action-btn action-btn-save print-btn">
             <strong>ENVIAR FACTURA</strong>
           </a>
 
-          <a href="#" ng-if="vm.orderSapPending && vm.isUserAdmin" ng-click="vm.generateSapOrder()" class="action-btn action-btn-save print-btn">
+          <a href="#" ng-if="vm.orderSapPending && vm.isUserAdmin" ng-click="vm.generateSapOrder()"
+            class="action-btn action-btn-save print-btn">
             <strong>GENERAR PEDIDO EN SAP</strong>
           </a>
         </div>
@@ -418,11 +423,11 @@
 
   </div>
 
-  <hr/>
+  <hr />
 
   <ng-include src="'views/checkout/order-policies.html'"></ng-include>
 
-  <hr/>
+  <hr />
 
   <section ng-show="vm.order.OrdersSapWeb && vm.order.OrdersSapWeb.length > 0" class="sap-docs only-hide-print">
     <h3>
@@ -445,7 +450,9 @@
     </ul>
   </section>
 
-  <ng-include ng-show="vm.isUserAdmin" class="only-hide-print" src="'views/checkout/sap-connection-logs.html'"></ng-include>
-  <ng-include ng-show="vm.isUserAdmin" class="only-hide-print" src="'views/checkout/alegra-connection-logs.html'"></ng-include>
+  <ng-include ng-show="vm.isUserAdmin" class="only-hide-print" src="'views/checkout/sap-connection-logs.html'">
+  </ng-include>
+  <ng-include ng-show="vm.isUserAdmin" class="only-hide-print" src="'views/checkout/alegra-connection-logs.html'">
+  </ng-include>
 
 </section>
