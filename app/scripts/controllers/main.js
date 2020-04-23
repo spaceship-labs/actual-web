@@ -625,7 +625,7 @@
     }
 
     function showPhoneNumberDialog() {
-      dialogService.showDialog('Asistencia en su compra: 01 (998) 884 1594');
+      dialogService.showDialog('Asistencia en su compra: 998 246 3487');
     }
 
     function handleCategoryHover(handle) {
