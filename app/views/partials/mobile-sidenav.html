@@ -50,7 +50,7 @@
         </li>
       </ul>
       <ul ng-if="main.siteTheme === 'actual-kids' ">
-        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index "
+        <li ng-repeat="category in main.categoriesTree track by $index "
           ng-click="main.handleAccordion(category.Handle)" class="nav-categories-item-sidenav">
           <a class="mouseover-link-mobile active">
             <span class="nav-categories-item-text" href="#">{{ category.Name }}</span></a>

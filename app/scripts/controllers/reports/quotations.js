@@ -22,7 +22,7 @@ angular
     angular.extend(vm, {
       user: angular.copy($rootScope.user),
       queryClients: queryClients,
-      triggerExportName: 'triggerExport',
+      triggerExportName: 'triggerExcelExport',
       triggerExcelExport: triggerExcelExport,
       triggerSearchName: 'triggerSearch',
       triggerSearch: triggerSearch,
@@ -45,7 +45,7 @@ angular
           domainMapper: siteService.getStoresIdMapper(),
           domainColumn: 'Store'
         },
-        { key: 'createdAt', label: 'Fecha', date: true },
+        { key: 'createdAt', label: 'Fecha', dateTime: true },
         { key: 'discount', label: 'Descuento', currency: true },
         { key: 'total', label: 'Total', currency: true },
         {
@@ -59,7 +59,23 @@ angular
           label: 'Sitio',
           mapper: siteService.getStoresIdMapper()
         },
+        {
+          key: 'UnregisteredClient.email',
+          label: 'N/R',
+          defaultValue: 'S/E'
+        },
+        {
+          key: 'UnregisteredClient.name',
+          label: 'N/R',
+          defaultValue: 'S/N'
+        },
+        {
+          key: 'UnregisteredClient.phone',
+          label: 'N/R',
+          defaultValue: 'S/T'
+        },
         { key: 'fromOffers', label: 'Paquetes', defaultValue: 'No' },
+        { key: 'clientIp', label: 'IP', defaultValue: 'N/A' },
         { key: 'paymentType', label: 'Tipo pago' },
         { key: 'OrderWeb', label: 'OrderWeb' }
       ]
@@ -100,6 +116,8 @@ angular
     function triggerExcelExport() {
       $scope.$broadcast(vm.triggerExportName);
     }
+
+
 
     $scope.$on('isExporting', function(evt, data) {
       vm.isExporting = data;

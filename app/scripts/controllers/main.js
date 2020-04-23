@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   function MainCtrl(
@@ -45,6 +45,7 @@
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
       toggleProfileModal: toggleProfileModal,
+      redirectToRegister: redirectToRegister,
       getFaviconUrl: getFaviconUrl,
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
@@ -68,11 +69,20 @@
     metaTagsService.setMetaTags();
     vm.metatags = $rootScope.metatags;
 
-    $rootScope.$on('metatagsChanged', function(ev, metatags) {
+    $rootScope.$on('metatagsChanged', function (ev, metatags) {
       vm.metatags = metatags;
     });
 
     init();
+
+    function redirectToRegister() {
+      if (!vm.activeQuotation.id) {
+        $location.path('/register');
+      }
+      $location.path('/register').search({
+        quotation: vm.activeQuotation.id
+      });
+    }
 
     function getFaviconUrl() {
       var faviconUrl = '/images/favicon.ico';
@@ -107,7 +117,7 @@
         },
 
         'camas-infantiles': {
-          
+
           icon: 'ninas-y-ninos2',
           image: '/images/categories/ninos.jpg'
         },
@@ -187,7 +197,7 @@
       }
       console.log('USER INVITED: ', $rootScope.user);
 
-      $rootScope.$on('activeStoreAssigned', function(ev, activeStore) {
+      $rootScope.$on('activeStoreAssigned', function (ev, activeStore) {
         loadCategoriesTree(activeStore.code);
       });
 
@@ -195,17 +205,17 @@
       loadSiteInfo();
 
       $scope.$watch(
-        function() {
+        function () {
           return localStorageService.get('quotation');
         },
-        function(quotation) {
+        function (quotation) {
           vm.quotation = quotation;
         }
       );
 
       moment.locale('es');
 
-      $(document).click(function(e) {
+      $(document).click(function (e) {
         var $target = $(event.target);
         var profileHeader = $('#profile-header');
         var profileHeaderTrigger = $('#profile-header-trigger');
@@ -247,13 +257,14 @@
       vm.isLoadingCategoriesTree = true;
       categoriesService
         .createCategoriesTree(activeStoreCode)
-        .then(function(tree) {
+        .then(function (tree) {
           vm.isLoadingCategoriesTree = false;
           vm.categoriesTree = tree;
+          console.log("MAIN CATEGORIES TREE TEST: ", vm.categoriesTree);
           $rootScope.categoriesTree = vm.categoriesTree;
           $rootScope.$emit('categoriesTreeLoaded', vm.categoriesTree);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
         });
     }
@@ -320,7 +331,7 @@
       console.log('cargando main data', new Date());
       $rootScope.isMainDataLoaded = false;
       $q.all([loadActiveStore(), loadActiveQuotation()])
-        .then(function(data) {
+        .then(function (data) {
           $scope.mainData = {
             activeStore: data[0],
             activeQuotation: data[1]
@@ -330,7 +341,7 @@
           $rootScope.isMainDataLoaded = true;
           console.log('termino main data', new Date());
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log('err', err);
         });
     }
@@ -340,7 +351,7 @@
       var deferred = $q.defer();
       userService
         .getActiveStore()
-        .then(function(activeStore) {
+        .then(function (activeStore) {
           console.log('activestore', activeStore);
           vm.activeStore = activeStore;
           $rootScope.activeStore = activeStore;
@@ -348,7 +359,7 @@
           $rootScope.$emit('activeStoreAssigned', activeStore);
           deferred.resolve(activeStore);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
           deferred.reject(err);
         });
@@ -361,7 +372,7 @@
 
       quotationService
         .getActiveQuotation()
-        .then(function(res) {
+        .then(function (res) {
           var quotation = res.data;
           console.log('quotation', quotation);
           $rootScope.isActiveQuotationLoaded = true;
@@ -378,7 +389,7 @@
             deferred.resolve(false);
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           $rootScope.activeQuotation = false;
           localStorageService.remove('quotation');
         });
@@ -390,20 +401,20 @@
       console.log('loadSiteInfo start', new Date());
       siteService
         .findByHandle(vm.siteTheme)
-        .then(function(res) {
+        .then(function (res) {
           vm.site = res.data || {};
           $rootScope.site = res.data || {};
           deferred.resolve(vm.site);
           console.log('loadSiteInfo end', new Date());
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
           deferred.reject(err);
         });
       return deferred.promise;
     }
 
-    $rootScope.$on('newActiveQuotation', function(ev, newQuotationId) {
+    $rootScope.$on('newActiveQuotation', function (ev, newQuotationId) {
       loadActiveQuotation();
     });
 
@@ -416,13 +427,13 @@
     }
 
     //$rootScope.$on("$locationChangeStart",function(event, next, current){
-    $scope.$on('$routeChangeStart', function(event, next, current) {
+    $scope.$on('$routeChangeStart', function (event, next, current) {
       if (current) {
         authService.runPolicies();
 
         //Only updating active quotation on every page change
         $rootScope.isActiveQuotationLoaded = false;
-        loadActiveQuotation().then(function() {
+        loadActiveQuotation().then(function () {
           $scope.mainData = $scope.mainData || {};
           $scope.mainData.activeQuotation = $rootScope.activeQuotation;
           $rootScope.$emit('mainDataLoaded', $scope.mainData);
@@ -520,7 +531,7 @@
     }
 
     function logOut() {
-      authService.logout(function() {
+      authService.logout(function () {
         $location.path('/');
         $window.location.reload();
       });
@@ -537,11 +548,11 @@
       localStorageService.set('activeStore', vm.user.activeStore);
     }
 
-    $rootScope.successAuth = function(res) {
+    $rootScope.successAuth = function (res) {
       setUserTokensOnResponse(res);
 
       assignCurrentUserToQuotationIfNeeded()
-        .then(function(quotationUpdated) {
+        .then(function (quotationUpdated) {
           console.log('quotationUpdated', quotationUpdated);
 
           if (quotationUpdated) {
@@ -570,12 +581,12 @@
           }
           return;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log('err successAuth', err);
         });
     };
 
-    $rootScope.successAuthInCheckout = function(res) {
+    $rootScope.successAuthInCheckout = function (res) {
       console.log('successAuthInCheckout');
       setUserTokensOnResponse(res);
     };
@@ -618,15 +629,18 @@
     }
 
     function handleCategoryHover(handle) {
-      Object.keys(vm.activeCategory).forEach(function(key, value) {
+      Object.keys(vm.activeCategory).forEach(function (key, value) {
         vm.activeCategory[key] = false;
       });
       vm.activeCategory[handle] = true;
+      console.log("TEST HANDLECATEGORYHOVER TRUE", vm.activeCategory[handle])
     }
 
     function handleCategoryLeave() {
-      Object.keys(vm.activeCategory).forEach(function(key, value) {
+      Object.keys(vm.activeCategory).forEach(function (key, value) {
         vm.activeCategory[key] = false;
+        console.log("TEST HANDLECATEGORYHOVER FALSE", vm.activeCategory[key])
+
       });
     }
 
@@ -651,7 +665,7 @@
       return (categoriesTree || []).filter(filterComplementsMenu).length;
     }
 
-    $scope.$on('$routeChangeStart', function(next, current) {
+    $scope.$on('$routeChangeStart', function (next, current) {
       vm.isActiveBackdrop = false;
       vm.isActiveLogin = false;
       vm.isLoadingLogin = false;
@@ -661,8 +675,8 @@
       }
     });
 
-    $rootScope.scrollTo = function(target, offset) {
-      $timeout(function() {
+    $rootScope.scrollTo = function (target, offset) {
+      $timeout(function () {
         offset = offset || 100;
 
         $('html, body').animate(

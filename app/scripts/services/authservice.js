@@ -48,7 +48,7 @@
     function signIn(data, success, error) {
       localStorageService.remove('token');
       localStorageService.remove('user');
-      localStorageService.remove('quotation');
+      // localStorageService.remove('quotation');
       localStorageService.remove('broker');
       return $http
         .post(api.baseUrl + '/auth/signin', data)

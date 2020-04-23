@@ -10,7 +10,6 @@ function PaymentDialogController(
   payment,
   quotation
 ) {
-
   'use strict';
 
   console.log('payment in dialog', payment);
@@ -21,7 +20,7 @@ function PaymentDialogController(
   $scope.payment.cardCountry = $scope.payment.cardCountry || 'Mexico';
   $scope.payment.cardObject = $scope.payment.cardObject || {};
   $scope.needsVerification = payment.needsVerification;
-  $scope.maxAmmount = (payment.maxAmmount >= 0) ? payment.maxAmmount : false;
+  $scope.maxAmmount = payment.maxAmmount >= 0 ? payment.maxAmmount : false;
   $scope.countries = commonService.getCountries();
   $scope.states = commonService.getStates();
   $scope.months = getMonths();
@@ -36,7 +35,9 @@ function PaymentDialogController(
 
   //ROUNDING
   $scope.payment.ammount = commonService.roundCurrency($scope.payment.ammount);
-  $scope.payment.remaining = commonService.roundCurrency($scope.payment.remaining);
+  $scope.payment.remaining = commonService.roundCurrency(
+    $scope.payment.remaining
+  );
   if ($scope.maxAmmount) {
     $scope.maxAmmount = commonService.roundCurrency($scope.maxAmmount);
   }
@@ -55,7 +56,11 @@ function PaymentDialogController(
   function getYears() {
     var years = [moment().format('YYYY')];
     for (var i = 1; i < 8; i++) {
-      years.push(moment().add(i, 'year').format('YYYY'));
+      years.push(
+        moment()
+          .add(i, 'year')
+          .format('YYYY')
+      );
     }
     return years;
   }
@@ -65,7 +70,7 @@ function PaymentDialogController(
     for (var i = 1; i < 13; i++) {
       var month = i;
       if (month < 10) {
-        month = "0" + month;
+        month = '0' + month;
       }
       month = month.toString();
       months.push(month);
@@ -122,7 +127,6 @@ function PaymentDialogController(
     }
   });
 
-
   function setPaymentOptionsBasedOnCardType(cardType) {
     if (cardType === 'american-express') {
       $scope.changingOptions = true;
@@ -161,8 +165,6 @@ function PaymentDialogController(
       $timeout(function () {
         $scope.changingOptions = false;
       }, 200);
-
-
     }
   }
 
@@ -180,7 +182,7 @@ function PaymentDialogController(
   /*
   $scope.$watch('copyingClientDataToPayment', function(newVal, oldVal){
     console.log('newVal', newVal);
-    console.log('oldVal', oldVal);    
+    console.log('oldVal', oldVal);
     if(newVal !== oldVal){
       copyingClientDataToPayment();
     }
@@ -201,7 +203,9 @@ function PaymentDialogController(
       $scope.payment.cardAddress2 = _.clone($scope.quotation.Address.Address);
       $scope.payment.cardZip = _.clone($scope.quotation.Address.U_CP);
 
-      $scope.payment.cardState = getStateNameByCode($scope.quotation.Address.U_Estado);
+      $scope.payment.cardState = getStateNameByCode(
+        $scope.quotation.Address.U_Estado
+      );
     } else {
       console.log('pasando a vacio');
       $scope.payment.cardName = null;
@@ -245,5 +249,4 @@ function PaymentDialogController(
       console.log('No valido');
     }
   };
-
 }

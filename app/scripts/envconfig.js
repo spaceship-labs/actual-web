@@ -2,6 +2,6 @@
 
  angular.module('envconfig', [])
 
-.constant('ENV', {name:'dev',apiEndpoint:'http://localhost:1337',cdnUrl:'https://d116li125og699.cloudfront.net',adminUrl:'http://localhost:3000',tokenPrefix:'dev',conektaHomeKey:'key_LcURg3XbcFPVXud8KmHkmGg',conektaKidsKey:'key_FAVz7GZoqMy4PwugqgHNrag',conektaStudioKey:'key_Eedd73QyEppQ3NxPgjVRxHQ'})
+.constant('ENV', {name:'production',apiEndpoint:'https://api.actualstudio.com',cdnUrl:'https://d116li125og699.cloudfront.net',adminUrl:'http://admin.miactual.com',tokenPrefix:'production',conektaHomeKey:'key_fTqfbsS7oxfpqZxtP9qZqdw',conektaKidsKey:'key_QCgrTimPycx55HtzxStvXZw',conektaStudioKey:'key_YrdmsrYuzSnqfZYryJxrjiQ',studioAnalytics:'UA-54662003-1',homeAnalytics:'UA-78979962-1',kidsAnalytics:'UA-55789134-1'})
 
 ;

@@ -1515,7 +1515,7 @@ select {
   box-shadow: rgba(0, 0, 0, 0.44) 0px 7px 7px -2px;
   right: auto;
   top: 100%;
-  transform: translateX(-600px);
+  transform: translateX(-450px);
   max-width: 600px;
   z-index: 999999;
 }
@@ -1535,6 +1535,7 @@ select {
 .smart-menu-left p:hover {
   text-shadow: -0.25px -0.25px 0 black, 0.25px 0.25px black;
 }
+/*
 .smart-menu a {
   font-size: 14px;
   color: #030202;
@@ -1573,6 +1574,7 @@ select {
   width: 100%;
   display: block;
 }
+*/
 /*---------------/
   #HOME
 /*--------------*/
