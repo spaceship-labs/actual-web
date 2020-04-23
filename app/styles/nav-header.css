@@ -58,6 +58,9 @@
 }
 
 .list-menu-miactual > img{
+  padding-top:2px;
+  width:36px;
+  height:36px;
   margin:auto;
 }
 
