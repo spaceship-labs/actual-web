@@ -21,7 +21,7 @@
 
 .main-menu-container > div {
   background-color: #fff;
-  width: 108px;
+  width: 165px;
   text-align: center;  
   
 }
@@ -31,7 +31,7 @@
   flex-direction: column;
   -webkit-align-content: center;
   align-content: center;
-  width: 108px;
+  width: 165px;
   height: 90px;
   transition: 0.4s;
   color: #404040;
@@ -40,7 +40,7 @@
 
 .list-menu-miactual > i {
   font-size: 40px;
-  width: 98px;
+  width: 165px;
   height: 40px;
   margin: 10px 5px 10px 5px;
   
