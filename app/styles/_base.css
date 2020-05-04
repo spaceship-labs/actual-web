@@ -1,0 +1,83 @@
+/***
+* COLOR VARIABLES
+****
+$color-white: #fff;
+
+$color-primary: #f1be3e;
+$color-primary-hover: #faf5e9;
+$color-primary-light: #f7de9e;
+$color-primary-dark: #dda901; OR #e9c15f;
+$color-primary-highlight: #fde932;
+
+$color-green-primary: #33ba2c; 
+$color-green-highlight: 2abc1c;
+
+$color-red-primary: #cc262f; 
+$color-red-highlight: #c82828;
+
+$color-blue-light: #34b3e7; 
+$color-blue-primary: #2965b9; 
+$color-blue-dark: #101d2c;
+
+$color-line-mouseover: #e2023f;
+
+$color-grey-light-1: #f9f7f6; OR #f8f8f8;
+$color-grey-light-2: #aaa;
+
+
+$color-grey-dark-1: #54483A;
+$color-grey-dark-2: #6D5D4B;
+
+
+$color-grey-light-1: #faf9f9;
+$color-grey-light-2: #f4f2f2;
+$color-grey-light-3: #f0eeee;
+$color-grey-light-4: #ccc;
+
+$color-grey-dark-1: #333;
+$color-grey-dark-2: #777;
+$color-grey-dark-3: #999;
+
+$color-dar: #000;
+
+shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
+shadow-light: 0 2rem 5rem rgba(0,0,0,.06);
+
+--line: 1px solid #777);
+
+*/
+
+/***
+* EXTRA FONT VARIABLES
+****
+$font-primary: 'Nunito', sans-serif;
+$font-display: 'Josefin Sans', sans-serif;
+*/
+
+/***
+* RESPONSIVE BREAKPOINTS
+****
+$bp-largest: 75em;   // 1200px
+$bp-large: 62.5em;   // 1000px
+$bp-medium: 50em;    // 800px; OR $bp-medium: 56.25em;   // 900px
+$bp-small: 37.5em;    // 600px;
+$bp-smallest: 31.25em; // 500px
+*/
+
+
+/***
+* MARGIN BUTTON SIZES 
+***/
+.mb-sm { margin-bottom: 2rem; }
+.mb-md { margin-bottom: 3rem; }
+.mb-lg { margin-bottom: 4rem; }
+.mb-hg { margin-bottom: 8rem; }
+
+/***
+*  FONT SIZES VARIABLES
+ ***
+$default-font-size: 1.6rem;
+&font-family: "Lato", sans-serif;
+$font-weight: 400;
+*/
+
