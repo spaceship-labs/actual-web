@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular.module('actualWebApp').factory('quotationService', quotationService);
@@ -97,21 +97,21 @@
 
     function getAddress(id, params) {
       var url = '/quotation/' + id + '/address';
-      return api.$http.get(url, params).then(function(res) {
+      return api.$http.get(url, params).then(function (res) {
         return res.data;
       });
     }
 
     function addRecord(quotationId, params) {
       var url = '/quotation/addrecord/' + quotationId;
-      return api.$http.post(url, params).then(function(res) {
+      return api.$http.post(url, params).then(function (res) {
         return res.data;
       });
     }
 
     function getRecords(quotationId) {
       var url = '/quotation/' + quotationId + '/records';
-      return api.$http.post(url).then(function(res) {
+      return api.$http.post(url).then(function (res) {
         return res.data;
       });
     }
@@ -187,7 +187,7 @@
       var total = 0;
       if (quotation.Details) {
         var details = quotation.Details;
-        details.forEach(function(detail) {
+        details.forEach(function (detail) {
           if (
             detail.Product &&
             detail.Product.priceBefore &&
@@ -210,7 +210,7 @@
       options = options || {};
       var deferred = $q.defer();
       if (quotation && quotation.Details) {
-        var productsIds = quotation.Details.map(function(detail) {
+        var productsIds = quotation.Details.map(function (detail) {
           return detail.Product; //product id
         });
 
@@ -221,13 +221,13 @@
 
         productService
           .multipleGetByIds(params)
-          .then(function(res) {
+          .then(function (res) {
             console.log('res', res);
             return productService.formatProducts(res.data);
           })
-          .then(function(formattedProducts) {
+          .then(function (formattedProducts) {
             //Match detail - product
-            quotation.Details = quotation.Details.map(function(detail) {
+            quotation.Details = quotation.Details.map(function (detail) {
               detail.Product = _.findWhere(formattedProducts, {
                 id: detail.Product
               });
@@ -235,7 +235,7 @@
             });
             deferred.resolve(quotation.Details);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log('err', err);
             deferred.reject(err);
           });
@@ -274,7 +274,7 @@
 
     function newQuotation(params, options) {
       options = options || {};
-      create(params).then(function(res) {
+      create(params).then(function (res) {
         var quotation = res.data;
         if (quotation) {
           setActiveQuotation(quotation.id);
@@ -313,11 +313,11 @@
         detail.ZipcodeDelivery = params.zipcodeDeliveryId;
         //Agregar al carrito
         addDetail(quotationId, detail)
-          .then(function(res) {
+          .then(function (res) {
             //setActiveQuotation(quotationId);
             $location.path('/quotations/edit/' + quotationId);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
           });
       } else {
@@ -328,14 +328,14 @@
         };
 
         create(quotationParams)
-          .then(function(res) {
+          .then(function (res) {
             var quotation = res.data;
             if (quotation) {
               setActiveQuotation(quotation.id);
               $location.path('/quotations/edit/' + quotation.id);
             }
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
           });
       }
@@ -348,7 +348,7 @@
       options = options || {};
       var quotationId = localStorageService.get('quotation');
       if (quotationId) {
-        var detailsParams = products.map(function(product) {
+        var detailsParams = products.map(function (product) {
           return createDetailFromParams(product.id, product, quotationId);
         });
 
@@ -358,41 +358,41 @@
         };
 
         addMultipleDetails(quotationId, params)
-          .then(function(details) {
+          .then(function (details) {
             //setActiveQuotation(quotationId);
             $location.path('/quotations/edit/' + quotationId);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
           });
       } else {
         //Crear cotizacion con producto agregado
         var quotationParams = options.fromOffers
           ? {
-              ZipcodeDelivery: options.zipcodeDeliveryId,
-              Details: products.map(function(product) {
-                var detail = createDetailFromParams(product.id, product);
-                return detail;
-              }),
-              fromOffers: options.fromOffers
-            }
+            ZipcodeDelivery: options.zipcodeDeliveryId,
+            Details: products.map(function (product) {
+              var detail = createDetailFromParams(product.id, product);
+              return detail;
+            }),
+            fromOffers: options.fromOffers
+          }
           : {
-              ZipcodeDelivery: options.zipcodeDeliveryId,
-              Details: products.map(function(product) {
-                var detail = createDetailFromParams(product.id, product);
-                return detail;
-              })
-            };
+            ZipcodeDelivery: options.zipcodeDeliveryId,
+            Details: products.map(function (product) {
+              var detail = createDetailFromParams(product.id, product);
+              return detail;
+            })
+          };
 
         create(quotationParams)
-          .then(function(res) {
+          .then(function (res) {
             var quotation = res.data;
             if (quotation) {
               setActiveQuotation(quotation.id);
               $location.path('/quotations/edit/' + quotation.id);
             }
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
           });
       }
@@ -408,15 +408,15 @@
 
       productService
         .getAllFilters({ quickread: true })
-        .then(function(res) {
+        .then(function (res) {
           //Assign filters to every product
           var filters = res.data;
-          details.forEach(function(detail) {
-            filters = filters.map(function(filter) {
+          details.forEach(function (detail) {
+            filters = filters.map(function (filter) {
               filter.Values = [];
 
               if (detail.Product && detail.Product.FilterValues) {
-                detail.Product.FilterValues.forEach(function(value) {
+                detail.Product.FilterValues.forEach(function (value) {
                   if (value.Filter === filter.id) {
                     filter.Values.push(value);
                   }
@@ -426,7 +426,7 @@
               return filter;
             });
 
-            filters = filters.filter(function(filter) {
+            filters = filters.filter(function (filter) {
               return filter.Values.length > 0;
             });
 
@@ -437,7 +437,7 @@
 
           deferred.resolve(details);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           deferred.reject(err);
         });
 
@@ -471,20 +471,20 @@
 
     function getQuotationZipcodeDelivery(id) {
       var url = '/quotation/' + id + '/zipcodedelivery';
-      return api.$http.get(url).then(function(res) {
+      return api.$http.get(url).then(function (res) {
         return res.data;
       });
     }
 
     function getQuotationPaymentAttempts(id) {
       var url = '/quotation/' + id + '/paymentattempts';
-      return api.$http.get(url).then(function(res) {
+      return api.$http.get(url).then(function (res) {
         return res.data;
       });
     }
 
     function mapDetailsStock(details, detailsStock) {
-      var details = details.map(function(detail) {
+      var details = details.map(function (detail) {
         var detailStock = _.findWhere(detailsStock, { id: detail.id });
         if (detailsStock) {
           detail.validStock = detailStock.validStock;
@@ -508,14 +508,14 @@
       var deferred = $q.defer();
       api.$http
         .post(url)
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.isValid) {
             deferred.resolve(true);
           } else {
             deferred.resolve(false);
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           deferred.reject(err);
         });
       return deferred.promise;
@@ -570,7 +570,7 @@
     }
 
     function mapDetailsOriginalValues(details) {
-      return details.map(function(detail) {
+      return details.map(function (detail) {
         detail.originalQuantity = _.clone(detail.quantity);
         return detail;
       });
@@ -590,7 +590,7 @@
 
       quotationAux = _.reduce(
         quotation.Details,
-        function(quotationObj, detail) {
+        function (quotationObj, detail) {
           quotationObj.totalProducts += detail.quantity;
           quotationObj.subtotal += detail.subtotal;
           quotationObj.total += detail.total;
@@ -621,7 +621,7 @@
     }
 
     function adjustSameProductsDeliveriesAndStock(details) {
-      details = details.map(function(detail) {
+      details = details.map(function (detail) {
         var productTakenStock = getProductTakenStockFromRemainingDetails(
           detail,
           details
@@ -642,7 +642,7 @@
     ) {
       return _.reduce(
         allDetails,
-        function(takenStock, detail) {
+        function (takenStock, detail) {
           if (
             detail.Product.id === currentDetail.Product.id &&
             detail.id !== currentDetail.id
@@ -660,6 +660,20 @@
       deliveries,
       productTakenStock
     ) {
+      // sergio start
+      var deliveriesGrouped = [];
+      for (var i = 0; i < detail.deliveries.length; i++) {
+        var index = _.findIndex(deliveriesGrouped, function (delivery) {
+          return moment(delivery.date).isSame(moment(detail.deliveries[i].date), 'day')
+        })
+        if (index === -1) {
+          deliveriesGrouped.push(detail.deliveries[i])
+        } else {
+          deliveriesGrouped[index].available += detail.deliveries[i].available;
+        }
+      }
+      deliveries = deliveriesGrouped;
+      // sergio end
       for (var i = 0; i < deliveries.length; i++) {
         deliveries[i].available =
           deliveries[i].initalAvailable - productTakenStock;
