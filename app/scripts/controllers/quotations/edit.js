@@ -37,7 +37,7 @@ function QuotationsEditCtrl(
   leadService
 ) {
   var vm = this;
-  var mainDataListener = function() {};
+  var mainDataListener = function () { };
   angular.extend(vm, {
     newRecord: {},
     api: api,
@@ -92,13 +92,13 @@ function QuotationsEditCtrl(
     user: $rootScope.user
   });
 
-  var activeQuotationListener = function() {};
+  var activeQuotationListener = function () { };
   var activeStoreId = localStorageService.get('activeStore');
 
   if ($rootScope.activeStore) {
     init($routeParams.id);
   } else {
-    mainDataListener = $rootScope.$on('activeStoreAssigned', function(e) {
+    mainDataListener = $rootScope.$on('activeStoreAssigned', function (e) {
       init($routeParams.id);
     });
   }
@@ -119,7 +119,7 @@ function QuotationsEditCtrl(
 
     quotationService
       .getById(quotationId)
-      .then(function(res) {
+      .then(function (res) {
         vm.isLoading = false;
         vm.quotation = res.data;
 
@@ -153,17 +153,17 @@ function QuotationsEditCtrl(
           populateParams
         );
       })
-      .then(function(details) {
+      .then(function (details) {
         vm.quotation.Details = details;
         return quotationService.loadProductsFilters(vm.quotation.Details);
       })
-      .then(function(detailsWithFilters) {
+      .then(function (detailsWithFilters) {
         vm.quotation.Details = detailsWithFilters;
         //vm.quotation.DetailsGroups = deliveryService.groupDetails(vm.quotation.Details);
         vm.isLoadingDetails = false;
         return quotationService.getCurrentStock(vm.quotation.id);
       })
-      .then(function(response) {
+      .then(function (response) {
         var detailsStock = response.data;
         vm.quotation.Details = quotationService.mapDetailsStock(
           vm.quotation.Details,
@@ -178,7 +178,7 @@ function QuotationsEditCtrl(
 
         return loadDetailsDeliveries(vm.quotation.Details);
       })
-      .then(function() {
+      .then(function () {
         vm.quotation.Details = quotationService.adjustSameProductsDeliveriesAndStock(
           vm.quotation.Details
         );
@@ -192,13 +192,13 @@ function QuotationsEditCtrl(
         if (vm.isUserAdmin) return quotationService.getRecords(vm.quotation.id);
         return $q.resolve();
       })
-      .then(function(records) {
+      .then(function (records) {
         if (records) {
           vm.quotation.Records = records;
         }
         vm.isLoadingRecords = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         var error = err.data || err;
         error = error ? error.toString() : '';
         dialogService.showDialog(error);
@@ -216,7 +216,7 @@ function QuotationsEditCtrl(
   }
 
   function someDetailShipdateHasChanged() {
-    return _.some(vm.quotation.Details, function(detail) {
+    return _.some(vm.quotation.Details, function (detail) {
       return isDetailAlertVisible(detail);
     });
   }
@@ -226,7 +226,7 @@ function QuotationsEditCtrl(
   }
 
   function loadQuotationAddress() {
-    quotationService.getAddress(vm.quotation.id).then(function(address) {
+    quotationService.getAddress(vm.quotation.id).then(function (address) {
       console.log('address', address);
       vm.addressString = buildAddressString(address);
     });
@@ -314,7 +314,7 @@ function QuotationsEditCtrl(
   }
 
   function loadDetailsDeliveries(details) {
-    var promises = details.map(function(detail) {
+    var promises = details.map(function (detail) {
       return loadDeliveriesByDetail(detail);
     });
     return $q.all(promises);
@@ -330,8 +330,8 @@ function QuotationsEditCtrl(
 
     return productService
       .delivery(options.productItemCode, options.zipcodeDeliveryId)
-      .then(function(deliveries) {
-        deliveries = deliveries.map(function(delivery) {
+      .then(function (deliveries) {
+        deliveries = deliveries.map(function (delivery) {
           delivery.initalAvailable = _.clone(delivery.available);
           return delivery;
         });
@@ -342,7 +342,20 @@ function QuotationsEditCtrl(
             deliveries
           );
         }
-
+        // sergio start
+        var deliveriesGrouped = [];
+        for (var i = 0; i < deliveries.length; i++) {
+          var index = _.findIndex(deliveriesGrouped, function (delivery) {
+            return moment(delivery.date).isSame(moment(deliveries[i].date), 'day')
+          })
+          if (index === -1) {
+            deliveriesGrouped.push(deliveries[i])
+          } else {
+            deliveriesGrouped[index].available += deliveries[i].available;
+          }
+        }
+        deliveries = deliveriesGrouped;
+        // sergio end
         return deliveryService.setUpDetailDeliveries(detail, deliveries);
       });
   }
@@ -370,7 +383,7 @@ function QuotationsEditCtrl(
         quotationDetails
       );
       vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
-      $timeout(function() {
+      $timeout(function () {
         vm.isCalculatingAvailability = false;
       }, 800);
     }
@@ -396,7 +409,7 @@ function QuotationsEditCtrl(
         quotationDetails
       );
       vm.quotation = quotationService.localQuotationUpdate(vm.quotation);
-      $timeout(function() {
+      $timeout(function () {
         vm.isCalculatingAvailability = false;
       }, 800);
     }
@@ -440,10 +453,10 @@ function QuotationsEditCtrl(
   function loadWarehouses() {
     api.$http
       .get('/company/find')
-      .then(function(res) {
+      .then(function (res) {
         vm.warehouses = res.data;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         $log.error(err);
       });
   }
@@ -452,12 +465,12 @@ function QuotationsEditCtrl(
     vm.isLoadingPaymentMethods = true;
     quotationService
       .getPaymentOptions(vm.quotation.id)
-      .then(function(response) {
+      .then(function (response) {
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
         vm.isLoadingPaymentMethods = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         vm.isLoadingPaymentMethods = false;
       });
@@ -490,11 +503,11 @@ function QuotationsEditCtrl(
           }
         }
       })
-      .then(function(res) {
+      .then(function (res) {
         console.log('res', res);
         dialogService.showDialog('Cotización enviada');
       })
-      .catch(function(err) {
+      .catch(function (err) {
         var errMsg = '';
         if (err) {
           errMsg = err.data || err;
@@ -521,11 +534,11 @@ function QuotationsEditCtrl(
     $rootScope.scrollTo('main');
     quotationService
       .sendByEmail(vm.quotation.id)
-      .then(function(res) {
+      .then(function (res) {
         vm.isLoading = false;
         dialogService.showDialog('Email enviado al cliente');
       })
-      .catch(function(err) {
+      .catch(function (err) {
         $log.error(err);
         vm.isLoading = false;
         dialogService.showDialog('Hubo un error, intentalo de nuevo');
@@ -541,7 +554,7 @@ function QuotationsEditCtrl(
   }
 
   function toggleRecord(record) {
-    vm.quotation.Records.forEach(function(rec) {
+    vm.quotation.Records.forEach(function (rec) {
       if (rec.id != record.id) {
         rec.isActive = false;
       }
@@ -586,11 +599,11 @@ function QuotationsEditCtrl(
       .cancel('Cancelar');
 
     $mdDialog.show(confirm).then(
-      function() {
+      function () {
         removeDetail(detail);
         //removeDetailsGroup(detailsGroup);
       },
-      function() {
+      function () {
         console.log('Eliminado');
       }
     );
@@ -607,10 +620,10 @@ function QuotationsEditCtrl(
       .cancel('Cancelar');
 
     $mdDialog.show(confirm).then(
-      function() {
+      function () {
         removeAllDetails();
       },
-      function() {
+      function () {
         console.log('Eliminado');
       }
     );
@@ -622,7 +635,7 @@ function QuotationsEditCtrl(
     $rootScope.scrollTo('main');
     return quotationService
       .removeDetail(detailId, vm.quotation.id)
-      .then(function(res) {
+      .then(function (res) {
         var updatedQuotation = res.data;
 
         //Removing deleted detail from local variables
@@ -654,7 +667,7 @@ function QuotationsEditCtrl(
         loadPaymentMethods();
         return $rootScope.loadActiveQuotation();
       })
-      .catch(function(err) {
+      .catch(function (err) {
         $log.error(err);
       });
   }
@@ -665,7 +678,7 @@ function QuotationsEditCtrl(
     $rootScope.scrollTo('main');
     return quotationService
       .removeAllDetails(vm.quotation.id)
-      .then(function(res) {
+      .then(function (res) {
         var updatedQuotation = res.data;
 
         //If remove worked
@@ -683,7 +696,7 @@ function QuotationsEditCtrl(
         }
         return $rootScope.loadActiveQuotation();
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         vm.isLoading = false;
         vm.isLoadingDetails = false;
@@ -691,14 +704,14 @@ function QuotationsEditCtrl(
   }
 
   function getRemovedDetailIndex(detailId, allDetails) {
-    var indexes = allDetails.map(function(detail, index) {
+    var indexes = allDetails.map(function (detail, index) {
       if (detailId === detail.id) {
         return index;
       } else {
         return 'invalidIndex';
       }
     });
-    var validIndexes = indexes.filter(function(index) {
+    var validIndexes = indexes.filter(function (index) {
       return index !== 'invalidIndex';
     });
 
@@ -718,7 +731,7 @@ function QuotationsEditCtrl(
     }
 
     //Removing all details that aren't new
-    details = details.filter(function(d) {
+    details = details.filter(function (d) {
       return _.findWhere(newDetails, { id: d.id });
     });
     return quotationService.localMultipleDetailsUpdate(details);
@@ -740,7 +753,7 @@ function QuotationsEditCtrl(
   }
 
   function didDetailsChanged() {
-    return _.some(vm.quotation.Details, function(detail) {
+    return _.some(vm.quotation.Details, function (detail) {
       return detail.availabilityChanged;
     });
   }
@@ -766,7 +779,7 @@ function QuotationsEditCtrl(
         Details: angular.copy(vm.quotation.Details)
       };
 
-      params.Details = params.Details.map(function(detail) {
+      params.Details = params.Details.map(function (detail) {
         detail.originalShipDate = detail.productCart.deliveryGroup.date;
         detail.shipDate = detail.originalShipDate;
         detail.quantity = _.clone(detail.productCart.quantity);
@@ -775,7 +788,7 @@ function QuotationsEditCtrl(
 
       quotationService
         .updateDetails(vm.quotation.id, params)
-        .then(function(res) {
+        .then(function (res) {
           console.log('res updateDetails', res);
 
           if (vm.quotation.Client) {
@@ -790,7 +803,7 @@ function QuotationsEditCtrl(
           }
           vm.isLoading = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           $log.error(err);
         });
     } else {
@@ -817,11 +830,11 @@ function QuotationsEditCtrl(
 
     leadService
       .getQuotationLeads(vm.quotation.id)
-      .then(function(leads) {
+      .then(function (leads) {
         vm.leads = leads;
         vm.isLoadingLeads = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err leads load', err);
         vm.isLoadingLeads = false;
       });
@@ -851,8 +864,8 @@ function QuotationsEditCtrl(
           detail: detail
         }
       })
-      .then(function() {})
-      .catch(function() {
+      .then(function () { })
+      .catch(function () {
         console.log('cancelled');
       });
   }
@@ -881,8 +894,8 @@ function QuotationsEditCtrl(
           detailGroup: detailGroup
         }
       })
-      .then(function() {})
-      .catch(function() {
+      .then(function () { })
+      .catch(function () {
         console.log('cancelled');
       });
   }
@@ -912,7 +925,7 @@ function QuotationsEditCtrl(
 
       quotationService
         .addRecord(vm.quotation.id, params)
-        .then(function(res) {
+        .then(function (res) {
           var record = res;
           if (record) {
             vm.quotation.Records.push(record);
@@ -921,7 +934,7 @@ function QuotationsEditCtrl(
           vm.isLoadingRecords = false;
           dialogService.showDialog('Evento guardado');
         })
-        .catch(function(err) {
+        .catch(function (err) {
           dialogService.showDialog('Hubo un error ' + (err.data || err));
           $log.error(err);
           vm.isLoadingRecords = false;
@@ -931,7 +944,7 @@ function QuotationsEditCtrl(
     }
   }
 
-  $scope.$on('$destroy', function() {
+  $scope.$on('$destroy', function () {
     $mdDialog.hide();
     mainDataListener();
   });
