@@ -16,6 +16,7 @@
     "angular-datatables": "^0.5.4",
     "pikaday-angular": "^2.0.0",
     "angular-jquery-timepicker": "^0.11.0",
+    "jquery-timepicker-jt": "1.13.4",
     "ng-photoswipe": "^0.2.0",
     "angular-input-masks": "^2.4.0",
     "angular-material": "^1.1.5",
