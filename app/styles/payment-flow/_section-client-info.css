@@ -1,0 +1,5 @@
+/***  SECTION CLIENT INFORMATION  ***/
+.info-client{
+    background-color: blue;
+    grid-column: full-start / col-end 4;
+}

@@ -1,0 +1,74 @@
+.heading-1, .heading-2, .heading-3, .heading-4 {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400; }
+  
+.heading-1 {
+    font-size: 4.5rem;
+    color: #f9f7f6;
+    line-height: 1; 
+}
+
+.heading-2 {
+    font-size: 4rem;
+    font-style: italic;
+    line-height: 1; 
+}
+
+.heading-2--light {
+    color: #f9f7f6; 
+}
+
+.heading-2--dark {
+    color: #54483A; 
+}
+
+.heading-3 {
+    font-size: 1.6rem;
+    color: #54483A;
+    text-transform: uppercase; 
+}
+
+.heading-4 {
+    font-size: 1.9rem; 
+}
+.heading-4--light {
+    color: #f9f7f6; 
+}
+
+.heading-4--dark {
+    color: #54483A; 
+}
+
+.btn {
+    background-color: #c69963;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: .8rem;
+    text-transform: uppercase;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.btn:hover {
+    background-color: #B28451; 
+}
+
+
+.font-primary{
+    font-family: 'Nunito', sans-serif;
+}
+
+.font-display{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/***
+*  FONT SIZES VARIABLES
+ ***
+$default-font-size: 1.6rem;
+&font-family: "Lato", sans-serif;
+$font-weight: 400;
+*/

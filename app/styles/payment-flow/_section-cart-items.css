@@ -1,0 +1,5 @@
+/***  SECTION CART ITEMS  ***/
+.cart-items{
+    background-color: rgb(136, 165, 42);
+    grid-column: col-start 5 / full-end;
+}

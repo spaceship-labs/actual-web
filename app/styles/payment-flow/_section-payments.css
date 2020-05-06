@@ -1,0 +1,5 @@
+/***  SECCTION PAYMENT  ***/
+.payment-methods{
+    background-color: blueviolet;
+    grid-column: col-start 5 / full-end;
+}
