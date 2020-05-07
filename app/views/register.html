@@ -1,19 +1,26 @@
 <div class="body-payment-flow">
   <div class="payment-flow">
     <div class="client-session">
-      <i class="icon-login"></i>
-      <h3 class="heading-4--light">Iniciar sesión</h4>
-      <div class="client-session__session-selectors">
-          Space for select method  
+      <div class="section-title">
+        <i class="icon-login"></i>
+        <h3 class="heading-4--light">Iniciar sesión</h4>
       </div>
-      <div class="client-session__sessionwith-text"> Iniciar sesión con </div>
-      <div class="client-session__sessionwith-buttons">
-        <button class="btn">
+
+      <div class="__session-selectors">
+        <ng-include src="'views/partials/payment-flow/login-selector.html'"></ng-include>
+      </div>
+      <!-- SOLCIAL NETWORKS SECTION 
+      <div class="__sessionwith-text" > Iniciar sesión con </div>
+      <div class="__sessionwith-buttons">
+        <button class="social-btn">
           Login with Facebook
         </button>
+        <button class="social-btn">
+          Login with Google
+        </button>
       </div>
+      -->
     </div>
-
     <div class="cart-items">Información del carrito</div>
     <div class="info-client">Información del cliente</div>
     <div class="payment-methods">Métodos de pago</div>

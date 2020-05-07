@@ -39,24 +39,6 @@
     color: #54483A; 
 }
 
-.btn {
-    background-color: #c69963;
-    color: #fff;
-    border: none;
-    border-radius: 0;
-    font-family: "Josefin Sans", sans-serif;
-    font-size: .8rem;
-    text-transform: uppercase;
-    padding: .5rem 1rem;
-    cursor: pointer;
-    transition: all .2s;
-}
-
-.btn:hover {
-    background-color: #B28451; 
-}
-
-
 .font-primary{
     font-family: 'Nunito', sans-serif;
 }
@@ -64,6 +46,35 @@
 .font-display{
     font-family: 'Josefin Sans', sans-serif;
 }
+
+.social-btn {
+    background-color: #c69963;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: .8rem;
+    text-transform: uppercase;
+    padding: .5rem 3rem;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.social-btn:hover {
+    background-color: #B28451; 
+}
+
+.hidden{
+    display: none;
+}
+
+/***
+* MARGIN BUTTON SIZES 
+***/
+.mb-sm { margin-bottom: 2rem; }
+.mb-md { margin-bottom: 3rem; }
+.mb-lg { margin-bottom: 4rem; }
+.mb-hg { margin-bottom: 8rem; }
 
 /***
 *  FONT SIZES VARIABLES

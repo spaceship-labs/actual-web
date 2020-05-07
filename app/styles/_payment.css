@@ -26,7 +26,14 @@
     font-family: "Nunito", sans-serif;
     font-size: 1rem;
 }
-  
 
+.section-title{
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    margin: auto;
+}
 
-
+.section-title > i{
+    margin-right: .5rem;
+}
