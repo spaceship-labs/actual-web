@@ -250,6 +250,7 @@
         });
         if (category.FeaturedProducts) {
           category.FeaturedProducts = category.FeaturedProducts.filter(function (FeaturedProduct) {
+            FeaturedProduct.url = buildProductUrl(FeaturedProduct);
             return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0
           }).slice(0, 2);
         }
@@ -291,6 +292,20 @@
         return icons[handle];
       }
       return 'murbles';
+    }
+
+    function buildProductUrl(product) {
+      product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
+      var _name = product.Name.replace(new RegExp(' ', 'g'), '-');
+      _name = _name.replace(new RegExp('/', 'g'), '-');
+      _name = _name.toLowerCase();
+      var slug = encodeURIComponent(_name);
+      var url = '/' + slug + '/' + product.ItemCode;
+      return url;
+    }
+    function capitalizeFirstLetter(string) {
+      var text = string.toLowerCase();
+      return text.charAt(0).toUpperCase() + text.slice(1);
     }
 
     function getLowestCategory(categories) {
