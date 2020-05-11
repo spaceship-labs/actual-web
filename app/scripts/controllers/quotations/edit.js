@@ -342,20 +342,6 @@ function QuotationsEditCtrl(
             deliveries
           );
         }
-        // sergio start
-        var deliveriesGrouped = [];
-        for (var i = 0; i < deliveries.length; i++) {
-          var index = _.findIndex(deliveriesGrouped, function (delivery) {
-            return moment(delivery.date).isSame(moment(deliveries[i].date), 'day')
-          })
-          if (index === -1) {
-            deliveriesGrouped.push(deliveries[i])
-          } else {
-            deliveriesGrouped[index].available += deliveries[i].available;
-          }
-        }
-        deliveries = deliveriesGrouped;
-        // sergio end
         return deliveryService.setUpDetailDeliveries(detail, deliveries);
       });
   }
