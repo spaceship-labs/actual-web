@@ -660,20 +660,7 @@
       deliveries,
       productTakenStock
     ) {
-      // sergio start
-      var deliveriesGrouped = [];
-      for (var i = 0; i < detail.deliveries.length; i++) {
-        var index = _.findIndex(deliveriesGrouped, function (delivery) {
-          return moment(delivery.date).isSame(moment(detail.deliveries[i].date), 'day')
-        })
-        if (index === -1) {
-          deliveriesGrouped.push(detail.deliveries[i])
-        } else {
-          deliveriesGrouped[index].available += detail.deliveries[i].available;
-        }
-      }
-      deliveries = deliveriesGrouped;
-      // sergio end
+      console.log("Deliveries", deliveries);
       for (var i = 0; i < deliveries.length; i++) {
         deliveries[i].available =
           deliveries[i].initalAvailable - productTakenStock;
@@ -696,8 +683,8 @@
           detail.quantity > deliveries[i].initalAvailable
         ) {
           //Takinkg what is available at time
-          detail.quantity = deliveries[i].available;
-          detail.availabilityChanged = true;
+          //detail.quantity = deliveries[i].available;
+          //detail.availabilityChanged = true;
         }
       }
 

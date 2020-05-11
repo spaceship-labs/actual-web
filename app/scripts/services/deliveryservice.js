@@ -154,26 +154,10 @@
 		}
 
 		function getAvailableByDeliveries(deliveries) {
-			//sergio start
-			var deliveriesGrouped = [];
-			for (var i = 0; i < deliveries.length; i++) {
-				var index = _.findIndex(deliveriesGrouped, function (delivery) {
-					return moment(delivery.date).isSame(moment(deliveries[i].date), 'day');
-				});
-				if (index === -1) {
-					deliveriesGrouped.push(deliveries[i])
-				} else {
-					if (deliveriesGrouped[index].available > deliveries[i].available)
-						deliveriesGrouped[index].available = deliveries[i].available;
-				}
-			}
-			deliveries = deliveriesGrouped;
-			//sergio end
-
 			var warehousesIds = getWarehousesIdsByDeliveries(deliveries);
 			var available = 0;
 			available = warehousesIds.reduce(function (acum, whsId) {
-				return getDeliveryStockByWarehouse(whsId, deliveries); // acum +
+				return acum + getDeliveryStockByWarehouse(whsId, deliveries);
 			}, 0);
 			return available;
 		}
