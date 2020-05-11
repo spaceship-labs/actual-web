@@ -13,7 +13,12 @@
     padding: 8rem;
     padding-top: 1rem;
     */
-    
+}
+
+@media only screen and (max-width: 70em) {
+    .client-session{
+        grid-template-columns: 1 / -1;
+    } 
 }
 
 /* SECTION SELECTORS STYLE */

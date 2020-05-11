@@ -3,3 +3,9 @@
     background-color: blue;
     grid-column: full-start / col-end 4;
 }
+
+@media only screen and (max-width: 40em) {
+    .client-session{
+        grid-template-columns: full-start / full-end;
+    } 
+}
