@@ -4670,7 +4670,7 @@ md-backdrop.md-sidenav-backdrop {
 /*--------------*/
 .options-alert-inner {
   position: relative;
-  padding: 20px 20px;
+  padding: 30px 30px;
   max-width: 600px;
 }
 .options-alert-dialog h2 {
@@ -4707,9 +4707,9 @@ md-backdrop.md-sidenav-backdrop {
   font-size: 19px;
   height: 25px;
   position: absolute;
-  right: 20px;
+  right: 5px;
   text-align: center;
-  top: 20px;
+  top: 5px;
   vertical-align: middle;
   width: 25px;
 }
@@ -4742,8 +4742,7 @@ md-backdrop.md-sidenav-backdrop {
 }
 .cart-view .cart-title i span {
   position: absolute;
-  left: -8px;
-  right: 0;
+  left: 11px;
   margin: 0 auto;
   top: 1px;
   font-size: 12px;
@@ -7757,6 +7756,10 @@ md-sidenav {
   #footer .footer-menu-col li p {
     font-size: 12px;
   }
+  .options-alert-dialog{
+    min-height:0;
+  }
+
 }
 
 @media (max-width: 800px) {
