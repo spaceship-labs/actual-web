@@ -1,11 +1,7 @@
-<div
-  ng-repeat="mainCategory in categoriesTree track by $index"
-  ng-if="mainCategory[storeCode]"
+<div ng-repeat="mainCategory in categoriesTree track by $index" ng-if="mainCategory[storeCode]"
   class="listing-view-nav-wrapper">
   <h2>
-    <a class="mouseover-link"
-      ng-href="/category/{{mainCategory.Handle}}"
-      ng-class="{'active': mainCategory.isActive}">
+    <a class="mouseover-link" ng-href="/category/{{mainCategory.Handle}}" ng-class="{'active': mainCategory.isActive}">
       <i class="icon-{{getCategoryIcon(mainCategory.Handle)}}"></i>
       <!-- MENU HOVER -->
       <strong>{{mainCategory.Name}}</strong>
@@ -13,33 +9,21 @@
     </a>
   </h2>
 
-  <ul
-    class="listing-view-nav"
-    ng-class="{'active': mainCategory.isActive}"
-  >
+  <ul class="listing-view-nav" ng-class="{'active': mainCategory.isActive}">
     <!--ng-show="mainCategory.isActive"-->
 
-    <li
-      ng-repeat="category in mainCategory.Childs | orderBy: 'Name' "
-      ng-if="category[storeCode]"
-      ng-class="{'active': category.isActive}"
-    >
+    <li ng-repeat="category in mainCategory.Childs | orderBy: 'Name' " ng-if="category[storeCode]"
+      ng-class="{'active': category.isActive}">
       <h3>
         <i class="icon-right-open aside"></i>
-        <a
-          ng-if="category.Childs"
-          ng-href="/category/{{category.Handle}}"
-        >
-        <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
+        <a ng-if="category.Childs" ng-href="/category/{{category.Handle}}">
+          <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
           <strong>{{category.Name}}</strong>
           <span class="products-num">({{category[storeCode]}})</span>
         </a>
-        
-        <a
-          ng-if="!category.Childs"
-          ng-href="/category/{{category.Handle}}"
-        > 
-        <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
+
+        <a ng-if="!category.Childs" ng-href="/category/{{category.Handle}}">
+          <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
 
           <strong>{{category.Name}}</strong>
           <span class="products-num">({{category[storeCode]}})</span>
@@ -47,11 +31,8 @@
       </h3>
 
       <ul class="listing-view-subnav">
-        <li
-          ng-repeat="subcategory in category.Childs | orderBy: 'Name' "
-          ng-if="subcategory[storeCode]"
-        >
-        <img class="listing-view-nav-icon-sub" src="images/arrow-right.png " alt="">
+        <li ng-repeat="subcategory in category.Childs | orderBy: 'Name' " ng-if="subcategory[storeCode]">
+          <img class="listing-view-nav-icon-sub" src="images/arrow-right.png " alt="">
 
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
             {{subcategory.Name}} ({{subcategory[storeCode]}})
@@ -62,7 +43,7 @@
   </ul>
 </div>
 
-<!--OFERTAS-->
+<!--OFERTAS
 <div
   class="listing-view-nav-wrapper">
   <h2>
@@ -74,3 +55,4 @@
     </a>
   </h2>
 </div>
+-->
