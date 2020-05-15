@@ -772,10 +772,10 @@ function getFacebookPixelId(env) {
   var facbookPixelId = '';
   switch (env) {
     case 'production':
-      facbookPixelId = '129365994394398';
+      facbookPixelId = '591808408023977';
       break;
     case 'sandbox':
-      facbookPixelId = '129365994394398';
+      facbookPixelId = '591808408023977';
       break;
     case 'dev':
       facbookPixelId = '';
