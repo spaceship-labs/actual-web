@@ -303,7 +303,7 @@
         iluminacion: 'iluminacion',
         organizacion: 'murbles'
       };
-      console.log('Test getCategoryIcon handle', handle);
+      //console.log('Test getCategoryIcon handle', handle);
 
       if (icons[handle]) {
         return icons[handle];

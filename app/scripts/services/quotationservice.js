@@ -684,7 +684,7 @@
         ) {
           //Takinkg what is available at time
           //detail.quantity = deliveries[i].available;
-          //detail.availabilityChanged = true;
+          detail.availabilityChanged = true;
         }
       }
 

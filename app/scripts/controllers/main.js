@@ -743,13 +743,13 @@
         vm.activeCategory[key] = false;
       });
       vm.activeCategory[handle] = true;
-      console.log("TEST HANDLECATEGORYHOVER TRUE", vm.activeCategory[handle])
+      //console.log("TEST HANDLECATEGORYHOVER TRUE", vm.activeCategory[handle])
     }
 
     function handleCategoryLeave() {
       Object.keys(vm.activeCategory).forEach(function (key, value) {
         vm.activeCategory[key] = false;
-        console.log("TEST HANDLECATEGORYHOVER FALSE", vm.activeCategory[key])
+        //console.log("TEST HANDLECATEGORYHOVER FALSE", vm.activeCategory[key])
 
       });
     }
