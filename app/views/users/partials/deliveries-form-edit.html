@@ -1,15 +1,11 @@
-<hr/>
+<hr />
 
 <div ng-if="vm.isLoadingEdit" layout-fill layout="row" layout-align="center center" class="loading-circle">
-  <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+  <md-progress-circular md-mode="indeterminate" md-diameter="150"></md-progress-circular>
 </div>
 
-<form 
-  ng-if="!vm.isLoadingEdit" 
-  class="delivery-user-form"
-  name="editForm" 
-  ng-submit="vm.updateAddress(editForm, vm.editAddress)"
->
+<form ng-if="!vm.isLoadingEdit" class="delivery-user-form" name="editForm"
+  ng-submit="vm.updateAddress(editForm, vm.editAddress)">
   <h2><strong>Editar dirección de envío</strong></h2>
 
   <section class="form-section">
@@ -75,8 +71,8 @@
     </section>
     <!--END DATOS PERSONALES-->
 
-  <!--END FORM SECTION-->        
-  
+    <!--END FORM SECTION-->
+
     <!--DATOS PERSONALES-->
     <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
       <div flex="100">
@@ -181,25 +177,23 @@
               <strong>Referencias cercanas</strong>
             </label>
             <div class="input-element-inner">
-              <input type="text" ng-model="vm.editAddress.U_Notes1">
+              <input type="text" maxlength="100" ng-model="vm.editAddress.U_Notes1">
             </div>
           </div>
-        <div flex-gt-sm="10" flex="100" class="input-element"></div>
-        </div>                
+          <div flex-gt-sm="10" flex="100" class="input-element"></div>
+        </div>
       </div>
     </section>
     <!--END DATOS PERSONALES-->
 
   </section>
-  <!--END FORM SECTION--> 
+  <!--END FORM SECTION-->
 
-  <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
-    <button
-      ng-submit="vm.updateAddress(editForm, vm.editAddress)"
-      flex="50"
+  <div layout="row" class="form-view-btns no-margin" layout-align="center center">
+    <button ng-submit="vm.updateAddress(editForm, vm.editAddress)" flex="50"
       class="form-view-btn form-view-btn-primary">
       Actualizar dirección
     </button>
   </div>
-<!--FIN DIRECCIONES DE ENVIO-->
+  <!--FIN DIRECCIONES DE ENVIO-->
 </form>
