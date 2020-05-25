@@ -71,7 +71,7 @@ function CategoryCtrl(
   }
 
   function init(){
-    var activeSortOptionKey = 'relevance';
+    var activeSortOptionKey = 'DiscountPrice';
     vm.activeSortOption = _.findWhere(vm.sortOptions,{key: activeSortOptionKey});
         
     vm.search = {

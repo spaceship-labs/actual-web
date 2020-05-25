@@ -1,30 +1,23 @@
-<hr/>
+<hr />
 
-<div ng-if="vm.isLoadingCreate" layout-fill layout="row"  layout-align="center center" class="loading-circle">
-  <md-progress-circular md-mode="indeterminate"  md-diameter="150"></md-progress-circular>
+<div ng-if="vm.isLoadingCreate" layout-fill layout="row" layout-align="center center" class="loading-circle">
+  <md-progress-circular md-mode="indeterminate" md-diameter="150"></md-progress-circular>
 </div>
 
 
-<form 
-  ng-if="!vm.isLoadingCreate" 
-  name="createForm" 
-  class="delivery-user-form"
-  ng-submit="vm.createAddress(createForm)"
->
+<form ng-if="!vm.isLoadingCreate" name="createForm" class="delivery-user-form" ng-submit="vm.createAddress(createForm)">
 
   <!--<h2><strong>Registrar una dirección de envío</strong></h2>-->
   <div layout="row" layout-wrap layout-align="start center" class="form-title">
     <div flex-sm="100" flex-xs="100">
-      <h2><strong>PERSONA Y DIRECCIÓN DE ENTREGA</strong></h2>  
+      <h2><strong>PERSONA Y DIRECCIÓN DE ENTREGA</strong></h2>
     </div>
 
     <div class="checkbox-client-type" flex-sm="100" flex-xs="100">
-      <md-checkbox
-        ng-click="vm.copyPersonalDataToNewAddress()"
-        ng-model="vm.copyingPersonalDataToContact"
+      <md-checkbox ng-click="vm.copyPersonalDataToNewAddress()" ng-model="vm.copyingPersonalDataToContact"
         aria-label="">
         Los mismos que mis datos personales
-      </md-checkbox>    
+      </md-checkbox>
     </div>
   </div>
 
@@ -196,25 +189,22 @@
               <strong>Referencias cercanas</strong>
             </label>
             <div class="input-element-inner">
-              <input type="text" ng-model="vm.newAddress.U_Notes1">
+              <input type="text" maxlength="100" ng-model="vm.newAddress.U_Notes1">
             </div>
           </div>
-        <div flex-gt-sm="10" flex="100" class="input-element"></div>
-        </div>                
+          <div flex-gt-sm="10" flex="100" class="input-element"></div>
+        </div>
       </div>
     </section>
     <!--END DATOS PERSONALES-->
 
   </section>
-  <!--END FORM SECTION--> 
+  <!--END FORM SECTION-->
 
-  <div layout="row" class="form-view-btns no-margin" layout-align="center center"> 
-    <button
-      ng-submit="vm.createAddress(createForm)"
-      flex="50"
-      class="form-view-btn form-view-btn-primary">
+  <div layout="row" class="form-view-btns no-margin" layout-align="center center">
+    <button ng-submit="vm.createAddress(createForm)" flex="50" class="form-view-btn form-view-btn-primary">
       Agregar dirección
     </button>
   </div>
-<!--FIN DIRECCIONES DE ENVIO-->
+  <!--FIN DIRECCIONES DE ENVIO-->
 </form>
