@@ -49,12 +49,16 @@
         ng-attr-href="{{main.getFaviconUrl()}}"
         type="image/x-icon"
     >
-
-
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<%= tagManagerId %>');</script>
-
     /process -->
-
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer2', 'GTM-M2CFZQH');</script>
+  <!-- End Google Tag Manager -->
   <base href="/" />
   <meta name="fragment" content="!" />
   <meta name="viewport" content="width=device-width, user-scalable=yes" />
@@ -136,21 +140,20 @@
   <!--End of Zendesk Chat Script-->
 
   <!--SEE GRUNTFILE processhtml-->
-  <!-- process:template
-    <script>
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-      document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-      //fbq.disablePushState = true; //not recommended, but can be done
-
-      fbq('init', '<%= facebookPixelId %>');
-      fbq('track', 'PageView');
-    </script>
-
-    /process -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      }; if (!f._fbq) f._fbq = n;
+      n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+    }(window,
+      document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    //fbq.disablePushState = true; //not recommended, but can be done
+    fbq('init', '591808408023977');
+    fbq('track', 'PageView');
+  </script>
 </head>
 
 <body ng-cloak ng-class="main.siteTheme">
@@ -162,10 +165,14 @@
       </p>
     <![endif]-->
 
-  <!-- process:template
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= tagManagerId %>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    /process -->
-
+  <!-- Facebook pixel Code (noscript) -->
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=591808408023977&ev=PageView&noscript=1" /></noscript>
+  <!-- End Facebook Pixel Code (noscript)-->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2CFZQH" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <div ng-show="main.isActiveBackdrop" class="backdrop"></div>
 
   <div id="wrap">
