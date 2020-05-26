@@ -2,6 +2,12 @@
 .payment-methods{
     background-color: blueviolet;
     grid-column: col-start 5 / full-end;
+
+    display: grid;
+    grid-template-rows: 4rem minmax(6rem, min-content);
+    grid-template-columns: minmax(min-content, max-content);
+    /*grid-row-gap: 1rem;*/
+    justify-content: center;
 }
 
 @media only screen and (max-width: 32.5em) {

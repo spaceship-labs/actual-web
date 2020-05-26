@@ -2,6 +2,12 @@
 .info-client{
     background-color: blue;
     grid-column: full-start / col-end 4;
+
+    display: grid;
+    grid-template-rows: 4rem minmax(6rem, min-content);
+    grid-template-columns: minmax(min-content, max-content);
+    /*grid-row-gap: 1rem;*/
+    justify-content: center;
 }
 
 

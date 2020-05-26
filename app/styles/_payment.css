@@ -109,4 +109,10 @@ $bp-smallest: 31.25em; // 500px
 
 .section-title > i{
     margin-right: .5rem;
+    font-weight: 700;
 }
+
+.section-title > .icon-delivery {
+    font-size: 1.8rem;
+}
+
