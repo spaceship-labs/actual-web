@@ -4,8 +4,10 @@
     grid-column: full-start / col-end 4;
 }
 
-@media only screen and (max-width: 40em) {
-    .client-session{
-        grid-template-columns: full-start / full-end;
-    } 
-}
+
+@media only screen and (max-width: 32.5em) {
+    .info-client{
+        grid-row: 2;
+        grid-column: 1 / -1;  
+    }    
+  }

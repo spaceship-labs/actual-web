@@ -4,8 +4,7 @@
     grid-column: col-start 5 / full-end;
 }
 
-@media only screen and (max-width: 40em) {
-    .client-session{
-        grid-template-columns: full-start / full-end;
-    } 
-}
+@media only screen and (max-width: 32.5em) {
+    .cart-items{
+        grid-column: 1 / -1;  }    
+  }

@@ -14,6 +14,8 @@
     font-size: 62.5%; 
     grid-template-rows: 18vw 20vw; /*repeat(2, 80vh) repeat(2, min-content);*/ 
     grid-template-columns: [full-start] minmax(6rem,1fr) [center-start] repeat(8, [col-start]minmax(min-content,14rem)[col-end]) [center-end] minmax(6rem,1fr) [full-end];
+
+
 }
 
 
@@ -60,20 +62,43 @@ $bp-smallest: 31.25em; // 500px
 
 @media only screen and (max-width: 34.5em) {
     .payment-flow{
-        grid-template-rows: 44vw 48vw; /*repeat(2, 80vh) repeat(2, min-content);*/ 
+        grid-template-rows: 45vw 48vw; /*repeat(2, 80vh) repeat(2, min-content);*/ 
         grid-template-columns: [full-start] minmax(5rem,1fr) [center-start] repeat(8, [col-start]minmax(min-content,12rem)[col-end]) [center-end] minmax(6rem,1fr) [full-end];
     }    
 }
   
+
+@media only screen and (max-width: 20em) {
+    .payment-flow{
+        grid-template-rows: 70vw 50vw;
+      }    
+  }
+
+  @media only screen and (max-width: 17em) {
+    .payment-flow{
+        grid-template-rows: 80vw 50vw;
+      }    
+  }
+
+  @media only screen and (max-width: 15em) {
+    .payment-flow{
+        grid-template-rows: 100vw 50vw;
+      }    
+  }
+
+
+  @media only screen and (max-width: 11.7em) {
+    .payment-flow{
+        grid-template-rows: 150vw 50vw;
+      }    
+  }
+
 .payment-flow > * {
     background-color: blueviolet;
     color: white;
     font-family: "Nunito", sans-serif;
     font-size: 1rem;
 }
-
-
-
 
 .section-title{
     display: flex;

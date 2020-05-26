@@ -15,10 +15,9 @@
     */
 }
 
-@media only screen and (max-width: 70em) {
-    .client-session{
-        grid-template-columns: 1 / -1;
-    } 
+@media only screen and (max-width: 32.5em) {
+  .client-session{
+      grid-column: 1 / -1;  }    
 }
 
 /* SECTION SELECTORS STYLE */
@@ -26,8 +25,16 @@
     display: grid;
     grid-template-rows: min-content;
     grid-row-gap: .5rem;
-   align-content: center;
+    align-content: center;
+    margin-top: -10px; 
 }
+
+@media only screen and (max-width: 32.5em) {
+  .__session-selectors{
+      margin-top: -20px; 
+    }    
+}
+
 
 .login-selectors{
     display: grid;
@@ -36,6 +43,35 @@
     grid-gap: 1rem;
     align-content: center;
     padding-top: 1.1rem;
+}
+
+
+@media only screen and (max-width: 60em) {
+  .login-selectors{
+    grid-template-columns: 35vw;
+  }    
+}
+
+@media only screen and (max-width: 52em) {
+  .login-selectors{
+    grid-template-columns: 30vw;
+  }    
+}
+
+@media only screen and (max-width: 32.5em) {
+  .login-selectors{
+     grid-template-columns: repeat(3,25vw); 
+     grid-gap: 0.5rem;
+     padding-top: 0;
+    }    
+}
+
+@media only screen and (max-width: 20em) {
+  .login-selectors{
+      grid-template-columns: 65vw;
+      grid-row-gap: 1rem;
+      margin-top: 2rem;
+    }    
 }
 
 /* The container */
@@ -51,6 +87,14 @@
 
     display: grid;
   }
+
+  @media only screen and (max-width: 32.5em) {
+    .radio-container{
+      padding-left: 1.25rem;
+    }  
+        
+  }
+  
 
   .radio-container::after{
     content: "";
