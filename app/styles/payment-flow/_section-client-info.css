@@ -59,9 +59,10 @@
   }
   
   .form__input{
-    font-size: 1rem;
-    padding: .3rem 1rem;
+ 
+    padding: .2rem 1rem;
     font-family: inherit;
+    font-size: 90%;
     color: inherit;
     border-radius: 2px;
     background-color: rbga(#fff, 0.5);
@@ -71,7 +72,7 @@
     width: 9rem;
     transition: all .3s; 
   } 
-    
+   
     
   .form__input:focus{
       outline: none;
@@ -100,6 +101,7 @@
     opacity: 0;
     visibility: hidden;
     transform: translateY(-2rem);
+    font-size: 90%;
   }
   
   .link__event{

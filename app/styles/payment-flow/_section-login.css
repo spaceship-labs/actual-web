@@ -6,13 +6,8 @@
     display: grid;
     grid-template-rows: 4rem minmax(6rem, min-content);
     grid-template-columns: minmax(min-content, max-content);
-    /*grid-row-gap: 1rem;*/
     justify-content: center;
 
-    /*
-    padding: 8rem;
-    padding-top: 1rem;
-    */
 }
 
 @media only screen and (max-width: 32.5em) {
