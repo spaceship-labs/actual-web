@@ -12,7 +12,7 @@
     display: grid;
     font-weight: 300px;
     font-size: 62.5%; 
-    grid-template-rows: 18vw 20vw; /*repeat(2, 80vh) repeat(2, min-content);*/ 
+    grid-template-rows: 18vw 30vw; /*repeat(2, 80vh) repeat(2, min-content);*/ 
     grid-template-columns: [full-start] minmax(6rem,1fr) [center-start] repeat(8, [col-start]minmax(min-content,14rem)[col-end]) [center-end] minmax(6rem,1fr) [full-end];
 
 
@@ -115,4 +115,3 @@ $bp-smallest: 31.25em; // 500px
 .section-title > .icon-delivery {
     font-size: 1.8rem;
 }
-
