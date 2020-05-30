@@ -29,6 +29,12 @@
     grid-column-gap: .2rem;
     margin-bottom: 1rem;
   }
+
+  @media only screen and (max-width: 50rem) {
+    .section-infoCart{
+        width: 300px;
+    }    
+  }
   
   
   .cart__groupDescription{
