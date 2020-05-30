@@ -13,5 +13,48 @@
 
 @media only screen and (max-width: 32.5em) {
     .cart-items{
-        grid-column: 1 / -1;  }    
+        grid-column: 1 / -1;  
+    }    
   }
+
+  .section-infoCart{
+    background-color: goldenrod;
+    width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: grid;
+    grid-template-rows: minmax(min-content, max-content);
+    grid-template-columns: [start-column1]60%[start-column2]40%[end-column2];
+    grid-row-gap: .2rem;
+    grid-column-gap: .2rem;
+    margin-bottom: 1rem;
+  }
+  
+  
+  .cart__groupDescription{
+    grid-column: start-column1 / start-column2;
+    background-color: green;
+  }
+  
+  @media only screen and (max-width: 50rem) {
+    .cart__groupDescription{
+      grid-column: 1 / -1;
+    }    
+  }
+  
+  .cart__groupItemCost{
+    grid-column: 2 / end-column2;
+    background-color: blueviolet;
+  }
+  
+  @media only screen and (max-width: 50rem) {
+    .cart__groupItemCost{
+      grid-column: 1 / -1;
+    }    
+  }
+  
+  .cart__groupBalance{
+    grid-column: 1 / -1;
+    background-color: royalblue;
+  }
+  
