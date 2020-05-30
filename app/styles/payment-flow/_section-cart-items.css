@@ -17,16 +17,15 @@
     }    
   }
 
-  .section-infoCart{
+.section-infoCart{
     background-color: goldenrod;
+    font-size: 80%;
     width: 500px;
     margin: 0 auto;
     padding: 1rem;
     display: grid;
+    grid-template-columns: 100%;
     grid-template-rows: minmax(min-content, max-content);
-    grid-template-columns: [start-column1]60%[start-column2]40%[end-column2];
-    grid-row-gap: .2rem;
-    grid-column-gap: .2rem;
     margin-bottom: 1rem;
   }
 
@@ -36,10 +35,19 @@
     }    
   }
   
+  .cart__groupInfoItems{
+    grid-column: 1 / -1;
+    
+    display: grid;
+    grid-template-columns: [start-column1]60%[start-column2]40%[end-column2];
+    grid-template-rows: minmax(min-content, max-content);
+      
+  }  
   
   .cart__groupDescription{
-    grid-column: start-column1 / start-column2;
+    grid-column: start-column1 / 2;
     background-color: green;
+    padding:.2rem;
   }
   
   @media only screen and (max-width: 50rem) {
@@ -51,6 +59,7 @@
   .cart__groupItemCost{
     grid-column: 2 / end-column2;
     background-color: blueviolet;
+    padding:.2rem;
   }
   
   @media only screen and (max-width: 50rem) {
@@ -62,5 +71,6 @@
   .cart__groupBalance{
     grid-column: 1 / -1;
     background-color: royalblue;
+    padding:.2rem;
   }
   
