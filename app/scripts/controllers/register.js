@@ -7,6 +7,7 @@ function RegisterCtrl(
   dialogService,
   quotationService,
   commonService,
+  validatorService,
   userService,
   localStorageService,
   $rootScope,
@@ -53,7 +54,7 @@ function RegisterCtrl(
     vm.isLoading = true;
     quotationService
       .getById($routeParams.quotation)
-      .then(function(res) {
+      .then(function (res) {
         vm.quotation = res.data;
         if (vm.quotation && vm.quotation.OrderWeb) {
           if (vm.quotation.OrderWeb) {
@@ -61,13 +62,13 @@ function RegisterCtrl(
           }
         }
         vm.isLoading = false;
-        return commonService.getStatesSap().then(function(res) {
+        return commonService.getStatesSap().then(function (res) {
           console.log(res);
           vm.states = res.data;
           loadZipcodeDelivery($routeParams.quotation);
         });
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
       });
   }
@@ -75,7 +76,7 @@ function RegisterCtrl(
   function loadZipcodeDelivery(quotationId) {
     quotationService
       .getQuotationZipcodeDelivery(quotationId)
-      .then(function(res) {
+      .then(function (res) {
         vm.zipcodeDelivery = res;
         vm.newAddress.U_CP = vm.zipcodeDelivery.cp;
         vm.newAddress.U_Mpio = vm.zipcodeDelivery.municipio;
@@ -85,7 +86,7 @@ function RegisterCtrl(
         console.log('vm.newAddress', vm.newAddress);
         console.log('vm.zipcodedelivery', vm.zipcodeDelivery);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
       });
   }
@@ -93,7 +94,7 @@ function RegisterCtrl(
   function getStateCodeByZipcodeDelivery(zipcodeDelivery) {
     var zipcodeStateName = zipcodeDelivery.estado.toUpperCase();
     console.log('zipcodeStateName', zipcodeStateName);
-    var stateItem = _.find(vm.states, function(state) {
+    var stateItem = _.find(vm.states, function (state) {
       var stateName = state.Name.toUpperCase();
       return stateName === zipcodeStateName;
     });
@@ -146,13 +147,13 @@ function RegisterCtrl(
         email: vm.existingClient.email,
         password: vm.existingClient.password
       };
-      var handleSignInError = function(err) {
+      var handleSignInError = function (err) {
         console.log('err', err);
         dialogService.showDialog('Error al iniciar sesión');
       };
       authService
         .signIn(formData, $rootScope.successAuthInCheckout, handleSignInError)
-        .then(function() {
+        .then(function () {
           var user = localStorageService.get('user');
           var userId = user.id;
           var clientId = user.Client;
@@ -171,7 +172,7 @@ function RegisterCtrl(
             return deferred.resolve();
           }
         })
-        .then(function(updated) {
+        .then(function (updated) {
           if (updated) {
             //dialogService.showDialog('Registrado con exito');
             $location.path('/checkout/client/' + $routeParams.quotation);
@@ -188,7 +189,6 @@ function RegisterCtrl(
     console.log('register');
     var createdClient;
     var createdUser;
-
     if (form.$valid) {
       vm.isLoading = true;
 
@@ -203,7 +203,7 @@ function RegisterCtrl(
       }
       clientService
         .register(vm.newClient)
-        .then(function(res) {
+        .then(function (res) {
           console.log('res', res);
           res = res || {};
           createdClient = res.client;
@@ -220,7 +220,7 @@ function RegisterCtrl(
             password: vm.newClient.password
           };
 
-          var handleSignInError = function(err) {
+          var handleSignInError = function (err) {
             console.log('err', err);
             dialogService.showDialog('Error al iniciar sesión');
           };
@@ -231,7 +231,7 @@ function RegisterCtrl(
             handleSignInError
           );
         })
-        .then(function() {
+        .then(function () {
           console.log('termino authService');
 
           if ($routeParams.quotation) {
@@ -249,7 +249,7 @@ function RegisterCtrl(
             return deferred.resolve();
           }
         })
-        .then(function(updated) {
+        .then(function (updated) {
           if (updated) {
             //dialogService.showDialog('Registrado con exito');
             $location.path('/checkout/client/' + $routeParams.quotation);
@@ -257,7 +257,7 @@ function RegisterCtrl(
             $location.path('/');
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           vm.isLoading = false;
           var errMsg = err.data || err;
 
@@ -269,8 +269,10 @@ function RegisterCtrl(
           dialogService.showDialog('Hubo un error, revisa tus datos ' + errMsg);
         });
     } else {
+      console.log(validatorService);
+      var errorMessage = validatorService.validateRegister(form)
       dialogService.showDialog(
-        'Campo incompleto, revisa el dato telefónico (10 dígitos)'
+        errorMessage
       );
     }
   }
@@ -278,7 +280,7 @@ function RegisterCtrl(
   function generatePassword() {
     var length = 8,
       charset =
-        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
       retVal = '';
     for (var i = 0, n = charset.length; i < length; ++i) {
       retVal += charset.charAt(Math.floor(Math.random() * n));
@@ -293,6 +295,7 @@ RegisterCtrl.$inject = [
   'dialogService',
   'quotationService',
   'commonService',
+  'validatorService',
   'userService',
   'localStorageService',
   '$rootScope',

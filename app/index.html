@@ -52,14 +52,23 @@
     >
     /process -->
   <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer2', 'GTM-M2CFZQH');</script>
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer2', 'GTM-M2CFZQH');
+
+  </script>
   <!-- End Google Tag Manager -->
   <base href="/" />
   <meta name="fragment" content="!" />
@@ -112,6 +121,7 @@
 
   <script>
     window.prerenderReady = false;
+
   </script>
 
   <!--Start of Zendesk Chat Script-->
@@ -120,8 +130,8 @@
     window.$zopim ||
       (function (d, s) {
         var z = ($zopim = function (c) {
-          z._.push(c);
-        }),
+            z._.push(c);
+          }),
           $ = (z.s = d.createElement(s)),
           e = d.getElementsByTagName(s)[0];
         z.set = function (o) {
@@ -136,6 +146,7 @@
         $.type = 'text/javascript';
         e.parentNode.insertBefore($, e);
       })(document, 'script');
+
   </script>
   <!-- Hotjar Tracking Code -->
 
@@ -144,30 +155,45 @@
       h.hj = h.hj || function () {
         (h.hj.q = h.hj.q || []).push(arguments)
       };
-      h._hjSettings = { hjid: 1796688, hjsv: 6 };
+      h._hjSettings = {
+        hjid: 1796688,
+        hjsv: 6
+      };
       a = o.getElementsByTagName('head')[0];
-      r = o.createElement('script'); r.async = 1;
+      r = o.createElement('script');
+      r.async = 1;
       r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
       a.appendChild(r);
     })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+
   </script>
   <!--End of Zendesk Chat Script-->
   <!--End of Zendesk Chat Script-->
 
   <!--SEE GRUNTFILE processhtml-->
   <script>
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return; n = f.fbq = function () {
+    ! function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
         n.callMethod ?
           n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-      }; if (!f._fbq) f._fbq = n;
-      n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
     }(window,
       document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     //fbq.disablePushState = true; //not recommended, but can be done
     fbq('init', '591808408023977');
     fbq('track', 'PageView');
+
   </script>
 </head>
 
@@ -212,10 +238,14 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54662003-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-54662003-1');
+
   </script>
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
   <!--
@@ -270,13 +300,14 @@ ga('send', 'pageview');
   <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js">
+  </script>
   <script
-    src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
-  <script
-    src="bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+    src="bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js">
+  </script>
   <script src="bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
-  <script
-    src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js">
+  </script>
   <script src="bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
@@ -316,6 +347,7 @@ ga('send', 'pageview');
   <script src="scripts/services/api.js"></script>
   <script src="scripts/services/authservice.js"></script>
   <script src="scripts/services/gtmservice.js"></script>
+  <script src="scripts/services/validatorservice.js"></script>
   <script src="scripts/directives/listing-product.js"></script>
   <script src="scripts/directives/fullheight-element.js"></script>
   <script src="scripts/directives/product-gallery.js"></script>
