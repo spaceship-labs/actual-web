@@ -36,7 +36,7 @@
       var customError = errors.reduce(function (acum, error) {
         const value = error.$$lastCommittedViewValue;
         const field = models[error.$$attr.ngModel];
-        const msg = `Error con el valor: '${value}' | Revisa tu: ${field}<br/>`;
+        const msg = "Error con el valor: '" + value + "' | Revisa tu(s): " + field + "<br/>";
         return acum + msg;
       }, '');
 
