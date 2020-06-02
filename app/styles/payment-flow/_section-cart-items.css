@@ -192,12 +192,15 @@ display: none;
 
 .cart__subTotalItem{
   grid-area: 1/2/1/2;
-  float: center;
+  justify-content: center;
+  margin: auto;
 }
 
 .cart__totalItem{
   grid-area: 2/3/2/2;
   justify-content: center;
+  margin: auto;
+  
 }
 
 
@@ -207,13 +210,33 @@ display: none;
   grid-column: 1 / -1;
   background-color: royalblue;
   padding:.2rem;
+
+  display: grid;
+  grid-template-columns: [start-column1]60%[start-column2]40%[end-column2];
+  grid-template-rows: minmax(min-content, max-content);  /*minmax(min-content, max-content)*/
+  padding: 4px 12px 4px 12px;
+  
 }
 
+.cart__totalPieces{
+  grid-area: 1/1/1/2;
+}
 
 .cart__totalPieces > .cart__select {
   width: 10em;
+  float: right;
+  margin-right: 2rem;
 }
 
-/*
-.cart__totalItems{}
-*/
+
+
+
+.cart__totalItems{
+  grid-area: 1/2/1/2;
+  text-align: end;
+  
+}
+
+.cart__totalItems > strong {
+  margin-top: 10px;
+}
