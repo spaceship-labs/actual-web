@@ -29,6 +29,7 @@
       <section class="section-infoCart"> 
         <div class="cart__groupInfoItems">
           <div class="cart__groupDescription">
+            <div class="cart__productName"><strong>Name product title</strong></div>
             <!-- Primero: Información -->
             <div class="cart__deleteItem">
               <i class="icon-trash2"></i>
@@ -36,24 +37,41 @@
             <div class="cart__img">
               <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/KI01294_01.jpg" alt="" src="https://d116li125og699.cloudfront.net/uploads/products/KI01294_01.jpg">
             </div>
-            <div class="cart__description">
-              Information
-            </div>
-            <div class="cart__unitPrice">S
-              Precio unitario: $ 1000 <span>MXN<span>
+            <div class="cart__description">   
+              <div><strong>Código: </strong>CO59389</div>
+              <div><strong>Color: </strong>Verde olivo</div>
+              <div class="cart__itemPrice"><strong>Precio unitario:</strong> $1000<span>MXN<span></div>
             </div>
           </div>
           <div class="cart__groupItemCost">
-            segundo balance x producto
-            <div class="cart__pieces">Piezas: 2</div>
-            <div class="cart__discout">Descuento: 15%</div>
-            <div class="cart__subTotalItem">Subtotal: $ 1000 <span>MXN<span></div>
-            <div class="cart__totalItem">Total (producto):  $ 1000 <span>MXN<span></div>
+            <div class="cart__pieces"><strong>Piezas:</strong> 
+              <div class="cart__select">
+                <select name="slct" id="slct">
+                  <option selected disabled>No.</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="cart__discout"><strong>15%</strong></div>
+            <div class="cart__subTotalItem"><strong>Subtotal (producto):</strong> $1000 <span>MXN<span></div>
+            <div class="cart__totalItem"> <strong>Total (producto): </strong>$1000<span>MXN<span></div>
           </div>
         </div>
-        <div class="cart__groupBalance">Tercero balance total y fecha entrega
-          <div class="cart__totalPieces">Fecha de entrega</div>
-          <div class="cart__totalItems">Total (carrito): $ 1000 <span>MXN<span></div>
+        <div class="cart__groupBalance">
+          <div class="cart__totalPieces"><strong>Fecha de entrega:</strong>
+            <div class="cart__select">
+              <select name="slct" id="slct">
+                <option selected disabled>Selecciona</option>
+                <option value="1">19/06/20</option>
+                <option value="2">14/07/20</option>
+                <option value="3">9/08/20</option>
+              </select>
+            </div>
+          </div>
+          <div class="cart__totalItems">Total de compras: $1000<span>MXN<span></div>
         </div> 
       </section>
     </div>
@@ -62,56 +80,7 @@
         <i class="icon-delivery"></i>
         <h3 class="heading-4--light">2. Agregar dirección</h4>
       </div>
-      <section class="section-deliveryAddress">  
-        <div class="DAContainer">
-          <form action="#" class="formAddInfo">
-            <div class="form__group1">
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="Calle" id="calle" required>
-                <label for="calle" class="form__label">Calle</label>
-              </div>
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="No. Interior" id="int" required>
-                <label for="int" class="form__label">Número Interior</label>
-              </div>
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="No. Exterior" id="ext" required>
-                <label for="ext" class="form__label">Número Exterior</label>
-              </div>
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="Colonia" id="colonia" required>
-                <label for="colonia" class="form__label">Colonia</label>
-              </div>
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="Municipio/Del." id="municipio" required>
-                <label for="municipio" class="form__label">Municipio/Delegación</label>
-              </div>
-            </div>
-            
-            <div class="form__group2">
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="Ciudad" id="ciudad" required>
-                <label for="ciudad" class="form__label">Ciudad</label>
-              </div>
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="Estado" id="estado" required>
-                <label for="ext" class="form__label">Estado</label>
-              </div>
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="Código postal" id="cp" required>
-                <label for="cp" class="form__label">Código Postal</label>
-              </div>      
-              <div class="form__group">
-                <input type="text" class="form__input" placeholder="Referencias" id="ref" required>
-                <label for="ref" class="form__label">Referencias</label>
-              </div>             
-            </div>
-          </form>
-          <div class="link__event">
-            <p><b><a href="#" target="_blank">Cambiar &rarr;</a></b></p>
-          </div>
-        </div>
-      </section>
+      <ng-include src="'views/partials/payment-flow/_cardSection.html'"></ng-include>
     </div>
     <div class="payment-methods">
       <div class="section-title">
