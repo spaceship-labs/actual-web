@@ -7,6 +7,7 @@ function RegisterCtrl(
   dialogService,
   quotationService,
   commonService,
+  validatorService,
   userService,
   localStorageService,
   $rootScope,
@@ -269,9 +270,11 @@ function RegisterCtrl(
           dialogService.showDialog('Hubo un error, revisa tus datos ' + errMsg);
         });
     } else {
+      console.log(validatorService);
+      var errorMessage = validatorService.validateRegister(form)
       dialogService.showDialog(
-        'Campo incompleto, revisa el dato telefónico (10 dígitos)'
-      );
+        errorMessage
+      );	      
     }
   }
 
@@ -293,6 +296,7 @@ RegisterCtrl.$inject = [
   'dialogService',
   'quotationService',
   'commonService',
+  'validatorService',
   'userService',
   'localStorageService',
   '$rootScope',
