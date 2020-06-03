@@ -55,7 +55,7 @@
 
 @media only screen and (max-width: 20em) {
 .payment-selectors{
-        grid-template-columns: 65vw;
+        grid-template-columns: 100%;
         grid-row-gap: 1rem;
         margin-top: 2rem;
     }    
