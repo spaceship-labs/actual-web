@@ -35,8 +35,7 @@
 
 .login-selectors{
   display: grid;
-  /*grid-template-rows: repeat(3, min-content);*/ 
-  grid-template-columns: 20vw;
+  grid-template-columns: 25vw;
   grid-gap: 1rem;
   align-content: center;
   padding-top: 1.1rem;
@@ -69,83 +68,6 @@
     grid-row-gap: 1rem;
     margin-top: 2rem;
   }    
-}
-
-/* The container */
-.radio-container {
-  display: block;
-  position: relative;
-  padding-left: 2rem;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  display: grid;
-}
-
-@media only screen and (max-width: 32.5em) {
-  .radio-container{
-    padding-left: 1.25rem;
-  }  
-}
-  
-
-.radio-container::after{
-  content: "";
-  height: 1px;
-  background-color: currentColor;
-}
-
-/* Hide the browser's default radio button */
-.radio-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-  
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-  top: 5px;
-  left: 0;
-  height: .6rem;
-  width: .6rem;
-  border: 3px solid #55c57a;
-  border-radius: 50%;
-}
-  
-/* On mouse-over, add a grey background color */
-.radio-container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-  
-/* When the radio button is checked, add a blue background */
-.radio-container input:checked ~ .checkmark {
-  background-color: transparent;
-}
-  
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.radio-container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.radio-container .checkmark:after {
-  top: 1.2px;
-  left: 1.2px;
-  width: .45rem;
-  height: .45rem;
-  border-radius: 50%;
-  background: #55c57a;
 }
 
 /* SECTION SOCIAL NETWORK STYLE */

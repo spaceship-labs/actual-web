@@ -212,28 +212,7 @@
   transform: translateY(-2rem);
 }
 
-.link__event{
-  text-align: right;
-  font-family: inherit;
-  grid-column: start-content / end-content ;
+.DAContainer .link__event{
   margin-top: -.9rem;
-}
-
-@media only screen and (max-width: 15.68rem) {
-  .link__event{
-    font-size: 85%;
-    margin-top: 0;
-  }    
-}
-
-.link__event > p{
-  margin: 0;
-}
-
-.link__event * a {
-  color: #008CBA;
-}
-
-.link__event * a:hover {
-  color: #34b3e7;
+  grid-column: start-content / end-content ;
 }

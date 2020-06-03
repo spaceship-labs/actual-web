@@ -1,80 +1,35 @@
 <div class="body-payment-flow">
   <div class="payment-flow">
+
     <div class="client-session">
       <div class="section-title">
         <i class="icon-login"></i>
         <h3 class="heading-4--light">1. Iniciar sesión</h4>
       </div>
-
       <div class="__session-selectors">
-        <ng-include src="'views/partials/payment-flow/login-selector.html'"></ng-include>
+        <ng-include src="'views/partials/payment-flow/_login-selector.html'"></ng-include>
       </div>
       <!-- SOLCIAL NETWORKS SECTION 
       <div class="__sessionwith-text" > Iniciar sesión con </div>
       <div class="__sessionwith-buttons">
-        <button class="social-btn">
+        <button class="actual-btn">
           Login with Facebook
         </button>
-        <button class="social-btn">
+        <button class="actual-btn">
           Login with Google
         </button>
       </div>
       -->
     </div>
+
     <div class="cart-items">
       <div class="section-title">
         <i class="icon-carro"></i>
         <h3 class="heading-4--light">3. Confirmar carrito</h4>
       </div>
-      <section class="section-infoCart"> 
-        <div class="cart__groupInfoItems">
-          <div class="cart__groupDescription">
-            <div class="cart__productName"><strong>Name product title</strong></div>
-            <!-- Primero: Información -->
-            <div class="cart__deleteItem">
-              <i class="icon-trash2"></i>
-            </div> 
-            <div class="cart__img">
-              <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/KI01294_01.jpg" alt="" src="https://d116li125og699.cloudfront.net/uploads/products/KI01294_01.jpg">
-            </div>
-            <div class="cart__description">   
-              <div><strong>Código: </strong>CO59389</div>
-              <div><strong>Color: </strong>Verde olivo</div>
-              <div class="cart__itemPrice"><strong>Precio unitario:</strong> $1000<span>MXN<span></div>
-            </div>
-          </div>
-          <div class="cart__groupItemCost">
-            <div class="cart__pieces"><strong>Piezas:</strong> 
-              <div class="cart__select">
-                <select name="slct" id="slct">
-                  <option selected disabled>No.</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </div>
-
-            </div>
-            <div class="cart__discout"><strong>15%</strong></div>
-            <div class="cart__subTotalItem"><strong>Subtotal (producto):</strong> $1000 <span>MXN<span></div>
-            <div class="cart__totalItem"> <strong>Total (producto): </strong>$1000<span>MXN<span></div>
-          </div>
-        </div>
-        <div class="cart__groupBalance">
-          <div class="cart__totalPieces"><strong class="cart__dDate">Fecha de entrega:</strong>
-            <div class="cart__select">
-              <select name="slct" id="slct">
-                <option selected disabled>Selecciona</option>
-                <option value="1">19/06/20</option>
-                <option value="2">14/07/20</option>
-                <option value="3">9/08/20</option>
-              </select>
-            </div>
-          </div>
-          <div class="cart__totalItems"><strong>Total de compras:</strong> $1000<span>MXN<span></div>
-        </div> 
-      </section>
+      <ng-include src="'views/partials/payment-flow/_infoCart-section.html'"></ng-include>
     </div>
+
     <div class="info-client">
       <div class="section-title">
         <i class="icon-delivery"></i>
@@ -82,12 +37,22 @@
       </div>
       <ng-include src="'views/partials/payment-flow/_cardSection.html'"></ng-include>
     </div>
+    
     <div class="payment-methods">
       <div class="section-title">
         <i class="icon-checkmark"></i>
         <h3 class="heading-4--light">4. Realizar compra</h4>
       </div>
-      
+      <div class="__payment-selectors">
+        <ng-include src="'views/partials/payment-flow/_purchase-selector.html'"></ng-include>
+        <div class="link__event">
+          <p><b><a href="#" target="_blank">¿Más opciones de pago? &rarr;</a></b></p>
+        </div>
+        <button class="actual-btn">
+          Realizar compra
+        </button>
+      </div>
+      </div>
     </div>
   </div>
 </div>

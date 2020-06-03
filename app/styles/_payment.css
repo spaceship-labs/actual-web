@@ -19,17 +19,6 @@
 }
 
 
-/***
-* RESPONSIVE BREAKPOINTS
-****
-$bp-largest: 75em;   // 1200px
-$bp-large: 62.5em;   // 1000px
-$bp-medium: 50em;    // 800px; OR $bp-medium: 56.25em;   // 900px
-$bp-small: 37.5em;    // 600px;
-$bp-smallest: 31.25em; // 500px
-
-*/
-
 @media only screen and (max-width: 75em) {
     .payment-flow{
         /*grid-template-rows: repeat(2,minmax(min-content, max-content)); */
@@ -67,33 +56,6 @@ $bp-smallest: 31.25em; // 500px
     }    
 }
   
-/*
-@media only screen and (max-width: 20em) {
-    .payment-flow{
-        grid-template-rows: 70vw 50vw;
-      }    
-  }
-
-  @media only screen and (max-width: 17em) {
-    .payment-flow{
-        grid-template-rows: 80vw 50vw;
-      }    
-  }
-
-  @media only screen and (max-width: 15em) {
-    .payment-flow{
-        grid-template-rows: 100vw 50vw;
-      }    
-  }
-
-
-  @media only screen and (max-width: 11.7em) {
-    .payment-flow{
-        grid-template-rows: 150vw 50vw;
-      }    
-  }
-  */
-
 .payment-flow > * {
     background-color: blueviolet;
     color: white;

@@ -213,7 +213,7 @@
 .cart__groupBalance{
   grid-column: 1 / -1;
   background-color: royalblue;
-  padding:.2rem;
+  padding:.3rem;
 
   display: grid;
   grid-template-columns: [start-column1]60%[start-column2]40%[end-column2];
