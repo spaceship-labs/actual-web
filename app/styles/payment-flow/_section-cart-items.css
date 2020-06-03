@@ -6,9 +6,7 @@
   display: grid;
   grid-template-rows: 4rem minmax(6rem, min-content);
   grid-template-columns: minmax(min-content, max-content);
-  /*grid-row-gap: 1rem;*/
   justify-content: center;
-
 }
 
 @media only screen and (max-width: 32.5em) {
@@ -20,18 +18,26 @@
 .section-infoCart{
   background-color: goldenrod;
   font-size: 80%;
-  width: 500px;
-  margin: 0 auto;
-  padding: 1rem;
+  margin-right: .3rem;
+  margin-left: .3rem;
+  padding: .8rem;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: minmax(min-content, max-content);
-  margin-bottom: 1rem;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.6);
+  margin-bottom: 2rem;
 }
 
-@media only screen and (max-width: 50rem) {
+@media only screen and (max-width: 21.75rem) {
   .section-infoCart{
-      width: 300px;
+    padding: 0;
+    width: 25vh;
+  }    
+}
+
+@media only screen and (max-width: 15.68rem) {
+  .section-infoCart{
+    width: 20vh;
   }    
 }
 
@@ -41,8 +47,8 @@
   display: grid;
   grid-template-columns: [start-column1]60%[start-column2]40%[end-column2];
   grid-template-rows: minmax(min-content, max-content);
-    
 }  
+
 
 /*Descrición de productos*/
 .cart__groupDescription{
@@ -51,9 +57,10 @@
   padding:.2rem;
 
   display: grid;
-  grid-template-columns: 30% 62% 8%;
+  grid-template-columns: 6% 20% 70% ;
   grid-template-rows: repeat(2,minmax(min-content, max-content));
-  grid-row-gap: .2rem; 
+  grid-row-gap: .3rem; 
+  grid-column-gap: .3rem;
 }
 
 @media only screen and (max-width: 50rem) {
@@ -63,36 +70,35 @@
 }
 
 .cart__productName{
-  grid-area: 1/3/1/1;
+  grid-area: 2/4/1/2;
+  margin-left: .3rem;
 }
 
 .cart__deleteItem{
-  grid-column: 3/4;
+  grid-column: 1/2;
   grid-row: 1 /2;
   margin: auto;
 }
 
 .cart__deleteItem > i{
     font-size: 1rem;
-    
 }
 
 .cart__img{
-  grid-column: 1/2;
+  grid-column: 2/3;
   grid-row: 2 /3;
   margin: auto;
 }
 
 .cart__img > img{
-  weight: 3rem;
+  max-height: 3rem;
   height: 3rem;
   border-radius: .1rem;
 }
 
 .cart__description{
-    grid-column: 2/3;
+    grid-column: 3/4;
     grid-row: 2 /3;
-    
 }
 
 .cart__itemPrice{
@@ -107,7 +113,7 @@
   padding:.2rem;
 
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 30% 67%;
   grid-template-rows: repeat(2,minmax(min-content, max-content));  /*minmax(min-content, max-content)*/
   grid-row-gap: .3rem; 
   grid-column-gap: .4rem;
@@ -121,11 +127,9 @@
 
 .cart__pieces{
   grid-area: 1/2/1/1;
-  
-
 }
 
-/* Reset Select */
+/* Selector: reset Select */
 .cart__select > select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -137,11 +141,13 @@
   background: #2c3e50;
   background-image: none;
 }
-/* Remove IE arrow */
+
+/* Selector:: remove IE arrow */
 .cart__select > select::-ms-expand {
-display: none;
+  display: none;
 }
-/* Custom Select */
+
+/* Selector: custom Select */
 .cart__select {
   position: relative;
   display: flex;
@@ -158,7 +164,7 @@ display: none;
   color: #fff;
   cursor: pointer;
 }
-/* Arrow */
+/* Selector: arrow */
 .cart__select::after {
   content: '\25BC';
   position: absolute;
@@ -172,7 +178,8 @@ display: none;
   -o-transition: .25s all ease;
   transition: .25s all ease;
 }
-/* Transition */
+
+/* Selector: transition */
 .cart__select:hover::after {
   color: #dda901;
 }
@@ -192,18 +199,15 @@ display: none;
 
 .cart__subTotalItem{
   grid-area: 1/2/1/2;
-  justify-content: center;
-  margin: auto;
+  text-align: end;
+  align-self: center;
 }
 
 .cart__totalItem{
   grid-area: 2/3/2/2;
-  justify-content: center;
-  margin: auto;
-  
+  text-align: end;
+  align-self: center;
 }
-
-
 
 /*Fecha de entrega y Total de compras*/
 .cart__groupBalance{
@@ -213,13 +217,25 @@ display: none;
 
   display: grid;
   grid-template-columns: [start-column1]60%[start-column2]40%[end-column2];
-  grid-template-rows: minmax(min-content, max-content);  /*minmax(min-content, max-content)*/
-  padding: 4px 12px 4px 12px;
-  
+  grid-template-rows: minmax(min-content, max-content); 
 }
 
 .cart__totalPieces{
   grid-area: 1/1/1/2;
+
+  display: grid;
+  grid-template-columns: [start-column1]40%[start-column2]60%[end-column2];
+  grid-template-rows: minmax(min-content, max-content); 
+}
+
+.cart__dDate{
+  align-self: center;
+}
+
+@media only screen and (max-width: 54rem) {
+  .cart__dDate{
+    grid-column: 1 / -1;
+  }    
 }
 
 .cart__totalPieces > .cart__select {
@@ -228,13 +244,10 @@ display: none;
   margin-right: 2rem;
 }
 
-
-
-
 .cart__totalItems{
   grid-area: 1/2/1/2;
   text-align: end;
-  
+  align-self: center;
 }
 
 .cart__totalItems > strong {
