@@ -16,7 +16,6 @@
     grid-template-columns: [full-start] minmax(6rem,1fr) [center-start] repeat(8, [col-start]minmax(min-content,14rem)[col-end]) [center-end] minmax(6rem,1fr) [full-end];
 }
 
-
 @media only screen and (max-width: 75em) {
     .payment-flow{
         /*grid-template-rows: repeat(2,minmax(min-content, max-content)); */
@@ -55,8 +54,7 @@
 }
   
 .payment-flow > * {
-    background-color: blueviolet;
-    color: white;
+    /*background-color: blueviolet;*/
     font-family: "Nunito", sans-serif;
     font-size: 1rem;
 }

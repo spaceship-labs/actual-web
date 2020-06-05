@@ -1,12 +1,13 @@
 /***  SECTION CART ITEMS  ***/
 .cart-items{
-  background-color: rgb(136, 165, 42);
+  /*background-color: rgb(136, 165, 42);*/
   grid-column: col-start 5 / full-end;
 
   display: grid;
   grid-template-rows: 4rem minmax(6rem, min-content);
   grid-template-columns: minmax(min-content, max-content);
   justify-content: center;
+  box-shadow: 0px -.7px 0px 0px rgba(190, 190, 190, 0.44);
 }
 
 @media only screen and (max-width: 32.5em) {
@@ -16,7 +17,6 @@
 }
 
 .section-infoCart{
-  background-color: goldenrod;
   font-size: 80%;
   margin-right: .3rem;
   margin-left: .3rem;
@@ -24,8 +24,12 @@
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: minmax(min-content, max-content);
-  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.6);
+  box-shadow: 0 .25rem .5rem rgba(0, 0, 0, 0.2);
   margin-bottom: 2rem;
+}
+
+.section-infoCart:hover{
+  box-shadow: 0 .5rem 1rem 0 rgba(0,0,0,0.2);
 }
 
 @media only screen and (max-width: 21.75rem) {
@@ -53,7 +57,7 @@
 /*Descrición de productos*/
 .cart__groupDescription{
   grid-column: start-column1 / 2;
-  background-color: green;
+  /*background-color: green;*/
   padding:.2rem;
 
   display: grid;
@@ -61,6 +65,7 @@
   grid-template-rows: repeat(2,minmax(min-content, max-content));
   grid-row-gap: .3rem; 
   grid-column-gap: .3rem;
+  box-shadow: .5px 0px 0px 0px rgba(0, 0, 0, 0.44);
 }
 
 @media only screen and (max-width: 50rem) {
@@ -212,12 +217,13 @@
 /*Fecha de entrega y Total de compras*/
 .cart__groupBalance{
   grid-column: 1 / -1;
-  background-color: royalblue;
+  /*background-color: royalblue;*/
   padding:.3rem;
 
   display: grid;
   grid-template-columns: [start-column1]60%[start-column2]40%[end-column2];
-  grid-template-rows: minmax(min-content, max-content); 
+  grid-template-rows: minmax(min-content, max-content);
+  box-shadow: 0px -.7px 0px 0px rgba(0, 0, 0, 0.44); 
 }
 
 .cart__totalPieces{
