@@ -1,79 +1,86 @@
 /*FONT ELEMENTS*/
-.heading-1, .heading-2, .heading-3, .heading-4 {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 400; }
-  
+.heading-1,
+.heading-2,
+.heading-3,
+.heading-4 {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+}
+
 .heading-1 {
-    font-size: 4.5rem;
-    color: #111;
-    line-height: 1; 
+  font-size: 4.5rem;
+  color: #111;
+  line-height: 1;
 }
 
 .heading-2 {
-    font-size: 4rem;
-    font-style: italic;
-    line-height: 1; 
+  font-size: 4rem;
+  font-style: italic;
+  line-height: 1;
 }
 
 .heading-2--light {
-    color: #111; 
+  color: #111;
 }
 
 .heading-2--dark {
-    color: #54483A; 
+  color: #54483A;
 }
 
 .heading-3 {
-    font-size: 1.6rem;
-    color: #54483A;
-    text-transform: uppercase; 
+  font-size: 1.6rem;
+  color: #54483A;
+  text-transform: uppercase;
 }
 
 .heading-4 {
-    font-size: 1.9rem; 
+  font-size: 1.9rem;
 }
+
 .heading-4--light {
-    color: #111; 
+  color: #111;
 }
 
 .heading-4--dark {
-    color: #54483A; 
+  color: #54483A;
 }
 
-.font-primary{
-    font-family: 'Nunito', sans-serif;
+.font-primary {
+  font-family: 'Nunito', sans-serif;
 }
 
-.font-display{
-    font-family: 'Josefin Sans', sans-serif;
+.font-display {
+  font-family: 'Josefin Sans', sans-serif;
 }
+
 /*END FONT ELEMENTS*/
 
 
 /*BUTTONS STRUCTURE*/
 .actual-btn {
-    background: linear-gradient(to bottom,#f7dfa5,#f0c14b);
-    border-color: #a88734 #9c7e31 #846a29;
-    color: #111;
-    border: none;
-    border-radius: 3px;
-    border-width: 1px;
-    border-style: solid;
-    font-family: "Josefin Sans", sans-serif;
-    font-size: .8rem;
-    text-transform: uppercase;
-    padding: .5rem 3rem;
-    cursor: pointer;
-    transition: all .2s;
+  background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+  border-color: #a88734 #9c7e31 #846a29;
+  color: #111;
+  border: none;
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: solid;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: .8rem;
+  text-transform: uppercase;
+  padding: .5rem 3rem;
+  cursor: pointer;
+  transition: all .2s;
 }
 
 .actual-btn:hover {
-  background: linear-gradient(0deg, rgba(241,190,62,1) 0%, rgba(241,190,62,1) 59%, rgba(247,222,158,1) 100%);
+  background: linear-gradient(0deg, rgba(241, 190, 62, 1) 0%, rgba(241, 190, 62, 1) 59%, rgba(247, 222, 158, 1) 100%);
 }
 
-.hidden{
-    display: none;
+.hidden {
+  display: none;
 }
+
 /*END BUTTONS STRUCTURE*/
 
 /*RADIO BUTTONS*/
@@ -90,13 +97,13 @@
 }
 
 @media only screen and (max-width: 32.5em) {
-  .radio-container{
+  .radio-container {
     padding-left: 1.25rem;
-  }  
+  }
 }
-  
 
-.radio-container::after{
+
+.radio-container::after {
   content: "";
   height: 1px;
   background-color: currentColor;
@@ -108,7 +115,7 @@
   opacity: 0;
   cursor: pointer;
 }
-  
+
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
@@ -119,17 +126,17 @@
   border: 3px solid #55c57a;
   border-radius: 50%;
 }
-  
+
 /* On mouse-over, add a grey background color */
-.radio-container:hover input ~ .checkmark {
+.radio-container:hover input~.checkmark {
   background-color: #ccc;
 }
-  
+
 /* When the radio button is checked, add a blue background */
-.radio-container input:checked ~ .checkmark {
+.radio-container input:checked~.checkmark {
   background-color: transparent;
 }
-  
+
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
   content: "";
@@ -138,7 +145,7 @@
 }
 
 /* Show the indicator (dot/circle) when checked */
-.radio-container input:checked ~ .checkmark:after {
+.radio-container input:checked~.checkmark:after {
   display: block;
 }
 
@@ -151,35 +158,37 @@
   border-radius: 50%;
   background: #55c57a;
 }
+
 /*END RADIO BUTTONS*/
 
 
 /*LINK BUTTON*/
-.link__event{
-    text-align: right;
-    font-family: inherit;
-    font-size: 90%;
+.link__event {
+  text-align: right;
+  font-family: inherit;
+  font-size: 90%;
 }
 
 @media only screen and (max-width: 15.68rem) {
-.link__event{
+  .link__event {
     font-size: 80%;
     margin-top: 0;
-}    
+  }
 }
 
-.link__event > p{
-margin: 0;
+.link__event>p {
+  margin: 0;
 }
 
 .link__event * a {
-color: #008CBA;
-text-decoration: underline;
+  color: #008CBA;
+  text-decoration: underline;
 }
 
 .link__event * a:hover {
-color: #34b3e7;
+  color: #34b3e7;
 }
+
 /*END LINK BUTTON*/
 
 /*POP UP*/
@@ -193,15 +202,15 @@ color: #34b3e7;
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
-  transition: all .3s; 
+  transition: all .3s;
 }
 
 @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
   .popUp {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.3); 
-  } 
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 }
 
 .popUp__content {
@@ -217,20 +226,21 @@ color: #34b3e7;
   overflow: hidden;
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.25);
-  transition: all .5s .2s; 
+  transition: all .5s .2s;
 }
 
 .popUp:target {
   opacity: 1;
-  visibility: visible; 
+  visibility: visible;
 }
 
 .popUp:target .popUp__content {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1); 
+  transform: translate(-50%, -50%) scale(1);
 }
 
-.popUp__close:link, .popUp__close:visited {
+.popUp__close:link,
+.popUp__close:visited {
   color: #777;
   position: absolute;
   top: .2rem;
@@ -239,11 +249,11 @@ color: #34b3e7;
   text-decoration: none;
   display: inline-block;
   transition: all .2s;
-  line-height: 1; 
+  line-height: 1;
 }
 
 .popUp__close:hover {
-  color: #cc262f; 
+  color: #cc262f;
 }
 
 /*END POP UP*/
@@ -252,10 +262,21 @@ color: #34b3e7;
 /***
 * MARGIN BUTTON SIZES 
 ***/
-.mb-sm { margin-bottom: 2rem; }
-.mb-md { margin-bottom: 3rem; }
-.mb-lg { margin-bottom: 4rem; }
-.mb-hg { margin-bottom: 8rem; }
+.mb-sm {
+  margin-bottom: 2rem;
+}
+
+.mb-md {
+  margin-bottom: 3rem;
+}
+
+.mb-lg {
+  margin-bottom: 4rem;
+}
+
+.mb-hg {
+  margin-bottom: 8rem;
+}
 
 /***
 *  FONT SIZES VARIABLES
@@ -275,3 +296,140 @@ $bp-small: 37.5em;    // 600px;
 $bp-smallest: 31.25em; // 500px
 
 */
+
+/* [Object] Modal
+ * =============================== 
+ 
+ check if any of those classes overwrites something else 
+ */
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: left;
+  background: rgba(0, 0, 0, .9);
+  transition: opacity .25s ease;
+  z-index: 999;
+}
+
+.modal__bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.modal-state {
+  display: none;
+}
+
+.modal-state:checked+.modal {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-state:checked+.modal .modal__inner {
+  top: 0;
+}
+
+.modal__inner {
+  transition: top .25s ease;
+  position: absolute;
+  top: -20%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  margin: auto;
+  overflow: auto;
+  background: #fff;
+  border-radius: 5px;
+  padding: 1em 2em;
+  height: 50%;
+}
+
+.modal__close {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  width: 1.1em;
+  height: 1.1em;
+  cursor: pointer;
+}
+
+.modal__close:after,
+.modal__close:before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 1.5em;
+  background: #ccc;
+  display: block;
+  transform: rotate(45deg);
+  left: 50%;
+  margin: -3px 0 0 -1px;
+  top: 0;
+}
+
+.modal__close:hover:after,
+.modal__close:hover:before {
+  background: #aaa;
+}
+
+.modal__close:before {
+  transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 768px) {
+
+  .modal__inner {
+    width: 90%;
+    height: 90%;
+    box-sizing: border-box;
+  }
+}
+
+.btn {
+  cursor: pointer;
+  background: #27ae60;
+  display: inline-block;
+  padding: .5em 1em;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.btn:hover,
+.btn:focus {
+  background: #2ecc71;
+}
+
+.btn:active {
+  background: #27ae60;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .2) inset;
+}
+
+.btn--blue {
+  background: #2980b9;
+}
+
+.btn--blue:hover,
+.btn--blue:focus {
+  background: #3498db;
+}
+
+.btn--blue:active {
+  background: #2980b9;
+}
+
+p img {
+  max-width: 200px;
+  height: auto;
+  float: left;
+  margin: 0 1em 1em 0;
+}
