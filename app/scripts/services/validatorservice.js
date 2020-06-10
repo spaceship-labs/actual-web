@@ -31,7 +31,8 @@
         "vm.newClient.LastName": "Apellidos de la sección de datos personales",
         "vm.newClient.E_Mail": "Correo eléctronico de la sección de datos personales",
         "vm.newClient._E_Mail": "Confirmación del correo eléctronico de la sección de datos personales",
-        "vm.newClient.Cellular": "Número celular(10 dígitos) de la sección de datos personales"
+        "vm.newClient.Cellular": "Número celular(10 dígitos) de la sección de datos personales",
+        "vm.newClient._password": "Confirmación de la contraseña",
       };
       var customError = errors.reduce(function (acum, error) {
         const value = error.$$lastCommittedViewValue;
