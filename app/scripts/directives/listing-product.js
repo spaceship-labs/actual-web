@@ -11,7 +11,7 @@ angular.module('actualWebApp').directive('listingProduct', [
   '$timeout',
   'api',
   'commonService',
-  function($rootScope, $timeout, api, commonService) {
+  function ($rootScope, $timeout, api, commonService) {
     return {
       scope: {
         product: '='
@@ -24,9 +24,9 @@ angular.module('actualWebApp').directive('listingProduct', [
         scope.images = [];
         scope.activeStore = $rootScope.activeStore;
 
-        scope.setUpImages = function() {
+        scope.setUpImages = function () {
           scope.imageSizeIndexGallery = 2;
-          scope.imageSizeThumbnailIndex = 2;
+          scope.imageSizeThumbnailIndex = 1;
           //console.log('scope.products.icons', scope.product.icons);
           scope.imageSize = api.imageSizes.gallery[scope.imageSizeIndexGallery];
 
@@ -40,30 +40,29 @@ angular.module('actualWebApp').directive('listingProduct', [
 
           //If populated images of product, load them in images array
           if (scope.product.files) {
-            scope.imageSize = '';
-            scope.product.files.forEach(function(img) {
+            //scope.imageSize = '200x200';
+            scope.product.files.forEach(function (img) {
               scope.images.push({
-                url:
-                  api.cdnUrl +
+                url: api.cdnUrl +
                   '/uploads/product/gallery/' +
-                  img.filename +
-                  '?d=' +
-                  scope.imageSize
+                  img.filename,
+                //'?d=' +
+                //scope.imageSize
               });
             });
           }
           //console.log('scope.images', scope.images);
 
-          $timeout(function() {
+          $timeout(function () {
             scope.areImagesLoaded = true;
           }, 500);
         };
 
-        scope.init = function() {
+        scope.init = function () {
           scope.setUpImages();
         };
 
-        scope.roundCurrency = function(ammount) {
+        scope.roundCurrency = function (ammount) {
           ammount = commonService.roundIntegerCurrency(ammount);
           return ammount;
         };

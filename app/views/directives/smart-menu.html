@@ -17,7 +17,8 @@
     <div class="smart-menu-row">
       <div class="smartmenu-feature-description" ng-repeat="featuredProduct in featured">
         <div class="smart-menu-img">
-          <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
+          <img
+            ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}?d=200x200" />
         </div>
         <a ng-href="{{featuredProduct.url}}" class="featured-product-link">
           <span>VER</span>

@@ -12,7 +12,7 @@ angular.module('actualWebApp').directive('productGallery', [
   '$q',
   '$timeout',
   '$rootScope',
-  function(api, productService, $q, $timeout, $rootScope) {
+  function (api, productService, $q, $timeout, $rootScope) {
     return {
       scope: {
         product: '='
@@ -30,17 +30,17 @@ angular.module('actualWebApp').directive('productGallery', [
           shareEl: false
         };
 
-        scope.closeGallery = function() {
+        scope.closeGallery = function () {
           scope.open = false;
         };
 
-        scope.setupGallery = function() {
+        scope.setupGallery = function () {
           setupImages(scope.product);
-          $timeout(function() {
+          $timeout(function () {
             scope.gallery = $('#slick-gallery');
             scope.galleryReel = $('#slick-thumbs');
-            scope.gallery.on('afterChange', function(e, slick, currentSlide) {
-              $timeout(function() {
+            scope.gallery.on('afterChange', function (e, slick, currentSlide) {
+              $timeout(function () {
                 scope.galleryReel.slick('slickGoTo', currentSlide);
                 scope.selectedSlideIndex = currentSlide;
               }, 0);
@@ -67,7 +67,7 @@ angular.module('actualWebApp').directive('productGallery', [
           }
           if (scope.product.files) {
             //TEMPORAL
-            scope.product.files.forEach(function(img) {
+            scope.product.files.forEach(function (img) {
               scope.galleryImages.push({
                 src: api.baseUrl + '/uploads/products/gallery/' + img.filename,
                 w: 500,
@@ -77,12 +77,12 @@ angular.module('actualWebApp').directive('productGallery', [
           }
         }
 
-        scope.setGalleryIndex = function(index) {
+        scope.setGalleryIndex = function (index) {
           scope.selectedSlideIndex = index;
           scope.gallery.slick('slickGoTo', index);
         };
 
-        scope.showGallery = function(i) {
+        scope.showGallery = function (i) {
           if (scope.loadedSizes) {
             if (angular.isDefined(i)) {
               scope.opts.index = i;
@@ -95,7 +95,7 @@ angular.module('actualWebApp').directive('productGallery', [
           var deferred = $q.defer();
           var img = new Image();
           img.src = galleryImg.src;
-          img.onload = function() {
+          img.onload = function () {
             galleryImg.w = this.width;
             galleryImg.h = this.height;
             scope.$apply();
@@ -110,10 +110,10 @@ angular.module('actualWebApp').directive('productGallery', [
             promises.push(getImageSize(scope.galleryImages[i]));
           }
           $q.all(promises)
-            .then(function() {
+            .then(function () {
               scope.loadedSizes = true;
             })
-            .catch(function(err) {
+            .catch(function (err) {
               console.log(err);
             });
         }
