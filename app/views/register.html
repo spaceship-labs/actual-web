@@ -14,7 +14,7 @@
             </div>
 
             <section ng-if="!vm.isLoading && vm.registerDone">
-              <h1>Usuario registrado con éxito</h1>
+              <h3>Usuario registrado con éxito</h3>
               <!--<p>Haz click <a ng-click="main.toggleLoginModal()" href="" class="login-toggler">aqui</a> para iniciar sesión</p>-->
             </section>
 
@@ -338,7 +338,7 @@
 <section ng-if="(!vm.isLoading && !vm.fromQuotation)" id="register" class="form-view checkbox-client-type">
   <div class="container container-lg">
     <section ng-if="!vm.isLoading && vm.registerDone">
-      <h1>Usuario registrado con éxito</h1>
+      <h3>Usuario registrado con éxito</h3>
     </section>
 
     <form ng-if="!vm.isLoading && !vm.registerDone" name="registerForm" ng-submit="vm.register(registerForm)">
