@@ -11,7 +11,8 @@
       <div layout="row">
         <div flex="40" class="cart-item-prod-img">
           <a ng-href="{{ detail.Product.url }}">
-            <img animate-visible="true" lazy-src="{{ detail.Product.icons[0].url }}?d=100x100" alt="" />
+            <img animate-visible="true" lazy-src="{{ detail.Product.icons[0].url }}?d=100x100"
+              alt="{{ detail.Product.ItemCode }}" />
           </a>
         </div>
         <div flex="60">

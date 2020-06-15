@@ -8,29 +8,17 @@
         <div layout="row" layout-align="space-between center">
           <div flex class="input-element input-element-from">
             <div class="input-element-inner">
-              <input
-                ng-model="vm.minPrice"
-                ui-money-mask="0"
-                placeholder="Min."
-                type="text"
-              >
+              <input ng-model="vm.minPrice" ui-money-mask="0" placeholder="Min." type="text">
             </div>
           </div>
           <span>a</span>
           <div flex class="input-element input-element-to">
             <div class="input-element-inner">
-              <input
-                ng-model="vm.maxPrice"
-                ui-money-mask="0"
-                placeholder="Max."
-                type="text"
-              >
+              <input ng-model="vm.maxPrice" ui-money-mask="0" placeholder="Max." type="text">
             </div>
           </div>
-          <a href="#" class="filter-block-price-btn"
-            ng-click="vm.getProductsByCategory()"
-          >
-            <img animate-visible="true" lazy-src="images/arrow-right.png" alt="">
+          <a href="#" class="filter-block-price-btn" ng-click="vm.getProductsByCategory()">
+            <img animate-visible="true" lazy-src="images/arrow-right.png" alt="Esconder">
           </a>
         </div>
 
@@ -39,31 +27,24 @@
     </div>
 
     <div class="filter-block" ng-repeat="filter in vm.filters track by $index">
-      <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active" ng-class="{'active-arrow': vm.filters[$index].active}">
+      <h4 ng-click="vm.filters[$index].active = !vm.filters[$index].active"
+        ng-class="{'active-arrow': vm.filters[$index].active}">
         <strong>{{filter.Name}}:</strong>
       </h4>
       <div ng-show="vm.filters[$index].active" class="filter-block-inner">
 
-        <div ng-if=" filter.Handle != 'color' " >
-          <md-checkbox
-            ng-repeat="value in filter.Values"
-            ng-model="value.selected"
-            ng-change="vm.getProductsByCategory()"
-            aria-label="Checkbox Indeterminate">
+        <div ng-if=" filter.Handle != 'color' ">
+          <md-checkbox ng-repeat="value in filter.Values" ng-model="value.selected"
+            ng-change="vm.getProductsByCategory()" aria-label="Checkbox Indeterminate">
             {{value.Name}}
           </md-checkbox>
         </div>
 
 
         <div ng-if=" filter.Handle == 'color' " class="color-picker-sp" layout="row" layout-wrap>
-          <a
-            class="color-picker-sp-value"
-            ng-repeat="value in filter.Values"
-            ng-click="vm.toggleColorFilter(value, filter)"
-            ng-style="{'background-color' : value.Code}"
-            ng-class="{'active': value.selected}"
-            href="#"
-            flex>
+          <a class="color-picker-sp-value" ng-repeat="value in filter.Values"
+            ng-click="vm.toggleColorFilter(value, filter)" ng-style="{'background-color' : value.Code}"
+            ng-class="{'active': value.selected}" href="#" flex>
             <span></span>
           </a>
         </div>

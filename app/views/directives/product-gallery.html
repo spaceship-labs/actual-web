@@ -18,7 +18,7 @@
     <slick id="slick-gallery" init-onload="true" data="areImagesLoaded" arrows="true" draggable="false">
       <div ng-repeat="image in galleryImages track by $index" class="product-view-gallery-img">
         <div class="product-view-gallery-img-inner">
-          <img animate-visible="true" lazy-src="{{image.src}}?d=400x400" ng-click="showGallery($index)"
+          <img src="{{image.src}}?d=400x400" ng-click="showGallery($index)"
             alt="{{product.icon_description|| product.Name}}-{{$index}}">
         </div>
       </div>

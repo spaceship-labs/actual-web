@@ -11,7 +11,8 @@
       <div layout="row">
         <div class="cart-item-prod-img">
           <a ng-href="{{ detail.Product.url }}">
-            <img animate-visible="true" lazy-src="{{ detail.Product.icons[0].url }}" alt="" />
+            <img animate-visible="true" lazy-src="{{ detail.Product.icons[0].url }}"
+              alt="{{ detail.Product.ItemCode }}" />
           </a>
         </div>
         <div>

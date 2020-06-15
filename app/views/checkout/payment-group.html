@@ -19,8 +19,8 @@
       </div>
 
       <div ng-if="method.cardsImages" flex="50" flex-md="50" flex-sm="50" class="bank-icons">
-        <img ng-repeat="card in method.cardsImages" animate-visible="true" lazy-src="{{ vm.api.baseUrl + card}}" alt=""
-          ng-class=" method.discountKey != 'discountPg1' ? 'card' : ''">
+        <img ng-repeat="card in method.cardsImages" animate-visible="true" lazy-src="{{ vm.api.baseUrl + card}}"
+          alt="{{card || 'Tarjeta'}}" ng-class=" method.discountKey != 'discountPg1' ? 'card' : ''">
         <span>
           <img ng-if="method.moreCards" src="images/mas-bancos.png" alt="Más bancos"
             ng-click="vm.showCardsDialog(method)" class="card more-cards-btn">

@@ -23,7 +23,7 @@
       </div>
       <div>
         <a title="Guardar fecha estimada de cierre" href="#" ng-click="vm.setEstimatedCloseDate()">
-          <img animate-visible="true" lazy-src="/images/save.png" alt="">
+          <img animate-visible="true" lazy-src="/images/save.png" alt="Guardar">
         </a>
       </div>
     </div>
@@ -156,7 +156,7 @@
         <td>{{record.files.length || 0}}</td>
         <td>
           <a ng-click="vm.toggleRecord(record)" href="#">
-            VER DETALLES <img animate-visible="true" lazy-src="/images/arrow-down.png" alt="">
+            VER DETALLES <img animate-visible="true" lazy-src="/images/arrow-down.png" alt="Expandir">
           </a>
         </td>
       </tr>
@@ -175,7 +175,8 @@
                   <a ng-repeat="file in record.files"
                     ng-href="{{vm.api.baseUrl + '/uploads/records/gallery/' + file.filename }}" target="_blank">
                     <img animate-visible="true"
-                      lazy-src="{{vm.api.baseUrl + '/uploads/records/gallery/' + file.filename }}" alt="">
+                      lazy-src="{{vm.api.baseUrl + '/uploads/records/gallery/' + file.filename }}"
+                      alt="{{file.filename}}">
                   </a>
                 </div>
 
