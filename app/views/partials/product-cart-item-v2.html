@@ -11,15 +11,13 @@
       <div layout="row">
         <div class="cart-item-prod-img">
           <a ng-href="{{ detail.Product.url }}">
-            <img ng-src="{{ detail.Product.icons[0].url }}" alt="" />
+            <img animate-visible="true" lazy-src="{{ detail.Product.icons[0].url }}" alt="" />
           </a>
         </div>
         <div>
           <ul>
             <li><strong>Código: </strong> {{ detail.Product.ItemCode }}</li>
-            <li
-              ng-repeat="filter in detail.Product.Filters"
-              ng-if="
+            <li ng-repeat="filter in detail.Product.Filters" ng-if="
                 (
                   filter.Handle == 'codigo' ||
                   filter.Handle == 'material' ||
@@ -27,8 +25,7 @@
                 )
                 &&
                 filter.Values.length > 0
-              "
-            >
+              ">
               <strong>{{ filter.Name }}: </strong>
               <span ng-repeat="value in filter.Values track by $index">
                 <span ng-if="value.Handle != 'color-paleta'">{{
@@ -50,12 +47,7 @@
     <!--ITEM DATA-->
     <div class="cart-item-data" flex="75" flex-xs="100">
       <div class="cart-item-data-inner">
-        <div
-          class="cart-item-data-prices"
-          layout="row"
-          layout-wrap
-          layout-align="space-between center"
-        >
+        <div class="cart-item-data-prices" layout="row" layout-wrap layout-align="space-between center">
           <!-- <div class="cart-item-data-column" flex="35" flex-xs="50">
             <p><strong>Fecha entrega estimada</strong></p>
             <p>{{detail.shipDate | date: "d/MMM/yyyy"}}</p>
@@ -64,12 +56,7 @@
             <p><strong>Precio Lista</strong></p>
             <p><small>MXN</small> {{ detail.unitPrice | roundCurrency }}</p>
           </div>
-          <div
-            class="cart-item-data-column"
-            flex="10"
-            flex-xs="50"
-            class="cart-item-data-qty"
-          >
+          <div class="cart-item-data-column" flex="10" flex-xs="50" class="cart-item-data-qty">
             <p><strong>Pieza(s)</strong></p>
             <p>{{ detail.quantity }}</p>
           </div>
@@ -88,23 +75,14 @@
     </div>
     <!--END ITEM DATA-->
 
-    <a
-      href="#"
-      ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
-      ng-click="vm.alertRemoveDetail($event,detail, $index)"
-      class="cart-item-remove"
-    >
+    <a href="#" ng-if="!vm.quotation.Order && !vm.quotation.isClosed"
+      ng-click="vm.alertRemoveDetail($event,detail, $index)" class="cart-item-remove">
       x
       <md-tooltip md-direction="bottom">Eliminar</md-tooltip>
     </a>
 
-    <div
-      ng-show="!detail.validStock && !vm.quotation.OrderWeb && !vm.isValidatingStock"
-      layout="row"
-      layout-align="center center"
-      class="stock-alert-layer"
-      ng-click="vm.showDetailGroupStockAlert($event, detail)"
-    >
+    <div ng-show="!detail.validStock && !vm.quotation.OrderWeb && !vm.isValidatingStock" layout="row"
+      layout-align="center center" class="stock-alert-layer" ng-click="vm.showDetailGroupStockAlert($event, detail)">
       <div class="stock-alert-content">
         <p>
           <a><i class="icon-alert"></i></a>
@@ -145,17 +123,12 @@
   </p>
   -->
 
-  <p
-    ng-if="
+  <p ng-if="
       vm.appliesForPackageOrPromotionDiscount(detail) == 'packageDiscount'
-    "
-    class="bottom-text"
-  >
+    " class="bottom-text">
     Paquete: {{ detail.discountName }}
   </p>
-  <div
-    ng-if="vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'"
-  >
+  <div ng-if="vm.appliesForPackageOrPromotionDiscount(detail) == 'promoDiscount'">
     <p class="bottom-text">
       <strong>Promoción:</strong> {{ detail.discountName }}
     </p>

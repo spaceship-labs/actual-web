@@ -41,13 +41,13 @@
           ng-init="payment.cardType = 'master-card' " ng-model="payment.cardType" class="payment-cardtype-chooser"
           layout="row">
           <md-radio-button value="master-card" class="md-primary">
-            <img src="/images/mastercard.png" alt="">
+            <img animate-visible="true" lazy-src="/images/mastercard.png" alt="">
           </md-radio-button>
           <md-radio-button value="visa" class="md-primary">
-            <img src="/images/visa.png" alt="">
+            <img animate-visible="true" lazy-src="/images/visa.png" alt="">
           </md-radio-button>
           <md-radio-button ng-if="payment.type !== 'debit-card' " value="american-express" class="md-primary">
-            <img src="/images/american.png" alt="">
+            <img animate-visible="true" lazy-src="/images/american.png" alt="">
           </md-radio-button>
         </md-radio-group>
 

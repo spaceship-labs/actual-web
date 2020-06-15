@@ -17,10 +17,10 @@
       <strong>- {{product.Discount}}%</strong>
     </div>
 
-    <img ng-if="images.length === 1" ng-src="{{images[0].url}}" alt="{{product.Name}}">
+    <img ng-if="images.length === 1" animate-visible="true" lazy-src="{{images[0].url}}" alt="{{product.Name}}">
     <slick ng-if="areImagesLoaded && images.length > 1" arrows="true">
       <div ng-repeat="image in images track by $index">
-        <img ng-src="{{image.url}}?d=100x100" alt="{{product.Name}}">
+        <img animate-visible="true" lazy-src="{{image.url}}?d=100x100" alt="{{product.Name}}">
       </div>
     </slick>
   </div>

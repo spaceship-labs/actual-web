@@ -223,7 +223,7 @@
         </a>
         <!--
         <a ng-href="" target="_blank">
-          <img src="images/tw.png" alt="Twitter {{main.siteName}}">
+          <img animate-visible="true" lazy-src="images/tw.png" alt="Twitter {{main.siteName}}">
         </a>
         -->
         <a ng-show="main.siteConstants.instagram_url" ng-href="{{main.siteConstants.instagram_url}}" target="_blank">
@@ -232,7 +232,7 @@
 
         <!--
         <a ng-href="" target="_blank">
-          <img src="images/youtube.png" alt="Youtube {{main.siteName}}">
+          <img animate-visible="true" lazy-src="images/youtube.png" alt="Youtube {{main.siteName}}">
         </a>
         -->
         <a ng-show="main.siteConstants.pinterest_url" ng-href="{{main.siteConstants.pinterest_url}}" target="_blank">
@@ -291,7 +291,10 @@
     var ratingBadgeContainer = document.createElement("div");
     document.getElementById("verified-logos-footer").appendChild(ratingBadgeContainer);
     window.gapi.load('ratingbadge', function () {
-      window.gapi.ratingbadge.render(ratingBadgeContainer, { "merchant_id": 117300745 });
+      window.gapi.ratingbadge.render(ratingBadgeContainer, {
+        "merchant_id": 117300745
+      });
     });
   }
+
 </script>

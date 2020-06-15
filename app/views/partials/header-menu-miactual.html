@@ -46,7 +46,7 @@
       ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
 
       <a class="list-menu-miactual" href="/category/{{ category.Handle }}">
-        <img src="{{ main.mainCategoriesKids[category.Handle].icon }}"></img>
+        <img animate-visible="true" lazy-src="{{ main.mainCategoriesKids[category.Handle].icon }}"></img>
         <br>
         <span>{{ category.Name }}</span>
       </a>
