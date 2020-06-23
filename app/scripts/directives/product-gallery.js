@@ -69,7 +69,7 @@ angular.module('actualWebApp').directive('productGallery', [
             //TEMPORAL
             scope.product.files.forEach(function (img) {
               scope.galleryImages.push({
-                src: api.baseUrl + '/uploads/products/gallery/' + img.filename,
+                src: 'https://d116li125og699.cloudfront.net/uploads/products/gallery/' + img.filename,
                 w: 500,
                 h: 500
               });
