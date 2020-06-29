@@ -1,9 +1,6 @@
-<slick ng-if="areImagesLoaded" arrows="true" >
+<slick ng-if="areImagesLoaded" arrows="true">
   <div ng-repeat="image in images track by $index" layout="row" layout-align="center center">
-    <img
-      ng-src="{{image.url}}"
-      alt=""
-    >
+    <img animate-visible="true" lazy-src="{{image.url}}" alt="Listing-production-{{$index}}">
   </div>
 </slick>
 <a ng-href="/{{product.ItemCode}}" layout="row" layout-align="center center">
