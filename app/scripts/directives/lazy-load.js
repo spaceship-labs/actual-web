@@ -96,7 +96,8 @@ angular.module('me-lazyload', [])
         }
       });
     }
-
+    
+    $win.bind('onload', checkImage);
     $win.bind('scroll', checkImage);
     $win.bind('resize', checkImage);
 

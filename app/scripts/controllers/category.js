@@ -71,13 +71,28 @@ function CategoryCtrl(
     vm.subnavIndex = index;
   }
 
+  function isMainCategory(category){
+    var main= ['salas', 'sillas', 'recamaras', 'muebles-de-jardin', 'decoracion', 'mesas', 'almacenaje']
+    var isMain=false;
+    var i=0;
+    while(!isMain && i<main.length){
+      if (category == main[i]){
+        isMain=true;
+      }
+      i++;
+    }
+    return isMain;
+  }
+
   function init() {
     if ($routeParams.category == 'comedores') {
-      console.log("comedores enter")
       $location.path('/category/mesas-comedor')
       return;
     }
     var activeSortOptionKey = 'DiscountPrice';
+    if (isMainCategory($routeParams.category)){
+      activeSortOptionKey = 'relevance';
+    }
     vm.activeSortOption = _.findWhere(vm.sortOptions, { key: activeSortOptionKey });
 
     vm.search = {
