@@ -62,13 +62,13 @@ angular.module('me-lazyload', [])
         viewHeight = Math.max(doc.documentElement.clientHeight, win.innerHeight || 0),
         xVisible,
         yVisible;
-
+        
       if (elemOffsetY <= winOffsetY) {
         if (elemOffsetY + elemHeight >= winOffsetY) {
           yVisible = true;
         }
       } else if (elemOffsetY >= winOffsetY) {
-        if (elemOffsetY <= winOffsetY + viewHeight) {
+        if (elemOffsetY <= winOffsetY + viewHeight || elemOffsetY>2300 && elemOffsetY <3000) {
           yVisible = true;
         }
       }
