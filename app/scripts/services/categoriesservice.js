@@ -67,8 +67,8 @@
         {
           name: 'mesas',
           childs: [
-            'mesas-laterales-y-centro',
             'mesas-de-comedor',
+            'mesas-laterales-y-centro',
             'bases-mesas-laterales-cama',
             'juego-comedor'
           ]
