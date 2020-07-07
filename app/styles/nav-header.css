@@ -16,12 +16,12 @@
   display: flex;
   justify-content: center;
   background-color: #fff;
-  height: 90px;  
+  height: 86px;  
 }
 
 .main-menu-container > div {
   background-color: #fff;
-  width: 108px;
+  width: 110px;
   text-align: center;  
   
 }
@@ -31,8 +31,8 @@
   flex-direction: column;
   -webkit-align-content: center;
   align-content: center;
-  width: 108px;
-  height: 90px;
+  /*width: 100px;*/
+  height: 87px;
   transition: 0.4s;
   color: #404040;
 }
@@ -50,6 +50,12 @@
   font-size: 14px;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+@media (max-width: 1347px) {
+  .list-menu-miactual > span {
+    font-size: 13px;
+  }
 }
 
 .icon-comedor {
