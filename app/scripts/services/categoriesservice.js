@@ -359,7 +359,7 @@
     var subcategories = [
       { name: 'Camas y literas', handle: "camas" },
       { name: 'Cunas', handle: "cunas" },
-      { name: 'Habitacion', handle: "escritorio" },
+      { name: 'Habitacion', handle: "escritorios" },
       { name: 'Almacenar', handle: "comodas" },
       { name: 'Mesas y sillas', handle: "mesitas" },
       { name: 'Decorativos', handle: "accesorios" }
