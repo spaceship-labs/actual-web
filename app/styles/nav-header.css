@@ -64,6 +64,13 @@
   margin: 10px auto;
 }
 
+nav > div:nth-child(4) > a > img {
+  -webkit-filter: drop-shadow(1px 1px 0#34b3e7) 
+  drop-shadow(-1px -1px 0 white);
+  filter:drop-shadow(1px 1px 0 #34b3e7) 
+  drop-shadow(-1px -1px 0 white);
+}
+
 .list-menu-miactual:hover {
   color: #fff ;
   background:#dda901 ;
