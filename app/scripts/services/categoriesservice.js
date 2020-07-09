@@ -121,42 +121,52 @@
 
         //KIDS
         {
-          name: 'camas-literas',
+          name: 'ninos',
           childs: [
             'camas',
             'literas',
-            'cabeceras',
-            'bases-de-cama',
-            'colchones'
-          ]
+            'colchones',
+            'barandales',
+            'buros',
+            'tocadores',
+            'comodas'          ]
         },
         {
-          name: 'cunas',
+          name: 'bebes',
           childs: [
             'cunas',
-            'colchones-cuna',
-            'cojines-cunas',
-            'blancos'
+            'colchones',
+            'mesas-laterales',
+            'cambiadores',
+            'barandales',
+            'mecedores'
           ]
         },
         {
-          name: 'habitacion',
+          name: 'estudio',
           childs: [
-            'cambiador',
-            'escritorio',
-            'mecedoras',
-            'bancos',
-            'tocador',
+            'mesas-y-sillas',
+            'repisas-y-libreros',
+            'escritorios'
+          ]
+        },
+        {
+          name: 'ropa-de-cama',
+          childs: [
+            'cojines',
+            'fundas',
+            'juegos-de-cuna',
+            'juegos-de-cama'
+          ]
+        },
+        {
+          name: 'decoracion',
+          childs: [
+            'accesorios',
+            'cuadros-y-decoracion-pared',
             'espejos',
-          ]
-        },
-        {
-          name: 'almacenar',
-          childs: [
-            'buros',
-            'comodas',
-            'repisas',
-            'libreros'
+            'iluminacion',
+            'bancos-y-percheros'
           ]
         }
 

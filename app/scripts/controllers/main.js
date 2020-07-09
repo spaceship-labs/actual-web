@@ -111,68 +111,28 @@
       };
 
       vm.mainCategoriesKids = {
-        'camas-literas': {
+        ninos: {
           icon: '/design/png/camasyliteras.png',
           image: '/images/categories/ninos.jpg'
         },
-
-        'camas-infantiles': {
-
-          icon: 'ninas-y-ninos2',
-          image: '/images/categories/ninos.jpg'
-        },
-
-        cunas: {
+        bebes: {
           icon: '/design/png/cunas.png',
           image: '/images/categories/bebes.jpg'
         },
-
-        'cunas-para-bebes': {
-          icon: 'bebebs2',
-          image: '/images/categories/bebes.jpg'
-        },
-
-        habitacion: {
+        estudio: {
           icon: '/design/png/habitacion.png',
           image: '/images/categories/mamaypapa.jpg'
         },
-
-        'accesorios-infantiles': {
-          icon: 'mamaypapa2',
-          image: '/images/categories/mamaypapa.jpg'
-        },
-        almacenar: {
+        'ropa-de-cama': {
           icon: 'design/png/almacenaje.png',
           image: '/images/categories/organizacion.jpg'
         },
-
-        organizacion: {
-          icon: 'organizacion2',
-          image: '/images/categories/organizacion.jpg'
-        },
-        juguetes: {
-          icon: 'juguetes2',
-          image: '/images/categories/juguetes.jpg'
-        },
-
-        decorativos: {
+        decoracion: {
           icon: '/design/png/decorativos.png',
           image: '/images/categories/decoracion.jpg'
-        },
-
-        'comoda-infantil': {
-          icon: 'decoracion-relleno',
-          image: '/images/categories/decoracion.jpg'
-        },
-        'mesas-infantiles': {
-          icon: 'iluminacion2',
-          image: '/images/categories/iluminacion.jpg'
-        },
-        'mesas-y-sillas': {
-          icon: '/design/png/mesasysillas.png',
-          image: '/images/categories/categoria1.png'
-        },
+        }
       };
+
       vm.activeCategory = {
         salas: false,
         comedores: false,
