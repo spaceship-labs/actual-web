@@ -124,7 +124,7 @@
           image: '/images/categories/mamaypapa.jpg'
         },
         'ropa-de-cama': {
-          icon: 'design/png/almacenaje.png',
+          icon: 'design/png/ropa-cama.png',
           image: '/images/categories/organizacion.jpg'
         },
         decoracion: {
