@@ -136,7 +136,7 @@
             filledIcon: 'recamaras',
             image: '/images/categories/categoria3.png'
           },
-          'muebles-de-jardin': {
+          'de-exterior': {
             color: 'muebles-exterior-bg',
             icon: 'exterior',
             filledIcon: 'exterior',
@@ -199,7 +199,7 @@
             filledIcon: 'recamaras',
             image: '/images/categories/categoria3.png'
           },
-          'muebles-de-jardin': {
+          'de-exterior': {
             color: 'muebles-exterior-bg',
             icon: 'exterior',
             filledIcon: 'exterior',
@@ -300,7 +300,7 @@
         mesas: false,
         sillas: false,
         recamaras: false,
-        'muebles-de-jardin': false,
+        'de-exterior': false,
         almacenaje: false,
         'muebles-para-oficina': false,
         ofertas: false,

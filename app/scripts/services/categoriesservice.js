@@ -47,37 +47,29 @@
         {
           name: 'salas',
           childs: [
-            'salas-esquineras',
-            'salas-modulares',
-            'sofas',
+            'salas-y-sofas',
             'sofa-cama',
-            'futon',
-            'sillones',
+            'futones',
             'sillones-reclinables',
-            'salas-de-cine',
-            'taburete',
-            'salas-para-jardin',
-            'mesas-de-centro',
-            'mesas-laterales',
-            'credenzas'
-          ]
-        },
-        {
-          name: 'comedores',
-          childs: [
-            'mesas-de-comedor',
-            'sillas-para-comedor',
-            'bancos-para-barra',
-            'bufeteras'
+            'sillones-salas',
+            'taburete'
           ]
         },
         {
           name: 'sillas',
           childs: [
             'sillas-para-comedor',
-            'sillas-para-oficina',
-            'sillas-para-jardin',
-            'bancos-para-barra'
+            'bancos',
+            'Oficina'
+          ]
+        },
+        {
+          name: 'mesas',
+          childs: [
+            'mesas-de-comedor',
+            'mesas-laterales-y-centro',
+            'mesas-laterales',
+            'juego-comedor'
           ]
         },
         {
@@ -85,40 +77,54 @@
           childs: [
             'camas',
             'cabeceras',
-            'bases-para-cama',
-            'futon',
-            'sofa-cama',
+            'bases-de-cama',
             'comoda',
-            'buros',
-            'colchones'
+            'colchones',
+            'comoda',
+            'buros-y-mesas-laterales'
           ]
         },
         {
-          name: 'muebles-de-jardin',
+          name: 'de-exterior',
           childs: [
-            'salas-para-jardin',
-            'sillones-para-exterior',
-            'mesas-para-jardin',
-            'sillas-para-jardin',
+            'salas-exterior',
+            'mesas-exterior',
+            'sillas-y-bancos',
             'camastro',
-            'sombrillas'
+            'mesa-de-centro-y-lateral'
           ]
         },
         {
-          name: 'muebles-para-oficina',
-          childs: ['escritorios', 'sillas-para-oficina', 'libreros']
+          name: 'decorativos',
+          childs: [
+            'accesorios',
+            'cuadros-y-decoracion-de-pared',
+            'espejos',
+            'tapetes',
+            'tapetes',
+            'iluminacion'
+          ]
         },
         {
-          name: 'muebles-de-tv',
+          name: 'almacenaje',
           childs: [
             'comodas-y-credenzas',
             'bufeteros',
             'buros',
             'muebles-para-tv',
-            'centro-de-entretenimiento',
-            'sillones-reclinables',
-            'sillones',
-            'salas-de-cine'
+            'escritorios',
+            'libreros-y-repisas'
+          ]
+        },
+        {
+          name: 'bebes-y-ninos',
+          childs: [
+            'camas-y-literas',
+            'cunas-bebes-ninos',
+            'habitacion-bebes-ninos',
+            'almacenar-bebes-ninos',
+            'mesas-y-sillas-bebes-ninos',
+            'decorativos-bebes-ninos'
           ]
         },
         //KIDS
@@ -297,7 +303,7 @@
         ninos: 'ninos',
         blancos: 'blancos',
         decoracion: 'decoracion',
-        'muebles-de-jardin': 'exterior',
+        'de-exterior': 'exterior',
         'muebles-para-oficina': 'paraoficina',
         'muebles-de-tv': 'mueblestv',
         tapetes: 'tapetes2',
