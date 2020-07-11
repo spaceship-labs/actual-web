@@ -131,60 +131,52 @@
         {
           name: 'ninos',
           childs: [
-            'camas-infantiles',
-            'literas-infantiles',
-            'comoda-infantil',
-            'escritorios-infantiles',
-            'mesas-y-sillas-infantiles',
-            'sillones-infantiles',
-            'colchones-para-ninos',
-            'blancos-para-ninos',
-            'cojines-infantiles'
-          ]
+            'camas',
+            'literas',
+            'colchones',
+            'barandales',
+            'buros',
+            'tocadores',
+            'comodas'          ]
         },
         {
           name: 'bebes',
           childs: [
-            'cunas-para-bebes',
-            'colchon-para-cuna',
-            'cambiador-de-panales',
-            'baneras-para-bebes',
-            'blancos-infantiles',
-            'cojines-para-bebes',
-            'sillas-para-comer'
+            'cunas',
+            'colchones',
+            'mesas-laterales',
+            'cambiadores',
+            'barandales',
+            'mecedores'
           ]
         },
         {
-          name: 'mama-y-papa',
-          childs: ['mecedoras', 'cojines-de-maternidad']
-        },
-        {
-          name: 'organizacion-kids',
+          name: 'estudio',
           childs: [
-            'baules',
-            'cestos-y-canastas',
-            'joyeros',
-            'repisas-infantiles'
-          ]
-        },
-        { name: 'juguetes', childs: ['peluches', 'estimulacion-temprana'] },
-        {
-          name: 'decoracion-infantil',
-          childs: [
-            'accesorios-decorativos-kids',
-            'cuadros-infantiles',
-            'colgantes',
-            'portarretratos-infantiles'
+            'mesas-y-sillas',
+            'repisas-y-libreros',
+            'escritorios'
           ]
         },
         {
-          name: 'lamparas-infantiles',
+          name: 'ropa-de-cama',
           childs: [
-            'lamparas-de-mesa-infantiles',
-            'lamparas-colgantes-infantiles'
+            'cojines',
+            'fundas',
+            'juegos-de-cuna',
+            'juegos-de-cama'
           ]
         },
-        { name: 'tapetes-infantiles', childs: ['tapetes'] }
+        {
+          name: 'decoracion',
+          childs: [
+            'accesorios',
+            'cuadros-y-decoracion-pared',
+            'espejos',
+            'iluminacion',
+            'bancos-y-percheros'
+          ]
+        }
       ];
 
       var tree = [];
