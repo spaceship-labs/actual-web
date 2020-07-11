@@ -47,37 +47,29 @@
         {
           name: 'salas',
           childs: [
-            'salas-esquineras',
-            'salas-modulares',
-            'sofas',
+            'salas-y-sofas',
             'sofa-cama',
-            'futon',
-            'sillones',
+            'futones',
             'sillones-reclinables',
-            'salas-de-cine',
-            'taburete',
-            'salas-para-jardin',
-            'mesas-de-centro',
-            'mesas-laterales',
-            'credenzas'
-          ]
-        },
-        {
-          name: 'comedores',
-          childs: [
-            'mesas-de-comedor',
-            'sillas-para-comedor',
-            'bancos-para-barra',
-            'bufeteras'
+            'sillones-salas',
+            'taburete'
           ]
         },
         {
           name: 'sillas',
           childs: [
             'sillas-para-comedor',
-            'sillas-para-oficina',
-            'sillas-para-jardin',
-            'bancos-para-barra'
+            'bancos',
+            'Oficina'
+          ]
+        },
+        {
+          name: 'mesas',
+          childs: [
+            'mesas-de-comedor',
+            'mesas-laterales-y-centro',
+            'mesas-laterales',
+            'juego-comedor'
           ]
         },
         {
@@ -85,100 +77,106 @@
           childs: [
             'camas',
             'cabeceras',
-            'bases-para-cama',
-            'futon',
-            'sofa-cama',
+            'bases-de-cama',
             'comoda',
-            'buros',
-            'colchones'
+            'colchones',
+            'comoda',
+            'buros-y-mesas-laterales'
           ]
         },
         {
           name: 'muebles-de-jardin',
           childs: [
-            'salas-para-jardin',
-            'sillones-para-exterior',
-            'mesas-para-jardin',
-            'sillas-para-jardin',
+            'salas-exterior',
+            'mesas-exterior',
+            'sillas-y-bancos',
             'camastro',
-            'sombrillas'
+            'mesa-de-centro-y-lateral'
           ]
         },
         {
-          name: 'muebles-para-oficina',
-          childs: ['escritorios', 'sillas-para-oficina', 'libreros']
+          name: 'decoracion',
+          childs: [
+            'accesorios',
+            'cuadros-y-decoracion-de-pared',
+            'espejos',
+            'tapetes',
+            'tapetes',
+            'iluminacion'
+          ]
         },
         {
-          name: 'muebles-de-tv',
+          name: 'almacenaje',
           childs: [
             'comodas-y-credenzas',
             'bufeteros',
             'buros',
             'muebles-para-tv',
-            'centro-de-entretenimiento',
-            'sillones-reclinables',
-            'sillones',
-            'salas-de-cine'
+            'escritorios',
+            'libreros-y-repisas'
+          ]
+        },
+        {
+          name: 'bebes-y-ninos',
+          childs: [
+            'camas-y-literas',
+            'cunas-bebes-ninos',
+            'habitacion-bebes-ninos',
+            'almacenar-bebes-ninos',
+            'mesas-y-sillas-bebes-ninos',
+            'decorativos-bebes-ninos'
           ]
         },
         //KIDS
         {
           name: 'ninos',
           childs: [
-            'camas-infantiles',
-            'literas-infantiles',
-            'comoda-infantil',
-            'escritorios-infantiles',
-            'mesas-y-sillas-infantiles',
-            'sillones-infantiles',
-            'colchones-para-ninos',
-            'blancos-para-ninos',
-            'cojines-infantiles'
-          ]
+            'camas',
+            'literas',
+            'colchones',
+            'barandales',
+            'buros',
+            'tocadores',
+            'comodas'          ]
         },
         {
           name: 'bebes',
           childs: [
-            'cunas-para-bebes',
-            'colchon-para-cuna',
-            'cambiador-de-panales',
-            'baneras-para-bebes',
-            'blancos-infantiles',
-            'cojines-para-bebes',
-            'sillas-para-comer'
+            'cunas',
+            'colchones',
+            'mesas-laterales',
+            'cambiadores',
+            'barandales',
+            'mecedores'
           ]
         },
         {
-          name: 'mama-y-papa',
-          childs: ['mecedoras', 'cojines-de-maternidad']
-        },
-        {
-          name: 'organizacion-kids',
+          name: 'estudio',
           childs: [
-            'baules',
-            'cestos-y-canastas',
-            'joyeros',
-            'repisas-infantiles'
-          ]
-        },
-        { name: 'juguetes', childs: ['peluches', 'estimulacion-temprana'] },
-        {
-          name: 'decoracion-infantil',
-          childs: [
-            'accesorios-decorativos-kids',
-            'cuadros-infantiles',
-            'colgantes',
-            'portarretratos-infantiles'
+            'mesas-y-sillas',
+            'repisas-y-libreros',
+            'escritorios'
           ]
         },
         {
-          name: 'lamparas-infantiles',
+          name: 'ropa-de-cama',
           childs: [
-            'lamparas-de-mesa-infantiles',
-            'lamparas-colgantes-infantiles'
+            'cojines',
+            'fundas',
+            'juegos-de-cuna',
+            'juegos-de-cama'
           ]
         },
-        { name: 'tapetes-infantiles', childs: ['tapetes'] }
+        {
+          name: 'decoracion',
+          childs: [
+            'accesorios',
+            'cuadros-y-decoracion-pared',
+            'espejos',
+            'iluminacion',
+            'bancos-y-percheros'
+          ]
+        }
       ];
 
       var tree = [];
