@@ -94,7 +94,7 @@
             'mesa-de-centro-y-lateral'
           ]
         },
-        /*
+        
         {
           name: 'decoracion',
           childs: [
@@ -106,7 +106,6 @@
             'iluminacion'
           ]
         },
-        
         {
           name: 'almacenaje',
           childs: [
@@ -118,7 +117,7 @@
             'libreros-y-repisas'
           ]
         },
-        */
+      
         {
           name: 'bebes-y-ninos',
           childs: [
@@ -128,56 +127,6 @@
             'almacenar-bebes-ninos',
             'mesas-y-sillas-bebes-ninos',
             'decorativos-bebes-ninos'
-          ]
-        },
-        //KIDS
-        {
-          name: 'ninos',
-          childs: [
-            'camas',
-            'literas',
-            'colchones',
-            'barandales',
-            'buros',
-            'tocadores',
-            'comodas'          ]
-        },
-        {
-          name: 'bebes',
-          childs: [
-            'cunas',
-            'colchones',
-            'mesas-laterales',
-            'cambiadores',
-            'barandales',
-            'mecedores'
-          ]
-        },
-        {
-          name: 'estudio',
-          childs: [
-            'mesas-y-sillas',
-            'repisas-y-libreros',
-            'escritorios'
-          ]
-        },
-        {
-          name: 'ropa-de-cama',
-          childs: [
-            'cojines',
-            'fundas',
-            'juegos-de-cuna',
-            'juegos-de-cama'
-          ]
-        },
-        {
-          name: 'decoracion',
-          childs: [
-            'accesorios',
-            'cuadros-y-decoracion-pared',
-            'espejos',
-            'iluminacion',
-            'bancos-y-percheros'
           ]
         }
       ];
