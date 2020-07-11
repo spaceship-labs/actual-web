@@ -111,6 +111,9 @@
         {
           name: 'muebles-de-tv',
           childs: [
+            'comodas-y-credenzas',
+            'bufeteros',
+            'buros',
             'muebles-para-tv',
             'centro-de-entretenimiento',
             'sillones-reclinables',
@@ -273,7 +276,7 @@
         acum.push(category)
         return acum;
       }, [])
-      return filteredFeaturedProducts;
+      return addKidsCategory(filteredFeaturedProducts);
     }
 
     function getCategoryByHandle(handle) {
@@ -350,5 +353,41 @@
     ];
 
     return service;
+  }
+
+  function addKidsCategory(tree) {
+    var finalTree = tree;
+    var Parent = {
+      CategoryLevel: 1,
+      Childs: [],
+      FeaturedProducts: [],
+      Handle: "bebes-y-ninos",
+      Name: "bebes y niños",
+      actual_studio: 1
+    };
+    var subcategories = [
+      { name: 'Camas y literas', handle: "camas" },
+      { name: 'Cunas', handle: "cunas" },
+      { name: 'Habitacion', handle: "escritorios" },
+      { name: 'Almacenar', handle: "comodas" },
+      { name: 'Mesas y sillas', handle: "mesitas" },
+      { name: 'Decorativos', handle: "accesorios" }
+    ];
+    Parent.Childs = subcategories.map(function (subcategory) {
+      var templateObject = {
+        CategoryLevel: 2,
+        Childs: [],
+        FeaturedProducts: [],
+        Handle: "",
+        Name: "",
+        actual_studio: 1,
+        manualFromKids: true
+      };
+      templateObject.Handle = subcategory.handle;
+      templateObject.Name = subcategory.name;
+      return templateObject;
+    });
+    finalTree.push(Parent);
+    return finalTree;
   }
 })();

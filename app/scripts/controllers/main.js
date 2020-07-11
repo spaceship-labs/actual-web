@@ -165,6 +165,12 @@
             icon: 'deco',
             filledIcon: 'deco',
             image: '/images/categories/decoracion.jpg'
+          },
+          'bebes-y-ninos': {
+            color: 'look-bg',
+            icon: 'nios-y-bebes',
+            filledIcon: 'nios-y-bebes',
+            image: '/images/categories/ninos.jpg'
           }
         };
       } else {

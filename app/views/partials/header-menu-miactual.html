@@ -3,10 +3,12 @@
 
     <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index"
       ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
-      <a class="list-menu-miactual" href="/category/{{ category.Handle }}">
-        <i ng-class="'icon-{{main.mainCategories[category.Handle].icon}}'"> </i>
-        <span>{{ category.Name }}</span>
-      </a>
+      <!--<a class="list-menu-miactual" href="/category/{{ category.Handle }}">-->
+        <div class="list-menu-miactual">
+          <i ng-class="'icon-{{main.mainCategories[category.Handle].icon}}'"> </i>
+          <span>{{ category.Name }}</span>
+        </div>
+      <!--</a>-->
       <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
         ng-mouseleave="main.handleCategoryLeave()" index="$index" subcategories="category.Childs"
         image="main.mainCategories[category.Handle].image" featured="category.FeaturedProducts"
