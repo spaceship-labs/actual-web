@@ -94,6 +94,7 @@
             'mesa-de-centro-y-lateral'
           ]
         },
+        /*
         {
           name: 'decoracion',
           childs: [
@@ -105,7 +106,7 @@
             'iluminacion'
           ]
         },
-        /*
+        
         {
           name: 'almacenaje',
           childs: [
@@ -116,7 +117,8 @@
             'escritorios',
             'libreros-y-repisas'
           ]
-        },*/
+        },
+        */
         {
           name: 'bebes-y-ninos',
           childs: [
