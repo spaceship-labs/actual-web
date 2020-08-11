@@ -344,6 +344,7 @@ function CheckoutPaymentsCtrl(
   }
 
   function MPTokenizePaymentCard(payment) {
+    Mercadopago.clearSession();
     var deferred = $q.defer();
     if (payment.type === 'transfer') {
       deferred.resolve('transfer');
@@ -438,6 +439,9 @@ function CheckoutPaymentsCtrl(
         })
         .then(function (token) {
           console.log('HEEEEY');
+          if (token === undefined) {
+            throw "No se pudo generar correctamente sus datos de pago, recargue la página y vuelva a introducir todos sus datos.";
+          }
           if (payment.msi) {
             payment.installments = payment.msi;
           } else {
@@ -521,7 +525,7 @@ function CheckoutPaymentsCtrl(
             };
 
             dialogService.showDialog(
-              'Hubo un error, revisa los datos e intenta de nuevo \n' + errMsg,
+              'Hubo un error, revisa los datos e intenta de nuevo <br/>' + errMsg,
               callback
             );
           }
