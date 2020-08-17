@@ -17,12 +17,25 @@
 <input class="modal-state" id="modal-1" type="checkbox" />
 <div class="modal">
   <label class="modal__bg" for="modal-1"></label>
-  <div class="modal__inner">
+  <div class="modal__inner modal__inner--login">
     <label class="modal__close" for="modal-1"></label>
-    <h2>Title!</h2>
-    <p>Aliquam in sagittis nulla. Curabitur euismod diam eget risus
-      venenatis, sed dictum lectus bibendum. Nunc nunc nisi, hendrerit eget nisi id, rhoncus rutrum velit. Nunc vel
-      mauris dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam
-      fringilla quis nisi eget imperdiet.</p>
+
+    <div class="container__login--session">
+      <div class="item--card items--1"><i class="icon-login"></i><span> Iniciar sesión</span></div>
+      <div >
+        <form action="#" class="items--2">
+          <div class="forms__group2">
+            <label for="calle" class="form__label2">Correo*</label>
+            <input type="text" class="form__input2" placeholder="Calle" id="calle" required>
+          </div>
+          <div class="forms__group2">
+            <label for="int" class="form__label2">Contraseña*</label>
+            <input type="text" class="form__input2" placeholder="Contraseña" id="password" required>
+          </div>
+          <a class="btnForm"><span>CONTINUAR</></a>
+        </form>
+      </div>
+    </div
+
   </div>
 </div>

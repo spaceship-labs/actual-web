@@ -192,6 +192,7 @@
 /*END LINK BUTTON*/
 
 /*POP UP*/
+/*
 .popUp {
   height: 100vh;
   width: 100%;
@@ -255,7 +256,7 @@
 .popUp__close:hover {
   color: #cc262f;
 }
-
+*/
 /*END POP UP*/
 
 
@@ -354,6 +355,10 @@ $bp-smallest: 31.25em; // 500px
   height: 50%;
 }
 
+.modal__inner--login{
+  height: 42%;
+}
+
 .modal__close {
   position: absolute;
   right: 1em;
@@ -377,14 +382,20 @@ $bp-smallest: 31.25em; // 500px
   top: 0;
 }
 
+.modal__close:hover {
+  color: #cc262f;
+}
+
+
 .modal__close:hover:after,
 .modal__close:hover:before {
-  background: #aaa;
+  color: #cc262f;
 }
 
 .modal__close:before {
   transform: rotate(-45deg);
 }
+
 
 @media screen and (max-width: 768px) {
 
@@ -433,3 +444,5 @@ p img {
   float: left;
   margin: 0 1em 1em 0;
 }
+
+
