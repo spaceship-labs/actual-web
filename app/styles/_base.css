@@ -359,6 +359,11 @@ $bp-smallest: 31.25em; // 500px
   height: 42%;
 }
 
+.modal__inner--invited{
+  width: 60%;
+  height: 55%;
+}
+
 .modal__close {
   position: absolute;
   right: 1em;
