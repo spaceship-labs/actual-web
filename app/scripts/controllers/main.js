@@ -45,7 +45,7 @@
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
       toggleProfileModal: toggleProfileModal,
-      redirectToRegister: redirectToRegister,
+      redirectScroll: redirectScroll,
       getFaviconUrl: getFaviconUrl,
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
@@ -75,12 +75,11 @@
 
     init();
 
-    function redirectToRegister() {
-      if (!vm.activeQuotation.id) {
-        $location.path('/register');
-      }
-      $location.path('/register').search({
-        quotation: vm.activeQuotation.id
+    function redirectScroll(){
+      var redirectScroll = document.getElementById("footer");
+
+      redirectScroll.scrollIntoView({
+        behavior: "smooth"
       });
     }
 
