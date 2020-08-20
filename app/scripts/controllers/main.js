@@ -45,7 +45,7 @@
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
       toggleProfileModal: toggleProfileModal,
-      redirectToRegister: redirectToRegister,
+      redirectScroll: redirectScroll,
       getFaviconUrl: getFaviconUrl,
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
@@ -75,14 +75,15 @@
 
     init();
 
-    function redirectToRegister() {
-      if (!vm.activeQuotation.id) {
-        $location.path('/register');
-      }
-      $location.path('/register').search({
-        quotation: vm.activeQuotation.id
+    function redirectScroll(){
+      var scrollFooter = document.getElementById("footer");
+      //console.log("Test scroll function", scrollFooter);
+      scrollFooter.scrollIntoView({
+        behavior: "smooth"
+
       });
-    }
+      
+    } 
 
     function getFaviconUrl() {
       var faviconUrl = '/images/favicon.ico';
