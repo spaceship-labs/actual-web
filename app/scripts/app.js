@@ -266,9 +266,9 @@ angular
         controller: 'AboutusCtrl',
         controllerAs: 'aboutus'
       })
-      .when('/filosofia', {
-        templateUrl: 'views/philosophy.html',
-        controller: 'PhilosophyCtrl',
+      .when('/nuestros-valores', {
+        templateUrl: 'views/Ourvalues.html',
+        controller: 'OurvaluesCtrl',
         controllerAs: 'philosophy'
       })
       .when('/nuestras-marcas', {
