@@ -9723,3 +9723,15 @@ md-sidenav {
   .quotation-view.client-signature{  display:flex;}
   .quotation-view .company-data,.quotation-view .quotation-validity{display: block;}*/
 }
+
+@keyframes blink {
+  from {background-color: transparent;}
+  to {background-color: #fcf403;}
+}
+
+/* The element to apply the animation to */
+.contact-animation {
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: 1
+}
