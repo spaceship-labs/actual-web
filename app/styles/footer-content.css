@@ -1,0 +1,82 @@
+.footer-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /*background-color: DodgerBlue;*/
+    /*padding: 14px;*/
+  }
+  
+  .footer-container  a{
+    text-decoration: none;
+    color: inherit;
+    font-size: 14px;
+  }
+  
+  .footer-container a:hover{
+    background: #eeeeee;
+  }
+  
+  .footer-container td{
+    margin-left: 10px;
+    padding: 0;
+    font-size: 14px;
+  }
+  
+  .footer-container ul{
+    list-style-type: none;
+    margin: 5px 0px 15px 0px;
+    padding: 0;
+    
+  }
+  
+  .footer-container li:not(:last-child){
+    margin: 5px 0px 5px 0px;
+    /*margin: 0;*/
+    padding: 0;
+  }
+  
+  .footer-container table{
+    margin-bottom: 10px;
+  }
+  
+  .footer-container p{
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer-container tr{
+    /*margin: 5px 0px 15px 0px;*/
+    padding: 0;
+  }
+  
+  .footer-container h2{
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  .footer-card{
+    font-family: "Nunito", sans-serif;
+    /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
+    /*width: 20rem;*/
+    color: #333;
+    flex-basis: 25%;
+    -webkit-align-content: center;
+    align-content: center;
+    margin: 10px;
+    
+  }
+  
+  .footer-card-container{
+    font-family: inherit;
+    color: inherit;
+    padding: 10px 10px;
+    /*width: 25rem;*/
+    top: 50%;
+    left: 50%;
+
+  }
+  
+  
+  
