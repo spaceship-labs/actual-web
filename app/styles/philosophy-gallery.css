@@ -1,0 +1,47 @@
+@media (max-width: 600px) {
+  .philosophy-gallery{
+    text-align: center;
+    float:none;    
+  }
+}
+@media(min-width: 600px){
+  .philosophy-gallery{
+    float:right; 
+    margin: 0 0 2em 2em;
+    text-align: center;
+    width:300px;
+  }
+}
+
+.tns-nav {
+  text-align: center;
+}
+.tns-nav > button {
+  border-radius: 100%;
+  background-color:#333;
+  width: 10px;
+  height: 12px;
+  border:none;
+  margin: 0 10px;
+}
+button.tns-nav-active {
+  background-color:#cc262f;
+}
+
+.tns-controls {
+  position: relative;
+  margin-top: -5%;
+}
+.tns-controls > button {
+  border: 0;
+  color:#fff;
+  background-color: #000;
+  border-radius: 100%;
+  height: 30px;
+}
+.tns-controls > button:nth-child(1) {
+  margin-left:10px;
+}
+.tns-controls > button:nth-child(2) {
+  margin-left:225px;
+}
