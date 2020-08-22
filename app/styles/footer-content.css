@@ -10,7 +10,7 @@
   .footer-container  a{
     text-decoration: none;
     color: inherit;
-    font-size: 16px;
+    font-size: 1em;
   }
   
   .footer-container a:hover{
@@ -18,9 +18,9 @@
   }
   
   .footer-container td{
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     padding: 0;
-    font-size: 16px;
+    font-size: 1em;
   }
   
   .footer-container ul{
@@ -37,7 +37,7 @@
   }
   
   .footer-container table{
-    margin-bottom: 10px;
+    margin-bottom: 0.62em;
   }
   
   .footer-container p{
@@ -50,11 +50,11 @@
     padding: 0;
   }
   
+  
   .footer-container h2{
-    font-size: 20px;
+    font-size: 1.25em;
     margin: 0;
     padding: 0;
-    
   }
   
   
@@ -65,17 +65,62 @@
     flex-basis: 30%;
     -webkit-align-content: center;
     align-content: center;
-    margin: 10px;
-    background-color: aquamarine;
-        
+    margin: 0.62em;        
   }
   
   .footer-card-container{
     font-family: inherit;
     color: inherit;
-    padding: 10px 10px;
-    margin-left: 20%;
+    padding: 0px 10px;
+    margin-left: 15%;
+  }
+
+  @media only screen and (max-width: 77em) {
+    .footer-card-container{
+      margin-left: 10%;
+    } 
+  }
+
+  
+  @media only screen and (min-width: 68.44) {
+    .footer-card-container{
+      margin-left: 5%;
+    } 
   }
   
+  @media only screen and (max-width: 63.125em)  {
+    .footer-card-container{
+      padding: 0;
+    } 
+
+  }
   
-  
+  @media only screen and (max-width: 42.67em) {
+  .footer-card-container td{
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 37.44em) {
+  .footer-card{
+    margin: 1%;
+  }
+  .footer-card{
+    flex-basis: 48%;
+  }
+
+  .footer-card-container{
+    margin-left: 1.56em;
+  } 
+}
+
+@media only screen and (max-width: 19.5em) {
+  .footer-card-container{
+    margin-left: 15%;
+  }
+
+  .footer-card{
+    flex-basis: 100%;
+  }
+
+}
