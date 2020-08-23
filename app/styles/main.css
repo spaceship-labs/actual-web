@@ -7434,11 +7434,10 @@ div.store-item-column.flex-xs-100.flex-sm-100.flex-40>h2>strong {
 #footer .footer-menu-bottom .box-bottom a {
   cursor: pointer;
   max-width: 50px;
-  margin: 5px;
 }
 
 #footer .footer-menu-bottom .box-bottom a img {
-  width: 100%;
+  width: 95%;
 }
 
 #footer .footer-bottom {
@@ -7475,7 +7474,7 @@ div.store-item-column.flex-xs-100.flex-sm-100.flex-40>h2>strong {
 }
 
 #footer .footer-logo {
-  max-width: 100% !important;
+  max-width: 85% !important;
 }
 
 #footer .verified-logos {
