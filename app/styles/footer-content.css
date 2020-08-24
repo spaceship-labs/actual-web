@@ -74,16 +74,16 @@
     .footer-card{
       flex-basis: 30%;
     }
-
     .footer-card-container{
-      margin-left: 10%;
+      margin-left: 0%;
     } 
-
-    .footer-container  a{
-      font-size: 0.8em;
-    }
     .footer-container p{
       font-size: 0.9em;
+    }
+    .footer-container td{
+      padding: 0;
+      font-size: 0.8em;
+
     }
   }
   
@@ -99,7 +99,7 @@
     }
 
     .footer-card-container{
-      margin-left: 10%;
+      margin-left: 0%;
     } 
   }
   
@@ -129,8 +129,14 @@
     flex-basis: 85%;
   }
   .footer-card-container{
-    margin-left: 1.5em;
+    margin-left: 0.5em;
   } 
+
+  .btn-radius, .btn-radius:link, .btn-radius:visited {
+    padding: 0.5rem 2.5rem;
+  }
+
+
 }
 
 .btn-radius, .btn-radius:link, .btn-radius:visited {
