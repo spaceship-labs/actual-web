@@ -81,6 +81,10 @@
         behavior: "smooth"
       });
       redirectScroll.classList.add("contact-animation");
+      setTimeout(function () {
+        var redirectScroll = document.getElementById("contactanos");
+        redirectScroll.classList.remove("contact-animation");
+      }, 2000)
     }
 
     function getFaviconUrl() {
