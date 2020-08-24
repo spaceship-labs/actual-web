@@ -76,11 +76,11 @@
     init();
 
     function redirectScroll() {
-      var redirectScroll = document.getElementById("footer");
+      var redirectScroll = document.getElementById("contactanos");
       redirectScroll.scrollIntoView({
         behavior: "smooth"
       });
-      /* redirectScroll.classList.add("contact-animation"); */
+      redirectScroll.classList.add("contact-animation");
     }
 
     function getFaviconUrl() {
