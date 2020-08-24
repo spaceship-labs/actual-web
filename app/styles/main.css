@@ -7014,6 +7014,10 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 /*--------------/
   #TERMS-VIEW
 /*--------------*/
+.terms-view{
+  font-family: "Nunito", sans-serif !important; ;
+}
+
 .terms-view .banner {
   min-height: 340px;
   background-size: cover;
@@ -7041,6 +7045,7 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 .terms-view .section-title {
   text-align: center;
   margin: 30px 0;
+  font-size: 2rem;
 }
 
 .terms-view a {
@@ -7104,8 +7109,9 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 
 .our-brands .brand-logo img {
   width: 185px;
-  -webkit-filter: drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198));
+  /* -webkit-filter: drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198));
   filter: drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198));
+ */
 }
 
 .our-brands .brand {
