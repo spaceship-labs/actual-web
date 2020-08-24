@@ -66,8 +66,8 @@
   .footer-card-container{
     font-family: inherit;
     color: inherit;
-    padding: 0px 10px;
-    margin-left: 15%;
+    /*padding: 0px 10px;*/
+     margin-left: 15%;
   }
 
   @media only screen and (max-width: 77em) {
@@ -78,6 +78,13 @@
     .footer-card-container{
       margin-left: 10%;
     } 
+
+    .footer-container  a{
+      font-size: 0.8em;
+    }
+    .footer-container p{
+      font-size: 0.9em;
+    }
   }
   
   @media only screen and (max-width: 63.125em)  {
@@ -105,6 +112,12 @@
   }
 }
 
+@media only screen and (max-width: 41.06em) {
+  .footer-card{
+    flex-basis: 28%;
+  }
+}
+
 @media only screen and (max-width: 37.25em) {
   .footer-card{
     flex-basis: 42%;
@@ -116,7 +129,7 @@
     flex-basis: 85%;
   }
   .footer-card-container{
-    margin-left: 1em;
+    margin-left: 1.5em;
   } 
 }
 
@@ -124,7 +137,7 @@
   font-family: "Nunito", sans-serif !important; 
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0.5rem 4rem;
+  padding: 0.5rem 3rem;
   display: inline-block;
   border-radius: 10rem;
   transition: all .2s;
@@ -174,4 +187,20 @@
   left: 0;
   z-index: -1;
   transition: all .4s; 
+}
+
+.footer-asbox{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+
+.footer-asbox a{
+  display: block;
+}
+
+.logo-as{
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: 5px;
 }

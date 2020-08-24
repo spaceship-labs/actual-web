@@ -4,12 +4,13 @@
     <div class="footer-container">
       <div class="footer-card">
         <div class="footer-card-container">
-          <a href="#" class="btn-radius btn-radius--green"><strong>COMPRA EN LÍNEA</strong></a>
-<!--           <a href="#section-tours" class="btn-radius btn-radius--white"><h2>COMPRA EN LÍNEA</h2></a>
- -->          <ul>
+          <a href="/compra-segura" class="btn-radius btn-radius--green"><strong>COMPRA EN LÍNEA</strong></a>
+          <!--           <a href="#section-tours" class="btn-radius btn-radius--white"><h2>COMPRA EN LÍNEA</h2></a>
+ -->
+          <ul>
             <li>
               <p>
-                <strong>FAQS </strong><span>chatbot</span>
+                <strong>FAQS </strong><span>(chatbot)</span>
               </p>
             </li>
             <li>
@@ -86,7 +87,7 @@
           <ul>
             <li>
               <p>
-                <strong>FAQS </strong><span>chatbot</span>
+                <strong>FAQS </strong><span>(chatbot)</span>
               </p>
             </li>
             <li>
@@ -133,6 +134,9 @@
               </p>
               <ul>
                 <li>
+                  <a href="/envio-y-entrega">Envíos y entregas</a>
+                </li>
+                <li>
                   <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
                 </li>
                 <li>
@@ -146,11 +150,22 @@
 
       <div class="footer-card">
         <div class="footer-card-container">
-          <a href="#" class="btn-radius btn-radius--green"><strong>ATENCIÓN A CLIENTES</strong></a>
+          <div class="footer-asbox">
+            <div>
+              <a href="/sugerencias-y-quejas" class="btn-radius btn-radius--green"><strong>ATENCIÓN A
+                  CLIENTES</strong></a>
+            </div>
+              <div  href="/" ng-switch on="main.siteTheme">
+                <img class="logo-as" ng-switch-when="actual-home" src="design/homeaq.png" alt="Actual Group" />
+                <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" />
+                <img class="logo-as" ng-switch-when="actual-kids" src="design/kids1.png" alt="Actual Group" />
+                <img class="logo-as" ng-switch-default ssrc="design/homeaq.png" alt="Actual Group" />
+              </div>
+          </div>
           <ul>
             <li>
               <p>
-                <strong>FAQS </strong><span>chatbot</span>
+                <strong>FAQS </strong><span>(chatbot)</span>
               </p>
               <p>
                 <a href="/politicas-de-garantia"><strong>Garantias</strong></a>
@@ -160,9 +175,9 @@
               <p>
                 <a href="/cambios-devoluciones-y-cancelaciones"><strong>Cambios y devoluciones</strong></a>
               </p>
-              <!--               <p>
+              <p>
                 <a href="/manual-de-cuidados-y-recomendaciones"><strong>Manual de recomendaciones </strong></a>
-              </p> -->
+              </p>
             </li>
             <li>
               <p>
