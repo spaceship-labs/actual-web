@@ -7444,13 +7444,14 @@ div.store-item-column.flex-xs-100.flex-sm-100.flex-40>h2>strong {
 }
 
 #footer .footer-menu-bottom .box-bottom a img {
-  width: 95%;
+  width: 100%;
 }
 
 #footer .footer-bottom {
   background: #092f57;
   color: #fff;
   padding: 10px 0;
+  font-family: inherit;
 }
 
 #footer .footer-bottom p {
