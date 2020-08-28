@@ -130,3 +130,21 @@
     background: #000 !important;
   }
 }
+
+.actual-studio .footer-container a:hover{
+  box-shadow: 0 2px #cc262f;
+}
+
+.actual-studio .btn-radius--footer {
+ background-color: #cc262f !important;
+ color: #fff !important; 
+}
+
+.actual-studio .btn-radius--footer::after {
+ background-color: #cc262f !important; 
+}
+
+.actual-studio .footer-container > div:not(:last-child){
+  border-right-style: solid;
+  border-color: #cc262f; 
+}

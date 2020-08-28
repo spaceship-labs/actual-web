@@ -1,10 +1,20 @@
 .footer-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
     /*background-color: DodgerBlue;*/
     padding-top: 14px;
-    
+    margin-left: 60px;
+  }
+
+  .footer-card-container > div{
+    margin: 0% auto;
+  }
+
+
+  .footer-container > div:not(:last-child){
+    border-right-style: solid;
+    border-color: #dda901; 
   }
   
   .footer-container  a{
@@ -15,7 +25,7 @@
   
   .footer-container a:hover{
 /*     background: #55c57a;
- */    box-shadow: 0 2px #55c57a;
+ */    box-shadow: 0 2px #dda901;
   }
   
   .footer-container td{
@@ -27,7 +37,7 @@
   
   .footer-container ul{
     list-style-type: none;
-    margin: 5px 0px 15px 0px;
+    /* margin: 5px 0px 15px 0px; */
     padding: 0;
     
   }
@@ -49,101 +59,36 @@
   }
   
   .footer-container tr{
-    /*margin: 5px 0px 15px 0px;*/
+   /* margin: 5px 0px 15px 0px; */
     padding: 0;
   }
   
   .footer-card{
     /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
-/*     color: #333;  */
     flex-basis: 30%;
     -webkit-align-content: center;
     align-content: center;
     margin: 0em 0.6em 0em 0.6em; 
-    padding: 5px;       
+    padding: 5px;    
+  
   }
   
   .footer-card-container{
     font-family: inherit;
     color: inherit;
-    /*padding: 0px 10px;*/
-     margin-left: 15%;
-  }
-
-  @media only screen and (max-width: 77em) {
-    .footer-card{
-      flex-basis: 30%;
-    }
-    .footer-card-container{
-      margin-left: 0%;
-    } 
-    .footer-container p{
-      font-size: 0.9em;
-    }
-    .footer-container td{
-      padding: 0;
-      font-size: 0.8em;
-
-    }
-  }
-  
-  @media only screen and (max-width: 63.125em)  {
-    .footer-card-container{
-      padding: 0;
-    } 
-  }
-
-  @media only screen and (max-width: 54.75em) {
-    .footer-card{
-      flex-basis: 27%;
     }
 
-    .footer-card-container{
-      margin-left: 0%;
-    } 
-  }
-  
-  @media only screen and (max-width: 45.90em) {
-  .footer-card-container td{
-    display: block;
-  }
-  .footer-card{
-    flex-basis: 27%;
-  }
-}
+    .footer-btn-contet {
+      text-align: center;
+      
+    }
 
-@media only screen and (max-width: 41.06em) {
-  .footer-card{
-    flex-basis: 28%;
-  }
-}
-
-@media only screen and (max-width: 37.25em) {
-  .footer-card{
-    flex-basis: 42%;
-  }
-}
-
-@media only screen and (max-width: 26.38em) {
-  .footer-card{
-    flex-basis: 85%;
-  }
-  .footer-card-container{
-    margin-left: 0.5em;
-  } 
-
-  .btn-radius, .btn-radius:link, .btn-radius:visited {
-    padding: 0.5rem 2.5rem;
-  }
-
-
-}
 
 .btn-radius, .btn-radius:link, .btn-radius:visited {
   font-family: "Nunito", sans-serif !important; 
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 4.2em;
   display: inline-block;
   border-radius: 10rem;
   transition: all .2s;
@@ -173,13 +118,13 @@
 .btn-radius--white::after {
     background-color: #fff !important; }
 
-.btn-radius--green {
-  background-color: #55c57a !important;
+.btn-radius--footer {
+  background-color: #dda901 !important;
   color: #fff !important; 
 }
 
-.btn-radius--green::after {
-  background-color: #55c57a !important; 
+.btn-radius--footer::after {
+  background-color: #dda901 !important; 
 }
 
 .btn-radius::after {
@@ -208,5 +153,111 @@
 .logo-as{
   width: 2.5rem;
   height: 2.5rem;
-  margin-left: 5px;
+  margin: -10px 0px 0px 5px;
 }
+
+
+@media only screen and (max-width: 77em) {
+  .footer-card{
+    flex-basis: 30%;
+  }
+
+  .footer-container p{
+    font-size: 0.9em;
+  }
+  .footer-container td{
+    padding: 0;
+    font-size: 0.8em;
+  }
+
+  .btn-radius, .btn-radius:link, .btn-radius:visited {
+    padding: 0.5rem 3rem;
+    font-size: 15px;
+  }
+
+ .footer-container{
+    margin-left: 40px;
+  }  
+}
+
+@media only screen and (max-width: 61.62em)  {
+
+  .footer-card{
+    flex-basis: 28%;
+  }
+  .footer-container{
+    margin-left: 25px;
+  } 
+}
+
+@media only screen and (max-width: 54.75em) {
+  .footer-card{
+    flex-basis: 60%;
+  }
+
+   .footer-container{
+    margin-left: 15%;
+ }
+   .footer-container > div:not(:last-child){
+    border-style: hidden;
+    border-color: transparent;
+  }  
+}
+
+@media only screen and (max-width: 763px) {
+    .footer-card{
+    flex-basis: 80%;
+  } 
+
+  .btn-radius, .btn-radius:link, .btn-radius:visited {
+    padding: 0.5rem 3rem;
+  }
+
+
+  .footer-container{
+    margin-left: 25%;
+  } 
+
+} 
+
+ @media only screen and (max-width: 46.75em) {
+
+  .footer-container{
+    margin-left: 20%;
+  }
+} 
+
+
+@media only screen and (max-width: 35.75em) {
+
+  .btn-radius, .btn-radius:link, .btn-radius:visited {
+    padding: 0.5rem 3em;
+  } 
+
+  .footer-container{
+    margin-left: 10%;
+    
+  }
+
+} 
+
+
+@media only screen and (max-width: 25.12em) {
+
+  .footer-card{
+    flex-basis: 90%;
+  } 
+
+  .footer-container{
+    margin-left: 15px;
+  } 
+
+} 
+
+ @media only screen and (max-width:375px) {
+
+  .footer-container{
+    margin-left: 20px;
+  } 
+
+} 
