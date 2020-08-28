@@ -7,8 +7,8 @@
     margin-left: 60px;
   }
 
-  .footer-card-container > div{
-    margin: 0% auto;
+  .footer-rbtn {
+    margin-left: 20px;
   }
 
 
@@ -70,7 +70,7 @@
     align-content: center;
     margin: 0em 0.6em 0em 0.6em; 
     padding: 5px;    
-  
+
   }
   
   .footer-card-container{
@@ -156,6 +156,14 @@
   margin: -10px 0px 0px 5px;
 }
 
+@media only screen and (max-width: 1278px) {
+  .footer-rbtn {
+    margin-left: 15px;
+  }
+  .footer-container{
+    margin-left: 15px;
+  } 
+}
 
 @media only screen and (max-width: 77em) {
   .footer-card{
@@ -176,8 +184,12 @@
   }
 
  .footer-container{
-    margin-left: 40px;
-  }  
+    margin-left: 10px;
+  } 
+  
+  .footer-rbtn {
+    margin-left: 15px;
+  }
 }
 
 @media only screen and (max-width: 61.62em)  {
@@ -186,7 +198,15 @@
     flex-basis: 28%;
   }
   .footer-container{
-    margin-left: 25px;
+    margin-left: 0px;
+  } 
+
+  .btn-radius, .btn-radius:link, .btn-radius:visited {
+    padding: 0.5rem 3rem;
+  }
+
+  .footer-rbtn {
+    margin-left: 5px;
   } 
 }
 
@@ -201,17 +221,17 @@
    .footer-container > div:not(:last-child){
     border-style: hidden;
     border-color: transparent;
-  }  
+  } 
+
+  .footer-rbtn {
+    margin-left: 0px;
+  } 
 }
 
 @media only screen and (max-width: 763px) {
     .footer-card{
     flex-basis: 80%;
   } 
-
-  .btn-radius, .btn-radius:link, .btn-radius:visited {
-    padding: 0.5rem 3rem;
-  }
 
 
   .footer-container{
@@ -231,7 +251,7 @@
 @media only screen and (max-width: 35.75em) {
 
   .btn-radius, .btn-radius:link, .btn-radius:visited {
-    padding: 0.5rem 3em;
+    padding: 0.5rem 2em;
   } 
 
   .footer-container{
@@ -251,6 +271,9 @@
   .footer-container{
     margin-left: 15px;
   } 
+  .footer-rbtn {
+    margin-left: 5px;
+  }
 
 } 
 
@@ -259,5 +282,24 @@
   .footer-container{
     margin-left: 20px;
   } 
+
+  .footer-rbtn {
+    margin-left: 10px;
+  }
+
+} 
+
+@media only screen and (max-width: 17.5em) {
+  .btn-radius, .btn-radius:link, .btn-radius:visited {
+    padding: 0.5rem 1em;
+  } 
+
+  .footer-container{
+    margin-left: 0px;
+  } 
+
+  .footer-rbtn {
+    margin-left: 5px;
+  }
 
 } 
