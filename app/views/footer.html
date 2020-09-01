@@ -160,18 +160,16 @@
 
       <div class="footer-card">
         <div class="footer-card-container">
-          <div class="footer-asbox">
             <div class="footer-rbtn">
               <a href="/sugerencias-y-quejas" class="btn-radius btn-radius--footer"><strong>ATENCIÓN A
                   CLIENTE</strong></a>
             </div>
-            <div href="/" ng-switch on="main.siteTheme">
+            <div class="hidden-footer" ng-switch on="main.siteTheme">
               <img class="logo-as" ng-switch-when="actual-home" src="design/homeaq.png" alt="Actual Group" />
               <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" />
               <img class="logo-as" ng-switch-when="actual-kids" src="design/kids1.png" alt="Actual Group" />
               <img class="logo-as" ng-switch-default ssrc="design/homeaq.png" alt="Actual Group" />
             </div>
-          </div>
           <ul>
             <li>
               <p>
