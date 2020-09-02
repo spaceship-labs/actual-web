@@ -21,7 +21,7 @@
         <div layout-align="center center">
           <p>
             <a href="/nuestras-marcas">
-              <span style="margin-top:-2px;">Tiendas y Showrooms</span> <!-- <strong>|</strong> -->
+              <span style="margin-top:22px;">Tiendas y Showrooms</span> <!-- <strong>|</strong> -->
             </a>
             <!--
             <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
@@ -35,7 +35,7 @@
             <div flex href="#" class="header-top-bar">
               <p>
                 <a  ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-                  <span style="margin-top:-20px;">Proyectos</span>
+                  <span style="margin-top:-12px;">Proyectos</span>
                 </a>
               </p>
             </div>
@@ -46,7 +46,7 @@
             <div flex href="#" class="header-top-bar">
               <p>
                 <a href="https://actualproyectos.blog/trabaja-con-nosotros/">
-                  <span style="margin-top: 28px;">Programa de decoradores y arquitectos</span>
+                  <span style="margin-top: 34px;">Programa de decoradores y arquitectos</span>
                 </a>
               </p>
             </div>
@@ -113,7 +113,7 @@
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div> -->
         <div hide-xs flex class="header-top-bar-menu-item">
-          <p ng-click="main.redirectToFooter()" style="margin-top:-8px;">Contacto</p>
+          <p ng-click="main.redirectToFooter()" style="margin-top:0px;">Contacto</p>
         </div>
 
         <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
@@ -121,7 +121,7 @@
         </div>
 
         <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
-          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="margin-top:-8px;">
+          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="margin-top:0px;">
             <span hide-xs>
               <span>MI CUENTA</span>
               <i hide-gt-xs class="icon-login"></i>
@@ -195,7 +195,7 @@
         </div>
 
         <!-- IF NOT ACTIVE QUOTATION -->
-        <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item">
+        <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item" style="margin-top: -15px">
           <i class="icon-carro"></i>
         </a>
 
