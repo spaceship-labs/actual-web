@@ -13,15 +13,15 @@
           <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group" />
           <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group" />
           <img ng-switch-when="actual-kids" src="images/actual-kids-blanco.png" alt="Actual Group" />
-          <img ng-switch-default src="images/actual-home-blanco.png" alt="Actual Group" />
+          <img ng-switch-default " src="images/actual-home-blanco.png" alt="Actual Group" />
         </a>
       </div>
 
       <section class="header-section-top" hide-xs hide-sm layout="row" layout-align="center center">
         <div layout-align="center center">
           <p>
-            <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-              <span>BLOG<strong>|</strong></span>
+            <a href="/nuestras-marcas">
+              <span style="margin-top:-2px;">Tiendas y Showrooms</span> <!-- <strong>|</strong> -->
             </a>
             <!--
             <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
@@ -34,8 +34,8 @@
           <a href="/" ng-switch on="main.siteTheme">
             <div flex href="#" class="header-top-bar">
               <p>
-                <a href="/nuestras-marcas">
-                  <span>NUESTRAS MARCAS</span>
+                <a  ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
+                  <span style="margin-top:-20px;">Proyectos</span>
                 </a>
               </p>
             </div>
@@ -45,8 +45,8 @@
           <a href="/" ng-switch on="main.siteTheme">
             <div flex href="#" class="header-top-bar">
               <p>
-                <a href="/contactanos">
-                  <span><strong>|</strong>CONTACTO</span>
+                <a href="https://actualproyectos.blog/trabaja-con-nosotros/">
+                  <span style="margin-top: 28px;">Programa de decoradores y arquitectos</span>
                 </a>
               </p>
             </div>
@@ -113,7 +113,7 @@
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div> -->
         <div hide-xs flex class="header-top-bar-menu-item">
-          <p ng-click="main.redirectToFooter()" style="color: #fff;">CONTACTO</p>
+          <p ng-click="main.redirectToFooter()" style="margin-top:-8px;">Contacto</p>
         </div>
 
         <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
@@ -121,9 +121,9 @@
         </div>
 
         <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
-          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">
-            <span class="header-top-bar-menu-item" hide-xs><strong style="color: #e9c15f;">| </strong> <span>MI
-                CUENTA</span>
+          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="margin-top:-8px;">
+            <span hide-xs>
+              <span>MI CUENTA</span>
               <i hide-gt-xs class="icon-login"></i>
           </p>
           <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
