@@ -7170,8 +7170,9 @@ div.store-item-column.flex-xs-100.flex-sm-100.flex-40>h2>strong {
   overflow: hidden;
 }
 
+/*64.25%*/
 .our-stores .store-item .map-puertocancun {
-  padding-bottom: 64.25%;
+  padding-bottom: 10%;
 }
 
 .our-stores .store-item .map iframe {
