@@ -4,11 +4,11 @@
 
 <div id="header">
   <!-- START TOP BAR -->
-  <div class="header-top-bar" fixed-element top="50" ng-class="{'fixed-head': scrolled}">
+  <div class="actual-header-top fixed-head" fixed-element top="50" ng-class="{'fixed-head': scrolled}">
 
-    <div class="container" layout="row" layout-wrap layout-align="center center">
+    <div >
 
-      <div hide-xs hide-sm flex-gt-sm="15" class="logo" layout-align="center center">
+      <div >
         <a href="/" ng-switch on="main.siteTheme">
           <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group" />
           <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group" />
@@ -17,11 +17,11 @@
         </a>
       </div>
 
-      <section class="header-section-top" hide-xs hide-sm layout="row" layout-align="center center">
-        <div layout-align="center center">
+      <section>
+        <div >
           <p>
             <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-              <span>BLOG<strong>|</strong></span>
+              <span>BLOG</span>
             </a>
             <!--
             <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
@@ -30,9 +30,9 @@
             -->
           </p>
         </div>
-        <div layout-align="center center">
+        <div >
           <a href="/" ng-switch on="main.siteTheme">
-            <div flex href="#" class="header-top-bar">
+            <div flex href="#" >
               <p>
                 <a href="/nuestras-marcas">
                   <span>NUESTRAS MARCAS</span>
@@ -43,7 +43,7 @@
         </div>
         <div layout-align="center center">
           <a href="/" ng-switch on="main.siteTheme">
-            <div flex href="#" class="header-top-bar">
+            <div flex href="#" >
               <p>
                 <a href="/contactanos">
                   <span><strong>|</strong>CONTACTO</span>
@@ -53,21 +53,6 @@
           </a>
         </div>
       </section>
-
-      <!-- <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center"
-        layout-align-sm="center center" layout-align-xs="start center" hide-xs hide-sm>
-        <div flex href="#" ng-click="main.toggleSchedulesModal()"
-          class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-          <span>
-          <strong> <i class="icon-time"></i> </strong>  
-           <strong hide-xs>998 246 3487</strong> 
-            <span hide-xs>Tel: (998) 246 3487</a></span>
-            <strong> <i class="icon-time"></i> </strong>
-          </span>
-
-          <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
-        </div>
-      </div> -->
 
       <!-- MENU SEARCH BAR -->
       <form ng-class="{
@@ -83,14 +68,15 @@
         <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn" />
       </form>
 
-      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align-sm="center center"
-        layout-align-xs="start center">
+      <div >
+
+
         <!-- SIDE MENU BUTTON -->
         <div flex hide-gt-sm>
-          <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static">
+          <a ng-click="main.toggleMobileSidenav()">
 
-            <body ng-app="menu" ng-controller="mainCtrl" ng-mouseup="elsewhrClicks($event)" class="ng-cloak ">
-              <div class="navbar">
+            <body ng-app="menu" ng-controller="mainCtrl" ng-mouseup="elsewhrClicks($event)" >
+              <div>
                 <div id="nav-toggle" ng-click="toggleNav = !toggleNav; animate = !animate"
                   ng-class="{'active': animate}">
                   <span></span>
@@ -112,36 +98,36 @@
         <!-- <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div> -->
-        <div ng-if="!main.user || main.user.invited" hide-xs flex class="header-top-bar-menu-item">
-          <p ng-click="main.redirectToRegister()" style="color: #fff;"> REGÍSTRATE</p>
+        <div ng-if="!main.user || main.user.invited" hide-xs flex >
+          <p ng-click="main.redirectToRegister()"> REGÍSTRATE</p>
         </div>
 
-        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+        <div hide-gt-xs flex >
           <i class="icon-search" style="margin-left:8px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div>
 
-        <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
-          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">
-            <span class="header-top-bar-menu-item" hide-xs><strong style="color: #e9c15f;">| </strong> <span>MI
-                CUENTA</span>
+        <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" >
+          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" >
+            <span class="header-top-bar-menu-item" hide-xs>
+              <span>MICUENTA</span>
               <i hide-gt-xs class="icon-login"></i>
           </p>
           <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
-            <strong class="invited-label">Invitado</strong>
+            <strong >Invitado</strong>
           </span>
 
-          <i hide-gt-sm style="margin-left:10px;" class="icon-login" ng-click="main.toggleLoginModal()"></i>
+          <i hide-gt-sm class="icon-login" ng-click="main.toggleLoginModal()"></i>
           <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
             src="'views/partials/login-header.html'"></ng-include>
         </div>
 
         <!-- IF logged in -->
-        <div class="header-top-bar-menu-item-user">
+        <div >
           <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger"
-            ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
+            ng-click="main.toggleProfileModal()" >
             <a href="#" layout="row">
               <i class="icon-login"></i>
-              <div class="header-top-bar-menu-item-user">
+              <div >
                 <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
               </div>
               </span>
@@ -151,18 +137,18 @@
           </div>
         </div>
 
-        <div hide-gt-xs flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
+        <div hide-gt-xs flex href="#">
           <p>
             <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-              <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
+              <span>BLOG</span>
             </a>
             <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-              <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
+              <span>BLOG</span>
             </a>
           </p>
         </div>
 
-        <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()"
+        <div hide-gt-xs href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
             <strong> <i class="icon-phone"></i></strong>

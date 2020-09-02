@@ -7,10 +7,10 @@
   background: #34b3e7;
 }
 
-.actual-kids .header-top-bar {
+.actual-kids .actual-header-top {
   background: #34b3e7 !important;
 }
-.actual-kids .header-top-bar-menu .cart-active {
+.actual-kids .actual-header-top-menu .cart-active {
   color: #fff !important;
 }
 .actual-kids .footer-bottom {
