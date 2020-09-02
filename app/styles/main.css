@@ -703,7 +703,18 @@ select {
   margin-left: 5px;
   margin-right: 2px;
   font-size: 14px;
+  text-decoration: none;
+
 }
+
+.hover-yellow-actual{
+  color: #fff;
+}
+
+.hover-yellow-actual:hover {
+  color:#e9c15f
+}
+
 
 .header-top-bar-menu-item-phone i {
   font-size: 20px !important;
@@ -724,9 +735,10 @@ select {
   color: #fff;
 }
 
-.header-top-bar-menu .header-top-bar-menu-item-name>a {
+/* .header-top-bar-menu .header-top-bar-menu-item-name>a {
   color: #fff;
 }
+ */
 
 .header-top-bar-menu .header-top-bar-menu-item-name strong {
   text-transform: uppercase;
@@ -765,7 +777,7 @@ select {
 }
 
 .header-top-bar-menu .icon-login {
-  color: white;
+/*   color: white; */
   font-size: 27px;
   vertical-align: center;
   position: relative;
