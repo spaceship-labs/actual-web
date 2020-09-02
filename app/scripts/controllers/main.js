@@ -76,7 +76,13 @@
     init();
 
     function redirectToFooter() {
-      console.log("TEST BTN FOOTER");
+      var scroll = document.getElementById("footer");
+      scroll.scrollIntoView({behavior: "smooth" }); 
+
+      /* setTimeout(() => {
+        var scroll = document.getElementById("footer");
+        scroll.scrollIntoView({behavior: "smooth" });
+       }, 250); */
 
     }
 
