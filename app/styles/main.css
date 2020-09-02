@@ -1052,8 +1052,8 @@ select {
 /*------------*/
 .modal-header {
   position: absolute;
-  left: 0;
-  top: 100%;
+  left: 95px; 
+  top: 0%;
   z-index: 99999999999999999;
   background: #fff;
   min-width: 326px;
@@ -1067,8 +1067,7 @@ select {
 }
 
 .modal-header-top h4 {
-  font-weight: 300;
-  font-size: 13px;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -1083,7 +1082,7 @@ select {
 }
 
 .modal-header-inner {
-  padding: 10px 15px;
+  padding: 0px 15px;
   text-align: left;
 }
 
@@ -1189,6 +1188,7 @@ select {
   -webkit-transform: translateX(0) !important;
   -moz-transform: translateX(0) !important;
 }
+
 
 .profile-modal-header-avatar {
   display: none;

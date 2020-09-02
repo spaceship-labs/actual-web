@@ -141,7 +141,7 @@
             ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
             <a href="#" layout="row">
               <i class="icon-login"></i>
-              <div class="header-top-bar-menu-item-user">
+              <div class="header-top-bar-menu-item-user" >
                 <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
               </div>
               </span>
@@ -195,7 +195,7 @@
         </div>
 
         <!-- IF NOT ACTIVE QUOTATION -->
-        <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item" style="margin-top: -15px">
+        <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item" style="margin-top: -20px">
           <i class="icon-carro"></i>
         </a>
 
