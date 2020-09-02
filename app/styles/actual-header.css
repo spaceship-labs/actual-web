@@ -1,3 +1,4 @@
+
 .actual-header-top{
     color: #fff;
     font-family: 'Montserrat', sans-serif;
@@ -9,8 +10,17 @@
     color: #fff;
 }
 
-.actual-header-top i{
+.actual-header-top a:hover{
+    color:#e9c15f
+}
+
+.atual-yellow-hover{
     color: #fff;
+}
+
+
+.atual-yellow-hover:hover{
+    color:#e9c15f
 }
 
 

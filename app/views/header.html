@@ -99,7 +99,7 @@
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div> -->
         <div ng-if="!main.user || main.user.invited" hide-xs flex >
-          <p ng-click="main.redirectToRegister()"> REGÍSTRATE</p>
+          <a ng-click="main.redirectToRegister()"> REGÍSTRATE</a>
         </div>
 
         <div hide-gt-xs flex >
@@ -109,7 +109,7 @@
         <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" >
           <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" >
             <span class="header-top-bar-menu-item" hide-xs>
-              <span>MICUENTA</span>
+              <span class="atual-yellow-hover" >MICUENTA</span>
               <i hide-gt-xs class="icon-login"></i>
           </p>
           <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
@@ -123,9 +123,9 @@
 
         <!-- IF logged in -->
         <div >
-          <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger"
-            ng-click="main.toggleProfileModal()" >
-            <a href="#" layout="row">
+          <div ng-if="main.user && !main.user.invited"  href="#" id="profile-header-trigger"
+            ng-click="main.toggleProfileModal()">
+            <a href="#" >
               <i class="icon-login"></i>
               <div >
                 <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
