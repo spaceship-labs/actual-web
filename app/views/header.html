@@ -8,23 +8,22 @@
     ng-class="{'fixed-head': scrolled}">
 
     <div class="header-element-1">
-
       <div class="header-align-items" hide-gt-sm>
         <div class="hai-element-1">
-        <a ng-click="main.toggleMobileSidenav()" class="  header-icon-menu-css">
+          <a ng-click="main.toggleMobileSidenav()" class="  header-icon-menu-css">
             <img src="images/navbar-mobile-dark.png">
-        </a>
-      </div>
-        <div class="hai-element-2">
-        <div flex-gt-xs="15" class="logo logo-mobile">
-          <a href="/" ng-switch on="main.siteTheme">
-            <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group" />
-            <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group" />
-            <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group" />
-            <img ng-switch-default src="images/logos/home.png" alt="Actual Group" />
           </a>
         </div>
-      </div>
+        <div class="hai-element-2">
+          <div flex-gt-xs="15" class="logo logo-mobile">
+            <a href="/" ng-switch on="main.siteTheme">
+              <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group" />
+              <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group" />
+              <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group" />
+              <img ng-switch-default src="images/logos/home.png" alt="Actual Group" />
+            </a>
+          </div>
+        </div>
       </div>
       <div hide-xs>
         <a href="/" ng-switch on="main.siteTheme">
@@ -35,7 +34,6 @@
         </a>
       </div>
     </div>
-
 
     <div class="header-element-2">
       <a href="/" ng-switch on="main.siteTheme">
@@ -72,9 +70,7 @@
       </a>
     </div>
 
-
     <div class="header-element-5">
-
       <!-- MENU SEARCH BAR -->
       <form ng-class="{
           'searcher-wrapper-show-mobile':main.showSearchBar
@@ -88,71 +84,57 @@
         </div>
         <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn" />
       </form>
-
     </div>
-
-    <!-- SIDE MENU BUTTON -->
-
 
     <div class="header-element-6">
       <a ng-click="main.redirectToFooter()"> <span>Contacto</span></a>
     </div>
 
     <div hide-gt-xs>
-      <i class="icon-search" style="margin-left:8px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+      <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
     </div>
 
-    <div class="header-align-items" ng-if="!main.user || main.user.invited" id="login-header-trigger">
-      <div class=".hai-element-1">
+    <div ng-if="!main.user || main.user.invited" id="login-header-trigger">
       <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
-        <span><span class="atual-yellow-hover">MI CUENTA</span>
+        <span class="atual-yellow-hover">MI CUENTA</span>
       </p>
-
       <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
         <strong>Invitado</strong>
       </span>
-    </div>
       <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
         src="'views/partials/login-header.html'"></ng-include>
-      <i class="icon-login" hide-gt-sm></i>
+
     </div>
 
     <!-- IF logged in -->
-    <div class="header-element-8">
-      <div class="header-align-items">
-        <div ng-if="main.user && !main.user.invited" href="#" id="profile-header-trigger"
-          ng-click="main.toggleProfileModal()">
-
-          <a href="#">
-            <i class="icon-login"></i>
-            <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
-            </span>
-          </a>
-          <div>
-            <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
-          </div>
-        </div>
-        <!-- IF NOT ACTIVE QUOTATION -->
+    <div class="header-align-items">
+      <div ng-if="main.user && !main.user.invited" href="#" id="profile-header-trigger"
+        ng-click="main.toggleProfileModal()" class="hai-element-1">
+        <a href="#">
+          <i class="icon-login"></i>
+          <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
+          </span>
+        </a>
         <div>
-          <a ng-if="main.user && !main.activeQuotation" href="/">
-            <i class="icon-carro"></i>
-          </a>
-          <!-- IF ACTIVE QUOTATION -->
-          <div>
-            <a style="display:block;" ng-if="main.activeQuotation"
-              ng-href="/quotations/edit/{{ main.activeQuotation.id }}">
-              <span class="header-car-item-number"
-                ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-              <i hide-xs class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-            </a>
-          </div>
+          <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
-
+      </div>
+      <!-- IF NOT ACTIVE QUOTATION -->
+      <div class="hai-element-2">
+        <a ng-if="main.user && !main.activeQuotation" href="/">
+          <i class="icon-carro"></i>
+        </a>
+        <!-- IF ACTIVE QUOTATION -->
+        <a ng-if="main.activeQuotation" ng-href="/quotations/edit/{{ main.activeQuotation.id }}">
+          <span class="header-car-item-number"
+            ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+          <i hide-xs class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
+        </a>
       </div>
     </div>
 
-    <div hide-gt-xs href="#" ng-click="main.toggleSchedulesModal()"
-      class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+
+    <div hide-gt-xs href="#" ng-click="main.toggleSchedulesModal()">
       <span>
         <strong> <i class="icon-phone"></i></strong>
       </span>
