@@ -50,7 +50,6 @@
 
     grid-template-columns: repeat(2, max-content) ;
     grid-template-rows: max-content;
-    grid-column-gap: 10px;
 }
 
 .hai-element-1{grid-column: 1/2;}
@@ -58,10 +57,26 @@
 
 
 .header-item-child{ 
-    
     width: max-content;
 }
 
+@media only screen and (max-width: 1120px) {
+    .actual-header-top{padding: 0;}
+}
+
+@media only screen and (max-width: 1182px) {
+    .actual-header-top{padding: 0;}
+}
+
+/* @media only screen and (max-width: 1158px) {
+    .actual-header-top a{
+        width: 80px;        
+        display: block;
+        line-height: 1em;
+        background-color: #c82828;       
+    }
+}
+ */
 .header-cart-item{
     flex-wrap: wrap;
 }
