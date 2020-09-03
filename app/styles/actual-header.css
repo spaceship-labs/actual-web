@@ -63,11 +63,19 @@
 }
 
 .hai-element-1{ grid-column: 1/ 2;}
-.hai-element-1{ grid-column: 2/ -1;}
+.hai-element-2{ grid-column: 2/ -1;}
 
 
 /*STYLE ICONS*/
 
+.header-icon-menu-css img {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    /* margin: 6px 0; */
+}
+  
+  
 .header-car-item-number {
     position: relative;
     left: 22px;
