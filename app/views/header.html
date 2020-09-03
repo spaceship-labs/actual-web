@@ -105,8 +105,8 @@
     <div class="header-item-child" ng-if="!main.user || main.user.invited" id="login-header-trigger">
       <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
         <span class="atual-yellow-hover" hide-xs>MI CUENTA</span>
-        <i class="icon-login" hide-xs></i>
-        <i class="icon-login" style="color: #fff; font-size: 1.5em;" hide-gt-sm></i>
+<!--         <i class="icon-login" hide-xs></i>
+ -->        <i class="icon-login" style="color: #fff; font-size: 1.5em;" hide-gt-sm></i>
       </p>
       <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
         <strong>Invitado</strong>
@@ -121,7 +121,7 @@
         <div ng-if="main.user && !main.user.invited" href="#" id="profile-header-trigger"
           ng-click="main.toggleProfileModal()" class="hai-element-1">
           <a href="#">
-            <i class="icon-login" hide-xs></i>
+            <i class="icon-login" hide-xs hide-sm></i>
             <i class="icon-login" style="color: #fff; font-size: 2em;" hide-gt-sm></i>
             <span hide-xs>Bienvenido <strong hide-xs>{{ main.user.firstName }}</strong>
             </span>
