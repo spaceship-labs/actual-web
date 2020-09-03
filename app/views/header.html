@@ -18,7 +18,7 @@
 
     <div class="header-element-2">
       <a href="/" ng-switch on="main.siteTheme">
-        <div flex href="#">
+        <div href="#">
           <p>
             <a href="/nuestras-marcas">
               <span>Tiendas y Showrooms</span>
@@ -41,7 +41,7 @@
 
     <div class="header-element-4" layout-align="center center">
       <a href="/" ng-switch on="main.siteTheme">
-        <div flex href="#">
+        <div href="#">
           <p>
             <a href="https://actualproyectos.blog/trabaja-con-nosotros/">
               <span>Trabaja con nosotros</span>
@@ -71,7 +71,7 @@
     </div>
 
     <!-- SIDE MENU BUTTON -->
-    <div flex hide-gt-sm>
+    <div  hide-gt-sm>
       <a ng-click="main.toggleMobileSidenav()">
 
         <body ng-app="menu" ng-controller="mainCtrl" ng-mouseup="elsewhrClicks($event)">
@@ -98,14 +98,14 @@
       <a ng-click="main.redirectToFooter()"> Contacto</a>
     </div>
 
-    <div hide-gt-xs flex>
+    <div hide-gt-xs>
       <i class="icon-search" style="margin-left:8px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
     </div>
 
-    <div class="header-element-7" ng-if="!main.user || main.user.invited" flex id="login-header-trigger">
+    <div class="header-element-7" ng-if="!main.user || main.user.invited" id="login-header-trigger">
       <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
         <span class="header-top-bar-menu-item" hide-xs>
-          <span class="atual-yellow-hover">MICUENTA</span>
+          <span class="atual-yellow-hover">MI CUENTA</span>
           <i class="icon-login"></i>
       </p>
       <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
@@ -119,7 +119,7 @@
 
     <!-- IF logged in -->
     <div class="header-element-8">
-      <div class="align-itemsa">
+      <div class="header-align-items">
         <div ng-if="main.user && !main.user.invited" href="#" id="profile-header-trigger"
           ng-click="main.toggleProfileModal()">
 
@@ -134,12 +134,12 @@
         </div>
         <!-- IF NOT ACTIVE QUOTATION -->
         <div>
-          <a ng-if="main.user && !main.activeQuotation" flex href="/">
+          <a ng-if="main.user && !main.activeQuotation" href="/">
             <i class="icon-carro"></i>
           </a>
           <!-- IF ACTIVE QUOTATION -->
           <div>
-            <a style="display:block;" ng-if="main.activeQuotation" flex
+            <a style="display:block;" ng-if="main.activeQuotation" 
               ng-href="/quotations/edit/{{ main.activeQuotation.id }}">
               <span class="header-car-item-number"
                 ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>

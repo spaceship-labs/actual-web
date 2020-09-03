@@ -546,10 +546,18 @@ select {
   /*width: 90%;*/
   /*min-width: 320px;
   max-width: 400px;
-  */
-  width: 400px;
-  margin: 0 20px;
+  /*   width: 400px;*/
+  min-width: 400px;
 }
+
+@media only screen and (max-width: 1167) {
+  .searcher-wrapper{
+    
+    max-width: 400px;
+  }    
+}
+
+
 
 .searcher {
   background: rgb(250, 250, 250);
@@ -761,15 +769,6 @@ select {
   vertical-align: center;
 }
 
-.header-car-item-number {
-  position: relative;
-  left: 23px;
-  bottom: 16px;
-  margin: 0 auto;
-  right: 0px;
-  font-weight: 700;
-  font-size: 14px;
-}
 
 .header-car-item-number-mobile {
   position: absolute;
@@ -1030,247 +1029,7 @@ select {
   z-index: 9;
 }
 
-/*-------------/
-  #MODAL-HEADER
-/*------------*/
-.modal-header {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  z-index: 99999999999999999;
-  background: #fff;
-  min-width: 326px;
-}
 
-.modal-header-top {
-  background: #f8f8f8;
-  padding: 10px;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.modal-header-top h4 {
-  font-weight: 300;
-  font-size: 13px;
-  margin: 0;
-}
-
-.modal-header h3 {
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: 300;
-}
-
-.modal-header p {
-  font-size: 13px;
-}
-
-.modal-header-inner {
-  padding: 10px 15px;
-  text-align: left;
-}
-
-.modal-header .input-element {
-  background: #fff;
-}
-
-.modal-header a {
-  color: #000;
-}
-
-.modal-header .action-btn {
-  background: #000;
-  color: #fff;
-  text-transform: uppercase;
-  border: 0;
-  display: block;
-  margin: 20px 0;
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: center;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.modal-header hr {
-  background: #000;
-  border: 0;
-  height: 1px;
-}
-
-.cart-modal-header,
-.login-modal-header {
-  /*display: none;*/
-  /*top: 90%;*/
-  right: 0;
-  left: auto;
-  top: 116%;
-  /*top: 100%;*/
-}
-
-.login-modal-header {
-  display: block;
-}
-
-.login-modal-header .input-element {
-  margin: 5px 0;
-}
-
-/*-------------/
-  #CART-MODAL-HEADER
-/*-------------*/
-.cart-modal-header .cart-modal-item-wrap {
-  padding: 0px 5px;
-  margin: 10px 0;
-}
-
-.cart-modal-header .cart-modal-item-img {
-  border: 1px solid #000;
-  display: block;
-  max-width: 100%;
-}
-
-.cart-modal-header .cart-modal-item-hr {
-  border: 0;
-  height: 2px;
-  background: #e2023f;
-  width: 40%;
-  margin: 4px 0;
-}
-
-.cart-modal-header .cart-modal-item-price {
-  font-weight: 300;
-}
-
-.cart-modal-header .cart-modal-item-desc {
-  font-size: 11px;
-}
-
-.cart-modal-header .cart-modal-item-desc p {
-  margin: 0;
-}
-
-.cart-modal-header .cart-modal-subtotal p+p {
-  text-align: right;
-}
-
-/*-------------/
-  #PROFILE-MODAL-HEADER
-/*-------------*/
-.profile-modal-header {
-  background: #f8f8f8;
-  box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.33);
-  border: 1px solid rgba(0, 0, 0, 0.16);
-  border-bottom: 0;
-  border-top: 0;
-  top: 118%;
-  min-width: 216px;
-  transform: translateX(0) !important;
-  -webkit-transform: translateX(0) !important;
-  -moz-transform: translateX(0) !important;
-}
-
-.profile-modal-header-avatar {
-  display: none;
-  text-align: center;
-}
-
-.profile-modal-header-avatar img {
-  max-width: 66px;
-  border-radius: 50%;
-}
-
-.profile-modal-header-info h2,
-.profile-modal-header-info p {
-  margin: 4px 0;
-}
-
-.profile-modal-header-content {
-  padding: 10px;
-  text-align: center;
-}
-
-.profile-modal-header-btn {
-  background: #000;
-  padding: 10px 16px;
-  color: #fff !important;
-  font-weight: 700;
-  display: inline-block;
-  margin: 4px 0;
-  text-align: center;
-  text-transform: uppercase;
-  max-width: 200px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.profile-modal-header-btn i {
-  color: #fff !important;
-  vertical-align: middle;
-  margin-left: 0 !important;
-  margin-right: 4px !important;
-  padding: 0 !important;
-  font-size: 20px !important;
-}
-
-.profile-modal-header-bottom {
-  border-top: 1px solid #000;
-  padding: 10px;
-}
-
-.profile-modal-header-btn-alert {
-  background: #c82828 !important;
-}
-
-/*--------------/
-  #LOGIN-MODAL
-/*--------------*/
-.login-modal-header .error-msg {
-  color: #c82828;
-  font-weight: 700;
-  text-align: center;
-}
-
-/*--------------/
-  #SCHEDULES-MODAL
-/*--------------*/
-.schedules-modal-header {
-  top: 49px;
-  background: #092f57 !important;
-  min-width: 260px;
-}
-
-.schedules-modal-header .phone-assitance {
-  display: none;
-
-
-}
-
-.schedules-modal-header .schedules-modal-header-content {
-  padding: 10px;
-}
-
-.schedules-modal-header-content th {
-  font-size: 13px;
-  text-align: left;
-}
-
-.schedules-modal-header-content td {
-  vertical-align: top;
-  padding: 0 4px;
-  text-align: left;
-}
-
-.schedules-modal-header-content td+td {
-  /*border-left: 1px solid #fff;*/
-}
-
-.schedules-modal-header-content p {
-  margin: 4px 0;
-}
 
 /*-------------/
   #MENU
@@ -8980,6 +8739,7 @@ md-sidenav {
 
   .header-top-bar {
     padding: 0;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .header-top-bar .categories-btn,
