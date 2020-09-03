@@ -547,18 +547,13 @@ select {
 } 
  
 .searcher-wrapper {
-/*
-display: none;
-position: absolute;
-top: 100%;
-*/
 z-index: 9999999;
 background: #092f57 !important;
 padding: 0;
 left: 0;
 right: 0;
-margin: 8px 9px 9px 9px;
-width: 100%;
+/* margin: 8px 9px 9px 9px;*/
+ width: 100%;
 }
 
 
