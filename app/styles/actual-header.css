@@ -16,7 +16,7 @@
     grid-gap: 15px; */
     
     display: flex;
-    padding:  0 10px 0 16px;
+    padding:  0 12px 0 12px;
 
 }
 
@@ -24,13 +24,6 @@
     margin: auto;
     padding:5px;
 }
-
-/* .actual-header-top  span{
-    display: block;
-    width: max-content;
-  background-color: #c82828;
-} */
-
 
 /* @media only screen and (max-width: 1240) {
     .actual-header-top{ 
@@ -62,8 +55,14 @@
 
 }
 
-.hai-element-1{ grid-column: 1/ 2;}
-.hai-element-2{ grid-column: 2/ -1;}
+.hai-element-1{grid-column: 1/2;}
+.hai-element-2{grid-column: 2/-1;}
+
+
+.header-item-child{ 
+    
+    width: max-content;
+}
 
 .header-cart-item{
     flex-wrap: wrap;
@@ -76,7 +75,6 @@
     width: 20px;
     height: 20px;
     margin: 0;
-    /* margin: 6px 0; */
 }
   
   
@@ -93,19 +91,6 @@
 .actual-header-top .icon-login{font-size: 16px;}
 .actual-header-top .icon-carro{font-size: 26px;}/*color: #fff;*/
 
-/*GRID PROPERTYS*/
-.header-element-1{grid-column: 2/ 3;}
-.header-element-2{grid-column: 3/ 4;}
-.header-element-3{grid-column: 4/ 5;}
-.header-element-4{grid-column: 5/ 6;}
-.header-element-5{grid-column: 6/ 7;}
-.header-element-6{grid-column: 7/ 8;}
-.header-element-7{ 
-/*     grid-column: 8/ 9;*/   
-
-}
-
-.header-element-8{grid-column: 9/ 10;}
 
 /*MODAL HEADER*/
 
@@ -135,9 +120,7 @@
   }
   
   .profile-modal-header-info h2,
-  .profile-modal-header-info p {
-    margin: 4px 0;
-  }
+  .profile-modal-header-info p {margin: 4px 0;}
   
   .profile-modal-header-content {
     padding: 10px;
@@ -172,9 +155,7 @@
     padding: 10px;
   }
   
-  .profile-modal-header-btn-alert {
-    background: #c82828 !important;
-  }
+  .profile-modal-header-btn-alert { background: #c82828 !important;}
 
   /*-------------/
   #MODAL-HEADER
@@ -208,10 +189,7 @@
     font-weight: 400;
   }
   
-  .modal-header p {
-    font-size: 14px;
-    
-  }
+  .modal-header p {font-size: 14px;}
   
   .modal-header-inner {
     padding: 0 15px 0 15px;
@@ -219,13 +197,9 @@
 
   }
   
-  .modal-header .input-element {
-    background: #fff;
-  }
+  .modal-header .input-element { background: #fff;}
   
-  .modal-header a {
-    color: #000;
-  }
+  .modal-header a {color: #000;}
   
   .modal-header .action-btn {
     font-family: 'Montserrat', sans-serif;
@@ -254,22 +228,16 @@
   
   .cart-modal-header,
   .login-modal-header {
-    /*display: none;*/
-    /*top: 90%;*/
+
     right: 0;
     left: auto;
     top: 100%;
-    /*top: 100%;*/
     background-color: #fff; /*#f8f8f8;*/
   }
   
-  .login-modal-header {
-    display: block;
-  }
+  .login-modal-header { display: block;}
   
-  .login-modal-header .input-element {
-    margin: 5px 0;
-  }
+  .login-modal-header .input-element {margin: 5px 0;}
   
   /*-------------/
     #CART-MODAL-HEADER
@@ -293,21 +261,13 @@
     margin: 4px 0;
   }
   
-  .cart-modal-header .cart-modal-item-price {
-    font-weight: 300;
-  }
+  .cart-modal-header .cart-modal-item-price {font-weight: 300;}
   
-  .cart-modal-header .cart-modal-item-desc {
-    font-size: 11px;
-  }
+  .cart-modal-header .cart-modal-item-desc {font-size: 11px;}
   
-  .cart-modal-header .cart-modal-item-desc p {
-    margin: 0;
-  }
+  .cart-modal-header .cart-modal-item-desc p { margin: 0;}
   
-  .cart-modal-header .cart-modal-subtotal p+p {
-    text-align: right;
-  }
+  .cart-modal-header .cart-modal-subtotal p+p {text-align: right;}
   
   
   /*--------------/
@@ -319,38 +279,3 @@
     text-align: center;
   }
   
-  /*--------------/
-    #SCHEDULES-MODAL
-  /*--------------*/
-  .schedules-modal-header {
-    top: 49px;
-    background: #092f57 !important;
-    min-width: 260px;
-  }
-  
-  .schedules-modal-header .phone-assitance {
-    display: none;
-  }
-  
-  .schedules-modal-header .schedules-modal-header-content {
-    padding: 10px;
-  }
-  
-  .schedules-modal-header-content th {
-    font-size: 13px;
-    text-align: left;
-  }
-  
-  .schedules-modal-header-content td {
-    vertical-align: top;
-    padding: 0 4px;
-    text-align: left;
-  }
-  
-  .schedules-modal-header-content td+td {
-    /*border-left: 1px solid #fff;*/
-  }
-  
-  .schedules-modal-header-content p {
-    margin: 4px 0;
-  }

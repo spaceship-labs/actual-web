@@ -542,21 +542,24 @@ select {
 /*---------------/
   #SEARCHER
 /*---------------*/
+  .searcher-wrapper {
+  width: 400px;
+} 
+ 
 .searcher-wrapper {
-  /*width: 90%;*/
-  /*min-width: 320px;
-  max-width: 400px;
-  /*   width: 400px;*/
-  min-width: 400px;
+/*
+display: none;
+position: absolute;
+top: 100%;
+*/
+z-index: 9999999;
+background: #092f57 !important;
+padding: 0;
+left: 0;
+right: 0;
+margin: 8px 9px 9px 9px;
+width: 100%;
 }
-
-@media only screen and (max-width: 1167) {
-  .searcher-wrapper{
-    
-    max-width: 400px;
-  }    
-}
-
 
 
 .searcher {
@@ -8582,6 +8585,32 @@ md-sidenav {
     /* top: 90px; */
   }
 
+    /*--------------/
+    #SCHEDULES-MODAL
+  /*--------------*/
+  .schedules-modal-header {
+    top: 49px;
+    background: #092f57 !important;
+    min-width: 260px;
+  }
+
+  .schedules-modal-header .phone-assitance {display: none;}
+  
+  .schedules-modal-header .schedules-modal-header-content {padding: 10px;}
+  
+  .schedules-modal-header-content th {
+    font-size: 13px;
+    text-align: left;
+  }
+  
+  .schedules-modal-header-content td {
+    vertical-align: top;
+    padding: 0 4px;
+    text-align: left;
+  }
+
+  .schedules-modal-header-content p {margin: 4px 0;}
+
   .schedules-modal-header {
     top: 60px;
     left: -50px;
@@ -8944,6 +8973,13 @@ md-sidenav {
     margin: 8px 9px 9px 9px;
     width: 95%;
   }
+
+  @media only screen and (max-width: 1226px) {
+    .searcher-wrapper{
+      width: 75%;
+    }    
+  }
+   
 
   .header-top-bar.fixed-head .searcher {
     min-width: 0;
