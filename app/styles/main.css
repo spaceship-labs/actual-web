@@ -36,6 +36,11 @@ md-content {
   background: #fff;
 }
 
+img{
+  margin-left: 162px;
+  margin-bottom: 26px;
+}
+
 #main-content {
   overflow: visible;
 }
@@ -9712,6 +9717,7 @@ md-sidenav {
   .quotation-view .stock-alert-layer {
     display: none;
   }
+
 
   /*
   #header,.steps-bar,.checkout-view > .checkout-title,
