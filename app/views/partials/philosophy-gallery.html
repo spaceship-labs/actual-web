@@ -1,123 +1,132 @@
 <!--ng-switch on="main.siteTheme"-->
-<div  class="my-slider">
+<div ng-switch on="siteTheme">   <!-- class="my-slider" -->
+
+  <!--
+  NOTA: SE NECESITABA EL  ng-switch on="siteTheme" PARA QUE SE PUDIERA CUMPLIR LA VISTA SEGÚN SU TIPO,  
+  PARA ASEGURARME DE QUE ASÍ SE USÉ LOS SIGUIENTES COMANDO PARA VER LO QUE SE ABRE EN PRODUCCIÓN  
+        PARA KIDS: grunt serve --site=kids --env=production
+        PARA HOME: grunt serve --site=home --env=production
+        PARA STUDIO: grunt serve --site=studio --env=production
+
+   NOTA: CUANDO COMPILAS MODO PRODUCCIÓN SE GENERA UNA ORDEN EN "siteConfic.js" SOLO OMÍTELO CUANDO HAGAS COMMIT
+   CON CONFIANZA PUEDES HACER EL "DISCARD CHANGES Y YA HACES TU SELECCÓN COMPLETA CON ADD. 
+  -->
   <!-- specific images for each site -->
   <!--/slider-home  images-->
-  <div  ng-switch-when="actual-home">
-     <img src="/images/slider-home/AH-ShowRoom-18.png" width="300">
+  <div ng-switch-when="actual-home">  
+    <img src="/images/slider-home/showroom-actual1.jpg" width="300">
   </div>
-  <div  ng-switch-when="actual-home">
-     <img src="/images/slider-home/IMG_3158edición.jpg" width="300">
+  <div ng-switch-when="actual-home">   
+     <img src="/images/slider-home/showroom-actual2.jpg" width="300">
   </div>
-    <div  ng-switch-when="actual-home">
-      <img src="/images/slider-home/IMG_8950edición.jpg" width="300"/>
+    <div ng-switch-when="actual-home">   
+      <img src="/images/slider-home/showroom-actual3.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home">
-    <img src="/images/slider-home/Mistiq_ShowRoom-12.jpg" width="300"/>
+  <div ng-switch-when="actual-home">   
+    <img src="/images/slider-home/showroom-actual4.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/Mistiq_ShowRoom-30.jpg" width="300"/>
+  <div ng-switch-when="actual-home">   
+    <img src="/images/slider-home/showroom-actual5.jpg" width="300"/>
   </div>
-  <div >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.02 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual6.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.02 AM (1).jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual7.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.03 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual8.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.04 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual9.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.04 AM (1).jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual10.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.07 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual11.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.07 AM (1).jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual12.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.08 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual13.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.09 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual14.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.10 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual15.jpg" width="300"/>
   </div>
-  <div  ng-switch-when="actual-home" >
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.11 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-home"> 
+    <img src="/images/slider-home/showroom-actual16.jpg" width="300"/>
   </div>
-  <div>
-    <img src="/images/slider-home/WhatsApp Image 2020-09-03 at 6.49.11 AM (1).jpeg" width="300"/>
-  </div>
+  <h3>----- END HOME GALLERY -------</h3>
 
-  <!--/slider-studio  images-->
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/AS-SR-Flamboyan-08.png" width="300"/>
+  <!--/slider-studio  /images-->
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio1.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/AS-SR-Okume-04.png" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio2.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_1830edición.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio3.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_1835edición.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio4.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_3207edición.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio5.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_4242edición.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio6.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_4982edicion.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio7.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_5158edicion.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio8.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_8726-Editaredición.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio9.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_9129edición.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio10.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/IMG_9184edición.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio11.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-studio">
-    <img src="/images/slider-studio/ST13814-Mesa-comedor-circular-walnut-cristal-gris1.jpg" width="300"/>
+  <div ng-switch-when="actual-studio">  
+    <img src="/images/slider-studio/showroom-studio12.jpg" width="300"/>
   </div>
+  <h3>----- END STUDIO GALLERY -------</h3>
 
-
-  <div ng-switch-when="actual-kids">
-      <img src="/images/slider_kids/Axent By Isola Showroom-19.jpg" width="300"/>
+  <div ng-switch-when="actual-kids">    
+      <img src="/images/slider_kids/showroom-kids1.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-kids">
-    <img src="/images/slider_kids/IMG_1254edición.jpg" width="300"/>
+  <div ng-switch-when="actual-kids">    
+    <img src="/images/slider_kids/showroom-kids2.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-kids">
-    <img src="/images/slider_kids/IMG_3069edición.jpg" width="300"/>
+  <div ng-switch-when="actual-kids">    
+    <img src="/images/slider_kids/showroom-kids3.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-kids">
-    <img src="/images/slider_kids/IMG_3180edición.jpg" width="300"/>
+  <div ng-switch-when="actual-kids">    
+    <img src="/images/slider_kids/showroom-kids4.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-kids">
-    <img src="/images/slider_kids/IMG_7353edición.jpg" width="300"/>
+  <div ng-switch-when="actual-kids">    
+    <img src="/images/slider_kids/showroom-kids5.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-kids">
-    <img src="/images/slider_kids/WhatsApp Image 2020-09-03 at 6.49.05 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-kids">    
+    <img src="/images/slider_kids/showroom-kids6.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-kids">
-    <img src="/images/slider_kids/WhatsApp Image 2020-09-03 at 6.49.06 AM (1).jpeg" width="300"/>
+  <div ng-switch-when="actual-kids">    
+    <img src="/images/slider_kids/showroom-kids7.jpg" width="300"/>
   </div>
-  <div ng-switch-when="actual-kids">
-    <img src="/images/slider_kids/WhatsApp Image 2020-09-03 at 6.49.06 AM.jpeg" width="300"/>
+  <div ng-switch-when="actual-kids">    
+    <img src="/images/slider_kids/showroom-kids8.jpg" width="300"/>
   </div>
-
+  <h3>----- END KIDS GALLERY -------</h3>
   <!-- shared images 
   <div> <img src="/images/shared-slider/example.jpg"/> </div>-->
 </div>
