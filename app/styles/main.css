@@ -7108,6 +7108,48 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   filter: drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198)) drop-shadow(0 0 1px rgb(198, 198, 198));
 }
 
+.our-boarder-decoration {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.3s;
+  width: 140px;
+  border-radius: 3px; 
+  margin: 6px 5em;
+  position: static;
+}
+
+@media only screen and (max-width:910px){
+  .our-boarder-decoration{margin: 6px 22em;}
+}
+@media only screen and (max-width:800px){
+  .our-boarder-decoration{margin: 6px 18.5em;}
+}
+@media only screen and (max-width:768px){
+  .our-boarder-decoration{ margin: 6px 17.5em;}
+}
+@media only screen and (max-width:562px){
+  .our-boarder-decoration{margin: 6px 12em;}
+}
+@media only screen and (max-width:414px){
+  .our-boarder-decoration{margin: 6px 7em;}
+}
+@media only screen and (max-width:375px){
+  .our-boarder-decoration{margin: 6px 6em;}
+}
+@media only screen and (max-width:360px){
+  .our-boarder-decoration{margin: 6px 5.5em;}
+}
+@media only screen and (max-width:360px){
+  .our-boarder-decoration{margin: 6px 5.5em;}
+}
+@media only screen and (max-width:320px){
+  .our-boarder-decoration{margin: 6px 4.5em;}
+}
+
+.our-boarder-decoration:hover {box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);}
+
+.our-boearder-container {padding: 6px 10px;}
+
+
 .our-brands .brand {
   padding: 0 12px;
 }
