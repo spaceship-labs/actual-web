@@ -122,9 +122,8 @@
     window.prerenderReady = false;
 
   </script>
-
-  <!--Start of Zendesk Chat Script-->
-  <!--Start of Zendesk Chat Script-->
+   
+  <!--Start of Zendesk Chat Script
   <script type="text/javascript">
     window.$zopim ||
       (function (d, s) {
@@ -147,7 +146,10 @@
       })(document, 'script');
 
   </script>
-  <!-- Hotjar Tracking Code -->
+  -->
+  <!--End of Zendesk Chat Script-->
+
+  <!--Hotjar Tracking Code -->
 
   <script>
     (function (h, o, t, j, a, r) {
@@ -166,8 +168,6 @@
     })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
 
   </script>
-  <!--End of Zendesk Chat Script-->
-  <!--End of Zendesk Chat Script-->
 
   <!--SEE GRUNTFILE processhtml-->
   <script>
@@ -197,6 +197,31 @@
 </head>
 
 <body ng-cloak ng-class="main.siteTheme">
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>}
+    window.fbAsyncInit = function() {
+      FB.init({
+        xfbml            : true,
+        version          : 'v8.0'
+      });
+    };
+ 
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+ 
+  <!-- Your Chat Plugin code -->
+  <div class="fb-customerchat"
+    attribution=install_email
+    page_id="399256543461442"
+    theme_color="#CD362F">
+  </div>
   <!--[if lte IE 8]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
