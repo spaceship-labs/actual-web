@@ -8,15 +8,15 @@
     ng-class="{'fixed-head': scrolled}">
 
     <div class="header-item-child">
-      <div class="header-align-items" hide-gt-sm>
-        <div class="hai-element-1" hide-sm>
+      <div class="header-align-items" hide-md hide-lg hide-xl>
+        <div class="hai-element-1" hide-md hide-lg hide-xl>
           <a ng-click="main.toggleMobileSidenav()" class=" header-icon-menu-css">
             <img src="images/navbar-mobile-dark.png">
           </a>
         </div>
         <div class="hai-element-2">
           <div class="logo logo-mobile">
-            <a href="/" ng-switch on="main.siteTheme" hide-sm>
+            <a href="/" ng-switch on="main.siteTheme" hide-md hide-gt hide-xl>
               <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group" />
               <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group" />
               <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group" />
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div hide-xs>
+      <div hide-xs hide-sm>
         <a href="/" ng-switch on="main.siteTheme">
           <img ng-switch-when="actual-home" src="images/actual-home-blanco.png" alt="Actual Group" />
           <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group" />
