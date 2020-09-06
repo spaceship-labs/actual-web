@@ -45,7 +45,7 @@
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
       toggleProfileModal: toggleProfileModal,
-      redirectToFooter: redirectToFooter,
+      redirectScroll: redirectScroll,
       getFaviconUrl: getFaviconUrl,
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
@@ -75,15 +75,16 @@
 
     init();
 
-    function redirectToFooter() {
-      var scroll = document.getElementById("footer");
-      scroll.scrollIntoView({behavior: "smooth" }); 
-
-      /* setTimeout(() => {
-        var scroll = document.getElementById("footer");
-        scroll.scrollIntoView({behavior: "smooth" });
-       }, 250); */
-
+    function redirectScroll() {
+      var redirectScroll = document.getElementById("contactanos");
+      redirectScroll.scrollIntoView({
+        behavior: "smooth"
+      });
+      redirectScroll.classList.add("contact-animation");
+      setTimeout(function () {
+        var redirectScroll = document.getElementById("contactanos");
+        redirectScroll.classList.remove("contact-animation");
+      }, 2000)
     }
 
     function getFaviconUrl() {
