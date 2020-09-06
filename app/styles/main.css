@@ -34,6 +34,12 @@ body, md-content, md-content.md-default-theme, md-content {
   background: #fff;
 }
 
+
+#banner-about{
+  margin-left: 162px;
+  margin-bottom: 26px;
+}
+
 #main-content {
   overflow: visible;
 }
@@ -9432,6 +9438,7 @@ cursor: pointer; */
   .quotation-view .stock-alert-layer {
     display: none;
   }
+
   /*
   #header,.steps-bar,.checkout-view > .checkout-title,
   #records-view,#profile-view,.print-btn,

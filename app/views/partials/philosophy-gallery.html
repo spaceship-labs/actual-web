@@ -1,0 +1,168 @@
+<!--
+  NOTA: SE NECESITABA EL  ng-switch on="siteTheme" PARA QUE SE PUDIERA CUMPLIR LA VISTA SEGÚN SU TIPO,  
+  PARA ASEGURARME DE QUE ASÍ SE USÉ LOS SIGUIENTES COMANDO PARA VER LO QUE SE ABRE EN PRODUCCIÓN  
+        PARA KIDS: grunt serve --site=kids --env=production
+        PARA HOME: grunt serve --site=home --env=production
+        PARA STUDIO: grunt serve --site=studio --env=production
+
+   NOTA: CUANDO COMPILAS MODO PRODUCCIÓN SE GENERA UNA ORDEN EN "siteConfic.js" SOLO OMÍTELO CUANDO HAGAS COMMIT
+   CON CONFIANZA PUEDES HACER EL "DISCARD CHANGES Y YA HACES TU SELECCÓN COMPLETA CON ADD. 
+  -->
+
+  <div class="philosophy-gallery" >
+    <div class="my-slider-1">
+      <div>
+        <img src="/images/slider-home/showroom-actual1.jpg" height="200">
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual2.jpg" height="200">
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual3.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual4.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual5.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual6.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual7.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual8.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual9.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual10.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual11.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual12.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual13.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual14.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual15.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-home/showroom-actual16.jpg" height="200" />
+      </div>
+    </div>
+    <script>
+      var slider = tns({
+      container: '.my-slider-1',
+      items: 1,
+      slideBy: 'page',
+      autoplay: false,
+      controlsText: ["◄", "►"],
+      nav: false,
+      controlsPosition: "bottom",
+      });
+    </script>
+  </div>
+<!-- studio
+  <div class="philosophy-gallery">
+    <div class="my-slider-2">
+      <div>
+        <img src="/images/slider-studio/showroom-studio1.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio2.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio3.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio4.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio5.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio6.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio7.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio8.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio9.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio10.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio11.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider-studio/showroom-studio12.jpg" height="200" />
+      </div>
+    </div>
+    <script>
+      var slider = tns({
+        container: '.my-slider-2',
+        items: 1,
+        slideBy: 'page',
+        autoplay: false,
+        controlsText: ["◄", "►"],
+        nav: false,
+        controlsPosition: "bottom",
+      });
+    </script>
+  </div>
+-->
+<!-- kids
+  <div class="philosophy-gallery">
+    <div class="my-slider-3">
+      <div>
+        <img src="/images/slider_kids/showroom-kids1.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider_kids/showroom-kids2.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider_kids/showroom-kids3.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider_kids/showroom-kids4.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider_kids/showroom-kids5.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider_kids/showroom-kids6.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider_kids/showroom-kids7.jpg" height="200" />
+      </div>
+      <div>
+        <img src="/images/slider_kids/showroom-kids8.jpg" height="200" />
+      </div>
+    </div>
+    <script>
+      var slider = tns({
+        container: '.my-slider-3',
+        items: 1,
+        slideBy: 'page',
+        autoplay: false,
+        controlsText: ["◄", "►"],
+        nav: false,
+        controlsPosition: "bottom",
+      });
+    </script>
+  </div>
+-->
