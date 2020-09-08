@@ -354,7 +354,8 @@
       FeaturedProducts: [],
       Handle: "bebes-y-ninos",
       Name: "bebes y niños",
-      actual_studio: 1
+      actual_studio: 1,
+      actual_home: 1
     };
     var subcategories = [
       { name: 'Camas y literas', handle: "camas" },
@@ -372,6 +373,7 @@
         Handle: "",
         Name: "",
         actual_studio: 1,
+        actual_home: 1,
         manualFromKids: true
       };
       templateObject.Handle = subcategory.handle;
