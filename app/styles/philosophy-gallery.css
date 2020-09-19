@@ -60,10 +60,10 @@ button.tns-nav-active {
 
 .tns-controls>button {
   border: 0;
-  color: #dda901; /* #092f57;*/
-  /* color: #fff;
-  background-color: #000; */
-  background-color:  rgba(9, 47, 87, 0.5);    /*rgba(255, 255, 255, 0.5);*/
+  color: #092f57;
+  background-color: rgba(255, 255, 255, 0.6);  /*rgba(9, 47, 87, 0.5); */
+/*   color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);  */ /*  #000; */
   border-radius: 100%;
   width: 45px;
   height: 45px;
