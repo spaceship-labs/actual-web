@@ -29,19 +29,21 @@
             <li ng-repeat="subcategory in category.Childs">
               <br />
               <a ng-href="{{'/category/' + subcategory.Handle}}" class="sidebar-info-main-items">
-                <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
+                <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="Expandir">
 
                 <span class="nav-categories-item-text">{{ subcategory.Name }}</span>
               </a>
             </li>
           </ul>
         </li>
+        <!--
         <li>
           <a href="/ofertas" class="nav-categories-item-sidenav , mouseover-link-mobile active">
-            <!-- <i class="icon-ofertas"></i> -->
+            <!-- <i class="icon-ofertas"></i> --
             <span class="nav-categories-item-text">Ofertas</span>
           </a>
         </li>
+      -->
         <li>
           <a href="/search?sortkey=slowmovement" class="nav-categories-item-sidenav , mouseover-link-mobile active">
             <!-- <i class="icon-promociones2"></i> -->
@@ -50,7 +52,7 @@
         </li>
       </ul>
       <ul ng-if="main.siteTheme === 'actual-kids' ">
-        <li ng-repeat="category in main.categoriesTree track by $index "
+        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index "
           ng-click="main.handleAccordion(category.Handle)" class="nav-categories-item-sidenav">
           <a class="mouseover-link-mobile active">
             <span class="nav-categories-item-text" href="#">{{ category.Name }}</span></a>
@@ -95,9 +97,9 @@
                 <p>
                   <strong class="nav-categories-item-text">Asistencia en su compra</strong>
                 </p>
-                <th> <a href="tel:+998-246-3487">(998) 246 3487</a> ó <a href="tel:+998-884-1594">(998) 246 3487</a>
+                <th> <a href="tel:+998-246-3487">(998) 246 3487</a> ó <a href="tel:+998-884-1594">(998) 884 1594</a>
                 </th>
-                <!-- <th>(998) 246 3487 o (998) 246 3487</th> -->
+                <!-- <th>(998) 246 3487 o (998) 884 1594</th> -->
               </li>
               <br />
               <li>

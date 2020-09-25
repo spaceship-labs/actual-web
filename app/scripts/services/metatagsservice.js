@@ -9,13 +9,13 @@
  */
 angular
   .module('actualWebApp')
-  .service('metaTagsService', function(api, $rootScope, $location, $filter) {
-    this.getBasePath = function() {
+  .service('metaTagsService', function (api, $rootScope, $location, $filter) {
+    this.getBasePath = function () {
       this.path = $location.path();
       return this.path;
     };
 
-    this.getDescriptionBySiteTheme = function() {
+    this.getDescriptionBySiteTheme = function () {
       var description =
         'Muebles y decoración; salas, comedores, sillas, recámaras. Decora tu hogar con muebles modernos y funcionales';
       switch ($rootScope.siteTheme) {
@@ -35,7 +35,7 @@ angular
       return description;
     };
 
-    this.setMetaTags = function(params) {
+    this.setMetaTags = function (params) {
       var domainUrl =
         $location.protocol() +
         '://' +
@@ -56,7 +56,7 @@ angular
           defaultParams.image = api.baseUrl + '/logos/home-og.png';
           break;
         case 'actual-studio':
-          defaultParams.title = 'Actual Studio';
+          defaultParams.title = 'Actual Studio | Muebles, accesorios y para el hogar en México';
           defaultParams.description = this.getDescriptionBySiteTheme();
           defaultParams.image = api.baseUrl + '/logos/studio-og.png';
           break;

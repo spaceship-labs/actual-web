@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular.module('actualWebApp').factory('productService', productService);
@@ -12,8 +12,7 @@
     localStorageService,
     $rootScope
   ) {
-    var FILTERS_VARIANTS = [
-      {
+    var FILTERS_VARIANTS = [{
         id: '5743703aef7d5e62e508e22d',
         key: 'color',
         handle: 'color',
@@ -153,16 +152,13 @@
         }
         */
       if (product.icon_filename && product.icon_filename !== 'null') {
-        product.icons = [
-          {
-            url: api.cdnUrl + '/uploads/products/' + product.icon_filename,
-            size: 'default'
-          }
-        ];
-        api.imageSizes.avatar.forEach(function(size) {
+        product.icons = [{
+          url: api.cdnUrl + '/uploads/products/' + product.icon_filename,
+          size: 'default'
+        }];
+        api.imageSizes.avatar.forEach(function (size) {
           product.icons.push({
-            url:
-              api.cdnUrl +
+            url: api.cdnUrl +
               '/uploads/products/' +
               product.icon_filename +
               '?d=' +
@@ -171,7 +167,10 @@
           });
         });
       } else {
-        product.icons = [{ url: '', size: 'default' }];
+        product.icons = [{
+          url: '',
+          size: 'default'
+        }];
       }
 
       if (product.mainPromo) {
@@ -194,13 +193,13 @@
       var deferred = $q.defer();
 
       getMainPromo(product.id)
-        .then(function(res) {
+        .then(function (res) {
           var mainPromo = res.data;
           product.mainPromo = mainPromo;
           product = formatProductSync(product);
           deferred.resolve(product);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
           deferred.reject(err);
         });
@@ -222,8 +221,10 @@
           }
         }
         //Checking if a file was not in the orderedList
-        files.forEach(function(file) {
-          if (!_.findWhere(orderedList, { id: file.id })) {
+        files.forEach(function (file) {
+          if (!_.findWhere(orderedList, {
+              id: file.id
+            })) {
             orderedList.push(file);
           }
         });
@@ -310,7 +311,7 @@
         params.zipcodeDeliveryId = zipcodeDeliveryId;
       }
 
-      return api.$http.get(url, params).then(function(res) {
+      return api.$http.get(url, params).then(function (res) {
         return res.data;
       });
     }
@@ -322,7 +323,7 @@
 
     function getVariantGroupProducts(product) {
       var variantGroup = false;
-      product.Groups.forEach(function(group) {
+      product.Groups.forEach(function (group) {
         if (group.Type === 'variations') {
           variantGroup = group;
         }
@@ -342,21 +343,21 @@
       var deferred = $q.defer();
       var variants = {};
       getVariantGroupProducts(product)
-        .then(function(result) {
+        .then(function (result) {
           var products = result.data || [];
           if (products.length > 0) {
-            FILTERS_VARIANTS.forEach(function(filter) {
+            FILTERS_VARIANTS.forEach(function (filter) {
               variants[filter.key] = {};
               angular.copy(filter, variants[filter.key]);
               variants[filter.key].products = [];
             });
 
-            products.forEach(function(product) {
-              FILTERS_VARIANTS.forEach(function(filter) {
+            products.forEach(function (product) {
+              FILTERS_VARIANTS.forEach(function (filter) {
                 var values = _.where(product.FilterValues, {
                   Filter: filter.id
                 });
-                values.forEach(function(val) {
+                values.forEach(function (val) {
                   if ($rootScope.activeQuotation) {
                     product = substractProductStockByQuotationDetails(
                       product,
@@ -372,12 +373,15 @@
                   val.stock = product[activeStore.code];
                 });
 
-                values = values.filter(function(val) {
+                values = values.filter(function (val) {
                   return val.stock > 0;
                 });
 
                 if (values.length > 0) {
-                  var aux = { id: product.ItemCode, filterValues: values };
+                  var aux = {
+                    id: product.ItemCode,
+                    filterValues: values
+                  };
                   variants[filter.key].products.push(aux);
                 }
               });
@@ -385,7 +389,7 @@
           }
           deferred.resolve(variants);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           deferred.reject(err);
         });
       return deferred.promise;

@@ -1,28 +1,12 @@
-<div
-  class="method-block"
-  layout="row"
-  layout-align="space-between center"
->
+<div class="method-block" layout="row" layout-align="space-between center">
   <ul flex="75" flex-md="65" flex-sm="65">
-    <li
-      ng-repeat="method in paymentGroup.methods"
-      ng-show="vm.isActiveMethod(method,vm.quotation)"
-      layout="row"
-      layout-wrap
-      layout-align="space-between center"
-    >
-      <div
-        ng-attr-flex="{{method.cardsImages && '50' || '100' }}"
+    <li ng-repeat="method in paymentGroup.methods" ng-show="vm.isActiveMethod(method,vm.quotation)" layout="row"
+      layout-wrap layout-align="space-between center">
+      <div ng-attr-flex="{{method.cardsImages && '50' || '100' }}"
         ng-attr-flex-md="{{method.cardsImages && '50' || '100' }}"
-        ng-attr-flex-md="{{method.cardsImages && '60' || '100' }}"
-        flex-sm="100"
-        flex-xs="100"
-      >
+        ng-attr-flex-md="{{method.cardsImages && '60' || '100' }}" flex-sm="100" flex-xs="100">
 
-        <md-radio-button
-          ng-click="vm.chooseMethod(method , paymentGroup.group)"
-          ng-model="method"
-          ng-value="method"
+        <md-radio-button ng-click="vm.chooseMethod(method , paymentGroup.group)" ng-model="method" ng-value="method"
           class="md-primary">
 
           <strong>{{method.label}}</strong>
@@ -34,27 +18,12 @@
         <div ng-if="method.msi" class="hl-label"><strong>Sin intereses</strong></div>
       </div>
 
-      <div
-        ng-if="method.cardsImages"
-        flex="50"
-        flex-md="50"
-        flex-sm="50"
-        class="bank-icons"
-      >
-        <img
-          ng-repeat="card in method.cardsImages"
-          ng-src="{{ vm.api.baseUrl + card}}"
-          alt=""
-          ng-class=" method.discountKey != 'discountPg1' ? 'card' : ''"
-        >
+      <div ng-if="method.cardsImages" flex="50" flex-md="50" flex-sm="50" class="bank-icons">
+        <img ng-repeat="card in method.cardsImages" animate-visible="true" lazy-src="{{ vm.api.baseUrl + card}}"
+          alt="{{card || 'Tarjeta'}}" ng-class=" method.discountKey != 'discountPg1' ? 'card' : ''">
         <span>
-          <img
-            ng-if="method.moreCards"
-            src="images/mas-bancos.png"
-            alt="Más bancos"
-            ng-click="vm.showCardsDialog(method)"
-            class="card more-cards-btn"
-          >
+          <img ng-if="method.moreCards" src="images/mas-bancos.png" alt="Más bancos"
+            ng-click="vm.showCardsDialog(method)" class="card more-cards-btn">
           <!--<md-tooltip class="banks-tooltip">
             <ul>
               <li ng-repeat="card in method.cards track by $index">
@@ -67,14 +36,8 @@
     </li>
 
   </ul>
-  <div
-    flex="20"
-    flex-md="15"
-    flex-sm="30"
-    flex-xs="30"
-    class="method-block-prices"
-    ng-show="!vm.areMethodsDisabled(paymentGroup.methods)"
-  >
+  <div flex="20" flex-md="15" flex-sm="30" flex-xs="30" class="method-block-prices"
+    ng-show="!vm.areMethodsDisabled(paymentGroup.methods)">
     <h2 class="price-now" ng-class="{'price-hl' : $index == 0 }">
       <span class="currency-label">MXN</span> {{ vm.calculateRemaining(paymentGroup.total) | roundCurrency }}
     </h2>

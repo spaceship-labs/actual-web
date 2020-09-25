@@ -71,14 +71,15 @@
             </a>
           </div>
         </div>
+        <!-- <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+          <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+        </div> -->
+        <div hide-xs flex class="header-top-bar-menu-item">
+          <p ng-click="main.redirectScroll()" style="color: #fff;"> CONTACTO </p>
+        </div>
 
         <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
-        </div>
-        <div ng-if="!main.user || main.user.invited" hide-xs hide-sm flex class="header-top-bar-menu-item">
-          <a href="/register">
-            <p style="color: #fff;"> REGÍSTRATE</p>
-          </a>
         </div>
         <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">

@@ -3,21 +3,25 @@
 
     <div ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index"
       ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
-      <a class="list-menu-miactual" href="/category/{{ category.Handle }}">
+      <!--<a class="list-menu-miactual" href="/category/{{ category.Handle }}">-->
+      <div class="list-menu-miactual">
         <i ng-class="'icon-{{main.mainCategories[category.Handle].icon}}'"> </i>
         <span>{{ category.Name }}</span>
-      </a>
+      </div>
+      <!--</a>-->
       <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
         ng-mouseleave="main.handleCategoryLeave()" index="$index" subcategories="category.Childs"
         image="main.mainCategories[category.Handle].image" featured="category.FeaturedProducts"
         activeStoreCode="main.activeStore.code" leavehover="main.handleCategoryLeave"></smart-menu>
     </div>
+    <!--
     <div ng-mouseleave="main.handleCategoryLeave()">
       <a href="/ofertas" class="list-menu-miactual">
         <i class="icon-paquete"> </i>
         <span class="test" href="#">paquetes</span>
       </a>
     </div>
+    -->
     <div>
       <a href="https://actualkids.com" target="_blank" class="kids-bg list-menu-miactual">
         <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 70px; margin-top: 6px;" />
@@ -44,14 +48,16 @@
       ng-mouseover="main.handleCategoryHover(category.Handle)" ng-mouseleave="main.handleCategoryLeave()">
 
       <a class="list-menu-miactual" href="/category/{{ category.Handle }}">
-        <img src="{{ main.mainCategoriesKids[category.Handle].icon }}"></img>
+        <img animate-visible="true" lazy-src="{{ main.mainCategoriesKids[category.Handle].icon }}"></img>
+        <br>
         <span>{{ category.Name }}</span>
       </a>
 
       <smart-menu ng-repeat-end ng-show="main.activeCategory[category.Handle]" ng-if="category.Handle !== 'ofertas'"
         ng-mouseleave="main.handleCategoryLeave()" index="$index" subcategories="category.Childs"
-        image="main.mainCategoriesKids[category.Handle].image" featured="category.FeaturedProducts"
-        activeStoreCode="main.activeStore.code" leavehover="main.handleCategoryLeave"></smart-menu>
+        image="main.mainCategories[category.Handle].image" featured="category.FeaturedProducts"
+        activeStoreCode="main.activeStore.code" image="main.mainCategoriesKids[category.Handle].image"
+        leavehover="main.handleCategoryLeave"></smart-menu>
     </div>
     <div ng-if="main.isUserSellerOrAdmin">
       <a href="/reports/orders" class="list-menu-miactual">

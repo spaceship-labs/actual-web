@@ -1,10 +1,10 @@
 <section class="spei-card">
-  <div class="spei-card-inner">    
+  <div class="spei-card-inner">
     <div class="ps-reminder">Ficha digital. No es necesario imprimir.</div>
     <div class="ps">
       <div class="ps-header">
         <div class="ps-info">
-          <div class="ps-actual-logo"><img src="images/logo.png" alt="Actual Group"></div>
+          <div class="ps-actual-logo"><img animate-visible="true" lazy-src="images/logo.png" alt="Actual Group"></div>
           <div class="ps-amount">
             <h3 class="amount-to-pay">Monto a pagar</h3>
             <h2>{{vm.quotation.OrderWeb.conektaAmount | roundCurrency}} <sup>MXN</sup></h2>
@@ -13,7 +13,7 @@
             <p>Utiliza exactamente esta cantidad al realizar el pago.</p>
           </div>
           <div class="ps-spei-brand">
-            <img src="images/spei_brand.png" alt="">
+            <img animate-visible="true" lazy-src="images/spei_brand.png" alt="SPEI">
           </div>
         </div>
 
@@ -52,11 +52,15 @@
           <h3>Instrucciones</h3>
           <ol>
             <li>Accede a tu banca en línea.</li>
-            <li>Da de alta la CLABE en esta ficha. <strong>El banco deberá de ser {{vm.quotation.OrderWeb.receiving_account_bank}}</strong>.</li>
-            <li>Realiza la transferencia correspondiente por la cantidad exacta en esta ficha, <strong>de lo contrario se rechazará el cargo</strong>.</li>
-            <li>Al confirmar tu pago, el portal de tu banco generará un comprobante digital. <strong>En el podrás verificar que se haya realizado correctamente.</strong> Conserva este comprobante de pago.</li>
+            <li>Da de alta la CLABE en esta ficha. <strong>El banco deberá de ser
+                {{vm.quotation.OrderWeb.receiving_account_bank}}</strong>.</li>
+            <li>Realiza la transferencia correspondiente por la cantidad exacta en esta ficha, <strong>de lo contrario
+                se rechazará el cargo</strong>.</li>
+            <li>Al confirmar tu pago, el portal de tu banco generará un comprobante digital. <strong>En el podrás
+                verificar que se haya realizado correctamente.</strong> Conserva este comprobante de pago.</li>
           </ol>
-          <div class="ps-footnote">Al completar estos pasos recibirás un correo de <strong>AH ACTUAL S.A DE C.V.</strong> confirmando tu pago.</div>
+          <div class="ps-footnote">Al completar estos pasos recibirás un correo de <strong>AH ACTUAL S.A DE
+              C.V.</strong> confirmando tu pago.</div>
         </div>
       </div>
     </div>
