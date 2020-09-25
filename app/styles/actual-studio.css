@@ -2,7 +2,7 @@
   background: #cc262f;
   color: #fff;
 }
-.actual-studio .header-top-bar {
+.actual-studio .actual-header-top {
   background: #000000 !important;
 }
 .actual-studio .footer-bottom {
@@ -126,7 +126,25 @@
 }
 
 @media (max-width: 600px) {
-  .actual-studio .searcher-wrapper {
-    background: #000 !important;
-  }
+  .actual-studio .searcher-wrapper {background: #000 !important;}
+}
+
+/* .actual-studio .actual-header-top a:hover{color:#cc262f;}
+.actual-studio .atual-yellow-hover:hover{color: #cc262f;} */
+.actual-studio .footer-container a:hover{
+  box-shadow: 0 2px #cc262f;
+}
+
+.actual-studio .btn-radius--footer {
+ background-color: #cc262f !important;
+ color: #fff !important; 
+}
+
+.actual-studio .btn-radius--footer::after {
+ background-color: #cc262f !important; 
+}
+
+.actual-studio .footer-container > div:not(:last-child){
+  border-right-style: solid;
+  border-color: #cc262f; 
 }

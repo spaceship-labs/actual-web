@@ -23,7 +23,7 @@
  			scope.style = function (screenType) {
  				var header = $('#header');// jshint ignore:line
  				
- 				var fixedHeader = $('.header-top-bar.fixed-head');
+ 				var fixedHeader = $('.actual-header-top .fixed-head');
  				if(fixedHeader.length > 0){
  					header = fixedHeader;
  				}

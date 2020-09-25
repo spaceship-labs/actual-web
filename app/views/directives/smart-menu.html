@@ -12,13 +12,14 @@
   <div flex="70" flex-order="{{ index > 3 ? 1 : 2 }}" on="category" class="smartmenu-feature-info">
     <!-- GENERAL IMG IF FEATURED PRODUCT DOSN´T EXSIST -->
     <div class="smartmenu-default-img" ng-if="featured.length==0">
-      <img ng-src="{{ image }}" alt="Actual Group" />
+      <img animate-visible="true" lazy-src="{{ image }}" alt="Actual Group" />
     </div>
     <b ng-if="featured.length>0" class="Featured-title">Productos Destacados</b><br />
     <div class="smart-menu-row">
       <div class="smartmenu-feature-description" ng-repeat="featuredProduct in featured">
         <div class="smart-menu-img">
-          <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
+          <img animate-visible="true"
+            lazy-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}?d=200x200" />
         </div>
         <a ng-href="{{featuredProduct.url}}" class="featured-product-link">
           <span>VER</span>
@@ -33,7 +34,7 @@
     <strong class="Featured-title">Productos Destacados</strong>
     <div class="smartmenu-feature-description" ng-repeat="featuredProduct in featured">
       <div class="smart-menu-img">
-        <img ng-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
+        <img animate-visible="true" lazy-src="https://d116li125og699.cloudfront.net/uploads/products/{{featuredProduct.icon_filename}}" />
       </div>
         <a ng-href="{{product.url}}" class="featured-product-link">
           <span>VER</span>

@@ -57,6 +57,7 @@ angular.module('actualWebApp')
                 }
             });
             console.log('datalayer after', dataLayer);
+
             console.log('datalayer after', dataLayer2);
         }
 
