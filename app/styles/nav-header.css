@@ -46,14 +46,16 @@
   
 }
 
-.list-menu-miactual > span {
+.list-menu-miactual  span{
   font-size: 14px;
   text-decoration: none;
   text-transform: uppercase;
 }
 
+
+
 @media (max-width: 1347px) {
-  .list-menu-miactual > span {
+  .list-menu-miactual  span {
     font-size: 13px;
   }
 }
@@ -212,53 +214,47 @@
   margin: auto 0;
 }
 
-.btn-radius, .btn-radius:link, .btn-radius:visited {
+.actual-rbtn  i{
+  font-size: 40px;
+} 
+
+.actual-rbtn  span{
+  margin-top: 10px;
+} 
+
+.hbtn-radius {
   text-transform: uppercase;
-  text-decoration: none;
-  padding: 0.3rem 2em;
-  display: inline-block;
-  transition: all .2s;
-  position: relative;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  font-size: 14px;
+  padding: 8.5px;
+  display: flex;
+  flex-direction: column;
+  -webkit-align-content: center;
+  align-content: center;
+  transition: 0.4s;
+  color: #404040;
+  ;
 }
 
-.btn-radius:hover {
+.hbtn-radius:hover {
+  color: #fff !important;
+  background-color: #dda901 !important;
+}
+
+/*BUTTON EFFECT*/
+
+/*  .hbtn-radius:hover {
   transform: translateY(-3px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  color: #fff !important;
+  background-color: #dda901 !important;
 }
 
-.btn-radius:hover::after {
+.hbtn-radius:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
 }
 
-.btn-radius:active, .btn-radius:focus {
+.hbtn-radius:active, .hbtn-radius:focus {
   outline: none;
   transform: translateY(-1px);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-}
-
-.btn-radius--home {
-  background-color: #dda901 !important;
-  color: #fff !important;
-}
-
-.btn-radius--home::after {
-  background-color: #dda901 !important;
-}
-
-.btn-radius::after {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all .4s;
-}
+} */

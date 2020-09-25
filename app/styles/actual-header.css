@@ -157,7 +157,7 @@
   padding: 10px;
   text-align: center;
 }
-
+/*
 .profile-modal-header-btn {
   background: #000;
   padding: 10px 16px;
@@ -168,7 +168,6 @@
   text-align: center;
   text-transform: uppercase;
   max-width: 200px;
-  width: 100%;
   box-sizing: border-box;
 }
 
@@ -181,14 +180,16 @@
   font-size: 15px !important;
 }
 
+.profile-modal-header-btn-alert {
+  background: #c82828 !important;
+}
+*/
 .profile-modal-header-bottom {
   border-top: 1px solid #000;
   padding: 10px;
 }
 
-.profile-modal-header-btn-alert {
-  background: #c82828 !important;
-}
+
 
 /*-------------/
   #MODAL-HEADER

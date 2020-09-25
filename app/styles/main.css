@@ -1164,6 +1164,7 @@ right: 0;
   text-align: center;
 }
 
+
 .profile-modal-header-btn {
   background: #000;
   padding: 10px 16px;
@@ -1173,8 +1174,8 @@ right: 0;
   margin: 4px 0;
   text-align: center;
   text-transform: uppercase;
-  max-width: 200px;
-  width: 100%;
+  width: 200px;
+  /*width: 100%;*/
   box-sizing: border-box;
 }
 
