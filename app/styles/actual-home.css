@@ -1,4 +1,4 @@
-.actual-home .header-top-bar {
+.actual-home .actual-header-top {
   background: #092f57 !important;
 }
 .actual-home .footer-bottom {
@@ -91,7 +91,7 @@
 }
 
 @media (max-width: 600px) {
-  .actual-home .header-top-bar {
+  .actual-home .actual-header-top {
     background: #092f57 !important;
   }
 }

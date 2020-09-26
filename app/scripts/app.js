@@ -22,7 +22,8 @@ angular
     //'angulartics.google.tagmanager',
     'envconfig',
     'siteconfig',
-    'material.components.expansionPanels'
+    'material.components.expansionPanels',
+    'me-lazyload'
   ])
 
   .config(function (

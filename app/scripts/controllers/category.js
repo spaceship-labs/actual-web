@@ -4,20 +4,21 @@ angular.module('actualWebApp')
 
 function CategoryCtrl(
   $scope,
-  $routeParams, 
-  $mdSidenav, 
+  $routeParams,
+  $mdSidenav,
   $timeout,
   $rootScope,
-  categoriesService, 
+  categoriesService,
   productService,
   productSearchService,
   metaTagsService,
   breadcrumbService,
-  SITE
-){
-  var vm     = this;
+  SITE,
+  $location
+) {
+  var vm = this;
 
-  angular.extend(vm,{
+  angular.extend(vm, {
     filters: [],
     subnavIndex: 0,
     showLevel2: false,
@@ -46,34 +47,54 @@ function CategoryCtrl(
     getFilterById: getFilterById
   });
 
-  var activeQuotationListener = function(){};
+  var activeQuotationListener = function () { };
 
-  if(SITE.name === 'actual-kids'){
+  if (SITE.name === 'actual-kids') {
 
-    if($rootScope.activeQuotation || $rootScope.isActiveQuotationLoaded){
+    if ($rootScope.activeQuotation || $rootScope.isActiveQuotationLoaded) {
       console.log('init on actual kids preloaded', $rootScope.activeQuotation);
       init();
     }
-    else{
-      activeQuotationListener = $rootScope.$on('activeQuotationAssigned', function(e){
+    else {
+      activeQuotationListener = $rootScope.$on('activeQuotationAssigned', function (e) {
         console.log('init on actual kids event', $rootScope.activeQuotation);
         init();
       });
     }
 
 
-  }else{
+  } else {
     init();
-  }   
+  }
 
-  function setSubnavIndex(index){
+  function setSubnavIndex(index) {
     vm.subnavIndex = index;
   }
 
-  function init(){
+  function isMainCategory(category) {
+    var main = ['salas', 'sillas', 'recamaras', 'muebles-de-jardin', 'decoracion', 'mesas', 'almacenaje']
+    var isMain = false;
+    var i = 0;
+    while (!isMain && i < main.length) {
+      if (category == main[i]) {
+        isMain = true;
+      }
+      i++;
+    }
+    return isMain;
+  }
+
+  function init() {
+    if ($routeParams.category == 'comedores') {
+      $location.path('/category/mesas-comedor')
+      return;
+    }
     var activeSortOptionKey = 'DiscountPrice';
-    vm.activeSortOption = _.findWhere(vm.sortOptions,{key: activeSortOptionKey});
-        
+    if (isMainCategory($routeParams.category)) {
+      activeSortOptionKey = 'relevance';
+    }
+    vm.activeSortOption = _.findWhere(vm.sortOptions, { key: activeSortOptionKey });
+
     vm.search = {
       items: 10,
       page: 1,
@@ -81,9 +102,9 @@ function CategoryCtrl(
       sortOption: vm.activeSortOption
     };
 
-    if(SITE.name === 'actual-kids' && $rootScope.activeQuotation){
+    if (SITE.name === 'actual-kids' && $rootScope.activeQuotation) {
       vm.search.zipcodeDeliveryId = $rootScope.activeQuotation.ZipcodeDelivery;
-    } 
+    }
 
     loadCustomBrands();
     getCategories();
@@ -93,11 +114,11 @@ function CategoryCtrl(
 
   function getCategories() {
     vm.isLoading = true;
-    categoriesService.getCategoryByHandle($routeParams.category).then(function(res){
+    categoriesService.getCategoryByHandle($routeParams.category).then(function (res) {
       vm.category = res.data;
       vm.breadcrumbItems = [];
 
-      $rootScope.$on('formattedCategoriesTree', function(e){
+      $rootScope.$on('formattedCategoriesTree', function (e) {
 
         console.log('on categoriesTreeLoaded');
         vm.breadcrumbItems = breadcrumbService.buildCategoryBreadcrumb(
@@ -105,7 +126,7 @@ function CategoryCtrl(
           vm.category.id
         );
         console.log('vm.breadcrumbItems', vm.breadcrumbItems);
-      }); 
+      });
 
 
       var metaTags = {
@@ -115,25 +136,25 @@ function CategoryCtrl(
       metaTagsService.setMetaTags(metaTags);
 
 
-      if(vm.category && vm.category.Childs.length === 0){
+      if (vm.category && vm.category.Childs.length === 0) {
         vm.enableSortOptions = true;
         vm.enableFiltersTrigger = true;
       }
 
       var hasLevel2Categories = false;
-      var filters = vm.category.Filters.map(function(filter){
+      var filters = vm.category.Filters.map(function (filter) {
         return filter.id;
       });
-      productService.getAllFilters({ids: filters}).then(function(res){
+      productService.getAllFilters({ ids: filters }).then(function (res) {
         vm.filters = res.data;
-        vm.filters = vm.filters.map(function(filter){
+        vm.filters = vm.filters.map(function (filter) {
           filter.orderBy = filter.customOrder ? 'createdAt' : 'Name';
           return filter;
-        });    
+        });
         vm.filters = sortFiltersByList(vm.filters);
         onCloseSidenav();
       });
-      hasLevel2Categories = vm.category.Childs.find(function(child) {
+      hasLevel2Categories = vm.category.Childs.find(function (child) {
         return child.CategoryLevel === 2;
       });
       vm.showLevel2 = hasLevel2Categories;
@@ -142,9 +163,9 @@ function CategoryCtrl(
     });
 
   }
-  function onCloseSidenav(){
+  function onCloseSidenav() {
     $mdSidenav('searchFilters').onClose(function () {
-      for(var i = 0; i < vm.filters.length; i++){
+      for (var i = 0; i < vm.filters.length; i++) {
         vm.filters[i].active = false;
       }
       vm.isBrandFilterActive = false;
@@ -153,51 +174,51 @@ function CategoryCtrl(
     });
   }
 
-  function sortFiltersByList(filters){
-    var sortList = ['estilo','material','color','forma'];
-    var sorted =  filters.sort(function(a,b){
+  function sortFiltersByList(filters) {
+    var sortList = ['estilo', 'material', 'color', 'forma'];
+    var sorted = filters.sort(function (a, b) {
       return sortList.indexOf(b.Handle) - sortList.indexOf(a.Handle);
     });
     return sorted;
   }
 
 
-  function loadCustomBrands(){
+  function loadCustomBrands() {
     productService.getCustomBrands()
-      .then(function(res){
+      .then(function (res) {
         vm.customBrands = res.data;
         console.log('customBrands', vm.customBrands);
       })
-      .catch(function(err){
+      .catch(function (err) {
         console.log('err', err);
-      });    
+      });
   }
 
-  function doInitialProductsSearch(){
+  function doInitialProductsSearch() {
     vm.isLoadingProducts = true;
 
     productService.searchCategoryByFilters(vm.search)
-      .then(function(res){
+      .then(function (res) {
         console.log('res', res);
         var products = res.data.products || [];
         vm.totalProducts = res.data.total;
         vm.isLoadingProducts = false;
         return productService.formatProducts(products);
       })
-      .then(function(productsFormatted){
+      .then(function (productsFormatted) {
         vm.products = productsFormatted;
         console.log('vm.products', vm.products);
-        $timeout(function(){
-          window.prerenderReady = true;          
-        },2000);
+        $timeout(function () {
+          window.prerenderReady = true;
+        }, 2000);
       })
-      .catch(function(err){
+      .catch(function (err) {
         console.log('err', err);
       });
-  }  
+  }
 
-  function searchByFilters(options){
-    if(!options || !angular.isDefined(options.isLoadingMore)){
+  function searchByFilters(options) {
+    if (!options || !angular.isDefined(options.isLoadingMore)) {
       vm.search.page = 1;
     }
 
@@ -208,34 +229,34 @@ function CategoryCtrl(
     var searchValuesIds = productSearchService.getSearchValuesIds(vm.searchValues);
 
     //BRANDS
-    vm.brandSearchValues = vm.customBrands.filter(function(brand){
+    vm.brandSearchValues = vm.customBrands.filter(function (brand) {
       return brand.selected;
     });
-    var brandSearchValuesIds = vm.brandSearchValues.map(function(brand){
+    var brandSearchValuesIds = vm.brandSearchValues.map(function (brand) {
       return brand.id;
     });
 
     //DISCOUNTS
-    vm.discountFiltersSelected = vm.discountFilters.filter(function(discount){
+    vm.discountFiltersSelected = vm.discountFilters.filter(function (discount) {
       return discount.selected;
     });
-    var discountFiltersValues = vm.discountFiltersSelected.map(function(discount){
+    var discountFiltersValues = vm.discountFiltersSelected.map(function (discount) {
       return discount.value;
     });
 
     //STOCK
-    vm.stockFiltersSelected = vm.stockFilters.filter(function(stock){
+    vm.stockFiltersSelected = vm.stockFilters.filter(function (stock) {
       return stock.selected;
     });
-    var stockFiltersValues = vm.stockFiltersSelected.map(function(stock){
+    var stockFiltersValues = vm.stockFiltersSelected.map(function (stock) {
       return stock.value;
     });
 
     //SOCIETIES
-    vm.societyFiltersSelected = vm.societyFilters.filter(function(society){
+    vm.societyFiltersSelected = vm.societyFilters.filter(function (society) {
       return society.selected;
     });
-    var societyFiltersValues = vm.societyFiltersSelected.map(function(society){
+    var societyFiltersValues = vm.societyFiltersSelected.map(function (society) {
       return society.code;
     });
 
@@ -257,43 +278,43 @@ function CategoryCtrl(
       zipcodeDeliveryId: vm.search.zipcodeDeliveryId
     };
 
-    if(vm.activeSortOption && vm.activeSortOption.key === 'slowMovement'){
-      params.slowMovement = true;      
+    if (vm.activeSortOption && vm.activeSortOption.key === 'slowMovement') {
+      params.slowMovement = true;
     }
-    else if(vm.activeSortOption && vm.activeSortOption.key === 'spotlight'){
-      params.spotlight = true;      
+    else if (vm.activeSortOption && vm.activeSortOption.key === 'spotlight') {
+      params.spotlight = true;
     }
 
     productService.searchCategoryByFilters(params)
-      .then(function(res){
+      .then(function (res) {
         var products = res.data.products || [];
         vm.totalProducts = res.data.total;
         return productService.formatProducts(products);
       })
-      .then(function(productsFormatted){
-        if(options && options.isLoadingMore){
+      .then(function (productsFormatted) {
+        if (options && options.isLoadingMore) {
           var productsAux = angular.copy(vm.products);
           vm.products = productsAux.concat(productsFormatted);
-        }else{
+        } else {
           vm.products = productsFormatted;
           vm.scrollTo('breadcrumb-category-page');
         }
 
         vm.isLoadingProducts = false;
       })
-      .catch(function(err){
+      .catch(function (err) {
         console.log('err', err);
       });
   }
 
-  function removeSearchValue(value){
+  function removeSearchValue(value) {
     var removeIndex = vm.searchValues.indexOf(value);
-    if(removeIndex > -1){
+    if (removeIndex > -1) {
       vm.searchValues.splice(removeIndex, 1);
     }
-    vm.filters.forEach(function(filter){
-      filter.Values.forEach(function(val){
-        if(val.id === value.id){
+    vm.filters.forEach(function (filter) {
+      filter.Values.forEach(function (val) {
+        if (val.id === value.id) {
           val.selected = false;
         }
       });
@@ -302,13 +323,13 @@ function CategoryCtrl(
     searchByFilters();
   }
 
-  function removeBrandSearchValue(value){
+  function removeBrandSearchValue(value) {
     var removeIndex = vm.brandSearchValues.indexOf(value);
-    if(removeIndex > -1){
+    if (removeIndex > -1) {
       vm.brandSearchValues.splice(removeIndex, 1);
     }
-    vm.customBrands.forEach(function(brand){
-      if(brand.id === value.id){
+    vm.customBrands.forEach(function (brand) {
+      if (brand.id === value.id) {
         brand.selected = false;
       }
     });
@@ -316,13 +337,13 @@ function CategoryCtrl(
     searchByFilters();
   }
 
-  function removeSelectedDiscountFilter(discount){
+  function removeSelectedDiscountFilter(discount) {
     var removeIndex = vm.discountFiltersSelected.indexOf(discount);
-    if(removeIndex > -1){
+    if (removeIndex > -1) {
       vm.discountFiltersSelected.splice(removeIndex, 1);
     }
-    vm.discountFilters.forEach(function(discountFilter){
-      if(discountFilter.value === discount.value){
+    vm.discountFilters.forEach(function (discountFilter) {
+      if (discountFilter.value === discount.value) {
         discountFilter.selected = false;
       }
     });
@@ -331,78 +352,78 @@ function CategoryCtrl(
 
   }
 
-  function removeSelectedStockFilter(stockRangeObject){
+  function removeSelectedStockFilter(stockRangeObject) {
     var removeIndex = vm.stockFiltersSelected.indexOf(stockRangeObject);
-    if(removeIndex > -1){
+    if (removeIndex > -1) {
       vm.stockFiltersSelected.splice(removeIndex, 1);
     }
-    vm.stockFilters.forEach(function(stockFilters){
-      if(stockFilters.id === stockRangeObject.id){
+    vm.stockFilters.forEach(function (stockFilters) {
+      if (stockFilters.id === stockRangeObject.id) {
         stockFilters.selected = false;
       }
     });
 
     searchByFilters();
-  }  
+  }
 
-  function removeSelectedSocietyFilter(society){
+  function removeSelectedSocietyFilter(society) {
     var removeIndex = vm.societyFiltersSelected.indexOf(society);
-    if(removeIndex > -1){
+    if (removeIndex > -1) {
       vm.societyFiltersSelected.splice(removeIndex, 1);
     }
-    vm.societyFilters.forEach(function(societyFilter){
-      if(societyFilter.code === society.code){
+    vm.societyFilters.forEach(function (societyFilter) {
+      if (societyFilter.code === society.code) {
         societyFilter.selected = false;
       }
     });
 
     searchByFilters();
-  } 
+  }
 
 
-  function removeMinPrice(){
+  function removeMinPrice() {
     delete vm.minPrice;
     searchByFilters();
   }
 
-  function removeMaxPrice(){
+  function removeMaxPrice() {
     delete vm.maxPrice;
     searchByFilters();
-  }  
-
-  function scrollTo(target){
-    $timeout(
-        function(){
-          $('html, body').animate({
-            scrollTop: $('#' + target).offset().top - 100
-          }, 600);
-        },
-        300
-    );
-  }  
-
-  function loadMore(){
-    vm.search.page++;
-    vm.searchByFilters({isLoadingMore: true});
   }
 
-  function toggleColorFilter(value, filter){
+  function scrollTo(target) {
+    $timeout(
+      function () {
+        $('html, body').animate({
+          scrollTop: $('#' + target).offset().top - 100
+        }, 600);
+      },
+      300
+    );
+  }
+
+  function loadMore() {
+    vm.search.page++;
+    vm.searchByFilters({ isLoadingMore: true });
+  }
+
+  function toggleColorFilter(value, filter) {
     value.selected = !value.selected;
     vm.searchByFilters();
   }
 
-  function toggleSearchSidenav(filterHandleToOpen){
+  function toggleSearchSidenav(filterHandleToOpen) {
     $mdSidenav('searchFilters').toggle();
-    if(filterHandleToOpen){
-      var filterIndexToOpen = _.findIndex(vm.filters, function(filter){
+    if (filterHandleToOpen) {
+      var filterIndexToOpen = _.findIndex(vm.filters, function (filter) {
         return filter.Handle === filterHandleToOpen;
       });
-      if(filterIndexToOpen >= 0){
+      if (filterIndexToOpen >= 0) {
         vm.filters[filterIndexToOpen].active = true;
       }
-      else{
+      else {
 
-        switch(filterHandleToOpen){
+        switch (filterHandleToOpen) {
           case 'brand':
             vm.isBrandFilterActive = true;
             break;
@@ -414,18 +435,18 @@ function CategoryCtrl(
             break;
         }
       }
-    }    
-  }  
+    }
+  }
 
-  function setActiveSortOption(sortOption){
+  function setActiveSortOption(sortOption) {
 
-    if(vm.activeSortOption.key  === sortOption.key){
+    if (vm.activeSortOption.key === sortOption.key) {
       sortOption.direction = sortOption.direction === 'ASC' ? 'DESC' : 'ASC';
     }
-    else if(sortOption.key === 'salesCount' || sortOption.key === 'slowMovement'){
+    else if (sortOption.key === 'salesCount' || sortOption.key === 'slowMovement') {
       sortOption.direction = 'DESC';
     }
-    else{
+    else {
       sortOption.direction = 'ASC';
     }
 
@@ -433,11 +454,11 @@ function CategoryCtrl(
     searchByFilters();
   }
 
-  function getFilterById(filterId){
-    return _.findWhere(vm.filters, {id: filterId});
+  function getFilterById(filterId) {
+    return _.findWhere(vm.filters, { id: filterId });
   }
 
-  $scope.$on('$destroy', function(){
+  $scope.$on('$destroy', function () {
     activeQuotationListener();
   });
 
@@ -454,5 +475,6 @@ CategoryCtrl.$inject = [
   'productSearchService',
   'metaTagsService',
   'breadcrumbService',
-  'SITE'
+  'SITE',
+  '$location'
 ];

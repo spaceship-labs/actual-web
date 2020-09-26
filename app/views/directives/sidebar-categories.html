@@ -17,13 +17,13 @@
       <h3>
         <i class="icon-right-open aside"></i>
         <a ng-if="category.Childs" ng-href="/category/{{category.Handle}}">
-          <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
+          <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="Expandir">
           <strong>{{category.Name}}</strong>
           <span class="products-num">({{category[storeCode]}})</span>
         </a>
 
         <a ng-if="!category.Childs" ng-href="/category/{{category.Handle}}">
-          <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="">
+          <img class="listing-view-nav-icon" src="images/arrow-right.png" alt="Expandir">
 
           <strong>{{category.Name}}</strong>
           <span class="products-num">({{category[storeCode]}})</span>
@@ -32,7 +32,7 @@
 
       <ul class="listing-view-subnav">
         <li ng-repeat="subcategory in category.Childs | orderBy: 'Name' " ng-if="subcategory[storeCode]">
-          <img class="listing-view-nav-icon-sub" src="images/arrow-right.png " alt="">
+          <img class="listing-view-nav-icon-sub" src="images/arrow-right.png " alt="Expandir">
 
           <a ng-href="/category/{{subcategory.Handle}}" ng-class="{'active': subcategory.isActive}">
             {{subcategory.Name}} ({{subcategory[storeCode]}})

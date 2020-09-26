@@ -50,6 +50,7 @@
             'salas-y-sofas',
             'sofa-cama',
             'futones',
+            'sofa-cama',
             'sillones-reclinables',
             'sillones-salas',
             'taburete'
@@ -68,7 +69,7 @@
           childs: [
             'mesas-de-comedor',
             'mesas-laterales-y-centro',
-            'mesas-laterales',
+            'bases-mesas-laterales-cama',
             'juego-comedor'
           ]
         },
@@ -77,11 +78,10 @@
           childs: [
             'camas',
             'cabeceras',
-            'bases-de-cama',
+            'bases-para-cama',
             'comoda',
             'colchones',
-            'comoda',
-            'buros-y-mesas-laterales'
+            'buro-mesa-lateral'
           ]
         },
         {
@@ -91,10 +91,10 @@
             'mesas-exterior',
             'sillas-y-bancos',
             'camastro',
-            'mesa-de-centro-y-lateral'
+            'mesa-de- centro-y-lateral'
           ]
         },
-        
+
         {
           name: 'decoracion',
           childs: [
@@ -102,7 +102,7 @@
             'cuadros-y-decoracion-de-pared',
             'espejos',
             'tapetes',
-            'tapetes',
+            'cojines',
             'iluminacion'
           ]
         },
@@ -113,11 +113,10 @@
             'bufeteros',
             'buros',
             'muebles-para-tv',
-            'escritorios',
-            'libreros-y-repisas'
+            'libreros-y-repisas',
+            'escritorios'
           ]
         },
-      
         {
           name: 'bebes-y-ninos',
           childs: [
@@ -128,7 +127,50 @@
             'mesas-y-sillas-bebes-ninos',
             'decorativos-bebes-ninos'
           ]
+        },
+
+        //KIDS
+        {
+          name: 'camas-literas',
+          childs: [
+            'camas',
+            'literas',
+            'cabeceras',
+            'bases-de-cama',
+            'colchones'
+          ]
+        },
+        {
+          name: 'cunas',
+          childs: [
+            'cunas',
+            'colchones-cuna',
+            'cojines-cunas',
+            'blancos'
+          ]
+        },
+        {
+          name: 'habitacion',
+          childs: [
+            'cambiador',
+            'escritorio',
+            'mecedoras',
+            'bancos',
+            'tocador',
+            'espejos',
+          ]
+        },
+
+        {
+          name: 'almacenar',
+          childs: [
+            'buros',
+            'comodas',
+            'repisas',
+            'libreros'
+          ]
         }
+
       ];
 
       var tree = [];
@@ -255,8 +297,7 @@
         iluminacion: 'iluminacion',
         organizacion: 'murbles'
       };
-
-      console.log('Test getCategoryIcon handle', handle);
+      //console.log('Test getCategoryIcon handle', handle);
 
       if (icons[handle]) {
         return icons[handle];
@@ -276,7 +317,6 @@
       var text = string.toLowerCase();
       return text.charAt(0).toUpperCase() + text.slice(1);
     }
-
     function getLowestCategory(categories) {
       var lowestCategoryLevel = 0;
       var lowestCategory = false;
@@ -313,7 +353,8 @@
       FeaturedProducts: [],
       Handle: "bebes-y-ninos",
       Name: "bebes y niños",
-      actual_studio: 1
+      actual_studio: 1,
+      actual_home: 1
     };
     var subcategories = [
       { name: 'Camas y literas', handle: "camas" },
@@ -331,6 +372,7 @@
         Handle: "",
         Name: "",
         actual_studio: 1,
+        actual_home: 1,
         manualFromKids: true
       };
       templateObject.Handle = subcategory.handle;

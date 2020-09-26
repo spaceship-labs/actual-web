@@ -81,13 +81,15 @@
   <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
   <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
   <link rel="stylesheet" href="bower_components/angular-datatables/dist/css/angular-datatables.css" />
-  <link rel="stylesheet" href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" />
+  <link rel="stylesheet"
+    href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" />
   <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
   <link rel="stylesheet" href="bower_components/jquery-timepicker-jt/jquery.timepicker.css" />
   <link rel="stylesheet" href="bower_components/photoswipe/dist/photoswipe.css" />
   <link rel="stylesheet" href="bower_components/photoswipe/dist/default-skin/default-skin.css" />
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/angular-material-expansion-panel/dist/md-expansion-panel.css" />
+  <link rel="stylesheet" href="bower_components/tiny-slider/dist/tiny-slider.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -102,7 +104,13 @@
   <link rel="stylesheet" href="styles/actual-studio.css" />
   <link rel="stylesheet" href="styles/actual-kids.css" />
   <link rel="stylesheet" href="styles/nav-header.css">
+  <link rel="stylesheet" href="styles/actual-header.css">
+  <link rel="stylesheet" href="styles/philosophy-gallery.css">
+  <link rel="stylesheet" href="styles/footer-content.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,700,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700,900" rel="stylesheet">
+
   <!-- endbuild -->
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css" />
@@ -140,13 +148,22 @@
 
   <!--SEE GRUNTFILE processhtml-->
   <script>
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return; n = f.fbq = function () {
+    ! function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
         n.callMethod ?
           n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-      }; if (!f._fbq) f._fbq = n;
-      n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
     }(window,
       document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     //fbq.disablePushState = true; //not recommended, but can be done
@@ -163,7 +180,6 @@
         your experience.
       </p>
     <![endif]-->
-
   <!-- Facebook pixel Code (noscript) -->
   <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=591808408023977&ev=PageView&noscript=1" /></noscript>
@@ -253,10 +269,13 @@ ga('send', 'pageview');
   <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
-  <script src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
-  <script src="bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+  <script
+    src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+  <script
+    src="bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
-  <script src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+  <script
+    src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
@@ -280,6 +299,7 @@ ga('send', 'pageview');
   <script src="bower_components/js-xlsx/dist/xlsx.full.min.js"></script>
   <script src="bower_components/es6-promise/promise.js"></script>
   <script src="bower_components/alasql/dist/alasql.min.js"></script>
+  <script src="bower_components/tiny-slider/dist/tiny-slider.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -305,6 +325,7 @@ ga('send', 'pageview');
   <script src="scripts/controllers/product.js"></script>
   <script src="scripts/directives/sidebar-categories.js"></script>
   <script src="scripts/directives/ng-enter.js"></script>
+  <script src="scripts/directives/lazy-load.js"></script>
   <script src="scripts/services/categoriesservice.js"></script>
   <script src="scripts/services/checkoutservice.js"></script>
   <script src="scripts/services/ewalletservice.js"></script>

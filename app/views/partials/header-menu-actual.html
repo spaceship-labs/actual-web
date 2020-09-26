@@ -25,16 +25,17 @@
               <i ng-show="main.activeCategory[9]" class="icon-look-relleno"></i>
               <span class="nav-categories-item-text" href="#">Paquetes</span>
             </a>
-      <div class="flex-container-menu-row">
-        <a>
-          <i class="icon-8"> </i>
-          <span class="test">paquetes</span>
-        </a>
-      </div>
-      <!--- TRABJO ACTUAL -->
+      
+            <div class="flex-container-menu-row">
+              <a>
+                <i class="icon-8"> </i>
+                <span class="test">paquetes</span>
+              </a>
+            </div>
+            <!--- TRABJO ACTUAL -->
 
       <a href="https://actualkids.com" target="_blank" flex flex-xs="25" class="kids-bg nav-categories-item">
-        <img src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px" />
+        <img animate-visible="true" lazy-src="images/logos/kids-azul.png" alt="Actual Group" style="width: 80px" />
       </a>
       <a ng-if="main.isUserSellerOrAdmin" href="/reports/orders" flex flex-xs="25" class="nav-categories-item">
         <i class="icon-attachment"></i>

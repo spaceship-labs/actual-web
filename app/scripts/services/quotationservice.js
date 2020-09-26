@@ -660,6 +660,7 @@
       deliveries,
       productTakenStock
     ) {
+      console.log("Deliveries", deliveries);
       for (var i = 0; i < deliveries.length; i++) {
         deliveries[i].available =
           deliveries[i].initalAvailable - productTakenStock;

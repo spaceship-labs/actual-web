@@ -45,7 +45,7 @@
       toggleLoginModal: toggleLoginModal,
       toggleSchedulesModal: toggleSchedulesModal,
       toggleProfileModal: toggleProfileModal,
-      redirectToRegister: redirectToRegister,
+      redirectScroll: redirectScroll,
       getFaviconUrl: getFaviconUrl,
       toggleMobileSidenav: toggleMobileSidenav,
       showPhoneNumberDialog: showPhoneNumberDialog,
@@ -75,13 +75,16 @@
 
     init();
 
-    function redirectToRegister() {
-      if (!vm.activeQuotation.id) {
-        $location.path('/register');
-      }
-      $location.path('/register').search({
-        quotation: vm.activeQuotation.id
+    function redirectScroll() {
+      var redirectScroll = document.getElementById("contactanos");
+      redirectScroll.scrollIntoView({
+        behavior: "smooth"
       });
+      redirectScroll.classList.add("contact-animation");
+      setTimeout(function () {
+        var redirectScroll = document.getElementById("contactanos");
+        redirectScroll.classList.remove("contact-animation");
+      }, 2000)
     }
 
     function getFaviconUrl() {
@@ -219,6 +222,18 @@
           },
           'bebes-y-ninos': {
             color: 'look-bg',
+            icon: 'paquete',
+            filledIcon: 'paquete',
+            image: '/images/categories/categoria8.png'
+          },
+          decoracion: {
+            color: 'look-bg',
+            icon: 'deco',
+            filledIcon: 'ddeco',
+            image: '/images/categories/decoracion.jpg'
+          },
+          'bebes-y-ninos': {
+            color: 'look-bg',
             icon: 'nios-y-bebes',
             filledIcon: 'nios-y-bebes',
             image: '/images/categories/ninos.jpg'
@@ -236,7 +251,7 @@
           image: '/images/categories/bebes.jpg'
         }
       };
-      
+
       vm.activeCategory = {
         salas: false,
         mesas: false,
@@ -689,7 +704,7 @@
     }
 
     function showPhoneNumberDialog() {
-      dialogService.showDialog('Asistencia en su compra: 01 (998) 884 1594');
+      dialogService.showDialog('Asistencia en su compra: 998 246 3487');
     }
 
     function handleCategoryHover(handle) {
@@ -697,13 +712,13 @@
         vm.activeCategory[key] = false;
       });
       vm.activeCategory[handle] = true;
-      console.log("TEST HANDLECATEGORYHOVER TRUE", vm.activeCategory[handle])
+      //console.log("TEST HANDLECATEGORYHOVER TRUE", vm.activeCategory[handle])
     }
 
     function handleCategoryLeave() {
       Object.keys(vm.activeCategory).forEach(function (key, value) {
         vm.activeCategory[key] = false;
-        console.log("TEST HANDLECATEGORYHOVER FALSE", vm.activeCategory[key])
+        //console.log("TEST HANDLECATEGORYHOVER FALSE", vm.activeCategory[key])
 
       });
     }

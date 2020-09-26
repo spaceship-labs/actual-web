@@ -7,10 +7,10 @@
   background: #34b3e7;
 }
 
-.actual-kids .header-top-bar {
+.actual-kids .actual-header-top {
   background: #34b3e7 !important;
 }
-.actual-kids .header-top-bar-menu .cart-active {
+.actual-kids .actual-header-top-menu .cart-active {
   color: #fff !important;
 }
 .actual-kids .footer-bottom {
@@ -104,4 +104,23 @@
   .actual-kids .searcher-wrapper {
     background: #34b3e7 !important;
   }
+}
+
+
+.actual-kids .footer-container a:hover{
+   box-shadow: 0 2px #cc262f;
+}
+
+.actual-kids .btn-radius--footer {
+  background-color: #cc262f !important;
+  color: #fff !important; 
+}
+
+.actual-kids .btn-radius--footer::after {
+  background-color: #cc262f !important; 
+}
+
+.actual-kids .footer-container > div:not(:last-child){
+  border-right-style: solid;
+  border-color: #cc262f; 
 }
