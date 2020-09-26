@@ -189,7 +189,6 @@ function RegisterCtrl(
     console.log('register');
     var createdClient;
     var createdUser;
-
     if (form.$valid) {
       vm.isLoading = true;
 

@@ -778,10 +778,10 @@ function getFacebookPixelId(env) {
   var facbookPixelId = '';
   switch (env) {
     case 'production':
-      facbookPixelId = '129365994394398';
+      facbookPixelId = '591808408023977';
       break;
     case 'sandbox':
-      facbookPixelId = '129365994394398';
+      facbookPixelId = '591808408023977';
       break;
     case 'dev':
       facbookPixelId = '';
@@ -805,7 +805,7 @@ function getMetaTagsBySite(siteOption) {
   switch (siteOption) {
     case 'studio':
       metaTags = {
-        title: 'Actual Studio',
+        title: 'Actual Studio | Muebles, accesorios y para el hogar en México',
         description:
           'Muebles y decoración; salas, comedores, sillas, recámaras. Decora tu hogar con muebles modernos y funcionales',
         image: 'https://api.actualstudio.com/logos/studio-og.png',

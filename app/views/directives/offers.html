@@ -6,7 +6,7 @@
   <div ng-repeat="package in packages track by $index" class="package-wrapper">
 
     <a ng-click="addPackageToCart(package.id)" href="#">
-      <img ng-src="{{package.image}}" alt="{{package.image}}">
+      <img animate-visible="true" lazy-src="{{package.image}}" alt="{{package.image}}">
     </a>
     <div class="package-text">
       <h4>

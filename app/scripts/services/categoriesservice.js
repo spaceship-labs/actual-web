@@ -41,43 +41,59 @@
       });
     }
 
+    function getCategoryChildsRelations(handle) {
+      var url = '/productcategory/childsrelations/' + handle;
+      return api.$http.post(url).then(function (res) {
+        const relations = (res.data || []).filter(function (relation) {
+          return relation.position ? relation : false;
+        })
+        return relations.sort(function (relationA, relationB) {
+          return relationA.position - relationB.position;
+        });;
+      });
+    }
+
     function formatCategoriesTree(originalTree, activeStoreCode) {
       console.log("TEST: Original Tree", originalTree);
       var sortList = [
         {
-          name: 'salas',
+          name: 'ninos',
           childs: [
-            'salas-esquineras',
-            'salas-modulares',
-            'sofas',
-            'sofa-cama',
-            'futon',
-            'sillones',
-            'sillones-reclinables',
-            'salas-de-cine',
-            'taburete',
-            'salas-para-jardin',
-            'mesas-de-centro',
-            'mesas-laterales',
-            'credenzas'
+
+          ]
+        }, {
+          name: 'bebes',
+          childs: [
+
           ]
         },
         {
-          name: 'comedores',
+          name: 'salas',
           childs: [
-            'mesas-de-comedor',
-            'sillas-para-comedor',
-            'bancos-para-barra',
-            'bufeteras'
+            'salas-y-sofas',
+            'sofa-cama',
+            'futones',
+            'sofa-cama',
+            'sillones-reclinables',
+            'sillones-salas',
+            'taburete'
           ]
         },
         {
           name: 'sillas',
           childs: [
             'sillas-para-comedor',
-            'sillas-para-oficina',
-            'sillas-para-jardin',
-            'bancos-para-barra'
+            'bancos',
+            'Oficina'
+          ]
+        },
+        {
+          name: 'mesas',
+          childs: [
+            'mesas-de-comedor',
+            'mesas-laterales-y-centro',
+            'bases-mesas-laterales-cama',
+            'juego-comedor'
           ]
         },
         {
@@ -86,42 +102,36 @@
             'camas',
             'cabeceras',
             'bases-para-cama',
-            'futon',
-            'sofa-cama',
             'comoda',
-            'buros',
-            'colchones'
+            'colchones',
+            'buro-mesa-lateral'
           ]
         },
         {
           name: 'muebles-de-jardin',
           childs: [
-            'salas-para-jardin',
-            'sillones-para-exterior',
-            'mesas-para-jardin',
-            'sillas-para-jardin',
+            'salas-exterior',
+            'mesas-exterior',
+            'sillas-y-bancos',
             'camastro',
-            'sombrillas'
+            'mesa-de- centro-y-lateral'
           ]
         },
         {
-          name: 'muebles-para-oficina',
-          childs: ['escritorios', 'sillas-para-oficina', 'libreros']
-        },
-        {
-          name: 'muebles-de-tv',
+          name: 'almacenaje',
           childs: [
+            'comodas-y-credenzas',
+            'bufeteros',
+            'buros',
             'muebles-para-tv',
-            'centro-de-entretenimiento',
-            'sillones-reclinables',
-            'sillones',
-            'salas-de-cine'
+            'libreros-y-repisas',
+            'escritorios'
           ]
         },
 
         //KIDS
         {
-          name: 'ninos',
+          name: 'bebes-y-ninos',
           childs: [
             'camas',
             'literas',
@@ -129,10 +139,12 @@
             'barandales',
             'buros',
             'tocadores',
-            'comodas'          ]
+            'comodas']
         },
+
+        //KIDS
         {
-          name: 'bebes',
+          name: 'camas-literas',
           childs: [
             'cunas',
             'colchones',
@@ -296,7 +308,7 @@
         iluminacion: 'iluminacion',
         organizacion: 'murbles'
       };
-      console.log('Test getCategoryIcon handle', handle);
+      //console.log('Test getCategoryIcon handle', handle);
 
       if (icons[handle]) {
         return icons[handle];
@@ -317,7 +329,6 @@
       var text = string.toLowerCase();
       return text.charAt(0).toUpperCase() + text.slice(1);
     }
-
     function getLowestCategory(categories) {
       var lowestCategoryLevel = 0;
       var lowestCategory = false;
@@ -331,5 +342,41 @@
     }
 
     return service;
+  }
+
+  function addKidsCategory(tree) {
+    var finalTree = tree;
+    var Parent = {
+      CategoryLevel: 1,
+      Childs: [],
+      FeaturedProducts: [],
+      Handle: "bebes-y-ninos",
+      Name: "bebes y niños",
+      actual_studio: 1
+    };
+    var subcategories = [
+      { name: 'Camas y literas', handle: "camas" },
+      { name: 'Cunas', handle: "cunas" },
+      { name: 'Habitacion', handle: "escritorios" },
+      { name: 'Almacenar', handle: "comodas" },
+      { name: 'Mesas y sillas', handle: "mesitas" },
+      { name: 'Decorativos', handle: "accesorios" }
+    ];
+    Parent.Childs = subcategories.map(function (subcategory) {
+      var templateObject = {
+        CategoryLevel: 2,
+        Childs: [],
+        FeaturedProducts: [],
+        Handle: "",
+        Name: "",
+        actual_studio: 1,
+        manualFromKids: true
+      };
+      templateObject.Handle = subcategory.handle;
+      templateObject.Name = subcategory.name;
+      return templateObject;
+    });
+    finalTree.push(Parent);
+    return finalTree;
   }
 })();

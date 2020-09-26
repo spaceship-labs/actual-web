@@ -49,12 +49,7 @@
         ng-attr-href="{{main.getFaviconUrl()}}"
         type="image/x-icon"
     >
-
-
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<%= tagManagerId %>');</script>
-
     /process -->
-
   <base href="/" />
   <meta name="fragment" content="!" />
   <meta name="viewport" content="width=device-width, user-scalable=yes" />
@@ -84,6 +79,7 @@
   <link rel="stylesheet" href="bower_components/photoswipe/dist/default-skin/default-skin.css" />
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/angular-material-expansion-panel/dist/md-expansion-panel.css" />
+  <link rel="stylesheet" href="bower_components/tiny-slider/dist/tiny-slider.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -98,7 +94,10 @@
   <link rel="stylesheet" href="styles/actual-studio.css" />
   <link rel="stylesheet" href="styles/actual-kids.css" />
   <link rel="stylesheet" href="styles/nav-header.css">
+  <link rel="stylesheet" href="styles/philosophy-gallery.css">
+  <link rel="stylesheet" href="styles/footer-content.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
   <!-- endbuild -->
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css" />
@@ -114,8 +113,8 @@
     window.$zopim ||
       (function (d, s) {
         var z = ($zopim = function (c) {
-            z._.push(c);
-          }),
+          z._.push(c);
+        }),
           $ = (z.s = d.createElement(s)),
           e = d.getElementsByTagName(s)[0];
         z.set = function (o) {
@@ -150,7 +149,6 @@
     })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
 
   </script>
-
   <!--End of Zendesk Chat Script-->
   <!--End of Zendesk Chat Script-->
 
@@ -301,6 +299,7 @@ ga('send', 'pageview');
   <script src="bower_components/js-xlsx/dist/xlsx.full.min.js"></script>
   <script src="bower_components/es6-promise/promise.js"></script>
   <script src="bower_components/alasql/dist/alasql.min.js"></script>
+  <script src="bower_components/tiny-slider/dist/tiny-slider.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -326,6 +325,7 @@ ga('send', 'pageview');
   <script src="scripts/controllers/product.js"></script>
   <script src="scripts/directives/sidebar-categories.js"></script>
   <script src="scripts/directives/ng-enter.js"></script>
+  <script src="scripts/directives/lazy-load.js"></script>
   <script src="scripts/services/categoriesservice.js"></script>
   <script src="scripts/services/checkoutservice.js"></script>
   <script src="scripts/services/ewalletservice.js"></script>

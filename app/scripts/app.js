@@ -22,10 +22,11 @@ angular
     //'angulartics.google.tagmanager',
     'envconfig',
     'siteconfig',
-    'material.components.expansionPanels'
+    'material.components.expansionPanels',
+    'me-lazyload'
   ])
 
-  .config(function(
+  .config(function (
     $routeProvider,
     $httpProvider,
     $locationProvider,
@@ -48,12 +49,12 @@ angular
         controller: 'HomeCtrl',
         controllerAs: 'vm',
         resolve: {
-          activeStore: function($rootScope, $q) {
+          activeStore: function ($rootScope, $q) {
             if ($rootScope.activeStore) {
               return $q.resolve($rootScope.activeStore);
             } else {
               var deferred = $q.defer();
-              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore) {
+              $rootScope.$on('activeStoreAssigned', function (ev, _activeStore) {
                 deferred.resolve(_activeStore);
               });
               return deferred.promise;
@@ -111,7 +112,7 @@ angular
         controller: 'OffersCtrl',
         controllerAs: 'vm',
         resolve: {
-          activeQuotation: function($rootScope, $q, quotationService) {
+          activeQuotation: function ($rootScope, $q, quotationService) {
             if (!quotationService.getActiveQuotationId()) {
               return $q.resolve(false);
             }
@@ -120,7 +121,7 @@ angular
               return $q.resolve($rootScope.activeQuotation);
             } else {
               var deferred = $q.defer();
-              $rootScope.$on('activeQuotationAssigned', function(
+              $rootScope.$on('activeQuotationAssigned', function (
                 ev,
                 _activeQuotation
               ) {
@@ -361,12 +362,12 @@ angular
         controller: 'ProductCtrl',
         controllerAs: 'vm',
         resolve: {
-          activeStore: function($rootScope, $q) {
+          activeStore: function ($rootScope, $q) {
             if ($rootScope.activeStore) {
               return $q.resolve($rootScope.activeStore);
             } else {
               var deferred = $q.defer();
-              $rootScope.$on('activeStoreAssigned', function(ev, _activeStore) {
+              $rootScope.$on('activeStoreAssigned', function (ev, _activeStore) {
                 deferred.resolve(_activeStore);
               });
               return deferred.promise;
@@ -440,9 +441,9 @@ angular
       '$location',
       'localStorageService',
       'SITE',
-      function($q, $location, localStorageService, SITE) {
+      function ($q, $location, localStorageService, SITE) {
         return {
-          request: function(config) {
+          request: function (config) {
             config.headers = config.headers || {};
             if (localStorageService.get('token')) {
               config.headers.Authorization =
@@ -465,7 +466,7 @@ angular
     ]);
   })
 
-  .run(function(
+  .run(function (
     localStorageService,
     authService,
     jwtHelper,
@@ -481,10 +482,10 @@ angular
     //Configures $location.path second parameter, for no reloading
 
     var original = $location.path;
-    $location.path = function(path, reload) {
+    $location.path = function (path, reload) {
       if (reload === false) {
         var lastRoute = $route.current;
-        var un = $rootScope.$on('$locationChangeSuccess', function() {
+        var un = $rootScope.$on('$locationChangeSuccess', function () {
           $route.current = lastRoute;
           un();
         });
@@ -492,9 +493,16 @@ angular
       return original.apply($location, [path]);
     };
 
-    $rootScope.$on('$routeChangeSuccess', function() {
+    $rootScope.$on('$routeChangeSuccess', function () {
       var dataLayer = (window.dataLayer = window.dataLayer || []);
       dataLayer.push({
+        event: 'ngRouteChange',
+        attributes: {
+          route: $location.path()
+        }
+      });
+      var dataLayer2 = (window.dataLayer2 = window.dataLayer2 || []);
+      dataLayer2.push({
         event: 'ngRouteChange',
         attributes: {
           route: $location.path()
@@ -503,20 +511,20 @@ angular
     });
 
     //TODO: Reactivate ALASQL for export to excel function
-    
+
     alasql.fn.nullFormat = formatService.nullFormat;
     alasql.fn.yesNoFormat = formatService.yesNoFormat;
     alasql.fn.dateTimeFormat = formatService.dateTimeFormat;
     alasql.fn.dateFormat = formatService.dateFormat;
     alasql.fn.currencyFormat = formatService.currencyFormat;
     alasql.fn.rateFormat = formatService.rateFormat;
-    alasql.fn.storeIdMapperFormat = function(data) {
+    alasql.fn.storeIdMapperFormat = function (data) {
       var mapper = siteService.getStoresIdMapper();
       return mapper[data] || data;
     };
-    alasql.fn.orderStatusMapperFormat = function(data) {
+    alasql.fn.orderStatusMapperFormat = function (data) {
       var mapper = orderService.getOrderStatusMapper();
       return mapper[data] || data;
     };
-    
+
   });

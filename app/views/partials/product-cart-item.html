@@ -11,15 +11,14 @@
       <div layout="row">
         <div flex="40" class="cart-item-prod-img">
           <a ng-href="{{ detail.Product.url }}">
-            <img ng-src="{{ detail.Product.icons[0].url }}" alt="" />
+            <img animate-visible="true" lazy-src="{{ detail.Product.icons[0].url }}?d=100x100"
+              alt="{{ detail.Product.ItemCode }}" />
           </a>
         </div>
         <div flex="60">
           <ul>
             <li><strong>Código: </strong> {{ detail.Product.ItemCode }}</li>
-            <li
-              ng-repeat="filter in detail.Product.Filters"
-              ng-if="
+            <li ng-repeat="filter in detail.Product.Filters" ng-if="
                 (
                   filter.Handle == 'codigo' ||
                   filter.Handle == 'material' ||
@@ -27,8 +26,7 @@
                 )
                 &&
                 filter.Values.length > 0
-              "
-            >
+              ">
               <strong>{{ filter.Name }}: </strong>
               <span ng-repeat="value in filter.Values track by $index">
                 <span ng-if="value.Handle != 'color-paleta'">{{
@@ -50,11 +48,7 @@
     <!--ITEM DATA-->
     <div class="cart-item-data" flex="60" flex-xs="100">
       <div class="cart-item-data-inner">
-        <div
-          class="cart-item-data-prices"
-          layout="row"
-          layout-align="space-between center"
-        >
+        <div class="cart-item-data-prices" layout="row" layout-align="space-between center">
           <div flex="35">
             <p ng-if="detail.discountPercent > 0" class="discount-label">
               -{{ detail.discountPercentPromos }}%
@@ -96,26 +90,17 @@
     </div>
     <!--END ITEM DATA-->
 
-    <a
-      href="#"
-      ng-if="vm.isDetailRemoveOptionEnabled(detail)"
-      ng-click="vm.alertRemoveDetail($event,detail, $index)"
-      class="cart-item-remove"
-    >
+    <a href="#" ng-if="vm.isDetailRemoveOptionEnabled(detail)" ng-click="vm.alertRemoveDetail($event,detail, $index)"
+      class="cart-item-remove">
       <i class="icon-trashcan"></i>
       <md-tooltip md-direction="bottom">Eliminar</md-tooltip>
     </a>
   </div>
 
-  <ng-include
-    src="'views/partials/product-cart-item-delivery.html'"
-  ></ng-include>
+  <ng-include src="'views/partials/product-cart-item-delivery.html'"></ng-include>
 
   <div layout="row" layout-align="space-between center">
-    <div
-      flex
-      ng-if="!vm.isLoadingDetailsDeliveries && detail.productCart.deliveryGroup"
-    >
+    <div flex ng-if="!vm.isLoadingDetailsDeliveries && detail.productCart.deliveryGroup">
       <!-- <p class="bottom-text">
         <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
       </p> -->

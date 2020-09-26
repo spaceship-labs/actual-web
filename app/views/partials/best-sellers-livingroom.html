@@ -1,18 +1,19 @@
 <div ng-if="vm.featuredProducts && main.site" id="home-slider-wrapper">
   <div class="listing-view">
-    <h2 class="listing-view-title best-seller-title">
+    <h1 class="listing-view-title best-seller-title">
       <a href="/category/salas">
         <span class="color-gray">
           <strong>Nuevas colecciones</strong>
         </span>
       </a>
-    </h2>
+    </h1>
   </div>
   <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
     <div flex="80" flex-xs="100" flex-sm="100">
-      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="true" slides-to-show="3" slides-to-scroll="3"
-        init-onload="true" data="vm.featuredLoaded">
-        <div ng-repeat="featuredSalas in vm.featuredProducts | filter: {categoryHandle: 'salas'} | limitTo: vm.limitLivingRooms"
+      <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="true"
+        slides-to-show="3" slides-to-scroll="3" init-onload="true" data="vm.featuredLoaded">
+        <div
+          ng-repeat="featuredSalas in vm.featuredProducts | filter: {categoryHandle: 'salas'} | limitTo: vm.limitLivingRooms"
           class="listing-product-wrap">
           <listing-product product="featuredSalas.product" />
         </div>
@@ -23,7 +24,7 @@
         <div class="circle circle-recamaras">
           <div class="circle-text">
             <p style="font-size: 26px;">
-              VER 
+              VER
               <br>
               CATEGORÍA
               <strong>COMPLETA</strong>
