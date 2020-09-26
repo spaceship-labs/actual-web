@@ -1,0 +1,79 @@
+@media (max-width: 600px) {
+  .philosophy-gallery {
+    text-align: center;
+    float: none;
+  }
+  .we-are-video {
+    text-align: center;
+    float: none;
+  }
+
+  .philosophy-gallery img{ height: 200;}
+}
+
+@media(min-width: 600px) {
+  .philosophy-gallery {
+    float: right;
+    margin: 0 0 2em 2em;
+    text-align: center;
+    width: 300px;
+  }
+  .we-are-video {
+    float: right;
+    margin: 0 0 2em 2em;
+    text-align: center;
+    width: 400px;
+  }
+  .philosophy-gallery img{ height: 200;}
+}
+
+.philosophy-gallery {
+  margin-top: 2.8em;
+  width: 400px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.10),0 1px 3px rgba(0,0,0,.10);
+}
+.we-are-video {
+  width: 500px;
+}
+
+.tns-nav {
+  text-align: center;
+}
+
+.tns-nav>button {
+  border-radius: 100%;
+  background-color: #333;
+  width: 10px;
+  height: 12px;
+  border: none;
+  margin: 0 10px;
+}
+
+button.tns-nav-active {
+  background-color: #cc262f;
+}
+
+.tns-controls {
+  position: relative;
+  margin-top: -13%;
+}
+
+.tns-controls>button {
+  border: 0;
+/*   color: #092f57;
+  background-color: rgba(255, 255, 255, 0.6);  */ /*rgba(9, 47, 87, 0.5); */
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);  /*  #000; */
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  box-shadow: 0 4px 7px rgba(0,0,0,.16),0 4px 7px rgba(0,0,0,.23);
+}
+
+/* .tns-controls>button:nth-child(1) {
+  margin-left: 10px;
+} */
+
+.tns-controls>button:nth-child(2) {
+  margin-left: 230px;
+}
