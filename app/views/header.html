@@ -4,33 +4,32 @@
 
 <div id="header">
   <!-- START TOP BAR -->
-  <div class="header-top-bar actual-header-top" layout-wrap="" La fixed-element top="50"
-    ng-class="{'fixed-head': scrolled}">
+  <div class="header-top-bar actual-header-top" fixed-element la layout-wrap="" ng-class="{'fixed-head': scrolled}" top="50">
 
     <div class="header-item-child">
-      <div class="header-align-items" hide-md hide-lg hide-xl>
-        <div class="hai-element-1" hide-md hide-lg hide-xl>
-          <a ng-click="main.toggleMobileSidenav()" class=" header-icon-menu-css">
+      <div class="header-align-items" hide-lg hide-md hide-xl>
+        <div class="hai-element-1" hide-lg hide-md hide-xl>
+          <a class=" header-icon-menu-css" ng-click="main.toggleMobileSidenav()">
             <img src="images/navbar-mobile-dark.png">
           </a>
         </div>
         <div class="hai-element-2">
           <div class="logo logo-mobile">
-            <a href="/" ng-switch on="main.siteTheme" hide-md hide-gt hide-xl>
-              <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group" />
-              <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group" />
-              <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group" />
-              <img ng-switch-default src="images/logos/home.png" alt="Actual Group" />
+            <a hide-gt hide-md hide-xl href="/" ng-switch on="main.siteTheme">
+              <img alt="Actual Group" ng-switch-when="actual-home" src="images/logos/home.png"/>
+              <img alt="Actual Group" ng-switch-when="actual-studio" src="images/logos/studio.png"/>
+              <img alt="Actual Group" ng-switch-when="actual-kids" src="images/logos/kids.png"/>
+              <img alt="Actual Group" ng-switch-default src="images/logos/home.png"/>
             </a>
           </div>
         </div>
       </div>
-      <div hide-xs hide-sm>
+      <div hide-sm hide-xs>
         <a href="/" ng-switch on="main.siteTheme">
-          <img ng-switch-when="actual-home" src="images/logos/logo144x72.png" alt="Actual Group" />
-          <img ng-switch-when="actual-studio" src="images/actual-studio-blanco.png" alt="Actual Group" />
-          <img ng-switch-when="actual-kids" src="images/actual-kids-blanco.png" alt="Actual Group" />
-          <img ng-switch-default src="images/logos/logo144x72.png" alt="Actual Group" />
+          <img alt="Actual Group" ng-switch-when="actual-home" src="images/logos/logo144x72.png"/>
+          <img alt="Actual Group" ng-switch-when="actual-studio" src="images/actual-studio-blanco.png"/>
+          <img alt="Actual Group" ng-switch-when="actual-kids" src="images/actual-kids-blanco.png"/>
+          <img alt="Actual Group" ng-switch-default src="images/logos/logo144x72.png"/>
         </a>
       </div>
     </div>
@@ -39,7 +38,7 @@
       <a href="/" ng-switch on="main.siteTheme">
         <div href="#">
           <p>
-            <a href="/nuestras-marcas">
+            <a href="/nuestras-tiendas">
               <span hide-xs>Tiendas y Showrooms</span>
             </a>
           </p>
@@ -49,10 +48,10 @@
 
     <div class="header-item-child">
       <p>
-        <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
+        <a href="https://actualproyectos.blog/" ng-if="main.siteTheme === 'actual-home'" target="_blank">
           <span>Proyectos</span>
         </a>
-        <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.Proyectos/tag/notas/" target="_blank">
+        <a href="https://welove.design.Proyectos/tag/notas/" ng-if="main.siteTheme !== 'actual-home'" target="_blank">
           <span>Proyectos</span>
         </a>
       </p>
@@ -62,7 +61,7 @@
       <a href="/" ng-switch on="main.siteTheme">
         <div href="#">
           <p>
-            <a href="https://actualproyectos.blog/trabaja-con-nosotros/">
+            <a href="https://actualproyectos.blog/trabaja-con-nosotros/" target="_blank">
               <span>Programa Decoradores</span>
             </a>
           </p>
@@ -71,72 +70,73 @@
     </div>
 
     <div class="header-item-child" hide-xs>
-      <form ng-class="{
-      'searcher-wrapper-show-mobile':main.showSearchBar
-    }" ng-submit="main.handleSearch()" class="searcher-wrapper" ng-show="!main.showSearchBar">
+      <form class="searcher-wrapper" ng-class="{
+              'searcher-wrapper-show-mobile':main.showSearchBar
+            }" ng-show="!main.showSearchBar" ng-submit="main.handleSearch()">
         <div class="header-align-items">
           <div class="hai-element-1">
             <div class="searcher">
               <div class="searcher-inner">
                 <i class="icon-search"></i>
-                <input type="text" name="term" ng-model="main.searchValue" />
+                <input name="term" ng-model="main.searchValue" type="text"/>
               </div>
             </div>
           </div>
           <div class="hai-element-2">
-            <input type="submit" value="BUSCAR" class="searcher-btn" />
+            <input class="searcher-btn" type="submit" value="BUSCAR"/>
           </div>
         </div>
       </form>
     </div>
 
-    <div class="header-item-child" hide-sm hide-gt-sm>
-      <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"
-        style="color: #fff; font-size: 1.5em;"></i>
+    <div class="header-item-child" hide-gt-sm hide-sm>
+      <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar" style="color: #fff; font-size: 1.5em;"></i>
     </div>
 
     <div class="header-item-child">
-      <a ng-click="main.redirectScroll()" hide-xs> <span>Contacto</span></a>
-      <a ng-click="main.redirectScroll()" hide-gt-xs> <i class="icon-phone" style="color: #fff; font-size: 1.5em;"></i>
+      <a hide-xs ng-click="main.redirectScroll()">
+        <span>Contacto</span>
+      </a>
+      <a hide-gt-xs ng-click="main.redirectScroll()">
+        <i class="icon-phone" style="color: #fff; font-size: 1.5em;"></i>
       </a>
       <!--  ng-click="main.toggleSchedulesModal()"  <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include> -->
     </div>
 
-    <div class="header-item-child" ng-if="!main.user || main.user.invited" id="login-header-trigger">
-      <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
+    <div class="header-item-child" id="login-header-trigger" ng-if="!main.user || main.user.invited">
+      <p ng-click="main.toggleLoginModal()" ng-if="!main.user || main.user.invited">
         <span class="atual-yellow-hover" hide-xs>MI CUENTA</span>
         <!--         <i class="icon-login" hide-xs></i>
- --> <i class="icon-login" style="color: #fff; font-size: 1.5em;" hide-gt-sm></i>
+ -->
+        <i class="icon-login" hide-gt-sm style="color: #fff; font-size: 1.5em;"></i>
       </p>
-      <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
+      <span ng-click="main.toggleLoginModal()" ng-if="main.user && main.user.invited">
         <strong>Invitado</strong>
       </span>
-      <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
-        src="'views/partials/login-header.html'"></ng-include>
+      <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
     </div>
 
     <!-- IF logged in -->
     <div class="header-item-child">
       <div class="header-align-items">
-        <div ng-if="main.user && !main.user.invited" href="#" id="profile-header-trigger"
-          ng-click="main.toggleProfileModal()" class="hai-element-1">
+        <div class="hai-element-1" href="#" id="profile-header-trigger" ng-click="main.toggleProfileModal()" ng-if="main.user && !main.user.invited">
           <a href="#">
-            <i class="icon-login" hide-xs hide-sm></i>
-            <i class="icon-login" style="color: #fff; font-size: 2em;" hide-gt-sm></i>
-            <span hide-xs>Bienvenido <strong hide-xs>{{ main.user.firstName }}</strong>
+            <i class="icon-login" hide-sm hide-xs></i>
+            <i class="icon-login" hide-gt-sm style="color: #fff; font-size: 2em;"></i>
+            <span hide-xs>Bienvenido
+              <strong hide-xs>{{ main.user.firstName }}</strong>
             </span>
           </a>
           <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
         <!-- IF NOT ACTIVE QUOTATION -->
         <div class="hai-element-2" style=" margin-right: 10px;">
-          <a ng-if="main.user && !main.activeQuotation" href="/">
+          <a href="/" ng-if="main.user && !main.activeQuotation">
             <i class="icon-carro"></i>
           </a>
           <!-- IF ACTIVE QUOTATION -->
-          <a ng-if="main.activeQuotation" ng-href="/quotations/edit/{{ main.activeQuotation.id }}">
-            <span class="header-car-item-number"
-              ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+          <a ng-href="/quotations/edit/{{ main.activeQuotation.id }}" ng-if="main.activeQuotation">
+            <span class="header-car-item-number" ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
             <i class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
           </a>
         </div>
@@ -144,21 +144,21 @@
     </div>
 
 
-    <div class="header-item-child" hide-sm hide-gt-sm>
-      <form ng-class="{
-      'searcher-wrapper-show-mobile':main.showSearchBar
-    }" ng-submit="main.handleSearch()" class="searcher-wrapper" ng-show="!main.showSearchBar">
+    <div class="header-item-child" hide-gt-sm hide-sm>
+      <form class="searcher-wrapper" ng-class="{
+              'searcher-wrapper-show-mobile':main.showSearchBar
+            }" ng-show="!main.showSearchBar" ng-submit="main.handleSearch()">
         <div class="header-align-items">
           <div class="hai-element-1">
             <div class="searcher">
               <div class="searcher-inner">
                 <i class="icon-search"></i>
-                <input type="text" name="term" ng-model="main.searchValue" />
+                <input name="term" ng-model="main.searchValue" type="text"/>
               </div>
             </div>
           </div>
           <div class="hai-element-2">
-            <input type="submit" value="BUSCAR" class="searcher-btn" />
+            <input class="searcher-btn" type="submit" value="BUSCAR"/>
           </div>
         </div>
       </form>
@@ -170,4 +170,4 @@
   <!-- END MENU -->
 </div>
 
-<md-sidenav md-component-id="left" class="md-sidenav-left movil"></md-sidenav>
+<md-sidenav class="md-sidenav-left movil" md-component-id="left"></md-sidenav>
