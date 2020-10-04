@@ -36,28 +36,21 @@
             </li>
           </ul>
         </li>
-        <!--
-        <li>
-          <a href="/ofertas" class="nav-categories-item-sidenav , mouseover-link-mobile active">
-            <!-- <i class="icon-ofertas"></i> --
-            <span class="nav-categories-item-text">Ofertas</span>
-          </a>
-        </li>
-      -->
+
         <li>
           <a href="/search?sortkey=slowmovement" class="nav-categories-item-sidenav , mouseover-link-mobile active">
-            <!-- <i class="icon-promociones2"></i> -->
             <span class="nav-categories-item-text">Promociones</span>
           </a>
         </li>
       </ul>
       <ul ng-if="main.siteTheme === 'actual-kids' ">
-        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index "
+        <li ng-repeat="category in main.categoriesTree | filter: main.filterRemoveComplements track by $index " 
           ng-click="main.handleAccordion(category.Handle)" class="nav-categories-item-sidenav">
           <a class="mouseover-link-mobile active">
-            <span class="nav-categories-item-text" href="#">{{ category.Name }}</span></a>
+            <span class="nav-categories-item-text" href="#">{{ category.Name }}</span>
+          </a>
           <ul ng-show="main.accordion.current === category.Handle">
-            <li ng-repeat="subcategory in category.Childs" class="">
+            <li ng-repeat="subcategory in category.Childs">
               <a ng-href="{{'/category/' + subcategory.Handle}}" class="nav-categories-item">
                 <span class="nav-categories-item-text">{{ subcategory.Name }}</span>
               </a>
@@ -66,7 +59,7 @@
         </li>
         <li>
           <a href="/search?sortkey=slowmovement" class="nav-categories-item , mouseover-link-mobile active">
-            <span class="nav-categories-item-text">Promociones</span>
+            <span style="margin-left: 6px; font-size: 14px;">Promociones</span>
           </a>
         </li>
       </ul>
