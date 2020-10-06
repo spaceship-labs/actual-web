@@ -214,6 +214,16 @@
 
         $scope.$apply();
       });
+      dialogService.showDialog('<center><br/><br/><strong>Por motivos de contigencia en la zona de Yucatán y Quintana Roo: Huracán Delta </strong><br/></center>\
+        <ul>\
+        <li>Se suspenderán brevemente los servicios en nuevas ordenes a partir de las 18:00 horas <br/> con fecha 06/OCT/2020</li>\
+        </ul>\
+        <center>\
+        Se espera reestablecer servicios en la brevedad.<br/>\
+        Lamentamos el inconveniente que pueda generar está interrupción en los servicios.<br/><br/><br/>\
+        Atentamente: <br/>\
+        <img src="/images/logos/group.png"/>   </center>'
+      );
     }
 
     function loadCategoriesTree(activeStoreCode) {
