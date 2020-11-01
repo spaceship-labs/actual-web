@@ -86,7 +86,7 @@ function CategoryCtrl(
 
   function init() {
     if ($routeParams.category == 'comedores') {
-      $location.path('/category/mesas-comedor')
+      $location.path('/category/mesas-de-comedor')
       return;
     }
     var activeSortOptionKey = 'DiscountPrice';
