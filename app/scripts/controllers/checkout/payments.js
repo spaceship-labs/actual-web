@@ -62,13 +62,13 @@ function CheckoutPaymentsCtrl(
 
   var EWALLET_TYPE = ewalletService.ewalletType;
   var CLIENT_BALANCE_TYPE = paymentService.clientBalanceType;
-  var mainDataListener = function() {};
+  var mainDataListener = function () { };
   var selectedMethod;
 
   if ($rootScope.isMainDataLoaded) {
     init();
   } else {
-    mainDataListener = $rootScope.$on('mainDataLoaded', function(e, data) {
+    mainDataListener = $rootScope.$on('mainDataLoaded', function (e, data) {
       init();
     });
   }
@@ -112,7 +112,7 @@ function CheckoutPaymentsCtrl(
 
     quotationService
       .getById($routeParams.id, getParams)
-      .then(function(res) {
+      .then(function (res) {
         vm.quotation = res.data;
 
         if (vm.quotation && vm.quotation.OrderWeb) {
@@ -129,7 +129,7 @@ function CheckoutPaymentsCtrl(
           loadPaymentMethods()
         ]);
       })
-      .then(function(result) {
+      .then(function (result) {
         var isValidStock = result[0];
 
         if (!isValidStock) {
@@ -163,7 +163,7 @@ function CheckoutPaymentsCtrl(
 
         vm.isLoading = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         dialogService.showDialog(err.data);
         $location.path('/quotations/edit/' + vm.quotation.id);
@@ -174,12 +174,12 @@ function CheckoutPaymentsCtrl(
     vm.isLoadingSapLogs = true;
     quotationService
       .getSapOrderConnectionLogs(quotationId)
-      .then(function(res) {
+      .then(function (res) {
         vm.sapLogs = res.data;
         console.log('sapLogs', vm.sapLogs);
         vm.isLoadingSapLogs = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         vm.isLoadingSapLogs = false;
       });
@@ -205,7 +205,7 @@ function CheckoutPaymentsCtrl(
     };
     quotationService
       .getPaymentOptions(vm.quotation.id, params)
-      .then(function(response) {
+      .then(function (response) {
         var groups = response.data || [];
         vm.paymentMethodsGroups = groups;
 
@@ -216,7 +216,7 @@ function CheckoutPaymentsCtrl(
         }
         deferred.resolve();
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         deferred.reject(err);
       });
@@ -311,46 +311,55 @@ function CheckoutPaymentsCtrl(
   }
 
   function guessingPaymentMethod(payment) {
+    //NetPay.setApiKey("pk_netpay_ryDNhWywMbMjqXbLzMUEeTMfW");
+    NetPay.setApiKey("pk_netpay_xvzwHaQVrcAwwwZuGhCDpyVww");
+    NetPay.setSandboxMode(false);
+    /*
     Mercadopago.setPublishableKey(
       'APP_USR-715cc117-cd35-41ae-a920-2f3a993e6927'
       // 'TEST-b7083679-cd78-4b22-842d-9ff41b544bc2'
     );
+    */
     var deferred = $q.defer();
     if (payment.type === 'transfer') {
       deferred.resolve('banamex');
       return deferred.promise;
     }
-    var getBin = function(payment) {
-      var cardNumber = payment.cardObject.number;
-      var value = cardNumber.replace(/[ .-]/g, '').slice(0, 6);
-      return value;
-    };
-    var bin = getBin(payment);
-    var setPaymentMethodInfo = function(status, response) {
-      console.log('response guess: ', response);
-      console.log('sttaus guess: ', status);
+    deferred.resolve('card');
 
-      if (status == 200) {
-        deferred.resolve(response[0].id);
-      }
-    };
+    /*
+      var getBin = function(payment) {
+        var cardNumber = payment.cardObject.number;
+        var value = cardNumber.replace(/[ .-]/g, '').slice(0, 6);
+        return value;
+      };
+      var bin = getBin(payment);
+      var setPaymentMethodInfo = function(status, response) {
+        console.log('response guess: ', response);
+        console.log('sttaus guess: ', status);
 
-    Mercadopago.getPaymentMethod(
-      {
-        bin: bin
-      },
-      setPaymentMethodInfo
-    );
+        if (status == 200) {
+          deferred.resolve('card');//response[0].id);
+        }
+      };
+      Mercadopago.getPaymentMethod(
+        {
+          bin: bin
+        },
+        setPaymentMethodInfo
+      );
+      */
     return deferred.promise;
   }
 
   function MPTokenizePaymentCard(payment) {
-    Mercadopago.clearSession();
+    //Mercadopago.clearSession();
     var deferred = $q.defer();
     if (payment.type === 'transfer') {
       deferred.resolve('transfer');
       return deferred.promise;
     }
+    /*
     var handleResponse = function(status, response) {
       console.log('status: ', status);
 
@@ -365,7 +374,6 @@ function CheckoutPaymentsCtrl(
         deferred.resolve(response.id);
       }
     };
-
     var tokenParams = {
       cardholderName: payment.cardName,
       cardNumber: _.clone(payment.cardObject.number),
@@ -373,7 +381,45 @@ function CheckoutPaymentsCtrl(
       cardExpirationYear: _.clone(payment.cardObject.expYear),
       securityCode: _.clone(payment.cardObject.cvc)
     };
-    Mercadopago.createToken(tokenParams, handleResponse);
+    */
+    var netpayTokenParams = {
+      cardHolderName: payment.cardName,
+      cardNumber: _.clone(payment.cardObject.number),
+      expMonth: _.clone(payment.cardObject.expMonth),
+      expYear: _.clone(payment.cardObject.expYear),
+      cvv2: _.clone(payment.cardObject.cvc)
+    };
+
+    var onSuccess = function (e) {
+      console.log('netpay token', JSON.parse(e.message.data));
+      let billingAddress = {
+        address: {
+          country: payment.cardCountry,
+          state: payment.cardState,
+          postalCode: payment.cardZip,
+          city: payment.cardCity,
+          street1: payment.cardAddress1,
+          street2: payment.cardAddress1
+        }
+      }
+      //siteUrl: "http://localhost:9000"
+      let tokenData = {
+        ...JSON.parse(e.message.data),
+        ...billingAddress,
+        cardName:payment.cardName, 
+        siteUrl: "https://actualstudio.com"
+      }
+      deferred.resolve(tokenData);
+    };
+    var onError = function (e) {
+      vm.isLoading = false;
+      dialogService.showDialog(
+        `Ocurrio un error: ${e}`
+      );
+      deferred.resolve();
+    };
+    NetPay.token.create(netpayTokenParams, onSuccess, onError);
+    // Mercadopago.createToken(tokenParams, handleResponse);
     return deferred.promise;
   }
 
@@ -432,15 +478,13 @@ function CheckoutPaymentsCtrl(
       var cardObjectAux = _.clone(payment.cardObject);
       var paymentMethodId;
       guessingPaymentMethod(payment)
-        .then(function(_paymentMethodId) {
-          console.log('_paymentMethodId: ', _paymentMethodId);
+        .then(function (_paymentMethodId) {
 
           paymentMethodId = _paymentMethodId;
           return MPTokenizePaymentCard(payment);
         })
-        .then(function(token) {
-          console.log('HEEEEY');
-          if(token === undefined ){
+        .then(function (token) {
+          if (token === undefined) {
             throw "No se pudo generar correctamente sus datos de pago, recargue la página y vuelva a introducir todos sus datos.";
           }
           if (payment.msi) {
@@ -448,13 +492,14 @@ function CheckoutPaymentsCtrl(
           } else {
             payment.installments = 1;
           }
+          payment.cardName = payment.cardObject.cardName,
           delete payment.cardObject;
-          payment.token = token;
-          payment.payment_method_id = paymentMethodId;
+          payment.tokenData = token;
+          payment.paymentMethod = paymentMethodId;
           console.log('payment type: ', payment.type);
           return createOrder(payment);
         })
-        .then(function(res) {
+        .then(function (res) {
           vm.isLoadingProgress = false;
           vm.order = res.data;
           console.log('vm.order: ', vm.order);
@@ -482,7 +527,7 @@ function CheckoutPaymentsCtrl(
               .search({ orderCreated: true });
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log('err', err);
           var errMsg = '';
           if (err) {
@@ -515,7 +560,7 @@ function CheckoutPaymentsCtrl(
               errMsg = conektaOrderMsg;
             }
 
-            var callback = function() {
+            var callback = function () {
               payment.cardObject = cardObjectAux;
               console.log('payment to openTransactionDialog again', payment);
               openTransactionDialog(
@@ -562,12 +607,12 @@ function CheckoutPaymentsCtrl(
   function loadPayments() {
     quotationService
       .getPayments(vm.quotation.id)
-      .then(function(res) {
+      .then(function (res) {
         var payments = res.data;
         vm.quotation.Payments = payments;
         vm.isLoadingPayments = false;
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log('err', err);
         dialogService.showDialog('Hubo un error, recarga la página');
         vm.isLoadingPayments = false;
@@ -623,11 +668,11 @@ function CheckoutPaymentsCtrl(
             quotation: vm.quotation
           }
         })
-        .then(function(payment) {
+        .then(function (payment) {
           console.log('Pago aplicado');
           return addPayment(payment);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log('Pago no aplicado');
           clearActiveMethod();
         });
@@ -667,7 +712,7 @@ function CheckoutPaymentsCtrl(
   }
 
   function animateProgress() {
-    vm.intervalProgress = $interval(function() {
+    vm.intervalProgress = $interval(function () {
       vm.loadingEstimate += 5;
       if (vm.loadingEstimate >= 100) {
         vm.loadingEstimate = 0;
@@ -694,7 +739,7 @@ function CheckoutPaymentsCtrl(
     });
   }
 
-  $scope.$on('$destroy', function() {
+  $scope.$on('$destroy', function () {
     mainDataListener();
     $mdDialog.cancel();
     if (vm.intervalProgress) {
