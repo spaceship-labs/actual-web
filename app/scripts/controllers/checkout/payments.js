@@ -392,7 +392,7 @@ function CheckoutPaymentsCtrl(
 
     var onSuccess = function (e) {
       console.log('netpay token', JSON.parse(e.message.data));
-      let billingAddress = {
+      var billingAddress = {
         address: {
           country: payment.cardCountry,
           state: payment.cardState,
@@ -403,7 +403,7 @@ function CheckoutPaymentsCtrl(
         }
       }
        //siteUrl: "http://localhost:9000"
-      let tokenData = {
+      var tokenData = {
         //...JSON.parse(e.message.data),
         //...billingAddress,
         cardName:payment.cardName, 
