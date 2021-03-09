@@ -404,11 +404,13 @@ function CheckoutPaymentsCtrl(
       }
       //siteUrl: "http://localhost:9000"
       let tokenData = {
-        ...JSON.parse(e.message.data),
-        ...billingAddress,
+        //...JSON.parse(e.message.data),
+        //...billingAddress,
         cardName:payment.cardName, 
         siteUrl: "https://actualstudio.com"
       }
+      tokenData = _.extend({}, tokenData,JSON.parse(e.message.data))
+      tokenData = _.extend({}, tokenData,billingAddress)
       deferred.resolve(tokenData);
     };
     var onError = function (e) {
