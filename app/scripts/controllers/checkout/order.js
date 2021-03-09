@@ -84,6 +84,9 @@ function CheckoutOrderCtrl(
         vm.order = res.data;
         vm.status = orderService.getOrderStatusLabel(vm.order.status);
 
+        if(vm.order.returnUrl && vm.order.NetpayOrderStatus == "review"){
+          window.location.replace(vm.order.returnUrl);
+        }
         if ($location.search().orderCreated) {
           showImmediateDeliveryDialog(vm.order);
         }
