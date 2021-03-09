@@ -416,7 +416,7 @@ function CheckoutPaymentsCtrl(
     var onError = function (e) {
       vm.isLoading = false;
       dialogService.showDialog(
-        `Ocurrio un error: ${e}`
+        'Ocurrio un error: ' + e
       );
       deferred.resolve();
     };
