@@ -94,7 +94,8 @@
   <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
   <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
   <link rel="stylesheet" href="bower_components/angular-datatables/dist/css/angular-datatables.css" />
-  <link rel="stylesheet" href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" />
+  <link rel="stylesheet"
+    href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" />
   <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
   <link rel="stylesheet" href="bower_components/jquery-timepicker-jt/jquery.timepicker.css" />
   <link rel="stylesheet" href="bower_components/photoswipe/dist/photoswipe.css" />
@@ -128,31 +129,6 @@
     window.prerenderReady = false;
 
   </script>
-
-  <!--Start of  facebook msn Chat Script -->
-  <!-- Load Facebook SDK for JavaScript -->
-  <div id="fb-root"></div>
-  <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        xfbml: true,
-        version: 'v10.0'
-      });
-    };
-
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
-  <!-- Your Chat Plugin code -->
-  <div class="fb-customerchat" attribution="install_email" page_id="399256543461442" theme_color="#CD362F">
-  </div>
-
-  <!--End of facebook msn Chat Script-->
 
   <!--Hotjar Tracking Code -->
 
@@ -202,6 +178,32 @@
 </head>
 
 <body ng-cloak ng-class="main.siteTheme">
+
+  <!--Start of  facebook msn Chat Script -->
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        xfbml: true,
+        version: 'v10.0'
+      });
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+  <!-- Your Chat Plugin code -->
+  <div class="fb-customerchat" attribution="install_email" page_id="399256543461442" theme_color="#CD362F">
+  </div>
+
+  <!--End of facebook msn Chat Script-->
+
   <!--[if lte IE 8]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
@@ -304,10 +306,13 @@ ga('send', 'pageview');
   <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
-  <script src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
-  <script src="bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+  <script
+    src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+  <script
+    src="bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
-  <script src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+  <script
+    src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
   <script src="bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
