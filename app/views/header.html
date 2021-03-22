@@ -159,6 +159,13 @@
           </span>
           <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
         </div>
+        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+          <!-- <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" /> -->
+          <a href="https://wa.me/message/5SDKIHWOEO4XE1">
+            <i class="icon-whatsapp" style=" color:#fff; font-size: 22px; margin-left:2px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+          </a>
+        </div>
+        <!-- https://wa.me/message/5SDKIHWOEO4XE1 -->
         <!-- <div hide-xs hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
