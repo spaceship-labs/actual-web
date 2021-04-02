@@ -638,9 +638,9 @@ select {
   outline: 0px;
 }
 
-.header-top-bar-menu-item strong {
+/* .header-top-bar-menu-item strong {
   margin: 0px 5px 0px 5px;
-}
+} */
 
 .header-top-bar-menu .cart-n-items {
   position: absolute;
