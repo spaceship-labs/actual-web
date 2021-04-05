@@ -103,6 +103,12 @@
       <!--  ng-click="main.toggleSchedulesModal()"  <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include> -->
     </div>
 
+    <div  class="header-item-child">
+      <a href="https://wa.me/message/5SDKIHWOEO4XE1" >
+        <i class="icon-whatsapp" style=" color:#fff; font-size: 20px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+      </a>
+    </div>
+
     <div class="header-item-child" id="login-header-trigger" ng-if="!main.user || main.user.invited">
       <p ng-click="main.toggleLoginModal()" ng-if="!main.user || main.user.invited">
         <span class="atual-yellow-hover" hide-xs>MI CUENTA</span>
@@ -116,11 +122,11 @@
       <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin" src="'views/partials/login-header.html'"></ng-include>
     </div>
 
-    <div hide-gt-xs class="header-item-child">
+<!--     <div hide-gt-xs class="header-item-child">
       <a href="https://wa.me/message/5SDKIHWOEO4XE1">
         <i class="icon-whatsapp" style=" color:#fff; font-size: 18px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
       </a>
-    </div>
+    </div> -->
 
     <!-- IF logged in -->
     <div class="header-item-child">
