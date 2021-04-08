@@ -81,6 +81,11 @@
         <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div>
+        <div  class="header-item-child" style="margin-right: 20px;">
+          <a href="https://wa.me/message/5SDKIHWOEO4XE1" >
+            <i class="icon-whatsapp" style=" color:#fff; font-size: 20px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+          </a>
+        </div>
         <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
           <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">
             <span class="header-top-bar-menu-item" hide-xs><strong>| </strong> <b>MI CUENTA</b></span>
