@@ -153,6 +153,10 @@ function PaymentDialogController(
         {
           card: { label: 'Internacional', value: 'internacional' },
           terminal: { label: 'Banamex', value: 'banamex' }
+        },
+        {
+          card: { label: 'Otra', value: 'internacional' },
+          terminal: { label: 'Banamex', value: 'banamex' }
         }
       ];
 
