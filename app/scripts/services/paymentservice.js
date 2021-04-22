@@ -132,14 +132,14 @@
         storesTypes:['home', 'studio'],
         terminal: {label:'Banorte', value:'banorte'}
       },
-      /*
       {
         card: {label:'Otra', value:'other'},
-        paymentTypes: ['credit-card'],
+        paymentTypes: ['credit-card','debit-card'],
         storesTypes:['home','studio'],
-        terminal: {label:'American Express', value:'american-express'}
+        terminal: {
+          label:'Banorte', value:'banorte'
+        }
       },
-      */      
     ];
 
 
