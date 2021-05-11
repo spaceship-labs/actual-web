@@ -643,24 +643,30 @@ select {
 } */
 
 .header-top-bar-menu .cart-n-items {
-  position: absolute;
-  left: 261px;
-  top: 6px;
+  position: relative;
+  left: 21px;
+  top: -14px;
   margin: 0 auto;
-  right: 0px;
   font-weight: 700;
   font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .header-top-bar-menu .cart-n-items {
+    top: -14px;
+  }
 }
 
 .header-top-bar-menu .cart-n-itemss {
   position: absolute;
   /* left: 260px; */
-  top: 14px;
+  top: 8px;
   margin: 0 auto;
   right: 17px;
   font-weight: 700;
   font-size: 12px;
 }
+
 
 .header-top-bar-menu-item-phone {
   text-align: center;

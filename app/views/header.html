@@ -81,7 +81,7 @@
         <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
           <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
         </div>
-        <div  class="header-item-child" style="margin-right: 20px;">
+        <div  hide-xs class="header-item-child" style="margin-right: 20px;">
           <a href="https://wa.me/529982418106" >
             <i class="icon-whatsapp" style=" color:#fff; font-size: 20px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
           </a>
@@ -114,7 +114,7 @@
           <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
         </div>
 
-        <div flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
+<!--         <div flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
           <p>
             <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
               <span><strong>|</strong> BLOG</span>
@@ -125,7 +125,7 @@
               <span><strong>|</strong> BLOG</span>
             </a>
           </p>
-        </div>
+        </div> -->
 
         <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
