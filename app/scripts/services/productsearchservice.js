@@ -31,7 +31,7 @@
             },
             {
                 label:'Promociones',
-                key: 'slowMovement',
+                key: 'Discount',
                 direction: 'DESC'
             },
         ];
