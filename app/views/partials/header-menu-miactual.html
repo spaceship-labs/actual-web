@@ -13,10 +13,13 @@
         activeStoreCode="main.activeStore.code" leavehover="main.handleCategoryLeave">
       </smart-menu>
     </div>
-    <!--     <div class="list-menu-miactual">
-      <i class="icon-medal"></i>
-      <a href="https://actualproyectos.blog/nuestras-marcas/"><span>Marcas</span></a>
-    </div> -->
+
+    <div ng-mouseleave="main.handleCategoryLeave()">
+      <a href="/ofertas" class="list-menu-miactual">
+        <i class="icon-paquete"> </i>
+        <span class="test" href="#">Ofertas</span>
+      </a>
+    </div>
 
     <div class="actual-rbtn">
       <a href="https://actualproyectos.blog/nuestras-marcas/" class="hbtn-radius" target="_blank">
