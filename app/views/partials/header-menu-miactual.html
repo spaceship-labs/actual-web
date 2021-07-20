@@ -59,6 +59,14 @@
         activeStoreCode="main.activeStore.code" image="main.mainCategoriesKids[category.Handle].image"
         leavehover="main.handleCategoryLeave"></smart-menu>
     </div>
+
+    <div ng-mouseleave="main.handleCategoryLeave()">
+      <a href="/ofertas" class="list-menu-miactual">
+        <i class="icon-paquete"> </i>
+        <span href="#">Ofertas</span>
+      </a>
+    </div>
+
     <div ng-if="main.isUserSellerOrAdmin">
       <a href="/reports/orders" class="list-menu-miactual">
         <i class="icon-attachment"></i>
