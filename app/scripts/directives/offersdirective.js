@@ -50,6 +50,10 @@ angular
             .getPackagesByCurrentStore()
             .then(function(res) {
               scope.packages = res.data.reverse() || [];
+              var paquetesx = scope.packages.filter(function(p){
+                return p["OnHome"];
+              })
+              scope.packages = paquetesx;
               scope.packages = scope.packages.map(function(p) {
                 p.image = api.cdnUrl + '/uploads/groups/' + p.icon_filename;
                 return p;
