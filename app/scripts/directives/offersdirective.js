@@ -49,7 +49,7 @@ angular
           packageService
             .getPackagesByCurrentStore()
             .then(function(res) {
-              scope.packages = res.data || [];
+              scope.packages = res.data.reverse() || [];
               scope.packages = scope.packages.map(function(p) {
                 p.image = api.cdnUrl + '/uploads/groups/' + p.icon_filename;
                 return p;

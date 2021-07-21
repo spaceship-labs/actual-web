@@ -6894,6 +6894,10 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
   -moz-box-sizing: border-box;
 }
 
+.package-text strong{
+  font-size: 13px;
+}
+
 .package-wrapper .package-text h4 {
   margin: 0;
   font-weight: 400;
