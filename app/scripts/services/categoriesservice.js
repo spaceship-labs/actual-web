@@ -262,7 +262,7 @@
         if (category.FeaturedProducts) {
           category.FeaturedProducts = category.FeaturedProducts.filter(function (FeaturedProduct) {
             FeaturedProduct.url = buildProductUrl(FeaturedProduct);
-            return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0
+            return FeaturedProduct.Active == "Y" && FeaturedProduct[activeStoreCode] > 0 && FeaturedProduct.ItemCode.slice(0,2)=="CO"
           }).slice(0, 2)
         }
         acum.push(category)

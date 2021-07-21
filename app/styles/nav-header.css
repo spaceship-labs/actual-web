@@ -67,7 +67,7 @@
 
 .list-menu-miactual:hover {
   color: #fff;
-  background: #dda901;
+  background: #dda901 !important;
 }
 
 /**
