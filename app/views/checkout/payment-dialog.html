@@ -84,9 +84,9 @@
           <div flex-sm="100" flex-xs="100" class="input-element-inner">
 <!--             <input type="text" ng-model="payment.cardObject.cvc" minlength="3" ng-minlength="3" maxlength="4"
               ng-maxlength="4" required /> -->
-              <input type="text" ng-model="payment.cardObject.cvc"  ng-if="payment.cardType == 'master-card' || payment.cardType == 'visa' " minlength="3" ng-minlength="3" maxlength="3"
+              <input type="password" value="" ng-model="payment.cardObject.cvc"  ng-if="payment.cardType == 'master-card' || payment.cardType == 'visa' " minlength="3" ng-minlength="3" maxlength="3"
               ng-maxlength="3" required />
-              <input type="text"ng-model="payment.cardObject.cvc" ng-if="payment.cardType == 'american-express' " minlength="3" ng-minlength="3" maxlength="4"
+              <input type="password"ng-model="payment.cardObject.cvc" ng-if="payment.cardType == 'american-express' " minlength="3" ng-minlength="3" maxlength="4"
               ng-maxlength="4" required />
           </div>
         </div>
