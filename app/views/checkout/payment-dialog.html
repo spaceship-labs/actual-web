@@ -22,9 +22,14 @@
               <!--<small>(Ingresar sin espacios y sin guiones)</small>-->
             </label>
           </p>
-          <div flex="95" flex-sm="100" flex-xs="100" class="input-element-inner">
-            <input type="text" ng-model="payment.cardObject.number" minlength="14" ng-minlength="14" maxlength="19"
-              ng-maxlength="19" required />
+          <div flex="95" flex-sm="100" flex-xs="100" class="input-element-inner" >
+<!--             <input type="text" ng-model="payment.cardObject.number" minlength="14" ng-minlength="14" maxlength="19"
+              ng-maxlength="19" required /> -->
+            <input id='account_changed' ng-pattern="inputCardShow" type="text" ng-model="payment.cardObject.number" ng-if="payment.cardType == 'master-card' || payment.cardType == 'visa' " minlength="16" ng-minlength="16" maxlength="16"
+            ng-maxlength="16" required />
+            <input id='account_changed' type="text" ng-model="payment.cardObject.number" ng-if="payment.cardType == 'american-express' " minlength="15" ng-minlength="15" maxlength="15"
+            ng-maxlength="15" required />
+              
           </div>
         </div>
         <div flex="50" flex-sm="100" flex-xs="100" class="input-element">
@@ -77,7 +82,11 @@
             <label><strong>CÓDIGO CVC</strong>*</label>
           </p>
           <div flex-sm="100" flex-xs="100" class="input-element-inner">
-            <input type="text" ng-model="payment.cardObject.cvc" minlength="3" ng-minlength="3" maxlength="4"
+<!--             <input type="text" ng-model="payment.cardObject.cvc" minlength="3" ng-minlength="3" maxlength="4"
+              ng-maxlength="4" required /> -->
+              <input type="text" ng-model="payment.cardObject.cvc"  ng-if="payment.cardType == 'master-card' || payment.cardType == 'visa' " minlength="3" ng-minlength="3" maxlength="3"
+              ng-maxlength="3" required />
+              <input type="text"ng-model="payment.cardObject.cvc" ng-if="payment.cardType == 'american-express' " minlength="3" ng-minlength="3" maxlength="4"
               ng-maxlength="4" required />
           </div>
         </div>
