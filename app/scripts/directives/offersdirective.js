@@ -83,7 +83,7 @@ angular
         }
 
         function addPackageToCart(packageId) {
-          if ($rootScope.siteTheme !== 'actual-studio') {
+          if ($rootScope.siteTheme !== 'actual-kids') {
             return;
           }
 
