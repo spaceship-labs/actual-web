@@ -311,68 +311,70 @@ function CheckoutPaymentsCtrl(
   }
 
   function guessingPaymentMethod(payment) {
-    Mercadopago.setPublishableKey(
-      'APP_USR-6cfcb6e2-33e2-420f-a5c9-66a1c55c49cc'
-    );
+    // Mercadopago.setPublishableKey(
+    //   'APP_USR-6cfcb6e2-33e2-420f-a5c9-66a1c55c49cc'
+    // );
+    NetPay.setApiKey("pk_netpay_SZdIBQXJhORRVUwygNhYXiboT");
+    NetPay.setSandboxMode(true);
     var deferred = $q.defer();
     if (payment.type === 'transfer') {
       deferred.resolve('banamex');
       return deferred.promise;
     }
-    var getBin = function (payment) {
-      var cardNumber = payment.cardObject.number;
-      var value = cardNumber.replace(/[ .-]/g, '').slice(0, 6);
-      return value;
-    };
-    var bin = getBin(payment);
-    var setPaymentMethodInfo = function (status, response) {
-      console.log('response guess: ', response);
-      console.log('sttaus guess: ', status);
-
-      if (status == 200) {
-        deferred.resolve(response[0].id);
-      }
-    };
-
-    Mercadopago.getPaymentMethod(
-      {
-        bin: bin
-      },
-      setPaymentMethodInfo
-    );
+    deferred.resolve('card');
     return deferred.promise;
   }
 
   function MPTokenizePaymentCard(payment) {
-    Mercadopago.clearSession();
+    // Mercadopago.clearSession();
+    console.log('MPtokenize start')
     var deferred = $q.defer();
     if (payment.type === 'transfer') {
       deferred.resolve('transfer');
       return deferred.promise;
     }
-    var handleResponse = function (status, response) {
-      console.log('status: ', status);
-
-      if (status != 200 && status != 201) {
-        vm.isLoading = false;
-        dialogService.showDialog(
-          'Error en los datos introducidos, por favor, verifique sus datos'
-        );
-        deferred.resolve();
-      } else {
-        console.log('token', response.id);
-        deferred.resolve(response.id);
-      }
-    };
-
-    var tokenParams = {
-      cardholderName: payment.cardName,
+    var netpayTokenParams = {
+      cardHolderName: payment.cardName,
       cardNumber: _.clone(payment.cardObject.number),
-      cardExpirationMonth: _.clone(payment.cardObject.expMonth),
-      cardExpirationYear: _.clone(payment.cardObject.expYear),
-      securityCode: _.clone(payment.cardObject.cvc)
+      expMonth: _.clone(payment.cardObject.expMonth),
+      expYear: _.clone(payment.cardObject.expYear),
+      cvv2: _.clone(payment.cardObject.cvc)
     };
-    Mercadopago.createToken(tokenParams, handleResponse);
+
+    var onSuccess = function (e) {
+      console.log('netpay token', JSON.parse(e.message.data));
+      var billingAddress = {
+        address: {
+          country: payment.cardCountry,
+          state: payment.cardState,
+          postalCode: payment.cardZip,
+          city: payment.cardCity,
+          street1: payment.cardAddress1,
+          street2: payment.cardAddress1
+        }
+      }
+      //siteUrl: "http://localhost:9000"
+      var tokenData = {
+        // ...JSON.parse(e.message.data),
+        // ...billingAddress,
+        cardName:payment.cardName, 
+        siteUrl: "http://localhost:9000",
+        //siteUrl: "https://actualkids.com"
+      }
+      tokenData = _.extend({}, tokenData,JSON.parse(e.message.data))
+      tokenData = _.extend({}, tokenData,billingAddress)
+      deferred.resolve(tokenData);
+    };
+    var onError = function (e) {
+      vm.isLoading = false;
+      dialogService.showDialog(
+        'Ocurrio un error: ' + e
+      );
+      deferred.resolve();
+    };
+    console.log('almost end')
+
+    NetPay.token.create(netpayTokenParams, onSuccess, onError);
     return deferred.promise;
   }
 
@@ -435,6 +437,7 @@ function CheckoutPaymentsCtrl(
           console.log('_paymentMethodId: ', _paymentMethodId);
 
           paymentMethodId = _paymentMethodId;
+          console.log('guessing payment finished')
           return MPTokenizePaymentCard(payment);
         })
         .then(function (token) {
@@ -447,9 +450,10 @@ function CheckoutPaymentsCtrl(
           } else {
             payment.installments = 1;
           }
+          payment.cardName = payment.cardObject.cardName
           delete payment.cardObject;
-          payment.token = token;
-          payment.payment_method_id = paymentMethodId;
+          payment.tokenData = token;
+          payment.paymentMethod = paymentMethodId;
           console.log('payment type: ', payment.type);
           return createOrder(payment);
         })
