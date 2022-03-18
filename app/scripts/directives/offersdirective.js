@@ -45,6 +45,16 @@ angular
         function init() {
           scope.isLoading = true;
           loadZipcodeDeliveryByActiveQuotation();
+          const packagesOrder = [
+                                {id: "61fdda1f2e9f3c43ccbc953f"},
+                                {id: "61fdd7962e9f3c43ccbc9526"},
+                                {id: "61fb5dabff614b161f032a03"},
+                                {id: "61fc083a2e9f3c43ccbc8eca"},
+                                {id: "61fac970ff614b161f0326f9"},
+                                {id: "61fac2d3ff614b161f0326b5"},
+                                {id: "621e8e64810d096f46b693e9"},
+                                {id: "61fc4e9c2e9f3c43ccbc905a"},
+                                ];
 
           packageService
             .getPackagesByCurrentStore()
@@ -54,6 +64,10 @@ angular
                 p.image = api.cdnUrl + '/uploads/groups/' + p.icon_filename;
                 return p;
               });
+              //Sort packages array based on the packagesOrder array
+              scope.packages = _.sortBy(scope.packages, function(obj) {
+                return _.findIndex(packagesOrder, {id: obj.id.toString()});
+              }).reverse();
               scope.isLoading = false;
             })
             .catch(function(err) {
