@@ -67,7 +67,9 @@ angular
               })
               scope.packages = paquetesx;
               console.log(scope.packages);
-              scope.packages = scope.packages.filter(e => !e.Name.match('STUDIO'));
+              scope.packages = scope.packages.filter(function(e){
+                return !e.Name.match('STUDIO')
+              });
               scope.packages = scope.packages.map(function(p) {
                 p.image = api.cdnUrl + '/uploads/groups/' + p.icon_filename;
                 return p;
