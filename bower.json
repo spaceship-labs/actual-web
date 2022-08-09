@@ -25,7 +25,7 @@
     "moment": "^2.22.2",
     "angular-material-expansion-panel": "^0.7.2",
     "alasql": "0.5.1",
-    "tiny-slider": "^2.9.3"
+    "tiny-slider": "2.9.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
