@@ -89,7 +89,7 @@ function CategoryCtrl(
       $location.path('/category/mesas-comedor')
       return;
     }
-    var activeSortOptionKey = 'DiscountPrice';
+    var activeSortOptionKey = 'stock';
     if (isMainCategory($routeParams.category)) {
       activeSortOptionKey = 'relevance';
     }
