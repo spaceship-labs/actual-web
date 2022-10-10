@@ -22,7 +22,7 @@
             {
                 label:'Disponibilidad',
                 key: 'stock',
-                direction: 'ASC'
+                direction: 'DESC'
             },
             {
                 label:'Precio',
@@ -75,7 +75,7 @@
 
         function getSearchValuesByFilters(filters){
           var searchValues = filters.reduce(function(acum, filter){
-            
+
             var selectedValues = filter.Values.filter(function(value){
                 return value.selected;
             });
@@ -103,7 +103,7 @@
             STOCK_SEARCH_OPTIONS: STOCK_SEARCH_OPTIONS,
             SORT_OPTIONS: SORT_OPTIONS,
             SOCIETY_OPTIONS: SOCIETY_OPTIONS
-        };        
+        };
 
         return service;
 
