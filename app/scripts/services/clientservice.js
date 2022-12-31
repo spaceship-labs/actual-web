@@ -36,7 +36,12 @@
       },
       validateRfc: validateRfc,
       GENERIC_RFC: GENERIC_RFC,
-      RFC_VALIDATION_REGEX: RFC_VALIDATION_REGEX
+      RFC_VALIDATION_REGEX: RFC_VALIDATION_REGEX,
+
+      getCFDIUseListLegalPerson : getCFDIUseListLegalPerson,
+      getCFDIUseListNaturalPerson : getCFDIUseListNaturalPerson,
+      getRegimesLegalPerson : getRegimesLegalPerson,
+      getRegimesNaturalPerson : getRegimesNaturalPerson,
     };
 
     return service;
@@ -244,62 +249,374 @@
         {
           code: 'D01',
           label: 'Honorarios médicos, dentales y gastos hospitalarios',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D02',
           label: 'Gastos médicos por incapacidad o discapacidad',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D03',
           label: 'Gastos funerales',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D04',
           label: 'Donativos',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D05',
           label:
             'Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación)',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D06',
           label: 'Aportaciones voluntarias al SAR',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D07',
           label: 'Primas por seguros de gastos médicos',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D08',
           label: 'Gastos de transportación escolar obligatoria',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D09',
           label:
             'Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones',
-          isMoral: true
+          isMoral: false
         },
         {
           code: 'D10',
           label: 'Pagos por servicios educativos (colegiaturas)',
+          isMoral: false
+        },
+        {
+          code: 'P01',
+          label: 'Por definir',
+          isMoral: true
+        },
+        {
+          code: "S01",
+          label: "Sin efectos fiscales.",
+          isMoral: true
+        },
+        {
+          code: "CP01",
+          label: "Pagos",
+          isMoral: true
+        },
+        {
+          code: "CN01",
+          label: "Nómina",
+          isMoral: false
+        }
+      ];
+
+      return list;
+    }
+
+    function getCFDIUseListLegalPerson() {
+      var list = [
+        {
+          code: 'G01',
+          label: 'Adquisición de mercancias',
+          isMoral: true
+        },
+        {
+          code: 'G02',
+          label: 'Devoluciones, descuentos o bonificaciones',
+          isMoral: true
+        },
+        {
+          code: 'G03',
+          label: 'Gastos en general',
+          isMoral: true
+        },
+        {
+          code: 'I01',
+          label: 'Construcciones',
+          isMoral: true
+        },
+        {
+          code: 'I02',
+          label: 'Mobilario y equipo de oficina por inversiones',
+          isMoral: true
+        },
+        {
+          code: 'I03',
+          label: 'Equipo de transporte',
+          isMoral: true
+        },
+        {
+          code: 'I04',
+          label: 'Equipo de computo y accesorios',
+          isMoral: true
+        },
+        {
+          code: 'I05',
+          label: 'Dados, troqueles, moldes, matrices y herramental',
+          isMoral: true
+        },
+        {
+          code: 'I06',
+          label: 'Comunicaciones telefónicas',
+          isMoral: true
+        },
+        {
+          code: 'I07',
+          label: 'Comunicaciones satelitales',
+          isMoral: true
+        },
+        {
+          code: 'I08',
+          label: 'Otra maquinaria y equipo',
           isMoral: true
         },
         {
           code: 'P01',
           label: 'Por definir',
           isMoral: true
+        },
+        {
+          code: "S01",
+          label: "Sin efectos fiscales.",
+          isMoral: true
+        },
+        {
+          code: "CP01",
+          label: "Pagos",
+          isMoral: true
         }
       ];
+      return list;
+    }
 
+    function getCFDIUseListNaturalPerson() {
+      var list = [
+        {
+          code: 'G01',
+          label: 'Adquisición de mercancias',
+          isMoral: true
+        },
+        {
+          code: 'G02',
+          label: 'Devoluciones, descuentos o bonificaciones',
+          isMoral: true
+        },
+        {
+          code: 'G03',
+          label: 'Gastos en general',
+          isMoral: true
+        },
+        {
+          code: 'I01',
+          label: 'Construcciones',
+          isMoral: true
+        },
+        {
+          code: 'I02',
+          label: 'Mobilario y equipo de oficina por inversiones',
+          isMoral: true
+        },
+        {
+          code: 'I03',
+          label: 'Equipo de transporte',
+          isMoral: true
+        },
+        {
+          code: 'I04',
+          label: 'Equipo de computo y accesorios',
+          isMoral: true
+        },
+        {
+          code: 'I05',
+          label: 'Dados, troqueles, moldes, matrices y herramental',
+          isMoral: true
+        },
+        {
+          code: 'I06',
+          label: 'Comunicaciones telefónicas',
+          isMoral: true
+        },
+        {
+          code: 'I07',
+          label: 'Comunicaciones satelitales',
+          isMoral: true
+        },
+        {
+          code: 'I08',
+          label: 'Otra maquinaria y equipo',
+          isMoral: true
+        },
+        {
+          code: 'D01',
+          label: 'Honorarios médicos, dentales y gastos hospitalarios',
+          isMoral: false
+        },
+        {
+          code: 'D02',
+          label: 'Gastos médicos por incapacidad o discapacidad',
+          isMoral: false
+        },
+        {
+          code: 'D03',
+          label: 'Gastos funerales',
+          isMoral: false
+        },
+        {
+          code: 'D04',
+          label: 'Donativos',
+          isMoral: false
+        },
+        {
+          code: 'D05',
+          label:
+            'Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación)',
+          isMoral: false
+        },
+        {
+          code: 'D06',
+          label: 'Aportaciones voluntarias al SAR',
+          isMoral: false
+        },
+        {
+          code: 'D07',
+          label: 'Primas por seguros de gastos médicos',
+          isMoral: false
+        },
+        {
+          code: 'D08',
+          label: 'Gastos de transportación escolar obligatoria',
+          isMoral: false
+        },
+        {
+          code: 'D09',
+          label:
+            'Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones',
+          isMoral: false
+        },
+        {
+          code: 'D10',
+          label: 'Pagos por servicios educativos (colegiaturas)',
+          isMoral: false
+        },
+        {
+          code: 'P01',
+          label: 'Por definir',
+          isMoral: true
+        },
+        {
+          code: "S01",
+          label: "Sin efectos fiscales.",
+          isMoral: true
+        },
+        {
+          code: "CP01",
+          label: "Pagos",
+          isMoral: true
+        },
+        {
+          code: "CN01",
+          label: "Nómina",
+          isMoral: false
+        }
+      ];
+      return list;
+    }
+
+    function getRegimesLegalPerson() {
+      var list = [
+        {
+          code: 'GENERAL_REGIME_OF_MORAL_PEOPLE_LAW',
+          label: 'Régimen General de Ley Personas Morales',
+        },
+        {
+          code: 'REGIME_OF_MORAL_PEOPLE_NOT_PROFIT',
+          label: 'Régimen de las Personas Morales con Fines No Lucrativos',
+        },
+        {
+          code: 'REGIME_OF_COOPERATIVE_PRODUCTION_SOCIETIES',
+          label: 'Sociedades Cooperativas de Producción que optan por diferir sus ingresos',
+        },
+        {
+          code: 'PRIMARY_SECTOR_REGIME',
+          label: 'Régimen de Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras',
+        },
+        {
+          code: 'SOCIETIES_OPTIONAL_REGIME',
+          label: 'Régimen Opcional para Grupos de Sociedades',
+        },
+        {
+          code: 'REGIME_OF_THE_COORDINATED',
+          label: 'Régimen de los Coordinados',
+        },
+        {
+          code: 'REGIME_OF_TRUST',
+          label: 'Régimen simplificado de confianza (RESICO)',
+        },
+        /* {
+          code: 'FEES_REGIME',
+          label: 'Régimen honorarios (servicios profesionales)',
+        }, */
+        {
+          code: 'NO_REGIME',
+          label: 'Sin régimen',
+        }
+      ]
+      return list;
+    }
+
+    function getRegimesNaturalPerson() {
+      var list = [
+        {
+          code: 'SALARIED_REGIME',
+          label: 'Sueldos y Salarios e Ingresos Asimilados a Salarios',
+        },
+        {
+          code: 'LEASEHOLD_REGIME',
+          label: 'Régimen de arrendamiento',
+        },
+        {
+          code: "DIVIDEND_INCOME",
+          label: "Ingresos por Dividendos (socios y accionistas)",
+        },
+        {
+          code: 'BUSINESS_ACTIVITIES_REGIME',
+          label: 'Personas Físicas con Actividades Empresariales y Profesionales',
+        },
+        {
+          code: 'SIMPLIFIED_REGIME',
+          label: 'Sin obligaciones fiscales',
+        },
+        {
+          code: 'FISCAL_INCORPORATION_REGIME',
+          label: 'Régimen de Incorporación Fiscal',
+        },
+        {
+          code: 'REGIME_OF_THE_TECHNOLOGICAL_PLATFORMS_INCOME_ACTIVITIES',
+          label: 'Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas',
+        },
+        {
+          code: 'REGIME_OF_TRUST',
+          label: 'Régimen simplificado de confianza (RESICO)',
+        },
+        /* {
+          code: 'FEES_REGIME',
+          label: 'Régimen honorarios (servicios profesionales)',
+        }, */
+        {
+          code: 'NO_REGIME',
+          label: 'Sin régimen',
+        }
+      ]
       return list;
     }
   }

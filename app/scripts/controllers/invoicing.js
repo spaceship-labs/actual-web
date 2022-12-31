@@ -15,7 +15,16 @@ function InvoicingCtrl(
     cfdiUseList: clientService.getCFDIUseList(),
     form: {},
     sendFiscalData: sendFiscalData,
-    onPikadaySelect: onPikadaySelect
+    onPikadaySelect: onPikadaySelect,
+
+    CFDIUseListLegalPerson : clientService.getCFDIUseListLegalPerson(),
+    CFDIUseListNaturalPerson : clientService.getCFDIUseListNaturalPerson(),
+    RegimesLegalPerson : clientService.getRegimesLegalPerson(),
+    RegimesNaturalPerson : clientService.getRegimesNaturalPerson(),
+
+    getCFDIUseListSelect : getCFDIUseListSelect,
+    getRegimesSelect : getRegimesSelect,
+    isGenericRFC : isGenericRFC,
   });
 
   init();
@@ -43,7 +52,12 @@ function InvoicingCtrl(
   }
 
   function sendFiscalData($form) {
-    if ($form.$valid) {
+    if ($form.$valid &&
+        vm.form.regime &&
+        vm.form.regime != null &&
+        vm.form.cfdiUse &&
+        vm.form.cfdiUse != null
+      ) {
       vm.isLoading = true;
       $rootScope.scrollTo("main");
       invoiceService
@@ -66,6 +80,45 @@ function InvoicingCtrl(
         });
     } else {
       dialogService.showDialog("Datos incompletos, revisa los campos");
+    }
+  }
+
+  function getCFDIUseListSelect (rfc) {
+    var LicTradNum = rfc;
+    if ( LicTradNum ) {
+      if ( LicTradNum.length == 12 ) {
+        return vm.CFDIUseListLegalPerson;
+      }else if ( LicTradNum.length == 13) {
+        return vm.CFDIUseListNaturalPerson;
+      }
+    }
+  }
+
+  function getRegimesSelect (rfc) {
+    var LicTradNum = rfc;
+    if ( LicTradNum ) {
+      if ( LicTradNum.length == 12 ) {
+        return vm.RegimesLegalPerson;
+      }else if ( LicTradNum.length == 13) {
+        return vm.RegimesNaturalPerson;
+      }
+    }
+  }
+
+  function isGenericRFC ( rfc ){
+    if(rfc){
+      if(rfc == clientService.GENERIC_RFC){
+        vm.genericRfc = true;
+        vm.form.regime = "SIMPLIFIED_REGIME";
+        vm.form.cfdiUse = "S01";
+        vm.form.companyName = "PUBLICO EN GENERAL";
+        vm.form.ZipCode = "77507";
+
+        return true;
+      }else{
+        vm.genericRfc = false;
+        return false;
+      }
     }
   }
 }
