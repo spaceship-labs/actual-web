@@ -37,7 +37,16 @@ function UsersUserInvoicesCtrl(
         actions: [{ url: '#', type: 'edit' }]
       }
     ],
-    updateFiscalAddress: updateFiscalAddress
+    updateFiscalAddress: updateFiscalAddress,
+
+    CFDIUseListLegalPerson : clientService.getCFDIUseListLegalPerson(),
+    CFDIUseListNaturalPerson : clientService.getCFDIUseListNaturalPerson(),
+    RegimesLegalPerson : clientService.getRegimesLegalPerson(),
+    RegimesNaturalPerson : clientService.getRegimesNaturalPerson(),
+    getCFDIUseListSelect : getCFDIUseListSelect,
+    getRegimesSelect : getRegimesSelect,
+
+    isGenericRFC : isGenericRFC,
   });
 
   init();
@@ -53,6 +62,9 @@ function UsersUserInvoicesCtrl(
       .getUserFiscalAddress()
       .then(function(res) {
         vm.fiscalAddress = res;
+
+        console.log("vm.fiscalAddress",vm.fiscalAddress)
+        isGenericRFC(vm.fiscalAddress.LicTradNum);
 
         if (!vm.fiscalAddress.cfdiUse) {
           var lastIndexCfdiUseList = vm.cfdiUseList.length - 1;
@@ -85,9 +97,22 @@ function UsersUserInvoicesCtrl(
     var isValidEmail = commonService.isValidEmail(vm.fiscalAddress.U_Correos, {
       excludeActualDomains: true
     });
-    if (form.$valid && isValidEmail) {
+    if (form.$valid &&
+      vm.fiscalAddress.regime &&
+      vm.fiscalAddress.regime != null &&
+      vm.fiscalAddress.cfdiUse &&
+      vm.fiscalAddress.cfdiUse != null
+      ) {
+
+      if (!isGenericRFC && !isValidEmail){
+        vm.isLoading = false;
+        dialogService.showDialog('Email no valido');
+        return;
+      }
       var params = _.clone(vm.fiscalAddress);
       params.LicTradNum = _.clone(vm.fiscalAddress.LicTradNum);
+      params.regime = _.clone(vm.fiscalAddress.regime);
+      params.cfdiUse = _.clone(vm.fiscalAddress.cfdiUse);
 
       userService
         .updateUserFiscalAddress(params)
@@ -104,7 +129,7 @@ function UsersUserInvoicesCtrl(
               (err.data || err)
           );
         });
-    } else if (!isValidEmail) {
+    } else if (!isValidEmail && !isGenericRFC) {
       vm.isLoading = false;
       dialogService.showDialog('Email no valido');
     } else {
@@ -120,6 +145,48 @@ function UsersUserInvoicesCtrl(
       $location.path(searchParams.returnTo).search({
         invoiceDataSaved: true
       });
+    }
+  }
+
+  function getCFDIUseListSelect (rfc) {
+    var LicTradNum = rfc;
+    if ( LicTradNum ) {
+      if ( LicTradNum.length == 12 ) {
+        return vm.CFDIUseListLegalPerson;
+      }else if ( LicTradNum.length == 13) {
+        return vm.CFDIUseListNaturalPerson;
+      }
+    }
+  }
+
+  function getRegimesSelect (rfc) {
+    var LicTradNum = rfc;
+    if ( LicTradNum ) {
+      if ( LicTradNum.length == 12 ) {
+        return vm.RegimesLegalPerson;
+      }else if ( LicTradNum.length == 13) {
+        return vm.RegimesNaturalPerson;
+      }
+    }
+  }
+
+  function isGenericRFC ( rfc ){
+    console.log()
+    if(rfc){
+      if(rfc == clientService.GENERIC_RFC){
+        console.log("isGenericRFC = true")
+        vm.genericRfc = true;
+        vm.fiscalAddress.regime = "SIMPLIFIED_REGIME";
+        vm.fiscalAddress.cfdiUse = "S01";
+        vm.fiscalAddress.companyName = "PUBLICO EN GENERAL";
+        vm.fiscalAddress.ZipCode = "77507";
+
+        return true;
+      }else{
+        console.log("isGenericRFC = false")
+        vm.genericRfc = false;
+        return false;
+      }
     }
   }
 }

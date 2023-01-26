@@ -59,8 +59,8 @@
       <script>
         window.renderOptIn = function () {
           window.gapi.load('surveyoptin', function () {
-            let dataContainer = document.getElementById("scriptData");
-            let Ps = dataContainer.getElementsByTagName("p");
+            var dataContainer = document.getElementById("scriptData");
+            var Ps = dataContainer.getElementsByTagName("p");
             window.gapi.surveyoptin.render({
               // REQUIRED FIELDS
               "merchant_id": 117300745,
