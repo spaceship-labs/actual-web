@@ -16,7 +16,14 @@
               </p>
             </label>
             <div class="input-element-inner">
-              <input type="text" name="LicTradNum" rfc-input-validator required ng-model="vm.fiscalAddress.LicTradNum">
+              <input
+                type="text"
+                name="LicTradNum"
+                rfc-input-validator
+                required
+                ng-model="vm.fiscalAddress.LicTradNum"
+                ng-blur="vm.isGenericRFC(vm.fiscalAddress.LicTradNum)"
+              >
             </div>
             </br>
             <label ng-show="vm.updateFiscalForm.LicTradNum.$error.rfcValidation" class="generic-error-msg">
@@ -62,10 +69,20 @@
 
         <div class="input-element select-element-wrapper">
           <label>
-            <strong>Uso CFDI</strong>
+            <strong>Uso CFDI<span class="hl-label">*</span></strong>
           </label>
           <md-select ng-model="vm.fiscalAddress.cfdiUse" class="select-element" required>
-            <md-option ng-repeat="use in vm.cfdiUseList | orderBy:'label'" ng-value="use.code">
+            <md-option ng-repeat="use in vm.getCFDIUseListSelect(vm.fiscalAddress.LicTradNum) | orderBy:'label'" ng-value="use.code">
+              {{use.label}} ({{use.code}})
+            </md-option>
+          </md-select>
+        </div>
+        <div class="input-element select-element-wrapper">
+          <label>
+            <strong>Régimen<span class="hl-label">*</span></strong>
+          </label>
+          <md-select ng-model="vm.fiscalAddress.regime" class="select-element" required>
+            <md-option ng-repeat="use in vm.getRegimesSelect(vm.fiscalAddress.LicTradNum) | orderBy:'label'" ng-value="use.code">
               {{use.label}} ({{use.code}})
             </md-option>
           </md-select>
@@ -91,7 +108,7 @@
               </p>
             </label>
             <div flex class="input-element-inner">
-              <input ng-model="vm.fiscalAddress.Phone1" name="Phone1" type="text">
+              <input ng-model="vm.fiscalAddress.Phone1" name="Phone1" type="text" ng-required="!vm.genericRfc">
             </div>
           </div>
           <div flex-gt-sm="25" flex="100" class="input-element">
@@ -102,7 +119,7 @@
               </p>
             </label>
             <div class="input-element-inner">
-              <input type="email" ng-model="vm.fiscalAddress.U_Correos" required>
+              <input type="email" ng-model="vm.fiscalAddress.U_Correos" ng-required="!vm.genericRfc">
             </div>
           </div>
         </div>
@@ -190,7 +207,7 @@
           <div flex flex-sm="100" flex-xs="100" class="input-element select-element-wrapper">
             <label>
               <strong>Estado</strong>*</label>
-            <md-select ng-model="vm.fiscalAddress.State" class="select-element" required>
+            <md-select ng-model="vm.fiscalAddress.State" class="select-element" ng-required="!vm.genericRfc">
               <md-option ng-repeat="state in vm.states" ng-value="state.Code">
                 {{state.Name}}
               </md-option>
