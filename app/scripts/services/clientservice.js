@@ -299,11 +299,6 @@
           isMoral: false
         },
         {
-          code: 'P01',
-          label: 'Por definir',
-          isMoral: true
-        },
-        {
           code: "S01",
           label: "Sin efectos fiscales.",
           isMoral: true
@@ -378,11 +373,6 @@
         {
           code: 'I08',
           label: 'Otra maquinaria y equipo',
-          isMoral: true
-        },
-        {
-          code: 'P01',
-          label: 'Por definir',
           isMoral: true
         },
         {
@@ -507,11 +497,6 @@
           code: 'D10',
           label: 'Pagos por servicios educativos (colegiaturas)',
           isMoral: false
-        },
-        {
-          code: 'P01',
-          label: 'Por definir',
-          isMoral: true
         },
         {
           code: "S01",
