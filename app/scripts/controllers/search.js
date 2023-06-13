@@ -429,12 +429,24 @@ function SearchCtrl(
         return productService.formatProducts(res.data.products);
       })
       .then(function(fProducts) {
-        if (options && options.isLoadingMore) {
-          var productsAux = angular.copy(vm.products);
-          vm.products = productsAux.concat(fProducts);
-        } else {
-          vm.products = fProducts;
-          vm.scrollTo('search-page');
+        if(fProducts <= 0){
+          vm.isLoadingProducts = false;
+          vm.allProductsShown = true;
+        }else{
+          if(options && options.isLoadingMore){
+            var productsAux = angular.copy(vm.products);
+            var products = productsAux.concat(fProducts);
+            //Delete duplicates
+            vm.products = products.filter(function(product, index) {
+              return products.findIndex(function(obj) {
+                return obj.ItemCode === product.ItemCode && obj.id === product.id;
+              }) === index;
+            });
+            console.log("vm.products length: ",vm.products.length)
+          }else{
+            vm.products = fProducts;
+            vm.scrollTo('search-page');
+          }
         }
         vm.isLoading = false;
       });
@@ -466,8 +478,12 @@ function SearchCtrl(
   }
 
   function loadMore() {
-    vm.search.page++;
-    vm.searchByFilters({ isLoadingMore: true });
+    if(vm.allProductsShown == true){
+      return;
+    }else{
+      vm.search.page++;
+      vm.searchByFilters({isLoadingMore: true});
+    }
   }
 
   function scrollTo(target) {
