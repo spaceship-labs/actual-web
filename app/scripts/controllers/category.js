@@ -305,8 +305,6 @@ function CategoryCtrl(
                 return obj.ItemCode === product.ItemCode && obj.id === product.id;
               }) === index;
             });
-            console.log("products ",products.length)
-            console.log("vm ",vm.products.length)
           }else{
             vm.products = productsFormatted;
             vm.scrollTo('breadcrumb-category-page');
