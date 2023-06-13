@@ -292,12 +292,24 @@ function CategoryCtrl(
         return productService.formatProducts(products);
       })
       .then(function (productsFormatted) {
-        if (options && options.isLoadingMore) {
-          var productsAux = angular.copy(vm.products);
-          vm.products = productsAux.concat(productsFormatted);
-        } else {
-          vm.products = productsFormatted;
-          vm.scrollTo('breadcrumb-category-page');
+        if(productsFormatted <= 0){
+          vm.isLoadingProducts = false;
+          vm.allProductsShown = true;
+        }else{
+          if(options && options.isLoadingMore){
+            var productsAux = angular.copy(vm.products);
+            var products = productsAux.concat(productsFormatted);
+            console.log(products)
+            //Delete duplicates
+            vm.products = products.filter(function(product, index) {
+              return products.findIndex(function(obj) {
+                return obj.ItemCode === product.ItemCode && obj.id === product.id;
+              }) === index;
+            });
+          }else{
+            vm.products = productsFormatted;
+            vm.scrollTo('breadcrumb-category-page');
+          }
         }
 
         vm.isLoadingProducts = false;
@@ -403,8 +415,12 @@ function CategoryCtrl(
   }
 
   function loadMore() {
-    vm.search.page++;
-    vm.searchByFilters({ isLoadingMore: true });
+    if(vm.allProductsShown == true){
+      return;
+    }else{
+      vm.search.page++;
+      vm.searchByFilters({isLoadingMore: true});
+    }
   }
 
   function toggleColorFilter(value, filter) {
