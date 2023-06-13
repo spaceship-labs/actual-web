@@ -299,13 +299,14 @@ function CategoryCtrl(
           if(options && options.isLoadingMore){
             var productsAux = angular.copy(vm.products);
             var products = productsAux.concat(productsFormatted);
-            console.log(products)
             //Delete duplicates
             vm.products = products.filter(function(product, index) {
               return products.findIndex(function(obj) {
                 return obj.ItemCode === product.ItemCode && obj.id === product.id;
               }) === index;
             });
+            console.log("products ",products.length)
+            console.log("vm ",vm.products.length)
           }else{
             vm.products = productsFormatted;
             vm.scrollTo('breadcrumb-category-page');
