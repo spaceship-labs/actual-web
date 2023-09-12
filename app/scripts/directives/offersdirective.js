@@ -25,6 +25,10 @@ angular
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
         scope.addPackageToCart = addPackageToCart;
+        scope.validatePassword = validatePassword;
+        
+        scope.passwd = '';
+        scope.showImage = '';
 
         var activeQuotation;
 
@@ -66,7 +70,7 @@ angular
                 return p["OnHome"];
               })
               scope.packages = paquetesx;
-              console.log(scope.packages);
+              console.log("scope.packages", scope.packages);
               // scope.packages = scope.packages.filter(function(e){
               //   return !e.Name.match('STUDIO')
               // });
@@ -308,6 +312,35 @@ angular
             .catch(function(err) {
               console.log('err', err);
             });
+        }
+
+        function validatePassword (id,pass){
+          console.log(id);
+          console.log(pass);
+          var params = {
+            password: pass,
+          }
+          var res = packageService.validatePassword(id,params)
+          .then( function (res) {
+            console.log(res)
+
+            scope.showImage = id;
+            console.log("scope.showImage",scope.showImage);
+          })
+          .catch( function (err) {
+            console.log(err)
+            console.log("scope.showImage",scope.showImage);
+
+            dialogService.showDialog(
+              "Contraseña incorrecta"
+            );
+          })
+
+          /* if (scope.passwd === "") {
+            scope.showImage = true;
+          } else {
+            alert('Contraseña incorrecta');
+          } */
         }
       }
     };

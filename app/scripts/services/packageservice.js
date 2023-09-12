@@ -13,6 +13,7 @@
         getDetailedPackage: getDetailedPackage,
         getPackagesByCurrentStore: getPackagesByCurrentStore,
         getProductsByPackage: getProductsByPackage,
+        validatePassword:validatePassword,
       };
 
       function getList(page, params){
@@ -34,6 +35,12 @@
       function getDetailedPackage(id){
         var url = '/packages/details/'+id;
         return api.$http.post(url);
+      }
+
+      function validatePassword(id,params) {
+        var url = '/packages/validate/'+id;
+        return api.$http
+          .post(url,params);
       }
 
       return service;

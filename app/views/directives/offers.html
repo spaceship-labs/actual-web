@@ -2,10 +2,9 @@
   <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
 </div>
 
-<div ng-if="!isLoading" class="subs-container">
+<div ng-if="!isLoading" class="subs-container" style="display:flex;">
   <div ng-repeat="package in packages track by $index" class="package-wrapper">
-
-    <a ng-click="addPackageToCart(package.id)" href="#">
+    <!-- <a ng-click="addPackageToCart(package.id)" href="#">
       <img animate-visible="true" lazy-src="{{package.image}}" alt="{{package.image}}">
     </a>
     <div class="package-text">
@@ -14,6 +13,17 @@
           <strong>{{package.Name}}</strong>
         </a>
       </h4>
+    </div> -->
+    <form ng-submit="validatePassword(package.id,passwd)" ng-if="!showImage" style="display: flex;flex-direction: column;align-items:center;padding: 0 22px;">
+      <img animate-visible="true" lazy-src="{{package.image}}" alt="{{package.image}}" style="width:90%;margin-bottom:1em;">
+      <div>
+        <input type="password" ng-model="passwd" placeholder="Ingresa tu contraseña" style="margin-bottom:2em;background:#f8f8f8;border:rgb(133 133 133);height: 32px;font-family: Roboto, 'Helvetica Neue', sans-serif;font-size:12px;padding-left:5px"><button type="submit" class="searcher-btn" style="background: #dda901;text-transform: uppercase; padding: 0 22px;height: 32px;font-weight: 700;font-family: Roboto, 'Helvetica Neue', sans-serif;font-size:11px;border:none;">Ingresar</button> 
+      </div>
+    </form>
+    <div ng-if="showImage===package.id">
+      <a ng-click="addPackageToCart(package.id)" href="#">
+        <img animate-visible="true" lazy-src="{{package.image}}" alt="{{package.image}}">
+      </a>
     </div>
   </div>
 </div>

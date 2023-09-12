@@ -17,7 +17,7 @@
   display: flex;
   justify-content: center;
   background-color: #fff;
-  height: 86px;
+  height: 96px;
 }
 
 .main-menu-container>div {
@@ -26,13 +26,17 @@
   text-align: center;
 }
 
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .list-menu-miactual {
+  align-items: center;
   display: flex;
   flex-direction: column;
   -webkit-align-content: center;
   align-content: center;
-  /*width: 100px;*/
-  height: 87px;
+  height: 96px;
   transition: 0.4s;
   color: #404040;
 }
@@ -211,7 +215,7 @@
 **/
 
 .actual-rbtn {
-  margin: auto 0;
+  padding: auto 0;
 }
 
 .actual-rbtn i {
@@ -234,7 +238,7 @@
   ;
 }
 
-.hbtn-radius:hover {
+.hbtn-radius-container:hover {
   color: #fff !important;
   background-color: #dda901 !important;
 }
