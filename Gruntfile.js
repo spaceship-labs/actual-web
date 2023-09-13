@@ -559,7 +559,27 @@ module.exports = function (grunt) {
           }
         }
       },
-
+      dev: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/envconfig.js',
+          name: 'envconfig'
+        },
+        constants: {
+          ENV: {
+            name: 'dev',
+            apiEndpoint: 'https://stagingapiweb.miactual.com',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
+            adminUrl: 'http://admin.miactual.com',
+            tokenPrefix: 'dev',
+            conektaHomeKey: 'key_fTqfbsS7oxfpqZxtP9qZqdw',
+            conektaKidsKey: 'key_QCgrTimPycx55HtzxStvXZw',
+            conektaStudioKey: 'key_YrdmsrYuzSnqfZYryJxrjiQ',
+            studioAnalytics: 'UA-54662003-1',
+            homeAnalytics: 'UA-78979962-1',
+            kidsAnalytics: 'UA-55789134-1'
+          }
+        }
+      },
       actualHome: {
         options: {
           dest: '<%= yeoman.app %>/scripts/siteconfig.js',
@@ -615,27 +635,6 @@ module.exports = function (grunt) {
             foursquare_url:
               'https://es.foursquare.com/p/actual-studio/87584627',
             pinterest_url: 'https://www.pinterest.com.mx/ActualGroup/'
-          }
-        }
-      },
-      dev: {
-        options: {
-          dest: '<%= yeoman.app %>/scripts/envconfig.js',
-          name: 'envconfig'
-        },
-        constants: {
-          SITE: {
-            name: 'dev',
-            apiEndpoint: 'https://stagingapiweb.miactual.com',
-            cdnUrl: 'https://d116li125og699.cloudfront.net',
-            adminUrl: 'http://admin.miactual.com',
-            tokenPrefix: 'dev',
-            conektaHomeKey: 'key_fTqfbsS7oxfpqZxtP9qZqdw',
-            conektaKidsKey: 'key_QCgrTimPycx55HtzxStvXZw',
-            conektaStudioKey: 'key_YrdmsrYuzSnqfZYryJxrjiQ',
-            studioAnalytics: 'UA-54662003-1',
-            homeAnalytics: 'UA-78979962-1',
-            kidsAnalytics: 'UA-55789134-1'
           }
         }
       }
