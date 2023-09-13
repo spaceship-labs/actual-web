@@ -2,8 +2,8 @@
   <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
 </div>
 
-<div ng-if="!isLoading" class="subs-container" style="display:flex;">
-  <div ng-repeat="package in packages track by $index" class="package-wrapper">
+<div ng-if="!isLoading" class="subs-container" style="display:flex; flex-wrap: wrap;">
+  <div ng-repeat="package in packages track by $index" class="package-wrapper" style="flex-basis: calc(50% - 10px);">
     <!-- <a ng-click="addPackageToCart(package.id)" href="#">
       <img animate-visible="true" lazy-src="{{package.image}}" alt="{{package.image}}">
     </a>
