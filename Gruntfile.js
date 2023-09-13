@@ -617,6 +617,25 @@ module.exports = function (grunt) {
             pinterest_url: 'https://www.pinterest.com.mx/ActualGroup/'
           }
         }
+      },
+      staged: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/envconfig.js',
+          name: 'envconfig'
+        },
+        constants: {
+          SITE: {
+            name: 'staged',
+            publicName: 'Staged',
+            baseUrl: 'http://stagingapiweb.miactual.com',
+            domain: 'stagingapiweb.miactual.com',
+            fb_url: 'https://www.facebook.com/ActualKids',
+            instagram_url: 'https://www.instagram.com/actualkids_mx/',
+            foursquare_url:
+              'https://es.foursquare.com/p/actual-studio/87584627',
+            pinterest_url: 'https://www.pinterest.com.mx/ActualGroup/'
+          }
+        }
       }
     }
   });
