@@ -548,7 +548,7 @@ module.exports = function (grunt) {
         },
         constants: {
           ENV: {
-            name: 'dev',
+            name: 'staged',
             apiEndpoint: 'http://localhost:1337',
             cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://localhost:3000',
@@ -625,8 +625,8 @@ module.exports = function (grunt) {
         },
         constants: {
           SITE: {
-            name: 'staged',
-            publicName: 'Staged',
+            name: 'dev',
+            publicName: 'dev',
             baseUrl: 'http://stagingapiweb.miactual.com',
             domain: 'stagingapiweb.miactual.com',
             fb_url: 'https://www.facebook.com/ActualKids',
