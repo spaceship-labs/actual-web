@@ -541,7 +541,7 @@ module.exports = function (grunt) {
           }
         }
       },
-      dev: {
+      staged: {
         options: {
           dest: '<%= yeoman.app %>/scripts/envconfig.js',
           name: 'envconfig'
@@ -618,7 +618,7 @@ module.exports = function (grunt) {
           }
         }
       },
-      staged: {
+      dev: {
         options: {
           dest: '<%= yeoman.app %>/scripts/envconfig.js',
           name: 'envconfig'
