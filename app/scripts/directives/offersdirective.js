@@ -25,7 +25,11 @@ angular
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
         scope.addPackageToCart = addPackageToCart;
-
+        scope.validatePassword = validatePassword;
+        
+        scope.passwd = '';
+        scope.showImage = '';
+        
         var activeQuotation;
 
         if (!quotationService.getActiveQuotationId()) {

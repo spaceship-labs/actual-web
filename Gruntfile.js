@@ -541,25 +541,45 @@ module.exports = function (grunt) {
           }
         }
       },
-      dev: {
+      staged: {
         options: {
           dest: '<%= yeoman.app %>/scripts/envconfig.js',
           name: 'envconfig'
         },
         constants: {
           ENV: {
-            name: 'dev',
+            name: 'staged',
             apiEndpoint: 'http://localhost:1337',
             cdnUrl: 'https://d116li125og699.cloudfront.net',
             adminUrl: 'http://localhost:3000',
-            tokenPrefix: 'dev',
+            tokenPrefix: 'staged',
             conektaHomeKey: 'key_LcURg3XbcFPVXud8KmHkmGg',
             conektaKidsKey: 'key_FAVz7GZoqMy4PwugqgHNrag',
             conektaStudioKey: 'key_Eedd73QyEppQ3NxPgjVRxHQ'
           }
         }
       },
-
+      dev: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/envconfig.js',
+          name: 'envconfig'
+        },
+        constants: {
+          SITE: {
+            name: 'dev',
+            apiEndpoint: 'http://stagingapiweb.miactual.com',
+            cdnUrl: 'https://d116li125og699.cloudfront.net',
+            adminUrl: 'http://stagingadmin.miactual.com',
+            tokenPrefix: 'dev',
+            conektaHomeKey: 'key_fTqfbsS7oxfpqZxtP9qZqdw',
+            conektaKidsKey: 'key_QCgrTimPycx55HtzxStvXZw',
+            conektaStudioKey: 'key_YrdmsrYuzSnqfZYryJxrjiQ',
+            studioAnalytics: 'UA-54662003-1',
+            homeAnalytics: 'UA-78979962-1',
+            kidsAnalytics: 'UA-55789134-1'
+          }
+        }
+      },
       actualHome: {
         options: {
           dest: '<%= yeoman.app %>/scripts/siteconfig.js',
