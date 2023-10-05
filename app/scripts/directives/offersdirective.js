@@ -303,6 +303,35 @@ angular
               console.log('err', err);
             });
         }
+
+        function validatePassword (id,pass){
+          console.log(id);
+          console.log(pass);
+          var params = {
+            password: pass,
+          }
+          var res = packageService.validatePassword(id,params)
+          .then( function (res) {
+            console.log(res)
+
+            scope.showImage = id;
+            console.log("scope.showImage",scope.showImage);
+          })
+          .catch( function (err) {
+            console.log(err)
+            console.log("scope.showImage",scope.showImage);
+
+            dialogService.showDialog(
+              "Contraseña incorrecta"
+            );
+          })
+
+          /* if (scope.passwd === "") {
+            scope.showImage = true;
+          } else {
+            alert('Contraseña incorrecta');
+          } */
+        }
       }
     };
   });
