@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc directive
- * @name actualWebApp.directive:offersDirective
+ * @name actualWebApp.directive:desarrollosDirective
  * @description
- * # offersDirective
+ * # desarrollosDirective
  */
 angular
   .module('actualWebApp')
-  .directive('offersDirective', function(
+  .directive('desarrollosDirective', function(
     $q,
     $filter,
     $rootScope,
@@ -21,7 +21,7 @@ angular
     deliveryService
   ) {
     return {
-      templateUrl: 'views/directives/offers.html',
+      templateUrl: 'views/directives/atenciondesarrollos.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
         scope.addPackageToCart = addPackageToCart;
@@ -73,7 +73,7 @@ angular
                 return _.findIndex(packagesOrder, {id: obj.id.toString()});
               }).reverse();
               scope.packages = _.filter(scope.packages, function(item) {
-                return item.IsPublic === true;
+                return item.IsPublic != true;
               });
               scope.isLoading = false;
             })
