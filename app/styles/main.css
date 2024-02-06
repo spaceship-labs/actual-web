@@ -2237,7 +2237,7 @@ select {
 
 .listing-product .discount-batch {
   background-size: contain;
-  background-image: url('/images/etiqueta-promo.png');
+  background-image: url('/images/promo-label.png');
   transform: rotate(90deg); /* Ajusta el ángulo */
   background-repeat: no-repeat;
   width: 100px; /* Ajusta el ancho según tus necesidades */
@@ -2247,6 +2247,7 @@ select {
   top: 32px;
   z-index: 2;
   font-size: 12px;
+  color: #fff;
 }
 
 .listing-product .discount-batch strong {
