@@ -2164,6 +2164,7 @@ select {
 .listing-product .listing-product-gallery {
   min-height: 230px;
   text-align: center;
+  background-color: #f6f6f6;
 }
 
 .listing-product .listing-product-gallery .slick-slider {
@@ -2235,18 +2236,17 @@ select {
 }
 
 .listing-product .discount-batch {
-  background: #2965b9;
-  border-radius: 50%;
-  height: 45px;
-  width: 45px;
+  background-size: contain;
+  background-image: url('/images/etiqueta-promo.png');
+  transform: rotate(90deg); /* Ajusta el ángulo */
+  background-repeat: no-repeat;
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  height: 22px; /* Ajusta el alto según tus necesidades */
   position: absolute;
-  right: 5px;
-  top: 5px;
+  left: -10px;
+  top: 32px;
   z-index: 2;
   font-size: 12px;
-  -webkit-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
-  -moz-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
-  box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
 }
 
 .listing-product .discount-batch strong {
@@ -9987,3 +9987,28 @@ md-sidenav {
   text-decoration: none;
 }
 /*CSS CATEGORIES-HOME END*/
+
+/*ESTRELLAS*/
+.estrella,
+.estrella-vacia {
+  display: inline-block; /* Asegura que estén en la misma línea */
+}
+
+.estrella::before,
+.estrella-vacia::before {
+  content: '\2605'; /* Unicode para una estrella rellena */
+  font-size: 16px; /* Ajusta el tamaño según tus preferencias */
+  color: gold; /* Puedes ajustar el color según tus preferencias */
+}
+
+.estrella-vacia::before {
+  content: '\2606'; /* Unicode para una estrella vacía */
+  color: gray; /* Puedes ajustar el color según tus preferencias */
+}
+/*ESTRELLAS END*/
+
+/*TITULO DE PRECIO*/
+.listing-product-info-name {
+  min-height: 30px;
+}
+/*TITULO DE PRECIO END*/
