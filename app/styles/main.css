@@ -2647,13 +2647,17 @@ select {
   font-size: 32px;
   text-align: center;
   font-weight: 300;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   display: flex;
   position: relative;
   align-items: center;
   margin: 15px auto 0;
   max-width: 65%;
+  justify-content: center;
+  text-decoration: none;
 }
+
+/* 
 
 .listing-view .best-seller-title:before {
   content: '';
@@ -2673,6 +2677,7 @@ select {
   margin-left: 20px;
 }
 
+
 .listing-view .best-seller-title .color-gray {
   color: #030202;
 }
@@ -2680,6 +2685,7 @@ select {
 .listing-view .best-seller-title:hover .color-gray {
   color: #030202;
 }
+*/
 
 .color-gray > h1 {
   font-size: 23px;
@@ -9973,7 +9979,6 @@ md-sidenav {
 
 /*CSS CATEGORIES-HOME*/
 .container-categories {
-  width: 100%;
   background-color: #f6f6f6;
 }
 

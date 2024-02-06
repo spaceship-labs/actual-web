@@ -1,27 +1,31 @@
 <div ng-if="vm.featuredProducts && main.site" id="home-slider-wrapper">
-  <div class="listing-view">
-    <h1 class="listing-view-title best-seller-title">
-      <a href="/category/salas">
-        <span class="color-gray">
-          <strong>Nuevas colecciones</strong>
-        </span>
-      </a>
-    </h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center">PRODUCTOS MÁS VENDIDOS</h3>
+        <p class="text-center">
+          <small>
+            Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla
+            euismod ultrices massa, et feugiat ipsum consequat eu.
+          </small>
+        </p>
+      </div>
+    </div>
   </div>
+
   <div
     class="products-list"
     layout="row"
     layout-wrap
-    layout-align="start center"
+    layout-align="center"
     ng-cloak
   >
     <div flex="80" flex-xs="100" flex-sm="100">
       <slick
-        class="categories-carousel"
         responsive="vm.bestSellersCarouselBreakpoints"
         infinite="true"
-        slides-to-show="3"
-        slides-to-scroll="3"
+        slides-to-show="4"
+        slides-to-scroll="0"
         init-onload="true"
         data="vm.featuredLoaded"
       >
@@ -33,30 +37,5 @@
         </div>
       </slick>
     </div>
-    <div
-      hide-xs
-      hide-sm
-      flex="20"
-      layout="row"
-      layout-wrap
-      layout-align="start center"
-      class="view-more-category"
-    >
-      <a href="/category/salas">
-        <div class="circle circle-recamaras">
-          <div class="circle-text">
-            <p style="font-size: 26px">
-              VER
-              <br />
-              CATEGORÍA
-              <strong>COMPLETA</strong>
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div hide-gt-sm class="listing-view">
-    <a href="/category/salas" class="action-btn"> VER MÁS PRODUCTOS </a>
   </div>
 </div>
