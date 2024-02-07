@@ -2324,7 +2324,7 @@ select {
   /* min-width: 1px; */
   padding: 0 10px;
   width: 200px;
-  height: 360px;
+  /*height: 360px;*/
 }
 
 .products-list .product-width {
@@ -10008,8 +10008,6 @@ md-sidenav {
 }
 /*ESTRELLAS END*/
 
-/*TITULO DE PRECIO*/
-.listing-product-info-name {
-  min-height: 30px;
+.product-name {
+  text-transform: lowercase; /* Convierte todo el texto a minúsculas */
 }
-/*TITULO DE PRECIO END*/
