@@ -2,12 +2,15 @@
   background: #cc262f;
   color: #fff;
 }
+
 .actual-studio .header-top-bar {
   background: #000000 !important;
 }
+
 .actual-studio .footer-bottom {
   background: #030202 !important;
 }
+
 .actual-studio .nav-categories-item-active,
 .actual-studio .salas-bg:hover {
   background: #c7227d;
@@ -57,16 +60,17 @@
 .actual-studio .kids-bg:hover {
   background: #66b1e3;
 }
+
 /* .actual-studio .nav-categories-item-active,
 .actual-studio .nav-categories-item:hover {
   background: #cc262f;
 } */
 
-.actual-studio .listing-view-nav > li.active h3 a,
-.actual-studio .listing-view-nav > li h3 a.active,
-.actual-studio .listing-view-nav > li h3 a:hover,
+.actual-studio .listing-view-nav>li.active h3 a,
+.actual-studio .listing-view-nav>li h3 a.active,
+.actual-studio .listing-view-nav>li h3 a:hover,
 .actual-studio .listing-view-nav .icon-right-open.aside,
-.actual-studio .listing-view-nav-wrapper > h2 a.active,
+.actual-studio .listing-view-nav-wrapper>h2 a.active,
 .actual-studio .listing-view-subnav a.active,
 .actual-studio .filters .head-filt i {
   color: #cc262f;
@@ -85,9 +89,11 @@
 .actual-studio .mobile-sidenav .close-btn {
   background: #cc262f !important;
 }
+
 .actual-studio .mobile-sidenav .nav-categories-item {
   /* border-bottom: 1px solid #cc262f; */
 }
+
 .actual-studio .nav-categories-item-active,
 .actual-studio .nav-categories-item:hover {
   border-bottom: 2px solid #cc262f;
@@ -101,6 +107,7 @@
 .actual-studio .filters-sidenav .pointer-close-btn i {
   color: #cc262f;
 }
+
 .actual-studio .filters-head {
   background: #cc262f !important;
 }
@@ -131,20 +138,80 @@
   }
 }
 
-.actual-studio .footer-container a:hover{
+.actual-studio .footer-container a:hover {
   box-shadow: 0 2px #cc262f;
 }
 
 .actual-studio .btn-radius--footer {
- background-color: #cc262f !important;
- color: #fff !important; 
+  background-color: #cc262f !important;
+  color: #fff !important;
 }
 
 .actual-studio .btn-radius--footer::after {
- background-color: #cc262f !important; 
+  background-color: #cc262f !important;
 }
 
-.actual-studio .footer-container > div:not(:last-child){
+.actual-studio .footer-container>div:not(:last-child) {
   border-right-style: solid;
-  border-color: #cc262f; 
+  border-color: #cc262f;
 }
+
+/* Widget packages */
+.punto {
+  width: 15px;
+  height: 15px;
+  background-color: rgb(229, 67, 67);
+  border-radius: 50%;
+  margin: 15px;
+  position: absolute;
+  cursor: pointer;
+  border-radius: 100%;
+  animation: pulse 1.5s infinite alternate;
+  /* Aplicar la animación de pulso */
+}
+
+/* Estilo para la animación del pulso */
+@keyframes pulse {
+  0% {
+    transform: scale(0.5);
+    /* Escala inicial */
+    opacity: 0;
+    /* Opacidad inicial */
+  }
+
+  50% {
+    transform: scale(1.5);
+    /* Escala máxima */
+    opacity: 1;
+    /* Opacidad máxima */
+  }
+
+  100% {
+    transform: scale(0.5);
+    /* Escala final */
+    opacity: 0;
+    /* Opacidad final */
+  }
+}
+
+#contenedor-imagen {
+  max-width: 877px;
+  /* Esto permite que el contenedor se ajuste al tamaño de la imagen */
+  width: auto;
+  /* Esto evita que la imagen se estire más allá de su tamaño natural */
+  position: relative;
+  /* Esto permite que los puntos se posicionen correctamente dentro del contenedor */
+}
+
+#mobile-sheet {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  transition: bottom 0.3s ease;
+  z-index: 9999;
+
+}
+
+/* end of widget packages*/

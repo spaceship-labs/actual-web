@@ -87,24 +87,25 @@ function HomeCtrl(
   function loadBannersAndFeaturedProducts() {
     siteService
       .findByHandle($rootScope.siteTheme, { getBanners: true })
-      .then(function(res) {
+      .then(function (res) {
         console.log('res findByHandle', res);
         var site = res.data;
         site.Banners = siteService.sortSiteBanners(site);
         vm.siteBanners = site.Banners;
         return productService.getFeaturedProducts(site.id);
       })
-      .then(function(result) {
+      .then(function (result) {
         vm.featuredProducts = result.data;
-        vm.featuredProducts.map(function(featured) {
+        vm.featuredProducts.map(function (featured) {
           featured.product = productService.formatProductSync(featured.product);
           return featured;
         });
-        $timeout(function() {
+        $timeout(function () {
           vm.featuredLoaded = true;
         }, 1800);
       });
   }
+
   init();
 }
 
