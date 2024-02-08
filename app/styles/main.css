@@ -9990,6 +9990,59 @@ md-sidenav {
 /*CSS CATEGORIES-HOME END*/
 
 /*PRODUCT CARD*/
+.url-product {
+  text-decoration: none;
+}
+
+.discount-batch {
+  transform: rotate(90deg);
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  position: absolute;
+  left: -8px;
+  top: 44px;
+  z-index: 2;
+  color: #ffffff;
+  font-size: 11px;
+}
+
+.bookmark-icon {
+  transform: rotate(90deg);
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  height: 30px; /* Ajusta el alto según tus necesidades */
+  position: absolute;
+  left: -10px;
+  top: 35px;
+  z-index: 2;
+}
+
+.card-img-top {
+  background-color: #f6f6f6;
+}
+
+.card:hover::before,
+.card:hover::after {
+  content: '';
+  position: absolute;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  top: -1px;
+  left: 10px;
+  pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease;
+  border-radius: 5px;
+}
+
+.card-img-top img {
+  width: 50px;
+  height: 50px;
+}
+
+.product-name {
+  min-height: 10px;
+  color: #747474;
+}
+
 .estrella,
 .estrella-vacia {
   margin-top: -23px;
@@ -10007,19 +10060,6 @@ md-sidenav {
   color: gray; /* Puedes ajustar el color según tus preferencias */
 }
 
-.card-img-top {
-  background-color: #f6f6f6;
-}
-
-.card-img-top img {
-  width: 50px;
-  height: 50px;
-}
-
-.product-name {
-  min-height: 10px;
-  color: #747474;
-}
 .price {
   margin-top: -20px;
   color: #000000;
@@ -10029,26 +10069,5 @@ md-sidenav {
 .price-before {
   text-decoration: line-through;
   color: #8c8c8c;
-}
-
-.discount-batch {
-  transform: rotate(90deg);
-  width: 100px; /* Ajusta el ancho según tus necesidades */
-  position: absolute;
-  left: -10px;
-  top: 44px;
-  z-index: 2;
-  color: #ffffff;
-  font-size: 11px;
-}
-
-.bookmark-icon {
-  transform: rotate(90deg);
-  width: 100px; /* Ajusta el ancho según tus necesidades */
-  height: 30px; /* Ajusta el alto según tus necesidades */
-  position: absolute;
-  left: -10px;
-  top: 35px;
-  z-index: 2;
 }
 /*PRODUCT CARD END*/
