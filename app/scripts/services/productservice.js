@@ -146,10 +146,13 @@
       product.url = getProductUrl(product);
       
       // Limitar el nombre del producto a 20 caracteres
-      if (product.Name.length > 20) {
-        product.Name = product.Name.substring(0, 20);
+      if (product.Name.length > 23) {
+        product.Name = product.Name.substring(0, 23);
       }
-    
+      // Redondea el .00 del precio
+      product.Price = Math.round(product.Price); 
+      product.DiscountPrice = Math.round(product.DiscountPrice);
+
       if (product.icon_filename && product.icon_filename !== 'null') {
         product.icons = [{
           url: api.cdnUrl + '/uploads/products/' + product.icon_filename,

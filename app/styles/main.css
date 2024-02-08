@@ -9989,16 +9989,16 @@ md-sidenav {
 }
 /*CSS CATEGORIES-HOME END*/
 
-/*ESTRELLAS*/
+/*PRODUCT CARD*/
 .estrella,
 .estrella-vacia {
-  display: inline-block; /* Asegura que estén en la misma línea */
+  margin-top: -23px;
 }
 
 .estrella::before,
 .estrella-vacia::before {
   content: '\2605'; /* Unicode para una estrella rellena */
-  font-size: 16px; /* Ajusta el tamaño según tus preferencias */
+  font-size: 17px; /* Ajusta el tamaño según tus preferencias */
   color: gold; /* Puedes ajustar el color según tus preferencias */
 }
 
@@ -10006,8 +10006,49 @@ md-sidenav {
   content: '\2606'; /* Unicode para una estrella vacía */
   color: gray; /* Puedes ajustar el color según tus preferencias */
 }
-/*ESTRELLAS END*/
 
 .card-img-top {
-  background-color: #f6f6f6 !important;
+  background-color: #f6f6f6;
 }
+
+.card-img-top img {
+  width: 50px;
+  height: 50px;
+}
+
+.product-name {
+  min-height: 10px;
+  color: #747474;
+}
+.price {
+  margin-top: -20px;
+  color: #000000;
+  font-size: 15px;
+}
+
+.price-before {
+  text-decoration: line-through;
+  color: #8c8c8c;
+}
+
+.discount-batch {
+  transform: rotate(90deg);
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  position: absolute;
+  left: -10px;
+  top: 44px;
+  z-index: 2;
+  color: #ffffff;
+  font-size: 11px;
+}
+
+.bookmark-icon {
+  transform: rotate(90deg);
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  height: 30px; /* Ajusta el alto según tus necesidades */
+  position: absolute;
+  left: -10px;
+  top: 35px;
+  z-index: 2;
+}
+/*PRODUCT CARD END*/
