@@ -138,19 +138,18 @@
       var url = '/' + slug + '/' + product.ItemCode;
       return url;
     }
-
+/* AJUSTES EN DETALLES DE LA CARD DE PRODUCTO */
     function formatProductSync(product, options) {
       options = options || {};
-      //product.Name = capitalizeFirstLetter(product.ItemName);
+      product.Name = capitalizeFirstLetter(product.ItemName);
       product.Name = product.Name || capitalizeFirstLetter(product.ItemName);
       product.url = getProductUrl(product);
-      /*
-        if( product.Name && isUpperCase(product.Name) ) {
-          product.Name = capitalizeFirstLetter(product.ItemName);
-        }else{
-          product.Name = product.ItemName;
-        }
-        */
+      
+      // Limitar el nombre del producto a 20 caracteres
+      if (product.Name.length > 20) {
+        product.Name = product.Name.substring(0, 20);
+      }
+    
       if (product.icon_filename && product.icon_filename !== 'null') {
         product.icons = [{
           url: api.cdnUrl + '/uploads/products/' + product.icon_filename,
@@ -172,7 +171,7 @@
           size: 'default'
         }];
       }
-
+    
       if (product.mainPromo) {
         var maxDiscount = product.mainPromo.discountPg1;
         product.maxDiscount = maxDiscount;
@@ -188,6 +187,8 @@
       }
       return product;
     }
+/* AJUSTES EN DETALLES DE LA CARD DE PRODUCTO  END*/
+    
 
     function formatSingleProduct(product) {
       var deferred = $q.defer();

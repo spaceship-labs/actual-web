@@ -10008,6 +10008,6 @@ md-sidenav {
 }
 /*ESTRELLAS END*/
 
-.product-name {
-  text-transform: lowercase; /* Convierte todo el texto a minúsculas */
+.card-img-top {
+  background-color: #f6f6f6 !important;
 }
