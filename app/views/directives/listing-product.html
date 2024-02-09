@@ -1,48 +1,46 @@
-<div class="listing-product">
-  <a ng-href="{{product.url}}" class="listing-product-link absolute-link">
-    <span>VER</span>
-  </a>
-
-  <div class="listing-product-gallery">
-
-    <div class="slow-movement-sticker" ng-show="product.slowMovement" ng-switch on="siteTheme">
-      <img ng-switch-when="actual-home" src="images/slowmovement-home.png" alt="Lento movimiento">
-      <img ng-switch-when="actual-studio" src="images/slowmovement-studio.png" alt="Lento movimiento">
-      <img ng-switch-when="actual-kids" src="images/slowmovement-kids.png" alt="Lento movimiento">
-      <img ng-switch-default src="images/slowmovement.png" alt="Lento movimiento">
-    </div>
-
-    <div ng-if="product.Discount && product.Discount > 0" class="discount-batch" layout="row"
-      layout-align="center center">
-      <strong>- {{product.Discount}}%</strong>
-    </div>
-
-    <img ng-if="images.length === 1" animate-visible="true" lazy-src="{{images[0].url}}" alt="{{product.Name}}">
-    <slick ng-if="areImagesLoaded && images.length > 1" arrows="true">
-      <div ng-repeat="image in images track by $index">
-        <img animate-visible="true" lazy-src="{{image.url}}?d=100x100" alt="{{product.Name}}">
+<a ng-href="{{product.url}}" class="url-product">
+  <div class="container-fluid" style="width: 16rem">
+    <div class="row">
+      <div class="card border-0">
+        <img
+          class="card-img-top"
+          ng-if="images.length === 1"
+          animate-visible="true"
+          lazy-src="{{images[0].url}}"
+          alt="{{product.Name}}"
+        />
+        <div class="bookmark-icon">
+          <img src="/images/promo-label.png" alt="Price Label" />
+        </div>
+        <div
+          class="discount-batch"
+          ng-if="product.Discount && product.Discount > 0"
+        >
+          - {{product.Discount}}%
+        </div>
+        <div class="card-body">
+          <p class="product-name">{{product.Name}}</p>
+          <!--
+          <p class="estrella">
+            <span class="estrella"></span>
+            <span class="estrella"></span>
+            <span class="estrella"></span>
+            <span class="estrella"></span>
+            <span class="estrella-vacia"></span>
+          </p>
+          -->
+          <p class="price">
+            <strong class="price-now-currency"></strong>
+            {{product.Price | roundCurrency:'$'}}
+            <span class="price-before-currency"></span>
+            <span class="price-before"
+              >{{product.priceBefore | roundCurrency:'$'}}</span
+            >
+            <span ng-if="product.priceBefore"></span>
+            <br />
+          </p>
+        </div>
       </div>
-    </slick>
-  </div>
-
-  <div class="listing-product-info">
-    <div class="listing-product-info-main">
-      <p>
-        <strong>{{product.Name}}</strong>
-      </p>
-
-      <div layout="row" layout-align="end center">
-        <p class="price">
-          <span class="price-before-currency">MXN</span>
-          <span class="price-before">{{product.priceBefore | roundCurrency:'$'}}</span>
-          <span ng-if="product.priceBefore">|</span>
-          <strong class="price-now-currency">MXN</strong>
-          <strong class="price-now">{{product.Price | roundCurrency:'$'}}</strong>
-          <br />
-          <span class="taxes-included">Impuestos incluidos</span>
-        </p>
-      </div>
-
     </div>
   </div>
-</div>
+</a>

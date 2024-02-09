@@ -2164,6 +2164,7 @@ select {
 .listing-product .listing-product-gallery {
   min-height: 230px;
   text-align: center;
+  background-color: #f6f6f6;
 }
 
 .listing-product .listing-product-gallery .slick-slider {
@@ -2235,18 +2236,18 @@ select {
 }
 
 .listing-product .discount-batch {
-  background: #2965b9;
-  border-radius: 50%;
-  height: 45px;
-  width: 45px;
+  background-size: contain;
+  background-image: url('/images/promo-label.png');
+  transform: rotate(90deg); /* Ajusta el ángulo */
+  background-repeat: no-repeat;
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  height: 22px; /* Ajusta el alto según tus necesidades */
   position: absolute;
-  right: 5px;
-  top: 5px;
+  left: -10px;
+  top: 32px;
   z-index: 2;
   font-size: 12px;
-  -webkit-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
-  -moz-box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
-  box-shadow: 0px 6px 3px -2px rgba(0, 0, 0, 0.44);
+  color: #fff;
 }
 
 .listing-product .discount-batch strong {
@@ -2323,7 +2324,7 @@ select {
   /* min-width: 1px; */
   padding: 0 10px;
   width: 200px;
-  height: 360px;
+  /*height: 360px;*/
 }
 
 .products-list .product-width {
@@ -2647,13 +2648,17 @@ select {
   font-size: 32px;
   text-align: center;
   font-weight: 300;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   display: flex;
   position: relative;
   align-items: center;
   margin: 15px auto 0;
   max-width: 65%;
+  justify-content: center;
+  text-decoration: none;
 }
+
+/* 
 
 .listing-view .best-seller-title:before {
   content: '';
@@ -2673,6 +2678,7 @@ select {
   margin-left: 20px;
 }
 
+
 .listing-view .best-seller-title .color-gray {
   color: #030202;
 }
@@ -2680,6 +2686,7 @@ select {
 .listing-view .best-seller-title:hover .color-gray {
   color: #030202;
 }
+*/
 
 .color-gray > h1 {
   font-size: 23px;
@@ -9973,7 +9980,6 @@ md-sidenav {
 
 /*CSS CATEGORIES-HOME*/
 .container-categories {
-  width: 100%;
   background-color: #f6f6f6;
 }
 
@@ -9982,3 +9988,87 @@ md-sidenav {
   text-decoration: none;
 }
 /*CSS CATEGORIES-HOME END*/
+
+/*PRODUCT CARD*/
+.url-product {
+  text-decoration: none;
+}
+
+.discount-batch {
+  transform: rotate(90deg);
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  position: absolute;
+  left: -10px;
+  top: 48px;
+  z-index: 2;
+  color: #ffffff;
+  font-size: 9px;
+}
+
+.bookmark-icon {
+  transform: rotate(90deg);
+  width: 100px; /* Ajusta el ancho según tus necesidades */
+  height: 30px; /* Ajusta el alto según tus necesidades */
+  position: absolute;
+  left: -10px;
+  top: 35px;
+  z-index: 2;
+}
+
+.card-img-top {
+  background-color: #f6f6f6;
+}
+
+.card:hover::before,
+.card:hover::after {
+  content: '';
+  position: absolute;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  top: -1px;
+  left: 10px;
+  pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease;
+  border-radius: 5px;
+}
+
+.card-img-top img {
+  width: 50px;
+  height: 50px;
+}
+
+.product-name {
+  min-height: 10px;
+  color: #747474;
+}
+
+/*
+.estrella,
+.estrella-vacia {
+  margin-top: -23px;
+}
+
+.estrella::before,
+.estrella-vacia::before {
+  content: '\2605'; /* Unicode para una estrella rellena 
+font-size: 17px; /* Ajusta el tamaño según tus preferencias
+color: gold; /* Puedes ajustar el color según tus preferencias 
+}
+
+.estrella-vacia::before {
+  content: '\2606'; /* Unicode para una estrella vacía 
+color: gray; /* Puedes ajustar el color según tus preferencias 
+} */
+
+.price {
+  margin-top: -20px;
+  color: #000000;
+  font-size: 15px;
+}
+
+.price-before {
+  text-decoration: line-through;
+  color: #8c8c8c;
+}
+/*PRODUCT CARD END*/
