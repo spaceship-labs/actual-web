@@ -1,4 +1,165 @@
-<div id="footer">
+<footer id="footer-actual" class="container-fluid py-4" ng-if="main.siteTheme === 'actual-studio'">
+  <div class="row">
+    <div class="col-10 col-md-11 mx-auto">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-2">
+            <h6 class="text-uppercase text-center-xs">Nosotros</h6>
+            <ul class="font-size-75 p-0 list-style-none">
+              <li class="text-uppercase">Acerca de nosotros</li>
+              <li class="text-uppercase">Contacto</li>
+              <li class="text-uppercase">Nuestras tiendas</li>
+            </ul>
+            <h6 class="mt-1 text-uppercase mt-4 text-center-xs">Horarios de atención</h6>
+            <p class="text-uppercase text-center-xs font-size-75 m-0">Lunes a viernes:</p>
+            <p class="m-0 font-size-75 text-uppercase text-center-xs">9:00 AM - 18:00 PM</p>
+            <p class="m-0 font-size-75 text-uppercase text-center-xs">Sábado:</p>
+            <p class="m-0 font-size-75 text-uppercase text-center-xs">9:00 AM - 13:00 PM</p>
+          </div>
+          <div class="col-12 col-sm-6 col-md-2">
+            <h6 class="mt-3 mt-sm-0 text-center-xs text-uppercase">Más Información</h6>
+            <ul class="text-uppercase font-size-75 p-0">
+              <li class="text-uppercase">rastrear mi pedido</li>
+              <li class="text-uppercase">Preguntas frecuentes</li>
+              <li class="text-uppercase">
+                <a class="text-black text-decoration-none" href="/aviso-de-privacidad">Aviso de privacidad</a>
+              </li>
+              <li class="text-uppercase">
+                <a class="text-black text-decoration-none" href="/terminos-y-condiciones">Términos y condiciones</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <h6 class="mb-4 mt-2 mt-sm-0 text-uppercase">Síguenos en:</h6>
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-10 col-sm-9 col-md-8">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-3 align-self-center">
+                            <a ng-href="{{main.siteConstants.fb_url}}" target="_blank">
+                              <img class="img-fluid w-100" lazy-src="images/fb.png" alt="Facebook {{main.siteName}}">
+                            </a>
+                          </div>
+                          <div class="col-3 align-self-center">
+                            <a ng-href="" target="_blank">
+                              <img class="img-fluid w-100" animate-visible="true" lazy-src="images/tw.png" alt="Twitter {{main.siteName}}">
+                            </a>
+                          </div>
+                          <div class="col-3 align-self-center">
+                            <a ng-show="main.siteConstants.instagram_url" ng-href="{{main.siteConstants.instagram_url}}" target="_blank">
+                              <img class="img-fluid w-100" src="images/instagram.png" alt="Instagram {{main.siteName}}">
+                            </a>
+
+                          </div>
+                          <div class="col-3 align-self-center">
+                            <a ng-show="main.siteConstants.pinterest_url" ng-href="{{main.siteConstants.pinterest_url}}" target="_blank">
+                              <img class="img-fluid w-100" src="images/pinterest.png" alt="Pinterest {{main.siteName}}">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <h2 class="mt-3 mt-sm-0 text-uppercase">Newsletter</h2>
+            <p class="font-size-75">Tendencias en Muebles: Explora Nuestros Set Exclusivos.</p>
+            <form action="https://actualdecoracion.us8.list-manage.com/subscribe/post?u=25c04b33be0ab7f4c91305d5f&amp;id=754a3112f2&amp;f_id=00f5c2e1f0" class="container mt-3" method="post" id="newsletter-form">
+              <div class="row">
+                <div class="col-9 p-0">
+                  <input type="text" class="d-block w-100 py-2 px-2" placeholder="Correo electrónico">
+                </div>
+                <div class="col-3 p-0">
+                  <button type="submit" class="d-block w-100 py-2 px-2">Suscríbete</button>
+                </div>
+              </div>
+            </form>
+            <img src="/images/icons/ac_full_logo.png" class="w-75 d-block mx-auto mt-3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row justify-content-between">
+    <div class="col-11 mx-auto border-top mt-3 pt-3" >
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-5 col-sm-4 col-lg-3">
+            <p class="p-0 my-2">Copyright © 2023</p>
+          </div>
+          <div class="col-5 col-sm-4 col-lg-3 offset-lg-6 offset-md-4 offset-2 text-end">
+            <img src="/images/icons/card_brands.png" class="w-25" alt="Actual-card-brand">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</footer>
+
+<footer class="pt-5 pb-4 d-none" id="footer-actual">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h3>NOSOTROS</h3>
+          <ul class="list-unstyled">
+            <li><a href="#">ACERCA DE NOTROS</a></li>
+            <li><a href="#">CONTACTO</a></li>
+            <li><a href="#">NUESTRAS TIENDAS</a></li>
+            <li><a href="#">POLITICAS DE PRIVACIDAD</a></li>
+            <li><a href="#">TERMINOS Y CONDICIONES</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h3>MAS INFROMACION</h3>
+          <ul class="list-unstyled">
+            <li><a href="#">PREGUNTAS FRECUENTES</a></li>
+            <li><a href="#">RASTREAR MI PEDIDO</a></li>
+            <li><a href="#">Tendencias en Muebles</a></li>
+            <li><a href="#">Explora Nuestros Sets Exclusivos</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h3>SIGUENOS EN:</h3>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+          <p class="mt-4">Suscribete a nuestro Newsletter:</p>
+          <form action="#">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Tu correo electrónico">
+              <button class="btn btn-primary" type="submit">Suscribirse</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h3>HORARIOS DE ATENCION</h3>
+          <ul class="list-unstyled">
+            <li>LUNES A VIERNES</li>
+            <li>09:00 AM-18:00 PM</li>
+            <li>SÁBADO</li>
+            <li>09:00 AM-13:00 PM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-darker text-center py-2">
+      <p class="mb-0">Copyright © 2023 - Atelier - Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+
+<div id="footer" ng-if="main.siteTheme !== 'actual-studio'">
   <div class="footer-menu">
     <div class="footer-container">
 
@@ -7,7 +168,7 @@
           <div class="footer-rbtn">
             <a href="/compra-segura" class="btn-radius btn-radius--footer"><strong>COMPRA EN LÍNEA</strong></a>
             <!--           <a href="#section-tours" class="btn-radius btn-radius--white"><h2>COMPRA EN LÍNEA</h2></a>
- -->
+            -->
           </div>
           <div>
             <ul>
@@ -42,280 +203,280 @@
                       <p>08:00am - 22:00pm</p>
                     </td>
                   </tr>
-                  </tr>
-                </table>
-              </li>
-              <li>
-                <p>
-                  <strong>Acerca de nosotros</strong>
-                </p>
-                <ul>
-                  <li>
-                    <a href="/quienes-somos">¿Quiénes somos?</a>
-                  </li>
-                  <li>
-                    <a href="/filosofia">Filosofía</a>
-                  </li>
-                  <li>
-                    <a href="/nuestras-marcas">Nuestras marcas</a>
-                  </li>
-                  <li>
-                    <a href="/nuestras-tiendas">Tiendas</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <p>
-                  <strong>Pagos</strong>
-                </p>
-                <ul>
-                  <li>
-                    <a href="/compra-segura">Compra segura</a>
-                  </li>
-                  <li>
-                    <a href="/formas-de-pago">Formas de pago</a>
-                  </li>
-                  <li>
-                    <a href="/facturacion">Facturación</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-card">
-        <div class="footer-card-container footer-rboarder">
-          <div class="footer-rbtn">
-            <a href="/envio-y-entrega" class="btn-radius btn-radius--footer"><strong>ENVÍOS Y ENTREGAS</strong></a>
-          </div>
-
-          <div>
-            <ul>
-              <li>
-                <p>
-                  <strong>FAQS </strong><span>(chatbot)</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <strong>Contacto</strong>
-                </p>
-                <p>
-                  Entregas locales:
-                </p>
-                <table>
-                  <tr>
-                    <td>Celular:&nbsp;&nbsp;</td>
-                    <td>(998) 246 0845</td>
-                  </tr>
-                </table>
-                <p>
-                  Entregas foráneas (todo México):
-                </p>
-                <table>
-                  <tr>
-                    <td>Celular:&nbsp;&nbsp;</td>
-                    <td>(998) 200 5664</td>
-                  </tr>
-                </table>
-              </li>
-
-              <li>
-                <p>
-                  <strong>Horarios de atención</strong>
-                </p>
-                <table>
-                  <tr>
-                    <td>Lunes a Domingo:&nbsp;&nbsp;</td>
-                    <td>
-                      <p>08:00am - 22:00pm</p>
-                    </td>
-                  </tr>
-                  </tr>
-                </table>
-              </li>
-              <li>
-                <p>
-                  <strong>¿Necesitas ayuda?</strong>
-                </p>
-                <ul>
-                  <li>
-                    <a href="/envio-y-entrega">Envíos y entregas</a>
-                  </li>
-                  <li>
-                    <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
-                  </li>
-                  <li>
-                    <a id="contactanos" href="/contactanos">Contáctanos</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-card">
-        <div class="footer-card-container">
-            <div class="footer-rbtn">
-              <a href="/sugerencias-y-quejas" class="btn-radius btn-radius--footer"><strong>ATENCIÓN A
-                  CLIENTE</strong></a>
-            </div>
-            <div class="hidden-footer" ng-switch on="main.siteTheme">
-              <img class="logo-as" ng-switch-when="actual-home" src="design/homeaq.png" alt="Actual Group" />
-              <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" />
-              <img class="logo-as" ng-switch-when="actual-kids" src="design/kids1.png" alt="Actual Group" />
-              <img class="logo-as" ng-switch-default ssrc="design/homeaq.png" alt="Actual Group" />
-            </div>
-          <ul>
-            <li>
-              <p>
-                <strong>FAQS </strong><span>(chatbot)</span>
-              </p>
-              <p>
-                <a href="/politicas-de-garantia"><strong>Garantias</strong></a>
-              </p>
-            </li>
-            <li>
-              <p>
-                <a href="/cambios-devoluciones-y-cancelaciones"><strong>Cambios y devoluciones</strong></a>
-              </p>
-              <p>
-                <a href="/manual-de-cuidados-y-recomendaciones"><strong>Manual de recomendaciones </strong></a>
-              </p>
-            </li>
-            <li>
-              <p>
-                <strong>Contacto</strong>
-              </p>
-              <table>
-                <tr>
-                  <td>Celular:&nbsp;&nbsp;</td>
-                  <td>998 168 8989</td>
-                </tr>
-                <tr>
-                  <td>Celular:&nbsp;&nbsp;</td>
-                  <td>998 195 6839</td>
                 </tr>
               </table>
             </li>
             <li>
               <p>
-                <strong>Horarios de atención</strong>
-              </p>
-              <table>
-                <tr>
-                  <td>Lunes a Viernes:&nbsp;&nbsp;</td>
-                  <td>
-                    <p>09:00am - 18:00pm</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Sábado:&nbsp;&nbsp;</td>
-                  <td>
-                    <p>09:00am - 13:00pm</p>
-                  </td>
-                </tr>
-                </tr>
-              </table>
-            </li>
-            <li>
-              <p>
-                <strong>¡Ayúdanos a mejorar!</strong>
+                <strong>Acerca de nosotros</strong>
               </p>
               <ul>
                 <li>
-                  <a href="/sugerencias-y-quejas">Tu opinión nos importa</a>
+                  <a href="/quienes-somos">¿Quiénes somos?</a>
+                </li>
+                <li>
+                  <a href="/filosofia">Filosofía</a>
+                </li>
+                <li>
+                  <a href="/nuestras-marcas">Nuestras marcas</a>
+                </li>
+                <li>
+                  <a href="/nuestras-tiendas">Tiendas</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>
+                <strong>Pagos</strong>
+              </p>
+              <ul>
+                <li>
+                  <a href="/compra-segura">Compra segura</a>
+                </li>
+                <li>
+                  <a href="/formas-de-pago">Formas de pago</a>
+                </li>
+                <li>
+                  <a href="/facturacion">Facturación</a>
                 </li>
               </ul>
             </li>
           </ul>
         </div>
       </div>
-
     </div>
 
-    <div class="container container-xxlg footer-menu-bottom" layout="row" layout-wrap layout-align="center center">
-      <div class="box-bottom" flex="40" flex-xs="100">
+    <div class="footer-card">
+      <div class="footer-card-container footer-rboarder">
+        <div class="footer-rbtn">
+          <a href="/envio-y-entrega" class="btn-radius btn-radius--footer"><strong>ENVÍOS Y ENTREGAS</strong></a>
+        </div>
 
-        <p class="verified-logos" id="verified-logos-footer">
-          <img src="/images/trust_brands_trustwave.svg" alt="Trustwave">
-          <img src="/images/trust_brands_prosa.svg" alt="Prosa">
-          <img src="/images/trust_brands_kount.svg" alt="Kount">
-          <img src="/images/trust_brands_mcafee.svg" alt="Mcafee">
-          <img src="/images/trust_brands_digicert.svg" alt="Digicert">
-        </p>
+        <div>
+          <ul>
+            <li>
+              <p>
+                <strong>FAQS </strong><span>(chatbot)</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Contacto</strong>
+              </p>
+              <p>
+                Entregas locales:
+              </p>
+              <table>
+                <tr>
+                  <td>Celular:&nbsp;&nbsp;</td>
+                  <td>(998) 246 0845</td>
+                </tr>
+              </table>
+              <p>
+                Entregas foráneas (todo México):
+              </p>
+              <table>
+                <tr>
+                  <td>Celular:&nbsp;&nbsp;</td>
+                  <td>(998) 200 5664</td>
+                </tr>
+              </table>
+            </li>
 
+            <li>
+              <p>
+                <strong>Horarios de atención</strong>
+              </p>
+              <table>
+                <tr>
+                  <td>Lunes a Domingo:&nbsp;&nbsp;</td>
+                  <td>
+                    <p>08:00am - 22:00pm</p>
+                  </td>
+                </tr>
+              </tr>
+            </table>
+          </li>
+          <li>
+            <p>
+              <strong>¿Necesitas ayuda?</strong>
+            </p>
+            <ul>
+              <li>
+                <a href="/envio-y-entrega">Envíos y entregas</a>
+              </li>
+              <li>
+                <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
+              </li>
+              <li>
+                <a id="contactanos" href="/contactanos">Contáctanos</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
+    </div>
+  </div>
 
-      <div class="box-bottom social-networks" layout="row" layout-align="center center" flex="30" flex-xs="100">
-        <a ng-href="{{main.siteConstants.fb_url}}" target="_blank">
-          <img src="images/fb.png" alt="Facebook {{main.siteName}}">
-        </a>
+  <div class="footer-card">
+    <div class="footer-card-container">
+      <div class="footer-rbtn">
+        <a href="/sugerencias-y-quejas" class="btn-radius btn-radius--footer"><strong>ATENCIÓN A
+        CLIENTE</strong></a>
+      </div>
+      <div class="hidden-footer" ng-switch on="main.siteTheme">
+        <img class="logo-as" ng-switch-when="actual-home" src="design/homeaq.png" alt="Actual Group" />
+        <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" />
+        <img class="logo-as" ng-switch-when="actual-kids" src="design/kids1.png" alt="Actual Group" />
+        <img class="logo-as" ng-switch-default ssrc="design/homeaq.png" alt="Actual Group" />
+      </div>
+      <ul>
+        <li>
+          <p>
+            <strong>FAQS </strong><span>(chatbot)</span>
+          </p>
+          <p>
+            <a href="/politicas-de-garantia"><strong>Garantias</strong></a>
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="/cambios-devoluciones-y-cancelaciones"><strong>Cambios y devoluciones</strong></a>
+          </p>
+          <p>
+            <a href="/manual-de-cuidados-y-recomendaciones"><strong>Manual de recomendaciones </strong></a>
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Contacto</strong>
+          </p>
+          <table>
+            <tr>
+              <td>Celular:&nbsp;&nbsp;</td>
+              <td>998 168 8989</td>
+            </tr>
+            <tr>
+              <td>Celular:&nbsp;&nbsp;</td>
+              <td>998 195 6839</td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <p>
+            <strong>Horarios de atención</strong>
+          </p>
+          <table>
+            <tr>
+              <td>Lunes a Viernes:&nbsp;&nbsp;</td>
+              <td>
+                <p>09:00am - 18:00pm</p>
+              </td>
+            </tr>
+            <tr>
+              <td>Sábado:&nbsp;&nbsp;</td>
+              <td>
+                <p>09:00am - 13:00pm</p>
+              </td>
+            </tr>
+          </tr>
+        </table>
+      </li>
+      <li>
+        <p>
+          <strong>¡Ayúdanos a mejorar!</strong>
+        </p>
+        <ul>
+          <li>
+            <a href="/sugerencias-y-quejas">Tu opinión nos importa</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<div class="container container-xxlg footer-menu-bottom" layout="row" layout-wrap layout-align="center center">
+  <div class="box-bottom" flex="40" flex-xs="100">
+
+    <p class="verified-logos" id="verified-logos-footer">
+      <img src="/images/trust_brands_trustwave.svg" alt="Trustwave">
+      <img src="/images/trust_brands_prosa.svg" alt="Prosa">
+      <img src="/images/trust_brands_kount.svg" alt="Kount">
+      <img src="/images/trust_brands_mcafee.svg" alt="Mcafee">
+      <img src="/images/trust_brands_digicert.svg" alt="Digicert">
+    </p>
+
+  </div>
+
+  <div class="box-bottom social-networks" layout="row" layout-align="center center" flex="30" flex-xs="100">
+    <a ng-href="{{main.siteConstants.fb_url}}" target="_blank">
+      <img src="images/fb.png" alt="Facebook {{main.siteName}}">
+    </a>
         <!--
         <a ng-href="" target="_blank">
           <img animate-visible="true" lazy-src="images/tw.png" alt="Twitter {{main.siteName}}">
         </a>
-        -->
-        <a ng-show="main.siteConstants.instagram_url" ng-href="{{main.siteConstants.instagram_url}}" target="_blank">
-          <img src="images/instagram.png" alt="Instagram {{main.siteName}}">
-        </a>
+      -->
+      <a ng-show="main.siteConstants.instagram_url" ng-href="{{main.siteConstants.instagram_url}}" target="_blank">
+        <img src="images/instagram.png" alt="Instagram {{main.siteName}}">
+      </a>
 
         <!--
         <a ng-href="" target="_blank">
           <img animate-visible="true" lazy-src="images/youtube.png" alt="Youtube {{main.siteName}}">
         </a>
-        -->
-        <a ng-show="main.siteConstants.pinterest_url" ng-href="{{main.siteConstants.pinterest_url}}" target="_blank">
-          <img src="images/pinterest.png" alt="Pinterest {{main.siteName}}">
-        </a>
-      </div>
-
-      <div class="box-bottom" layout="row" layout-align="center center" flex="30" flex-xs="100" ng-switch
-        on="main.siteTheme">
-
-        <a href="/" class="footer-logo">
-          <img ng-switch-when="actual-home" class="logo" src="images/NLogo-A-Home.png" alt="Actual home">
-          <img ng-switch-when="actual-studio" class="logo" src="images/Logo-A-Studio.png" alt="Actual studio">
-          <img ng-switch-when="actual-kids" class="logo" src="images/Logo-A-Kids.png" alt="Actual kids">
-          <img ng-switch-default class="logo" src="images/NLogo-A-Home.png" alt="Actual home">
-        </a>
-
-      </div>
-
+      -->
+      <a ng-show="main.siteConstants.pinterest_url" ng-href="{{main.siteConstants.pinterest_url}}" target="_blank">
+        <img src="images/pinterest.png" alt="Pinterest {{main.siteName}}">
+      </a>
     </div>
 
-    <!--<ng-include src="'views/sitemap.html'"></ng-include>-->
+    <div class="box-bottom" layout="row" layout-align="center center" flex="30" flex-xs="100" ng-switch
+    on="main.siteTheme">
 
-    <div class="footer-bottom center-content">
-      <div class="container container-xlg">
-        <p>
-          <strong>​© AH ACTUAL S.A. de C.V. es parte de Actual Group {{main.currentYear}} | Todos los derechos
-            reservados.
-            | Todos
-            los precios son mostrados en Pesos Mexicanos (MXN) con IVA incluido.</strong>
-        </p>
-        <h3 analytics-on="click" analytics-event="testEvent">Legales</h3>
-        <p>
-          <a href="/aviso-de-privacidad">Aviso de privacidad</a> |
-          <a href="/terminos-y-condiciones">Términos y condiciones</a> |
-          <a href="/seguridad">Seguridad</a>
-        </p>
-        <div>
-          <p>
-            <span>Se prohíbe cualquier reproducción total o parcial de este contenido. Es responsabilidad del
-              proveedor
-              garantizar
-              <br> la exactitud de las fotografías mostradas y no nos hacemos responsables por inexactitudes en las
-              mismas.</span>
-          </p>
-        </div>
-      </div>
-    </div>
+    <a href="/" class="footer-logo">
+      <img ng-switch-when="actual-home" class="logo" src="images/NLogo-A-Home.png" alt="Actual home">
+      <img ng-switch-when="actual-studio" class="logo" src="images/Logo-A-Studio.png" alt="Actual studio">
+      <img ng-switch-when="actual-kids" class="logo" src="images/Logo-A-Kids.png" alt="Actual kids">
+      <img ng-switch-default class="logo" src="images/NLogo-A-Home.png" alt="Actual home">
+    </a>
 
   </div>
+
+</div>
+
+<!--<ng-include src="'views/sitemap.html'"></ng-include>-->
+
+<div class="footer-bottom center-content">
+  <div class="container container-xlg">
+    <p>
+      <strong>​© AH ACTUAL S.A. de C.V. es parte de Actual Group {{main.currentYear}} | Todos los derechos
+        reservados.
+        | Todos
+      los precios son mostrados en Pesos Mexicanos (MXN) con IVA incluido.</strong>
+    </p>
+    <h3 analytics-on="click" analytics-event="testEvent">Legales</h3>
+    <p>
+      <a href="/aviso-de-privacidad">Aviso de privacidad</a> |
+      <a href="/terminos-y-condiciones">Términos y condiciones</a> |
+      <a href="/seguridad">Seguridad</a>
+    </p>
+    <div>
+      <p>
+        <span>Se prohíbe cualquier reproducción total o parcial de este contenido. Es responsabilidad del
+          proveedor
+          garantizar
+          <br> la exactitud de las fotografías mostradas y no nos hacemos responsables por inexactitudes en las
+        mismas.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+</div>
   <!--
   <script src="https://apis.google.com/js/platform.js?onload=renderBadge" async defer></script>
 
@@ -331,11 +492,11 @@
     }
 
   </script>
-  -->
-  <script type="text/javascript">
-    (function(e,t,o,n,p,r,i){e.visitorGlobalObjectAlias=n;e[e.visitorGlobalObjectAlias]=e[e.visitorGlobalObjectAlias]||function(){(e[e.visitorGlobalObjectAlias].q=e[e.visitorGlobalObjectAlias].q||[]).push(arguments)};e[e.visitorGlobalObjectAlias].l=(new Date).getTime();r=t.createElement("script");r.src=o;r.async=true;i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)})(window,document,"https://diffuser-cdn.app-us1.com/diffuser/diffuser.js","vgo");
-    vgo('setAccount', '224706343');
-    vgo('setTrackByDefault', true);
+-->
+<script type="text/javascript">
+  (function(e,t,o,n,p,r,i){e.visitorGlobalObjectAlias=n;e[e.visitorGlobalObjectAlias]=e[e.visitorGlobalObjectAlias]||function(){(e[e.visitorGlobalObjectAlias].q=e[e.visitorGlobalObjectAlias].q||[]).push(arguments)};e[e.visitorGlobalObjectAlias].l=(new Date).getTime();r=t.createElement("script");r.src=o;r.async=true;i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)})(window,document,"https://diffuser-cdn.app-us1.com/diffuser/diffuser.js","vgo");
+  vgo('setAccount', '224706343');
+  vgo('setTrackByDefault', true);
 
-    vgo('process');
-  </script>
+  vgo('process');
+</script>
