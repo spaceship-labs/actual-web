@@ -10072,3 +10072,15 @@ color: gray; /* Puedes ajustar el color según tus preferencias
   color: #8c8c8c;
 }
 /*PRODUCT CARD END*/
+
+/*BUNDLES*/
+.custom {
+  color: #909090;
+}
+
+@media only screen and (max-width: 600px) {
+  .responsive-text {
+    font-size: 0.8em;
+  }
+}
+/*BUNDLES END*/
