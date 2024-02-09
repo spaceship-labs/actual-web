@@ -1,1 +1,50 @@
-widget
+<div class="col-11 mx-auto" ng-controller="widgetController">
+    <div class="container">
+        <p class="h1 py-4 text-center">Espacios que enamoran</p>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-7 d-flex justify-content-center">
+            <div id="contenedor-imagen">
+                <img id="plano" src="images/home2024/widget1.png" alt="Mapa" class="img-fluid">
+                <!-- Puntos sobre las áreas -->
+
+                <div class="punto" id="punto1p1" onclick="accion(0)"></div>
+                <div class="punto" id="punto2p1" onclick="accion(1)"></div>
+                <div class="punto" id="punto3p1" onclick="accion(2)"></div>
+                <div class="punto" id="punto4p1" onclick="accion(3)"></div>
+                <div class="punto" id="punto5p1" onclick="accion(4)"></div>
+                <div class="punto" id="punto6p1" onclick="accion(5)"></div>
+                <!-- Añade más puntos según las áreas -->
+            </div>
+        </div>
+        <div class="col-5 justify-content-center d-none d-xl-flex">
+            <div class="card" style="width: 18rem; max-height: 454px;">
+                <img src="https://d116li125og699.cloudfront.net/uploads/products/CO69272_1.jpg" class="card-img-top"
+                    id="widget-product-image">
+                <div class="card-body">
+                    <h5 class="card-title" id="widget-product-title">Espejo decorativo redondo cae060 ø1.20 dorado</h5>
+                    <p class="card-text" id="widget-product-price">$6999</p>
+                    <a href="#" class="btn btn-primary">comprar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mobile-sheet">
+
+    <div class="card product-sheet-widget" style="width: 100%;">
+        <div class="container-fluid py-3 d-flex justify-content-end">
+            <button id="close-button" onclick="closeMobileSheet()">X</button>
+        </div>
+        <div class="d-flex justify-content-center">
+            <img src="" class="card-img-top" id="mobile-product-image" style="max-width: 300px;">
+        </div>
+        <div class="card-body">
+
+            <div class="container">
+                <h5 class="card-title text-center" id="mobile-product-title"></h5>
+                <p class="card-text" id="mobile-product-price"></p>
+            </div>
+        </div>
+    </div>
+</div>
