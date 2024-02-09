@@ -8,12 +8,12 @@
                 <img id="plano" src="images/home2024/widget1.png" alt="Mapa" class="img-fluid">
                 <!-- Puntos sobre las áreas -->
 
-                <div class="punto" id="punto1" style="left: 30%; top: 30%;" onclick="accion(0)"></div>
-                <div class="punto" id="punto2" style="left: 38%; top: 49%;" onclick="accion(1)"></div>
-                <div class="punto" id="punto3" style="left: 22%; top: 65%;" onclick="accion(2)"></div>
-                <div class="punto" id="punto4" style="left: 50%; top: 45%;" onclick="accion(3)"></div>
-                <div class="punto" id="punto5" style="left: 66%; top: 56%;" onclick="accion(4)"></div>
-                <div class="punto" id="punto6" style="left: 60%; top: 68%;" onclick="accion(5)"></div>
+                <div class="punto" id="punto1p1" onclick="accion(0)"></div>
+                <div class="punto" id="punto2p1" onclick="accion(1)"></div>
+                <div class="punto" id="punto3p1" onclick="accion(2)"></div>
+                <div class="punto" id="punto4p1" onclick="accion(3)"></div>
+                <div class="punto" id="punto5p1" onclick="accion(4)"></div>
+                <div class="punto" id="punto6p1" onclick="accion(5)"></div>
                 <!-- Añade más puntos según las áreas -->
             </div>
         </div>
@@ -32,12 +32,19 @@
 </div>
 <div id="mobile-sheet">
 
-    <div class="card" style="width: 100%;">
-        <button id="close-button" onclick="closeMobileSheet()">X</button>
-        <img src="" class="card-img-top" id="mobile-product-image" style="max-width: 400px;">
+    <div class="card product-sheet-widget" style="width: 100%;">
+        <div class="container-fluid py-3 d-flex justify-content-end">
+            <button id="close-button" onclick="closeMobileSheet()">X</button>
+        </div>
+        <div class="d-flex justify-content-center">
+            <img src="" class="card-img-top" id="mobile-product-image" style="max-width: 300px;">
+        </div>
         <div class="card-body">
-            <h5 class="card-title" id="mobile-product-title"></h5>
-            <p class="card-text" id="mobile-product-price"></p>
+
+            <div class="container">
+                <h5 class="card-title text-center" id="mobile-product-title"></h5>
+                <p class="card-text" id="mobile-product-price"></p>
+            </div>
         </div>
     </div>
 </div>

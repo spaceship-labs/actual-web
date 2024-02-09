@@ -160,12 +160,13 @@
 .punto {
   width: 15px;
   height: 15px;
-  background-color: rgb(229, 67, 67);
-  border-radius: 50%;
+  background-color: rgb(172, 169, 169);
   margin: 15px;
   position: absolute;
   cursor: pointer;
   border-radius: 100%;
+  box-shadow: inset 0px 0px 0px 1px white;
+  border: 1px solid rgb(80, 80, 80);
   animation: pulse 1.5s infinite alternate;
   /* Aplicar la animación de pulso */
 }
@@ -173,24 +174,15 @@
 /* Estilo para la animación del pulso */
 @keyframes pulse {
   0% {
-    transform: scale(0.5);
-    /* Escala inicial */
-    opacity: 0;
-    /* Opacidad inicial */
+    transform: scale(0.9);
   }
 
   50% {
-    transform: scale(1.5);
-    /* Escala máxima */
-    opacity: 1;
-    /* Opacidad máxima */
+    transform: scale(1.2);
   }
 
   100% {
-    transform: scale(0.5);
-    /* Escala final */
-    opacity: 0;
-    /* Opacidad final */
+    transform: scale(0.9);
   }
 }
 
@@ -215,3 +207,179 @@
 }
 
 /* end of widget packages*/
+
+
+/*Poitns poostions*/
+
+/* mobile*/
+@media only screen and (max-width: 576px) {
+  #punto1p1 {
+    left: 25%;
+    top: 30%;
+  }
+
+  #punto2p1 {
+    left: 33%;
+    top: 39%;
+  }
+
+  #punto3p1 {
+    left: 22%;
+    top: 65%;
+  }
+
+  #punto4p1 {
+    left: 50%;
+    top: 40%;
+  }
+
+  #punto5p1 {
+    left: 66%;
+    top: 56%;
+  }
+
+  #punto6p1 {
+    left: 53%;
+    top: 66%;
+  }
+}
+
+
+@media only screen and (min-width: 577px) and (max-width: 1025px) {
+  #punto1p1 {
+    left: 28%;
+    top: 30%;
+  }
+
+  #punto2p1 {
+    left: 36%;
+    top: 47%;
+  }
+
+  #punto3p1 {
+    left: 22%;
+    top: 65%;
+  }
+
+  #punto4p1 {
+    left: 50%;
+    top: 40%;
+  }
+
+  #punto5p1 {
+    left: 66%;
+    top: 56%;
+  }
+
+  #punto6p1 {
+    left: 53%;
+    top: 66%;
+  }
+}
+
+@media only screen and (min-width: 1026px) and (max-width:1199px) {
+  #punto1p1 {
+    left: 28%;
+    top: 30%;
+  }
+
+  #punto2p1 {
+    left: 36%;
+    top: 47%;
+  }
+
+  #punto3p1 {
+    left: 22%;
+    top: 65%;
+  }
+
+  #punto4p1 {
+    left: 50%;
+    top: 40%;
+  }
+
+  #punto5p1 {
+    left: 66%;
+    top: 56%;
+  }
+
+  #punto6p1 {
+    left: 53%;
+    top: 66%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width:1399px) {
+  #punto1p1 {
+    left: 27%;
+    top: 20%;
+  }
+
+  #punto2p1 {
+    left: 35%;
+    top: 35%;
+  }
+
+  #punto3p1 {
+    left: 22%;
+    top: 50%;
+  }
+
+  #punto4p1 {
+    left: 50%;
+    top: 33%;
+  }
+
+  #punto5p1 {
+    left: 66%;
+    top: 42%;
+  }
+
+  #punto6p1 {
+    left: 50%;
+    top: 58%;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  #punto1p1 {
+    left: 28%;
+    top: 28%;
+  }
+
+  #punto2p1 {
+    left: 36%;
+    top: 48%;
+  }
+
+  #punto3p1 {
+    left: 26%;
+    top: 70%;
+  }
+
+  #punto4p1 {
+    left: 50%;
+    top: 45%;
+  }
+
+  #punto5p1 {
+    left: 66%;
+    top: 57%;
+  }
+
+  #punto6p1 {
+    left: 57%;
+    top: 70%;
+  }
+}
+
+#close-button {
+  border: none;
+  background-color: transparent !important;
+}
+
+.product-sheet-widget {
+  box-shadow: -1px -6px 9px -2px rgba(0, 0, 0, 0.75) !important;
+  -webkit-box-shadow: -1px -6px 9px -2px rgba(0, 0, 0, 0.75) !important;
+  -moz-box-shadow: -1px -6px 9px -2px rgba(0, 0, 0, 0.75) !important;
+}
