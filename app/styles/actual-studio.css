@@ -312,32 +312,32 @@
 @media only screen and (min-width: 1200px) and (max-width:1399px) {
   #punto1p1 {
     left: 27%;
-    top: 20%;
+    top: 30%;
   }
 
   #punto2p1 {
     left: 35%;
-    top: 35%;
+    top: 48%;
   }
 
   #punto3p1 {
     left: 22%;
-    top: 50%;
+    top: 66%;
   }
 
   #punto4p1 {
     left: 50%;
-    top: 33%;
+    top: 45%;
   }
 
   #punto5p1 {
     left: 66%;
-    top: 42%;
+    top: 58%;
   }
 
   #punto6p1 {
     left: 50%;
-    top: 58%;
+    top: 69%;
   }
 }
 
@@ -382,4 +382,16 @@
   box-shadow: -1px -6px 9px -2px rgba(0, 0, 0, 0.75) !important;
   -webkit-box-shadow: -1px -6px 9px -2px rgba(0, 0, 0, 0.75) !important;
   -moz-box-shadow: -1px -6px 9px -2px rgba(0, 0, 0, 0.75) !important;
+}
+
+.product-sheet-widget:hover {
+  border: none !important;
+}
+
+.product-sheet-widget:hover::before,
+.product-sheet-widget:hover::after {
+  content: '';
+  position: absolute;
+  border: none !important;
+  pointer-events: none;
 }
