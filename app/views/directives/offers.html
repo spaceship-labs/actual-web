@@ -1,18 +1,65 @@
-<div ng-if="isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
-  <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
+<div
+  ng-if="isLoading"
+  layout-fill
+  layout="row"
+  layout-align="center center"
+  class="loading-circle"
+>
+  <md-progress-circular
+    md-mode="indeterminate"
+    class="md-accent"
+    md-diameter="150"
+  ></md-progress-circular>
 </div>
 
-<div ng-if="!isLoading" class="subs-container" style="display:flex;flex-wrap: wrap;">
-  <div ng-repeat="package in packages track by $index" class="package-wrapper">
-      <a ng-click="addPackageToCart(package.id)" href="#">
-        <img animate-visible="true" lazy-src="{{package.image}}" alt="{{package.image}}">
-      </a>
-      <div class="package-text">
-        <h4>
-          <a href="#">
-            <strong>{{package.Name}}</strong>
-          </a>
-        </h4>
-      </div> 
+<div
+  ng-if="!isLoading"
+  class="subs-container"
+  style="display: flex; flex-wrap: wrap"
+></div>
+
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div ng-if="!isLoading">
+        <div
+          ng-repeat="package in packages track by $index"
+          class="package-wrapper"
+        >
+          <img
+            animate-visible="true"
+            lazy-src="{{package.image}}"
+            alt="{{package.image}}"
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <a
+              ng-click="addPackageToCart(package.id)"
+              href="#"
+              class="btn btn-primary"
+              >Comprar Ahora</a
+            >
+            <a href="/ofertas" class="btn btn-secondary">Ver Más</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previo</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguente</span>
+  </button>
 </div>
