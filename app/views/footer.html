@@ -1,4 +1,4 @@
-<footer id="footer-actual" class="container-fluid py-4" ng-if="main.siteTheme === 'actual-studio'">
+<footer id="footer-actual" class="container-fluid pt-4" ng-if="main.siteTheme === 'actual-studio'">
   <div class="row">
     <div class="col-10 col-md-11 mx-auto">
       <div class="container-fluid">
@@ -38,23 +38,23 @@
                     <div class="col-10 col-sm-9 col-md-8">
                       <div class="container">
                         <div class="row">
-                          <div class="col-3 align-self-center">
+                          <div class="col-4 align-self-center">
                             <a ng-href="{{main.siteConstants.fb_url}}" target="_blank">
                               <img class="img-fluid w-100" lazy-src="images/fb.png" alt="Facebook {{main.siteName}}">
                             </a>
                           </div>
-                          <div class="col-3 align-self-center">
+                          <div class="col-3 align-self-center d-none">
                             <a ng-href="" target="_blank">
                               <img class="img-fluid w-100" animate-visible="true" lazy-src="images/tw.png" alt="Twitter {{main.siteName}}">
                             </a>
                           </div>
-                          <div class="col-3 align-self-center">
+                          <div class="col-4 align-self-center">
                             <a ng-show="main.siteConstants.instagram_url" ng-href="{{main.siteConstants.instagram_url}}" target="_blank">
                               <img class="img-fluid w-100" src="images/instagram.png" alt="Instagram {{main.siteName}}">
                             </a>
 
                           </div>
-                          <div class="col-3 align-self-center">
+                          <div class="col-4 align-self-center">
                             <a ng-show="main.siteConstants.pinterest_url" ng-href="{{main.siteConstants.pinterest_url}}" target="_blank">
                               <img class="img-fluid w-100" src="images/pinterest.png" alt="Pinterest {{main.siteName}}">
                             </a>
@@ -88,13 +88,13 @@
 
   </div>
   <div class="row justify-content-between">
-    <div class="col-11 mx-auto border-top mt-3 pt-3" >
+    <div class="col-11 mx-auto border-top mt-1" >
       <div class="container-fluid">
         <div class="row">
           <div class="col-5 col-sm-4 col-lg-3">
-            <p class="p-0 my-2">Copyright © 2023</p>
+            <p class="p-0 my-2" id="copy">Copyright © 2023</p>
           </div>
-          <div class="col-5 col-sm-4 col-lg-3 offset-lg-6 offset-md-4 offset-2 text-end">
+          <div class="col-5 col-sm-4 col-lg-3 offset-lg-6 offset-md-4 offset-2 text-end align-self-center">
             <img src="/images/icons/card_brands.png" class="w-25" alt="Actual-card-brand">
           </div>
         </div>
