@@ -6,6 +6,9 @@
   position: relative;
   clear: both;
 }
+#footer-actual #copy{
+  font-size: 0.70rem;
+}
 
 .font-size-75{
   font-size: 0.75rem;
