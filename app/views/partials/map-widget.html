@@ -1,4 +1,4 @@
-<div class="col-11 mx-auto" ng-controller="widgetController">
+<div class="col-11 mx-auto">
     <div class="container">
         <p class="h1 py-4 text-center">Espacios que enamoran</p>
     </div>
@@ -18,15 +18,29 @@
             </div>
         </div>
         <div class="col-5 justify-content-center d-none d-xl-flex">
-            <div class="card" style="width: 18rem; max-height: 454px;">
-                <img src="https://d116li125og699.cloudfront.net/uploads/products/CO69272_1.jpg" class="card-img-top"
-                    id="widget-product-image">
-                <div class="card-body">
-                    <h5 class="card-title" id="widget-product-title">Espejo decorativo redondo cae060 ø1.20 dorado</h5>
-                    <p class="card-text" id="widget-product-price">$6999</p>
-                    <a href="#" class="btn btn-primary">comprar</a>
+            <a ng-href="#" class="url-product">
+                <div class="container-fluid d-flex align-items-center">
+                    <div class="card border-0 mx-auto" style="max-width: 60%;">
+                        <img class="card-img-top px-2" img
+                            src="https://d116li125og699.cloudfront.net/uploads/products/CO69272_1.jpg"
+                            id="widget-product-image" />
+                        <div class="bookmark-icon">
+                            <img src="/images/promo-label.png" alt="Price Label" />
+                        </div>
+                        <div class="discount-batch" id="product-discount">
+                            - 20%
+                        </div>
+                        <div class="card-body">
+                            <p class="product-name" id="widget-product-title">Espejo decorativo redondo</p>
+                            <p class="price">
+                                <strong class="price-now-currency" id="widget-product-price-discount">$5599</strong>
+                                <span class="price-before" id="widget-product-price">$6999</span>
+                                <br />
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -36,14 +50,26 @@
         <div class="container-fluid py-3 d-flex justify-content-end">
             <button id="close-button" onclick="closeMobileSheet()">X</button>
         </div>
+        <div class="discount-batch-sheet" id="product-discount2">
+            - 20%
+        </div>
         <div class="d-flex justify-content-center">
             <img src="" class="card-img-top" id="mobile-product-image" style="max-width: 300px;">
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center product-name-sheet">
+                    <p id="widget-product-title2">Espejo decorativo redondo</p>
 
-            <div class="container">
-                <h5 class="card-title text-center" id="mobile-product-title"></h5>
-                <p class="card-text" id="mobile-product-price"></p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="">
+                        <strong class="price-now-currency" id="widget-product-price-discount2">$5599</strong>
+                        <span class="price-before" id="widget-product-price2">$6999</span>
+                        <br>
+
+                    </p>
+                </div>
             </div>
         </div>
     </div>
