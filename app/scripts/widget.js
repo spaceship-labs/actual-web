@@ -71,6 +71,7 @@ function accion(numero) {
         document.getElementById("widget-product-title2").textContent = producto.title;
         document.getElementById("widget-product-price2").textContent = "$" + producto.price.toFixed(2);
         document.getElementById("widget-product-price-discount2").textContent = "$" + calcularPorcentaje(producto.price, producto.discount_percentage).toFixed(2);
+        document.getElementById("product-discount2").textContent = "-" + producto.discount_percentage + "%"
         openMobileSheet();
     }
 }
