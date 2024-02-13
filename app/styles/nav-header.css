@@ -3,6 +3,13 @@
 * HEADER MENU  |
 *---------------
 **/
+#navbar-actual{
+  background-color: #000;
+  font-size: 0.5rem;
+}
+.img-social-footer{
+  max-width: 25px;
+}
 .nav-menu-miactual{
   position: relative;
   z-index: 9;
