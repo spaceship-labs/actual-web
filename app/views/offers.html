@@ -2,27 +2,43 @@
   <div class="container container-xxlg">
     <p>
       <a href="/">Inicio</a>
-      <a href="/ofertas" class="breadcrumb-active"> > Ofertas</a>
+      <a href="/ofertas" class="breadcrumb-active"> > Paquetes</a>
     </p>
   </div>
 </div>
 
-<div class="content-block listing-view">
-  <div class="container container-lg">
-    <!--START NAV-->
-    <!-- <aside flex="20" hide-sm hide-xs>
-      <sidebar-categories categories-tree="main.categoriesTree" selected-category-id="vm.category.id" active-store="main.activeStore">
-      </sidebar-categories>
-
-    </aside> -->
-    <!--END NAV-->
-
-
-    <div class="subs-container">
-      <h1 class="listing-view-title">Ofertas</h2>
-        <offers-directive />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center">PAQUETES STUDIO</h3>
+      <p class="text-center responsive-text">
+        <small class="custom">
+          Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla
+          euismod ultrices.
+        </small>
+      </p>
     </div>
-    <!-- END SUBCATEGORIES-->
-
   </div>
 </div>
+
+<div class="container-fluid text-left">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <offers-directive />
+    </div>
+  </div>
+</div>
+
+<style>
+  .carousel-control-next {
+    display: none;
+  }
+
+  .carousel-control-prev {
+    display: none;
+  }
+
+  .btn-outline-secondary {
+    display: none;
+  }
+</style>
