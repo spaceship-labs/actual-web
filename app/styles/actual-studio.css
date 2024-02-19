@@ -160,13 +160,15 @@
 .punto {
   width: 15px;
   height: 15px;
-  background-color: rgb(214 214 214);
+  /* background-color: rgb(214 214 214); */
   margin: 15px;
   position: absolute;
+  background-image: url('/images/home2024/punto.png');
   cursor: pointer;
-  border-radius: 100%;
-  box-shadow: inset 0px 0px 0px 0.4px white;
-  border: 1px solid rgb(255 255 255);
+  background-size: contain;
+  /* border-radius: 100%; */
+  /* box-shadow: inset 0px 0px 0px 0.4px white;
+  border: 1px solid rgb(255 255 255); */
   animation: pulse 1.5s infinite alternate;
   /* Aplicar la animación de pulso */
 }
@@ -371,6 +373,14 @@
     left: 57%;
     top: 70%;
   }
+}
+
+#space-widget {
+  background-image: url('/images/home2024/back-round.png');
+  background-size: 85%;
+  background-position: top left;
+  background-repeat: no-repeat;
+
 }
 
 #close-button {
