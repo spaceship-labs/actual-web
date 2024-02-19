@@ -65,8 +65,11 @@
 </div>
 
 <!--OFERTAS-->
-<div ng-repeat="package in packages track by $index" class="package-wrapper">
-  <div id="offers-page" class="text-center">
+<div
+  ng-repeat="package in packages track by $index"
+  class="package-wrapper offers-page"
+>
+  <div class="text-center">
     <a ng-click="addPackageToCart(package.id)" href="#">
       <img
         animate-visible="true"
