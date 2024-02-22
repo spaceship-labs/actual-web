@@ -1,0 +1,36 @@
+<div ng-if="vm.featuredProducts && main.site" id="home-slider-wrapper">
+    <div class="listing-view">
+        <h2 class="listing-view-title best-seller-title">
+            <a href="/category/salas-y-sofas">
+                <span class="color-gray">
+                    <strong>Top Salas</strong>
+
+                </span>
+            </a>
+        </h2>
+    </div>
+    <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
+        <div flex="80" flex-xs="100" flex-sm="100">
+            <slick class="categories-carousel" responsive="vm.bestSellersCarouselBreakpoints" infinite="true"
+                slides-to-show="3" slides-to-scroll="3" init-onload="true" data="vm.featuredLoaded">
+                <div ng-repeat="featuredSilla in vm.featuredProducts | filter: {categoryHandle: 'salas'} | limitTo: vm.limitChairs"
+                    class="listing-product-wrap">
+                    <listing-product product="featuredSilla.product" />
+                </div>
+            </slick>
+        </div>
+        <div hide-xs hide-sm flex="20" layout="row" layout-wrap layout-align="start center" class="view-more-category">
+            <a href="/category/salas-y-sofas" class="complete-category">
+
+                VER
+                CATEGORÍA<br>
+                <strong>COMPLETA</strong>
+            </a>
+        </div>
+    </div>
+    <div hide-gt-sm class="listing-view">
+        <a href="/category/salas-y-sofas" class="action-btn">
+            VER MÁS PRODUCTOS
+        </a>
+    </div>
+</div>

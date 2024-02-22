@@ -61,6 +61,7 @@ function HomeCtrl(
     vm.limitDinningRooms = VISIBLE_PRODUCTS_LIMIT;
     vm.limitBedRooms = VISIBLE_PRODUCTS_LIMIT;
     vm.limitKidsBeds = VISIBLE_PRODUCTS_LIMIT;
+    vm.limitChairs = VISIBLE_PRODUCTS_LIMIT;
     vm.limitKidsBureaus = VISIBLE_PRODUCTS_LIMIT;
     vm.limitKidsForniture = VISIBLE_PRODUCTS_LIMIT;
 
@@ -96,6 +97,8 @@ function HomeCtrl(
       })
       .then(function (result) {
         vm.featuredProducts = result.data;
+        console.log("featured")
+        console.log(vm.featuredProducts);
         vm.featuredProducts.map(function (featured) {
           featured.product = productService.formatProductSync(featured.product);
           return featured;
