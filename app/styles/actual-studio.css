@@ -376,7 +376,7 @@
 }
 
 #space-widget {
-  background-image: url('/images/home2024/back-round.png');
+  background-image: url('/images/home2024/back-widget.png');
   background-size: 85%;
   background-position: top left;
   background-repeat: no-repeat;
@@ -508,4 +508,24 @@
   color: black !important;
   text-decoration: none;
   border-radius: 5px;
+}
+
+
+.complete-category {
+  border: 1px solid black !important;
+  text-align: center;
+  padding: 5px 45px 5px 45px;
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  font-size: 13px !important;
+}
+
+.categories-carousel .slick-prev,
+.categories-carousel .slick-next {
+  box-shadow: none !important;
+}
+
+.carousel-item {
+  max-height: 80vh !important;
 }

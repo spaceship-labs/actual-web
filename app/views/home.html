@@ -1,8 +1,8 @@
 <ng-include ng-if="main.siteTheme === 'actual-studio'" src="'views/partials/home-main-banner.html'"></ng-include>
-<ng-include src="'views/partials/home-slider.html'"></ng-include>
-<div class="home-free-delivery" layout="row" layout-align="center center">
+<!-- <ng-include src="'views/partials/home-slider.html'"></ng-include> -->
+<!-- <div class="home-free-delivery" layout="row" layout-align="center center">
   <img class="free-delivery-image" src="/images/cintillo-envio-gratis.png" alt="Envíos gratis" />
-</div>
+</div> -->
 
 <div class="container container-xxlg">
   <div ng-if="main.isLoadingCategoriesTree" layout-fill layout="row" layout-align="center center"
@@ -57,7 +57,8 @@
         </div>
 
         <div ng-if="vm.activeStore.code !== 'actual_kids'">
-          <ng-include src="'views/partials/best-sellers-livingroom.html'"></ng-include>
+          <ng-include ng-if="main.siteTheme !== 'actual-studio'"
+            src="'views/partials/best-sellers-livingroom.html'"></ng-include>
         </div>
 
         <div ng-if="vm.activeStore.code === 'actual_kids'">
@@ -81,14 +82,16 @@
         <div ng-if="vm.activeStore.code !== 'actual_kids'">
           <ng-include src="'views/partials/best-sellers-bedroom.html'"></ng-include>
         </div>
-
+        <div ng-if="vm.activeStore.code !== 'actual_kids'">
+          <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
+        </div>
         <!--Bundles section-->
         <div ng-if="main.siteTheme === 'actual-studio'">
           <ng-include src="'views/partials/bundles.html'"></ng-include>
         </div>
         <!--end of bundles section-->
-        <div ng-if="vm.activeStore.code !== 'actual_kids'">
-          <ng-include src="'views/partials/best-sellers-dinningroom.html'"></ng-include>
+        <div ng-if="main.siteTheme === 'actual-studio'">
+          <ng-include src="'views/partials/best-sellers-chairs.html'"></ng-include>
         </div>
 
         <div ng-if="vm.activeStore.code === 'actual_kids'">
@@ -96,7 +99,7 @@
         </div>
       </div>
       <br />
-      <ng-include src="'views/partials/home-slider-2.html'"></ng-include>
+      <!-- <ng-include src="'views/partials/home-slider-2.html'"></ng-include> -->
     </div>
     <!-- END CATEGORIES-->
   </div>
