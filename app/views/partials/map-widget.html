@@ -3,7 +3,7 @@
         <p class="h1 py-4 text-center">Espacios que enamoran</p>
     </div>
     <div class="row">
-        <div class="col-12 col-xl-7 d-flex justify-content-center">
+        <div class="col-12 col-xl-7 d-flex justify-content-center py-5" id="space-widget">
             <div id="contenedor-imagen">
                 <img id="plano" src="images/home2024/widget1.png" alt="Mapa" class="img-fluid">
                 <!-- Puntos sobre las áreas -->
@@ -18,29 +18,35 @@
             </div>
         </div>
         <div class="col-5 justify-content-center d-none d-xl-flex">
-            <a ng-href="#" class="url-product">
-                <div class="container-fluid d-flex align-items-center">
-                    <div class="card border-0 mx-auto" style="max-width: 60%;">
-                        <img class="card-img-top px-2" img
-                            src="https://d116li125og699.cloudfront.net/uploads/products/CO69272_1.jpg"
-                            id="widget-product-image" />
-                        <div class="bookmark-icon">
-                            <img src="/images/promo-label.png" alt="Price Label" />
-                        </div>
-                        <div class="discount-batch" id="product-discount">
-                            - 20%
-                        </div>
-                        <div class="card-body">
-                            <p class="product-name" id="widget-product-title">Espejo decorativo redondo</p>
-                            <p class="price">
-                                <strong class="price-now-currency" id="widget-product-price-discount">$5599</strong>
-                                <span class="price-before" id="widget-product-price">$6999</span>
-                                <br />
-                            </p>
+            <div class="container-fluid d-flex align-items-center">
+                <div class="card border-0 mx-auto" style="max-width: 60%;">
+                    <img class="w-75 mx-auto px-2" img
+                        src="https://d116li125og699.cloudfront.net/uploads/products/CO69272_1.jpg"
+                        id="widget-product-image" />
+                    <div class="bookmark-icon">
+                        <img src="/images/promo-label.png" alt="Price Label" />
+                    </div>
+                    <div class="discount-batch" id="product-discount">
+                        - 20%
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-7">
+                                <p class="product-name" id="widget-product-title">Espejo decorativo redondo</p>
+                                <p class="price">
+                                    <strong class="price-now-currency" id="widget-product-price-discount">$5599</strong>
+                                    <span class="price-before" id="widget-product-price">$6999</span>
+                                    <br />
+                                </p>
+                            </div>
+                            <div class="col-5 d-flex align-items-center justify-content-end">
+                                <a href="#" class="widget-link px-3 py-1 text-center"> Ver
+                                    detalles</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 </div>
@@ -69,6 +75,10 @@
                         <br>
 
                     </p>
+                </div>
+                <div class="col-12 text-center">
+                    <a href="#" class="widget-link px-4 py-1 text-center"> Ver
+                        detalles</a>
                 </div>
             </div>
         </div>

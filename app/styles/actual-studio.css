@@ -163,13 +163,15 @@
 .punto {
   width: 15px;
   height: 15px;
-  background-color: rgb(172, 169, 169);
+  /* background-color: rgb(214 214 214); */
   margin: 15px;
   position: absolute;
+  background-image: url('/images/home2024/punto.png');
   cursor: pointer;
-  border-radius: 100%;
-  box-shadow: inset 0px 0px 0px 1px white;
-  border: 1px solid rgb(80, 80, 80);
+  background-size: contain;
+  /* border-radius: 100%; */
+  /* box-shadow: inset 0px 0px 0px 0.4px white;
+  border: 1px solid rgb(255 255 255); */
   animation: pulse 1.5s infinite alternate;
   /* Aplicar la animación de pulso */
 }
@@ -376,6 +378,14 @@
   }
 }
 
+#space-widget {
+  background-image: url('/images/home2024/back-widget.png');
+  background-size: 85%;
+  background-position: top left;
+  background-repeat: no-repeat;
+
+}
+
 #close-button {
   border: none;
   background-color: transparent !important;
@@ -494,4 +504,31 @@
   .home-main-banner {
     background-size: 100% 100%;
   }
+}
+
+.widget-link {
+  background-color: #FFCC33 !important;
+  color: black !important;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+
+.complete-category {
+  border: 1px solid black !important;
+  text-align: center;
+  padding: 5px 45px 5px 45px;
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  font-size: 13px !important;
+}
+
+.categories-carousel .slick-prev,
+.categories-carousel .slick-next {
+  box-shadow: none !important;
+}
+
+.carousel-item {
+  max-height: 80vh !important;
 }
