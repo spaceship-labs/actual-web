@@ -6,7 +6,10 @@
 .actual-studio .header-top-bar {
   background: #000000 !important;
 }
-
+#header-studio .header-top-bar{
+  background: transparent!important;
+  color: black!important;
+}
 .actual-studio .footer-bottom {
   background: #030202 !important;
 }
