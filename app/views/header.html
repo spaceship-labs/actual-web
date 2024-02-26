@@ -1,7 +1,7 @@
 <!-- MOBILE-MENU -->
 <ng-include src="'views/partials/mobile-sidenav.html'"></ng-include>
 <!-- END MOBILE-MENU -->
-<nav id="navbar-actual" class="container-fluid py-2" ng-if="main.siteTheme === 'actual-studio'">
+<nav id="navbar-actual" class="container-fluid" ng-if="main.siteTheme === 'actual-studio'">
   <div class="row">
     <div class="col-10 mx-auto container">
       <div class="row">
@@ -27,13 +27,191 @@
     </div>
   </div>
 </nav>
+<!-- START TOP BAR -->
+<nav class="navbar navbar-expand-lg position-fixed" ng-controller="MenuCtrl" ng-if="main.siteTheme === 'actual-studio'" id="header-studio">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="images/icons/ac_full_white.png" alt="Actual Group" id="logo-white" class="img-fluid m-auto w-75" />
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="d-flex mx-auto" ng-class="{
+        'searcher-wrapper-show-mobile':main.showSearchBar
+      }" ng-submit="main.handleSearch()" class="searcher-wrapper" flex-order-xs="1" layout="row"
+      ng-show="!main.showSearchBar">
+      <div class="searcher bg-transparent border-white" flex flex-xs="70">
+        <div class="searcher-inner">
+          <input type="text" class="bg-transparent text-black" name="term" ng-model="main.searchValue" placeholder="Buscar en toda la tienda…" />
+        </div>
+      </div>
+      <button type="submit" class="bg-transparent" id="btn-navbar-search"><i class="icon-search" id="lupa-icon"></i></button>
+    </form>
+    <ul class="navbar-nav ms-auto ">
+      <li class="nav-item">
+        <a style="display:block;" ng-if="main.activeQuotation"
+        ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="nav-link p-0">
+        <span hide-xs class="badge bg-secondary"
+        ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+        <i hide-xs class="icon-carro text-white fs-5" id="icon-cart-navbar" ng-class="{'cart-active' : main.activeQuotation}"></i>
+        <span hide-gt-xs class="badge bg-secondary"
+        ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+        <i hide-gt-xs style="margin-right:5px;" class="icon-carro text-white"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <!-- <a class="nav-link text-white" href="#">Boton 2</a> -->
+      <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
+        <p class="text-white" ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
+          <i class="icon-login ms-3 fs-5" id="icon-user-navbar"></i>
+        </p>
+        <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
+          <strong class="invited-label">Invitado</strong>
+        </span>
+
+        <i hide-gt-sm style="margin-left:10px;" class="icon-login" ng-click="main.toggleLoginModal()"></i>
+        <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
+        src="'views/partials/login-header.html'"></ng-include>
+      </div>
+    </li>
+    <li class="nav-item d-block d-lg-none dropdown">
+      <a class="dropdown-toggle  text-decoration-none" role="button" id="dropdownRecamara" data-bs-toggle="dropdown" aria-expanded="false">
+        Recamara
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownRecamara">
+        <li>
+          <a href="/category/camas" class="dropdown-item text-decoration-none">Camas</a>
+        </li>
+        <li>
+          <a href="/category/cabeceras" class="dropdown-item text-decoration-none">Cabeceras</a>
+        </li>
+        <li>
+          <a href="/category/comoda" class="dropdown-item text-decoration-none">Cómodas</a>
+        </li>
+        <li>
+          <a href="/category/colchones" class="dropdown-item text-decoration-none">Colchones</a>
+        </li>
+        <li>
+          <a href="/category/blancos" class="dropdown-item text-decoration-none">Blancos</a>
+        </li>
+        <li>
+           <a href="/category/bases-de-cama" class="dropdown-item text-decoration-none">Bases de cama</a>
+        </li>
+        <li>
+          <a href="/category/buros-y-mesas-laterales" class="dropdown-item text-decoration-none">Burós y mesas laterales</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class="container-fluid text-center position-fixed d-none d-lg-block" id="header-studio-nav" style="z-index: 99999;">
+  <div class="row mx-auto py-1 w-70" >
+    <div class="col-2 drop">
+      <a class=" text-decoration-none link-navbar">
+        Recamara
+      </a>
+      <div class="drop-content">
+        <a href="/category/camas" class="dropdown-item text-decoration-none">Camas</a>
+        <a href="/category/cabeceras" class="dropdown-item text-decoration-none">Cabeceras</a>
+        <a href="/category/comoda" class="dropdown-item text-decoration-none">Cómodas</a>
+        <a href="/category/colchones" class="dropdown-item text-decoration-none">Colchones</a>
+        <a href="/category/blancos" class="dropdown-item text-decoration-none">Blancos</a>
+        <a href="/category/bases-de-cama" class="dropdown-item text-decoration-none">Bases de cama</a>
+        <a href="/category/buros-y-mesas-laterales" class="dropdown-item text-decoration-none">Burós y mesas laterales</a>
+      </div>
+    </div>
+    <div class="col-2 drop">
+      <a class=" text-decoration-none link-navbar">Sala</a>
+      <div class="drop-content">
+        <a href="/category/salas-y-sofas">Salas y sófas</a>
+        <a href="/category/sofa-cama">Sofa cama</a>
+        <a href="/category/futones">Futones</a>
+        <a href="/category/sillones-reclinables">Reclinables</a>
+        <a href="/category/sillones-salas">Sillones</a>
+        <a href="/category/taburete">Taburetes</a>
+      </div>
+    </div>
+    <div class="col-2">
+      <a href="/category/mesas-de-comedor" class=" text-decoration-none link-navbar">Comedor</a>
+    </div>
+    <div class="col-2 drop">
+      <a class=" text-decoration-none link-navbar">Exterior</a>
+      <div class="drop-content">
+        <a href="/category/salas-exterior">Salas</a>
+        <a href="/category/mesas-exterior">Exterior</a>
+        <a href="/category/sillas-y-bancos">Sillas y bancos</a>
+        <a href="/category/camastro">Camastros</a>
+        <a href="/category/mesa-de-centro-y-lateral">Mesas de centro y lateral</a>
+      </div>
+    </div>
+    <div class="col-2 drop">
+      <a class=" text-decoration-none link-navbar">Decoración</a>
+      <div class="drop-content">
+        <a href="/category/accesorios">Accesorios</a>
+        <a href="/category/cuadros-y-decoracion-de-pared">Cuadros y decoración de pared</a>
+        <a href="/category/espejos">Espejos</a>
+        <a href="/category/tapetes">Tapetes</a>
+        <a href="/category/cojines">Cojines</a>
+        <a href="/category/iluminacion">Iluminación</a>
+      </div>
+    </div>
+    <div class="col-2 drop">
+      <a class=" text-decoration-none link-navbar">Almacenaje</a>
+      <div class="drop-content">
+        <a href="/category/comodas-y-credenzas">Comodas y credenzas</a>
+        <a href="/category/bufeteros">Bufetero</a>
+        <a href="/category/muebles-para-tv">Muebles TV</a>
+        <a href="/category/libreros-y-repisas">Libreros y repisas</a>
+        <a href="/category/escritorios">Escritorios</a>
+        <a href="/category/buros">Burós</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid text-center position-fixed d-none d-lg-block" id="header-studio-nav-2">
+  <div class="row w-75 mx-auto py-1">
+    <div class="col">
+      <a href="/category/camas" class=" text-decoration-none link-navbar">Camas</a>
+    </div>
+    <div class="col">
+      <a href="/category/colchones" class=" text-decoration-none link-navbar">Colchones</a>
+    </div>
+    <div class="col">
+      <a href="/category/buros-y-mesas-laterales" class=" text-decoration-none link-navbar">Burós</a>
+    </div>
+    <div class="col">
+      <a href="/category/salas-y-sofas" class=" text-decoration-none link-navbar">Sófas</a>
+    </div>
+    <div class="col">
+      <a href="category/sillones-salas" class=" text-decoration-none link-navbar">Sillones</a>
+    </div>
+    <div class="col">
+      <a href="/category/mesas-de-comedor" class=" text-decoration-none link-navbar">Mesas</a>
+    </div>
+    <div class="col">
+      <a href="/category/tapetes" class=" text-decoration-none link-navbar">Tapetes</a>
+    </div>
+    <div class="col">
+      <a href="/category/espejos" class=" text-decoration-none link-navbar">Espejos</a>
+    </div>
+    <div class="col">
+      <a href="/category/iluminacion" class=" text-decoration-none link-navbar">Iluminación</a>
+    </div>
+  </div>
+</div>
+</div>
+</nav>
 
 
-<div id="header">
+
+
+<div id="header" class="" ng-if="main.siteTheme !== 'actual-studio'">
   <!-- START TOP BAR -->
   <div class="header-top-bar" fixed-element top="50" ng-class="{'fixed-head': scrolled}">
 
-    <div class="container" layout="row" layout-wrap layout-align="center center">
+    <div class="container-fluid" layout="row" layout-wrap layout-align="center center">
 
       <div hide-xs hide-sm flex-gt-sm="15" class="logo" layout-align="center center">
         <a href="/" ng-switch on="main.siteTheme">
@@ -126,77 +304,77 @@
       </a>
     </div>
   </div>
-        <!-- <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
-          <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
-        </div> -->
-        <div hide-xs flex class="header-top-bar-menu-item">
-          <p ng-click="main.redirectScroll()" style="color: #fff;"> CONTACTO </p>
+  <!-- <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+    <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+  </div> -->
+  <div hide-xs flex class="header-top-bar-menu-item">
+    <p ng-click="main.redirectScroll()" style="color: #fff;"> CONTACTO </p>
+  </div>
+
+  <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+    <i class="icon-search" style="margin-left:8px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+  </div>
+  <div  class="header-item-child" style="margin-right:20px;">
+    <a href="http://wa.me/529982418106" >
+      <i class="icon-whatsapp" style=" color:#fff; font-size: 20px;"></i>
+    </a>
+  </div>
+  <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
+    <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">
+      <span class="header-top-bar-menu-item" hide-xs><strong style="color: #e9c15f;">| </strong> <span>MI
+      CUENTA</span>
+      <i hide-gt-xs class="icon-login"></i>
+    </p>
+    <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
+      <strong class="invited-label">Invitado</strong>
+    </span>
+
+    <i hide-gt-sm style="margin-left:10px;" class="icon-login" ng-click="main.toggleLoginModal()"></i>
+    <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
+    src="'views/partials/login-header.html'"></ng-include>
+  </div>
+
+  <!-- IF logged in -->
+  <div class="header-top-bar-menu-item-user">
+    <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger"
+    ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
+    <a href="#" layout="row">
+      <i class="icon-login"></i>
+      <div class="header-top-bar-menu-item-user">
+        <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
         </div>
-
-        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
-          <i class="icon-search" style="margin-left:8px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
-        </div>
-        <div  class="header-item-child" style="margin-right:20px;">
-          <a href="http://wa.me/529982418106" >
-            <i class="icon-whatsapp" style=" color:#fff; font-size: 20px;"></i>
-          </a>
-        </div>
-        <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
-          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">
-            <span class="header-top-bar-menu-item" hide-xs><strong style="color: #e9c15f;">| </strong> <span>MI
-            CUENTA</span>
-            <i hide-gt-xs class="icon-login"></i>
-          </p>
-          <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
-            <strong class="invited-label">Invitado</strong>
-          </span>
-
-          <i hide-gt-sm style="margin-left:10px;" class="icon-login" ng-click="main.toggleLoginModal()"></i>
-          <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
-          src="'views/partials/login-header.html'"></ng-include>
-        </div>
-
-        <!-- IF logged in -->
-        <div class="header-top-bar-menu-item-user">
-          <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger"
-          ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
-          <a href="#" layout="row">
-            <i class="icon-login"></i>
-            <div class="header-top-bar-menu-item-user">
-              <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
-              </div>
-            </span>
-          </a>
-
-          <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
-        </div>
-      </div>
-
-      <div hide-gt-xs flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
-        <p>
-          <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-            <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
-          </a>
-          <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-            <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
-          </a>
-        </p>
-      </div>
-
-      <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()"
-      class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-      <span>
-        <strong> <i class="icon-phone"></i></strong>
       </span>
-      <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
-    </div>
-    <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
-      <!-- <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" /> -->
-      <a href="http://wa.me/529982418106">
-        <i class="icon-whatsapp" style=" color:#fff; font-size: 22px; margin-left:2px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
-      </a>
-    </div>
-    <!-- https://wa.me/message/5SDKIHWOEO4XE1 -->
+    </a>
+
+    <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
+  </div>
+</div>
+
+<div hide-gt-xs flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
+  <p>
+    <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
+      <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
+    </a>
+    <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
+      <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
+    </a>
+  </p>
+</div>
+
+<div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()"
+class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+<span>
+  <strong> <i class="icon-phone"></i></strong>
+</span>
+<ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
+</div>
+<div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+  <!-- <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" /> -->
+  <a href="http://wa.me/529982418106">
+    <i class="icon-whatsapp" style=" color:#fff; font-size: 22px; margin-left:2px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+  </a>
+</div>
+<!-- https://wa.me/message/5SDKIHWOEO4XE1 -->
         <!-- <div hide-xs hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
