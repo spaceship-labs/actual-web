@@ -38,10 +38,10 @@
       ng-show="!main.showSearchBar">
       <div class="searcher bg-transparent border-white" flex flex-xs="70">
         <div class="searcher-inner">
-          <input type="text" class="bg-transparent text-black" name="term" ng-model="main.searchValue" />
+          <input type="text" class="bg-transparent text-black" name="term" ng-model="main.searchValue" placeholder="Buscar en toda la tienda…" />
         </div>
       </div>
-      <button type="submit" class="bg-light border-0"><i class="icon-search"></i></button>
+      <button type="submit" class="bg-transparent" id="btn-navbar-search"><i class="icon-search" id="lupa-icon"></i></button>
     </form>
     <ul class="navbar-nav ms-auto ">
       <li class="nav-item">
@@ -101,7 +101,7 @@
   </ul>
 </div>
 <div class="container-fluid text-center position-fixed d-none d-lg-block" id="header-studio-nav" style="z-index: 99999;">
-  <div class="row w-75 mx-auto py-1">
+  <div class="row mx-auto py-1 w-70" >
     <div class="col-2 drop">
       <a class=" text-decoration-none link-navbar">
         Recamara

@@ -28,6 +28,7 @@ angular.module('actualWebApp')
       for (const link of linksNavbar) {
         link.style.color = 'black';
       }
+      document.getElementById("lupa-icon").style.color = "black";
       document.getElementById("icon-user-navbar").style.filter = "contrast(0)";
       document.getElementById("icon-cart-navbar").style.filter = "contrast(0)";
     }
@@ -46,6 +47,7 @@ angular.module('actualWebApp')
       for (const link of linksNavbar) {
         link.style.color = 'white';
       }
+      document.getElementById("lupa-icon").style.color = "white";
       document.getElementById("icon-user-navbar").style.filter = "contrast(1)";
       document.getElementById("icon-cart-navbar").style.filter = "contrast(1)";
     } else {
@@ -62,6 +64,7 @@ angular.module('actualWebApp')
       for (const link of linksNavbar) {
         link.style.color = 'black';
       }
+      document.getElementById("lupa-icon").style.color = "black";
       document.getElementById("icon-user-navbar").style.filter = "contrast(0)";
       document.getElementById("icon-cart-navbar").style.filter = "contrast(0)";
     }

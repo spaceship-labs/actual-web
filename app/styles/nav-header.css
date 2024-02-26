@@ -39,8 +39,18 @@
   text-decoration: none;
   transition: 0.5s ease all;
 }
+.w-70{
+  width: 70%;
+}
+#header-studio #lupa-icon{
+  color: white;
+}
 #header-studio{
   z-index: 999;
+}
+#header-studio #btn-navbar-search{
+  border: 1px solid white;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 #header-studio-nav .dropdown-menu {
   min-width: 50vw; /* Ajusta el ancho según tus necesidades */
@@ -125,7 +135,7 @@
   background-color: #fff;
   width: 110px;
   text-align: center;  
-  
+
 }
 
 *, *:before, *:after {
@@ -150,7 +160,7 @@
   width: 98px;
   height: 40px;
   margin: 10px 5px 10px 5px;
-  
+
 }
 
 .list-menu-miactual > span {
@@ -240,7 +250,7 @@
   text-align: center;
   text-decoration: none;
   font-size: 9px;
-  
+
 } 
 
 .smart-menu-img > img{
