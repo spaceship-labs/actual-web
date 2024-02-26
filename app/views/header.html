@@ -21,11 +21,10 @@
     </div>
   </div>
 </nav>
-
 <!-- START TOP BAR -->
 <nav class="navbar navbar-expand-lg position-fixed" ng-controller="MenuCtrl" ng-if="main.siteTheme === 'actual-studio'" id="header-studio">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
       <img src="images/icons/ac_full_white.png" alt="Actual Group" id="logo-white" class="img-fluid m-auto w-75" />
       
     </a>
@@ -50,7 +49,7 @@
         ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="nav-link p-0">
         <span hide-xs class="badge bg-secondary"
         ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-        <i hide-xs class="icon-carro text-white fs-5" ng-class="{'cart-active' : main.activeQuotation}"></i>
+        <i hide-xs class="icon-carro text-white fs-5" id="icon-cart-navbar" ng-class="{'cart-active' : main.activeQuotation}"></i>
         <span hide-gt-xs class="badge bg-secondary"
         ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
         <i hide-gt-xs style="margin-right:5px;" class="icon-carro text-white"></i>
@@ -60,7 +59,7 @@
       <!-- <a class="nav-link text-white" href="#">Boton 2</a> -->
       <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
         <p class="text-white" ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
-          <i class="icon-login ms-3 fs-5"></i>
+          <i class="icon-login ms-3 fs-5" id="icon-user-navbar"></i>
         </p>
         <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
           <strong class="invited-label">Invitado</strong>
