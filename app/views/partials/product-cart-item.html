@@ -13,7 +13,7 @@
           </a>
         </div>
         <div flex="60">
-          <h3>
+          <h3 class="c">
             <a ng-href="{{ detail.Product.url }}">
               <strong
                 >{{ detail.Product.Name || detail.Product.ItemCode }}</strong
@@ -21,7 +21,10 @@
             </a>
           </h3>
           <ul>
-            <li><strong>Código: </strong> {{ detail.Product.ItemCode }}</li>
+            <li>
+              <strong>Código: </strong>
+              <span class="item-code">{{ detail.Product.ItemCode }}</span>
+            </li>
             <li
               ng-repeat="filter in detail.Product.Filters"
               ng-if="
@@ -44,7 +47,7 @@
             </li>
             <li ng-if="detail.Product.DetailedColor">
               <strong>Color</strong>
-              <span>{{ detail.Product.DetailedColor }}</span>
+              <span class="item-code">{{ detail.Product.DetailedColor }}</span>
             </li>
           </ul>
         </div>
@@ -80,7 +83,7 @@
                 {{ detail.unitPriceWithDiscount | roundCurrency }}
               </strong>
             </p>
-            <p class="included-taxes-label">Impuesto incluido</p>
+            <!-- <p class="included-taxes-label">Impuesto incluido</p> -->
           </div>
           <div flex="25" class="cart-item-data-qty">
             <p>
@@ -100,7 +103,7 @@
             <div
               class="delivery-selection input-element select-element-wrapper"
             >
-              <label>Fecha entrega estimada</label>
+              <label>Entrega estimada</label>
 
               <select
                 class="select-element"
@@ -114,6 +117,29 @@
               <strong>{{ detail.total | roundCurrency }}</strong>
             </h3> 
             <p class="included-taxes-label pull-right">Impuesto incluido</p>-->
+          </div>
+        </div>
+        <div layout="row" layout-align="space-between center">
+          <div
+            flex
+            ng-if="!vm.isLoadingDetailsDeliveries && detail.productCart.deliveryGroup"
+          >
+            <!-- <p class="bottom-text">
+              <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
+            </p>
+      
+            <p ng-if="vm.appliesForPackageDiscount(detail)" class="bottom-text">
+              Paquete: {{ detail.discountName }}
+            </p>
+      
+            <div ng-if="vm.appliesForPromotionDiscount(detail)">
+              <p class="bottom-text">
+                <strong>Promoción:</strong> {{ detail.discountName }}
+              </p>
+              <p class="bottom-text" ng-if="detail.ewallet > 0">
+                Beneficio monedero eléctronico: {{ detail.ewallet | currency }}
+              </p>
+            </div> -->
           </div>
         </div>
       </div>
@@ -142,7 +168,7 @@
     >
       <!-- <p class="bottom-text">
         <strong>Fecha entrega estimada: </strong> {{detail.shipDate | date: "d/MMM/yyyy"}}
-      </p> -->
+      </p>
 
       <p ng-if="vm.appliesForPackageDiscount(detail)" class="bottom-text">
         Paquete: {{ detail.discountName }}
@@ -155,7 +181,7 @@
         <p class="bottom-text" ng-if="detail.ewallet > 0">
           Beneficio monedero eléctronico: {{ detail.ewallet | currency }}
         </p>
-      </div>
+      </div> -->
     </div>
   </div>
 
