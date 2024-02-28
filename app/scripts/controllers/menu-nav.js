@@ -5,7 +5,7 @@ angular.module('actualWebApp')
   const header = document.getElementById('header-studio');
   const nav = document.getElementById('header-studio-nav');
   const subnav = document.getElementById('header-studio-nav-2');
-  const logoBlack = document.getElementById('logo-black');
+  const logoColor = document.getElementById('logo-color');
   const logoWhite = document.getElementById('logo-white');
   const linksNavbar = document.querySelectorAll('.link-navbar');
   const userIcon = document.getElementById("icon-user-navbar");
@@ -23,14 +23,19 @@ angular.module('actualWebApp')
       nav.style.backgroundColor = "white";
       subnav.style.backgroundColor = "white";
       subnav.style.boxShadow = '0 5px 5px rgba(0, 0, 0, 0.2)';
-      // logoBlack.style.display = "block";
-      logoWhite.style.filter = "contrast(0)";
+      logoColor.style.display = "block";
+      logoWhite.style.display = "none";
       for (const link of linksNavbar) {
         link.style.color = 'black';
       }
+      for (const link of document.querySelectorAll(".dropdown-mobile")) {
+        link.style.color = 'black';
+      }
+
       document.getElementById("lupa-icon").style.color = "black";
-      document.getElementById("icon-user-navbar").style.filter = "contrast(0)";
-      document.getElementById("icon-cart-navbar").style.filter = "contrast(0)";
+      document.getElementById("icon-user-navbar").style.color= "black";
+      document.getElementById("icon-cart-navbar").style.color = "black";
+      document.getElementById("main-content").style.marginTop = "125px";
     }
   });
   angular.element(window).on('scroll', function() {
@@ -43,13 +48,17 @@ angular.module('actualWebApp')
       header.style.backgroundColor = 'transparent';
       nav.style.backgroundColor = "transparent";
       subnav.style.backgroundColor = "transparent";
-      logoWhite.style.filter = "contrast(1)";
+      logoColor.style.display = "none";
+      logoWhite.style.display = "block";
       for (const link of linksNavbar) {
         link.style.color = 'white';
       }
+      for (const link of document.querySelectorAll(".dropdown-mobile")) {
+        link.style.color = 'white';
+      }
       document.getElementById("lupa-icon").style.color = "white";
-      document.getElementById("icon-user-navbar").style.filter = "contrast(1)";
-      document.getElementById("icon-cart-navbar").style.filter = "contrast(1)";
+      document.getElementById("icon-user-navbar").style.color= "white";
+      document.getElementById("icon-cart-navbar").style.color = "white";
     } else {
       console.log('El usuario ha hecho scroll hacia abajo');
       header.style.backgroundColor = "white";
@@ -59,14 +68,18 @@ angular.module('actualWebApp')
       nav.style.backgroundColor = "white";
       subnav.style.backgroundColor = "white";
       subnav.style.boxShadow = '0 5px 5px rgba(0, 0, 0, 0.2)';
-      logoWhite.style.filter = "contrast(0)";
+      logoColor.style.display = "block";
+      logoWhite.style.display = "none";
       
       for (const link of linksNavbar) {
         link.style.color = 'black';
       }
+      for (const link of document.querySelectorAll(".dropdown-mobile")) {
+        link.style.color = 'black';
+      }
       document.getElementById("lupa-icon").style.color = "black";
-      document.getElementById("icon-user-navbar").style.filter = "contrast(0)";
-      document.getElementById("icon-cart-navbar").style.filter = "contrast(0)";
+      document.getElementById("icon-user-navbar").style.color= "black";
+      document.getElementById("icon-cart-navbar").style.color = "black";
     }
   });
 }]);

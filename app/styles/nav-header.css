@@ -6,12 +6,21 @@
 *{
   transition: 1s ease all;
 }
+.cart-view{
+  margin-top: 125px;
+}
 #header-studio{
   position: fixed;
   top: 30px;
   z-index: 9999;
   width: 100%;
   background-color: transparent;
+}
+#header-studio .bi{
+  color: white;
+}
+#header-studio .dropdown-mobile{
+  color: white;
 }
 #header-studio .border-white{
   border: 0;
