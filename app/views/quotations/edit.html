@@ -246,8 +246,8 @@
         }">
         <h1 class="cart-title" hide-sm hide-xs>
           <i ng-show="vm.quotation.isSpeiQuotation" class="icon-carro"></i>
-          <strong ng-show="vm.quotation.isSpeiQuotation">ARTICULOS</strong>
-          <strong ng-show="!vm.quotation.isSpeiQuotation">ARTICULOS AGREGADOS</strong>
+          <strong ng-show="vm.quotation.isSpeiQuotation">PRODUCTOS</strong>
+          <strong ng-show="!vm.quotation.isSpeiQuotation">PRODUCTOS</strong>
           <span ng-show="vm.quotation.isSpeiQuotation">Previa elección y presupuesto aceptado</span>
         </h1>
 
@@ -277,7 +277,7 @@
 
         <hr />
         <a href="#" ng-if="!vm.quotation.Order && !vm.quotation.isClosed && !vm.quotation.rateLimitReported"
-          ng-click="vm.addNewProduct()" class="print-btn add-to-card-quotation">
+          ng-click="vm.addNewProduct()" class="print-btn add-to-card-quotation special-button">
           AGREGAR NUEVO ARTÍCULO
         </a>
         <div class="client-signature" layout="row">
@@ -291,7 +291,7 @@
           <i class="icon-carro">
             <span>{{ vm.quotation.totalProducts }}</span>
           </i>
-          <strong>MI CARRITO</strong>
+          <strong>DETALLES DEL CARRITO</strong>
         </h1>
 
         <div class="cart-summary">
