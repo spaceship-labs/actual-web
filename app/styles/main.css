@@ -373,14 +373,15 @@ md-sidenav {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   /* background: linear-gradient(0deg, rgba(6,6,6,1) 0%, rgba(48,48,46,1) 59%, rgba(147,145,140,1) 100%) !important; */
-  color: #848484; !important;
+  color: #848484 !important;
   /* text-transform: uppercase; */
   text-decoration: none;
   background: #ffffff;
-  border: .5px solid #848484; !important;
+  border: 0.5px solid #848484 !important;
   display: inline-block;
   background: rgb(250, 250, 250);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
 /* Estilos para vista de escritorio */
@@ -3699,6 +3700,10 @@ md-radio-button.md-checked .md-off {
   font-size: 11px;
 }
 
+.currency-label .customT {
+  font-weight: 700 !important;
+}
+
 .cart-view .cart-item-data .input-element {
   margin-bottom: 0 !important;
   margin-top: 0 !important;
@@ -5376,7 +5381,8 @@ md-backdrop.md-sidenav-backdrop {
   padding: 15px 10px;
   margin-top: 0;
   background: rgb(250, 250, 250);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
 .cart-view .cart-title span {
@@ -5434,7 +5440,8 @@ md-backdrop.md-sidenav-backdrop {
   padding: 14px 10px;
   text-align: center;
   background: rgb(250, 250, 250);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
 /* propuesta card view:
@@ -5649,54 +5656,47 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 
 .cart-view .cart-summary .cart-totals .price-crossed {
   text-decoration: line-through;
-  font-weight: 400;
+  font-weight: 450;
 }
 
 .cart-view .cart-summary .cart-totals .price-main {
   color: #e2023f;
-  font-weight: 700;
+  font-weight: 450;
   margin-top: 20px;
 }
 
 .cart-view .cart-summary-mobile .cart-total .price-main {
   color: #4fa379;
-  font-weight: 700;
+  font-weight: 450;
   text-align: right;
 }
 
 .cart-view .cart-summary .cart-totals .price-main-v2 {
   color: #000;
+  font-weight: 500px;
 }
 
 .cart-view .cart-view-btn {
   display: block;
+  border-radius: 5px;
   text-align: center;
-  color: #111;
-  font-weight: 700;
-  font-size: 20px;
-  padding: 14px 20px;
-  /* border: 0; */
-  border-style: solid;
-  border-width: 1px;
-  background: linear-gradient(
-    0deg,
-    rgba(241, 190, 62, 1) 0%,
-    rgba(241, 190, 62, 1) 59%,
-    rgba(247, 222, 158, 1) 100%
-  );
+  color: #f8f8f8; /* Cambiado a color blanco */
+  font-weight: 500;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: 0; /* Reestablecido el borde a un solo valor */
+  background: #fbdb13;
   width: 100%;
-  margin: 14px 0 4px;
+  margin: 10px 0 4px;
   outline: 0;
-  letter-spacing: 2px;
-  transition: background-color 0.3s linear-gradient;
+  letter-spacing: 1px;
 }
 
 .cart-view .cart-view-btn:hover {
   border-style: solid;
-  border-width: 1px;
-  border-color: #ce9403;
-  background: #ddd;
-  background-color: #f1be3e;
+  border-width: 0.5px;
+  border-color: rgb(136, 136, 136);
+  background-color: #fcdc4c;
   cursor: pointer;
 }
 
@@ -5706,7 +5706,8 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 
 .cart-view .cart-summary .cart-summary-note {
   color: #828282;
-  font-size: 14px;
+  font-size: 12px;
+  text-align: center;
 }
 
 .cart-view .alert-btn-wrap {
@@ -9031,7 +9032,7 @@ md-sidenav {
   .product-view .product-view-price-main h3 {
     display: inline-block;
     margin-top: 4px;
-    font-size: 32px !important;
+    font-size: 20px !important;
   }
 
   .product-view .product-view-price-main .taxes-included {
@@ -10144,3 +10145,12 @@ color: gray; /* Puedes ajustar el color según tus preferencias
   }
 }
 /*BUNDLES END*/
+
+/* .cart-aside {
+  position: fixed; /* Fija la posición 
+top: 20; /* Mantiene el elemento en la parte superior
+  right: 150px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Opcional: añade sombra 
+  transition: top 0.3s;
+  z-index: 1000;
+} */

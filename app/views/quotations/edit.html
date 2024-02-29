@@ -280,6 +280,7 @@
           ng-click="vm.addNewProduct()" class="print-btn add-to-card-quotation special-button">
           AGREGAR NUEVO ARTÍCULO
         </a>
+
         <div class="client-signature" layout="row">
           <span flex="25">Firma cliente:</span>
           <span flex class="signature-line"></span>
@@ -308,9 +309,9 @@
               </td>
             </tr>
             <tr>
-              <td>Descuento:</td>
+              <td style="color: #e2023f;">Descuento:</td>
               <td>
-                <strong>MXN <span
+                <strong style="color: #e2023f;">MXN <span
                     ng-show="vm.quotation.discount > 0">-</span>{{ vm.quotation.discount | currency }}</strong>
               </td>
             </tr>
@@ -326,25 +327,22 @@
 
           <hr />
 
-          <div class="cart-totals" layout="row" layout-align="space-between end">
+          <div class="cart-total" layout="row" layout-align="space-between center">
             <div flex="30">
-              <h1>
-                <strong>TOTAL:</strong>
-              </h1>
+              <strong>TOTAL:</strong>
             </div>
-            <div flex="70">
-              <h3 class="price-crossed-block" ng-show="vm.quotation.subtotal != vm.quotation.total">
-                <span class="currency-label">MXN</span>
-                <span class="price-crossed">{{
-                  vm.quotation.subtotal | roundCurrency
-                }}</span>
-              </h3>
-              <h1 class="price-main">
-                <span class="currency-label">MXN</span>
+            <div flex="70" layout="row" layout-align="end center">
+              <div class="price-main ng-binding" style="font-weight: 700; font-size: x-large;">
+                <span class="currency-label customT"></span>
                 {{ vm.quotation.total | roundCurrency }}
-              </h1>
+              </div>
+              <h3 hide-xs class="price-crossed-block" ng-show="vm.quotation.subtotal != vm.quotation.total">
+                <span class="ng-binding" style="font-size: large; text-decoration: line-through; font-weight: 300; color: #848484; margin-left: 5px;">
+                {{ vm.quotation.subtotal | roundCurrency }}</span>
+              </h3>
             </div>
           </div>
+          
 
           <!--
           <input
