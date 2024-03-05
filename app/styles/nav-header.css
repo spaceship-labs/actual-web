@@ -4,7 +4,7 @@
 *---------------
 **/
 *{
-  transition: 1s ease all;
+  transition: 0.5s ease all;
 }
 .cart-view{
   margin-top: 125px;
@@ -85,7 +85,7 @@
 .drop-content a:hover {
   background-color: black;
   color: white;
-  transition: 1s ease all;
+  transition: 0.5s ease all;
 
 }
 .link-navbar{
@@ -105,11 +105,14 @@
   width: 100%;
   z-index: 1;
 }
+#header-studio-nav-2 .drop-content a, #header-studio-nav .drop-content a{
+    border-bottom: 1px solid transparent;
+}
 #header-studio-nav-2 .drop-content a:hover, #header-studio-nav .drop-content a:hover{
-  /*  border-bottom: 1px solid #cc262f;*/
   transition: 0.3s ease all;
-  background-color: black;
-  color: white;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+  color: black;
   text-decoration: none;
 }
 #header-actual{
