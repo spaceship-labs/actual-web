@@ -45,7 +45,7 @@
     <div class="row">
       <div class="col-10 col-md-3 col-lg-2 mx-auto ">
         <h4 class="text-center">Filtros</h4>
-        <p class="text-center py-2 mt-2" style="border-top: 1px solid black; border-bottom: 1px solid black;">Color:</p>
+        <p class="text-center py-2 mt-2" style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">Color:</p>
         <div class="" ng-repeat="filter in vm.filters track by $index">
           </h4>
             <div ng-if="filter.Name == 'Color' " class="">
@@ -55,21 +55,20 @@
             </div>
 
         </div>
-      <p class="text-center py-2 mt-4" style="border-top: 1px solid black; border-bottom: 1px solid black;">Rango de precio:</p>
+      <p class="text-center py-2 mt-4" style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">Rango de precio:</p>
       <form class="filter-block-inner" ng-submit="vm.searchByFilters()">
         <div layout="row" layout-align="space-between center">
           <div flex class="input-element input-element-from">
             <div class="input-element-inner">
-              <input ng-model="vm.minPrice" ui-money-mask="0" placeholder="Min." type="text">
+              <input ng-model="vm.minPrice" class="border shadow-none" ui-money-mask="0" placeholder="Mín." type="text">
             </div>
           </div>
-          <span>a</span>
           <div flex class="input-element input-element-to">
             <div class="input-element-inner">
-              <input ng-model="vm.maxPrice" ui-money-mask="0" placeholder="Max." type="text">
+              <input ng-model="vm.maxPrice" class="border shadow-none" ui-money-mask="0" placeholder="Máx." type="text">
             </div>
           </div>
-          <button type="submit" class="filter-block-price-btn">
+          <button type="submit" class="btn border-radius-0 p-1">
             <img animate-visible="true" lazy-src="images/arrow-right.png" alt="Expandir">
           </button>
         </div>
