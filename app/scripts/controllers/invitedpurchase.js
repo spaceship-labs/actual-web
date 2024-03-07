@@ -76,6 +76,7 @@ function InvitedPurchaseCtrl(
   }
 
   function copyDeliveryDataToPersonalData(client, contact) {
+    console.log("kueghasbjdckjsr"+contact);
     if (!contact.copyingPersonalData) {
       client.FirstName = _.clone(contact.FirstName);
       client.LastName = _.clone(contact.LastName);

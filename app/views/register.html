@@ -29,129 +29,11 @@
               <!-- ACCORDION LIST -->
               <!-- modificar main.cssclass="container-accordion" -->
               <div class="container-accordion">
-                <!-- ACCORDION CONTENT FOR SESSION -->
-                <button class="accordion" ng-click="vm.accordionsession = !vm.accordionsession">
-                  <img class="icon-accordion" src="images/arrow2-right.png" alt="Expandir" />
-                  <strong class="strong-accordion">INICIAR SESIÓN</strong>
-                  <span class="span-accordion" hide-xs hide-sm>Si ya tienes una cuenta con nosotros</span>
-                </button>
-                <form class="accordion-content" ng-show="vm.accordionsession" name="signInForm"
-                  ng-submit="vm.signIn(signInForm)">
-                  <div class="input-element-header">
-                    <div class="input-container">
-                      <div class="input-element">
-                        <p>
-                          <label><strong>Email*</strong></label>
-                        </p>
-                        <div class="input-element-inner">
-                          <input type="email" ng-model="vm.existingClient.email" required />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="input-container" ng-if="!vm.newClient.invited">
-                      <div class="input-element">
-                        <p>
-                          <label><strong>Contraseña*</strong></label>
-                        </p>
-                        <div class="input-element-inner">
-                          <input type="password" ng-model="vm.existingClient.password" required />
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="form-view-btn form-view-btn-primary">
-                      Continuar
-                    </button>
-                  </div>
-                </form>
-                <!-- ACCORDION CONTENT FOR INVITED USER -->
-                <button class="accordion" ng-click="vm.accordioninvited = !vm.accordioninvited">
-                  <img class="icon-accordion" src="images/arrow2-right.png" alt="Expandir" />
-                  <strong class="strong-accordion">INVITADO</strong>
-                  <span class="span-accordion" hide-xs hide-sm>Continuar como invitado para agilizar la compra</span>
-                </button>
-                <form class="accordion-content" ng-show="vm.accordioninvited" name="invitedForm"
-                  ng-submit="vm.register(invitedForm, true)">
-                  <div class="input-element-header">
-                    <h4>DATOS PERSONALES DEL USUARIO</h4>
-                    <div class="input-container">
-                      <div class="input-element">
-                        <p>
-                          <label><strong>Nombre(s)*</strong></label>
-                        </p>
-                        <div class="input-element-inner">
-                          <input type="text" ng-model="vm.newClient.FirstName" required />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="input-container">
-                      <div class="input-element">
-                        <p>
-                          <label><strong>Apellido(s)*</strong></label>
-                        </p>
-                        <div class="input-element-inner">
-                          <input type="text" ng-model="vm.newClient.LastName" required />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="input-container">
-                      <div class="input-element">
-                        <p>
-                          <label><strong>Email*</strong></label>
-                        </p>
-                        <div class="input-element-inner">
-                          <input type="email" ng-model="vm.newClient.E_Mail" required />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="input-container">
-                      <div class="input-element">
-                        <p>
-                          <label><strong>Confirmar email*</strong></label>
-                        </p>
-                        <div class="input-element-inner">
-                          <input type="email" ng-model="vm.newClient._E_Mail" ng-pattern="vm.newClient.E_Mail"
-                            required />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="input-container">
-                      <div class="input-element">
-                        <p>
-                          <label><strong>Télefono móvil*</strong></label>
-                        </p>
-                        <div class="input-element-inner">
-                          <input type="text" ng-model="vm.newClient.Cellular" required />
-                        </div>
-                      </div>
-                    </div>
-                    <div ng-if="vm.isContactCreateActive">
-                      <ng-include src="'views/partials/contact-form-register.html'">
-                      </ng-include>
-                    </div>
-                    <!-- <div
-                              ng-if="vm.isCheckoutProcessActive"
-                              class="checkbox-client-type"
-                            >
-                              <md-checkbox ng-model="vm.newClient.invited">
-                                <strong>Deseo continuar como invitado</strong>
-                              </md-checkbox>
-                            </div> -->
-                    <button type="submit" class="form-view-btn form-view-btn-primary">
-                      Continuar
-                    </button>
-                  </div>
-                </form>
                 <!-- ACCORDION CONTENT FOR REGISTER -->
                 <button class="accordion" ng-click="vm.accordionregister = !vm.accordionregister">
-                  <img class="icon-accordion" src="images/arrow2-right.png" alt="Expandir" />
-                  <strong class="strong-accordion">REGÍSTRATE</strong>
-                  <span class="span-accordion" hide-xs hide-sm>¿Eres un nuevo cliente?<strong> Empieza
-                      aquí</strong></span>
+                  <strong class="strong-accordion">¿NO TIENES UNA CUENTA?</strong>
+                  <span class="span-accordion" hide-xs hide-sm>Registrate
+                    aquí</span>
                 </button>
                 <form class="accordion-content" ng-show="vm.accordionregister" name="registerForm"
                   ng-submit="vm.register(registerForm)">
@@ -194,18 +76,6 @@
                     <div class="input-container">
                       <div class="input-element">
                         <p>
-                          <label><strong>Confirmar email*</strong></label>
-                        </p>
-                        <div class="input-element-inner">
-                          <input type="email" ng-model="vm.newClient._E_Mail" ng-pattern="vm.newClient.E_Mail"
-                            required />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="input-container">
-                      <div class="input-element">
-                        <p>
                           <label><strong>Télefono móvil*</strong></label>
                         </p>
                         <div class="input-element-inner">
@@ -213,6 +83,117 @@
                         </div>
                       </div>
                     </div>
+                    <!-- <hr> 
+                    <h4>DIRECCION DE FACTURACION</h4>
+                    <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+                      <div flex="100">
+                        <div layout="row" layout-wrap>
+                          <div flex="25" flex-xs="45" class="input-element">
+                            <label>
+                              <strong>Calle<span class="hl-label">*</span></strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.Address" required />
+                            </div>
+                          </div>
+                          <div flex="15" flex-xs="45" class="input-element">
+                            <label>
+                              <strong>No. Exterior<span class="hl-label">*</span></strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.U_Noexterior" required />
+                            </div>
+                          </div>
+                          <div flex="15" flex-xs="45" class="input-element">
+                            <label>
+                              <strong>No. Interior </strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.U_Nointerior" />
+                            </div>
+                          </div>
+                          <div flex flex-xs="45" class="input-element">
+                            <label>
+                              <strong>Colonia<span class="hl-label">*</span></strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.U_Colonia" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div layout="row" layout-wrap>
+                          <div flex flex-xs="45" class="input-element">
+                            <label>
+                              <strong>Municipio o delegación<span class="hl-label">*</span></strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.U_Mpio" required />
+                            </div>
+                          </div>
+                          <div flex="20" flex-xs="45" class="input-element">
+                            <label>
+                              <strong>Ciudad<span class="hl-label">*</span></strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.U_Ciudad" required />
+                            </div>
+                          </div>
+                          <div flex="20" flex-xs="45" class="input-element">
+                            <label>
+                              <strong>Estado<span class="hl-label">*</span></strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <md-select ng-model="vm.newAddress.U_Estado" class="select-element" required>
+                                <md-option ng-repeat="state in vm.states" ng-value="state.Code">
+                                  {{ state.Name }}
+                                </md-option>
+                              </md-select>
+                            </div>
+                          </div>
+                          <div flex flex-xs="45" class="input-element">
+                            <label>
+                              <strong>Código postal<span class="hl-label">*</span></strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.U_CP" required />
+                            </div>
+                          </div>
+                          <!-- <div flex-gt-sm="25" flex="100" class="input-element"></div> 
+                        </div>
+                        <div layout="row" layout-wrap>
+                          <div flex="25" flex-xs="40" class="input-element">
+                            <label>
+                              <strong>Entre calle</strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.U_Entrecalle" />
+                            </div>
+                          </div>
+                          <div flex="5" class="input-element">
+                            <label>
+                              <strong>Y</strong>
+                            </label>
+                          </div>
+                          <div flex="25" flex-xs="45" class="input-element">
+                            <label>
+                              <strong>Calle</strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" ng-model="vm.newAddress.U_Ycalle" />
+                            </div>
+                          </div>
+                          <div flex flex-xs="45" class="input-element">
+                            <label>
+                              <strong>Referencias cercanas</strong>
+                            </label>
+                            <div class="input-element-inner">
+                              <input type="text" maxlength="100" ng-model="vm.newAddress.U_Notes1" />
+                            </div>
+                          </div>
+                           <div flex-gt-sm="10" flex="100" class="input-element"></div> 
+                        </div>
+                      </div>
+                    </section> -->
 
                     <div ng-if="vm.isContactCreateActive">
                       <ng-include src="'views/partials/contact-form-register.html'"></ng-include>
@@ -236,6 +217,40 @@
                         <div class="input-element-inner">
                           <input type="password" ng-model="vm.newClient._password" ng-pattern="vm.newClient.password"
                             required />
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="form-view-btn form-view-btn-primary">
+                      Continuar
+                    </button>
+                  </div>
+                </form>
+                                <!-- ACCORDION CONTENT FOR SESSION -->
+                <button class="accordion" ng-click="vm.accordionsession = !vm.accordionsession">
+                  <strong class="strong-accordion">INICIAR SESIÓN</strong>
+                  <span class="span-accordion" hide-xs hide-sm>Si ya tienes una cuenta con nosotros</span>
+                </button>
+                <form class="accordion-content" ng-show="vm.accordionsession" name="signInForm"
+                  ng-submit="vm.signIn(signInForm)">
+                  <div class="input-element-header">
+                    <div class="input-container">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Email*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input type="email" ng-model="vm.existingClient.email" required />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-container" ng-if="!vm.newClient.invited">
+                      <div class="input-element">
+                        <p>
+                          <label><strong>Contraseña*</strong></label>
+                        </p>
+                        <div class="input-element-inner">
+                          <input type="password" ng-model="vm.existingClient.password" required />
                         </div>
                       </div>
                     </div>
