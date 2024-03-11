@@ -24,7 +24,7 @@
 
 <div class="product-view-gallery-thumbs">
   <slick id="slick-thumbs" infinite="false" slides-to-show="4" slides-to-scroll="1" init-onload="true"
-    data="vm.areImagesLoaded" arrows="false" draggable="false">
+    data="vm.areImagesLoaded" arrows="false" draggable="false" vertical="true">
     <div ng-repeat="image in vm.galleryImages track by $index">
       <div class="product-view-gallery-thumb">
         <a ng-click="vm.setGalleryIndex($index)" href="" data-thumb="{{$index}}"

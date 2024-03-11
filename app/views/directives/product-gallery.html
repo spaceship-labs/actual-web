@@ -2,10 +2,10 @@
   slide-selector=".product-view-gallery-img-inner > img" on-close="closeGallery()" options="opts">
 </div>
 <div class="product-gallery">
-  <div ng-if="product.maxDiscount && product.maxDiscount > 0" class="product-view-gallery-discount" layout="row"
+  <!-- <div ng-if="product.maxDiscount && product.maxDiscount > 0" class="product-view-gallery-discount" layout="row"
     layout-align="center center">
     <strong>- {{product.maxDiscount}}%</strong>
-  </div>
+  </div> -->
 
   <div ng-show="product.slowMovement" class="slow-movement-sticker" ng-switch on="siteTheme">
     <img ng-switch-when="actual-home" src="images/slowmovement-home.png" alt="Lento movimiento">
@@ -14,33 +14,39 @@
     <img ng-switch-default src="images/slowmovement.png" alt="Lento movimiento">
   </div>
 
-  <div class="product-view-gallery">
-    <slick id="slick-gallery" init-onload="true" data="areImagesLoaded" arrows="true" draggable="false">
-      <div ng-repeat="image in galleryImages track by $index" class="product-view-gallery-img">
-        <div class="product-view-gallery-img-inner">
-          <img src="{{image.src}}?d=400x400" ng-click="showGallery($index)"
-            alt="{{product.icon_description|| product.Name}}-{{$index}}">
-        </div>
-      </div>
-    </slick>
-  </div>
+  <div class="row">
 
-  <div class="product-view-gallery-thumbs">
-    <slick id="slick-thumbs" infinite="false" slides-to-show="4" slides-to-scroll="1" init-onload="true"
-      data="areImagesLoaded" arrows="false" draggable="false">
-      <div ng-repeat="image in galleryImages track by $index">
-        <div class="product-view-gallery-thumb">
-          <a ng-click="setGalleryIndex($index)" href="" data-thumb="{{$index}}"
-            data-selected-index="{{selectedSlideIndex}}" ng-class="
-            {
-              'product-view-gallery-thumb-inner-active' : $index === selectedSlideIndex,
-              'product-view-gallery-thumb-inner-inactive' : $index !== selectedSlideIndex
-            }" class="product-view-gallery-thumb-inner">
-            <img animate-visible="true" lazy-src="{{image.src}}?d=100x100"
-              alt="{{product.icon_description|| product.Name}}-{{$index}}">
-          </a>
-        </div>
+    <div class="col-3">
+      <div class="product-view-gallery-thumbs">
+        <slick id="slick-thumbs" infinite="false" slides-to-show="4" slides-to-scroll="1" init-onload="true"
+          data="areImagesLoaded" arrows="false" draggable="false" vertical="true">
+          <div ng-repeat="image in galleryImages track by $index">
+            <div class="product-view-gallery-thumb">
+              <a ng-click="setGalleryIndex($index)" href="" data-thumb="{{$index}}"
+                data-selected-index="{{selectedSlideIndex}}" ng-class="
+              {
+                'product-view-gallery-thumb-inner-active' : $index === selectedSlideIndex,
+                'product-view-gallery-thumb-inner-inactive' : $index !== selectedSlideIndex
+              }" class="product-view-gallery-thumb-inner">
+                <img animate-visible="true" lazy-src="{{image.src}}?d=100x100"
+                  alt="{{product.icon_description|| product.Name}}-{{$index}}">
+              </a>
+            </div>
+          </div>
+        </slick>
       </div>
-    </slick>
+    </div>
+    <div class="col-9">
+      <div class="product-view-gallery">
+        <slick id="slick-gallery" init-onload="true" data="areImagesLoaded" arrows="true" draggable="false">
+          <div ng-repeat="image in galleryImages track by $index" class="product-view-gallery-img">
+            <div class="product-view-gallery-img-inner">
+              <img src="{{image.src}}?d=400x400" ng-click="showGallery($index)"
+                alt="{{product.icon_description|| product.Name}}-{{$index}}">
+            </div>
+          </div>
+        </slick>
+      </div>
+    </div>
   </div>
 </div>

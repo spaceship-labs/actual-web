@@ -7,7 +7,8 @@
       <span ng-repeat="itemGroup in vm.breadcrumbItems track by $index" ng-show="itemGroup.length > 0">
         >
         <a ng-repeat="item in itemGroup" ng-href="/category/{{ item.Handle }}" class="breadcrumb-item"
-          ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}">{{ item.Name }}</a>
+          ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}">{{ item.Name
+          }}</a>
       </span>
     </p>
   </div>
@@ -15,21 +16,17 @@
 <div class="content-block listing-view">
   <div class="container container-xxlg" layout="row">
     <!--START NAV-->
-    <div class="product-nav-viewcategory">
+    <!-- <div class="product-nav-viewcategory">
       <sidebar-categories selected-category-id="vm.lowestCategory.id" categories-tree="main.categoriesTree"
-        active-store="main.activeStore" hide-sm hide-xs flex="20">
+        active-store="main.activeStore" hide-sm hide-xs flex="20"> -->
 
-        <!-- ng-mouseover="main.handleCategoryHover(category.Handle)" -->
-      </sidebar-categories>
-    </div>
-    </sidebar-categories>
+    <!-- ng-mouseover="main.handleCategoryHover(category.Handle)" -->
+    <!-- </sidebar-categories>
+    </div> -->
     <!--END NAV-->
 
     <!--MAIN VIEW-->
-    <div class="product-view" flex="75" flex-sm="100" flex-xs="100">
-      <h2 class="listing-view-title">
-        {{ vm.product.Name || vm.product.ItemName }}
-      </h2>
+    <div class="product-view" flex="100" flex-sm="100" flex-xs="100">
 
       <div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
         <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150">
@@ -38,7 +35,7 @@
 
       <!--PRODUCT VIEW CONTENT-->
       <section ng-if="!vm.isLoading" class="product-view-content">
-        <div class="section-free-delivery" layout="row">
+        <div class="section-free-delivery" layout="row" ng-if="main.siteTheme !=== 'actual-studio'">
           <span>
             <i class="icon-delivery"></i>
             <strong> ENVÍOS GRATIS</strong>
@@ -55,44 +52,94 @@
 
           <!--PRODUCT VIEW DATA-->
           <div flex="50" flex-sm="100" flex-xs="100" class="product-view-data">
-            <a ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#" class="add-cart-btn"
-              ng-class="
-              {
-                'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity,
-                'add-cart-btn-blink': vm.zipcodeDelivery
-              }
-              ">
-              <span class="add-cart-btn-icon">
-                <span class="add-cart-btn-icon-num">{{
-                  vm.productCart.quantity
-                }}</span>
-                <i class="icon-carro"></i>
-              </span>
-              <strong>Agregar al carrito</strong>
-            </a>
+            <h2 class="listing-view-title">
+              {{ vm.product.Name || vm.product.ItemName }}
+            </h2>
+            <p class="seen-number-s">
+              <strong class="small">visto {{vm.product.seenTimes}}
+                <span ng-if="vm.product.seenTimes > 1">veces</span>
+                <span ng-if="vm.product.seenTimes <= 1">veces</span>
+                hoy</strong>
+            </p>
+            <div class="container d-flex align-items-end">
+              <p class="product-view-price-current pe-2">
+                <!-- <span class="currency-label">MXN</span> -->
+                <strong>{{ vm.product.Price | roundCurrency: '$' }}</strong>
+              </p>
+              <p>
+                <!-- <span class="currency-label">MXN</span> -->
+                <span class="product-view-price-crossed">{{
+                  vm.product.priceBefore | roundCurrency: '$'
+                  }}</span>
+              </p>
+
+              <p class="product-view-price-discount ms-3 px-2" ng-if="vm.product.mainPromo">
+                - {{ vm.mainPromo.discountPg1 }}%
+              </p>
+            </div>
+
             <ng-include src="'views/partials/product-features.html'"></ng-include>
             <ng-include src="'views/partials/product-variants.html'"></ng-include>
             <ng-include ng-if="vm.zipcodeDelivery && !vm.isLoadingDeliveries"
               src="'views/partials/product-delivery.html'"></ng-include>
             <!-- <ng-include src="'views/partials/product-stock.html'"></ng-include> -->
             <!-- <ng-include src="'views/partials/product-promotions.html'"></ng-include> -->
+            <div id="quantity-selectors" class="py-3" ng-if="main.siteTheme === 'actual-studio'">
+              <div class="row">
+                <div class="col-3">
+                  <div class="product-view-qty input-element">
+                    <div ng-if="!vm.zipcodeDelivery" ng-click="vm.setDeliveriesByStaticZipCode()" class="zipcode-layer">
+                    </div>
 
+                    <label>Piezas</label>
+                    <select class="select-element" ng-model="vm.productCart.quantity"
+                      ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="delivery-selection input-element select-element-wrapper">
+                    <div ng-if="!vm.zipcodeDelivery" ng-click="vm.setDeliveriesByStaticZipCode()" class="zipcode-layer">
+                    </div>
+
+                    <label>Entrega aproximada{{ vm.selectedDelivery }}</label>
+                    <select class="select-element" ng-model="vm.productCart.deliveryGroup"
+                      ng-change="vm.resetProductCartQuantity(deliveryGrop.available)"
+                      ng-options="deliveryGroup.date | date: 'd/MMM/yyyy' for deliveryGroup in vm.deliveriesGroups">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <a ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#"
+                    class="add-cart-btn-studio" ng-class="
+                {
+                  'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity,
+                  'add-cart-btn-blink': vm.zipcodeDelivery
+                }
+                ">
+
+                    <strong>Agregar al carrito</strong>
+                  </a>
+                </div>
+                <div class="col-3">
+                  <a ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#"
+                    class="add-cart-btn-studio-buy px-3" ng-class="
+                {
+                  'add-cart-btn-disabled': vm.productCart.quantity > vm.productCart.deliveryGroup.available || !vm.productCart.quantity,
+                  'add-cart-btn-blink': vm.zipcodeDelivery
+                }
+                ">
+
+                    <strong>Comprar Ahora</strong>
+                  </a>
+                </div>
+              </div>
+            </div>
             <!-- PRODUCT PRICE CURRENCY -->
-            <div class="product-view-prices" layout="row" layout-wrap layout-align="space-between end">
+            <div class="product-view-prices" layout="row" layout-wrap layout-align="space-between end"
+              ng-if="main.siteTheme !== 'actual-studio'">
               <div flex="20" flex-sm="100" flex-xs="100" class="unit-data">
-                <p class="product-view-price-discount" ng-if="vm.product.mainPromo">
-                  - {{ vm.mainPromo.discountPg1 }}%
-                </p>
-                <p>
-                  <span class="currency-label">MXN</span>
-                  <span class="product-view-price-crossed">{{
-                    vm.product.priceBefore | roundCurrency: '$'
-                  }}</span>
-                </p>
-                <p class="product-view-price-hl">
-                  <span class="currency-label">MXN</span>
-                  <strong>{{ vm.product.Price | roundCurrency: '$' }}</strong>
-                </p>
+
               </div>
 
               <!--ONLY IF ZIPCODE IS ASSIGNED-->
@@ -106,7 +153,10 @@
                     ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)">
                   </select>
                 </div>
+
+
               </div>
+
               <!-- PRODUCT DELIVERY DATE -->
               <div flex="30" flex-sm="50" flex-xs="50">
                 <div class="delivery-selection input-element select-element-wrapper">
@@ -126,8 +176,8 @@
                   <span class="currency-label">MXN</span>
                   <strong>{{
                     vm.product.Price * vm.productCart.quantity
-                      | roundCurrency: '$'
-                  }}</strong>
+                    | roundCurrency: '$'
+                    }}</strong>
                 </h3>
                 <span class="taxes-included">Impuestos incluidos</span>
               </div>
@@ -135,12 +185,30 @@
               <!--END CONDITION-->
             </div>
 
-            <p class="seen-number">
-              <strong class="small">visto {{vm.product.seenTimes}}
-                <span ng-if="vm.product.seenTimes > 1">veces</span>
-                <span ng-if="vm.product.seenTimes <= 1">veces</span>
-                hoy</strong>
-            </p>
+            <div id="product-info" class="product-view-data-block no-border">
+              <p> <strong>Caracteristicas:</strong></p>
+              <table class="bodyTable_margin">
+                <tr>
+                  <td>{{' '}}Código:</td>
+                  <td>
+                    <strong>{{ vm.product.ItemCode }}</strong>
+                  </td>
+                </tr>
+                <!--
+                <tr>
+                  <td>Sociedad (SAP):</td>
+                  <td><strong>{{vm.sas[vm.product.U_Empresa]}}</strong></td>
+                </tr>
+                -->
+                <tr ng-if="vm.product.CustomBrand">
+                  <td>{{' '}}Marca</td>
+                  <td>
+                    <strong>{{ vm.product.CustomBrand.Name }} </strong>
+                  </td>
+                </tr>
+              </table>
+
+            </div>
 
           </div>
           <!--END PRODUCT VIEW DATA-->
@@ -222,7 +290,8 @@
         </section> -->
 
         <!-- New product description section -->
-        <section class="desc-wrapper">
+
+        <section class="desc-wrapper" ng-if="main.siteTheme !== 'actual-studio'">
           <md-expansion-panel-group md-component-id="panelGroup" auto-expand="">
             <md-expansion-panel md-component-id="ProductDetailsPanel">
               <md-expansion-panel-collapsed>
@@ -336,6 +405,62 @@
     <!-- MAIN VIEW -->
   </div>
 </div>
+</div>
+<div class="container-fluid d-flex justify-content-center" id="product-tabs">
+  <div>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item px-3" role="presentation">
+        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+          type="button" role="tab" aria-controls="pills-home" aria-selected="true">Descripción</button>
+      </li>
+      <li class="nav-item px-3" role="presentation">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+          type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dimensiones</button>
+      </li>
+      <li class="nav-item px-3" role="presentation">
+        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+          type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Envio</button>
+      </li>
+      <li class="nav-item px-3" role="presentation">
+        <button class="nav-link" id="pills-contact-tab2" data-bs-toggle="pill" data-bs-target="#pills-contact2"
+          type="button" role="tab" aria-controls="pills-contact2" aria-selected="false">Formas de pago</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+        tabindex="0">
+        <div ng-bind-html="vm.trustAsHtml(vm.product.Description)"></div>
+      </div>
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+        <div ng-bind-html="vm.trustAsHtml(vm.product.MainFeatures)"></div>
+      </div>
+      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+        <div ng-bind-html="vm.trustAsHtml(main.site.deliveryText)"></div>
+      </div>
+      <div class="tab-pane fade" id="pills-contact2" role="tabpanel" aria-labelledby="pills-contact-tab2" tabindex="0">
+        <div style="overflow-x:auto;">
+          <table class="payments-type-table" summary="This table shows the payments types">
+            <!-- <caption>Válidos, 2019</caption> -->
+            <tr>
+              <th scope="col">Formas de pago</th>
+              <th scope="col">Planes de pago</th>
+              <th scope="col">Grupos financieros participantes</th>
+            </tr>
+            <tr>
+              <th scope="row">Tarjeta de Crédito</th>
+              <td>Un solo pago</td>
+              <td>Visa,MasterCard,American Express</td>
+            </tr>
+            <tr class="alt">
+              <th scope="row">Tarjeta de débito</th>
+              <td>Un solo pago</td>
+              <td>Banamex,HSBC,Inbursa,Santander</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
