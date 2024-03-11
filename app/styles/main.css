@@ -7794,22 +7794,27 @@ div.store-item-column.flex-xs-100.flex-sm-100.flex-40 > h2 > strong {
 
 button.accordion {
   width: 100%;
-  background: linear-gradient(
-    0deg,
-    rgba(241, 190, 62, 1) 0%,
-    rgba(241, 190, 62, 1) 59%,
-    rgba(247, 222, 158, 1) 100%
-  );
-  border: none;
-  outline: none;
-  padding: 15px 20px;
-  display: inline-flex;
-  border-style: solid;
-  border-width: 0.2px;
-  border-color: #f1be3e;
-  transition: background-color 0.3s linear-gradient;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-  margin-bottom: 5px;
+  display: block;
+  margin: 0;
+  border-radius: 2px;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  justify-content: center;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* background: linear-gradient(0deg, rgba(6,6,6,1) 0%, rgba(48,48,46,1) 59%, rgba(147,145,140,1) 100%) !important; */
+  color: #000 !important;
+  /* text-transform: uppercase; */
+  text-decoration: none;
+  background: #ffffff;
+  border: 0.5px solid #848484 !important;
+  display: inline-block;
+  background: rgb(250, 250, 250);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
 }
 
 .accordion-content {
@@ -7822,9 +7827,9 @@ button.accordion {
 }
 
 button.accordion:hover {
-  background: #ddd;
-  background-color: #f1be3e;
-  cursor: pointer;
+  color: #000 !important;
+  background: #e2e2e2;
+  transition: all 0.3s ease 0s;
 }
 
 .icon-accordion {
@@ -7838,18 +7843,17 @@ button.accordion:hover {
 }
 
 .strong-accordion {
-  float: left;
-  margin-top: 18px;
+  text-align: center !important;
+  margin-top: 10px;
   font-size: 20px;
-  font-family: 'Helvetica Neue';
-  display: flex;
+  display: block;
 }
 
 .span-accordion {
-  position: absolute;
+  /* position: absolute;
   padding-top: 19px;
   padding-left: 250px;
-  font-family: 'Helvetica Neue';
+  font-family: 'Helvetica Neue'; */
 }
 
 .content-accordion-list {
@@ -7863,12 +7867,26 @@ button.accordion:hover {
 
 #register .form-view-btn {
   display: block;
+  border-radius: 5px;
+  text-align: center;
+  color: #f8f8f8; /* Cambiado a color blanco */
+  font-weight: 5 400;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: 0; /* Reestablecido el borde a un solo valor */
+  background: #fbdb13;
   width: 100%;
-  border-radius: 3px;
-  font-size: 15px;
-  margin-top: 16px;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
+  margin: 10px 0 4px;
+  outline: 0;
+  letter-spacing: 1px;
+}
+
+#register .form-view-btn:hover {
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: rgb(136, 136, 136);
+  background-color: #fcdc4c;
+  cursor: pointer;
 }
 
 /*ICON LINK*/
