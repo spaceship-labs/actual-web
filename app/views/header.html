@@ -15,7 +15,7 @@
                   </div>
                   <div class="col text-center">
                     <p class="text-white text-uppercase m-0">ENVÍOS GRATIS A TODA LA REPÚBLICA EN COMPRAS EN LÍNEA*</p>
-                    <p class="text-white text-uppercasem-0">*El envio gratuito es en la república mexicana (zona continental), exceptuando todas las islas (ZEE).</p> 
+                    <p class="text-white text-uppercase m-0">*El envio gratuito es en la república mexicana (zona continental), exceptuando todas las islas (ZEE).</p> 
                   </div>
                 </div>
               </div>
@@ -31,7 +31,9 @@
 <nav class="navbar navbar-expand-lg position-fixed" ng-controller="MenuCtrl" ng-if="main.siteTheme === 'actual-studio'" id="header-studio">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="images/icons/ac_full_white.png" alt="Actual Group" id="logo-white" class="img-fluid m-auto w-75" />
+      <img src="images/icons/actual_white.png" alt="Actual Group" id="logo-white" class="img-fluid m-auto w-75" />
+      <img src="images/icons/actual_color.png" style="display: none;" alt="Actual Group" id="logo-color" class="img-fluid m-auto w-75" />
+
       
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +57,7 @@
         ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="nav-link p-0">
         <span hide-xs class="badge bg-secondary"
         ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-        <i hide-xs class="icon-carro text-white fs-5" id="icon-cart-navbar" ng-class="{'cart-active' : main.activeQuotation}"></i>
+        <i class="bi bi-cart mx-1 fs-3" id="icon-cart-navbar" ng-class="{'cart-active' : main.activeQuotation}"></i>
         <span hide-gt-xs class="badge bg-secondary"
         ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
         <i hide-gt-xs style="margin-right:5px;" class="icon-carro text-white"></i>
@@ -64,20 +66,19 @@
     <li class="nav-item">
       <!-- <a class="nav-link text-white" href="#">Boton 2</a> -->
       <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
-        <p class="text-white" ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
+        <!-- <p class="text-white" ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
           <i class="icon-login ms-3 fs-5" id="icon-user-navbar"></i>
-        </p>
+        </p> -->
         <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
           <strong class="invited-label">Invitado</strong>
         </span>
-
-        <i hide-gt-sm style="margin-left:10px;" class="icon-login" ng-click="main.toggleLoginModal()"></i>
+        <i class="bi bi-person mx-1 fs-3" id="icon-user-navbar" ng-click="main.toggleLoginModal()"></i>
         <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
         src="'views/partials/login-header.html'"></ng-include>
       </div>
     </li>
     <li class="nav-item d-block d-lg-none dropdown">
-      <a class="dropdown-toggle  text-decoration-none" role="button" id="dropdownRecamara" data-bs-toggle="dropdown" aria-expanded="false">
+      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownRecamara" data-bs-toggle="dropdown" aria-expanded="false">
         Recamara
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownRecamara">
@@ -101,6 +102,103 @@
         </li>
         <li>
           <a href="/category/buros-y-mesas-laterales" class="dropdown-item text-decoration-none">Burós y mesas laterales</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item d-block d-lg-none dropdown">
+      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownSala" data-bs-toggle="dropdown" aria-expanded="false">
+        Sala
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownSala">
+        <li>
+          <a href="/category/salas-y-sofas" class="dropdown-item text-decoration-none">Salas y sófas</a>
+        </li>
+        <li>
+          <a href="/category/sofa-cama" class="dropdown-item text-decoration-none">Sofa cama</a>
+        </li>
+        <li>
+        <a href="/category/futones" class="dropdown-item text-decoration-none">Futones</a>
+        </li>
+        <li>
+          <a href="/category/sillones-reclinables" class="dropdown-item text-decoration-none">Reclinables</a>
+        </li>
+        <li>
+          <a href="/category/sillones-salas" class="dropdown-item text-decoration-none">Sillones</a>
+        </li>
+        <li>
+          <a href="/category/taburete" class="dropdown-item text-decoration-none">Taburetes</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item d-block d-lg-none dropdown">
+      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownExterior" data-bs-toggle="dropdown" aria-expanded="false">
+        Exterior
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownExterior">
+        <li>
+          <a href="/category/salas-exterior" class="dropdown-item text-decoration-none">Salas</a>
+        </li>
+        <li>
+          <a href="/category/mesas-exterior" class="dropdown-item text-decoration-none">Exterior</a>
+        </li>
+        <li>
+          <a href="/category/sillas-y-bancos" class="dropdown-item text-decoration-none">Sillas y bancos</a>
+        </li>
+        <li>
+          <a href="/category/camastro" class="dropdown-item text-decoration-none">Camastros</a>
+        </li>
+        <li>
+          <a href="/category/mesa-de-centro-y-lateral" class="dropdown-item text-decoration-none">Mesas de centro y lateral</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item d-block d-lg-none dropdown">
+      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownDecoracion" data-bs-toggle="dropdown" aria-expanded="false">
+        Decoración
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownDecoracion">
+        <li>
+          <a href="/category/accesorios" class="dropdown-item text-decoration-none">Accesorios</a>
+        </li>
+        <li>
+          <a href="/category/cuadros-y-decoracion-de-pared" class="dropdown-item text-decoration-none">Cuadros y decoración de pared</a>
+        </li>
+        <li>
+          <a href="/category/espejos" class="dropdown-item text-decoration-none">Espejos</a>
+        </li>
+        <li>
+          <a href="/category/tapetes" class="dropdown-item text-decoration-none">Tapetes</a>
+        </li>
+        <li>
+          <a href="/category/cojines" class="dropdown-item text-decoration-none">Cojines</a>
+        </li>
+        <li>
+           <a href="/category/iluminacion" class="dropdown-item text-decoration-none">Iluminación</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item d-block d-lg-none dropdown">
+      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownAlmacenaje" data-bs-toggle="dropdown" aria-expanded="false">
+        Almacenaje
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownAlmacenaje">
+        <li>
+          <a href="/category/comodas-y-credenzas" class="dropdown-item text-decoration-none">Comodas y credenzas</a>
+        </li>
+        <li>
+          <a href="/category/bufeteros" class="dropdown-item text-decoration-none">Bufetero</a>
+        </li>
+        <li>
+          <a href="/category/muebles-para-tv" class="dropdown-item text-decoration-none">Muebles TV</a>
+        </li>
+        <li>
+          <a href="/category/libreros-y-repisas" class="dropdown-item text-decoration-none">Libreros y repisas</a>
+        </li>
+        <li>
+          <a href="/category/escritorios" class="dropdown-item text-decoration-none">Escritorios</a>
+        </li>
+        <li>
+           <a href="/category/buros" class="dropdown-item text-decoration-none">Burós</a>
         </li>
       </ul>
     </li>
