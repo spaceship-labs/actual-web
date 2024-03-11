@@ -1,14 +1,21 @@
 <section class="form-section">
   <!--DATOS PERSONALES-->
   <hr />
-  <h4>PERSONA Y DIRECCIÓN DE ENTREGA</h4>
+  <h4>DIRECCION DE FACTURACION</h4>
   <div class="checkbox-client-type">
-    <md-checkbox ng-click="vm.copyPersonalDataToDeliveryData(vm.newClient, vm.newAddress)"
-      ng-model="contact.copyingPersonalData" aria-label="Persona moral">
+    <md-checkbox
+      ng-change="vm.copyPersonalDataToDeliveryData(vm.newClient, vm.newAddress)"
+      ng-model="contact.copyingPersonalData"
+      aria-label="Persona moral"
+    >
       <strong>Los mismos que mis datos personales</strong>
     </md-checkbox>
   </div>
-  <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+  <section
+    class="form-section-content form-section-content-v2"
+    layout="row"
+    layout-align="space-between center"
+  >
     <div flex="100">
       <div layout="row" layout-wrap>
         <div flex flex-xs="100" class="input-element">
@@ -47,8 +54,13 @@
             <strong>Teléfono celular<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" ng-model="vm.newAddress.Cellolar" placeholder="10 dígitos" ng-pattern="vm.phonePattern"
-              required />
+            <input
+              type="text"
+              ng-model="vm.newAddress.Cellolar"
+              placeholder="10 dígitos"
+              ng-pattern="vm.phonePattern"
+              required
+            />
           </div>
         </div>
         <div flex flex-xs="100" class="input-element">
@@ -75,7 +87,11 @@
   <!--END DATOS PERSONALES-->
 
   <!--DATOS PERSONALES-->
-  <section class="form-section-content form-section-content-v2" layout="row" layout-align="space-between center">
+  <section
+    class="form-section-content form-section-content-v2"
+    layout="row"
+    layout-align="space-between center"
+  >
     <div flex="100">
       <div layout="row" layout-wrap>
         <div flex="25" flex-xs="45" class="input-element">
@@ -114,7 +130,9 @@
       <div layout="row" layout-wrap>
         <div flex flex-xs="45" class="input-element">
           <label>
-            <strong>Municipio o delegación<span class="hl-label">*</span></strong>
+            <strong
+              >Municipio o delegación<span class="hl-label">*</span></strong
+            >
           </label>
           <div class="input-element-inner">
             <input type="text" ng-model="vm.newAddress.U_Mpio" required />
@@ -133,7 +151,11 @@
             <strong>Estado<span class="hl-label">*</span></strong>
           </label>
           <div class="input-element-inner">
-            <md-select ng-model="vm.newAddress.U_Estado" class="select-element" required>
+            <md-select
+              ng-model="vm.newAddress.U_Estado"
+              class="select-element"
+              required
+            >
               <md-option ng-repeat="state in vm.states" ng-value="state.Code">
                 {{ state.Name }}
               </md-option>
@@ -177,7 +199,11 @@
             <strong>Referencias cercanas</strong>
           </label>
           <div class="input-element-inner">
-            <input type="text" maxlength="100" ng-model="vm.newAddress.U_Notes1" />
+            <input
+              type="text"
+              maxlength="100"
+              ng-model="vm.newAddress.U_Notes1"
+            />
           </div>
         </div>
         <!-- <div flex-gt-sm="10" flex="100" class="input-element"></div> -->
