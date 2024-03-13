@@ -13,47 +13,53 @@ function calcularPorcentaje(numeroOriginal, porcentaje) {
 function accion(numero) {
     let package1 = [
         {
-            "title": "Espejo decorativo redondo cae060 ø1.20 dorado",
-            "price": 6999,
+            "title": "ESPEJO NAPOLI 90X200 C/WALNUT",
+            "price": 15899,
             "discount": true,
-            "discount_percentage": 20,
-            "photo": "https://d116li125og699.cloudfront.net/uploads/products/CO69272_1.jpg"
+            "discount_percentage": 28,
+            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST14572_1.jpg",
+            "url": "/espejo-napoli-90x200-c-walnut/ST14572"
         },
         {
-            "title": "Buró Bahía-02 c/ 2 cajones color blanco alto brillo",
-            "price": 6799.01,
+            "title": "Buro paamul c/parota 45x38x50",
+            "price": 5799.01,
             "discount": true,
-            "discount_percentage": 20,
-            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST16451_1.jpg"
+            "discount_percentage": 28,
+            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST18862.jpeg",
+            "url": "/buro-paamul-c-parota-45x38x50/ST18862"
         },
         {
-            "title": "SILLA MONTECARLO CUERDA FLAT AZUL C/BRAZOS TEKA DARK BROWN TELA CANVAS NATURAL",
-            "price": 18499,
+            "title": "Sillon xpuha manila c/jequitiba t.f.pearl  80x80x72",
+            "price": 28399.01,
             "discount": true,
-            "discount_percentage": 20,
-            "photo": "https://d116li125og699.cloudfront.net/uploads/products/CO62810_01.jpg"
+            "discount_percentage": 28,
+            "photo": "https://d116li125og699.cloudfront.net/uploads/products/CO75398_01.jpg",
+            "url": "/sillon-xpuha-manila-c-jequitiba-t.f.pearl%C2%A0-80x80x72/CO75398"
         },
         {
-            "title": "Cama King Size tapizada en tela gris claro con cabecera lisa",
+            "title": "Cama paamul mat rd c/parota-yute-red 140x104",
+            "price": 20299.01,
+            "discount": true,
+            "discount_percentage": 28,
+            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST18857.jpeg",
+            "url": "/cama-paamul-mat-rd-c-parota-yute-red-140x104/ST18857"
+        },
+        {
+            "title": "Corner nuvola ii 92x92x64h spark ivory",
             "price": 14999,
             "discount": true,
-            "discount_percentage": 20,
-            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST10019_01_Cama_lisa_gris_king_size.jpg"
-        },
-        {
-            "title": "Sofa cama con chaise izquierdo modelo Alexa tapizado en tela gris",
-            "price": 37999.01,
-            "discount": true,
-            "discount_percentage": 20,
-            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST15340_4.jpg"
+            "discount_percentage": 28,
+            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST18706_001.jpg",
+            "url": "corner-nuvola-ii-92x92x64h-spark-ivory/ST18706"
         },
 
         {
-            "title": "MESA CENTRAL FIORDO REDONDA GRANDE 100DX50H ACABADO NOGAL NATURAL",
-            "price": 9499,
+            "title": "Mesa de centro free ii chica esp ng nat ce2289-03 e",
+            "price": 9799,
             "discount": true,
-            "discount_percentage": 20,
-            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST15071_011.jpg"
+            "discount_percentage": 28,
+            "photo": "https://d116li125og699.cloudfront.net/uploads/products/AT0000217_1.jpg",
+            "url": "/mesa-de-centro-free-ii-chica-esp-ng-nat-ce2289-03-e/AT0000217"
         }
     ]
     if (window.innerWidth >= 1200) {
@@ -64,6 +70,8 @@ function accion(numero) {
         document.getElementById("widget-product-price").textContent = "$" + producto.price.toFixed(2);
         document.getElementById("widget-product-price-discount").textContent = "$" + calcularPorcentaje(producto.price, producto.discount_percentage).toFixed(2);
         document.getElementById("product-discount").textContent = "-" + producto.discount_percentage + "%"
+        document.getElementById("widget-url").href = producto.url
+
     } else {
         // En pantallas más pequeñas
         var producto = package1[numero];
@@ -72,6 +80,7 @@ function accion(numero) {
         document.getElementById("widget-product-price2").textContent = "$" + producto.price.toFixed(2);
         document.getElementById("widget-product-price-discount2").textContent = "$" + calcularPorcentaje(producto.price, producto.discount_percentage).toFixed(2);
         document.getElementById("product-discount2").textContent = "-" + producto.discount_percentage + "%"
+        document.getElementById("widget-url2").href = producto.url
         openMobileSheet();
     }
 }
