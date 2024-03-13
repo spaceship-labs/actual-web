@@ -20,20 +20,22 @@
         </div>
         <div class="card-body">
           <p class="product-name">{{product.Name}}</p>
-          <!--
           <p class="estrella">
             <span class="estrella"></span>
             <span class="estrella"></span>
             <span class="estrella"></span>
             <span class="estrella"></span>
-            <span class="estrella-vacia"></span>
           </p>
-          -->
-          <p class="price">
+          <p
+            class="price"
+            style="margin-top: -17px; color: #cc1020; font-weight: 500"
+          >
             <strong class="price-now-currency"></strong>
             {{product.Price | roundCurrency:'$'}}
             <span class="price-before-currency"></span>
-            <span class="price-before"
+            <span
+              class="price-before"
+              style="text-decoration: line-through; color: #747474"
               >{{product.priceBefore | roundCurrency:'$'}}</span
             >
             <span ng-if="product.priceBefore"></span>

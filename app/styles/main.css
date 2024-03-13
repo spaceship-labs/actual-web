@@ -10124,16 +10124,15 @@ md-sidenav {
   color: #747474;
 }
 
-
 .estrella,
 .estrella-vacia {
-  margin-top: -23px;
+  margin-top: -20px;
 }
 
 .estrella::before,
 .estrella-vacia::before {
   content: '\2605';
-  font-size: 17px;
+  font-size: 18px;
   color: gold;
 }
 
@@ -10161,7 +10160,6 @@ body {
   font-family: Inter !important;
   background-color: white !important;
 }
-
 
 #wrap {
   background-color: white !important;
