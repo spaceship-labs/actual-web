@@ -15,291 +15,320 @@
                   </div>
                   <div class="col text-center">
                     <p class="text-white text-uppercase m-0">ENVÍOS GRATIS A TODA LA REPÚBLICA EN COMPRAS EN LÍNEA*</p>
-                    <p class="text-white text-uppercase m-0">*El envio gratuito es en la república mexicana (zona continental), exceptuando todas las islas (ZEE).</p> 
+                    <p class="text-white text-uppercase m-0">*El envio gratuito es en la república mexicana (zona
+                      continental), exceptuando todas las islas (ZEE).</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   </div>
 </nav>
 <!-- START TOP BAR -->
-<nav class="navbar navbar-expand-lg position-fixed" ng-controller="MenuCtrl" ng-if="main.siteTheme === 'actual-studio'" id="header-studio">
+<nav class="navbar navbar-expand-lg position-fixed" ng-controller="MenuCtrl" ng-if="main.siteTheme === 'actual-studio'"
+  id="header-studio">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <img src="images/icons/actual_white.png" alt="Actual Group" id="logo-white" class="img-fluid m-auto w-75" />
-      <img src="images/icons/actual_color.png" style="display: none;" alt="Actual Group" id="logo-color" class="img-fluid m-auto w-75" />
+      <img src="images/icons/actual_color.png" style="display: none;" alt="Actual Group" id="logo-color"
+        class="img-fluid m-auto w-75" />
 
-      
+
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <form class="d-flex mx-auto" ng-class="{
         'searcher-wrapper-show-mobile':main.showSearchBar
       }" ng-submit="main.handleSearch()" class="searcher-wrapper" flex-order-xs="1" layout="row"
-      ng-show="!main.showSearchBar">
-      <div class="searcher bg-transparent border-white" flex flex-xs="70">
-        <div class="searcher-inner">
-          <input type="text" class="bg-transparent text-black" name="term" ng-model="main.searchValue" placeholder="Buscar en toda la tienda…" />
+        ng-show="!main.showSearchBar">
+        <div class="searcher bg-transparent border-white" flex flex-xs="70">
+          <div class="searcher-inner">
+            <input type="text" class="bg-transparent text-black" name="term" ng-model="main.searchValue"
+              placeholder="Buscar en toda la tienda…" />
+          </div>
         </div>
-      </div>
-      <button type="submit" class="bg-transparent" id="btn-navbar-search"><i class="icon-search" id="lupa-icon"></i></button>
-    </form>
-    <ul class="navbar-nav ms-auto ">
-      <li class="nav-item">
-        <a style="display:block;" ng-if="main.activeQuotation"
-        ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="nav-link p-0">
-        <span hide-xs class="badge bg-secondary"
-        ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-        <i class="bi bi-cart mx-1 fs-3" id="icon-cart-navbar" ng-class="{'cart-active' : main.activeQuotation}"></i>
-        <span hide-gt-xs class="badge bg-secondary"
-        ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-        <i hide-gt-xs style="margin-right:5px;" class="icon-carro text-white"></i>
-      </a>
-    </li>
-    <li class="nav-item">
-      <!-- <a class="nav-link text-white" href="#">Boton 2</a> -->
-      <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
-        <!-- <p class="text-white" ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
+        <button type="submit" class="bg-transparent" id="btn-navbar-search"><i class="icon-search"
+            id="lupa-icon"></i></button>
+      </form>
+      <ul class="navbar-nav ms-auto ">
+        <li class="nav-item pe-5 mt-2">
+          <a href="#" id="business-button" class="px-4 py-2 ac-b-b">ACTUAL BUSINESS</a>
+        </li>
+        <li class="nav-item pe-3 bl-w">
+          <a style="display:block;" ng-if="main.activeQuotation"
+            ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="nav-link p-0">
+            <span hide-xs class="badge bg-secondary" ng-class="{'cart-active-items' : main.activeQuotation}">{{
+              main.activeQuotation.totalProducts }}</span>
+            <i class="bi bi-cart mx-1 fs-3" id="icon-cart-navbar" ng-class="{'cart-active' : main.activeQuotation}"></i>
+            <span hide-gt-xs class="badge bg-secondary" ng-class="{'cart-active-items' : main.activeQuotation}">{{
+              main.activeQuotation.totalProducts }}</span>
+            <i hide-gt-xs style="margin-right:5px;" class="icon-carro text-white"></i>
+          </a>
+        </li>
+        <li class="nav-item ps-2">
+          <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger"
+            ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
+            <a href="#" layout="row">
+              <i class="bi bi-person mx-1 fs-3" id="icon-user-navbar"></i>
+            </a>
+
+            <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
+          </div>
+        </li>
+        <li class="nav-item">
+          <!-- <a class="nav-link text-white" href="#">Boton 2</a> -->
+          <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
+            <!-- <p class="text-white" ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()">
           <i class="icon-login ms-3 fs-5" id="icon-user-navbar"></i>
         </p> -->
-        <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
-          <strong class="invited-label">Invitado</strong>
-        </span>
-        <i class="bi bi-person mx-1 fs-3" id="icon-user-navbar" ng-click="main.toggleLoginModal()"></i>
-        <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
-        src="'views/partials/login-header.html'"></ng-include>
-      </div>
-    </li>
-    <li class="nav-item d-block d-lg-none dropdown">
-      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownRecamara" data-bs-toggle="dropdown" aria-expanded="false">
-        Recamara
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownRecamara">
-        <li>
-          <a href="/category/camas" class="dropdown-item text-decoration-none">Camas</a>
+            <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
+              <strong class="invited-label">Invitado</strong>
+            </span>
+            <i class="bi bi-person mx-1 fs-3" id="icon-user-navbar" ng-click="main.toggleLoginModal()"></i>
+            <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
+              src="'views/partials/login-header.html'"></ng-include>
+          </div>
         </li>
-        <li>
-          <a href="/category/cabeceras" class="dropdown-item text-decoration-none">Cabeceras</a>
+        <li class="nav-item d-block d-lg-none dropdown">
+          <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownRecamara"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Recamara
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownRecamara">
+            <li>
+              <a href="/category/camas" class="dropdown-item text-decoration-none">Camas</a>
+            </li>
+            <li>
+              <a href="/category/cabeceras" class="dropdown-item text-decoration-none">Cabeceras</a>
+            </li>
+            <li>
+              <a href="/category/comoda" class="dropdown-item text-decoration-none">Cómodas</a>
+            </li>
+            <li>
+              <a href="/category/colchones" class="dropdown-item text-decoration-none">Colchones</a>
+            </li>
+            <li>
+              <a href="/category/blancos" class="dropdown-item text-decoration-none">Blancos</a>
+            </li>
+            <li>
+              <a href="/category/bases-de-cama" class="dropdown-item text-decoration-none">Bases de cama</a>
+            </li>
+            <li>
+              <a href="/category/buros-y-mesas-laterales" class="dropdown-item text-decoration-none">Burós y mesas
+                laterales</a>
+            </li>
+          </ul>
         </li>
-        <li>
-          <a href="/category/comoda" class="dropdown-item text-decoration-none">Cómodas</a>
+        <li class="nav-item d-block d-lg-none dropdown">
+          <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownSala"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Sala
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownSala">
+            <li>
+              <a href="/category/salas-y-sofas" class="dropdown-item text-decoration-none">Salas y sófas</a>
+            </li>
+            <li>
+              <a href="/category/sofa-cama" class="dropdown-item text-decoration-none">Sofa cama</a>
+            </li>
+            <li>
+              <a href="/category/futones" class="dropdown-item text-decoration-none">Futones</a>
+            </li>
+            <li>
+              <a href="/category/sillones-reclinables" class="dropdown-item text-decoration-none">Reclinables</a>
+            </li>
+            <li>
+              <a href="/category/sillones-salas" class="dropdown-item text-decoration-none">Sillones</a>
+            </li>
+            <li>
+              <a href="/category/taburete" class="dropdown-item text-decoration-none">Taburetes</a>
+            </li>
+          </ul>
         </li>
-        <li>
-          <a href="/category/colchones" class="dropdown-item text-decoration-none">Colchones</a>
+        <li class="nav-item d-block d-lg-none dropdown">
+          <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownExterior"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Exterior
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownExterior">
+            <li>
+              <a href="/category/salas-exterior" class="dropdown-item text-decoration-none">Salas</a>
+            </li>
+            <li>
+              <a href="/category/mesas-exterior" class="dropdown-item text-decoration-none">Exterior</a>
+            </li>
+            <li>
+              <a href="/category/sillas-y-bancos" class="dropdown-item text-decoration-none">Sillas y bancos</a>
+            </li>
+            <li>
+              <a href="/category/camastro" class="dropdown-item text-decoration-none">Camastros</a>
+            </li>
+            <li>
+              <a href="/category/mesa-de-centro-y-lateral" class="dropdown-item text-decoration-none">Mesas de centro y
+                lateral</a>
+            </li>
+          </ul>
         </li>
-        <li>
-          <a href="/category/blancos" class="dropdown-item text-decoration-none">Blancos</a>
+        <li class="nav-item d-block d-lg-none dropdown">
+          <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownDecoracion"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Decoración
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownDecoracion">
+            <li>
+              <a href="/category/accesorios" class="dropdown-item text-decoration-none">Accesorios</a>
+            </li>
+            <li>
+              <a href="/category/cuadros-y-decoracion-de-pared" class="dropdown-item text-decoration-none">Cuadros y
+                decoración de pared</a>
+            </li>
+            <li>
+              <a href="/category/espejos" class="dropdown-item text-decoration-none">Espejos</a>
+            </li>
+            <li>
+              <a href="/category/tapetes" class="dropdown-item text-decoration-none">Tapetes</a>
+            </li>
+            <li>
+              <a href="/category/cojines" class="dropdown-item text-decoration-none">Cojines</a>
+            </li>
+            <li>
+              <a href="/category/iluminacion" class="dropdown-item text-decoration-none">Iluminación</a>
+            </li>
+          </ul>
         </li>
-        <li>
-           <a href="/category/bases-de-cama" class="dropdown-item text-decoration-none">Bases de cama</a>
-        </li>
-        <li>
-          <a href="/category/buros-y-mesas-laterales" class="dropdown-item text-decoration-none">Burós y mesas laterales</a>
+        <li class="nav-item d-block d-lg-none dropdown">
+          <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownAlmacenaje"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Almacenaje
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownAlmacenaje">
+            <li>
+              <a href="/category/comodas-y-credenzas" class="dropdown-item text-decoration-none">Comodas y credenzas</a>
+            </li>
+            <li>
+              <a href="/category/bufeteros" class="dropdown-item text-decoration-none">Bufetero</a>
+            </li>
+            <li>
+              <a href="/category/muebles-para-tv" class="dropdown-item text-decoration-none">Muebles TV</a>
+            </li>
+            <li>
+              <a href="/category/libreros-y-repisas" class="dropdown-item text-decoration-none">Libreros y repisas</a>
+            </li>
+            <li>
+              <a href="/category/escritorios" class="dropdown-item text-decoration-none">Escritorios</a>
+            </li>
+            <li>
+              <a href="/category/buros" class="dropdown-item text-decoration-none">Burós</a>
+            </li>
+          </ul>
         </li>
       </ul>
-    </li>
-    <li class="nav-item d-block d-lg-none dropdown">
-      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownSala" data-bs-toggle="dropdown" aria-expanded="false">
-        Sala
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownSala">
-        <li>
-          <a href="/category/salas-y-sofas" class="dropdown-item text-decoration-none">Salas y sófas</a>
-        </li>
-        <li>
-          <a href="/category/sofa-cama" class="dropdown-item text-decoration-none">Sofa cama</a>
-        </li>
-        <li>
-        <a href="/category/futones" class="dropdown-item text-decoration-none">Futones</a>
-        </li>
-        <li>
-          <a href="/category/sillones-reclinables" class="dropdown-item text-decoration-none">Reclinables</a>
-        </li>
-        <li>
-          <a href="/category/sillones-salas" class="dropdown-item text-decoration-none">Sillones</a>
-        </li>
-        <li>
-          <a href="/category/taburete" class="dropdown-item text-decoration-none">Taburetes</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item d-block d-lg-none dropdown">
-      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownExterior" data-bs-toggle="dropdown" aria-expanded="false">
-        Exterior
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownExterior">
-        <li>
-          <a href="/category/salas-exterior" class="dropdown-item text-decoration-none">Salas</a>
-        </li>
-        <li>
-          <a href="/category/mesas-exterior" class="dropdown-item text-decoration-none">Exterior</a>
-        </li>
-        <li>
-          <a href="/category/sillas-y-bancos" class="dropdown-item text-decoration-none">Sillas y bancos</a>
-        </li>
-        <li>
-          <a href="/category/camastro" class="dropdown-item text-decoration-none">Camastros</a>
-        </li>
-        <li>
-          <a href="/category/mesa-de-centro-y-lateral" class="dropdown-item text-decoration-none">Mesas de centro y lateral</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item d-block d-lg-none dropdown">
-      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownDecoracion" data-bs-toggle="dropdown" aria-expanded="false">
-        Decoración
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownDecoracion">
-        <li>
-          <a href="/category/accesorios" class="dropdown-item text-decoration-none">Accesorios</a>
-        </li>
-        <li>
-          <a href="/category/cuadros-y-decoracion-de-pared" class="dropdown-item text-decoration-none">Cuadros y decoración de pared</a>
-        </li>
-        <li>
-          <a href="/category/espejos" class="dropdown-item text-decoration-none">Espejos</a>
-        </li>
-        <li>
-          <a href="/category/tapetes" class="dropdown-item text-decoration-none">Tapetes</a>
-        </li>
-        <li>
-          <a href="/category/cojines" class="dropdown-item text-decoration-none">Cojines</a>
-        </li>
-        <li>
-           <a href="/category/iluminacion" class="dropdown-item text-decoration-none">Iluminación</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item d-block d-lg-none dropdown">
-      <a class="dropdown-toggle  text-decoration-none dropdown-mobile" role="button" id="dropdownAlmacenaje" data-bs-toggle="dropdown" aria-expanded="false">
-        Almacenaje
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownAlmacenaje">
-        <li>
-          <a href="/category/comodas-y-credenzas" class="dropdown-item text-decoration-none">Comodas y credenzas</a>
-        </li>
-        <li>
-          <a href="/category/bufeteros" class="dropdown-item text-decoration-none">Bufetero</a>
-        </li>
-        <li>
-          <a href="/category/muebles-para-tv" class="dropdown-item text-decoration-none">Muebles TV</a>
-        </li>
-        <li>
-          <a href="/category/libreros-y-repisas" class="dropdown-item text-decoration-none">Libreros y repisas</a>
-        </li>
-        <li>
-          <a href="/category/escritorios" class="dropdown-item text-decoration-none">Escritorios</a>
-        </li>
-        <li>
-           <a href="/category/buros" class="dropdown-item text-decoration-none">Burós</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div>
-<div class="container-fluid text-center position-fixed d-none d-lg-block" id="header-studio-nav" style="z-index: 99999;">
-  <div class="row mx-auto py-1 w-70" >
-    <div class="col-2 drop">
-      <a class=" text-decoration-none link-navbar">
-        Recamara
-      </a>
-      <div class="drop-content">
-        <a href="/category/camas" class="dropdown-item text-decoration-none">Camas</a>
-        <a href="/category/cabeceras" class="dropdown-item text-decoration-none">Cabeceras</a>
-        <a href="/category/comoda" class="dropdown-item text-decoration-none">Cómodas</a>
-        <a href="/category/colchones" class="dropdown-item text-decoration-none">Colchones</a>
-        <a href="/category/blancos" class="dropdown-item text-decoration-none">Blancos</a>
-        <a href="/category/bases-de-cama" class="dropdown-item text-decoration-none">Bases de cama</a>
-        <a href="/category/buros-y-mesas-laterales" class="dropdown-item text-decoration-none">Burós y mesas laterales</a>
+    </div>
+    <div class="container-fluid text-center position-fixed d-none d-lg-block" id="header-studio-nav"
+      style="z-index: 99999;">
+      <div class="row mx-auto py-1 w-70">
+        <div class="col-2 drop">
+          <a class=" text-decoration-none link-navbar">
+            Recamara
+          </a>
+          <div class="drop-content">
+            <a href="/category/camas" class="dropdown-item text-decoration-none">Camas</a>
+            <a href="/category/cabeceras" class="dropdown-item text-decoration-none">Cabeceras</a>
+            <a href="/category/comoda" class="dropdown-item text-decoration-none">Cómodas</a>
+            <a href="/category/colchones" class="dropdown-item text-decoration-none">Colchones</a>
+            <a href="/category/blancos" class="dropdown-item text-decoration-none">Blancos</a>
+            <a href="/category/bases-de-cama" class="dropdown-item text-decoration-none">Bases de cama</a>
+            <a href="/category/buros-y-mesas-laterales" class="dropdown-item text-decoration-none">Burós y mesas
+              laterales</a>
+          </div>
+        </div>
+        <div class="col-2 drop">
+          <a class=" text-decoration-none link-navbar">Sala</a>
+          <div class="drop-content">
+            <a href="/category/salas-y-sofas">Salas y sófas</a>
+            <a href="/category/sofa-cama">Sofa cama</a>
+            <a href="/category/futones">Futones</a>
+            <a href="/category/sillones-reclinables">Reclinables</a>
+            <a href="/category/sillones-salas">Sillones</a>
+            <a href="/category/taburete">Taburetes</a>
+          </div>
+        </div>
+        <div class="col-2">
+          <a href="/category/mesas-de-comedor" class=" text-decoration-none link-navbar">Comedor</a>
+        </div>
+        <div class="col-2 drop">
+          <a class=" text-decoration-none link-navbar">Exterior</a>
+          <div class="drop-content">
+            <a href="/category/salas-exterior">Salas</a>
+            <a href="/category/mesas-exterior">Exterior</a>
+            <a href="/category/sillas-y-bancos">Sillas y bancos</a>
+            <a href="/category/camastro">Camastros</a>
+            <a href="/category/mesa-de-centro-y-lateral">Mesas de centro y lateral</a>
+          </div>
+        </div>
+        <div class="col-2 drop">
+          <a class=" text-decoration-none link-navbar">Decoración</a>
+          <div class="drop-content">
+            <a href="/category/accesorios">Accesorios</a>
+            <a href="/category/cuadros-y-decoracion-de-pared">Cuadros y decoración de pared</a>
+            <a href="/category/espejos">Espejos</a>
+            <a href="/category/tapetes">Tapetes</a>
+            <a href="/category/cojines">Cojines</a>
+            <a href="/category/iluminacion">Iluminación</a>
+          </div>
+        </div>
+        <div class="col-2 drop">
+          <a class=" text-decoration-none link-navbar">Almacenaje</a>
+          <div class="drop-content">
+            <a href="/category/comodas-y-credenzas">Comodas y credenzas</a>
+            <a href="/category/bufeteros">Bufetero</a>
+            <a href="/category/muebles-para-tv">Muebles TV</a>
+            <a href="/category/libreros-y-repisas">Libreros y repisas</a>
+            <a href="/category/escritorios">Escritorios</a>
+            <a href="/category/buros">Burós</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-2 drop">
-      <a class=" text-decoration-none link-navbar">Sala</a>
-      <div class="drop-content">
-        <a href="/category/salas-y-sofas">Salas y sófas</a>
-        <a href="/category/sofa-cama">Sofa cama</a>
-        <a href="/category/futones">Futones</a>
-        <a href="/category/sillones-reclinables">Reclinables</a>
-        <a href="/category/sillones-salas">Sillones</a>
-        <a href="/category/taburete">Taburetes</a>
-      </div>
-    </div>
-    <div class="col-2">
-      <a href="/category/mesas-de-comedor" class=" text-decoration-none link-navbar">Comedor</a>
-    </div>
-    <div class="col-2 drop">
-      <a class=" text-decoration-none link-navbar">Exterior</a>
-      <div class="drop-content">
-        <a href="/category/salas-exterior">Salas</a>
-        <a href="/category/mesas-exterior">Exterior</a>
-        <a href="/category/sillas-y-bancos">Sillas y bancos</a>
-        <a href="/category/camastro">Camastros</a>
-        <a href="/category/mesa-de-centro-y-lateral">Mesas de centro y lateral</a>
-      </div>
-    </div>
-    <div class="col-2 drop">
-      <a class=" text-decoration-none link-navbar">Decoración</a>
-      <div class="drop-content">
-        <a href="/category/accesorios">Accesorios</a>
-        <a href="/category/cuadros-y-decoracion-de-pared">Cuadros y decoración de pared</a>
-        <a href="/category/espejos">Espejos</a>
-        <a href="/category/tapetes">Tapetes</a>
-        <a href="/category/cojines">Cojines</a>
-        <a href="/category/iluminacion">Iluminación</a>
-      </div>
-    </div>
-    <div class="col-2 drop">
-      <a class=" text-decoration-none link-navbar">Almacenaje</a>
-      <div class="drop-content">
-        <a href="/category/comodas-y-credenzas">Comodas y credenzas</a>
-        <a href="/category/bufeteros">Bufetero</a>
-        <a href="/category/muebles-para-tv">Muebles TV</a>
-        <a href="/category/libreros-y-repisas">Libreros y repisas</a>
-        <a href="/category/escritorios">Escritorios</a>
-        <a href="/category/buros">Burós</a>
+    <div class="container-fluid text-center position-fixed d-none d-lg-block" id="header-studio-nav-2">
+      <div class="row w-75 mx-auto py-1">
+        <div class="col">
+          <a href="/category/camas" class=" text-decoration-none link-navbar">Camas</a>
+        </div>
+        <div class="col">
+          <a href="/category/colchones" class=" text-decoration-none link-navbar">Colchones</a>
+        </div>
+        <div class="col">
+          <a href="/category/buros-y-mesas-laterales" class=" text-decoration-none link-navbar">Burós</a>
+        </div>
+        <div class="col">
+          <a href="/category/salas-y-sofas" class=" text-decoration-none link-navbar">Sófas</a>
+        </div>
+        <div class="col">
+          <a href="category/sillones-salas" class=" text-decoration-none link-navbar">Sillones</a>
+        </div>
+        <div class="col">
+          <a href="/category/mesas-de-comedor" class=" text-decoration-none link-navbar">Mesas</a>
+        </div>
+        <div class="col">
+          <a href="/category/tapetes" class=" text-decoration-none link-navbar">Tapetes</a>
+        </div>
+        <div class="col">
+          <a href="/category/espejos" class=" text-decoration-none link-navbar">Espejos</a>
+        </div>
+        <div class="col">
+          <a href="/category/iluminacion" class=" text-decoration-none link-navbar">Iluminación</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container-fluid text-center position-fixed d-none d-lg-block" id="header-studio-nav-2">
-  <div class="row w-75 mx-auto py-1">
-    <div class="col">
-      <a href="/category/camas" class=" text-decoration-none link-navbar">Camas</a>
-    </div>
-    <div class="col">
-      <a href="/category/colchones" class=" text-decoration-none link-navbar">Colchones</a>
-    </div>
-    <div class="col">
-      <a href="/category/buros-y-mesas-laterales" class=" text-decoration-none link-navbar">Burós</a>
-    </div>
-    <div class="col">
-      <a href="/category/salas-y-sofas" class=" text-decoration-none link-navbar">Sófas</a>
-    </div>
-    <div class="col">
-      <a href="category/sillones-salas" class=" text-decoration-none link-navbar">Sillones</a>
-    </div>
-    <div class="col">
-      <a href="/category/mesas-de-comedor" class=" text-decoration-none link-navbar">Mesas</a>
-    </div>
-    <div class="col">
-      <a href="/category/tapetes" class=" text-decoration-none link-navbar">Tapetes</a>
-    </div>
-    <div class="col">
-      <a href="/category/espejos" class=" text-decoration-none link-navbar">Espejos</a>
-    </div>
-    <div class="col">
-      <a href="/category/iluminacion" class=" text-decoration-none link-navbar">Iluminación</a>
-    </div>
-  </div>
-</div>
-</div>
 </nav>
 
 
@@ -331,21 +360,21 @@
               <span>BLOG<strong>|</strong></span>
             </a>
           -->
-        </p>
-      </div>
-      <div layout-align="center center">
-        <a href="/" ng-switch on="main.siteTheme">
-          <div flex href="#" class="header-top-bar">
-            <p>
-              <a href="/nuestras-tiendas">
-                <span>NUESTRAS TIENDAS</span>
-              </a>
-            </p>
-          </div>
-        </a>
-      </div>
+          </p>
+        </div>
+        <div layout-align="center center">
+          <a href="/" ng-switch on="main.siteTheme">
+            <div flex href="#" class="header-top-bar">
+              <p>
+                <a href="/nuestras-tiendas">
+                  <span>NUESTRAS TIENDAS</span>
+                </a>
+              </p>
+            </div>
+          </a>
+        </div>
 
-    </section>
+      </section>
 
       <!-- <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align="center center"
         layout-align-sm="center center" layout-align-xs="start center" hide-xs hide-sm>
@@ -366,113 +395,114 @@
       <form ng-class="{
         'searcher-wrapper-show-mobile':main.showSearchBar
       }" ng-submit="main.handleSearch()" class="searcher-wrapper" flex-order-xs="1" layout="row"
-      ng-show="!main.showSearchBar">
-      <div class="searcher" flex flex-xs="70">
-        <div class="searcher-inner">
-          <i class="icon-search"></i>
-          <input type="text" name="term" ng-model="main.searchValue" />
-        </div>
-      </div>
-      <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn" />
-    </form>
-
-    <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align-sm="center center"
-    layout-align-xs="start center">
-    <!-- SIDE MENU BUTTON -->
-    <div flex hide-gt-sm>
-      <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static">
-
-        <body ng-app="menu" ng-controller="mainCtrl" ng-mouseup="elsewhrClicks($event)" class="ng-cloak ">
-          <div class="navbar">
-            <div id="nav-toggle" ng-click="toggleNav = !toggleNav; animate = !animate"
-            ng-class="{'active': animate}">
-            <span></span>
-            <span></span>
-            <span></span>
+        ng-show="!main.showSearchBar">
+        <div class="searcher" flex flex-xs="70">
+          <div class="searcher-inner">
+            <i class="icon-search"></i>
+            <input type="text" name="term" ng-model="main.searchValue" />
           </div>
         </div>
-      </body>
-    </a>
-    <div flex-gt-xs="15" class="logo logo-mobile">
-      <a href="/" ng-switch on="main.siteTheme">
-        <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group" />
-        <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group" />
-        <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group" />
-        <img ng-switch-default src="images/logos/home.png" alt="Actual Group" />
-      </a>
-    </div>
-  </div>
-  <!-- <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+        <input flex-xs="30" type="submit" value="BUSCAR" class="searcher-btn" />
+      </form>
+
+      <div class="header-top-bar-menu" layout="row" layout-align="center center" layout-align-sm="center center"
+        layout-align-xs="start center">
+        <!-- SIDE MENU BUTTON -->
+        <div flex hide-gt-sm>
+          <a ng-click="main.toggleMobileSidenav()" class="menu-mobile-icon menu-mobile-icon-static">
+
+            <body ng-app="menu" ng-controller="mainCtrl" ng-mouseup="elsewhrClicks($event)" class="ng-cloak ">
+              <div class="navbar">
+                <div id="nav-toggle" ng-click="toggleNav = !toggleNav; animate = !animate"
+                  ng-class="{'active': animate}">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </body>
+          </a>
+          <div flex-gt-xs="15" class="logo logo-mobile">
+            <a href="/" ng-switch on="main.siteTheme">
+              <img ng-switch-when="actual-home" src="images/logos/home.png" alt="Actual Group" />
+              <img ng-switch-when="actual-studio" src="images/logos/studio.png" alt="Actual Group" />
+              <img ng-switch-when="actual-kids" src="images/logos/kids.png" alt="Actual Group" />
+              <img ng-switch-default src="images/logos/home.png" alt="Actual Group" />
+            </a>
+          </div>
+        </div>
+        <!-- <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
     <i class="icon-search" ng-click="main.showSearchBar = !main.showSearchBar"></i>
   </div> -->
-  <div hide-xs flex class="header-top-bar-menu-item">
-    <p ng-click="main.redirectScroll()" style="color: #fff;"> CONTACTO </p>
-  </div>
-
-  <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
-    <i class="icon-search" style="margin-left:8px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
-  </div>
-  <div  class="header-item-child" style="margin-right:20px;">
-    <a href="http://wa.me/529982418106" >
-      <i class="icon-whatsapp" style=" color:#fff; font-size: 20px;"></i>
-    </a>
-  </div>
-  <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
-    <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">
-      <span class="header-top-bar-menu-item" hide-xs><strong style="color: #e9c15f;">| </strong> <span>MI
-      CUENTA</span>
-      <i hide-gt-xs class="icon-login"></i>
-    </p>
-    <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
-      <strong class="invited-label">Invitado</strong>
-    </span>
-
-    <i hide-gt-sm style="margin-left:10px;" class="icon-login" ng-click="main.toggleLoginModal()"></i>
-    <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
-    src="'views/partials/login-header.html'"></ng-include>
-  </div>
-
-  <!-- IF logged in -->
-  <div class="header-top-bar-menu-item-user">
-    <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger"
-    ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
-    <a href="#" layout="row">
-      <i class="icon-login"></i>
-      <div class="header-top-bar-menu-item-user">
-        <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
+        <div hide-xs flex class="header-top-bar-menu-item">
+          <p ng-click="main.redirectScroll()" style="color: #fff;"> CONTACTO </p>
         </div>
-      </span>
-    </a>
 
-    <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
-  </div>
-</div>
+        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+          <i class="icon-search" style="margin-left:8px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
+        </div>
+        <div class="header-item-child" style="margin-right:20px;">
+          <a href="http://wa.me/529982418106">
+            <i class="icon-whatsapp" style=" color:#fff; font-size: 20px;"></i>
+          </a>
+        </div>
+        <div ng-if="!main.user || main.user.invited" flex id="login-header-trigger" class="header-top-bar-menu-item">
+          <p ng-if="!main.user || main.user.invited" ng-click="main.toggleLoginModal()" style="color: #fff;">
+            <span class="header-top-bar-menu-item" hide-xs><strong style="color: #e9c15f;">| </strong> <span>MI
+                CUENTA</span>
+              <i hide-gt-xs class="icon-login"></i>
+          </p>
+          <span ng-if="main.user && main.user.invited" ng-click="main.toggleLoginModal()">
+            <strong class="invited-label">Invitado</strong>
+          </span>
 
-<div hide-gt-xs flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
-  <p>
-    <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
-      <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
-    </a>
-    <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
-      <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
-    </a>
-  </p>
-</div>
+          <i hide-gt-sm style="margin-left:10px;" class="icon-login" ng-click="main.toggleLoginModal()"></i>
+          <ng-include ng-if="(!main.user || main.user.invited) && main.isActiveLogin"
+            src="'views/partials/login-header.html'"></ng-include>
+        </div>
 
-<div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()"
-class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
-<span>
-  <strong> <i class="icon-phone"></i></strong>
-</span>
-<ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
-</div>
-<div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
-  <!-- <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" /> -->
-  <a href="http://wa.me/529982418106">
-    <i class="icon-whatsapp" style=" color:#fff; font-size: 22px; margin-left:2px;" ng-click="main.showSearchBar = !main.showSearchBar"></i>
-  </a>
-</div>
-<!-- https://wa.me/message/5SDKIHWOEO4XE1 -->
+        <!-- IF logged in -->
+        <div class="header-top-bar-menu-item-user">
+          <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger"
+            ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
+            <a href="#" layout="row">
+              <i class="icon-login"></i>
+              <div class="header-top-bar-menu-item-user">
+                <span>Bienvenido <strong>{{ main.user.firstName }}</strong>
+              </div>
+              </span>
+            </a>
+
+            <ng-include ng-if="main.isActiveProfileHeader" src="'views/partials/profile-header.html'"></ng-include>
+          </div>
+        </div>
+
+        <div hide-gt-xs flex href="#" class="header-top-bar-menu-item header-top-bar-menu-item-blog">
+          <p>
+            <a ng-if="main.siteTheme === 'actual-home'" href="https://actualproyectos.blog/" target="_blank">
+              <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
+            </a>
+            <a ng-if="main.siteTheme !== 'actual-home'" href="https://welove.design.blog/tag/notas/" target="_blank">
+              <span><strong style="color: #e9c15f;">|</strong>BLOG</span>
+            </a>
+          </p>
+        </div>
+
+        <div hide-gt-xs flex href="#" ng-click="main.toggleSchedulesModal()"
+          class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
+          <span>
+            <strong> <i class="icon-phone"></i></strong>
+          </span>
+          <ng-include ng-if="main.isActiveSchedulesModal" src="'views/partials/schedules-dropdown.html'"></ng-include>
+        </div>
+        <div hide-gt-xs flex class="header-top-bar-menu-item search-trigger-item">
+          <!-- <img class="logo-as" ng-switch-when="actual-studio" src="design/studioaq.png" alt="Actual Group" /> -->
+          <a href="http://wa.me/529982418106">
+            <i class="icon-whatsapp" style=" color:#fff; font-size: 22px; margin-left:2px;"
+              ng-click="main.showSearchBar = !main.showSearchBar"></i>
+          </a>
+        </div>
+        <!-- https://wa.me/message/5SDKIHWOEO4XE1 -->
         <!-- <div hide-xs hide-gt-sm flex href="#" ng-click="main.toggleSchedulesModal()"
           class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-trigger">
           <span>
@@ -488,30 +518,30 @@ class="header-top-bar-menu-item header-top-bar-menu-item-phone schedules-modal-t
         <!-- IF ACTIVE QUOTATION -->
         <div>
           <a style="display:block;" ng-if="main.activeQuotation" flex
-          ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="header-top-bar-menu-item">
-          <span hide-xs class="header-car-item-number"
-          ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-          <i hide-xs class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
-          <span hide-gt-xs class="header-car-item-number-mobile"
-          ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
-          <i hide-gt-xs style="margin-right:5px;" class="icon-carro"></i>
+            ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="header-top-bar-menu-item">
+            <span hide-xs class="header-car-item-number" ng-class="{'cart-active-items' : main.activeQuotation}">{{
+              main.activeQuotation.totalProducts }}</span>
+            <i hide-xs class="icon-carro" ng-class="{'cart-active' : main.activeQuotation}"></i>
+            <span hide-gt-xs class="header-car-item-number-mobile"
+              ng-class="{'cart-active-items' : main.activeQuotation}">{{ main.activeQuotation.totalProducts }}</span>
+            <i hide-gt-xs style="margin-right:5px;" class="icon-carro"></i>
+          </a>
+        </div>
+
+        <!-- IF NOT ACTIVE QUOTATION -->
+        <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item">
+          <i class="icon-carro"></i>
         </a>
+
+        <!-- -end if Logged in -->
       </div>
-
-      <!-- IF NOT ACTIVE QUOTATION -->
-      <a ng-if="main.user && !main.activeQuotation" flex href="/" class="header-top-bar-menu-item">
-        <i class="icon-carro"></i>
-      </a>
-
-      <!-- -end if Logged in -->
     </div>
   </div>
-</div>
-<!-- END TOP BAR -->
+  <!-- END TOP BAR -->
 
-<!-- START MENU -->
-<ng-include ng-if="main.activeModule !== 'users'" src="'views/partials/header-menu-miactual.html'"></ng-include>
-<!-- END MENU -->
+  <!-- START MENU -->
+  <ng-include ng-if="main.activeModule !== 'users'" src="'views/partials/header-menu-miactual.html'"></ng-include>
+  <!-- END MENU -->
 </div>
 
 <md-sidenav md-component-id="left" class="md-sidenav-left movil">
