@@ -97,7 +97,7 @@
                     <div ng-if="!vm.zipcodeDelivery" ng-click="vm.setDeliveriesByStaticZipCode()" class="zipcode-layer">
                     </div>
 
-                    <label>Piezas</label>
+                    <label class="ft-12">Piezas</label>
                     <select class="select-element" ng-model="vm.productCart.quantity"
                       ng-options="qty for qty in vm.getQtyArray(vm.productCart.deliveryGroup.available)">
                     </select>

@@ -681,3 +681,7 @@
 .ac-b-b:hover {
   text-decoration: underline;
 }
+
+.ft-12 {
+  font-size: 12px !important;
+}
