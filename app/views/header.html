@@ -58,7 +58,10 @@
             id="lupa-icon"></i></button>
       </form>
       <ul class="navbar-nav ms-auto ">
-        <li class="nav-item">
+        <li class="nav-item pe-5 mt-2">
+          <a href="#" id="business-button" class="px-4 py-2 ac-b-b">ACTUAL BUSINESS</a>
+        </li>
+        <li class="nav-item pe-3 bl-w">
           <a style="display:block;" ng-if="main.activeQuotation"
             ng-href="/quotations/edit/{{ main.activeQuotation.id }}" class="nav-link p-0">
             <span hide-xs class="badge bg-secondary" ng-class="{'cart-active-items' : main.activeQuotation}">{{
@@ -69,7 +72,7 @@
             <i hide-gt-xs style="margin-right:5px;" class="icon-carro text-white"></i>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ps-2">
           <div ng-if="main.user && !main.user.invited" flex href="#" id="profile-header-trigger"
             ng-click="main.toggleProfileModal()" class="header-top-bar-menu-item header-top-bar-menu-item-name">
             <a href="#" layout="row">

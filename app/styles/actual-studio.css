@@ -659,3 +659,25 @@
 .product-black {
   color: #000000 !important;
 }
+
+.bl-w {
+  border-right: white 2px solid;
+}
+
+.ac-b-b-w {
+  border: white 1px solid;
+  color: white;
+}
+
+.ac-b-b-b {
+  border: black 1px solid;
+  color: black;
+}
+
+.ac-b-b {
+  text-decoration: none;
+}
+
+.ac-b-b:hover {
+  text-decoration: underline;
+}
