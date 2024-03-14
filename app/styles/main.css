@@ -2678,6 +2678,7 @@ select {
 
 .listing-view .best-seller-title {
   font-size: 32px;
+  text-transform: uppercase;
   text-align: center;
   font-weight: 300;
   /*text-transform: uppercase;*/
