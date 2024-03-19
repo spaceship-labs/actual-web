@@ -215,11 +215,40 @@
 
 /* end of widget packages*/
 
+@media only screen and (max-width: 576px) {
+  #space-widget {
+    background-image: url('/images/home2024/back-widget.png');
+    background-size: 85% 80%;
+    background-position: center left;
+    background-repeat: no-repeat;
+
+  }
+
+}
+
+@media only screen and (min-width: 577px) {
+  #space-widget {
+    background-image: url('/images/home2024/back-widget.png');
+    background-size: 85%;
+    background-position: top left;
+    background-repeat: no-repeat;
+
+  }
+
+}
 
 /*Poitns poostions*/
 
 /* mobile*/
 @media only screen and (max-width: 576px) {
+  .cards-brand {
+    width: 100%;
+  }
+
+  .tab-content {
+    width: 100%;
+  }
+
   #punto1p1 {
     left: 25%;
     top: 30%;
@@ -253,6 +282,14 @@
 
 
 @media only screen and (min-width: 577px) and (max-width: 1025px) {
+  .cards-brand {
+    width: 25%;
+  }
+
+  .tab-content {
+    width: 550px;
+  }
+
   #punto1p1 {
     left: 28%;
     top: 30%;
@@ -285,6 +322,14 @@
 }
 
 @media only screen and (min-width: 1026px) and (max-width:1199px) {
+  .cards-brand {
+    width: 25%;
+  }
+
+  .tab-content {
+    width: 550px;
+  }
+
   #punto1p1 {
     left: 28%;
     top: 30%;
@@ -317,6 +362,14 @@
 }
 
 @media only screen and (min-width: 1200px) and (max-width:1399px) {
+  .cards-brand {
+    width: 25%;
+  }
+
+  .tab-content {
+    width: 550px;
+  }
+
   #punto1p1 {
     left: 27%;
     top: 30%;
@@ -349,6 +402,14 @@
 }
 
 @media only screen and (min-width:1400px) {
+  .cards-brand {
+    width: 25%;
+  }
+
+  .tab-content {
+    width: 550px;
+  }
+
   #punto1p1 {
     left: 28%;
     top: 28%;
@@ -380,13 +441,7 @@
   }
 }
 
-#space-widget {
-  background-image: url('/images/home2024/back-widget.png');
-  background-size: 85%;
-  background-position: top left;
-  background-repeat: no-repeat;
 
-}
 
 #close-button {
   border: none;
@@ -617,9 +672,6 @@
   border-radius: 0 !important;
 }
 
-.tab-content {
-  width: 550px;
-}
 
 
 .product-view-gallery .slick-prev,

@@ -92,7 +92,7 @@
             <!-- <ng-include src="'views/partials/product-promotions.html'"></ng-include> -->
             <div id="quantity-selectors" class="py-3" ng-if="main.siteTheme === 'actual-studio'">
               <div class="row">
-                <div class="col-3">
+                <div class="col-6 col-md-3">
                   <div class="product-view-qty input-element">
                     <div ng-if="!vm.zipcodeDelivery" ng-click="vm.setDeliveriesByStaticZipCode()" class="zipcode-layer">
                     </div>
@@ -103,7 +103,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-6 col-md-3">
                   <div class="delivery-selection input-element select-element-wrapper">
                     <div ng-if="!vm.zipcodeDelivery" ng-click="vm.setDeliveriesByStaticZipCode()" class="zipcode-layer">
                     </div>
@@ -115,7 +115,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-6 col-md-3">
                   <a ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#"
                     class="add-cart-btn-studio" ng-class="
                 {
@@ -127,7 +127,7 @@
                     <strong>Agregar al carrito</strong>
                   </a>
                 </div>
-                <div class="col-3">
+                <div class="col-6 col-md-3">
                   <a ng-click="vm.available && vm.productCart.quantity && vm.addToCart($event)" href="#"
                     class="add-cart-btn-studio-buy px-3" ng-class="
                 {

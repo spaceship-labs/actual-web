@@ -2497,7 +2497,7 @@ select {
 /*-------------*/
 
 .listing-view {
-  padding: 0px 20px 30px;
+  padding: 0px 0px 30px;
   margin-top: 16px;
 }
 
@@ -3539,7 +3539,7 @@ select {
   cursor: pointer;
   height: 28px;
   vertical-align: middle;
-  margin: 2px;
+  margin: 4px;
   border-radius: 50%;
 }
 
@@ -10084,7 +10084,7 @@ md-sidenav {
 }
 
 .card-img-top {
-  background-color: #f6f6f6;
+  background-color: #f6f6f6 !important;
 }
 
 .card:hover::before,
