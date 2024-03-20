@@ -1,7 +1,7 @@
 <!-- MOBILE-MENU -->
 <ng-include src="'views/partials/mobile-sidenav.html'"></ng-include>
 <!-- END MOBILE-MENU -->
-<nav id="navbar-actual" class="container-fluid" ng-if="main.siteTheme === 'actual-studio'">
+<nav id="navbar-actual" class="container-fluid d-none d-md-block" ng-if="main.siteTheme === 'actual-studio'">
   <div class="row">
     <div class="col-10 mx-auto container">
       <div class="row">
@@ -58,8 +58,8 @@
             id="lupa-icon"></i></button>
       </form>
       <ul class="navbar-nav ms-auto ">
-        <li class="nav-item pe-5 mt-2">
-          <a href="#" id="business-button" class="px-4 py-2 ac-b-b">ACTUAL BUSINESS</a>
+        <li class="nav-item pe-5 mt-2 my-2 my-md-0">
+          <a href="#" id="business-button" class="px-4 py-2 ac-b-b rounded">ACTUAL BUSINESS</a>
         </li>
         <li class="nav-item pe-3 bl-w">
           <a style="display:block;" ng-if="main.activeQuotation"
@@ -234,7 +234,7 @@
     <div class="container-fluid text-center position-fixed d-none d-lg-block" id="header-studio-nav"
       style="z-index: 99999;">
       <div class="row mx-auto py-1 w-70">
-        <div class="col-2 drop">
+        <div class="col drop">
           <a class=" text-decoration-none link-navbar">
             Recamara
           </a>
@@ -249,7 +249,7 @@
               laterales</a>
           </div>
         </div>
-        <div class="col-2 drop">
+        <div class="col drop">
           <a class=" text-decoration-none link-navbar">Sala</a>
           <div class="drop-content">
             <a href="/category/salas-y-sofas">Salas y sófas</a>
@@ -260,10 +260,10 @@
             <a href="/category/taburete">Taburetes</a>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col">
           <a href="/category/mesas-de-comedor" class=" text-decoration-none link-navbar">Comedor</a>
         </div>
-        <div class="col-2 drop">
+        <div class="col drop">
           <a class=" text-decoration-none link-navbar">Exterior</a>
           <div class="drop-content">
             <a href="/category/salas-exterior">Salas</a>
@@ -273,7 +273,7 @@
             <a href="/category/mesa-de-centro-y-lateral">Mesas de centro y lateral</a>
           </div>
         </div>
-        <div class="col-2 drop">
+        <div class="col drop">
           <a class=" text-decoration-none link-navbar">Decoración</a>
           <div class="drop-content">
             <a href="/category/accesorios">Accesorios</a>
@@ -284,7 +284,7 @@
             <a href="/category/iluminacion">Iluminación</a>
           </div>
         </div>
-        <div class="col-2 drop">
+        <div class="col drop">
           <a class=" text-decoration-none link-navbar">Almacenaje</a>
           <div class="drop-content">
             <a href="/category/comodas-y-credenzas">Comodas y credenzas</a>
@@ -294,6 +294,9 @@
             <a href="/category/escritorios">Escritorios</a>
             <a href="/category/buros">Burós</a>
           </div>
+        </div>
+        <div class="col">
+          <a href="/category/mesas-de-comedor" class=" text-decoration-none link-navbar">KIDS</a>
         </div>
       </div>
     </div>
