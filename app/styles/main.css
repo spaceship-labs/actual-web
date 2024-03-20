@@ -94,7 +94,36 @@ md-sidenav {
   min-width: 100%;
   max-width: 100%;
 }
-
+#wa-link{
+  position: fixed;
+  right: 1vw;
+  bottom: 1vw;
+  max-width: 50px;
+  height: 50px;
+  z-index: 999999999999999999999;
+}
+#wa-link img{
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease all;
+}
+@media (max-width: 575.98px) {
+  #wa-link{
+    position: fixed;
+    right: 4vw;
+    bottom: 4vw;
+    max-width: 35px;
+    height: 35px;
+    z-index: 999999999999999999999;
+  }
+  #header-studio .navbar-brand{
+    width: 75%;
+  }
+}
+#wa-link img:hover{
+  transform: scale(1.2);
+  transition: 0.5s ease all;
+}
 .loading-circle {
   min-height: 250px;
 }

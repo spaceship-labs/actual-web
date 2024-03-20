@@ -19,8 +19,8 @@ angular.module('actualWebApp')
         console.log("no estoy en el home");
         header.style.backgroundColor = "white";
         header.style.top = "0";
-        nav.style.top = "75px";
-        subnav.style.top = "100px";
+        nav.style.top = "80px";
+        subnav.style.top = "110px";
         nav.style.backgroundColor = "white";
         subnav.style.backgroundColor = "white";
         subnav.style.boxShadow = '0 5px 5px rgba(0, 0, 0, 0.2)';
@@ -48,8 +48,8 @@ angular.module('actualWebApp')
         console.log('El usuario está en la parte superior de la página');
         businessB.classList.remove("ac-b-b-b");
         businessB.classList.add("ac-b-b-w");
-        header.style.top = "30px";
-        nav.style.top = "105px";
+        header.style.top = "20px";
+        nav.style.top = "100px";
         subnav.style.top = "130px";
         header.style.backgroundColor = 'transparent';
         nav.style.backgroundColor = "transparent";
@@ -71,8 +71,8 @@ angular.module('actualWebApp')
         businessB.classList.remove("ac-b-b-w");
         header.style.backgroundColor = "white";
         header.style.top = "0";
-        nav.style.top = "75px";
-        subnav.style.top = "100px";
+        nav.style.top = "80px";
+        subnav.style.top = "110px";
         nav.style.backgroundColor = "white";
         subnav.style.backgroundColor = "white";
         subnav.style.boxShadow = '0 5px 5px rgba(0, 0, 0, 0.2)';
