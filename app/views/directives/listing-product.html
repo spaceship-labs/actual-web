@@ -2,20 +2,14 @@
   <div class="container-fluid" style="width: 16rem">
     <div class="row">
       <div class="card border-0">
-        <img
-          class="card-img-top"
-          ng-if="images.length === 1"
-          animate-visible="true"
-          lazy-src="{{images[0].url}}"
-          alt="{{product.Name}}"
-        />
+        <div class="listing-img-blend">
+          <img class="card-img-top" ng-if="images.length === 1" animate-visible="true" lazy-src="{{images[0].url}}"
+            alt="{{product.Name}}" />
+        </div>
         <div class="bookmark-icon">
           <img src="/images/promo-label.png" alt="Price Label" />
         </div>
-        <div
-          class="discount-batch"
-          ng-if="product.Discount && product.Discount > 0"
-        >
+        <div class="discount-batch" ng-if="product.Discount && product.Discount > 0">
           - {{product.Discount}}%
         </div>
         <div class="card-body">
@@ -26,18 +20,12 @@
             <span class="estrella"></span>
             <span class="estrella"></span>
           </p>
-          <p
-            class="price"
-            style="margin-top: -17px; color: #cc1020; font-weight: 500"
-          >
+          <p class="price" style="margin-top: -17px; color: #cc1020; font-weight: 500">
             <strong class="price-now-currency"></strong>
             {{product.Price | roundCurrency:'$'}}
             <span class="price-before-currency"></span>
-            <span
-              class="price-before"
-              style="text-decoration: line-through; color: #747474"
-              >{{product.priceBefore | roundCurrency:'$'}}</span
-            >
+            <span class="price-before" style="text-decoration: line-through; color: #747474">{{product.priceBefore |
+              roundCurrency:'$'}}</span>
             <span ng-if="product.priceBefore"></span>
             <br />
           </p>
