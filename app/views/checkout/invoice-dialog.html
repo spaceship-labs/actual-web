@@ -1,10 +1,8 @@
 <md-dialog class="options-alert-dialog" aria-label="Invoice dialog" ng-cloak>
   <div class="options-alert-inner">
-    <a href="#" ng-click="cancel()" class="options-alert-cancel">
-      x
-    </a>
+    <!-- <a href="#" ng-click="cancel()" class="options-alert-cancel"> x </a> -->
 
-    <h3>Dar click en REGISTRAR DATOS FISCALES si requiere FACTURA</h3>
+    <h3><strong>¿REQUIERE FACTURA? REGISTRAR DATOS FISCALES</strong></h3>
 
     <div
       class="btns-section"
@@ -15,24 +13,16 @@
       layout-align-xs="start start"
     >
       <div flex flex-sm="100" flex-xs="100" class="btns-section-block">
-        <a
-          href="#"
-          ng-click="continue()"
-          class="action-btn action-btn-wide action-btn-inline action-btn-save "
-        >
-          Continuar a pago
-        </a>
-        <!--<p class="center-content">Continuar a pago</p>-->
-      </div>
-      <div flex flex-sm="100" flex-xs="100" class="btns-section-block">
-        <a
-          href="#"
-          ng-click="modify()"
-          class="action-btn action-btn-wide action-btn-save action-btn-inline"
-        >
-          Registrar datos fiscales
+        <a href="#" ng-click="modify()" class="action-cart-btn-fac">
+          REGISTRAR DATOS FISCALES
         </a>
         <!--<p class="center-content">Crear factura</p>-->
+      </div>
+      <div flex flex-sm="100" flex-xs="100" class="btns-section-block">
+        <a href="#" ng-click="continue()" class="action-cart-btn">
+          CONTINUAR CON EL PAGO
+        </a>
+        <!--<p class="center-content">Continuar a pago</p>-->
       </div>
     </div>
   </div>
