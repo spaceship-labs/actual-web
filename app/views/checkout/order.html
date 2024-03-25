@@ -16,15 +16,15 @@
       </h1>
       <div flex="50" flex-sm="100" flex-xs="100" class="order-title-extra">
         <span class="order-date">{{vm.order.createdAt | date:'d/MMM/yyyy h:mm a' }}</span>
-        <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
+        <a href="#" ng-click="vm.print()" class="complete-category">
           <strong>IMPRIMIR RECIBO</strong>
         </a>
 
-        <p ng-if="!vm.invoiceExists && !vm.showInvoiceErrorIfNeeded(vm.alegraLogs)">
+        <p ng-if="!vm.invoiceExists && !vm.showInvoiceErrorIfNeeded(vm.alegraLogs)" class="complete-category-note">
           <strong>Generación/Lectura de factura en proceso</strong>
         </p>
 
-        <a href="#" ng-if="vm.invoiceExists" ng-click="vm.sendInvoice()" class="action-btn action-btn-save print-btn">
+        <a href="#" ng-if="vm.invoiceExists" ng-click="vm.sendInvoice()" class="complete-category">
           <strong>ENVIAR FACTURA</strong>
         </a>
       </div>
@@ -403,20 +403,20 @@
             <strong>Email:</strong> clientes@actualg.com</p>
         </div>
         <div flex="20" flex-sm="100" flex-xs="100">
-          <a href="#" ng-click="vm.print()" class="action-btn action-btn-save print-btn">
+          <a href="#" ng-click="vm.print()" class="complete-category">
             <strong>IMPRIMIR RECIBO</strong>
           </a>
           <a href="#" ng-if="!vm.invoiceExists && vm.isUserAdmin" ng-click="vm.generateInvoice()"
-            class="action-btn action-btn-save print-btn">
+            class="complete-category">
             <strong>GENERAR FACTURA</strong>
           </a>
           <a href="#" ng-if="vm.invoiceExists && vm.isUserAdmin" ng-click="vm.sendInvoice()"
-            class="action-btn action-btn-save print-btn">
+            class="complete-category">
             <strong>ENVIAR FACTURA</strong>
           </a>
 
           <a href="#" ng-if="vm.orderSapPending && vm.isUserAdmin" ng-click="vm.generateSapOrder()"
-            class="action-btn action-btn-save print-btn">
+            class="complete-category">
             <strong>GENERAR PEDIDO EN SAP</strong>
           </a>
         </div>
