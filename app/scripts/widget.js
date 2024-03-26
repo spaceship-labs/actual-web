@@ -17,7 +17,7 @@ function accion(numero) {
             "price": 15899,
             "discount": true,
             "discount_percentage": 28,
-            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST14572_1.jpg",
+            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST14572_1.png",
             "url": "/espejo-napoli-90x200-c-walnut/ST14572"
         },
         {
