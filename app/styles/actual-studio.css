@@ -467,6 +467,7 @@
   /* Asegura que los elementos secundarios se posicionen correctamente */
   background-image: url('/images/home2024/banner-main.jpg');
   background-repeat: no-repeat;
+  background-size: cover;
   /* Usar cover para asegurar que la imagen se ajuste al tamaño del contenedor */
 }
 

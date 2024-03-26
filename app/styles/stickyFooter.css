@@ -8,7 +8,7 @@ html, body, #wrap {height: 100%;}
 
 body > #wrap {height: auto; min-height: 100%;}
 
-#main {padding-bottom: 83px;}  /* must be same height as the footer */
+#main {}  /* must be same height as the footer */
 
 #footer {position: relative;
   margin-top: -83px; /* negative value of footer height */
