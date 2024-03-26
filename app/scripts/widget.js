@@ -49,7 +49,7 @@ function accion(numero) {
             "price": 14999,
             "discount": true,
             "discount_percentage": 28,
-            "photo": "https://d116li125og699.cloudfront.net/uploads/products/ST18706_001.jpg",
+            "photo": "https://d116li125og699.cloudfront.net/uploads/products/fixed__1___1_.png",
             "url": "corner-nuvola-ii-92x92x64h-spark-ivory/ST18706"
         },
 

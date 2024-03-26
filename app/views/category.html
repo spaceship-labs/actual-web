@@ -19,15 +19,18 @@
       <span ng-repeat="itemGroup in vm.breadcrumbItems track by $index" ng-show="itemGroup.length > 0">
         >
         <a ng-repeat="item in itemGroup" ng-href="/category/{{item.Handle}}" class="breadcrumb-item"
-        ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}">{{item.Name}}</a>
+          ng-class="{'breadcrumb-active': vm.isActiveBreadcrumbItem(vm.breadcrumbItems, $parent.$index)}">{{item.Name}}</a>
       </span>
     </p>
   </div>
 </div>
 
-<div class="content-block listing-view" id="category-page" ng-if="main.siteTheme === 'actual-studio'" >
+<div class="content-block listing-view" id="category-page" ng-if="main.siteTheme === 'actual-studio'">
   <h1 class="text-center display-3">{{vm.category.Name}}</h1>
-
+  <h2 class="center-content">
+    <i class="icon-search"></i>
+    <span class="hl-text">{{vm.totalProducts}}</span> Resultados
+  </h2>
 
   <div class="container-fluid">
     <!--START NAV-->
@@ -45,105 +48,115 @@
     <div class="row">
       <div class="col-10 col-md-3 col-lg-2 mx-auto ">
         <h4 class="text-center">Filtros</h4>
-        <p class="text-center py-2 mt-2" style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">Color:</p>
+        <p class="text-center py-2 mt-2" style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">Color:
+        </p>
         <div class="" ng-repeat="filter in vm.filters track by $index">
           </h4>
+
+          <div ng-if="filter.Name == 'Color' " class="">
+            <a class="d-block text-decoration-none border-radius-1 mb-2"
+              style="border: 1px solid black; width: 25px; height: 25px; border-radius: 50px;"
+              ng-repeat="value in filter.Values" ng-click="vm.toggleColorFilter(value, filter)"
+              ng-style="{'background-color' : value.Code}" href="#">
+              <p class="ms-5 text-black text-decoration-none">{{value.Name}}</p>
+            </a>
+          </div>
+
             <div ng-if="filter.Name == 'Color' " class="">
               <a class="d-block text-decoration-none border-radius-1 mb-3" style="border: 1px solid black; width: 25px; height: 25px; border-radius: 50px;" ng-repeat="value in filter.Values"
                 ng-click="vm.toggleColorFilter(value, filter)" ng-style="{'background-color' : value.Code}" href="#" ><p class="ms-5 text-black text-decoration-none" style="line-height: 15px;">{{value.Name}}</p>
               </a>
             </div>
 
+
         </div>
-      <p class="text-center py-2 mt-4" style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">Rango de precio:</p>
-      <form class="filter-block-inner" ng-submit="vm.searchByFilters()">
-        <div layout="row" layout-align="space-between center">
-          <div flex class="input-element input-element-from">
-            <div class="input-element-inner">
-              <input ng-model="vm.minPrice" class="border shadow-none" ui-money-mask="0" placeholder="Mín." type="text">
+        <p class="text-center py-2 mt-4" style="border-top: 0.5px solid black; border-bottom: 0.5px solid black;">Rango
+          de precio:</p>
+        <form class="filter-block-inner" ng-submit="vm.searchByFilters()">
+          <div layout="row" layout-align="space-between center">
+            <div flex class="input-element input-element-from">
+              <div class="input-element-inner">
+                <input ng-model="vm.minPrice" class="border shadow-none" ui-money-mask="0" placeholder="Mín."
+                  type="text">
+              </div>
             </div>
-          </div>
-          <div flex class="input-element input-element-to">
-            <div class="input-element-inner">
-              <input ng-model="vm.maxPrice" class="border shadow-none" ui-money-mask="0" placeholder="Máx." type="text">
+            <div flex class="input-element input-element-to">
+              <div class="input-element-inner">
+                <input ng-model="vm.maxPrice" class="border shadow-none" ui-money-mask="0" placeholder="Máx."
+                  type="text">
+              </div>
             </div>
+            <button type="submit" class="btn border-radius-0 p-1">
+              <img animate-visible="true" lazy-src="images/arrow-right.png" alt="Expandir">
+            </button>
           </div>
-          <button type="submit" class="btn border-radius-0 p-1">
-            <img animate-visible="true" lazy-src="images/arrow-right.png" alt="Expandir">
-          </button>
-        </div>
-      </form>
-    </div>
-    <div class="col-10 col-md-9 col-lg-10 mx-auto">
-      <div>
+        </form>
+      </div>
+      <div class="col-10 col-md-9 col-lg-10 mx-auto">
+        <div>
 
-        <div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
-          <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
-        </div>
+          <div ng-if="vm.isLoading" layout-fill layout="row" layout-align="center center" class="loading-circle">
+            <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="150"></md-progress-circular>
+          </div>
 
-        <div ng-if="!vm.isLoading" class="subs-container">
+          <div ng-if="!vm.isLoading" class="subs-container">
 
 
-          <!--SUBCATEGORIES LIST LEVEL 2-->
-        <!-- <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap hide-gt-xs>
+            <!--SUBCATEGORIES LIST LEVEL 2-->
+            <!-- <div ng-if="vm.category.Childs.length > 0 && vm.showLevel2" class="subs-container-list" layout="row" layout-wrap hide-gt-xs>
           <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:2}" ng-if="subcategory[main.activeStore.code] > 0"
             flex="33" flex-sm="50" flex-xs="100">
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
         </div> -->
-        <!--END SUBCATEGORIES LIST LEVEL 2-->
+            <!--END SUBCATEGORIES LIST LEVEL 2-->
 
 
-        <!--SUBCATEGORIES LIST LEVEL 3-->
-        <!-- <div ng-if="vm.category.Childs.length > 0 && vm.showLevel3" class="subs-container-list" layout="row" layout-wrap>
+            <!--SUBCATEGORIES LIST LEVEL 3-->
+            <!-- <div ng-if="vm.category.Childs.length > 0 && vm.showLevel3" class="subs-container-list" layout="row" layout-wrap>
           <div class="sub-wrapper" ng-repeat="subcategory in vm.category.Childs | filter: {CategoryLevel:3}" ng-if="subcategory[main.activeStore.code] > 0"
             flex="33" flex-sm="50" flex-xs="100" hide-gt-xs>
             <category-item category="subcategory" stock-key="{{main.activeStore.code}}" />
           </div>
         </div> -->
-        <!--END SUBCATEGORIES LIST LEVEL 3-->
+            <!--END SUBCATEGORIES LIST LEVEL 3-->
 
-        <!--RESULTS-->
-        <div id="products-results">
+            <!--RESULTS-->
+            <div id="products-results">
 
-          <ng-include src="'views/partials/search-options.html'"></ng-include>
+              <ng-include src="'views/partials/search-options.html'"></ng-include>
 
-          <div ng-if="!vm.isLoadingProducts || vm.search.page > 1" class="results" infinite-scroll="vm.loadMore()"
-            infinite-scroll-disabled="!(vm.totalProducts > vm.products.length && !vm.isLoadingProducts && vm.products.length > 0)"
-            infinite-scroll-distance="1">
-            <h2 class="center-content">
-              <strong>
-                <i class="icon-search"></i>
-                <span class="hl-text">{{vm.totalProducts}}</span> Resultados
-              </strong>
-            </h2>
+              <div ng-if="!vm.isLoadingProducts || vm.search.page > 1" class="results" infinite-scroll="vm.loadMore()"
+                infinite-scroll-disabled="!(vm.totalProducts > vm.products.length && !vm.isLoadingProducts && vm.products.length > 0)"
+                infinite-scroll-distance="1">
 
-            <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
-              <div flex="25" flex-sm="50" flex-xs="100" class="listing-product-wrap"
-              ng-repeat="product in vm.products track by product.ItemCode">
-              <listing-product product="product"></listing-product>
+
+                <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
+                  <div flex="25" flex-sm="50" flex-xs="100" class="listing-product-wrap"
+                    ng-repeat="product in vm.products track by product.ItemCode">
+                    <listing-product product="product"></listing-product>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
+            <!--END RESULTS-->
+
+            <div ng-if="vm.isLoadingProducts" layout="row" layout-align="center center" class="loading-circle">
+              <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+            </div>
+
           </div>
-
         </div>
-
+        <!-- END SUBCATEGORIES-->
       </div>
-      <!--END RESULTS-->
-
-      <div ng-if="vm.isLoadingProducts" layout="row" layout-align="center center" class="loading-circle">
-        <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
-      </div>
-
     </div>
+
   </div>
-  <!-- END SUBCATEGORIES-->
-</div>
 </div>
 
-</div>
-</div>
-
-<div class="content-block listing-view" id="category-page" ng-if="main.siteTheme !== 'actual-studio'" >
+<div class="content-block listing-view" id="category-page" ng-if="main.siteTheme !== 'actual-studio'">
   <ng-include ng-show="vm.enableFiltersTrigger" src="'views/partials/search-filters-trigger.html'"></ng-include>
   <ng-include src="'views/partials/search-filters.html'"></ng-include>
 
@@ -207,23 +220,23 @@
 
             <div class="products-list" layout="row" layout-wrap layout-align="start center" ng-cloak>
               <div flex="25" flex-sm="50" flex-xs="100" class="listing-product-wrap"
-              ng-repeat="product in vm.products track by product.ItemCode">
-              <listing-product product="product"></listing-product>
+                ng-repeat="product in vm.products track by product.ItemCode">
+                <listing-product product="product"></listing-product>
+              </div>
             </div>
+
           </div>
 
         </div>
+        <!--END RESULTS-->
+
+        <div ng-if="vm.isLoadingProducts" layout="row" layout-align="center center" class="loading-circle">
+          <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
+        </div>
 
       </div>
-      <!--END RESULTS-->
-
-      <div ng-if="vm.isLoadingProducts" layout="row" layout-align="center center" class="loading-circle">
-        <md-progress-circular class="md-accent" md-diameter="100px"></md-progress-circular>
-      </div>
-
     </div>
-  </div>
-  <!-- END SUBCATEGORIES-->
+    <!-- END SUBCATEGORIES-->
 
-</div>
+  </div>
 </div>

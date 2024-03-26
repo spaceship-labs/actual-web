@@ -71,11 +71,11 @@
   background: #cc262f;
 } */
 
-.actual-studio .listing-view-nav > li.active h3 a,
-.actual-studio .listing-view-nav > li h3 a.active,
-.actual-studio .listing-view-nav > li h3 a:hover,
+.actual-studio .listing-view-nav>li.active h3 a,
+.actual-studio .listing-view-nav>li h3 a.active,
+.actual-studio .listing-view-nav>li h3 a:hover,
 .actual-studio .listing-view-nav .icon-right-open.aside,
-.actual-studio .listing-view-nav-wrapper > h2 a.active,
+.actual-studio .listing-view-nav-wrapper>h2 a.active,
 .actual-studio .listing-view-subnav a.active,
 .actual-studio .filters .head-filt i {
   color: #cc262f;
@@ -156,7 +156,7 @@
   background-color: #cc262f !important;
 }
 
-.actual-studio .footer-container > div:not(:last-child) {
+.actual-studio .footer-container>div:not(:last-child) {
   border-right-style: solid;
   border-color: #cc262f;
 }
@@ -465,7 +465,6 @@
 #home-main-banner {
   position: relative;
   /* Asegura que los elementos secundarios se posicionen correctamente */
-  min-height: 100vh;
   background-image: url('/images/home2024/banner-main.jpg');
   background-repeat: no-repeat;
   /* Usar cover para asegurar que la imagen se ajuste al tamaño del contenedor */
@@ -522,12 +521,20 @@
     background-size: cover;
     background-position: center;
   }
+
+  #home-main-banner {
+    height: 40vh;
+  }
 }
 
 @media only screen and (min-width: 577px) and (max-width: 1025px) {
   #home-main-banner {
     background-size: cover;
     background-position: center;
+  }
+
+  #home-main-banner {
+    height: 48vh;
   }
 }
 
@@ -536,11 +543,19 @@
     background-size: cover;
     background-position: center;
   }
+
+  #home-main-banner {
+    min-height: 100vh;
+  }
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   #home-main-banner {
     background-size: 100% 100%;
+  }
+
+  #main-banner {
+    min-height: 100vh;
   }
 }
 
@@ -722,4 +737,14 @@
 
 .ft-12 {
   font-size: 12px !important;
+}
+
+.price-now-currency {
+  color: #cc1020;
+  font-weight: 500;
+}
+
+.price-before {
+  text-decoration: line-through;
+  color: #747474;
 }
