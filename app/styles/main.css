@@ -10251,6 +10251,8 @@ body {
   background-color: white !important;
 }
 
+
+
 /* .cart-aside {
   position: fixed; /* Fija la posición 
   top: 20; /* Mantiene el elemento en la parte superior
@@ -10259,3 +10261,15 @@ body {
   transition: top 0.3s;
   z-index: 1000;
 } */
+
+
+.no-hover:hover::before,
+.no-hover:hover::after {
+  content: '';
+  position: absolute;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
