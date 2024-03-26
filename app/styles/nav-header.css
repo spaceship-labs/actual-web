@@ -130,6 +130,7 @@
 #header-studio-nav-2 .drop-content a,
 #header-studio-nav .drop-content a {
   border-bottom: 1px solid transparent;
+  margin-inline: 10px;
 }
 
 #header-studio-nav-2 .drop-content a:hover,
