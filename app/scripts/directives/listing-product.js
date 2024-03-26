@@ -67,6 +67,11 @@ angular.module('actualWebApp').directive('listingProduct', [
           return ammount;
         };
 
+        scope.noDecimals = function (ammount) {
+          clean = Math.trunc(ammount)
+          return clean
+        }
+
         scope.ezOptions = {
           constrainType: 'height',
           constrainSize: 274,

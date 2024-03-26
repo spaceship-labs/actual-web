@@ -22,10 +22,10 @@
           </p>
           <p class="price" style="margin-top: -17px; color: #cc1020; font-weight: 500">
             <strong class="price-now-currency"></strong>
-            {{product.Price | roundCurrency:'$'}}
+            ${{ product.Price | number:0 }}
             <span class="price-before-currency"></span>
-            <span class="price-before" style="text-decoration: line-through; color: #747474">{{product.priceBefore |
-              roundCurrency:'$'}}</span>
+            <span class="price-before" style="text-decoration: line-through; color: #747474"> ${{product.priceBefore |
+              number:0 }}</span>
             <span ng-if="product.priceBefore"></span>
             <br />
           </p>
