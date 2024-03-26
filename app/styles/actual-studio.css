@@ -560,8 +560,9 @@
 }
 
 @media only screen and (min-width: 1400px) {
-  .home-main-banner {
+  #home-main-banner {
     background-size: 100% 100%;
+    background-position: center;
   }
 }
 
