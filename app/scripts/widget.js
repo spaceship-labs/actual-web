@@ -67,8 +67,8 @@ function accion(numero) {
         var producto = package1[numero];
         document.getElementById("widget-product-image").src = producto.photo;
         document.getElementById("widget-product-title").textContent = producto.title.substring(0, 36);
-        document.getElementById("widget-product-price").textContent = "$" + producto.price.toFixed(2);
-        document.getElementById("widget-product-price-discount").textContent = "$" + calcularPorcentaje(producto.price, producto.discount_percentage).toFixed(2);
+        document.getElementById("widget-product-price").textContent = "$" + producto.price.toFixed(0);
+        document.getElementById("widget-product-price-discount").textContent = "$" + calcularPorcentaje(producto.price, producto.discount_percentage).toFixed(0);
         document.getElementById("product-discount").textContent = "-" + producto.discount_percentage + "%"
         document.getElementById("widget-url").href = producto.url
 
@@ -77,8 +77,8 @@ function accion(numero) {
         var producto = package1[numero];
         document.getElementById("mobile-product-image").src = producto.photo;
         document.getElementById("widget-product-title2").textContent = producto.title;
-        document.getElementById("widget-product-price2").textContent = "$" + producto.price.toFixed(2);
-        document.getElementById("widget-product-price-discount2").textContent = "$" + calcularPorcentaje(producto.price, producto.discount_percentage).toFixed(2);
+        document.getElementById("widget-product-price2").textContent = "$" + producto.price.toFixed(0);
+        document.getElementById("widget-product-price-discount2").textContent = "$" + calcularPorcentaje(producto.price, producto.discount_percentage).toFixed(0);
         document.getElementById("product-discount2").textContent = "-" + producto.discount_percentage + "%"
         document.getElementById("widget-url2").href = producto.url
         openMobileSheet();
