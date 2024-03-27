@@ -23,7 +23,7 @@ function CategoryCtrl(
     subnavIndex: 0,
     showLevel2: false,
     showLevel3: false,
-    enableSortOptions: false,
+    enableSortOptions: true,
     enableFiltersTrigger: false,
     discountFilters: productSearchService.DISCOUNTS_SEARCH_OPTIONS,
     stockFilters: productSearchService.STOCK_SEARCH_OPTIONS,
@@ -71,13 +71,13 @@ function CategoryCtrl(
     vm.subnavIndex = index;
   }
 
-  function isMainCategory(category){
-    var main= ['salas', 'sillas', 'recamaras', 'muebles-de-jardin', 'decoracion', 'mesas', 'almacenaje']
-    var isMain=false;
-    var i=0;
-    while(!isMain && i<main.length){
-      if (category == main[i]){
-        isMain=true;
+  function isMainCategory(category) {
+    var main = ['salas', 'sillas', 'recamaras', 'muebles-de-jardin', 'decoracion', 'mesas', 'almacenaje']
+    var isMain = false;
+    var i = 0;
+    while (!isMain && i < main.length) {
+      if (category == main[i]) {
+        isMain = true;
       }
       i++;
     }
@@ -90,7 +90,7 @@ function CategoryCtrl(
       return;
     }
     var activeSortOptionKey = 'stock';
-    if (isMainCategory($routeParams.category)){
+    if (isMainCategory($routeParams.category)) {
       activeSortOptionKey = 'relevance';
     }
     vm.activeSortOption = _.findWhere(vm.sortOptions, { key: activeSortOptionKey });
@@ -292,20 +292,20 @@ function CategoryCtrl(
         return productService.formatProducts(products);
       })
       .then(function (productsFormatted) {
-        if(productsFormatted <= 0){
+        if (productsFormatted <= 0) {
           vm.isLoadingProducts = false;
           vm.allProductsShown = true;
-        }else{
-          if(options && options.isLoadingMore){
+        } else {
+          if (options && options.isLoadingMore) {
             var productsAux = angular.copy(vm.products);
             var products = productsAux.concat(productsFormatted);
             //Delete duplicates
-            vm.products = products.filter(function(product, index) {
-              return products.findIndex(function(obj) {
+            vm.products = products.filter(function (product, index) {
+              return products.findIndex(function (obj) {
                 return obj.ItemCode === product.ItemCode && obj.id === product.id;
               }) === index;
             });
-          }else{
+          } else {
             vm.products = productsFormatted;
             vm.scrollTo('breadcrumb-category-page');
           }
@@ -414,11 +414,11 @@ function CategoryCtrl(
   }
 
   function loadMore() {
-    if(vm.allProductsShown == true){
+    if (vm.allProductsShown == true) {
       return;
-    }else{
+    } else {
       vm.search.page++;
-      vm.searchByFilters({isLoadingMore: true});
+      vm.searchByFilters({ isLoadingMore: true });
     }
   }
 
