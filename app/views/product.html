@@ -68,20 +68,26 @@
                 hoy</strong>
             </p>
             <div class="container d-flex align-items-end">
-              <p class="product-view-price-current pe-2">
-                <!-- <span class="currency-label">MXN</span> -->
-                <strong>{{ vm.product.Price | roundCurrency: '$' }}</strong>
-              </p>
-              <p>
-                <!-- <span class="currency-label">MXN</span> -->
-                <span class="product-view-price-crossed">{{
-                  vm.product.priceBefore | roundCurrency: '$'
-                  }}</span>
+              <p class="product-view-price-discount ms-2 px-3" ng-if="vm.product.mainPromo">
+                -{{ vm.mainPromo.discountPg1 }}%
               </p>
 
-              <p class="product-view-price-discount ms-3 px-2" ng-if="vm.product.mainPromo">
-                - {{ vm.mainPromo.discountPg1 }}%
-              </p>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <p>
+                      <span class="product-view-price-crossed">{{
+                        vm.product.priceBefore | roundCurrency: '$'
+                        }}</span>
+                    </p>
+                    <p class="product-view-price-current">
+                      <strong>{{ vm.product.Price | roundCurrency: '$' }}</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+
             </div>
 
             <ng-include src="'views/partials/product-features.html'"></ng-include>
